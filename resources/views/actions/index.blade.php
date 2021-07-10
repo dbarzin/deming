@@ -21,7 +21,7 @@ Liste des plans d'action
 	    <thead>
 	    <tr>
 			<th class="sortable-column sort-asc" width="10%">Titre</th>
-			<th class="sortable-column sort-asc" width="60%">Nom</th>
+			<th class="sortable-column sort-asc" width="60%">Action</th>
 			<th class="sortable-column sort-asc" width="10%">Date de la mesure</th>
 			<th class="sortable-column sort-asc" width="10%">Prochaine revue</th>
 			<th class="sortable-column sort-asc" width="10%">Note</th>
@@ -30,12 +30,15 @@ Liste des plans d'action
 	    <tbody>
 	@foreach($actions as $action)
 		<tr>
-			<td>
+			<td valign="top">
 				<a href="/controls/{{$action->control_id}}">
 					{{ $action->clause }}
 				</a>
 			</td>
-			<td>{{ $action->name }}</td>
+			<td>
+				<b>{{ $action->name }}</b>
+				<pre>{{ $action->action_plan }}</pre>
+			</td>
 			<td><a href="/action/{{ $action->id }}">{{ $action->plan_date }}</a></td>
 			<td><a href="/measurements/{{ $action->next_id }}">{{ $action->next_date }}</a></td>
 			<td>

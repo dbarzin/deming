@@ -30,6 +30,7 @@ class ActionplanController extends Controller
                 m1.control_id as control_id, 
                 m1.clause as clause,
                 m1.name as name, 
+                m1.action_plan as action_plan,
                 m1.plan_date as plan_date, 
                 m1.score as score,
                 m1.realisation_date as realisation_date,

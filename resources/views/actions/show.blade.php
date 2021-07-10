@@ -62,12 +62,7 @@ form, table {
 				<strong>Prochaine revue</strong>
 	    	</div>
 			<div class="cell-2">
-					<input type="text" data-role="calendarpicker" name="next_date" value="{{ 
-				\Carbon\Carbon
-				::createFromFormat('Y-m-d',$action->next_date)
-				->format('Y-m-d')
-				}}" 
-				data-input-format="%Y-%m-%d"> 
+				<input type="text" data-role="calendarpicker" name="plan_date" value="{{$action->next_date}}" data-input-format="%Y-%m-%d"> 
 			</div>
 		</div>
 
