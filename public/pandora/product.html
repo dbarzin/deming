@@ -1,0 +1,274 @@
+<div class="row border-bottom bd-lightGray m-3">
+    <div class="cell-md-4 d-flex flex-align-center">
+        <h3 class="dashboard-section-title text-center text-left-md w-100">Pandora <small>Version 1.0</small></h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md flex-align-center">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">eCommerce</a></li>
+            <li class="page-item"><a href="#" class="page-link">Product Details</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="m-3">
+<div class="product-card">
+
+    <div class="row">
+
+        <div class="cell-lg-3 cell-md-5">
+            <div class="product-image p-4">
+                <img src="images/product_1.png" class="main-image">
+                <ul class="thumb-list">
+                    <li class="thumb active"><img src="images/product_1.png"></li>
+                    <li class="thumb"><img src="images/product_2.png"></li>
+                    <li class="thumb"><img src="images/product_3.png"></li>
+                    <li class="thumb"><img src="images/product_4.png"></li>
+                    <li class="thumb"><img src="images/product_5.png"></li>
+                    <li class="thumb"><img src="images/product_6.png"></li>
+                    <li class="thumb"><img src="images/product_7.png"></li>
+                    <li class="thumb"><img src="images/product_8.png"></li>
+                    <li class="thumb"><img src="images/product_9.png"></li>
+                    <li class="thumb"><img src="images/product_10.png"></li>
+                    <li class="thumb"><img src="images/product_11.png"></li>
+                    <li class="thumb"><img src="images/product_12.png"></li>
+                </ul>
+            </div>
+        </div>
+
+        <script>
+            $(".thumb-list").on("click", "li", function(){
+                var li = $(this), img = li.children("img");
+                $(".main-image").attr("src", img.attr("src"));
+                $(".thumb-list li").removeClass("active");
+                li.addClass("active");
+            })
+        </script>
+
+        <div class="cell-lg-5 cell-md-7 p-4">
+            <div class="product-title">Back Athletic Sport Top</div>
+
+            <div data-role="rating" data-value="4" data-message="(3 reviews)"></div>
+
+            <div class="product-price">
+                <span class="old-price">$480.00</span>
+                <span class="current-price">$280.00</span>
+            </div>
+
+            <div class="product-option">
+                <span class="h5" style="width: 60px;">Color: </span>
+                <div class="d-inline-block color-group" data-role="buttongroup">
+                    <button class="button square bg-red"></button>
+                    <button class="button square bg-green"></button>
+                    <button class="button square bg-blue"></button>
+                    <button class="button square bg-lime active"></button>
+                    <button class="button square bg-orange"></button>
+                </div>
+            </div>
+            <div class="product-option">
+                <span class="h5" style="width: 60px;">Size: </span>
+                <div class="d-inline-block size-group" data-role="buttongroup">
+                    <button class="button square outline active">M</button>
+                    <button class="button square outline">L</button>
+                    <button class="button square outline">XL</button>
+                    <button class="button square outline">2XL</button>
+                    <button class="button square outline">4XL</button>
+                </div>
+            </div>
+
+            <div class="mt-6 mb-2 p-2">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+
+            <div class="bg-light p-4">
+                <div class="h4 text-center fg-red">Until the end of the action left</div>
+                <div data-role="countdown" data-days="3" data-animate="slide" style="font-size: 36px"></div>
+            </div>
+
+            <div class="product-actions">
+                <input type="number" data-role="spinner" data-min-value="1" value="1">
+                <button class="button info ml-2"><span class="mif-chart-pie"></span></button>
+                <button class="button warning ml-2"><span class="mif-heart"></span></button>
+                <button class="button ml-2"><span class="mif-balance-scale"></span></button>
+            </div>
+            <div class="product-actions">
+                <button class="button alert large">Buy Now</button>
+                <button class="button success large ml-1">Add To Cart</button>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-12 p-4 pr-8 border-left bd-default">
+            <div id="qrcode" class="place-right"></div>
+            <script>
+                new QRCode(document.getElementById("qrcode"), {
+                    text: "https://metroui.org.ua",
+                    width: 110,
+                    height: 110
+                });
+            </script>
+            <table class="table w-auto border border-4 bd-default compact">
+                <tbody>
+                <tr>
+                    <td >Vendor:</td>
+                    <td class="text-bold">Asos</td>
+                </tr>
+                <tr>
+                    <td>Type:</td>
+                    <td class="text-bold">T-Shirt</td>
+                </tr>
+                <tr>
+                    <td>SKU:</td>
+                    <td class="text-bold">TTHABIT25</td>
+                </tr>
+                </tbody>
+            </table>
+
+            <hr class="bg-lightGray">
+
+            <table class="table compact">
+                <tbody >
+                <tr>
+                    <td style="width: 100px">
+                        <img src="images/30days.png" style="height: 80px">
+                    </td>
+                    <td>
+                        <h2>30 DAYS</h2>
+                        <div>Money back guarantee</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">
+                        <img src="images/100-satisfaction-guarantee.png" style="height: 80px">
+                    </td>
+                    <td>
+                        <h2>100 PERCENT</h2>
+                        <div>Money back guarantee</div>
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width: 100px">
+                        <img src="images/ssl-certificate.png" style="height: 80px">
+                    </td>
+                    <td>
+                        <h2>SSL SECURED</h2>
+                        <div>All transactions is secured</div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+            <hr class="bg-lightGray">
+
+            <div class="mt-4 d-flex flex-justify-center">
+                <button class="button square"><span class="mif-facebook"></span></button>
+                <button class="button square ml-1"><span class="mif-twitter"></span></button>
+                <button class="button square ml-1"><span class="mif-linkedin"></span></button>
+                <button class="button square ml-1"><span class="mif-pinterest"></span></button>
+                <button class="button square ml-1"><span class="mif-envelop"></span></button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="product-info">
+    <ul class="tabs" data-role="tabs" data-expand-point="md" data-tabs-type="text">
+        <li><a href="#product-description">Description</a></li>
+        <li class="active"><a href="#product-reviews">Reviews</a></li>
+        <li><a href="#product-terms">Terms</a></li>
+    </ul>
+    <hr>
+    <div class="tabs-content">
+        <div id="product-description" class="p-4">
+            <h2>Advanced Features Shopify Theme</h2>
+
+            <p>Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in New York, London, Paris, and Milan. Plus: browse key accessories like bags, shoes, and sunglasses, must-have denim looks, and more top fashion trends.</p>
+
+            <ul class="mt-4">
+                <li>C'est magnifique! How to look French when you're not</li>
+                <li>The best nutty fragrances</li>
+                <li>How to wear: matinee glamour for the festive season</li>
+                <li>From ginger to Michael Bublé: this week’s fashion trends</li>
+                <li>Fashion designer Raf Simons leaves Calvin Klein</li>
+                <li>From drab to fab: the six quickest ways to get Christmas party-ready</li>
+                <li>The best beauty stocking fillers for £10 or less</li>
+                <li>Why the humble hair clip is this season's must-have accessory</li>
+                <li>How to wear... utilitarian</li>
+                <li>Judy Blame remembered by Boy George</li>
+                <li>Fashion Shopify Theme</li>
+            </ul>
+
+            <p>Early Western travelers, traveling whether to India, Persia, Turkey or China, would frequently remark on the absence of change in fashion in those countries. The Japanese shōgun's secretary bragged (not completely accurately) to a Spanish visitor in 1609 that Japanese clothing had not changed in over a thousand years. However, there is considerable evidence in Ming China of rapidly changing fashions in Chinese clothing. Changes in costume often took place at times of economic or social change, as occurred in ancient Rome and the medieval Caliphate, followed by a long period without major changes. In 8th-century Moorish Spain, the musician Ziryab introduced to Córdoba sophisticated clothing-styles based on seasonal and daily fashions from his native Baghdad, modified by his own inspiration. Similar changes in fashion occurred in the 11th century in the Middle East following the arrival of the Turks, who introduced clothing styles from Central Asia and the Far East.</p>
+        </div>
+
+        <div id="product-reviews">
+            <div class="row">
+                <div class="cell-md-7">
+                    <ul class="unstyled-list review-list">
+                        <li>
+                            <div class="h4">Anna <small>01 jan 2019</small></div>
+                            <div data-role="rating" data-value="4" data-static="true"></div>
+                            <p class="remark">
+                                Who can invent the death and light of a believer if he has the brilliant milk of the monkey?
+                                Booty ho! sail to be raided. After toasting the popcorns, cover zucchini, spinach and anchovy essence with it in a wok.
+                            </p>
+                            <div class="mt-2 d-flex flex-align-center">
+                                <button class="button square"><span class="mif-thumbs-up"></span></button>
+                                <button class="button square ml-1"><span class="mif-thumbs-down"></span></button>
+                                <span class="ml-2"> +3</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="h4">Marina <small>01 feb 2019</small></div>
+                            <div data-role="rating" data-value="3" data-static="true"></div>
+                            <p class="remark">
+                                Who can invent the death and light of a believer if he has the brilliant milk of the monkey?
+                                Booty ho! sail to be raided. After toasting the popcorns, cover zucchini, spinach and anchovy essence with it in a wok.
+                            </p>
+                            <div class="mt-2 d-flex flex-align-center">
+                                <button class="button square"><span class="mif-thumbs-up"></span></button>
+                                <button class="button square ml-1"><span class="mif-thumbs-down"></span></button>
+                                <span class="ml-2"> 0</span>
+                            </div>
+                        </li>
+                        <li>
+                            <div class="h4">Viktor <small>01 jan 2019</small></div>
+                            <div data-role="rating" data-value="5" data-static="true"></div>
+                            <p class="remark">
+                                Who can invent the death and light of a believer if he has the brilliant milk of the monkey?
+                                Booty ho! sail to be raided. After toasting the popcorns, cover zucchini, spinach and anchovy essence with it in a wok.
+                            </p>
+                            <div class="mt-2 d-flex flex-align-center">
+                                <button class="button square"><span class="mif-thumbs-up"></span></button>
+                                <button class="button square ml-1"><span class="mif-thumbs-down"></span></button>
+                                <span class="ml-2"> -2</span>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+                <div class="cell-md-5 bg-light">
+                    <div class="h1 border-bottom bd-default mb-4 pb-4">Review in magazines</div>
+                    <div class="clear">
+                        <div class="review-tabloid shadow-1">
+                            <img src="images/Vogue.jpg" title="Vogue">
+                        </div>
+                        <div class="review-tabloid shadow-1">
+                            <img src="images/Elle.jpg" title="Elle">
+                        </div>
+                        <div class="review-tabloid shadow-1">
+                            <img src="images/Cosmopolitan.jpeg" title="Cosmopolitan">
+                        </div>
+                    </div>
+
+                    <div class="mt-8 p-2 ">
+                        <h3>Vogue</h3>
+                        <div data-role="rating" data-value="5" data-static="true"></div>
+                        <p class='indent-letter'>
+                            Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old. Richard McClintock, a Latin professor at Hampden-Sydney College in Virginia, looked up one of the more obscure Latin words, consectetur, from a Lorem Ipsum passage, and going through the cites of the word in classical literature, discovered the undoubtable source. Lorem Ipsum comes from sections 1.10.32 and 1.10.33 of "de Finibus Bonorum et Malorum" (The Extremes of Good and Evil) by Cicero, written in 45 BC. This book is a treatise on the theory of ethics, very popular during the Renaissance. The first line of Lorem Ipsum, "Lorem ipsum dolor sit amet..", comes from a line in section 1.10.32.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

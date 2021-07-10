@@ -1,0 +1,70 @@
+<div class="row m-3">
+    <div class="cell-md-4 text-center text-left-md">
+        <h3 class="dashboard-section-title">Countdown
+            <small>ui elements</small>
+        </h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">UI Elements</a></li>
+            <li class="page-item"><a href="#" class="page-link">Countdown</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="p-1 m-3">
+    <div class="row">
+        <div class="cell-lg-6">
+            <div class="bg-white p-4">
+                <h5 class="mt-0">Default</h5>
+                <div data-role="countdown" data-days="30" style="font-size: 64px;"></div>
+            </div>
+        </div>
+        <div class="cell-lg-6">
+            <div class="bg-white p-4">
+                <h5 class="mt-0">Effect slide</h5>
+                <div data-role="countdown" data-days="30" data-animate="slide" style="font-size: 64px;"></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="cell-lg-6">
+            <div class="bg-white p-4">
+                <h5 class="mt-0">Effect fade</h5>
+                <div data-role="countdown" data-days="30" data-animate="fade" style="font-size: 64px;"></div>
+            </div>
+        </div>
+        <div class="cell-lg-6">
+            <div class="bg-white p-4">
+                <h5 class="mt-0">Effect Zoom</h5>
+                <div data-role="countdown" data-days="30" data-animate="zoom" style="font-size: 64px;"></div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="cell-lg-12">
+            <div class="bg-white p-4">
+                <h5 class="mt-0">i18n</h5>
+                <div class="d-flex flex-justify-center mb-4">
+                    <button class="button m-1" onclick="changeLocale($(this).text())">en-US</button>
+                    <button class="button m-1" onclick="changeLocale($(this).text())">de-DE</button>
+                    <button class="button m-1" onclick="changeLocale($(this).text())">hu-HU</button>
+                    <button class="button m-1" onclick="changeLocale($(this).text())">uk-UA</button>
+                    <button class="button m-1" onclick="changeLocale($(this).text())">ru-RU</button>
+                </div>
+
+                <div id="countdown_locale" data-role="countdown" data-days="30" style="font-size: 64px"></div>
+
+                <script>
+                    function changeLocale(locale){
+                        $('#countdown_locale').attr('data-locale', locale);
+                    }
+                </script>
+            </div>
+        </div>
+    </div>
+</div>

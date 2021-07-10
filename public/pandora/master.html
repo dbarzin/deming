@@ -1,0 +1,331 @@
+<div class="row m-3">
+    <div class="cell-md-4 text-center text-left-md">
+        <h3 class="dashboard-section-title">Master
+            <small>wizards</small>
+        </h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">Wizards</a></li>
+            <li class="page-item"><a href="#" class="page-link">Master</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="p-1 m-3">
+    <div class="row">
+        <div class="cell-lg-12">
+            <div class="bg-white p-4 h-100">
+                <div class="d-flex flex-justify-center mb-2">
+                    <input type="radio" data-role="radio" name="r1" value="slide" data-caption="slide" checked onclick="$('#effect-demo').attr('data-effect', this.value)">
+                    <input type="radio" data-role="radio" name="r1" value="fade" data-caption="fade" onclick="$('#effect-demo').attr('data-effect', this.value)">
+                    <input type="radio" data-role="radio" name="r1" value="switch" data-caption="switch" onclick="$('#effect-demo').attr('data-effect', this.value)">
+                </div>
+                <hr>
+                <div id="effect-demo" data-role="master"
+                     data-control-title="Ordering, step $1 of $2"
+                     data-control-prev="<span class='mif-arrow-left'></span>"
+                     data-control-next="<span class='mif-arrow-right'></span>"
+                >
+                    <div class="page">
+                        Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.
+                    </div>
+                    <div class="page">
+                        It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.
+                    </div>
+                    <div class="page">
+                        The standard chunk of Lorem Ipsum used since the 1500s is reproduced below for those interested. Sections 1.10.32 and 1.10.33 from "de Finibus Bonorum et Malorum" by Cicero are also reproduced in their exact original form, accompanied by English versions from the 1914 translation by H. Rackham.
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <br>
+    <div class="row">
+        <div class="cell-lg-12">
+            <form action="javascript:" id="master-form" data-role="validator">
+                <div id="master1" data-role="master"
+                     data-control-prev="<span class='mif-arrow-left'></span>"
+                     data-control-next="<span class='mif-arrow-right'></span>"
+                     data-control-title="Checkout step $1/$2"
+                     data-on-before-page="masterBeforePage"
+                >
+                    <div class="page">
+
+                        <select name="h_service" id="h_service" data-role="select">
+                            <optgroup label="Physical servers">
+                                <option value="dedicatced_1_xeon_silver_ssd">Single Xeon Silver SSD</option>
+                                <option value="dedicatced_2_xeon_silver_ssd">Dual Xeon Silver SSD</option>
+                                <option value="dedicatced_smart_1_xeon_silver_ssd">Smart Single Xeon Silver SSD</option>
+                                <option value="dedicatced_smart_2_xeon_silver_ssd">Smart Dual Xeon Silver SSD</option>
+                                <option value="dedicated_corei3_hp">Core i3 (hp)</option>
+                                <option value="dedicated_corei3_hp_ssd">Core i3 (hp) SSD</option>
+                                <option value="dedicated_corei7_hp_ssd">Core i7 (hp) SSD</option>
+                                <option value="dedicated_pentium_hp">Pentium (hp)</option>
+                                <option value="dedicated_pentium_hp_ssd">Pentium (hp) SSD</option>
+                                <option value="dedicated_smart_corei3_hp">Smart Core i3 (hp)</option>
+                                <option value="dedicated_smart_corei3_hp_ssd">Smart Core i3 (hp) SSD</option>
+                                <option value="dedicated_smart_corei7_hp_ssd">Smart Core i7 (hp) SSD</option>
+                                <option value="dedicated_smart_pentium_hp">Smart Pentium (hp)</option>
+                                <option value="dedicated_smart_pentium_hp_ssd">Smart Pentium (hp) SSD</option>
+                                <option value="dedicated_smart_xeon_hp">Smart Xeon (hp)</option>
+                                <option value="dedicated_smart_xeon_hp_ssd">Smart Xeon (hp) SSD</option>
+                                <option value="dedicated_smart_xeon_ssd">Smart Xeon SSD</option>
+                                <option value="dedicated_xeon_hp">Xeon (hp)</option>
+                                <option value="dedicated_xeon_hp_ssd">Xeon (hp) SSD</option>
+                                <option value="dedicated_xeon_ssd">Xeon SSD</option>
+                                <option value="dedicated_xeon">Xeon</option>
+                                <option value="dedicated_xeon_sata">Xeon SATA</option>
+                                <option value="dedicated_dual_xeon">Dual Xeon</option>
+                                <option value="dedicated_dual_xeon_sata">Dual Xeon SATA</option>
+                                <option value="dedicated_smart_xeon">Smart Xeon</option>
+                                <option value="dedicated_smart_xeon_sata">Smart Xeon SATA</option>
+                                <option value="dedicated_smart_dual_xeon">Smart Dual Xeon</option>
+                                <option value="dedicated_smart_dual_xeon_sata">Smart Dual Xeon SATA</option>
+                                <option value="colo_new_2u">Colocation 2U</option>
+                                <option value="colo_new_4u">Colocation 4U</option>
+                            </optgroup>
+                            <optgroup label="Virtual Hosting">
+                                <option value="mini" selected="selected">Mini</option>
+                                <option value="site">Site</option>
+                                <option value="portal">Portal</option>
+                            </optgroup>
+                            <optgroup label="Virtual servers">
+                                <option value="evps0">eVPS-TEST (30 days)</option>
+                                <option value="evps1">eVPS-1</option>
+                                <option value="evps2">eVPS-2</option>
+                                <option value="evps4">eVPS-4</option>
+                                <option value="evps8">eVPS-8</option>
+                                <option value="evps16">eVPS-16</option>
+                                <option value="evps32">eVPS-32</option>
+                                <option value="evps64">eVPS-64</option>
+                                <option value="evps128">eVPS-128</option>
+                            </optgroup>
+                        </select>
+
+                        <div class="d-table fg-dark w-100 mt-8 mb-8">
+                            <div class="d-table-row text-bold reduce-2 enlarge-md">
+                                <div class="d-table-cell"></div>
+                                <div class="d-table-cell text-center">Terms<br>(months)</div>
+                                <div class="d-table-cell text-center">Price<br>(month)</div>
+                                <div class="d-table-cell text-center">Cost<br>(UAH)</div>
+                            </div>
+
+                            <div class="d-table-row" style="height: 8px;"></div>
+
+                            <label class="d-table-row reduce-1 enlarge-md">
+                                <div class="p-1 d-table-cell"><input name="h_term" value="3" type="radio" data-role="radio" checked></div>
+                                <div class="p-1 d-table-cell text-center">3</div>
+                                <div class="p-1 d-table-cell text-center">115.02</div>
+                                <div class="p-1 d-table-cell text-center">345.06</div>
+                            </label>
+                            <label class="d-table-row reduce-1 enlarge-md">
+                                <div class="p-1 d-table-cell"><input name="h_term" value="6" type="radio" data-role="radio"></div>
+                                <div class="p-1 d-table-cell text-center">6</div>
+                                <div class="p-1 d-table-cell text-center">98.01</div>
+                                <div class="p-1 d-table-cell text-center">588.06</div>
+                            </label>
+                            <label class="d-table-row reduce-1 enlarge-md">
+                                <div class="p-1 d-table-cell"><input name="h_term" value="12" type="radio" data-role="radio"></div>
+                                <div class="p-1 d-table-cell text-center">12</div>
+                                <div class="p-1 d-table-cell text-center">86.67</div>
+                                <div class="p-1 d-table-cell text-center">1 040.04</div>
+                            </label>
+                        </div>
+
+                        <select name="php_version" data-role="select">
+                            <option value="72">Version PHP 7.2</option>
+                            <option value="71" selected="selected">Version PHP 7.1 (recomended)</option>
+                            <option value="7">Version PHP 7.0</option>
+                            <option value="56">Version PHP 5.6</option>
+                            <option value="54">Version PHP 5.4</option>
+                            <option value="53">Version PHP 5.3</option>
+                            <option value="5">Version PHP 5.2</option>
+                        </select>
+
+                        <label class="d-flex mt-8 flex-align-start">
+                            <input type="radio" name="hosting_with_domain" value="0" checked data-role="radio" class="mt-1">
+                            <div class="reduce-1 enlarge-md">
+                                <h5>I have a domain</h5>
+                                <p class="mt-0">
+                                    Specify an existing domain name that you want to use for your order
+                                </p>
+                            </div>
+                        </label>
+                        <div>
+                            <input type="text" name="domain_name_1" id="domain_name_1" data-role="input" data-prepend="www." placeholder="Domain (website address)" data-validate="domain">
+                            <span class="invalid_feedback">Please specify domain name</span>
+                        </div>
+
+                        <label class="d-flex mt-8 flex-align-start">
+                            <input type="radio" name="hosting_with_domain" value="1" data-role="radio" class="mt-1">
+                            <div class="reduce-1 enlarge-md">
+                                <h5>Register domain</h5>
+                                <p class="mt-0">
+                                    If you do not have a registered domain name. <a href="#" class="fg-red">Free registration domain name terms</a>
+                                </p>
+                            </div>
+                        </label>
+                        <div>
+                            <div class="row">
+                                <div class="cell-sm-8">
+                                    <input type="text" name="domain_name_2" id="domain_name_2" data-role="input" data-prepend="www." placeholder="Domain name" data-validate="pattern=^[a-z0-9а-я]+$">
+                                    <span class="invalid_feedback">Please specify domain name</span>
+                                </div>
+                                <div class="cell-sm-4 mt-2 mt-0-sm pl-0-sm">
+                                    <select name="domain_type" id="domain_type" class="select-domains" data-role="select">
+
+                                        <option value="com">com</option>
+                                        <option value="net">net</option>
+                                        <option value="org">org</option>
+                                        <option value="biz">biz</option>
+                                        <option value="info">info</option>
+
+
+                                        <option value="ru">ru</option>
+
+                                        <option value="com.ua" selected="selected">com.ua</option>
+                                        <option value="net.ua">net.ua</option>
+                                        <option value="org.ua">org.ua</option>
+
+
+                                        <option value="kiev.ua">kiev.ua</option>
+
+                                        <option value="in.ua">in.ua</option>
+
+                                        <option value="cn.ua">cn.ua</option>
+                                        <option value="crimea.ua">crimea.ua</option>
+                                        <option value="cv.ua">cv.ua</option>
+                                        <option value="dn.ua">dn.ua</option>
+                                        <option value="donetsk.ua">donetsk.ua</option>
+                                        <option value="dp.ua">dp.ua</option>
+                                        <option value="if.ua">if.ua</option>
+                                        <option value="kh.ua">kh.ua</option>
+                                        <option value="kharkov.ua">kharkov.ua</option>
+                                        <option value="kherson.ua">kherson.ua</option>
+                                        <option value="kirovograd.ua">kirovograd.ua</option>
+                                        <option value="km.ua">km.ua</option>
+                                        <option value="kr.ua">kr.ua</option>
+                                        <option value="ks.ua">ks.ua</option>
+                                        <option value="lg.ua">lg.ua</option>
+                                        <option value="lugansk.ua">lugansk.ua</option>
+                                        <option value="lutsk.ua">lutsk.ua</option>
+                                        <option value="lviv.ua">lviv.ua</option>
+                                        <option value="mk.ua">mk.ua</option>
+                                        <option value="nikolaev.ua">nikolaev.ua</option>
+                                        <option value="od.ua">od.ua</option>
+                                        <option value="odessa.ua">odessa.ua</option>
+                                        <option value="pl.ua">pl.ua</option>
+                                        <option value="poltava.ua">poltava.ua</option>
+                                        <option value="rovno.ua">rovno.ua</option>
+                                        <option value="rv.ua">rv.ua</option>
+                                        <option value="sebastopol.ua">sebastopol.ua</option>
+                                        <option value="sumy.ua">sumy.ua</option>
+                                        <option value="te.ua">te.ua</option>
+                                        <option value="uzhgorod.ua">uzhgorod.ua</option>
+                                        <option value="vinnica.ua">vinnica.ua</option>
+                                        <option value="vn.ua">vn.ua</option>
+                                        <option value="zaporizhzhe.ua">zaporizhzhe.ua</option>
+                                        <option value="zp.ua">zp.ua</option>
+                                        <option value="zt.ua">zt.ua</option>
+                                        <option value="zhitomir.ua">zhitomir.ua</option>
+                                        <option value="uz.ua">uz.ua</option>
+                                        <option value="ternopil.ua">ternopil.ua</option>
+                                        <option value="ivano-frankivsk.ua">ivano-frankivsk.ua</option>
+                                        <option value="chernovtsy.ua">chernovtsy.ua</option>
+                                        <option value="yalta.ua">yalta.ua</option>
+                                        <option value="khmelnitskiy.ua">khmelnitskiy.ua</option>
+                                        <option value="ck.ua">ck.ua</option>
+                                        <option value="volyn.ua">volyn.ua</option>
+                                        <option value="sm.ua">sm.ua</option>
+                                        <option value="kharkiv.ua">kharkiv.ua</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="text-center mt-4">
+                                Terms: <span class="fg-red">1 year free</span>
+                            </div>
+                        </div>
+
+                    </div>
+
+                    <div class="page">
+                        <label class="d-flex mt-8 flex-align-center">
+                            <input type="checkbox" checked data-role="checkbox" name="ua_resident" value="1" class="mt-1">
+                            <div class="reduce-1-sm">
+                                <p class="mt-0">
+                                    Resident of Ukraine (the person registered on the territory of Ukraine)
+                                </p>
+                            </div>
+                        </label>
+                        <label class="d-flex mt-8 flex-align-center">
+                            <input type="radio" name="client_type" value="physical" checked data-role="radio" class="mt-1">
+                            <div class="reduce-1-sm">
+                                <h5>Individual</h5>
+                                <hr>
+                                <p class="mt-0">
+                                    Payment is one of these methods on our website, provided for individuals.
+                                </p>
+                            </div>
+                        </label>
+                        <label class="d-flex mt-8 flex-align-center">
+                            <input type="radio" name="client_type" value="legal" data-role="radio" class="mt-1">
+                            <div class="reduce-1-sm">
+                                <h5>Legal entity</h5>
+                                <hr>
+                                <p class="mt-0">
+                                    Payment is only by means of transfer on the basis of the issued invoice.
+                                </p>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    function masterBeforePage(dir, index){
+        var result = {
+            val: 0,
+            log: []
+        };
+        var form = $("#master-form");
+
+        if (dir === "next" && index === 0) {
+
+            var field1 = $('#domain_name_1');
+            var field2 = $('#domain_name_2');
+
+            field1.parent().removeClass("invalid");
+            field2.parent().removeClass("invalid");
+
+            if (parseInt(form[0]['hosting_with_domain'].value) === 0) {
+                Metro.validator.validate(field1, result, null, null, true);
+            } else {
+                Metro.validator.validate(field2, result, null, null, true);
+            }
+
+            if (result['log'].length > 0) {
+                setTimeout(function(){
+                    $.each([field1, field2], function(){
+                        var inp  = $(this);
+                        if (Metro.validator.is_control(inp)) {
+                            inp.parent().removeClass("invalid");
+                        } else {
+                            inp.removeClass("invalid");
+                        }
+                    })
+                }, 2000);
+            }
+
+            return result['log'].length === 0;
+        }
+
+        return true;
+
+    }
+</script>

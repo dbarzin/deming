@@ -1,0 +1,176 @@
+<div class="row border-bottom bd-lightGray m-3">
+    <div class="cell-md-4 text-center text-left-md">
+        <h3 class="dashboard-section-title">Pandora <small>Version 1.0</small></h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">Mailbox</a></li>
+            <li class="page-item"><a href="#" class="page-link">Read email</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="m-3">
+<div class="inbox p-1 bg-transparent">
+    <div class="inbox-actions place-right mt-3 d-flex flex-align-center">
+        <div class="d-inline-block" id="search-wrapper">
+            <input type="text" data-role="input" data-search-button="true">
+        </div>
+        <button class="button ml-2 success">Compose new mail</button>
+    </div>
+    <h1>Read email</h1>
+    <hr>
+    <div class="row">
+        <div class="cell-md-3 cell-xl-2">
+            <button class="button mb-3 success">Compose</button>
+            <div data-role="panel" data-collapsible="true" data-title-caption="Folders">
+                <ul class="v-menu inbox-folders mt-4">
+                    <li class="active">
+                        <a href="#">
+                            <span class="icon mif-download"></span> Inbox
+                            <span class="badge inline bg-cyan fg-white">12</span>
+                        </a>
+                    </li>
+                    <li><a href="#"><span class="icon mif-mail-read"></span> Sent</a></li>
+                    <li><a href="#"><span class="icon mif-drafts"></span> Drafts</a></li>
+                    <li><a href="#"><span class="icon mif-filter"></span> Junk</a></li>
+                    <li><a href="#"><span class="icon mif-bin"></span> Trash</a></li>
+                    <li>
+                        <a href="#" class="dropdown-toggle"><span class="icon mif-brightness-auto"></span> Labels</a>
+                        <ul class="v-menu" data-role="dropdown">
+                            <li><a href="#"><span class="icon mif-brightness-auto fg-red"></span> Important</a></li>
+                            <li><a href="#"><span class="icon mif-brightness-auto fg-orange"></span> Promotions</a></li>
+                            <li><a href="#"><span class="icon mif-brightness-auto fg-cyan"></span> Social</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div data-role="panel" data-collapsible="true" data-title-caption="Categories" class="mt-2">
+                <ul class="v-menu inbox-folders mt-4">
+                    <li><a href="#"><span class="icon mif-users fg-red"></span> Networks</a></li>
+                    <li><a href="#"><span class="icon mif-bubbles fg-orange"></span> Forums</a></li>
+                    <li><a href="#"><span class="icon mif-flag fg-cyan"></span> Promotions</a></li>
+                    <li><a href="#"><span class="icon mif-chat fg-green"></span> Notifies</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="cell-md-9 cell-xl-10">
+            <div class="inbox-items-wrapper">
+                <div class="inbox-actions mt-2 mt-0-lg">
+                    <div class="d-flex flex-align-center flex-wrap">
+                        <button class="button square bg-white"><span class="mif-arrow-left"></span></button>
+                        <button class="button square ml-3 bg-white"><span class="mif-file-archive"></span></button>
+                        <button class="button square ml-1 bg-white"><span class="mif-warning"></span></button>
+                        <button class="button square ml-1 bg-white"><span class="mif-bin"></span></button>
+                        <button class="button square ml-3 bg-white"><span class="mif-mail-read"></span></button>
+                        <button class="button square ml-1 bg-white"><span class="mif-history"></span></button>
+                        <button class="button square ml-3 bg-white"><span class="mif-tag"></span></button>
+                        <div class="dropdown-button h-auto ml-1">
+                            <button class="button square bg-white"><span class="mif-more-vert"></span></button>
+                            <ul class="d-menu" data-role="dropdown">
+                                <li><a href="#">Marked as read</a></li>
+                                <li><a href="#">Marked as unread</a></li>
+                                <li><a href="#">Add to task</a></li>
+                                <li><a href="#">Add remark</a></li>
+                                <li><a href="#">Add to calendar</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="ml-auto-lg d-flex flex-justify-end flex-align-center mt-2 mt-0-lg">
+                            <button class="button square ml-1 bg-white"><span class="mif-chevron-left"></span></button>
+                            <button class="button square ml-1 bg-white"><span class="mif-chevron-right"></span></button>
+                            <button class="button square ml-1 bg-white"><span class="mif-cog"></span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1 p-6-lg bg-white mt-3">
+                    <div class="email-read-form">
+                        <div class="row flex-align-center">
+                            <div class="cell-md-6">
+                                <div class="email-to">Receive to: <span class="text-bold">help@example.com</span></div>
+                                <div class="email-to">Copy to: <span class="text-bold">help@example.com, support@example.com</span></div>
+                            </div>
+                            <div class="cell-md-6 text-right-md">
+                                <div class="email-actions">
+                                    <button class="button square small"><span class="mif-star-empty"></span></button>
+                                    <button class="button square small"><span class="mif-reply"></span></button>
+                                    <button class="button square small"><span class="mif-print"></span></button>
+                                    <div class="dropdown-button ml-1">
+                                        <button class="button square small"><span class="mif-more-vert"></span></button>
+                                        <ul class="d-menu place-right text-left" data-role="dropdown">
+                                            <li><a href="#"><span class="mif-reply icon"></span> Reply</a></li>
+                                            <li><a href="#"><span class="mif-reply_all icon"></span> Reply All</a></li>
+                                            <li><a href="#"><span class="mif-redo icon "></span> Forward</a></li>
+                                            <li><a href="#"><span class="mif-filter icon"></span> Filter by example</a></li>
+                                            <li><a href="#"><span class="mif-print icon"></span> Print</a></li>
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <h2 class="email-subject">Message Subject Is Placed Here</h2>
+                        <div class="row">
+                            <div class="cell-md-6">
+                                <div class="email-from">From: <span class="text-bold">help@example.com</span></div>
+                            </div>
+                            <div class="cell-md-6 text-right-md">
+                                <div class="email-date">
+                                    15 Feb. 2016 11:03 PM
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="email-text">
+                            Hello John,
+                            <br>
+                            <br>
+                            Keffiyeh blog actually fashion axe vegan, irony biodiesel. Cold-pressed hoodie chillwave put a bird on it aesthetic, bitters brunch meggings vegan iPhone. Dreamcatcher vegan scenester mlkshk. Ethical master cleanse Bushwick, occupy Thundercats banjo cliche ennui farm-to-table mlkshk fanny pack gluten-free. Marfa butcher vegan quinoa, bicycle rights disrupt tofu scenester chillwave 3 wolf moon asymmetrical taxidermy pour-over. Quinoa tote bag fashion axe, Godard disrupt migas church-key tofu blog locavore. Thundercats cronut polaroid Neutra tousled, meh food truck selfies narwhal American Apparel.
+                            <br>
+                            <br>
+                            Raw denim McSweeney's bicycle rights, iPhone trust fund quinoa Neutra VHS kale chips vegan PBR&B literally Thundercats +1. Forage tilde four dollar toast, banjo health goth paleo butcher. Four dollar toast Brooklyn pour-over American Apparel sustainable, lumbersexual listicle gluten-free health goth umami hoodie. Synth Echo Park bicycle rights DIY farm-to-table, retro kogi sriracha dreamcatcher PBR&B flannel hashtag irony Wes Anderson. Lumbersexual Williamsburg Helvetica next level. Cold-pressed slow-carb pop-up normcore Thundercats Portland, cardigan literally meditation lumbersexual crucifix. Wayfarers raw denim paleo Bushwick, keytar Helvetica scenester keffiyeh 8-bit irony mumblecore whatever viral Truffaut.
+                            <br>
+                            <br>
+                            Thanks,
+                            Jane
+                        </div>
+                        <hr>
+                        <div class="email-attachments">
+                            <div class="email-attachment">
+                                <div class="preview">
+                                    <span class="mif-file-pdf"></span>
+                                </div>
+                                <div class="desc">
+                                    <button class="button square place-right"><span class="mif-download2"></span></button>
+                                    <div class="text-bold">report.pdf</div>
+                                    <div>1,245 kb</div>
+                                </div>
+                            </div>
+                            <div class="email-attachment">
+                                <div class="preview">
+                                    <img src="https://lorempixel.com/200/100/nature/">
+                                </div>
+                                <div class="desc">
+                                    <button class="button square place-right"><span class="mif-download2"></span></button>
+                                    <div class="text-bold">photo-1.jpg</div>
+                                    <div>1,5 mb</div>
+                                </div>
+                            </div>
+                        </div>
+                        <hr>
+                        <div class="email-actions">
+
+                            <button class="button place-right"><span class="mif-print"></span> Print</button>
+                            <button class="button"><span class="mif-reply"></span> Reply</button>
+                            <button class="button"><span class="mif-reply_all"></span> Reply All</button>
+                            <button class="button"><span class="mif-redo"></span> Forward</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

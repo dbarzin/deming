@@ -1,0 +1,316 @@
+<div class="row border-bottom bd-lightGray m-3">
+    <div class="cell-md-4 d-flex flex-align-center">
+        <h3 class="dashboard-section-title text-center text-left-md w-100">Forms
+            <small>extended</small>
+        </h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md flex-align-center">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">Forms</a></li>
+            <li class="page-item"><a href="#" class="page-link">Extended</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="m-3">
+    <h4>Input</h4>
+    <div class="row">
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1">
+                <form>
+                    <div class="form-group">
+                        <label>Input[text] data-role="input"</label>
+                        <input type="text" data-role="input">
+                        <p class="text-small">Input with clear button</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1">
+                <form>
+                    <div class="form-group">
+                        <label>Input[password] data-role="input"</label>
+                        <input type="password" data-role="input">
+                        <p class="text-small">Input with clear and reveal buttons</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1">
+                <form>
+                    <div class="form-group">
+                        <label>Input[text] data-role="input" with search</label>
+                        <input type="text" data-role="input" data-search-button="true">
+                        <p class="text-small">Input with clear and search buttons</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1">
+                <form>
+                    <div class="form-group">
+                        <label>Input[password] data-role="input" with history</label>
+                        <input type="password" data-role="input" data-history="true">
+                        <p class="text-small">Enter value and press <kbd>Enter</kbd>, repeat, then press <kbd>Up</kbd>
+                            or <kbd>Down</kbd> arrows to access entered values.</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1">
+                <form>
+                    <div class="form-group">
+                        <label>Input[text] data-role="input" with prepend</label>
+                        <input type="text" data-role="input" data-prepend="www.">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1">
+                <form>
+                    <div class="form-group">
+                        <label>Input[password] data-role="input" with append</label>
+                        <input type="password" data-role="input" data-append=".00">
+                    </div>
+                </form>
+            </div>
+        </div>
+
+    </div>
+    <div class="row">
+
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1">
+                <form>
+                    <div class="form-group">
+                        <script>
+                            var customButtons = [
+                                {
+                                    html: "<span class='mif-user'></span>",
+                                    cls: "alert",
+                                    onclick: "alert('You press user button')"
+                                },
+                                {
+                                    html: "<span class='mif-cog'></span>",
+                                    cls: "warning",
+                                    onclick: "alert('You press cog button')"
+                                }
+                            ]
+                        </script>
+                        <label>Input[text] data-role="input" with custom buttons</label>
+                        <input type="text" data-role="input" data-custom-buttons="customButtons">
+                        <p class="text-small">Custom buttons must be defined before input</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1">
+                <form>
+                    <div class="form-group">
+                        <label>Input[text] data-role="input" with autocomplete</label>
+                        <input type="text" data-role="input"
+                               data-autocomplete="Ukraine, USA, Canada, Marokko, Singapur">
+                        <p class="text-small">Begin type one of Ukraine, USA, Canada, Marokko, Singapur</p>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-3">Date &amp; time</h4>
+    <div class="row">
+        <div class="cell-lg-4">
+            <div class="bg-white p-4 m-1">
+                <h5 class="mt-0">Calendar picker</h5>
+                <input type="text" data-role="calendarpicker">
+            </div>
+        </div>
+        <div class="cell-lg-4">
+            <div class="bg-white p-4 m-1">
+                <h5 class="mt-0">Date piker</h5>
+                <input type="text" data-role="datepicker">
+            </div>
+        </div>
+        <div class="cell-lg-4">
+            <div class="bg-white p-4 m-1">
+                <h5 class="mt-0">Time piker</h5>
+                <input type="text" data-role="timepicker">
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-3">Textarea</h4>
+    <div class="row">
+        <div class="cell-lg-12">
+            <div class="bg-white p-4 m-1">
+                <textarea data-role="textarea" data-prepend="<span class='mif-leanpub'></span>"></textarea>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-3">Select</h4>
+    <div class="row">
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1">
+                <h5>Single</h5>
+                <select data-role="select">
+                    <option>Value 1</option>
+                    <option>Value 2</option>
+                    <option>Value 3</option>
+                    <option>Value 4</option>
+                    <option>Value 5</option>
+                </select>
+            </div>
+        </div>
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1">
+                <h5>Multiple</h5>
+                <select data-role="select" multiple>
+                    <option>Value 1</option>
+                    <option>Value 2</option>
+                    <option>Value 3</option>
+                    <option>Value 4</option>
+                    <option>Value 5</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-3">Keypad and Spinner</h4>
+    <div class="row">
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1">
+                <h5>Keypad</h5>
+                <input  type="text" data-role="keypad">
+            </div>
+        </div>
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1">
+                <h5>Spinner</h5>
+                <input  type="text" data-role="spinner">
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-3">Tag input</h4>
+    <div class="row">
+        <div class="cell-lg-12">
+            <div class="bg-white p-4 m-1">
+                <input  type="text" data-role="taginput" data-random-color="true" value="Metro 4,the,best,css3,javascript,html5,framework">
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-3">Slider</h4>
+    <div class="row">
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1 h-100">
+                <h5>Horizontal</h5>
+                <input type="text" data-role="slider">
+                <label>Accuracy</label>
+                <input data-role="slider" data-accuracy="10">
+                <label>With buffer</label>
+                <input data-role="slider" data-buffer="60" data-value="20">
+                <label>With hint</label>
+                <input data-role="slider" data-hint="true" data-hint-always="true" data-value="50">
+            </div>
+        </div>
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1 h-100 clear">
+                <h5>Vertical</h5>
+                <input type="text" data-role="slider" data-vertical="true" data-size="200" data-cls-slider="mx-auto">
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-3">Checkbox, Radio and Switch</h4>
+    <div class="row">
+        <div class="cell-lg-4">
+            <div class="bg-white p-4 m-1">
+                <h5>Checkboxes</h5>
+
+                <input type="checkbox" data-role="checkbox">
+                <input type="checkbox" data-role="checkbox" checked >
+                <input type="checkbox" data-role="checkbox" disabled >
+                <input type="checkbox" data-role="checkbox" disabled checked>
+                <input type="checkbox" data-role="checkbox" data-indeterminate="true">
+
+                <hr>
+
+                <input type="checkbox" data-role="checkbox" data-style="2">
+                <input type="checkbox" data-role="checkbox" checked  data-style="2">
+                <input type="checkbox" data-role="checkbox" disabled  data-style="2">
+                <input type="checkbox" data-role="checkbox" disabled checked data-style="2">
+                <input type="checkbox" data-role="checkbox" data-indeterminate="true" data-style="2">
+            </div>
+        </div>
+        <div class="cell-lg-4">
+            <div class="bg-white p-4 m-1">
+                <h5>Radio</h5>
+                <input name="r1" type="radio" data-role="radio">
+                <input name="r1" type="radio" data-role="radio" checked >
+                <input name="r1" type="radio" data-role="radio" disabled >
+                <input name="r2" type="radio" data-role="radio" disabled checked>
+
+                <hr>
+
+                <input name="r3" type="radio" data-role="radio" data-style="2">
+                <input name="r3" type="radio" data-role="radio" checked  data-style="2">
+                <input name="r3" type="radio" data-role="radio" disabled  data-style="2">
+                <input name="r4" type="radio" data-role="radio" disabled checked data-style="2">
+            </div>
+        </div>
+        <div class="cell-lg-4">
+            <div class="bg-white p-4 m-1">
+                <h5>Switch</h5>
+                <input type="checkbox" data-role="switch">
+                <input type="checkbox" data-role="switch" disabled >
+                <input type="checkbox" data-role="switch" disabled checked>
+
+                <hr>
+
+                <input type="checkbox" data-role="switch" data-material="true">
+                <input type="checkbox" data-role="switch" disabled data-material="true">
+                <input type="checkbox" data-role="switch" disabled checked data-material="true">
+            </div>
+        </div>
+    </div>
+
+    <h4 class="mt-3">Rating</h4>
+    <div class="row">
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1">
+                <h5>Rating</h5>
+                <input data-role="rating" class="d-block">
+                <input data-role="rating" data-star-color="red" data-stared-color="green" data-value="3">
+            </div>
+        </div>
+        <div class="cell-lg-6">
+            <div class="bg-white p-4 m-1">
+                <h5>Rating static</h5>
+                <input data-role="rating" data-value="3" data-message="(avg 3 from 3856)" data-static="true" class="d-block">
+                <input data-role="rating" data-value="3.5" data-message="(avg 3.5 from 3856)" data-static="true" class="d-block" data-stared-color="cyan">
+            </div>
+        </div>
+    </div>
+</div>

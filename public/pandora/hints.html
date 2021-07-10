@@ -1,0 +1,134 @@
+<div class="row m-3">
+    <div class="cell-md-4 text-center text-left-md">
+        <h3 class="dashboard-section-title">Hints
+            <small>ui elements</small>
+        </h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">UI Elements</a></li>
+            <li class="page-item"><a href="#" class="page-link">Hints</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="m-3 p-6 bg-white">
+    <p class="text-leader text-center">
+        Hints, toasts and notifies are used for system messaging.
+    </p>
+</div>
+
+<div class="p-1 m-3">
+    <h4>Toasts</h4>
+    <div class="bg-white p-4">
+        <h5 class="mt-0">General</h5>
+        <button class="button mt-1" onclick="runToast()">Default toast</button>
+        <button class="button mt-1" onclick="runToast('callback')">Toast with a callback</button>
+        <button class="button mt-1" onclick="runToast('timeout')">Toast timeout</button>
+        <button class="button mt-1" onclick="runToast('class')">Toast custom class</button>
+        <button class="button mt-1" onclick="runToast('options')">Toast options</button>
+    </div>
+    <br>
+    <div class="bg-white p-4">
+        <h5 class="mt-0">Accent classes</h5>
+        <button class="button primary mt-1" onclick="toastClasses('primary')">Primary</button>
+        <button class="button secondary mt-1" onclick="toastClasses('secondary')">Secondary</button>
+        <button class="button success mt-1" onclick="toastClasses('success')">Success</button>
+        <button class="button alert mt-1" onclick="toastClasses('alert')">Alert</button>
+        <button class="button warning mt-1" onclick="toastClasses('warning')">Warning</button>
+        <button class="button yellow mt-1" onclick="toastClasses('yellow')">Yellow</button>
+        <button class="button info mt-1" onclick="toastClasses('info')">Info</button>
+        <button class="button light mt-1" onclick="toastClasses('light')">Light</button>
+    </div>
+</div>
+
+<div class="p-1 m-3">
+    <h4>Notifies</h4>
+    <div class="bg-white p-4">
+        <h5 class="mt-0">General</h5>
+        <button class="button mt-1" onclick="simpleNotify()">Create notify</button>
+        <button class="button mt-1" onclick="setupNotify()">Setup notify</button>
+        <button class="button mt-1" onclick="keepNotify()">Keep open</button>
+        <button class="button mt-1" onclick="callbackNotify()">Callback</button>
+        <button class="button mt-1" onclick="classNotify()">Additional classe</button>
+    </div>
+</div>
+
+<div class="p-1 m-3">
+    <h4>Hints</h4>
+    <div class="bg-white p-4 d-flex flex-justify-between">
+        <button class="button primary" data-role="hint" data-hint-position="right" data-hint-text="This is a hinted button">Hint on Right</button>
+        <button class="button secondary" data-role="hint" data-hint-position="top" data-hint-text="This is a hinted button">Hint on Top</button>
+        <button class="button info" data-role="hint" data-hint-position="bottom" data-hint-text="This is a hinted button">Hint on Bottom</button>
+        <button class="button success" data-role="hint" data-hint-position="left" data-hint-text="This is a hinted button">Hint on Left</button>
+    </div>
+</div>
+
+<script>
+    function runToast(mode) {
+        var toast = Metro.toast.create;
+        switch (mode) {
+            case 'callback': toast("This is a toast with callback", function(){alert('Toast callback executed!');}); break;
+            case 'timeout': toast("This is a toast with timeout 5s", null, 5000); break;
+            case 'class': toast("This is a toast with custom class", null, 5000, "bg-green fg-white"); break;
+            case 'options': toastOptions(); break;
+            default: toast("This is default toast");
+        }
+    }
+
+    function toastClasses(cls){
+        var toast = Metro.toast.create;
+        toast("This is a toast with a predefined class ." + cls, null, 5000, cls);
+    }
+
+    function toastOptions(){
+        var options = {
+            showTop: true,
+            timeout: 3000,
+            distance: 64,
+            clsToast: 'alert'
+        };
+        Metro.toast.create("Toast message", null, null, null, options);
+    }
+
+    function simpleNotify(){
+        return Metro.notify.create('This is a notify', 'Title', {});
+    }
+
+    function setupNotify(){
+        var notify = Metro.notify;
+        notify.setup({
+            width: 300,
+            duration: 1000,
+            animation: 'easeOutBounce'
+        });
+        notify.create("This is a notify", "", {});
+        notify.reset();
+    }
+
+    function classNotify(){
+        var notify = Metro.notify;
+        notify.create("This is a notify with additional class.", null, {
+            cls: "alert"
+        });
+    }
+
+    function keepNotify(){
+        var notify = Metro.notify;
+        notify.create("This is a notify. Click me to close.", null, {
+            keepOpen: true
+        });
+    }
+
+    function callbackNotify(){
+        var notify = Metro.notify;
+        notify.create("This is a notify.", null, {
+            onClose: function(){
+                alert('Hi from notification callback');
+            }
+        });
+    }
+
+</script>

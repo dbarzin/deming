@@ -1,0 +1,204 @@
+body {
+    background-color: #ECF0F5;
+}
+
+.navview {
+    .navview-pane {
+        background-color: #222D32;
+        color: #b8c7ce;
+        font-size: 14px;
+    }
+
+    .navview-content {
+        padding-top: 52px;
+        background-color: #ECF0F5;
+    }
+
+    .pull-button {
+        height: 52px;
+        width: 52px;
+    }
+
+    .navview-menu {
+        background-color: #222D32;
+
+        li {
+            a {
+                &:hover {
+                    color: #fff;
+                    background: #1e282c;
+                }
+            }
+
+            &.active {
+                a {
+                    color: #fff;
+                    background: #1e282c;
+                }
+            }
+        }
+
+        .dropdown-toggle::after {
+            border-bottom-color: white;
+        }
+
+        .item-header {
+            color: #4b646f;
+            background: #1a2226;
+            font-size: 12px;
+        }
+    }
+
+    .suggest-box {
+        .holder {
+            &:hover {
+                color: #fff;
+                background: #1e282c;
+            }
+        }
+
+        .data-box {
+            display: flex;
+            padding: 0 8px;
+        }
+
+        img.holder {
+            width: 32px!important;
+            height: auto!important;
+        }
+    }
+
+    .navview-menu .navview-menu {
+        background-color: darken(#1E282C, 2%);
+    }
+}
+
+.avatar-title {
+    line-height: 1.2;
+}
+
+.navview .pull-button + h2,
+.navview.compacted .pull-button + h2
+{
+    display: none;
+}
+
+.navview.expand .pull-button + h2, .navview-pane.open .pull-button + h2 {
+    display: flex;
+}
+
+@media screen and (min-width: 1200px) {
+    .navview .pull-button + h2 {
+        display: flex;
+    }
+}
+
+.navview-pane  , .app-bar {
+    .avatar {
+        width: 32px;
+        height: 32px;
+        border-radius: 50%;
+        overflow: hidden;
+    }
+}
+
+.app-bar-name {
+    display: none;
+}
+
+@media screen and (min-width: 768px) {
+    .app-bar-name {
+        display: inline;
+    }
+}
+
+.dashboard-section-title {
+    line-height: 1.2;
+    margin: 0;
+    padding: 0;
+}
+
+.user-list {
+    margin: 0;
+    padding: 0;
+    list-style: none inside;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-between;
+    align-items: center;
+
+    li {
+        width: 25%;
+        text-align: center;
+        flex-shrink: 0;
+        padding: 10px;
+        font-size: 12px;
+
+        .avatar {
+            border-radius: 50%;
+            max-width: 100%;
+            height: auto;
+            overflow: hidden;
+        }
+    }
+}
+
+.lock-box {
+    .avatar {
+        width: 128px;
+        height: auto;
+        overflow: hidden;
+        border-radius: 50%;
+        border: 2px solid white;
+    }
+}
+
+.page-error-box {
+    width: 100%;
+    display: block;
+    position: relative;
+    text-align: center;
+}
+
+.login-box {
+    display: block;
+    position: relative;
+    width: 100%;
+    box-shadow: 0 1px 1px rgba(0,0,0,0.1);
+}
+
+.user-block {
+    display: block;
+    position: absolute;
+    top: 100%;
+    right: 0;
+    width: 280px;
+    line-height: 1.2;
+
+    .avatar {
+        width: 128px;
+        height: 120px;
+        overflow: hidden;
+        border-radius: 50%;
+        border: 2px solid white;
+
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+}
+
+@media screen and (min-width: 640px){
+    .login-box {
+        width: 360px;
+    }
+
+    .page-error-box {
+        width: 480px;
+    }
+}
+
+@import (once) "ecommerce";
+@import (once) "mailbox";
+@import (once) "wizards";

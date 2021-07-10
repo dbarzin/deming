@@ -1,0 +1,117 @@
+<div class="row m-3">
+    <div class="cell-md-4 text-center text-left-md">
+        <h3 class="dashboard-section-title">TreeView
+            <small>ui elements</small>
+        </h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">UI Elements</a></li>
+            <li class="page-item"><a href="#" class="page-link">TreeView</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="p-1 m-3">
+    <div class="row">
+        <div class="cell-lg-4">
+            <div class="bg-white p-4">
+                <h5 class="mt-0">Simple</h5>
+                <ul data-role="treeview">
+                    <li data-icon="<span class='mif-star-full'></span>" data-caption="Favorites">
+                        <ul>
+                            <li data-icon="<span class='mif-library'></span>" data-caption="Projects"></li>
+                            <li data-icon="<span class='mif-download'></span>" data-caption="Downloads"></li>
+                            <li data-icon="<span class='mif-dashboard'></span>" data-caption="Desktop"></li>
+                        </ul>
+                    </li>
+                    <li data-icon="<span class='mif-onedrive'></span>" data-caption="OneDrive">
+                        <ul>
+                            <li data-caption="Documents"></li>
+                            <li data-caption="Projects" data-collapsed="true">
+                                <ul>
+                                    <li data-caption="Web"></li>
+                                    <li data-caption="Android"></li>
+                                    <li data-caption="Windows"></li>
+                                    <li data-caption="iOS"></li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="cell-lg-4">
+            <div class="bg-white p-4">
+                <h5 class="mt-0">Inputs</h5>
+                <ul data-role="treeview">
+                    <li class="expanded" data-caption="Checkboxes">
+                        <ul>
+                            <li><input type="checkbox" data-role="checkbox" data-caption="Play animation"></li>
+                            <li><input type="checkbox" data-role="checkbox" data-caption="Play sound" checked></li>
+                            <li><input type="checkbox" data-role="checkbox" data-caption="Disabled" disabled></li>
+                            <li><input type="checkbox" data-role="checkbox" data-caption="Disabled checked" checked disabled></li>
+                        </ul>
+                    </li>
+                    <li class="expanded" data-caption="Radios">
+                        <ul>
+                            <li><input type="radio" name="r1" data-role="radio" data-caption="Play animation"></li>
+                            <li><input type="radio" name="r1" data-role="radio" data-caption="Play sound" checked></li>
+                            <li><input type="radio" data-role="radio" data-caption="Disabled" disabled></li>
+                            <li><input type="radio" data-role="radio" data-caption="Disabled checked" checked disabled></li>
+                        </ul>
+                    </li>
+                    <li class="expanded" data-caption="Switches">
+                        <ul>
+                            <li><input type="checkbox" data-role="switch" data-caption="Play animation"></li>
+                            <li><input type="checkbox" data-role="switch" data-caption="Play sound" checked></li>
+                            <li><input type="checkbox" data-role="switch" data-caption="Disabled" disabled></li>
+                            <li><input type="checkbox" data-role="switch" data-caption="Disabled checked" checked disabled></li>
+                        </ul>
+                    </li>
+                    <li class="expanded" data-caption="Inputs">
+                        <ul>
+                            <li style="width: 220px"><input type="text" data-role="input"></li>
+                            <li style="width: 220px">
+                                <select data-role="select">
+                                    <option value="1">Value 1</option>
+                                    <option value="2">Value 2</option>
+                                    <option value="3">Value 3</option>
+                                </select>
+                            </li>
+                            <li style="width: 220px"><textarea data-role="textarea"></textarea></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="cell-lg-4">
+            <div class="bg-white p-4">
+                <h5 class="mt-0">Options tree</h5>
+                <ul data-role="treeview">
+                    <li>
+                        <input type="checkbox" data-role="checkbox" data-caption="Play video" title="">
+                        <ul>
+                            <li><input type="checkbox" data-role="checkbox" data-caption="AVI" title=""></li>
+                            <li><input type="checkbox" data-role="checkbox" data-caption="MPEG" title=""></li>
+                            <li><input checked type="checkbox" data-role="checkbox" data-caption="VIDX" title=""></li>
+                            <li><input type="checkbox" data-role="checkbox" data-caption="MP4" title=""></li>
+                            <li><input checked type="checkbox" data-role="checkbox" data-caption="XVID" title=""></li>
+                        </ul>
+                    </li>
+                    <li><input type="checkbox" data-role="checkbox" data-caption="Play audio" title=""></li>
+                    <li>
+                        <input type="checkbox" data-role="checkbox" data-caption="Subtitles" title="">
+                        <ul>
+                            <li><input type="checkbox" data-role="checkbox" data-caption="English" title=""></li>
+                            <li><input checked type="checkbox" data-role="checkbox" data-caption="Ukrainian" title=""></li>
+                            <li><input type="checkbox" data-role="checkbox" data-caption="Dutch" title=""></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+</div>

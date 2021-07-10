@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Metro 4 -->
+    <link rel="stylesheet" href="vendors/metro4/css/metro-all.min.css">
+    <link rel="stylesheet" href="css/index.css">
+
+    <title>Pandora :: 404 Page not found</title>
+
+    <script>
+        var customButtons = [
+            {
+                html: "<span class='mif-search mif-2x'>",
+                onclick: function(){
+                    $(this.form).submit()
+                }
+            }
+        ];
+    </script>
+
+</head>
+<body class="m4-cloak h-vh-100 d-flex flex-justify-center flex-align-center">
+    <div class="container text-center">
+
+        <img src="images/p-120x120.png" >
+
+        <div class="display4 fg-orange mt-0">404</div>
+        <div class="h1 text-center m-8">Oops!<br>Page not found.</div>
+
+        <div class="text-leader2 text-center page-error-box mx-auto">
+            We could not find the page you were looking for.
+            <br>Meanwhile, you may <a href="index.html">return to dashboard</a> or try using the search form.
+        </div>
+
+        <form class="p-4 mx-auto page-error-box" action="javascript:">
+            <input type="text" data-role="input" data-custom-buttons="customButtons" placeholder="Search..." class="input-large">
+        </form>
+    </div>
+
+    <script src="vendors/jquery/jquery-3.4.1.min.js"></script>
+    <script src="vendors/metro4/js/metro.min.js"></script>
+</body>
+</html>

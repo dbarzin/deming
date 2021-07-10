@@ -1,0 +1,534 @@
+<div class="row border-bottom bd-lightGray m-3">
+    <div class="cell-md-4 d-flex flex-align-center">
+        <h3 class="dashboard-section-title text-center text-left-md w-100">Pandora <small>Version 1.0</small></h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md flex-align-center">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">eCommerce</a></li>
+            <li class="page-item"><a href="#" class="page-link">Product List</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="product-list-wrapper m-3">
+    <div class="product-list-service d-flex flex-wrap flex-justify-center mb-4">
+        <h4>Products</h4>
+        <div class="ml-auto d-flex flex-wrap flex-justify-center">
+            <div class="list-sort-as d-flex flex-align-center">
+                <span class="mr-2">Sort as: </span>
+                <div class="split-button small">
+                    <button class="button bg-transparent current-sort text-bold">Discount</button>
+                    <button class="split dropdown-toggle bg-transparent"></button>
+                    <ul id="product-list-sort" class="d-menu" data-role="dropdown">
+                        <li><a href="#" data-sort-col="sales" data-sort-dir="desc">Best selling</a></li>
+                        <li><a href="#" data-sort-col="discount" data-sort-dir="desc">Discount</a></li>
+                        <li><a href="#" data-sort-col="product-title" data-sort-dir="asc">Name A-Z</a></li>
+                        <li><a href="#" data-sort-col="product-title" data-sort-dir="desc">Name Z-A</a></li>
+                        <li><a href="#" data-sort-col="current-price" data-sort-dir="asc">Price Low to High</a></li>
+                        <li><a href="#" data-sort-col="current-price" data-sort-dir="desc">Price High to Low</a></li>
+                    </ul>
+                </div>
+            </div>
+
+            <script>
+
+                function sortList(col, dir){
+                    $(".product-list").data("list").sorting(col, dir, true);
+                }
+
+                $("#product-list-sort a").on("click", function(){
+                    var el = $(this);
+                    var col = el.attr("data-sort-col");
+                    var dir = el.attr("data-sort-dir");
+                    console.log(col, dir);
+                    sortList(col, dir);
+                    $(".current-sort").text(el.text());
+                });
+
+            </script>
+
+
+            <div class="list-view-as d-flex flex-align-center ml-4">
+                <span class="mr-2">View as: </span>
+                <div data-role="buttongroup">
+                    <button class="button small" data-view="list"><span class="mif-list"></span></button>
+                    <button class="button active small" data-view="tiles"><span class="mif-apps"></span></button>
+                </div>
+            </div>
+
+            <script>
+                $(".list-view-as button").on("click", function(){
+                    if ($(this).attr("data-view") === 'list') {
+                        $(".product-list").addClass("view-as-list");
+                    } else {
+                        $(".product-list").removeClass("view-as-list");
+                    }
+                })
+            </script>
+        </div>
+    </div>
+
+    <ul data-role="list" class="product-list"
+        data-show-search="true"
+        data-show-pagination="true"
+        data-show-items-steps="true"
+        data-items="12"
+        data-items-steps="all, 12, 24"
+        data-cls-list-pagination="mt-4 d-flex flex-justify-center"
+        data-cls-list-top="row"
+        data-cls-search="cell-sm-9"
+        data-cls-items-count="cell-sm-3"
+        data-list-items-count-title="<span class='mif-eye'>"
+        data-list-search-title="<span class='mif-search'>"
+        data-sort-class="discount"
+        data-sort-dir="desc"
+    >
+        <li class="product-list-item">
+            <div class="sales" data-format="int">4</div>
+            <div class="product-image">
+                <img src="images/product_1.png">
+            </div>
+            <div class="product-title">Back Athletic Sport Top</div>
+            <div class="product-price"><span class="current-price" data-format="money">$480.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">1</div>
+            <div class="discount" data-format="int">60</div>
+            <div class="product-image">
+                <img src="images/product_2.png">
+                <div class="badge inside bg-red fg-white">-60%</div>
+                <div data-role="countdown" data-days="3" data-animate="slide"></div>
+            </div>
+            <div class="product-title">Blazer Open Front</div>
+            <div class="product-price"><span class="old-price" data-format="money">$300.00</span> <span class="current-price" data-format="money">$180.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">0</div>
+            <div class="discount" data-format="int">60</div>
+            <div class="product-image">
+                <img src="images/product_3.png">
+                <div class="badge inside bg-red fg-white">-60%</div>
+                <div data-role="countdown" data-days="2" data-animate="slide"></div>
+            </div>
+            <div class="product-title">Bow tie neck swing</div>
+            <div class="product-price"><span class="old-price" data-format="money">$300.00</span> <span class="current-price" data-format="money">$180.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">10</div>
+            <div class="discount" data-format="int">10</div>
+            <div class="product-image">
+                <img src="images/product_4.png">
+                <div class="badge inside bg-red fg-white">-10%</div>
+                <div data-role="countdown" data-days="30" data-animate="slide"></div>
+            </div>
+            <div class="product-title">Color Block Tunic Shirt</div>
+            <div class="product-price"><span class="old-price">$200.00</span> <span class="current-price" data-format="money">$180.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">4</div>
+            <div class="product-image">
+                <img src="images/product_5.png">
+            </div>
+            <div class="product-title">Contrast Shawl Collar</div>
+            <div class="product-price"><span class="current-price" data-format="money">$580.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">12</div>
+            <div class="product-image">
+                <img src="images/product_6.png">
+            </div>
+            <div class="product-title">Drapey Open Cardigan</div>
+            <div class="product-price"><span class="current-price" data-format="money">$480.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">20</div>
+            <div class="product-image">
+                <img src="images/product_7.png">
+                <div class="badge inside bg-green fg-white enlarge-2">Bestseller</div>
+            </div>
+            <div class="product-title">Flapper Dress Accessories</div>
+            <div class="product-price"><span class="current-price" data-format="money">$120.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">54</div>
+            <div class="product-image">
+                <img src="images/product_8.png">
+                <div class="badge inside bg-green fg-white enlarge-2">Bestseller</div>
+            </div>
+            <div class="product-title">Full-Zip Polar Jacket</div>
+            <div class="product-price"><span class="current-price" data-format="money">$260.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">36</div>
+            <div class="product-image">
+                <img src="images/product_9.png">
+                <div class="badge inside bg-green fg-white enlarge-2">Bestseller</div>
+            </div>
+            <div class="product-title">Lace Bodycon Dress</div>
+            <div class="product-price"><span class="current-price" data-format="money">$260.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">45</div>
+            <div class="product-image">
+                <img src="images/product_10.png">
+                <div class="badge inside bg-green fg-white enlarge-2">Bestseller</div>
+            </div>
+            <div class="product-title">Men Stylist Tank Tops</div>
+            <div class="product-price"><span class="current-price" data-format="money">$410.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">13</div>
+            <div class="product-image">
+                <img src="images/product_11.png">
+            </div>
+            <div class="product-title">Neck Reverse Pleat</div>
+            <div class="product-price"><span class="current-price" data-format="money">$150.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">0</div>
+            <div class="product-image">
+                <img src="images/product_12.png">
+            </div>
+            <div class="product-title">Neck Ruffle Polka</div>
+            <div class="product-price"><span class="current-price" data-format="money">$350.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">0</div>
+            <div class="product-image">
+                <img src="images/product_13.png">
+            </div>
+            <div class="product-title">Peak Lapel Pants Suit</div>
+            <div class="product-price"><span class="current-price" data-format="money">$480.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">0</div>
+            <div class="product-image">
+                <img src="images/product_14.png">
+            </div>
+            <div class="product-title">Rolled Sleeve Shirt</div>
+            <div class="product-price"><span class="current-price" data-format="money">$345.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">0</div>
+            <div class="product-image">
+                <img src="images/product_15.png">
+            </div>
+            <div class="product-title">Sexy Halter Neck Short</div>
+            <div class="product-price"><span class="current-price" data-format="money">$105.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">0</div>
+            <div class="product-image">
+                <img src="images/product_16.png">
+            </div>
+            <div class="product-title">Sexy Women Sleeveless</div>
+            <div class="product-price"><span class="current-price" data-format="money">$150.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">0</div>
+            <div class="product-image">
+                <img src="images/product_17.png">
+            </div>
+            <div class="product-title">Skinny Ankle Jean</div>
+            <div class="product-price"><span class="current-price" data-format="money">$110.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">0</div>
+            <div class="product-image">
+                <img src="images/product_18.png">
+            </div>
+            <div class="product-title">Skinny Stretch Jegging</div>
+            <div class="product-price"><span class="current-price" data-format="money">$220.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">0</div>
+            <div class="product-image">
+                <img src="images/product_19.png">
+            </div>
+            <div class="product-title">Trousers Ponte Knit</div>
+            <div class="product-price"><span class="current-price" data-format="money">$105.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">0</div>
+            <div class="product-image">
+                <img src="images/product_20.png">
+            </div>
+            <div class="product-title">V-Neck Pullover Cashmere</div>
+            <div class="product-price"><span class="current-price" data-format="money">$360.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">0</div>
+            <div class="product-image">
+                <img src="images/product_21.png">
+            </div>
+            <div class="product-title">Wedgie Icon Jeans</div>
+            <div class="product-price"><span class="current-price" data-format="money">$105.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">0</div>
+            <div class="product-image">
+                <img src="images/product_22.png">
+            </div>
+            <div class="product-title">Women Supersoft Terry</div>
+            <div class="product-price"><span class="current-price" data-format="money">$150.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">0</div>
+            <div class="product-image">
+                <img src="images/product_23.png">
+            </div>
+            <div class="product-title">Womens Cosima Tops</div>
+            <div class="product-price"><span class="current-price" data-format="money">$195.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+
+        <li class="product-list-item">
+            <div class="sales" data-format="int">0</div>
+            <div class="product-image">
+                <img src="images/product_24.png">
+            </div>
+            <div class="product-title">Womens Sleepshirt Cotton</div>
+            <div class="product-price"><span class="current-price" data-format="money">$100.00</span></div>
+            <div class="product-desc">
+                Advanced Features Shopify Theme Get the latest fashion tips and outfit ideas from your favorite celebrities and designers. Click through runway and front row photos from fashion week shows in...
+            </div>
+            <div class="product-actions">
+                <button class="button success"><span class="mif-add-shopping-cart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button warning"><span class="mif-heart"></span></button>
+                <button class="button"><span class="mif-balance-scale"></span></button>
+                <button class="button alert">Buy Now</button>
+            </div>
+        </li>
+    </ul>
+</div>

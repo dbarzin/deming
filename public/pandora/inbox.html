@@ -1,0 +1,359 @@
+<div class="row border-bottom bd-lightGray m-3">
+    <div class="cell-md-4 text-center text-left-md">
+        <h3 class="dashboard-section-title">Pandora <small>Version 1.0</small></h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">Mailbox</a></li>
+            <li class="page-item"><a href="#" class="page-link">Inbox</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="m-3">
+<div class="inbox p-1 bg-transparent">
+    <div class="inbox-actions place-right mt-3 d-flex flex-align-center">
+        <div class="d-inline-block" id="search-wrapper">
+            <input type="text" data-role="input" data-search-button="true">
+        </div>
+        <button class="button ml-2 success">Compose new mail</button>
+    </div>
+    <h1>Inbox</h1>
+    <hr>
+    <div class="row">
+        <div class="cell-md-3 cell-xl-2">
+            <button class="button mb-3 success">Compose</button>
+            <div data-role="panel" data-collapsible="true" data-title-caption="Folders">
+                <ul class="v-menu inbox-folders mt-4">
+                    <li class="active">
+                        <a href="#">
+                            <span class="icon mif-download"></span> Inbox
+                            <span class="badge inline bg-cyan fg-white">12</span>
+                        </a>
+                    </li>
+                    <li><a href="#"><span class="icon mif-mail-read"></span> Sent</a></li>
+                    <li><a href="#"><span class="icon mif-drafts"></span> Drafts</a></li>
+                    <li><a href="#"><span class="icon mif-filter"></span> Junk</a></li>
+                    <li><a href="#"><span class="icon mif-bin"></span> Trash</a></li>
+                    <li>
+                        <a href="#" class="dropdown-toggle"><span class="icon mif-brightness-auto"></span> Labels</a>
+                        <ul class="v-menu" data-role="dropdown">
+                            <li><a href="#"><span class="icon mif-brightness-auto fg-red"></span> Important</a></li>
+                            <li><a href="#"><span class="icon mif-brightness-auto fg-orange"></span> Promotions</a></li>
+                            <li><a href="#"><span class="icon mif-brightness-auto fg-cyan"></span> Social</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div data-role="panel" data-collapsible="true" data-title-caption="Categories" class="mt-2">
+                <ul class="v-menu inbox-folders mt-4">
+                    <li><a href="#"><span class="icon mif-users fg-red"></span> Networks</a></li>
+                    <li><a href="#"><span class="icon mif-bubbles fg-orange"></span> Forums</a></li>
+                    <li><a href="#"><span class="icon mif-flag fg-cyan"></span> Promotions</a></li>
+                    <li><a href="#"><span class="icon mif-chat fg-green"></span> Notifies</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="cell-md-9 cell-xl-10">
+            <div class="inbox-items-wrapper">
+                <div class="inbox-actions mt-2 mt-0-lg">
+                    <div class="d-flex flex-align-center">
+                        <div class="dropdown-checkbox d-flex flex-align-center">
+                            <input type="checkbox" data-role="checkbox" class="bg-white pl-2" data-cls-caption="d-none" onclick="$('.inbox-table input[type=checkbox]').prop('checked', this.checked)">
+                            <span class="button bg-white dropdown-toggle" style="padding-right: 0!important; width:24px;">&nbsp;</span>
+                            <ul class="d-menu" data-role="dropdown" style="top: 100%">
+                                <li><a href="#">All</a></li>
+                                <li><a href="#">Read</a></li>
+                                <li><a href="#">Not read</a></li>
+                                <li><a href="#">Marked</a></li>
+                            </ul>
+                        </div>
+
+                        <button class="button square ml-1 bg-white"><span class="mif-loop2"></span></button>
+                        <button class="button square ml-1 bg-white"><span class="mif-bin"></span></button>
+                        <div class="dropdown-button h-auto ml-1">
+                            <button class="button square bg-white"><span class="mif-more-vert"></span></button>
+                            <ul class="d-menu" data-role="dropdown">
+                                <li><a href="#"><span class="mif-reply icon"></span> Reply</a></li>
+                                <li><a href="#"><span class="mif-reply_all icon"></span>Reply All</a></li>
+                                <li><a href="#"><span class="mif-arrow-left icon"></span> Forward</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="ml-auto d-flex flex-justify-end flex-align-center">
+                            <small class="mr-1 text-center"><span class="d-none d-inline-md">Showed:</span> 1-20<span class="d-none d-inline-md">/100</span></small>
+                            <button class="button square ml-1 bg-white"><span class="mif-chevron-left"></span></button>
+                            <button class="button square ml-1 bg-white"><span class="mif-chevron-right"></span></button>
+                            <button class="button square ml-1 bg-white"><span class="mif-cog"></span></button>
+                        </div>
+                    </div>
+                </div>
+                <div class="p-1 p-6-lg bg-white mt-3">
+                <table class="table striped row-border row-hover inbox-table compact normal-md">
+                    <tbody>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-full fg-orange"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"></span></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-full fg-orange"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"><span class="mif-attachment"></span></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-empty"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"></span></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-empty"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"><span class="mif-attachment"></span></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-empty"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-full fg-orange"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-empty"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"><span class="mif-attachment"></span></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-empty"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-empty"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-empty"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"><span class="mif-attachment"></span></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-empty"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"><span class="mif-attachment"></span></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-empty"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"><span class="mif-attachment"></span></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-empty"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-full fg-orange"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"><span class="mif-attachment"></span></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-empty"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"><span class="mif-attachment"></span></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    <tr>
+                        <td class="check-cell"><input type="checkbox" data-role="checkbox" data-style="2"></td>
+                        <td class="star-cell"><span class="mif-star-empty"></span></td>
+                        <td class="sender-cell"><span class="text-ellipsis">Jack Sparrow</span></td>
+                        <td class="subject-cell">
+                            <div class="text-ellipsis">
+                                <span class="text-bold">Pandora issue</span>
+                                <span> - </span>
+                                <span class="text-muted">
+                                    The mind of your definitions will disturb harmoniously when you discover that uniqueness is the explosion of the death.
+                                </span>
+                            </div>
+                        </td>
+                        <td class="attach-cell"><span class="mif-attachment"></span></td>
+                        <td class="time-cell"><span>5 min</span></td>
+                    </tr>
+                    </tbody>
+                </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>

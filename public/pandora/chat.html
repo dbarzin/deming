@@ -1,0 +1,152 @@
+<div class="row m-3">
+    <div class="cell-md-4 text-center text-left-md">
+        <h3 class="dashboard-section-title">Chat
+            <small>component</small>
+        </h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">Components</a></li>
+            <li class="page-item"><a href="#" class="page-link">Chat</a></li>
+        </ul>
+    </div>
+</div>
+
+
+<script>
+    var messages = [
+        "Confucius says: vision and om."
+        , "Be unconditional."
+        , "Scholars, winds, and inward lovers will always protect them."
+        , "The meditation of hurting yogis is closest."
+        , "One mediocre silence i give you: meet each other."
+        , "You have to preach, and love blessing by your rising."
+        , "Acceptance, resurrection and a boundless great unknown."
+        , "Demissios mori, tanquam gratis buxum."
+        , "Aye, ah."
+        , "Stutter calmly like a salty dubloon."
+        , "Devastation at the holodeck was the rumour of faith, avoided to a solid planet."
+        , "Solitudos volare, tanquam brevis torquis."
+        , "When mashing small shrimps, be sure they are room temperature."
+        , "Try fluffing cheesecake garnished with cocktail sauce, blended with onion powder."
+        , "You have to sit, and know core by your balancing."
+        , "Gar, mighty lubber. you won't crush the pacific ocean."
+    ];
+
+    var opponent = {
+        name: "John Doe",
+        avatar:  "images/user1-128x128.jpg"
+    };
+
+    function sendMessage(msg){
+        var chat = $(this).data("chat");
+        setTimeout(function(){
+            var _m = {
+                name: opponent.name,
+                time: (new Date()),
+                avatar: opponent.avatar,
+                text: messages[Metro.utils.random(0, messages.length - 1)],
+                position: "left"
+            };
+            chat.add(_m);
+        }, Metro.utils.random(1000, 3000));
+    }
+</script>
+
+<div class="p-1 m-3">
+<div style="height: 400px" class="d-none d-block-md">
+    <div data-role="splitter" data-split-sizes="20, 80" class="bg-white">
+        <div class="p-4">
+            <ul class="v-menu">
+                <li class="menu-title">General</li>
+                <li class="active"><a href="#"><span class="icon mif-users"></span> Support</a></li>
+                <li class="menu-title">Technical</li>
+                <li><a href="#"><span class="icon mif-local-service"></span> Hosting</a></li>
+                <li><a href="#"><span class="icon mif-server"></span> VPS</a></li>
+                <li><a href="#"><span class="icon mif-library"></span> Domains</a></li>
+                <li class="menu-title">Finance</li>
+                <li><a href="#"><span class="icon mif-user-secret"></span> Director</a></li>
+                <li><a href="#"><span class="icon mif-user-check"></span> Manager</a></li>
+            </ul>
+        </div>
+
+        <div>
+            <div id="chat0"
+                 data-role="chat"
+                 data-avatar="images/user3-128x128.jpg"
+                 data-name="Sandra Bullock"
+                 data-height="400"
+                 data-title="Support chat"
+                 data-welcome="Welcome to Pandora chat!"
+
+                 data-cls-message-left="default fg-dark"
+                 data-cls-message-right="info"
+                 data-cls-send-button="info"
+
+                 data-on-send="sendMessage"
+            ></div>
+        </div>
+    </div>
+</div>
+
+<div class="row mt-4">
+    <div class="cell-lg-3 cell-sm-6 mt-4">
+        <div id="chat1" class="bd-green op-lightGreen"
+             data-role="chat"
+             data-height="400"
+             data-title="Direct chat"
+             data-welcome="Welcome to Pandora chat!"
+             data-cls-message-left="default"
+             data-cls-message-right="success"
+             data-cls-send-button="success"
+             data-on-send="sendMessage"
+             data-avatar="images/user3-128x128.jpg"
+             data-name="Sandra Bullock"
+        ></div>
+    </div>
+    <div class="cell-lg-3 cell-sm-6 mt-4">
+        <div id="chat2" class="bd-red op-lightRed"
+             data-role="chat"
+             data-height="400"
+             data-title="Direct chat"
+             data-welcome="Welcome to Pandora chat!"
+             data-cls-message-left="default"
+             data-cls-message-right="alert"
+             data-cls-send-button="alert"
+             data-on-send="sendMessage"
+             data-avatar="images/user3-128x128.jpg"
+             data-name="Sandra Bullock"
+        ></div>
+    </div>
+    <div class="cell-lg-3 cell-sm-6 mt-4">
+        <div id="chat3" class="bd-orange op-lightOrange"
+             data-role="chat"
+             data-height="400"
+             data-title="Direct chat"
+             data-welcome="Welcome to Pandora chat!"
+             data-cls-message-left="default"
+             data-cls-message-right="warning"
+             data-cls-send-button="warning"
+             data-on-send="sendMessage"
+             data-avatar="images/user3-128x128.jpg"
+             data-name="Sandra Bullock"
+        ></div>
+    </div>
+    <div class="cell-lg-3 cell-sm-6 mt-4">
+        <div id="chat4" class="bd-cyan op-lightCyan"
+             data-role="chat"
+             data-height="400"
+             data-title="Direct chat"
+             data-welcome="Welcome to Pandora chat!"
+             data-cls-message-left="default"
+             data-cls-message-right="info"
+             data-cls-send-button="info"
+             data-on-send="sendMessage"
+             data-avatar="images/user3-128x128.jpg"
+             data-name="Sandra Bullock"
+        ></div>
+    </div>
+</div>
+</div>

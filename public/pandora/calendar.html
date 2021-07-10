@@ -1,0 +1,149 @@
+<div class="row m-3">
+    <div class="cell-md-4 text-center text-left-md">
+        <h3 class="dashboard-section-title">Calendar
+            <small>ui elements</small>
+        </h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">UI Elements</a></li>
+            <li class="page-item"><a href="#" class="page-link">Calendar</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="p-1 m-3">
+    <div class="row bg-white">
+        <div class="cell-lg-4 mt-2 mb-2">
+                <h5 class="mt-0">Default</h5>
+                <div data-role="calendar"></div>
+        </div>
+        <div class="cell-lg-4 mt-2 mb-2">
+                <h5 class="mt-0">Start from monday</h5>
+                <div data-role="calendar" data-week-start="1"></div>
+        </div>
+        <div class="cell-lg-4 mt-2 mb-2">
+                <h5 class="mt-0">i18n</h5>
+                <div data-role="calendar" data-week-start="1" data-locale="uk-UA"></div>
+        </div>
+    </div>
+    <br>
+    <div class="row bg-white">
+        <div class="cell-lg-4 mt-2 mb-2">
+                <h5 class="mt-0">Multi select</h5>
+                <div data-role="calendar"  data-multi-select="true"></div>
+        </div>
+        <div class="cell-lg-4 mt-2 mb-2">
+                <h5 class="mt-0">One day select</h5>
+                <div data-role="calendar"  data-multi-select="false"></div>
+        </div>
+        <div class="cell-lg-4 mt-2 mb-2">
+                <h5 class="mt-0">Picker</h5>
+                <div data-role="calendar" data-picker-mode="true"></div>
+        </div>
+    </div>
+    <br>
+    <div class="row bg-white">
+        <div class="cell-lg-4 mt-2 mb-2">
+                <h5 class="mt-0">Exclude days</h5>
+                <div
+                        data-role="calendar"
+                        data-input-format="dd-mm-yyyy"
+                        data-show="15-10-2017"
+                        data-exclude="
+                            10-10-2017,
+                            11-10-2017,
+                            12-10-2017,
+                            13-10-2017,
+                            14-10-2017,
+                            15-10-2017
+                         "
+                ></div>
+        </div>
+        <div class="cell-lg-4 mt-2 mb-2">
+                <h5 class="mt-0">Pre-select days</h5>
+                <div
+                        data-role="calendar"
+                        data-show="2017/10/15"
+                        data-preset="
+                            2017/10/10,
+                            2017/10/11,
+                            2017/10/12,
+                            2017/10/13,
+                            2017/10/14,
+                            2017/10/15,
+                            2017/10/16"
+                ></div>
+        </div>
+        <div class="cell-lg-4 mt-2 mb-2">
+                <h5 class="mt-0">Special days</h5>
+                <div
+                        data-role="calendar"
+                        data-show="2017/10/15"
+                        data-special="
+                            2017/10/10,
+                            2017/10/11,
+                            2017/10/12,
+                            2017/10/13,
+                            2017/10/14,
+                            2017/10/15,
+                            2017/10/16"
+                ></div>
+        </div>
+    </div>
+
+    <br>
+    <div class="row bg-white">
+        <div class="cell-lg-4 mt-2 mb-2">
+            <h5 class="mt-0">min and max dates</h5>
+            <div
+                    data-role="calendar"
+                    data-show="2017/10/15"
+                    data-min-date="2017/10/08"
+                    data-max-date="2017/10/25"
+            ></div>
+        </div>
+        <div class="cell-lg-4 mt-2 mb-2">
+            <h5 class="mt-0">Show specific date</h5>
+            <div
+                    data-role="calendar"
+                    data-show="1972/12/21"
+            ></div>
+        </div>
+        <div class="cell-lg-4 mt-2 mb-2">
+            <h5 class="mt-0">Customize</h5>
+            <div
+                 data-role="calendar"
+                 data-show="2017/10/15"
+                 data-exclude="2017/10/01, 2017/10/02, 2017/10/03"
+                 data-preset="2017/10/15, 2017/10/16, 2017/10/17"
+                 data-cls-selected="bg-cyan fg-white"
+                 data-cls-excluded="bg-dark fg-white"
+                 data-cls-today="bg-pink fg-white"
+                 data-cls-today-button="success"
+                 data-cls-clear-button="alert"
+                 data-cls-done-button="primary"
+                 data-cls-calendar-header="bg-green"
+                 data-cls-calendar-content="bg-orange fg-white"
+                 data-cls-calendar-footer="bg-teal"
+            ></div>
+        </div>
+    </div>
+
+    <br>
+    <div class="row bg-white">
+        <div class="cell-lg-6 mt-2 mb-2">
+            <h5 class="mt-0">Wide mode</h5>
+            <div data-role="calendar" data-wide="true"></div>
+            <h5>Compact wide mode</h5>
+            <div class="compact" data-role="calendar" data-wide="true"></div>
+        </div>
+        <div class="cell-lg-6 mt-2 mb-2">
+            <h5 class="mt-0">Compact mode</h5>
+            <div class="compact" data-role="calendar"></div>
+        </div>
+    </div>
+</div>
+

@@ -1,0 +1,104 @@
+<div class="row border-bottom bd-lightGray m-3">
+    <div class="cell-md-4 text-center text-left-md">
+        <h3 class="dashboard-section-title">Pandora <small>Version 1.0</small></h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">Mailbox</a></li>
+            <li class="page-item"><a href="#" class="page-link">Compose</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="m-3">
+<div class="inbox p-1 bg-transparent">
+    <div class="row">
+        <div class="cell-md-3 cell-xl-2 mt-2">
+            <button class="button mb-3 success">Compose</button>
+            <div data-role="panel" data-collapsible="true" data-title-caption="Folders">
+                <ul class="v-menu inbox-folders mt-4">
+                    <li class="active">
+                        <a href="#">
+                            <span class="icon mif-download"></span> Inbox
+                            <span class="badge inline bg-cyan fg-white">12</span>
+                        </a>
+                    </li>
+                    <li><a href="#"><span class="icon mif-mail-read"></span> Sent</a></li>
+                    <li><a href="#"><span class="icon mif-drafts"></span> Drafts</a></li>
+                    <li><a href="#"><span class="icon mif-filter"></span> Junk</a></li>
+                    <li><a href="#"><span class="icon mif-bin"></span> Trash</a></li>
+                    <li>
+                        <a href="#" class="dropdown-toggle"><span class="icon mif-brightness-auto"></span> Labels</a>
+                        <ul class="v-menu" data-role="dropdown">
+                            <li><a href="#"><span class="icon mif-brightness-auto fg-red"></span> Important</a></li>
+                            <li><a href="#"><span class="icon mif-brightness-auto fg-orange"></span> Promotions</a></li>
+                            <li><a href="#"><span class="icon mif-brightness-auto fg-cyan"></span> Social</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+            <div data-role="panel" data-collapsible="true" data-title-caption="Categories" class="mt-2">
+                <ul class="v-menu inbox-folders mt-4">
+                    <li><a href="#"><span class="icon mif-users fg-red"></span> Networks</a></li>
+                    <li><a href="#"><span class="icon mif-bubbles fg-orange"></span> Forums</a></li>
+                    <li><a href="#"><span class="icon mif-flag fg-cyan"></span> Promotions</a></li>
+                    <li><a href="#"><span class="icon mif-chat fg-green"></span> Notifies</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="cell-md-9 cell-xl-10 mt-2">
+            <div class="p-1 p-6-lg bg-white">
+                <h4>Compose new mail</h4>
+                <form class="mt-3">
+                    <div class="row m-0">
+                        <div class="cell-lg-8 bg-light p-1 p-6-lg">
+                            <div class="form-group">
+                                <input type="text" data-role="input" data-prepend="To:">
+                            </div>
+                            <div class="form-group">
+                                <input type="text" data-role="input" data-prepend="Subject:">
+                            </div>
+                            <div class="form-group">
+                                <textarea id="editor"></textarea>
+                            </div>
+                        </div>
+                        <div class="cell-lg-4 d-none d-block-lg">
+                            <input class="h-50" type="file" data-role="file" data-mode="drop" data-drop-icon="<span class='mif-attachment mif-4x text-center'>" data-on-select="
+                                    $('#selected-files').html('');
+                                    $.each(arguments[0], function(){
+                                        $('#selected-files').append('<div>'+this.name+'</div>');
+                                    });
+                                ">
+                            <div id="selected-files" class="bg-light p-2 overflow reduce-1" style="height: 270px;"></div>
+                        </div>
+                    </div>
+                    <hr>
+                    <div class="form-actions d-flex flex-wrap flex-justify-center flex-justify-start-lg">
+                        <button class="button" type="button"><span class="mif-cancel"></span> Discard</button>
+                        <div class="ml-auto-lg">
+                            <button class="button secondary" type="button"><span class="mif-pencil"></span> Draft</button>
+                            <button class="button warning" type="button"><span class="mif-eye"></span> Preview</button>
+                            <button class="button info"><span class="mif-paper-plane"></span> Send</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+
+<style>
+    .ck-editor__editable {
+        min-height: 400px;
+    }
+</style>
+<script>
+    ClassicEditor
+        .create( document.querySelector( '#editor' ) )
+        .catch( function(error){
+            console.log(error)
+        });
+</script>

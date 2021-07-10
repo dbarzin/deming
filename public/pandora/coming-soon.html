@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <!-- Metro 4 -->
+    <link rel="stylesheet" href="vendors/metro4/css/metro-all.min.css">
+    <link rel="stylesheet" href="css/index.css">
+
+    <title>Pandora :: Coming soon</title>
+
+    <script>
+        var customButtons = [
+            {
+                html: "<span class='mif-envelop mif-2x'>",
+                onclick: function(){
+                    $(this.form).submit()
+                }
+            }
+        ];
+    </script>
+
+</head>
+<body class="m4-cloak h-vh-100-lg d-flex flex-column flex-justify-start flex-align-start">
+    <div class="container-fluid bg-white h-75 d-flex flex-align-center pt-3 pt-0-lg ">
+        <div class="container text-center">
+            <img src="images/p-512x512.png" style="width: 300px">
+            <div class="text-leader">Hey! Thank you for checking out our site.</div>
+            <div class="text-leader2">
+                It’s not quite ready yet, but we are working hard and it will be ready in approximately:
+            </div>
+            <div class="mt-3 mt-10-lg mb-3" data-role="countdown" data-days="30" data-animate="slide" style="font-size: 48px;"></div>
+        </div>
+    </div>
+
+    <div class="container-fluid h-25  d-flex flex-align-center">
+        <div class="container">
+            <form class="p-4 mx-auto page-error-box" action="javascript:">
+                <p class="m-2">
+                    If you would like to be notified when the app is ready, you can subscribe to our e-mail list.
+                </p>
+                <input type="text" data-role="input" data-custom-buttons="customButtons" placeholder="Subscribe..." class="input-large">
+            </form>
+        </div>
+    </div>
+
+    <script src="vendors/jquery/jquery-3.4.1.min.js"></script>
+    <script src="vendors/metro4/js/metro.min.js"></script>
+</body>
+</html>

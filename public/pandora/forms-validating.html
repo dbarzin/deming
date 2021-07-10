@@ -1,0 +1,368 @@
+<div class="row border-bottom bd-lightGray m-3">
+    <div class="cell-md-4 d-flex flex-align-center">
+        <h3 class="dashboard-section-title text-center text-left-md w-100">Forms <small>validating</small></h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md flex-align-center">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">Forms</a></li>
+            <li class="page-item"><a href="#" class="page-link">Validating</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="m-3">
+    <div class="bg-white p-4">
+        <form data-role="validator" action="javascript:">
+            <div class="row mb-2">
+                <div class="cell-md-6">
+                    <label>First name</label>
+                    <input type="text"
+                           data-validate="required minlength=6"
+                           placeholder="Enter first name">
+                    <span class="invalid_feedback">
+                Input correct name with min length 6 symbols
+            </span>
+                </div>
+                <div class="cell-md-6">
+                    <label>Email</label>
+                    <input type="email"
+                           data-validate="required email"
+                           placeholder="Enter email" data-role="input">
+                    <span class="invalid_feedback">
+                Input correct email address
+            </span>
+                </div>
+            </div>
+
+            <div class="mt-2 mb-2">
+                <label>Select option</label>
+                <select data-role="select" data-validate="required not=-1">
+                    <option value="-1" class="d-none"></option>
+                    <option value="1">Value 1</option>
+                    <option value="2">Value 2</option>
+                    <option value="3">Value 3</option>
+                </select>
+                <span class="invalid_feedback">
+            You must select a option!
+        </span>
+            </div>
+
+            <div class="row mb-2">
+                <div class="cell-md-6">
+                    <input type="checkbox"
+                           data-role="checkbox"
+                           data-caption="I accept the terms"
+                           data-validate="required">
+                    <span class="invalid_feedback">
+                You must accept this!
+            </span>
+                </div>
+                <div class="cell-md-6">
+                    <input type="radio" name="__r1"
+                           data-role="radio" value="1"
+                           data-validate="required" data-caption="Type 1">
+                    <input type="radio" name="__r1"
+                           data-role="radio" value="2"
+                           data-validate="required" data-caption="Type 2">
+                    <input type="radio" name="__r1"
+                           data-role="radio" value="3"
+                           data-validate="required" data-caption="Type 3">
+                    <span class="invalid_feedback"
+                    >You must select a option!
+            </span>
+                </div>
+            </div>
+
+            <button class="button primary">Submit</button>
+        </form>
+    </div>
+
+    <br>
+    <h4>Validations Functions</h4>
+
+    <div class="row">
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Required</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="required">
+                    <span class="invalid_feedback">Enter a required value</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Length</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="length=4">
+                    <span class="invalid_feedback">Value length must be a 4 symbols</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Min length</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="minlength=4">
+                    <span class="invalid_feedback">Min length must be a 4 symbols</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Max length</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="maxlength=4" value="12345">
+                    <span class="invalid_feedback">Max length must be a 4 symbols</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Min</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="number" data-validate="min=4" value="3">
+                    <span class="invalid_feedback">Value must be great or equal then 4</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Max</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="number" data-validate="max=4" value="5">
+                    <span class="invalid_feedback">Value must be less or equal then 4</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Email</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="email" value="12345">
+                    <span class="invalid_feedback">Value must be a valid email address</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Domain</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="domain" value="text">
+                    <span class="invalid_feedback">Value must be a valid domain name</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Url</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="url" value="text">
+                    <span class="invalid_feedback">Value must be a valid url</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Number</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="number">
+                    <span class="invalid_feedback">Value must be a valid number value</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Integer</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="integer" value="text">
+                    <span class="invalid_feedback">Value must be a valid integer value</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Float</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="float" value="text">
+                    <span class="invalid_feedback">Value must be a valid float value</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Date ECMAScript</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="date" value="12-21-1972">
+                    <span class="invalid_feedback">Value must be a valid date</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Any date</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="date" data-value-format="%d-%m-%y" value="21-12-1972">
+                    <span class="invalid_feedback">Value must be a valid value</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Digits</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="digits" value="text">
+                    <span class="invalid_feedback">Value must contains only digits</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>HEX color</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="hexcolor" value="#ffffff">
+                    <span class="invalid_feedback">Value must be a valid hex color value</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Color</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="color" value="white">
+                    <span class="invalid_feedback">Value must be a valid color name from standard names</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Pattern</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="pattern=(^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)">
+                    <span class="invalid_feedback">Value be equal pattern (^#[0-9A-F]{6}$)|(^#[0-9A-F]{3}$)</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Compare</label>
+                <form action="javascript:" data-role="validator">
+                    <label>Password:</label>
+                    <input type="password" data-validate="required" name="pass1">
+                    <label>Password confirm:</label>
+                    <input type="password" data-validate="required compare=pass1" name="pass2">
+                    <span class="invalid_feedback">value must be equal to compared input</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Not</label>
+                <form action="javascript:" data-role="validator">
+                    <select data-role="select" data-validate="not=-1">
+                        <option value="-1" class="d-none"></option>
+                        <option value="1">Value 1</option>
+                        <option value="2">Value 2</option>
+                        <option value="3">Value 3</option>
+                    </select>
+                    <span class="invalid_feedback">value must not be equal to compared value</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Not equals</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="required" name="ip_1">
+                    <input type="text" data-validate="required notequals=ip_1" name="ip_2">
+                    <span class="invalid_feedback">Values can't be equal</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Equals</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="required" name="ip_1">
+                    <input type="text" data-validate="required equals=ip_1" name="ip_2">
+                    <span class="invalid_feedback">Values can be equal</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <script>
+                    function myValidateFuncName(val){
+                        val = parseInt(val);
+                        return Metro.utils.isInt(val) && (val > 3 && val < 9);
+                    }
+                </script>
+                <label>Custom rule</label>
+                <form action="javascript:" data-role="validator">
+                    <input type="text" data-validate="custom=myValidateFuncName">
+                    <span class="invalid_feedback">Value must be &gt; 3 and &lt; 9</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+        <div class="cell-lg-4 cell-md-6 mt-2">
+            <div class="bg-white p-4">
+                <label>Interactive check</label>
+                <form action="javascript:" data-role="validator" data-interactive-check="true">
+                    <input type="text" data-validate="domain">
+                    <span class="invalid_feedback">Values must be a valid domain name</span>
+                    <button class="button mt-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="p-6 m-3 bg-white text-center">
+    More about form validation, you can read on <a href="https://metroui.org.ua/validator.html">Documentation</a> to Metro 4.
+</div>

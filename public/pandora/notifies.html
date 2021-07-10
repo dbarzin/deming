@@ -1,0 +1,71 @@
+<div class="row m-3">
+    <div class="cell-md-4 text-center text-left-md">
+        <h3 class="dashboard-section-title">Notifies
+            <small>ui elements</small>
+        </h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">UI Elements</a></li>
+            <li class="page-item"><a href="#" class="page-link">Notifies</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="m-3 p-6 bg-white">
+    <p class="text-leader text-center">
+        The system of notifications is intended for informing users about the processes occurring on the site or in the application.
+    </p>
+</div>
+
+<div class="bg-white p-4 text-center">
+    <h5 class="mt-0">General</h5>
+    <button class="button primary mt-1" onclick="simpleNotify()">Create notify</button>
+    <button class="button secondary mt-1" onclick="setupNotify()">Setup notify</button>
+    <button class="button info mt-1" onclick="keepNotify()">Keep open</button>
+    <button class="button success mt-1" onclick="callbackNotify()">Callback</button>
+    <button class="button alert mt-1" onclick="classNotify()">Additional classe</button>
+</div>
+
+<script>
+    function simpleNotify(){
+        return Metro.notify.create('This is a notify', 'Title', {});
+    }
+
+    function setupNotify(){
+        var notify = Metro.notify;
+        notify.setup({
+            width: 300,
+            duration: 1000,
+            animation: 'easeOutBounce'
+        });
+        notify.create("This is a notify", "", {});
+        notify.reset();
+    }
+
+    function classNotify(){
+        var notify = Metro.notify;
+        notify.create("This is a notify with additional class.", null, {
+            cls: "alert"
+        });
+    }
+
+    function keepNotify(){
+        var notify = Metro.notify;
+        notify.create("This is a notify. Click me to close.", null, {
+            keepOpen: true
+        });
+    }
+
+    function callbackNotify(){
+        var notify = Metro.notify;
+        notify.create("This is a notify.", null, {
+            onClose: function(){
+                alert('Hi from notification callback');
+            }
+        });
+    }
+
+</script>

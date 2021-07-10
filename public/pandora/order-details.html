@@ -1,0 +1,207 @@
+<div class="row border-bottom bd-lightGray m-3">
+    <div class="cell-md-4 d-flex flex-align-center">
+        <h3 class="dashboard-section-title text-center text-left-md w-100">Order details
+            <small>e-commerce</small>
+        </h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md flex-align-center">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">E-Commerce</a></li>
+            <li class="page-item"><a href="#" class="page-link">Order details</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="p-1 m-3">
+    <div class="d-flex flex-align-center p-2 bg-white">
+        <button class="button square outline"><span class="mif-arrow-left"></span></button>
+        <span class="ml-2 text-leader">Order # <span class="text-bold">756442208-00002</span></span>
+
+        <div class="ml-auto">
+            <button class="button square outline"><span class="mif-chevron-left"></span></button>
+            <button class="button square outline"><span class="mif-chevron-right"></span></button>
+            <button class="button square outline"><span class="mif-cog"></span></button>
+        </div>
+    </div>
+
+    <br>
+    <div class="row">
+        <div class="cell-lg-7">
+            <div class="p-4 bg-white">
+                <ul data-role="tabs" data-expand="true">
+                    <li><a href="#order-products">General</a></li>
+                </ul>
+                <div class="">
+                    <div id="order-products">
+                        <table class="table striped">
+                            <thead>
+                            <tr>
+                                <th>Product</th>
+                                <th>Price</th>
+                                <th class="text-center">Quantity</th>
+                                <th class="text-right">Subtotal</th>
+                            </tr>
+                            </thead>
+
+                            <tbody>
+                            <tr>
+                                <td>Apple iPhone 6s 32 GB</td>
+                                <td>$299.00</td>
+                                <td class="text-center">1</td>
+                                <td class="text-right">$299.00</td>
+                            </tr>
+                            <tr>
+                                <td>Apple iPhone 6s 32 GB</td>
+                                <td>$299.00</td>
+                                <td class="text-center">1</td>
+                                <td class="text-right">$299.00</td>
+                            </tr>
+                            <tr>
+                                <td>Apple iPhone 6s 32 GB</td>
+                                <td>$299.00</td>
+                                <td class="text-center">1</td>
+                                <td class="text-right">$299.00</td>
+                            </tr>
+                            <tr>
+                                <td>Apple iPhone 6s 32 GB</td>
+                                <td>$299.00</td>
+                                <td class="text-center">1</td>
+                                <td class="text-right">$299.00</td>
+                            </tr>
+                            <tr>
+                                <td>Apple iPhone 6s 32 GB</td>
+                                <td>$299.00</td>
+                                <td class="text-center">1</td>
+                                <td class="text-right">$299.00</td>
+                            </tr>
+                            </tbody>
+
+                            <thead>
+                            <tr class="border-top bd-default">
+                                <td colspan="3" class="text-right">Subtotal</td>
+                                <td class="text-right">$1,495.00</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="text-right">Shipping cost</td>
+                                <td class="text-right">$132.00</td>
+                            </tr>
+                            <tr>
+                                <td colspan="3" class="text-right">Taxes</td>
+                                <td class="text-right">$149.50</td>
+                            </tr>
+                            <tr class="border-top bd-default">
+                                <td colspan="3" class="text-right text-leader">Total</td>
+                                <td class="text-leader text-right">$1,776.50</td>
+                            </tr>
+                            </thead>
+                        </table>
+
+                        <div class="order-status">
+                            <ul data-role="tabs" data-expand="true">
+                                <li class="active"><a href="#">Status</a></li>
+                            </ul>
+                            <div class=" border-left border-right border-bottom bd-default p-4 ">
+                                <div class="d-flex mt-2 mb-2">
+                                    <select data-role="select" id="sel-statuses">
+                                        <option value="1">Pre-order</option>
+                                        <option value="2">Payed</option>
+                                        <option value="3">Payment error</option>
+                                        <option value="4">Delivered</option>
+                                        <option value="5">Preparing</option>
+                                        <option value="6">Awaiting payment</option>
+                                        <option value="7">Shipping</option>
+                                    </select>
+                                    <button class="button primary ml-2" onclick="updateOrderStatus()">UPDATE STATUS</button>
+                                </div>
+                                <table class="table striped subcompact" id="table-order-statuses">
+                                    <tbody>
+                                    <tr>
+                                        <td><code class="success">Payment accepted</code></td>
+                                        <td class="text-right">01/01/2019 12:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code class="warning">Awaiting payment</code></td>
+                                        <td class="text-right">12/31/2018 10:00</td>
+                                    </tr>
+                                    <tr>
+                                        <td><code class="info">Order created</code></td>
+                                        <td class="text-right">12/31/2018 09:30</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div id="order-addons"></div>
+                </div>
+            </div>
+        </div>
+        <div class="cell-lg-5">
+            <div class="row">
+                <div class="cell-lg-7">
+                    <div class="h-100" data-role="panel" data-title-caption="Customer" data-title-icon="<span class='mif-user'>" data-cls-content="p-4 h-100" data-custom-buttons="customerPanelButtons">
+                        <h5 class="mt-0 mb-0">John Doe</h5>
+                        <hr>
+                        <address>
+                            Customer #: <span class="text-bold">00002</span>
+                            <br>Email: <span class="text-bold">customer@domain.com</span>
+                            <br>IP address: <span class="text-bold">127.0.0.1</span>
+                            <br>Phone: <span class="text-bold">+1 646-386-3600</span>
+                        </address>
+                    </div>
+                </div>
+                <div class="cell-lg-5">
+                    <div class="h-100" data-role="panel" data-title-caption="Billing address" data-title-icon="<span class='mif-dollar'>" data-cls-content="p-4 h-100" data-custom-buttons="billingPanelButtons">
+                        <h5 class="mt-0 mb-0">John Doe</h5>
+                        <hr>
+                        <address>
+                            60 Center Street #5
+                            <br>New York, 01324
+                            <br>United States
+                            <br>+1 646-386-3600
+                        </address>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div data-role="panel" data-title-caption="Shipping address" data-title-icon="<span class='mif-truck'>" data-cls-content="p-4" data-custom-buttons="shippingPanelButtons">
+                <div class="row">
+                    <div class="cell-lg-5">
+                        <div class="p-4 h-100">
+                            <h5 class="mt-0 mb-0">John Doe</h5>
+                            <hr>
+                            <address>
+                                60 Center Street #5
+                                <br>New York, 01324
+                                <br>United States
+                                <br>+1 646-386-3600
+                            </address>
+                            <hr>
+                            <code class="success">Shipped</code>
+                            <code class="warning">Delivered</code>
+                        </div>
+                    </div>
+                    <div class="cell-lg-7">
+                        <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d28783.87033164108!2d-73.99476864626776!3d40.68428682594991!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x89c25bae694479a3%3A0xb9949385da52e69e!2z0JHQsNGA0LrQu9Cw0LnRgS3QptC10L3RgtGA!5e0!3m2!1sru!2sua!4v1554833928953!5m2!1sru!2sua" width="100%" height="300" frameborder="0" style="border:0" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <div class="d-flex flex-justify-center" id="barcode-wrapper">
+                <img id="barcode" jsbarcode-height="40" jsbarcode-value="5901234123457" jsbarcode-flat="true">
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    window.on_page_functions.push(function(){
+        var img = $("<img>").appendTo($("#barcode-wrapper"));
+        img.JsBarcode("5901234123457", {
+            flat: true,
+            height: 40
+        });
+    });
+</script>

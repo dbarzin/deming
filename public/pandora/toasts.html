@@ -1,0 +1,72 @@
+<div class="row m-3">
+    <div class="cell-md-4 text-center text-left-md">
+        <h3 class="dashboard-section-title">Toasts
+            <small>ui elements</small>
+        </h3>
+    </div>
+
+    <div class="cell-md-8 d-flex flex-justify-center flex-justify-end-md">
+        <ul class="breadcrumbs bg-transparent">
+            <li class="page-item"><a href="#" class="page-link"><span class="mif-meter"></span></a></li>
+            <li class="page-item"><a href="#" class="page-link">UI Elements</a></li>
+            <li class="page-item"><a href="#" class="page-link">Toasts</a></li>
+        </ul>
+    </div>
+</div>
+
+<div class="m-3 p-6 bg-white">
+    <p class="text-leader text-center">
+        Toasts are used for system messaging. They also display at the bottom of the screen, but may not be swiped off-screen. Metro 4 provides simple methods to create toasts.
+    </p>
+</div>
+
+<div class="p-1 m-3">
+    <div class="bg-white p-4 text-center">
+        <h5 class="mt-0">General</h5>
+        <button class="button primary mt-1" onclick="runToast()">Default toast</button>
+        <button class="button secondary mt-1" onclick="runToast('callback')">Toast with a callback</button>
+        <button class="button info mt-1" onclick="runToast('timeout')">Toast timeout</button>
+        <button class="button success mt-1" onclick="runToast('class')">Toast custom class</button>
+        <button class="button alert mt-1" onclick="runToast('options')">Toast options</button>
+    </div>
+    <br>
+    <div class="bg-white p-4 text-center">
+        <h5 class="mt-0">Accent classes</h5>
+        <button class="button primary mt-1" onclick="toastClasses('primary')">Primary</button>
+        <button class="button secondary mt-1" onclick="toastClasses('secondary')">Secondary</button>
+        <button class="button success mt-1" onclick="toastClasses('success')">Success</button>
+        <button class="button alert mt-1" onclick="toastClasses('alert')">Alert</button>
+        <button class="button warning mt-1" onclick="toastClasses('warning')">Warning</button>
+        <button class="button yellow mt-1" onclick="toastClasses('yellow')">Yellow</button>
+        <button class="button info mt-1" onclick="toastClasses('info')">Info</button>
+        <button class="button light mt-1" onclick="toastClasses('light')">Light</button>
+    </div>
+</div>
+
+<script>
+    function runToast(mode) {
+        var toast = Metro.toast.create;
+        switch (mode) {
+            case 'callback': toast("This is a toast with callback", function(){alert('Toast callback executed!');}); break;
+            case 'timeout': toast("This is a toast with timeout 5s", null, 5000); break;
+            case 'class': toast("This is a toast with custom class", null, 5000, "bg-green fg-white"); break;
+            case 'options': toastOptions(); break;
+            default: toast("This is default toast");
+        }
+    }
+
+    function toastClasses(cls){
+        var toast = Metro.toast.create;
+        toast("This is a toast with a predefined class ." + cls, null, 5000, cls);
+    }
+
+    function toastOptions(){
+        var options = {
+            showTop: true,
+            timeout: 3000,
+            distance: 64,
+            clsToast: 'alert'
+        };
+        Metro.toast.create("Toast message", null, null, null, options);
+    }
+</script>

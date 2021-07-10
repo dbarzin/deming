@@ -1,0 +1,102 @@
+.inbox {
+    display: block;
+    position: relative;
+    background-color: white;
+}
+
+.inbox-folders {
+    .badge {
+        position: absolute;
+        top: 12px;
+        right: 8px;
+    }
+
+    li {
+
+        &.active {
+            border-left-color: #0b98da;
+        }
+
+        &:hover {
+            background-color: #f7f7f7;
+        }
+
+        a {
+            background-color: inherit!important;
+            color: #000!important;
+            height: 40px;
+            line-height: 40px;
+        }
+    }
+
+}
+
+.inbox-table {
+    .check-cell, .star-cell, .attach-cell {
+        width: 32px;
+    }
+    .sender-cell {
+        width: 120px;
+    }
+    .subject-cell {
+        max-width: 0;
+    }
+    .time-cell {
+        width: 100px;
+    }
+}
+
+.email-read-form {
+    .email-date, .email-from, .email-text {
+        font-size: 14px;
+    }
+    .email-to {
+        font-size: 12px;
+    }
+}
+
+.email-attachments {
+    display: flex;
+    flex-flow: row wrap;
+}
+
+.email-attachment {
+    width: 180px;
+    height: 170px;
+    display: flex;
+    flex-flow: column;
+    border: 1px solid #ededed;
+    margin: 4px;
+
+    .preview {
+        width: 100%;
+        height: 120px;
+        overflow: hidden;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        img {
+            width: 100%;
+            height: auto;
+            min-height: 100%;
+        }
+
+        span {
+            font-size: 64px;
+        }
+    }
+
+    .desc {
+        height: 50px;
+        margin-top: auto;
+        background-color: #ededed;
+        font-size: 14px;
+        padding: 8px;
+        line-height: 1.2;
+
+        & > *:not(button) {
+            margin-right: 36px;
+        }
+    }
+}
