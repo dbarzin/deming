@@ -1,2 +1,2 @@
-# deming
+# Deming
 Work in progress...
