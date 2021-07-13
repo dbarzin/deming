@@ -56,26 +56,14 @@ Edit Measurement
 		    		<strong>Date de planification</strong>
 		    	</div>
 				<div class="cell-2">
-					<input type="text" data-role="calendarpicker" name="plan_date" value="{{ 
-				\Carbon\Carbon
-				::createFromFormat('Y-m-d',$measurement->plan_date)
-				->format('Y-m-d')
-				}}" 
-				data-input-format="%Y-%m-%d"> 
+					<input type="text" data-role="calendarpicker" name="plan_date" value="{{$measurement->plan_date}}"
+					data-input-format="%Y-%m-%d"> 
 				</div>
-			</div>
-
-	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>Date de réalisation</strong>
 		    	</div>
 				<div class="cell-2">
-					<input type="text" data-role="calendarpicker" name="realisation_date" value="{{ 
-					$measurement->realisation_date !=null ?
-						\Carbon\Carbon
-						::createFromFormat('Y-m-d',$measurement->realisation_date)
-						->format('Y-m-d')
-					: '' }}" 
+					<input type="text" data-role="calendarpicker" name="realisation_date" value="{{$measurement->realisation_date}}" 
 				data-input-format="%Y-%m-%d"> 
 				</div>
 			</div>

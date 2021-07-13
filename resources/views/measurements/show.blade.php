@@ -36,24 +36,6 @@ Mesure
 
     	<div class="row">
     		<div class="cell-1">
-	    		<strong>Observations</strong>
-	    	</div>
-			<div class="cell-6">
-				<pre>{!! $measurement->observations !!}</pre>
-			</div>
-		</div>
-
-    	<div class="row">
-    		<div class="cell-1">
-	    		<strong>Calcul</strong>
-	    	</div>
-			<div class="cell-6">
-				<pre>{{ $measurement->model }}</pre>
-			</div>
-		</div>
-
-    	<div class="row">
-    		<div class="cell-1">
 	    		<strong>Date de planification</strong>
 	    	</div>
 			<div class="cell-1">
@@ -91,16 +73,26 @@ Mesure
 
 		</div>
 
+
 		@if ($measurement->observations!=null)
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>Observations</strong>
 		    	</div>
 				<div class="cell-5">
-					<pre>{{ $measurement->observations }}</pre>
+					<pre>{!! $measurement->observations !!}</pre>
 				</div>
 		    </div>
 		@endif
+
+    	<div class="row">
+    		<div class="cell-1">
+	    		<strong>Calcul</strong>
+	    	</div>
+			<div class="cell-6">
+				<pre>{{ $measurement->model }}</pre>
+			</div>
+		</div>
 
 		@if ($documents->isNotEmpty())
 	    	<div class="row">
