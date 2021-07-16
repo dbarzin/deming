@@ -159,7 +159,7 @@ class MeasurementController extends Controller
      */
     public function store(Request $request)
     {
-        // does not exist in taht way
+        // does not exist in that way
         return redirect("/measurements");
     }
 
@@ -233,13 +233,7 @@ class MeasurementController extends Controller
      */
     public function update(Request $request, Measurement $measurement)
     {
-        $this->validate(
-            $request, [
-            ]
-        );
-        // $measurement->title = request("title");
-        // $domain->description = request("description");
-        $measurement-> save();
+        $measurement->save();
         return redirect("/measurements");
     }
 
@@ -441,7 +435,7 @@ class MeasurementController extends Controller
             ->withInput();
         }            
 
-        // Measurement fieldss
+        // Measurement fields
         $measurement = Measurement::find($id);
         $measurement->observations = request("observations");
         $measurement->plan_date=request("plan_date");

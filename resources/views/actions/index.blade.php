@@ -36,10 +36,10 @@ Liste des plans d'action
 				</a>
 			</td>
 			<td>
-				<b>{{ $action->name }}</b>
+				<b><a href="/action/{{ $action->id }}">{{ $action->name }}</a></b>
 				<pre>{{ $action->action_plan }}</pre>
 			</td>
-			<td><a href="/action/{{ $action->id }}">{{ $action->plan_date }}</a></td>
+			<td><a href="/measurements/{{ $action->id }}">{{ $action->plan_date }}</a></td>
 			<td><a href="/measurements/{{ $action->next_id }}">{{ $action->next_date }}</a></td>
 			<td>
                 @if ($action->score==1)
