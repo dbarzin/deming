@@ -66,7 +66,7 @@ Configure environenement
     DB_USERNAME=deming_user
     DB_PASSWORD=demPasssword-123
 
-# Chache
+# Cache
 
 If needed clear the cache
 
@@ -75,4 +75,10 @@ If needed clear the cache
 Storage file link
 
     php artisan storage:link
+
+# start
+
+Start the application
+
+    php artisan serve
 

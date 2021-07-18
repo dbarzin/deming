@@ -34,8 +34,22 @@ class ReportController extends Controller
      */
     public function welcome(Request $request)
     {
-        // count active domains
+        // get all domains
         $domains = DB::table('domains')->get();
+
+        // count active domains
+        $active_domains_count = DB::table('measurements')
+            ->select(
+                'domain_id',
+                DB::raw('max(measurements.id)'))
+            ->whereNull('realisation_date')
+            ->groupBy('domain_id')
+            ->get()
+            ->count();
+
+        // count all controls
+        $controls_count = DB::table('controls')            
+            ->count();
 
         // count active controls
         $active_controls_count = DB::table('measurements')
@@ -117,8 +131,10 @@ class ReportController extends Controller
 
         // return 
         return view("welcome")
+            ->with('active_domains_count',$active_domains_count)
             ->with('active_measurements', $active_measurements)
             ->with('domains', $domains)
+            ->with('controls_count', $controls_count)
             ->with('active_controls_count', $active_controls_count)
             ->with('measurements_made_count', $measurements_made_count)
 

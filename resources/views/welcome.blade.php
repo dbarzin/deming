@@ -54,7 +54,7 @@ Tableau de bord
         <div class="more-info-box bg-orange fg-white">
             <div class="content">
                 <h2 class="text-bold mb-0">
-                    {{ count($domains) }}
+                    {{ $active_domains_count }} / {{ count($domains) }}
                 </h2>
                 <div>Domaines</div>
             </div>
@@ -68,7 +68,7 @@ Tableau de bord
         <div class="more-info-box bg-cyan fg-white">
             <div class="content">
                 <h2 class="text-bold mb-0">
-                    {{ $active_controls_count }}
+                    {{ $active_controls_count }} / {{ $controls_count }}
                 </h2>
                 <div>Controls</div>
             </div>
