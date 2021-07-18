@@ -475,20 +475,20 @@
             <div class="app-bar-container ml-auto">
                 <a href="/measurements?period=0&domain=0&status=2" class="app-bar-item">
                     <span class="mif-envelop"></span>
-                    @if (Session::get("planed_measurements")!=null)
-                    <span class="badge bg-green fg-white mt-2 mr-1">{{Session::get("planed_measurements")}}</span>
+                    @if (Session::get("planed_measurements_this_month_count")!=null)
+                    <span class="badge bg-green fg-white mt-2 mr-1">{{Session::get("planed_measurements_this_month_count")}}</span>
                     @endif
                 </a>
                 <a href="/measurements?period=99&domain=0&status=1&late=1" class="app-bar-item">
                     <span class="mif-bell"></span>
-                    @if (Session::get("late_measurements")!=null)                    
-                    <span class="badge bg-orange fg-white mt-2 mr-1">{{Session::get("late_measurements")}}</span>
+                    @if (Session::get("late_measurements_count")!=null)                    
+                    <span class="badge bg-orange fg-white mt-2 mr-1">{{Session::get("late_measurements_count")}}</span>
                     @endif
                 </a>
                 <a href="/actions" class="app-bar-item">
                     <span class="mif-flag"></span>
-                    @if (Session::get("actions")!=null)
-                    <span class="badge bg-red fg-white mt-2 mr-1">{{Session::get("actions")}}</span>
+                    @if (Session::get("action_plans_count")!=null)
+                    <span class="badge bg-red fg-white mt-2 mr-1">{{Session::get("action_plans_count")}}</span>
                     @endif
                 </a>
                 <div class="app-bar-container">

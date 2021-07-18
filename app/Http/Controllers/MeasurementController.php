@@ -123,7 +123,7 @@ class MeasurementController extends Controller
                 m1.control_id as control_id,
                 m1.domain_id as domain_id,
                 m1.plan_date as plan_date,
-                max(m1.realisation_date) as realisation_date, 
+                m1.realisation_date,
                 m1.score as score,
                 m2.plan_date as next_date,
                 m2.id as next_id
@@ -131,8 +131,7 @@ class MeasurementController extends Controller
                 LEFT JOIN measurements m2 on ( 
                     m1.id<>m2.id and m1.control_id = m2.control_id and m2.realisation_date is null)
                 WHERE "
-                .$whereClause
-                ." group by control_id order by plan_date"));
+                . $whereClause));
 
         // view
         return view("measurements.index")
