@@ -22,29 +22,31 @@ class ActionplanController extends Controller
      */
     public function index(Request $request)
     {
-        $actions=DB::select(
-            DB::raw(
-                "
-                SELECT
-                m1.id as id, 
-                m1.control_id as control_id, 
-                m1.clause as clause,
-                m1.name as name, 
-                m1.action_plan as action_plan,
-                m1.plan_date as plan_date, 
-                m1.score as score,
-                m1.realisation_date as realisation_date,
-                max(m1.realisation_date) as realisation_date, 
-                m1.score as score,
-                m2.plan_date as next_date,
-                m2.id as next_id
-                FROM measurements m1
-                LEFT JOIN measurements m2 on ( 
-                    m1.id<>m2.id and m1.control_id = m2.control_id and m2.realisation_date is null)
-                WHERE (m1.score=1 or m1.score=2)
-                GROUP BY control_id order by plan_date"
-            )
-        );
+        $actions=
+            DB::table('measurements as m1')
+            ->select(
+                'm1.id', 
+                'm1.control_id',
+                'm1.clause',
+                'm1.name', 
+                'm1.action_plan',
+                'm1.plan_date', 
+                'm1.score',
+                'm1.realisation_date',
+                DB::raw('max(m1.realisation_date)'), 
+                'm1.score',
+                'm2.plan_date as next_date',
+                'm2.id as next_id')
+            ->leftJoin('measurements as m2', function($join){
+                $join->on('m1.id', '<>', 'm2.id');
+                $join->on('m1.control_id', '=', 'm2.control_id');
+                $join->whereNull('m2.realisation_date');
+            })            
+             ->where('m1.score','=',1)
+            ->orWhere('m1.score','=',2)
+            ->groupBy('control_id')
+            ->orderBy('plan_date')
+            ->get();
 
         // return
         return view("actions.index")
@@ -78,31 +80,30 @@ class ActionplanController extends Controller
      */
     public function show(int $id)
     {
-        // measurement where score==null and control_id=$control_id
-        $action=DB::select(
-            DB::raw(
-                "
-                SELECT
-                m1.id as id, 
-                m1.control_id as control_id, 
-                m1.clause as clause,
-                m1.name as name, 
-                m1.objective as objective, 
-                m1.observations as observations, 
-                m1.action_plan as action_plan, 
-                m1.plan_date as plan_date, 
-                m1.score as score,
-                m1.realisation_date as realisation_date,
-                m1.score as score,
-                m2.plan_date as next_date,
-                m2.id as next_id
-                FROM measurements m1
-                LEFT JOIN measurements m2 on ( 
-                    m1.id<>m2.id and m1.control_id = m2.control_id and m2.realisation_date is null)
-                WHERE (m1.id=".$id.")")
-        )[0];
+        $action=DB::table('measurements as m1')
+            ->select(
+                'm1.id', 
+                'm1.control_id', 
+                'm1.clause',
+                'm1.name', 
+                'm1.objective', 
+                'm1.observations', 
+                'm1.action_plan', 
+                'm1.plan_date', 
+                'm1.score',
+                'm1.realisation_date',
+                'm1.score',
+                'm2.plan_date as next_date',
+                'm2.id as next_id')
+            ->leftJoin('measurements as m2', function($join){
+                $join->on('m1.id', '<>', 'm2.id');
+                $join->on('m1.control_id', '=', 'm2.control_id');
+                $join->whereNull('m2.realisation_date');
+            })
+            ->where('m1.id','=',$id)
+            ->first();
 
-        // dd($action);
+        // return            
         return view("actions.show")
             ->with("action", $action);
     }

@@ -97,6 +97,23 @@ class ReportController extends Controller
         $request->session()->put("late_measurements", $lateMeasurements);
 
         // action plans
+        // status                
+        $actions=
+            DB::table('measurements')            
+            ->select(
+                'control_id',
+                DB::raw('max(measurements.id) as id'),
+                'measurements.clause', 
+                'measurements.name', 
+                'plan_date')
+            ->join('controls', 'controls.id', '=', 'measurements.control_id')
+            ->where('score','=',1)
+            ->orWhere('score','=',2)
+            ->groupBy('control_id')
+            ->get()->count();
+        //dd($actions);
+
+        /*
         $actions=count(
             DB::select(
                 DB::raw(
@@ -121,6 +138,7 @@ class ReportController extends Controller
                 )
             )
         );
+        */
         $request->session()->put("actions", $actions);
 
         // return 
