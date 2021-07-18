@@ -46,27 +46,20 @@ class ReportController extends Controller
 
         $domains = DB::table('domains')->get();
 
-        // status
-        $status=DB::select(
-            DB::raw(
-                "
-        SELECT
-        m2.control_id as cotrol_id, 
-        domains.title as title,
-        m2.realisation_date as realisation_date, 
-        m2.score as score 
-        from  
-            (select 
-            control_id,
-            max(id) as id
-            from measurements
-            where realisation_date is not null
-            group by control_id) as m1, measurements as m2, domains 
-        where domains.id = m2.domain_id and m1.id=m2.id;
-        "
-            )
-        );
-
+        // status                
+        $status=
+            DB::table('measurements')            
+            ->select(
+                'control_id',
+                DB::raw('max(measurements.id) as id'),
+                'domains.title as title', 
+                'realisation_date', 
+                'score')
+            ->join('domains', 'domains.id', '=', 'measurements.domain_id')
+            ->whereNotNull('realisation_date')
+            ->groupBy('control_id')
+            ->get();
+        
         //dd($status);
 
         // get planned controls

@@ -135,7 +135,7 @@ Tableau de bord
         <div data-role="panel" data-title-caption="Performances" data-collapsible="true" data-title-icon="<span class='mif-paragraph-left'></span>" class="">
     
             <div class="clear">
-                <div class="place-left">Contrôles réussis</div>
+                <div class="place-left">Mesures réussies</div>
                 <div class="place-right">
                     <strong>
                         <?php $count=0; ?>
@@ -155,7 +155,7 @@ Tableau de bord
             </div>
 
             <div class="clear">
-                <div class="place-left">Contrôles en alerte</div>
+                <div class="place-left">Mesures en alerte</div>
                 <div class="place-right">
                     <strong>
                         <?php $count=0; ?>
@@ -175,7 +175,7 @@ Tableau de bord
             </div>
 
             <div class="clear">
-                <div class="place-left">Contrôles en échec</div>
+                <div class="place-left">Mesures en échec</div>
                 <div class="place-right">
                     <strong>
                         <?php $count=0; ?>
@@ -195,7 +195,7 @@ Tableau de bord
             </div>
 
             <div class="clear">
-                <div class="place-left">Contrôles non réalisés</div>
+                <div class="place-left">Mesures en retard</div>
                 <div class="place-right">
                     <strong>
                         {{ $count=Session::get("late_measurements") }}
