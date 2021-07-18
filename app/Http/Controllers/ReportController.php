@@ -34,21 +34,21 @@ class ReportController extends Controller
      */
     public function welcome(Request $request)
     {
-        // count active controls
-        $controls = DB::table('controls')
-            ->count();
+        // count active domains
+        $domains = DB::table('domains')->get();
 
-        //  count mesurement made
-        $measurements = DB::table('measurements')
+        // count active controls
+        $active_controls_count = DB::table('measurements')
             ->whereNull('realisation_date')
             ->count();
 
+        // count mesurements made
+        $measurements_made_count = DB::table('measurements')
+            ->whereNotNull('realisation_date')
+            ->count();
 
-        $domains = DB::table('domains')->get();
-
-        // status                
-        $status=
-            DB::table('measurements')            
+        // Last measurements made by controls
+        $active_measurements = DB::table('measurements')
             ->select(
                 'control_id',
                 DB::raw('max(measurements.id) as id'),
@@ -63,30 +63,30 @@ class ReportController extends Controller
         //dd($status);
 
         // get planned controls
-        $plannedMeasurements=DB::table('measurements')
+        $measurements_todo = DB::table('measurements')
             ->where(
                 [
                     ["realisation_date","=",null],
                     ["plan_date","<",(new Carbon('first day of next month'))->toDateString()]
-                    ]
+                ]
             )
             ->get();
         // dd($plannedMeasurements);
 
         // planed measurements this month
-        $planed_measurements=DB::table('measurements')
+        $planed_measurements_this_month_count = DB::table('measurements')
             ->where(
                 [
                     ["realisation_date","=",null],
                     ["plan_date",">=", (new Carbon('first day of this month'))->toDateString()],
                     ["plan_date","<", (new Carbon('first day of next month'))->toDateString()]
-                    ]
+                ]
             )
             ->count();
-        $request->session()->put("planed_measurements", $planed_measurements);
+        $request->session()->put("planed_measurements_this_month_count", $planed_measurements_this_month_count);
 
         // late measurements
-        $lateMeasurements=DB::table('measurements')
+        $late_measurements_count=DB::table('measurements')
             ->where(
                 [
                     ["realisation_date","=",null],
@@ -94,11 +94,10 @@ class ReportController extends Controller
                     ]
             )
             ->count();
-        $request->session()->put("late_measurements", $lateMeasurements);
+        $request->session()->put("late_measurements_count", $late_measurements_count);
 
-        // action plans
-        // status                
-        $actions=
+        // Count number of action plans
+        $action_plans_count=
             DB::table('measurements')            
             ->select(
                 'control_id',
@@ -110,45 +109,23 @@ class ReportController extends Controller
             ->where('score','=',1)
             ->orWhere('score','=',2)
             ->groupBy('control_id')
-            ->get()->count();
+            ->get()
+            ->count();
         //dd($actions);
 
-        /*
-        $actions=count(
-            DB::select(
-                DB::raw(
-                    "
-                SELECT 
-                    m2.id as id, 
-                    m2.control_id as control_l, 
-                    m2.clause as clause, 
-                    m2.name as name, 
-                    m2.plan_date as plan_date, 
-                    m2.score as score 
-                FROM 
-                ( SELECT 
-                    max(id) as id,
-                    control_id
-                FROM  
-                    measurements 
-                WHERE (score=1 or score=2) 
-                GROUP BY control_id) as m1, measurements m2
-                WHERE m1.id=m2.id;
-            "
-                )
-            )
-        );
-        */
-        $request->session()->put("actions", $actions);
+        $request->session()->put("action_plans_count", $action_plans_count);
 
         // return 
         return view("welcome")
-            ->with('status', $status)
-            ->with('controls', $controls)
-            ->with('measurements', $measurements)
+            ->with('active_measurements', $active_measurements)
             ->with('domains', $domains)
-            ->with('actions', $actions)
-            ->with('plannedMeasurements', $plannedMeasurements);
+            ->with('active_controls_count', $active_controls_count)
+            ->with('measurements_made_count', $measurements_made_count)
+
+            ->with('measurements_todo', $measurements_todo)
+            ->with('active_measurements', $active_measurements)            
+            ->with('action_plans_count',$action_plans_count)
+            ->with('late_measurements_count',$late_measurements_count);
     }
 
     /**

@@ -68,7 +68,7 @@ Tableau de bord
         <div class="more-info-box bg-cyan fg-white">
             <div class="content">
                 <h2 class="text-bold mb-0">
-                    {{ $controls }}
+                    {{ $active_controls_count }}
                 </h2>
                 <div>Controls</div>
             </div>
@@ -83,9 +83,9 @@ Tableau de bord
         <div class="more-info-box bg-green fg-white">
             <div class="content">
                 <h2 class="text-bold mb-0">
-                    {{ $measurements }}
+                    {{ $measurements_made_count }}
                 </h2>
-                @if ($measurements>1)
+                @if ($measurements_made_count>1)
                 <div>Mesures</div>
                 @else
                 <div>Mesure</div>
@@ -100,8 +100,8 @@ Tableau de bord
     <div class="cell-lg-3 cell-md-6 mt-2">
         <div class="more-info-box bg-red fg-white">
             <div class="content">
-                <h2 class="text-bold mb-0">{{ $actions }} </h2>
-                @if ($actions>1)
+                <h2 class="text-bold mb-0">{{ $action_plans_count }} </h2>
+                @if ($action_plans_count>1)
                 <div>Plans d'action</div>
                 @else
                 <div>Plan d'action</div>
@@ -139,18 +139,17 @@ Tableau de bord
                 <div class="place-right">
                     <strong>
                         <?php $count=0; ?>
-                        @foreach($status as $s)
-                          <?php if ($s->score=="3") { $count++; 
-                          } ?>
+                        @foreach($active_measurements as $m)
+                          <?php if ($m->score=="3") { $count++; } ?>
                         @endforeach 
                         {{ $count }}
                     </strong>
                     /
-                    {{ count($status) }}
+                    {{ $active_controls_count }}
                 </div>
             </div>
             <div data-role="progress" data-value="35" class="progress" data-role-progress="true">
-                <div class="bar bg-green" style="width: {{ (count($status)>0) ? $count/count($status)*100 : 0 }}%  ;">
+                <div class="bar bg-green" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}%  ;">
                 </div>
             </div>
 
@@ -159,18 +158,17 @@ Tableau de bord
                 <div class="place-right">
                     <strong>
                         <?php $count=0; ?>
-                        @foreach($status as $s)
-                          <?php if ($s->score=="2") { $count++; 
-                          } ?>
+                        @foreach($active_measurements as $m)
+                          <?php if ($m->score=="2") { $count++; } ?>
                         @endforeach 
                         {{ $count }}
                     </strong>
                     /
-                    {{ count($status) }}
+                    {{ $active_controls_count }}
                 </div>
             </div>
-            <div data-role="progress" data-value="{{ count($status) }}" class="progress" data-role-progress="true">
-                <div class="bar bg-orange" style="width: {{ (count($status)>0) ? $count/count($status)*100 : 0 }}% ;">
+            <div data-role="progress" data-value="{{ count($active_measurements) }}" class="progress" data-role-progress="true">
+                <div class="bar bg-orange" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}% ;">
                 </div>
             </div>
 
@@ -179,18 +177,18 @@ Tableau de bord
                 <div class="place-right">
                     <strong>
                         <?php $count=0; ?>
-                        @foreach($status as $s)
-                          <?php if ($s->score=="1") { $count++; 
+                        @foreach($active_measurements as $m)
+                          <?php if ($m->score=="1") { $count++; 
                           } ?>
                         @endforeach 
                         {{ $count }}
                     </strong>
                     /
-                    {{ count($status) }}
+                    {{ count($active_measurements) }}
                 </div>
             </div>
-            <div data-role="progress" data-value="{{ count($status) }}" class="progress" data-role-progress="true">
-                <div class="bar bg-red" style="width: {{ (count($status)>0) ? $count/count($status)*100 : 0 }}%  ;">
+            <div data-role="progress" data-value="{{ count($active_measurements) }}" class="progress" data-role-progress="true">
+                <div class="bar bg-red" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}%  ;">
                 </div>
             </div>
 
@@ -198,14 +196,14 @@ Tableau de bord
                 <div class="place-left">Mesures en retard</div>
                 <div class="place-right">
                     <strong>
-                        {{ $count=Session::get("late_measurements") }}
+                        {{ $count=Session::get("late_measurements_count") }}
                     </strong>
                     /
-                    {{ count($status) }}
+                    {{ count($active_measurements) }}
                 </div>
             </div>
             <div data-role="progress" data-value="35" class="progress" data-role-progress="true">
-                <div class="bar bg-gray" style="width: {{ (count($status)>0) ? $count/count($status)*100 : 0 }}%  ;">
+                <div class="bar bg-gray" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}%  ;">
                 </div>
             </div>
 
@@ -242,7 +240,7 @@ Tableau de bord
                 </thead>
                 <tbody>
 
-            @foreach($plannedMeasurements as $measurement)
+            @foreach($measurements_todo as $measurement)
                 <tr onclick="window.location = '/measurements/{{$measurement->id}}';">
                     <td>
                         <a href="/domains/{{$measurement->domain_id}}">
@@ -325,9 +323,8 @@ Tableau de bord
             data: [
                 @foreach ($domains as $domain) 
                     <?php $count=0; ?>
-                    @foreach($status as $s)
-                      <?php if (($s->score==3)&&($s->title==$domain->title)) { $count++; 
-                      } ?>
+                    @foreach($active_measurements as $m)
+                      <?php if (($m->score==3)&&($m->title==$domain->title)) { $count++; } ?>
                     @endforeach 
                     {{ $count }}
                     {{ $loop->last ? '' : ',' }}
@@ -342,8 +339,8 @@ Tableau de bord
             data: [
                 @foreach ($domains as $domain) 
                     <?php $count=0; ?>
-                    @foreach($status as $s)
-                      <?php if (($s->score==2)&&($s->title==$domain->title)) { $count++; 
+                    @foreach($active_measurements as $m)
+                      <?php if (($m->score==2)&&($m->title==$domain->title)) { $count++; 
                       } ?>
                     @endforeach 
                     {{ $count }}
@@ -359,8 +356,8 @@ Tableau de bord
             data: [
                 @foreach ($domains as $domain) 
                     <?php $count=0; ?>
-                    @foreach($status as $s)
-                      <?php if (($s->score==1)&&($s->title==$domain->title)) { $count++; 
+                    @foreach($active_measurements as $m)
+                      <?php if (($m->score==1)&&($m->title==$domain->title)) { $count++; 
                       } ?>
                     @endforeach 
                     {{ $count }}
@@ -376,8 +373,8 @@ Tableau de bord
             data: [
                 @foreach ($domains as $domain) 
                     <?php $count=0; ?>
-                    @foreach($status as $s)
-                      <?php if (($s->score==null)&&($s->title==$domain->title)) { $count++; 
+                    @foreach($active_measurements as $m)
+                      <?php if (($m->score==null)&&($m->title==$domain->title)) { $count++; 
                       } ?>
                     @endforeach 
                     {{ $count }}
@@ -446,11 +443,11 @@ Tableau de bord
         data: [
         @foreach ($domains as $domain) 
             <?php $count=0; $total=0; ?>
-            @foreach($status as $s)
+            @foreach($active_measurements as $m)
               <?php 
-                if ($s->title==$domain->title) { $total++;
+                if ($m->title==$domain->title) { $total++;
                 }
-                if (($s->score==1)&&($s->title==$domain->title)) { $count++;
+                if (($m->score==1)&&($m->title==$domain->title)) { $count++;
                 }
                 ?>
             @endforeach 
@@ -466,11 +463,11 @@ Tableau de bord
         data: [
         @foreach ($domains as $domain) 
             <?php $count=0; $total=0; ?>
-            @foreach($status as $s)
+            @foreach($active_measurements as $m)
               <?php 
-                if ($s->title==$domain->title) { $total++;
+                if ($m->title==$domain->title) { $total++;
                 }
-                if ((($s->score==1)||($s->score==2))&&($s->title==$domain->title)) { $count++; 
+                if ((($m->score==1)||($m->score==2))&&($m->title==$domain->title)) { $count++; 
                 } 
                 ?>
             @endforeach 
@@ -486,11 +483,11 @@ Tableau de bord
         data: [
         @foreach ($domains as $domain) 
             <?php $count=0; $total=0; ?>
-            @foreach($status as $s)
+            @foreach($active_measurements as $m)
               <?php 
-                if ($s->title==$domain->title) { $total++;
+                if ($m->title==$domain->title) { $total++;
                 }
-                if ((($s->score==1)||($s->score==2)||($s->score==3))&&($s->title==$domain->title)) { $count++; 
+                if ((($m->score==1)||($m->score==2)||($m->score==3))&&($m->title==$domain->title)) { $count++; 
                 } 
                 ?>
             @endforeach 
