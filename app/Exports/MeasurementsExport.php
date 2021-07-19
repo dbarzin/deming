@@ -79,7 +79,6 @@ class MeasurementsExport implements FromQuery, WithMapping, WithHeadings, WithSt
                 $measurement->realisation_date,
                 $measurement->observations,
                 $measurement->score,
-                $measurement->note,
                 $measurement->action_plan,
             ]
         ];

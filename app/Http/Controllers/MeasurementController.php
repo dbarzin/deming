@@ -118,19 +118,25 @@ class MeasurementController extends Controller
             DB::raw("
                 SELECT
                 m1.id as id,
+                m1.control_id as control_id,
                 m1.name as name,
                 m1.clause as clause,
-                m1.control_id as control_id,
                 m1.domain_id as domain_id,
                 m1.plan_date as plan_date,
                 m1.realisation_date,
                 m1.score as score,
-                m2.plan_date as next_date,
-                m2.id as next_id
+                m3.next_date,
+                m3.next_id
                 FROM measurements m1
-                LEFT JOIN measurements m2 on ( 
-                    m1.id<>m2.id and m1.control_id = m2.control_id and m2.realisation_date is null)
-                WHERE "
+                LEFT OUTER JOIN (
+                    select
+                        m2.control_id,
+                        min(m2.id) as next_id,
+                        m2.plan_date as next_date
+                        from measurements m2
+                        group by control_id
+                    ) as m3 on (m1.control_id=m3.control_id and m3.next_id>m1.id)
+                WHERE " 
                 . $whereClause));
 
         // view
