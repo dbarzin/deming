@@ -184,7 +184,7 @@ Tableau de bord
                         {{ $count }}
                     </strong>
                     /
-                    {{ count($active_measurements) }}
+                    {{ $active_controls_count }}
                 </div>
             </div>
             <div data-role="progress" data-value="{{ count($active_measurements) }}" class="progress" data-role-progress="true">
@@ -193,13 +193,13 @@ Tableau de bord
             </div>
 
             <div class="clear">
-                <div class="place-left">Mesures en retard</div>
+                <div class="place-left">Mesures non-réalisées</div>
                 <div class="place-right">
-                    <strong>
-                        {{ $count=Session::get("late_measurements_count") }}
+		    <strong>
+                       ???
                     </strong>
                     /
-                    {{ count($active_measurements) }}
+                    {{ $active_controls_count }}
                 </div>
             </div>
             <div data-role="progress" data-value="35" class="progress" data-role-progress="true">
