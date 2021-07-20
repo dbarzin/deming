@@ -196,7 +196,7 @@ Tableau de bord
                 <div class="place-left">Mesures non-réalisées</div>
                 <div class="place-right">
 		    <strong>
-                       ???
+                    {{ $measurements_never_made_count }}
                     </strong>
                     /
                     {{ $active_controls_count }}

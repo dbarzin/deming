@@ -24,7 +24,6 @@ use PhpOffice\PhpWord\Element\Chart;
 use PhpOffice\PhpWord\Element\Table;
 use PhpOffice\PhpWord\PhpWord;
 
-
 class ReportController extends Controller
 {
     /**
@@ -60,6 +59,20 @@ class ReportController extends Controller
         $measurements_made_count = DB::table('measurements')
             ->whereNotNull('realisation_date')
             ->count();
+
+        // count measurement never made
+        $measurements_never_made_count = DB::select( 
+            DB::raw("
+                select count(*) as count
+                from measurements m1 
+                where realisation_date is null and 
+                not exists (
+                    select * 
+                    from measurements m2 
+                    where realisation_date is not null and m1.control_id=m2.control_id);"
+                ))[0]->count;
+        // dd($measurements_never_made_count);
+
 
         // Last measurements made by controls
         $active_measurements = DB::table('measurements')
@@ -137,6 +150,7 @@ class ReportController extends Controller
             ->with('controls_count', $controls_count)
             ->with('active_controls_count', $active_controls_count)
             ->with('measurements_made_count', $measurements_made_count)
+            ->with('measurements_never_made_count', $measurements_never_made_count)
 
             ->with('measurements_todo', $measurements_todo)
             ->with('active_measurements', $active_measurements)            

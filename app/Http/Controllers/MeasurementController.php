@@ -125,19 +125,14 @@ class MeasurementController extends Controller
                 m1.plan_date as plan_date,
                 m1.realisation_date,
                 m1.score as score,
-                m3.next_date,
-                m3.next_id
+                m2.plan_date as next_date,
+                min(m2.id) as next_id
                 FROM measurements m1
-                LEFT OUTER JOIN (
-                    select
-                        m2.control_id,
-                        min(m2.id) as next_id,
-                        m2.plan_date as next_date
-                        from measurements m2
-                        group by control_id
-                    ) as m3 on (m1.control_id=m3.control_id and m3.next_id>m1.id)
+                LEFT OUTER JOIN measurements m2 on
+                    (m2.control_id=m1.control_id and m1.id<m2.id) 
                 WHERE " 
-                . $whereClause));
+                . $whereClause 
+                . " group by control_id"));
 
         // view
         return view("measurements.index")
