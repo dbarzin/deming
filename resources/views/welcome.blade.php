@@ -196,7 +196,7 @@ Tableau de bord
                 <div class="place-left">Mesures non-réalisées</div>
                 <div class="place-right">
 		    <strong>
-                    {{ $measurements_never_made_count }}
+                    {{ count($measurements_never_made) }}
                     </strong>
                     /
                     {{ $active_controls_count }}
@@ -373,9 +373,8 @@ Tableau de bord
             data: [
                 @foreach ($domains as $domain) 
                     <?php $count=0; ?>
-                    @foreach($active_measurements as $m)
-                      <?php if (($m->score==null)&&($m->title==$domain->title)) { $count++; 
-                      } ?>
+                    @foreach($measurements_never_made as $m)
+                      <?php if ($m->domain_id==$domain->id) { $count++; } ?>
                     @endforeach 
                     {{ $count }}
                     {{ $loop->last ? '' : ',' }}
@@ -495,7 +494,24 @@ Tableau de bord
             {{ $loop->last ? '' : ',' }}
         @endforeach 
         ]
-      },       {
+      }, {
+        // Gray
+        backgroundColor: color(window.chartColors.gray).alpha(0.2).rgbString(),
+        borderColor: window.chartColors.gray,
+        pointBackgroundColor: window.chartColors.gray,
+        data: [
+        @foreach ($domains as $domain)
+            <?php $count=0; $total=0; ?>
+            @foreach($measurements_never_made as $m)
+                <?php 
+                if ($m->domain_id==$domain->id) { $count++; $total++; }
+                ?>
+            @endforeach 
+            {{ $count }}
+            {{ $loop->last ? '' : ',' }}
+        @endforeach 
+        ]
+      }, {
         // label: "Zero",
         backgroundColor: "rgba(0,0,0,1)",
         data: [0,0,0,0]

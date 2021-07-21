@@ -61,17 +61,17 @@ class ReportController extends Controller
             ->count();
 
         // count measurement never made
-        $measurements_never_made_count = DB::select( 
+        $measurements_never_made = DB::select( 
             DB::raw("
-                select count(*) as count
+                select domain_id 
                 from measurements m1 
                 where realisation_date is null and 
                 not exists (
                     select * 
                     from measurements m2 
                     where realisation_date is not null and m1.control_id=m2.control_id);"
-                ))[0]->count;
-        // dd($measurements_never_made_count);
+                ));
+        //dd($measurements_never_made);
 
 
         // Last measurements made by controls
@@ -150,7 +150,7 @@ class ReportController extends Controller
             ->with('controls_count', $controls_count)
             ->with('active_controls_count', $active_controls_count)
             ->with('measurements_made_count', $measurements_made_count)
-            ->with('measurements_never_made_count', $measurements_never_made_count)
+            ->with('measurements_never_made', $measurements_never_made)
 
             ->with('measurements_todo', $measurements_todo)
             ->with('active_measurements', $active_measurements)            
