@@ -120,97 +120,29 @@ Tableau de bord
 
 <div class="row">
     <div class="cell-md-7">
-        <div class="panel mt-4">
+        <div class="panel mt-6">
             <div data-role="panel" data-title-caption="Etat des contrôles au {{ date('d/m/Y')}}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
-                <div class="p-4">
+                <div class="p-7">
                     <canvas id="canvas-status" class="chartjs-render-monitor"></canvas>
                 </div>
             </div>
         </div>
     </div>
 
+    <!--------------------------------------------------------------------->
+
     <div class="cell-md-5">
-        <div class="panel mt-4">
-
-        <div data-role="panel" data-title-caption="Performances" data-collapsible="true" data-title-icon="<span class='mif-paragraph-left'></span>" class="">
-    
-            <div class="clear">
-                <div class="place-left">Mesures réussies</div>
-                <div class="place-right">
-                    <strong>
-                        <?php $count=0; ?>
-                        @foreach($active_measurements as $m)
-                          <?php if ($m->score=="3") { $count++; } ?>
-                        @endforeach 
-                        {{ $count }}
-                    </strong>
-                    /
-                    {{ $active_controls_count }}
+        <div class="panel mt-6">
+            <div data-role="panel" data-title-caption="Répartition" data-collapsible="true" data-title-icon="<span class='mif-meter'></span>">
+                <div class="p-7">
+                    <canvas id="canvas-doughnut" style="display: block; width: 200px; height: 146px;"  class="chartjs-render-monitor" 
+                    ></canvas>                    
                 </div>
-            </div>
-            <div data-role="progress" data-value="35" class="progress" data-role-progress="true">
-                <div class="bar bg-green" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}%  ;">
-                </div>
-            </div>
-
-            <div class="clear">
-                <div class="place-left">Mesures en alerte</div>
-                <div class="place-right">
-                    <strong>
-                        <?php $count=0; ?>
-                        @foreach($active_measurements as $m)
-                          <?php if ($m->score=="2") { $count++; } ?>
-                        @endforeach 
-                        {{ $count }}
-                    </strong>
-                    /
-                    {{ $active_controls_count }}
-                </div>
-            </div>
-            <div data-role="progress" data-value="{{ count($active_measurements) }}" class="progress" data-role-progress="true">
-                <div class="bar bg-orange" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}% ;">
-                </div>
-            </div>
-
-            <div class="clear">
-                <div class="place-left">Mesures en échec</div>
-                <div class="place-right">
-                    <strong>
-                        <?php $count=0; ?>
-                        @foreach($active_measurements as $m)
-                          <?php if ($m->score=="1") { $count++; 
-                          } ?>
-                        @endforeach 
-                        {{ $count }}
-                    </strong>
-                    /
-                    {{ $active_controls_count }}
-                </div>
-            </div>
-            <div data-role="progress" data-value="{{ count($active_measurements) }}" class="progress" data-role-progress="true">
-                <div class="bar bg-red" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}%  ;">
-                </div>
-            </div>
-
-            <div class="clear">
-                <div class="place-left">Mesures non-réalisées</div>
-                <div class="place-right">
-		    <strong>
-                    {{ count($measurements_never_made) }}
-                    </strong>
-                    /
-                    {{ $active_controls_count }}
-                </div>
-            </div>
-            <div data-role="progress" data-value="35" class="progress" data-role-progress="true">
-                <div class="bar bg-gray" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}%  ;">
-                </div>
-            </div>
-
-            <p class="text-small">Les performances passées ne préjugent pas des performances futures.</p>
             </div>
         </div>
     </div>
+
+</div>
 </div>
 
 <!------------------------------------------------------------------------------------------>
@@ -288,20 +220,92 @@ Tableau de bord
     <div class="cell-md-5">
         <div class="panel mt-4">
 
-        <div data-role="panel" data-title-caption="Radar" data-collapsible="true" data-title-icon="<span class='mif-meter'></span>" class="">
+        <div data-role="panel" data-title-caption="Performances" data-collapsible="true" data-title-icon="<span class='mif-paragraph-left'></span>" class="">
     
-        <canvas id="canvas-radar" style="display: block; width: 500px; height: 300px;" width="400" height="300" class="chartjs-render-monitor">
-        </canvas>
+            <div class="clear">
+                <div class="place-left">Mesures réussies</div>
+                <div class="place-right">
+                    <strong>
+                        <?php $count=0; ?>
+                        @foreach($active_measurements as $m)
+                          <?php if ($m->score=="3") { $count++; } ?>
+                        @endforeach 
+                        {{ $count }}
+                    </strong>
+                    /
+                    {{ $active_controls_count }}
+                </div>
+            </div>
+            <div data-role="progress" data-value="35" class="progress" data-role-progress="true">
+                <div class="bar bg-green" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}%  ;">
+                </div>
+            </div>
 
+            <div class="clear">
+                <div class="place-left">Mesures en alerte</div>
+                <div class="place-right">
+                    <strong>
+                        <?php $count=0; ?>
+                        @foreach($active_measurements as $m)
+                          <?php if ($m->score=="2") { $count++; } ?>
+                        @endforeach 
+                        {{ $count }}
+                    </strong>
+                    /
+                    {{ $active_controls_count }}
+                </div>
+            </div>
+            <div data-role="progress" data-value="{{ count($active_measurements) }}" class="progress" data-role-progress="true">
+                <div class="bar bg-orange" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}% ;">
+                </div>
+            </div>
+
+            <div class="clear">
+                <div class="place-left">Mesures en échec</div>
+                <div class="place-right">
+                    <strong>
+                        <?php $count=0; ?>
+                        @foreach($active_measurements as $m)
+                          <?php if ($m->score=="1") { $count++; } ?>
+                        @endforeach 
+                        {{ $count }}
+                    </strong>
+                    /
+                    {{ $active_controls_count }}
+                </div>
+            </div>
+            <div data-role="progress" data-value="{{ count($active_measurements) }}" class="progress" data-role-progress="true">
+                <div class="bar bg-red" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}%  ;">
+                </div>
+            </div>
+
+            <div class="clear">
+                <div class="place-left">Mesures non-réalisées</div>
+                <div class="place-right">
+                    <strong>
+                    {{ count($measurements_never_made) }}
+                    </strong>
+                    /
+                    {{ $active_controls_count }}
+                </div>
+            </div>
+            <div data-role="progress" data-value="35" class="progress" data-role-progress="true">
+                <div class="bar bg-gray" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}%  ;">
+                </div>
+            </div>
+
+            <p class="text-small">Les performances passées ne préjugent pas des performances futures.</p>
+            </div>
+        </div>
+
+    <!--------------------------------------------------------------------->
     </div>
+
 </div>
 </div>
 
 <script src="/vendors/chartjs/Chart.bundle.min.js"></script>
 <script src="/js/utils.js"></script>
-</div>
-</div>
-</div>
 
 <!------------------------------------------------------------------------------------->
 
@@ -411,116 +415,63 @@ Tableau de bord
 
 
 <!------------------------->
-<!-- RADAR -->
+<!-- DOUGHNUT -->
 <!------------------------->
 <script>
 
     var options = {
         responsive: true,
         legend: {
-            display: false,
+            display: true,
+            position: 'bottom',
         },
         title: {
             display: false
         }
     };
 
-    var ctx2 = document.getElementById('canvas-radar').getContext('2d');
+    var ctx2 = document.getElementById('canvas-doughnut').getContext('2d');
 
     var marksData = {
       labels: [
-            @foreach ($domains as $domain) 
-                '{{ $domain->title }}'
-                 {{ $loop->last ? '' : ',' }}
-            @endforeach 
+            'Echec','Alerte','Réussi','Unknown'
             ],
       datasets: [
-      { // red
-        backgroundColor: color(window.chartColors.red).alpha(0.2).rgbString(),
-        borderColor: window.chartColors.red,
-        pointBackgroundColor: window.chartColors.red,        
-        data: [
-        @foreach ($domains as $domain) 
-            <?php $count=0; $total=0; ?>
+      { 
+        backgroundColor: 
+            [
+                '#FF0000', '#fa6800', '#61b045', window.chartColors.grey
+            ],
+        borderColor: 
+            [
+                window.chartColors.red,
+                window.chartColors.orange,
+                window.chartColors.green,
+                window.chartColors.gray,
+            ],
+        data: [ 
+            <?php $count=0; ?>
             @foreach($active_measurements as $m)
-              <?php 
-                if ($m->title==$domain->title) { $total++;
-                }
-                if (($m->score==1)&&($m->title==$domain->title)) { $count++;
-                }
-                ?>
+              <?php if ($m->score=="1") { $count++; } ?>
             @endforeach 
-            {{ $count }}
-            {{ $loop->last ? '' : ',' }}
-        @endforeach 
-        ]
-      },{
-        // orange
-        backgroundColor: color(window.chartColors.orange).alpha(0.2).rgbString(),
-        borderColor: window.chartColors.orange,
-        pointBackgroundColor: window.chartColors.orange,
-        data: [
-        @foreach ($domains as $domain) 
-            <?php $count=0; $total=0; ?>
+            {{ $count }},
+            <?php $count=0; ?>
             @foreach($active_measurements as $m)
-              <?php 
-                if ($m->title==$domain->title) { $total++;
-                }
-                if ((($m->score==1)||($m->score==2))&&($m->title==$domain->title)) { $count++; 
-                } 
-                ?>
+              <?php if ($m->score=="2") { $count++; } ?>
             @endforeach 
-            {{ $count }}
-            {{ $loop->last ? '' : ',' }}
-        @endforeach 
-        ]
-      }, {
-        // Green
-        backgroundColor: color(window.chartColors.green).alpha(0.2).rgbString(),
-        borderColor: window.chartColors.green,
-        pointBackgroundColor: window.chartColors.green,
-        data: [
-        @foreach ($domains as $domain) 
-            <?php $count=0; $total=0; ?>
+            {{ $count }},
             @foreach($active_measurements as $m)
-              <?php 
-                if ($m->title==$domain->title) { $total++;
-                }
-                if ((($m->score==1)||($m->score==2)||($m->score==3))&&($m->title==$domain->title)) { $count++; 
-                } 
-                ?>
+              <?php if ($m->score=="3") { $count++; } ?>
             @endforeach 
-            {{ $count }}
-            {{ $loop->last ? '' : ',' }}
-        @endforeach 
-        ]
-      }, {
-        // Gray
-        backgroundColor: color(window.chartColors.gray).alpha(0.2).rgbString(),
-        borderColor: window.chartColors.gray,
-        pointBackgroundColor: window.chartColors.gray,
-        data: [
-        @foreach ($domains as $domain)
-            <?php $count=0; $total=0; ?>
-            @foreach($measurements_never_made as $m)
-                <?php 
-                if ($m->domain_id==$domain->id) { $count++; $total++; }
-                ?>
-            @endforeach 
-            {{ $count }}
-            {{ $loop->last ? '' : ',' }}
-        @endforeach 
-        ]
-      }, {
-        // label: "Zero",
-        backgroundColor: "rgba(0,0,0,1)",
-        data: [0,0,0,0]
-      } 
+            {{ $count }},
+            {{ count($measurements_never_made) }}
+            ]
+        } 
       ]
     };
          
     var radarChart = new Chart(ctx2, {
-      type: 'radar',
+      type: 'doughnut',
       data: marksData,
       options: options
     });
