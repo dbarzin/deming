@@ -460,6 +460,7 @@ Tableau de bord
               <?php if ($m->score=="2") { $count++; } ?>
             @endforeach 
             {{ $count }},
+            <?php $count=0; ?>
             @foreach($active_measurements as $m)
               <?php if ($m->score=="3") { $count++; } ?>
             @endforeach 
