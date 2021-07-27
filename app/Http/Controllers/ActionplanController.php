@@ -51,6 +51,7 @@ class ActionplanController extends Controller
                     m1.id = m2.id and
                     (m2.score=1 or m2.score=2) and
                     (m3.control_id=m2.control_id and m3.id>m2.id)
+                order by m2.id
                     ;");
 
         // return
