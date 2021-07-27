@@ -125,20 +125,30 @@ class ReportController extends Controller
 
         // Count number of action plans
         $action_plans_count=
-            DB::table('measurements')            
-            ->select(
-                'control_id',
-                DB::raw('max(measurements.id) as id'),
-                'measurements.clause', 
-                'measurements.name', 
-                'plan_date')
-            ->join('controls', 'controls.id', '=', 'measurements.control_id')
-            ->where('score','=',1)
-            ->orWhere('score','=',2)
-            ->groupBy('control_id')
-            ->get()
-            ->count();
-        //dd($actions);
+            count(DB::select("
+                select
+                    m2.control_id,
+                    m2.id,
+                    m2.clause,
+                    m2.name,
+                    m2.plan_date
+                from
+                    measurements m2,
+                    (
+                    select 
+                        control_id,
+                        max(id) as id
+                    from 
+                        measurements
+                    where
+                        realisation_date is not null
+                    group by control_id
+                    ) as m1
+                where
+                    m1.id = m2.id and
+                    (m2.score=1 or m2.score=2);"));
+
+        //dd($action_plans_count);
 
         $request->session()->put("action_plans_count", $action_plans_count);
 

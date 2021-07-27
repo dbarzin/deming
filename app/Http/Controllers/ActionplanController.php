@@ -23,30 +23,35 @@ class ActionplanController extends Controller
     public function index(Request $request)
     {
         $actions=
-            DB::table('measurements as m1')
-            ->select(
-                'm1.id', 
-                'm1.control_id',
-                'm1.clause',
-                'm1.name', 
-                'm1.action_plan',
-                'm1.plan_date', 
-                'm1.score',
-                'm1.realisation_date',
-                DB::raw('max(m1.realisation_date)'), 
-                'm1.score',
-                'm2.plan_date as next_date',
-                'm2.id as next_id')
-            ->leftJoin('measurements as m2', function($join){
-                $join->on('m1.id', '<>', 'm2.id');
-                $join->on('m1.control_id', '=', 'm2.control_id');
-                $join->whereNull('m2.realisation_date');
-            })            
-             ->where('m1.score','=',1)
-            ->orWhere('m1.score','=',2)
-            ->groupBy('control_id')
-            ->orderBy('plan_date')
-            ->get();
+            DB::select("
+                select
+                    m2.control_id,
+                    m2.id,
+                    m2.clause,
+                    m2.action_plan,
+                    m2.score,
+                    m2.name,
+                    m2.plan_date,
+                    m3.id as next_id,
+                    m3.plan_date as next_date
+                from
+                    (
+                    select 
+                        control_id,
+                        max(id) as id
+                    from 
+                        measurements
+                    where
+                        realisation_date is not null
+                    group by control_id
+                    ) as m1,                    
+                    measurements m2,
+                    measurements m3
+                where
+                    m1.id = m2.id and
+                    (m2.score=1 or m2.score=2) and
+                    (m3.control_id=m2.control_id and m3.id>m2.id)
+                    ;");
 
         // return
         return view("actions.index")
