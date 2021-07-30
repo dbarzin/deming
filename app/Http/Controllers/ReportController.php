@@ -132,7 +132,7 @@ class ReportController extends Controller
                 'measurements.clause', 
                 'measurements.name', 
                 'plan_date')
-            ->join('controls', 'controls.id', '=', 'measurements.control_id')
+            //->join('controls', 'controls.id', '=', 'measurements.control_id')
             ->where('score','=',1)
             ->orWhere('score','=',2)
             ->groupBy('control_id')
