@@ -73,20 +73,31 @@ class ReportController extends Controller
                 ));
         //dd($measurements_never_made);
 
-
         // Last measurements made by controls
-        $active_measurements = DB::table('measurements')
-            ->select(
-                'control_id',
-                DB::raw('max(measurements.id) as id'),
-                'domains.title as title', 
-                'realisation_date', 
-                'score')
-            ->join('domains', 'domains.id', '=', 'measurements.domain_id')
-            ->whereNotNull('realisation_date')
-            ->groupBy('control_id')
-            ->get();
-        
+        $active_measurements = DB::select("
+                select
+                    m2.id,
+                    m2.control_id,
+                    domains.title, 
+                    m2.realisation_date, 
+                    m2.score
+                from 
+                    (
+                    select 
+                        control_id,
+                        max(id) as id
+                    from 
+                        measurements
+                    where
+                        realisation_date is not null
+                    group by control_id
+                    ) as m1,                    
+                    measurements m2,
+                    domains
+                where
+                    m1.id=m2.id and domains.id=m2.domain_id
+                order by id;");
+
         //dd($status);
 
         // get planned controls
