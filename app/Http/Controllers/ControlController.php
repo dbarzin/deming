@@ -173,6 +173,7 @@ class ControlController extends Controller
             $measurement->name = $control->name;
             $measurement->objective = $control->objective;
             $measurement->attributes = $control->attributes;
+            $measurement->model = $control->model;
             $measurement->indicator = $control->indicator;
             $measurement->action_plan = $control->action_plan;
             $measurement->periodicity = $control->periodicity;
