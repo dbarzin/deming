@@ -168,8 +168,9 @@ class MeasurementController extends Controller
                     null as next_date,
                     null as next_id                    
                     FROM measurements m1 
-                    WHERE realisation_date is null and                     
-                    not exists (
+                    WHERE realisation_date is null and "                 
+                    . $whereClause .
+                    " and not exists (
                         select * 
                         from measurements m2 
                         where realisation_date is not null and m1.control_id=m2.control_id);"
