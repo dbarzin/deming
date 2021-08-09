@@ -408,7 +408,7 @@ Tableau de bord
             var firstPoint = activePoints[0];
             var label = barChartData.labels[firstPoint._index];
             var value = barChartData.datasets[firstPoint._datasetIndex].data[firstPoint._index];
-            window.location.href="measurements?status=1&period=99&domain_title="+label;
+            window.location.href="measurements?status=0&period=99&domain_title="+label;
         };    
     </script>
 

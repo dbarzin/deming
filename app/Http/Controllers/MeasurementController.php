@@ -155,9 +155,8 @@ class MeasurementController extends Controller
                         (m2.control_id=m1.control_id and m1.id<m2.id) 
                     WHERE (m1.realisation_date is not null) and " 
                     . $whereClause .
-                    "GROUP BY control_id
-                    UNION
-                    SELECT
+                    " GROUP BY control_id ".
+                    "UNION SELECT 
                     m1.id as id,
                     m1.control_id as control_id,
                     m1.name as name,
@@ -166,14 +165,14 @@ class MeasurementController extends Controller
                     m1.plan_date as plan_date,
                     m1.realisation_date,
                     m1.score as score,
-                    m2.plan_date as next_date,
-                    min(m2.id) as next_id
-                    FROM measurements m1
-                    LEFT OUTER JOIN measurements m2 on
-                        (m2.control_id=m1.control_id and m1.id<m2.id) 
-                    WHERE (m1.realisation_date is null) and " 
-                    . $whereClause .
-                    " GROUP BY control_id;"
+                    null as next_date,
+                    null as next_id                    
+                    FROM measurements m1 
+                    WHERE realisation_date is null and                     
+                    not exists (
+                        select * 
+                        from measurements m2 
+                        where realisation_date is not null and m1.control_id=m2.control_id);"
                     ));
             }
 
