@@ -87,28 +87,28 @@ class MeasurementController extends Controller
         $params = array();
         $whereClause ="(true)";
         if ($domain<>0) {
-            $whereClause .= "and (m1.domain_id=".$domain.")";
+            $whereClause .= "and (domain_id=".$domain.")";
         }
         if ($late<>null) {
-            $whereClause .= "and(m1.plan_date<='"
+            $whereClause .= "and(plan_date<='"
                 .Carbon::today()->format("Y-m-d")
-                ."')and(m1.realisation_date is null)";            
+                ."')and(realisation_date is null)";            
             
         }
         else {
             if (($period<>null)&&($period<>99)) {
-                $whereClause .= "and(m1.plan_date>='"
+                $whereClause .= "and(plan_date>='"
                 .((new Carbon('first day of this month'))->addMonth((int)$period)->format("Y-m-d"))
-                ."')and(m1.plan_date<'"
+                ."')and(plan_date<'"
                 .((new Carbon('first day of next month'))->addMonth((int)$period)->format("Y-m-d"))
                 ."')";
             }
             if ($status<>null) {
                 if ($status=='1') {
-                    $whereClause .= "and(m1.realisation_date is not null)";
+                    $whereClause .= "and(realisation_date is not null)";
                 }
                 if ($status=='2') {
-                    $whereClause .= "and(m1.realisation_date is null)";
+                    $whereClause .= "and(realisation_date is null)";
                 }
             }
         }
@@ -116,30 +116,44 @@ class MeasurementController extends Controller
         // Select
         if($status!='0') {
             $measurements=DB::select(
-                DB::raw("
-                    SELECT
-                    m1.id as id,
-                    m1.control_id as control_id,
-                    m1.name as name,
-                    m1.clause as clause,
-                    m1.domain_id as domain_id,
-                    m1.plan_date as plan_date,
+                DB::raw("select
+                    m1.id,
+                    m1.control_id,
+                    m1.clause,
+                    m1.name,
+                    m1.domain_id,
+                    domains.title, 
+                    m1.plan_date,
                     m1.realisation_date,
                     m1.score as score,
-                    m2.plan_date as next_date,
-                    min(m2.id) as next_id
-                    FROM measurements m1
-                    LEFT OUTER JOIN measurements m2 on
-                        (m2.control_id=m1.control_id and m1.id<m2.id) 
-                    WHERE " 
-                    . $whereClause . 
-                    " GROUP BY control_id;"));
+                    m1.realisation_date, 
+                    m1.score,
+                    (
+                        select max(m3.plan_date)
+                        from measurements m3
+                        where m3.id>m1.id and m1.control_id=m3.control_id
+                    ) as next_date,
+                    (
+                        select max(m3.id)
+                        from measurements m3
+                        where m3.id>m1.id and m1.control_id=m3.control_id
+                    ) as next_id
+                from 
+                    (
+                    select control_id, max(id) as id
+                    from measurements
+                    where ". $whereClause . " group by control_id
+                    ) as m2,
+                    measurements m1,
+                    domains
+                where
+                    m1.id=m2.id and domains.id=m1.domain_id
+                order by m1.id;"));
         }
         else
         {
             $measurements=DB::select(
-                DB::raw("
-                    SELECT
+                DB::raw("select
                     m1.id as id,
                     m1.control_id as control_id,
                     m1.name as name,
@@ -148,15 +162,27 @@ class MeasurementController extends Controller
                     m1.plan_date as plan_date,
                     m1.realisation_date,
                     m1.score as score,
-                    m2.plan_date as next_date,
-                    min(m2.id) as next_id
-                    FROM measurements m1
-                    LEFT OUTER JOIN measurements m2 on
-                        (m2.control_id=m1.control_id and m1.id<m2.id) 
-                    WHERE (m1.realisation_date is not null) and " 
-                    . $whereClause .
-                    " GROUP BY control_id ".
-                    "UNION SELECT 
+                    (
+                        select max(m3.plan_date)
+                        from measurements m3
+                        where m3.id>m1.id and m1.control_id=m3.control_id
+                    ) as next_date,
+                    (
+                        select max(m3.id)
+                        from measurements m3
+                        where m3.id>m1.id and m1.control_id=m3.control_id
+                    ) as next_id
+                from 
+                    (
+                    select control_id, max(id) as id
+                    from measurements
+                    where realisation_date is not null and ". $whereClause . " group by control_id
+                    ) as m2,
+                    measurements m1,
+                    domains
+                where
+                    m1.id=m2.id and domains.id=m1.domain_id 
+                UNION SELECT 
                     m1.id as id,
                     m1.control_id as control_id,
                     m1.name as name,
@@ -168,8 +194,8 @@ class MeasurementController extends Controller
                     null as next_date,
                     null as next_id                    
                     FROM measurements m1 
-                    WHERE realisation_date is null and                     
-                    not exists (
+                    WHERE realisation_date is null and ". $whereClause .
+                    " and not exists (
                         select * 
                         from measurements m2 
                         where realisation_date is not null and m1.control_id=m2.control_id);"
