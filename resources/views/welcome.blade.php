@@ -290,7 +290,7 @@ Tableau de bord
                 </div>
             </div>
             <div data-role="progress" data-value="35" class="progress" data-role-progress="true">
-                <div class="bar bg-gray" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}%  ;">
+                <div class="bar bg-gray" style="width: {{ count($measurements_never_made) / count($active_measurements)*100 }}%  ;">
                 </div>
             </div>
 
