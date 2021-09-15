@@ -337,7 +337,7 @@ class MeasurementController extends Controller
         
         $cur_date=$request->get("cur_date");
         if ($cur_date==null) {
-            $cur_date=\Carbon\Carbon::now()->format('Y-m-d');
+            $cur_date=today()->format('Y-m-d');
         } else {
             // Avoid SQL Injection
             $cur_date=\Carbon\Carbon::createFromFormat('Y-m-d', $cur_date)->format('Y-m-d');
@@ -345,25 +345,32 @@ class MeasurementController extends Controller
 
         $measurements=DB::select(
             DB::raw("
-                SELECT
+                select
                 m1.id as measurement_id,
                 m1.name as name,
                 m1.clause as clause,
                 m1.control_id as control_id,
                 m1.domain_id as domain_id,
                 m1.plan_date as plan_date,
-                max(m1.realisation_date) as realisation_date, 
+                m1.realisation_date as realisation_date, 
                 m1.score as score,
                 m2.plan_date as next_date,
                 m2.id as next_id
-                FROM measurements m1
-                LEFT JOIN measurements m2 on (
-                    m1.control_id = m2.control_id and m2.id > m1.id and m2.realisation_date is null)
-                WHERE m1.realisation_date <= '" 
-                . $cur_date
-                ."' group by control_id order by clause"
-            )
-        );
+                from
+                    measurements m1
+                    LEFT JOIN measurements m2 on (
+                        m1.control_id = m2.control_id and m2.id > m1.id and m2.realisation_date is null),
+                    (
+                    select max(id) as id
+                    from measurements
+                    where realisation_date <= '" . $cur_date . "'
+                    group by control_id
+                    ) as m3
+                where
+                    m1.id = m3.id 
+                group by control_id order by clause;"
+                )
+            );
 
         // return
         return view("measurements.radar")

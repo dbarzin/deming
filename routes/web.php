@@ -13,9 +13,10 @@
 
 Auth::routes();
 
-Route::get('/', 'ReportController@welcome');
-Route::get('/home', 'ReportController@welcome');
-Route::get('/index', 'ReportController@welcome');
+/* Index */
+Route::get('/', 'HomeController@index');
+Route::get('/home', 'HomeController@index');
+Route::get('/index', 'HomeController@index');
 
 /* Global-search engine */
 Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
