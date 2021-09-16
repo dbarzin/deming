@@ -352,14 +352,10 @@ class ReportController extends Controller
             );
 
             $table->addRow();            
-            //$table->addCell(18000, ['gridSpan' => 3])->addText($action->action_plan);
             $section=$table->addCell(18000, ['gridSpan' => 3]);
             $textlines = explode("\n", $action->action_plan);
-            for ($i = 0; $i < sizeof($textlines); $i++) {
-                $section->addText($textlines[$i]);
-            }
-
-            
+            foreach ($textlines as $textline) 
+                $section->addText($textline);
         }
 
         // get action plans

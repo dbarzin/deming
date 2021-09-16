@@ -98,7 +98,6 @@ class HomeController extends Controller
                 where
                     m1.id=m2.id and domains.id=m2.domain_id
                 order by id;");
-
         //dd($status);
 
         // get planned controls
