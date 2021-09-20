@@ -294,35 +294,39 @@ class ReportController extends Controller
 
         //----------------------------------------------------------------
         // Action plans
-        $actions=DB::select(
-            DB::raw(
-                "
-                SELECT 
-                    m2.id as id, 
-                    m2.control_id as control_id, 
-                    m2.clause as clause, 
-                    m2.name as name, 
-                    m2.plan_date as plan_date, 
-                    m2.score as score,
-                    m2.realisation_date as realisation_date,
+        $actions=
+            DB::select("
+                select
+                    m2.control_id,
+                    m2.id,
+                    m2.clause,
+                    m2.action_plan,
+                    m2.score,
+                    m2.name,
+                    m2.plan_date,
+                    m2.realisation_date,
+                    m3.id as next_id,
                     m3.plan_date as next_date,
-                    m2.action_plan as action_plan                    
-                FROM 
-                ( SELECT 
-                    max(id) as id,
-                    control_id
-                FROM  
-                    measurements 
-                WHERE ((score=1 or score=2) and realisation_date is not null)                
-                GROUP BY control_id
-                ) as m1, 
-                measurements m2
-                LEFT JOIN measurements m3 on ( 
-                    m2.id<>m3.id and m2.control_id = m3.control_id and m3.realisation_date is null)
-                WHERE m1.id=m2.id;
-                "
-            )
-        );
+                    m2.action_plan 
+                from
+                    (
+                    select 
+                        control_id,
+                        max(id) as id
+                    from 
+                        measurements
+                    where
+                        realisation_date is not null
+                    group by control_id
+                    ) as m1,                    
+                    measurements m2,
+                    measurements m3
+                where
+                    m1.id = m2.id and
+                    (m2.score=1 or m2.score=2) and
+                    (m3.control_id=m2.control_id and m3.id>m2.id)
+                order by control_id
+                    ;");
 
         $table =new Table(array('borderSize' => 3, 'borderColor' => 'black', 'width' => 9800 , 'unit' => TblWidth::TWIP));
 
