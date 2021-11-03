@@ -44,7 +44,7 @@ Edit Measurement
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Attributes</strong>
+		    		<strong>Attributs</strong>
 		    	</div>
 				<div class="cell-6">
 					<textarea name="attributes" rows="5" cols="80">{{ $errors->has('attributes') ?  old('attributes') : $measurement->attributes }}</textarea>

@@ -466,7 +466,7 @@ class MeasurementController extends Controller
      */
     public function save(Request $request)
     {
-        //Only for CISO
+        // Only for CISO
         if (Auth::User()->role!=1)
             return;
 
@@ -475,16 +475,16 @@ class MeasurementController extends Controller
         // plan date is in the futur
         // save measurement
         $measurement = Measurement::find($id);
-        // $measurement->name = request("name");
-        // $measurement->objective = request("objective");
-        // $measurement->attributes = request("attributes");
+        $measurement->objective = request("objective");
+        $measurement->attributes = request("attributes");
         $measurement->observations = request("observations");
         $measurement->note = request("note");
-        //$measurement->score = request("score");
+        $measurement->score = request("score");
         $measurement->plan_date=request("plan_date");
         $measurement->action_plan=request("action_plan");
-        //$measurement->realisation_date=request("realisation_date");
+        $measurement->realisation_date=request("realisation_date");
         $measurement-> update();
+
         return redirect("/measurement/show/".$id);
     }
 
