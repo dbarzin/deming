@@ -226,7 +226,7 @@ class ControlController extends Controller
         $measurement->retention = $control->retention;
         $measurement->plan_date = Carbon::now()->endOfMonth();
 
-        $measurement->save();
+	$measurement->save();
 
         // return to the list of controls
         return redirect("/controls");
