@@ -31,7 +31,7 @@ Liste des plans d'action
 	@foreach($actions as $action)
 		<tr>
 			<td valign="top">
-				<a href="/controls/{{$action->control_id}}">
+				<a href="/measures/{{$action->measure_id}}">
 					{{ $action->clause }}
 				</a>
 			</td>
@@ -39,8 +39,8 @@ Liste des plans d'action
 				<b><a href="/action/{{ $action->id }}">{{ $action->name }}</a></b>
 				<pre>{{ $action->action_plan }}</pre>
 			</td>
-			<td><a href="/measurements/{{ $action->id }}">{{ $action->plan_date }}</a></td>
-			<td><a href="/measurements/{{ $action->next_id }}">{{ $action->next_date }}</a></td>
+			<td><a href="/controls/{{ $action->id }}">{{ $action->plan_date }}</a></td>
+			<td><a href="/controls/{{ $action->next_id }}">{{ $action->next_date }}</a></td>
 			<td>
                 @if ($action->score==1)
                     &#128545;

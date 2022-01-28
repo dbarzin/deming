@@ -1,3 +1,4 @@
+
 @extends("layout")
 
 @section("title")
@@ -6,129 +7,193 @@ Liste des contrôles
 
 @section("content")
 
-<!--
- <div class="grid">
-    <div class="row">
-        <div class="cell"><div><h1 class="title">Controls</h1></div></div>
-        <div class="cell"><div>
-        	<form method="GET" action="/controls/create">
-				<div class="multi-action">
-				    <button class="action-button rotate-minus bg-green fg-white"
-				            onclick="$(this).toggleClass('active')">
-				        <span class="icon"><span class="mif-plus"></span></span>
-				    </button>
-				</div>
-			</form>
-	</div></div>
-	</div></div>
--->	
+    <div class="grid">
+        <div class="row">
+            <div class="cell-1" align="right">
+                <strong>Domaine</strong>
+            </div>
+            <div class="cell-4">
+                <select id='domain_id' name="domain_id" size="1" width='10'>
+                    <option value="0">-- Choisir un domaine --</option>
+                    @foreach ($domains as $domain)
+                        <option value="{{ $domain->id }}"
+                            @if (((int)Session::get("domain"))==$domain->id)        
+                                selected 
+                            @endif >
+                            {{ $domain->title }} - {{ $domain->description }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="cell-1" align="right">
+                <strong>Période</strong>
+            </div>
+            <div class="cell-2"> 
+                <select id='cur_period' name="period" size="1" width='10'>
+                    <option 
+                            @if (Session::get("period")=="99")
+                                selected 
+                            @endif
+                    value="99">-- Choisir une période --</option>
+                        @for ($i = -6; $i < 6; $i++)
+                            <option value="{{ $i }}"
+                            @if (((int)Session::get("period"))==$i)        
+                                selected 
+                            @endif 
+                            >
+                            {{ now()->addMonth($i)->format("M Y") }}
+                            </option>
+                        @endfor
+                    </select>
+                </div>
+            <div class="cell-1" align="right">
+                <strong>Etat</strong>
+            </div>
+            <div >
+                <input type="radio" data-role="radio" data-style="2" 
+                name="status" value="0" id="status0"
+                @if (Session::get("status")=="0" || Session::get("status")==null)
+                checked
+                @endif        
+                > Tous
+                <input type="radio" data-role="radio" data-style="2" 
+                name="status" value="1" id="status1"
+                @if (Session::get("status")=="1")
+                checked
+                @endif
+                > Fait
+                <input type="radio" data-role="radio" data-style="2" 
+                name="status" value="2" id="status2"
+                @if (Session::get("status")=="2")
+                checked
+                @endif        
+                > A faire
+            </div>
+        </div>
+    </div>
 
-	<div class="grid">
-		<div class="row">
-			<div class="cell-1">
-	    		<strong>Domain</strong>
-	    	</div>
-			<div class="cell-4">
-				<select id='domain_id' name="domain_id" size="1" width='10'>
-				    <option value="0">-- Choisir un domaine --</option>
-					@foreach ($domains as $domain)
-				    	<option value="{{ $domain->id }}"
-							@if (((int)Session::get("domain"))==$domain->id)		
-								selected 
-							@endif >
-				    		{{ $domain->title }} - {{ $domain->description }}
-				    	</option>
-				    @endforeach
-				</select>
-			</div>
-			<div class="cell-7" align="right">
-				<a href="/controls/create"><span class="mif-add"></span>Nouveau</a>
-			</div>
-		</div>
+    <script>
+        window.addEventListener('load', function(){
+            var select = document.getElementById('domain_id');
+            select.addEventListener('change', function(){
+                window.location = '/controls?domain=' + this.value;
+            }, false);
 
-	<script>
-		window.addEventListener('load', function(){
-	    var select = document.getElementById('domain_id');
+            select = document.getElementById('cur_period');
+            select.addEventListener('change', function(){
+                window.location = '/controls?period=' + this.value;
+            }, false);
 
-	    select.addEventListener('change', function(){
-	        window.location = '/controls?domain=' + this.value;
-	    }, false);
-	}, false);
-	</script>
+            select = document.getElementById('status0');
+            select.addEventListener('change', function(){
+                window.location = '/controls?status=0';
+            }, false);
 
-		<div class="row">
-			<div class="cell">
+            select = document.getElementById('status1');
+            select.addEventListener('change', function(){
+                window.location = '/controls?status=1';
+            }, false);
 
-	<table class="table striped row-hover cell-border"
+            select = document.getElementById('status2');
+            select.addEventListener('change', function(){
+                window.location = '/controls?status=2';
+            }, false);
+        }, false);
+
+    </script>
+
+    <table class="table striped row-hover cell-border"
        data-role="table"
        data-rows="10"
        data-show-activity="true"
        data-rownum="false"
        data-check="false"
-       data-check-style="1">
-	    <thead>
-	    <tr>
-			<th class="sortable-column sort-asc" width="10%">Domaine</th>
-			<th class="sortable-column sort-asc" width="10%">Clause</th>
-			<th class="sortable-column sort-asc" width="70%">Nom</th>
-			<th width="10%">Actif</th>
-	    </tr>
-	    </thead>
-	    <tbody>
-	@foreach($controls as $control)
-		<tr>
-			<td>
-				<a href="/domains/{{$control->domain_id}}">
-					{{ $control->domain($control->domain_id)->title }}
-				</a>
-			</td>
-			<td><a href="/controls/{{ $control->id}}">
-				@if (strlen($control->clause)==0)
-					None
-				@else
-					{{ $control->clause }}
-				@endif
-				</a>
-			</td>
-			<td>{{ $control->name }}</td>
-			<td>
-				<input type="checkbox" data-role="switch" data-material="true"
-					@if ($control->isActive($control->id))
-						checked 
-					@endif
-					onclick="handleClick(this,{{ $control->id }});">
-			</td>
-		</tr>
-	@endforeach
-	</tbody>
-	</table>
-</div>
-</div>
-<script type="text/javascript">
-function handleClick(cb, id) {
-  console.log(id + " clicked, new value = " + cb.checked);
-  if (cb.checked)
-	  $.ajax({
-	    type: 'GET',
-	    url: '{{ url( "/controls/activate" ) }}'+"?id="+id,
-	    success: function (data){
-	        console.log("Control "+id+" activated");
-	    },
-	    error: function(e) {
-	        console.log("Error control "+id+" not activated");
-	        console.log(e);
-	    }});
-	else
-	  $.ajax({
-	    type: 'GET',
-	    url: '{{ url( "/controls/disable" ) }}'+"?id="+id,
-	    success: function (data){
-	        console.log("Control "+id+" disabled");
-	    },
-	    error: function(e) {
-	        console.log("Error control "+id+" not disabled");
-	        console.log(e);
-	    }});
-}
-</script>
+       data-check-style="1"
+       >
+        <thead>
+            <tr>
+                <th class="sortable-column" width="5%">Domaine</th>
+                <th class="sortable-column" width="5%">Contrôle</th>
+                <th class="sortable-column" width="50%">Nom</th>
+                <th class="sortable-column" width="5%">Note</th>
+                <th class="sortable-column sort-asc"  width="5%">Planifié</th>
+                <th class="sortable-column sort-asc"  width="5%">Réalisé</th>
+                <th class="sortable-column"  width="5%">Suivant</th>
+            </tr>
+        </thead>
+        <tbody>
+    @foreach($controls as $control)
+        <tr>
+            <td>
+                <a href="/domains/{{ $control->domain_id}} ">
+                    {{ \App\Domain::find($control->domain_id)->title }}
+                </a>
+            </td>
+            <td>
+                <a href="/controls/{{ $control->measure_id }}">
+                    {{ $control->clause }}
+                </a>
+            </td>
+            <td>
+                    {{ $control->name }} 
+            </td>
+            <td>
+                <center>
+                <a href="/controls/{{ $control->id }}">
+                    @if ($control->score==1)
+                        &#128545;
+                    @elseif ($control->score==2)
+                        &#128528;
+                    @elseif ($control->score==3)
+                        <span style="filter: sepia(1) saturate(5) hue-rotate(70deg)">&#128512;</span>
+                    @else
+                        &#9675; <!-- &#9899; -->
+                    @endif
+                </a>
+                </center>
+            </td>
+            <td>
+                <!-- format in red when month passed -->
+                <a href="/control/show/{{$control->id}}">
+                <b>
+                @if ($control->realisation_date == null)
+                    @if (
+                    \Carbon\Carbon::
+                    createFromFormat('Y-m-d',$control->plan_date)
+                    ->addMonths(1)
+                    ->startOfMonth()
+                    ->isAfter(\Carbon\Carbon::now()))
+                        <font color="green">
+                    @else
+                        <font color="red">
+                    @endif
+                @else
+                    <font>
+                @endif
+                    {{ $control->plan_date }} 
+                    </font>
+                </b>
+                </a>
+            </td>
+            <td>
+                <b>
+                    <a href="/control/show/{{$control->id}}">
+                        {{ $control->realisation_date }}
+                    </a>
+                </b>
+            </td>
+            <td>
+                <b>
+                    @if ($control->next_id!=null)
+                    <a href="/controls/{{$control->next_id}}">
+                        {{ $control->next_date }}
+                    </a>
+                    @endif
+                </b>
+            </td>
+        </tr>
+    @endforeach
+    </tbody>
+</table>
 @endsection
+

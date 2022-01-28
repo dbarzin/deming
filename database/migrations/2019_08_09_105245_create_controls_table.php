@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateMeasuremetsTable extends Migration
+class CreateControlsTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,13 +13,13 @@ class CreateMeasuremetsTable extends Migration
      */
     public function up()
     {
-        Schema::create('measurements', function (Blueprint $table) {
+        Schema::create('controls', function (Blueprint $table) {
             $table->increments('id');
             // from control table
             $table->integer('domain_id')->unsigned();
             $table->foreign('domain_id')->references('id')->on('domains');
-            $table->integer('control_id')->unsigned();
-            $table->foreign('control_id')->references('id')->on('controls');
+            $table->integer('measure_id')->unsigned();
+            $table->foreign('measure_id')->references('id')->on('measures');
             $table->string('name');
             $table->text('clause')->nullable();
             $table->text('objective')->nullable();
@@ -49,6 +49,6 @@ class CreateMeasuremetsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('measurements');
+        Schema::dropIfExists('controls');
     }
 }

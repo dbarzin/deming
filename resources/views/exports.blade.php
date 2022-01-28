@@ -60,10 +60,10 @@ Exportations de données
 		<a href="/export/domains" target="_blank">Exportation des domaines</a>
 	</li>
 	<li>
-		<a href="/export/controls" target="_blank">Exportation des Contrôles</a>
+		<a href="/export/measures" target="_blank">Exportation des mesures de sécurité</a>
 	</li>
 	<li>
-		<a href="/export/measurements" target="_blank">Exportation des Mesures</a>
+		<a href="/export/controls" target="_blank">Exportation des contrôles</a>
 	</li>
 </ul>
 @endsection

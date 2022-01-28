@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("title")
-Effectuer une mesure
+Effectuer un contrôle
 @endsection
 
 @section("content")
@@ -12,16 +12,16 @@ Effectuer une mesure
 		@endforeach
 	@endif
 
-	<form method="POST" action="/measurement/make" enctype="multipart/form-data">
+	<form method="POST" action="/control/make" enctype="multipart/form-data">
 		@csrf
-		<input type="hidden" name="id" value="{{ $measurement->id }}"/>
+		<input type="hidden" name="id" value="{{ $control->id }}"/>
 
 		<div class="grid">
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>Nom</strong>
 		    	</div>
-					{{ $measurement->clause }} - {{ $measurement->name }}
+					{{ $control->clause }} - {{ $control->name }}
 				</div>
 			</div>
 
@@ -30,7 +30,7 @@ Effectuer une mesure
 		    		<strong>Objectif</strong>
 		    	</div>
 				<div class="cell-6">
-					{{ $measurement->objective }}
+					{{ $control->objective }}
 				</div>
 			</div>
 
@@ -39,7 +39,7 @@ Effectuer une mesure
 		    		<strong>Attributes</strong>
 		    	</div>
 				<div class="cell-6">
-					<pre>{{ $measurement->attributes }}</pre>
+					<pre>{{ $control->attributes }}</pre>
 				</div>
 			</div>
 
@@ -64,7 +64,7 @@ Effectuer une mesure
 					<input type="text" 
 						data-role="calendarpicker" 
 						name="plan_date"
-						value="{{ $measurement->plan_date }}" 
+						value="{{ $control->plan_date }}" 
 						data-input-format="%Y-%m-%d">
 
 				</div>
@@ -75,7 +75,7 @@ Effectuer une mesure
 		    		<strong>Observations</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="observations" rows="5" cols="80">{{ $errors->has('observations') ?  old('observations') : $measurement->observations }}</textarea>
+					<textarea name="observations" rows="5" cols="80">{{ $errors->has('observations') ?  old('observations') : $control->observations }}</textarea>
 				</div>
 		    </div>
 
@@ -83,7 +83,7 @@ Effectuer une mesure
 	    		<div class="cell-1">
 		    		<strong>Rapport</strong>
 		    		<br>
-					<a target="_new" href="/measurement/template/{{ $measurement->id }}">Modèle</a>
+					<a target="_new" href="/control/template/{{ $control->id }}">Modèle</a>
 		    	</div>
 				<div class="cell-6">
 					<div class="dropzone dropzone-previews" id="dropzoneFileUpload"></div>
@@ -96,7 +96,7 @@ Effectuer une mesure
 		    		<strong>Fonction</strong>
 		    	</div>
 				<div class="cell-6">
-					<pre>{{ $measurement->model }}</pre>
+					<pre>{{ $control->model }}</pre>
 				</div>
 			</div>
 			
@@ -105,7 +105,7 @@ Effectuer une mesure
 		    		<strong>Note</strong>
 		    	</div>
 	    		<div class="cell-1">
-					<input type="text" data-role="spinner" name="note" value="{{ $measurement->note }}">
+					<input type="text" data-role="spinner" name="note" value="{{ $control->note }}">
 	    		</div>
 		    </div>
 
@@ -114,7 +114,7 @@ Effectuer une mesure
 		    		<strong>Echelle</strong>
 		    	</div>
 				<div class="cell">
-					<pre>{{ $measurement->indicator }}</pre>
+					<pre>{{ $control->indicator }}</pre>
 				</div>
 			</div>
 
@@ -125,11 +125,11 @@ Effectuer une mesure
 		    		</strong>
 		    	</div>
 				<div class="cell">
-					<input type="radio" name="score" value="3" data-role="radio" {{ $measurement->score==3 ? "selected" : "" }} >
+					<input type="radio" name="score" value="3" data-role="radio" {{ $control->score==3 ? "selected" : "" }} >
 					<font color="green">Vert</font> &nbsp;
-					<input type="radio" name="score" value="2" data-role="radio" {{ $measurement->score==2 ? "selected" : "" }}> 
+					<input type="radio" name="score" value="2" data-role="radio" {{ $control->score==2 ? "selected" : "" }}> 
 					<font color="orange">Orange</font> &nbsp;
-					<input type="radio" name="score" value="1" data-role="radio" {{ $measurement->score==1 ? "selected" : "" }}> 
+					<input type="radio" name="score" value="1" data-role="radio" {{ $control->score==1 ? "selected" : "" }}> 
 					<font color="red">Rouge</font>
 				</div>
 			</div>
@@ -139,7 +139,7 @@ Effectuer une mesure
 		    		<strong>Plan d'action</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="action_plan" rows="5" cols="80">{{ $errors->has('action_plan') ?  old('action_plan') : $measurement->action_plan }}</textarea>
+					<textarea name="action_plan" rows="5" cols="80">{{ $errors->has('action_plan') ?  old('action_plan') : $control->action_plan }}</textarea>
 				</div>
 			</div>
 
@@ -152,32 +152,32 @@ Effectuer une mesure
 						data-role="calendarpicker" 
 						name="next_date" 
 						value="{{ 
-							$measurement->next_date==null ?
-							\Carbon\Carbon::createFromFormat('Y-m-d',$measurement->plan_date)
-								->addMonths($measurement->periodicity)
+							$control->next_date==null ?
+							\Carbon\Carbon::createFromFormat('Y-m-d',$control->plan_date)
+								->addMonths($control->periodicity)
 								->format('Y-m-d')
-							: $measurement->next_date->format('Y-m-d')
+							: $control->next_date->format('Y-m-d')
 							}}"
 						data-input-format="%Y-%m-%d">
 				</div>
 				<div class="cell-1">
 				(
-				@if ($measurement->periodicity==1) Mensuel @endif
-				@if ($measurement->periodicity==3) Triestriel @endif
-				@if ($measurement->periodicity==4) Quadrimestriel @endif
-				@if ($measurement->periodicity==6) Semestriel @endif
-				@if ($measurement->periodicity==12) Annuel @endif
+				@if ($control->periodicity==1) Mensuel @endif
+				@if ($control->periodicity==3) Triestriel @endif
+				@if ($control->periodicity==4) Quadrimestriel @endif
+				@if ($control->periodicity==6) Semestriel @endif
+				@if ($control->periodicity==12) Annuel @endif
 				)
 				</div>
 			</div>
 
 		<div class="grid">
 	    	<div class="row-12">
-			<button type="submit" class="button primary" onclick='this.form.action="/measurement/save"'>Sauver</button>
+			<button type="submit" class="button primary" onclick='this.form.action="/control/save"'>Sauver</button>
 
 			<button type="submit" class="button success">Faire</button>
 
-    		<button type="submit" class="button" onclick='this.form.action="/measurements";this.form.method="GET";'>Cancel</button>
+    		<button type="submit" class="button" onclick='this.form.action="/controls";this.form.method="GET";'>Cancel</button>
     		</div>
     	</div>
 

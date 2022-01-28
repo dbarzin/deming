@@ -49,25 +49,25 @@ Radar
                   </tr>
                   </thead>
                   <tbody>
-            @foreach($measurements as $measurement)
-                @if ($measurement->domain_id == $domain->id)
+            @foreach($controls as $control)
+                @if ($control->domain_id == $domain->id)
                     <tr>
                         <td><center>
-                    @if ($measurement->score==1)
+                    @if ($control->score==1)
                         &#128545;
-                    @elseif ($measurement->score==2)
+                    @elseif ($control->score==2)
                         &#128528;
-                    @elseif ($measurement->score==3)
+                    @elseif ($control->score==3)
                         <span style="filter: sepia(1) saturate(5) hue-rotate(80deg)">&#128512;</span>
                     @else
                         &#9899;
                     @endif
                         </center></td>
 
-                    <td><a href="/controls/{{ $measurement->control_id }}">{{ $measurement->clause }}</a></td>
-                    <td>{{ $measurement->name }}</td>
-                    <td><a href="/measurements/{{ $measurement->measurement_id }}">{{ $measurement->realisation_date }}</a></td>
-                    <td><a href="/measurements/{{ $measurement->next_id }}">{{ $measurement->next_date }}</a></td>
+                    <td><a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a></td>
+                    <td>{{ $control->name }}</td>
+                    <td><a href="/controls/{{ $control->control_id }}">{{ $control->realisation_date }}</a></td>
+                    <td><a href="/controls/{{ $control->next_id }}">{{ $control->next_date }}</a></td>
                     </tr>                    
                 @endif
             @endforeach
@@ -104,7 +104,7 @@ Radar
 
     var marksData_{{ $domain->id }} = {
       labels: [
-            @foreach ($measurements as $m) 
+            @foreach ($controls as $m) 
                 @if ($m->domain_id==$domain->id)
                     '{{ $m->clause }}'
                     {{ $loop->last ? '' : ',' }}
@@ -118,7 +118,7 @@ Radar
         borderColor: window.chartColors.blue,
         pointBackgroundColor: window.chartColors.blue,
         data: [
-        @foreach ($measurements as $m) 
+        @foreach ($controls as $m) 
             @if ($m->domain_id==$domain->id) 
                 @if ($m->score==1)
                     .5
@@ -139,7 +139,7 @@ Radar
         borderColor: window.chartColors.red,
         pointBackgroundColor: window.chartColors.red,        
         data: [
-        @foreach ($measurements as $m) 
+        @foreach ($controls as $m) 
             @if ($m->domain_id==$domain->id) 
                 1
             {{ $loop->last ? '' : ',' }}  
@@ -152,7 +152,7 @@ Radar
         borderColor: window.chartColors.orange,
         pointBackgroundColor: window.chartColors.orange,
         data: [
-        @foreach ($measurements as $m) 
+        @foreach ($controls as $m) 
             @if ($m->domain_id==$domain->id) 
                 2
             {{ $loop->last ? '' : ',' }}  
@@ -165,7 +165,7 @@ Radar
         borderColor: window.chartColors.green,
         pointBackgroundColor: window.chartColors.green,
         data: [
-        @foreach ($measurements as $m) 
+        @foreach ($controls as $m) 
             @if ($m->domain_id==$domain->id) 
                 3
             {{ $loop->last ? '' : ',' }}  

@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Control;
+use App\Measure;
 
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromCollection;
@@ -14,7 +14,7 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles, WithColumnWidths
+class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles, WithColumnWidths
 {
     public function headings(): array
     {
@@ -25,11 +25,9 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
             'Attributs',
             'Modèle',
             'Indicateur',
-            'Date',
-            'Observation',
-            'Score',
-            'Note',
-            'Plan d\'action'
+            'Plan d\'action',
+            'Responsable',
+            'Périodicité'
         ];
     }
 
@@ -55,31 +53,28 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
             'D' => 50,  // Attibuts
             'E' => 50,  // Modele
             'F' => 50,  // Indicateur
-            'G' => 15,  // Date
-            'H' => 50,  // Observation
-            'I' => 15,  // Score
-            'J' => 15,  // Note
-            'K' => 50,  // Plan d'action
+            'G' => 50,  // Plan d'action
+            'H' => 20,  // Responsable
+            'I' => 20    // Period
         ];
     }
 
     /**
-    * @var control $control
+    * @var Measure $measure
     */
-    public function map($control): array
+    public function map($measure): array
     {
         return [
             [
-                $control->clause, 
-                $control->name,
-                $control->objective,
-                $control->attributes,
-                $control->model,
-                $control->indicator,
-                $control->realisation_date,
-                $control->observations,
-                $control->score,
-                $control->action_plan,
+                $measure->clause, 
+                $measure->name,
+                $measure->objective,
+                $measure->attributes,
+                $measure->model,
+                $measure->indicator,
+                $measure->action_plan,
+                $measure->owner,
+                $measure->periodicity
             ]
         ];
     }
@@ -89,8 +84,9 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
     */
     public function query()
     {
-        return DB::table('controls')->orderBy("clause");
+        return DB::table('measures')->orderBy("clause");
     }
 
 }
+
 

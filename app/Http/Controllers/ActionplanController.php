@@ -25,32 +25,32 @@ class ActionplanController extends Controller
         $actions=
             DB::select("
                 select
-                    m2.control_id,
-                    m2.id,
-                    m2.clause,
-                    m2.action_plan,
-                    m2.score,
-                    m2.name,
-                    m2.plan_date,
-                    m3.id as next_id,
-                    m3.plan_date as next_date
+                    c2.measure_id,
+                    c2.id,
+                    c2.clause,
+                    c2.action_plan,
+                    c2.score,
+                    c2.name,
+                    c2.plan_date,
+                    c3.id as next_id,
+                    c3.plan_date as next_date
                 from
                     (
                     select 
-                        control_id,
+                        measure_id,
                         max(id) as id
                     from 
-                        measurements
+                        controls
                     where
                         realisation_date is not null
-                    group by control_id
-                    ) as m1,                    
-                    measurements m2,
-                    measurements m3
+                    group by measure_id
+                    ) as c1,                
+                    controls c2,
+                    controls c3
                 where
-                    m1.id = m2.id and
-                    (m2.score=1 or m2.score=2) and
-                    (m3.control_id=m2.control_id and m3.id>m2.id)
+                    c1.id = c2.id and
+                    (c2.score=1 or c2.score=2) and
+                    (c3.measure_id = c2.measure_id and c3.id > c2.id)
                 order by id
                     ;");
 
@@ -69,11 +69,11 @@ class ActionplanController extends Controller
     {
         $id = (int) request("id");
 
-        // save measurement
-        $measurement = Measurement::find($id);
-        $measurement->action_plan = request("action_plan");
-        $measurement->plan_date=request("plan_date");
-        $measurement-> update();
+        // save control
+        $control = Control::find($id);
+        $control->action_plan = request("action_plan");
+        $control->plan_date=request("plan_date");
+        $control-> update();
 
         return redirect("/actions");
     }
@@ -86,27 +86,27 @@ class ActionplanController extends Controller
      */
     public function show(int $id)
     {
-        $action=DB::table('measurements as m1')
+        $action=DB::table('controls as c1')
             ->select(
-                'm1.id', 
-                'm1.control_id', 
-                'm1.clause',
-                'm1.name', 
-                'm1.objective', 
-                'm1.observations', 
-                'm1.action_plan', 
-                'm1.plan_date', 
-                'm1.score',
-                'm1.realisation_date',
-                'm1.score',
-                'm2.plan_date as next_date',
-                'm2.id as next_id')
-            ->leftJoin('measurements as m2', function($join){
-                $join->on('m1.id', '<>', 'm2.id');
-                $join->on('m1.control_id', '=', 'm2.control_id');
-                $join->whereNull('m2.realisation_date');
+                'c1.id', 
+                'c1.measure_id', 
+                'c1.clause',
+                'c1.name', 
+                'c1.objective', 
+                'c1.observations', 
+                'c1.action_plan', 
+                'c1.plan_date', 
+                'c1.score',
+                'c1.realisation_date',
+                'c1.score',
+                'c2.plan_date as next_date',
+                'c2.id as next_id')
+            ->leftJoin('controls as c2', function($join){
+                $join->on('c1.id', '<>', 'c2.id');
+                $join->on('c1.measure_id', '=', 'c2.measure_id');
+                $join->whereNull('c2.realisation_date');
             })
-            ->where('m1.id','=',$id)
+            ->where('c1.id','=',$id)
             ->first();
 
         // return            

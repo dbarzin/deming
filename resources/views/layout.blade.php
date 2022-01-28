@@ -170,27 +170,27 @@
                 </li>
 
                 <li>
-                    <a href="/controls">
+                    <a href="/measures">
                         <span class="icon"><span class="mif-event-available"></span></span>
-                        <span class="caption">Contrôles</span>
+                        <span class="caption">Mesures</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="#" class="dropdown-toggle">
                         <span class="icon"><span class="mif-paste"></span></span>
-                        <span class="caption">Mesures</span>
+                        <span class="caption">Controles</span>
                     </a>
                     <ul class="navview-menu stay-open" data-role="dropdown" >
-                        <li><a href="/measurement/radar">
+                        <li><a href="/control/radar">
                             <span class="icon"><span class="mif-meter"></span></span>
                             <span class="caption">Radar</span>
                         </a></li>
-                        <li><a href="/measurement/history">
+                        <li><a href="/control/history">
                             <span class="icon"><span class="mif-calendar"></span></span>
                             <span class="caption">Planning</span>
                         </a></li>
-                        <li><a href="/measurements">
+                        <li><a href="/controls">
                             <span class="icon"><span class="mif-table"></span></span>
                             <span class="caption">Inventaire</span>
                         </a></li>
@@ -473,16 +473,16 @@
             <a href="#" class="app-bar-item d-block d-none-lg" id="paneToggle"><span class="mif-menu"></span></a>
 
             <div class="app-bar-container ml-auto">
-                <a href="/measurements?period=0&domain=0&status=2" class="app-bar-item">
+                <a href="/controls?period=0&domain=0&status=2" class="app-bar-item">
                     <span class="mif-envelop"></span>
-                    @if (Session::get("planed_measurements_this_month_count")!=null)
-                    <span class="badge bg-green fg-white mt-2 mr-1">{{Session::get("planed_measurements_this_month_count")}}</span>
+                    @if (Session::get("planed_controls_this_month_count")!=null)
+                    <span class="badge bg-green fg-white mt-2 mr-1">{{Session::get("planed_controls_this_month_count")}}</span>
                     @endif
                 </a>
-                <a href="/measurements?period=99&domain=0&status=1&late=1" class="app-bar-item">
+                <a href="/controls?period=99&domain=0&status=1&late=1" class="app-bar-item">
                     <span class="mif-bell"></span>
-                    @if (Session::get("late_measurements_count")!=null)                    
-                    <span class="badge bg-orange fg-white mt-2 mr-1">{{Session::get("late_measurements_count")}}</span>
+                    @if (Session::get("late_controls_count")!=null)                    
+                    <span class="badge bg-orange fg-white mt-2 mr-1">{{Session::get("late_controls_count")}}</span>
                     @endif
                 </a>
                 <a href="/actions" class="app-bar-item">

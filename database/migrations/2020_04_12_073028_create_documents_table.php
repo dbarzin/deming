@@ -15,8 +15,8 @@ class CreateDocumentsTable extends Migration
     {
         Schema::create('documents', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->integer('measurement_id')->unsigned();
-            $table->foreign('measurement_id')->references('id')->on('measurements');
+            $table->integer('control_id')->unsigned();
+            $table->foreign('control_id')->references('id')->on('controls');
             $table->string('filename');
             $table->string('mimetype');
             $table->integer('size');

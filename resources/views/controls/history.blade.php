@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("title")
-Historique des mesures
+Historique des contrôles
 @endsection
 
 @section("content")
@@ -22,18 +22,18 @@ Historique des mesures
             ?>
             <tr>
                 <td align="center">
-                <a href="/measurements?period={{$i}}&domain=0&status=0">                    
+                <a href="/controls?period={{$i}}&domain=0&status=0">                    
                     {{ now()->addMonth($i)->format("m/Y") }}
                 </a>
                 </td>
                 <td align="center">
                     <?php $count=0; ?>
-                    @foreach ($measurements as $measurement)
+                    @foreach ($controls as $control)
                         <?php
-                        if (($measurement->score!=null)
-                            && ($measurement->plan_date!=null)
-                            && (\Carbon\Carbon::parse($measurement->plan_date)->between($first, $second))
-                        ) {
+                        if (($control->score!=null) && 
+                            (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
+                        ) 
+                        {
                                 $count++;
                         }
                         ?>
@@ -41,11 +41,19 @@ Historique des mesures
                     {{ $count }} 
                     /
                     <?php $count=0; ?>
-                    @foreach ($measurements as $measurement)
+                    @foreach ($controls as $control)
                         <?php
-                        if (($measurement->plan_date!=null)
-                            && (\Carbon\Carbon::parse($measurement->plan_date)->between($first, $second))
-                        ) {
+                        if (
+                            (
+                                ($control->score==null)&&
+                                (\Carbon\Carbon::parse($control->plan_date)->between($first, $second))
+                            )||
+                            (
+                                ($control->score!=null)&&
+                                (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
+                            )
+                        ) 
+                        {
                                 $count++;
                         }
                         ?>
@@ -54,11 +62,10 @@ Historique des mesures
                 </td>
                 <td  align="center">
                     <?php $count=0; ?>
-                    @foreach ($measurements as $measurement)
+                    @foreach ($controls as $control)
                         <?php
-                        if (($measurement->score==1)
-                            && ($measurement->plan_date!=null)
-                            && (\Carbon\Carbon::parse($measurement->plan_date)->between($first, $second))
+                        if (($control->score==1) &&
+                            (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
                         ) {
                                 $count++;
                         }
@@ -74,11 +81,10 @@ Historique des mesures
                 </td>
                 <td  align="center">
                     <?php $count=0; ?>
-                    @foreach ($measurements as $measurement)
+                    @foreach ($controls as $control)
                         <?php
-                        if (($measurement->score==2)
-                            && ($measurement->plan_date!=null)
-                            && (\Carbon\Carbon::parse($measurement->plan_date)->between($first, $second))
+                        if (($control->score==2) &&
+                            (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
                         ) {
                                 $count++;
                         }
@@ -94,11 +100,10 @@ Historique des mesures
                 </td>
                 <td align="center"> 
                     <?php $count=0; ?>
-                    @foreach ($measurements as $measurement)
+                    @foreach ($controls as $control)
                         <?php
-                        if (($measurement->score==3)
-                            && ($measurement->plan_date!=null)
-                            && (\Carbon\Carbon::parse($measurement->plan_date)->between($first, $second))
+                        if (($control->score==3) &&
+                            (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
                         ) {
                                 $count++;
                         }
@@ -118,7 +123,6 @@ Historique des mesures
 </div>
 
 
-
 <!----------------------------------------------------------->
 
     <div class="cell-3">
@@ -131,7 +135,7 @@ Historique des mesures
             ?>
             <tr>
                 <td align="center">
-                <a href="/measurements?period={{$i}}&domain=0&status=0">
+                <a href="/controls?period={{$i}}&domain=0&status=0">
                 <?php        
                         $now = \Carbon\Carbon::now();
                         echo $now->addMonth($i)->format("m/Y");
@@ -140,11 +144,10 @@ Historique des mesures
                 </td>
                 <td align="center">
                 <?php $count=0; ?>
-                    @foreach ($measurements as $measurement)
+                    @foreach ($controls as $control)
                     <?php
-                    if (($measurement->score!=null)
-                        && ($measurement->plan_date!=null)
-                        && (\Carbon\Carbon::parse($measurement->plan_date)                        ->between($first, $second))
+                    if (($control->score!=null) &&
+                        (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
                     ) {
                             $count++;
                     }
@@ -153,10 +156,17 @@ Historique des mesures
                     {{ $count }} 
                     /
                     <?php $count=0; ?>
-                    @foreach ($measurements as $measurement)
+                    @foreach ($controls as $control)
                         <?php
-                        if (($measurement->plan_date!=null)
-                            && (\Carbon\Carbon::parse($measurement->plan_date)                        ->between($first, $second))
+                        if (
+                            (
+                                ($control->score==null) &&
+                                (\Carbon\Carbon::parse($control->plan_date)->between($first, $second))
+                            )||
+                            (
+                                ($control->score!=null) &&
+                                (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
+                            )
                         ) {
                                 $count++;
                         }
@@ -166,11 +176,10 @@ Historique des mesures
                 </td>
                 <td  align="center">
                     <?php $count=0; ?>
-                    @foreach ($measurements as $measurement)
+                    @foreach ($controls as $control)
                         <?php
-                        if (($measurement->score==1)
-                            && ($measurement->plan_date!=null)
-                            && (\Carbon\Carbon::parse($measurement->plan_date)                        ->between($first, $second))
+                        if (($control->score==1)
+                            && (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
                         ) {
                                 $count++;
                         }
@@ -185,12 +194,13 @@ Historique des mesures
                 </td>
                 <td  align="center">
                     <?php $count=0; ?>
-                    @foreach ($measurements as $measurement)
+                    @foreach ($controls as $control)
                         <?php
-                        if (($measurement->score==2)
-                            && ($measurement->plan_date!=null)
-                            && (\Carbon\Carbon::parse($measurement->plan_date)                        ->between($first, $second))
-                        ) {
+                        if (
+                            ($control->score==2) && 
+                            (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
+                            ) 
+                        {
                                 $count++;
                         }
                         ?>
@@ -204,11 +214,10 @@ Historique des mesures
                 </td>
                 <td align="center"> 
                     <?php $count=0; ?>
-                    @foreach ($measurements as $measurement)
+                    @foreach ($controls as $control)
                         <?php
-                        if (($measurement->score==3)
-                            && ($measurement->plan_date!=null)
-                            && (\Carbon\Carbon::parse($measurement->plan_date)                        ->between($first, $second))
+                        if (($control->score==3) && 
+                            (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
                         ) {
                                 $count++;
                         }
@@ -259,11 +268,11 @@ Historique des mesures
                 $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
                 $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
                 ?>
-            @foreach ($measurements as $measurement)
+            @foreach ($controls as $control)
                 <?php
-                if (($measurement->score==null)
-                    && ($measurement->plan_date!=null)
-                    && (\Carbon\Carbon::parse($measurement->plan_date)->between($first, $second))
+                if (($control->score==null)
+                    && ($control->plan_date!=null)
+                    && (\Carbon\Carbon::parse($control->plan_date)->between($first, $second))
                 ) {
                         $count++;
                 }
@@ -285,11 +294,11 @@ Historique des mesures
                 $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
                 $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
                 ?>
-            @foreach ($measurements as $measurement)
+            @foreach ($controls as $control)
                 <?php
-                if (($measurement->score==1)
-                    && ($measurement->plan_date!=null)
-                    && (\Carbon\Carbon::parse($measurement->plan_date)->between($first, $second))
+                if (($control->score==1) &&
+                    ($control->realisation_date!=null) && 
+                    (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
                 ) {
                     $count++;
                 }
@@ -311,11 +320,11 @@ Historique des mesures
                 $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
                 $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
                 ?>
-            @foreach ($measurements as $measurement)
+            @foreach ($controls as $control)
                 <?php
-                if (($measurement->score==2)
-                    && ($measurement->plan_date!=null)
-                    && (\Carbon\Carbon::parse($measurement->plan_date)->between($first, $second))
+                if (($control->score==2) && 
+                    ($control->realisation_date!=null) && 
+                    (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
                 ) { $count++;
                 }
                 ?>
@@ -336,11 +345,11 @@ Historique des mesures
                 $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
                 $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
                 ?>
-            @foreach ($measurements as $measurement)
+            @foreach ($controls as $control)
                 <?php
-                if (($measurement->score==3)
-                    && ($measurement->plan_date!=null)
-                    && (\Carbon\Carbon::parse($measurement->plan_date)->between($first, $second))
+                if (($control->score==3) && 
+                    ($control->realisation_date!=null) && 
+                    (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
                 ) { $count++;
                 }
                 ?>
@@ -387,19 +396,19 @@ Historique des mesures
     echo $second;
     echo "<br>";
     ?>
-    @foreach ($measurements as $measurement)
+    @foreach ($controls as $control)
         <?php 
-        echo $measurement->id;
+        echo $control->id;
         echo ' : ';
-        echo $measurement->score;
+        echo $control->score;
         echo ' : ';
-        echo $measurement->plan_date;
+        echo $control->plan_date;
         echo ' -> ';
-        echo \Carbon\Carbon::parse($measurement->plan_date)->between($first, $second,false) ? "true" :"false";
+        echo \Carbon\Carbon::parse($control->plan_date)->between($first, $second,false) ? "true" :"false";
         echo '<br>';
-        if (($measurement->score==null)&&
-            ($measurement->plan_date!=null)&&
-            (\Carbon\Carbon::parse($measurement->plan_date)
+        if (($control->score==null)&&
+            ($control->plan_date!=null)&&
+            (\Carbon\Carbon::parse($control->plan_date)
             ->between($first, $second))) {
                 $count++;
                 }

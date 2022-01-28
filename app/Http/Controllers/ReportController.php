@@ -4,12 +4,12 @@ namespace App\Http\Controllers;
 
 use \Carbon\Carbon;
 
-use App\Exports\MeasurementsExport;
+use App\Exports\ControlsExport;
 use Maatwebsite\Excel\Facades\Excel;
 
-use App\Control;
 use App\Domain;
-use App\Measurement;
+use App\Measure;
+use App\Control;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -86,7 +86,7 @@ class ReportController extends Controller
         // addText('', $fontStyle);
 
         //----------------------------------------------------------------        
-        $measurements =  Measurement::where(
+        $controls =  Control::where(
             [
                     ["realisation_date",">=",$start_date],            
                     ["realisation_date","<",$end_date],
@@ -95,13 +95,13 @@ class ReportController extends Controller
             ->orderBy("realisation_Date")->get();
         /*
         $values = [];
-        foreach($measurements as $measurement) {
+        foreach($controls as $control) {
 
             $values[] =  [
-                'ctrl_id' => $measurement->clause,
-                'ctrl_date' => $measurement->realisation_date, 
-                'ctrl_name' => $measurement->name,
-                'ctrl_score' => '<w:highlight w:val="red">'.'⬤'.$measurement->score.'</w:highlight>',
+                'ctrl_id' => $control->clause,
+                'ctrl_date' => $control->realisation_date, 
+                'ctrl_name' => $control->name,
+                'ctrl_score' => '<w:highlight w:val="red">'.'⬤'.$control->score.'</w:highlight>',
             ];
         }
 
@@ -125,16 +125,16 @@ class ReportController extends Controller
         $table->addCell(2000, ['bgColor'=>'#FFD5CA'])
             ->addText('Score', ['bold' => true], ['align'=>'center']);
 
-        foreach($measurements as $measurement) {
+        foreach($controls as $control) {
             $table->addRow();
-            $table->addCell(2500)->addText($measurement->clause);
-            $table->addCell(12500)->addText($measurement->name);
-            $table->addCell(2800)->addText($measurement->realisation_date, null, ['align'=>'center']);
+            $table->addCell(2500)->addText($control->clause);
+            $table->addCell(12500)->addText($control->name);
+            $table->addCell(2800)->addText($control->realisation_date, null, ['align'=>'center']);
             $table->addCell(2000)->addText(
                 '⬤',
-                ($measurement->score==1 ? ['color'=>'#FF0000'] : 
-                ($measurement->score==2 ? ['color'=>'#FF8000'] :
-                ($measurement->score==3 ? ['color'=>'#00CC00'] : null))),
+                ($control->score==1 ? ['color'=>'#FF0000'] : 
+                ($control->score==2 ? ['color'=>'#FF8000'] :
+                ($control->score==3 ? ['color'=>'#00CC00'] : null))),
                 ['align'=>'center']
             );
         }
@@ -154,18 +154,18 @@ class ReportController extends Controller
             DB::raw(
                 "
             SELECT 
-            m2.control_id as control_id, 
-            m2.domain_id as domain_id,
-            m2.score as score,
-            m2.realisation_date as realisation_date
+            c2.measure_id, 
+            c2.domain_id,
+            c2.score,
+            c2.realisation_date
             FROM
                 (select 
-                control_id,
+                measure_id,
                 max(id) as id
-                from measurements
+                from controls
                 where realisation_date is not null and score is not null
-                group by control_id) as m1, measurements as m2
-            where m1.id=m2.id;
+                group by measure_id) as c1, controls as c2
+            where c1.id=c2.id;
                 "
             )
         );
@@ -297,35 +297,35 @@ class ReportController extends Controller
         $actions=
             DB::select("
                 select
-                    m2.control_id,
-                    m2.id,
-                    m2.clause,
-                    m2.action_plan,
-                    m2.score,
-                    m2.name,
-                    m2.plan_date,
-                    m2.realisation_date,
-                    m3.id as next_id,
-                    m3.plan_date as next_date,
-                    m2.action_plan 
+                    c2.measure_id,
+                    c2.id,
+                    c2.clause,
+                    c2.action_plan,
+                    c2.score,
+                    c2.name,
+                    c2.plan_date,
+                    c2.realisation_date,
+                    c3.id as next_id,
+                    c3.plan_date as next_date,
+                    c2.action_plan 
                 from
                     (
                     select 
-                        control_id,
+                        measure_id,
                         max(id) as id
                     from 
-                        measurements
+                        controls
                     where
                         realisation_date is not null
-                    group by control_id
-                    ) as m1,                    
-                    measurements m2,
-                    measurements m3
+                    group by measure_id
+                    ) as c1,                    
+                    controls c2,
+                    controls c3
                 where
-                    m1.id = m2.id and
-                    (m2.score=1 or m2.score=2) and
-                    (m3.control_id=m2.control_id and m3.id>m2.id)
-                order by control_id
+                    (c1.id = c2.id ) and
+                    (c2.score=1 or c2.score=2) and
+                    (c3.measure_id = c2.measure_id and c3.id > c2.id)
+                order by measure_id
                     ;");
 
         $table =new Table(array('borderSize' => 3, 'borderColor' => 'black', 'width' => 9800 , 'unit' => TblWidth::TWIP));
@@ -419,49 +419,49 @@ class ReportController extends Controller
 
             // create a measurement
             // TODO : loop on plan_date until date is in the futur
-            $measurement = new Measurement();
-            $measurement->control_id=$control->id;
-            $measurement->domain_id=$control->domain_id;
-            $measurement->name=$control->name;
-            $measurement->clause=$control->clause;
-            $measurement->objective = $control->objective;
-            $measurement->attributes = $control->attributes;
-            $measurement->model = $control->model;
-            $measurement->indicator = $control->indicator;
-            $measurement->action_plan = $control->action_plan;
-            $measurement->owner = $control->owner;
-            $measurement->periodicity = $control->periodicity;
-            $measurement->retention = $control->retention;
+            $control = new Control();
+            $control->control_id=$control->id;
+            $control->domain_id=$control->domain_id;
+            $control->name=$control->name;
+            $control->clause=$control->clause;
+            $control->objective = $control->objective;
+            $control->attributes = $control->attributes;
+            $control->model = $control->model;
+            $control->indicator = $control->indicator;
+            $control->action_plan = $control->action_plan;
+            $control->owner = $control->owner;
+            $control->periodicity = $control->periodicity;
+            $control->retention = $control->retention;
             // do it            
-            $measurement->plan_date = $curDate->toDateString();
-            $measurement->realisation_date = (new Carbon($curDate))->addDay(rand(0, 28))->toDateString();
-            $measurement->note = rand(0, 10);
-            $measurement->score = rand(0, 100)<90 ? 3 : (rand(0, 2)<2 ? 2 : 1);
+            $control->plan_date = $curDate->toDateString();
+            $control->realisation_date = (new Carbon($curDate))->addDay(rand(0, 28))->toDateString();
+            $control->note = rand(0, 10);
+            $control->score = rand(0, 100)<90 ? 3 : (rand(0, 2)<2 ? 2 : 1);
             // save it
-            $measurement->save();
+            $control->save();
 
             // create next measurement
-            $measurement = new Measurement();
-            $measurement->control_id=$control->id;
-            $measurement->domain_id=$control->domain_id;
-            $measurement->name=$control->name;
-            $measurement->clause=$control->clause;
-            $measurement->objective = $control->objective;
-            $measurement->attributes = $control->attributes;
-            $measurement->model = $control->model;
-            $measurement->indicator = $control->indicator;
-            $measurement->action_plan = $control->action_plan;
-            $measurement->owner = $control->owner;
-            $measurement->periodicity = $control->periodicity;
-            $measurement->retention = $control->retention;
+            $control = new Control();
+            $control->control_id=$control->id;
+            $control->domain_id=$control->domain_id;
+            $control->name=$control->name;
+            $control->clause=$control->clause;
+            $control->objective = $control->objective;
+            $control->attributes = $control->attributes;
+            $control->model = $control->model;
+            $control->indicator = $control->indicator;
+            $control->action_plan = $control->action_plan;
+            $control->owner = $control->owner;
+            $control->periodicity = $control->periodicity;
+            $control->retention = $control->retention;
             // next one            
-            $measurement->plan_date = (new Carbon($curDate))->addMonth($control->periodicity)->toDateString();
+            $control->plan_date = (new Carbon($curDate))->addMonth($control->periodicity)->toDateString();
             // fix it
-            $measurement->realisation_date=null;
-            $measurement->note=null;
-            $measurement->score=null;
+            $control->realisation_date=null;
+            $control->note=null;
+            $control->score=null;
             // save it
-            $measurement->save();
+            $control->save();
         }
         return redirect("/");
     }

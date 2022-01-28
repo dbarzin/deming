@@ -26,23 +26,23 @@ Route::get('/profile', 'ProfileController@index')->name('profile');
 Route::post('/profile/update', 'ProfileController@updateProfile')->name('profile.update');
 Route::get('/profile/avatar/{id}', 'ProfileController@avatar');
 
-/* Controls */
-Route::get('/controls/activate', 'ControlController@activate');
-Route::get('/controls/disable', 'ControlController@disable');
+/* Measures */
+Route::get('/measure/activate', 'MeasureController@activate');
+Route::get('/measure/disable', 'MeasureController@disable');
 
-/* Measurements */
-Route::get('/measurement/show/{id}', 'MeasurementController@show');
-Route::get('/measurement/make/{id}', 'MeasurementController@make');
-Route::get('/measurement/plan/{id}', 'MeasurementController@plan');
-Route::get('/measurement/edit/{id}', 'MeasurementController@edit');
-Route::get('/measurement/template/{id}', 'MeasurementController@template');
-Route::get('/measurement/delete/{id}', 'MeasurementController@destroy');
-Route::post('/measurement/make', 'MeasurementController@doMake');
-Route::post('/measurement/plan', 'MeasurementController@doPlan');
-Route::post('/measurement/save', 'MeasurementController@save');
-Route::get('/measurement/radar', 'MeasurementController@radar');
-Route::get('/measurement/history', 'MeasurementController@history');
-Route::get('/measurement/upload/{id}', 'MeasurementController@upload');
+/* Controls */
+Route::get('/control/show/{id}', 'ControlController@show');
+Route::get('/control/make/{id}', 'ControlController@make');
+Route::get('/control/plan/{id}', 'ControlController@plan');
+Route::get('/control/edit/{id}', 'ControlController@edit');
+Route::get('/control/template/{id}', 'ControlController@template');
+Route::get('/control/delete/{id}', 'ControlController@destroy');
+Route::post('/control/make', 'ControlController@doMake');
+Route::post('/control/plan', 'ControlController@doPlan');
+Route::post('/control/save', 'ControlController@save');
+Route::get('/control/radar', 'ControlController@radar');
+Route::get('/control/history', 'ControlController@history');
+Route::get('/control/upload/{id}', 'ControlController@upload');
 
 
 /* Documents */
@@ -58,8 +58,8 @@ Route::post('/doc/template','DocumentController@saveTemplate');
 
 /* Other */
 Route::resource('domains', 'DomainController');
+Route::resource('measures', 'MeasureController');
 Route::resource('controls', 'ControlController');
-Route::resource('measurements', 'MeasurementController');
 Route::resource('users', 'UserController');
 
 /* actions */
@@ -73,8 +73,8 @@ Route::get('/reports/pilotage', 'ReportController@pilotage');
 /* Exports */
 Route::get('/exports', function () { return view("exports"); });
 Route::get('/export/domains', 'DomainController@export');
+Route::get('/export/measures', 'MeasureController@export');
 Route::get('/export/controls', 'ControlController@export');
-Route::get('/export/measurements', 'MeasurementController@export');
 
 /* test chart */
 Route::get('/testChart', 'ReportController@testChart');

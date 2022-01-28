@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateControlsTable extends Migration
+class CreateMeasuresTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateControlsTable extends Migration
      */
     public function up()
     {
-        Schema::create('controls', function (Blueprint $table) {
+        Schema::create('measures', function (Blueprint $table) {
             $table->increments('id');
             $table->integer('domain_id')->unsigned();
             $table->foreign('domain_id')->references('id')->on('domains');
@@ -27,6 +27,7 @@ class CreateControlsTable extends Migration
             $table->string('owner')->nullable();
             $table->integer('periodicity')->nullable();
             $table->integer('retention')->nullable();
+
             $table->timestamps();
         });
     }
@@ -38,6 +39,6 @@ class CreateControlsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('controls');
+        Schema::dropIfExists('measurements');
     }
 }

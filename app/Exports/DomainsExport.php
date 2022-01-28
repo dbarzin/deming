@@ -58,7 +58,6 @@ class DomainsExport implements FromQuery, WithMapping, WithHeadings, WithStyles,
     */
     public function query()
     {
-        // return Domain::all();
         return DB::table('domains')->orderBy("id");
     }
 }

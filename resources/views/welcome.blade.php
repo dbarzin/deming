@@ -68,14 +68,14 @@ Tableau de bord
         <div class="more-info-box bg-cyan fg-white">
             <div class="content">
                 <h2 class="text-bold mb-0">
-                    {{ $active_controls_count }} 
+                    {{ $active_measures_count }} 
                 </h2>
-                <div>Controls</div>
+                <div>Mesures de sécurité</div>
             </div>
             <div class="icon">
                 <span class="mif-event-available"></span>
             </div>
-            <a href="/controls" class="more"> More info <span class="mif-arrow-right"></span></a>
+            <a href="/measures" class="more"> More info <span class="mif-arrow-right"></span></a>
         </div>
     </div>
 
@@ -83,18 +83,18 @@ Tableau de bord
         <div class="more-info-box bg-green fg-white">
             <div class="content">
                 <h2 class="text-bold mb-0">
-                    {{ $measurements_made_count }}
+                    {{ $controls_made_count }}
                 </h2>
-                @if ($measurements_made_count>1)
-                <div>Mesures</div>
+                @if ($controls_made_count>1)
+                <div>Contrôles</div>
                 @else
-                <div>Mesure</div>
+                <div>Contrôle</div>
                 @endif
             </div>
             <div class="icon">
                 <span class="mif-paste"></span>
             </div>
-            <a href="/measurements?domain=0&period=99&status=1" class="more"> More info <span class="mif-arrow-right"></span></a>
+            <a href="/controls?domain=0&period=99&status=1" class="more"> More info <span class="mif-arrow-right"></span></a>
         </div>
     </div>
     <div class="cell-lg-3 cell-md-6 mt-2">
@@ -172,25 +172,25 @@ Tableau de bord
                 </thead>
                 <tbody>
 
-            @foreach($measurements_todo as $measurement)
-                <tr onclick="window.location = '/measurements/{{$measurement->id}}';">
+            @foreach($controls_todo as $control)
+                <tr onclick="window.location = '/controls/{{$control->id}}';">
                     <td>
-                        <a href="/domains/{{$measurement->domain_id}}">
-                        {{ \App\Domain::find($measurement->domain_id)->title }} 
+                        <a href="/domains/{{$control->domain_id}}">
+                        {{ \App\Domain::find($control->domain_id)->title }} 
                         </a>
                         </td>
                     <td>
-                        <a href="/controls/{{ $measurement->control_id }}">{{ $measurement->clause }}</a>
+                        <a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a>
                     </td>
-                    <td>{{ $measurement->name }} </td>
+                    <td>{{ $control->name }} </td>
                     <td>
                         <!-- format in red when month passed -->
                         <b>
-                            <a href="/measurements/{{ $measurement->id }}">
-                        @if ($measurement->realisation_date==null)
+                            <a href="/controls/{{ $control->id }}">
+                        @if ($control->realisation_date==null)
                             @if (
                             \Carbon\Carbon::
-                            createFromFormat('Y-m-d',$measurement->plan_date)
+                            createFromFormat('Y-m-d',$control->plan_date)
                             ->isAfter(\Carbon\Carbon::now()))
                                 <font color="green">
                             @else
@@ -199,9 +199,9 @@ Tableau de bord
                         @endif
                             {{ 
                             \Carbon\Carbon::
-                            createFromFormat('Y-m-d',$measurement->plan_date)
+                            createFromFormat('Y-m-d',$control->plan_date)
                             ->format('Y-m-d') }} 
-                        @if ($measurement->realisation_date!=null)
+                        @if ($control->realisation_date!=null)
                             </font>
                         @endif
                             </a>
@@ -223,74 +223,74 @@ Tableau de bord
         <div data-role="panel" data-title-caption="Performances" data-collapsible="true" data-title-icon="<span class='mif-paragraph-left'></span>" class="">
     
             <div class="clear">
-                <div class="place-left">Mesures réussies</div>
+                <div class="place-left">Contrôles réussis</div>
                 <div class="place-right">
                     <strong>
                         <?php $count=0; ?>
-                        @foreach($active_measurements as $m)
-                          <?php if ($m->score=="3") { $count++; } ?>
+                        @foreach($active_controls as $c)
+                          <?php if ($c->score=="3") { $count++; } ?>
                         @endforeach 
                         {{ $count }}
                     </strong>
                     /
-                    {{ $active_controls_count }}
+                    {{ $active_measures_count }}
                 </div>
             </div>
             <div data-role="progress" data-value="35" class="progress" data-role-progress="true">
-                <div class="bar bg-green" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}%  ;">
+                <div class="bar bg-green" style="width: {{ (count($active_controls)>0) ? $count/count($active_controls)*100 : 0 }}%  ;">
                 </div>
             </div>
 
             <div class="clear">
-                <div class="place-left">Mesures en alerte</div>
+                <div class="place-left">Controles en alerte</div>
                 <div class="place-right">
                     <strong>
                         <?php $count=0; ?>
-                        @foreach($active_measurements as $m)
-                          <?php if ($m->score=="2") { $count++; } ?>
+                        @foreach($active_controls as $v)
+                          <?php if ($c->score=="2") { $count++; } ?>
                         @endforeach 
                         {{ $count }}
                     </strong>
                     /
-                    {{ $active_controls_count }}
+                    {{ $active_measures_count }}
                 </div>
             </div>
-            <div data-role="progress" data-value="{{ count($active_measurements) }}" class="progress" data-role-progress="true">
-                <div class="bar bg-orange" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}% ;">
+            <div data-role="progress" data-value="{{ count($active_controls) }}" class="progress" data-role-progress="true">
+                <div class="bar bg-orange" style="width: {{ (count($active_controls)>0) ? $count/count($active_controls)*100 : 0 }}% ;">
                 </div>
             </div>
 
             <div class="clear">
-                <div class="place-left">Mesures en échec</div>
+                <div class="place-left">Contrôles en échec</div>
                 <div class="place-right">
                     <strong>
                         <?php $count=0; ?>
-                        @foreach($active_measurements as $m)
-                          <?php if ($m->score=="1") { $count++; } ?>
+                        @foreach($active_controls as $c)
+                          <?php if ($c->score=="1") { $count++; } ?>
                         @endforeach 
                         {{ $count }}
                     </strong>
                     /
-                    {{ $active_controls_count }}
+                    {{ $active_measures_count }}
                 </div>
             </div>
-            <div data-role="progress" data-value="{{ count($active_measurements) }}" class="progress" data-role-progress="true">
-                <div class="bar bg-red" style="width: {{ (count($active_measurements)>0) ? $count/count($active_measurements)*100 : 0 }}%  ;">
+            <div data-role="progress" data-value="{{ count($active_controls) }}" class="progress" data-role-progress="true">
+                <div class="bar bg-red" style="width: {{ (count($active_controls)>0) ? $count/count($active_controls)*100 : 0 }}%  ;">
                 </div>
             </div>
 
             <div class="clear">
-                <div class="place-left">Mesures non-réalisées</div>
+                <div class="place-left">Contrôles non-réalisées</div>
                 <div class="place-right">
                     <strong>
-                    {{ count($measurements_never_made) }}
+                    {{ count($controls_never_made) }}
                     </strong>
                     /
-                    {{ $active_controls_count }}
+                    {{ $active_measures_count }}
                 </div>
             </div>
             <div data-role="progress" data-value="35" class="progress" data-role-progress="true">
-                <div class="bar bg-gray" style="width: {{ count($measurements_never_made) / count($active_measurements)*100 }}%  ;">
+                <div class="bar bg-gray" style="width: {{ count($controls_never_made) / count($active_controls)*100 }}%  ;">
                 </div>
             </div>
 
@@ -326,8 +326,8 @@ Tableau de bord
             data: [
                 @foreach ($domains as $domain) 
                     <?php $count=0; ?>
-                    @foreach($active_measurements as $m)
-                      <?php if (($m->score==3)&&($m->title==$domain->title)) { $count++; } ?>
+                    @foreach($active_controls as $c)
+                      <?php if (($c->score==3)&&($c->title==$domain->title)) { $count++; } ?>
                     @endforeach 
                     {{ $count }}
                     {{ $loop->last ? '' : ',' }}
@@ -342,8 +342,8 @@ Tableau de bord
             data: [
                 @foreach ($domains as $domain) 
                     <?php $count=0; ?>
-                    @foreach($active_measurements as $m)
-                      <?php if (($m->score==2)&&($m->title==$domain->title)) { $count++; 
+                    @foreach($active_controls as $c)
+                      <?php if (($c->score==2)&&($c->title==$domain->title)) { $count++; 
                       } ?>
                     @endforeach 
                     {{ $count }}
@@ -359,8 +359,8 @@ Tableau de bord
             data: [
                 @foreach ($domains as $domain) 
                     <?php $count=0; ?>
-                    @foreach($active_measurements as $m)
-                      <?php if (($m->score==1)&&($m->title==$domain->title)) { $count++; 
+                    @foreach($active_controls as $c)
+                      <?php if (($c->score==1)&&($c->title==$domain->title)) { $count++; 
                       } ?>
                     @endforeach 
                     {{ $count }}
@@ -376,8 +376,8 @@ Tableau de bord
             data: [
                 @foreach ($domains as $domain) 
                     <?php $count=0; ?>
-                    @foreach($measurements_never_made as $m)
-                      <?php if ($m->domain_id==$domain->id) { $count++; } ?>
+                    @foreach($controls_never_made as $c)
+                      <?php if ($c->domain_id==$domain->id) { $count++; } ?>
                     @endforeach 
                     {{ $count }}
                     {{ $loop->last ? '' : ',' }}
@@ -408,7 +408,7 @@ Tableau de bord
             var firstPoint = activePoints[0];
             var label = barChartData.labels[firstPoint._index];
             var value = barChartData.datasets[firstPoint._datasetIndex].data[firstPoint._index];
-            window.location.href="measurements?status=0&period=99&domain_title="+label;
+            window.location.href="/controls?status=0&period=99&domain_title="+label;
         };    
     </script>
 
@@ -450,21 +450,21 @@ Tableau de bord
             ],
         data: [ 
             <?php $count=0; ?>
-            @foreach($active_measurements as $m)
-              <?php if ($m->score=="1") { $count++; } ?>
+            @foreach($active_controls as $c)
+              <?php if ($c->score=="1") { $count++; } ?>
             @endforeach 
             {{ $count }},
             <?php $count=0; ?>
-            @foreach($active_measurements as $m)
-              <?php if ($m->score=="2") { $count++; } ?>
+            @foreach($active_controls as $c)
+              <?php if ($c->score=="2") { $count++; } ?>
             @endforeach 
             {{ $count }},
             <?php $count=0; ?>
-            @foreach($active_measurements as $m)
-              <?php if ($m->score=="3") { $count++; } ?>
+            @foreach($active_controls as $c)
+              <?php if ($c->score=="3") { $count++; } ?>
             @endforeach 
             {{ $count }},
-            {{ count($measurements_never_made) }}
+            {{ count($controls_never_made) }}
             ]
         } 
       ]

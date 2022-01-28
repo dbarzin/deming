@@ -9,7 +9,7 @@ use Maatwebsite\Excel\Facades\Excel;
 
 use App\Control;
 use App\Domain;
-use App\Measurement;
+use App\Measure;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -38,70 +38,69 @@ class HomeController extends Controller
         $domains = DB::table('domains')->get();
 
         // count active domains
-        $active_domains_count = DB::table('measurements')
+        $active_domains_count = DB::table('controls')
             ->select(
                 'domain_id',
-                DB::raw('max(measurements.id)'))
+                DB::raw('max(controls.id)'))
             ->whereNull('realisation_date')
             ->groupBy('domain_id')
             ->get()
             ->count();
 
         // count all controls
-        $controls_count = DB::table('controls')            
+        $controls_count = DB::table('measures')            
             ->count();
 
-        // count active controls
-        $active_controls_count = DB::table('measurements')
+        // count active mesures
+        $active_measures_count = DB::table('controls')
             ->whereNull('realisation_date')
             ->count();
 
-        // count mesurements made
-        $measurements_made_count = DB::table('measurements')
+        // count controls made
+        $controls_made_count = DB::table('controls')
             ->whereNotNull('realisation_date')
             ->count();
 
-        // count measurement never made
-        $measurements_never_made = DB::select( 
+        // count control never made
+        $controls_never_made = DB::select( 
             DB::raw("
                 select domain_id 
-                from measurements m1 
+                from controls c1 
                 where realisation_date is null and 
                 not exists (
                     select * 
-                    from measurements m2 
-                    where realisation_date is not null and m1.control_id=m2.control_id);"
+                    from controls c2 
+                    where realisation_date is not null and c1.measure_id=c2.measure_id);"
                 ));
-        //dd($measurements_never_made);
 
-        // Last measurements made by controls
-        $active_measurements = DB::select("
+        // Last controls made by measures
+        $active_controls = DB::select("
                 select
-                    m2.id,
-                    m2.control_id,
+                    c2.id,
+                    c2.measure_id,
                     domains.title, 
-                    m2.realisation_date, 
-                    m2.score
+                    c2.realisation_date, 
+                    c2.score
                 from 
                     (
                     select 
-                        control_id,
+                        measure_id,
                         max(id) as id
                     from 
-                        measurements
+                        controls
                     where
                         realisation_date is not null
-                    group by control_id
-                    ) as m1,                    
-                    measurements m2,
+                    group by measure_id
+                    ) as c1,                    
+                    controls c2,
                     domains
                 where
-                    m1.id=m2.id and domains.id=m2.domain_id
+                    c1.id=c2.id and domains.id=c2.domain_id
                 order by id;");
         //dd($status);
 
         // get planned controls
-        $measurements_todo = DB::table('measurements')
+        $controls_todo = DB::table('controls')
             ->where(
                 [
                     ["realisation_date","=",null],
@@ -111,8 +110,8 @@ class HomeController extends Controller
             ->get();
         // dd($plannedMeasurements);
 
-        // planed measurements this month
-        $planed_measurements_this_month_count = DB::table('measurements')
+        // planed controls this month
+        $planed_controls_this_month_count = DB::table('controls')
             ->where(
                 [
                     ["realisation_date","=",null],
@@ -121,10 +120,10 @@ class HomeController extends Controller
                 ]
             )
             ->count();
-        $request->session()->put("planed_measurements_this_month_count", $planed_measurements_this_month_count);
+        $request->session()->put("planed_controls_this_month_count", $planed_controls_this_month_count);
 
-        // late measurements
-        $late_measurements_count=DB::table('measurements')
+        // late controls
+        $late_controls_count=DB::table('controls')
             ->where(
                 [
                     ["realisation_date","=",null],
@@ -132,28 +131,28 @@ class HomeController extends Controller
                     ]
             )
             ->count();
-        $request->session()->put("late_measurements_count", $late_measurements_count);
+        $request->session()->put("late_controls_count", $late_controls_count);
 
         // Count number of action plans
         $action_plans_count=
             count(DB::select("
                 select
-                    m2.control_id,
-                    m2.id,
-                    m2.clause,
-                    m2.name,
-                    m2.plan_date
+                    c2.measure_id,
+                    c2.id,
+                    c2.clause,
+                    c2.name,
+                    c2.plan_date
                 from
-                    measurements m2,
+                    controls c2,
                     (
                     select max(id) as id
-                    from measurements
+                    from controls
                     where realisation_date is not null
-                    group by control_id
-                    ) as m1
+                    group by measure_id
+                    ) as c1
                 where
-                    m1.id = m2.id and
-                    (m2.score=1 or m2.score=2);"));
+                    c1.id = c2.id and
+                    (c2.score=1 or c2.score=2);"));
 
         //dd($action_plans_count);
 
@@ -162,16 +161,16 @@ class HomeController extends Controller
         // return 
         return view("welcome")
             ->with('active_domains_count',$active_domains_count)
-            ->with('active_measurements', $active_measurements)
+            ->with('active_controls', $active_controls)
             ->with('domains', $domains)
             ->with('controls_count', $controls_count)
-            ->with('active_controls_count', $active_controls_count)
-            ->with('measurements_made_count', $measurements_made_count)
-            ->with('measurements_never_made', $measurements_never_made)
+            ->with('active_measures_count', $active_measures_count)
+            ->with('controls_made_count', $controls_made_count)
+            ->with('controls_never_made', $controls_never_made)
 
-            ->with('measurements_todo', $measurements_todo)
-            ->with('active_measurements', $active_measurements)            
+            ->with('controls_todo', $controls_todo)
+            ->with('active_controls', $active_controls)            
             ->with('action_plans_count',$action_plans_count)
-            ->with('late_measurements_count',$late_measurements_count);
+            ->with('late_controls_count',$late_controls_count);
     }
 }
