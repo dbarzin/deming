@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("title")
-Mesure
+Mesure de sécurité
 @endsection
 
 @section("content")
@@ -55,7 +55,7 @@ Mesure
 	    	</div>
 			<div class="cell-1">
 		    	@if ($prev_id!=null)
-					<a href="/measurement/show/{{ $prev_id }}">
+					<a href="/controls/{{ $prev_id }}">
 		    			{{ $prev_date }}
 		    		</a>
 				@else
@@ -63,7 +63,7 @@ Mesure
 				@endif
 				<br>
 		    	@if ($next_id!=null)
-					<a href="/measurement/show/{{ $next_id }}">
+					<a href="/controls/{{ $next_id }}">
 		    			{{ $next_date }}
 		    		</a>
 				@else

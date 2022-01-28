@@ -176,6 +176,29 @@
                     </a>
                 </li>
 
+
+                <li>
+                    <a href="/controls">
+                        <span class="icon"><span class="mif-table"></span></span>
+                        <span class="caption">Contrôles</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a href="/control/history">
+                        <span class="icon"><span class="mif-calendar"></span></span>
+                        <span class="caption">Planning</span>
+                    </a>
+                </li>
+
+
+                <li>
+                    <a href="/control/radar">
+                        <span class="icon"><span class="mif-meter"></span></span>
+                        <span class="caption">Radar</span>
+                    </a>
+                </li>
+<!--
                 <li>
                     <a href="#" class="dropdown-toggle">
                         <span class="icon"><span class="mif-paste"></span></span>
@@ -196,7 +219,7 @@
                         </a></li>
                     </ul>
                 </li>
-
+-->
                 <li>
                     <a href="/actions">
                         <span class="icon"><span class="mif-open-book"></span></span>

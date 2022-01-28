@@ -33,12 +33,11 @@ Route::get('/measure/disable', 'MeasureController@disable');
 /* Controls */
 Route::get('/control/show/{id}', 'ControlController@show');
 Route::get('/control/make/{id}', 'ControlController@make');
-Route::get('/control/plan/{id}', 'ControlController@plan');
 Route::get('/control/edit/{id}', 'ControlController@edit');
 Route::get('/control/template/{id}', 'ControlController@template');
 Route::get('/control/delete/{id}', 'ControlController@destroy');
 Route::post('/control/make', 'ControlController@doMake');
-Route::post('/control/plan', 'ControlController@doPlan');
+//Route::post('/control/plan', 'ControlController@doPlan');
 Route::post('/control/save', 'ControlController@save');
 Route::get('/control/radar', 'ControlController@radar');
 Route::get('/control/history', 'ControlController@history');

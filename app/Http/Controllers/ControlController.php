@@ -409,83 +409,36 @@ class ControlController extends Controller
 
 
     /**
-     * Save a measurement for planing
+     * Save a control for planing
      *
      * @param  \App\Domain $domain
      * @return \Illuminate\Http\Response
      */
     public function doPlan(Request $request)
     {
-        // TODO : remove this function
-        $id = (int) request("id");
-        // $month = (int) request("month");
-        // $year = (int) request("year");
-        // TODO: check not date in the past
-        // save
-        $control = Control::find($id);
-        $control->plan_date = request("plan_date"); 
-        $control-> update();
+        // dd($request);
+        $control = Control::find($request->id);
 
-        return redirect("/control");
-    }
+        // create the correspodign meaurement        
+        $measurement = new Measurement();
+        $measurement->control_id=$control->id;
+        $measurement->domain_id=$control->domain_id;
+        $measurement->name=$control->name;
+        $measurement->clause=$control->clause;
+        $measurement->objective = $control->objective;
+        $measurement->attributes = $control->attributes;
+        $measurement->model = $control->model;
+        $measurement->indicator = $control->indicator;
+        $measurement->action_plan = $control->action_plan;
+        $measurement->owner = $control->owner;
+        $measurement->periodicity = $control->periodicity;
+        $measurement->retention = $control->retention;
+        $measurement->plan_date = Carbon::now()->endOfMonth();
 
+    	$measurement->save();
 
-    public function make(Request $request)
-    {
-        // Not for aditor
-        if (Auth::User()->role==3)
-            return;
-
-        $id = (int) request("id");
-
-        // does not exists in that way
-        $control = Control::find($id);
-        if ($control==null) {
-            Log::Error("Control:make - Control not found  ". request("id"));
-            return null;
-        }
-
-        // get associated documents
-        $documents = DB::table('documents')->where('control_id', $id)->get();
-
-        // save control_id in session for document upload
-        $request->session()->put("measurement", $id);
-
-        // return view
-        return view("controls.make")
-            ->with("control", $control)
-            ->with("documents", $documents);
-    }
-
-
-    /**
-     * Save a Control
-     *
-     * @param  \App\Domain $domain
-     * @return \Illuminate\Http\Response
-     */
-    public function save(Request $request)
-    {
-        // Only for CISO
-        if (Auth::User()->role!=1)
-            return;
-
-        $id = (int) request("id");
-        // check
-        // plan date is in the futur
-        // save measurement
-        $control = Control::find($id);
-        $control->objective = request("objective");
-        $control->attributes = request("attributes");
-        $control->observations = request("observations");
-        $control->note = request("note");
-        $control->score = request("score");
-        $control->plan_date=request("plan_date");
-        $control->action_plan=request("action_plan");
-        $control->realisation_date=request("realisation_date");
-        $control-> update();
-
-        return redirect("/measurement/show/".$id);
+        // return to the list of controls
+        return redirect("/controls");
     }
 
 
