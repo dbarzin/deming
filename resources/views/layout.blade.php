@@ -484,10 +484,9 @@
         </ul>
 -->
         <div class="w-100 text-center text-small data-box p-2 border-top bd-grayMouse" style="position: absolute; bottom: 0">
-            <div>&copy; 2020 <a href="mailto:didier@barzin.be" class="text-muted fg-white-hover no-decor">Didier Barzin</a></div>
+            <!-- <div>&copy; 2020 <a href="mailto:a@b.com" class="text-muted fg-white-hover no-decor">name</a></div>-->
             <div>Created with <a href="https://laravel.com" class="text-muted fg-white-hover no-decor">Laravel</a></div>
-        </div>
-       
+        </div>       
     </div>
 
     <div class="navview-content h-100">
