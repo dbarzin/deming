@@ -442,6 +442,36 @@ class ControlController extends Controller
     }
 
 
+    /*
+    */
+
+    public function make(Request $request)
+    {
+        // Not for aditor
+        if (Auth::User()->role==3)
+            return;
+
+        $id = (int) request("id");
+
+        // does not exists in that way
+        $control = Control::find($id);
+        if ($control==null) {
+            Log::Error("Control:make - Control not found  ". request("id"));
+            return null;
+        }
+
+        // get associated documents
+        $documents = DB::table('documents')->where('control_id', $id)->get();
+
+        // save control_id in session for document upload
+        $request->session()->put("control", $id);
+
+        // return view
+        return view("controls.make")
+            ->with("control", $control)
+            ->with("documents", $documents);
+    }
+
     /**
      * Do a Control
      *
