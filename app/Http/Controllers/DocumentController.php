@@ -78,13 +78,13 @@ class DocumentController extends Controller
     {
         //Log::Alert("store called");
         $file = $request->file('file');
-        $measurement_id=$request->session()->get("measurement");
+        $control_id=$request->session()->get("control");
         
         // Log::Alert($measurement_id);
 
         // Log::Alert($measurement_id);
         $doc = new Document();
-        $doc->measurement_id = $measurement_id;
+        $doc->control_id = $control_id;
         $doc->filename = $file->getClientOriginalName();
         // Log::Alert("store filenale ".$file->getClientOriginalName());
         $doc->mimetype = $file->getClientMimeType();
