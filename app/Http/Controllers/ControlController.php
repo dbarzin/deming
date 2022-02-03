@@ -614,7 +614,7 @@ class ControlController extends Controller
         $templateProcessor->setValue('date', Carbon::today()->format("d/m/Y"));
 
         // save a copy
-        $filepath=storage_path('templates/measure-'.$control->clause.'.docx');
+        $filepath=storage_path('templates/control-'.$control->clause.'.docx');
         // if (file_exists($filepath)) unlink($filepath);
         $templateProcessor->saveAs($filepath);
 
