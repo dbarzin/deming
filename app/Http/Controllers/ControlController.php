@@ -556,8 +556,7 @@ class ControlController extends Controller
         // save control 
         $control = Control::find($id);
         $control->observations = request("observations");
-        $control->note = request("note");
-        $control->score = null;
+        $control->note = request("note"); 
         $control->plan_date=request("plan_date");
 	$control->action_plan=request("action_plan");
 
