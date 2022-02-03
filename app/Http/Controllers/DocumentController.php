@@ -77,7 +77,8 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         //Log::Alert("store called");
-        $file = $request->file('file');
+	$file = $request->file('file');
+	// TODO : avoid using session - get parameter from request
         $control_id=$request->session()->get("control");
         
         // Log::Alert($measurement_id);
