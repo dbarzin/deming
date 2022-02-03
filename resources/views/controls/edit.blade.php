@@ -167,6 +167,7 @@ Edit Measurement
 Dropzone.options.dropzoneFileUpload = { 
             url: '/doc/store',
             headers: { 'x-csrf-token': '{{csrf_token()}}'},
+	    params: { 'control': '{{ $control->id }}' },
             maxFilesize: 10,
             // acceptedFiles: ".jpeg,.jpg,.png,.gif",
             addRemoveLinks: true,

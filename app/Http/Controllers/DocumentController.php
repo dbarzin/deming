@@ -78,12 +78,9 @@ class DocumentController extends Controller
     {
         //Log::Alert("store called");
 	$file = $request->file('file');
-	// TODO : avoid using session - get parameter from request
-        $control_id=$request->session()->get("control");
+        $control_id=$request->get("control");
         
-        // Log::Alert($measurement_id);
-
-        // Log::Alert($measurement_id);
+        // Log::Alert($control_id);
         $doc = new Document();
         $doc->control_id = $control_id;
         $doc->filename = $file->getClientOriginalName();
