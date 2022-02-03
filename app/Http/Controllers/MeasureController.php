@@ -100,7 +100,7 @@ class MeasureController extends Controller
         $measure->periodicity = request("periodicity");
         $measure->retention= request("retention");
 
-        $measure-> save();
+        $measure->save();
 
         $request->session()->put("domain", $measure->domain_id);
 

@@ -538,6 +538,33 @@ class ControlController extends Controller
         return redirect("/controls");
     }
 
+    /**
+     * Save a Control 
+     *
+     * @param  \App\Domain $domain
+     * @return \Illuminate\Http\Response
+     */
+    public function save(Request $request)
+    {
+        //Only for CISO
+        if (Auth::User()->role!=1)
+            return;
+
+        $id = (int) request("id");
+        // check
+        // plan date is in the futur
+        // save control 
+        $control = Control::find($id);
+        $control->observations = request("observations");
+        $control->note = request("note");
+        $control->score = null;
+        $control->plan_date=request("plan_date");
+	$control->action_plan=request("action_plan");
+
+        $control-> update();
+        return redirect("/control/show/".$id);
+    }
+
     public function upload(Request $request) 
     {
         return null;
@@ -558,7 +585,7 @@ class ControlController extends Controller
 
         // get template
         $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(
-            storage_path('app/models/measure.docx')
+            storage_path('app/models/control.docx')
         );
 
         // make changes xxxx
