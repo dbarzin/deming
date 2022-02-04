@@ -109,6 +109,7 @@ Mesure de sécurité
 				</div>
 		    </div>
 		@endif
+
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>Note</strong>

@@ -93,7 +93,7 @@ Effectuer un contrôle
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Fonction</strong>
+		    		<strong>Calcul</strong>
 		    	</div>
 				<div class="cell-6">
 					<pre>{{ $control->model }}</pre>
