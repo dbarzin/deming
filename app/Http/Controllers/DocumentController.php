@@ -140,7 +140,7 @@ class DocumentController extends Controller
 
     public function check(Request $request)
     {
-        $documents=Document::All();
+        $documents=Document::with("control")->get();
 
         return view("/documents/check")
             ->with("documents", $documents);
