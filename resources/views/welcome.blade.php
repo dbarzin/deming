@@ -246,7 +246,7 @@ Tableau de bord
                 <div class="place-right">
                     <strong>
                         <?php $count=0; ?>
-                        @foreach($active_controls as $v)
+                        @foreach($active_controls as $c)
                           <?php if ($c->score=="2") { $count++; } ?>
                         @endforeach 
                         {{ $count }}
