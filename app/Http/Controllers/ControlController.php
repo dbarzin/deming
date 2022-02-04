@@ -535,7 +535,7 @@ class ControlController extends Controller
         }
 
         // Log::Alert("doMake Done.");
-        return redirect("/controls");
+        return redirect("/");
     }
 
     /**
@@ -558,7 +558,7 @@ class ControlController extends Controller
         $control->observations = request("observations");
         $control->note = request("note"); 
         $control->plan_date=request("plan_date");
-	$control->action_plan=request("action_plan");
+    	$control->action_plan=request("action_plan");
 
         $control-> update();
         return redirect("/control/show/".$id);
@@ -614,7 +614,13 @@ class ControlController extends Controller
         $templateProcessor->setValue('date', Carbon::today()->format("d/m/Y"));
 
         // save a copy
-        $filepath=storage_path('templates/control-'.$control->clause.'.docx');
+        $filepath=storage_path(
+            'templates/measure-' . 
+            $control->clause . 
+            '-' .
+            now()->format('Ymd') .
+            '.docx');
+
         // if (file_exists($filepath)) unlink($filepath);
         $templateProcessor->saveAs($filepath);
 

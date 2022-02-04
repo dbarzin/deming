@@ -64,7 +64,7 @@ Effectuer un contrôle
 					<input type="text" 
 						data-role="calendarpicker" 
 						name="plan_date"
-						value="{{ $control->plan_date }}" 
+						value="{{ count($errors)>0 ?  old('plan_date') : $control->plan_date }}" 
 						data-input-format="%Y-%m-%d">
 
 				</div>
@@ -75,7 +75,7 @@ Effectuer un contrôle
 		    		<strong>Observations</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="observations" rows="5" cols="80">{{ $errors->has('observations') ?  old('observations') : $control->observations }}</textarea>
+					<textarea name="observations" rows="5" cols="80">{{ count($errors)>0 ?  old('observations') : $control->observations }}</textarea>
 				</div>
 		    </div>
 
@@ -105,7 +105,7 @@ Effectuer un contrôle
 		    		<strong>Note</strong>
 		    	</div>
 	    		<div class="cell-1">
-					<input type="text" data-role="spinner" name="note" value="{{ $control->note }}">
+					<input type="text" data-role="spinner" name="note" value="{{ count($errors)>0 ?  old('note') : $control->note }}">
 	    		</div>
 		    </div>
 
@@ -139,7 +139,7 @@ Effectuer un contrôle
 		    		<strong>Plan d'action</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="action_plan" rows="5" cols="80">{{ $errors->has('action_plan') ?  old('action_plan') : $control->action_plan }}</textarea>
+					<textarea name="action_plan" rows="5" cols="80">{{ $errors->count()>0 ?  old('action_plan') : $control->action_plan }}</textarea>
 				</div>
 			</div>
 
