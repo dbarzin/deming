@@ -13,10 +13,10 @@ Voir mesure
 	    	</div>
 			<div class="cell">
 				<a href="/domains/{{$measure->domain_id}}">
-				{{ $measure->domain($measure->domain_id)->title }}
+				{{ $measure->domain->title }}
 				</a>
 				-
-				{{ $measure->domain($measure->domain_id)->description }}
+				{{ $measure->domain->description }}
 			</div>
 	    </div>
 

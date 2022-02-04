@@ -18,8 +18,9 @@ function bytesToHuman($bytes)
     <thead>
     <tr>
         <th>#</th>
-        <th>Name</th>
-        <th>Size</th>
+        <th>Contrôle</th>
+        <th>Nom</th>
+        <th>Taille</th>
         <th>Hash</th>
     </tr>
     </thead>
@@ -28,6 +29,9 @@ function bytesToHuman($bytes)
     <tr>
         <td>
             {{ $doc->id }}
+        </td>
+        <td>
+            <a href="/control/show/{{ $doc->control_id }}">{{ $doc->control->clause }}</a>
         </td>
         <td>
             {{ substr($doc->filename,0,32) }}

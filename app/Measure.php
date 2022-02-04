@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Domain;
+
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
@@ -25,10 +27,10 @@ class Measure extends Model
     protected $fillable = [
     ];
     
-    // return the domain associated to this measure
-    public function domain(int $id)    
+    // Return the domain associated to this measure
+    public function domain()
     {
-        return Domain::find($id);
+        return $this->belongsTo(Domain::class, 'domain_id');
     }
 
     // check if there is an empty control associated with this measure
