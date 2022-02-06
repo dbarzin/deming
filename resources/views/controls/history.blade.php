@@ -223,7 +223,7 @@ Historique des contrôles
                         }
                         ?>
                     @endforeach          
-                    <font color="green">   
+                    <font color="green">
                     @if ($count>0) {{ $count }} &nbsp; &#9679; 
                     @else
                     &nbsp; &nbsp; &nbsp;
@@ -283,7 +283,7 @@ Historique des contrôles
         ]
       },
       { 
-        backgroundColor: color(window.chartColors.red).alpha(0.5).rgbString(),
+        backgroundColor: color(window.chartColors.red).rgbString(),
         borderColor: window.chartColors.red,
         pointBackgroundColor: window.chartColors.red,        
         stack: 'Stack 0',
@@ -309,7 +309,7 @@ Historique des contrôles
         ]
       },
       { 
-        backgroundColor: color(window.chartColors.orange).alpha(0.5).rgbString(),
+        backgroundColor: color(window.chartColors.orange).rgbString(),
         borderColor: window.chartColors.orange,
         pointBackgroundColor: window.chartColors.orange,        
         stack: 'Stack 0',
@@ -334,7 +334,7 @@ Historique des contrôles
         ]
       },
       { 
-        backgroundColor: color(window.chartColors.green).alpha(0.5).rgbString(),
+        backgroundColor: color(window.chartColors.green).rgbString(),
         borderColor: window.chartColors.green,
         pointBackgroundColor: window.chartColors.green,        
         stack: 'Stack 0',
@@ -379,10 +379,6 @@ Historique des contrôles
 
     };
     </script>
-
-
-
-
 
     <?php 
     /*

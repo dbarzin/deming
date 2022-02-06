@@ -2,6 +2,8 @@
 
 namespace App;
 
+use App\Measure;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Control extends Model
@@ -22,7 +24,12 @@ class Control extends Model
 
     protected $fillable = [
     ];
-    
+
+    // Return the measure associated to this control
+    public function measure()
+    {
+        return $this->belongsTo(Measure::class, 'measure_id');
+    }    
 }
 
 

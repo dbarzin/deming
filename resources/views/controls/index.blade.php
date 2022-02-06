@@ -113,7 +113,7 @@ Liste des contrôles
         <thead>
             <tr>
                 <th class="sortable-column" width="5%">Domaine</th>
-                <th class="sortable-column" width="5%">Contrôle</th>
+                <th class="sortable-column" width="5%">Mesure</th>
                 <th class="sortable-column" width="50%">Nom</th>
                 <th class="sortable-column" width="5%">Note</th>
                 <th class="sortable-column sort-asc"  width="5%">Planifié</th>
@@ -130,7 +130,7 @@ Liste des contrôles
                 </a>
             </td>
             <td>
-                <a href="/controls/{{ $control->measure_id }}">
+                <a href="/measures/{{ $control->measure_id }}">
                     {{ $control->clause }}
                 </a>
             </td>

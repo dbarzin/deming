@@ -28,7 +28,7 @@ Edit Measurement
 		    		<strong>Nom</strong>
 		    	</div>
 				<div class="cell-6">
-		    		<a href="/controls/{{ $control->measure_id}}">{{ $control->clause }}</a>
+		    		{{ $control->clause }} 
 					<input type="text" name="name" value="{{ $control->name }}">
 				</div>
 			</div>

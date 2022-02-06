@@ -12,7 +12,7 @@ Mesure de sécurité
 	    		<strong>Nom</strong>
 	    	</div>
     		<div class="cell">
-	    		<a href="/controls/{{ $control->control_id}}">{{ $control->clause }}</a> &nbsp; - &nbsp; {{ $control->name }}
+	    		<a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a> &nbsp; - &nbsp; {{ $control->name }}
     		</div>
     	</div>
 

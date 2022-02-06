@@ -64,8 +64,9 @@
         </div>
 
         <ul class="navview-menu mt-4" id="side-menu">
-            <li class="item-header">MAIN NAVIGATION</li>
+            <li> </li>
             <!--
+            <li class="item-header">MAIN NAVIGATION</li>
             <li>
                 <a href="#dashboard">
                     <span class="icon"><span class="mif-meter"></span></span>
