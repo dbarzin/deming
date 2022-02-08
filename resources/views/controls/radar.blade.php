@@ -8,7 +8,7 @@ Radar
 
 <div class="grid">    
     <div class="row">
-        <div class="cell-9">
+        <div class="cell-12">
 
     @foreach($domains as $domain)
     <div class="row">
