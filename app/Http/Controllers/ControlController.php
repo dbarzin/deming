@@ -615,7 +615,7 @@ class ControlController extends Controller
 
         // save a copy
         $filepath=storage_path(
-            'templates/measure-' . 
+            'templates/control-' . 
             $control->clause . 
             '-' .
             now()->format('Ymd') .
