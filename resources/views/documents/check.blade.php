@@ -34,7 +34,7 @@ function bytesToHuman($bytes)
             <a href="/control/show/{{ $doc->control_id }}">{{ $doc->control->clause }}</a>
         </td>
         <td>
-            {{ substr($doc->filename,0,32) }}
+            <a href="/doc/show/{{ $doc->id }}">{{ substr($doc->filename,0,32) }}</a>
         </td>
         <td>
             {{ bytesToHuman($doc->size) }}
