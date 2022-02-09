@@ -165,14 +165,14 @@
 
                 <li>
                     <a href="/domains">
-                        <span class="icon"><span class="mif-books"></span></span>
+                        <span class="icon"><span class="mif-library"></span></span>
                         <span class="caption">Domaines</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="/measures">
-                        <span class="icon"><span class="mif-event-available"></span></span>
+                        <span class="icon"><span class="mif-books"></span></span>
                         <span class="caption">Mesures</span>
                     </a>
                 </li>
@@ -223,7 +223,7 @@
 -->
                 <li>
                     <a href="/actions">
-                        <span class="icon"><span class="mif-open-book"></span></span>
+                        <span class="icon"><span class="mif-list"></span></span>
                         <span class="caption">Plans d'action</span>
                     </a>
                 </li>
@@ -253,6 +253,13 @@
                             <span class="caption">Modèles</span>
                         </a></li>
                     </ul>
+                </li>
+
+                <li>
+                    <a href="/logout">
+                        <span class="icon"><span class="mif-switch"></span></span>
+                        <span class="caption">Quitter</span>
+                    </a>
                 </li>
 
 <!-- ------------------------------------------------------------------------------  
