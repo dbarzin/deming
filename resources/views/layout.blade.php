@@ -558,28 +558,7 @@
         </div>
     -->
 
-<!------------------------------------------------------------------------------------------>
-
 <div id="content-wrapper" class="h-100" style="overflow-y: auto">
-
-<div class="row border-bottom bd-lightGray m-2">
-    <div class="cell-md-8 d-flex flex-align-center">
-        <h3 class="dashboard-section-title  text-center text-left-md w-600">
-            Information Security Management System
-        </h3>
-    </div>
-
-    <div class="cell-md-4 d-flex flex-justify-center flex-justify-end-md flex-align-center">
-        <ul class="breadcrumbs bg-transparent">
-            <li class="page-item">
-                <a href="/" class="page-link"><span class="mif-meter"></span></a>
-            </li>
-            <li class="page-item"><a href="#" class="page-link">@yield('title')</a></li>
-        </ul>
-    </div>
-</div>
-
-<!------------------------------------------------------------------------------------------>
 
 <div class="p-3">
     <div data-role="panel" data-title-caption="@yield('title')" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">@yield('content')
