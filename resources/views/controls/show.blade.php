@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("title")
-Mesure de sécurité
+Contrôle de sécurité
 @endsection
 
 @section("content")

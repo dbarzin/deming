@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("title")
-Radar
+Etat des contrôles de sécurité
 @endsection
 
 @section("content")

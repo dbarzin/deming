@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("title")
-Voir mesure
+Mesure de sécurité
 @endsection
 
 @section("content")

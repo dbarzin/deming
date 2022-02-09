@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("title")
-Plan Measurement
+Plannifier un contrôle
 @endsection
 
 @section("content")

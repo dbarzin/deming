@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("title")
-Ajouter un contrôle
+Ajouter une mesure de sécurité
 @endsection
 
 @section("content")

@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("title")
-Edit Measurement
+Modifier un contrôle de sécurité
 @endsection
 
 @section("content")
