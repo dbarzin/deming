@@ -9,6 +9,9 @@
     <link rel="stylesheet" href="/vendors/metro4/css/metro-all.min.css">
     <link rel="stylesheet" href="/css/index.css">
 
+    <!-- Calendar -->
+    <link rel="stylesheet" href="/css/calendar.css">
+
     <!-- Dropzone -->
     <!-- https://rawgit.com/enyo/dropzone/master/dist/dropzone.js -->
     <script src="/js/dropzone.js"></script>
@@ -568,7 +571,8 @@
 <div id="content-wrapper" class="h-100" style="overflow-y: auto">
 
 <div class="p-3">
-    <div data-role="panel" data-title-caption="@yield('title')" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">@yield('content')
+    <div data-role="panel" data-title-caption="@yield('title')" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+        @yield('content')
     </div>
 </div>
 

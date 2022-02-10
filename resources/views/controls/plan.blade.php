@@ -18,10 +18,10 @@ Plannifier un contrôle
 	</div>
 	@endif
 
-	<form method="POST" action="/measurement/plan">
+	<form method="POST" action="/control/plan">
 	@csrf
 
-	<input type="hidden" name="id" value="{{ $measurement->id }}"/>
+	<input type="hidden" name="id" value="{{ $control->id }}"/>
 
 	<div class="grid">
     	<div class="row">
@@ -29,8 +29,8 @@ Plannifier un contrôle
 	    		<strong>Nom</strong>
 	    	</div>
 			<div class="cell">
-				{{ $measurement->title }} &nbsp;
-				{{ $measurement->name }}
+				{{ $control->title }} &nbsp;
+				{{ $control->name }}
 			</div>
 		</div>
     	<div class="row">
@@ -38,7 +38,7 @@ Plannifier un contrôle
 	    		<strong>Objectif</strong>
 	    	</div>
 			<div class="cell">
-				{{ $measurement->objective }}
+				{{ $control->objective }}
 			</div>
 		</div>
     	<div class="row">
@@ -54,11 +54,11 @@ Plannifier un contrôle
 	    		<strong>Périodicite</strong>
 	    	</div>
 			<div class="cell">
-				@if ($measurement->periodicity==1) Mensuel @endif
-				@if ($measurement->periodicity==3) Triestriel @endif
-				@if ($measurement->periodicity==4) Quadrimestriel @endif
-				@if ($measurement->periodicity==6) Semestriel @endif
-				@if ($measurement->periodicity==12) Annuel @endif				
+				@if ($control->periodicity==1) Mensuel @endif
+				@if ($control->periodicity==3) Triestriel @endif
+				@if ($control->periodicity==4) Quadrimestriel @endif
+				@if ($control->periodicity==6) Semestriel @endif
+				@if ($control->periodicity==12) Annuel @endif				
 			</div>
 		</div>
     	<div class="row">
@@ -68,7 +68,7 @@ Plannifier un contrôle
 			<div class="cell-2">
 					<input type="text" data-role="calendarpicker" name="plan_date" value="{{ 
 				\Carbon\Carbon
-				::createFromFormat('Y-m-d',$measurement->plan_date)
+				::createFromFormat('Y-m-d',$control->plan_date)
 				->format('Y-m-d')
 				}}" 
 				data-input-format="%Y-%m-%d"> 

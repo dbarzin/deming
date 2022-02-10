@@ -277,19 +277,11 @@ class ControlController extends Controller
         $id = (int) request("id");
             
         $control = Control::find($id);
-        // get associated documents
         $documents = DB::table('documents')->where('control_id', $id)->get();
-
-        // save control_id in session for document upload
-        $request->session()->put("measurement", $id);
-
-        // return view
-        //return view("control.make")
 
         return view("controls.edit")
             ->with("control", $control)
             ->with("documents", $documents);
-
     }
 
     /**
@@ -320,8 +312,10 @@ class ControlController extends Controller
 
     public function history(Request $request)
     {
-        // get control
-        $controls = Control::All();
+        // Get all controls
+        $controls = DB::table("controls")
+            ->select("id","clause","score","realisation_date","plan_date")
+            ->get();
 
         // return
         return view("controls.history")
@@ -390,6 +384,8 @@ class ControlController extends Controller
         // does not exists in that way
         // $control->delete();
         $control = Control::find($id);
+        if ($control==null)
+            return;
 
         $years = [];
         $cur_year = Carbon::now()->year;
@@ -400,7 +396,7 @@ class ControlController extends Controller
         for ($month=1; $month <= 12; $month++) { $months[$month] = $month;
         }
 
-        return view("control.plan", compact("measurement"))
+        return view("controls.plan", compact("control"))
             ->with("years", $years)
             ->with("day", date('d', strtotime($control->plan_date)))
             ->with("month", date('m', strtotime($control->plan_date)))
@@ -416,35 +412,21 @@ class ControlController extends Controller
      */
     public function doPlan(Request $request)
     {
-        // dd($request);
-        $control = Control::find($request->id);
+        $control = Control::find($request->id);   
 
-        // create the correspodign meaurement        
-        $measurement = new Measurement();
-        $measurement->control_id=$control->id;
-        $measurement->domain_id=$control->domain_id;
-        $measurement->name=$control->name;
-        $measurement->clause=$control->clause;
-        $measurement->objective = $control->objective;
-        $measurement->attributes = $control->attributes;
-        $measurement->model = $control->model;
-        $measurement->indicator = $control->indicator;
-        $measurement->action_plan = $control->action_plan;
-        $measurement->owner = $control->owner;
-        $measurement->periodicity = $control->periodicity;
-        $measurement->retention = $control->retention;
-        $measurement->plan_date = Carbon::now()->endOfMonth();
+        // Control already made ?
+        if ($control->realisation_date!=null) 
+            return null;
 
-    	$measurement->save();
+        $control->plan_date = $request->plan_date;
+    	$control->save();
 
-        // return to the list of controls
-        return redirect("/controls");
+        return redirect("/controls/".$request->id);
     }
 
 
     /*
     */
-
     public function make(Request $request)
     {
         // Not for aditor
@@ -459,6 +441,10 @@ class ControlController extends Controller
             Log::Error("Control:make - Control not found  ". request("id"));
             return null;
         }
+
+        // Control already made ?
+        if ($control->realisation_date!=null) 
+            return null;
 
         // get associated documents
         $documents = DB::table('documents')->where('control_id', $id)->get();
@@ -495,6 +481,11 @@ class ControlController extends Controller
 
         // Control fields
         $control = Control::find($id);
+
+        // control already made ?
+        if ($control->realisation_date!=null)
+            return null;
+
         $control->observations = request("observations");
         $control->plan_date=request("plan_date");
         $control->realisation_date=request("realisation_date");
@@ -504,18 +495,17 @@ class ControlController extends Controller
 
         // Log::Alert("doMake realisation_date=".request("realisation_date"));
 
-        // update measurement
+        // update control
         $control->update();
 
-        // if there is no next measurement
+        // if there is no next control
         if (
             DB::table('controls')
             ->where('clause','=',$control->clause)
             ->where('realisation_date','=',null)
             ->count()==0) {
 
-            Log::Alert("create a new measurement");            
-            // create a new measurement
+            // create a new control
             $new_control = new Control();
             $new_control->measure_id=$control->measure_id;
             $new_control->domain_id=$control->domain_id;
@@ -534,7 +524,6 @@ class ControlController extends Controller
             $new_control->save();
         }
 
-        // Log::Alert("doMake Done.");
         return redirect("/");
     }
 

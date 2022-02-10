@@ -37,12 +37,12 @@ Route::get('/control/edit/{id}', 'ControlController@edit');
 Route::get('/control/template/{id}', 'ControlController@template');
 Route::get('/control/delete/{id}', 'ControlController@destroy');
 Route::post('/control/make', 'ControlController@doMake');
-//Route::post('/control/plan', 'ControlController@doPlan');
+Route::post('/control/plan', 'ControlController@doPlan');
 Route::post('/control/save', 'ControlController@save');
 Route::get('/control/radar', 'ControlController@radar');
 Route::get('/control/history', 'ControlController@history');
 Route::get('/control/upload/{id}', 'ControlController@upload');
-
+Route::get('/control/plan/{id}', 'ControlController@plan');
 
 /* Documents */
 Route::post('/doc/store','DocumentController@store');
@@ -80,3 +80,4 @@ Route::get('/testChart', 'ReportController@testChart');
 
 /* Generate test data */
 Route::get('/generateTests', 'ReportController@generateTests');
+

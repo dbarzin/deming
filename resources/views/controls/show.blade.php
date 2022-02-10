@@ -177,7 +177,10 @@ Contrôle de sécurité
 	    		<button class="button primary">Edit</button>
 			</form>
 			@endif
-   			@if ($control->realisation_date==null)
+			@if ($control->realisation_date==null)
+		    <form action="/control/plan/{{ $control->id }}">
+	    		<button class="button info">Plan</button>
+			</form>
 		    <form action="/control/make/{{ $control->id }}">
 	    		<button class="button success">Faire</button>
 			</form>
