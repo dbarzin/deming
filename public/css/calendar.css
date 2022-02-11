@@ -37,7 +37,6 @@
     padding: 15px;
     font-weight: normal;
     color: #7c878d;
-    cursor: pointer;
     min-height: 100px;
 }
 .MyCalendar .days .day_num span {
@@ -57,15 +56,24 @@
 }
 .MyCalendar .days .day_num .event.green {
     background-color: #51ce57;
+    cursor: pointer;
 }
+
+.MyCalendar .days .day_num a:link {
+  text-decoration: none;
+}
+
 .MyCalendar .days .day_num .event.blue {
     background-color: #518fce;
+    cursor: pointer;
 }
 .MyCalendar .days .day_num .event.red {
     background-color: #ce5151;
+    cursor: pointer;
 }
 .MyCalendar .days .day_num .event.grey {
     background-color: #C9CBCF;
+    cursor: pointer;
 }
 .MyCalendar .days .day_num:nth-child(7n+1) {
     border-left: 1px solid #e6e9ea;
