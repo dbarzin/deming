@@ -1,0 +1,84 @@
+.MyCalendar {
+    display: flex;
+    flex-flow: column;
+    width: 100%;
+}
+.MyCalendar .header .month-year {
+    font-size: 14px;
+    font-weight: bold;
+    color: #636e73;
+    padding: 2px;
+    text-align: center     
+}
+.MyCalendar .days {
+    display: flex;
+    flex-flow: wrap;
+}
+.MyCalendar .days .day_name {
+    width: calc(100% / 7);
+    border-right: 1px solid #2c7aca;
+    padding: 4px;
+    text-transform: none;
+    font-size: 12px;
+    font-weight: normal;
+    color: #818589;
+    color: #fff;
+    background-color: #448cd6;
+}
+.MyCalendar .days .day_name:nth-child(7) {
+    border: none;
+}
+.MyCalendar .days .day_num {
+    display: flex;
+    flex-flow: column;
+    width: calc(100% / 7);
+    border-right: 1px solid #e6e9ea;
+    border-bottom: 1px solid #e6e9ea;
+    padding: 15px;
+    font-weight: normal;
+    color: #7c878d;
+    cursor: pointer;
+    min-height: 100px;
+}
+.MyCalendar .days .day_num span {
+    display: inline-flex;
+    width: 30px;
+    font-size: 14px;
+}
+.MyCalendar .days .day_num .event {
+    margin-top: 10px;
+    font-weight: 500;
+    font-size: 12px;
+    padding: 3px 6px;
+    border-radius: 4px;
+    background-color: #f7c30d;
+    color: #fff;
+    word-wrap: break-word;
+}
+.MyCalendar .days .day_num .event.green {
+    background-color: #51ce57;
+}
+.MyCalendar .days .day_num .event.blue {
+    background-color: #518fce;
+}
+.MyCalendar .days .day_num .event.red {
+    background-color: #ce5151;
+}
+.MyCalendar .days .day_num .event.grey {
+    background-color: #C9CBCF;
+}
+.MyCalendar .days .day_num:nth-child(7n+1) {
+    border-left: 1px solid #e6e9ea;
+}
+.MyCalendar .days .day_num:hover {
+    background-color: #fdfdfd;
+}
+.MyCalendar .days .day_num.ignore {
+    background-color: #fdfdfd;
+    color: #ced2d4;
+    cursor: inherit;
+}
+.MyCalendar .days .day_num.selected {
+    background-color: #f1f2f3;
+    cursor: inherit;
+}

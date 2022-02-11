@@ -245,31 +245,19 @@ Planning des contrôles
             <?php
             $calendar = new \App\Calendar(\Carbon\Carbon::now()->format('y-m-d'));
             foreach ($controls as $control) {
-                // echo "check :" . \Carbon\Carbon::parse($control->plan_date) . " " . \Carbon\Carbon::parse($control->realisation_date) . 
-                // echo "check :" . $control->clause . " " . $control->plan_date . " " . $control->realisation_date . "<br>";
                 if (($control->score==null) && ($control->plan_date!=null)) {
                         $calendar->add_event($control->clause, $control->plan_date, 1, 'grey');
-                        // echo 'plan:' . $control->plan_date . '<br>';
                     }
-                if (($control->score==1) && ($control->realisation_date!=null)) {
+                else if (($control->score==1) && ($control->realisation_date!=null)) {
                         $calendar->add_event($control->clause, $control->realisation_date, 1, 'red');
-                        // echo 'red:' . $control->realisation_date . '<br>';
                         }
-                if (($control->score==2) && ($control->realisation_date!=null)) {
+                else if (($control->score==2) && ($control->realisation_date!=null)) {
                         $calendar->add_event($control->clause, $control->realisation_date, 1, 'orange');
-                        // echo 'orange:' . $control->realisation_date . '<br>';
                         }
-                if (($control->score==3) && ($control->realisation_date!=null)) {
+                else if (($control->score==3) && ($control->realisation_date!=null)) {
                         $calendar->add_event($control->clause, $control->realisation_date, 1, 'green');
-                        // echo 'green:' . $control->realisation_date . '<br>';
                     }
                 }
-            /*
-            $calendar->add_event('A.9.4', '2021-02-03', 1, 'green');
-            $calendar->add_event('A.12.3', '2021-02-03', 1, 'green');
-            $calendar->add_event('A.4.3.2', '2021-02-04', 1, 'red');
-            $calendar->add_event('A.7.5.5', '2021-02-16', 1, 'grey');
-            */
             echo $calendar;
             ?>            
         </div>
