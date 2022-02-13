@@ -29,8 +29,7 @@ Plannifier un contrôle
 	    		<strong>Nom</strong>
 	    	</div>
 			<div class="cell">
-				{{ $control->title }} &nbsp;
-				{{ $control->name }}
+	    		<a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a> &nbsp; - &nbsp; {{ $control->name }}
 			</div>
 		</div>
     	<div class="row">
@@ -77,7 +76,7 @@ Plannifier un contrôle
     	<div class="row">
     		<div class="cell-12">
 				<button type="submit" class="button success">Plan</button>
-				<button type="submit" class="button" onclick="this.form.action='/measurements';">Cancel</button>
+				<button type="submit" class="button" onclick="this.form.action='/controls';">Cancel</button>
 			</div>
 		</div>
 	</div>

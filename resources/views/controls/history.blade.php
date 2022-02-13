@@ -243,7 +243,10 @@ Planning des contrôles
 <!------------------------------------------------------------------------------------->
         <div class="cell-6">
             <?php
-            $calendar = new \App\Calendar(\Carbon\Carbon::now()->format('y-m-d'));
+            if (Request::get('date')==null)
+                $calendar = new \App\Calendar(\Carbon\Carbon::now()->format('y-m-d'));
+            else
+                $calendar = new \App\Calendar(Request::get('date'));
             foreach ($controls as $control) {
                 if (($control->score==null) && ($control->plan_date!=null)) {
                         $calendar->add_event($control->clause, $control->plan_date, 1, 'grey', $control->id);
