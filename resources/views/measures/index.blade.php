@@ -110,7 +110,7 @@ function handleClick(cb, id) {
   if (cb.checked)
 	  $.ajax({
 	    type: 'GET',
-	    url: '{{ url( "/measures/activate" ) }}'+"?id="+id,
+	    url: '{{ url( "/measure/activate" ) }}'+"?id="+id,
 	    success: function (data){
 	        console.log("Control "+id+" activated");
 	    },
@@ -121,7 +121,7 @@ function handleClick(cb, id) {
 	else
 	  $.ajax({
 	    type: 'GET',
-	    url: '{{ url( "/measures/disable" ) }}'+"?id="+id,
+	    url: '{{ url( "/measure/disable" ) }}'+"?id="+id,
 	    success: function (data){
 	        console.log("Control "+id+" disabled");
 	    },
