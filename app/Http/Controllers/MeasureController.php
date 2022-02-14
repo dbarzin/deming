@@ -8,6 +8,7 @@ use App\Exports\MeasuresExport;
 use Maatwebsite\Excel\Facades\Excel;
 
 use App\Measure;
+use App\Control;
 use App\Domain;
 use App\Measurement;
 
@@ -210,23 +211,26 @@ class MeasureController extends Controller
         // dd($request);
         $measure = Measure::find($request->id);
 
-        // create the correspodign meaurement        
-        $measure = new Measurement();
-        $measure->measure_id=$measure->id;
-        $measure->domain_id=$measure->domain_id;
-        $measure->name=$measure->name;
-        $measure->clause=$measure->clause;
-        $measure->objective = $measure->objective;
-        $measure->attributes = $measure->attributes;
-        $measure->model = $measure->model;
-        $measure->indicator = $measure->indicator;
-        $measure->action_plan = $measure->action_plan;
-        $measure->owner = $measure->owner;
-        $measure->periodicity = $measure->periodicity;
-        $measure->retention = $measure->retention;
-        $measure->plan_date = Carbon::now()->endOfMonth();
+	// TODO: check control is disabled
 
-        $measure->save();
+
+        // create the correspodign control        
+        $control = new Control();
+        $control->measure_id=$measure->id;
+        $control->domain_id=$measure->domain_id;
+        $control->name=$measure->name;
+        $control->clause=$measure->clause;
+        $control->objective = $measure->objective;
+        $control->attributes = $measure->attributes;
+        $control->model = $measure->model;
+        $control->indicator = $measure->indicator;
+        $control->action_plan = $measure->action_plan;
+        $control->owner = $measure->owner;
+        $control->periodicity = $measure->periodicity;
+        $control->retention = $measure->retention;
+        $control->plan_date = Carbon::now()->endOfMonth();
+
+        $control->save();
 
         // return to the list of measures
         return redirect("/measures");

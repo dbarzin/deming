@@ -18,7 +18,7 @@ Ajouter une mesure de sécurité
 	@endif
 
 
-	<form method="POST" action="/controls">
+	<form method="POST" action="/measures">
 	@csrf
 	<div class="grid">
     	<div class="row">
