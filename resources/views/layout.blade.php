@@ -570,11 +570,7 @@
 
 <div id="content-wrapper" class="h-100" style="overflow-y: auto">
 
-<div class="p-3">
-    <div data-role="panel" data-title-caption="@yield('title')" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
-        @yield('content')
-    </div>
-</div>
+@yield('content')
 
 <!--
 <div class="m-3">

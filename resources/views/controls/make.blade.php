@@ -1,10 +1,8 @@
 @extends("layout")
 
-@section("title")
-Effectuer un contrôle
-@endsection
-
 @section("content")
+<div class="p-3">
+    <div data-role="panel" data-title-caption="Effectuer un contrôle" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 	@if (count($errors))
 		@foreach ($errors->all() as $error)
@@ -182,6 +180,9 @@ Effectuer un contrôle
     	</div>
 
 	</form>
+</div>
+</div>
+
 <br>
 <br>
 

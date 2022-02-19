@@ -1,9 +1,5 @@
 @extends("layout")
 
-@section("title")
-Plan d'action
-@endsection
-
 @section("content")
 <style type="text/css">
 form, table {
@@ -12,6 +8,9 @@ form, table {
      padding:0px;
 }
 </style>
+
+<div class="p-3">
+    <div data-role="panel" data-title-caption="Liste des plans d'action" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 	@if (count($errors))
 	<div class= “form-group”>
@@ -78,14 +77,13 @@ form, table {
 
 
 		<div class="grid">
-	    	<div class="row-12">
-			<button type="submit" class="button success">Save</button>
-
-    		<button type="submit" class="button" onclick='this.form.action="/actions";this.form.method="GET";'>Cancel</button>
+		    	<div class="row-12">
+				<button type="submit" class="button success">Save</button>
+	 	   		<button type="submit" class="button" onclick='this.form.action="/actions";this.form.method="GET";'>Cancel</button>
+	    		</div>
     		</div>
     	</div>
-
-	</form>
-
-
+</form>
+</div>
+</div>
 @endsection

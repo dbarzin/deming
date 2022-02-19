@@ -1,10 +1,8 @@
 @extends("layout")
 
-@section("title")
-Plannifier un contrôle
-@endsection
-
 @section("content")
+<div class="p-3">
+    <div data-role="panel" data-title-caption="Plannifier un contrôle" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 	@if (count($errors))
 	<div class= “form-group”>
@@ -81,6 +79,7 @@ Plannifier un contrôle
 		</div>
 	</div>
 	</form>
-
+</div>
+</div>
 @endsection
 

@@ -1,10 +1,8 @@
 @extends("layout")
 
-@section("title")
-Modifier un contrôle de sécurité
-@endsection
-
 @section("content")
+<div class="p-3">
+    <div data-role="panel" data-title-caption="Modifier un contrôle de sécurité" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 	@if (count($errors))
 	<div class= “form-group”>
@@ -160,8 +158,10 @@ Modifier un contrôle de sécurité
     		<button type="submit" class="button cancel" onclick='this.form.action="/controls";this.form.method="GET";'><span class="mif-cancel"></span> Cancel</button>
     		</div>
     	</div>
-
-	</form>
+    </div>
+</form>
+</div>
+</div>
 
 <script>
 Dropzone.options.dropzoneFileUpload = { 

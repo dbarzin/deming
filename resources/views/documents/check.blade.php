@@ -1,19 +1,18 @@
 @extends("layout")
 
-@section("title")
-Documents
-@endsection
-
 @section("content")
+
 <?php
-function bytesToHuman($bytes)
-{
+function bytesToHuman($bytes) {
     $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
-    for ($i = 0; $bytes > 1024; $i++) { $bytes /= 1024;
-    }
+    for ($i = 0; $bytes > 1024; $i++) $bytes /= 1024;
     return round($bytes, 2) . ' ' . $units[$i];
 }
 ?>
+
+<div class="p-3">
+    <div data-role="panel" data-title-caption="Liste des documents" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+
 <table class="table">
     <thead>
     <tr>

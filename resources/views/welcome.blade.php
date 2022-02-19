@@ -1,120 +1,74 @@
 @extends("layout")
 
-@section("title")
-Tableau de bord
-@endsection
-
 @section("content")
-<!--
-<div class="m-3">
-<div class="row mt-2">
-    <div class="cell-lg-3 cell-sm-6 mt-2">
-        <div class="icon-box border bd-cyan">
-            <div class="icon bg-cyan fg-white"><span class="mif-cog"></span></div>
-            <div class="content p-4">
-                <div class="text-upper">measurements</div>
-                <div class="text-upper text-bold text-lead">90%</div>
+<div class="p-3">
+    <div data-role="panel" data-title-caption="Tableau de bord" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+        <div class="row">
+            <div class="cell-lg-3 cell-md-6 mt-2">
+                <div class="more-info-box bg-orange fg-white">
+                    <div class="content">
+                        <h2 class="text-bold mb-0">
+                            {{ $active_domains_count }} 
+                        </h2>
+                        <div>Domaines</div>
+                    </div>
+                    <div class="icon">
+                        <span class="mif-books"></span>
+                    </div>
+                    <a href="/domains" class="more"> More info <span class="mif-arrow-right"></span></a>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="cell-lg-3 cell-sm-6 mt-2">
-        <div class="icon-box border bd-red">
-            <div class="icon bg-red fg-white"><span class="mif-google-plus"></span></div>
-            <div class="content p-4">
-                <div class="text-upper">controls</div>
-                <div class="text-upper text-bold text-lead">41,410</div>
+            <div class="cell-lg-3 cell-md-6 mt-2">
+                <div class="more-info-box bg-cyan fg-white">
+                    <div class="content">
+                        <h2 class="text-bold mb-0">
+                            {{ $active_measures_count }} 
+                        </h2>
+                        <div>Mesures de sécurité</div>
+                    </div>
+                    <div class="icon">
+                        <span class="mif-event-available"></span>
+                    </div>
+                    <a href="/measures" class="more"> More info <span class="mif-arrow-right"></span></a>
+                </div>
             </div>
-        </div>
-    </div>
-    <div class="cell-lg-3 cell-sm-6 mt-2">
-        <div class="icon-box border bd-green">
-            <div class="icon bg-green fg-white"><span class="mif-cart"></span></div>
-            <div class="content p-4">
-                <div class="text-upper">sales</div>
-                <div class="text-upper text-bold text-lead">1024</div>
-            </div>
-        </div>
-    </div>
-    <div class="cell-lg-3 cell-sm-6 mt-2">
-        <div class="icon-box border bd-orange">
-            <div class="icon bg-orange fg-white"><span class="mif-users"></span></div>
-            <div class="content p-4">
-                <div class="text-upper">new members</div>
-                <div class="text-upper text-bold text-lead">3,300</div>
-            </div>
-        </div>
-    </div>
-</div>
--->
 
-<!------------------------------------------------------------------------------------------>
-
-<div class="row">
-    <div class="cell-lg-3 cell-md-6 mt-2">
-        <div class="more-info-box bg-orange fg-white">
-            <div class="content">
-                <h2 class="text-bold mb-0">
-                    {{ $active_domains_count }} 
-                </h2>
-                <div>Domaines</div>
+            <div class="cell-lg-3 cell-md-6 mt-2">
+                <div class="more-info-box bg-green fg-white">
+                    <div class="content">
+                        <h2 class="text-bold mb-0">
+                            {{ $controls_made_count }}
+                        </h2>
+                        @if ($controls_made_count>1)
+                        <div>Contrôles</div>
+                        @else
+                        <div>Contrôle</div>
+                        @endif
+                    </div>
+                    <div class="icon">
+                        <span class="mif-paste"></span>
+                    </div>
+                    <a href="/controls?domain=0&period=99&status=1" class="more"> More info <span class="mif-arrow-right"></span></a>
+                </div>
             </div>
-            <div class="icon">
-                <span class="mif-books"></span>
+            <div class="cell-lg-3 cell-md-6 mt-2">
+                <div class="more-info-box bg-red fg-white">
+                    <div class="content">
+                        <h2 class="text-bold mb-0">{{ $action_plans_count }} </h2>
+                        @if ($action_plans_count>1)
+                        <div>Plans d'action</div>
+                        @else
+                        <div>Plan d'action</div>
+                        @endif
+                    </div>
+                    <div class="icon">
+                        <span class="mif-open-book"></span>
+                    </div>
+                    <a href="/actions" class="more"> More info <span class="mif-arrow-right"></span></a>
+                </div>
             </div>
-            <a href="/domains" class="more"> More info <span class="mif-arrow-right"></span></a>
         </div>
     </div>
-    <div class="cell-lg-3 cell-md-6 mt-2">
-        <div class="more-info-box bg-cyan fg-white">
-            <div class="content">
-                <h2 class="text-bold mb-0">
-                    {{ $active_measures_count }} 
-                </h2>
-                <div>Mesures de sécurité</div>
-            </div>
-            <div class="icon">
-                <span class="mif-event-available"></span>
-            </div>
-            <a href="/measures" class="more"> More info <span class="mif-arrow-right"></span></a>
-        </div>
-    </div>
-
-    <div class="cell-lg-3 cell-md-6 mt-2">
-        <div class="more-info-box bg-green fg-white">
-            <div class="content">
-                <h2 class="text-bold mb-0">
-                    {{ $controls_made_count }}
-                </h2>
-                @if ($controls_made_count>1)
-                <div>Contrôles</div>
-                @else
-                <div>Contrôle</div>
-                @endif
-            </div>
-            <div class="icon">
-                <span class="mif-paste"></span>
-            </div>
-            <a href="/controls?domain=0&period=99&status=1" class="more"> More info <span class="mif-arrow-right"></span></a>
-        </div>
-    </div>
-    <div class="cell-lg-3 cell-md-6 mt-2">
-        <div class="more-info-box bg-red fg-white">
-            <div class="content">
-                <h2 class="text-bold mb-0">{{ $action_plans_count }} </h2>
-                @if ($action_plans_count>1)
-                <div>Plans d'action</div>
-                @else
-                <div>Plan d'action</div>
-                @endif
-            </div>
-            <div class="icon">
-                <span class="mif-open-book"></span>
-            </div>
-            <a href="/actions" class="more"> More info <span class="mif-arrow-right"></span></a>
-        </div>
-    </div>
-</div>
-</div>
 
 <!---------------------------------------->
 

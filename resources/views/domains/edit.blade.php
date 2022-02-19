@@ -1,10 +1,8 @@
 @extends("layout")
 
-@section("title")
-Modifier un domaine
-@endsection
-
 @section("content")
+<div class="p-3">
+    <div data-role="panel" data-title-caption="Modifier un domaine" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 	@if (count($errors))
 	<div class= “form-group”>
 		<div class= “alert alert-danger”>
@@ -44,6 +42,8 @@ Modifier un domaine
 		<form>
     		<button type="submit" class="button" onclick='this.form.action="/domains/{{ $domain->id }}";this.form.method="GET";'>Cancel</button>
 		</form>
+	</div>
+</div>
 @endsection
 
 

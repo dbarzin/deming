@@ -3,12 +3,13 @@
     flex-flow: column;
     width: 100%;
 }
-.MyCalendar .header .month-year {
+.MyCalendar .header  {
+    margin-top: 0px;
+    margin-bottom: 2px;
     font-size: 14px;
-    font-weight: bold;
     color: #636e73;
     padding: 2px;
-    text-align: center     
+    text-align: center;
 }
 .MyCalendar .days {
     display: flex;

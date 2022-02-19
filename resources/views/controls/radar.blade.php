@@ -1,10 +1,8 @@
 @extends("layout")
 
-@section("title")
-Etat des contrôles de sécurité
-@endsection
-
 @section("content")
+<div class="p-3">
+    <div data-role="panel" data-title-caption="Etat des contrôles de sécurité" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 <div class="grid">    
     <div class="row">
@@ -79,8 +77,12 @@ Etat des contrôles de sécurité
 </div>
 
 </div>
+</div>
+</div>
+</div>
 
 <script src="/vendors/chartjs/Chart.bundle.min.js"></script>
+
 <script src="/js/utils.js"></script>
 
     <script>
@@ -189,7 +191,4 @@ Etat des contrôles de sécurité
 @endforeach
 
 </script>
-
-
-
 @endsection

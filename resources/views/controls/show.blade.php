@@ -1,10 +1,8 @@
 @extends("layout")
 
-@section("title")
-Contrôle de sécurité
-@endsection
-
 @section("content")
+<div class="p-3">
+    <div data-role="panel" data-title-caption="Contrôle de sécurité" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 	<div class="grid">
     	<div class="row">
@@ -190,5 +188,8 @@ Contrôle de sécurité
 			</form>
 		</div>
 	</div>
+
+</div>
+</div>
 
 @endsection

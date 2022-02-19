@@ -1,11 +1,9 @@
-
 @extends("layout")
 
-@section("title")
-Liste des contrôles
-@endsection
-
 @section("content")
+<div class="p-3">
+    <div data-role="panel" data-title-caption="Liste des contrôles" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+
 
     <div class="grid">
         <div class="row">
@@ -30,14 +28,14 @@ Liste des contrôles
             </div>
             <div class="cell-2"> 
                 <select id='cur_period' name="period" size="1" width='10'>
-                    <option 
-                            @if (Session::get("period")=="99")
-                                selected 
-                            @endif
-                    value="99">-- Choisir une période --</option>
-                        @for ($i = -6; $i < 6; $i++)
+                    <option value="99"
+                        @if (Session::get("period")=="99")
+                            selected 
+                        @endif
+                    >-- Choisir une période --</option>
+                        @for ($i = -12; $i < 12; $i++)
                             <option value="{{ $i }}"
-                            @if (((int)Session::get("period"))==$i)        
+                            @if (((int)Session::get("period"))==$i)
                                 selected 
                             @endif 
                             >
@@ -163,15 +161,11 @@ Liste des contrôles
                     ->addMonths(1)
                     ->startOfMonth()
                     ->isAfter(\Carbon\Carbon::now()))
-                        <font color="green">
+                        <font color="green">{{ $control->plan_date }}</font>
                     @else
-                        <font color="red">
+                        <font color="red">{{ $control->plan_date }}</font>
                     @endif
-                @else
-                    <font>
                 @endif
-                    {{ $control->plan_date }} 
-                    </font>
                 </b>
                 </a>
             </td>
@@ -195,5 +189,7 @@ Liste des contrôles
     @endforeach
     </tbody>
 </table>
+</div>
+</div>
 @endsection
 

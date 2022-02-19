@@ -1,10 +1,8 @@
 @extends("layout")
 
-@section("title")
-Mesure de sécurité
-@endsection
-
 @section("content")
+<div class="p-3">
+    <div data-role="panel" data-title-caption="Mesure de sécurité" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 	<div class="grid">
     	<div class="row">
@@ -105,7 +103,8 @@ Mesure de sécurité
 	    	<button class="button" onclick='this.form.action="/measures";'>Cancel</button>
 		</form>
 	</div>
-
+</div>
+</div>
 
 @endsection
 
