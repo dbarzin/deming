@@ -183,7 +183,7 @@
 
                 <li>
                     <a href="/controls">
-                        <span class="icon"><span class="mif-table"></span></span>
+                        <span class="icon"><span class="mif-paste"></span></span>
                         <span class="caption">Contrôles</span>
                     </a>
                 </li>
@@ -226,7 +226,7 @@
 -->
                 <li>
                     <a href="/actions">
-                        <span class="icon"><span class="mif-list"></span></span>
+                        <span class="icon"><span class="mif-open-book"></span></span>
                         <span class="caption">Plans d'action</span>
                     </a>
                 </li>

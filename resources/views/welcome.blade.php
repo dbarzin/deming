@@ -13,7 +13,7 @@
                         <div>Domaines</div>
                     </div>
                     <div class="icon">
-                        <span class="mif-books"></span>
+                        <span class="mif-library"></span>
                     </div>
                     <a href="/domains" class="more"> More info <span class="mif-arrow-right"></span></a>
                 </div>
@@ -27,7 +27,7 @@
                         <div>Mesures de sécurité</div>
                     </div>
                     <div class="icon">
-                        <span class="mif-event-available"></span>
+                        <span class="mif-books"></span>
                     </div>
                     <a href="/measures" class="more"> More info <span class="mif-arrow-right"></span></a>
                 </div>
