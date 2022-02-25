@@ -2,12 +2,11 @@
 
 @section("content")
 
-<div class="grid">
-    <div class="row">
-        <div class="cell-6">
+<div class="p-3">
+<div class="row ">
+    <div class="cell-md-6">
 
-    <div class="p-3">
-        <div data-role="panel" data-title-caption="Historique" data-collapsible="false" data-title-icon="<span class='mif-chart-line'></span>">
+        <div data-role="panel" data-title-caption="Planning" data-collapsible="false" data-title-icon="<span class='mif-chart-line'></span>">
 
             <canvas id="canvas-status" width="600" height="300px" class="chartjs-render-monitor">
             </canvas>
@@ -239,16 +238,15 @@
 <!------->
 
 </div>
-</div>
 
        </div>
     </div>
 
 </div>
-<div class="cell-6">
 
-<div class="p-3">
-    <div data-role="panel">
+    <div class="cell-md-6">
+        <div class="panel">
+
             <?php
             if (Request::get('date')==null)
                 $calendar = new \App\Calendar(\Carbon\Carbon::now()->format('y-m-d'));

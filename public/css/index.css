@@ -3,7 +3,7 @@ body {
 }
 
 .bg-chem {
-  background-color: #7C123E !important;
+  background-color: #ecf0f5 !important; /*7C123E*/
 }
 
 .bg-chem-hover:hover {
@@ -11,7 +11,7 @@ body {
 }
 
 .navview .navview-pane {
-  background-color: #7C123E;
+  background-color: #ecf0f5; /* #7C123E; */
   color: #000000;
   font-size: 14px;
 }
@@ -24,17 +24,18 @@ body {
   width: 52px;
 }
 .navview .navview-menu {
-  /* background-color: #E1D3D0; */
-  background-color: #FFDDD0;
+  /* background-color: #E1D3D0; */ 
+  /* background-color: #FFDDD0; */
+  background-color: #FFFFFF; 
 }
 
 .navview .navview-menu li a:hover {
   color: #000000;
-  background: #FFDDD0;
+  background: #c2c2c2; 
 }
 .navview .navview-menu li.active a {
   color: #111111;
-  background: #FFDDD0;
+  background: #f7f7f7;
 }
 .navview .navview-menu .dropdown-toggle::after {
   border-bottom-color: white;
@@ -58,7 +59,7 @@ body {
 }   
 .navview .navview-menu .navview-menu {
   color: #222;
-  background-color: #FFCEC1;
+  background-color: #FFFFFF;
 }
 .avatar-title {
   line-height: 1.2;

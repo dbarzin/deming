@@ -30,14 +30,14 @@
     <div class="navview-pane">
         
         <div class="d-flex flex-align-center">
-            <button class="pull-button m-0 bg-chem-hover">
-                <span class="mif-menu fg-white"></span>
+            <button class="pull-button m-0 ">
+                <span class="mif-menu fg-black"></span>
             </button>
-            <a href="/" class="d-block fg-white text-medium no-decor">
-                <h2 class="text-medium m-0 fg-white pl-7" style="line-height: 52px">Deming</h2>
+            <a href="/" class="d-block fg-black text-medium no-decor">
+                <h2 class="text-medium m-0 fg-black pl-7" style="line-height: 52px">Deming</h2>
             </a>
         </div>
-        
+        <!----------------
         <div class="suggest-box">
             <div class="data-box">                
                 @if (Auth::User()->profile_image)
@@ -52,7 +52,7 @@
                 </div>
             </div>
         </div>
-
+        ------>
         <div class="suggest-box">            
             <!-- Search engine -->
             <input type="text" data-role="input" data-clear-button="false" data-search-button="true" id="search">
@@ -501,7 +501,7 @@
     </div>
 
     <div class="navview-content h-100">
-        <div data-role="appbar" class="pos-absolute bg-chem fg-white">
+        <div data-role="appbar" class="pos-absolute bg-chem fg-black">
 
             <a href="#" class="app-bar-item d-block d-none-lg" id="paneToggle"><span class="mif-menu"></span></a>
 
@@ -524,6 +524,7 @@
                     <span class="badge bg-red fg-white mt-2 mr-1">{{Session::get("action_plans_count")}}</span>
                     @endif
                 </a>
+                <!--------------
                 <div class="app-bar-container">
                     <a href="#" class="app-bar-item">
                         @if (Auth::User()->profile_image)
@@ -543,13 +544,11 @@
                             <div class="h4 mb-0">{{ Auth::User()->name }}</div>
                             <div>{{ Auth::User()->title }}</div>
                         </div>
-                        <!--
                         <div class="bg-white d-flex flex-justify-between flex-equal-items p-2">
                             <button class="button flat-button">Followers</button>
                             <button class="button flat-button">Sales</button>
                             <button class="button flat-button">Friends</button>
                         </div>
-                        -->
                         <form action="">@csrf
                         <div class="bg-white d-flex flex-justify-between flex-equal-items p-2 bg-light">
                             <button class="button mr-1" type="submit" onclick="this.form.action='/profile'">Profile</button>
@@ -558,6 +557,7 @@
                         </form>
                     </div>
                 </div>
+                        -->
                 <a href="#" class="app-bar-item">
                     <span class="mif-cogs"></span>
                 </a>
