@@ -74,7 +74,7 @@
 
 <div class="row">
     <div class="cell-md-7">
-        <div class="panel mt-6">
+        <div class="panel mt-2">
             <div data-role="panel" data-title-caption="Etat des contrôles au {{ date('d/m/Y')}}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
                 <div class="p-7">
                     <canvas id="canvas-status" class="chartjs-render-monitor"></canvas>
@@ -86,7 +86,7 @@
     <!--------------------------------------------------------------------->
 
     <div class="cell-md-5">
-        <div class="panel mt-6">
+        <div class="panel mt-2">
             <div data-role="panel" data-title-caption="Répartition" data-collapsible="true" data-title-icon="<span class='mif-meter'></span>">
                 <div class="p-7">
                     <canvas id="canvas-doughnut" style="display: block; width: 200px; height: 146px;"  class="chartjs-render-monitor" 
@@ -102,7 +102,7 @@
 
 <div class="row">
     <div class="cell-md-7">
-        <div class="panel mt-4">
+        <div class="panel mt-2">
             <div data-role="panel" data-title-caption="Contrôles plannifiés" data-collapsible="true" data-title-icon="<span class='mif-calendar'></span>" class="">
                 <div class="p-4">
 
@@ -171,7 +171,7 @@
     </div>
 
     <div class="cell-md-5">
-        <div class="panel mt-4">
+        <div class="panel mt-2">
 
         <div data-role="panel" data-title-caption="Performances" data-collapsible="true" data-title-icon="<span class='mif-paragraph-left'></span>" class="">
     
@@ -272,7 +272,7 @@
             ],
         datasets: [{
             // label: 'Vert',
-            backgroundColor: '#61b045',
+            backgroundColor: '#60a917',
             borderColor: window.chartColors.green,
             pointBackgroundColor: window.chartColors.green,        
             stack: 'Stack 0',
@@ -305,7 +305,7 @@
             ]
         }, {
             // label: 'Rouge',
-            backgroundColor: '#FF0000',
+            backgroundColor: '#ce352c',
             borderColor: window.chartColors.red,
             pointBackgroundColor: window.chartColors.red,        
             stack: 'Stack 0',
@@ -392,7 +392,7 @@
       { 
         backgroundColor: 
             [
-                '#FF0000', '#fa6800', '#61b045', window.chartColors.grey
+                '#ce352c', '#fa6800', '#60a917', window.chartColors.grey
             ],
         borderColor: 
             [

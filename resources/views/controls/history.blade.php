@@ -327,8 +327,8 @@
         ]
       },
       { 
-        backgroundColor: color(window.chartColors.red).rgbString(),
-        borderColor: window.chartColors.red,
+        backgroundColor: "#ce352c",
+        borderColor: "#ce352c",
         pointBackgroundColor: window.chartColors.red,        
         stack: 'Stack 0',
         data: [
@@ -353,8 +353,8 @@
         ]
       },
       { 
-        backgroundColor: color(window.chartColors.orange).rgbString(),
-        borderColor: window.chartColors.orange,
+        backgroundColor: "#fa6800",
+        borderColor: "#fa6800",
         pointBackgroundColor: window.chartColors.orange,        
         stack: 'Stack 0',
         data: [
@@ -378,8 +378,8 @@
         ]
       },
       { 
-        backgroundColor: color(window.chartColors.green).rgbString(),
-        borderColor: window.chartColors.green,
+        backgroundColor: "#60a917",
+        borderColor: "#60a917",
         pointBackgroundColor: window.chartColors.green,        
         stack: 'Stack 0',
         data: [

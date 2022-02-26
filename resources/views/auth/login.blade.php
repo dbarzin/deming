@@ -12,11 +12,10 @@
     <title>Deming :: Log in</title>
 </head>
 
-
 <body class="d-flex flex-justify-center flex-align-center bg-default">
     <form  
           method="POST" action="{{ route('login') }}"
-          class="login-form bg-white p-6 mx-auto border bg-chem fg-white win-shadow"
+          class="login-form bg-white p-6 mx-auto border fg-black win-shadow"
           data-role="validator"
           action="javascript:"
           data-clear-invalid="2000"
@@ -25,7 +24,7 @@
         @csrf
         <span class="mif-vpn-lock mif-4x place-right" style="margin-top: -10px;"></span>
             <h2 class="text-medium m-0 pl-7" style="line-height: 52px">Deming</h2>
-            <div class="text-muted mb-4">Sign in to start your session</div>
+            <div class="mb-4">Sign in to start your session</div>
             <div class="form-group">
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                 @error('email')
