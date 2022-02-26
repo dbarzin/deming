@@ -9,7 +9,7 @@
 
 				</div>
 				<div class="cell-7" align="right">
-					<a href="/domains/create"><span class="mif-add"></span>Nouveau</a>
+					<button class="button primary" onclick="location.href = '/domains/create';">Nouveau</button>
 				</div>
 			</div>
 

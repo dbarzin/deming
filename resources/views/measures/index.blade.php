@@ -7,7 +7,7 @@
 			<div class="grid">
 				<div class="row">
 					<div class="cell-1">
-			    		<strong>Domain</strong>
+			    		<strong>Domaine</strong>
 			    	</div>
 					<div class="cell-4">
 						<select id='domain_id' name="domain_id" size="1" width='10'>
@@ -23,7 +23,7 @@
 						</select>
 					</div>
 					<div class="cell-7" align="right">
-						<a href="/measures/create"><span class="mif-add"></span>Nouveau</a>
+						<button class="button primary" onclick="location.href = '/measures/create';">Nouveau</button>
 					</div>
 				</div>
 

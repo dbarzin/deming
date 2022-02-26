@@ -25,7 +25,7 @@
 		    	</div>
 				<div class="cell-5">
 					<select name="domain_id" value="{{ old('domain_id') }}" size="1" width='10'>
-					    <option value="">--Choose an domain--</option>
+					    <option value="">-- Choisir un domaine --</option>
 						@foreach ($domains as $domain)
 					    	<option value="{{ $domain->id }}"
 								@if (((int)Session::get("domain"))==$domain->id)		
