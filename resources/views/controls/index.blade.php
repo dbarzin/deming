@@ -155,16 +155,13 @@
                 <a href="/control/show/{{$control->id}}">
                 <b>
                 @if ($control->realisation_date == null)
-                    @if (
-                    \Carbon\Carbon::
-                    createFromFormat('Y-m-d',$control->plan_date)
-                    ->addMonths(1)
-                    ->startOfMonth()
-                    ->isAfter(\Carbon\Carbon::now()))
+                    @if( strtotime($control->plan_date) >= strtotime('now') ) {
                         <font color="green">{{ $control->plan_date }}</font>
                     @else
                         <font color="red">{{ $control->plan_date }}</font>
                     @endif
+                @else 
+                    {{ $control->plan_date }}
                 @endif
                 </b>
                 </a>

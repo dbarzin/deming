@@ -154,12 +154,12 @@ class ControlController extends Controller
         {
             $controls=DB::select(
                 DB::raw("select
-                    m1.id as id,
-                    m1.measure_id as measure_id,
-                    m1.name as name,
-                    m1.clause as clause,
-                    m1.domain_id as domain_id,
-                    m1.plan_date as plan_date,
+                    m1.id,
+                    m1.measure_id,
+                    m1.name,
+                    m1.clause,
+                    m1.domain_id,
+                    m1.plan_date,
                     m1.realisation_date,
                     m1.score as score,
                     (
