@@ -130,9 +130,19 @@
                 </li>
 
                 <li>
-                    <a href="/logout">
+                    <a class="dropdown-item" href="{{ route('logout') }}"
+                       onclick="event.preventDefault();
+                                     document.getElementById('logout-form').submit();">
                         <span class="icon"><span class="mif-switch"></span></span>
                         <span class="caption">Quitter</span>
+
+                    </a>
+
+                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                        @csrf
+                    </form>
+
+
                     </a>
                 </li>
 

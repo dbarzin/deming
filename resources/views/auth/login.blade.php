@@ -22,9 +22,9 @@
           data-on-error-form="invalidForm"
           data-on-validate-form="validateForm">
         @csrf
-        <span class="mif-vpn-lock mif-4x place-right" style="margin-top: -10px;"></span>
+        <span class="mif-lock mif-4x place-right ani-shake fg-red" style="margin-top: -10px;"></span>
             <h2 class="text-medium m-0 pl-7" style="line-height: 52px">Deming</h2>
-            <div class="mb-4">Sign in to start your session</div>
+            <div class="mb-4">Connexion</div>
             <div class="form-group">
                 <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
                 @error('email')
@@ -40,11 +40,11 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-                <span class="invalid_feedback">Please enter a password</span>
+                <span class="invalid_feedback">Entrez un mot de passe</span>
             </div>
             <div class="form-group d-flex flex-align-center flex-justify-between">
-                <input type="checkbox" data-role="checkbox" data-caption="Remember Me">
-                <button class="button">Sign In</button>
+                <input type="checkbox" data-role="checkbox" data-caption="Se souvenir de moi">
+                <button class="button primary">Identification</button>
             </div>
         </form>
 
