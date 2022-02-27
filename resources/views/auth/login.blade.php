@@ -22,7 +22,7 @@
           data-on-error-form="invalidForm"
           data-on-validate-form="validateForm">
         @csrf
-        <span class="mif-lock mif-4x place-right ani-shake fg-red" style="margin-top: -10px;"></span>
+        <span class="mif-lock mif-4x place-right ani-shake fg-cyan" style="margin-top: -10px;"></span>
             <h2 class="text-medium m-0 pl-7" style="line-height: 52px">Deming</h2>
             <div class="mb-4">Connexion</div>
             <div class="form-group">
@@ -43,7 +43,6 @@
                 <span class="invalid_feedback">Entrez un mot de passe</span>
             </div>
             <div class="form-group d-flex flex-align-center flex-justify-between">
-                <input type="checkbox" data-role="checkbox" data-caption="Se souvenir de moi">
                 <button class="button primary">Identification</button>
             </div>
         </form>
