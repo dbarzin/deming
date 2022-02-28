@@ -155,7 +155,7 @@
                 <a href="/control/show/{{$control->id}}">
                 <b>
                 @if ($control->realisation_date == null)
-                    @if( strtotime($control->plan_date) >= strtotime('now') ) {
+                    @if( strtotime($control->plan_date) >= strtotime('now') ) 
                         <font color="green">{{ $control->plan_date }}</font>
                     @else
                         <font color="red">{{ $control->plan_date }}</font>
