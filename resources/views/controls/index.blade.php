@@ -152,19 +152,19 @@
             </td>
             <td>
                 <!-- format in red when month passed -->
+                @if ($control->realisation_date == null)
                 <a href="/control/show/{{$control->id}}">
                 <b>
-                @if ($control->realisation_date == null)
                     @if( strtotime($control->plan_date) >= strtotime('now') ) 
                         <font color="green">{{ $control->plan_date }}</font>
                     @else
                         <font color="red">{{ $control->plan_date }}</font>
                     @endif
+                </b>
+                </a>
                 @else 
                     {{ $control->plan_date }}
                 @endif
-                </b>
-                </a>
             </td>
             <td>
                 <b>
