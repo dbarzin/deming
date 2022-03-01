@@ -27,7 +27,6 @@
 <body class="m4-cloak h-vh-100">
 <div data-role="navview" data-toggle="#paneToggle" data-expand="xl" data-compact="lg" data-active-state="true">
     <div class="navview-pane">
-        
         <div class="d-flex flex-align-center">
             <button class="pull-button m-0 ">
                 <span class="mif-menu fg-black"></span>
@@ -145,13 +144,11 @@
 
                     </a>
                 </li>
-        <!--                
+            </ul>
         <div class="w-100 text-center text-small data-box p-2 border-top bd-grayMouse" style="position: absolute; bottom: 0">
             <div>Github <a href="https://github.com/dbarzin/deming" class="no-decor">dbarzin/deming</a></div>
             <div>Created with <a href="https://laravel.com" class="no-decor">Laravel</a></div>
         </div>
-        -->       
-
     </div>
 
     <div class="navview-content h-100">
