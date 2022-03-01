@@ -145,11 +145,13 @@
 
                     </a>
                 </li>
-
+        <!--                
         <div class="w-100 text-center text-small data-box p-2 border-top bd-grayMouse" style="position: absolute; bottom: 0">
             <div>Github <a href="https://github.com/dbarzin/deming" class="no-decor">dbarzin/deming</a></div>
             <div>Created with <a href="https://laravel.com" class="no-decor">Laravel</a></div>
-        </div>       
+        </div>
+        -->       
+
     </div>
 
     <div class="navview-content h-100">

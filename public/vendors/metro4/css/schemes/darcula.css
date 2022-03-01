@@ -1,7 +1,7 @@
 /*
- * Metro 4 Components Library v4.3.5  (https://metroui.org.ua)
- * Copyright 2012-2019 Sergey Pimenov
- * Built at 24/12/2019 18:04:54
+ * Metro 4 Components Library v4.5.0  (https://metroui.org.ua)
+ * Copyright 2012-2021 Sergey Pimenov
+ * Built at 01/08/2021 18:53:43
  * Licensed under MIT
  */
 .bg-scheme {
@@ -148,7 +148,6 @@ textarea.focused,
   border-color: #585b5d;
   background-color: #585b5d;
   -webkit-transition: all 0.3s ease-in-out;
-  -o-transition: all 0.3s ease-in-out;
   transition: all 0.3s ease-in-out;
 }
 .checkbox input[type=checkbox]:checked ~ .check::before {
