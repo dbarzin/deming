@@ -220,15 +220,16 @@ Dropzone.options.dropzoneFileUpload = {
             success: function(file, response) 
             {
                 file.id=response.id;
-                console.log("respose");
+                console.log("success response");
                 console.log(response);
             },
             error: function(file, response)
             {
+                console.log("error response");
                 console.log(response);
                return false;
             },
-        init: function () {
+            init: function () {
             //Add existing files into dropzone            
             var existingFiles = [
             @foreach ($documents as $document) 
@@ -243,6 +244,18 @@ Dropzone.options.dropzoneFileUpload = {
 
     	}
 
+document.onpaste = function(event){
+  const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+  for (let index in items) {
+    const item = items[index];
+    console.log("paste "+item.kind);
+    if (item.kind === 'file') {
+    // adds the file to your dropzone instance
+       console.log("file: "+item.name);
+      //Dropzone.options.dropzoneFileUpload.addFile(item.getAsFile())
+    }
+  }
+}
 </script>
 
 @endsection
