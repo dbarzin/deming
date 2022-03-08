@@ -21,12 +21,12 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
         return [
             'Clause',
             'Nom',
-            'Objctif',
+            'Objectif',
             'Attributs',
             'Modèle',
             'Indicateur',
             'Plan d\'action',
-            'Responsable',
+            'Responsables',
             'Périodicité'
         ];
     }

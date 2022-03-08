@@ -21,7 +21,7 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
         return [
             'Clause',
             'Nom',
-            'Objctif',
+            'Objectif',
             'Attributs',
             'Modèle',
             'Indicateur',
