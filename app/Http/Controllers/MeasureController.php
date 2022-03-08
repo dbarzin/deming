@@ -166,20 +166,20 @@ class MeasureController extends Controller
         $measure->save();
 
         // update the open measure
-        $measure=Measurement::where('measure_id', $measure->id)
+        $control=Control::where('measure_id', $measure->id)
                             ->where('realisation_date', null)
                             ->get()->first();
-        if ($measure<>null) {
-            $measure->clause = $measure->clause;
-            $measure->name = $measure->name;
-            $measure->objective = $measure->objective;
-            $measure->attributes = $measure->attributes;
-            $measure->model = $measure->model;
-            $measure->indicator = $measure->indicator;
-            $measure->action_plan = $measure->action_plan;
-            $measure->periodicity = $measure->periodicity;
-            $measure->periodicity = $measure->retention;
-            $measure->save();
+        if ($control<>null) {
+            $control->clause = $measure->clause;
+            $control->name = $measure->name;
+            $control->objective = $measure->objective;
+            $control->attributes = $measure->attributes;
+            $control->model = $measure->model;
+            $control->indicator = $measure->indicator;
+            $control->action_plan = $measure->action_plan;
+            $control->periodicity = $measure->periodicity;
+            $control->periodicity = $measure->retention;
+            $control->save();
         }
 
         // retun to view measure
