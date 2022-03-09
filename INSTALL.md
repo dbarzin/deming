@@ -1,84 +1,157 @@
-# INSTALL Deming
+# Procédure d'installation de Deming
 
-## Ressources
+## Configuration recommandée
 
-Recommended configuration:
-
-- OS : Ubunto 20.04 LTS
+- OS : Ubuntu 21.10
 - RAM : 2G
-- Disk : 50G
-- VCPU : 2
+- Disque : 50G
+- VCPU 2
 
-## Git
+## Installation 
 
-Clone the project from GIT
+Mettre à jour la distribution linux
 
-    git clone github.com/dbarzin/deming
+    sudo apt update && sudo apt upgrade
 
-## Install PHP
-
-Update you OS
-
-sudo apt update && sudo apt upgrade
-
-Install PHP
+Installer quelques libraries PHP
 
     sudo apt-get install php php-mysql
 
-## Database
+Installer GIT
 
-Install Mysql
+    sudo apt install git
 
-    sudo apt-get install mysql-server
+Créer le répertoire du projet
 
-Create the database
+    cd /var/www
+    sudo mkdir deming
+    sudo chown $USER:$GROUP deming
+
+Cloner le projet depuis Github
+
+    git clone https://www.github.com/dbarzin/deming
+
+## Composer
+
+Installer Composer : [Install Composer globally](https://getcomposer.org/download/).
+
+    sudo mv composer.phar /usr/local/bin/composer
+
+Installer les packages avec composer :
+
+    cd /var/www/deming
+    composer update
+
+Publier tous les actifs publiables à partir des packages des fournisseurs
+
+    php artisan vendor:publish --all
+
+## MySQL
+
+Installer MySQL
+
+    sudo apt install mysql-server
+
+Vérifier que vous utilisez MySQL et pas MariaDB (Mercator ne fonctionne pas avec MariaDB).
+
+    sudo mysql --version
+
+Lancer MySQL avec les droits root
 
     sudo mysql
-    create database deming;
-    CREATE USER 'deming_user'@'localhost' IDENTIFIED BY 'demPasssword-123';
+
+Créer la base de données _deming_ et l'utilisateur _deming_user_
+
+    CREATE DATABASE deming CHARACTER SET utf8 COLLATE utf8_general_ci;
+	CREATE USER 'deming_user'@'localhost' IDENTIFIED BY 'demPasssword-123';
     GRANT ALL ON deming.* TO deming_user@localhost;
-    quit
+    GRANT PROCESS ON *.* TO 'deming_user'@'localhost';
 
-Create tables
+    FLUSH PRIVILEGES;
+    EXIT;
 
-    php artisan migrate:fresh
+## Configuration
 
-## Data
+Créer un fichier .env dans le répertoire racine du projet :
 
-Insert sample data
+    cd /var/www/deming
+    cp .env.example .env
 
-    mysql deming -p < data.sql
+Mettre les paramètre de connexion à la base de données :
 
-# Environement
+    vi .env
 
-Copy sample
-
-    cp .env.sample .env
-
-Configure environenement
-
-    edit .env
-
+    ## .env file
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
     DB_PORT=3306
-    DB_DATABASE=deming
-    DB_USERNAME=deming_user
-    DB_PASSWORD=demPasssword-123
+	DB_DATABASE=deming
+	DB_USERNAME=deming_user
+	DB_PASSWORD=demPasssword-123
 
-# Cache
+## Créer la base de données
 
-If needed clear the cache
+Exécuter les migrations
 
-    php artisan cache:clear
+    php artisan migrate --seed
 
-Storage file link
+Remarque: la graine est importante (--seed), car elle créera le premier utilisateur administrateur pour vous.
 
-    php artisan storage:link
+Générer la clé de l'application
 
-# start
+    php artisan key:generate
 
-Start the application
+Créer le lien de stockage
+
+	php artisan storage:link
+
+Pour importer la base de données de test (facultatif)
+
+    sudo mysql deming < deming_data.sql
+
+Démarrer l'application avec php
 
     php artisan serve
 
+ou pour y accéder à l'application depuis un autre serveur
+
+    php artisan serve --host 0.0.0.0 --port 8000
+
+L'application est accessible à l'URL [http://127.0.0.1:8000]
+
+    utilisateur : admin@admin.local
+    mot de passe : admin
+
+## Apache
+
+Pour configurer Apache, modifiez les propriétés du répertoire deming et accordez les autorisations appropriées au répertoire de stockage avec la commande suivante
+
+    sudo chown -R www-data:www-data /var/www/deming
+    sudo chmod -R 775 /var/www/deming/storage
+
+Ensuite, créez un nouveau fichier de configuration d'hôte virtuel Apache pour servir l'application Mercator :
+
+    sudo vi /etc/apache2/sites-available/deming.conf
+
+Ajouter les lignes suivantes :
+
+    <VirtualHost *:80>
+    ServerName deming.local
+    ServerAdmin admin@example.com
+    DocumentRoot /var/www/deming/public
+    <Directory /var/www/deming>
+    AllowOverride All
+    </Directory>
+    ErrorLog ${APACHE_LOG_DIR}/error.log
+    CustomLog ${APACHE_LOG_DIR}/access.log combined
+    </VirtualHost>
+
+Enregistrez et fermez le fichier lorsque vous avez terminé. Ensuite, activez l'hôte virtuel Apache et le module de réécriture avec la commande suivante :
+
+    sudo a2enmod rewrite
+    sudo a2dissite 000-default.conf
+    sudo a2ensite deming.conf
+
+Enfin, redémarrez le service Apache pour activer les modifications :
+
+    sudo systemctl restart apache2
