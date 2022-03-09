@@ -71,12 +71,12 @@ Deming permet de répondre à ces exigences et de conserver les informations doc
 
 ### Ecran principal
 
-[<img src="public/screenshots/main1.png" width="400" height="300">](public/screenshots/main1.png)
-[<img src="public/screenshots/main2.png" width="400" height="300">](public/screenshots/main2.png)
+[<img src="public/screenshots/main1.png" width="400" height="280">](public/screenshots/main1.png)
+[<img src="public/screenshots/main2.png" width="400" height="280">](public/screenshots/main2.png)
 
 ### Liste des contrôles
 
-[<img src="public/screenshots/controls.png" width="400" height="200">](public/screenshots/controls.png)
+[<img src="public/screenshots/controls.png" width="400" height="180">](public/screenshots/controls.png)
 
 ### Planification des contrôles
 
