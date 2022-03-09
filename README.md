@@ -93,11 +93,11 @@ Deming permet de répondre à ces exigences et de conserver les informations doc
 
 ## Installation
 
-Procédure d'[installation](https://github.com/dbarzin/deming/blob/master/INSTALL.md) de l'application.
+Procédure d'[installation](https://github.com/dbarzin/deming/blob/main/INSTALL.md) de l'application.
 
 ## Feuille de route
 
-Une [feuille de route](https://github.com/dbarzin/deming/blob/master/ROADMAP.md) reprend les évolutions prévues de l'application.
+Une [feuille de route](https://github.com/dbarzin/deming/blob/main/ROADMAP.md) reprend les évolutions prévues de l'application.
 
 ## License
 
