@@ -23,10 +23,15 @@ Cette gestion des contrôles doit permettre la mise en œuvre d’une sécurité
 Les objectifs de mesure de l’efficacité des exigences d’un SMSI sont :
 
 a) d’évaluer l'efficacité des contrôles;
+
 b) d’évaluer l'efficacité du système de gestion de l'information;
+
 c) de vérifier dans quelle mesure les exigences de sécurité identifiées ont été respectées;
+
 d) de faciliter l’amélioration des performances de la sécurité de l’information par rapport aux objectifs ;
+
 e) de fournir des données pour la revue de la direction afin de faciliter la prise de décision liée au SMSI ;
+
 f) de justifier les besoins améliorations du ISMS.
 
 ### Evaluation des performances
@@ -36,10 +41,15 @@ La norme ISO 27001 au chapitre 9.1, impose d’évaluer les performances de séc
 Pour évaluer ces performances, il faut déterminer :
 
 a) ce qu’il est nécessaire de surveiller et de mesurer, y compris les processus et les mesures de sécurité de l’information;
+
 b) les méthodes de surveillance, de mesurage, d’analyse et d’évaluation, selon le cas, pour assurer la validité des résultats;
+
 c) quand la surveillance et les mesures doivent être effectuées;
+
 d) qui doit effectuer la surveillance et les mesures;
+
 e) quand les résultats de la surveillance et des mesures doivent être analysés et évalués; et
+
 f) qui doit analyser et évaluer ces résultats.
 
 Deming permet de répondre à ces exigences et de conserver les informations documentées appropriées comme preuves des résultats de la surveillance et des mesures.
@@ -67,15 +77,11 @@ Deming permet de répondre à ces exigences et de conserver les informations doc
 
 ### Planification des contrôles
 
-[<img src="public/screenshots/plan.png" width="400" height="300">](public/screenshots/plan.png)
+[<img src="public/screenshots/plan.png" width="450" height="300">](public/screenshots/plan.png)
 
 ### Gestion des plans d'action
 
 [<img src="public/screenshots/actions.png" width="500" height="300">](public/screenshots/actions.png)
-
-## Installation
-
-Procédure d'[installation de Deming]().
 
 ## Technologies
 - PHP, Javascript, Laravel
