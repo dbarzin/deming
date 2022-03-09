@@ -1,8 +1,5 @@
 # Deming
 
-Work in progress
-
-
 [![Latest Release](https://img.shields.io/github/release/dbarzin/deming.svg?style=flat-square)](https://github.com/dbarzin/deming/releases/latest)
 ![License](https://img.shields.io/github/license/dbarzin/deming.svg?style=flat-square)
 ![Contributors](https://img.shields.io/github/contributors/dbarzin/deming.svg?style=flat-square)
@@ -31,11 +28,11 @@ b) d’évaluer l'efficacité du système de gestion de l'information;
 
 c) de vérifier dans quelle mesure les exigences de sécurité identifiées ont été respectées;
 
-d) de faciliter l’amélioration des performances de la sécurité de l’information par rapport aux objectifs ;
+d) de faciliter l’amélioration des performances de la sécurité de l’information par rapport aux objectifs;
 
-e) de fournir des données pour la revue de la direction afin de faciliter la prise de décision liée au SMSI ;
+e) de fournir des données pour la revue de la direction afin de faciliter la prise de décisions liées au SMSI;
 
-f) de justifier les besoins améliorations du ISMS.
+f) de justifier les besoins d'amélioration du ISMS.
 
 ### Evaluation des performances
 
@@ -71,8 +68,8 @@ Deming permet de répondre à ces exigences et de conserver les informations doc
 
 ### Ecran principal
 
-[<img src="public/screenshots/main1.png" width="400" height="280">](public/screenshots/main1.png)
-[<img src="public/screenshots/main2.png" width="400" height="280">](public/screenshots/main2.png)
+[<img src="public/screenshots/main1.png" width="400" height="270">](public/screenshots/main1.png)
+[<img src="public/screenshots/main2.png" width="400" height="270">](public/screenshots/main2.png)
 
 ### Liste des contrôles
 
@@ -101,5 +98,5 @@ Une [feuille de route](https://github.com/dbarzin/deming/blob/main/ROADMAP.md) r
 
 ## License
 
-Deming est un logiciel open source distribué sous [GPL](https://www.gnu.org/licenses/licenses.fr.html).
+Deming est un logiciel open source distribué sous la licence [GPL](https://www.gnu.org/licenses/licenses.fr.html).
 
