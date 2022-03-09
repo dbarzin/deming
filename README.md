@@ -80,7 +80,7 @@ Deming permet de répondre à ces exigences et de conserver les informations doc
 
 ### Planification des contrôles
 
-[<img src="public/screenshots/plan.png" width="450" height="300">](public/screenshots/plan.png)
+[<img src="public/screenshots/plans.png" width="450" height="300">](public/screenshots/plans.png)
 
 ### Gestion des plans d'action
 
