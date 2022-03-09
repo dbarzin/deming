@@ -77,11 +77,16 @@ Deming permet de répondre à ces exigences et de conserver les informations doc
 
 ### Planification des contrôles
 
-[<img src="public/screenshots/plans.png" width="450" height="250">](public/screenshots/plans.png)
+[<img src="public/screenshots/plans.png" width="450" height="230">](public/screenshots/plans.png)
+[<img src="public/screenshots/calendar.png" width="400" height="200">](public/screenshots/calendar.png)
 
 ### Gestion des plans d'action
 
 [<img src="public/screenshots/actions.png" width="500" height="300">](public/screenshots/actions.png)
+
+### Vue de la courverture des mesures de protection
+
+[<img src="public/screenshots/radar.png" width="500" height="200">](public/screenshots/radar.png)
 
 ## Technologies
 - PHP, Javascript, Laravel
