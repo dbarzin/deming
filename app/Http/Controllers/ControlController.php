@@ -93,7 +93,6 @@ class ControlController extends Controller
             $whereClause .= "and(plan_date<='"
                 .Carbon::today()->format("Y-m-d")
                 ."')and(realisation_date is null)";            
-            
         }
         else {
             if (($period<>null)&&($period<>99)) {
@@ -151,7 +150,7 @@ class ControlController extends Controller
                 order by m1.id;"));
         }
         else
-        {
+        { // status==='0' -> all
             $controls=DB::select(
                 DB::raw("select
                     m1.id,

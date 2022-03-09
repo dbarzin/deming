@@ -137,17 +137,19 @@
             </td>
             <td>
                 <center>
-                <a href="/controls/{{ $control->id }}">
                     @if ($control->score==1)
-                        &#128545;
+                    <a href="/action/{{ $control->id }}">
+                        &#128545; 
+                    </a>
                     @elseif ($control->score==2)
+                    <a href="/action/{{ $control->id }}">
                         &#128528;
+                    </a>
                     @elseif ($control->score==3)
                         <span style="filter: sepia(1) saturate(5) hue-rotate(70deg)">&#128512;</span>
                     @else
                         &#9675; <!-- &#9899; -->
                     @endif
-                </a>
                 </center>
             </td>
             <td>

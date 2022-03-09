@@ -104,26 +104,26 @@
     <div class="cell-md-7">
         <div class="panel mt-2">
             <div data-role="panel" data-title-caption="Contrôles plannifiés" data-collapsible="true" data-title-icon="<span class='mif-calendar'></span>" class="">
-                <div class="p-4">
 
-            <table class="table striped row-hover cell-border"
+            <table class="table striped table-border mt-4"
                data-role="table"
                data-rows="10"
-               data-show-activity="true"
-               data-rownum="false"
-               data-check="false"
-               data-check-style="1"
-               id="MeasurementTable"
+               data-rows-steps="5, 10"
+               data-show-activity="false"
+               data-check-style="2"
+               data-cell-wrapper="false" 
+               data-show-search="false"
+               data-show-rows-steps="false"
                >
                 <thead>
                     <tr>
-                        <th class="sortable-column" width="5%">Domain</th>
-                        <th width="5%">Clause</th>
-                        <th width="85%">Name</th>
-                        <th class="sortable-column sort-asc"  width="5%">Date</th>
+                        <th class="sortable-column">Domain</th>
+                        <th>Clause</th>
+                        <th >Name</th>
+                        <th class="sortable-column sort-asc">Date</th>
                     </tr>
                 </thead>
-                <tbody>
+            <tbody>
 
             @foreach($controls_todo as $control)
                 <tr onclick="window.location = '/controls/{{$control->id}}';">
@@ -135,37 +135,30 @@
                     <td>
                         <a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a>
                     </td>
-                    <td>{{ $control->name }} </td>
+                    <td >{{ $control->name }}</td>
                     <td>
                         <!-- format in red when month passed -->
                         <b>
                             <a href="/controls/{{ $control->id }}">
                         @if ($control->realisation_date==null)
-                            @if (
-                            \Carbon\Carbon::
-                            createFromFormat('Y-m-d',$control->plan_date)
-                            ->isAfter(\Carbon\Carbon::now()))
+                            @if( strtotime($control->plan_date) >= strtotime('now') ) 
                                 <font color="green">
                             @else
                                 <font color="red">
                             @endif
                         @endif
-                            {{ 
-                            \Carbon\Carbon::
-                            createFromFormat('Y-m-d',$control->plan_date)
-                            ->format('Y-m-d') }} 
+                            {{ $control->plan_date }} 
                         @if ($control->realisation_date!=null)
                             </font>
                         @endif
                             </a>
-                            </b>
+                        </b>
                     </td>
                 </tr>
                 </a>
             @endforeach
             </tbody>
         </table>
-        </div>
         </div>
     </div>
     </div>
