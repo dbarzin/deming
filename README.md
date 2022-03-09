@@ -17,7 +17,7 @@ place atteignent leurs objectifs de sécurité.
 
 ### Qu’est-ce que Deming ?
 
-Deming est un outil qui permet de gérer, de planifier, de suivre et de rapporter l’efficafité de des contrôle de sécurité.
+Deming est un outil qui permet de gérer, de planifier, de suivre et de rapporter l’efficafité des contrôle de sécurité.
 
 Cette gestion des contrôles doit permettre la mise en œuvre d’une sécurité adéquate et proportionnée. Cette approche est conforme aux recommandations de la norme ISO / IEC 27001:2013, chapitre 9 qui traite de l’évaluation des performances.
 
