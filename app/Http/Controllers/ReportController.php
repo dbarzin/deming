@@ -71,10 +71,13 @@ class ReportController extends Controller
                 ->withInput();
         }
 
-        // get template
-        $templateProcessor = new TemplateProcessor(
-            storage_path('app/models/pilotage.docx')
-        );
+        // Get template file
+        $template_filename = storage_path('app/models/pilotage_.docx');
+        if (!file_exists($template_filename))
+            $template_filename = storage_path('app/models/pilotage.docx');
+
+        // create templateProcessor
+        $templateProcessor = new TemplateProcessor($template_filename);
 
         //-------------------------------------------------------------
         // make changes 

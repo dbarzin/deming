@@ -7,6 +7,7 @@ Use \Carbon\Carbon;
 use App\Exports\ControlsExport;
 use Maatwebsite\Excel\Facades\Excel;
 
+use PhpOffice\PhpWord\TemplateProcessor;
 use PhpOffice\PhpWord\Shared\Converter;
 
 use App\Measure;
@@ -570,10 +571,13 @@ class ControlController extends Controller
         // find associate measurement
         $control = Control::find($id);
 
-        // get template
-        $templateProcessor = new \PhpOffice\PhpWord\TemplateProcessor(
-            storage_path('app/models/control.docx')
-        );
+        // Get template file
+        $template_filename = storage_path('app/models/control_.docx');
+        if (!file_exists($template_filename))
+            $template_filename = storage_path('app/models/control.docx');
+
+        // create templateProcessor
+        $templateProcessor = new TemplateProcessor($template_filename);
 
         // make changes xxxx
         $templateProcessor->setValue('ref', $control->clause);

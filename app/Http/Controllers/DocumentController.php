@@ -22,11 +22,22 @@ class DocumentController extends Controller
         // nothing to do
         $id = (int)$request->get("id");
         
-
         if ($id==1) {
-            return response()->download(storage_path('app/models/control.docx'));
+            // check exists new model
+            if (file_exists(storage_path('app/models/control_.docx')))
+                // return new model
+                return response()->download(storage_path('app/models/control_.docx'));
+            else
+                // return default model
+                return response()->download(storage_path('app/models/control.docx'));
         } else if ($id==2) {
-            return response()->download(storage_path('app/models/pilotage.docx'));
+            // check exists new model
+            if (file_exists(storage_path('app/models/pilotage_.docx')))
+                // return new model
+                return response()->download(storage_path('app/models/pilotage_.docx'));
+            else
+                // return default model
+                return response()->download(storage_path('app/models/pilotage.docx'));
         } else {
             return null;
         }
@@ -41,7 +52,7 @@ class DocumentController extends Controller
             // Get image file
             $template = $request->file('template1');
             // Upload image
-            $template->storeAs('models', 'control.docx');
+            $template->storeAs('models', 'control_.docx');
 
             $message="Template updated !";
         }
@@ -50,12 +61,12 @@ class DocumentController extends Controller
             // Get image file
             $template = $request->file('template2');
             // Upload image
-            $template->storeAs('models', 'pilotage.docx');
+            $template->storeAs('models', 'pilotage_.docx');
 
             $message="Template updated !";
         }
 
-        return redirect()->back()->with('success', $message);
+        return redirect()->back()->with('message', $message);
     }
 
 

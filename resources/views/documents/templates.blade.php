@@ -9,6 +9,12 @@ Modèles de document
 <div class="p-3">
     <div data-role="panel" data-title-caption="Documents" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
+		@if(session('message'))
+		<div class="remark success">
+			<p>{{ session('message') }}</p>
+		</div>	    
+		@endif
+
 	    @if (count($errors))
 	    <div class= “form-group”>
 	        <div class= “alert alert-danger”>
@@ -26,7 +32,7 @@ Modèles de document
 	    @csrf
 			<ul>
 				<li>
-					<a href="/doc/template?id=1" target="_new"> Modèle de Contrôle</a>
+					<a href="/doc/template?id=1" target="_new">Modèle de Contrôle</a>
 			        	<input type="file" data-role="file" name="template1"> <br>
 				</li>
 
