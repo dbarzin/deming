@@ -73,7 +73,7 @@ Deming permet de répondre à ces exigences et de conserver les informations doc
 
 ### Liste des contrôles
 
-[<img src="public/screenshots/controls.png" width="400" height="180">](public/screenshots/controls.png)
+[<img src="public/screenshots/controls.png" width="400" height="120">](public/screenshots/controls.png)
 
 ### Planification des contrôles
 
