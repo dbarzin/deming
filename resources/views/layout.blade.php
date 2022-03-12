@@ -36,10 +36,12 @@
             </a>
         </div>
         <div class="suggest-box">
-            <input type="text" data-role="input" data-clear-button="false" data-search-button="true" id="search">
-            <button class="holder">
-                <span class="mif-search fg-white"></span>
-            </button>            
+            <form id="search-form" action="{{ route("globalSearch") }}" method="GET">
+                <input type="text" data-role="input" data-clear-button="false" data-search-button="true" id="search">
+                <button class="holder">
+                    <span class="mif-search fg-white"></span>
+                </button>
+            </form>            
         </div>
 
         <ul class="navview-menu mt-4" id="side-menu">
@@ -193,7 +195,7 @@
 <script src="/vendors/metro4/js/metro.min.js"></script>
 <script src="/js/index.js"></script>
 
-<!-- search engine 
+<!-- search engine  -->
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
 
     <script>
@@ -219,7 +221,7 @@
         escapeMarkup: function (markup) { return markup; },
         templateResult: formatItem,
         templateSelection: formatItemSelection,
-        placeholder : '{{ trans('global.search') }}...',
+        placeholder : '',
         language: {
             inputTooShort: function(args) {
                 var remainingChars = args.minimum - args.input.length;
@@ -255,7 +257,7 @@
 
     function formatItemSelection (item) {
         if (!item.model) {
-            return '{{ trans('global.search') }}...';
+            return '';
         }
         return item.model;
     }
@@ -266,7 +268,6 @@
 });
 
     </script>
--->
 
 </body>
 </html>

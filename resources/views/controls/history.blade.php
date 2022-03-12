@@ -301,9 +301,9 @@
       ],
       datasets: [
       { 
-        backgroundColor: color(window.chartColors.grey).alpha(0.3).rgbString(),
-        borderColor: window.chartColors.grey,
-        pointBackgroundColor: window.chartColors.grey,        
+        backgroundColor: "#60a917",
+        borderColor: "#60a917",
+        pointBackgroundColor: window.chartColors.green,        
         stack: 'Stack 0',
         data: [
             <?php 
@@ -314,11 +314,35 @@
                 ?>
             @foreach ($controls as $control)
                 <?php
-                if (($control->score==null)
-                    && ($control->plan_date!=null)
-                    && (\Carbon\Carbon::parse($control->plan_date)->between($first, $second))
-                ) {
-                        $count++;
+                if (($control->score==3) && 
+                    ($control->realisation_date!=null) && 
+                    (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
+                ) { $count++;
+                }
+                ?>
+            @endforeach          
+            {{ $count }},
+            <?php } ?> 
+        ]
+      },
+      { 
+        backgroundColor: "#fa6800",
+        borderColor: "#fa6800",
+        pointBackgroundColor: window.chartColors.orange,        
+        stack: 'Stack 0',
+        data: [
+            <?php 
+            for ($i=-12; $i<12; $i++) { 
+                $count=0; 
+                $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
+                $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
+                ?>
+            @foreach ($controls as $control)
+                <?php
+                if (($control->score==2) && 
+                    ($control->realisation_date!=null) && 
+                    (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
+                ) { $count++;
                 }
                 ?>
             @endforeach          
@@ -353,9 +377,9 @@
         ]
       },
       { 
-        backgroundColor: "#fa6800",
-        borderColor: "#fa6800",
-        pointBackgroundColor: window.chartColors.orange,        
+        backgroundColor: color(window.chartColors.grey).alpha(0.3).rgbString(),
+        borderColor: window.chartColors.grey,
+        pointBackgroundColor: window.chartColors.grey,        
         stack: 'Stack 0',
         data: [
             <?php 
@@ -366,10 +390,11 @@
                 ?>
             @foreach ($controls as $control)
                 <?php
-                if (($control->score==2) && 
-                    ($control->realisation_date!=null) && 
-                    (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
-                ) { $count++;
+                if (($control->score==null)
+                    && ($control->plan_date!=null)
+                    && (\Carbon\Carbon::parse($control->plan_date)->between($first, $second))
+                ) {
+                        $count++;
                 }
                 ?>
             @endforeach          
@@ -377,31 +402,6 @@
             <?php } ?> 
         ]
       },
-      { 
-        backgroundColor: "#60a917",
-        borderColor: "#60a917",
-        pointBackgroundColor: window.chartColors.green,        
-        stack: 'Stack 0',
-        data: [
-            <?php 
-            for ($i=-12; $i<12; $i++) { 
-                $count=0; 
-                $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
-                $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
-                ?>
-            @foreach ($controls as $control)
-                <?php
-                if (($control->score==3) && 
-                    ($control->realisation_date!=null) && 
-                    (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
-                ) { $count++;
-                }
-                ?>
-            @endforeach          
-            {{ $count }},
-            <?php } ?> 
-        ]
-      }
       ]
     };
          

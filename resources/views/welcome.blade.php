@@ -236,7 +236,7 @@
                 </div>
             </div>
             <div data-role="progress" data-value="35" class="progress" data-role-progress="true">
-                <div class="bar bg-gray" style="width: {{ count($controls_never_made) / count($active_controls)*100 }}%  ;">
+                <div class="bar bg-gray" style="width: {{ count($active_controls) > 0 ? count($controls_never_made) / count($active_controls)*100 : 0 }}%  ;">
                 </div>
             </div>
 
