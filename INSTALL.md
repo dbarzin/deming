@@ -13,7 +13,7 @@ Mettre à jour la distribution linux
 
     sudo apt update && sudo apt upgrade
 
-Installer git, php et composer
+Installer Apache, git, php et composer
 
     sudo apt-get install git composer apache2 libapache2-mod-php php php-cli php-opcache php-mysql php-zip php-gd php-mbstring php-curl php-xml -y
 
