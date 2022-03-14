@@ -4,7 +4,7 @@
 
 - OS : Ubuntu 21.10
 - RAM : 2G
-- Disque : 50G
+- Disque : 120G
 - VCPU 2
 
 ## Installation 
