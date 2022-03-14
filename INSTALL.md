@@ -99,7 +99,7 @@ Créer le lien de stockage
 
 Pour importer la base de données avec les mesures de sécurité de la norme 27002:2013
 
-    sudo mysql deming < deming-27k1\:2013.sql
+    sudo mysql deming < deming-27k2\:2013.sql
 
 Démarrer l'application avec php
 
