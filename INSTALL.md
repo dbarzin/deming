@@ -30,6 +30,8 @@ Cloner le projet depuis Github
 Installer les packages avec composer :
 
     cd deming
+    mkdir storage/framework/views
+    mkdir storage/framework/cache
     composer install
 
 Publier tous les actifs publiables à partir des packages des fournisseurs
