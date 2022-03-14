@@ -13,13 +13,9 @@ Mettre à jour la distribution linux
 
     sudo apt update && sudo apt upgrade
 
-Installer quelques libraries PHP
+Installer git, php et composer
 
-    sudo apt-get install php php-mysql
-
-Installer GIT
-
-    sudo apt install git
+    sudo apt-get install git composer apache2 libapache2-mod-php php php-cli php-opcache php-mysql php-zip php-gd php-mbstring php-curl php-xml -y
 
 Créer le répertoire du projet
 
@@ -31,16 +27,10 @@ Cloner le projet depuis Github
 
     git clone https://www.github.com/dbarzin/deming
 
-## Composer
-
-Installer Composer : [Install Composer globally](https://getcomposer.org/download/).
-
-    sudo mv composer.phar /usr/local/bin/composer
-
 Installer les packages avec composer :
 
-    cd /var/www/deming
-    composer update
+    cd deming
+    composer install
 
 Publier tous les actifs publiables à partir des packages des fournisseurs
 
