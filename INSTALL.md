@@ -105,9 +105,9 @@ Créer le lien de stockage
 
 	php artisan storage:link
 
-Pour importer la base de données de test (facultatif)
+Pour importer la base de données avec les mesures de sécurité de la norme 27002:2013
 
-    sudo mysql deming < deming_data.sql
+    sudo mysql deming < deming-27k1\:2013.sql
 
 Démarrer l'application avec php
 
