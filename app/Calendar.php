@@ -27,14 +27,25 @@ class Calendar {
 
         $html = '<div class="MyCalendar">';
         $html .= '<div class="header">';
-        $html .= '<div class="month-year">';
+        $html .= '<div class="grid no-gap">';
+        $html .= '<div class="row">';
+        $html .= '<div class="col-2">';
         $html .= '<a href="?date=';
         $html .=  date("Y-m-d", strtotime("-1 month", $this->date));
         $html .= '">&lt;&lt;</a> &nbsp; ';
-        $html .= date('F Y', strtotime($this->active_year . '-' . $this->active_month . '-' . $this->active_day));
-        $html .= ' &nbsp; <a href="?date=';
+        $html .= '</div>';
+        $html .= '<div class="col">';
+        $html .= '<input data-role="datepicker" data-day="false"';
+        $html .= ' data-min-year='. date('Y', strtotime("-1 year", $this->date));
+        $html .= ' data-max-year='. date('Y', strtotime("+1 year", $this->date));
+        $html .= ' data-value="' . $this->active_year . '-' . $this->active_month . '">';
+        $html .= '</div>';
+        $html .= '<div class="col-2">';
+        $html .= ' <a href="?date=';
         $html .=  date("Y-m-d", strtotime("+1 month", $this->date));
         $html .= '">&gt&gt;</a>';
+        $html .= '</div>';
+        $html .= '</div>';
         $html .= '</div>';
         $html .= '</div>';
         $html .= '<div class="days">';

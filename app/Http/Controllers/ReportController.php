@@ -392,7 +392,7 @@ class ReportController extends Controller
     {        
         // remove all measurements
         DB::table('documents')->delete();
-        DB::table('measurements')->delete();
+        DB::table('controls')->delete();
 
         // period in month
         $period = 12;
@@ -402,17 +402,17 @@ class ReportController extends Controller
         // Log::Alert("startDate=" . $curDate->toDateString());
 
         // get all controls
-        $controls = Control::All();
-        $cntControls = DB::table('controls')->count();
-        // Log::Alert("controld count=" . $cntControls);
+        $measures = Measure::All();
+        $cntMeasure = DB::table('measures')->count();
+        // Log::Alert("controld count=" . $cntMeasure);
 
         // controls per period
-        $perPeriod = (int)($cntControls / $period);
+        $perPeriod = (int)($cntMeasure / $period);
         // Log::Alert("control per period=" . $perPeriod);
 
         // loop on controls
         $curControl = 1; 
-        foreach ($controls as $control) {
+        foreach ($measures as $measure) {
             // go to next period
             if (($curControl++ % $perPeriod)==0) {
                 $curDate->addMonth(1);                
@@ -423,18 +423,18 @@ class ReportController extends Controller
             // create a measurement
             // TODO : loop on plan_date until date is in the futur
             $control = new Control();
-            $control->control_id=$control->id;
-            $control->domain_id=$control->domain_id;
-            $control->name=$control->name;
-            $control->clause=$control->clause;
-            $control->objective = $control->objective;
-            $control->attributes = $control->attributes;
-            $control->model = $control->model;
-            $control->indicator = $control->indicator;
-            $control->action_plan = $control->action_plan;
-            $control->owner = $control->owner;
-            $control->periodicity = $control->periodicity;
-            $control->retention = $control->retention;
+            $control->measure_id=$measure->id;
+            $control->domain_id=$measure->domain_id;
+            $control->name=$measure->name;
+            $control->clause=$measure->clause;
+            $control->objective = $measure->objective;
+            $control->attributes = $measure->attributes;
+            $control->model = $measure->model;
+            $control->indicator = $measure->indicator;
+            $control->action_plan = $measure->action_plan;
+            $control->owner = $measure->owner;
+            $control->periodicity = $measure->periodicity;
+            $control->retention = $measure->retention;
             // do it            
             $control->plan_date = $curDate->toDateString();
             $control->realisation_date = (new Carbon($curDate))->addDay(rand(0, 28))->toDateString();
@@ -443,22 +443,22 @@ class ReportController extends Controller
             // save it
             $control->save();
 
-            // create next measurement
+            // create next control
             $control = new Control();
-            $control->control_id=$control->id;
-            $control->domain_id=$control->domain_id;
-            $control->name=$control->name;
-            $control->clause=$control->clause;
-            $control->objective = $control->objective;
-            $control->attributes = $control->attributes;
-            $control->model = $control->model;
-            $control->indicator = $control->indicator;
-            $control->action_plan = $control->action_plan;
-            $control->owner = $control->owner;
-            $control->periodicity = $control->periodicity;
-            $control->retention = $control->retention;
+            $control->measure_id=$measure->id;
+            $control->domain_id=$measure->domain_id;
+            $control->name=$measure->name;
+            $control->clause=$measure->clause;
+            $control->objective = $measure->objective;
+            $control->attributes = $measure->attributes;
+            $control->model = $measure->model;
+            $control->indicator = $measure->indicator;
+            $control->action_plan = $measure->action_plan;
+            $control->owner = $measure->owner;
+            $control->periodicity = $measure->periodicity;
+            $control->retention = $measure->retention;
             // next one            
-            $control->plan_date = (new Carbon($curDate))->addMonth($control->periodicity)->toDateString();
+            $control->plan_date = (new Carbon($curDate))->addMonth($measure->periodicity)->toDateString();
             // fix it
             $control->realisation_date=null;
             $control->note=null;
