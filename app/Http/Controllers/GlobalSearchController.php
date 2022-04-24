@@ -10,21 +10,19 @@ class GlobalSearchController extends Controller
 {
     private $models = [
         'Domain'          => 'Domaine',
+        'Measure'         => 'Mesure',
         'Control'         => 'Control',
-        'Measurement'     => 'Mesure',
     ];
 
     public function search(Request $request)
     {
-        $search = $request->input('search');
+        $term = $request->input('search');
 
-        \Log::Alert("search: ".$search);
+        \Log::Alert("search: ".$term);
 
-        if ($search === null || !isset($search['term'])) {
-            abort(400);
-        }
-
-        $term           = $search['term'];
+        if ($term === null) 
+            return redirect()->back();
+        
         $searchableData = [];
 
         foreach ($this->models as $model => $translation) {
@@ -54,12 +52,13 @@ class GlobalSearchController extends Controller
 
                 $parsedData['fields_formated'] = $formattedFields;
 
-                $parsedData['url'] = url('/admin/' . Str::plural(Str::snake($model, '-')) . '/' . $result->id . '/edit');
+                $parsedData['url'] = url('/' . Str::plural(Str::snake($model, '-')) . '/' . $result->id );
 
                 $searchableData[] = $parsedData;
             }
         }
 
-        return response()->json(['results' => $searchableData]);
+        return view("search",['results' => $searchableData])
+            ->with("search", $term);
     }
 }
