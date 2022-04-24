@@ -85,122 +85,49 @@ class ControlController extends Controller
         }
 
         // select
-        $params = array();
         $whereClause ="(true)";
         if ($domain<>0) {
-            $whereClause .= "and (domain_id=".$domain.")";
+            $whereClause .= "and (c1.domain_id=".$domain.")";
         }
         if ($late<>null) {
-            $whereClause .= "and(plan_date<='"
+            $whereClause .= "and(c1.plan_date<='"
                 .Carbon::today()->format("Y-m-d")
-                ."')and(realisation_date is null)";            
+                ."')and(c1.realisation_date is null)";            
         }
         else {
             if (($period<>null)&&($period<>99)) {
-                $whereClause .= "and(plan_date>='"
+                $whereClause .= "and(c1.plan_date>='"
                 .((new Carbon('first day of this month'))->addMonth((int)$period)->format("Y-m-d"))
-                ."')and(plan_date<'"
+                ."')and(c1.plan_date<'"
                 .((new Carbon('first day of next month'))->addMonth((int)$period)->format("Y-m-d"))
                 ."')";
             }
             if ($status<>null) {
                 if ($status=='1') {
-                    $whereClause .= "and(realisation_date is not null)";
+                    $whereClause .= "and(c1.realisation_date is not null)";
                 }
                 if ($status=='2') {
-                    $whereClause .= "and(realisation_date is null)";
+                    $whereClause .= "and(c1.realisation_date is null)";
                 }
             }
         }
-
-        // Select
-        if($status!='0') {
-            $controls=DB::select(
-                DB::raw("select
-                    m1.id,
-                    m1.measure_id,
-                    m1.clause,
-                    m1.name,
-                    m1.domain_id,
-                    domains.title, 
-                    m1.plan_date,
-                    m1.realisation_date,
-                    m1.score as score,
-                    m1.realisation_date, 
-                    m1.score,
-                    (
-                        select max(m3.plan_date)
-                        from controls m3
-                        where m3.id>m1.id and m1.measure_id=m3.measure_id
-                    ) as next_date,
-                    (
-                        select max(m3.id)
-                        from controls m3
-                        where m3.id>m1.id and m1.measure_id=m3.measure_id
-                    ) as next_id
-                from 
-                    (
-                    select measure_id, max(id) as id
-                    from controls
-                    where ". $whereClause . " group by measure_id
-                    ) as m2,
-                    controls m1,
-                    domains
-                where
-                    m1.id=m2.id and domains.id=m1.domain_id
-                order by m1.id;"));
-        }
-        else
-        { // status==='0' -> all
-            $controls=DB::select(
-                DB::raw("select
-                    m1.id,
-                    m1.measure_id,
-                    m1.name,
-                    m1.clause,
-                    m1.domain_id,
-                    m1.plan_date,
-                    m1.realisation_date,
-                    m1.score as score,
-                    (
-                        select max(m3.plan_date)
-                        from controls m3
-                        where m3.id>m1.id and m1.measure_id=m3.measure_id
-                    ) as next_date,
-                    (
-                        select max(m3.id)
-                        from controls m3
-                        where m3.id>m1.id and m1.measure_id=m3.measure_id
-                    ) as next_id
-                from 
-                    (
-                    select measure_id, max(id) as id
-                    from controls
-                    where realisation_date is not null and ". $whereClause . " group by measure_id
-                    ) as m2,
-                    controls m1,
-                    domains
-                where
-                    m1.id=m2.id and domains.id=m1.domain_id 
-                UNION SELECT 
-                    m1.id as id,
-                    m1.measure_id as measure_id,
-                    m1.name as name,
-                    m1.clause as clause,
-                    m1.domain_id as domain_id,
-                    m1.plan_date as plan_date,
-                    m1.realisation_date,
-                    m1.score as score,
-                    null as next_date,
-                    null as next_id                    
-                    FROM controls m1 
-                    WHERE realisation_date is null and ". $whereClause .
-                    " and not exists (
-                        select * 
-                        from controls m2 
-                        where realisation_date is not null and m1.measure_id=m2.measure_id);"
-                    ));
-            }
+        $controls=DB::select(
+            DB::raw("select
+                c1.id,
+                c1.measure_id,
+                c1.name,
+                c1.clause,
+                c1.domain_id,
+                c1.plan_date,
+                c1.realisation_date,
+                c1.score as score,
+                c2.id as next_id,
+                c2.plan_date as next_date
+            from
+                controls c1 left join controls c2 on c1.next_id=c2.id
+            where " . $whereClause .
+            " order by c1.id"    
+                ));
 
         // view
         return view("controls.index")
@@ -241,16 +168,17 @@ class ControlController extends Controller
     {
         $control = Control::find($id);
 
-        $next_control = DB::table("controls")
-           ->select(\DB::raw("MIN(id) as id"),"plan_date")
-           ->where("measure_id","=",$control->measure_id)
-           ->where("id",">",$control->id)
-           ->get()->first();
+        if ($control->next_id!=null)
+            $next_control = DB::table("controls")
+               ->select("id","plan_date")
+               ->where("id","=",$control->next_id)
+               ->get()->first();
+        else
+            $next_control=null;
 
         $prev_control = DB::table("controls")
-           ->select(\DB::raw("MAX(id) as id"),"plan_date")
-           ->where("measure_id","=",$control->measure_id)
-           ->where("id","<",$control->id)
+           ->select("id","plan_date")
+           ->where("next_id","=",$id)
            ->get()->first();
 
         // get associated documents
@@ -351,17 +279,9 @@ class ControlController extends Controller
                 c2.plan_date as next_date,
                 c2.id as next_id
                 from
-                    controls c1
-                    LEFT JOIN controls c2 on (
-                        c1.measure_id = c2.measure_id and c2.id > c1.id and c2.realisation_date is null),
-                    (
-                    select max(id) as id
-                    from controls
-                    where realisation_date <= '" . $cur_date . "'
-                    group by measure_id
-                    ) as c3
+                    controls c1 left join controls c2 on c1.next_id=c2.id
                 where
-                    c1.id = c3.id 
+                    c2.realisation_date is null and c1.next_id is not null
                 group by measure_id order by clause;"
                 )
             );
@@ -495,16 +415,10 @@ class ControlController extends Controller
 
         // Log::Alert("doMake realisation_date=".request("realisation_date"));
 
-        // update control
-        $control->update();
 
         // if there is no next control
-        if (
-            DB::table('controls')
-            ->where('clause','=',$control->clause)
-            ->where('realisation_date','=',null)
-            ->count()==0) {
-
+        if ($control->next_id==null) 
+        {
             // create a new control
             $new_control = new Control();
             $new_control->measure_id=$control->measure_id;
@@ -515,14 +429,20 @@ class ControlController extends Controller
             $new_control->attributes = $control->attributes;
             $new_control->model = $control->model;
             $new_control->indicator = $control->indicator;
-            // should action_plan comes from measure ?
+
+            // should action_plan comes from measure 
             $new_control->action_plan = $control->action_plan; 
             $new_control->owner = $control->owner;
             $new_control->periodicity = $control->periodicity;        
             $new_control->retention = $control->retention;
             $new_control->plan_date = request("next_date");
             $new_control->save();
+            // make link
+            $control->next_id=$new->control->id;
         }
+
+        // update control
+        $control->update();
 
         return redirect("/");
     }

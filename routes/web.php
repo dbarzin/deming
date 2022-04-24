@@ -78,6 +78,3 @@ Route::get('/export/controls', 'ControlController@export');
 /* test chart */
 Route::get('/testChart', 'ReportController@testChart');
 
-/* Generate test data */
-Route::get('/generateTests', 'ReportController@generateTests');
-

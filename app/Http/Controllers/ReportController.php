@@ -154,22 +154,17 @@ class ReportController extends Controller
 
         // get status report
         $controls=DB::select(
-            DB::raw(
-                "
+            DB::raw("
             SELECT 
-            c2.measure_id, 
-            c2.domain_id,
-            c2.score,
-            c2.realisation_date
+            c1.measure_id, 
+            c1.domain_id,
+            c1.score,
+            c1.realisation_date
             FROM
-                (select 
-                measure_id,
-                max(id) as id
-                from controls
-                where realisation_date is not null and score is not null
-                group by measure_id) as c1, controls as c2
-            where c1.id=c2.id;
-                "
+                controls c1 left join controls c2 on c1.next_id=c2.id
+            WHERE
+                c2.realisation_date is null and c1.next_id is not null
+            group by measure_id order by clause;"
             )
         );
 
@@ -300,36 +295,22 @@ class ReportController extends Controller
         $actions=
             DB::select("
                 select
-                    c2.measure_id,
-                    c2.id,
-                    c2.clause,
-                    c2.action_plan,
-                    c2.score,
-                    c2.name,
-                    c2.plan_date,
-                    c2.realisation_date,
-                    c3.id as next_id,
-                    c3.plan_date as next_date,
-                    c2.action_plan 
+                    c1.measure_id,
+                    c1.id,
+                    c1.clause,
+                    c1.action_plan,
+                    c1.score,
+                    c1.name,
+                    c1.plan_date,
+                    c1.realisation_date,
+                    c2.id as next_id,
+                    c2.plan_date as next_date,
+                    c1.action_plan 
                 from
-                    (
-                    select 
-                        measure_id,
-                        max(id) as id
-                    from 
-                        controls
-                    where
-                        realisation_date is not null
-                    group by measure_id
-                    ) as c1,                    
-                    controls c2,
-                    controls c3
+                    controls c1 left join controls c2 on c1.next_id=c2.id
                 where
-                    (c1.id = c2.id ) and
-                    (c2.score=1 or c2.score=2) and
-                    (c3.measure_id = c2.measure_id and c3.id > c2.id)
-                order by measure_id
-                    ;");
+                    (c1.score=1 or c1.score=2)
+                order by measure_id;");
 
         $table =new Table(array('borderSize' => 3, 'borderColor' => 'black', 'width' => 9800 , 'unit' => TblWidth::TWIP));
 
@@ -379,95 +360,5 @@ class ReportController extends Controller
         // return
         return response()->download($filepath);       
     }
-
-
-
-
-    /**
-     * Generate tests data. !!!! DANGEROUS !!!!
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function generateTests()
-    {        
-        // remove all measurements
-        DB::table('documents')->delete();
-        DB::table('controls')->delete();
-
-        // period in month
-        $period = 12;
-
-        // Start date
-        $curDate=Carbon::now()->addMonth(-$period)->day(1);
-        // Log::Alert("startDate=" . $curDate->toDateString());
-
-        // get all controls
-        $measures = Measure::All();
-        $cntMeasure = DB::table('measures')->count();
-        // Log::Alert("controld count=" . $cntMeasure);
-
-        // controls per period
-        $perPeriod = (int)($cntMeasure / $period);
-        // Log::Alert("control per period=" . $perPeriod);
-
-        // loop on controls
-        $curControl = 1; 
-        foreach ($measures as $measure) {
-            // go to next period
-            if (($curControl++ % $perPeriod)==0) {
-                $curDate->addMonth(1);                
-            }
-
-            // Log::Alert("Control " . $control->clause . " curDate=" . $curDate->toDateString());
-
-            // create a measurement
-            // TODO : loop on plan_date until date is in the futur
-            $control = new Control();
-            $control->measure_id=$measure->id;
-            $control->domain_id=$measure->domain_id;
-            $control->name=$measure->name;
-            $control->clause=$measure->clause;
-            $control->objective = $measure->objective;
-            $control->attributes = $measure->attributes;
-            $control->model = $measure->model;
-            $control->indicator = $measure->indicator;
-            $control->action_plan = $measure->action_plan;
-            $control->owner = $measure->owner;
-            $control->periodicity = $measure->periodicity;
-            $control->retention = $measure->retention;
-            // do it            
-            $control->plan_date = $curDate->toDateString();
-            $control->realisation_date = (new Carbon($curDate))->addDay(rand(0, 28))->toDateString();
-            $control->note = rand(0, 10);
-            $control->score = rand(0, 100)<90 ? 3 : (rand(0, 2)<2 ? 2 : 1);
-            // save it
-            $control->save();
-
-            // create next control
-            $control = new Control();
-            $control->measure_id=$measure->id;
-            $control->domain_id=$measure->domain_id;
-            $control->name=$measure->name;
-            $control->clause=$measure->clause;
-            $control->objective = $measure->objective;
-            $control->attributes = $measure->attributes;
-            $control->model = $measure->model;
-            $control->indicator = $measure->indicator;
-            $control->action_plan = $measure->action_plan;
-            $control->owner = $measure->owner;
-            $control->periodicity = $measure->periodicity;
-            $control->retention = $measure->retention;
-            // next one            
-            $control->plan_date = (new Carbon($curDate))->addMonth($measure->periodicity)->toDateString();
-            // fix it
-            $control->realisation_date=null;
-            $control->note=null;
-            $control->score=null;
-            // save it
-            $control->save();
-        }
-        return redirect("/");
-    }
-
 }
 

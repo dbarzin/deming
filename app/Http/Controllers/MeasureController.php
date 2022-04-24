@@ -165,7 +165,7 @@ class MeasureController extends Controller
         $measure->retention = request("retention");
         $measure->save();
 
-        // update the open measure
+        // update the current control
         $control=Control::where('measure_id', $measure->id)
                             ->where('realisation_date', null)
                             ->get()->first();
@@ -189,7 +189,7 @@ class MeasureController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\c $c
+     * @param  \App\Measure $measure
      * @return \Illuminate\Http\Response
      */
     public function destroy(Measure $measure)
@@ -203,7 +203,7 @@ class MeasureController extends Controller
     /**
      * Activate a measure
      *
-     * @param  \App\c $c
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function activate(Request $request)
@@ -211,26 +211,40 @@ class MeasureController extends Controller
         // dd($request);
         $measure = Measure::find($request->id);
 
-	// TODO: check control is disabled
+    	// Check control is disabled
+        $active_control_id = DB::Table("controls")
+            ->select("id")
+            ->where("measure_id","=",$measure->id)
+            ->where('realisation_date', null)
+            ->first();
+        if ($active_control_id==null) {
+            // create a new control        
+            $control = new Control();
+            $control->measure_id=$measure->id;
+            $control->domain_id=$measure->domain_id;
+            $control->name=$measure->name;
+            $control->clause=$measure->clause;
+            $control->objective = $measure->objective;
+            $control->attributes = $measure->attributes;
+            $control->model = $measure->model;
+            $control->indicator = $measure->indicator;
+            $control->action_plan = $measure->action_plan;
+            $control->owner = $measure->owner;
+            $control->periodicity = $measure->periodicity;
+            $control->retention = $measure->retention;
+            $control->plan_date = Carbon::now()->endOfMonth();
+            // Save it
+            $control->save();
 
-
-        // create the correspodign control        
-        $control = new Control();
-        $control->measure_id=$measure->id;
-        $control->domain_id=$measure->domain_id;
-        $control->name=$measure->name;
-        $control->clause=$measure->clause;
-        $control->objective = $measure->objective;
-        $control->attributes = $measure->attributes;
-        $control->model = $measure->model;
-        $control->indicator = $measure->indicator;
-        $control->action_plan = $measure->action_plan;
-        $control->owner = $measure->owner;
-        $control->periodicity = $measure->periodicity;
-        $control->retention = $measure->retention;
-        $control->plan_date = Carbon::now()->endOfMonth();
-
-        $control->save();
+            // Update link
+            $prev_control = Control::where("measure_id","=",$measure->id)
+                ->where('next_id',null)
+                ->first();
+            if ($prev_control!=null) {
+                $prev_control->next_id=$control->id;
+                $prev_control->update();
+            }
+        }
 
         // return to the list of measures
         return redirect("/measures");
@@ -240,16 +254,23 @@ class MeasureController extends Controller
     /**
      * Disable a measure
      *
-     * @param  \App\c $c
+     * @param \Illuminate\Http\Request $request
      * @return \Illuminate\Http\Response
      */
     public function disable(Request $request)
     {
-
-        DB::table('measures')
+        $control_id = DB::table('controls')
+            ->select('id')
             ->where('measure_id', '=', $request->id)
-            ->whereNull('realisation_date')
-            ->delete();
+            ->where('realisation_date', null)
+            ->get()
+            ->first()->id;
+        if($control_id!=null) {
+            // break link
+            DB::update("UPDATE controls SET next_id = null WHERE next_id =" . $control_id);
+            // delete control
+            DB::delete("DELETE FROM controls WHERE id = " . $control_id);
+           }
 
         // return to the list of measures
         return redirect("/measures");
