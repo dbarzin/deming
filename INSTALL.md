@@ -102,6 +102,10 @@ Pour importer la base de données avec les mesures de sécurité de la norme 270
 
     sudo mysql deming < deming-27k2\:2013.sql
 
+Génrérer des données de test (optionnel)
+
+    php artisan deming:generateTests
+
 Démarrer l'application avec php
 
     php artisan serve
