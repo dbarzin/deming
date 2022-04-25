@@ -438,7 +438,7 @@ class ControlController extends Controller
             $new_control->plan_date = request("next_date");
             $new_control->save();
             // make link
-            $control->next_id=$new->control->id;
+            $control->next_id=$new_control->id;
         }
 
         // update control

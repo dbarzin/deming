@@ -164,7 +164,7 @@ class ReportController extends Controller
                 controls c1 left join controls c2 on c1.next_id=c2.id
             WHERE
                 c2.realisation_date is null and c1.next_id is not null
-            group by measure_id order by clause;"
+            group by c1.measure_id order by c1.clause;"
             )
         );
 
