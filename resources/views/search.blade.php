@@ -6,6 +6,7 @@
 
 		@foreach($results as $result)
 		<b>{{ $result['model'] }}</b> :
+		{{ $result['clause'] }} :
 		<a href="{{ $result['url'] }}">
 			@if (array_key_exists("name",$result))
 				{{ $result["name"] }}
@@ -13,6 +14,9 @@
 				{{ $result["title"] }}
 			@endif
 		</a>
+			@if (array_key_exists("realisation_date",$result))
+				- {{ $result["realisation_date"] }}
+			@endif			
 		<br>
 		@endforeach
 	</div>
