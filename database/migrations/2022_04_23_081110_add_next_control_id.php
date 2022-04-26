@@ -24,7 +24,7 @@ class AddNextControlId extends Migration
         $controls=Control::All();
         foreach($controls as $control) {
             $control->next_id=DB::select(DB::raw(
-                    "select max(id) as next_id from controls " .
+                    "select min(id) as next_id from controls " .
                     "where id > " . $control->id .
                     " and measure_id = " . $control->measure_id))[0]->next_id;
             $control->update();
