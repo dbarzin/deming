@@ -309,7 +309,7 @@ class ReportController extends Controller
                 from
                     controls c1 left join controls c2 on c1.next_id=c2.id
                 where
-                    (c1.score=1 or c1.score=2)
+                    (c1.score=1 or c1.score=2) and c2.next_id is null
                 order by measure_id;");
 
         $table =new Table(array('borderSize' => 3, 'borderColor' => 'black', 'width' => 9800 , 'unit' => TblWidth::TWIP));
