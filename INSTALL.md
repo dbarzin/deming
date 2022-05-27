@@ -116,7 +116,7 @@ ou pour y accéder à l'application depuis un autre serveur
 
 L'application est accessible à l'URL [http://127.0.0.1:8000]
 
-    utilisateur : admin@admin.local
+    utilisateur : admin@admin.localhost
     mot de passe : admin
 
 ## Apache
