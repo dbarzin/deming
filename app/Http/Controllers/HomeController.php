@@ -99,7 +99,25 @@ class HomeController extends Controller
                 order by id;");
         //dd($status);
 
-        // get planned controls
+        // get controls todo
+        $controls_todo=DB::select(
+            DB::raw("select
+                c1.id,
+                c1.measure_id,
+                c1.name,
+                c1.clause,
+                c1.domain_id,
+                c1.plan_date,
+                c2.id as prev_id,
+                c2.realisation_date as prev_date,
+                c2.score as score
+            from
+                controls c1 left join controls c2 on c2.next_id=c1.id
+            where (c1.realisation_date is null) and (c1.plan_date < NOW() + INTERVAL 30 DAY)
+            order by c1.plan_date"
+            ));
+
+        /*
         $controls_todo = DB::table('controls')
             ->where(
                 [
@@ -108,6 +126,7 @@ class HomeController extends Controller
                 ]
             )
             ->get();
+        */
         // dd($plannedMeasurements);
 
         // planed controls this month

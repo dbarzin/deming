@@ -101,7 +101,7 @@
 <!------------------------------------------------------------------------------------------>
 
 <div class="row">
-    <div class="cell-md-7">
+    <div class="cell-md-12">
         <div class="panel mt-2">
             <div data-role="panel" data-title-caption="Contrôles plannifiés" data-collapsible="true" data-title-icon="<span class='mif-calendar'></span>" class="">
 
@@ -120,7 +120,9 @@
                         <th class="sortable-column">Domain</th>
                         <th>Clause</th>
                         <th >Name</th>
-                        <th class="sortable-column sort-asc">Date</th>
+                        <th >Note</th>
+                        <th >Réalisé</th>
+                        <th class="sortable-column">Planifié</th>
                     </tr>
                 </thead>
             <tbody>
@@ -136,21 +138,38 @@
                         <a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a>
                     </td>
                     <td >{{ $control->name }}</td>
+
                     <td>
-                        <!-- format in red when month passed -->
+                        <center>
+                            <a href="/control/show/{{ $control->prev_id }}">
+                            @if ($control->score==1)
+                                &#128545; 
+                            @elseif ($control->score==2)
+                                &#128528;
+                            @elseif ($control->score==3)
+                                <span style="filter: sepia(1) saturate(5) hue-rotate(70deg)">&#128512;</span>
+                            @else
+                                &#9675; <!-- &#9899; -->
+                            @endif
+                            </a>
+                        </center>
+                    </td>
+
+                    <td>
+                        <a href="/control/show/{{$control->prev_id}}">
+                            {{ $control->prev_date }}
+                        </a>
+                    </td>
+                    <td>
                         <b>
                             <a href="/controls/{{ $control->id }}">
-                        @if ($control->realisation_date==null)
                             @if( strtotime($control->plan_date) >= strtotime('now') ) 
                                 <font color="green">
                             @else
                                 <font color="red">
                             @endif
-                        @endif
-                            {{ $control->plan_date }} 
-                        @if ($control->realisation_date!=null)
+                                {{ $control->plan_date }} 
                             </font>
-                        @endif
                             </a>
                         </b>
                     </td>
@@ -163,88 +182,6 @@
     </div>
     </div>
 
-    <div class="cell-md-5">
-        <div class="panel mt-2">
-
-        <div data-role="panel" data-title-caption="Performances" data-collapsible="true" data-title-icon="<span class='mif-paragraph-left'></span>" class="">
-    
-            <div class="clear">
-                <div class="place-left">Contrôles réussis</div>
-                <div class="place-right">
-                    <strong>
-                        <?php $count=0; ?>
-                        @foreach($active_controls as $c)
-                          <?php if ($c->score=="3") { $count++; } ?>
-                        @endforeach 
-                        {{ $count }}
-                    </strong>
-                    /
-                    {{ $active_measures_count }}
-                </div>
-            </div>
-            <div data-role="progress" data-value="35" class="progress" data-role-progress="true">
-                <div class="bar bg-green" style="width: {{ (count($active_controls)>0) ? $count/count($active_controls)*100 : 0 }}%  ;">
-                </div>
-            </div>
-
-            <div class="clear">
-                <div class="place-left">Controles en alerte</div>
-                <div class="place-right">
-                    <strong>
-                        <?php $count=0; ?>
-                        @foreach($active_controls as $c)
-                          <?php if ($c->score=="2") { $count++; } ?>
-                        @endforeach 
-                        {{ $count }}
-                    </strong>
-                    /
-                    {{ $active_measures_count }}
-                </div>
-            </div>
-            <div data-role="progress" data-value="{{ count($active_controls) }}" class="progress" data-role-progress="true">
-                <div class="bar bg-orange" style="width: {{ (count($active_controls)>0) ? $count/count($active_controls)*100 : 0 }}% ;">
-                </div>
-            </div>
-
-            <div class="clear">
-                <div class="place-left">Contrôles en échec</div>
-                <div class="place-right">
-                    <strong>
-                        <?php $count=0; ?>
-                        @foreach($active_controls as $c)
-                          <?php if ($c->score=="1") { $count++; } ?>
-                        @endforeach 
-                        {{ $count }}
-                    </strong>
-                    /
-                    {{ $active_measures_count }}
-                </div>
-            </div>
-            <div data-role="progress" data-value="{{ count($active_controls) }}" class="progress" data-role-progress="true">
-                <div class="bar bg-red" style="width: {{ (count($active_controls)>0) ? $count/count($active_controls)*100 : 0 }}%  ;">
-                </div>
-            </div>
-
-            <div class="clear">
-                <div class="place-left">Contrôles non-réalisées</div>
-                <div class="place-right">
-                    <strong>
-                    {{ count($controls_never_made) }}
-                    </strong>
-                    /
-                    {{ $active_measures_count }}
-                </div>
-            </div>
-            <div data-role="progress" data-value="35" class="progress" data-role-progress="true">
-                <div class="bar bg-gray" style="width: {{ count($active_controls) > 0 ? count($controls_never_made) / count($active_controls)*100 : 0 }}%  ;">
-                </div>
-            </div>
-
-            <p class="text-small">Les performances passées ne préjugent pas des performances futures.</p>
-            </div>
-        </div>
-
-    </div>
 
 </div>
 </div>
