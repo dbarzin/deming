@@ -49,6 +49,7 @@
 
     		<div class="cell-1">
     			<strong>Précédent</strong>
+    			<br>
 	    		<strong>Suivant</strong>	    		
 	    	</div>
 			<div class="cell-1">
