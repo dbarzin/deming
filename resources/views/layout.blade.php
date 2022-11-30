@@ -187,7 +187,7 @@
 </div>
 
 <!-- jQuery first, then Metro UI JS -->
-<script src="/vendors/jquery/jquery-3.4.1.min.js"></script>
+<script src="/vendors/jquery/jquery-3.6.1.min.js"></script>
 <script src="/vendors/chartjs/Chart.bundle.min.js"></script>
 <script src="/vendors/qrcode/qrcode.min.js"></script>
 <script src="/vendors/jsbarcode/JsBarcode.all.min.js"></script>
