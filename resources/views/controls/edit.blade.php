@@ -90,8 +90,8 @@
 	    		<div class="cell-1">
 		    		<strong>Note</strong>
 		    	</div>
-	    		<div class="cell-2">
-					<input type="text" data-role="spinner" name="note" value="{{ $control->note }}" size="3">
+	    		<div class="cell-1">
+					<input type="text" data-role="spinner" name="note" value="{{ count($errors)>0 ?  old('note') : $control->note }}">
 	    		</div>
 		    </div>
 
