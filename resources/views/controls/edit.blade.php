@@ -25,9 +25,9 @@
 	    		<div class="cell-1">
 		    		<strong>Nom</strong>
 		    	</div>
-				<div class="cell-6">
+				<div class="cell-8">
 		    		{{ $control->clause }} 
-					<input type="text" name="name" value="{{ $control->name }}">
+					<input type="text" name="name" value="{{ $control->name }}" size="64">
 				</div>
 			</div>
 
@@ -91,7 +91,7 @@
 		    		<strong>Note</strong>
 		    	</div>
 	    		<div class="cell-2">
-					<input type="text" data-role="spinner" name="note" value="{{ $control->note }}">
+					<input type="text" data-role="spinner" name="note" value="{{ $control->note }}" size="3">
 	    		</div>
 		    </div>
 
