@@ -33,6 +33,7 @@ Installer les packages avec composer :
     mkdir -p storage/framework/views
     mkdir -p storage/framework/cache
     mkdir -p storage/framework/sessions
+    mkdir -p bootstrap/cache
     composer install
 
 Publier tous les actifs publiables à partir des packages des fournisseurs
