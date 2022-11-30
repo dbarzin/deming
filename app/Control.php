@@ -25,6 +25,15 @@ class Control extends Model
     ];
 
     protected $fillable = [
+        'name',
+        'observations',
+        'clause',
+        'objective',
+        'attributes',
+        'indicator',
+        'model',
+        'note',
+        'score'
     ];
 
     // Return the measure associated to this control

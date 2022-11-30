@@ -455,7 +455,7 @@ class ControlController extends Controller
      */
     public function save(Request $request)
     {
-        //Only for CISO
+        // Only for CISO
         if (Auth::User()->role!=1)
             return;
 
@@ -464,9 +464,14 @@ class ControlController extends Controller
         // plan date is in the futur
         // save control 
         $control = Control::find($id);
+        $control->name = request("name");
+        $control->objective = request("objective");
+        $control->attributes = request("attributes");
+        $control->plan_date = request("plan_date");
+        $control->realisation_date = request("realisation_date");
         $control->observations = request("observations");
         $control->note = request("note"); 
-        $control->plan_date=request("plan_date");
+        $control->score = request("score"); 
     	$control->action_plan=request("action_plan");
 
         $control-> update();
