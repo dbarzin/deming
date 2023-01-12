@@ -163,6 +163,7 @@ class MeasureController extends Controller
         $measure->owner = request("owner");
         $measure->periodicity = request("periodicity");
         $measure->retention = request("retention");
+        
         $measure->save();
 
         // update the current control

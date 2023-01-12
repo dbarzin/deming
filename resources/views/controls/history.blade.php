@@ -6,7 +6,7 @@
 <div class="row ">
     <div class="cell-md-6">
 
-        <div data-role="panel" data-title-caption="Planning" data-collapsible="false" data-title-icon="<span class='mif-chart-line'></span>">
+        <div data-role="panel" data-title-caption="{{ trans('cruds.control.history') }}" data-collapsible="false" data-title-icon="<span class='mif-chart-line'></span>">
 
             <canvas id="canvas-status" width="600" height="300px" class="chartjs-render-monitor">
             </canvas>

@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Effectuer un contrôle" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.control.make') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 	@if (count($errors))
 		@foreach ($errors->all() as $error)
@@ -17,7 +17,7 @@
 		<div class="grid">
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Nom</strong>
+		    		<strong>{{ trans('cruds.control.fields.name') }}</strong>
 		    	</div>
 					{{ $control->clause }} - {{ $control->name }}
 				</div>
@@ -25,7 +25,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Objectif</strong>
+		    		<strong>{{ trans('cruds.control.fields.objective') }}</strong>
 		    	</div>
 				<div class="cell-6">
 					{{ $control->objective }}
@@ -34,7 +34,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Attributes</strong>
+		    		<strong>{{ trans('cruds.control.fields.attributes') }}</strong>
 		    	</div>
 				<div class="cell-6">
 					<pre>{{ $control->attributes }}</pre>
@@ -43,7 +43,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Date de la mesure</strong>
+		    		<strong>{{ trans('cruds.control.fields.realisation_date') }}</strong>
 		    	</div>
 				<div class="cell-2">
 					<input type="text" 
@@ -56,7 +56,7 @@
 						data-input-format="%Y-%m-%d">
 				</div>
 				<div class="cell-2">
-					<b>Date de planification</b>
+					<b>{{ trans('cruds.control.fields.plan_date') }}</b>
 				</div>
 				<div class="cell-2">				
 					<input type="text" 
@@ -70,7 +70,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Observations</strong>
+		    		<strong>{{ trans('cruds.control.fields.observations') }}</strong>
 		    	</div>
 				<div class="cell-6">
 					<textarea name="observations" rows="5" cols="80">{{ count($errors)>0 ?  old('observations') : $control->observations }}</textarea>
@@ -79,15 +79,14 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Rapport</strong>
+		    		<strong>{{ trans('cruds.control.fields.report') }}</strong>
 		    		<br>
-					<a target="_new" href="/control/template/{{ $control->id }}">Modèle</a>
+					<a target="_new" href="/control/template/{{ $control->id }}">{{ trans('cruds.control.fields.model') }}</a>
 		    	</div>
 				<div class="cell-6">
 					<div class="dropzone dropzone-previews" id="dropzoneFileUpload"></div>
 				</div>
 		    </div>
-
 
 	    	<div class="row">
 	    		<div class="cell-1">
@@ -100,7 +99,7 @@
 			
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Note</strong>
+		    		<strong>{{ trans('cruds.control.fields.note') }}</strong>
 		    	</div>
 	    		<div class="cell-1">
 					<input type="text" data-role="spinner" name="note" value="{{ count($errors)>0 ?  old('note') : $control->note }}">
@@ -109,7 +108,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Echelle</strong>
+		    		<strong>{{ trans('cruds.control.fields.indicator') }}</strong>
 		    	</div>
 				<div class="cell">
 					<pre>{{ $control->indicator }}</pre>
@@ -119,22 +118,22 @@
 	    	<div class="row">
 	    		<div class="cell-1">	    			
 		    		<strong>
-		    			Score
+		    			{{ trans('cruds.control.fields.score') }}
 		    		</strong>
 		    	</div>
 				<div class="cell">
 					<input type="radio" name="score" value="3" data-role="radio" {{ $control->score==3 ? "selected" : "" }} >
-					<font color="green">Vert</font> &nbsp;
+					<font color="green">{{ trans('common.green') }}</font> &nbsp;
 					<input type="radio" name="score" value="2" data-role="radio" {{ $control->score==2 ? "selected" : "" }}> 
-					<font color="orange">Orange</font> &nbsp;
+					<font color="orange">{{ trans('common.orange') }}</font> &nbsp;
 					<input type="radio" name="score" value="1" data-role="radio" {{ $control->score==1 ? "selected" : "" }}> 
-					<font color="red">Rouge</font>
+					<font color="red">{{ trans('common.red') }}</font>
 				</div>
 			</div>
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Plan d'action</strong>
+		    		<strong>{{ trans('cruds.control.fields.action_plan') }}</strong>
 		    	</div>
 				<div class="cell-6">
 					<textarea name="action_plan" rows="5" cols="80">{{ $errors->count()>0 ?  old('action_plan') : $control->action_plan }}</textarea>
@@ -143,7 +142,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Prochaine revue</strong>
+		    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
 		    	</div>
 				<div class="cell-2">
 					<input type="text" 
@@ -169,18 +168,16 @@
 				</div>
 			</div>
 
-		<div class="grid">
-	    	<div class="row-12">
-			<button type="submit" class="button primary" onclick='this.form.action="/control/save"'>Sauver</button>
+			<div class="grid">
+		    	<div class="row-12">
+					<button type="submit" class="button primary" onclick='this.form.action="/control/save"'>{{ trans('common.save') }}</button>
+					<button type="submit" class="button success">{{ trans('common.make') }}</button>
+		    		<button type="submit" class="button" onclick='this.form.action="/controls";this.form.method="GET";'>{{ trans('common.cancel') }}</button>
+	    		</div>
+	    	</div>
 
-			<button type="submit" class="button success">Faire</button>
-
-    		<button type="submit" class="button" onclick='this.form.action="/controls";this.form.method="GET";'>Cancel</button>
-    		</div>
-    	</div>
-
-	</form>
-</div>
+		</form>
+	</div>
 </div>
 
 <br>

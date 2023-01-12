@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Modifier un contrôle de sécurité" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption='{{ trans("cruds.control.edit")}}' data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 	@if (count($errors))
 	<div class= “form-group”>
@@ -23,7 +23,7 @@
 		<div class="grid">
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Nom</strong>
+		    		<strong>{{ trans("cruds.control.fields.name") }}</strong>
 		    	</div>
 				<div class="cell-8">
 		    		{{ $control->clause }} 
@@ -33,7 +33,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Objectif</strong>
+		    		<strong>{{ trans("cruds.control.fields.objective") }}</strong>
 		    	</div>
 				<div class="cell-6">
 					<textarea name="objective" rows="5" cols="80">{{ $errors->has('objective') ?  old('objective') : $control->objective }}</textarea>
@@ -42,7 +42,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Attributs</strong>
+		    		<strong>{{ trans("cruds.control.fields.attributes") }}</strong>
 		    	</div>
 				<div class="cell-6">
 					<textarea name="attributes" rows="5" cols="80">{{ $errors->has('attributes') ?  old('attributes') : $control->attributes }}</textarea>
@@ -51,14 +51,14 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Date de planification</strong>
+		    		<strong>{{ trans("cruds.control.fields.plan_date") }}</strong>
 		    	</div>
 				<div class="cell-2">
 					<input type="text" data-role="calendarpicker" name="plan_date" value="{{$control->plan_date}}"
 					data-input-format="%Y-%m-%d"> 
 				</div>
 	    		<div class="cell-1">
-		    		<strong>Date de réalisation</strong>
+		    		<strong>{{ trans("cruds.control.fields.realisation_date") }}</strong>
 		    	</div>
 				<div class="cell-2">
 					<input type="text" data-role="calendarpicker" name="realisation_date" value="{{$control->realisation_date}}" 
@@ -68,7 +68,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Observations</strong>
+		    		<strong>{{ trans("cruds.control.fields.observations") }}</strong>
 		    	</div>
 				<div class="cell-6">
 					<textarea name="observations" rows="5" cols="80">{{ $errors->has('observations') ?  old('observations') : $control->observations }}</textarea>
@@ -77,9 +77,9 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Rapport</strong>
+		    		<strong>{{ trans("cruds.control.fields.report") }}</strong>
 		    		<br>
-					<a target="_new" href="/control/template/{{ $control->id }}">Modèle</a>
+					<a target="_new" href="/control/template/{{ $control->id }}">{{ trans("cruds.control.fields.model") }}</a>
 		    	</div>
 				<div class="cell-6">
 					<div class="dropzone dropzone-previews" id="dropzoneFileUpload"></div>
@@ -88,7 +88,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Note</strong>
+		    		<strong>{{ trans("cruds.control.fields.note") }}</strong>
 		    	</div>
 	    		<div class="cell-1">
 					<input type="text" data-role="spinner" name="note" value="{{ count($errors)>0 ?  old('note') : $control->note }}">
@@ -97,7 +97,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Fonction</strong>
+		    		<strong>{{ trans("cruds.control.fields.indicator") }}</strong>
 		    	</div>
 				<div class="cell">
 					<pre>{{ $control->indicator }}</pre>
@@ -106,21 +106,21 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Score</strong>
+		    		<strong>{{ trans("cruds.control.fields.score") }}</strong>
 		    	</div>
 				<div class="cell">
 					<input type="radio" name="score" value="3" data-role="radio" {{ ($control->score==3) ? 'checked' : '' }}> 
-					<font color="green">Vert</font> &nbsp;
+					<font color="green">{{ trans("common.green") }}</font> &nbsp;
 					<input type="radio" name="score" value="2" data-role="radio" {{ ($control->score==2) ? 'checked' : '' }}> 
-					<font color="orange">Orange</font> &nbsp;
+					<font color="orange">{{ trans("common.orange") }}</font> &nbsp;
 					<input type="radio" name="score" value="1" data-role="radio" {{ ($control->score==1) ? 'checked' : '' }}> 
-					<font color="red">Rouge</font>
+					<font color="red">{{ trans("common.red") }}</font>
 				</div>
 			</div>
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Plan d'action</strong>
+		    		<strong>{{ trans("cruds.control.fields.action_plan") }}</strong>
 		    	</div>
 				<div class="cell-6">
 					<textarea name="action_plan" rows="5" cols="80">{{ $errors->has('action_plan') ?  old('action_plan') : $control->action_plan }}</textarea>
@@ -153,9 +153,9 @@
 -->
 		<div class="grid">
 	    	<div class="row-12">
-			<button type="submit" class="button success">Save</button>
+			<button type="submit" class="button success">{{ trans("common.save") }}</button>
 
-    		<button type="submit" class="button cancel" onclick='this.form.action="/controls";this.form.method="GET";'><span class="mif-cancel"></span> Cancel</button>
+    		<button type="submit" class="button cancel" onclick='this.form.action="/controls";this.form.method="GET";'><span class="mif-cancel"></span>{{ trans("common.cancel") }}</button>
     		</div>
     	</div>
     </div>

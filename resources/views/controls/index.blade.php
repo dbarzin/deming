@@ -2,17 +2,16 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Liste des contrôles" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
-
+    <div data-role="panel" data-title-caption='{{ trans("cruds.control.list")}}' data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
     <div class="grid">
         <div class="row">
             <div class="cell-1" align="right">
-                <strong>Domaine</strong>
+                <strong>{{ trans("cruds.control.fields.domain")}}</strong>
             </div>
             <div class="cell-4">
                 <select id='domain_id' name="domain_id" size="1" width='10'>
-                    <option value="0">-- Choisir un domaine --</option>
+                    <option value="0">-- {{ trans("cruds.control.fields.choose_domain")}} --</option>
                     @foreach ($domains as $domain)
                         <option value="{{ $domain->id }}"
                             @if (((int)Session::get("domain"))==$domain->id)        
@@ -24,7 +23,7 @@
                 </select>
             </div>
             <div class="cell-1" align="right">
-                <strong>Période</strong>
+                <strong>{{ trans("cruds.control.fields.period") }}</strong>
             </div>
             <div class="cell-2"> 
                 <select id='cur_period' name="period" size="1" width='10'>
@@ -32,7 +31,7 @@
                         @if (Session::get("period")=="99")
                             selected 
                         @endif
-                    >-- Choisir une période --</option>
+                    >-- {{ trans("cruds.control.fields.choose_period") }} --</option>
                         @for ($i = -12; $i < 12; $i++)
                             <option value="{{ $i }}"
                             @if (((int)Session::get("period"))==$i)
@@ -45,27 +44,28 @@
                     </select>
                 </div>
             <div class="cell-1" align="right">
-                <strong>Etat</strong>
+                <strong>{{ trans("cruds.control.fields.status") }}</strong>
             </div>
-            <div >
+            <div class="cell-3" align="left">
                 <input type="radio" data-role="radio" data-style="2" 
                 name="status" value="0" id="status0"
                 @if (Session::get("status")=="0" || Session::get("status")==null)
                 checked
-                @endif        
-                > Tous
+                @endif
+                > 
+                {{ trans("cruds.control.fields.status_all") }}
                 <input type="radio" data-role="radio" data-style="2" 
                 name="status" value="1" id="status1"
                 @if (Session::get("status")=="1")
                 checked
                 @endif
-                > Fait
+                > {{ trans("cruds.control.fields.status_done") }}
                 <input type="radio" data-role="radio" data-style="2" 
                 name="status" value="2" id="status2"
                 @if (Session::get("status")=="2")
                 checked
-                @endif        
-                > A faire
+                @endif
+                > {{ trans("cruds.control.fields.status_todo") }}
             </div>
         </div>
     </div>
@@ -110,13 +110,13 @@
        >
         <thead>
             <tr>
-                <th class="sortable-column" width="5%">Domaine</th>
-                <th class="sortable-column" width="5%">Mesure</th>
-                <th class="sortable-column" width="50%">Nom</th>
-                <th class="sortable-column" width="5%">Note</th>
-                <th class="sortable-column sort-asc"  width="5%">Planifié</th>
-                <th class="sortable-column sort-asc"  width="5%">Réalisé</th>
-                <th class="sortable-column"  width="5%">Suivant</th>
+                <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.domain") }}</th>
+                <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.measure") }}</th>
+                <th class="sortable-column" width="50%">{{ trans("cruds.control.fields.name") }}</th>
+                <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.score") }}</th>
+                <th class="sortable-column sort-asc"  width="5%">{{ trans("cruds.control.fields.planned") }}</th>
+                <th class="sortable-column sort-asc"  width="5%">{{ trans("cruds.control.fields.realized") }}</th>
+                <th class="sortable-column"  width="5%">{{ trans("cruds.control.fields.next") }}</th>
             </tr>
         </thead>
         <tbody>

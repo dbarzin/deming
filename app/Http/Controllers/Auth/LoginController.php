@@ -65,14 +65,15 @@ class LoginController extends Controller
             try {
                 if ($this->ldapLogin($username, $password)) {
                     $user = \App\User::where('login', $username)->first();
-                    if (!$user) {
-                        return false;                    }
+                    if (!$user) 
+                        return false;                    
                     $this->guard()->login($user, true);
                     return true;
                 }
                 return false;
             }
-            finally { return false; 
+            finally { 
+                return false; 
             }
         }
         else {

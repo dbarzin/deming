@@ -221,7 +221,8 @@ class ControlController extends Controller
      */
     public function update(Request $request, Control $control)
     {
-        $control->save();
+        $control->update($request->all);
+        //$control->save();
         return redirect("/control");
     }
 
@@ -464,6 +465,7 @@ class ControlController extends Controller
         // plan date is in the futur
         // save control 
         $control = Control::find($id);
+
         $control->name = request("name");
         $control->objective = request("objective");
         $control->attributes = request("attributes");
@@ -474,7 +476,8 @@ class ControlController extends Controller
         $control->score = request("score"); 
     	$control->action_plan=request("action_plan");
 
-        $control-> update();
+        $control->save();
+        
         return redirect("/control/show/".$id);
     }
 

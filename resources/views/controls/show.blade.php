@@ -7,7 +7,7 @@
 	<div class="grid">
     	<div class="row">
     		<div class="cell-1">
-	    		<strong>Nom</strong>
+	    		<strong>{{ trans("cruds.control.fields.name") }}</strong>
 	    	</div>
     		<div class="cell">
 	    		<a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a> &nbsp; - &nbsp; {{ $control->name }}
@@ -16,7 +16,7 @@
 
     	<div class="row">
     		<div class="cell-1">
-	    		<strong>Objectif</strong>
+	    		<strong>{{ trans("cruds.control.fields.objective") }}</strong>
 	    	</div>
     		<div class="cell-6">
 	    		<pre>{!! $control->objective !!}</pre>
@@ -25,7 +25,7 @@
 
     	<div class="row">
     		<div class="cell-1">
-	    		<strong>Attributs</strong>
+	    		<strong>{{ trans("cruds.control.fields.attributes") }}</strong>
 	    	</div>
 			<div class="cell-6">
 				<pre>{!! $control->attributes !!}</pre>
@@ -34,23 +34,23 @@
 
     	<div class="row">
     		<div class="cell-1">
-	    		<strong>Date de planification</strong>
+	    		<strong>{{ trans("cruds.control.fields.plan_date") }}</strong>
 	    	</div>
 			<div class="cell-1">
 	    		{{ $control->plan_date }}
 			</div>
 
     		<div class="cell-1">
-	    		<strong>Date de la mesure</strong>
+	    		<strong>{{ trans("cruds.control.fields.realisation_date") }}</strong>
 	    	</div>
 			<div class="cell-1">
 	    		{{ $control->realisation_date }}
 			</div>
 
     		<div class="cell-1">
-    			<strong>Précédent</strong>
+    			<strong>{{ trans("common.previous") }}</strong>
     			<br>
-	    		<strong>Suivant</strong>	    		
+	    		<strong>{{ trans("common.next") }}</strong>	    		
 	    	</div>
 			<div class="cell-1">
 		    	@if ($prev_id!=null)
@@ -69,14 +69,13 @@
 					N/A
 				@endif
 			</div>
-
 		</div>
 
 
 		@if ($control->observations!=null)
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Observations</strong>
+		    		<strong>{{ trans("cruds.control.fields.observation") }}</strong>
 		    	</div>
 				<div class="cell-5">
 					<pre>{!! $control->observations !!}</pre>
@@ -86,7 +85,7 @@
 
     	<div class="row">
     		<div class="cell-1">
-	    		<strong>Calcul</strong>
+	    		<strong>{{ trans("cruds.control.fields.model") }}</strong>
 	    	</div>
 			<div class="cell-6">
 				<pre>{{ $control->model }}</pre>
@@ -96,7 +95,7 @@
 		@if ($documents->isNotEmpty())
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Documents</strong>
+		    		<strong>{{ trans("cruds.control.fields.report") }}</strong>
 		    	</div>
 				<div class="cell-6">
 					@foreach ($documents as $document)
@@ -111,7 +110,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Note</strong>
+		    		<strong>{{ trans("cruds.control.fields.note") }}</strong>
 		    	</div>
 	    		<div class="cell-2">
 		    		{{ $control->note }}
@@ -122,7 +121,7 @@
 		@if ($control->realisation_date !=null)
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Indicateur</strong>
+		    		<strong>{{ trans("cruds.control.fields.indicator") }}</strong>
 		    	</div>
 				<div class="cell-6">
 					<pre>{{ $control->indicator }}</pre>
@@ -131,7 +130,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Score</strong>
+		    		<strong>{{ trans("cruds.control.fields.score") }}</strong>
 		    	</div>
 				<div class="cell">
                     @if ($control->score==1)
@@ -145,11 +144,11 @@
                     @endif
 					&nbsp; - &nbsp;
 					@if ($control->score==1) 
-						Rouge
+						{{ trans("common.red") }}
 					@elseif ($control->score==2) 
-						Orange
+						{{ trans("common.orange") }}
 					@elseif ($control->score==3) 
-						Vert
+						{{ trans("common.vert") }}
 					@else
 						
 					@endif
@@ -160,7 +159,7 @@
 		@else
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Plan d'action</strong>
+		    		<strong>{{ trans("cruds.control.fields.action_plan") }}</strong>
 		    	</div>
 				<div class="cell-6">
 					<pre>{{ $control->action_plan }}</pre>
@@ -173,19 +172,19 @@
    		<div class="cell-3">
 			@if (Auth::User()->role==1)
 		    <form action="/control/edit/{{ $control->id }}">
-	    		<button class="button primary">Edit</button>
+	    		<button class="button primary">{{ trans("common.edit") }}</button>
 			</form>
 			@endif
 			@if ($control->realisation_date==null)
 		    <form action="/control/plan/{{ $control->id }}">
-	    		<button class="button info">Plan</button>
+	    		<button class="button info">{{ trans("common.plan") }}</button>
 			</form>
 		    <form action="/control/make/{{ $control->id }}">
-	    		<button class="button success">Faire</button>
+	    		<button class="button success">{{ trans("common.make") }}</button>
 			</form>
    			@endif
 		    <form action="/controls">
-	    		<button class="button">Cancel</button>
+	    		<button class="button">{{ trans("common.cancel") }}</button>
 			</form>
 		</div>
 	</div>
