@@ -165,61 +165,59 @@
 
 <script>
 Dropzone.options.dropzoneFileUpload = { 
-            url: '/doc/store',
-            headers: { 'x-csrf-token': '{{csrf_token()}}'},
+	    url: '/doc/store',
+	    headers: { 'x-csrf-token': '{{csrf_token()}}'},
 	    params: { 'control': '{{ $control->id }}' },
-            maxFilesize: 10,
-            // acceptedFiles: ".jpeg,.jpg,.png,.gif",
-            addRemoveLinks: true,
-            timeout: 50000,
-            removedfile: function(file) 
-            {
-                console.log("remove file " + file.name + " " + file.id);
-                $.ajax({
-                    headers: {
-                      'X-CSRF-TOKEN': '{{csrf_token()}}'
-                       },
-                    type: 'GET',
-                    url: '{{ url( "/doc/delete" ) }}'+"/"+file.id,
-                    success: function (data){
-                        console.log("File has been successfully removed");
-                    },
-                    error: function(e) {
-                        console.log("File not removed");
-                        console.log(e);
-                    }});
-                    // console.log('{{ url( "/doc/delete" ) }}'+"/"+file.id+']');
-                    var fileRef;
-                    return (fileRef = file.previewElement) != null ? 
-                    fileRef.parentNode.removeChild(file.previewElement) : void 0;
-            },
-       
-            success: function(file, response) 
-            {
-                file.id=response.id;
-                console.log("respose");
-                console.log(response);
-            },
-            error: function(file, response)
-            {
-                console.log(response);
-               return false;
-            },
-        init: function () {
-            //Add existing files into dropzone            
-            var existingFiles = [
-            @foreach ($documents as $document) 
-                { name: "{{ $document->filename }}", size: {{ $document->size }}, id: {{ $document->id }} },
-            @endforeach
-            ];
-            for (i = 0; i < existingFiles.length; i++) {
-                this.emit("addedfile", existingFiles[i]);                
-                this.emit("complete", existingFiles[i]);                
-            }            
-        	}
+	    maxFilesize: 10,
+	    // acceptedFiles: ".jpeg,.jpg,.png,.gif",
+	    addRemoveLinks: true,
+	    timeout: 50000,
+	    removedfile: function(file) 
+	    {
+	        console.log("remove file " + file.name + " " + file.id);
+	        $.ajax({
+	            headers: {
+	              'X-CSRF-TOKEN': '{{csrf_token()}}'
+	               },
+	            type: 'GET',
+	            url: '{{ url( "/doc/delete" ) }}'+"/"+file.id,
+	            success: function (data) {
+	                console.log("File has been successfully removed");
+	            	},
+	            error: function(e) {
+	                console.log("File not removed");
+	                console.log(e);
+	            	}
+	            });
+	            // console.log('{{ url( "/doc/delete" ) }}'+"/"+file.id+']');
+	            var fileRef;
+	            return (fileRef = file.previewElement) != null ? 
+	            fileRef.parentNode.removeChild(file.previewElement) : void 0;
+	    },
 
-    	}
-
+	    success: function(file, response) 
+	    {
+	        file.id=response.id;
+	        console.log("respose");
+	        console.log(response);
+	    },
+	    error: function(file, response)
+	    {
+	        console.log(response);
+	       return false;
+	    },
+		init: function () {
+	    //Add existing files into dropzone            
+	    var existingFiles = [
+	    @foreach ($documents as $document) 
+	        { name: "{{ $document->filename }}", size: {{ $document->size }}, id: {{ $document->id }} },
+	    @endforeach
+	    ];
+	    for (i = 0; i < existingFiles.length; i++) {
+	        this.emit("addedfile", existingFiles[i]);                
+	        this.emit("complete", existingFiles[i]);                
+		    }            
+		}
+	}
 </script>
-
 @endsection

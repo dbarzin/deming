@@ -11,16 +11,16 @@ function bytesToHuman($bytes) {
 ?>
 
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Liste des documents" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.document.title.list') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 <table class="table">
     <thead>
     <tr>
         <th>#</th>
-        <th>Contrôle</th>
-        <th>Nom</th>
-        <th>Taille</th>
-        <th>Hash</th>
+        <th>{{ trans('cruds.document.fields.control') }}</th>
+        <th>{{ trans('cruds.document.fields.name') }}</th>
+        <th>{{ trans('cruds.document.fields.size') }}</th>
+        <th>{{ trans('cruds.document.fields.hash') }}</th>
     </tr>
     </thead>
 

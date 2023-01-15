@@ -1,13 +1,13 @@
 @extends("layout")
 
 @section("title")
-Modèles de document
+{{ trans('cruds.document.title.model') }}
 @endsection
 
 @section("content")
 
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Documents" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.document.title.model') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 		@if(session('message'))
 		<div class="remark success">
@@ -32,18 +32,18 @@ Modèles de document
 	    @csrf
 			<ul>
 				<li>
-					<a href="/doc/template?id=1" target="_new">Modèle de Contrôle</a>
+					<a href="/doc/template?id=1" target="_new">{{ trans('cruds.document.model.control') }}</a>
 			        	<input type="file" data-role="file" name="template1"> <br>
 				</li>
 
 				<li>
-					<a href="/doc/template?id=2" target="_new">Rapport de pilotage</a>
+					<a href="/doc/template?id=2" target="_new">{{ trans('cruds.document.model.report') }}</a>
 			        	<input type="file" data-role="file" name="template2"><br>
 				</li>
 			</ul>
 
-			<button type="submit" class="button success"><span class="mif-ok"></span> Sauver</button>
-		    <button type="submit" class="button cancel" onclick='this.form.method="GET";this.form.action="/";'><span class="mif-cancel"></span> Annuler</button>
+			<button type="submit" class="button success"><span class="mif-ok"></span>{{ trans("common.save") }}</button>
+		    <button type="submit" class="button cancel" onclick='this.form.method="GET";this.form.action="/";'><span class="mif-cancel"></span>{{ trans("common.cancel") }}</button>
 
 		</form>
 
