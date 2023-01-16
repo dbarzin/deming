@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Ajouter un domaine" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.domain.title.add') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 		@if (count($errors))
 		<div class= “form-group”>
 			<div class= “alert alert-danger”>
@@ -20,7 +20,7 @@
 			<div class="grid">
 		    	<div class="row">
 		    		<div class="cell-1">
-			    		<strong>Nom</strong>
+			    		<strong>{{ trans('cruds.domain.fields.name') }}</strong>
 			    	</div>
 		    		<div class="cell-5">
 						<input type="text" name="title" placeholder="title" value="{{ old('title') }}" size='25'>
@@ -29,7 +29,7 @@
 
 		    	<div class="row">
 		    		<div class="cell-1">
-			    		<strong>Description</strong>
+			    		<strong>{{ trans('cruds.domain.fields.description') }}</strong>
 			    	</div>
 		    		<div class="cell-5">
 						<textarea name="description" rows="5" cols="80">{{ old('description') }}</textarea>
@@ -38,8 +38,8 @@
 
 		    	<div class="row">
 		    		<div class="cell-5">
-						<button type="submit" class="button success">Sauver</button>
-						<button type="submit" class="button" onclick='this.form.action="/domains";this.form.method="GET";'>Annuler</button>
+						<button type="submit" class="button success">{{ trans('common.save') }}</button>
+						<button type="submit" class="button" onclick='this.form.action="/domains";this.form.method="GET";'>{{ trans('common.cancel') }}</button>
 					</div>
 				</div>
 			</div>

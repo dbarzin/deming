@@ -2,14 +2,14 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Domaines" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.domain.title.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 		<div class="grid">
 			<div class="row">
 				<div class="cell-5">
 
 				</div>
 				<div class="cell-7" align="right">
-					<button class="button primary" onclick="location.href = '/domains/create';">Nouveau</button>
+					<button class="button primary" onclick="location.href = '/domains/create';">{{ trans('common.new') }}</button>
 				</div>
 			</div>
 
@@ -26,8 +26,8 @@
 		       data-check-style="1">
 			    <thead>
 			    <tr>
-					<th width="50">Title</th>
-					<th width="200">Descrition</th>
+					<th width="50">{{ trans('cruds.domain.fields.name') }}</th>
+					<th width="200">{{ trans('cruds.domain.fields.description') }}</th>
 			    </tr>
 			    </thead>
 			    <tbody>

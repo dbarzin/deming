@@ -4,162 +4,162 @@
 <div class="p-3">
     <div data-role="panel" data-title-caption='{{ trans("cruds.control.edit")}}' data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
-	@if (count($errors))
-	<div class= “form-group”>
-		<div class= “alert alert-danger”>
-			<ul>
-			@foreach ($errors->all() as $error)
-				<li>{{ $error }}</li>
-			@endforeach
-			</ul>
+		@if (count($errors))
+		<div class= “form-group”>
+			<div class= “alert alert-danger”>
+				<ul>
+				@foreach ($errors->all() as $error)
+					<li>{{ $error }}</li>
+				@endforeach
+				</ul>
+			</div>
 		</div>
-	</div>
-	@endif
+		@endif
 
-	<form method="POST" action="/control/save">
-		@csrf
-		<input type="hidden" name="id" value="{{ $control->id }}"/>
+		<form method="POST" action="/control/save">
+			@csrf
+			<input type="hidden" name="id" value="{{ $control->id }}"/>
 
-		<div class="grid">
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.name") }}</strong>
-		    	</div>
-				<div class="cell-8">
-		    		{{ $control->clause }} 
-					<input type="text" name="name" value="{{ $control->name }}" size="64">
+			<div class="grid">
+		    	<div class="row">
+		    		<div class="cell-1">
+			    		<strong>{{ trans("cruds.control.fields.name") }}</strong>
+			    	</div>
+					<div class="cell-8">
+			    		{{ $control->clause }} 
+						<input type="text" name="name" value="{{ $control->name }}" size="64">
+					</div>
 				</div>
-			</div>
 
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.objective") }}</strong>
-		    	</div>
-				<div class="cell-6">
-					<textarea name="objective" rows="5" cols="80">{{ $errors->has('objective') ?  old('objective') : $control->objective }}</textarea>
+		    	<div class="row">
+		    		<div class="cell-1">
+			    		<strong>{{ trans("cruds.control.fields.objective") }}</strong>
+			    	</div>
+					<div class="cell-6">
+						<textarea name="objective" rows="5" cols="80">{{ $errors->has('objective') ?  old('objective') : $control->objective }}</textarea>
+					</div>
 				</div>
-			</div>
 
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.attributes") }}</strong>
-		    	</div>
-				<div class="cell-6">
-					<textarea name="attributes" rows="5" cols="80">{{ $errors->has('attributes') ?  old('attributes') : $control->attributes }}</textarea>
+		    	<div class="row">
+		    		<div class="cell-1">
+			    		<strong>{{ trans("cruds.control.fields.attributes") }}</strong>
+			    	</div>
+					<div class="cell-6">
+						<textarea name="attributes" rows="5" cols="80">{{ $errors->has('attributes') ?  old('attributes') : $control->attributes }}</textarea>
+					</div>
 				</div>
-			</div>
 
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.plan_date") }}</strong>
-		    	</div>
-				<div class="cell-2">
-					<input type="text" data-role="calendarpicker" name="plan_date" value="{{$control->plan_date}}"
+		    	<div class="row">
+		    		<div class="cell-1">
+			    		<strong>{{ trans("cruds.control.fields.plan_date") }}</strong>
+			    	</div>
+					<div class="cell-2">
+						<input type="text" data-role="calendarpicker" name="plan_date" value="{{$control->plan_date}}"
+						data-input-format="%Y-%m-%d"> 
+					</div>
+		    		<div class="cell-1">
+			    		<strong>{{ trans("cruds.control.fields.realisation_date") }}</strong>
+			    	</div>
+					<div class="cell-2">
+						<input type="text" data-role="calendarpicker" name="realisation_date" value="{{$control->realisation_date}}" 
 					data-input-format="%Y-%m-%d"> 
+					</div>
 				</div>
-	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.realisation_date") }}</strong>
-		    	</div>
-				<div class="cell-2">
-					<input type="text" data-role="calendarpicker" name="realisation_date" value="{{$control->realisation_date}}" 
-				data-input-format="%Y-%m-%d"> 
-				</div>
-			</div>
 
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.observations") }}</strong>
-		    	</div>
-				<div class="cell-6">
-					<textarea name="observations" rows="5" cols="80">{{ $errors->has('observations') ?  old('observations') : $control->observations }}</textarea>
-				</div>
-		    </div>
+		    	<div class="row">
+		    		<div class="cell-1">
+			    		<strong>{{ trans("cruds.control.fields.observations") }}</strong>
+			    	</div>
+					<div class="cell-6">
+						<textarea name="observations" rows="5" cols="80">{{ $errors->has('observations') ?  old('observations') : $control->observations }}</textarea>
+					</div>
+			    </div>
 
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.report") }}</strong>
-		    		<br>
-					<a target="_new" href="/control/template/{{ $control->id }}">{{ trans("cruds.control.fields.model") }}</a>
-		    	</div>
-				<div class="cell-6">
-					<div class="dropzone dropzone-previews" id="dropzoneFileUpload"></div>
-				</div>
-		    </div>
+		    	<div class="row">
+		    		<div class="cell-1">
+			    		<strong>{{ trans("cruds.control.fields.report") }}</strong>
+			    		<br>
+						<a target="_new" href="/control/template/{{ $control->id }}">{{ trans("cruds.control.fields.model") }}</a>
+			    	</div>
+					<div class="cell-6">
+						<div class="dropzone dropzone-previews" id="dropzoneFileUpload"></div>
+					</div>
+			    </div>
 
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.note") }}</strong>
-		    	</div>
-	    		<div class="cell-1">
-					<input type="text" data-role="spinner" name="note" value="{{ count($errors)>0 ?  old('note') : $control->note }}">
+		    	<div class="row">
+		    		<div class="cell-1">
+			    		<strong>{{ trans("cruds.control.fields.note") }}</strong>
+			    	</div>
+		    		<div class="cell-1">
+						<input type="text" data-role="spinner" name="note" value="{{ count($errors)>0 ?  old('note') : $control->note }}">
+		    		</div>
+			    </div>
+
+		    	<div class="row">
+		    		<div class="cell-1">
+			    		<strong>{{ trans("cruds.control.fields.indicator") }}</strong>
+			    	</div>
+					<div class="cell">
+						<pre>{{ $control->indicator }}</pre>
+					</div>
+				</div>
+
+		    	<div class="row">
+		    		<div class="cell-1">
+			    		<strong>{{ trans("cruds.control.fields.score") }}</strong>
+			    	</div>
+					<div class="cell">
+						<input type="radio" name="score" value="3" data-role="radio" {{ ($control->score==3) ? 'checked' : '' }}> 
+						<font color="green">{{ trans("common.green") }}</font> &nbsp;
+						<input type="radio" name="score" value="2" data-role="radio" {{ ($control->score==2) ? 'checked' : '' }}> 
+						<font color="orange">{{ trans("common.orange") }}</font> &nbsp;
+						<input type="radio" name="score" value="1" data-role="radio" {{ ($control->score==1) ? 'checked' : '' }}> 
+						<font color="red">{{ trans("common.red") }}</font>
+					</div>
+				</div>
+
+		    	<div class="row">
+		    		<div class="cell-1">
+			    		<strong>{{ trans("cruds.control.fields.action_plan") }}</strong>
+			    	</div>
+					<div class="cell-6">
+						<textarea name="action_plan" rows="5" cols="80">{{ $errors->has('action_plan') ?  old('action_plan') : $control->action_plan }}</textarea>
+					</div>
+				</div>
+	<!--
+		    	<div class="row">
+		    		<div class="cell-1">
+			    		<strong>Prochaine revue</strong>
+			    	</div>
+					<div class="cell-3">
+						<input data-role="datepicker" name="next_date" value="{{ 
+					\Carbon\Carbon
+					::createFromFormat('Y-m-d',$control->plan_date)
+					->addMonths($control->periodicity)
+					->format('Y-m-d')
+					}}" 
+					data-input-format="%d/%m/%y">
+					</div>
+					<div class="cell-1">
+					(
+					@if ($control->periodicity==1) Mensuel @endif
+					@if ($control->periodicity==3) Triestriel @endif
+					@if ($control->periodicity==4) Quadrimestriel @endif
+					@if ($control->periodicity==6) Semestriel @endif
+					@if ($control->periodicity==12) Annuel @endif
+					)
+					</div>
+				</div>
+	-->
+			<div class="grid">
+		    	<div class="row-12">
+				<button type="submit" class="button success">{{ trans("common.save") }}</button>
+
+	    		<button type="submit" class="button cancel" onclick='this.form.action="/controls";this.form.method="GET";'><span class="mif-cancel"></span>{{ trans("common.cancel") }}</button>
 	    		</div>
-		    </div>
-
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.indicator") }}</strong>
-		    	</div>
-				<div class="cell">
-					<pre>{{ $control->indicator }}</pre>
-				</div>
-			</div>
-
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.score") }}</strong>
-		    	</div>
-				<div class="cell">
-					<input type="radio" name="score" value="3" data-role="radio" {{ ($control->score==3) ? 'checked' : '' }}> 
-					<font color="green">{{ trans("common.green") }}</font> &nbsp;
-					<input type="radio" name="score" value="2" data-role="radio" {{ ($control->score==2) ? 'checked' : '' }}> 
-					<font color="orange">{{ trans("common.orange") }}</font> &nbsp;
-					<input type="radio" name="score" value="1" data-role="radio" {{ ($control->score==1) ? 'checked' : '' }}> 
-					<font color="red">{{ trans("common.red") }}</font>
-				</div>
-			</div>
-
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.action_plan") }}</strong>
-		    	</div>
-				<div class="cell-6">
-					<textarea name="action_plan" rows="5" cols="80">{{ $errors->has('action_plan') ?  old('action_plan') : $control->action_plan }}</textarea>
-				</div>
-			</div>
-<!--
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>Prochaine revue</strong>
-		    	</div>
-				<div class="cell-3">
-					<input data-role="datepicker" name="next_date" value="{{ 
-				\Carbon\Carbon
-				::createFromFormat('Y-m-d',$control->plan_date)
-				->addMonths($control->periodicity)
-				->format('Y-m-d')
-				}}" 
-				data-input-format="%d/%m/%y">
-				</div>
-				<div class="cell-1">
-				(
-				@if ($control->periodicity==1) Mensuel @endif
-				@if ($control->periodicity==3) Triestriel @endif
-				@if ($control->periodicity==4) Quadrimestriel @endif
-				@if ($control->periodicity==6) Semestriel @endif
-				@if ($control->periodicity==12) Annuel @endif
-				)
-				</div>
-			</div>
--->
-		<div class="grid">
-	    	<div class="row-12">
-			<button type="submit" class="button success">{{ trans("common.save") }}</button>
-
-    		<button type="submit" class="button cancel" onclick='this.form.action="/controls";this.form.method="GET";'><span class="mif-cancel"></span>{{ trans("common.cancel") }}</button>
-    		</div>
-    	</div>
-    </div>
-</form>
+	    	</div>
+	    </div>
+	</form>
 </div>
 </div>
 
