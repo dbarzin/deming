@@ -21,15 +21,15 @@
 		<div class="grid">
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Domaine</strong>
+		    		<strong>{{ trans("cruds.measure.title") }}</strong>
 		    	</div>
 				<div class="cell-5">
 					<select name="domain_id" value="{{ old('domain_id') }}" size="1" width='10'>
-					    <option value="">-- Choisir un domaine --</option>
+					    <option value="">-- {{ trans("cruds.domain.choose") }} --</option>
 						@foreach ($domains as $domain)
 					    	<option value="{{ $domain->id }}"
 								@if (((int)Session::get("domain"))==$domain->id)		
-									selected 
+									selected
 								@endif >
 					    		{{ $domain->title }} - {{ $domain->description }}
 					    	</option>
@@ -39,7 +39,7 @@
 			</div>
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Clause</strong>
+		    		<strong>{{ trans("cruds.measure.fields.clause") }}</strong>
 		    	</div>
 				<div class="cell-5">
 					<input type="text" class="input" name="clause" value="{{ old('clause') }}" size='60'>
@@ -48,7 +48,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Nom</strong>
+		    		<strong>{{ trans("cruds.measure.fields.name") }}</strong>
 		    	</div>
 				<div class="cell-5">
 					<input type="text" class="input" name="name" value="{{ old('name') }}" size='60'>
@@ -57,7 +57,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-					<strong>Objectif</strong>
+					<strong>{{ trans("cruds.measure.fields.objective") }}</strong>
 				</div>
 				<div class="cell-5">
 					<textarea class="textarea" name="objective" rows="3" cols="80">{{ old('objective') }}</textarea>
@@ -66,7 +66,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-					<strong>Attributs</strong>
+					<strong>{{ trans("cruds.measure.fields.attributes") }}</strong>
 				</div>
 				<div class="cell-5">			
 					<textarea class="textarea" name="attributes" rows="3" cols="80">{{ old('attributes') }}</textarea>
@@ -75,7 +75,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-					<strong>Calcul</strong>
+					<strong>{{ trans("cruds.measure.fields.model") }}</strong>
 				</div>
 				<div class="cell-5">			
 					<textarea class="textarea" name="model" rows="3" cols="80">{{ old('model') }}</textarea>
@@ -84,7 +84,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-					<strong>Indicateur (Rouge, Orange, Vert)</strong>
+					<strong>{{ trans("cruds.measure.fields.indicator") }}</strong>
 				</div>
 				<div class="cell-5">			
 					<textarea class="textarea" name="indicator" rows="3" cols="80">{{ old('indicator') }}</textarea>
@@ -93,7 +93,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-					<strong>Plan d'action</strong>
+					<strong>{{ trans("cruds.measure.fields.action_plan") }}</strong>
 				</div>
 				<div class="cell-5">
 					<textarea class="textarea" name="action_plan" rows="3" cols="80">{{ old('action_plan') }}</textarea>
@@ -102,7 +102,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-					<strong>Responsable</strong>
+					<strong>{{ trans("cruds.measure.fields.responsible") }}</strong>
 				</div>
 				<div class="cell-5">
 					<input type="text" class="input" name="owner" value="{{ old('owner') }}" size='20'>
@@ -111,16 +111,15 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-					<strong>Périodicité</strong>
+					<strong>{{ trans("cruds.measure.fields.periodicity") }}</strong>
 				</div>
 				<div class="cell-5">
 					<select name="periodicity" size="1" width='20'>
 					    <option value="0" {{ old('periodicity')==0 ? 'selected' : ''}} ></option>
-					    <option value="1" {{ old('periodicity')==1 ? 'selected' : ''}}>Mensuel</option>
-					    <option value="3" {{ old('periodicity')==3 ? 'selected' : ''}}>Trimestriel</option>
-					    <option value="4" {{ old('periodicity')==4 ? 'selected' : ''}}> Quatrimestriel</option>
-					    <option value="6" {{ old('periodicity')==6 ? 'selected' : ''}}>Semstriel</option>
-					    <option value="12" {{ old('periodicity')==12 ? 'selected' : ''}}>Annuel</option>
+					    <option value="1" {{ old('periodicity')==1 ? 'selected' : ''}}>{{ trans("common.monthly") }}</option>
+					    <option value="3" {{ old('periodicity')==3 ? 'selected' : ''}}>{{ trans("common.quarterly") }}</option>
+					    <option value="6" {{ old('periodicity')==6 ? 'selected' : ''}}>{{ trans("common.biannual") }}</option>
+					    <option value="12" {{ old('periodicity')==12 ? 'selected' : ''}}>{{ trans("common.yearly") }}</option>
 					 </select>
 				</div>
 			</div>
@@ -128,11 +127,11 @@
 	    	<div class="row">
 	    		<div class="cell-5">
 					<button type="submit" class="button success">
-						<span class="mif-done"></span>Sauver</button>
-					<button type="submit" 
+						<span class="mif-done"></span>{{ trans("common.save") }}</button>
+					<button type="submit"
 						onclick="this.form.method='GET';"
 						class="button">
-						<span class="mif-cancel"></span> Annuler</button>
+						<span class="mif-cancel"></span>{{ trans("common.cancel") }}</button>
 				</div>
 			</div>
 		</div>
