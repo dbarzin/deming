@@ -83,6 +83,8 @@ return [
         'total_size' => 'Taille totale',
     ],
     'user' => [
+        'index' => 'Liste des utilisateurs',
+        'edit' => 'Modifier un utilisateur',
         'add' => 'Ajouter un utilisateur',
         'fields' => [
             'login' => 'Login',
@@ -96,6 +98,6 @@ return [
             'admin' => 'Administrateur',
             'user' => 'Utilisateur',
             'auditor' => 'Auditeur'
-        ]
+        ],
     ]
 ];

@@ -2,13 +2,13 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Utilisateur" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.user.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 		<div class="grid">
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Login</strong>
+		    		<strong>{{ trans('cruds.user.fields.login') }}</strong>
 		    	</div>
 	    		<div class="cell">
 		    		{{ $user->login }}
@@ -17,7 +17,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Nom</strong>
+		    		<strong>{{ trans('cruds.user.fields.name') }}</strong>
 		    	</div>
 	    		<div class="cell">
 		    		{{ $user->name }}
@@ -26,7 +26,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Title</strong>
+		    		<strong>{{ trans('cruds.user.fields.title') }}</strong>
 		    	</div>
 	    		<div class="cell">
 		    		{{ $user->title }}
@@ -35,18 +35,18 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Role</strong>
+		    		<strong>{{ trans('cruds.user.fields.role') }}</strong>
 		    	</div>
 	    		<div class="cell">
-		    		{{ $user->role==1 ? "CISO" : "" }}
-		    		{{ $user->role==2 ? "Security" : "" }}
-		    		{{ $user->role==3 ? "Auditor" : "" }}
+		    		{{ $user->role==1 ? trans('cruds.user.roles.admin') : "" }}
+		    		{{ $user->role==2 ? trans('cruds.user.roles.user') : "" }}
+		    		{{ $user->role==3 ? trans('cruds.user.roles.auditor') : "" }}
 	    		</div>
 		    </div>
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>eMail</strong>
+		    		<strong>{{ trans('cruds.user.fields.email') }}</strong>
 		    	</div>
 	    		<div class="cell">
 		    		{{ $user->email }}
@@ -58,9 +58,9 @@
 		<div class="form-group">
 		    <form action="">
 				@if ((Auth::User()->role==1)||($user->id==Auth::User()->id))
-		    	<button class="button primary" onclick='this.form.action="/users/{{ $user->id }}/edit"';>Edit</button>
+		    	<button class="button primary" onclick='this.form.action="/users/{{ $user->id }}/edit"';>{{ trans('common.edit') }}</button>
 		    	@endif
-		    	<button class="button" onclick='this.form.action="/users";'>Cancel</button>
+		    	<button class="button" onclick='this.form.action="/users";'>{{ trans('common.cancel') }}</button>
 			</form>
 		</div>
 	</div>
