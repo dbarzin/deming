@@ -123,7 +123,7 @@ class UserController extends Controller
 
         if (request("password1")!=null) {
             if (request("password1")!=request("password2")) {
-                return  redirect('/users/edit')
+                return  redirect('/users/' . $user->id . '/edit')
                     ->withErrors(['password1' => 'Les mots de passe ne correspondent pas'])
                     ->withInput();
             }
@@ -139,6 +139,7 @@ class UserController extends Controller
             $user->password = bcrypt(request("password1"));
         }
         $user->update();
+
         return redirect("/users");
     }
 
