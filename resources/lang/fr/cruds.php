@@ -51,25 +51,23 @@ return [
         ]
     ],
     'domain' => [
-        'title' => [
-            'add' => 'Ajouter un domaine',
-            'edit' => 'Modifier un domaine',
-            'show' => 'Domaine',
-            'index' => 'Liste des domaines'
-        ],
         'fields' => [
             'name' => 'Nom',
             'description' => 'Description',
         ],
-        'choose' => 'Choisir un domaine'
+        'add' => 'Ajouter un domaine',
+        'edit' => 'Modifier un domaine',
+        'show' => 'Domaine',
+        'index' => 'Liste des domaines',
+        'choose' => 'Choisir un domaine',
+        'title' => 'Domaine'
     ],
     'document' => [
+        'title' => 'Document',
         'description' => 'Description',
-        'title' => [
-            'list' => 'Liste des documents',
-            'index' => 'Documents',
-            'model' => 'Modèles de document'
-        ],
+        'list' => 'Liste des documents',
+        'index' => 'Documents',
+        'model' => 'Modèles de document',
         'fields' => [
             'name' => 'Nom',
             'control' => 'Contrôle',
@@ -83,5 +81,21 @@ return [
         ],
         'count' => 'Nombre de documents',
         'total_size' => 'Taille totale',
+    ],
+    'user' => [
+        'add' => 'Ajouter un utilisateur',
+        'fields' => [
+            'login' => 'Login',
+            'name' => 'Nom',
+            'title' => 'Titre',
+            'role' => 'Role',
+            'password' => 'Password',
+            'email' => 'eMail'
+        ],
+        'roles' => [
+            'admin' => 'Administrateur',
+            'user' => 'Utilisateur',
+            'auditor' => 'Auditeur'
+        ]
     ]
 ];

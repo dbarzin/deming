@@ -10,7 +10,7 @@ function bytesToHuman($bytes) {
 ?>
 
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.document.title.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.document.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
     <ul>
         <li>
