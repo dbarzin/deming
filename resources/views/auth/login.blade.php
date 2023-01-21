@@ -24,7 +24,7 @@
         @csrf
         <span class="mif-lock mif-4x place-right ani-shake fg-cyan" style="margin-top: -10px;"></span>
             <h2 class="text-medium m-0 pl-7" style="line-height: 52px">Deming</h2>
-            <div class="mb-4">Connexion</div>
+            <div class="mb-4">{{ trans("cruds.login.connection") }}</div>
             <div class="form-group">
                 <input type="text" data-role="input" class="form-control @error('email') is-invalid @enderror" data-prepend="<span class='mif-user'></span>" name="email" value="{{ old('email') }}" required autofocus>
                 @error('email')
@@ -40,10 +40,10 @@
                         <strong>{{ $message }}</strong>
                     </span>
                 @enderror
-                <span class="invalid_feedback">Entrez un mot de passe</span>
+                <span class="invalid_feedback">{{ trans("cruds.login.title") }}</span>
             </div>
             <div class="form-group d-flex flex-align-center flex-justify-between">
-                <button class="button primary">Identification</button>
+                <button class="button primary">{{ trans("cruds.login.identification") }}</button>
             </div>
         </form>
 

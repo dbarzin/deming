@@ -13,6 +13,7 @@ return [
     'weekly' => 'Hebdomadaire',
     'yearly' => 'Annuel',
     'next' => 'Suivant',
+    'new' => 'Nouveau',
     'orange' => 'Orange',
     'plan' => 'Planifier',
     'previous' => 'Précédent',

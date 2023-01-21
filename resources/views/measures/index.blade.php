@@ -2,16 +2,16 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Liste des mesures de sécurité" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 			<div class="grid">
 				<div class="row">
 					<div class="cell-1">
-			    		<strong>Domaine</strong>
+			    		<strong>{{ trans('cruds.measure.title') }}</strong>
 			    	</div>
 					<div class="cell-4">
 						<select id='domain_id' name="domain_id" size="1" width='10'>
-						    <option value="0">-- Choisir un domaine --</option>
+						    <option value="0">-- {{ trans('cruds.domain.choose') }} --</option>
 							@foreach ($domains as $domain)
 						    	<option value="{{ $domain->id }}"
 									@if (((int)Session::get("domain"))==$domain->id)		
@@ -23,7 +23,7 @@
 						</select>
 					</div>
 					<div class="cell-7" align="right">
-						<button class="button primary" onclick="location.href = '/measures/create';">Nouveau</button>
+						<button class="button primary" onclick="location.href = '/measures/create';">{{ trans('common.new') }}</button>
 					</div>
 				</div>
 
@@ -49,9 +49,9 @@
 		       data-check-style="1">
 			   <thead>
 				    <tr>
-						<th class="sortable-column sort-asc" width="10%">Domaine</th>
-						<th class="sortable-column sort-asc" width="10%">Clause</th>
-						<th class="sortable-column sort-asc" width="70%">Nom</th>
+						<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.measure.fields.domain') }}</th>
+						<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.measure.fields.clause') }}</th>
+						<th class="sortable-column sort-asc" width="70%">{{ trans('cruds.measure.fields.name') }}</th>
 						<th width="10%">Actif</th>
 				    </tr>
 			    </thead>

@@ -1,5 +1,10 @@
 <?php
 return [
+    'login' => [
+        'title' => 'Entrez un mot de passe',
+        'identification' => 'Identification',
+        'connection' => 'Connexion',
+    ],
     'control' => [
         'description' => '',
         'fields' => [
@@ -39,6 +44,7 @@ return [
     'measure' => [
         'title' => 'Mesure',
         'fields' => [
+            'domain' => 'Domaine',
             'clause' => 'Clause',
             'name' => 'Nom',
             'objective' => 'Objectif',
@@ -48,7 +54,9 @@ return [
             'cation_plan' => 'Plan d\'action',
             'responsible' => 'Responsable',
             'periodicity' => 'Périodicité'
-        ]
+        ],
+        'index' => 'Liste des mesures',
+
     ],
     'domain' => [
         'fields' => [
