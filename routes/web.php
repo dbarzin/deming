@@ -38,6 +38,7 @@ Route::get('/control/template/{id}', 'ControlController@template');
 Route::get('/control/delete/{id}', 'ControlController@destroy');
 Route::post('/control/make', 'ControlController@doMake');
 Route::post('/control/plan', 'ControlController@doPlan');
+Route::post('/control/draft', 'ControlController@draft');
 Route::post('/control/save', 'ControlController@save');
 Route::get('/control/radar', 'ControlController@radar');
 Route::get('/control/history', 'ControlController@history');

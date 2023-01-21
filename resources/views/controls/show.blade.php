@@ -75,7 +75,7 @@
 		@if ($control->observations!=null)
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.observation") }}</strong>
+		    		<strong>{{ trans("cruds.control.fields.observations") }}</strong>
 		    	</div>
 				<div class="cell-5">
 					<pre>{!! $control->observations !!}</pre>

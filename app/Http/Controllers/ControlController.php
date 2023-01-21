@@ -481,6 +481,29 @@ class ControlController extends Controller
         return redirect("/control/show/".$id);
     }
 
+    /**
+     * Draft a Control 
+     *
+     * @param  \App\Domain $domain
+     * @return \Illuminate\Http\Response
+     */
+    public function draft(Request $request)
+    {
+        $id = (int) request("id");
+
+        $control = Control::find($id);
+
+        $control->plan_date = request("plan_date");
+        $control->observations = request("observations");
+        $control->note = request("note"); 
+        $control->score = request("score"); 
+        $control->action_plan=request("action_plan");
+
+        $control->save();
+        
+        return redirect("/control/show/".$id);
+    }
+
     public function upload(Request $request) 
     {
         return null;

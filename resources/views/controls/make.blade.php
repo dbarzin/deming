@@ -170,7 +170,7 @@
 
 			<div class="grid">
 		    	<div class="row-12">
-					<button type="submit" class="button primary" onclick='this.form.action="/control/save"'>{{ trans('common.save') }}</button>
+					<button type="submit" class="button primary" onclick='this.form.action="/control/draft"'>{{ trans('common.save') }}</button>
 					<button type="submit" class="button success">{{ trans('common.make') }}</button>
 		    		<button type="submit" class="button" onclick='this.form.action="/controls";this.form.method="GET";'>{{ trans('common.cancel') }}</button>
 	    		</div>
