@@ -12,20 +12,24 @@ function bytesToHuman($bytes) {
 <div class="p-3">
     <div data-role="panel" data-title-caption="{{ trans('cruds.document.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
-    <ul>
-        <li>
+    <div class="grid">
+        <div class="row">
+            <div class="cell-3">
             {{ trans('cruds.document.count') }} : {{ $count }}
-        </li>
-        <li>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell-3">
             {{ trans('cruds.document.total_size') }} : {{ bytesToHuman($sum) }} 
-        </li>
-    </ul>
-
-    <br>
-        <form action="/doc/check">
-            <button type="submit" class="button success">{{ trans('common.check') }}</button>
-        </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell-3">
+                <form action="/doc/check">
+                    <button type="submit" class="button success">{{ trans('common.check') }}</button>
+                </form>
+            </div>
+        </div>
     </div>
 </div>
-
 @endsection

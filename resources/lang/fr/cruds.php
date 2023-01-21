@@ -67,7 +67,6 @@ return [
         'description' => 'Description',
         'list' => 'Liste des documents',
         'index' => 'Documents',
-        'model' => 'Modèles de document',
         'fields' => [
             'name' => 'Nom',
             'control' => 'Contrôle',
@@ -99,5 +98,8 @@ return [
             'user' => 'Utilisateur',
             'auditor' => 'Auditeur'
         ],
+    ],
+    'exports' => [
+        'index' => 'Exporter des données',
     ]
 ];

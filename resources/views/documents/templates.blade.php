@@ -7,7 +7,7 @@
 @section("content")
 
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.document.model') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.document.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 		@if(session('message'))
 		<div class="remark success">
