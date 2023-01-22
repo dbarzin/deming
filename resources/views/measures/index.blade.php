@@ -23,7 +23,11 @@
 						</select>
 					</div>
 					<div class="cell-7" align="right">
-						<button class="button primary" onclick="location.href = '/measures/create';">{{ trans('common.new') }}</button>
+						<button class="button primary" onclick="location.href = '/measures/create';">
+			            <span class="mif-plus"></span>
+			            &nbsp;
+									{{ trans('common.new') }}
+					</button>
 					</div>
 				</div>
 

@@ -1,24 +1,23 @@
 <?php
 return [
     'cancel' => 'Annuler',
-    'edit' => 'Modifier',
-    'green' => 'vert',
-    'make' => 'Faire',
-
-    'monthy' => 'Mensuel',
-    'quarterly' => 'Trimestriel',
-    'biannual' => 'Bisanuel',
-    'annualy' => 'Annuel',
-
-    'weekly' => 'Hebdomadaire',
-    'yearly' => 'Annuel',
-    'next' => 'Suivant',
-    'new' => 'Nouveau',
-    'orange' => 'Orange',
-    'plan' => 'Planifier',
-    'previous' => 'Précédent',
-    'red' => 'rouge',
-    'save' => 'Sauver',
     'check' => 'Vérifier',
     'delete' => 'Supprimer',
+    'edit' => 'Modifier',
+    'make' => 'Faire',
+    'new' => 'Nouveau',
+    'plan' => 'Planifier',
+    'save' => 'Sauver',
+
+    'monthly' => 'Mensuel',
+    'quarterly' => 'Trimestriel',
+    'biannually' => 'Bisanuel',
+    'annually' => 'Annuel',
+
+    'next' => 'Suivant',
+    'previous' => 'Précédent',
+
+    'green' => 'vert',
+    'orange' => 'Orange',
+    'red' => 'rouge',
 ];

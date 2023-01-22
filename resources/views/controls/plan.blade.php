@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Plannifier un contrôle" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.control.plan') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 	@if (count($errors))
 	<div class= “form-group”>
@@ -24,7 +24,7 @@
 	<div class="grid">
     	<div class="row">
     		<div class="cell-1">
-	    		<strong>Nom</strong>
+	    		<strong>{{ trans('cruds.control.fields.name') }}</strong>
 	    	</div>
 			<div class="cell">
 	    		<a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a> &nbsp; - &nbsp; {{ $control->name }}
@@ -32,7 +32,7 @@
 		</div>
     	<div class="row">
     		<div class="cell-1">
-	    		<strong>Objectif</strong>
+	    		<strong>{{ trans('cruds.control.fields.objective') }}</strong>
 	    	</div>
 			<div class="cell">
 				{{ $control->objective }}
@@ -48,19 +48,18 @@
 		</div>
     	<div class="row">
     		<div class="cell-1">
-	    		<strong>Périodicite</strong>
+	    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
 	    	</div>
 			<div class="cell">
-				@if ($control->periodicity==1) Mensuel @endif
-				@if ($control->periodicity==3) Triestriel @endif
-				@if ($control->periodicity==4) Quadrimestriel @endif
-				@if ($control->periodicity==6) Semestriel @endif
-				@if ($control->periodicity==12) Annuel @endif				
+				@if ($control->periodicity==1) {{ trans('common.monthly') }} @endif
+				@if ($control->periodicity==3) {{ trans('common.quarterly') }} @endif
+				@if ($control->periodicity==6) {{ trans('common.biannually') }} @endif
+				@if ($control->periodicity==12) {{ trans('common.annually') }} @endif				
 			</div>
 		</div>
     	<div class="row">
     		<div class="cell-1">
-				<strong>Plan Date</strong>
+				<strong>{{ trans('cruds.control.fields.plan_date') }}</strong>
 	    	</div>
 			<div class="cell-2">
 					<input type="text" data-role="calendarpicker" name="plan_date" value="{{ 
@@ -73,8 +72,17 @@
 		</div>
     	<div class="row">
     		<div class="cell-12">
-				<button type="submit" class="button success">Plan</button>
-				<button type="submit" class="button" onclick="this.form.action='/controls';">Cancel</button>
+				<button type="submit" class="button success">
+					<span class="mif-calendar"></span>
+					&nbsp;
+					{{ trans("common.plan") }}
+				</button>
+				&nbsp;
+				<button type="submit" class="button" onclick="this.form.action='/control/'.{{ $control->id }};">
+					<span class="mif-cancel"></span>
+					&nbsp;
+					{{ trans("common.cancel") }}
+			</button>
 			</div>
 		</div>
 	</div>

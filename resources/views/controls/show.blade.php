@@ -172,19 +172,38 @@
    		<div class="cell-3">
 			@if (Auth::User()->role==1)
 		    <form action="/control/edit/{{ $control->id }}">
-	    		<button class="button primary">{{ trans("common.edit") }}</button>
+	    		<button class="button primary">
+					<span class="mif-wrench"></span>
+					&nbsp;
+	    			{{ trans("common.edit") }}
+	    		</button>
 			</form>
+			&nbsp;
 			@endif
 			@if ($control->realisation_date==null)
 		    <form action="/control/plan/{{ $control->id }}">
-	    		<button class="button info">{{ trans("common.plan") }}</button>
+	    		<button class="button info">
+					<span class="mif-calendar"></span>
+					&nbsp;
+		    		{{ trans("common.plan") }}
+	    		</button>
 			</form>
+			&nbsp;
 		    <form action="/control/make/{{ $control->id }}">
-	    		<button class="button success">{{ trans("common.make") }}</button>
+	    		<button class="button success">
+					<span class="mif-assignment"></span>
+					&nbsp;	    			
+		    		{{ trans("common.make") }}
+		    	</button>
 			</form>
+			&nbsp;
    			@endif
 		    <form action="/controls">
-	    		<button class="button">{{ trans("common.cancel") }}</button>
+	    		<button class="button">
+					<span class="mif-cancel"></span>
+					&nbsp;
+		    		{{ trans("common.cancel") }}
+	    		</button>
 			</form>
 		</div>
 	</div>

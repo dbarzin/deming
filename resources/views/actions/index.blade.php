@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Liste des plans d'action" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.actions.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 		<div class="grid">
 			<div class="row">
 				<div class="cell">
@@ -17,11 +17,11 @@
 	       data-check-style="1">
 		    <thead>
 		    <tr>
-				<th class="sortable-column sort-asc" width="10%">Titre</th>
-				<th class="sortable-column sort-asc" width="60%">Action</th>
-				<th class="sortable-column sort-asc" width="10%">Date de la mesure</th>
-				<th class="sortable-column sort-asc" width="10%">Prochaine revue</th>
-				<th class="sortable-column sort-asc" width="10%">Note</th>
+				<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.clause') }}</th>
+				<th class="sortable-column sort-asc" width="60%">{{ trans('cruds.action.fields.action') }}</th>
+				<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.plan_date') }}</th>
+				<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.next_date') }}</th>
+				<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.note') }}</th>
 		    </tr>
 		    </thead>
 		    <tbody>

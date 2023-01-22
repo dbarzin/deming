@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Ajouter une mesure de sécurité" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.create') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 	@if (count($errors))
 		<div class= “form-group”>
 			<div class= “alert alert-danger”>
@@ -102,7 +102,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-					<strong>{{ trans("cruds.measure.fields.responsible") }}</strong>
+					<strong>{{ trans("cruds.measure.fields.owner") }}</strong>
 				</div>
 				<div class="cell-5">
 					<input type="text" class="input" name="owner" value="{{ old('owner') }}" size='20'>
@@ -118,8 +118,8 @@
 					    <option value="0" {{ old('periodicity')==0 ? 'selected' : ''}} ></option>
 					    <option value="1" {{ old('periodicity')==1 ? 'selected' : ''}}>{{ trans("common.monthly") }}</option>
 					    <option value="3" {{ old('periodicity')==3 ? 'selected' : ''}}>{{ trans("common.quarterly") }}</option>
-					    <option value="6" {{ old('periodicity')==6 ? 'selected' : ''}}>{{ trans("common.biannual") }}</option>
-					    <option value="12" {{ old('periodicity')==12 ? 'selected' : ''}}>{{ trans("common.yearly") }}</option>
+					    <option value="6" {{ old('periodicity')==6 ? 'selected' : ''}}>{{ trans("common.biannually") }}</option>
+					    <option value="12" {{ old('periodicity')==12 ? 'selected' : ''}}>{{ trans("common.annually") }}</option>
 					 </select>
 				</div>
 			</div>
@@ -127,11 +127,14 @@
 	    	<div class="row">
 	    		<div class="cell-5">
 					<button type="submit" class="button success">
-						<span class="mif-done"></span>{{ trans("common.save") }}</button>
-					<button type="submit"
-						onclick="this.form.method='GET';"
-						class="button">
-						<span class="mif-cancel"></span>{{ trans("common.cancel") }}</button>
+						<span class="mif-done"></span> &nbsp;
+						{{ trans("common.save") }}
+					</button>
+					&nbsp;
+					<button type="submit" onclick="this.form.method='GET';"class="button">
+						<span class="mif-cancel"></span> &nbsp;
+						{{ trans("common.cancel") }}
+					</button>
 				</div>
 			</div>
 		</div>

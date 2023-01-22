@@ -153,9 +153,20 @@
 	-->
 			<div class="grid">
 		    	<div class="row-12">
-				<button type="submit" class="button success">{{ trans("common.save") }}</button>
-
-	    		<button type="submit" class="button cancel" onclick='this.form.action="/controls";this.form.method="GET";'><span class="mif-cancel"></span>{{ trans("common.cancel") }}</button>
+				<button type="submit" class="button success">
+		            <span class="mif-floppy-disk"></span>
+		            &nbsp;
+					{{ trans("common.save") }}
+				</button>
+				</form>
+				&nbsp;
+	    		<form action="/controls/{{$control->id}}">
+		    		<button type="submit" class="button cancel">
+		    			<span class="mif-cancel"></span>
+		    			&nbsp;
+		    			{{ trans("common.cancel") }}
+		    		</button>
+		    	</form>
 	    		</div>
 	    	</div>
 	    </div>

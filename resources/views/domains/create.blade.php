@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.domain.title.add') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.domain.add') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 		@if (count($errors))
 		<div class= “form-group”>
 			<div class= “alert alert-danger”>

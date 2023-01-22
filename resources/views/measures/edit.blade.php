@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Modifier une mesure de sécurité" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.edit') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 	@if (count($errors))
 	<div class= “form-group”>
@@ -30,11 +30,11 @@
 		<div class="grid">
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Domain</strong>
+		    		<strong>{{ trans('cruds.measure.fields.domain') }}</strong>
 		    	</div>
 				<div class="cell-5">
 				<select name="domain_id" size="1" width='10'>
-					    <option value="">--Choose an domain--</option>
+					    <option value="">--{{ trans('cruds.domain.choose') }}--</option>
 						@foreach ($domains as $domain)
 					    	<option value="{{ $domain->id }}"
 					    	{{ $domain->id==$measure->domain_id ? "selected" : ""}} >
@@ -46,7 +46,7 @@
 			</div>
 			<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Clause</strong>
+		    		<strong>{{ trans('cruds.measure.fields.clause') }}</strong>
 		    	</div>
 				<div class="cell-5">
 					<input type="text" name="clause" 
@@ -56,7 +56,7 @@
 			</div>
 			<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Nom</strong>
+		    		<strong>{{ trans('cruds.measure.fields.name') }}</strong>
 		    	</div>
 				<div class="cell-5">
 					<input type="text" name="name" 
@@ -66,7 +66,7 @@
 			</div>
 			<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Objectif</strong>
+		    		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
 		    	</div>
 				<div class="cell-5">
 					<textarea name="objective" rows="3" cols="80">{{ $errors->has('objective') ?  old('objective') : $measure->objective }}</textarea>
@@ -74,7 +74,7 @@
 			</div>
 			<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Attributs</strong>
+		    		<strong>{{ trans('cruds.measure.fields.attributes') }}</strong>
 		    	</div>
 				<div class="cell-5">
 					<textarea name="attributes" rows="3" cols="80">{{ $errors->has('attributes') ?  old('attributes') : $measure->attributes }}</textarea>
@@ -82,7 +82,7 @@
 			</div>
 			<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Calcul</strong>
+		    		<strong>{{ trans('cruds.measure.fields.model') }}</strong>
 		    	</div>
 				<div class="cell-5">
 					<textarea class="textarea" name="model" rows="3" cols="80">{{ $errors->has('model') ?  old('model') : $measure->model }}</textarea>
@@ -90,7 +90,7 @@
 			</div>
 			<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Indicateur</strong>
+		    		<strong>{{ trans('cruds.measure.fields.indicator') }}</strong>
 		    	</div>
 				<div class="cell-5">
 					<textarea name="indicator" rows="3" cols="80">{{ $errors->has('indicator') ?  old('indicator') : $measure->indicator }}</textarea>
@@ -98,7 +98,7 @@
 			</div>
 			<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Plan d'actions</strong>
+		    		<strong>{{ trans('cruds.measure.fields.action_plan') }}</strong>
 		    	</div>
 				<div class="cell-5">
 					<textarea name="action_plan" rows="3" cols="80">{{ $errors->has('action_plan') ?  old('action_plan') : $measure->action_plan }}</textarea>
@@ -106,7 +106,7 @@
 			</div>
 			<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Owner</strong>
+		    		<strong>{{ trans('cruds.measure.fields.owner') }}</strong>
 		    	</div>
 				<div class="cell-5">
 				<input name="owner" type="text"
@@ -116,34 +116,43 @@
 			</div>
 			<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Périodicité</strong>
+		    		<strong>{{ trans('cruds.measure.fields.periodicity') }}</strong>
 		    	</div>
 				<div class="cell-5">
 					<select name="periodicity" size="1" width='20'>
 					    <option value="0"></option>
-					    <option value="1" {{ $measure->periodicity==1 ? "selected" : ""}} >Mensuel</option>
-					    <option value="3" {{ $measure->periodicity==3 ? "selected" : ""}}>Trimestriel</option>
-					    <option value="4" {{ $measure->periodicity==4 ? "selected" : ""}}>Quatrimestriel</option>
-					    <option value="6" {{ $measure->periodicity==6 ? "selected" : ""}}>Semstriel</option>
-					    <option value="12" {{ $measure->periodicity==12 ? "selected" : ""}}>Annuel</option>
+					    <option value="1" {{ $measure->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
+					    <option value="3" {{ $measure->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
+					    <option value="6" {{ $measure->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>
+					    <option value="12" {{ $measure->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
 					 </select>
 				</div>
 			</div>
 
 			<div class="row">
 	    		<div class="cell-5">
-					<button type="submit" class="button success">Sauver</button>
+					<button type="submit" class="button success">
+			            <span class="mif-floppy-disk"></span>
+			            &nbsp;
+						{{ trans('common.save') }}
+					</button>
 					</form>
-
+					&nbsp;
 					<form action="/measures/{{ $measure->id }}" method="post">
 			        	{{ method_field('delete') }}
 			        	@csrf
-			            <button class="button alert" type="submit">Supprimer</button>
+			            <button class="button alert" type="submit">
+				            <span class="mif-fire"></span>
+				            &nbsp;
+			            	{{ trans('common.delete') }}
+			            </button>
 			        </form>
-					
+					&nbsp;
 					<form action="/measures/{{ $measure->id }}">
 						<button type="submit" class="button">
-							<span class="mif-cancel"></span> Annuler
+							<span class="mif-cancel"></span>
+							&nbsp;
+							{{ trans('common.cancel') }}
 						</button>
 					</form>
 				</div>

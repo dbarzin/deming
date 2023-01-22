@@ -81,7 +81,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.control.fields.report') }}</strong>
 		    		<br>
-					<a target="_new" href="/control/template/{{ $control->id }}">{{ trans('cruds.control.fields.model') }}</a>
+					<a target="_new" href="/control/template/{{ $control->id }}">{{ trans('cruds.control.checklist') }}</a>
 		    	</div>
 				<div class="cell-6">
 					<div class="dropzone dropzone-previews" id="dropzoneFileUpload"></div>
@@ -90,7 +90,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Calcul</strong>
+		    		<strong>{{ trans('cruds.control.fields.model') }}</strong>
 		    	</div>
 				<div class="cell-6">
 					<pre>{{ $control->model }}</pre>
@@ -159,20 +159,49 @@
 				</div>
 				<div class="cell-1">
 				(
-				@if ($control->periodicity==1) Mensuel @endif
-				@if ($control->periodicity==3) Triestriel @endif
-				@if ($control->periodicity==4) Quadrimestriel @endif
-				@if ($control->periodicity==6) Semestriel @endif
-				@if ($control->periodicity==12) Annuel @endif
+				@if ($control->periodicity==1) 
+					{{ trans("common.monthly") }} 
+				@elseif ($control->periodicity==3) 
+					{{ trans("common.quarterly") }} 
+				@elseif ($control->periodicity==6) 
+					{{ trans("common.bisannually") }} 
+				@elseif ($control->periodicity==12) 
+					{{ trans("common.annually") }} 
+				@else
+					$control->periodicity
+				@endif
 				)
 				</div>
 			</div>
 
 			<div class="grid">
+		    	<div class="row">
+		    		&nbsp;
+		    	</div>
+		    </div>
+
+			<div class="grid">
 		    	<div class="row-12">
-					<button type="submit" class="button primary" onclick='this.form.action="/control/draft"'>{{ trans('common.save') }}</button>
-					<button type="submit" class="button success">{{ trans('common.make') }}</button>
-		    		<button type="submit" class="button" onclick='this.form.action="/controls";this.form.method="GET";'>{{ trans('common.cancel') }}</button>
+					<button type="submit" class="button primary" onclick='this.form.action="/control/draft"'>
+			            <span class="mif-floppy-disk"></span>
+			            &nbsp;
+						{{ trans('common.save') }}
+					</button>
+					&nbsp;
+					<button type="submit" class="button success">
+						<span class="mif-done"></span>
+						&nbsp;	    			
+						{{ trans('common.make') }}
+					</button>
+					</form>
+					&nbsp;
+					<form action="/controls/{{ $control->id }}">
+			    		<button type="submit" class="button">
+							<span class="mif-cancel"></span>
+							&nbsp;
+			    			{{ trans('common.cancel') }}
+			    		</button>
+		    		</form>
 	    		</div>
 	    	</div>
 

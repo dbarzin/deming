@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.domain.title.edit') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.domain.edit') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 		@if (count($errors))
 		<div class= “form-group”>
 			<div class= “alert alert-danger”>
@@ -35,17 +35,29 @@
 					</div>
 				</div>
 			</div>
-			<button type="submit" class="button success">{{ trans('common.save') }}</button>
+			<button type="submit" class="button success">
+	            <span class="mif-floppy-disk"></span>
+				&nbsp;
+				{{ trans('common.save') }}
+			</button>
 			</form>
 	        &nbsp;
-		<form action="/domains/{{ $domain->id }}" method="post">
-           {{ method_field('delete') }}
-           @csrf
-	        <button class="button alert" type="submit">{{ trans('common.delete') }}</button>
+			<form action="/domains/{{ $domain->id }}" method="post">
+	           {{ method_field('delete') }}
+	           @csrf
+		        <button class="button alert" type="submit">
+					<span class="mif-fire"></span>
+					&nbsp;
+			        {{ trans('common.delete') }}
+		    </button>
         </form>
         &nbsp;
 		<form>
-    		<button type="submit" class="button" onclick='this.form.action="/domains/{{ $domain->id }}";this.form.method="GET";'>{{ trans('common.cancel') }}</button>
+    		<button type="submit" class="button" onclick='this.form.action="/domains/{{ $domain->id }}";this.form.method="GET";'>
+				<span class="mif-cancel"></span>
+				&nbsp;
+    			{{ trans('common.cancel') }}
+    		</button>
 		</form>
 	</div>
 </div>

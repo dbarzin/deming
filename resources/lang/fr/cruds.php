@@ -1,9 +1,19 @@
 <?php
 return [
-    'login' => [
-        'title' => 'Entrez un mot de passe',
-        'identification' => 'Identification',
-        'connection' => 'Connexion',
+    'action' => [
+        'index' => 'Liste des plans d\'action',
+        'show' => 'Plan d\'action',
+        'fields' => [
+            'clause' => 'Clause',
+            'name' => 'Nom',
+            'action' => 'Plan d\'action',
+            'plan_date' => 'Date de plannification',
+            'next_date' => 'Date de revue',
+            'note' => 'Score',
+            'objective' => 'Objectif',
+            'observation' => 'Observation',
+            'action_plan' => 'Plan d\'actions'
+        ],
     ],
     'control' => [
         'description' => '',
@@ -34,10 +44,12 @@ return [
             'status_todo' => 'A faire',
             'status_all' => 'Tous',
         ],
+        'checklist' => 'Fiche de contrôle',
         'list' => 'Liste des contrôles',
         'edit' => 'Modifier un contrôle de sécurité',
         'history' => 'Planning',
         'make' => 'Réaliser un contrôle',
+        'plan' => 'Plannifier un contrôle',
         'title' => 'Contrôles',
         'title_singular' => 'Contrôle',
     ],
@@ -51,11 +63,14 @@ return [
             'attributes' => 'Attributes',
             'model' => 'Modèle',
             'indicator' => 'Indicateur (Rouge, Orange, Vert)',
-            'cation_plan' => 'Plan d\'action',
-            'responsible' => 'Responsable',
-            'periodicity' => 'Périodicité'
+            'action_plan' => 'Plan d\'action',
+            'owner' => 'Responsable',
+            'periodicity' => 'Périodicité',
         ],
-        'index' => 'Liste des mesures',
+        'show' => 'Mesure de sécurité',
+        'index' => 'Liste des mesures de sécurité',
+        'create' => 'Ajouter une mesure de sécurité',
+        'edit' => 'Modifier une mesure de sécurité',
 
     ],
     'domain' => [
@@ -89,6 +104,14 @@ return [
         'count' => 'Nombre de documents',
         'total_size' => 'Taille totale',
     ],
+    'exports' => [
+        'index' => 'Exporter des données',
+    ],
+    'login' => [
+        'title' => 'Entrez un mot de passe',
+        'identification' => 'Identification',
+        'connection' => 'Connexion',
+    ],
     'user' => [
         'index' => 'Liste des utilisateurs',
         'edit' => 'Modifier un utilisateur',
@@ -107,7 +130,4 @@ return [
             'auditor' => 'Auditeur'
         ],
     ],
-    'exports' => [
-        'index' => 'Exporter des données',
-    ]
 ];

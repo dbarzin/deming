@@ -10,7 +10,7 @@ form, table {
 </style>
 
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Plan d'action" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.action.show') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 	@if (count($errors))
 	<div class= “form-group”>
@@ -31,7 +31,7 @@ form, table {
 		<div class="grid">
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Nom</strong>
+		    		<strong>{{ trans('cruds.action.fields.name') }}</strong>
 		    	</div>
 				<div class="cell-5">
 					{{ $action->name }}
@@ -40,7 +40,7 @@ form, table {
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Objectif</strong>
+		    		<strong>{{ trans('cruds.action.fields.objective') }}</strong>
 		    	</div>
 				<div class="cell-5">
 					<pre>{{ $action->objective }}</pre>
@@ -49,7 +49,7 @@ form, table {
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>Observation</strong>
+		    		<strong>{{ trans('cruds.action.fields.observation') }}</strong>
 		    	</div>
 				<div class="cell-6">
 					<pre>{{ $action->observations }}</pre>
@@ -58,32 +58,30 @@ form, table {
 
     	<div class="row">
     		<div class="cell-1">
-				<strong>Prochaine revue</strong>
+				<strong>{{ trans('cruds.action.fields.next_date') }}</strong>
 	    	</div>
 			<div class="cell-2">
 				<input type="text" data-role="calendarpicker" name="plan_date" value="{{$action->next_date}}" data-input-format="%Y-%m-%d"> 
 			</div>
 		</div>
 
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>Plan d'action</strong>
-		    	</div>
-				<div class="cell-6">
-					<textarea name="action_plan" rows="10" cols="80">{{ $errors->has('action_plan') ?  old('action_plan') : $action->action_plan }}</textarea>
-				</div>
+    	<div class="row">
+    		<div class="cell-1">
+	    		<strong>{{ trans('cruds.action.fields.action_plan') }}</strong>
+	    	</div>
+			<div class="cell-6">
+				<textarea name="action_plan" rows="10" cols="80">{{ $errors->has('action_plan') ?  old('action_plan') : $action->action_plan }}</textarea>
 			</div>
-
-
+		</div>
 
 		<div class="grid">
 		    	<div class="row-12">
-				<button type="submit" class="button success">Save</button>
-	 	   		<button type="submit" class="button" onclick='this.form.action="/actions";this.form.method="GET";'>Cancel</button>
+				<button type="submit" class="button success">{{ trans('common.save') }}</button>
+	 	   		<button type="submit" class="button" onclick='this.form.action="/actions";this.form.method="GET";'>{{ trans('common.cancel') }}</button>
 	    		</div>
     		</div>
     	</div>
-</form>
+	</form>
 </div>
 </div>
 @endsection
