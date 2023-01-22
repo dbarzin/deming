@@ -179,6 +179,11 @@ class HomeController extends Controller
 
         $request->session()->put("action_plans_count", $action_plans_count);
 
+        // Get all controls
+        $controls = DB::table("controls")
+            ->select("id","clause","score","realisation_date","plan_date")
+            ->get();
+
         // return 
         return view("welcome")
             ->with('active_domains_count',$active_domains_count)
@@ -192,6 +197,8 @@ class HomeController extends Controller
             ->with('controls_todo', $controls_todo)
             ->with('active_controls', $active_controls)            
             ->with('action_plans_count',$action_plans_count)
-            ->with('late_controls_count',$late_controls_count);
+            ->with('late_controls_count',$late_controls_count)
+
+            ->with("controls", $controls);
     }
 }
