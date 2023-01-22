@@ -60,14 +60,24 @@ class GenerateTestData extends Command
 
         // loop on measures
         $curControl = 0; 
-        $delta = rand(0,5);
+        $delta = $perPeriod-rand(-$perPeriod/3,$perPeriod/3);
+
+        $this->info("perPeriod=" . $perPeriod);
+        $this->info("curDate=" . $curDate);
+        $this->info("delta=" . $delta);
+
         $this->info("Lopp on measures");
         foreach ($measures as $measure) {
             $this->info($measure->clause);
             // go to next period
-            if (( ($curControl++) % ($perPeriod+$delta))==0) {
+            $delta--;
+            if ($delta<=0) {
                 $curDate->addMonth(1);
-                $delta = rand(0,5);
+                $delta = $perPeriod-rand(-$perPeriod/3,$perPeriod/3);
+
+                $this->info("------------------------------");
+                $this->info("curDate=" . $curDate);
+                $this->info("delta=" . $delta);
             }
 
             // Log::Alert("Control " . $control->clause . " curDate=" . $curDate->toDateString());
@@ -92,6 +102,8 @@ class GenerateTestData extends Command
             $control->note = rand(0, 10);
             $control->score = rand(0, 100)<90 ? 3 : (rand(0, 2)<2 ? 2 : 1);
             $control->save();
+
+            $this->info('Control ' . $control->id . " plan_date=" . $control->plan_date);
  
             // create next control
             $nextControl = new Control();
@@ -115,6 +127,8 @@ class GenerateTestData extends Command
             $nextControl->score=null;
             // save it
             $nextControl->save();
+
+            $this->info('nextControl ' . $nextControl->id . " plan_date=" . $nextControl->plan_date);   
 
             // link them
             $control->next_id=$nextControl->id;
