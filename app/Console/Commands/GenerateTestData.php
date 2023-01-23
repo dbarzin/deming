@@ -60,7 +60,7 @@ class GenerateTestData extends Command
 
         // loop on measures
         $curControl = 0; 
-        $delta = $perPeriod-rand(-$perPeriod/3,$perPeriod/3);
+        $delta = $perPeriod-rand(-$perPeriod/2,$perPeriod/2);
 
         $this->info("perPeriod=" . $perPeriod);
         $this->info("curDate=" . $curDate);
@@ -69,18 +69,12 @@ class GenerateTestData extends Command
         $this->info("Lopp on measures");
         foreach ($measures as $measure) {
             $this->info($measure->clause);
-            // go to next period
             $delta--;
             if ($delta<=0) {
+                // go to next period
                 $curDate->addMonth(1);
                 $delta = $perPeriod-rand(-$perPeriod/3,$perPeriod/3);
-
-                $this->info("------------------------------");
-                $this->info("curDate=" . $curDate);
-                $this->info("delta=" . $delta);
             }
-
-            // Log::Alert("Control " . $control->clause . " curDate=" . $curDate->toDateString());
 
             // create a control
             $control = new Control();

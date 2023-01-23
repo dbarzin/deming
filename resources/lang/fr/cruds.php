@@ -37,7 +37,7 @@ return [
             'planned' => 'Planifié',
             'realisation_date' => 'Date de réalisation',
             'realized' => 'Réalisé',
-            'report' => 'Rapport',
+            'evidences' => 'Preuves',
             'score' => 'Score',
             'status' => 'Etat',
             'status_done' => 'Fait',
