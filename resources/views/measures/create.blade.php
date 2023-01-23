@@ -127,12 +127,14 @@
 	    	<div class="row">
 	    		<div class="cell-5">
 					<button type="submit" class="button success">
-						<span class="mif-done"></span> &nbsp;
+			            <span class="mif-floppy-disk"></span>
+						&nbsp;
 						{{ trans("common.save") }}
 					</button>
 					&nbsp;
 					<button type="submit" onclick="this.form.method='GET';"class="button">
-						<span class="mif-cancel"></span> &nbsp;
+						<span class="mif-cancel"></span> 
+						&nbsp;
 						{{ trans("common.cancel") }}
 					</button>
 				</div>

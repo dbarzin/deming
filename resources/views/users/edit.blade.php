@@ -86,20 +86,31 @@
 		</div>
 
 			@if (Auth::User()->role==1)
-				<button type="submit" class="button success">{{ trans('common.save') }}</button>
+				<button type="submit" class="button success">
+		            <span class="mif-floppy-disk"></span>
+					&nbsp;
+					{{ trans('common.save') }}
+				</button>
+		        &nbsp;
 			@endif
 			</form>
-	        &nbsp;
 			@if (Auth::User()->role==1)
 			<form action="/users/{{ $user->id }}" method="post">
-	               {{ method_field('delete') }}
-	               @csrf
-	            <button class="button alert" type="submit">{{ trans('common.delete') }}</button>
-		        &nbsp;
+               {{ method_field('delete') }}
+               @csrf
+	            <button class="button alert" type="submit">
+					<span class="mif-fire"></span>
+					&nbsp;
+	            	{{ trans('common.delete') }}
+	            </button>
 	        </form>
+	        &nsbp;
 	        @endif
-			<form>
-	    		<button type="submit" class="button" onclick='this.form.action="/users/{{ $user->id }}";this.form.method="GET";'><span class="mif-cancel"></span>{{ trans('common.cancel') }}</button>
+			<form action="/users/{{ $user->id }}">
+	    		<button type="submit" class="button">
+	    			<span class="mif-cancel"></span>
+	    			&nsbp;
+	    			{{ trans('common.cancel') }}</button>
 			</form>
 		</div>
 	</div>	

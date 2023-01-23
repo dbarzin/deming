@@ -76,8 +76,16 @@
 			</div>
 	    	<div class="row">
 	    		<div class="cell-4">
-					<button type="submit" class="button success">{{ trans('common.save') }}</button>
-					<button type="submit" class="button" onclick="this.form.method='GET';">{{ trans('common.cancel') }}</button>
+					<button type="submit" class="button success">
+			            <span class="mif-floppy-disk"></span>
+						&nbsp;
+						{{ trans('common.save') }}
+					</button>
+					<button type="submit" class="button" onclick="this.form.method='GET';">
+						<span class="mif-cancel"></span> 
+						&nbsp;
+						{{ trans('common.cancel') }}
+					</button>
 				</div>
 			</div>
 		</form>

@@ -52,8 +52,8 @@
 		    </button>
         </form>
         &nbsp;
-		<form>
-    		<button type="submit" class="button" onclick='this.form.action="/domains/{{ $domain->id }}";this.form.method="GET";'>
+		<form action="/domains/{{ $domain->id }}">
+    		<button type="submit" class="button">
 				<span class="mif-cancel"></span>
 				&nbsp;
     			{{ trans('common.cancel') }}

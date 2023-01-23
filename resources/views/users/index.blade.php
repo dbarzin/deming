@@ -7,18 +7,23 @@
 		<div class="grid">
 			<div class="row">
 				<div class="cell-5">
-
 				</div>
+
 				<div class="cell-7" align="right">
 					@if (Auth::User()->role==1)
-					<a href="/users/create"><span class="mif-add"></span>Nouveau</a>
+					<form action="/users/create">
+						<button class="button primary" onclick="location.href = '/users/create';">
+				            <span class="mif-plus"></span>
+				            &nbsp;
+							{{ trans('common.new') }}
+						</button>
+					</form>
 					@endif
 				</div>
 			</div>
 
 			<div class="row">
 				<div class="cell-12">
-
 
 			<table class="table striped row-hover cell-border"
 		       data-role="table"
@@ -35,24 +40,24 @@
 						data-sort-dir="asc"
 						data-format="string"
 						width="50"
-						>Login</th>
+						>{{ trans('cruds.user.fields.login') }}</th>
 					<th 
 						data-sortable="true"
 						data-sort-dir="asc"
 						data-format="string"
 						width="50"
-						>Nom</th>
+						>{{ trans('cruds.user.fields.name') }}</th>
 					<th 
 						data-sortable="true"
 						data-sort-dir="asc"
 						data-format="string"
 						width="50"
-						>Titre</th>
+						>{{ trans('cruds.user.fields.title') }}</th>
 					<th 
 						data-sortable="true"
 						data-format="string"
 						data-format="string"
-						width="200">eMail</th>
+						width="200">{{ trans('cruds.user.fields.email') }}</th>
 			    </tr>
 			    </thead>
 			    <tbody>
