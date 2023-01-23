@@ -1,111 +1,112 @@
 # Deming
 
-[![Latest Release](https://img.shields.io/github/release/dbarzin/deming.svg?style=flat-square)](https://github.com/dbarzin/deming/releases/latest)
+[![Latest Release](https://img.shields.io/github/release/dbarzin/deming.svg?style=flat-square)](https://github.com/dbarzin/deming/releases/latest )
 ![License](https://img.shields.io/github/license/dbarzin/deming.svg?style=flat-square)
 ![Contributors](https://img.shields.io/github/contributors/dbarzin/deming.svg?style=flat-square)
 ![Stars](https://img.shields.io/github/stars/dbarzin/deming?style=flat-square)
 
+Read this in other languages: [French](README.fr.md)
+
 ## Introduction
 
-Pour gérer la sécurité de leur système d’information les organisations doivent mettre en place un 
-ensemble de mesures de sécurité et contrôler régulièrement que ces mesures sont effectives et 
-efficaces. Ces contrôles réguliers permettent de garantir que les mesures de sécurité mises en 
-place atteignent leurs objectifs de sécurité.
+To manage the security of their information system, organizations must set up a
+set of security measures and regularly check that these measures are effective and
+effective. These regular checks make it possible to guarantee that the security measures implemented
+place achieve their security objectives.
 
-### Qu’est-ce que Deming ?
+### What is Deming?
 
-Deming est un outil qui permet de gérer, de planifier, de suivre et de rapporter l’efficacité des contrôles de sécurité.
+Deming is a tool for managing, planning, tracking and reporting the effectiveness of security controls.
 
-Cette gestion des contrôles doit permettre la mise en œuvre d’une sécurité adéquate et proportionnée. Cette approche est conforme aux recommandations de la norme ISO / IEC 27001:2013, chapitre 9 qui traite de l’évaluation des performances.
+This management of controls must allow the implementation of adequate and proportionate security. This approach is in line with the recommendations of ISO / IEC 27001:2013, chapter 9 which deals with performance evaluation.
 
-### Pourquoi contrôler ?
+### Why control?
 
-Les objectifs de mesure de l’efficacité des exigences d’un SMSI sont :
+The objectives of measuring the effectiveness of the requirements of an ISMS are:
 
-a) d’évaluer l'efficacité des contrôles;
+a) assess the effectiveness of controls;
 
-b) d’évaluer l'efficacité du système de gestion de l'information;
+b) assess the effectiveness of the information management system;
 
-c) de vérifier dans quelle mesure les exigences de sécurité identifiées ont été respectées;
+c) to verify the extent to which the identified security requirements have been met;
 
-d) de faciliter l’amélioration des performances de la sécurité de l’information par rapport aux objectifs;
+d) facilitate the improvement of information security performance against objectives;
 
-e) de fournir des données pour la revue de la direction afin de faciliter la prise de décisions liées au SMSI;
+e) provide input for management review to facilitate ISMS-related decision-making;
 
-f) de justifier les besoins d'amélioration du ISMS.
+f) to justify the needs for improvement of the ISMS.
 
-### Evaluation des performances
+### Evaluation of performances
 
-La norme ISO 27001 au chapitre 9.1, impose d’évaluer les performances de sécurité de l’information, ainsi que l’efficacité du système de management de la sécurité de l’information.
+The ISO 27001 standard in chapter 9.1 requires the evaluation of information security performance, as well as the effectiveness of the information security management system.
 
-Pour évaluer ces performances, il faut déterminer :
+To assess this performance, it is necessary to determine:
 
-a) ce qu’il est nécessaire de surveiller et de mesurer, y compris les processus et les mesures de sécurité de l’information;
+a) what needs to be monitored and measured, including information security processes and measures;
 
-b) les méthodes de surveillance, de mesurage, d’analyse et d’évaluation, selon le cas, pour assurer la validité des résultats;
+b) the monitoring, measurement, analysis and evaluation methods, as applicable, to ensure the validity of the results;
 
-c) quand la surveillance et les mesures doivent être effectuées;
+c) when monitoring and measurements should be carried out;
 
-d) qui doit effectuer la surveillance et les mesures;
+d) who is to carry out the monitoring and measurements;
 
-e) quand les résultats de la surveillance et des mesures doivent être analysés et évalués; et
+e) when the results of monitoring and measurements should be analyzed and evaluated; and
 
-f) qui doit analyser et évaluer ces résultats.
+f) who should analyze and evaluate these results.
 
-Deming permet de répondre à ces exigences et de conserver les informations documentées appropriées comme preuves des résultats de la surveillance et des mesures.
+Deming helps meet these requirements and retain appropriate documented information as evidence of monitoring and measurement results.
 
 ## Definitions
 
-**Mesures de sécurité** (en anglais « Control ») : ensemble de dispositions à mettre en œuvre. Ce sont les mesures à prendre pour mettre en œuvre la politique de sécurité.
+**Security measures** (in English “Control”): set of provisions to be implemented. These are the measures to be taken to implement the security policy.
 
-**Contrôle** ou Mesurage (en anglais « Measurement ») : processus d’obtention relative à l’efficacité d’un SMSI et de mesures de sécurité, à l’aide d’une méthode d’évaluation, d’une fonction d’évaluation, d’un modèle analytique, et de critère de décisions [ISO/IEC 27004].
+** Control ** or Measurement (in English “Measurement”): process of obtaining relative to the effectiveness of an ISMS and security measures, using an evaluation method, a function assessment, analytical model, and decision criteria [ISO/IEC 27004].
 
-**Indicateur** : résultat de l’application d’un modèle analytique à une ou plusieurs variables en relation avec les critères de décision ou d’un besoin d’information [ISO/IEC 27004].
+**Indicator**: result of the application of an analytical model to one or more variables in relation to the decision criteria or an information need [ISO/IEC 27004].
 
-**Attribut** : propriété ou caractéristique d’un objet qui peut être distingué quantitativement ou qualitativement par des moyens humains ou automatiques [ISO/IEC 15939:2007].
+**Attribute**: property or characteristic of an object that can be quantitatively or qualitatively distinguished by human or automatic means [ISO/IEC 15939:2007].
 
-## Ecrans
+## Screens
 
-### Ecran principal
+### Main Screen
 
 [<img src="public/screenshots/main1.png" width="400" height="270">](public/screenshots/main1.png)
 [<img src="public/screenshots/main2.png" width="400" height="270">](public/screenshots/main2.png)
 
-### Liste des contrôles
+### List of controls
 
 [<img src="public/screenshots/controls.png" width="400" height="120">](public/screenshots/controls.png)
 
-### Planification des contrôles
+### Control planning
 
 [<img src="public/screenshots/calendar.png" width="400" height="200">](public/screenshots/calendar.png)
 
-### Gestion des plans d'action
+### Action plan management
 
-[<img src="public/screenshots/plans.png" width="450" height="230">](public/screenshots/plans.png)
+[<img src="public/screenshots/maps.png" width="450" height="230">](public/screenshots/maps.png)
 
-### Vue de la courverture des mesures de protection
+### View of the coverage of protective measures
 
 [<img src="public/screenshots/radar.png" width="500" height="200">](public/screenshots/radar.png)
 
-### Rapport de réunion de pilotage du SMSI
+### WSIS steering meeting report
 
 [<img src="public/screenshots/pilotage1.png" width="360" height="270">](public/screenshots/pilotage1.png)
 [<img src="public/screenshots/pilotage2.png" width="360" height="270">](public/screenshots/pilotage2.png)
 
-## Technologies
-- PHP, Javascript, Laravel
-- Base de données supportées : MySQL, Postgres, SQLite, SQL Server
+## Technology
+- PHP, JavaScript, Laravel
+- Supported databases: MySQL, Postgres, SQLite, SQL Server
 - ChartJS
 
-## Installation
+## Facility
 
-Procédure d'[installation](https://github.com/dbarzin/deming/blob/main/INSTALL.md) de l'application.
+[Installation](https://github.com/dbarzin/deming/blob/main/INSTALL.md) procedure of the application.
 
-## Feuille de route
+## Roadmap
 
-Une [feuille de route](https://github.com/dbarzin/deming/blob/main/ROADMAP.md) reprend les évolutions prévues de l'application.
+A [roadmap](https://github.com/dbarzin/deming/blob/main/ROADMAP.md) includes the planned changes to the application.
 
 ## License
 
-Deming est un logiciel open source distribué sous la licence [GPL](https://www.gnu.org/licenses/licenses.fr.html).
-
+Deming is open source software distributed under the [GPL] license (https://www.gnu.org/licenses/licenses.html).
