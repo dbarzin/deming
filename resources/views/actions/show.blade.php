@@ -75,12 +75,24 @@ form, table {
 		</div>
 
 		<div class="grid">
-		    	<div class="row-12">
-				<button type="submit" class="button success">{{ trans('common.save') }}</button>
-	 	   		<button type="submit" class="button" onclick='this.form.action="/actions";this.form.method="GET";'>{{ trans('common.cancel') }}</button>
-	    		</div>
+	    	<div class="row-12">
+				<button type="submit" class="button success">
+		            <span class="mif-floppy-disk"></span>
+		            &nbsp;
+					{{ trans('common.save') }}
+				</button>
+				</form>
+				&nbsp;
+	    		<form action="/actions">
+		    		<button type="submit" class="button cancel">
+		    			<span class="mif-cancel"></span>
+		    			&nbsp;
+		    			{{ trans("common.cancel") }}
+		    		</button>
+		    	</form>
     		</div>
-    	</div>
+		</div>
+	</div>
 	</form>
 </div>
 </div>

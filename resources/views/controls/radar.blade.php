@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Etat des contrôles de sécurité" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.control.radar') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 <div class="grid">    
     <div class="row">
@@ -39,11 +39,11 @@
             <table class="table table-bordered">
                   <thead>
                   <tr>
-                    <th>Note</th>
+                    <th>{{ trans("cruds.control.fields.note") }}</th>
                     <th><center>#</center></th>
-                    <th>Nom</th>
-                    <th>Date</th>
-                    <th>Next</th>
+                    <th>{{ trans("cruds.control.fields.name") }}</th>
+                    <th>{{ trans("cruds.control.fields.realisation_date") }}</th>
+                    <th>{{ trans("cruds.control.fields.next") }}</th>
                   </tr>
                   </thead>
                   <tbody>
