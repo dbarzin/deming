@@ -109,4 +109,4 @@ A [roadmap](https://github.com/dbarzin/deming/blob/main/ROADMAP.md) includes the
 
 ## License
 
-Deming is open source software distributed under the [GPL] license (https://www.gnu.org/licenses/licenses.html).
+Deming is open source software distributed under the [GPL](https://www.gnu.org/licenses/licenses.html) license.
