@@ -48,21 +48,21 @@
                 <li>
                     <a href="/">
                         <span class="icon"><span class="mif-home"></span></span>
-                        <span class="caption">Home</span>
+                        <span class="caption">{{ trans("menu.home") }}</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="/domains">
                         <span class="icon"><span class="mif-library"></span></span>
-                        <span class="caption">Domaines</span>
+                        <span class="caption">{{ trans("menu.domains") }}</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="/measures">
                         <span class="icon"><span class="mif-books"></span></span>
-                        <span class="caption">Mesures</span>
+                        <span class="caption">{{ trans("menu.measures") }}</span>
                     </a>
                 </li>
 
@@ -70,7 +70,7 @@
                 <li>
                     <a href="/controls">
                         <span class="icon"><span class="mif-paste"></span></span>
-                        <span class="caption">Contrôles</span>
+                        <span class="caption">{{ trans("menu.controls") }}</span>
                         <span class="badges ml-auto mr-3">
                         <!-- TODO
                             <span class="badge inline bg-cyan fg-white">17</span>
@@ -85,7 +85,7 @@
                 <li>
                     <a href="/control/history">
                         <span class="icon"><span class="mif-calendar"></span></span>
-                        <span class="caption">Planning</span>
+                        <span class="caption">{{ trans("menu.planning") }}</span>
                     </a>
                 </li>
 
@@ -93,39 +93,39 @@
                 <li>
                     <a href="/control/radar">
                         <span class="icon"><span class="mif-meter"></span></span>
-                        <span class="caption">Radar</span>
+                        <span class="caption">{{ trans("menu.radar") }}</span>
                     </a>
                 </li>
                 <li>
                     <a href="/actions">
                         <span class="icon"><span class="mif-open-book"></span></span>
-                        <span class="caption">Plans d'action</span>
+                        <span class="caption">{{ trans("menu.action_plan") }}</span>
                     </a>
                 </li>
 
                 <li>
                     <a href="#" class="dropdown-toggle">
                         <span class="icon"><span class="mif-cog"></span></span>
-                        <span class="caption">Configuration</span>
+                        <span class="caption">{{ trans("menu.configuration.title) }}</span>
                     </a>
                     <ul class="navview-menu stay-open" data-role="dropdown" >
                         @if (Auth::User()->role==1)
                         <li><a href="/users">
                             <span class="icon"><span class="mif-users"></span></span>
-                            <span class="caption">Utilisateurs</span>
+                            <span class="caption">{{ trans("menu.configuration.users") }}</span>
                         </a></li>
                         @endif
                         <li><a href="/exports">
                             <span class="icon"><span class="mif-download"></span></span>
-                            <span class="caption">Rapports</span>
+                            <span class="caption">{{ trans("menu.configuration.reports") }}</span>
                         </a></li>
                         <li><a href="/doc/stats"> 
                             <span class="icon"><span class="mif-file-text"></span></span>
-                            <span class="caption">Documents</span>
+                            <span class="caption">{{ trans("menu.configuration.documents") }}</span>
                         </a></li>
                         <li><a href="/doc/templates"> 
                             <span class="icon"><span class="mif-file-text"></span></span>
-                            <span class="caption">Modèles</span>
+                            <span class="caption">{{ trans("menu.configuration.models") }}</span>
                         </a></li>
                     </ul>
                 </li>
