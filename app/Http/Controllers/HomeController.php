@@ -2,20 +2,9 @@
 
 namespace App\Http\Controllers;
 
-use \Carbon\Carbon;
-
-use App\Exports\MeasurementsExport;
-use Maatwebsite\Excel\Facades\Excel;
-
-use App\Control;
-use App\Domain;
-use App\Measure;
-
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -43,14 +32,15 @@ class HomeController extends Controller
         $active_domains_count = DB::table('controls')
             ->select(
                 'domain_id',
-                DB::raw('max(controls.id)'))
+                DB::raw('max(controls.id)')
+            )
             ->whereNull('realisation_date')
             ->groupBy('domain_id')
             ->get()
             ->count();
 
         // count all controls
-        $controls_count = DB::table('measures')            
+        $controls_count = DB::table('measures')
             ->count();
 
         // count active mesures
@@ -64,19 +54,21 @@ class HomeController extends Controller
             ->count();
 
         // count control never made
-        $controls_never_made = DB::select( 
-            DB::raw("
+        $controls_never_made = DB::select(
+            DB::raw(
+                '
                 select domain_id 
                 from controls c1 
                 where realisation_date is null and 
                 not exists (
                     select * 
                     from controls c2 
-                    where realisation_date is not null and c1.measure_id=c2.measure_id);"
-                ));
+                    where realisation_date is not null and c1.measure_id=c2.measure_id);'
+            )
+        );
 
         // Last controls made by measures
-        $active_controls = DB::select("
+        $active_controls = DB::select('
                 select
                     c2.id,
                     c2.measure_id,
@@ -98,12 +90,13 @@ class HomeController extends Controller
                     domains
                 where
                     c1.id=c2.id and domains.id=c2.domain_id
-                order by id;");
+                order by id;');
         //dd($status);
 
         // get controls todo
-        $controls_todo=DB::select(
-            DB::raw("select
+        $controls_todo = DB::select(
+            DB::raw(
+                'select
                 c1.id,
                 c1.measure_id,
                 c1.name,
@@ -116,8 +109,9 @@ class HomeController extends Controller
             from
                 controls c1 left join controls c2 on c2.next_id=c1.id
             where (c1.realisation_date is null) and (c1.plan_date < NOW() + INTERVAL 30 DAY)
-            order by c1.plan_date"
-            ));
+            order by c1.plan_date'
+            )
+        );
 
         /*
         $controls_todo = DB::table('controls')
@@ -135,28 +129,28 @@ class HomeController extends Controller
         $planed_controls_this_month_count = DB::table('controls')
             ->where(
                 [
-                    ["realisation_date","=",null],
-                    ["plan_date",">=", (new Carbon('first day of this month'))->toDateString()],
-                    ["plan_date","<", (new Carbon('first day of next month'))->toDateString()]
+                    ['realisation_date','=',null],
+                    ['plan_date','>=', (new Carbon('first day of this month'))->toDateString()],
+                    ['plan_date','<', (new Carbon('first day of next month'))->toDateString()],
                 ]
             )
             ->count();
-        $request->session()->put("planed_controls_this_month_count", $planed_controls_this_month_count);
+        $request->session()->put('planed_controls_this_month_count', $planed_controls_this_month_count);
 
         // late controls
-        $late_controls_count=DB::table('controls')
+        $late_controls_count = DB::table('controls')
             ->where(
                 [
-                    ["realisation_date","=",null],
-                    ["plan_date","<", Carbon::today()->toDateString()],
-                    ]
+                    ['realisation_date','=',null],
+                    ['plan_date','<', Carbon::today()->toDateString()],
+                ]
             )
             ->count();
-        $request->session()->put("late_controls_count", $late_controls_count);
+        $request->session()->put('late_controls_count', $late_controls_count);
 
         // Count number of action plans
-        $action_plans_count=
-            count(DB::select("
+        $action_plans_count =
+            count(DB::select('
                 select
                     c2.measure_id,
                     c2.id,
@@ -173,20 +167,20 @@ class HomeController extends Controller
                     ) as c1
                 where
                     c1.id = c2.id and
-                    (c2.score=1 or c2.score=2);"));
+                    (c2.score=1 or c2.score=2);'));
 
         //dd($action_plans_count);
 
-        $request->session()->put("action_plans_count", $action_plans_count);
+        $request->session()->put('action_plans_count', $action_plans_count);
 
         // Get all controls
-        $controls = DB::table("controls")
-            ->select("id","clause","score","realisation_date","plan_date")
+        $controls = DB::table('controls')
+            ->select('id', 'clause', 'score', 'realisation_date', 'plan_date')
             ->get();
 
-        // return 
-        return view("welcome")
-            ->with('active_domains_count',$active_domains_count)
+        // return
+        return view('welcome')
+            ->with('active_domains_count', $active_domains_count)
             ->with('active_controls', $active_controls)
             ->with('domains', $domains)
             ->with('controls_count', $controls_count)
@@ -195,10 +189,10 @@ class HomeController extends Controller
             ->with('controls_never_made', $controls_never_made)
 
             ->with('controls_todo', $controls_todo)
-            ->with('active_controls', $active_controls)            
-            ->with('action_plans_count',$action_plans_count)
-            ->with('late_controls_count',$late_controls_count)
+            ->with('active_controls', $active_controls)
+            ->with('action_plans_count', $action_plans_count)
+            ->with('late_controls_count', $late_controls_count)
 
-            ->with("controls", $controls);
+            ->with('controls', $controls);
     }
 }

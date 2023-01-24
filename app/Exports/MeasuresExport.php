@@ -3,15 +3,12 @@
 namespace App\Exports;
 
 use App\Measure;
-
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\WithColumnWidths;
-
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles, WithColumnWidths
@@ -27,7 +24,7 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
             'Indicateur',
             'Plan d\'action',
             'Responsables',
-            'Périodicité'
+            'Périodicité',
         ];
     }
 
@@ -35,12 +32,12 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
     {
         return [
             // Style the first row as bold text.
-            1    => ['font' => ['bold' => true],
-                    'alignment' => [
-                        'wrapText' => true,
-                        'vertical' => 'top'
-                        ],
-                ]
+            1 => ['font' => ['bold' => true],
+                'alignment' => [
+                    'wrapText' => true,
+                    'vertical' => 'top',
+                ],
+            ],
         ];
     }
 
@@ -55,18 +52,18 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
             'F' => 50,  // Indicateur
             'G' => 50,  // Plan d'action
             'H' => 20,  // Responsable
-            'I' => 20    // Period
+            'I' => 20,    // Period
         ];
     }
 
     /**
-    * @var Measure $measure
-    */
+     * @var Measure $measure
+     */
     public function map($measure): array
     {
         return [
             [
-                $measure->clause, 
+                $measure->clause,
                 $measure->name,
                 $measure->objective,
                 $measure->attributes,
@@ -74,19 +71,16 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
                 $measure->indicator,
                 $measure->action_plan,
                 $measure->owner,
-                $measure->periodicity
-            ]
+                $measure->periodicity,
+            ],
         ];
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function query()
     {
-        return DB::table('measures')->orderBy("clause");
+        return DB::table('measures')->orderBy('clause');
     }
-
 }
-
-

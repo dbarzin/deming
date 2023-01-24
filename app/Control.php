@@ -2,8 +2,6 @@
 
 namespace App;
 
-use App\Measure;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Control extends Model
@@ -15,7 +13,7 @@ class Control extends Model
         'attributes',
         'model',
         'action_plan',
-        'realisation_date'
+        'realisation_date',
     ];
 
     protected $dates = [
@@ -31,8 +29,5 @@ class Control extends Model
     public function measure()
     {
         return $this->belongsTo(Measure::class, 'measure_id');
-    }    
+    }
 }
-
-
-

@@ -254,16 +254,16 @@
                 $calendar = new \App\Calendar(Request::get('date'));
             foreach ($controls as $control) {
                 if (($control->score==null) && ($control->plan_date!=null)) {
-                        $calendar->add_event($control->clause, $control->plan_date, 1, 'grey', $control->id);
+                        $calendar->addEvent($control->clause, $control->plan_date, 1, 'grey', $control->id);
                     }
                 else if (($control->score==1) && ($control->realisation_date!=null)) {
-                        $calendar->add_event($control->clause, $control->realisation_date, 1, 'red', $control->id);
+                        $calendar->addEvent($control->clause, $control->realisation_date, 1, 'red', $control->id);
                         }
                 else if (($control->score==2) && ($control->realisation_date!=null)) {
-                        $calendar->add_event($control->clause, $control->realisation_date, 1, 'orange', $control->id);
+                        $calendar->addEvent($control->clause, $control->realisation_date, 1, 'orange', $control->id);
                         }
                 else if (($control->score==3) && ($control->realisation_date!=null)) {
-                        $calendar->add_event($control->clause, $control->realisation_date, 1, 'green', $control->id);
+                        $calendar->addEvent($control->clause, $control->realisation_date, 1, 'green', $control->id);
                     }
                 }
             echo $calendar;

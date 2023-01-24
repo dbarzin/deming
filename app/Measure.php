@@ -2,20 +2,17 @@
 
 namespace App;
 
-use App\Domain;
-
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\DB;
 
 class Measure extends Model
 {
-
     public static $searchable = [
         'name',
         'clause',
         'objective',
         'attributes',
-        'model'
+        'model',
     ];
 
     protected $dates = [
@@ -26,7 +23,7 @@ class Measure extends Model
 
     protected $fillable = [
     ];
-    
+
     // Return the domain associated to this measure
     public function domain()
     {
@@ -39,6 +36,6 @@ class Measure extends Model
         return DB::table('controls')
             ->where('measure_id', $id)
             ->whereNull('realisation_date')
-            ->exists(); 
+            ->exists();
     }
 }

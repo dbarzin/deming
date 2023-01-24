@@ -148,7 +148,7 @@
 					@elseif ($control->score==2) 
 						{{ trans("common.orange") }}
 					@elseif ($control->score==3) 
-						{{ trans("common.vert") }}
+						{{ trans("common.green") }}
 					@else
 						
 					@endif

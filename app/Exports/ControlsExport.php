@@ -3,15 +3,12 @@
 namespace App\Exports;
 
 use App\Control;
-
 use Illuminate\Support\Facades\DB;
-use Maatwebsite\Excel\Concerns\FromCollection;
 use Maatwebsite\Excel\Concerns\FromQuery;
+use Maatwebsite\Excel\Concerns\WithColumnWidths;
+use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
-use Maatwebsite\Excel\Concerns\WithHeadings;
-use Maatwebsite\Excel\Concerns\WithColumnWidths;
-
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
 class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles, WithColumnWidths
@@ -29,7 +26,7 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
             'Observation',
             'Score',
             'Note',
-            'Plan d\'action'
+            'Plan d\'action',
         ];
     }
 
@@ -37,12 +34,12 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
     {
         return [
             // Style the first row as bold text.
-            1    => ['font' => ['bold' => true],
-                    'alignment' => [
-                        'wrapText' => true,
-                        'vertical' => 'top'
-                        ],
-                ]
+            1 => ['font' => ['bold' => true],
+                'alignment' => [
+                    'wrapText' => true,
+                    'vertical' => 'top',
+                ],
+            ],
         ];
     }
 
@@ -64,13 +61,13 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
     }
 
     /**
-    * @var control $control
-    */
+     * @var control $control
+     */
     public function map($control): array
     {
         return [
             [
-                $control->clause, 
+                $control->clause,
                 $control->name,
                 $control->objective,
                 $control->attributes,
@@ -80,17 +77,15 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
                 $control->observations,
                 $control->score,
                 $control->action_plan,
-            ]
+            ],
         ];
     }
 
     /**
-    * @return \Illuminate\Support\Collection
-    */
+     * @return \Illuminate\Support\Collection
+     */
     public function query()
     {
-        return DB::table('controls')->orderBy("clause");
+        return DB::table('controls')->orderBy('clause');
     }
-
 }
-

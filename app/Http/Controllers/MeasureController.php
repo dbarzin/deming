@@ -2,19 +2,14 @@
 
 namespace App\Http\Controllers;
 
-Use \Carbon\Carbon;
-
-use App\Exports\MeasuresExport;
-use Maatwebsite\Excel\Facades\Excel;
-
-use App\Measure;
 use App\Control;
 use App\Domain;
-use App\Measurement;
-
+use App\Exports\MeasuresExport;
+use App\Measure;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
+use Maatwebsite\Excel\Facades\Excel;
 
 class MeasureController extends Controller
 {
@@ -28,29 +23,27 @@ class MeasureController extends Controller
         // $measures = Measure::All();
         $domains = Domain::All();
 
-        $domain=$request->get("domain");
-        if ($domain<>null) {
-            if ($domain=="0") { 
-                $request->session()->forget("domain");
-                $domain=null;
+        $domain = $request->get('domain');
+        if ($domain !== null) {
+            if ($domain === '0') {
+                $request->session()->forget('domain');
+                $domain = null;
             }
-        }
-        else {
-            $domain=$request->session()->get("domain");
+        } else {
+            $domain = $request->session()->get('domain');
         }
 
-        if (($domain<>null)) {
-            $measures = Measure::where("domain_id", $domain)->get()->sortBy("clause");
-            $request->session()->put("domain", $domain);
-        }
-        else {
-            $measures = Measure::All()->sortBy("clause");
+        if (($domain !== null)) {
+            $measures = Measure::where('domain_id', $domain)->get()->sortBy('clause');
+            $request->session()->put('domain', $domain);
+        } else {
+            $measures = Measure::All()->sortBy('clause');
         }
 
         // return
-        return view("measures.index")
-            ->with("measures", $measures)
-            ->with("domains", $domains);
+        return view('measures.index')
+            ->with('measures', $measures)
+            ->with('domains', $domains);
     }
 
     /**
@@ -65,64 +58,67 @@ class MeasureController extends Controller
 
         //dd($domains);
 
-        // store it in the response 
-        return view("measures.create")->with('domains', $domains);;
+        // store it in the response
+        return view('measures.create')->with('domains', $domains);
     }
 
     /**
      * Store a newly created resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function store(Request $request)
     {
-        //
         $this->validate(
-            $request, [
-            "domain_id" => "required",
-            "clause" => "required|min:3|max:30",
-            "name" => "required|min:5",
-            "objective" => "required"
+            $request,
+            [
+                'domain_id' => 'required',
+                'clause' => 'required|min:3|max:30',
+                'name' => 'required|min:5',
+                'objective' => 'required',
             ]
         );
-    
+
         $measure = new Measure();
 
-        $measure->domain_id = request("domain_id");
-        $measure->clause = request("clause");
-        $measure->name = request("name");
-        $measure->objective = request("objective");
-        $measure->attributes = request("attributes");
-        $measure->model = request("model");
-        $measure->indicator = request("indicator");
-        $measure->action_plan = request("action_plan");
-        $measure->owner = request("owner");
-        $measure->periodicity = request("periodicity");
-        $measure->retention= request("retention");
+        $measure->domain_id = request('domain_id');
+        $measure->clause = request('clause');
+        $measure->name = request('name');
+        $measure->objective = request('objective');
+        $measure->attributes = request('attributes');
+        $measure->model = request('model');
+        $measure->indicator = request('indicator');
+        $measure->action_plan = request('action_plan');
+        $measure->owner = request('owner');
+        $measure->periodicity = request('periodicity');
+        $measure->retention = request('retention');
 
         $measure->save();
 
-        $request->session()->put("domain", $measure->domain_id);
+        $request->session()->put('domain', $measure->domain_id);
 
-        return redirect("/measures");
+        return redirect('/measures');
     }
 
     /**
      * Display the specified resource.
      *
      * @param  \App\Measure $measure
+     *
      * @return \Illuminate\Http\Response
      */
     public function show(Measure $measure)
     {
-        return view("measures.show", compact("measure"));
+        return view('measures.show', compact('measure'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
      * @param  \App\Measure $measure
+     *
      * @return \Illuminate\Http\Response
      */
     public function edit(Measure $measure)
@@ -130,7 +126,7 @@ class MeasureController extends Controller
         // get the list of domains
         $domains = Domain::All();
 
-        return view("measures.edit", compact("measure"))->with('domains', $domains);
+        return view('measures.edit', compact('measure'))->with('domains', $domains);
     }
 
     /**
@@ -138,39 +134,41 @@ class MeasureController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      * @param  \App\Measure             $measure
+     *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, Measure $measure)
     {
         $this->validate(
-            $request, [
-            "domain_id" => "required",
-            "clause" => "required|min:3|max:30",
-            "name" => "required|min:5",
-            "objective" => "required"
+            $request,
+            [
+                'domain_id' => 'required',
+                'clause' => 'required|min:3|max:30',
+                'name' => 'required|min:5',
+                'objective' => 'required',
             ]
         );
 
         // update measure
-        $measure->domain_id = request("domain_id");
-        $measure->name = request("name");
-        $measure->clause = request("clause");
-        $measure->objective = request("objective");
-        $measure->attributes = request("attributes");
-        $measure->model = request("model");
-        $measure->indicator = request("indicator");
-        $measure->action_plan = request("action_plan");
-        $measure->owner = request("owner");
-        $measure->periodicity = request("periodicity");
-        $measure->retention = request("retention");
-        
+        $measure->domain_id = request('domain_id');
+        $measure->name = request('name');
+        $measure->clause = request('clause');
+        $measure->objective = request('objective');
+        $measure->attributes = request('attributes');
+        $measure->model = request('model');
+        $measure->indicator = request('indicator');
+        $measure->action_plan = request('action_plan');
+        $measure->owner = request('owner');
+        $measure->periodicity = request('periodicity');
+        $measure->retention = request('retention');
+
         $measure->save();
 
         // update the current control
-        $control=Control::where('measure_id', $measure->id)
-                            ->where('realisation_date', null)
-                            ->get()->first();
-        if ($control<>null) {
+        $control = Control::where('measure_id', $measure->id)
+            ->where('realisation_date', null)
+            ->get()->first();
+        if ($control !== null) {
             $control->clause = $measure->clause;
             $control->name = $measure->name;
             $control->objective = $measure->objective;
@@ -184,27 +182,27 @@ class MeasureController extends Controller
         }
 
         // retun to view measure
-        return redirect("/measures/".$measure->id);
+        return redirect('/measures/'.$measure->id);
     }
 
     /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Measure $measure
+     *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Measure $measure)
     {
-        //
         $measure->delete();
-        return redirect("/measures");
+        return redirect('/measures');
     }
-
 
     /**
      * Activate a measure
      *
      * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function activate(Request $request)
@@ -212,19 +210,19 @@ class MeasureController extends Controller
         // dd($request);
         $measure = Measure::find($request->id);
 
-    	// Check control is disabled
-        $active_control_id = DB::Table("controls")
-            ->select("id")
-            ->where("measure_id","=",$measure->id)
+        // Check control is disabled
+        $active_control_id = DB::Table('controls')
+            ->select('id')
+            ->where('measure_id', '=', $measure->id)
             ->where('realisation_date', null)
             ->first();
-        if ($active_control_id==null) {
-            // create a new control        
+        if ($active_control_id === null) {
+            // create a new control
             $control = new Control();
-            $control->measure_id=$measure->id;
-            $control->domain_id=$measure->domain_id;
-            $control->name=$measure->name;
-            $control->clause=$measure->clause;
+            $control->measure_id = $measure->id;
+            $control->domain_id = $measure->domain_id;
+            $control->name = $measure->name;
+            $control->clause = $measure->clause;
             $control->objective = $measure->objective;
             $control->attributes = $measure->attributes;
             $control->model = $measure->model;
@@ -238,24 +236,24 @@ class MeasureController extends Controller
             $control->save();
 
             // Update link
-            $prev_control = Control::where("measure_id","=",$measure->id)
-                ->where('next_id',null)
+            $prev_control = Control::where('measure_id', '=', $measure->id)
+                ->where('next_id', null)
                 ->first();
-            if ($prev_control!=null) {
-                $prev_control->next_id=$control->id;
+            if ($prev_control !== null) {
+                $prev_control->next_id = $control->id;
                 $prev_control->update();
             }
         }
 
         // return to the list of measures
-        return redirect("/measures");
+        return redirect('/measures');
     }
-
 
     /**
      * Disable a measure
      *
      * @param \Illuminate\Http\Request $request
+     *
      * @return \Illuminate\Http\Response
      */
     public function disable(Request $request)
@@ -266,20 +264,19 @@ class MeasureController extends Controller
             ->where('realisation_date', null)
             ->get()
             ->first()->id;
-        if($control_id!=null) {
+        if ($control_id !== null) {
             // break link
-            DB::update("UPDATE controls SET next_id = null WHERE next_id =" . $control_id);
+            DB::update('UPDATE controls SET next_id = null WHERE next_id =' . $control_id);
             // delete control
-            DB::delete("DELETE FROM controls WHERE id = " . $control_id);
-           }
+            DB::delete('DELETE FROM controls WHERE id = ' . $control_id);
+        }
 
         // return to the list of measures
-        return redirect("/measures");
+        return redirect('/measures');
     }
 
-    public function export() 
+    public function export()
     {
-        return Excel::download(new MeasuresExport, 'measures.xlsx');
-    }    
-
+        return Excel::download(new MeasuresExport(), 'measures.xlsx');
+    }
 }

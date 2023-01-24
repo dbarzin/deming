@@ -46,15 +46,15 @@ Route::get('/control/upload/{id}', 'ControlController@upload');
 Route::get('/control/plan/{id}', 'ControlController@plan');
 
 /* Documents */
-Route::post('/doc/store','DocumentController@store');
-Route::get('/doc/delete/{id}','DocumentController@delete');
-Route::get('/doc/show/{id}','DocumentController@get');
-Route::get('/doc/stats','DocumentController@stats');
-Route::get('/doc/check','DocumentController@check');
+Route::post('/doc/store', 'DocumentController@store');
+Route::get('/doc/delete/{id}', 'DocumentController@delete');
+Route::get('/doc/show/{id}', 'DocumentController@get');
+Route::get('/doc/stats', 'DocumentController@stats');
+Route::get('/doc/check', 'DocumentController@check');
 
-Route::get('/doc/templates','DocumentController@listTemplates');
-Route::get('/doc/template','DocumentController@getTemplate');
-Route::post('/doc/template','DocumentController@saveTemplate');
+Route::get('/doc/templates', 'DocumentController@listTemplates');
+Route::get('/doc/template', 'DocumentController@getTemplate');
+Route::post('/doc/template', 'DocumentController@saveTemplate');
 
 /* Other */
 Route::resource('domains', 'DomainController');
@@ -71,11 +71,12 @@ Route::post('/action/save', 'ActionplanController@save');
 Route::get('/reports/pilotage', 'ReportController@pilotage');
 
 /* Exports */
-Route::get('/exports', function () { return view("exports"); });
+Route::get('/exports', function () {
+    return view('exports');
+});
 Route::get('/export/domains', 'DomainController@export');
 Route::get('/export/measures', 'MeasureController@export');
 Route::get('/export/controls', 'ControlController@export');
 
 /* test chart */
 Route::get('/testChart', 'ReportController@testChart');
-

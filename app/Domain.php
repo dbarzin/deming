@@ -6,7 +6,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Domain extends Model
 {
-    //
     public static $searchable = [
         'title',
         'description',
@@ -20,5 +19,4 @@ class Domain extends Model
 
     protected $fillable = [
     ];
-    
 }
