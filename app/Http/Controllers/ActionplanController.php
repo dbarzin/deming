@@ -13,7 +13,7 @@ class ActionplanController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $request)
+    public function index()
     {
         $actions =
             DB::select('
@@ -61,7 +61,7 @@ class ActionplanController extends Controller
      */
     public function save(Request $request)
     {
-        $id = (int)$request->get('id');
+        $id = (int) $request->get('id');
 
         // save control
         $control = Control::find($id);

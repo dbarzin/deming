@@ -498,7 +498,7 @@ class ControlController extends Controller
      */
     public function draft(Request $request)
     {
-        $id = (int)$request->get('id');
+        $id = (int) $request->get('id');
 
         $control = Control::find($id);
 
@@ -520,7 +520,7 @@ class ControlController extends Controller
 
     public function template()
     {
-        $id = (int)request('id');
+        $id = (int) request('id');
 
         // find associate measurement
         $control = Control::find($id);
