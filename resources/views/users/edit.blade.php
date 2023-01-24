@@ -49,6 +49,18 @@
 				</div>
 			</div>
 			
+	    	<div class="row">
+	    		<div class="cell-1">
+					<label>{{ trans('cruds.user.fields.language') }}</label>
+				</div>
+	    		<div class="cell-3">
+	    			<select name='language' value='language'>
+	    				<option {{ $user->language=='en' ? 'selected' : ''}} >en</option>
+	    				<option {{ $user->language=='fr' ? 'selected' : ''}} >fr</option>
+	    			</select>
+				</div>
+			</div>
+
 			@if (Auth::User()->role==1)
 	    	<div class="row">
 	    		<div class="cell-1">
@@ -104,12 +116,12 @@
 	            	{{ trans('common.delete') }}
 	            </button>
 	        </form>
-	        &nsbp;
+	        &nbsp;
 	        @endif
 			<form action="/users/{{ $user->id }}">
 	    		<button type="submit" class="button">
 	    			<span class="mif-cancel"></span>
-	    			&nsbp;
+	    			&nbsp;
 	    			{{ trans('common.cancel') }}</button>
 			</form>
 		</div>

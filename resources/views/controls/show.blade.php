@@ -95,7 +95,7 @@
 		@if ($documents->isNotEmpty())
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.evidences") }}</strong>
+		    		<strong>{{ trans("cruds.control.fields.evidence") }}</strong>
 		    	</div>
 				<div class="cell-6">
 					@foreach ($documents as $document)

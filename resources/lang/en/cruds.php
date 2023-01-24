@@ -35,9 +35,9 @@ return [
              'period' => 'Period',
              'periodicity' => 'Periodicity',
              'planned' => 'Planned',
-             'realization_date' => 'Realization date',
+             'realisation_date' => 'Realization date',
              'realized' => 'Realized',
-             'evidence' => 'Proof',
+             'evidence' => 'Evidence',
              'score' => 'Score',
              'status' => 'State',
              'status_done' => 'Done',
@@ -97,10 +97,9 @@ return [
              'size' => 'Size',
              'hash' => 'Hash',
          ],
-         'pattern' => [
+         'model' => [
              'control' => 'Control Model',
-             'report' => 'Pilot report',
-
+             'report' => 'Magamenet meeting report',
          ],
          'count' => 'Number of documents',
          'total_size' => 'Total Size',
@@ -123,7 +122,8 @@ return [
              'title' => 'Title',
              'role' => 'Role',
              'password' => 'Password',
-             'email' => 'email'
+             'email' => 'email',
+            'language' => 'Language',
          ],
          'roles' => [
              'admin' => 'Administrator',

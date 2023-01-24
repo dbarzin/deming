@@ -67,6 +67,7 @@ class UserController extends Controller
         $user->email = request("email");
         $user->title = request("title");
         $user->role = request("role");
+        $user->language = request("language");
         $user->password = bcrypt(request("password1"));
         $user->save();
 
@@ -135,12 +136,16 @@ class UserController extends Controller
             $user->role = request("role");
         }
         $user->title = request("title");
+        $user->language = request("language");
         if (request("password1")!=null) {
             $user->password = bcrypt(request("password1"));
         }
         $user->update();
 
-        return redirect("/users");
+        if (Auth::User()->role===1)
+            return redirect("/users");
+        else
+            return redirect("/");                
     }
 
     /**

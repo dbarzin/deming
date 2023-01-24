@@ -174,7 +174,7 @@
                     <span class="badge bg-red fg-white mt-2 mr-1">{{Session::get("action_plans_count")}}</span>
                     @endif
                 </a>
-                <a href="#" class="app-bar-item">
+                <a href="/users/{{ Auth::User()->id }}/edit" class="app-bar-item">
                     <span class="mif-cogs"></span>
                 </a>
             </div>

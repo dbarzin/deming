@@ -79,7 +79,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>{{ trans('cruds.control.fields.evidences') }}</strong>
+		    		<strong>{{ trans('cruds.control.fields.evidence') }}</strong>
 		    		<br>
 					<a target="_new" href="/control/template/{{ $control->id }}">{{ trans('cruds.control.checklist') }}</a>
 		    	</div>

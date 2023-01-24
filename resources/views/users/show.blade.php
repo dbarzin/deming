@@ -35,6 +35,15 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
+		    		<strong>{{ trans('cruds.user.fields.language') }}</strong>
+		    	</div>
+	    		<div class="cell">
+		    		{{ $user->language }}
+	    		</div>
+		    </div>
+
+	    	<div class="row">
+	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.user.fields.role') }}</strong>
 		    	</div>
 	    		<div class="cell">
@@ -58,9 +67,18 @@
 		<div class="form-group">
 		    <form action="">
 				@if ((Auth::User()->role==1)||($user->id==Auth::User()->id))
-		    	<button class="button primary" onclick='this.form.action="/users/{{ $user->id }}/edit"';>{{ trans('common.edit') }}</button>
+		    	<button class="button primary" onclick='this.form.action="/users/{{ $user->id }}/edit"';>
+		            <span class="mif-wrench"></span>
+		            &nbsp;
+		    		{{ trans('common.edit') }}
+		    	</button>
+		    	&nbsp;
 		    	@endif
-		    	<button class="button" onclick='this.form.action="/users";'>{{ trans('common.cancel') }}</button>
+		    	<button class="button" onclick='this.form.action="/users";'>
+					<span class="mif-cancel"></span>
+					&nbsp;
+		    		{{ trans('common.cancel') }}
+		    	</button>
 			</form>
 		</div>
 	</div>

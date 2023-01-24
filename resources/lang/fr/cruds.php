@@ -37,7 +37,7 @@ return [
             'planned' => 'Planifié',
             'realisation_date' => 'Date de réalisation',
             'realized' => 'Réalisé',
-            'evidences' => 'Preuves',
+            'evidence' => 'Preuves',
             'score' => 'Score',
             'status' => 'Etat',
             'status_done' => 'Fait',
@@ -123,7 +123,8 @@ return [
             'title' => 'Titre',
             'role' => 'Role',
             'password' => 'Password',
-            'email' => 'eMail'
+            'email' => 'eMail',
+            'language' => 'Langue',
         ],
         'roles' => [
             'admin' => 'Administrateur',
