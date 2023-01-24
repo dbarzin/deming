@@ -97,7 +97,7 @@
 			</div>
 		</div>
 
-			@if (Auth::User()->role==1)
+			@if ((Auth::User()->role==1)||(Auth::User()->id===$user->id))
 				<button type="submit" class="button success">
 		            <span class="mif-floppy-disk"></span>
 					&nbsp;
