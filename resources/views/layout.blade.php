@@ -106,7 +106,7 @@
                 <li>
                     <a href="#" class="dropdown-toggle">
                         <span class="icon"><span class="mif-cog"></span></span>
-                        <span class="caption">{{ trans("menu.configuration.title) }}</span>
+                        <span class="caption">{{ trans("menu.configuration.title") }}</span>
                     </a>
                     <ul class="navview-menu stay-open" data-role="dropdown" >
                         @if (Auth::User()->role==1)
