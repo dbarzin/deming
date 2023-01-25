@@ -252,8 +252,8 @@ class ControlController extends Controller
             ->with('controls', $controls);
     }
 
-    public function domains() {
-
+    public function domains()
+    {
         // get all domains
         $domains = DB::table('domains')->get();
 
@@ -296,11 +296,10 @@ class ControlController extends Controller
                     c1.id=c2.id and domains.id=c2.domain_id
                 order by id;');
 
-
         // return
         return view('/controls/domains')
             ->with('controls_never_made', $controls_never_made)
-    
+
             ->with('domains', $domains)
             ->with('active_controls', $active_controls);
     }
