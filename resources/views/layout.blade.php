@@ -91,11 +91,22 @@
 
 
                 <li>
-                    <a href="/control/radar">
+                    <a href="#" class="dropdown-toggle">
                         <span class="icon"><span class="mif-meter"></span></span>
                         <span class="caption">{{ trans("menu.radar") }}</span>
                     </a>
+                    <ul class="navview-menu stay-open" data-role="dropdown" >
+                        <li><a href="/control/radar/domains">
+                            <span class="caption">by domains</span>
+                        </a></li>
+                        <li><a href="/control/radar/tags">
+                            <span class="caption">by tags</span>
+                        </a></li>
+                    </ul>
                 </li>
+
+
+
                 <li>
                     <a href="/actions">
                         <span class="icon"><span class="mif-open-book"></span></span>

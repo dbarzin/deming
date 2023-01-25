@@ -252,7 +252,60 @@ class ControlController extends Controller
             ->with('controls', $controls);
     }
 
-    public function radar(Request $request)
+    public function domains() {
+
+        // get all domains
+        $domains = DB::table('domains')->get();
+
+        // count control never made
+        $controls_never_made = DB::select(
+            DB::raw(
+                '
+                select domain_id 
+                from controls c1 
+                where realisation_date is null and 
+                not exists (
+                    select * 
+                    from controls c2 
+                    where realisation_date is not null and c1.measure_id=c2.measure_id);'
+            )
+        );
+
+        // Last controls made by measures
+        $active_controls = DB::select('
+                select
+                    c2.id,
+                    c2.measure_id,
+                    domains.title, 
+                    c2.realisation_date, 
+                    c2.score
+                from 
+                    (
+                    select 
+                        measure_id,
+                        max(id) as id
+                    from 
+                        controls
+                    where
+                        realisation_date is not null
+                    group by measure_id
+                    ) as c1,                    
+                    controls c2,
+                    domains
+                where
+                    c1.id=c2.id and domains.id=c2.domain_id
+                order by id;');
+
+
+        // return
+        return view('/controls/domains')
+            ->with('controls_never_made', $controls_never_made)
+    
+            ->with('domains', $domains)
+            ->with('active_controls', $active_controls);
+    }
+
+    public function tags(Request $request)
     {
         // get control
 

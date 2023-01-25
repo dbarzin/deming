@@ -58,7 +58,7 @@
                     @elseif ($control->score==3)
                         <span style="filter: sepia(1) saturate(5) hue-rotate(80deg)">&#128512;</span>
                     @else
-                        &#9899;
+                        &#9675;
                     @endif
                         </center></td>
 
