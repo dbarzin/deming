@@ -83,7 +83,7 @@ Deming helps meet these requirements and retain appropriate documented informati
 
 ### Action plan management
 
-[<img src="public/screenshots/maps.png" width="450" height="230">](public/screenshots/plans.png)
+[<img src="public/screenshots/plans.png" width="450" height="230">](public/screenshots/plans.png)
 
 ### View of the coverage of protective measures
 
