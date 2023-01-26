@@ -51,6 +51,7 @@ class ControlController extends Controller
         // get current period
         $period = $request->get('period');
         if ($period !== null) {
+            $period = intval($period);
             if ($period === '99') {
                 $request->session()->put('period', $period);
                 $period = null;
@@ -85,6 +86,7 @@ class ControlController extends Controller
                 .Carbon::today()->format('Y-m-d')
                 ."')and(c1.realisation_date is null)";
         } else {
+            $period = intval($period);
             if (($period !== null) && ($period !== 99)) {
                 $whereClause .= "and(c1.plan_date>='"
                 .((new Carbon('first day of this month'))->addMonth((int) $period)->format('Y-m-d'))
