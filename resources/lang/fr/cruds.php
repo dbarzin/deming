@@ -1,5 +1,14 @@
 <?php
 return [
+    'welcome' => [
+        'domains' => 'Domaines',
+        'measures' => 'Mesures de sécurité',
+        'controls' => 'Controls',
+        'action_plans' => "Plans d'action",
+        'next_controls' => 'Contrôles plannifiés les 30 prochains jours',
+        'control_status' => 'Etat des contrôles',
+        'control_planning' => 'Planning des contrôles',
+    ],
     'action' => [
         'index' => 'Liste des plans d\'action',
         'show' => 'Plan d\'action',
@@ -22,6 +31,7 @@ return [
             'attributes' => 'Attributs',
             'choose_domain' => 'Choisir un domaine',
             'choose_period' => 'Choisir une periode',
+            'clause' => 'Clause',
             'domain' => 'Domaine',
             'indicator' => 'Fonction',
             'measure' => 'Mesure',

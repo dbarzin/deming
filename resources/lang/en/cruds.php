@@ -1,5 +1,14 @@
 <?php
 return [
+    'welcome' => [
+        'domains' => 'Domains',
+         'measures' => 'Security measures',
+         'controls' => 'Controls',
+         'action_plans' => "Action Plans",
+         'next_controls' => 'Checks scheduled for the next 30 days',
+         'control_status' => 'Control Status',
+         'control_planning' => 'Controls schedule',        
+    ],
      'action' => [
          'index' => 'Action plans',
          'show' => 'Action Plan',

@@ -89,8 +89,8 @@
 			<div class="cell">
 				@if ($measure->periodicity==1) {{ trans("common.monthly") }} @endif
 				@if ($measure->periodicity==3) {{ trans("common.quarterly") }} @endif
-				@if ($measure->periodicity==6) {{ trans("common.biannual") }} @endif
-				@if ($measure->periodicity==12) {{ trans("common.annual") }} @endif
+				@if ($measure->periodicity==6) {{ trans("common.biannually") }} @endif
+				@if ($measure->periodicity==12) {{ trans("common.annually") }} @endif
 				</div>
 			</div>
 	    </div>

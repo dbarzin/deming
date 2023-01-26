@@ -10,12 +10,12 @@
                         <h2 class="text-bold mb-0">
                             {{ $active_domains_count }} 
                         </h2>
-                        <div>Domaines</div>
+                        <div>{{ trans("cruds.welcome.domains") }}</div>
                     </div>
                     <div class="icon">
                         <span class="mif-library"></span>
                     </div>
-                    <a href="/domains" class="more"> More info <span class="mif-arrow-right"></span></a>
+                    <a href="/domains" class="more"> {{ trans('common.more_info' )}} <span class="mif-arrow-right"></span></a>
                 </div>
             </div>
             <div class="cell-lg-3 cell-md-6 mt-2">
@@ -24,12 +24,12 @@
                         <h2 class="text-bold mb-0">
                             {{ $active_measures_count }} 
                         </h2>
-                        <div>Mesures de sécurité</div>
+                        <div>{{ trans('cruds.welcome.measures') }}</div>
                     </div>
                     <div class="icon">
                         <span class="mif-books"></span>
                     </div>
-                    <a href="/measures" class="more"> More info <span class="mif-arrow-right"></span></a>
+                    <a href="/measures" class="more"> {{ trans('common.more_info' )}} <span class="mif-arrow-right"></span></a>
                 </div>
             </div>
 
@@ -39,32 +39,26 @@
                         <h2 class="text-bold mb-0">
                             {{ $controls_made_count }}
                         </h2>
-                        @if ($controls_made_count>1)
-                        <div>Contrôles</div>
-                        @else
-                        <div>Contrôle</div>
-                        @endif
+                        <diV>{{ trans('cruds.welcome.controls') }}</diV>
                     </div>
                     <div class="icon">
                         <span class="mif-paste"></span>
                     </div>
-                    <a href="/controls?domain=0&period=99&status=1" class="more"> More info <span class="mif-arrow-right"></span></a>
+                    <a href="/controls?domain=0&period=99&status=1" class="more"> {{ trans('common.more_info' )}} <span class="mif-arrow-right"></span></a>
                 </div>
             </div>
             <div class="cell-lg-3 cell-md-6 mt-2">
                 <div class="more-info-box bg-red fg-white">
                     <div class="content">
-                        <h2 class="text-bold mb-0">{{ $action_plans_count }} </h2>
-                        @if ($action_plans_count>1)
-                        <div>Plans d'action</div>
-                        @else
-                        <div>Plan d'action</div>
-                        @endif
+                        <h2 class="text-bold mb-0">
+                            {{ $action_plans_count }}
+                        </h2>
+                    <div>{{ trans('cruds.welcome.measures') }}</div>
                     </div>
                     <div class="icon">
                         <span class="mif-open-book"></span>
                     </div>
-                    <a href="/actions" class="more"> More info <span class="mif-arrow-right"></span></a>
+                    <a href="/actions" class="more"> {{ trans('common.more_info' )}} <span class="mif-arrow-right"></span></a>
                 </div>
             </div>
         </div>
@@ -75,7 +69,7 @@
 <div class="row">
     <div class="cell-md-7">
         <div class="panel mt-2">
-            <div data-role="panel" data-title-caption="Etat des contrôles au {{ date('d/m/Y')}}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+            <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_planning') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
                 <div class="p-7">
                     <canvas id="canvas-status" class="chartjs-render-monitor"></canvas>
                 </div>
@@ -87,7 +81,7 @@
 
     <div class="cell-md-5">
         <div class="panel mt-2">
-            <div data-role="panel" data-title-caption="Répartition" data-collapsible="true" data-title-icon="<span class='mif-meter'></span>">
+            <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_status') }}" data-collapsible="true" data-title-icon="<span class='mif-meter'></span>">
                 <div class="p-7">
                     <canvas id="canvas-doughnut" style="display: block; width: 200px; height: 146px;"  class="chartjs-render-monitor" 
                     ></canvas>                    
@@ -103,7 +97,7 @@
 <div class="row">
     <div class="cell-md-12">
         <div class="panel mt-2">
-            <div data-role="panel" data-title-caption="Contrôles plannifiés" data-collapsible="true" data-title-icon="<span class='mif-calendar'></span>" class="">
+            <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.next_controls') }}" data-collapsible="true" data-title-icon="<span class='mif-calendar'></span>" class="">
 
             <table class="table striped table-border mt-4"
                data-role="table"
@@ -117,12 +111,12 @@
                >
                 <thead>
                     <tr>
-                        <th class="sortable-column">Domain</th>
-                        <th>Clause</th>
-                        <th >Name</th>
-                        <th >Note</th>
-                        <th >Réalisé</th>
-                        <th class="sortable-column">Planifié</th>
+                        <th class="sortable-column">{{ trans('cruds.control.fields.domain') }}</th>
+                        <th>{{ trans('cruds.control.fields.clause') }}</th>
+                        <th >{{ trans('cruds.control.fields.name') }}</th>
+                        <th >{{ trans('cruds.control.fields.score') }}</th>
+                        <th >{{ trans('cruds.control.fields.realisation_date') }}</th>
+                        <th class="sortable-column">{{ trans('cruds.control.fields.plan_date') }}</th>
                     </tr>
                 </thead>
             <tbody>

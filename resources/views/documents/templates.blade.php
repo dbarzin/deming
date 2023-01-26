@@ -46,8 +46,20 @@
 		        <div class="row">
 		            <div class="cell-4">
 
-					<button type="submit" class="button success"><span class="mif-ok"></span>{{ trans("common.save") }}</button>
-				    <button type="submit" class="button cancel" onclick='this.form.method="GET";this.form.action="/";'><span class="mif-cancel"></span>{{ trans("common.cancel") }}</button>
+					<button type="submit" class="button success"><span class="mif-ok"></span>
+			            <span class="mif-floppy-disk"></span>
+			            &nbsp;
+						{{ trans("common.save") }}
+					</button>
+					</form>
+					&nbsp;
+					<form action="/">
+						<button type="submit" class="button cancel" onclick='this.form.method="GET";this.form.action="/";'>
+							<span class="mif-cancel"></span>
+							&nbsp;
+							{{ trans("common.cancel") }}
+						</button>
+					</form>
 					</div>
 				</div>
 			</div>

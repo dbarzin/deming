@@ -54,7 +54,7 @@
 
 			<div class="row">
 		        <div class="cell-1">	    
-				    <button type="submit" class="button primary drop-shadow">Créer</button>
+				    <button type="submit" class="button primary drop-shadow">{{ trans ('common.create') }}</button>
 				</div>
 			</div>
 

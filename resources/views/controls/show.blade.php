@@ -169,7 +169,7 @@
 	@endif
 
    	<div class="row">
-   		<div class="cell-3">
+   		<div class="cell-5">
 			@if (Auth::User()->role==1)
 		    <form action="/control/edit/{{ $control->id }}">
 	    		<button class="button primary">

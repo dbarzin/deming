@@ -2,6 +2,7 @@
 return [
      'cancel' => 'Cancel',
      'check' => 'Check',
+     'create' => 'Create',
      'delete' => 'Delete',
      'edit' => 'Edit',
      'make' => 'Make',
@@ -16,6 +17,7 @@ return [
 
      'next' => 'Next',
      'previous' => 'Previous',
+     'more_info' => 'More info',
 
      'green' => 'green',
      'orange' => 'Orange',
