@@ -1,6 +1,6 @@
 <?php
 
-revenir [
+return [
 
      /*
      |--------------------------------------------------------------- -------------------------
@@ -71,10 +71,10 @@ revenir [
          'array' => 'Le :attribute doit avoir moins de :value éléments.',
      ],
      'lte' => [
-         'numeric' => 'Le :attribut doit être inférieur ou égal à :value.',
+         'numeric' => 'Le  :attribute doit être inférieur ou égal à :value.',
          'file' => 'Le :attribute doit être inférieur ou égal à :value kilo-octets.',
-         'string' => 'Le :attribut doit être inférieur ou égal à :valeur caractères.',
-         'array' => 'Le :attribut ne doit pas avoir plus de :value éléments.',
+         'string' => 'Le :attribute doit être inférieur ou égal à :valeur caractères.',
+         'array' => 'Le :attribute ne doit pas avoir plus de :value éléments.',
      ],
      'max' => [
          'numeric' => 'Le :attribute ne peut pas être supérieur à :max.',
@@ -90,4 +90,32 @@ revenir [
          'string' => 'Le :attribute doit contenir au moins :min caractères.',
          'array' => 'Le :attribute doit avoir au moins :min éléments.',
      ],
-     'not_in' => 'L\'attribut sélectionné est i
+    'not_in' => 'La sélection :attribute est invalide.',
+    'not_regex' => 'Le format :attribute est invalide.',
+    'numeric' => ':attribute doit être un nombre',
+    'password' => 'Le mot de passe est incorrect',
+    'present' => 'le champ :attribute doit être présent.',
+    'regex' => ':attribute n\'est pas au bon format',
+    'required' => 'le champ :attribute est obligatoire.',
+    'required_if' => ': le champ :attribute est obligatoire lorsque :other vaut :value .',
+    'required_unless' => 'le champ :attribute est obligatoire sauf si : other est dans :values .',
+    'required_with' => 'le champ :attribute est obligatoire lorsque :values est présent.',
+    'required_with_all' => 'le champ :attribute est obligatoire lorsque :value est présent.',
+    'required_without' => 'le champ :attribute est obligatoire lorsque :values n\'est pas présent.',
+    'required_without_all' => 'le champ :attribute est requis lorsqu\'aucune des : valeues n\'est présente',
+    'reserved_word' => ':attribute contient un mot réservé.',
+    'same' => ':attribute et : autre doivent correspondre.',
+    'taille' => [
+      'array' => ':attribute doit contenir : éléments de taille.',
+      'file' => ':attribute doit être : size kilo-octets.',
+      'numeric' => ':attribute doit être : size.',
+      'string' => ':attribute doit être : size caractères.',
+    ],
+    'commence_par' => '',
+    'string' => ':attribute doit être une chaîne',
+    'timezone' => ':attribute doit être un champ valide.',
+    'unique' => ':attribute a déjà été pris.',
+    'uploaded' => 'le téléchargement de :attribute a échoué',
+    'url' => ':attribute au format invalide',
+    'uuid' => '',
+    ];
