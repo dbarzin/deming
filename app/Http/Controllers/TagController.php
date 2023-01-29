@@ -44,22 +44,22 @@ class TagController extends Controller
         $this->validate(
             $request,
             [
-                'title' => 'required|min:1|max:30',
-                'description' => 'required',
+                'name' => 'required|min:1|max:30',
+                'values' => 'required',
             ]
         );
 
-        $tag = new Tag();
-        $tag->title = request('title');
-        $tag->description = request('description');
-        $tag->save();
+        $domain = new Tag();
+        $domain->title = request('name');
+        $domain->description = request('value');
+        $domain->save();
         return redirect('/tags');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Tag $Tag
+     * @param  \App\Domain $domain
      *
      * @return \Illuminate\Http\Response
      */
@@ -71,7 +71,7 @@ class TagController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Tag $tag
+     * @param  \App\Domain $domain
      *
      * @return \Illuminate\Http\Response
      */
@@ -84,7 +84,7 @@ class TagController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Tag $tag
+     * @param  \App\Domain              $domain
      *
      * @return \Illuminate\Http\Response
      */
@@ -97,22 +97,21 @@ class TagController extends Controller
                 'values' => 'required',
             ]
         );
-        $tag->name = request('name');
-        $tag->values = request('values');
-        $Tag->save();
+        $domain->name = request('name');
+        $domain->values = request('values');
+        $domain->save();
         return redirect('/tags');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Tag $tag
+     * @param  \App\Domain $domain
      *
      * @return \Illuminate\Http\Response
      */
     public function destroy(Tag $tag)
     {
-        // dd($Tag);
         $tag->delete();
         return redirect('/tags');
     }
