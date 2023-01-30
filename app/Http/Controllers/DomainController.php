@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Tag;
-use App\Exports\TagsExport;
+use App\Domain;
+use App\Exports\DomainsExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
-class TagController extends Controller
+class DomainController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = DB::table('tags')->orderBy('id')->get();
-        return view('tags.index')
-            ->with('tags', $tags);
+        $domains = DB::table('domains')->orderBy('id')->get();
+        return view('domains.index')
+            ->with('domains', $domains);
     }
 
     /**
@@ -29,7 +29,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('tags.create');
+        return view('domains.create');
     }
 
     /**
@@ -49,46 +49,46 @@ class TagController extends Controller
             ]
         );
 
-        $tag = new Tag();
+        $tag = new Domain();
         $tag->title = request('title');
         $tag->description = request('description');
         $tag->save();
-        return redirect('/tags');
+        return redirect('/domains');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Tag $Tag
+     * @param  \App\Domain $Domain
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
+    public function show(Domain $tag)
     {
-        return view('tags.show', compact('tag'));
+        return view('domains.show', compact('tag'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Tag $tag
+     * @param  \App\Domain $tag
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
+    public function edit(Domain $tag)
     {
-        return view('tags.edit', compact('tag'));
+        return view('domains.edit', compact('tag'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Tag $tag
+     * @param  \App\Domain $tag
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(Request $request, Domain $tag)
     {
         $this->validate(
             $request,
@@ -99,26 +99,26 @@ class TagController extends Controller
         );
         $tag->name = request('name');
         $tag->values = request('values');
-        $Tag->save();
-        return redirect('/tags');
+        $Domain->save();
+        return redirect('/domains');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Tag $tag
+     * @param  \App\Domain $tag
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy(Domain $tag)
     {
-        // dd($Tag);
+        // dd($Domain);
         $tag->delete();
-        return redirect('/tags');
+        return redirect('/domains');
     }
 
     public function export()
     {
-        return Excel::download(new TagsExport(), 'tags.xlsx');
+        return Excel::download(new DomainsExport(), 'domains.xlsx');
     }
 }

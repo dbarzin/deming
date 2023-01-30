@@ -77,7 +77,7 @@ Route::get('/exports', function () {
     return view('exports');
 });
 Route::get('/export/domains', 'DomainController@export');
-Route::get('/export/tags', 'TagController@export');
+Route::get('/export/attributes', 'AttributeController@export');
 Route::get('/export/measures', 'MeasureController@export');
 Route::get('/export/controls', 'ControlController@export');
 
