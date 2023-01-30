@@ -2,12 +2,12 @@
 return [
     'welcome' => [
         'domains' => 'Domains',
-         'measures' => 'Security measures',
-         'controls' => 'Controls',
+         'measures' => 'Controls',
+         'controls' => 'Measurements',
          'action_plans' => "Action Plans",
          'next_controls' => 'Checks scheduled for the next 30 days',
-         'control_status' => 'Control Status',
-         'control_planning' => 'Controls schedule',        
+         'control_status' => 'Measurement status',
+         'control_planning' => 'Schedule measure',        
     ],
      'action' => [
          'index' => 'Action plans',
@@ -60,11 +60,11 @@ return [
          'make' => 'Make a check',
          'plan' => 'Schedule a check',
          'radar' => 'Security checks status',
-         'title' => 'Controls',
-         'title_singular' => 'Control',
+         'title' => 'Measurements',
+         'title_singular' => 'Measurement',
      ],
      'measure' => [
-         'title' => 'Measurement',
+         'title' => 'Control',
          'fields' => [
              'domain' => 'Domain',
              'clause' => 'Clause',
@@ -77,10 +77,10 @@ return [
              'owner' => 'Responsible',
              'periodicity' => 'Periodicity',
          ],
-         'show' => 'Security measure',
-         'index' => 'List of security measures',
-         'create' => 'Add security measure',
-         'edit' => 'Edit a security measure',
+         'show' => 'Control',
+         'index' => 'List of controls',
+         'create' => 'Add control',
+         'edit' => 'Edit a control',
 
      ],
      'domain' => [
