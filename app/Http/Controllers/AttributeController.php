@@ -49,46 +49,46 @@ class AttributeController extends Controller
             ]
         );
 
-        $domain = new Attribute();
-        $domain->title = request('name');
-        $domain->description = request('value');
-        $domain->save();
+        $attribute = new Attribute();
+        $attribute->name = request('name');
+        $attribute->values = request('values');
+        $attribute->save();
         return redirect('/attributes');
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  \App\Domain $domain
+     * @param  \App\Attribute $attribute
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Attribute $tag)
+    public function show(Attribute $attribute)
     {
-        return view('attributes.show', compact('tag'));
+        return view('attributes.show', compact('attribute'));
     }
 
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Domain $domain
+     * @param  \App\Attribute $attribute
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Attribute $tag)
+    public function edit(Attribute $attribute)
     {
-        return view('attributes.edit', compact('tag'));
+        return view('attributes.edit', compact('attribute'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Domain              $domain
+     * @param  \App\Attribute              $attribute
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Attribute $tag)
+    public function update(Request $request, Attribute $attribute)
     {
         $this->validate(
             $request,
@@ -97,22 +97,22 @@ class AttributeController extends Controller
                 'values' => 'required',
             ]
         );
-        $domain->name = request('name');
-        $domain->values = request('values');
-        $domain->save();
+        $attribute->name = request('name');
+        $attribute->values = request('values');
+        $attribute->save();
         return redirect('/attributes');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Domain $domain
+     * @param  \App\Attribute $attribute
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Attribute $tag)
+    public function destroy(Attribute $attribute)
     {
-        $tag->delete();
+        $attribute->delete();
         return redirect('/attributes');
     }
 

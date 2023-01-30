@@ -23,7 +23,7 @@
 			    		<strong>{{ trans('cruds.domain.fields.name') }}</strong>
 			    	</div>
 		    		<div class="cell-5">
-						<input type="text" name="title" placeholder="title" value="{{ old('title') }}" size='25'>
+						<input type="text" name="title" value="{{ old('title') }}" size='25'>
 					</div>
 				</div>
 
@@ -38,8 +38,20 @@
 
 		    	<div class="row">
 		    		<div class="cell-5">
-						<button type="submit" class="button success">{{ trans('common.save') }}</button>
-						<button type="submit" class="button" onclick='this.form.action="/domains";this.form.method="GET";'>{{ trans('common.cancel') }}</button>
+						<button type="submit" class="button success">
+				            <span class="mif-floppy-disk"></span>
+							&nbsp;
+							{{ trans('common.save') }}
+						</button>
+					</form>
+					&nbsp;
+					<form action="/domains">
+			    		<button type="submit" class="button">
+							<span class="mif-cancel"></span>
+							&nbsp;
+			    			{{ trans('common.cancel') }}
+			    		</button>
+					</form>
 					</div>
 				</div>
 			</div>

@@ -53,13 +53,6 @@
                 </li>
 
                 <li>
-                    <a href="/domains">
-                        <span class="icon"><span class="mif-library"></span></span>
-                        <span class="caption">{{ trans("menu.domains") }}</span>
-                    </a>
-                </li>
-
-                <li>
                     <a href="/measures">
                         <span class="icon"><span class="mif-books"></span></span>
                         <span class="caption">{{ trans("menu.measures") }}</span>
@@ -120,6 +113,22 @@
                         <span class="caption">{{ trans("menu.configuration.title") }}</span>
                     </a>
                     <ul class="navview-menu stay-open" data-role="dropdown" >
+
+                    <li>
+                        <a href="/attributes">
+                            <span class="icon"><span class="mif-tags"></span></span>
+                            <span class="caption">{{ trans("menu.attributes") }}</span>
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="/domains">
+                            <span class="icon"><span class="mif-books"></span></span>
+                            <span class="caption">{{ trans("menu.domains") }}</span>
+                        </a>
+                    </li>
+
+
                         @if (Auth::User()->role==1)
                         <li><a href="/users">
                             <span class="icon"><span class="mif-users"></span></span>

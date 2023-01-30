@@ -24,6 +24,18 @@ return [
              'action_plan' => 'Action Plan'
          ],
      ],
+    'attribute' => [
+        'fields' => [
+            'name' => 'Name',
+            'values' => 'Values',
+        ],
+        'add' => 'Add attribute',
+        'edit' => 'Edit attribute',
+        'show' => 'Attribute',
+        'index' => 'List of attributes',
+        'choose' => 'Choose an attribute',
+        'title' => 'Attribute'     
+    ],
      'control' => [
          'description' => '',
          'fields' => [

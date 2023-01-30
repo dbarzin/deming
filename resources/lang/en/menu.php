@@ -1,6 +1,7 @@
 <?php
 return [
     'home' => 'Home',
+    'attributes' => 'Attributes',
     'domains' => 'Domaines',
     'measures' => 'Mesures',
     'controls' => 'Controls',

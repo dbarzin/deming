@@ -49,7 +49,7 @@ class UserController extends Controller
             [
                 'login' => 'required|min:1|max:30',
                 'name' => 'required|min:1|max:30',
-                'email' => 'required|email:rfc,dns',
+                'email' => 'required|email:rfc',
                 'password1' => 'required|min:8',
                 'role' => 'required',
             ]
@@ -126,7 +126,7 @@ class UserController extends Controller
             $request,
             [
                 'name' => 'required|min:1|max:40',
-                'email' => 'required|email:rfc,dns',
+                'email' => 'required|email:rfc',
             ]
         );
 
