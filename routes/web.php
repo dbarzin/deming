@@ -41,7 +41,7 @@ Route::post('/control/plan', 'ControlController@doPlan');
 Route::post('/control/draft', 'ControlController@draft');
 Route::post('/control/save', 'ControlController@save');
 Route::get('/control/radar/domains', 'ControlController@domains');
-Route::get('/control/radar/tags', 'ControlController@tags');
+Route::get('/control/radar/attributes', 'ControlController@attributes');
 Route::get('/control/history', 'ControlController@history');
 Route::get('/control/upload/{id}', 'ControlController@upload');
 Route::get('/control/plan/{id}', 'ControlController@plan');
@@ -59,6 +59,7 @@ Route::post('/doc/template', 'DocumentController@saveTemplate');
 
 /* Other */
 Route::resource('domains', 'DomainController');
+Route::resource('attributes', 'AttributeController');
 Route::resource('measures', 'MeasureController');
 Route::resource('controls', 'ControlController');
 Route::resource('users', 'UserController');
@@ -76,6 +77,7 @@ Route::get('/exports', function () {
     return view('exports');
 });
 Route::get('/export/domains', 'DomainController@export');
+Route::get('/export/tags', 'TagController@export');
 Route::get('/export/measures', 'MeasureController@export');
 Route::get('/export/controls', 'ControlController@export');
 

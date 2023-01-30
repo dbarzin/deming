@@ -2,13 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Tag;
-use App\Exports\TagsExport;
+use App\Attribute;
+use App\Exports\AttributesExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
-class TagController extends Controller
+class AttributeController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -17,9 +17,9 @@ class TagController extends Controller
      */
     public function index()
     {
-        $tags = DB::table('tags')->orderBy('id')->get();
-        return view('tags.index')
-            ->with('tags', $tags);
+        $attributes = DB::table('attributes')->orderBy('id')->get();
+        return view('attributes.index')
+            ->with('attributes', $attributes);
     }
 
     /**
@@ -29,7 +29,7 @@ class TagController extends Controller
      */
     public function create()
     {
-        return view('tags.create');
+        return view('attributes.create');
     }
 
     /**
@@ -49,11 +49,11 @@ class TagController extends Controller
             ]
         );
 
-        $domain = new Tag();
+        $domain = new Attribute();
         $domain->title = request('name');
         $domain->description = request('value');
         $domain->save();
-        return redirect('/tags');
+        return redirect('/attributes');
     }
 
     /**
@@ -63,9 +63,9 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Tag $tag)
+    public function show(Attribute $tag)
     {
-        return view('tags.show', compact('tag'));
+        return view('attributes.show', compact('tag'));
     }
 
     /**
@@ -75,9 +75,9 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Tag $tag)
+    public function edit(Attribute $tag)
     {
-        return view('tags.edit', compact('tag'));
+        return view('attributes.edit', compact('tag'));
     }
 
     /**
@@ -88,7 +88,7 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Tag $tag)
+    public function update(Request $request, Attribute $tag)
     {
         $this->validate(
             $request,
@@ -100,7 +100,7 @@ class TagController extends Controller
         $domain->name = request('name');
         $domain->values = request('values');
         $domain->save();
-        return redirect('/tags');
+        return redirect('/attributes');
     }
 
     /**
@@ -110,14 +110,14 @@ class TagController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Tag $tag)
+    public function destroy(Attribute $tag)
     {
         $tag->delete();
-        return redirect('/tags');
+        return redirect('/attributes');
     }
 
     public function export()
     {
-        return Excel::download(new TagsExport(), 'tags.xlsx');
+        return Excel::download(new AttributesExport(), 'attributes.xlsx');
     }
 }
