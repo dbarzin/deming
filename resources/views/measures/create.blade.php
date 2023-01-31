@@ -66,10 +66,10 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-					<strong>{{ trans("cruds.measure.fields.attributes") }}</strong>
+					<strong>{{ trans("cruds.measure.fields.input") }}</strong>
 				</div>
 				<div class="cell-5">			
-					<textarea class="textarea" name="attributes" rows="3" cols="80">{{ old('attributes') }}</textarea>
+					<textarea class="textarea" name="input" rows="3" cols="80">{{ old('input') }}</textarea>
 				</div>
 			</div>
 

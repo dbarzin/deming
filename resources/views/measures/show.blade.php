@@ -38,10 +38,10 @@
 
     	<div class="row">
 			<div class="cell-1">
-	    		<strong>{{ trans('cruds.measure.fields.attributes') }}</strong>
+	    		<strong>{{ trans('cruds.measure.fields.input') }}</strong>
 	    	</div>
 			<div class="cell">
-				<pre>{{ $measure->attributes }}</pre>
+				<pre>{{ $measure->input }}</pre>
 			</div>
 	    </div>
 

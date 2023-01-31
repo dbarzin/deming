@@ -25,10 +25,10 @@
 
     	<div class="row">
     		<div class="cell-1">
-	    		<strong>{{ trans("cruds.control.fields.attributes") }}</strong>
+	    		<strong>{{ trans("cruds.control.fields.input") }}</strong>
 	    	</div>
 			<div class="cell-6">
-				<pre>{!! $control->attributes !!}</pre>
+				<pre>{!! $control->input !!}</pre>
 			</div>
 		</div>
 

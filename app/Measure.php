@@ -11,6 +11,7 @@ class Measure extends Model
         'name',
         'clause',
         'objective',
+        'input',
         'attributes',
         'model',
     ];

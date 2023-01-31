@@ -10,6 +10,7 @@ class Control extends Model
         'name',
         'clause',
         'objective',
+        'input',
         'attributes',
         'model',
         'action_plan',

@@ -42,10 +42,10 @@
 
 		    	<div class="row">
 		    		<div class="cell-1">
-			    		<strong>{{ trans("cruds.control.fields.attributes") }}</strong>
+			    		<strong>{{ trans("cruds.control.fields.input") }}</strong>
 			    	</div>
 					<div class="cell-6">
-						<textarea name="attributes" rows="5" cols="80">{{ $errors->has('attributes') ?  old('attributes') : $control->attributes }}</textarea>
+						<textarea name="input" rows="5" cols="80">{{ $errors->has('input') ?  old('input') : $control->input }}</textarea>
 					</div>
 				</div>
 

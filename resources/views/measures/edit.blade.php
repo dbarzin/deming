@@ -74,10 +74,10 @@
 			</div>
 			<div class="row">
 	    		<div class="cell-1">
-		    		<strong>{{ trans('cruds.measure.fields.attributes') }}</strong>
+		    		<strong>{{ trans('cruds.measure.fields.input') }}</strong>
 		    	</div>
 				<div class="cell-5">
-					<textarea name="attributes" rows="3" cols="80">{{ $errors->has('attributes') ?  old('attributes') : $measure->attributes }}</textarea>
+					<textarea name="input" rows="3" cols="80">{{ $errors->has('input') ?  old('input') : $measure->input }}</textarea>
 				</div>
 			</div>
 			<div class="row">

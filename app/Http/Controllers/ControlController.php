@@ -487,7 +487,7 @@ class ControlController extends Controller
             $new_control->name = $control->name;
             $new_control->clause = $control->clause;
             $new_control->objective = $control->objective;
-            $new_control->attributes = $control->attributes;
+            $new_control->input = $control->input;
             $new_control->model = $control->model;
             $new_control->indicator = $control->indicator;
 
@@ -530,7 +530,7 @@ class ControlController extends Controller
 
         $control->name = request('name');
         $control->objective = request('objective');
-        $control->attributes = request('attributes');
+        $control->input = request('input');
         $control->plan_date = request('plan_date');
         $control->realisation_date = request('realisation_date');
         $control->observations = request('observations');
@@ -599,9 +599,9 @@ class ControlController extends Controller
             )
         );
         $templateProcessor->setValue(
-            'attributes',
+            'input',
             strtr(
-                $control->attributes,
+                $control->input,
                 ["\n" => "</w:t>\n<w:br />\n<w:t xml:space=\"preserve\">"]
             )
         );

@@ -41,6 +41,7 @@ return [
         'fields' => [
             'action_plan' => 'Plan d\'actions',
             'attributes' => 'Attributs',
+            'input' => 'Données',
             'choose_domain' => 'Choisir un domaine',
             'choose_period' => 'Choisir une periode',
             'clause' => 'Clause',
@@ -83,6 +84,7 @@ return [
             'clause' => 'Clause',
             'name' => 'Nom',
             'objective' => 'Objectif',
+            'input' => 'Données',
             'attributes' => 'Attributes',
             'model' => 'Modèle',
             'indicator' => 'Indicateur (Rouge, Orange, Vert)',

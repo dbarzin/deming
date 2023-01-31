@@ -87,7 +87,7 @@ class MeasureController extends Controller
         $measure->clause = request('clause');
         $measure->name = request('name');
         $measure->objective = request('objective');
-        $measure->attributes = request('attributes');
+        $measure->input = request('input');
         $measure->model = request('model');
         $measure->indicator = request('indicator');
         $measure->action_plan = request('action_plan');
@@ -154,7 +154,7 @@ class MeasureController extends Controller
         $measure->name = request('name');
         $measure->clause = request('clause');
         $measure->objective = request('objective');
-        $measure->attributes = request('attributes');
+        $measure->input = request('input');
         $measure->model = request('model');
         $measure->indicator = request('indicator');
         $measure->action_plan = request('action_plan');
@@ -172,7 +172,7 @@ class MeasureController extends Controller
             $control->clause = $measure->clause;
             $control->name = $measure->name;
             $control->objective = $measure->objective;
-            $control->attributes = $measure->attributes;
+            $control->input = $measure->input;
             $control->model = $measure->model;
             $control->indicator = $measure->indicator;
             $control->action_plan = $measure->action_plan;
@@ -224,7 +224,7 @@ class MeasureController extends Controller
             $control->name = $measure->name;
             $control->clause = $measure->clause;
             $control->objective = $measure->objective;
-            $control->attributes = $measure->attributes;
+            $control->input = $measure->input;
             $control->model = $measure->model;
             $control->indicator = $measure->indicator;
             $control->action_plan = $measure->action_plan;
