@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Tag;
+use App\Attribute;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;
@@ -12,13 +12,13 @@ use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
 
-class TagsExport implements FromQuery, WithMapping, WithHeadings, WithStyles, WithColumnWidths, ShouldAutoSize
+class AtributesExport implements FromQuery, WithMapping, WithHeadings, WithStyles, WithColumnWidths, ShouldAutoSize
 {
     public function headings(): array
     {
         return [
-            'Name',
-            'Values',
+            trans('cruds.attribute.fields.name'),
+            trans('cruds.attribute.fields.values'),
         ];
     }
 
@@ -39,13 +39,13 @@ class TagsExport implements FromQuery, WithMapping, WithHeadings, WithStyles, Wi
     }
 
     /**
-     * @var Tag $tag
+     * @var Attribute $attribute
      */
-    public function map($tag): array
+    public function map($attribute): array
     {
         return [
             [
-                $tag->name, $tag->values,
+                $attribute->name, $attribute->values,
             ],
         ];
     }
@@ -55,6 +55,6 @@ class TagsExport implements FromQuery, WithMapping, WithHeadings, WithStyles, Wi
      */
     public function query()
     {
-        return DB::table('tags')->orderBy('name');
+        return DB::table('attributes')->orderBy('name');
     }
 }

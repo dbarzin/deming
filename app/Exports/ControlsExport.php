@@ -16,17 +16,17 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
     public function headings(): array
     {
         return [
-            'Clause',
-            'Nom',
-            'Objectif',
-            'Attributs',
-            'Modèle',
-            'Indicateur',
-            'Date',
-            'Observation',
-            'Score',
-            'Note',
-            'Plan d\'action',
+            trans('cruds.control.fields.clause'),
+            trans('cruds.control.fields.name'),
+            trans('cruds.control.fields.objective'),
+            trans('cruds.control.fields.attributes'),
+            trans('cruds.control.fields.model'),
+            trans('cruds.control.fields.indicator'),
+            trans('cruds.control.fields.realisation_date'),
+            trans('cruds.control.fields.observations'),
+            trans('cruds.control.fields.score'),
+            trans('cruds.control.fields.note'),
+            trans('cruds.control.fields.action_plan'),
         ];
     }
 
@@ -70,7 +70,7 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
                 $control->clause,
                 $control->name,
                 $control->objective,
-                $control->attributes,
+                $control->input,
                 $control->model,
                 $control->indicator,
                 $control->realisation_date,

@@ -16,15 +16,15 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
     public function headings(): array
     {
         return [
-            'Clause',
-            'Nom',
-            'Objectif',
-            'Attributs',
-            'Modèle',
-            'Indicateur',
-            'Plan d\'action',
-            'Responsables',
-            'Périodicité',
+            trans('cruds.measure.fields.clause'),
+            trans('cruds.measure.fields.name'),
+            trans('cruds.measure.fields.objective'),
+            trans('cruds.measure.fields.input'),
+            trans('cruds.measure.fields.model'),
+            trans('cruds.measure.fields.indicator'),
+            trans('cruds.measure.fields.action_plan'),
+            trans('cruds.measure.fields.owner'),
+            trans('cruds.measure.fields.periodicity'),
         ];
     }
 
@@ -66,7 +66,7 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
                 $measure->clause,
                 $measure->name,
                 $measure->objective,
-                $measure->attributes,
+                $measure->input,
                 $measure->model,
                 $measure->indicator,
                 $measure->action_plan,
