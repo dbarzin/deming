@@ -4,7 +4,7 @@
 <div class="p-3">
     <div data-role="panel" data-title-caption="{{ trans('cruds.exports.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
-		<b>Rapports</b>
+		<b>{{ trans('cruds.exports.report_title') }}</b>
 
 		@if (count($errors))
 		<div class= “form-group”>
@@ -23,13 +23,13 @@
 		<div class="grid">
 	    	<div class="row">
 	    		<div class="cell-5">
-				Pilotage du SMSI
+				{{ trans('cruds.exports.steering') }}
 				</div>
 			</div>
 
 			<div class="row">
 		        <div class="cell-1">
-					Début
+					{{ trans('cruds.exports.start') }}
 				</div>
 		        <div class="cell-2">
 		            <input type="text"
@@ -41,7 +41,7 @@
 		    </div>
 			<div class="row">
 		        <div class="cell-1">
-				Fin
+				{{ trans('cruds.exports.end') }}
 				</div>
 		        <div class="cell-2">
 		            <input type="text"
@@ -66,7 +66,7 @@
 
 			<div class="row">
 		        <div class="cell-3">	    
-					<b>Exportations de données</b>
+					<b>{{ trans('cruds.exports.data_export_title') }}</b>
 				</div>
 			</div>
 
@@ -74,13 +74,13 @@
 		        <div class="cell-3">
 		        	<ul>
 		        		<li>
-							<a href="/export/domains" target="_blank">Exportation des domaines</a>
+							<a href="/export/domains" target="_blank">{{ trans('cruds.exports.domains_export') }}</a>
 						</li>
 						<li>
-							<a href="/export/measures" target="_blank">Exportation des mesures de sécurité</a>
+							<a href="/export/measures" target="_blank">{{ trans('cruds.exports.measures_export') }}</a>
 						</li>
 						<li>
-							<a href="/export/controls" target="_blank">Exportation des contrôles</a>
+							<a href="/export/controls" target="_blank">{{ trans('cruds.exports.controls_export') }}</a>
 						</li>
 					</ul>
 				</div>

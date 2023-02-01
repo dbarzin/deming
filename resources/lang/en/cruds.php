@@ -125,8 +125,16 @@ return [
          'count' => 'Number of documents',
          'total_size' => 'Total Size',
      ],
-     'export' => [
-         'index' => 'Export Data',
+    'export' => [
+         'index' => 'Export data',
+         'start' => 'Start',
+         'end' => 'End',
+         'report_title' => 'Report',
+         'steering' => 'ISMS steering report',
+         'data_export_title' => 'Data Export',
+         'domains_export'=> 'Domains export',
+         'measures_export' => 'Export of security measures',
+         'controls_export' => 'Controls export',
      ],
      'login' => [
          'title' => 'Enter a password',

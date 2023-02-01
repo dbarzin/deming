@@ -2,7 +2,7 @@
 return [
     'cancel' => 'Annuler',
     'check' => 'Vérifier',
-    'create' => 'Create',
+    'create' => 'Créer',
     'delete' => 'Supprimer',
     'edit' => 'Modifier',
     'make' => 'Faire',

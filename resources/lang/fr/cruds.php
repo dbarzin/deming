@@ -131,6 +131,14 @@ return [
     ],
     'exports' => [
         'index' => 'Exporter des données',
+        'start' => 'Début',
+        'end' => 'Fin',
+        'report_title' => 'Rapport',
+        'steering' => 'Rapport de pilotage du SMSI',
+        'data_export_title' => 'Exportation des données',
+        'domains_export'=> 'Exportation des domaines',
+        'measures_export' => 'Exportation des mesures de sécurité',
+        'controls_export' => 'Exportation des contrôles',
     ],
     'login' => [
         'title' => 'Entrez un mot de passe',
