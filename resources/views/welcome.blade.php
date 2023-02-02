@@ -53,7 +53,7 @@
                         <h2 class="text-bold mb-0">
                             {{ $action_plans_count }}
                         </h2>
-                    <div>{{ trans('cruds.welcome.measures') }}</div>
+                    <div>{{ trans('cruds.welcome.action_plans') }}</div>
                     </div>
                     <div class="icon">
                         <span class="mif-open-book"></span>
