@@ -52,7 +52,7 @@ class ControlController extends Controller
         $period = $request->get('period');
         if ($period !== null) {
             $period = intval($period);
-            if ($period === '99') {
+            if ($period === 99) {
                 $request->session()->put('period', $period);
                 $period = null;
             } else {
@@ -78,7 +78,7 @@ class ControlController extends Controller
 
         // select
         $whereClause = '(true)';
-        if ($domain !== null) {
+        if ($domain !== 0) {
             $whereClause .= 'and (c1.domain_id='.$domain.')';
         }
         if ($late !== null) {
