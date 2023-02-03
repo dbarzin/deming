@@ -27,8 +27,11 @@ Route::post('/profile/update', 'ProfileController@updateProfile')->name('profile
 Route::get('/profile/avatar/{id}', 'ProfileController@avatar');
 
 /* Measures */
-Route::get('/measure/activate', 'MeasureController@activate');
-Route::get('/measure/disable', 'MeasureController@disable');
+Route::get('/measure/plan/{id}', 'MeasureController@plan');
+Route::post('/measure/activate/{id}', 'MeasureController@activate');
+
+//Route::get('/measure/activate', 'MeasureController@activate');
+//Route::get('/measure/disable', 'MeasureController@disable');
 
 /* Controls */
 Route::get('/control/show/{id}', 'ControlController@show');

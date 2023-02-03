@@ -199,6 +199,21 @@ class MeasureController extends Controller
     }
 
     /**
+     * Plan a measure.
+     *
+     * @param  \App\Measure $measure
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function plan(Request $request)
+    {
+        $measure = Measure::find($request->id);
+
+        return view('measures.plan', compact('measure'));
+    }
+
+
+    /**
      * Activate a measure
      *
      * @param \Illuminate\Http\Request $request
@@ -211,12 +226,12 @@ class MeasureController extends Controller
         $measure = Measure::find($request->id);
 
         // Check control is disabled
-        $active_control_id = DB::Table('controls')
+        $control = DB::Table('controls')
             ->select('id')
             ->where('measure_id', '=', $measure->id)
             ->where('realisation_date', null)
             ->first();
-        if ($active_control_id === null) {
+        if ($control === null) {
             // create a new control
             $control = new Control();
             $control->measure_id = $measure->id;
@@ -231,7 +246,7 @@ class MeasureController extends Controller
             $control->owner = $measure->owner;
             $control->periodicity = $measure->periodicity;
             $control->retention = $measure->retention;
-            $control->plan_date = Carbon::now()->endOfMonth();
+            $control->plan_date = $request->get("plan_date");
             // Save it
             $control->save();
 
@@ -242,7 +257,13 @@ class MeasureController extends Controller
             if ($prev_control !== null) {
                 $prev_control->next_id = $control->id;
                 $prev_control->update();
+                }
             }
+        else {
+            // just update the date
+            $control = Control::find($control->id);
+            $control->plan_date = $request->get("plan_date");
+            $control->save();
         }
 
         // return to the list of measures

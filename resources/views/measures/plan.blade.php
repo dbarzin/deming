@@ -2,8 +2,9 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.show') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
-
+    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.plan') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <form method="POST" action="/measure/activate/{{ $measure->id }}">
+	@csrf
 	<div class="grid">
     	<div class="row">
     		<div class="cell-1">
@@ -91,38 +92,28 @@
 				@if ($measure->periodicity==3) {{ trans("common.quarterly") }} @endif
 				@if ($measure->periodicity==6) {{ trans("common.biannually") }} @endif
 				@if ($measure->periodicity==12) {{ trans("common.annually") }} @endif
-				</div>
 			</div>
-	    </div>
+		</div>
+    </div>
 
+	<div class="row">
+		<div class="cell-1">
+			<strong>{{ trans('cruds.control.fields.plan_date') }}</strong>
+    	</div>
+		<div class="cell-2">
+				<input type="text" data-role="calendarpicker" name="plan_date" 
+				value="{{ $measure->planDate() }}"
+			data-input-format="%Y-%m-%d"> 
+		</div>
+	</div>
 
 	<div class="form-group">
-	    <form action="/measure/plan/{{ $measure->id }}">
-	    	<button class="button info">
+	    	<button class="button success">
 	            <span class="mif-calendar"></span>
 	            &nbsp;
 		    	{{ trans('common.plan') }}
 	    	</button>
 	    </form>
-	    &nbsp;
-	    <form action="/measures/{{ $measure->id }}/edit">
-	    	<button class="button primary">
-	            <span class="mif-wrench"></span>
-	            &nbsp;
-		    	{{ trans('common.edit') }}
-	    	</button>
-	    </form>
-	    &nbsp;
-		<form action="/measures/{{ $measure->id }}" method="post">
-			{{ method_field('delete') }}
-			@csrf
-			<button class="button alert" type="submit">
-				<span class="mif-fire"></span>
-				&nbsp;
-			    {{ trans('common.delete') }}
-			</button>
-        </form>
-	    &nbsp;
 	    <form action="/measures">
 	    	&nbsp;
 	    	<button class="button">

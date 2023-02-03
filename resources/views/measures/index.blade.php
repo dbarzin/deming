@@ -26,7 +26,7 @@
 						<button class="button primary" onclick="location.href = '/measures/create';">
 			            <span class="mif-plus"></span>
 			            &nbsp;
-									{{ trans('common.new') }}
+						{{ trans('common.new') }}
 					</button>
 					</div>
 				</div>
@@ -56,7 +56,7 @@
 						<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.measure.fields.domain') }}</th>
 						<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.measure.fields.clause') }}</th>
 						<th class="sortable-column sort-asc" width="70%">{{ trans('cruds.measure.fields.name') }}</th>
-						<th width="10%">Actif</th>
+						<th width="10% class="sortable-column sort-asc" width="70%">{{ trans('cruds.control.fields.plan_date') }}</th>
 				    </tr>
 			    </thead>
 			    <tbody>
@@ -77,11 +77,7 @@
 					</td>
 					<td>{{ $measure->name }}</td>
 					<td>
-						<input type="checkbox" data-role="switch" data-material="true"
-							@if ($measure->isActive($measure->id))
-								checked 
-							@endif
-							onclick="handleClick(this,{{ $measure->id }});">
+						<a href="/measure/plan/{{ $measure->id }}">{{ $measure->planDate() }}</a>
 					</td>
 				</tr>
 			@endforeach
@@ -90,32 +86,4 @@
 		</div>
 	</div>
 </div>
-
-<script type="text/javascript">
-function handleClick(cb, id) {
-  console.log(id + " clicked, new value = " + cb.checked);
-  if (cb.checked)
-	  $.ajax({
-	    type: 'GET',
-	    url: '{{ url( "/measure/activate" ) }}'+"?id="+id,
-	    success: function (data){
-	        console.log("Control "+id+" activated");
-	    },
-	    error: function(e) {
-	        console.log("Error measure "+id+" not activated");
-	        console.log(e);
-	    }});
-	else
-	  $.ajax({
-	    type: 'GET',
-	    url: '{{ url( "/measure/disable" ) }}'+"?id="+id,
-	    success: function (data){
-	        console.log("Control "+id+" disabled");
-	    },
-	    error: function(e) {
-	        console.log("Error measure "+id+" not disabled");
-	        console.log(e);
-	    }});
-}
-</script>
 @endsection

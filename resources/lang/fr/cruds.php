@@ -96,7 +96,7 @@ return [
         'index' => 'Liste des mesures de sécurité',
         'create' => 'Ajouter une mesure de sécurité',
         'edit' => 'Modifier une mesure de sécurité',
-
+        'plan' => 'Plannifier un contrôle'
     ],
     'domain' => [
         'fields' => [

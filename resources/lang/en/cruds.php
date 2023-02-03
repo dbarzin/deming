@@ -93,7 +93,7 @@ return [
          'index' => 'List of controls',
          'create' => 'Add control',
          'edit' => 'Edit a control',
-
+         'plan' => 'Measurement planning'
      ],
      'domain' => [
          'fields' => [
