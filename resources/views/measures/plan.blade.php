@@ -69,17 +69,15 @@
 		</div>
 	</div>
 
-	@if ($measure->planDate()===null)
-		<div class="form-group">
-	    	<button class="button success">
-	            <span class="mif-calendar"></span>
-	            &nbsp;
-		    	{{ trans('common.plan') }}
-	    	</button>
-	@endif
+	<div class="form-group">
+    	<button class="button success">
+            <span class="mif-calendar"></span>
+            &nbsp;
+	    	{{ trans('common.plan') }}
+    	</button>
 	    </form>
-    	&nbsp;
-	@if ($measure->planDate()!==null)
+		@if ($measure->planDate()!==null)
+		&nbsp;
 	    <form action="/measure/unplan/{{ $measure->id }}">
 	    	<button class="button alert">
 	            <span class="mif-calendar"></span>
@@ -87,7 +85,7 @@
 		    	{{ trans('common.unplan') }}
 	    	</button>
 	    </form>
-	 @endif
+		@endif
 	    &nbsp;
 	    <form action="/measures">
 	    	<button class="button">

@@ -34,7 +34,7 @@
     		<div class="cell-1">
 	    		<strong>{{ trans('cruds.control.fields.objective') }}</strong>
 	    	</div>
-			<div class="cell">
+			<div class="cell-6">
 				{{ $control->objective }}
 			</div>
 		</div>
@@ -52,10 +52,10 @@
 	    	</div>
 			<div class="cell">
 				<select name="periodicity" size="1" width='20'>
-				    <option value="1" {{ $measure->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
-				    <option value="3" {{ $measure->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
-				    <option value="6" {{ $measure->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>
-				    <option value="12" {{ $measure->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
+				    <option value="1" {{ $control->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
+				    <option value="3" {{ $control->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
+				    <option value="6" {{ $control->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>
+				    <option value="12" {{ $control->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
 				 </select>
 			</div>
 		</div>

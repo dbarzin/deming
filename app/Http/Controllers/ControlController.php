@@ -201,9 +201,9 @@ class ControlController extends Controller
      * @return \Illuminate\Http\Response
      */
     // public function edit(int $id)
-    public function edit()
+    public function edit(Request $request)
     {
-        $id = (int) $request('id');
+        $id = intval($request->id);
 
         $control = Control::find($id);
         $documents = DB::table('documents')->where('control_id', $id)->get();
@@ -515,14 +515,15 @@ class ControlController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function save()
+    public function save(Request $request)
     {
         // Only for CISO
         if (Auth::User()->role !== 1) {
             return;
         }
 
-        $id = (int) $request('id');
+        $id = intval($request->id);
+        
         // check
         // plan date is in the futur
         // save control
