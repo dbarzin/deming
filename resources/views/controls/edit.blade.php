@@ -66,6 +66,20 @@
 					</div>
 				</div>
 
+				<div class="row">
+		    		<div class="cell-1">
+			    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
+			    	</div>
+					<div class="cell-5">
+						<select name="periodicity" size="1" width='20'>
+						    <option value="1" {{ $control->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
+						    <option value="3" {{ $control->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
+						    <option value="6" {{ $control->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>
+						    <option value="12" {{ $control->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
+						 </select>
+					</div>
+				</div>
+
 		    	<div class="row">
 		    		<div class="cell-1">
 			    		<strong>{{ trans("cruds.control.fields.observations") }}</strong>
@@ -126,6 +140,8 @@
 						<textarea name="action_plan" rows="5" cols="80">{{ $errors->has('action_plan') ?  old('action_plan') : $control->action_plan }}</textarea>
 					</div>
 				</div>
+
+
 	<!--
 		    	<div class="row">
 		    		<div class="cell-1">

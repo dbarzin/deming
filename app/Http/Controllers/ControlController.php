@@ -224,7 +224,7 @@ class ControlController extends Controller
     public function update(Request $request, Control $control)
     {
         $control->update($request->all);
-        //$control->save();
+
         return redirect('/control');
     }
 
@@ -537,6 +537,7 @@ class ControlController extends Controller
         $control->note = request('note');
         $control->score = request('score');
         $control->action_plan = request('action_plan');
+        $control->periodicity = request('periodicity');
 
         $control->save();
 

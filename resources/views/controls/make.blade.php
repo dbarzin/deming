@@ -164,11 +164,11 @@
 				@elseif ($control->periodicity==3) 
 					{{ trans("common.quarterly") }} 
 				@elseif ($control->periodicity==6) 
-					{{ trans("common.bisannually") }} 
+					{{ trans("common.biannually") }} 
 				@elseif ($control->periodicity==12) 
 					{{ trans("common.annually") }} 
 				@else
-					$control->periodicity
+					{{ $control->periodicity }}
 				@endif
 				)
 				</div>
