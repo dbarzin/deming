@@ -30,6 +30,7 @@ class UserController extends Controller
     public function create()
     {
         abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return view('users.create');
     }
 

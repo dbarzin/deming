@@ -393,9 +393,7 @@ class ControlController extends Controller
     public function make(Request $request)
     {
         // Not for aditor
-        if (Auth::User()->role === 3) {
-            return;
-        }
+        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');        
 
         $id = (int) request('id');
 
@@ -502,15 +500,10 @@ class ControlController extends Controller
     public function save(Request $request)
     {
         // Only for CISO
-        if (Auth::User()->role !== 1) {
-            return;
-        }
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $id = intval($request->id);
 
-        // check
-        // plan date is in the futur
-        // save control
         $control = Control::find($id);
 
         $control->name = request('name');
