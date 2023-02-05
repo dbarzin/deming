@@ -51,10 +51,12 @@
 	    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
 	    	</div>
 			<div class="cell">
-				@if ($control->periodicity==1) {{ trans('common.monthly') }} @endif
-				@if ($control->periodicity==3) {{ trans('common.quarterly') }} @endif
-				@if ($control->periodicity==6) {{ trans('common.biannually') }} @endif
-				@if ($control->periodicity==12) {{ trans('common.annually') }} @endif				
+				<select name="periodicity" size="1" width='20'>
+				    <option value="1" {{ $measure->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
+				    <option value="3" {{ $measure->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
+				    <option value="6" {{ $measure->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>
+				    <option value="12" {{ $measure->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
+				 </select>
 			</div>
 		</div>
     	<div class="row">
@@ -77,12 +79,15 @@
 					&nbsp;
 					{{ trans("common.plan") }}
 				</button>
+				</form>
 				&nbsp;
-				<button type="submit" class="button" onclick="this.form.action='/control/'.{{ $control->id }};">
-					<span class="mif-cancel"></span>
-					&nbsp;
-					{{ trans("common.cancel") }}
-			</button>
+				<form action="/measures"/>
+					<button type="submit" class="button">
+						<span class="mif-cancel"></span>
+						&nbsp;
+						{{ trans("common.cancel") }}
+					</button>
+				</form>
 			</div>
 		</div>
 	</div>

@@ -9,6 +9,7 @@ return [
      'new' => 'New',
      'plan' => 'Plan',
      'save' => 'Save',
+     'unplan' => 'Unplan',
 
      'monthly' => 'Monthly',
      'quarterly' => 'Quarterly',

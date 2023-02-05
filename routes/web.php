@@ -28,6 +28,7 @@ Route::get('/profile/avatar/{id}', 'ProfileController@avatar');
 
 /* Measures */
 Route::get('/measure/plan/{id}', 'MeasureController@plan');
+Route::get('/measure/unplan/{id}', 'MeasureController@unplan');
 Route::post('/measure/activate/{id}', 'MeasureController@activate');
 
 //Route::get('/measure/activate', 'MeasureController@activate');

@@ -37,61 +37,18 @@
 			</div>
 	    </div>
 
-    	<div class="row">
-			<div class="cell-1">
-	    		<strong>{{ trans('cruds.measure.fields.input') }}</strong>
-	    	</div>
-			<div class="cell">
-				<pre>{{ $measure->input }}</pre>
-			</div>
-	    </div>
-
-    	<div class="row">
-			<div class="cell-1">
-	    		<strong>{{ trans('cruds.measure.fields.model') }}</strong>
-	    	</div>
-			<div class="cell-6">
-				<pre>{{ $measure->model }}</pre>
-			</div>
-	    </div>
-
-
-    	<div class="row">
-			<div class="cell-1">
-	    		<strong>{{ trans('cruds.measure.fields.indicator') }}</strong>
-	    	</div>
-			<div class="cell">
-				<pre>{{ $measure->indicator }}</pre>
-			</div>
-	    </div>
-
-    	<div class="row">
-			<div class="cell-1">
-	    		<strong>{{ trans('cruds.measure.fields.action_plan') }}</strong>
-	    	</div>
-			<div class="cell-6">
-	    		<pre>{{ $measure->action_plan }}</pre>
-			</div>
-	    </div>
-
-    	<div class="row">
-			<div class="cell-1">
-	    		<strong>{{ trans('cruds.measure.fields.owner') }}</strong>
-	    	</div>
-			<div class="cell">
-				{{ $measure->owner }}
-			</div>
-	    </div>
 
     	<div class="row">
 			<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.periodicity') }}</strong>
 	    	</div>
 			<div class="cell">
-				@if ($measure->periodicity==1) {{ trans("common.monthly") }} @endif
-				@if ($measure->periodicity==3) {{ trans("common.quarterly") }} @endif
-				@if ($measure->periodicity==6) {{ trans("common.biannually") }} @endif
-				@if ($measure->periodicity==12) {{ trans("common.annually") }} @endif
+				<select name="periodicity" size="1" width='20'>
+				    <option value="1" {{ $measure->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
+				    <option value="3" {{ $measure->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
+				    <option value="6" {{ $measure->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>
+				    <option value="12" {{ $measure->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
+				 </select>
 			</div>
 		</div>
     </div>
@@ -107,15 +64,32 @@
 		</div>
 	</div>
 
-	<div class="form-group">
+	<div class="row">
+		<div class="cell">
+		</div>
+	</div>
+
+	@if ($measure->planDate()===null)
+		<div class="form-group">
 	    	<button class="button success">
 	            <span class="mif-calendar"></span>
 	            &nbsp;
 		    	{{ trans('common.plan') }}
 	    	</button>
+	@endif
 	    </form>
+    	&nbsp;
+	@if ($measure->planDate()!==null)
+	    <form action="/measure/unplan/{{ $measure->id }}">
+	    	<button class="button alert">
+	            <span class="mif-calendar"></span>
+	            &nbsp;
+		    	{{ trans('common.unplan') }}
+	    	</button>
+	    </form>
+	 @endif
+	    &nbsp;
 	    <form action="/measures">
-	    	&nbsp;
 	    	<button class="button">
 				<span class="mif-cancel"></span>
 				&nbsp;

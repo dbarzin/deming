@@ -9,6 +9,7 @@ return [
     'new' => 'Nouveau',
     'plan' => 'Planifier',
     'save' => 'Sauver',
+    'unplan' => 'Déplanifier',
 
     'monthly' => 'Mensuel',
     'quarterly' => 'Trimestriel',

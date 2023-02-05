@@ -138,16 +138,6 @@
 					</button>
 					</form>
 					&nbsp;
-					<form action="/measures/{{ $measure->id }}" method="post">
-			        	{{ method_field('delete') }}
-			        	@csrf
-			            <button class="button alert" type="submit">
-				            <span class="mif-fire"></span>
-				            &nbsp;
-			            	{{ trans('common.delete') }}
-			            </button>
-			        </form>
-					&nbsp;
 					<form action="/measures/{{ $measure->id }}">
 						<button type="submit" class="button">
 							<span class="mif-cancel"></span>

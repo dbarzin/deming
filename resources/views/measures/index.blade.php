@@ -77,7 +77,17 @@
 					</td>
 					<td>{{ $measure->name }}</td>
 					<td>
-						<a href="/measure/plan/{{ $measure->id }}">{{ $measure->planDate() }}</a>
+						@if ($measure->planDate()!==null)
+							<a href="/measure/plan/{{ $measure->id }}">{{ $measure->planDate() }}</a>
+						@else
+						    <form action="/measure/plan/{{ $measure->id }}">
+						    	<button class="button info">
+						            <span class="mif-calendar"></span>
+						            &nbsp;
+							    	{{ trans('common.plan') }}
+						    	</button>
+						    </form>						
+						@endif
 					</td>
 				</tr>
 			@endforeach
