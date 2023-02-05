@@ -89,7 +89,7 @@ Deming helps meet these requirements and retain appropriate documented informati
 
 [<img src="public/screenshots/radar.png" width="500" height="200">](public/screenshots/radar.png)
 
-### WSIS steering meeting report
+### ISMS steering meeting report
 
 [<img src="public/screenshots/pilotage1.png" width="360" height="270">](public/screenshots/pilotage1.png)
 [<img src="public/screenshots/pilotage2.png" width="360" height="270">](public/screenshots/pilotage2.png)
