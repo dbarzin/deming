@@ -82,7 +82,8 @@ class Calendar
             }
             $html .= '</div>';
         }
-        for ($i = 1; $i <= (42 - $num_days - max($first_day_of_week, 0)); $i++) {
+        $end = 42 - $num_days - max($first_day_of_week, 0);
+        for ($i = 1; $i <= $end; $i++) {
             $html .= '
                 <div class="day_num ignore">
                     ' . $i . '

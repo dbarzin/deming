@@ -38,7 +38,9 @@
 			@foreach($attributes as $attribute)
 				<tr>
 					<td><a href="/attributes/{{ $attribute->id}}">{{ $attribute->name }}</a></td>
-					<td data-cell-wrapper="true" >{{ $attribute->values }}</td>
+					<td>
+						{{ strlen($attribute->values)>120 ? substr($attribute->values,0,120) . "..." : $attribute->values}}
+					</td>
 				</tr>
 			@endforeach
 				</tbody>

@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Config;
 use DB;
 use Illuminate\Support\ServiceProvider;
 use Log;
@@ -24,7 +25,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (false) {
+        if (Config::get('APP_DEBUG')) {
             DB::listen(function ($query) {
                 Log::info(
                     $query->sql,

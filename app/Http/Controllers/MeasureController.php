@@ -6,7 +6,6 @@ use App\Control;
 use App\Domain;
 use App\Exports\MeasuresExport;
 use App\Measure;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
@@ -212,7 +211,6 @@ class MeasureController extends Controller
         return view('measures.plan', compact('measure'));
     }
 
-
     /**
      * unPlan a measure.
      *
@@ -224,21 +222,21 @@ class MeasureController extends Controller
     {
         $control = Control
             ::whereNull('realisation_date')
-            ->where('measure_id', '=', $request->id)
-            ->get()
-            ->first();
+                ->where('measure_id', '=', $request->id)
+                ->get()
+                ->first();
 
-        if ($control!==null) {
+        if ($control !== null) {
             // break previous link
-            $prev_control = Control::where("next_id",$control->id)->get()->first();
-            if ($prev_control!==null) {
+            $prev_control = Control::where('next_id', $control->id)->get()->first();
+            if ($prev_control !== null) {
                 $prev_control->next_id = null;
                 $prev_control->update();
             }
 
             $control->delete();
         }
-        
+
         return redirect('/measures');
     }
 
@@ -253,6 +251,8 @@ class MeasureController extends Controller
     {
         // dd($request);
         $measure = Measure::find($request->id);
+        $measure->periodicity = $request->get('periodicity');
+        $measure->update();
 
         // Check control is disabled
         $control = DB::Table('controls')
@@ -276,8 +276,8 @@ class MeasureController extends Controller
             $control->owner = $measure->owner;
             $control->periodicity = $measure->periodicity;
             $control->retention = $measure->retention;
-            $control->periodicity = $request->get("periodicity");
-            $control->plan_date = $request->get("plan_date");
+            $control->periodicity = $request->get('periodicity');
+            $control->plan_date = $request->get('plan_date');
             // Save it
             $control->save();
 
@@ -285,18 +285,17 @@ class MeasureController extends Controller
             $prev_control = Control::where('measure_id', '=', $measure->id)
                 ->where('next_id', null)
                 ->whereNotNull('realisation_date')
-                ->orderBy('id','desc')
+                ->orderBy('id', 'desc')
                 ->first();
             if ($prev_control !== null) {
                 $prev_control->next_id = $control->id;
                 $prev_control->update();
-                }
             }
-        else {
+        } else {
             // just update the date
             $control = Control::find($control->id);
-            $control->periodicity = $request->get("periodicity");
-            $control->plan_date = $request->get("plan_date");
+            $control->periodicity = $request->get('periodicity');
+            $control->plan_date = $request->get('plan_date');
             $control->save();
         }
 

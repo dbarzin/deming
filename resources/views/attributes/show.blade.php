@@ -17,7 +17,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.attribute.fields.values') }}</strong>
 		    	</div>
-	    		<div class="cell">
+	    		<div class="cell-6">
 		    		{{ $attribute->values }}
 	    		</div>
 	    	</div>

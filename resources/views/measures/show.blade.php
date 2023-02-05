@@ -124,7 +124,6 @@
         </form>
 	    &nbsp;
 	    <form action="/measures">
-	    	&nbsp;
 	    	<button class="button">
 				<span class="mif-cancel"></span>
 				&nbsp;

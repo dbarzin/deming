@@ -92,8 +92,8 @@
                         <li><a href="/control/radar/domains">
                             <span class="caption">by domains</span>
                         </a></li>
-                        <li><a href="/control/radar/tags">
-                            <span class="caption">by tags</span>
+                        <li><a href="/control/radar/attributes">
+                            <span class="caption">by attributes</span>
                         </a></li>
                     </ul>
                 </li>

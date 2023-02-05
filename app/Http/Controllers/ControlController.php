@@ -306,9 +306,8 @@ class ControlController extends Controller
             ->with('active_controls', $active_controls);
     }
 
-    public function tags(Request $request)
+    public function attributes(Request $request)
     {
-        // get control
 
         // get all doains
         $domains = Domain::All();
@@ -523,7 +522,7 @@ class ControlController extends Controller
         }
 
         $id = intval($request->id);
-        
+
         // check
         // plan date is in the futur
         // save control

@@ -15,7 +15,7 @@ class Attribute extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'values'
+        'name', 'values',
     ];
 
     protected $dates = [
@@ -23,5 +23,4 @@ class Attribute extends Authenticatable
         'updated_at',
         'deleted_at',
     ];
-
 }

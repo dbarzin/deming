@@ -43,11 +43,10 @@ class Measure extends Model
     // check if there is an empty control associated with this measure
     public function isDisabled()
     {
-        return 
-            DB::table('controls')
-                ->where('measure_id', $this->id)
-                ->exists()
-        && 
+        return DB::table('controls')
+            ->where('measure_id', $this->id)
+            ->exists()
+        &&
             ! DB::table('controls')
                 ->where('measure_id', $this->id)
                 ->whereNull('realisation_date')
@@ -58,14 +57,13 @@ class Measure extends Model
     public function planDate()
     {
         $res = DB::table('controls')
-                ->select('plan_date')
-                ->where('measure_id', $this->id)
-                ->whereNull('realisation_date')
-                ->get()->first();
-        if ($res===null)
+            ->select('plan_date')
+            ->where('measure_id', $this->id)
+            ->whereNull('realisation_date')
+            ->get()->first();
+        if ($res === null) {
             return null;
-        else
-            return $res->plan_date;
+        }
+        return $res->plan_date;
     }
-
 }

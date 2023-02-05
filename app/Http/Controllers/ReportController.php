@@ -156,7 +156,8 @@ class ReportController extends Controller
             )
         );
 
-        for ($j = 0;$j < count($domains);$j++) {
+        $count_domains = count($domains);
+        for ($j = 0; $j < $count_domains; $j++) {
             $values[0][$j] = 0;
             $values[1][$j] = 0;
             $values[2][$j] = 0;
@@ -178,7 +179,7 @@ class ReportController extends Controller
             $domains[$i] = $domain->title;
             foreach ($controls as $control) {
                 if ($control->domain_id === $domain->id) {
-                    $values[3 - $control->score][$i] = $values[3 - $control->score][$i] + 1;
+                    $values[3 - $control->score][$i] += 1;
                 }
             }
             $i++;
