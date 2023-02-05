@@ -214,21 +214,6 @@ class ControlController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
-     *
-     * @param  \Illuminate\Http\Request $request
-     * @param  \App\Domain              $domain
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function update(Request $request, Control $control)
-    {
-        $control->update($request->all);
-
-        return redirect('/control');
-    }
-
-    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Domain $domain
