@@ -78,7 +78,7 @@ class ControlController extends Controller
 
         // select
         $whereClause = '(true)';
-        if ($domain !== 0) {
+        if ($domain !== null) {
             $whereClause .= 'and (c1.domain_id='.$domain.')';
         }
         if ($late !== null) {
