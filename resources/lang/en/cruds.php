@@ -81,7 +81,7 @@ return [
              'domain' => 'Domain',
              'clause' => 'Clause',
              'name' => 'Name',
-             'objective' => 'Objective',
+             'objective' => 'Description',
              'attributes' => 'Attributes',
              'model' => 'Model',
              'indicator' => 'Indicator (Red, Orange, Green)',

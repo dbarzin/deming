@@ -83,7 +83,7 @@ return [
             'domain' => 'Domaine',
             'clause' => 'Clause',
             'name' => 'Nom',
-            'objective' => 'Objectif',
+            'objective' => 'Description',
             'input' => 'Données',
             'attributes' => 'Attributes',
             'model' => 'Modèle',
