@@ -71,7 +71,7 @@
         <div class="panel mt-2">
             <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_planning') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
                 <div class="p-7">
-                    <canvas id="canvas-status" class="chartjs-render-monitor"></canvas>
+                    <canvas id="canvas-status" style="display: block; width: 100%; height:500px; " class="chartjs-render-monitor"></canvas>
                 </div>
             </div>
         </div>
@@ -83,7 +83,7 @@
         <div class="panel mt-2">
             <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_status') }}" data-collapsible="true" data-title-icon="<span class='mif-meter'></span>">
                 <div class="p-7">
-                    <canvas id="canvas-doughnut" style="display: block; width: 200px; height: 146px;"  class="chartjs-render-monitor" 
+                    <canvas id="canvas-doughnut" style="display: block; width: 100%; height: 500px;"  class="chartjs-render-monitor" 
                     ></canvas>                    
                 </div>
             </div>

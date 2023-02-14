@@ -13,7 +13,7 @@ use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpWord\TemplateProcessor;
 use Illuminate\Http\Response;
-	
+
 class ControlController extends Controller
 {
     /**
