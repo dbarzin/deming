@@ -58,7 +58,7 @@ Deming helps meet these requirements and retain appropriate documented informati
 
 ## Definitions
 
-**Control** : set of provisions to be implemented. These are the measures to be taken to implement the security policy.
+**Control** : processes and policies you put in place to minimize information security risks.
 
 **Measurement** : process of obtaining relative to the effectiveness of an ISMS and security measures, using an evaluation method, a function assessment, analytical model, and decision criteria [ISO/IEC 27004].
 
