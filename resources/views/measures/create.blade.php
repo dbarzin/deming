@@ -5,7 +5,7 @@
     <div data-role="panel" data-title-caption="{{ trans('cruds.measure.create') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 	@if (count($errors))
 		<div class= “form-group”>
-			<div class= “alert alert-danger”>
+			<div class= “remark alert alert-danger”>
 				<ul>
 				@foreach ($errors->all() as $error)
 					<li>{{ $error }}</li>

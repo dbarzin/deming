@@ -59,8 +59,7 @@
     	</div>
 		<div class="cell-2">
 				<input type="text" data-role="calendarpicker" name="plan_date" 
-				value="{{ $measure->planDate() }}"
-			data-input-format="%Y-%m-%d"> 
+				value="{{ $measure->planDate() }}" data-input-format="%Y-%m-%d"> 
 		</div>
 	</div>
 
