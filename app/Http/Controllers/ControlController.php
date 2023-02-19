@@ -7,12 +7,12 @@ use App\Domain;
 use App\Exports\ControlsExport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpWord\TemplateProcessor;
-use Illuminate\Http\Response;
 
 class ControlController extends Controller
 {
@@ -79,7 +79,7 @@ class ControlController extends Controller
 
         // select
         $whereClause = '(true)';
-        if (($domain !== null)&&($domain !== 0)) {
+        if (($domain !== null) && ($domain !== 0)) {
             $whereClause .= 'and (c1.domain_id='.$domain.')';
         }
         if ($late !== null) {
@@ -294,7 +294,6 @@ class ControlController extends Controller
 
     public function attributes(Request $request)
     {
-
         // get all doains
         $domains = Domain::All();
 
@@ -394,7 +393,7 @@ class ControlController extends Controller
     public function make(Request $request)
     {
         // Not for aditor
-        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');        
+        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $id = (int) request('id');
 
