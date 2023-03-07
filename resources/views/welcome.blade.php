@@ -216,10 +216,9 @@
                 if (($control->score==3) && 
                     ($control->realisation_date!=null) && 
                     (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
-                ) { $count++;
-                }
+                ) { $count++; }
                 ?>
-            @endforeach          
+            @endforeach   
             {{ $count }},
             <?php } ?> 
         ]
@@ -233,16 +232,15 @@
             <?php 
             for ($i=-12; $i<12; $i++) { 
                 $count=0; 
-                $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
-                $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
+                $first = \Carbon\Carbon::now()->startOfMonth();;
+                $second = \Carbon\Carbon::now()->endOfMonth();;
                 ?>
             @foreach ($controls as $control)
                 <?php
                 if (($control->score==2) && 
                     ($control->realisation_date!=null) && 
                     (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
-                ) { $count++;
-                }
+                ) { $count++; }
                 ?>
             @endforeach          
             {{ $count }},
@@ -258,17 +256,15 @@
             <?php 
             for ($i=-12; $i<12; $i++) { 
                 $count=0; 
-                $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
-                $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
+                $first = \Carbon\Carbon::now()->startOfMonth();;
+                $second = \Carbon\Carbon::now()->endOfMonth();;
                 ?>
             @foreach ($controls as $control)
                 <?php
                 if (($control->score==1) &&
                     ($control->realisation_date!=null) && 
                     (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
-                ) {
-                    $count++;
-                }
+                ) { $count++; }
                 ?>
             @endforeach          
             {{ $count }},
@@ -284,8 +280,8 @@
             <?php 
             for ($i=-12; $i<12; $i++) { 
                 $count=0; 
-                $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
-                $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
+                $first = \Carbon\Carbon::now()->startOfMonth();;
+                $second = \Carbon\Carbon::now()->endOfMonth();;
                 ?>
             @foreach ($controls as $control)
                 <?php
