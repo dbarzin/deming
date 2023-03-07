@@ -207,9 +207,9 @@
         data: [
             <?php 
             for ($i=-12; $i<12; $i++) { 
-                $count=0; 
-                $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
-                $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
+                $count=0;
+                $first = \Carbon\Carbon::today()->addMonth($i)->startOfMonth();
+                $second = \Carbon\Carbon::today()->addMonth($i)->endOfMonth();
                 ?>
             @foreach ($controls as $control)
                 <?php
@@ -232,8 +232,8 @@
             <?php 
             for ($i=-12; $i<12; $i++) { 
                 $count=0; 
-                $first = \Carbon\Carbon::now()->startOfMonth();;
-                $second = \Carbon\Carbon::now()->endOfMonth();;
+                $first = \Carbon\Carbon::today()->addMonth($i)->startOfMonth();
+                $second = \Carbon\Carbon::today()->addMonth($i)->endOfMonth();
                 ?>
             @foreach ($controls as $control)
                 <?php
@@ -256,8 +256,8 @@
             <?php 
             for ($i=-12; $i<12; $i++) { 
                 $count=0; 
-                $first = \Carbon\Carbon::now()->startOfMonth();;
-                $second = \Carbon\Carbon::now()->endOfMonth();;
+                $first = \Carbon\Carbon::today()->addMonth($i)->startOfMonth();
+                $second = \Carbon\Carbon::today()->addMonth($i)->endOfMonth();
                 ?>
             @foreach ($controls as $control)
                 <?php
