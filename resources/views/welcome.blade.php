@@ -213,6 +213,11 @@
                 ?>
             @foreach ($controls as $control)
                 <?php
+                echo("<!-- ");
+                echo($first);
+                echo(" ");
+                echo($second);
+                echo("--> ");
                 if (($control->score==3) && 
                     ($control->realisation_date!=null) && 
                     (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
@@ -285,8 +290,7 @@
                 ?>
             @foreach ($controls as $control)
                 <?php
-                if (($control->score==null)
-                    && ($control->plan_date!=null)
+                if (($control->realisation_date==null)
                     && (\Carbon\Carbon::parse($control->plan_date)->between($first, $second))
                 ) {
                         $count++;
