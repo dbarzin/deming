@@ -63,9 +63,11 @@ class DomainController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Domain $tag)
+    public function show(int $id)
     {
-        return view('domains.show', compact('tag'));
+        $domain = Domain::find($id);
+
+        return view('domains.show', compact('domain'));
     }
 
     /**
@@ -75,9 +77,11 @@ class DomainController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Domain $tag)
+    public function edit(int $id)
     {
-        return view('domains.edit', compact('tag'));
+        $domain = Domain::find($id);
+
+        return view('domains.edit', compact('domain'));
     }
 
     /**
@@ -88,19 +92,19 @@ class DomainController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Domain $tag)
+    public function update(Request $request, Domain $domain)
     {
         $this->validate(
             $request,
             [
-                'name' => 'required|min:1|max:30',
-                'values' => 'required',
+                'title' => 'required|min:1|max:30',
+                'description' => 'required',
             ]
         );
-        $tag->name = request('name');
-        $tag->values = request('values');
-        $Domain->save();
-        return redirect('/domains');
+        $domain->title = request('title');
+        $domain->description = request('description');
+        $domain->save();
+        return redirect('/domains/' . $domain->id);
     }
 
     /**
@@ -110,10 +114,10 @@ class DomainController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Domain $tag)
+    public function destroy(Domain $domain)
     {
-        // dd($Domain);
-        $tag->delete();
+//        dd($domain);
+        $domain->delete();
         return redirect('/domains');
     }
 

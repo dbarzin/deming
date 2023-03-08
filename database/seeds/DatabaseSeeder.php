@@ -18,7 +18,7 @@ class DatabaseSeeder extends Seeder
             'name' => 'Jacks Barrow',
             'title' => 'Pirate Captain',
             'role' => 1,
-            'email' => 'admin@admin.localhost',
+            'email' => 'admin@admin.com',
             'password' => bcrypt('admin'),
         ]);
     }

@@ -29,14 +29,28 @@
     	</div>
     	
 		<div class="form-group">
-		    <form action="">
-		    	<button class="button primary" onclick='this.form.action="/domains/{{ $domain->id }}/edit"';>
+		    <form action="/domains/{{ $domain->id }}/edit">
+	           @csrf
+		    	<button class="button primary">
 		            <span class="mif-wrench"></span>
 		            &nbsp;
 		    		{{ trans('common.edit') }}
 		    	</button>
-				&nbsp;
-		    	<button class="button" onclick='this.form.action="/domains";'>
+		        &nbsp;
+		    </form>
+			<form action="/domains/{{ $domain->id }}" method="post">
+	           {{ method_field('delete') }}
+	           @csrf
+		        <button class="button alert" type="submit">
+					<span class="mif-fire"></span>
+					&nbsp;
+			        {{ trans('common.delete') }}
+		    	</button>
+        	</form>
+			&nbsp;
+			<form action="/domains">
+	           @csrf
+		    	<button class="button">
 					<span class="mif-cancel"></span>
 					&nbsp;
 		    		{{ trans('common.cancel') }}

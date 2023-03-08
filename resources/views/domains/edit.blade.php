@@ -40,20 +40,10 @@
 				&nbsp;
 				{{ trans('common.save') }}
 			</button>
-			</form>
-	        &nbsp;
-			<form action="/domains/{{ $domain->id }}" method="post">
-	           {{ method_field('delete') }}
-	           @csrf
-		        <button class="button alert" type="submit">
-					<span class="mif-fire"></span>
-					&nbsp;
-			        {{ trans('common.delete') }}
-		    </button>
-        </form>
+		</form>
         &nbsp;
 		<form action="/domains/{{ $domain->id }}">
-    		<button type="submit" class="button">
+			<button type="submit" class="button">
 				<span class="mif-cancel"></span>
 				&nbsp;
     			{{ trans('common.cancel') }}
