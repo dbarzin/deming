@@ -1,18 +1,19 @@
-# Feuille de route
+# Roadmap
 
-Ce document reprend les évolutions prévues sur Deming sur l'année 2023.
+This document contains the evolutions planned for Deming in 2023.
 
 ## Important
 
-* [ ] Tests de non régressions
-* [x] Contrôle de la qualité du code
-* [ ] Intégration continue dans GitHub
+* [ ] Non-regression tests
+* [x] Quality code controls
+* [ ] Continuous integration in GitHub
 
-## Améliorations
+## Improvements
 
-* [x] Outil de recheche dans la base de données
-* [ ] ISO 27002:2022 - mettre à jour les mesures sur base de la nouvelle version de la norme ISO 27002
-* [x] Propriétés (tags) - ajouter des tags sur les mesures de sécurité
-* [ ] Multisites - Introduire des contrôles par site 
-* [ ] Améliorer la génération des données de test
-* [ ] Gérer les non-conformités
+* [x] Database search tool
+* [ ] ISO 27002:2022 - update metrics based on the new version of ISO 27002
+* [x] Properties (tags) - add tags on security measures
+* [ ] Multisites - introduce controls by site
+* [x] Improve test data generation
+* [ ] Manage non-conformities
+
