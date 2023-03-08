@@ -32,7 +32,7 @@
 			    		<strong>{{ trans('cruds.domain.fields.description') }}</strong>
 			    	</div>
 		    		<div class="cell-5">
-						<textarea name="description" rows="5" cols="80">{{ old('description') }}</textarea>
+						<input type="text" name="description" value="{{ old('description') }}" size='60'>
 					</div>
 				</div>
 

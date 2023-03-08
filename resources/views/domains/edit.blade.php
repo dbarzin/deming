@@ -31,7 +31,7 @@
 						<label class="label" for="description">{{ trans('cruds.domain.fields.description') }}</label>
 			    	</div>
 					<div class="cell-8">						
-						<textarea name="description" rows="5" cols="80">{{ $errors->has('description') ?  old('description') : $domain->description }}</textarea>
+						<input type="text" class="input {{ $errors->has('description') ? 'is-danger' : ''}}" name="description" value="{{ $errors->has('description') ?  old('description') : $domain->description }}" size='40'>
 					</div>
 				</div>
 			</div>

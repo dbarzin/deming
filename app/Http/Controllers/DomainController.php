@@ -116,7 +116,6 @@ class DomainController extends Controller
      */
     public function destroy(Domain $domain)
     {
-//        dd($domain);
         $domain->delete();
         return redirect('/domains');
     }
