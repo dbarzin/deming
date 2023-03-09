@@ -540,6 +540,7 @@ class ControlController extends Controller
         $control->note = request('note');
         $control->score = request('score');
         $control->action_plan = request('action_plan');
+        $control->next_date = request('next_date');
 
         $control->save();
 
