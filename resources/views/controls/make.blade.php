@@ -73,7 +73,7 @@
 		    		<strong>{{ trans('cruds.control.fields.observations') }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="observations" rows="5" cols="80">{{ count($errors)>0 ?  old('observations') : $control->observations }}</textarea>
+					<textarea name="observations" rows="5" cols="65">{{ count($errors)>0 ?  old('observations') : $control->observations }}</textarea>
 				</div>
 		    </div>
 
@@ -136,7 +136,7 @@
 		    		<strong>{{ trans('cruds.control.fields.action_plan') }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="action_plan" rows="5" cols="80">{{ $errors->count()>0 ?  old('action_plan') : $control->action_plan }}</textarea>
+					<textarea name="action_plan" rows="5" cols="65">{{ $errors->count()>0 ?  old('action_plan') : $control->action_plan }}</textarea>
 				</div>
 			</div>
 

@@ -125,7 +125,18 @@ class MeasureController extends Controller
         // get the list of domains
         $domains = Domain::All();
 
-        return view('measures.edit', compact('measure'))->with('domains', $domains);
+        // get all attributes
+        $values = array();
+        $attributes = DB::table('attributes')
+            ->select('values')
+            ->orderBy('values')
+            ->get();
+        foreach($attributes as $attribute) {
+            foreach(explode(" ",$attribute->values) as $value) {
+                array_push($values,$value);
+            }
+        }
+        return view('measures.edit', compact('measure', 'values'))->with('domains', $domains);
     }
 
     /**

@@ -85,7 +85,7 @@ return [
             'name' => 'Nom',
             'objective' => 'Description',
             'input' => 'Données',
-            'attributes' => 'Attributes',
+            'attributes' => 'Attributs',
             'model' => 'Modèle',
             'indicator' => 'Indicateur (Rouge, Orange, Vert)',
             'action_plan' => 'Plan d\'action',
