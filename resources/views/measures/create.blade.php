@@ -21,16 +21,13 @@
 		<div class="grid">
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.measure.title") }}</strong>
+		    		<strong>{{ trans("cruds.measure.fields.domain") }}</strong>
 		    	</div>
 				<div class="cell-5">
-					<select name="domain_id" value="{{ old('domain_id') }}" size="1" width='10'>
+					<select data-role="select" name="domain_id" value="{{ old('domain_id') }}" size="1" width='10'>
 					    <option value="">-- {{ trans("cruds.domain.choose") }} --</option>
 						@foreach ($domains as $domain)
-					    	<option value="{{ $domain->id }}"
-								@if (((int)Session::get("domain"))==$domain->id)		
-									selected
-								@endif >
+					    	<option value="{{ $domain->id }}" {{ old('domain_id')==$domain->id ? "selected" : "" }} >
 					    		{{ $domain->title }} - {{ $domain->description }}
 					    	</option>
 					    @endforeach
@@ -41,7 +38,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans("cruds.measure.fields.clause") }}</strong>
 		    	</div>
-				<div class="cell-5">
+				<div class="cell-2">
 					<input type="text" class="input" name="clause" value="{{ old('clause') }}" size='60'>
 				</div>
 			</div>
@@ -52,6 +49,19 @@
 		    	</div>
 				<div class="cell-5">
 					<input type="text" class="input" name="name" value="{{ old('name') }}" size='60'>
+				</div>
+			</div>
+
+			<div class="row">
+	    		<div class="cell-1">
+		    		<strong>{{ trans('cruds.measure.fields.attributes') }}</strong>
+		    	</div>
+				<div class="cell-7">
+					<select data-role="select" name="values[]" multiple>
+						@foreach($values as $value)
+					    <option {{ str_contains(old("vaues"),$value) ? "selected" : ""}}>{{$value}}</option>
+					    @endforeach
+					 </select>
 				</div>
 			</div>
 
@@ -113,8 +123,8 @@
 	    		<div class="cell-1">
 					<strong>{{ trans("cruds.measure.fields.periodicity") }}</strong>
 				</div>
-				<div class="cell-5">
-					<select name="periodicity" size="1" width='20'>
+				<div class="cell-2">
+					<select data-role="select" name="periodicity" size="1" width='20'>
 					    <option value="0" {{ old('periodicity')==0 ? 'selected' : ''}} ></option>
 					    <option value="1" {{ old('periodicity')==1 ? 'selected' : ''}}>{{ trans("common.monthly") }}</option>
 					    <option value="3" {{ old('periodicity')==3 ? 'selected' : ''}}>{{ trans("common.quarterly") }}</option>

@@ -31,7 +31,7 @@
 						<label class="label" for="description">{{ trans('cruds.attribute.fields.values') }}</label>
 			    	</div>
 					<div class="cell-8">					
-						<input type="text" name="values" size="64" value="{{ $errors->has('values') ?  old('values') : $attribute->values }}">
+						<input type="text" name="values" size="64" maxsize="512" value="{{ $errors->has('values') ?  old('values') : $attribute->values }}">
 					</div>
 				</div>
 			</div>

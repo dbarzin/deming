@@ -55,10 +55,20 @@ class MeasureController extends Controller
         // get the list of domains
         $domains = Domain::All();
 
-        //dd($domains);
+        // get all attributes
+        $values = array();
+        $attributes = DB::table('attributes')
+            ->select('values')
+            ->get();
+        foreach($attributes as $attribute) {
+            foreach(explode(" ",$attribute->values) as $value) {
+                array_push($values,$value);
+               }
+            sort($values);
+            }
 
         // store it in the response
-        return view('measures.create')->with('domains', $domains);
+        return view('measures.create',compact('values','domains'));
     }
 
     /**
@@ -81,9 +91,10 @@ class MeasureController extends Controller
         );
 
         $measure = new Measure();
-
         $measure->domain_id = request('domain_id');
         $measure->clause = request('clause');
+        if (request('values') !=null)
+            $measure->attributes = implode(" ", request('values'));
         $measure->name = request('name');
         $measure->objective = request('objective');
         $measure->input = request('input');
@@ -129,14 +140,14 @@ class MeasureController extends Controller
         $values = array();
         $attributes = DB::table('attributes')
             ->select('values')
-            ->orderBy('values')
             ->get();
         foreach($attributes as $attribute) {
             foreach(explode(" ",$attribute->values) as $value) {
                 array_push($values,$value);
+               }
+            sort($values);
             }
-        }
-        return view('measures.edit', compact('measure', 'values'))->with('domains', $domains);
+        return view('measures.edit', compact('measure', 'values','domains'))->with('domains', $domains);
     }
 
     /**
@@ -163,6 +174,10 @@ class MeasureController extends Controller
         $measure->domain_id = request('domain_id');
         $measure->name = request('name');
         $measure->clause = request('clause');
+        if (request('attributes')!==null)
+            $measure->attributes = implode(" ", request('attributes'));
+        else
+            $measure->attributes = null;
         $measure->objective = request('objective');
         $measure->input = request('input');
         $measure->model = request('model');
@@ -181,6 +196,7 @@ class MeasureController extends Controller
         if ($control !== null) {
             $control->clause = $measure->clause;
             $control->name = $measure->name;
+            $control->attributes = $measure->attributes;
             $control->objective = $measure->objective;
             $control->input = $measure->input;
             $control->model = $measure->model;
@@ -278,6 +294,7 @@ class MeasureController extends Controller
             $control->measure_id = $measure->id;
             $control->domain_id = $measure->domain_id;
             $control->name = $measure->name;
+            $control->attributes = $measure->attributes;
             $control->clause = $measure->clause;
             $control->objective = $measure->objective;
             $control->input = $measure->input;
