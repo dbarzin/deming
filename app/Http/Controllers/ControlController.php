@@ -304,7 +304,7 @@ class ControlController extends Controller
             ->with('active_controls', $active_controls);
     }
 
-    public function attributes(Request $request)
+    public function measures(Request $request)
     {
         // get all doains
         $domains = Domain::All();
@@ -344,6 +344,10 @@ class ControlController extends Controller
             ->with('controls', $controls)
             ->with('cur_date', $cur_date)
             ->with('domains', $domains);
+    }
+
+    public function attributes(Request $request) {
+        return redirect('/');        
     }
 
     /**

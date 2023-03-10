@@ -45,6 +45,7 @@ Route::post('/control/plan', 'ControlController@doPlan');
 Route::post('/control/draft', 'ControlController@draft');
 Route::post('/control/save', 'ControlController@save');
 Route::get('/control/radar/domains', 'ControlController@domains');
+Route::get('/control/radar/measures', 'ControlController@measures');
 Route::get('/control/radar/attributes', 'ControlController@attributes');
 Route::get('/control/history', 'ControlController@history');
 Route::get('/control/upload/{id}', 'ControlController@upload');
