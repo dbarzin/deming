@@ -61,9 +61,8 @@ class MeasureController extends Controller
             ->select('values')
             ->get();
         foreach($attributes as $attribute) {
-            foreach(explode(" ",$attribute->values) as $value) {
+            foreach(explode(" ",$attribute->values) as $value) 
                 array_push($values,$value);
-               }
             sort($values);
             }
 
@@ -93,9 +92,8 @@ class MeasureController extends Controller
         $measure = new Measure();
         $measure->domain_id = request('domain_id');
         $measure->clause = request('clause');
-        if (request('values') !=null)
-            $measure->attributes = implode(" ", request('values'));
         $measure->name = request('name');
+        $measure->attributes = request('attributes')!==null ? implode(" ", request('attributes')) : null;
         $measure->objective = request('objective');
         $measure->input = request('input');
         $measure->model = request('model');
@@ -174,10 +172,7 @@ class MeasureController extends Controller
         $measure->domain_id = request('domain_id');
         $measure->name = request('name');
         $measure->clause = request('clause');
-        if (request('attributes')!==null)
-            $measure->attributes = implode(" ", request('attributes'));
-        else
-            $measure->attributes = null;
+        $measure->attributes = request('attributes')!==null ? implode(" ", request('attributes')) : null;
         $measure->objective = request('objective');
         $measure->input = request('input');
         $measure->model = request('model');
@@ -203,7 +198,7 @@ class MeasureController extends Controller
             $control->indicator = $measure->indicator;
             $control->action_plan = $measure->action_plan;
             $control->periodicity = $measure->periodicity;
-            $control->periodicity = $measure->retention;
+            $control->retention = $measure->retention;
             $control->save();
         }
 

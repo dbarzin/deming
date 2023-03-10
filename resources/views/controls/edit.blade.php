@@ -25,9 +25,22 @@
 		    		<div class="cell-1">
 			    		<strong>{{ trans("cruds.control.fields.name") }}</strong>
 			    	</div>
-					<div class="cell-6">
+					<div class="cell-5">
 			    		{{ $control->clause }} 
 						<input type="text" name="name" value="{{ $control->name }}" size="64">
+					</div>
+				</div>
+
+				<div class="row">
+		    		<div class="cell-1">
+			    		<strong>{{ trans('cruds.control.fields.attributes') }}</strong>
+			    	</div>
+					<div class="cell-5">
+						<select data-role="select" name="attributes[]" multiple>
+							@foreach($attributes as $attribute)
+						    <option {{ str_contains($control->attributes, $attribute) ? "selected" : ""}}>{{$attribute}}</option>
+						    @endforeach
+						 </select>
 					</div>
 				</div>
 
@@ -35,7 +48,7 @@
 		    		<div class="cell-1">
 			    		<strong>{{ trans("cruds.control.fields.objective") }}</strong>
 			    	</div>
-					<div class="cell-6">
+					<div class="cell-5">
 						<textarea name="objective" rows="5" cols="80">{{ $errors->has('objective') ?  old('objective') : $control->objective }}</textarea>
 					</div>
 				</div>
@@ -44,8 +57,8 @@
 		    		<div class="cell-1">
 			    		<strong>{{ trans("cruds.control.fields.input") }}</strong>
 			    	</div>
-					<div class="cell-6">
-						<textarea name="input" rows="5" cols="80">{{ $errors->has('input') ?  old('input') : $control->input }}</textarea>
+					<div class="cell-5">
+						<textarea name="input" rows="5" cols="60">{{ $errors->has('input') ?  old('input') : $control->input }}</textarea>
 					</div>
 				</div>
 
@@ -63,20 +76,6 @@
 					<div class="cell-2">
 						<input type="text" data-role="calendarpicker" name="realisation_date" value="{{$control->realisation_date}}" 
 					data-input-format="%Y-%m-%d"> 
-					</div>
-				</div>
-
-				<div class="row">
-		    		<div class="cell-1">
-			    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
-			    	</div>
-					<div class="cell-5">
-						<select name="periodicity" size="1" width='20'>
-						    <option value="1" {{ $control->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
-						    <option value="3" {{ $control->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
-						    <option value="6" {{ $control->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>
-						    <option value="12" {{ $control->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
-						 </select>
 					</div>
 				</div>
 
@@ -142,47 +141,36 @@
 				</div>
 
 
-	<!--
-		    	<div class="row">
+				<div class="row">
 		    		<div class="cell-1">
-			    		<strong>Prochaine revue</strong>
+			    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
 			    	</div>
-					<div class="cell-3">
-						<input data-role="datepicker" name="next_date" value="{{ 
-					\Carbon\Carbon
-					::createFromFormat('Y-m-d',$control->plan_date)
-					->addMonths($control->periodicity)
-					->format('Y-m-d')
-					}}" 
-					data-input-format="%d/%m/%y">
-					</div>
-					<div class="cell-1">
-					(
-					@if ($control->periodicity==1) Mensuel @endif
-					@if ($control->periodicity==3) Triestriel @endif
-					@if ($control->periodicity==4) Quadrimestriel @endif
-					@if ($control->periodicity==6) Semestriel @endif
-					@if ($control->periodicity==12) Annuel @endif
-					)
+					<div class="cell-5">
+						<select data-role="select" name="periodicity">
+						    <option value="1" {{ $control->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
+						    <option value="3" {{ $control->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
+						    <option value="6" {{ $control->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>
+						    <option value="12" {{ $control->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
+						 </select>
 					</div>
 				</div>
-	-->
-			<div class="grid">
-		    	<div class="row-12">
-				<button type="submit" class="button success">
-		            <span class="mif-floppy-disk"></span>
-		            &nbsp;
-					{{ trans("common.save") }}
-				</button>
-				</form>
-				&nbsp;
-	    		<form action="/controls/{{$control->id}}">
-		    		<button type="submit" class="button cancel">
-		    			<span class="mif-cancel"></span>
-		    			&nbsp;
-		    			{{ trans("common.cancel") }}
-		    		</button>
-		    	</form>
+
+				<div class="grid">
+			    	<div class="row-12">
+					<button type="submit" class="button success">
+			            <span class="mif-floppy-disk"></span>
+			            &nbsp;
+						{{ trans("common.save") }}
+					</button>
+					</form>
+					&nbsp;
+		    		<form action="/controls/{{$control->id}}">
+			    		<button type="submit" class="button cancel">
+			    			<span class="mif-cancel"></span>
+			    			&nbsp;
+			    			{{ trans("common.cancel") }}
+			    		</button>
+			    	</form>
 	    		</div>
 	    	</div>
 	    </div>

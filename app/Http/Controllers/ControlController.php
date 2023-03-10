@@ -209,9 +209,21 @@ class ControlController extends Controller
         $control = Control::find($id);
         $documents = DB::table('documents')->where('control_id', $id)->get();
 
+        // get all attributes
+        $values = array();
+        $attributes = DB::table('attributes')
+            ->select('values')
+            ->get();
+        foreach($attributes as $attribute) {
+            foreach(explode(" ",$attribute->values) as $value) 
+                array_push($values,$value);
+            sort($values);
+            }
+
         return view('controls.edit')
             ->with('control', $control)
-            ->with('documents', $documents);
+            ->with('documents', $documents)
+            ->with('attributes', $values);
     }
 
     /**
@@ -508,6 +520,7 @@ class ControlController extends Controller
 
         $control->name = request('name');
         $control->objective = request('objective');
+        $control->attributes = request('attributes')!==null ? implode(" ", request('attributes')) : null;
         $control->input = request('input');
         $control->plan_date = request('plan_date');
         $control->realisation_date = request('realisation_date');
