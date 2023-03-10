@@ -70,7 +70,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.measure.fields.attributes') }}</strong>
 		    	</div>
-				<div class="cell-7">
+				<div class="cell-5">
 					<select data-role="select" name="attributes[]" multiple>
 						@foreach($values as $value)
 					    <option {{ str_contains($measure->attributes,$value) ? "selected" : ""}}>{{$value}}</option>

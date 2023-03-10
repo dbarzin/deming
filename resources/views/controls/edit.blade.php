@@ -25,7 +25,7 @@
 		    		<div class="cell-1">
 			    		<strong>{{ trans("cruds.control.fields.name") }}</strong>
 			    	</div>
-					<div class="cell-8">
+					<div class="cell-6">
 			    		{{ $control->clause }} 
 						<input type="text" name="name" value="{{ $control->name }}" size="64">
 					</div>
