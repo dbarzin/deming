@@ -32,7 +32,7 @@
 			    		<strong>{{ trans('cruds.attribute.fields.values') }}</strong>
 			    	</div>
 		    		<div class="cell-5">
-						<input type="text" name="values" value="{{ old('values') }}" size="64">
+						<textarea name="values" rows="5" cols="80">{{ old('values') }}</textarea>
 					</div>
 				</div>
 

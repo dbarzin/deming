@@ -30,8 +30,8 @@
 		    		<div class="cell-1">
 						<label class="label" for="description">{{ trans('cruds.attribute.fields.values') }}</label>
 			    	</div>
-					<div class="cell-8">					
-						<input type="text" name="values" size="64" maxsize="512" value="{{ $errors->has('values') ?  old('values') : $attribute->values }}">
+					<div class="cell-8">
+						<textarea name="values" rows="5" cols="80">{{ $errors->has('values') ?  old('values') : $attribute->values }}</textarea>
 					</div>
 				</div>
 			</div>
@@ -41,16 +41,6 @@
 				{{ trans('common.save') }}
 			</button>
 			</form>
-	        &nbsp;
-			<form action="/attributes/{{ $attribute->id }}" method="post">
-	           {{ method_field('delete') }}
-	           @csrf
-		        <button class="button alert" type="submit">
-					<span class="mif-fire"></span>
-					&nbsp;
-			        {{ trans('common.delete') }}
-		    </button>
-        </form>
         &nbsp;
 		<form action="/attributes/{{ $attribute->id }}">
     		<button type="submit" class="button">
