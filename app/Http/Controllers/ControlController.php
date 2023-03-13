@@ -217,8 +217,8 @@ class ControlController extends Controller
         foreach($attributes as $attribute) {
             foreach(explode(" ",$attribute->values) as $value) 
                 array_push($values,$value);
-            sort($values);
             }
+        sort($values);
 
         return view('controls.edit')
             ->with('control', $control)
@@ -297,11 +297,10 @@ class ControlController extends Controller
                 order by id;');
 
         // return
-        return view('/controls/domains')
-            ->with('controls_never_made', $controls_never_made)
-
+        return view('/radar/domains')
             ->with('domains', $domains)
-            ->with('active_controls', $active_controls);
+            ->with('active_controls', $active_controls)
+            ->with('controls_never_made', $controls_never_made);
     }
 
     public function measures(Request $request)
@@ -340,14 +339,46 @@ class ControlController extends Controller
         );
 
         // return
-        return view('controls.radar')
+        return view('radar.controls')
             ->with('controls', $controls)
             ->with('cur_date', $cur_date)
             ->with('domains', $domains);
     }
 
     public function attributes(Request $request) {
-        return redirect('/');        
+        // get all attributes
+        $attributes = DB::table('attributes')
+            ->orderBy('name')
+            ->get();
+
+        // Controls made
+        $controls = DB::select('
+                select
+                    c2.id,
+                    c2.name,
+                    c2.attributes,
+                    c2.realisation_date, 
+                    c2.score
+                from 
+                    (
+                    select 
+                        measure_id,
+                        max(id) as id
+                    from 
+                        controls
+                    where
+                        realisation_date is not null
+                    group by measure_id
+                    ) as c1,                    
+                    controls c2
+                where
+                    c1.id=c2.id
+                order by id;');
+
+        // return
+        return view('radar.attributes')
+            ->with("attributes", $attributes)
+            ->with("controls", $controls);
     }
 
     /**
@@ -557,7 +588,6 @@ class ControlController extends Controller
         $control->note = request('note');
         $control->score = request('score');
         $control->action_plan = request('action_plan');
-        $control->next_date = request('next_date');
 
         $control->save();
 

@@ -38,7 +38,9 @@
 					<div class="cell-5">
 						<select data-role="select" name="attributes[]" multiple>
 							@foreach($attributes as $attribute)
-						    <option {{ str_contains($control->attributes, $attribute) ? "selected" : ""}}>{{$attribute}}</option>
+								@if (strlen($attribute)>0)
+							    <option {{ str_contains($control->attributes, $attribute) ? "selected" : ""}}>{{$attribute}}</option>
+							    @endif
 						    @endforeach
 						 </select>
 					</div>
