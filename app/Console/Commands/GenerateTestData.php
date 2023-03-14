@@ -36,6 +36,19 @@ class GenerateTestData extends Command
         DB::table('documents')->delete();
         DB::table('controls')->delete();
 
+        // get all attributes
+        $attributes = array();
+        $attributesDB = DB::table('attributes')
+            ->select('values')
+            ->get();
+        foreach($attributesDB as $attribute) {
+            foreach(explode(" ",$attribute->values) as $value) {
+                if (strlen($value)>0)
+                    array_push($attributes,$value);
+               }
+            }
+        sort($attributes);
+
         // period in month
         $period = 12;
 
@@ -84,6 +97,10 @@ class GenerateTestData extends Command
             $control->owner = $measure->owner;
             $control->periodicity = $measure->periodicity;
             $control->retention = $measure->retention;
+            $control->attributes =
+                $attributes[rand(0,count($attributes)-1)] . " ". 
+                $attributes[rand(0,count($attributes)-1)] . " " . 
+                $attributes[rand(0,count($attributes)-1)];
             // do it
             $control->plan_date = (new Carbon($curDate))->day(rand(0, 28))->toDateString();
             $control->realisation_date = (new Carbon($curDate))->addDay(rand(0, 28))->toDateString();
@@ -107,6 +124,7 @@ class GenerateTestData extends Command
             $nextControl->owner = $measure->owner;
             $nextControl->periodicity = $measure->periodicity;
             $nextControl->retention = $measure->retention;
+            $nextControl->attributes = $control->attributes;
             // next one
             $nextControl->plan_date = (new Carbon($curDate))->day(rand(0, 28))->addMonth($measure->periodicity)->toDateString();
             // fix it
