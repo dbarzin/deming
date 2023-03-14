@@ -44,6 +44,7 @@ return [
             'input' => 'Données',
             'choose_domain' => 'Choisir un domaine',
             'choose_period' => 'Choisir une periode',
+            'choose_attribute' => 'Choisir un attribut',
             'clause' => 'Clause',
             'domain' => 'Domaine',
             'indicator' => 'Fonction',

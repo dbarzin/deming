@@ -6,11 +6,8 @@
 
 			<div class="grid">
 				<div class="row">
-					<div class="cell-1">
-			    		<strong>{{ trans('cruds.measure.title') }}</strong>
-			    	</div>
 					<div class="cell-4">
-						<select id='domain_id' name="domain_id" size="1" width='10'>
+						<select id='domain_id' name="domain_id" data-role="select">
 						    <option value="0">-- {{ trans('cruds.domain.choose') }} --</option>
 							@foreach ($domains as $domain)
 						    	<option value="{{ $domain->id }}"
@@ -22,7 +19,7 @@
 						    @endforeach
 						</select>
 					</div>
-					<div class="cell-7" align="right">
+					<div class="cell-8" align="right">
 						<button class="button primary" onclick="location.href = '/measures/create';">
 			            <span class="mif-plus"></span>
 			            &nbsp;

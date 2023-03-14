@@ -26,6 +26,18 @@ class ControlController extends Controller
         // get all doains
         $domains = Domain::All();
 
+        // get all attributes
+        $attributes = array();
+        $allAttributes = DB::table('attributes')
+            ->select('values')
+            ->get();
+        foreach($allAttributes as $attribute) {
+            foreach(explode(" ",$attribute->values) as $value) 
+                if (strlen($value)>0)
+                    array_push($attributes,$value);
+            }
+        sort($attributes);
+
         // get domain base on his title
         $domain_title = $request->get('domain_title');
         if ($domain_title !== null) {
@@ -47,6 +59,19 @@ class ControlController extends Controller
             }
         } else {
             $domain = $request->session()->get('domain');
+        }
+
+        // get current domain
+        $attribute = $request->get('attribute');
+        if ($attribute !== null) {
+            if ($attribute === "none") {
+                $request->session()->forget('attribute');
+                $attribute=null;
+            } else {
+                $request->session()->put('attribute', $attribute);
+            }
+        } else {
+            $attribute = $request->session()->get('attribute');
         }
 
         // get current period
@@ -77,6 +102,8 @@ class ControlController extends Controller
             $request->session()->put('status', '2');
         }
 
+        // TODO : Convert to Laravel SQL
+        
         // select
         $whereClause = '(true)';
         if (($domain !== null) && ($domain !== 0)) {
@@ -104,6 +131,9 @@ class ControlController extends Controller
                 }
             }
         }
+        if ($attribute!=null) {
+            $whereClause .= 'and (c1.attributes like "%' . $attribute . '%")';
+        }
 
         //dd($whereClause);
 
@@ -130,6 +160,7 @@ class ControlController extends Controller
         // view
         return view('controls.index')
             ->with('controls', $controls)
+            ->with('attributes', $attributes)
             ->with('domains', $domains);
     }
 

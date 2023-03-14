@@ -43,6 +43,7 @@ return [
              'attributes' => 'Attributes',
              'choose_domain' => 'Choose domain',
              'choose_period' => 'Choose a period',
+             'choose_attribute' => 'Choose an attribute',
              'domain' => 'Domain',
              'indicator' => 'Function',
              'measure' => 'Measure',

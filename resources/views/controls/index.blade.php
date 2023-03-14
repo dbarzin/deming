@@ -6,11 +6,8 @@
 
     <div class="grid">
         <div class="row">
-            <div class="cell-1" align="right">
-                <strong>{{ trans("cruds.control.fields.domain")}}</strong>
-            </div>
-            <div class="cell-4">
-                <select id='domain_id' name="domain_id" size="1" width='10'>
+            <div class="cell-3">
+                <select id='domain' name="domain_id" data-role="select">
                     <option value="0">-- {{ trans("cruds.control.fields.choose_domain")}} --</option>
                     @foreach ($domains as $domain)
                         <option value="{{ $domain->id }}"
@@ -22,11 +19,21 @@
                     @endforeach
                 </select>
             </div>
-            <div class="cell-1" align="right">
-                <strong>{{ trans("cruds.control.fields.period") }}</strong>
+            <div class="cell-3">
+                <select id='attribute' name="attribute" data-role="select">
+                    <option value="none">-- {{ trans("cruds.control.fields.choose_attribute")}} --</option>
+                    @foreach ($attributes as $attribute)
+                        <option
+                            @if (Session::get("attribute")==$attribute)        
+                                selected 
+                            @endif >
+                            {{ $attribute }}
+                        </option>
+                    @endforeach
+                </select>
             </div>
-            <div class="cell-2"> 
-                <select id='cur_period' name="period" size="1" width='10'>
+            <div class="cell-3"> 
+                <select id='cur_period' name="period" data-role="select">
                     <option value="99"
                         @if (Session::get("period")=="99")
                             selected 
@@ -43,10 +50,7 @@
                         @endfor
                     </select>
                 </div>
-            <div class="cell-1" align="right">
-                <strong>{{ trans("cruds.control.fields.status") }}</strong>
-            </div>
-            <div class="cell-3" align="left">
+            <div class="cell-3">
                 <input type="radio" data-role="radio" data-style="2" 
                 name="status" value="0" id="status0"
                 @if (Session::get("status")=="0" || Session::get("status")==null)
@@ -72,9 +76,14 @@
 
     <script>
         window.addEventListener('load', function(){
-            var select = document.getElementById('domain_id');
+            var select = document.getElementById('domain');
             select.addEventListener('change', function(){
                 window.location = '/controls?domain=' + this.value;
+            }, false);
+
+            var select = document.getElementById('attribute');
+            select.addEventListener('change', function(){
+                window.location = '/controls?attribute=' + encodeURIComponent(this.value);
             }, false);
 
             select = document.getElementById('cur_period');
