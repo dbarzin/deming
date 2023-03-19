@@ -179,16 +179,14 @@
 
    	<div class="row">
    		<div class="cell-5">
-			@if (Auth::User()->role==1)
-		    <form action="/control/edit/{{ $control->id }}">
-	    		<button class="button primary">
-					<span class="mif-wrench"></span>
-					&nbsp;
-	    			{{ trans("common.edit") }}
-	    		</button>
+		    <form action="/control/make/{{ $control->id }}">
+	    		<button class="button success">
+					<span class="mif-assignment"></span>
+					&nbsp;	    			
+		    		{{ trans("common.make") }}
+		    	</button>
 			</form>
 			&nbsp;
-			@endif
 			@if ($control->realisation_date==null)
 		    <form action="/control/plan/{{ $control->id }}">
 	    		<button class="button info">
@@ -198,12 +196,14 @@
 	    		</button>
 			</form>
 			&nbsp;
-		    <form action="/control/make/{{ $control->id }}">
-	    		<button class="button success">
-					<span class="mif-assignment"></span>
-					&nbsp;	    			
-		    		{{ trans("common.make") }}
-		    	</button>
+			@endif
+			@if (Auth::User()->role==1)
+		    <form action="/control/edit/{{ $control->id }}">
+	    		<button class="button primary">
+					<span class="mif-wrench"></span>
+					&nbsp;
+	    			{{ trans("common.edit") }}
+	    		</button>
 			</form>
 			&nbsp;
    			@endif
