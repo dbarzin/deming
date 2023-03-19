@@ -48,7 +48,7 @@ class ControlController extends Controller
             }
         }
 
-        // get current domain
+        // Domain filter
         $domain = $request->get('domain');
         if ($domain !== null) {
             $domain = intval($domain);
@@ -61,7 +61,7 @@ class ControlController extends Controller
             $domain = $request->session()->get('domain');
         }
 
-        // get current domain
+        // Attribute filter
         $attribute = $request->get('attribute');
         if ($attribute !== null) {
             if ($attribute === "none") {
@@ -74,7 +74,7 @@ class ControlController extends Controller
             $attribute = $request->session()->get('attribute');
         }
 
-        // get current period
+        // Period filter
         $period = $request->get('period');
         if ($period !== null) {
             $period = intval($period);
@@ -88,7 +88,7 @@ class ControlController extends Controller
             $period = $request->session()->get('period');
         }
 
-        // get status
+        // Status filter
         $status = $request->get('status');
         if ($status !== null) {
             $request->session()->put('status', $status);
@@ -96,10 +96,11 @@ class ControlController extends Controller
             $status = $request->session()->get('status');
         }
 
-        // get all late control
+        // Late filter
         $late = $request->get('late');
         if ($late !== null) {
             $request->session()->put('status', '2');
+            $status = '2';
         }
 
         // TODO : Convert to Laravel SQL

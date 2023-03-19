@@ -116,6 +116,7 @@
        data-rownum="false"
        data-check="false"
        data-check-style="1"
+       onDraw="alert('change')"
        >
         <thead>
             <tr>

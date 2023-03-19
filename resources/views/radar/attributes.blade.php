@@ -11,21 +11,16 @@
     @foreach($attributes as $attribute)
     <div class="row">
         <div class="cell-10">
-            <b>{{ $attribute->name }}</b>
         </div>
 
 
     </div>
     <div class="row">
         <div class="cell-6">
-            <br>
-                <canvas id="canvas-radar-{{ $attribute->id }}" width="100" height="100"></canvas>
-        </div>
-        <div class="cell-6">
             <table class="table table-bordered">
                   <thead>
                   <tr>
-                    <th width="80%">{{ trans("cruds.control.fields.attributes") }}</th>
+                    <th width="80%">{{ $attribute->name }}</th>
                     <th width="20%">{{ trans("cruds.control.fields.note") }}</th>
                   </tr>
                   </thead>
@@ -45,7 +40,7 @@
                             @endif
                         @endforeach
                     <tr>
-                        <td>{{ $value }}</td>
+                        <td><a href="/controls?domain=0&period=99&status=1&attribute={{ urlencode($value) }}">{{ $value }}</a></td>
                         <td>
                             <font color="30FF30"><?php echo $score3; ?></font> -
                             <font color="ff5733"><?php echo $score2; ?></font> -
@@ -56,6 +51,9 @@
                 @endforeach
                 </tbody>
             </table>
+        </div>
+        <div class="cell-6">
+            <canvas id="canvas-radar-{{ $attribute->id }}" width="100" height="100"></canvas>
         </div>
     </div>
     @endforeach
