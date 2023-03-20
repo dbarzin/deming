@@ -80,7 +80,6 @@ class ControlController extends Controller
             $period = intval($period);
             if ($period === 99) {
                 $request->session()->put('period', $period);
-                $period = null;
             } else {
                 $request->session()->put('period', $period);
             }
@@ -103,60 +102,48 @@ class ControlController extends Controller
             $status = '2';
         }
 
-        // TODO : Convert to Laravel SQL
+        // Build query
+        $controls = DB::table("controls as c1")
+                ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id');
+
+        if (($domain !== null) && ($domain !== 0)) 
+            $controls = $controls->where("c1.domain_id", "=", $domain);
         
-        // select
-        $whereClause = '(true)';
-        if (($domain !== null) && ($domain !== 0)) {
-            $whereClause .= 'and (c1.domain_id='.$domain.')';
-        }
-        if ($late !== null) {
-            $whereClause .= "and(c1.plan_date<='"
-                .Carbon::today()->format('Y-m-d')
-                ."')and(c1.realisation_date is null)";
-        } else {
-            $period = intval($period);
-            if (($period !== null) && ($period !== 99)) {
-                $whereClause .= "and(c1.plan_date>='"
-                .((new Carbon('first day of this month'))->addMonth((int) $period)->format('Y-m-d'))
-                ."')and(c1.plan_date<'"
-                .((new Carbon('first day of next month'))->addMonth((int) $period)->format('Y-m-d'))
-                ."')";
+        if ($late !== null) 
+            $controls = $controls
+                ->where("c1.plan_date", "<=", Carbon::today()->format("Y-m-d"))
+                ->whereNull("c1.realisation_date");
+
+        elseif (($period !== null) && ($period !== 99)) {
+                $controls = $controls
+                    ->where("c1.plan_date",">=",(new Carbon('first day of this month'))->addMonth($period)->format("Y-m-d"))
+                    ->where("c1.plan_date","<",(new Carbon('first day of next month'))->addMonth($period)->format("Y-m-d"));
             }
-            if ($status !== null) {
-                if ($status === '1') {
-                    $whereClause .= 'and(c1.realisation_date is not null)';
-                }
-                if ($status === '2') {
-                    $whereClause .= 'and(c1.realisation_date is null)';
-                }
-            }
-        }
+        elseif ($status === '1') 
+            $controls = $controls->whereNotNull("c1.realisation_date");
+    
+        elseif ($status === '2') 
+            $controls = $controls->whereNull("c1.realisation_date");
+                
+            
         if ($attribute!=null) {
-            $whereClause .= 'and (c1.attributes like "%' . $attribute . '%")';
+            $controls = $controls->where('c1.attributes', 'LIKE', '%'.$attribute.'%');
         }
 
-        //dd($whereClause);
-
-        $controls = DB::select(
-            DB::raw(
-                'select
-                c1.id,
-                c1.measure_id,
-                c1.name,
-                c1.clause,
-                c1.domain_id,
-                c1.plan_date,
-                c1.realisation_date,
-                c1.score as score,
-                c2.id as next_id,
-                c2.plan_date as next_date
-            from
-                controls c1 left join controls c2 on c1.next_id=c2.id
-            where ' . $whereClause .
-            ' order by c1.id'
-            )
-        );
+        $controls=$controls->select(
+            [
+                'c1.id',
+                'c1.measure_id',
+                'c1.name',
+                'c1.clause',
+                'c1.domain_id',
+                'c1.plan_date',
+                'c1.realisation_date',
+                'c1.score as score',
+                'c2.id as next_id',
+                'c2.plan_date as next_date'
+            ])
+            ->orderBy("c1.id")->get();
 
         // view
         return view('controls.index')

@@ -44,7 +44,7 @@
                     <div class="icon">
                         <span class="mif-paste"></span>
                     </div>
-                    <a href="/controls?domain=0&period=99&status=1" class="more"> {{ trans('common.more_info' )}} <span class="mif-arrow-right"></span></a>
+                    <a href="/controls?attribute=none&domain=0&period=99&status=1" class="more"> {{ trans('common.more_info' )}} <span class="mif-arrow-right"></span></a>
                 </div>
             </div>
             <div class="cell-lg-3 cell-md-6 mt-2">
@@ -326,7 +326,7 @@
             var activePoints = window.myBar.getElementsAtEvent(evt);
             var firstPoint = activePoints[0];
             // var label = barChartData.labels[firstPoint._index];
-            window.location.href="/controls?status=0&period="+(firstPoint._index-12);
+            window.location.href="/controls?attribute=none&status=0&period="+(firstPoint._index-12);
         };        
     </script>
 

@@ -118,7 +118,7 @@
                             <?php $total++; ?>
                         @endif
                     @endforeach
-                    {{ 2.5* $score3 / $total }} 
+                    {{ 2.5 * $score3 / $total }} 
                     {{ $loop->last ? '' : ',' }}  
                 @endif
             @endforeach
@@ -132,7 +132,7 @@
         data: [
         @foreach (explode(" ",$attribute->values) as $value)
             @if (strlen($value)>0)
-                1
+                2
             {{ $loop->last ? '' : ',' }}  
             @endif
         @endforeach 
@@ -145,7 +145,7 @@
         data: [
         @foreach (explode(" ",$attribute->values) as $value)
             @if (strlen($value)>0)
-                2
+                2.5
             {{ $loop->last ? '' : ',' }}  
             @endif
         @endforeach 
