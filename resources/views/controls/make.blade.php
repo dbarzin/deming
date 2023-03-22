@@ -182,19 +182,19 @@
 
 			<div class="grid">
 		    	<div class="row-12">
+					<button type="submit" class="button success">
+						<span class="mif-done"></span>
+						&nbsp;	    			
+						{{ trans('common.make') }}
+					</button>
+					&nbsp;
 					<button type="submit" class="button primary" onclick='this.form.action="/control/draft"'>
 			            <span class="mif-floppy-disk"></span>
 			            &nbsp;
 						{{ trans('common.save') }}
 					</button>
 					&nbsp;
-					<button type="submit" class="button success">
-						<span class="mif-done"></span>
-						&nbsp;	    			
-						{{ trans('common.make') }}
-					</button>
 					</form>
-					&nbsp;
 					<form action="/controls/{{ $control->id }}">
 			    		<button type="submit" class="button">
 							<span class="mif-cancel"></span>
