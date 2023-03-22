@@ -215,15 +215,8 @@
                 <?php
                 if (($control->score==3) && 
                     ($control->realisation_date!=null) && 
-                    (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
-                ) {
-                echo("<!-- ");
-                echo($control->id);
-                echo(" - ");
-                echo($control->realisation_date);
-                echo("--> ");
-                    $count++; 
-                } ?>
+                    (\Carbon\Carbon::parse($control->plan_date)->between($first, $second))
+                ) { $count++; } ?>
             @endforeach   
             {{ $count }},
             <?php } ?> 
@@ -245,7 +238,7 @@
                 <?php
                 if (($control->score==2) && 
                     ($control->realisation_date!=null) && 
-                    (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
+                    (\Carbon\Carbon::parse($control->plan_date)->between($first, $second))
                 ) { $count++; }
                 ?>
             @endforeach          
@@ -269,7 +262,7 @@
                 <?php
                 if (($control->score==1) &&
                     ($control->realisation_date!=null) && 
-                    (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
+                    (\Carbon\Carbon::parse($control->plan_date)->between($first, $second))
                 ) { $count++; }
                 ?>
             @endforeach          
