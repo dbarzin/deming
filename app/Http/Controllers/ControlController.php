@@ -472,7 +472,8 @@ class ControlController extends Controller
 
         // Control already made ?
         if ($control->realisation_date !== null) {
-            return null;
+            // TODO : return an error "Control already made"
+            return redirect('/control/show/'.$id);
         }
 
         // get associated documents
