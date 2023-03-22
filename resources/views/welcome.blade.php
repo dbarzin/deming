@@ -213,15 +213,15 @@
                 ?>
             @foreach ($controls as $control)
                 <?php
-                echo("<!-- ");
-                echo($first);
-                echo(" ");
-                echo($second);
-                echo("--> ");
                 if (($control->score==3) && 
                     ($control->realisation_date!=null) && 
                     (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
-                ) { $count++; }
+                ) {                     
+                echo("<!-- ");
+                echo($control->realisation_date);
+                echo("--> ");
+                    $count++; 
+                }
                 ?>
             @endforeach   
             {{ $count }},
