@@ -216,13 +216,14 @@
                 if (($control->score==3) && 
                     ($control->realisation_date!=null) && 
                     (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
-                ) {                     
+                ) {
                 echo("<!-- ");
+                echo($control->id);
+                echo(" - ");
                 echo($control->realisation_date);
                 echo("--> ");
                     $count++; 
-                }
-                ?>
+                } ?>
             @endforeach   
             {{ $count }},
             <?php } ?> 
