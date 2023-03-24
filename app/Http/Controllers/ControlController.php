@@ -108,7 +108,7 @@ class ControlController extends Controller
 
         if (($domain !== null) && ($domain !== 0)) 
             $controls = $controls->where("c1.domain_id", "=", $domain);
-        
+
         if ($late !== null) 
             $controls = $controls
                 ->where("c1.plan_date", "<=", Carbon::today()->format("Y-m-d"))
@@ -119,10 +119,11 @@ class ControlController extends Controller
                     ->where("c1.plan_date",">=",(new Carbon('first day of this month'))->addMonth($period)->format("Y-m-d"))
                     ->where("c1.plan_date","<",(new Carbon('first day of next month'))->addMonth($period)->format("Y-m-d"));
             }
-        elseif ($status === '1') 
+
+        if ($status === '1') 
             $controls = $controls->whereNotNull("c1.realisation_date");
     
-        elseif ($status === '2') 
+        elseif ($status == '2') 
             $controls = $controls->whereNull("c1.realisation_date");
                 
             
