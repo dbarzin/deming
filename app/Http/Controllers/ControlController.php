@@ -106,31 +106,31 @@ class ControlController extends Controller
         $controls = DB::table("controls as c1")
                 ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id');
 
+        // Filter on domain
         if (($domain !== null) && ($domain !== 0)) 
             $controls = $controls->where("c1.domain_id", "=", $domain);
 
+        // Filter on period
+        if (($period !== null) && ($period !== 99)) 
+                $controls = $controls
+                    ->where("c1.plan_date",">=",(new Carbon('first day of this month'))->addMonth($period)->format("Y-m-d"))
+                    ->where("c1.plan_date","<",(new Carbon('first day of next month'))->addMonth($period)->format("Y-m-d"));
+
+        // Filter on status
         if ($late !== null) 
             $controls = $controls
                 ->where("c1.plan_date", "<=", Carbon::today()->format("Y-m-d"))
                 ->whereNull("c1.realisation_date");
-
-        elseif (($period !== null) && ($period !== 99)) {
-                $controls = $controls
-                    ->where("c1.plan_date",">=",(new Carbon('first day of this month'))->addMonth($period)->format("Y-m-d"))
-                    ->where("c1.plan_date","<",(new Carbon('first day of next month'))->addMonth($period)->format("Y-m-d"));
-            }
-
-        if ($status === '1') 
+        elseif ($status === '1') 
             $controls = $controls->whereNotNull("c1.realisation_date");
-    
         elseif ($status == '2') 
-            $controls = $controls->whereNull("c1.realisation_date");
-                
-            
-        if ($attribute!=null) {
+            $controls = $controls->whereNull("c1.realisation_date");                
+        
+        // Filter on attribute    
+        if ($attribute!=null) 
             $controls = $controls->where('c1.attributes', 'LIKE', '%'.$attribute.'%');
-        }
-
+        
+        // Query DB
         $controls=$controls->select(
             [
                 'c1.id',
@@ -146,7 +146,7 @@ class ControlController extends Controller
             ])
             ->orderBy("c1.id")->get();
 
-        // view
+        // return view
         return view('controls.index')
             ->with('controls', $controls)
             ->with('attributes', $attributes)
