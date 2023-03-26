@@ -248,10 +248,13 @@
         <div class="panel">
 
             <?php
-            if (Request::get('date')==null)
-                $calendar = new \App\Calendar(\Carbon\Carbon::now()->format('y-m-d'));
-            else
+            if (Request::get('month')!==null)
+                $calendar = new \App\Calendar(\Carbon\Carbon::now()->addMonth(intval(Request::get('month')))->format('y-m-d'));
+            elseif (Request::get('date')!==null)
                 $calendar = new \App\Calendar(Request::get('date'));
+            else
+                $calendar = new \App\Calendar(\Carbon\Carbon::now()->format('y-m-d'));
+            
             foreach ($controls as $control) {
                 if (($control->score==null) && ($control->plan_date!=null)) {
                         $calendar->addEvent($control->clause, $control->plan_date, 1, 'grey', $control->id);
@@ -422,6 +425,17 @@
         });
 
     };
+
+
+    document.getElementById('canvas-status').onclick = function(evt){
+            var activePoints = window.myBar.getElementsAtEvent(evt);
+            var firstPoint = activePoints[0];
+            // var label = barChartData.labels[firstPoint._index];
+            // alert(firstPoint._index - 12);
+            // alert(barChartData.labels[firstPoint._index]);
+            window.location.href="/control/history?month="+(firstPoint._index-12);
+        };
+
     </script>
 
 
