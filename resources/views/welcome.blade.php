@@ -176,7 +176,6 @@
     </div>
     </div>
 
-
 </div>
 </div>
 
@@ -297,38 +296,29 @@
       },
       ]
     };
-         
-    window.onload = function() {
-        var ctx = document.getElementById('canvas-status').getContext('2d');
-        window.myBar = new Chart(ctx, {
-            type: 'bar',
-            data: barChartData,
-            options: {
-                responsive: true,
-                legend: {
-                    display: false,
-                },
-                title: {
-                    display: false
-                }
-            }
-        });
 
-    };
+    var ctx = document.getElementById('canvas-status').getContext('2d');
+    window.myBar = new Chart(ctx, {
+        type: 'bar',
+        data: barChartData,
+        options: {
+            responsive: true,
+            legend: {
+                display: false,
+            },
+            title: {
+                display: false
+            }
+        }
+    });
 
     document.getElementById('canvas-status').onclick = function(evt){
             var activePoints = window.myBar.getElementsAtEvent(evt);
             var firstPoint = activePoints[0];
             // var label = barChartData.labels[firstPoint._index];
             window.location.href="/controls?attribute=none&status=0&period="+(firstPoint._index-12);
-        };        
-    </script>
+        }; 
 
-
-<!------------------------->
-<!-- DOUGHNUT -->
-<!------------------------->
-<script>
 
     var options = {
         responsive: true,
