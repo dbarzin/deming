@@ -11,6 +11,19 @@
     @foreach($attributes as $attribute)
     <div class="row">
         <div class="cell-10">
+            @if ($loop->first)
+            <div class="cell-2" valign="right">
+                <form action="/control/radar/attributes">
+                    <input type="text" 
+                        data-role="calendarpicker" 
+                        name="cur_date" 
+                        data-dialog-mode="true"
+                        value="{{$cur_date}}"
+                        data-input-format="%Y-%m-%d"                    
+                        onchange="this.form.submit()">            
+                </form>
+            </div>
+            @endif
         </div>
 
 
