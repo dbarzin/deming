@@ -1,7 +1,8 @@
 <?php
 return [
     'welcome' => [
-        'domains' => 'Domains',
+         'dashboard' => 'Dashboard',
+         'domains' => 'Domains',
          'measures' => 'Controls',
          'controls' => 'Measurements',
          'action_plans' => "Action Plans",

@@ -1,6 +1,7 @@
 <?php
 return [
     'welcome' => [
+        'dashboard' => 'Tableau de bord',
         'domains' => 'Domaines',
         'measures' => 'Mesures de sécurité',
         'controls' => 'Controls',
