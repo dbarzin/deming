@@ -67,6 +67,7 @@ return [
              'status_todo' => 'To do',
              'status_all' => 'All',
              'clause' => 'Clause',
+             'input' => 'Input'
          ],
          'checklist' => 'Checklist',
          'list' => 'List of controls',
