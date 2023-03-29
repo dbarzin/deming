@@ -46,7 +46,7 @@ Installer MySQL
 
     sudo apt install mysql-server
 
-Vérifier que vous utilisez MySQL et pas MariaDB (Mercator ne fonctionne pas avec MariaDB).
+Vérifier que vous utilisez MySQL et pas MariaDB (Deming ne fonctionne pas avec MariaDB).
 
     sudo mysql --version
 
