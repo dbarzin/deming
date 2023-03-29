@@ -120,12 +120,12 @@ L'application est accessible à l'URL [http://127.0.0.1:8000]
     utilisateur : admin@admin.localhost
     mot de passe : admin
 
-L'administrateur utilise la langue anglaise par défaut, pour changer de langue aller dans la page de profil de l'utilisateur 
+L'administrateur utilise la langue anglaise par défaut. Pour changer de langue, allez dans la page de profil de l'utilisateur 
 (en haut à droit de la page principale).
 
 ## Apache
 
-Pour configurer Apache, modifiez les propriétés du répertoire deming et accordez les autorisations appropriées au répertoire de stockage avec la commande suivante
+Pour configurer Apache, modifiez les propriétés du répertoire deming et accordez les autorisations appropriées au répertoire de stockage avec la commande suivante :
 
     sudo chown -R www-data:www-data /var/www/deming
     sudo chmod -R 775 /var/www/deming/storage
@@ -147,12 +147,12 @@ Ajouter les lignes suivantes :
     CustomLog ${APACHE_LOG_DIR}/access.log combined
     </VirtualHost>
 
-Enregistrez et fermez le fichier lorsque vous avez terminé. Ensuite, activez l'hôte virtuel Apache et le module de réécriture avec la commande suivante :
+Enregistrez et fermez le fichier lorsque vous avez terminé. Ensuite, activez l'hôte virtuel Apache et le module de réécriture avec les commandes suivantes :
 
     sudo a2enmod rewrite
     sudo a2dissite 000-default.conf
     sudo a2ensite deming.conf
 
-Enfin, redémarrez le service Apache pour activer les modifications :
+Enfin, redémarrez le service Apache pour activer les modifications :
 
     sudo systemctl restart apache2
