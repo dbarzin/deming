@@ -118,7 +118,7 @@
                             <?php $total++; ?>
                         @endif
                     @endforeach
-                    {{ 2.5 * $score3 / $total }} 
+                    {{ $total == 0 ? 0 : 2.5 * $score3 / $total }} 
                     {{ $loop->last ? '' : ',' }}  
                 @endif
             @endforeach
