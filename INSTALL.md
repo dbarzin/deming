@@ -127,7 +127,7 @@ Pour configurer Apache, modifiez les propriétés du répertoire deming et accor
     sudo chown -R www-data:www-data /var/www/deming
     sudo chmod -R 775 /var/www/deming/storage
 
-Ensuite, créez un nouveau fichier de configuration d'hôte virtuel Apache pour servir l'application Mercator :
+Ensuite, créez un nouveau fichier de configuration d'hôte virtuel Apache pour servir l'application :
 
     sudo vi /etc/apache2/sites-available/deming.conf
 
