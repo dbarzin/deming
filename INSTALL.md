@@ -46,7 +46,7 @@ Installer MySQL
 
     sudo apt install mysql-server
 
-Vérifier que vous utilisez MySQL et pas MariaDB (Mercator ne fonctionne pas avec MariaDB).
+Vérifier que vous utilisez MySQL et pas MariaDB (Deming ne fonctionne pas avec MariaDB).
 
     sudo mysql --version
 
@@ -117,7 +117,7 @@ ou pour y accéder à l'application depuis un autre serveur
 
 L'application est accessible à l'URL [http://127.0.0.1:8000]
 
-    utilisateur : admin@admin.localhost
+    utilisateur : admin@admin.com
     mot de passe : admin
 
 ## Apache
