@@ -2,7 +2,7 @@
 
 ## Configuration recommandée
 
-- OS : Ubuntu 21.10
+- OS : Ubuntu 22.04 LTS
 - RAM : 2G
 - Disque : 120G
 - VCPU 2
