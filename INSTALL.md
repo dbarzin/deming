@@ -117,8 +117,11 @@ ou pour y accéder à l'application depuis un autre serveur
 
 L'application est accessible à l'URL [http://127.0.0.1:8000]
 
-    utilisateur : admin@admin.com
+    utilisateur : admin@admin.localhost
     mot de passe : admin
+
+L'administrateur utilise la langue anglaise par défaut, pour changer de langue aller dans la page de profil de l'utilisateur 
+(en haut à droit de la page principale).
 
 ## Apache
 
