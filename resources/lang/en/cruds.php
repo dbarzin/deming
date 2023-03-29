@@ -124,8 +124,8 @@ return [
              'hash' => 'Hash',
          ],
          'model' => [
-             'control' => 'Control Model',
-             'report' => 'Magamenet meeting report',
+             'control' => 'Control model',
+             'report' => 'Management meeting report model',
          ],
          'count' => 'Number of documents',
          'total_size' => 'Total Size',
