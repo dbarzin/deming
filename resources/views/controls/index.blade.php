@@ -45,7 +45,7 @@
                                 selected 
                             @endif 
                             >
-                            {{ now()->addMonth($i)->format("M Y") }}
+                            {{ now()->day(1)->addMonth($i)->format("M Y") }}
                             </option>
                         @endfor
                     </select>
