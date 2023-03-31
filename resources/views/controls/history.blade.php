@@ -18,12 +18,14 @@
                     @for ($i=-12;$i<0;$i++) 
                     <?php
                         $first = today()->day(1)->addMonth($i);
-                        $second = today()->day(1)->addMonth($i+1)->addDay(-1);
+                        $second = \Carbon\Carbon::today()->day(1)->addMonth($i)->endOfMonth();
                     ?>
                     <tr>
                         <td align="center">
-                        <a href="/controls?period={{$i}}&domain=0&status=0">                    
-                            {{ now()->addMonth($i)->format("m/Y") }}
+                        <a href="/controls?period={{$i}}&domain=0&status=0">
+                          <?php        
+	                     echo $first->format("m/Y");
+                          ?>
                         </a>
                         </td>
                         <td align="center">
@@ -130,14 +132,13 @@
         <?php 
         for ($i=0;$i<12;$i++) { 
             $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
-            $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
+            $second = \Carbon\Carbon::today()->day(1)->addMonth($i)->endOfMonth();
             ?>
             <tr>
                 <td align="center">
                 <a href="/controls?period={{$i}}&domain=0&status=0">
                 <?php        
-                        $now = \Carbon\Carbon::now();
-                        echo $now->addMonth($i)->format("m/Y");
+	             echo $first->format("m/Y");
                 ?>
                 </a>
                 </td>
@@ -297,7 +298,7 @@
         for ($i=-12;$i<12;$i++) { 
             $now = \Carbon\Carbon::now();
             echo '"';
-            echo $now->addMonth($i)->format("m/Y");
+            echo $now->startOfMonth()->addMonth($i)->format("m/Y");
             echo '",';
         }
         ?>
@@ -313,7 +314,7 @@
             for ($i=-12; $i<12; $i++) { 
                 $count=0; 
                 $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
-                $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
+                $second = \Carbon\Carbon::today()->day(1)->addMonth($i)->endOfMonth();
                 ?>
             @foreach ($controls as $control)
                 <?php
@@ -338,7 +339,7 @@
             for ($i=-12; $i<12; $i++) { 
                 $count=0; 
                 $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
-                $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
+                $second = \Carbon\Carbon::today()->day(1)->addMonth($i)->endOfMonth();
                 ?>
             @foreach ($controls as $control)
                 <?php
@@ -363,7 +364,7 @@
             for ($i=-12; $i<12; $i++) { 
                 $count=0; 
                 $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
-                $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
+                $second = \Carbon\Carbon::today()->day(1)->addMonth($i)->endOfMonth();
                 ?>
             @foreach ($controls as $control)
                 <?php
@@ -389,7 +390,7 @@
             for ($i=-12; $i<12; $i++) { 
                 $count=0; 
                 $first = \Carbon\Carbon::today()->day(1)->addMonth($i);
-                $second = \Carbon\Carbon::today()->day(1)->addMonth($i+1)->addDay(-1);
+                $second = \Carbon\Carbon::today()->day(1)->addMonth($i)->endOfMonth();
                 ?>
             @foreach ($controls as $control)
                 <?php
