@@ -15,18 +15,17 @@
         </div>
 
         @if ($loop->first)
-               
         <div class="cell-2" valign="right">
-            <form action="/measurement/radar">
-            <input type="text" 
+            <form action="/control/radar/measures">
+                <input type="text" 
                     data-role="calendarpicker" 
                     name="cur_date" 
+                    data-dialog-mode="true"
                     value="{{$cur_date}}"
                     data-input-format="%Y-%m-%d"                    
                     onchange="this.form.submit()">            
             </form>
         </div>
-
         @endif
 
     </div>

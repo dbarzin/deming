@@ -336,27 +336,28 @@ class ControlController extends Controller
             $cur_date = \Carbon\Carbon::createFromFormat('Y-m-d', $cur_date)->format('Y-m-d');
         }
 
-        $controls = DB::select(
-            DB::raw(
-                '
-                select
-                c1.id as control_id,
-                c1.name as name,
-                c1.clause as clause,
-                c1.measure_id as measure_id,
-                c1.domain_id as domain_id,
-                c1.plan_date as plan_date,
-                c1.realisation_date as realisation_date, 
-                c1.score as score,
-                c2.plan_date as next_date,
-                c2.id as next_id
-                from
-                    controls c1 left join controls c2 on c1.next_id=c2.id
-                where
-                    c2.realisation_date is null and c1.next_id is not null
-                group by measure_id order by clause;'
-            )
-        );
+        // Build query
+        $controls = DB::table("controls as c1")
+            ->select(
+            [
+                'c1.id as control_id',
+                'c1.name as name',
+                'c1.clause as clause',
+                'c1.measure_id as measure_id',
+                'c1.domain_id as domain_id',
+                'c1.plan_date as plan_date',
+                'c1.realisation_date as realisation_date', 
+                'c1.score as score',
+                'c2.plan_date as next_date',
+                'c2.id as next_id'
+            ])
+            ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id')
+            ->where("c2.realisation_date","=",null)
+            ->where("c1.next_id","<>",null)
+            ->where("c1.realisation_date","<=",$cur_date)
+            ->groupBy("measure_id")
+            ->orderBy("clause")
+            ->get();
 
         // return
         return view('radar.controls')

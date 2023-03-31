@@ -1,7 +1,8 @@
 <?php
 return [
     'welcome' => [
-        'domains' => 'Domains',
+         'dashboard' => 'Dashboard',
+         'domains' => 'Domains',
          'measures' => 'Controls',
          'controls' => 'Measurements',
          'action_plans' => "Action Plans",
@@ -65,6 +66,8 @@ return [
              'status_done' => 'Done',
              'status_todo' => 'To do',
              'status_all' => 'All',
+             'clause' => 'Clause',
+             'input' => 'Input'
          ],
          'checklist' => 'Checklist',
          'list' => 'List of controls',
@@ -89,6 +92,7 @@ return [
              'action_plan' => 'Action Plan',
              'owner' => 'Responsible',
              'periodicity' => 'Periodicity',
+             'input' => 'Input',
          ],
          'show' => 'Control',
          'index' => 'List of controls',
@@ -120,8 +124,8 @@ return [
              'hash' => 'Hash',
          ],
          'model' => [
-             'control' => 'Control Model',
-             'report' => 'Magamenet meeting report',
+             'control' => 'Control model',
+             'report' => 'Management meeting report model',
          ],
          'count' => 'Number of documents',
          'total_size' => 'Total Size',

@@ -33,7 +33,7 @@
 	    		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
 	    	</div>
 			<div class="cell-6">
-				{{ $measure->objective }}
+				<pre>{{ $measure->objective }}</pre>
 			</div>
 	    </div>
 

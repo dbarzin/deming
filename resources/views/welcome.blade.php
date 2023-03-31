@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="Tableau de bord" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.dashboard') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
         <div class="row">
             <div class="cell-lg-3 cell-md-6 mt-2">
                 <div class="more-info-box bg-orange fg-white">

@@ -29,7 +29,7 @@
                     @if(strlen($value)>0)
                         <?php $score1=0; $score2=0; $score3=0; ?>
                         @foreach($controls as $control)
-                            @if (str_contains($control->attributes, $value))
+                            @if (str_contains($control->attributes.' ', $value.' '))
                                 @if ($control->score==1)
                                     <?php $score1++; ?>
                                 @elseif ($control->score==2)
@@ -107,7 +107,7 @@
                 @if(strlen($value)>0)
                     <?php $score1=0; $score2=0; $score3=0; $total=0; ?>
                     @foreach($controls as $control)
-                        @if (str_contains($control->attributes, $value))
+                        @if (str_contains($control->attributes.' ', $value.' '))
                             @if ($control->score==1)
                                 <?php $score1++; ?>
                             @elseif ($control->score==2)
@@ -118,7 +118,7 @@
                             <?php $total++; ?>
                         @endif
                     @endforeach
-                    {{ 2.5 * $score3 / $total }} 
+                    {{ $total == 0 ? 0 : 2.5 * $score3 / $total }} 
                     {{ $loop->last ? '' : ',' }}  
                 @endif
             @endforeach
