@@ -33,7 +33,9 @@ class Calendar
         $html .= '<div class="col-2">';
         $html .= '<a href="?date=';
         $html .= date('Y-m-d', strtotime('-1 month', $this->date));
-        $html .= '">&lt;&lt;</a> &nbsp; ';
+        $html .= '" ';
+        $html .= 'style="font-size: 30px; text-decoration: none"';
+        $html .= '>&lt;&lt;</a> &nbsp; ';
         $html .= '</div>';
         $html .= '<div class="col">';
         $html .= '<input data-role="datepicker" data-day="false"';
@@ -44,7 +46,9 @@ class Calendar
         $html .= '<div class="col-2">';
         $html .= ' <a href="?date=';
         $html .= date('Y-m-d', strtotime('+1 month', $this->date));
-        $html .= '">&gt&gt;</a>';
+        $html .= '" ';
+        $html .= 'style="font-size: 30px; text-decoration: none"';
+        $html .= '>&gt&gt;</a>';
         $html .= '</div>';
         $html .= '</div>';
         $html .= '</div>';
