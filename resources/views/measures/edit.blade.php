@@ -32,8 +32,8 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.measure.fields.domain') }}</strong>
 		    	</div>
-				<div class="cell-5">
-				<select name="domain_id" size="1" width='10'>
+				<div class="cell-6">
+				<select name="domain_id" data-role="select">
 					    <option value="">--{{ trans('cruds.domain.choose') }}--</option>
 						@foreach ($domains as $domain)
 					    	<option value="{{ $domain->id }}"
@@ -48,8 +48,8 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.measure.fields.clause') }}</strong>
 		    	</div>
-				<div class="cell-5">
-					<input type="text" name="clause" 
+				<div class="cell-3">
+					<input type="text" name="clause" data-role="input"
 					value="{{ $errors->has('clause') ?  old('clause') : $measure->clause }}" 
 					size='60'>
 				</div>
@@ -59,8 +59,8 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.measure.fields.name') }}</strong>
 		    	</div>
-				<div class="cell-5">
-					<input type="text" name="name" 
+				<div class="cell-6">
+					<input type="text" name="name" data-role="input" 
 						value="{{ $errors->has('name') ?  old('name') : $measure->name }}" 
 						size='60'>
 				</div>
@@ -70,7 +70,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.measure.fields.attributes') }}</strong>
 		    	</div>
-				<div class="cell-5">
+				<div class="cell-6">
 					<select data-role="select" name="attributes[]" multiple>
 						@foreach($values as $value)
 					    <option {{ str_contains($measure->attributes,$value) ? "selected" : ""}}>{{$value}}</option>
@@ -83,40 +83,40 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
 		    	</div>
-				<div class="cell-5">
-					<textarea name="objective" rows="3" cols="80">{{ $errors->has('objective') ?  old('objective') : $measure->objective }}</textarea>
+				<div class="cell-6">
+					<textarea name="objective" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('objective') ?  old('objective') : $measure->objective }}</textarea>
 				</div>
 			</div>
 			<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.measure.fields.input') }}</strong>
 		    	</div>
-				<div class="cell-5">
-					<textarea name="input" rows="3" cols="80">{{ $errors->has('input') ?  old('input') : $measure->input }}</textarea>
+				<div class="cell-6">
+					<textarea name="input" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('input') ?  old('input') : $measure->input }}</textarea>
 				</div>
 			</div>
 			<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.measure.fields.model') }}</strong>
 		    	</div>
-				<div class="cell-5">
-					<textarea class="textarea" name="model" rows="3" cols="80">{{ $errors->has('model') ?  old('model') : $measure->model }}</textarea>
+				<div class="cell-6">
+					<textarea class="textarea" name="model" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('model') ?  old('model') : $measure->model }}</textarea>
 				</div>
 			</div>
 			<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.measure.fields.indicator') }}</strong>
 		    	</div>
-				<div class="cell-5">
-					<textarea name="indicator" rows="3" cols="80">{{ $errors->has('indicator') ?  old('indicator') : $measure->indicator }}</textarea>
+				<div class="cell-6">
+					<textarea name="indicator" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('indicator') ?  old('indicator') : $measure->indicator }}</textarea>
 				</div>
 			</div>
 			<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.measure.fields.action_plan') }}</strong>
 		    	</div>
-				<div class="cell-5">
-					<textarea name="action_plan" rows="3" cols="80">{{ $errors->has('action_plan') ?  old('action_plan') : $measure->action_plan }}</textarea>
+				<div class="cell-6">
+					<textarea name="action_plan" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('action_plan') ?  old('action_plan') : $measure->action_plan }}</textarea>
 				</div>
 			</div>
 			<div class="row">

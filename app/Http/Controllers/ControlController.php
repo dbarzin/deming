@@ -637,9 +637,11 @@ class ControlController extends Controller
         // create templateProcessor
         $templateProcessor = new TemplateProcessor($template_filename);
 
-        // make changes xxxx
+        // Replace names
         $templateProcessor->setValue('ref', $control->clause);
         $templateProcessor->setValue('name', $control->name);
+        $templateProcessor->setValue('attributes', $control->attributes);
+
         $templateProcessor->setValue(
             'objective',
             strtr(

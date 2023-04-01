@@ -25,7 +25,7 @@
 		    		<div class="cell-1">
 			    		<strong>{{ trans("cruds.control.fields.name") }}</strong>
 			    	</div>
-					<div class="cell-5">
+					<div class="cell-6">
 			    		{{ $control->clause }} 
 						<input type="text" name="name" value="{{ $control->name }}" size="64">
 					</div>
@@ -35,7 +35,7 @@
 		    		<div class="cell-1">
 			    		<strong>{{ trans('cruds.control.fields.attributes') }}</strong>
 			    	</div>
-					<div class="cell-5">
+					<div class="cell-6">
 						<select data-role="select" name="attributes[]" multiple>
 							@foreach($attributes as $attribute)
 								@if (strlen($attribute)>0)
@@ -50,8 +50,8 @@
 		    		<div class="cell-1">
 			    		<strong>{{ trans("cruds.control.fields.objective") }}</strong>
 			    	</div>
-					<div class="cell-5">
-						<textarea name="objective" rows="5" cols="80">{{ $errors->has('objective') ?  old('objective') : $control->objective }}</textarea>
+					<div class="cell-6">
+						<textarea name="objective" rows="5" data-role="textarea" data-clear-button="false">{{ $errors->has('objective') ?  old('objective') : $control->objective }}</textarea>
 					</div>
 				</div>
 
@@ -59,8 +59,8 @@
 		    		<div class="cell-1">
 			    		<strong>{{ trans("cruds.control.fields.input") }}</strong>
 			    	</div>
-					<div class="cell-5">
-						<textarea name="input" rows="5" cols="60">{{ $errors->has('input') ?  old('input') : $control->input }}</textarea>
+					<div class="cell-6">
+						<textarea name="input" rows="5" data-role="textarea" data-clear-button="false">{{ $errors->has('input') ?  old('input') : $control->input }}</textarea>
 					</div>
 				</div>
 
@@ -86,7 +86,7 @@
 			    		<strong>{{ trans("cruds.control.fields.observations") }}</strong>
 			    	</div>
 					<div class="cell-6">
-						<textarea name="observations" rows="5" cols="80">{{ $errors->has('observations') ?  old('observations') : $control->observations }}</textarea>
+						<textarea name="observations" rows="5" data-role="textarea" data-clear-button="false">{{ $errors->has('observations') ?  old('observations') : $control->observations }}</textarea>
 					</div>
 			    </div>
 
@@ -138,7 +138,7 @@
 			    		<strong>{{ trans("cruds.control.fields.action_plan") }}</strong>
 			    	</div>
 					<div class="cell-6">
-						<textarea name="action_plan" rows="5" cols="80">{{ $errors->has('action_plan') ?  old('action_plan') : $control->action_plan }}</textarea>
+						<textarea name="action_plan" rows="5" data-role="textarea" data-clear-button="false">{{ $errors->has('action_plan') ?  old('action_plan') : $control->action_plan }}</textarea>
 					</div>
 				</div>
 
@@ -147,7 +147,7 @@
 		    		<div class="cell-1">
 			    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
 			    	</div>
-					<div class="cell-5">
+					<div class="cell-3">
 						<select data-role="select" name="periodicity">
 						    <option value="1" {{ $control->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
 						    <option value="3" {{ $control->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
@@ -157,8 +157,11 @@
 					</div>
 				</div>
 
-				<div class="grid">
-			    	<div class="row-12">
+		    	<div class="row-12">
+		    		<div><br></div>
+		    	</div>
+
+		    	<div class="row-12">
 					<button type="submit" class="button success">
 			            <span class="mif-floppy-disk"></span>
 			            &nbsp;
@@ -177,7 +180,6 @@
 	    	</div>
 	    </div>
 	</form>
-</div>
 </div>
 
 <script>
