@@ -15,8 +15,7 @@ class Calendar
 
     public function __construct($date = null)
     {
-        // $this->date = strtotime("1/" . $date);
-        $this->date = DateTime::createFromFormat('d/m/Y', '01/'. $date)->getTimestamp();
+        $this->date = DateTime::createFromFormat('m/Y', $date)->getTimestamp();
         $this->active_year = $date !== null ? date('Y', $this->date) : date('Y');
         $this->active_month = $date !== null ? date('m', $this->date) : date('m');
         $this->active_day = $date !== null ? date('d', $this->date) : date('d');
@@ -35,7 +34,7 @@ class Calendar
         $html .= '<div class="row">';
         $html .= '<div class="col-4">';
         $html .= '<a href="?date=';
-        $html .= date('m/Y', strtotime('-1 month', $this->date)); //date('d/m/Y', strtotime('-1 month', $this->date));
+        $html .= date('m/Y', strtotime('-1 month', $this->date));
         $html .= '" ';
         $html .= 'style="font-size: 30px; text-decoration: none"';
         $html .= '>&lt;&lt;</a> &nbsp; ';
@@ -46,7 +45,7 @@ class Calendar
         for ($i = -12; $i < 12; $i++) {
             $html .= '<option value="';
             $date = strtotime($i.' month', $this->date);
-            $html .= date('m/Y', strtotime($i.' month', $this->date)); // $date->format("m/Y");
+            $html .= date('m/Y', strtotime($i.' month', $this->date));
             $html .= '"';
             if ($i==0)
                 $html .= ' selected';
