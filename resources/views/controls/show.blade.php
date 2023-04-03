@@ -179,6 +179,7 @@
 
    	<div class="row">
    		<div class="cell-5">
+			@if ($control->realisation_date==null)
 		    <form action="/control/make/{{ $control->id }}">
 	    		<button class="button success">
 					<span class="mif-assignment"></span>
@@ -187,7 +188,6 @@
 		    	</button>
 			</form>
 			&nbsp;
-			@if ($control->realisation_date==null)
 		    <form action="/control/plan/{{ $control->id }}">
 	    		<button class="button info">
 					<span class="mif-calendar"></span>
