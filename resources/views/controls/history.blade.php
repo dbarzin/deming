@@ -15,7 +15,10 @@
                 <div class="cell-6">
             <table class="table subcompact cell-border">
                 <?php
-                    $start_day=\Carbon\Carbon::parse(Request::get('date'))->floorMonth();
+                    if (Request::get('date')==null)
+                        $start_day=Carbon\Carbon::now()->floorMonth();
+                    else
+                        $start_day=Carbon\Carbon::createFromFormat("m/Y", Request::get('date'))->floorMonth();
                     $delta = today()->floorMonth()->diffInMonths($start_day);
                     if ($start_day<today())
                         $delta = -$delta;
@@ -258,7 +261,7 @@
             if (Request::get('date')!==null)
                 $calendar = new \App\Calendar(Request::get('date'));
             else
-                $calendar = new \App\Calendar(\Carbon\Carbon::now()->format('y-m-d'));
+                $calendar = new \App\Calendar(\Carbon\Carbon::now()->format('m/Y'));
             
             foreach ($controls as $control) {
                 if (($control->score==null) && ($control->plan_date!=null)) {
@@ -438,10 +441,15 @@
             // var label = barChartData.labels[firstPoint._index];
             // alert(firstPoint._index - 12);
             // alert(barChartData.labels[firstPoint._index]);
-            window.location.href="/control/history?month="+(firstPoint._index-12);
+            window.location.href="/control/history?date="+(barChartData.labels[firstPoint._index]);
         };
 
-    </script>
+    window.addEventListener('load', function(){
+        document.getElementById('date').addEventListener('change', function(){
+            window.location = '/control/history?date=' + this.value;
+        }, false);
+    }, false);
 
+    </script>
 
 @endsection
