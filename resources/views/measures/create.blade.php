@@ -141,12 +141,15 @@
 						&nbsp;
 						{{ trans("common.save") }}
 					</button>
+					</form>
 					&nbsp;
-					<button type="submit" onclick="this.form.method='GET';"class="button">
-						<span class="mif-cancel"></span> 
-						&nbsp;
-						{{ trans("common.cancel") }}
-					</button>
+					<form action="/measures">
+						<button type="submit" class="button">
+							<span class="mif-cancel"></span> 
+							&nbsp;
+							{{ trans("common.cancel") }}
+						</button>
+					</form>
 				</div>
 			</div>
 		</div>
