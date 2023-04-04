@@ -62,7 +62,8 @@ class MeasureController extends Controller
             ->get();
         foreach($attributes as $attribute) {
             foreach(explode(" ",$attribute->values) as $value) 
-                array_push($values,$value);
+                if (strlen($value)>0)
+                    array_push($values,$value);
             sort($values);
             }
 
