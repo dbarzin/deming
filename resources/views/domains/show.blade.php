@@ -30,7 +30,6 @@
     	
 		<div class="form-group">
 		    <form action="/domains/{{ $domain->id }}/edit">
-	           @csrf
 		    	<button class="button primary">
 		            <span class="mif-wrench"></span>
 		            &nbsp;
@@ -49,7 +48,6 @@
         	</form>
 			&nbsp;
 			<form action="/domains">
-	           @csrf
 		    	<button class="button">
 					<span class="mif-cancel"></span>
 					&nbsp;
