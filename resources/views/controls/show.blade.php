@@ -23,6 +23,7 @@
     		</div>
     	</div>
 
+		@if ($control->attributes!=null)
     	<div class="row">
     		<div class="cell-1">
 	    		<strong>{{ trans("cruds.control.fields.attributes") }}</strong>
@@ -31,6 +32,7 @@
 	    		{{ $control->attributes }}
     		</div>
     	</div>
+    	@endif
 
     	<div class="row">
     		<div class="cell-1">
@@ -91,15 +93,6 @@
 				</div>
 		    </div>
 		@endif
-
-    	<div class="row">
-    		<div class="cell-1">
-	    		<strong>{{ trans("cruds.control.fields.model") }}</strong>
-	    	</div>
-			<div class="cell-6">
-				<pre>{{ $control->model }}</pre>
-			</div>
-		</div>
 
 		@if ($documents->isNotEmpty())
 	    	<div class="row">

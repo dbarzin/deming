@@ -316,7 +316,7 @@
             var activePoints = window.myBar.getElementsAtEvent(evt);
             var firstPoint = activePoints[0];
             // var label = barChartData.labels[firstPoint._index];
-            window.location.href="/controls?attribute=none&status=0&period="+(firstPoint._index-12);
+            window.location.href="/controls?domain=0&attribute=none&status=0&period="+(firstPoint._index-12);
         }; 
 
 
