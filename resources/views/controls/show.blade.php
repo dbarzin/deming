@@ -16,19 +16,19 @@
 
     	<div class="row">
     		<div class="cell-1">
-	    		<strong>{{ trans("cruds.control.fields.attributes") }}</strong>
+	    		<strong>{{ trans("cruds.control.fields.objective") }}</strong>
 	    	</div>
     		<div class="cell-6">
-	    		{{ $control->attributes }}
+	    		<pre>{!! $control->objective !!}</pre>
     		</div>
     	</div>
 
     	<div class="row">
     		<div class="cell-1">
-	    		<strong>{{ trans("cruds.control.fields.objective") }}</strong>
+	    		<strong>{{ trans("cruds.control.fields.attributes") }}</strong>
 	    	</div>
     		<div class="cell-6">
-	    		<pre>{!! $control->objective !!}</pre>
+	    		{{ $control->attributes }}
     		</div>
     	</div>
 

@@ -68,6 +68,15 @@
 
 			<div class="row">
 	    		<div class="cell-1">
+		    		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
+		    	</div>
+				<div class="cell-6">
+					<textarea name="objective" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('objective') ?  old('objective') : $measure->objective }}</textarea>
+				</div>
+			</div>
+
+			<div class="row">
+	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.measure.fields.attributes') }}</strong>
 		    	</div>
 				<div class="cell-6">
@@ -79,14 +88,6 @@
 				</div>
 			</div>
 
-			<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
-		    	</div>
-				<div class="cell-6">
-					<textarea name="objective" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('objective') ?  old('objective') : $measure->objective }}</textarea>
-				</div>
-			</div>
 			<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.measure.fields.input') }}</strong>

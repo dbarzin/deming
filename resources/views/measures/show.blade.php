@@ -28,15 +28,6 @@
 	    </div>
 
     	<div class="row">
-    		<div class="cell-1">
-	    		<strong>{{ trans("cruds.measure.fields.attributes") }}</strong>
-	    	</div>
-    		<div class="cell-6">
-	    		{{ $measure->attributes }}
-    		</div>
-    	</div>
-
-    	<div class="row">
 			<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
 	    	</div>
@@ -44,6 +35,15 @@
 				{{ $measure->objective }}
 			</div>
 	    </div>
+
+    	<div class="row">
+    		<div class="cell-1">
+	    		<strong>{{ trans("cruds.measure.fields.attributes") }}</strong>
+	    	</div>
+    		<div class="cell-6">
+	    		{{ $measure->attributes }}
+    		</div>
+    	</div>
 
     	<div class="row">
 			<div class="cell-1">
