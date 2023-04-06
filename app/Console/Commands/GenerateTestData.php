@@ -33,8 +33,10 @@ class GenerateTestData extends Command
     {
         // remove all measurements
         $this->info('Remove all controls and documents');
-        DB::table('documents')->delete();
-        DB::table('controls')->delete();
+        DB::statement("SET foreign_key_checks=0");
+        DB::table('documents')->truncate();
+        DB::table('controls')->truncate();
+        DB::statement("SET foreign_key_checks=1");
 
         // get all attributes
         $attributes = array();
@@ -92,21 +94,49 @@ class GenerateTestData extends Command
             $control->objective = $measure->objective;
             $control->attributes = $measure->attributes;
             $control->model = $measure->model;
+            $control->input = $measure->input;
             $control->indicator = $measure->indicator;
             $control->action_plan = $measure->action_plan;
             $control->owner = $measure->owner;
             $control->periodicity = $measure->periodicity;
             $control->retention = $measure->retention;
+            /*
             $control->attributes =
                 $attributes[rand(0,count($attributes)-1)] . " ". 
                 $attributes[rand(0,count($attributes)-1)] . " " . 
                 $attributes[rand(0,count($attributes)-1)];
+            */
+            $control->attributes = $measure->attributes;
             // do it
             $control->plan_date = (new Carbon($curDate))->day(rand(0, 28))->toDateString();
             $control->realisation_date = (new Carbon($curDate))->addDay(rand(0, 28))->toDateString();
             $control->note = rand(0, 10);
             $control->score = rand(0, 100) < 90 ? 3 : (rand(0, 2) < 2 ? 2 : 1);
             $control->save();
+
+            // create a previous
+            $prev_control = new Control();
+            $prev_control->measure_id = $measure->id;
+            $prev_control->domain_id = $measure->domain_id;
+            $prev_control->name = $measure->name;
+            $prev_control->clause = $measure->clause;
+            $prev_control->objective = $measure->objective;
+            $prev_control->attributes = $measure->attributes;
+            $prev_control->input = $measure->input;
+            $prev_control->model = $measure->model;
+            $prev_control->indicator = $measure->indicator;
+            $prev_control->action_plan = $measure->action_plan;
+            $prev_control->owner = $measure->owner;
+            $prev_control->periodicity = $measure->periodicity;
+            $prev_control->retention = $measure->retention;
+            $prev_control->attributes = $measure->attributes;
+            // do it
+            $prev_control->plan_date = (new Carbon($curDate))->addMonth(-$measure->periodicity)->day(rand(0, 28))->toDateString();
+            $prev_control->realisation_date = (new Carbon($curDate))->addMonth(-$measure->periodicity)->addDay(rand(0, 28))->toDateString();
+            $prev_control->note = rand(0, 10);
+            $prev_control->score = rand(0, 100) < 90 ? 3 : (rand(0, 2) < 2 ? 2 : 1);
+            $prev_control->next_id = $control->id;
+            $prev_control->save();
 
             $this->info('Control ' . $control->id . ' plan_date=' . $control->plan_date);
 
@@ -118,6 +148,7 @@ class GenerateTestData extends Command
             $nextControl->clause = $measure->clause;
             $nextControl->objective = $measure->objective;
             $nextControl->attributes = $measure->attributes;
+            $nextControl->input = $measure->input;
             $nextControl->model = $measure->model;
             $nextControl->indicator = $measure->indicator;
             $nextControl->action_plan = $measure->action_plan;
