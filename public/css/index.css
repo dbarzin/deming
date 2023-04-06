@@ -504,12 +504,6 @@ body {
   }
 }
 
-.textarea,
-textarea {
- line-height:18px;
- padding : 10px;
-  }
-
 
 pre {
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
