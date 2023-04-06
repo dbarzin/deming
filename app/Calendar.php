@@ -47,8 +47,9 @@ class Calendar
             $date = strtotime($i.' month', $this->date);
             $html .= date('m/Y', strtotime($i.' month', $this->date));
             $html .= '"';
-            if ($i==0)
+            if ($i === 0) {
                 $html .= ' selected';
+            }
             $html .= '>';
             $html .= date('F Y', $date);
             $html .= '</option>';

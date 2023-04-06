@@ -33,22 +33,23 @@ class GenerateTestData extends Command
     {
         // remove all measurements
         $this->info('Remove all controls and documents');
-        DB::statement("SET foreign_key_checks=0");
+        DB::statement('SET foreign_key_checks=0');
         DB::table('documents')->truncate();
         DB::table('controls')->truncate();
-        DB::statement("SET foreign_key_checks=1");
+        DB::statement('SET foreign_key_checks=1');
 
         // get all attributes
-        $attributes = array();
+        $attributes = [];
         $attributesDB = DB::table('attributes')
             ->select('values')
             ->get();
-        foreach($attributesDB as $attribute) {
-            foreach(explode(" ",$attribute->values) as $value) {
-                if (strlen($value)>0)
-                    array_push($attributes,$value);
-               }
+        foreach ($attributesDB as $attribute) {
+            foreach (explode(' ', $attribute->values) as $value) {
+                if (strlen($value) > 0) {
+                    array_push($attributes, $value);
+                }
             }
+        }
         sort($attributes);
 
         // period in month
@@ -102,8 +103,8 @@ class GenerateTestData extends Command
             $control->retention = $measure->retention;
             /*
             $control->attributes =
-                $attributes[rand(0,count($attributes)-1)] . " ". 
-                $attributes[rand(0,count($attributes)-1)] . " " . 
+                $attributes[rand(0,count($attributes)-1)] . " ".
+                $attributes[rand(0,count($attributes)-1)] . " " .
                 $attributes[rand(0,count($attributes)-1)];
             */
             $control->attributes = $measure->attributes;

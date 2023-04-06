@@ -27,15 +27,17 @@ class ControlController extends Controller
         $domains = Domain::All();
 
         // get all attributes
-        $attributes = array();
+        $attributes = [];
         $allAttributes = DB::table('attributes')
             ->select('values')
             ->get();
-        foreach($allAttributes as $attribute) {
-            foreach(explode(" ",$attribute->values) as $value) 
-                if (strlen($value)>0)
-                    array_push($attributes,$value);
+        foreach ($allAttributes as $attribute) {
+            foreach (explode(' ', $attribute->values) as $value) {
+                if (strlen($value) > 0) {
+                    array_push($attributes, $value);
+                }
             }
+        }
         sort($attributes);
 
         // get domain base on his title
@@ -64,9 +66,9 @@ class ControlController extends Controller
         // Attribute filter
         $attribute = $request->get('attribute');
         if ($attribute !== null) {
-            if ($attribute === "none") {
+            if ($attribute === 'none') {
                 $request->session()->forget('attribute');
-                $attribute=null;
+                $attribute = null;
             } else {
                 $request->session()->put('attribute', $attribute);
             }
@@ -103,35 +105,39 @@ class ControlController extends Controller
         }
 
         // Build query
-        $controls = DB::table("controls as c1")
-                ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id');
+        $controls = DB::table('controls as c1')
+            ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id');
 
         // Filter on domain
-        if (($domain !== null) && ($domain !== 0)) 
-            $controls = $controls->where("c1.domain_id", "=", $domain);
+        if (($domain !== null) && ($domain !== 0)) {
+            $controls = $controls->where('c1.domain_id', '=', $domain);
+        }
 
         // Filter on period
-        if (($period !== null) && ($period !== 99)) 
-                $controls = $controls
-                    ->where("c1.plan_date",">=",(new Carbon('first day of this month'))->addMonth($period)->format("Y-m-d"))
-                    ->where("c1.plan_date","<",(new Carbon('first day of next month'))->addMonth($period)->format("Y-m-d"));
+        if (($period !== null) && ($period !== 99)) {
+            $controls = $controls
+                ->where('c1.plan_date', '>=', (new Carbon('first day of this month'))->addMonth($period)->format('Y-m-d'))
+                ->where('c1.plan_date', '<', (new Carbon('first day of next month'))->addMonth($period)->format('Y-m-d'));
+        }
 
         // Filter on status
-        if ($late !== null) 
+        if ($late !== null) {
             $controls = $controls
-                ->where("c1.plan_date", "<=", Carbon::today()->format("Y-m-d"))
-                ->whereNull("c1.realisation_date");
-        elseif ($status === '1') 
-            $controls = $controls->whereNotNull("c1.realisation_date");
-        elseif ($status == '2') 
-            $controls = $controls->whereNull("c1.realisation_date");                
-        
-        // Filter on attribute    
-        if ($attribute!=null) 
+                ->where('c1.plan_date', '<=', Carbon::today()->format('Y-m-d'))
+                ->whereNull('c1.realisation_date');
+        } elseif ($status === '1') {
+            $controls = $controls->whereNotNull('c1.realisation_date');
+        } elseif ($status === '2') {
+            $controls = $controls->whereNull('c1.realisation_date');
+        }
+
+        // Filter on attribute
+        if ($attribute !== null) {
             $controls = $controls->where('c1.attributes', 'LIKE', '%'.$attribute.'%');
-        
+        }
+
         // Query DB
-        $controls=$controls->select(
+        $controls = $controls->select(
             [
                 'c1.id',
                 'c1.measure_id',
@@ -142,9 +148,10 @@ class ControlController extends Controller
                 'c1.realisation_date',
                 'c1.score as score',
                 'c2.id as next_id',
-                'c2.plan_date as next_date'
-            ])
-            ->orderBy("c1.id")->get();
+                'c2.plan_date as next_date',
+            ]
+        )
+            ->orderBy('c1.id')->get();
 
         // return view
         return view('controls.index')
@@ -230,14 +237,15 @@ class ControlController extends Controller
         $documents = DB::table('documents')->where('control_id', $id)->get();
 
         // get all attributes
-        $values = array();
+        $values = [];
         $attributes = DB::table('attributes')
             ->select('values')
             ->get();
-        foreach($attributes as $attribute) {
-            foreach(explode(" ",$attribute->values) as $value) 
-                array_push($values,$value);
+        foreach ($attributes as $attribute) {
+            foreach (explode(' ', $attribute->values) as $value) {
+                array_push($values, $value);
             }
+        }
         sort($values);
 
         return view('controls.edit')
@@ -337,26 +345,27 @@ class ControlController extends Controller
         }
 
         // Build query
-        $controls = DB::table("controls as c1")
+        $controls = DB::table('controls as c1')
             ->select(
-            [
-                'c1.id as control_id',
-                'c1.name as name',
-                'c1.clause as clause',
-                'c1.measure_id as measure_id',
-                'c1.domain_id as domain_id',
-                'c1.plan_date as plan_date',
-                'c1.realisation_date as realisation_date', 
-                'c1.score as score',
-                'c2.plan_date as next_date',
-                'c2.id as next_id'
-            ])
+                [
+                    'c1.id as control_id',
+                    'c1.name as name',
+                    'c1.clause as clause',
+                    'c1.measure_id as measure_id',
+                    'c1.domain_id as domain_id',
+                    'c1.plan_date as plan_date',
+                    'c1.realisation_date as realisation_date',
+                    'c1.score as score',
+                    'c2.plan_date as next_date',
+                    'c2.id as next_id',
+                ]
+            )
             ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id')
-            ->where("c2.realisation_date","=",null)
-            ->where("c1.next_id","<>",null)
-            ->where("c1.realisation_date","<=",$cur_date)
-            ->groupBy("measure_id")
-            ->orderBy("clause")
+            ->where('c2.realisation_date', '=', null)
+            ->where('c1.next_id', '<>', null)
+            ->where('c1.realisation_date', '<=', $cur_date)
+            ->groupBy('measure_id')
+            ->orderBy('clause')
             ->get();
 
         // return
@@ -366,7 +375,8 @@ class ControlController extends Controller
             ->with('domains', $domains);
     }
 
-    public function attributes(Request $request) {
+    public function attributes(Request $request)
+    {
         // get all attributes
         $attributes = DB::table('attributes')
             ->orderBy('name')
@@ -398,8 +408,8 @@ class ControlController extends Controller
 
         // return
         return view('radar.attributes')
-            ->with("attributes", $attributes)
-            ->with("controls", $controls);
+            ->with('attributes', $attributes)
+            ->with('controls', $controls);
     }
 
     /**
@@ -577,7 +587,7 @@ class ControlController extends Controller
 
         $control->name = request('name');
         $control->objective = request('objective');
-        $control->attributes = request('attributes')!==null ? implode(" ", request('attributes')) : null;
+        $control->attributes = request('attributes') !== null ? implode(' ', request('attributes')) : null;
         $control->input = request('input');
         $control->plan_date = request('plan_date');
         $control->realisation_date = request('realisation_date');

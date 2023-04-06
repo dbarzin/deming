@@ -56,19 +56,21 @@ class MeasureController extends Controller
         $domains = Domain::All();
 
         // get all attributes
-        $values = array();
+        $values = [];
         $attributes = DB::table('attributes')
             ->select('values')
             ->get();
-        foreach($attributes as $attribute) {
-            foreach(explode(" ",$attribute->values) as $value) 
-                if (strlen($value)>0)
-                    array_push($values,$value);
-            sort($values);
+        foreach ($attributes as $attribute) {
+            foreach (explode(' ', $attribute->values) as $value) {
+                if (strlen($value) > 0) {
+                    array_push($values, $value);
+                }
             }
+            sort($values);
+        }
 
         // store it in the response
-        return view('measures.create',compact('values','domains'));
+        return view('measures.create', compact('values', 'domains'));
     }
 
     /**
@@ -94,7 +96,7 @@ class MeasureController extends Controller
         $measure->domain_id = request('domain_id');
         $measure->clause = request('clause');
         $measure->name = request('name');
-        $measure->attributes = request('attributes')!==null ? implode(" ", request('attributes')) : null;
+        $measure->attributes = request('attributes') !== null ? implode(' ', request('attributes')) : null;
         $measure->objective = request('objective');
         $measure->input = request('input');
         $measure->model = request('model');
@@ -136,19 +138,20 @@ class MeasureController extends Controller
         $domains = Domain::All();
 
         // get all attributes
-        $values = array();
+        $values = [];
         $attributes = DB::table('attributes')
             ->select('values')
             ->get();
-        foreach($attributes as $attribute) {
-            foreach(explode(" ",$attribute->values) as $value) {
-                if (strlen($value)>0)
-                    array_push($values,$value);
-               }
+        foreach ($attributes as $attribute) {
+            foreach (explode(' ', $attribute->values) as $value) {
+                if (strlen($value) > 0) {
+                    array_push($values, $value);
+                }
             }
+        }
         sort($values);
-        
-        return view('measures.edit', compact('measure', 'values','domains'))->with('domains', $domains);
+
+        return view('measures.edit', compact('measure', 'values', 'domains'))->with('domains', $domains);
     }
 
     /**
@@ -175,7 +178,7 @@ class MeasureController extends Controller
         $measure->domain_id = request('domain_id');
         $measure->name = request('name');
         $measure->clause = request('clause');
-        $measure->attributes = request('attributes')!==null ? implode(" ", request('attributes')) : null;
+        $measure->attributes = request('attributes') !== null ? implode(' ', request('attributes')) : null;
         $measure->objective = request('objective');
         $measure->input = request('input');
         $measure->model = request('model');
