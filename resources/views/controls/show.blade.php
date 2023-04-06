@@ -45,6 +45,15 @@
 
     	<div class="row">
     		<div class="cell-1">
+	    		<strong>{{ trans("cruds.control.fields.model") }}</strong>
+	    	</div>
+			<div class="cell-6">
+				<pre>{!! $control->model !!}</pre>
+			</div>
+		</div>
+
+    	<div class="row">
+    		<div class="cell-1">
 	    		<strong>{{ trans("cruds.control.fields.plan_date") }}</strong>
 	    	</div>
 			<div class="cell-1">
