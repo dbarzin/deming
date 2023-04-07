@@ -50,8 +50,8 @@
     		<div class="cell-1">
 	    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
 	    	</div>
-			<div class="cell">
-				<select name="periodicity" size="1" width='20'>
+			<div class="cell-2">
+				<select name="periodicity" data-role="select">
 				    <option value="1" {{ $control->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
 				    <option value="3" {{ $control->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
 				    <option value="6" {{ $control->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>
