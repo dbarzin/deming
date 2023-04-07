@@ -160,3 +160,24 @@ Enregistrez et fermez le fichier lorsque vous avez terminé. Ensuite, activez l'
 Enfin, redémarrez le service Apache pour activer les modifications :
 
     sudo systemctl restart apache2
+
+## Mise à jour
+
+Pour mettre à jour Deming, il faut aller dans le répoertoire de deming et récupérer les sources
+
+    cd /var/www/deming
+    git pull
+
+migrer la base de données
+
+    php artisan migrate
+
+Mettre à jour les librairies
+
+    composer update
+
+Vider les caches
+
+    php artisan config:clear &&  php artisan view:clear
+
+
