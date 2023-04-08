@@ -6,7 +6,7 @@ return [
     'measures' => 'Mesures',
     'controls' => 'Contrôles',
     'planning' => 'Planning',
-    'radar' => 'Radar',
+    'radar' => 'Analyse',
     'action_plan' => 'Plans d\'action',
     'configuration' => [
         'title' => 'Configuration',
