@@ -103,3 +103,21 @@ Lorsque vous cliquez sur :
 et vous revenez vers la [liste des contrôles](#list).
 
 
+### Fiche de contrôle <a name="sheet"></a>
+
+
+La fiche de contrôle est un document word généré par Deming su base des données du contrôle.
+
+Cette fiche permet de décrire les observations réalisés, d'ajouter des captures d'écran ou des tableaux et de __signer électroniquement__ les observations.
+
+
+   [<img src="/deming/images/report3.png" width="600">](/deming/images/report3.png)
+
+
+La fiche de contrôle peut être [adaptée](/deming/config/#models) afin de respecter le modèle de document de votre organisation.
+
+
+
+
+
+
