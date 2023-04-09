@@ -26,22 +26,21 @@ Lorsque vous cliquez sur :
 
 ### Afficher un contrôle <a name="show"></a>
 
-Cet écran contient le information d’un contrôle :
+Cet écran contient les informations d’un contrôle :
 
+* Le nom d’un contrôles ;
 
-* Le nom d’un contrôles
+* L’objectif du contrpole ;
 
-* L’objectif du contrpole
+* Les attributs ;
 
-* Les attributs
+* Les données ;
 
-* Les données
+* Le modèle ;
 
-* Le modèle 
+* La dates de planification, de réalisation et la date du contrôle suivant ;
 
-* La dates de planification, de réalisation et la date du contrôle suivant.
-
-* La note attributée au contrôle ;
+* La note attributée au contrôle ; et
 
 * Le score attributé au contrôle (vert, orange ou rouge).
 
