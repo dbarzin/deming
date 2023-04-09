@@ -50,7 +50,7 @@ Cet écran permet d’avoir une vue sur l’ensemble des documents utilisés com
 
 [<img src="/deming/images/documents.png" width="300">](/deming/images/documents.png)
 
-Le bouton « Vérifier » vérifier l’intégrité des documents conservés.
+Le bouton « Vérifier » permet de vérifier l’intégrité des documents conservés dans l'application.
 
 ### Modèles <a name="models"></a>
 
