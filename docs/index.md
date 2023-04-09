@@ -7,16 +7,16 @@ Deming est un outil Open Source conçu pour aider les RSSI à mettre en place et
 
 
 Deming offre des fonctionnalités telles que la [gestion des mesures de sécurité](/deming/measures/), 
-la [planification des contrôles](/deming/plan/), la création des fiches de contrôle, l’enregistrement des preuves, 
+la [planification des contrôles](/deming/plan/), la création des [fiches de contrôle](/deming/controls/#sheet), l’enregistrement des preuves, 
 le suivi [des plans d’actions](/deming/actions/) ainsi que des [tableaux de bord](/deming/dashboards/) et 
-des [rapports de pilotage du SMSI](/deming/config/#report) pour aider les RSSI à suivre le maintient de leur programme de sécurité de l'information.
+des [rapports de pilotage du SMSI](/deming/config/#report) pour aider les RSSI à suivre le maintient des mesures de sécurité de l'information.
 
 
 L'application est conçue pour être compatible avec la norme ISO 27001:2022, en suivant les exigences spécifiques de la norme pour la planification, la mise en œuvre, la vérification et l'amélioration continue du système de management de la sécurité de l'information.
 Elle est également conçue pour aider les RSSI à préparer leur organisation aux audits de certification ISO 27001 en fournissant des rapports détaillés sur les contrôles de sécurité et la mesure de leur efficacité.
 
 
-Cette application est publiée sous une licence libre GPL, permettant aux utilisateurs de l'utiliser, de la modifier et de la distribuer librement. Cette approche open source permet aux utilisateurs de contribuer au développement de l'application en soumettant des demandes de changement, des rapports de bogues ou des fonctionnalités supplémentaires.
+Cette application est publiée sous la licence [GPL](https://www.gnu.org/licenses/licenses.fr.html), permettant aux utilisateurs de l'utiliser, de la modifier et de la distribuer librement. Cette approche open source permet aux utilisateurs de contribuer au développement de l'application en soumettant des demandes de changement, des rapports de bogues ou des fonctionnalités supplémentaires.
 
 
 Cette application de gestion de la sécurité de l'information est un outil puissant et personnalisable pour les RSSI qui cherchent à mettre en place et à maintenir un système de management de la sécurité de l'information conforme à la norme ISO 27001. 
