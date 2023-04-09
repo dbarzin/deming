@@ -2,7 +2,9 @@
 
 ### Page principale
 
-La page principale de l’application est composées de :
+La page principale de l’application permet d'avoir une vue d'enseble du SMSI et des contrôles à réaliser.
+
+Elle est composées de :
 
 * sur la gauche, le menu principal de l’application ;
     * en haut des indicateurs sur :
