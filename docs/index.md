@@ -8,7 +8,7 @@ Deming est un outil Open Source conçu pour aider les RSSI à mettre en place et
 
 Deming offre des fonctionnalités telles que la [gestion des mesures de sécurité](/deming/measures/), 
 la [planification des contrôles](/deming/plan/), la création des [fiches de contrôle](/deming/controls/#sheet), l’enregistrement des preuves, 
-le suivi [des plans d’actions](/deming/actions/) ainsi que des [tableaux de bord](/deming/dashboards/) et 
+le suivi [des plans d’action](/deming/actions/) ainsi que des [tableaux de bord](/deming/dashboards/) et 
 des [rapports de pilotage du SMSI](/deming/config/#report) pour aider les RSSI à suivre le maintient des mesures de sécurité de l'information.
 
 

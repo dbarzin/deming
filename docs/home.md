@@ -25,7 +25,7 @@ La partie inférieur de la page principale contient la liste des contôles panni
 ### Recherche
 
 Un outil de recherche permet de rechecher la présent d’un mot dans le nom, les objectifs des mesures de scurité ainsi 
-que dans les objectifs, observations des contrôles et dans leurs plans d’actions.
+que dans les objectifs, observations des contrôles et dans leurs plans d’action.
 
    [<img src="/deming/images/search.png" width="600">](/deming/images/search.png)
 
