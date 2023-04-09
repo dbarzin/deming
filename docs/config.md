@@ -46,7 +46,7 @@ Voici le rapport de pilotage du SMSI :
 
 ### Documents <a name="documents"></a>
 
-Cet écran permet d’avoir une vue sur l’ensemble des documents utilisés comme preuve lors de la réalisation des contrôles de sécurté.
+Cet écran permet d’avoir une vue sur l’ensemble des documents utilisés comme preuve lors de la réalisation des contrôles de sécurité.
 
 [<img src="/deming/images/documents.png" width="300">](/deming/images/documents.png)
 
