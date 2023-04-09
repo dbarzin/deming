@@ -124,8 +124,8 @@ return [
             'hash' => 'Hash',
         ],
         'model' => [
-            'control' => 'Modèle de Contrôle',
-            'report' => 'Rapport de pilotage',
+            'control' => 'Modèle de fiche de contrôle',
+            'report' => 'Modèle du rapport de pilotage',
 
         ],
         'count' => 'Nombre de documents',

@@ -69,7 +69,7 @@ return [
              'clause' => 'Clause',
              'input' => 'Input'
          ],
-         'checklist' => 'Checklist',
+         'checklist' => 'Control sheet',
          'list' => 'List of controls',
          'edit' => 'Edit security check',
          'history' => 'Schedule',
@@ -124,8 +124,8 @@ return [
              'hash' => 'Hash',
          ],
          'model' => [
-             'control' => 'Control model',
-             'report' => 'Management meeting report model',
+            'control' => 'Control sheet template',
+            'report' => 'Steering report template',
          ],
          'count' => 'Number of documents',
          'total_size' => 'Total Size',
