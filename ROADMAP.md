@@ -12,8 +12,8 @@ This document contains the evolutions planned for Deming in 2023.
 
 * [x] Database search tool
 * [x] ISO 27002:2022 - update metrics based on the new version of ISO 27002
-* [x] Properties (tags) - add tags on security measures
+* [x] Attributes (tags) - add attributes on security measures
 * [x] Improve test data generation
+* [x] User documentation
 * [ ] Manage non-conformities
 * [ ] Multisites - introduce controls by site
-
