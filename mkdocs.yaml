@@ -1,0 +1,14 @@
+site_name: Deming
+site_url: https://dbarzin.githubs.io/deming/
+nav:
+    - Introduction: index.md
+    - Page principale : home.md
+    - Mesures : measures.md
+    - Contrôles : controls.md
+    - Planning : plan.md
+    - Tableaux de bords : dashboards.md
+    - Plans d'action : actions.md
+    - Configuration : config.md
+    - Références: references.md
+
+theme: readthedocs
