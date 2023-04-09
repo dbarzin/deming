@@ -92,10 +92,18 @@ Deming permet de répondre à ces exigences et de conserver les informations doc
 [<img src="public/screenshots/pilotage1.png" width="360" height="270">](public/screenshots/pilotage1.png)
 [<img src="public/screenshots/pilotage2.png" width="360" height="270">](public/screenshots/pilotage2.png)
 
+
+## Documentation
+
+L'application dispose d'une [documentation utilisateur](https://dbarzin.github.io/deming/).
+
+
 ## Technologies
+
 - PHP, Javascript, Laravel
 - Base de données supportées : MySQL, Postgres, SQLite, SQL Server
 - ChartJS
+
 
 ## Installation
 

@@ -29,6 +29,4 @@ que dans les objectifs, observations des contrôles et dans leurs plans d’acti
 
    [<img src="/deming/images/search.png" width="600">](/deming/images/search.png)
 
-### Menus
-
 
