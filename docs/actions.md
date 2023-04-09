@@ -29,5 +29,5 @@ Lorsque vous cliquez sur :
 
 * « Sauver », vous sauver le plan d’action et revenez à la [liste des plans d’action](#list)
 
-* « Annuler » vous revenez à a [liste des plans d’action](#list)
+* « Annuler » vous revenez à la [liste des plans d’action](#list)
 

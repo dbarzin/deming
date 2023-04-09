@@ -91,6 +91,7 @@ Cet écran contient :
 * La date du prochaine contrôle
 
    [<img src="/deming/images/c3.png" width="600">](/deming/images/c3.png)
+   [<img src="/deming/images/c4.png" width="600">](/deming/images/c4.png)
 
 Lorsque vous cliquez sur :
 
@@ -105,7 +106,7 @@ et vous revenez vers la [liste des contrôles](#list).
 ### Fiche de contrôle <a name="sheet"></a>
 
 
-La fiche de contrôle est un document word généré par Deming su base des données du contrôle.
+La fiche de contrôle est un document word généré par l'application sur base des données du contrôle.
 
 Cette fiche permet de décrire les observations réalisés, d'ajouter des captures d'écran ou des tableaux et de __signer électroniquement__ les observations.
 

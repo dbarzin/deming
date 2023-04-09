@@ -24,11 +24,14 @@ La partie inférieur de la page principale contient la liste des contôles panni
 
    [<img src="/deming/images/home2.png" width="600">](/deming/images/home2.png)
 
+Les dates des contrôles en retard sont affichés en rouge.
+
 ### Recherche
 
-Un outil de recherche permet de rechecher la présent d’un mot dans le nom, les objectifs des mesures de scurité ainsi 
-que dans les objectifs, observations des contrôles et dans leurs plans d’action.
+Un outil de recherche permet de rechecher la présence d’un mot dans le nom, les objectifs, les observations des contrôles 
+et dans leurs plans d’action.
 
    [<img src="/deming/images/search.png" width="600">](/deming/images/search.png)
+
 
 
