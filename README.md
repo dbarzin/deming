@@ -99,6 +99,10 @@ Deming helps meet these requirements and retain appropriate documented informati
 - Supported databases: MySQL, Postgres, SQLite, SQL Server
 - ChartJS
 
+## Documentation
+
+The application has a [user documentation](https://dbarzin.github.io/deming/index/).
+
 ## Facility
 
 [Installation](https://github.com/dbarzin/deming/blob/main/INSTALL.md) procedure of the application.

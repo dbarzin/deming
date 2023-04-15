@@ -95,7 +95,7 @@ Deming permet de répondre à ces exigences et de conserver les informations doc
 
 ## Documentation
 
-L'application dispose d'une [documentation utilisateur](https://dbarzin.github.io/deming/).
+L'application dispose d'une [documentation utilisateur](https://dbarzin.github.io/deming/index.fr/).
 
 
 ## Technologies
@@ -109,9 +109,11 @@ L'application dispose d'une [documentation utilisateur](https://dbarzin.github.i
 
 Procédure d'[installation](https://github.com/dbarzin/deming/blob/main/INSTALL.md) de l'application.
 
+
 ## Feuille de route
 
 Une [feuille de route](https://github.com/dbarzin/deming/blob/main/ROADMAP.md) reprend les évolutions prévues de l'application.
+
 
 ## License
 
