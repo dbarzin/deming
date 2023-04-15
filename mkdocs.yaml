@@ -9,7 +9,7 @@ repo_url: https://github.com/dbarzin/deming
 edit_uri: edit/main/docs
 
 # Copyright
-copyright: Copyright &copy; 2016-2023 <a href="http://www.isardvdi.com">IsardVDI</a>.
+copyright: Copyright <a href="https://www.gnu.org/licenses/licenses.en.html">GPL</a>.
 
 theme: 
   name: readthedocs
