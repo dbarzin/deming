@@ -130,7 +130,7 @@ return [
          'count' => 'Number of documents',
          'total_size' => 'Total Size',
      ],
-    'export' => [
+    'exports' => [
          'index' => 'Export data',
          'start' => 'Start',
          'end' => 'End',

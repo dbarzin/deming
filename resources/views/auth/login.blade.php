@@ -5,11 +5,10 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <!-- Metro 4 -->
-    <link rel="stylesheet" href="vendors/metro4/css/metro-all.min.css">
-    <link rel="stylesheet" href="/css/index.css">
-
     <title>Deming :: Log in</title>
+
+    <link rel="stylesheet" href="/css/all.css" />
+    <script src="/js/all.js"></script>
 </head>
 
 <body class="d-flex flex-justify-center flex-align-center bg-default">
@@ -47,8 +46,6 @@
             </div>
         </form>
 
-    <script src="vendors/jquery/jquery-3.4.1.min.js"></script>
-    <script src="vendors/metro4/js/metro.min.js"></script>
     <script>
         function invalidForm(){
             var form  = $(this);

@@ -4,23 +4,18 @@
 <div class="p-3">
     <div data-role="panel" data-title-caption="Tableau de bord" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
-<!---------------------------------------->
-
-<div class="row">
-    <div class="cell-md-7">
-        <div class="panel mt-2">
-            <div data-role="panel" data-title-caption="Etat des contrôles au {{ date('d/m/Y')}}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
-                <div class="p-7">
-                    <canvas id="canvas-status" class="chartjs-render-monitor"></canvas>
+    <div class="row">
+        <div class="cell-md-7">
+            <div class="panel mt-2">
+                <div data-role="panel" data-title-caption="Etat des contrôles au {{ date('d/m/Y')}}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+                    <div class="p-7">
+                        <canvas id="canvas-status" class="chartjs-render-monitor"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-</div>
-
-<script src="/vendors/chartjs/Chart.bundle.min.js"></script>
-<script src="/js/utils.js"></script>
 
 <script>
     var color = Chart.helpers.color;

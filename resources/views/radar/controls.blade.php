@@ -80,10 +80,6 @@
 </div>
 </div>
 
-<script src="/vendors/chartjs/Chart.bundle.min.js"></script>
-
-<script src="/js/utils.js"></script>
-
     <script>
 
     var color = Chart.helpers.color;
