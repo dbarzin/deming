@@ -1,14 +1,68 @@
-site_name: Deming
-site_url: https://dbarzin.githubs.io/deming/
-nav:
-    - Introduction: index.md
-    - Page principale : home.md
-    - Mesures : measures.md
-    - Contrôles : controls.md
-    - Planning : plan.md
-    - Tableaux de bords : dashboards.md
-    - Plans d'action : actions.md
-    - Configuration : config.md
-    - Références: references.md
+docs_dir: docs
 
-theme: readthedocs
+# Project information
+site_name: Deming
+site_description: ISMS made easy !
+
+# Repository
+repo_url: https://github.com/dbarzin/deming
+edit_uri: edit/main/docs
+
+# Copyright
+copyright: Copyright &copy; 2016-2023 <a href="http://www.isardvdi.com">IsardVDI</a>.
+
+theme: 
+  name: readthedocs
+
+plugins:
+  - search
+  - i18n:
+      languages:
+        fr: "Français"
+        en: "English"
+      default_language: 'en'
+      no_translation:
+        fr: "Cette page n'a pas été traduite"
+        en: "This page isn't translated to English."
+      translate_nav:
+        fr:
+          section title: "Section"
+          subsection: "Souse-section"
+          page title: "Titre"
+        en:
+          section title: "Section"
+          subsection: "Subsection"
+          page title: "Page with title translated"
+
+nav:
+- Introduction: index.md
+- Introduction: index.fr.md
+- Homepage : home.md
+- Page principale : home.fr.md
+- Measures : measures.md
+- Mesures : measures.fr.md
+- Controls : controls.md
+- Contrôles : controls.fr.md
+- Planning : plan.md
+- Planning : plan.fr.md
+- Dashboards : dashboards.md
+- Tableaux de bords : dashboards.fr.md
+- Action plans : actions.md
+- Plans d'action : actions.fr.md
+- Configuration : config.md
+- Configuration : config.fr.md
+- References: references.md
+- Références: references.fr.md
+
+extra:
+  # Default mkdocs-material alternate links for untranslated pages
+  # https://squidfunk.github.io/mkdocs-material/setup/changing-the-language/#site-language-selector
+  alternate:
+    - name: English
+      link: ""
+      lang: en
+
+    - name: Français
+      link: index.fr/
+      lang: fr
+

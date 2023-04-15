@@ -1,14 +1,13 @@
-## Planning
+## Schedule
 
-L’écran de planning permet d’avoir une vue sur les contrôles réalisé et à réaliser.
+The schedule screen provides a view of the controls carried out and to be carried out.
 
-   [<img src="/deming/images/cal.png" width="600">](/deming/images/cal.png)
-
-
-La partie de gauche de l’écran contient les contrôles passés et à venir. En cliquant sur une colonne, 
-vous êtes renvoyé vers la [liste des contrôle](/deming/controls/#list) planifiés du mois correspondant.
+[<img src="/images/cal.png" width="600">](/images/cal.png)
 
 
-La partie de droite contient les contrôles planifiés ce mois. Il est possible de changer le mois en cours et de sélectionner 
-un [contrôle](/deming/controls/#show) dans le calendrier.
+The left part of the screen contains past and future checks. By clicking on a column,
+you are returned to the [list of controls](/controls/#list) planned for the corresponding month.
 
+
+The right side contains the checks scheduled for this month. It is possible to change the current month and select
+a [control](/controls/#show) in the calendar.

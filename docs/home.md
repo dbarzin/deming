@@ -1,37 +1,34 @@
 ## Application
 
-### Page principale
+### Main page
 
-La page principale de l’application permet d'avoir une vue d'enseble du SMSI et des contrôles à réaliser.
+The main page of the application provides an overview of the ISMS and the checks to be carried out.
 
-Elle est composées de :
+It is composed of:
 
-* sur la gauche, le menu principal de l’application ;
-    * en haut des indicateurs sur :
-        * le nombre de domaines de sécurité
-        * de mesures de sécurité sélectionnées
-        * le nombre de contrôles réalisés
-        * le nombre de plans d’action 
+* on the left, the application's main menu;
+     * at the top of the indicators on:
+         * the number of security domains
+         * selected security measures
+         * the number of checks carried out
+         * the number of action plans
 
-* au milieu :
-    * Le planning des contrôle qui montre les contrôle à réaliser avec leur résultat (vert, orange ou rouge) et les contrôle plannifiés (en gris)
-    * Un état global des contrôles
-
-
-   [<img src="/deming/images/home1.png" width="600">](/deming/images/home1.png)
-
-La partie inférieur de la page principale contient la liste des contôles pannifiés dans les 30 prochains jours :
-
-   [<img src="/deming/images/home2.png" width="600">](/deming/images/home2.png)
-
-Les dates des contrôles en retard sont affichés en rouge.
-
-### Recherche
-
-Un outil de recherche permet de rechecher la présence d’un mot dans le nom, les objectifs, les observations des contrôles 
-et dans leurs plans d’action.
-
-   [<img src="/deming/images/search.png" width="600">](/deming/images/search.png)
+* between :
+     * The inspection schedule which shows the inspections to be carried out with their result (green, orange or red) and the planned inspections (in grey)
+     * An overall state of controls
 
 
+[<img src="/images/home1.png" width="600">](/images/home1.png)
 
+The lower part of the main page contains the list of controls scheduled for the next 30 days:
+
+[<img src="/images/home2.png" width="600">](/images/home2.png)
+
+Overdue check dates are displayed in red.
+
+### Research
+
+A search tool allows you to search for the presence of a word in the name, the objectives, the observations of the controls
+and in their action plans.
+
+[<img src="/images/search.png" width="600">](/images/search.png)

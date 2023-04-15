@@ -1,33 +1,32 @@
-## Plans d'action
+## Action Plans
 
-Chaque fois qu’un contrôle est en échec (orange ou rouge), un plan d’action doit être mis en place et suivi afin de remédier à la situation.
+Each time a control fails (orange or red), an action plan must be put in place and followed in order to remedy the situation.
 
-### Liste des plans d’action <a name="list"></a>
+### List of Action Plans <a name="list"></a>
 
-Cet écran permet de suivre les plans d’action :
+This screen allows you to follow the action plans:
 
-[<img src="/deming/images/a1.png" width="600">](/deming/images/a1.png)
-
-
-En cliquant sur :
-
-* le titre du contrôle associé, vous arrivez vers la page de [modification du plan d’action](#edit) correspondant.
-
-* La date de planification, vous arrivez sur le [contrôle](/deming/controls/#show) ayant généré ce plan d’action
-
-* La date de prochaine revue, vous arrivez vers le [contrôle](/deming/controls/#show) suivant
+[<img src="/images/a1.png" width="600">](/images/a1.png)
 
 
-### Modifier un plan d’action <a name="edit"></a>
+Clicking on :
 
-Cet écran permet de modifier un plan d’action et de planifier la prochaine évaluation du contrôle.
+* the title of the associated control, you arrive at the corresponding [modification of the action plan](#edit) page.
 
-[<img src="/deming/images/a2.png" width="600">](/deming/images/a2.png)
+* On the planning date, you arrive at the [control](/controls/#show) that generated this action plan
+
+* The next review date, you arrive at the next [control](/controls/#show)
 
 
-Lorsque vous cliquez sur :
+### Edit an action plan <a name="edit"></a>
 
-* « Sauver », vous sauver le plan d’action et revenez à la [liste des plans d’action](#list)
+This screen allows you to edit an action plan and schedule the next control assessment.
 
-* « Annuler » vous revenez à la [liste des plans d’action](#list)
+[<img src="/images/a2.png" width="600">](/images/a2.png)
 
+
+When you click:
+
+* "Save", you save the action plan and return to the [list of action plans](#list)
+
+* "Cancel" you return to the [list of action plans](#list)

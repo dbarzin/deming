@@ -1,74 +1,74 @@
 ## Introduction
 
 
-### Qu’est-ce que Deming ?
+### What is Deming?
 
-Deming est un outil Open Source conçu pour aider les RSSI à mettre en place et à maintenir leur système de management de la sécurité de l'information. Grâce à cette application, les RSSI peuvent facilement planifier et suivre la mise en œuvre des contrôles de sécurité et le cycle d'amélioration continue requis par la norme ISO 27001. L'application est conçue pour être facile à utiliser et à personnaliser, avec une interface utilisateur intuitive.
-
-
-Deming offre des fonctionnalités telles que la [gestion des mesures de sécurité](/deming/measures/), 
-la [planification des contrôles](/deming/plan/), la création des [fiches de contrôle](/deming/controls/#sheet), l’enregistrement des preuves, 
-le suivi [des plans d’action](/deming/actions/) ainsi que des [tableaux de bord](/deming/dashboards/) et 
-des [rapports de pilotage du SMSI](/deming/config/#report) pour aider les RSSI à suivre le maintient des mesures de sécurité de l'information.
+Deming is an Open Source tool designed to help CISOs set up and maintain their information security management system. Using this app, CISOs can easily plan and track the implementation of security controls and the continuous improvement cycle required by ISO 27001. The app is designed to be easy to use and customize, with a intuitive user interface.
 
 
-L'application est conçue pour être compatible avec la norme ISO 27001:2022, en suivant les exigences spécifiques de la norme pour la planification, la mise en œuvre, la vérification et l'amélioration continue du système de management de la sécurité de l'information.
-Elle est également conçue pour aider les RSSI à préparer leur organisation aux audits de certification ISO 27001 en fournissant des rapports détaillés sur les contrôles de sécurité et la mesure de leur efficacité.
+Deming offers features such as [security measures management](/measures/),
+the [planning of controls](/plan/), the creation of [control sheets](/controls/#sheet), the recording of evidence,
+monitoring [action plans](/actions/) as well as [dashboards](/dashboards/) and
+[ISMS management reports](/config/#report) to help CISOs monitor the maintenance of information security measures.
 
 
-Cette application est publiée sous la licence [GPL](https://www.gnu.org/licenses/licenses.fr.html), permettant aux utilisateurs de l'utiliser, de la modifier et de la distribuer librement. Cette approche open source permet aux utilisateurs de contribuer au développement de l'application en soumettant des demandes de changement, des rapports de bogues ou des fonctionnalités supplémentaires.
+The application is designed to be compatible with the ISO 27001:2022 standard, following the specific requirements of the standard for the planning, implementation, verification and continuous improvement of the security management system of the information.
+It is also designed to help CISOs prepare their organization for ISO 27001 certification audits by providing detailed reports on security controls and measuring their effectiveness.
 
 
-Cette application de gestion de la sécurité de l'information est un outil puissant et personnalisable pour les RSSI qui cherchent à mettre en place et à maintenir un système de management de la sécurité de l'information conforme à la norme ISO 27001. 
+This application is released under the [GPL](https://www.gnu.org/licenses/licenses.en.html) license, allowing users to use, modify and distribute it freely. This open source approach allows users to contribute to the development of the application by submitting change requests, bug reports or additional features.
 
 
-Avec son interface utilisateur intuitive, la possibilité de définir de nouveaux contrôles et sa compatibilité ISO 27001:2022, elle offre aux RSSI une grande flexibilité pour adapter l'application à leurs besoins spécifiques.
+This information security management application is a powerful and customizable tool for CISOs looking to implement and maintain an ISO 27001 compliant information security management system.
 
 
-### Pourquoi contrôler ?
+With its intuitive user interface, the ability to define new controls and its ISO 27001:2022 compatibility, it offers CISOs great flexibility to adapt the application to their specific needs.
 
-Pour gérer la sécurité du système d’information il faut mettre en place un ensemble de mesures de sécurité et contrôler régulièrement que ces mesures sont effectives et efficaces. Ces contrôles réguliers permettent de garantir que les mesures de sécurité mises en place atteignent leurs objectifs de sécurité.
 
-Les exigences de mesure de l’efficacité sont :
+### Why control?
 
-a) d’évaluer l'efficacité des contrôles;
+To manage the security of the information system, it is necessary to put in place a set of security measures and regularly check that these measures are effective and efficient. These regular checks make it possible to guarantee that the security measures put in place achieve their security objectives.
 
-b) d’évaluer l'efficacité du système de gestion de l'information;
+The effectiveness measurement requirements are:
 
-c) de vérifier dans quelle mesure les exigences de sécurité identifiées ont été respectées;
+(a) assess the effectiveness of controls;
 
-d) de faciliter l’amélioration des performances de la sécurité de l’information par rapport aux objectifs;
+b) assess the effectiveness of the information management system;
 
-e) de fournir des données pour la revue de la direction afin de faciliter la prise de décisions liées au SMSI;
+c) to verify the extent to which the identified security requirements have been met;
 
-f) de justifier les besoins d'amélioration du ISMS.
+d) facilitate the improvement of information security performance against objectives;
 
-### Evaluation des performances
+e) provide input for management review to facilitate ISMS-related decision-making;
 
-La norme ISO 27001 au chapitre 9.1, impose d’évaluer les performances de sécurité de l’information, ainsi que l’efficacité du système de management de la sécurité de l’information.
+f) to justify the needs for improvement of the ISMS.
 
-Pour évaluer ces performances, il faut déterminer :
+### Evaluation of performances
 
-a) ce qu’il est nécessaire de surveiller et de mesurer, y compris les processus et les mesures de sécurité de l’information;
+The ISO 27001 standard in chapter 9.1 requires the evaluation of information security performance, as well as the effectiveness of the information security management system.
 
-b) les méthodes de surveillance, de mesurage, d’analyse et d’évaluation, selon le cas, pour assurer la validité des résultats;
+To assess this performance, it is necessary to determine:
 
-c) quand la surveillance et les mesures doivent être effectuées;
+a) what needs to be monitored and measured, including information security processes and measures;
 
-d) qui doit effectuer la surveillance et les mesures;
+(b) the monitoring, measurement, analysis and evaluation methods, as applicable, to ensure the validity of the results;
 
-e) quand les résultats de la surveillance et des mesures doivent être analysés et évalués; et
+c) when monitoring and measurements should be carried out;
 
-f) qui doit analyser et évaluer ces résultats.
+(d) who is to carry out the monitoring and measurements;
 
-Deming permet de répondre à ces exigences et de conserver les informations documentées appropriées comme preuves des résultats de la surveillance et des mesures.
+e) when the results of monitoring and measurements should be analyzed and evaluated; And
+
+(f) who should analyze and evaluate these results.
+
+Deming helps meet these requirements and retain appropriate documented information as evidence of monitoring and measurement results.
 
 ### Definitions
 
-**Mesures de sécurité** (en anglais « Control ») : ensemble de dispositions à mettre en œuvre. Ce sont les mesures à prendre pour mettre en œuvre la politique de sécurité.
+**Security measures** (in English “Control”): set of provisions to be implemented. These are the measures to be taken to implement the security policy.
 
-**Contrôle** ou Mesurage (en anglais « Measurement ») : processus d’obtention relative à l’efficacité d’un SMSI et de mesures de sécurité, à l’aide d’une méthode d’évaluation, d’une fonction d’évaluation, d’un modèle analytique, et de critère de décisions [ISO/IEC 27004].
+** Control ** or Measurement (in English “Measurement”): process of obtaining relative to the effectiveness of an ISMS and security measures, using an evaluation method, a function assessment, analytical model, and decision criteria [ISO/IEC 27004].
 
-**Indicateur** : résultat de l’application d’un modèle analytique à une ou plusieurs variables en relation avec les critères de décision ou d’un besoin d’information [ISO/IEC 27004].
+**Indicator**: result of the application of an analytical model to one or more variables in relation to the decision criteria or an information need [ISO/IEC 27004].
 
-**Attribut** : propriété ou caractéristique d’un objet qui peut être distingué quantitativement ou qualitativement par des moyens humains ou automatiques [ISO/IEC 15939:2007].
+**Attribute**: property or characteristic of an object that can be quantitatively or qualitatively distinguished by human or automatic means [ISO/IEC 15939:2007].

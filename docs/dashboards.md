@@ -1,25 +1,24 @@
-## Tableaux de bords
+## Dashboards
 
-Il existe trois tableaux de bord :
+There are three dashboards:
 
-* les contrôles par domaines
+* controls by domains
 
-* les contrôle par domaine et par mesure
+* controls by domain and by measure
 
-* les contrôles par attribut
-
-
-### Les contrôles par domaines
-
-[<img src="/deming/images/r1.png" width="300">](/deming/images/r1.png)
+* controls by attribute
 
 
-### Les contrôle par domaine et par mesure
+### Controls by domains
 
-[<img src="/deming/images/r2.png" width="600">](/deming/images/r2.png)
+[<img src="/images/r1.png" width="300">](/images/r1.png)
 
 
-### Les contrôles par attribut
+### Controls by domain and by measure
 
-[<img src="/deming/images/r3.png" width="600">](/deming/images/r3.png)
+[<img src="/images/r2.png" width="600">](/images/r2.png)
 
+
+### Attribute checks
+
+[<img src="/images/r3.png" width="600">](/images/r3.png)
