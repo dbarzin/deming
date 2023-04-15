@@ -8,16 +8,10 @@
     <title>Deming - ISMS Controls Made Easy</title>
 
     <link rel="stylesheet" href="/css/all.css" />
-
     <script src="/js/all.js"></script>
-
-    <script>
-        window.on_page_functions = [];
-    </script>
 </head>
+
 <body class="m4-cloak h-vh-100">
-
-
 <div data-role="navview" data-toggle="#paneToggle" data-expand="xl" data-compact="lg" data-active-state="true">
     <div class="navview-pane">
         <div class="d-flex flex-align-center">
@@ -201,21 +195,6 @@
 </div>
 </div>
 </div>
-
-<!-- jQuery first, then Metro UI JS 
-<script src="/vendors/jquery/jquery-3.6.1.min.js"></script>
-<script src="/vendors/chartjs/Chart.bundle.min.js"></script>
-<script src="/vendors/qrcode/qrcode.min.js"></script>
-<script src="/vendors/jsbarcode/JsBarcode.all.min.js"></script>
-<script src="/vendors/ckeditor/ckeditor.js"></script>
-<script src="/vendors/metro4/js/metro.min.js"></script>
-<script src="/js/index.js"></script>
--->
-
-<!-- search engine  
-<script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
--->
-
 
 </body>
 </html>

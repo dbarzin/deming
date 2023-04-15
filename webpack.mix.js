@@ -25,6 +25,7 @@ mix.js([
 mix.styles([
     'public/vendors/chartjs/Chart.css', 
     'public/vendors/metro4/css/metro-all.css',
+    'resources/css/app.css',
     'resources/css/calendar.css',
     ], 
     'public/css/all.css');
