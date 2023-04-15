@@ -6,9 +6,9 @@ L’écran de planning permet d’avoir une vue sur les contrôles réalisé et 
 
 
 La partie de gauche de l’écran contient les contrôles passés et à venir. En cliquant sur une colonne, 
-vous êtes renvoyé vers la [liste des contrôle](/controls.fr/#list) planifiés du mois correspondant.
+vous êtes renvoyé vers la [liste des contrôle](/deming/controls.fr/#list) planifiés du mois correspondant.
 
 
 La partie de droite contient les contrôles planifiés ce mois. Il est possible de changer le mois en cours et de sélectionner 
-un [contrôle](/controls.fr/#show) dans le calendrier.
+un [contrôle](/deming/controls.fr/#show) dans le calendrier.
 

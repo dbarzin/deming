@@ -18,9 +18,9 @@ This screen is used to display the list of controls and to filter them by:
 
 When you click:
 
-* The domain, you arrive at the [security domain display](/config/#domains) screen
+* The domain, you arrive at the [security domain display](/deming/config/#domains) screen
 
-* Clause, you arrive at the [security measure display](/measures/#show) screen.
+* Clause, you arrive at the [security measure display](/deming/measures/#show) screen.
 
 * The date of completion, planning or the date of the next check, you arrive at the [security check display](#show) screen.
 
@@ -53,7 +53,7 @@ When you click:
 
 * "Make", you are sent to the [control completion screen](#make)
 
-* "Plan", you are sent to the [control planning screen](/measures/#plan)
+* "Plan", you are sent to the [control planning screen](/deming/measures/#plan)
 
 * "Edit", you are sent to the [control edit screen](#edit)
 

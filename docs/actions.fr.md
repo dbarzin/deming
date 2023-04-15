@@ -13,9 +13,9 @@ En cliquant sur :
 
 * le titre du contrôle associé, vous arrivez vers la page de [modification du plan d’action](#edit) correspondant.
 
-* La date de planification, vous arrivez sur le [contrôle](/controls.fr/#show) ayant généré ce plan d’action
+* La date de planification, vous arrivez sur le [contrôle](/deming/controls.fr/#show) ayant généré ce plan d’action
 
-* La date de prochaine revue, vous arrivez vers le [contrôle](/controls.fr/#show) suivant
+* La date de prochaine revue, vous arrivez vers le [contrôle](/deming/controls.fr/#show) suivant
 
 
 ### Modifier un plan d’action <a name="edit"></a>
