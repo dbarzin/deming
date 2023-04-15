@@ -101,7 +101,7 @@ Deming helps meet these requirements and retain appropriate documented informati
 
 ## Documentation
 
-The application has a [user documentation](https://dbarzin.github.io/deming/index/).
+The application has a [user documentation](https://dbarzin.github.io/deming/index).
 
 ## Facility
 
