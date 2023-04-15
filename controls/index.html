@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://dbarzin.githubs.io/deming/controls/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Contrôles - Deming</title>
+    <title>Controls - Deming</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Contr\u00f4les";
+        var mkdocs_page_name = "Controls";
         var mkdocs_page_input_path = "controls.md";
-        var mkdocs_page_url = "/deming/controls/";
+        var mkdocs_page_url = null;
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -45,23 +45,23 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../home/">Page principale</a>
+                <li class="toctree-l1"><a class="reference internal" href="../home/">Homepage</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../measures/">Mesures</a>
+                <li class="toctree-l1"><a class="reference internal" href="../measures/">Measures</a>
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Contrôles</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Controls</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#liste-des-controles">Liste des contrôles </a>
+    <li class="toctree-l2"><a class="reference internal" href="#list-of-controls">List of controls </a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#afficher-un-controle">Afficher un contrôle </a>
+    <li class="toctree-l2"><a class="reference internal" href="#show-a-control">Show a control </a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#realiser-un-controles">Réaliser un contrôles </a>
+    <li class="toctree-l2"><a class="reference internal" href="#making-a-check">Making a  check</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#fiche-de-controle">Fiche de contrôle </a>
+    <li class="toctree-l2"><a class="reference internal" href="#control-sheet">Control sheet </a>
     </li>
     </ul>
                 </li>
@@ -71,11 +71,11 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../dashboards/">Tableaux de bords</a>
+                <li class="toctree-l1"><a class="reference internal" href="../dashboards/">Dashboards</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../actions/">Plans d'action</a>
+                <li class="toctree-l1"><a class="reference internal" href="../actions/">Action plans</a>
                 </li>
               </ul>
               <ul>
@@ -83,7 +83,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../references/">Références</a>
+                <li class="toctree-l1"><a class="reference internal" href="../references/">References</a>
                 </li>
               </ul>
       </div>
@@ -99,157 +99,161 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Contrôles</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Controls</li>
     <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/dbarzin/deming/edit/main/docs/controls.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="controles">Contrôles</h2>
-<h3 id="liste-des-controles">Liste des contrôles <a name="list"></a></h3>
-<p>Cet écran permet d’afficher la liste des contrôles et de les filtrer par :</p>
+                <ul>
+<li class="i18n-link i18n-link-found i18n-link-fr"><a href="../controls.fr/">Français</a></li>
+</ul>
+<h2 id="controls">Controls</h2>
+<h3 id="list-of-controls">List of controls <a name="list"></a></h3>
+<p>This screen is used to display the list of controls and to filter them by:</p>
 <ul>
 <li>
-<p>domaine,</p>
+<p>domain,</p>
 </li>
 <li>
-<p>attribut,</p>
+<p>attribute,</p>
 </li>
 <li>
-<p>période de planification,</p>
+<p>planning period,</p>
 </li>
 <li>
-<p>état du contrôle : tous, fait et à faire,</p>
+<p>control status: all, done and to do,</p>
 </li>
 <li>
-<p>texte libre sur le nom, l’objectif, les observations.</p>
+<p>free text on name, purpose, comments.</p>
 </li>
 </ul>
-<p><a href="/deming/images/c1.png"><img src="/deming/images/c1.png" width="600"></a></p>
-<p>Lorsque vous cliquez sur :</p>
+<p><a href="/images/c1.png"><img src="/images/c1.png" width="600"></a></p>
+<p>When you click:</p>
 <ul>
 <li>
-<p>Le domaine, vous arrivez l'écran d'<a href="/deming/config/#domains">affichage du domaine de sécurité</a></p>
+<p>The domain, you arrive at the <a href="/config/#domains">security domain display</a> screen</p>
 </li>
 <li>
-<p>La clause, vous arrivez l'écran d'<a href="/deming/measures/#show">affichage de la mesure de sécurité</a>.</p>
+<p>Clause, you arrive at the <a href="/measures/#show">security measure display</a> screen.</p>
 </li>
 <li>
-<p>La date de réalisation, de planification ou la date du contrôle suivant, vous arrivez l'écran d'<a href="#show">affichage du contrôle de sécurité</a>.</p>
+<p>The date of completion, planning or the date of the next check, you arrive at the <a href="#show">security check display</a> screen.</p>
 </li>
 </ul>
-<h3 id="afficher-un-controle">Afficher un contrôle <a name="show"></a></h3>
-<p>Cet écran contient les informations d’un contrôle :</p>
+<h3 id="show-a-control">Show a control <a name="show"></a></h3>
+<p>This screen contains the information of a control:</p>
 <ul>
 <li>
-<p>Le nom d’un contrôles ;</p>
+<p>The name of a control;</p>
 </li>
 <li>
-<p>L’objectif du contrpole ;</p>
+<p>The objective of the control;</p>
 </li>
 <li>
-<p>Les attributs ;</p>
+<p>Attributes ;</p>
 </li>
 <li>
-<p>Les données ;</p>
+<p>Data;</p>
 </li>
 <li>
-<p>Le modèle ;</p>
+<p>The model ;</p>
 </li>
 <li>
-<p>La dates de planification, de réalisation et la date du contrôle suivant ;</p>
+<p>The dates of planning, completion and the date of the next inspection;</p>
 </li>
 <li>
-<p>La note attributée au contrôle ; et</p>
+<p>The score assigned to the control; And</p>
 </li>
 <li>
-<p>Le score attributé au contrôle (vert, orange ou rouge).</p>
+<p>The score attributed to the control (green, orange or red).</p>
 </li>
 </ul>
-<p>Les boutons « Faire » et « Planifier » sont présents si ce contôle n’a pas encore été réalisé.</p>
-<p><a href="/deming/images/c2.png"><img src="/deming/images/c2.png" width="600"></a></p>
-<p>Lorsque vous cliquez sur :</p>
+<p>The "Do" and "Schedule" buttons are present if this control has not yet been carried out.</p>
+<p><a href="/images/c2.png"><img src="/images/c2.png" width="600"></a></p>
+<p>When you click:</p>
 <ul>
 <li>
-<p>« Faire », vous êtes envoyé vers l’<a href="#make">écran de réalisation d’un contrôle</a></p>
+<p>"Make", you are sent to the <a href="#make">control completion screen</a></p>
 </li>
 <li>
-<p>« Planifier », vous êtes envoyé vers l’<a href="/deming/measures/#plan">écran de planification d’un contrôles</a></p>
+<p>"Plan", you are sent to the <a href="/measures/#plan">control planning screen</a></p>
 </li>
 <li>
-<p>« Modifier », vous êtes envoyé vers l’<a href="#edit">écran de modification du contrôles</a></p>
+<p>"Edit", you are sent to the <a href="#edit">control edit screen</a></p>
 </li>
 <li>
-<p>« Annuler », vous êtes envoyé vers la <a href="#list">liste des contrôles</a></p>
+<p>"Cancel", you are sent to the <a href="#list">list of controls</a></p>
 </li>
 </ul>
-<h3 id="realiser-un-controles">Réaliser un contrôles <a name="make"></a></h3>
-<p>Cet écran permet de réaliser un contrôle de sécurité.</p>
-<p>Cet écran contient :</p>
+<h3 id="making-a-check">Making a <a name="make"></a> check</h3>
+<p>This screen allows you to perform a security check.</p>
+<p>This screen contains:</p>
 <ul>
 <li>
-<p>Le nom du contrôle</p>
+<p>The name of the control</p>
 </li>
 <li>
-<p>L’objectif</p>
+<p>The goal</p>
 </li>
 <li>
-<p>Les données</p>
+<p>Data</p>
 </li>
 <li>
-<p>La date de réalisation, la date de planification</p>
+<p>Completion date, planning date</p>
 </li>
 <li>
-<p>Les observation du contrôle</p>
+<p>Control observations</p>
 </li>
 <li>
-<p>Une zonz pour sauvegarder les preuves</p>
+<p>A zonz to save evidence</p>
 </li>
 <li>
-<p>Un lien permettant de télécharger la fiche de contrôles</p>
+<p>A link to download the control sheet</p>
 </li>
 <li>
-<p>Le modèle aliqué au contrôle</p>
+<p>The model alicated to the control</p>
 </li>
 <li>
-<p>La note du contrôles</p>
+<p>The note of the controls</p>
 </li>
 <li>
-<p>Le score</p>
+<p>The score</p>
 </li>
 <li>
-<p>Le plan d’action</p>
+<p>The action plan</p>
 </li>
 <li>
-<p>La date du prochaine contrôle</p>
+<p>The date of the next check</p>
 </li>
 </ul>
-<p><a href="/deming/images/c3.png"><img src="/deming/images/c3.png" width="600"></a>
-   <a href="/deming/images/c4.png"><img src="/deming/images/c4.png" width="600"></a></p>
-<p>Lorsque vous cliquez sur :</p>
+<p><a href="/images/c3.png"><img src="/images/c3.png" width="600"></a>
+<a href="/images/c4.png"><img src="/images/c4.png" width="600"></a></p>
+<p>When you click:</p>
 <ul>
 <li>
-<p>« Faire », le contrôle est sauvé et un nouveau contrôle est créé à la date planifiée</p>
+<p>"Do", the control is saved and a new control is created on the scheduled date</p>
 </li>
 <li>
-<p>« Sauver », le contrôle est sauvé</p>
+<p>"Save", the control is saved</p>
 </li>
 </ul>
-<p>et vous revenez vers la <a href="#list">liste des contrôles</a>.</p>
-<h3 id="fiche-de-controle">Fiche de contrôle <a name="sheet"></a></h3>
-<p>La fiche de contrôle est un document word généré par l'application sur base des données du contrôle.</p>
-<p>Cette fiche permet de décrire les observations réalisés, d'ajouter des captures d'écran ou des tableaux et de <strong>signer électroniquement</strong> les observations.</p>
-<p><a href="/deming/images/report3.png"><img src="/deming/images/report3.png" width="600"></a></p>
-<p>La fiche de contrôle peut être <a href="/deming/config/#models">adaptée</a> afin de respecter le modèle de document de votre organisation.</p>
+<p>and you return to the <a href="#list">list of controls</a>.</p>
+<h3 id="control-sheet">Control sheet <a name="sheet"></a></h3>
+<p>The check sheet is a word document generated by the application based on the check data.</p>
+<p>This form allows you to describe the observations made, to add screenshots or tables and to <strong>electronically sign</strong> the observations.</p>
+<p><a href="/images/report3.png"><img src="/images/report3.png" width="600"></a></p>
+<p>The checklist can be <a href="/deming/config/#models">adapted</a> to match your organization's document model.</p>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../measures/" class="btn btn-neutral float-left" title="Mesures"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../measures/" class="btn btn-neutral float-left" title="Measures"><span class="icon icon-circle-arrow-left"></span> Previous</a>
         <a href="../plan/" class="btn btn-neutral float-right" title="Planning">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
@@ -257,6 +261,7 @@
 
   <div role="contentinfo">
     <!-- Copyright etc -->
+      <p>Copyright &copy; 2016-2023 <a href="http://www.isardvdi.com">IsardVDI</a>.</p>
   </div>
 
   Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
@@ -271,6 +276,10 @@
 
   <div class="rst-versions" role="note" aria-label="Versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/dbarzin/deming" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
     
     
       <span><a href="../measures/" style="color: #fcfcfc">&laquo; Previous</a></span>

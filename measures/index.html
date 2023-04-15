@@ -3,18 +3,18 @@
 <head>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" /><link rel="canonical" href="https://dbarzin.githubs.io/deming/measures/" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Mesures - Deming</title>
+    <title>Measures - Deming</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Mesures";
+        var mkdocs_page_name = "Measures";
         var mkdocs_page_input_path = "measures.md";
-        var mkdocs_page_url = "/deming/measures/";
+        var mkdocs_page_url = null;
       </script>
     
     <script src="../js/jquery-3.6.0.min.js" defer></script>
@@ -45,25 +45,25 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../home/">Page principale</a>
+                <li class="toctree-l1"><a class="reference internal" href="../home/">Homepage</a>
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Mesures</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Measures</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#liste-des-mesures-de-securite">Liste des mesures de sécurité </a>
+    <li class="toctree-l2"><a class="reference internal" href="#list-of-security-measures">List of security measures </a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#afficher-une-mesure-de-securite">Afficher une mesure de sécurité </a>
+    <li class="toctree-l2"><a class="reference internal" href="#show-security-measure">Show security measure </a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#modifier-une-mesure-de-securite">Modifier une mesure de sécurité </a>
+    <li class="toctree-l2"><a class="reference internal" href="#edit-a-security-measure">Edit a security measure </a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#plannifier-un-controle">Plannifier un contrôle </a>
+    <li class="toctree-l2"><a class="reference internal" href="#schedule-a-control">Schedule a control </a>
     </li>
     </ul>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../controls/">Contrôles</a>
+                <li class="toctree-l1"><a class="reference internal" href="../controls/">Controls</a>
                 </li>
               </ul>
               <ul>
@@ -71,11 +71,11 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../dashboards/">Tableaux de bords</a>
+                <li class="toctree-l1"><a class="reference internal" href="../dashboards/">Dashboards</a>
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../actions/">Plans d'action</a>
+                <li class="toctree-l1"><a class="reference internal" href="../actions/">Action plans</a>
                 </li>
               </ul>
               <ul>
@@ -83,7 +83,7 @@
                 </li>
               </ul>
               <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../references/">Références</a>
+                <li class="toctree-l1"><a class="reference internal" href="../references/">References</a>
                 </li>
               </ul>
       </div>
@@ -99,150 +99,157 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li><li>Mesures</li>
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>Measures</li>
     <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/dbarzin/deming/edit/main/docs/measures.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
 </div>
-
           <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
             <div class="section" itemprop="articleBody">
               
-                <h2 id="mesures-de-securite">Mesures de sécurité</h2>
-<p>Cette partie permet de définir, de modifier et de plannifier de nouvelles mesures de sécurité.</p>
-<h3 id="liste-des-mesures-de-securite">Liste des mesures de sécurité <a name="list"></a></h3>
-<p>La liste des mesures de sécurité permet d’afficher la liste des mesures, de les filtrer par domaine ou de recherche une mesure sur base d’une partie de son nom.</p>
-<p><a href="/deming/images/m1.png"><img src="/deming/images/m1.png" width="600"></a></p>
-<p>En cliquant sur :</p>
+                <ul>
+<li class="i18n-link i18n-link-found i18n-link-fr"><a href="../measures.fr/">Français</a></li>
+</ul>
+<h2 id="security-measures">Security measures</h2>
+<p>This part allows you to define, modify and plan new security measures.</p>
+<h3 id="list-of-security-measures">List of security measures <a name="list"></a></h3>
+<p>The list of security measures allows you to display the list of measures, to filter them by domain or to search for a measure based on part of its name.</p>
+<p><a href="/images/m1.png"><img src="/images/m1.png" width="600"></a></p>
+<p>Clicking on :</p>
 <ul>
 <li>
-<p>le domaine, vous arrivez sur la <a href="/deming/config/#domain">définition du domaine choisi</a></p>
+<p>the domain, you arrive at the <a href="/deming/config/#domain">chosen domain definition</a></p>
 </li>
 <li>
-<p>la clause, vous arrivez sur la <a href="#show">description de la mesure de sécurité</a></p>
+<p>the clause, you arrive on the <a href="#show">description of the security measure</a></p>
 </li>
 <li>
-<p>la date, vous arrivez l’écran de <a href="#plan">planification de la mesure de sécurité</a></p>
+<p>the date you arrive the <a href="#plan">security measure planning</a> screen</p>
 </li>
 </ul>
-<h3 id="afficher-une-mesure-de-securite">Afficher une mesure de sécurité <a name="show"></a></h3>
-<p>Cet écran permet d’afficher une mesure de sécurité.</p>
-<p><a href="/deming/images/m2.png"><img src="/deming/images/m2.png" width="600"></a></p>
-<p>Une mesure de sécurité est composée :</p>
+<h3 id="show-security-measure">Show security measure <a name="show"></a></h3>
+<p>This screen displays a security measure.</p>
+<p><a href="/images/m2.png"><img src="/images/m2.png" width="600"></a></p>
+<p>A security measure consists of:</p>
 <ul>
 <li>
-<p>d’un domaines ;</p>
+<p>of a domain;</p>
 </li>
 <li>
-<p>d’un nom ;</p>
+<p>of a name;</p>
 </li>
 <li>
-<p>d’un objectif de sécurité ;</p>
+<p>a security objective;</p>
 </li>
 <li>
-<p>d’attributs ;</p>
+<p>attributes;</p>
 </li>
 <li>
-<p>des données de mesures :</p>
+<p>measurement data:</p>
 </li>
 <li>
-<p>du modèle de vérification ;</p>
+<p>of the verification model;</p>
 </li>
 <li>
-<p>d’un indicateur (vert, orange, rouge)</p>
+<p>an indicator (green, orange, red)</p>
 </li>
 <li>
-<p>d’un plan d’action à appliquer si le contrôle de cette mesure de sécurité est en échec ;</p>
+<p>an action plan to be applied if control of this security measure fails;</p>
 </li>
 <li>
-<p>de responsable ; et</p>
+<p>responsible; And</p>
 </li>
 <li>
-<p>de la périodicité de la mesure (mesuel, trimestriel, disanuel, annuel).</p>
+<p>the periodicity of the measurement (monthly, quarterly, daily, annual).</p>
 </li>
 </ul>
-<p>Lorsque vous cliquez sur :</p>
+<p>When you click:</p>
 <ul>
 <li>
-<p>« Planifier » : vous arrivez vers l’écran de <a href="#plan">planification de la mesure de sécurité</a>.</p>
+<p>“Plan”: you arrive at the <a href="#plan">security measure planning</a> screen.</p>
 </li>
 <li>
-<p>« Modifier » : vous arrivez vers <a href="#edit">l’écran de moficiaton de la mesure</a></p>
+<p>"Modify": you arrive at <a href="#edit">the measurement modification screen</a></p>
 </li>
 <li>
-<p>« Supprimer »: vous permet de supprimer la mesure et de revenir à <a href="#list">la liste des mesures de sécurité</a></p>
+<p>“Delete”: allows you to delete the measure and return to <a href="#list">the list of security measures</a></p>
 </li>
 <li>
-<p>« Annuler » : vous renvoie vers la <a href="#list">liste des mesures de séucurité</a></p>
+<p>"Cancel": returns you to the <a href="#list">list of security measures</a></p>
 </li>
 </ul>
-<h3 id="modifier-une-mesure-de-securite">Modifier une mesure de sécurité <a name="edit"></a></h3>
-<p>Cet écran permet de modifier une mesure de sécurité.</p>
-<p><a href="/deming/images/m3.png"><img src="/deming/images/m3.png" width="600"></a></p>
-<p>Lorsque vous cliquez sur :</p>
+<h3 id="edit-a-security-measure">Edit a security measure <a name="edit"></a></h3>
+<p>This screen allows you to modify a security measure.</p>
+<p><a href="/images/m3.png"><img src="/images/m3.png" width="600"></a></p>
+<p>When you click:</p>
 <ul>
 <li>
-<p>« Sauver », les modification sont sauvées et vous revenez à l’écran d’<a href="#show">affichage de la mesure de sécurité</a>.</p>
+<p>"Save", the changes are saved and you return to the <a href="#show">security measure display</a> screen.</p>
 </li>
 <li>
-<p>« Annluer », vous revenez à l’écran d’<a href="#show">affichage de la mesure de sécurité</a>.</p>
+<p>"Cancel", you return to the <a href="#show">security measure display</a> screen.</p>
 </li>
 </ul>
-<h3 id="plannifier-un-controle">Plannifier un contrôle <a name="plan"></a></h3>
-<p>Cet écran permet de planifier un contrôle de sécurité à partir d’une mesure.</p>
-<p>L’écran contient :</p>
+<h3 id="schedule-a-control">Schedule a control <a name="plan"></a></h3>
+<p>This screen is used to plan a control based on a security measure.</p>
+<p>The screen contains:</p>
 <ul>
 <li>
-<p>Le domaine ;</p>
+<p>The domain ;</p>
 </li>
 <li>
-<p>Le nom de la mesure ;</p>
+<p>The name of the measure;</p>
 </li>
 <li>
-<p>L’objectif de sécurité ;</p>
+<p>The security objective;</p>
 </li>
 <li>
-<p>La périodicité du contrôles ; et</p>
+<p>The frequency of checks; And</p>
 </li>
 <li>
-<p>La date de planification.</p>
+<p>The planning date.</p>
 </li>
 </ul>
-<p><a href="/deming/images/plan.png"><img src="/deming/images/plan.png" width="600"></a></p>
-<p>Lorsque vous cliquez sur : </p>
+<p><a href="/images/plan.png"><img src="/images/plan.png" width="600"></a></p>
+<p>When you click:</p>
 <ul>
 <li>
-<p>« Planifier », </p>
+<p>" Plan ",</p>
 <ul>
 <li>
-<p>s’il n’existe pas de contrôle pour cette mesure, un nouveau contrôle est créé en copiant toutes les données de le mesure et est planifié à la date spécifiée.</p>
+<p>If there is no control for this measure, a new control is created by copying all the data from the measure and is scheduled on the specified date.</p>
 </li>
 <li>
-<p>S’il existe déjà un contrôle non-réalisé pour cette mesure de sécurité, la date de planification est mise à jour.</p>
+<p>If there is already an uncompleted check for this security measure, the planning date is updated.</p>
 </li>
 </ul>
-<p>Vous revenez ensuite à la <a href="#list">liste des mesures de sécurité</a>.</p>
+</li>
+</ul>
+<p>You then return to the <a href="#list">list of security measures</a>.</p>
+<ul>
+<li>
+<p>"Unplan", the security check associated with this measure is deleted and the user returns to the <a href="#list">list of security measures</a>.</p>
 </li>
 <li>
-<p>« Déplanifier », le contrôle de sécurité associé à cette mesure est supprimé et l’utilisateur revient vers la <a href="#list">liste des mesures de sécurité</a>.</p>
-</li>
-<li>
-<p>« Annuler », vous revenez vers la <a href="#list">liste des mesures de sécurité</a>.</p>
+<p>"Cancel", you return to the <a href="#list">list of security measures</a>.</p>
 </li>
 </ul>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../home/" class="btn btn-neutral float-left" title="Page principale"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../controls/" class="btn btn-neutral float-right" title="Contrôles">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../home/" class="btn btn-neutral float-left" title="Homepage"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../controls/" class="btn btn-neutral float-right" title="Controls">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
 
   <div role="contentinfo">
     <!-- Copyright etc -->
+      <p>Copyright &copy; 2016-2023 <a href="http://www.isardvdi.com">IsardVDI</a>.</p>
   </div>
 
   Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
@@ -257,6 +264,10 @@
 
   <div class="rst-versions" role="note" aria-label="Versions">
   <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/dbarzin/deming" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
     
     
       <span><a href="../home/" style="color: #fcfcfc">&laquo; Previous</a></span>

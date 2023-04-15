@@ -1,48 +1,93 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
-         <loc>https://dbarzin.githubs.io/deming/</loc>
-         <lastmod>2023-04-09</lastmod>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://dbarzin.githubs.io/deming/actions/</loc>
-         <lastmod>2023-04-09</lastmod>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://dbarzin.githubs.io/deming/config/</loc>
-         <lastmod>2023-04-09</lastmod>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://dbarzin.githubs.io/deming/controls/</loc>
-         <lastmod>2023-04-09</lastmod>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://dbarzin.githubs.io/deming/dashboards/</loc>
-         <lastmod>2023-04-09</lastmod>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://dbarzin.githubs.io/deming/home/</loc>
-         <lastmod>2023-04-09</lastmod>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://dbarzin.githubs.io/deming/measures/</loc>
-         <lastmod>2023-04-09</lastmod>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://dbarzin.githubs.io/deming/plan/</loc>
-         <lastmod>2023-04-09</lastmod>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://dbarzin.githubs.io/deming/references/</loc>
-         <lastmod>2023-04-09</lastmod>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>None</loc>
+         <lastmod>2023-04-15</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
