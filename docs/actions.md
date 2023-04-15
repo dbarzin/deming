@@ -6,7 +6,7 @@ Each time a control fails (orange or red), an action plan must be put in place a
 
 This screen allows you to follow the action plans:
 
-[<img src="/images/a1.png" width="600">](/images/a1.png)
+[<img src="/deming/images/a1.png" width="600">](/deming/images/a1.png)
 
 
 Clicking on :
@@ -22,7 +22,7 @@ Clicking on :
 
 This screen allows you to edit an action plan and schedule the next control assessment.
 
-[<img src="/images/a2.png" width="600">](/images/a2.png)
+[<img src="/deming/images/a2.png" width="600">](/deming/images/a2.png)
 
 
 When you click:

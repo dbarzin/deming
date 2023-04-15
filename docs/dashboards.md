@@ -11,14 +11,14 @@ There are three dashboards:
 
 ### Controls by domains
 
-[<img src="/images/r1.png" width="300">](/images/r1.png)
+[<img src="/deming/images/r1.png" width="300">](/deming/images/r1.png)
 
 
 ### Controls by domain and by measure
 
-[<img src="/images/r2.png" width="600">](/images/r2.png)
+[<img src="/deming/images/r2.png" width="600">](/deming/images/r2.png)
 
 
 ### Attribute checks
 
-[<img src="/images/r3.png" width="600">](/images/r3.png)
+[<img src="/deming/images/r3.png" width="600">](/deming/images/r3.png)

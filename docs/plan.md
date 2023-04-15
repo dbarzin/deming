@@ -2,7 +2,7 @@
 
 The schedule screen provides a view of the controls carried out and to be carried out.
 
-[<img src="/images/cal.png" width="600">](/images/cal.png)
+[<img src="/deming/images/cal.png" width="600">](/deming/images/cal.png)
 
 
 The left part of the screen contains past and future checks. By clicking on a column,

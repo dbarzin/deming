@@ -6,7 +6,7 @@ Cette partie permet de définir, de modifier et de plannifier de nouvelles mesur
 
 La liste des mesures de sécurité permet d’afficher la liste des mesures, de les filtrer par domaine ou de recherche une mesure sur base d’une partie de son nom.
 
-[<img src="/images/m1.png" width="600">](/images/m1.png)
+[<img src="/deming/images/m1.png" width="600">](/deming/images/m1.png)
 
 En cliquant sur :
 
@@ -21,7 +21,7 @@ En cliquant sur :
 
 Cet écran permet d’afficher une mesure de sécurité.
 
-[<img src="/images/m2.png" width="600">](/images/m2.png)
+[<img src="/deming/images/m2.png" width="600">](/deming/images/m2.png)
 
 Une mesure de sécurité est composée :
 
@@ -61,7 +61,7 @@ Lorsque vous cliquez sur :
 
 Cet écran permet de modifier une mesure de sécurité.
 
-[<img src="/images/m3.png" width="600">](/images/m3.png)
+[<img src="/deming/images/m3.png" width="600">](/deming/images/m3.png)
 
 
 Lorsque vous cliquez sur :
@@ -88,7 +88,7 @@ L’écran contient :
 * La date de planification.
 
 
-[<img src="/images/plan.png" width="600">](/images/plan.png)
+[<img src="/deming/images/plan.png" width="600">](/deming/images/plan.png)
 
 Lorsque vous cliquez sur : 
 

@@ -18,11 +18,11 @@ It is composed of:
      * An overall state of controls
 
 
-[<img src="/images/home1.png" width="600">](/images/home1.png)
+[<img src="/deming/images/home1.png" width="600">](/deming/images/home1.png)
 
 The lower part of the main page contains the list of controls scheduled for the next 30 days:
 
-[<img src="/images/home2.png" width="600">](/images/home2.png)
+[<img src="/deming/images/home2.png" width="600">](/deming/images/home2.png)
 
 Overdue check dates are displayed in red.
 
@@ -31,4 +31,4 @@ Overdue check dates are displayed in red.
 A search tool allows you to search for the presence of a word in the name, the objectives, the observations of the controls
 and in their action plans.
 
-[<img src="/images/search.png" width="600">](/images/search.png)
+[<img src="/deming/images/search.png" width="600">](/deming/images/search.png)

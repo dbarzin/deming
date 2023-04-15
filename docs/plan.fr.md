@@ -2,7 +2,7 @@
 
 L’écran de planning permet d’avoir une vue sur les contrôles réalisé et à réaliser.
 
-[<img src="/images/cal.png" width="600">](/images/cal.png)
+[<img src="/deming/images/cal.png" width="600">](/deming/images/cal.png)
 
 
 La partie de gauche de l’écran contient les contrôles passés et à venir. En cliquant sur une colonne, 

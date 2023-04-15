@@ -14,7 +14,7 @@ Cet écran permet d’afficher la liste des contrôles et de les filtrer par :
 
 * texte libre sur le nom, l’objectif, les observations.
 
-[<img src="/images/c1.png" width="600">](/images/c1.png)
+[<img src="/deming/images/c1.png" width="600">](/deming/images/c1.png)
 
 Lorsque vous cliquez sur :
 
@@ -46,7 +46,7 @@ Cet écran contient les informations d’un contrôle :
 
 Les boutons « Faire » et « Planifier » sont présents si ce contôle n’a pas encore été réalisé.
 
-[<img src="/images/c2.png" width="600">](/images/c2.png)
+[<img src="/deming/images/c2.png" width="600">](/deming/images/c2.png)
 
 Lorsque vous cliquez sur :
 
@@ -89,8 +89,8 @@ Cet écran contient :
 
 * La date du prochaine contrôle
 
- [<img src="/images/c3.png" width="600">](/images/c3.png)
- [<img src="/images/c4.png" width="600">](/images/c4.png)
+ [<img src="/deming/images/c3.png" width="600">](/deming/images/c3.png)
+ [<img src="/deming/images/c4.png" width="600">](/deming/images/c4.png)
 
 Lorsque vous cliquez sur :
 
@@ -110,7 +110,7 @@ La fiche de contrôle est un document word généré par l'application sur base 
 Cette fiche permet de décrire les observations réalisés, d'ajouter des captures d'écran ou des tableaux et de __signer électroniquement__ les observations.
 
 
-[<img src="/images/report3.png" width="600">](/images/report3.png)
+[<img src="/deming/images/report3.png" width="600">](/deming/images/report3.png)
 
 
 La fiche de contrôle peut être [adaptée](/deming/config.fr/#models) afin de respecter le modèle de document de votre organisation.

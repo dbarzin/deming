@@ -6,7 +6,7 @@ Chaque fois qu’un contrôle est en échec (orange ou rouge), un plan d’actio
 
 Cet écran permet de suivre les plans d’action :
 
-[<img src="/images/a1.png" width="600">](/images/a1.png)
+[<img src="/deming/images/a1.png" width="600">](/deming/images/a1.png)
 
 
 En cliquant sur :
@@ -22,7 +22,7 @@ En cliquant sur :
 
 Cet écran permet de modifier un plan d’action et de planifier la prochaine évaluation du contrôle.
 
-[<img src="/images/a2.png" width="600">](/images/a2.png)
+[<img src="/deming/images/a2.png" width="600">](/deming/images/a2.png)
 
 
 Lorsque vous cliquez sur :

@@ -18,11 +18,11 @@ Elle est composées de :
     * Un état global des contrôles
 
 
-[<img src="/images/home1.png" width="600">](/images/home1.png)
+[<img src="/deming/images/home1.png" width="600">](/deming/images/home1.png)
 
 La partie inférieur de la page principale contient la liste des contôles pannifiés dans les 30 prochains jours :
 
-[<img src="/images/home2.png" width="600">](/images/home2.png)
+[<img src="/deming/images/home2.png" width="600">](/deming/images/home2.png)
 
 Les dates des contrôles en retard sont affichés en rouge.
 
@@ -31,7 +31,7 @@ Les dates des contrôles en retard sont affichés en rouge.
 Un outil de recherche permet de rechecher la présence d’un mot dans le nom, les objectifs, les observations des contrôles 
 et dans leurs plans d’action.
 
-[<img src="/images/search.png" width="600">](/images/search.png)
+[<img src="/deming/images/search.png" width="600">](/deming/images/search.png)
 
 
 

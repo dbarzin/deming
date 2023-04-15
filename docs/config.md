@@ -5,13 +5,13 @@
 This screen allows you to manage the attributes associated with the security measures.
 It contains the list of attributes and allows you to create, delete or modify attribute lists.
 
-[<img src="/images/tags.png" width="600">](/images/tags.png)
+[<img src="/deming/images/tags.png" width="600">](/deming/images/tags.png)
 
 ### Domains <a name="domains"></a>
 
 This screen allows you to create, modify or delete lists of security domains.
 
-[<img src="/images/domains.png" width="600">](/images/domains.png)
+[<img src="/deming/images/domains.png" width="600">](/deming/images/domains.png)
 
 The application is provided with a security measurement base inspired by the ISO 27001:2022 standard, but it is possible to define new security domains inspired by other standards such as PCIDSS, HDS, etc.
 
@@ -19,7 +19,7 @@ The application is provided with a security measurement base inspired by the ISO
 
 Users are directly defined in the application.
 
-[<img src="/images/users.png" width="600">](/images/users.png)
+[<img src="/deming/images/users.png" width="600">](/deming/images/users.png)
 
 There are three roles:
 
@@ -34,21 +34,21 @@ There are three roles:
 
 The application allows you to generate the ISMS management report and to export the list of domains, the security measures and all the checks carried out in an Excell file.
 
-[<img src="/images/reports.png" width="500">](/images/reports.png)
+[<img src="/deming/images/reports.png" width="500">](/deming/images/reports.png)
 
 
 Here is the ISMS pilot report:
 
-[<img src="/images/report1.png" width="600">](/images/report1.png)
+[<img src="/deming/images/report1.png" width="600">](/deming/images/report1.png)
 
-[<img src="/images/report2.png" width="600">](/images/report2.png)
+[<img src="/deming/images/report2.png" width="600">](/deming/images/report2.png)
 
 
 ### Documents <a name="documents"></a>
 
 This screen provides an overview of all the documents used as evidence when carrying out security checks.
 
-[<img src="/images/documents.png" width="300">](/images/documents.png)
+[<img src="/deming/images/documents.png" width="300">](/deming/images/documents.png)
 
 The "Verify" button allows you to verify the integrity of the documents stored in the application.
 
@@ -56,4 +56,4 @@ The "Verify" button allows you to verify the integrity of the documents stored i
 
 This screen is used to modify the document templates used for the control sheets and the ISMS management report.
 
-[<img src="/images/models.png" width="300">](/images/models.png)
+[<img src="/deming/images/models.png" width="300">](/deming/images/models.png)

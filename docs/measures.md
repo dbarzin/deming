@@ -6,7 +6,7 @@ This part allows you to define, modify and plan new security measures.
 
 The list of security measures allows you to display the list of measures, to filter them by domain or to search for a measure based on part of its name.
 
-[<img src="/images/m1.png" width="600">](/images/m1.png)
+[<img src="/deming/images/m1.png" width="600">](/deming/images/m1.png)
 
 Clicking on :
 
@@ -21,7 +21,7 @@ Clicking on :
 
 This screen displays a security measure.
 
-[<img src="/images/m2.png" width="600">](/images/m2.png)
+[<img src="/deming/images/m2.png" width="600">](/deming/images/m2.png)
 
 A security measure consists of:
 
@@ -61,7 +61,7 @@ When you click:
 
 This screen allows you to modify a security measure.
 
-[<img src="/images/m3.png" width="600">](/images/m3.png)
+[<img src="/deming/images/m3.png" width="600">](/deming/images/m3.png)
 
 
 When you click:
@@ -88,7 +88,7 @@ The screen contains:
 * The planning date.
 
 
-[<img src="/images/plan.png" width="600">](/images/plan.png)
+[<img src="/deming/images/plan.png" width="600">](/deming/images/plan.png)
 
 When you click:
 
