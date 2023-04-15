@@ -5,26 +5,19 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
 
-    <!-- Metro 4 -->
-    <link rel="stylesheet" href="/vendors/metro4/css/metro-all.min.css">
-    <link rel="stylesheet" href="/css/index.css">
-
-    <!-- Calendar -->
-    <link rel="stylesheet" href="/css/calendar.css">
-
-    <!-- Dropzone -->
-    <!-- https://rawgit.com/enyo/dropzone/master/dist/dropzone.js -->
-    <script src="/js/dropzone.js"></script>
-    <!-- https://rawgit.com/enyo/dropzone/master/dist/dropzone.css -->    
-    <link rel="stylesheet" href="/css/dropzone.css">
-
     <title>Deming - ISMS Controls Made Easy</title>
+
+    <link rel="stylesheet" href="/css/all.css" />
+
+    <script src="/js/all.js"></script>
 
     <script>
         window.on_page_functions = [];
     </script>
 </head>
 <body class="m4-cloak h-vh-100">
+
+
 <div data-role="navview" data-toggle="#paneToggle" data-expand="xl" data-compact="lg" data-active-state="true">
     <div class="navview-pane">
         <div class="d-flex flex-align-center">
@@ -209,7 +202,7 @@
 </div>
 </div>
 
-<!-- jQuery first, then Metro UI JS -->
+<!-- jQuery first, then Metro UI JS 
 <script src="/vendors/jquery/jquery-3.6.1.min.js"></script>
 <script src="/vendors/chartjs/Chart.bundle.min.js"></script>
 <script src="/vendors/qrcode/qrcode.min.js"></script>
@@ -217,9 +210,11 @@
 <script src="/vendors/ckeditor/ckeditor.js"></script>
 <script src="/vendors/metro4/js/metro.min.js"></script>
 <script src="/js/index.js"></script>
+-->
 
-<!-- search engine  -->
+<!-- search engine  
 <script src="https://cdnjs.cloudflare.com/ajax/libs/select2/4.0.5/js/select2.full.min.js"></script>
+-->
 
 
 </body>
