@@ -92,7 +92,7 @@ The screen contains:
 
 When you click:
 
-* " Plan ",
+* "Plan",
 
      * If there is no control for this measure, a new control is created by copying all the data from the measure and is scheduled on the specified date.
 
