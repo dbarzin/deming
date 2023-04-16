@@ -19,10 +19,10 @@ return [
              'action' => 'Action plan',
              'plan_date' => 'Planning date',
              'next_date' => 'Review date',
-             'rating' => 'Score',
+             'note' => 'Score',
              'objective' => 'Objective',
              'observation' => 'Observation',
-             'action_plan' => 'Action Plan'
+             'action_plan' => 'Action Plan',
          ],
      ],
     'attribute' => [
