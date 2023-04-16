@@ -88,7 +88,7 @@ return [
              'objective' => 'Description',
              'attributes' => 'Attributes',
              'model' => 'Model',
-             'indicator' => 'Indicator (Red, Orange, Green)',
+             'indicator' => 'Indicator',
              'action_plan' => 'Action Plan',
              'owner' => 'Responsible',
              'periodicity' => 'Periodicity',
