@@ -111,12 +111,12 @@
                >
                 <thead>
                     <tr>
-                        <th class="sortable-column">{{ trans('cruds.control.fields.domain') }}</th>
-                        <th>{{ trans('cruds.control.fields.clause') }}</th>
+                        <th data-sortable="true">{{ trans('cruds.control.fields.domain') }}</th>
+                        <th data-sortable="true">{{ trans('cruds.control.fields.clause') }}</th>
                         <th >{{ trans('cruds.control.fields.name') }}</th>
                         <th >{{ trans('cruds.control.fields.score') }}</th>
-                        <th >{{ trans('cruds.control.fields.realisation_date') }}</th>
-                        <th class="sortable-column">{{ trans('cruds.control.fields.plan_date') }}</th>
+                        <th>{{ trans('cruds.control.fields.realisation_date') }}</th>
+                        <th>{{ trans('cruds.control.fields.plan_date') }}</th>
                     </tr>
                 </thead>
             <tbody>
