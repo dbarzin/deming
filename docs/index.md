@@ -65,10 +65,14 @@ Deming helps meet these requirements and retain appropriate documented informati
 
 ### Definitions
 
-**Security measures** (in English “Control”): set of provisions to be implemented. These are the measures to be taken to implement the security policy.
+**Controls** : set of provisions to be implemented. These are the controls to be taken to implement the security policy.
 
-** Control ** or Measurement (in English “Measurement”): process of obtaining relative to the effectiveness of an ISMS and security measures, using an evaluation method, a function assessment, analytical model, and decision criteria [ISO/IEC 27004].
+**Measurement**: process of obtaining relative to the effectiveness of an ISMS and security measures, using an evaluation method, 
+a function assessment, analytical model, and decision criteria [ISO/IEC 27004].
 
-**Indicator**: result of the application of an analytical model to one or more variables in relation to the decision criteria or an information need [ISO/IEC 27004].
+**Indicator**: result of the application of an analytical model to one or more variables in relation to the decision criteria or 
+an information need [ISO/IEC 27004].
 
-**Attribute**: property or characteristic of an object that can be quantitatively or qualitatively distinguished by human or automatic means [ISO/IEC 15939:2007].
+**Attribute**: property or characteristic of an object that can be quantitatively or qualitatively distinguished by human or 
+automatic means [ISO/IEC 15939:2007].
+
