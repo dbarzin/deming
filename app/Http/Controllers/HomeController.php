@@ -55,7 +55,7 @@ class HomeController extends Controller
 
         // count control never made
         $controls_never_made = DB::select(
-                '
+            '
                 select domain_id 
                 from controls c1 
                 where realisation_date is null and 
@@ -93,7 +93,7 @@ class HomeController extends Controller
 
         // get controls todo
         $controls_todo = DB::select(
-                'select
+            'select
                 c1.id,
                 c1.measure_id,
                 c1.name,
@@ -107,7 +107,6 @@ class HomeController extends Controller
                 controls c1 left join controls c2 on c2.next_id=c1.id
             where (c1.realisation_date is null) and (c1.plan_date < NOW() + INTERVAL 30 DAY)
             order by c1.plan_date'
-            
         );
 
         /*

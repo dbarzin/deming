@@ -172,12 +172,15 @@ migrer la base de données
 
     php artisan migrate
 
+Mettre à jour composer
+
+    composer self-update
+
 Mettre à jour les librairies
 
     composer update
 
 Vider les caches
 
-    php artisan config:clear &&  php artisan view:clear
-
+    php artisan optimize:clear
 
