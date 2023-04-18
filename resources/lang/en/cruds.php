@@ -104,6 +104,7 @@ return [
          'fields' => [
              'name' => 'Name',
              'description' => 'Description',
+             'measures' => '# Measures',
          ],
          'add' => 'Add Domain',
          'edit' => 'Edit Domain',

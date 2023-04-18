@@ -32,6 +32,7 @@
 			    <tr>
 					<th width="50">{{ trans('cruds.domain.fields.name') }}</th>
 					<th width="200">{{ trans('cruds.domain.fields.description') }}</th>
+					<th width="200">{{ trans('cruds.domain.fields.measures') }}</th>
 			    </tr>
 			    </thead>
 			    <tbody>
@@ -39,6 +40,7 @@
 				<tr>
 					<td><a href="/domains/{{ $domain->id}}">{{ $domain->title }}</a></td>
 					<td>{{ $domain->description }}</td>
+					<td><a href="/measures?domain={{ $domain->id }}">{{ $domain->cnt }}</a></td>
 				</tr>
 			@endforeach
 				</tbody>

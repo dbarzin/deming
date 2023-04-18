@@ -18,6 +18,16 @@ class DomainController extends Controller
     public function index()
     {
         $domains = DB::table('domains')->orderBy('id')->get();
+
+
+
+    $domains= DB::table('domains')
+        ->select('domains.id','domains.title', 'domains.description',DB::raw("COUNT(measures.id) AS cnt"))
+        ->join('measures','measures.domain_id','=','domains.id')
+        ->groupBy('domains.id')
+        ->get();
+
+
         return view('domains.index')
             ->with('domains', $domains);
     }
