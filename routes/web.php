@@ -30,9 +30,8 @@ Route::get('/profile/avatar/{id}', 'ProfileController@avatar');
 Route::get('/measure/plan/{id}', 'MeasureController@plan');
 Route::get('/measure/unplan/{id}', 'MeasureController@unplan');
 Route::post('/measure/activate/{id}', 'MeasureController@activate');
-
-//Route::get('/measure/activate', 'MeasureController@activate');
-//Route::get('/measure/disable', 'MeasureController@disable');
+Route::get('/measure/import', function () { return view('measures/import'); });
+Route::post('/measure/import', 'MeasureController@import');
 
 /* Controls */
 Route::get('/control/show/{id}', 'ControlController@show');
@@ -81,15 +80,12 @@ Route::get('/reports/pilotage', 'ReportController@pilotage');
 
 /* Exports */
 Route::get('/reports', function () { return view('reports'); });
-Route::get('/import-export', function () { return view('import-export'); });
 
 Route::get('/export/domains', 'DomainController@export');
 Route::get('/export/attributes', 'AttributeController@export');
 Route::get('/export/measures', 'MeasureController@export');
 Route::get('/export/controls', 'ControlController@export');
 Route::get('/export/controls', 'ControlController@export');
-
-Route::post('/measure/import', 'MeasureController@import');
 
 /* test chart */
 Route::get('/testChart', 'ReportController@testChart');

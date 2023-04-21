@@ -459,11 +459,11 @@ class MeasureController extends Controller
                         $errors->push(($line+1) . ": domain is too long");
                         continue;
                     }
-                    if ( strlen($data[$line][1])>=32 ) {
+                    if ( strlen($data[$line][1]) >= 32) {
                         $errors->push(($line+1) . ": close too long");
                         continue;
                     }
-                    if ( strlen($data[$line][2]) === null ) {
+                    if (strlen($data[$line][2]) === 0) {
                         $errors->push(($line+1) . ": name is empty");
                         continue;
                     }
@@ -481,109 +481,108 @@ class MeasureController extends Controller
                 if ($errors->isEmpty()) {
                     for ($line=1; $line<count($data); $line++) {
 
-                    // delete line ?
-                    if ((count($data[$line])<10) || (
-                        ($data[$line][2] === null) &&  
-                        ($data[$line][3] === null) &&  
-                        ($data[$line][4] === null) &&  
-                        ($data[$line][5] === null) &&  
-                        ($data[$line][6] === null) &&  
-                        ($data[$line][7] === null) &&  
-                        ($data[$line][8] === null) &&  
-                        ($data[$line][9] === null) &&  
-                        ($data[$line][10] === null))
-                    ) {
-                        // delete documents
-                        $documents = DB::table('documents')
-                            ->join('controls', 'control.id', '=', 'documents.control_id')
-                            ->join('measures', 'measures.id', '=', 'control.measure_id')
-                            ->where('measures.id', $measure->id)
-                            ->select('documents.id',)
-                            ->get();
+                        // delete line ?
+                        if ((count($data[$line])<10) || (
+                            ($data[$line][2] === null) &&  
+                            ($data[$line][3] === null) &&  
+                            ($data[$line][4] === null) &&  
+                            ($data[$line][5] === null) &&  
+                            ($data[$line][6] === null) &&  
+                            ($data[$line][7] === null) &&  
+                            ($data[$line][8] === null) &&  
+                            ($data[$line][9] === null) &&  
+                            ($data[$line][10] === null))
+                        ) {
+                            // delete documents
+                            $documents = DB::table('documents')
+                                ->join('controls', 'controls.id', '=', 'documents.control_id')
+                                ->join('measures', 'measures.id', '=', 'controls.measure_id')
+                                ->where('measures.id', $measure->id)
+                                ->select('documents.id',)
+                                ->get();
 
-                        foreach($document as $doc) {
-                            unlink(storage_path('docs'), $doc->id);
-                            DB::table('documents')->where('id', $doc->id)->delete();
-                            $deleteDocumentCount++;
+                            foreach($documents as $document) {
+                                unlink(storage_path('docs/' . $document->id));
+                                DB::table('documents')->where('id', $document->id)->delete();
+                                $deleteDocumentCount++;
+                            }
+
+                            // delete associated controls
+                            $controls = DB::table('controls')
+                                ->join('measures', 'measures.id', '=', 'controls.measure_id')
+                                ->where('measures.id', $measure->id)
+                                ->select('controls.id',)
+                                ->get()->toArray();
+
+                            Control::whereIn('id', $controls)->delete();
+
+                            $deleteControlCount += count($controls);
+
+                            // delete measure
+                            measure::where('clause', $data[$line][1])->delete();
+
+                            $deleteCount++;
+                            continue;
+                        }
+                        // update or insert ?
+                        $measure = Measure::where('clause', $data[$line][1])->get()->first();
+
+                        if ($measure !== null) {
+                            // update
+
+                            // $measure = Measure::where('clause', $data[$line][1])->get()->first();
+                            $measure->name = $data[$line][2];
+                            $measure->objective = $data[$line][3];
+                            $measure->attributes = $data[$line][4];
+                            $measure->input = $data[$line][5];
+                            $measure->model = $data[$line][6];
+                            $measure->indicator = $data[$line][7];
+                            $measure->action_plan = $data[$line][8];
+                            $measure->owner = $data[$line][9];
+                            $measure->periodicity = $data[$line][10];
+
+                            $measure->save();
+
+                            // TODO : update last control
+
+                            $updateCount++;
+                        } else {
+                            // insert
+
+                            // get domain id
+                            $domain=Domain::where("title", $data[$line][0])->get()->first();
+
+                            if ($domain === null) {
+                                // create domain
+                                $domain = new Domain;
+                                $domain->title = $data[$line][0];
+                                $domain->save();
+
+                                $newDomainCount++;
+                            }
+
+                            // create measure
+                            $measure = new Measure;
+
+                            $measure->domain_id = $domain->id;
+                            $measure->clause = $data[$line][1];
+                            $measure->name = $data[$line][2];
+                            $measure->objective = $data[$line][3];
+                            $measure->attributes = $data[$line][4];
+                            $measure->input = $data[$line][5];
+                            $measure->model = $data[$line][6];
+                            $measure->indicator = $data[$line][7];
+                            $measure->action_plan = $data[$line][8];
+                            $measure->owner = $data[$line][9];
+                            $measure->periodicity = $data[$line][10];
+                     
+                            $measure->save();
+
+                            $insertCount++;
+                            }
                         }
 
-                        // delete associated controls
-                        $controls = DB::table('controls')
-                            ->join('measures', 'measures.id', '=', 'control.measure_id')
-                            ->where('measures.id', $measure->id)
-                            ->select('controls.id',)
-                            ->get();
-
-                        foreach($controls as $control) {
-                            DB::table('controls')->where('id', $control->id)->delete();
-                            $deleteControlCount++;
-                        }
-
-                        // delete measure
-                        measure::where('clause', $data[$line][1])->delete();
-
-                        $deleteCount++;
-                        continue;
                     }
-                    // update or insert ?
-                    $measure = Measure::where('clause', $data[$line][1])->get()->first();
-
-                    if ($measure !== null) {
-                        // update
-
-                        // $measure = Measure::where('clause', $data[$line][1])->get()->first();
-                        $measure->name = $data[$line][2];
-                        $measure->objective = $data[$line][3];
-                        $measure->attributes = $data[$line][4];
-                        $measure->input = $data[$line][5];
-                        $measure->model = $data[$line][6];
-                        $measure->indicator = $data[$line][7];
-                        $measure->action_plan = $data[$line][8];
-                        $measure->owner = $data[$line][9];
-                        $measure->periodicity = $data[$line][10];
-
-                        $measure->save();
-
-                        // TODO : update last control
-
-                        $updateCount++;
-                    } else {
-                        // insert
-
-                        // get domain id
-                        $domain=Domain::where("title", $data[$line][0])->get()->first();
-
-                        if ($domain === null) {
-                            // create domain
-                            $domain = new Domain;
-                            $domain->title = $data[$line][0];
-                            $domain->save();
-
-                            $newDomainCount++;
-                        }
-
-                        // create measure
-                        $measure = new Measure;
-
-                        $measure->domain_id = $domain->id;
-                        $measure->clause = $data[$line][1];
-                        $measure->name = $data[$line][2];
-                        $measure->objective = $data[$line][3];
-                        $measure->attributes = $data[$line][4];
-                        $measure->input = $data[$line][5];
-                        $measure->model = $data[$line][6];
-                        $measure->indicator = $data[$line][7];
-                        $measure->action_plan = $data[$line][8];
-                        $measure->owner = $data[$line][9];
-                        $measure->periodicity = $data[$line][10];
-                 
-                        $measure->save();
-
-                        $insertCount++;
-                        }
-                    }
-
-                }
                 if ($insertCount>0)
                     $errors->push($insertCount . " lines inserted");
                 if ($updateCount>0)

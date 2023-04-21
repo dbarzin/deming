@@ -136,9 +136,9 @@
                             <span class="icon"><span class="mif-open-book"></span></span>
                             <span class="caption">{{ trans("menu.configuration.reports") }}</span>
                         </a></li>
-                        <li><a href="/import-export">
+                        <li><a href="/measure/import">
                             <span class="icon"><span class="mif-file-excel"></span></span>
-                            <span class="caption">{{ trans("menu.configuration.import-export") }}</span>
+                            <span class="caption">{{ trans("menu.configuration.import") }}</span>
                         </a></li>
                         <li><a href="/doc/stats"> 
                             <span class="icon"><span class="mif-file-text"></span></span>

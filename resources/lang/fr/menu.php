@@ -12,7 +12,7 @@ return [
         'title' => 'Configuration',
         'users' => 'Utilisateurs',
         'reports' => 'Rapports',
-        'import-export' => "Import / Export",
+        'import' => "Import",
         'documents' => 'Documents',
         'models' => 'Modèles'
     ]
