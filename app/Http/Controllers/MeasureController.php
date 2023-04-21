@@ -8,7 +8,10 @@ use App\Document;
 use App\Measure;
 
 use App\Exports\MeasuresExport;
+
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -387,8 +390,11 @@ class MeasureController extends Controller
 
     public function import(Request $request)
     {
+        // Only for CISO
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $request->validate([
-            'file' => 'required|mimes:xls,xlsx|max:2048'
+            'file' => 'required|mimes:xls,xlsx'
             ]);
 
         if ($request->file()) {
@@ -475,6 +481,9 @@ class MeasureController extends Controller
                         $errors->push(($line+1) . ": responsible too long");
                         continue;
                     }
+                    // TODO: check tags
+
+                    // TODO; check periodicity
 
                 }
 
@@ -497,7 +506,7 @@ class MeasureController extends Controller
                             $documents = DB::table('documents')
                                 ->join('controls', 'controls.id', '=', 'documents.control_id')
                                 ->join('measures', 'measures.id', '=', 'controls.measure_id')
-                                ->where('measures.id', $measure->id)
+                                ->where('measures.clause', $data[$line][1])
                                 ->select('documents.id',)
                                 ->get();
 
@@ -507,14 +516,19 @@ class MeasureController extends Controller
                                 $deleteDocumentCount++;
                             }
 
-                            // delete associated controls
-                            $controls = DB::table('controls')
-                                ->join('measures', 'measures.id', '=', 'controls.measure_id')
-                                ->where('measures.id', $measure->id)
-                                ->select('controls.id',)
-                                ->get()->toArray();
 
-                            Control::whereIn('id', $controls)->delete();
+                            // Break link between controls
+                            Control::join('measures', 'measures.id', '=', 'controls.measure_id')
+                                ->where('measures.clause', $data[$line][1])
+                                ->update(['next_id' => null]);
+
+
+                            // Delete controls
+                            $controls = Control::join('measures', 'measures.id', '=', 'controls.measure_id')
+                                ->where('measures.clause', $data[$line][1])
+                                ->get(['controls.id']);
+
+                            Control::destroy($controls->toArray());
 
                             $deleteControlCount += count($controls);
 
