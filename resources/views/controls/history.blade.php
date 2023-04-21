@@ -31,7 +31,7 @@
                     ?>
                     <tr>
                         <td align="center">
-                        <a href="/controls?period={{$i}}&domain=0&status=0">
+                        <a href="/controls?period={{$i+$delta}}&domain=0&status=0">
                           <?php        
 	                     echo $first->format("m/Y");
                           ?>
@@ -145,7 +145,7 @@
             ?>
             <tr>
                 <td align="center">
-                <a href="/controls?period={{$i}}&domain=0&status=0">
+                <a href="/controls?period={{$i+$delta}}&domain=0&status=0">
                 <?php        
 	             echo $first->format("m/Y");
                 ?>
