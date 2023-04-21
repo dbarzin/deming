@@ -52,13 +52,13 @@
 		    		</thead>
 		    		<tbody>
 		        		<tr>
-		        			<td>A</td><td>Domain</td><td>string(255)</td>
+		        			<td>A</td><td>Domain</td><td>string(32)</td>
 		        			<td>
 		        				The domains name must be provided, it is created if it does not exists.
 		        			</td>
 		        		</tr>
 		        		<tr>
-		        			<td>B</td><td>Clause</td><td>string(255)</td>
+		        			<td>B</td><td>Clause</td><td>string(32)</td>
 		        			<td>
 		        					If the clause exists the security measure is updated,<br>
 		        					if the clause does not exists, a new security measure is created,<br>
