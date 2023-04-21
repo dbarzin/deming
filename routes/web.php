@@ -30,7 +30,9 @@ Route::get('/profile/avatar/{id}', 'ProfileController@avatar');
 Route::get('/measure/plan/{id}', 'MeasureController@plan');
 Route::get('/measure/unplan/{id}', 'MeasureController@unplan');
 Route::post('/measure/activate/{id}', 'MeasureController@activate');
-Route::get('/measure/import', function () { return view('measures/import'); });
+Route::get('/measure/import', function () {
+    return view('measures/import');
+});
 Route::post('/measure/import', 'MeasureController@import');
 
 /* Controls */
@@ -79,7 +81,9 @@ Route::post('/action/save', 'ActionplanController@save');
 Route::get('/reports/pilotage', 'ReportController@pilotage');
 
 /* Exports */
-Route::get('/reports', function () { return view('reports'); });
+Route::get('/reports', function () {
+    return view('reports');
+});
 
 Route::get('/export/domains', 'DomainController@export');
 Route::get('/export/attributes', 'AttributeController@export');

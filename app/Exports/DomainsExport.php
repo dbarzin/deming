@@ -22,7 +22,7 @@ class DomainsExport implements FromQuery, WithMapping, WithHeadings, WithStyles,
         ];
     }
 
-    public function styles(Worksheet $sheet)
+    public function styles(Worksheet)
     {
         return [
             // Style the first row as bold text.

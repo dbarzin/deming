@@ -287,7 +287,7 @@ class ControlController extends Controller
 
         // count control never made
         $controls_never_made = DB::select(
-                '
+            '
                 select domain_id 
                 from controls c1 
                 where realisation_date is null and 
