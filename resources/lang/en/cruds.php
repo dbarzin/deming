@@ -144,8 +144,8 @@ return [
          'import' => 'Import',
      ],
     'imports' => [
+         'index' => 'Import',
          'title' => 'Import security measures',
-
      ],
      'login' => [
          'title' => 'Enter a password',

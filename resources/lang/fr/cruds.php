@@ -143,6 +143,10 @@ return [
         'measures_export' => 'Exportation des mesures de sécurité',
         'controls_export' => 'Exportation des contrôles',
     ],
+    'imports' => [
+         'index' => 'Importer',
+         'title' => 'Importer des mesures de sécurité',
+    ],
     'login' => [
         'title' => 'Entrez un mot de passe',
         'identification' => 'Identification',

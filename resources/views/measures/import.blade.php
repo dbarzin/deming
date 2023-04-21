@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.exports.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.imports.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 			@if (count($errors))
 			<div class="form-group">
@@ -62,7 +62,7 @@
 		        			<td>
 		        					If the clause exists the security measure is updated,<br>
 		        					if the clause does not exists, a new security measure is created,<br>
-		        					if all other fields of the line are empty, the measure is removed.
+		        					if all other fields of the line are empty, the measure, related controls and documents are removed.
 		        			</td>
 		        		</tr>
 		        		<tr>

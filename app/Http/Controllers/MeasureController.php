@@ -484,7 +484,21 @@ class MeasureController extends Controller
                     // TODO: check tags
 
                     // TODO; check periodicity
+                    if (
+                        ($data[$line][10] !== null) &&    
+                        ($data[$line][10] !== "1") &&
+                        ($data[$line][10] !== "3") &&
+                        ($data[$line][10] !== "6") &&
+                        ($data[$line][10] !== "12")
+                    ) {
+                        $errors->push(($line+1) . ": invalid periodicity");
+                        continue;
+                    }
 
+                    if ($errors->count()>10) {
+                        $errors->push("too many errors...");
+                        break;
+                    }
                 }
 
                 if ($errors->isEmpty()) {
@@ -522,7 +536,6 @@ class MeasureController extends Controller
                                 ->where('measures.clause', $data[$line][1])
                                 ->update(['next_id' => null]);
 
-
                             // Delete controls
                             $controls = Control::join('measures', 'measures.id', '=', 'controls.measure_id')
                                 ->where('measures.clause', $data[$line][1])
@@ -534,6 +547,8 @@ class MeasureController extends Controller
 
                             // delete measure
                             measure::where('clause', $data[$line][1])->delete();
+
+                            // TODO: delete empty domains
 
                             $deleteCount++;
                             continue;
@@ -553,7 +568,7 @@ class MeasureController extends Controller
                             $measure->indicator = $data[$line][7];
                             $measure->action_plan = $data[$line][8];
                             $measure->owner = $data[$line][9];
-                            $measure->periodicity = $data[$line][10];
+                            $measure->periodicity = ($data[$line][10] === null) ? 12 : intval($data[$line][10]);
 
                             $measure->save();
 
@@ -588,7 +603,7 @@ class MeasureController extends Controller
                             $measure->indicator = $data[$line][7];
                             $measure->action_plan = $data[$line][8];
                             $measure->owner = $data[$line][9];
-                            $measure->periodicity = $data[$line][10];
+                            $measure->periodicity = ($data[$line][10] === null) ? 12 : intval($data[$line][10]);
                      
                             $measure->save();
 
