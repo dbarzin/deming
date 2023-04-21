@@ -17,6 +17,7 @@ mix.js([
         'public/vendors/ckeditor/ckeditor.js',
         'public/vendors/jquery/jquery-3.6.1.min.js',
         'public/vendors/metro4/js/metro.js',
+        // 'resources/js/dropzone.js',
         'resources/js/utils.js',
         ], 
     'public/js/all.js')
@@ -26,6 +27,7 @@ mix.styles([
     'public/vendors/chartjs/Chart.css', 
     'public/vendors/metro4/css/metro-all.css',
     'resources/css/app.css',
+    // 'resources/css/dropzone.css',
     'resources/css/calendar.css',
     ], 
     'public/css/all.css');

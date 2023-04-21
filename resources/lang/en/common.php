@@ -20,7 +20,7 @@ return [
      'previous' => 'Previous',
      'more_info' => 'More info',
 
-     'green' => 'green',
+     'green' => 'Green',
      'orange' => 'Orange',
-     'red' => 'red',
+     'red' => 'Red',
 ];

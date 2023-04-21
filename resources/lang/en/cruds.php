@@ -138,9 +138,14 @@ return [
          'report_title' => 'Report',
          'steering' => 'ISMS steering report',
          'data_export_title' => 'Data Export',
-         'domains_export'=> 'Domains export',
-         'measures_export' => 'Export of security measures',
-         'controls_export' => 'Controls export',
+         'domains_export'=> 'Domains ',
+         'measures_export' => 'Security measures',
+         'controls_export' => 'Controls',
+         'import' => 'Import',
+     ],
+    'imports' => [
+         'title' => 'Import security measures',
+
      ],
      'login' => [
          'title' => 'Enter a password',

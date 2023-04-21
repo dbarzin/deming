@@ -6,12 +6,13 @@ return [
     'measures' => 'Mesures',
     'controls' => 'Controls',
     'planning' => 'Planning',
-    'radar' => 'Radar',
+    'radar' => 'Analysis',
     'action_plan' => 'Action plans',
     'configuration' => [
         'title' => 'Configuration',
         'users' => 'Users',
-        'reports' => 'Rapports',
+        'reports' => 'Reports',
+        'import-export' => "Import / Export",
         'documents' => 'Documents',
         'models' => 'Models'
     ]

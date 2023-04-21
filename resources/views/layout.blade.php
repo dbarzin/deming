@@ -9,6 +9,13 @@
 
     <link rel="stylesheet" href="/css/all.css" />
     <script src="/js/all.js"></script>
+
+    <!-- Dropzone -->
+    <!-- https://rawgit.com/enyo/dropzone/master/dist/dropzone.js -->
+    <script src="/js/dropzone.js"></script>
+    <!-- https://rawgit.com/enyo/dropzone/master/dist/dropzone.css -->    
+    <link rel="stylesheet" href="/css/dropzone.css">
+
 </head>
 
 <body class="m4-cloak h-vh-100">
@@ -125,9 +132,13 @@
                             <span class="caption">{{ trans("menu.configuration.users") }}</span>
                         </a></li>
                         @endif
-                        <li><a href="/exports">
-                            <span class="icon"><span class="mif-download"></span></span>
+                        <li><a href="/reports">
+                            <span class="icon"><span class="mif-open-book"></span></span>
                             <span class="caption">{{ trans("menu.configuration.reports") }}</span>
+                        </a></li>
+                        <li><a href="/import-export">
+                            <span class="icon"><span class="mif-file-excel"></span></span>
+                            <span class="caption">{{ trans("menu.configuration.import-export") }}</span>
                         </a></li>
                         <li><a href="/doc/stats"> 
                             <span class="icon"><span class="mif-file-text"></span></span>

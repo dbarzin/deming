@@ -5,8 +5,8 @@
     <div data-role="panel" data-title-caption="{{ trans('cruds.measure.edit') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 	@if (count($errors))
-	<div class= “form-group”>
-		<div class= “remark alert alert-danger”>
+	<div class="form-group">
+		<div class= "remark alert alert-danger">
 			<ul>
 			@foreach ($errors->all() as $error)
 				<li>{{ $error }}</li>
@@ -15,14 +15,6 @@
 		</div>
 	</div>
 	@endif
-
-	<style type="text/css">
-	form, table {
-	     display:inline;
-	     margin:0px;
-	     padding:0px;
-	}
-	</style>
 
 	<form method="POST" action="/measures/{{ $measure->id }}">
 		@method("PATCH")

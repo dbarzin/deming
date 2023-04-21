@@ -4,11 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Control;
 use App\Domain;
-use App\Exports\MeasuresExport;
+use App\Document;
 use App\Measure;
+
+use App\Exports\MeasuresExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+
+use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+
 
 class MeasureController extends Controller
 {
@@ -358,8 +364,248 @@ class MeasureController extends Controller
         return redirect('/measures');
     }
 
+    /**
+     * Disable a measure
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
     public function export()
     {
-        return Excel::download(new MeasuresExport(), 'measures.xlsx');
+        return Excel::download(new MeasuresExport(), 'measures '. now()->format('Y-m-d Hi') . '.xlsx');
+    }
+
+
+    /**
+     * Import Measures
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\Response
+     */
+
+    public function import(Request $request)
+    {
+        $request->validate([
+            'file' => 'required|mimes:xls,xlsx|max:2048'
+            ]);
+
+        if ($request->file()) {
+
+            $fileName = null;
+            // Save temp file
+            try {
+                $fileName = $request->file('file')->store();
+
+                // XLSX 
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+                $reader->setReadDataOnly(true);
+                $spreadsheet = $reader->load(Storage::path($fileName));
+
+                $sheet = $spreadsheet->getSheet($spreadsheet->getFirstSheetIndex());
+                $data = $sheet->toArray();
+
+                $errors = Collect();
+                $deleteCount = 0;
+                $insertCount = 0;
+                $updateCount = 0;
+                $newDomainCount = 0;
+                $deleteControlCount = 0;
+                $deleteDocumentCount = 0;
+                /*
+                +-------------+---------------+------+-----+---------+----------------+
+                | Field       | Type          | Null | Key | Default | Extra          |
+                +-------------+---------------+------+-----+---------+----------------+
+              0 | domain      | varchar(255)  | NO   | MUL | NULL    |                |
+              1 | clause      | varchar(32)   | NO   |     | NULL    |                |
+              2 | name        | varchar(255)  | NO   |     | NULL    |                |
+              3 | objective   | text          | YES  |     | NULL    |                |
+              4 | attributes  | varchar(1024) | YES  |     | NULL    |                |
+              5 | input       | text          | YES  |     | NULL    |                |
+              6 | model       | text          | YES  |     | NULL    |                |
+              7 | indicator   | text          | YES  |     | NULL    |                |
+              8 | action_plan | text          | YES  |     | NULL    |                |
+              9 | owner       | varchar(255)  | YES  |     | NULL    |                |
+             10 | periodicity | int           | YES  |     | NULL    |                |
+                +-------------+---------------+------+-----+---------+----------------+
+                */
+
+                // Check for errors
+                for ($line=1; $line<count($data); $line++) {
+                    if ( ($data[$line][0] === null) ) {
+                        $errors->push(($line+1) . ": domain is empty");
+                        continue;
+                    }
+                    if ( ($data[$line][1] === null) ) {
+                        $errors->push(($line+1) . ": close is empty");
+                        continue;
+                    }
+                    // delete line ?
+                    if ((count($data[$line])<10) || (
+                        ($data[$line][2] === null) &&  
+                        ($data[$line][3] === null) &&  
+                        ($data[$line][4] === null) &&  
+                        ($data[$line][5] === null) &&  
+                        ($data[$line][6] === null) &&  
+                        ($data[$line][7] === null) &&  
+                        ($data[$line][8] === null) &&  
+                        ($data[$line][9] === null) &&  
+                        ($data[$line][10] === null))
+                    ) {
+                        continue;
+                    }
+                    if ( strlen($data[$line][0]) >= 255) {
+                        $errors->push(($line+1) . ": domain is too long");
+                        continue;
+                    }
+                    if ( strlen($data[$line][1])>=32 ) {
+                        $errors->push(($line+1) . ": close too long");
+                        continue;
+                    }
+                    if ( strlen($data[$line][2]) === null ) {
+                        $errors->push(($line+1) . ": name is empty");
+                        continue;
+                    }
+                    if ( strlen($data[$line][2])>=255 ) {
+                        $errors->push(($line+1) . ": name too long");
+                        continue;
+                    }
+                    if ( strlen($data[$line][9])>=255 ) {
+                        $errors->push(($line+1) . ": responsible too long");
+                        continue;
+                    }
+
+                }
+
+                if ($errors->isEmpty()) {
+                    for ($line=1; $line<count($data); $line++) {
+
+                    // delete line ?
+                    if ((count($data[$line])<10) || (
+                        ($data[$line][2] === null) &&  
+                        ($data[$line][3] === null) &&  
+                        ($data[$line][4] === null) &&  
+                        ($data[$line][5] === null) &&  
+                        ($data[$line][6] === null) &&  
+                        ($data[$line][7] === null) &&  
+                        ($data[$line][8] === null) &&  
+                        ($data[$line][9] === null) &&  
+                        ($data[$line][10] === null))
+                    ) {
+                        // delete documents
+                        $documents = DB::table('documents')
+                            ->join('controls', 'control.id', '=', 'documents.control_id')
+                            ->join('measures', 'measures.id', '=', 'control.measure_id')
+                            ->where('measures.id', $measure->id)
+                            ->select('documents.id',)
+                            ->get();
+
+                        foreach($document as $doc) {
+                            unlink(storage_path('docs'), $doc->id);
+                            DB::table('documents')->where('id', $doc->id)->delete();
+                            $deleteDocumentCount++;
+                        }
+
+                        // delete associated controls
+                        $controls = DB::table('controls')
+                            ->join('measures', 'measures.id', '=', 'control.measure_id')
+                            ->where('measures.id', $measure->id)
+                            ->select('controls.id',)
+                            ->get();
+
+                        foreach($controls as $control) {
+                            DB::table('controls')->where('id', $control->id)->delete();
+                            $deleteControlCount++;
+                        }
+
+                        // delete measure
+                        measure::where('clause', $data[$line][1])->delete();
+
+                        $deleteCount++;
+                        continue;
+                    }
+                    // update or insert ?
+                    $measure = Measure::where('clause', $data[$line][1])->get()->first();
+
+                    if ($measure !== null) {
+                        // update
+
+                        // $measure = Measure::where('clause', $data[$line][1])->get()->first();
+                        $measure->name = $data[$line][2];
+                        $measure->objective = $data[$line][3];
+                        $measure->attributes = $data[$line][4];
+                        $measure->input = $data[$line][5];
+                        $measure->model = $data[$line][6];
+                        $measure->indicator = $data[$line][7];
+                        $measure->action_plan = $data[$line][8];
+                        $measure->owner = $data[$line][9];
+                        $measure->periodicity = $data[$line][10];
+
+                        $measure->save();
+
+                        // TODO : update last control
+
+                        $updateCount++;
+                    } else {
+                        // insert
+
+                        // get domain id
+                        $domain=Domain::where("title", $data[$line][0])->get()->first();
+
+                        if ($domain === null) {
+                            // create domain
+                            $domain = new Domain;
+                            $domain->title = $data[$line][0];
+                            $domain->save();
+
+                            $newDomainCount++;
+                        }
+
+                        // create measure
+                        $measure = new Measure;
+
+                        $measure->domain_id = $domain->id;
+                        $measure->clause = $data[$line][1];
+                        $measure->name = $data[$line][2];
+                        $measure->objective = $data[$line][3];
+                        $measure->attributes = $data[$line][4];
+                        $measure->input = $data[$line][5];
+                        $measure->model = $data[$line][6];
+                        $measure->indicator = $data[$line][7];
+                        $measure->action_plan = $data[$line][8];
+                        $measure->owner = $data[$line][9];
+                        $measure->periodicity = $data[$line][10];
+                 
+                        $measure->save();
+
+                        $insertCount++;
+                        }
+                    }
+
+                }
+                if ($insertCount>0)
+                    $errors->push($insertCount . " lines inserted");
+                if ($updateCount>0)
+                    $errors->push($updateCount . " lines updated");
+                if ($deleteCount>0)
+                    $errors->push($deleteCount . " lines deleted");
+                if ($deleteControlCount>0)
+                    $errors->push($deleteControlCount . " controls deleted");
+                if ($deleteDocumentCount>0)
+                    $errors->push($deleteDocumentCount . " documents deleted");
+                if ($newDomainCount>0)
+                    $errors->push($newDomainCount . " new domains created");
+            }
+            finally {
+                unlink(Storage::path($fileName));
+            }
+
+            return back()
+                ->with('errors',$errors)
+                ->with('file', $fileName);
+        }
+
+    return redirect('/import-export');
     }
 }

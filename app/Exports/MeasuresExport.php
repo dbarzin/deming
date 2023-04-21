@@ -16,9 +16,11 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
     public function headings(): array
     {
         return [
+            trans('cruds.measure.fields.domain'),
             trans('cruds.measure.fields.clause'),
             trans('cruds.measure.fields.name'),
             trans('cruds.measure.fields.objective'),
+            trans('cruds.measure.fields.attributes'),
             trans('cruds.measure.fields.input'),
             trans('cruds.measure.fields.model'),
             trans('cruds.measure.fields.indicator'),
@@ -44,15 +46,16 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
     public function columnWidths(): array
     {
         return [
-            'A' => 10,  // Clause
-            'B' => 30,  // Nom
-            'C' => 50,  // Objectif
-            'D' => 50,  // Attibuts
-            'E' => 50,  // Modele
-            'F' => 50,  // Indicateur
-            'G' => 50,  // Plan d'action
-            'H' => 20,  // Responsable
-            'I' => 20,    // Period
+            'A' => 10,  // Domain
+            'B' => 10,  // Clause
+            'C' => 30,  // Name
+            'D' => 50,  // Objectif
+            'E' => 50,  // Attibuts
+            'F' => 50,  // Modele
+            'G' => 50,  // Indicateur
+            'H' => 50,  // Plan d'action
+            'I' => 20,  // Responsable
+            'J' => 20,  // Period
         ];
     }
 
@@ -63,9 +66,11 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
     {
         return [
             [
+                $measure->domain->title,
                 $measure->clause,
                 $measure->name,
                 $measure->objective,
+                $measure->attributes,
                 $measure->input,
                 $measure->model,
                 $measure->indicator,
@@ -81,6 +86,6 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
      */
     public function query()
     {
-        return DB::table('measures')->orderBy('clause');
+        return Measure::with('domain')->orderBy('clause');
     }
 }
