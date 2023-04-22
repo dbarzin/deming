@@ -10,12 +10,10 @@
     <link rel="stylesheet" href="/css/all.css" />
     <script src="/js/all.js"></script>
 
-    <!-- Dropzone -->
-    <!-- https://rawgit.com/enyo/dropzone/master/dist/dropzone.js -->
+    <!-- Dropzone 
     <script src="/js/dropzone.js"></script>
-    <!-- https://rawgit.com/enyo/dropzone/master/dist/dropzone.css -->    
     <link rel="stylesheet" href="/css/dropzone.css">
-
+    -->
 </head>
 
 <body class="m4-cloak h-vh-100">
