@@ -26,7 +26,7 @@ The lower part of the main page contains the list of controls scheduled for the 
 
 Overdue check dates are displayed in red.
 
-### Research
+### Serach
 
 A search tool allows you to search for the presence of a word in the name, the objectives, the observations of the controls
 and in their action plans.
