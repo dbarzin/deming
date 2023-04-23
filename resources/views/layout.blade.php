@@ -9,11 +9,6 @@
 
     <link rel="stylesheet" href="/css/all.css" />
     <script src="/js/all.js"></script>
-
-    <!-- Dropzone 
-    <script src="/js/dropzone.js"></script>
-    <link rel="stylesheet" href="/css/dropzone.css">
-    -->
 </head>
 
 <body class="m4-cloak h-vh-100">

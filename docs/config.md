@@ -36,13 +36,17 @@ The application allows you to generate the ISMS management report and to export 
 
 [<img src="/deming/images/reports.png" width="500">](/deming/images/reports.png)
 
-
 Here is the ISMS pilot report:
 
 [<img src="/deming/images/report1.png" width="600">](/deming/images/report1.png)
 
 [<img src="/deming/images/report2.png" width="600">](/deming/images/report2.png)
 
+### Import <a name="import"></a>
+
+It is possible to import controls from an .XLSX file.
+
+[<img src="/deming/images/import.png" width="600">](/deming/images/import.png)
 
 ### Documents <a name="documents"></a>
 

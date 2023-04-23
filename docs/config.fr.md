@@ -17,7 +17,7 @@ L’application est founir avec une base de mesure de sécurité inspirée de la
 
 ### Utilisateurs <a name="users"></a>
 
-Les utilisateurs sont directement définits dans l’application.
+Les utilisateurs sont définits dans l’application.
 
 [<img src="/deming/images/users.png" width="600">](/deming/images/users.png)
 
@@ -32,7 +32,7 @@ Il existe trois roles :
 
 ### Rapports <a name="report"></a>
 
-L’application permt de générer le rapport de pilotage du SMSI et d’exporter dans un fichier Excell la liste des domains, les mesures de sécurités et tous les contrôles réalisés.
+L’application permet de générer le rapport de pilotage du SMSI et d’exporter dans un fichier Excell la liste des domains, les mesures de sécurités et tous les contrôles réalisés.
 
 [<img src="/deming/images/reports.png" width="500">](/deming/images/reports.png)
 
@@ -43,6 +43,11 @@ Voici le rapport de pilotage du SMSI :
 
 [<img src="/deming/images/report2.png" width="600">](/deming/images/report2.png)
 
+### Import <a name="import"></a>
+
+Il est possible d'importer des mesures de sécurité depuis un fichier .XLSX.
+
+[<img src="/deming/images/import.png" width="600">](/deming/images/import.png)
 
 ### Documents <a name="documents"></a>
 
