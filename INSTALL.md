@@ -79,9 +79,9 @@ Mettre les paramètre de connexion à la base de données :
     DB_CONNECTION=mysql
     DB_HOST=127.0.0.1
     DB_PORT=3306
-	DB_DATABASE=deming
-	DB_USERNAME=deming_user
-	DB_PASSWORD=demPasssword-123
+    DB_DATABASE=deming
+    DB_USERNAME=deming_user
+    DB_PASSWORD=demPasssword-123
 
 ## Créer la base de données
 
@@ -129,7 +129,7 @@ L'administrateur utilise la langue anglaise par défaut. Pour changer de langue,
 
 ## Apache
 
-Pour configurer Apache, modifiez les propriétés du répertoire deming et accordez les autorisations appropriées au répertoire de stockage avec la commande suivante :
+Pour configurer Apache, modifiez les propriétés du répertoire Deming et accordez les autorisations appropriées au répertoire de stockage avec la commande suivante :
 
     sudo chown -R www-data:www-data /var/www/deming
     sudo chmod -R 775 /var/www/deming/storage
@@ -163,12 +163,12 @@ Enfin, redémarrez le service Apache pour activer les modifications :
 
 ## Mise à jour
 
-Pour mettre à jour Deming, il faut aller dans le répoertoire de deming et récupérer les sources
+Pour mettre à jour Deming, il faut aller dans le répoertoire de Deming et récupérer les sources
 
     cd /var/www/deming
     git pull
 
-migrer la base de données
+Migrer la base de données
 
     php artisan migrate
 

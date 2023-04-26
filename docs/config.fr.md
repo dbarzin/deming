@@ -59,7 +59,7 @@ Le bouton « Vérifier » permet de vérifier l’intégrité des documents cons
 
 ### Modèles <a name="models"></a>
 
-Cet écran permet de modifier les modèle de document utilisés pour les fiches de contrôle et le rapport de pilotage du SMSI.
+Cet écran permet de modifier les modèles de document utilisés pour les fiches de contrôle et le rapport de pilotage du SMSI.
 
 [<img src="/deming/images/models.png" width="300">](/deming/images/models.png)
 
