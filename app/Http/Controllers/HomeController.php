@@ -102,23 +102,15 @@ class HomeController extends Controller
                 c1.plan_date,
                 c2.id as prev_id,
                 c2.realisation_date as prev_date,
-                c2.score as score
+                c2.score as score,
+                domains.title as domain
             from
                 controls c1 left join controls c2 on c2.next_id=c1.id
+                left join domains on c1.domain_id=domains.id
             where (c1.realisation_date is null) and (c1.plan_date < NOW() + INTERVAL 30 DAY)
             order by c1.plan_date'
         );
 
-        /*
-        $controls_todo = DB::table('controls')
-            ->where(
-                [
-                    ["realisation_date","=",null],
-                    ["plan_date","<",(new Carbon('first day of next month'))->toDateString()]
-                ]
-            )
-            ->get();
-        */
         // dd($plannedMeasurements);
 
         // planed controls this month
@@ -173,7 +165,7 @@ class HomeController extends Controller
         $controls = DB::table('controls')
             ->select('id', 'clause', 'score', 'realisation_date', 'plan_date')
             ->get();
-
+        
         // return
         return view('welcome')
             ->with('active_domains_count', $active_domains_count)
@@ -189,6 +181,7 @@ class HomeController extends Controller
             ->with('action_plans_count', $action_plans_count)
             ->with('late_controls_count', $late_controls_count)
 
-            ->with('controls', $controls);
+            ->with('controls', $controls)
+            ;
     }
 }

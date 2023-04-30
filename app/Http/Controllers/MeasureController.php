@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
+use Illuminate\Database\Query\JoinClause;
 
 class MeasureController extends Controller
 {
@@ -35,12 +36,28 @@ class MeasureController extends Controller
             $domain = $request->session()->get('domain');
         }
 
+        $measures = DB::table("measures")
+            ->select(
+                [
+                    'measures.id',
+                    'measures.domain_id',
+                    'measures.clause',
+                    'measures.name',
+                    'controls.plan_date',
+                    'domains.title'
+                ])
+            ->leftjoin('domains', 'measures.domain_id', '=', 'domains.id')
+            ->join('controls', function (JoinClause $join) {
+                $join->on('measures.id', '=', 'controls.measure_id')
+                     ->whereNull('controls.realisation_date');
+            },null,null,"left outer");
+
         if (($domain !== null)) {
-            $measures = Measure::where('domain_id', $domain)->get()->sortBy('clause');
+            $measures->where('measures.domain_id', $domain);
             $request->session()->put('domain', $domain);
-        } else {
-            $measures = Measure::All()->sortBy('clause');
         }
+
+        $measures= $measures->orderBy('clause')->get();
 
         // return
         return view('measures.index')

@@ -125,7 +125,7 @@
                 <tr onclick="window.location = '/controls/{{$control->id}}';">
                     <td>
                         <a href="/domains/{{$control->domain_id}}">
-                        {{ \App\Domain::find($control->domain_id)->title }} 
+                            {{ $control->domain }}
                         </a>
                         </td>
                     <td>

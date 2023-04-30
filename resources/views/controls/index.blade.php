@@ -134,7 +134,7 @@
         <tr>
             <td>
                 <a href="/domains/{{ $control->domain_id}} ">
-                    {{ \App\Domain::find($control->domain_id)->title }}
+                    {{ $control->title }}
                 </a>
             </td>
             <td>

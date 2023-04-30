@@ -61,7 +61,7 @@
 				<tr>
 					<td>
 						<a href="/domains/{{$measure->domain_id}}">
-							{{ $measure->domain->title }}
+							{{ $measure->title }}
 						</a>
 					</td>
 					<td><a href="/measures/{{ $measure->id}}">
@@ -74,8 +74,8 @@
 					</td>
 					<td>{{ $measure->name }}</td>
 					<td>
-						@if ($measure->planDate()!==null)
-							<a href="/measure/plan/{{ $measure->id }}">{{ $measure->planDate() }}</a>
+						@if ($measure->plan_date!==null)
+							<a href="/measure/plan/{{ $measure->id }}">{{ $measure->plan_date }}</a>
 						@else
 						    <form action="/measure/plan/{{ $measure->id }}">
 						    	<button class="button info">
@@ -83,7 +83,7 @@
 						            &nbsp;
 							    	{{ trans('common.plan') }}
 						    	</button>
-						    </form>						
+						    </form>
 						@endif
 					</td>
 				</tr>

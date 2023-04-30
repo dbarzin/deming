@@ -106,7 +106,8 @@ class ControlController extends Controller
 
         // Build query
         $controls = DB::table('controls as c1')
-            ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id');
+            ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id')
+            ->leftjoin('domains', 'c1.domain_id', '=', 'domains.id');
 
         // Filter on domain
         if (($domain !== null) && ($domain !== 0)) {
@@ -149,6 +150,7 @@ class ControlController extends Controller
                 'c1.score as score',
                 'c2.id as next_id',
                 'c2.plan_date as next_date',
+                'domains.title'
             ]
         )
             ->orderBy('c1.id')->get();

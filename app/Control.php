@@ -2,6 +2,9 @@
 
 namespace App;
 
+use App\Domain;
+use App\Measure;
+
 use Illuminate\Database\Eloquent\Model;
 
 class Control extends Model
@@ -27,6 +30,11 @@ class Control extends Model
     ];
 
     // Return the measure associated to this control
+    public function domain()
+    {
+        return $this->belongsTo(Domain::class, 'domain_id');
+    }
+
     public function measure()
     {
         return $this->belongsTo(Measure::class, 'measure_id');
