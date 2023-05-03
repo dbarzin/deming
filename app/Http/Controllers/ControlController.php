@@ -479,7 +479,7 @@ class ControlController extends Controller
         $control = Control::find($id);
         if ($control === null) {
             Log::Error('Control:make - Control not found  '. request('id'));
-            return null;
+            return redirect('/controls');
         }
 
         // Control already made ?
@@ -690,8 +690,5 @@ class ControlController extends Controller
         // return
         return response()->download($filepath);
 
-        // return response()->make($user->avatar, 200, array(
-        //     'Content-Type' => (new finfo(FILEINFO_MIME))->buffer($user->avatar)
-        // ));
     }
 }

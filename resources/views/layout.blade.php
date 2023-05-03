@@ -181,13 +181,13 @@
                 <a href="/controls?attribute=none&period=99&domain=0&status=1&late=1" class="app-bar-item">
                     <span class="mif-bell"></span>
                     @if (Session::get("late_controls_count")!=null)                    
-                    <span class="badge bg-orange fg-white mt-2 mr-1">{{Session::get("late_controls_count")}}</span>
+                    <span class="badge bg-red fg-white mt-2 mr-1">{{Session::get("late_controls_count")}}</span>
                     @endif
                 </a>
                 <a href="/actions" class="app-bar-item">
                     <span class="mif-flag"></span>
                     @if (Session::get("action_plans_count")!=null)
-                    <span class="badge bg-red fg-white mt-2 mr-1">{{Session::get("action_plans_count")}}</span>
+                    <span class="badge bg-blue fg-white mt-2 mr-1">{{Session::get("action_plans_count")}}</span>
                     @endif
                 </a>
                 <a href="/users/{{ Auth::User()->id }}/edit" class="app-bar-item">

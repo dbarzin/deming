@@ -25,9 +25,6 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
-        // get all domains
-        $domains = DB::table('domains')->get();
-
         // count active domains
         $active_domains_count = DB::table('controls')
             ->select(
@@ -36,7 +33,6 @@ class HomeController extends Controller
             )
             ->whereNull('realisation_date')
             ->groupBy('domain_id')
-            ->get()
             ->count();
 
         // count all controls
@@ -170,7 +166,6 @@ class HomeController extends Controller
         return view('welcome')
             ->with('active_domains_count', $active_domains_count)
             ->with('active_controls', $active_controls)
-            ->with('domains', $domains)
             ->with('controls_count', $controls_count)
             ->with('active_measures_count', $active_measures_count)
             ->with('controls_made_count', $controls_made_count)

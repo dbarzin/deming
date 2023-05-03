@@ -117,7 +117,8 @@ class DocumentController extends Controller
         // Log::Alert("delete called");
         $document = Document::Find($id);
         if ($document === null) {
-            return redirect('image/list')->with('errorMessage', 'File not found !');
+            return redirect('image/list')
+                ->with('errorMessage', 'File not found !');
         }
 
         $path = storage_path('docs/'.$document->id);
@@ -135,8 +136,8 @@ class DocumentController extends Controller
 
     public function stats()
     {
-        $count = Document::All()->count();
-        $sum = Document::All()->sum('size');
+        $count = Document::count();
+        $sum = Document::sum('size');
 
         return view('/documents/index')
             ->with('count', $count)
