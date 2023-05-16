@@ -150,7 +150,7 @@ class ControlController extends Controller
                 'c1.score as score',
                 'c2.id as next_id',
                 'c2.plan_date as next_date',
-                'domains.title'
+                'domains.title',
             ]
         )
             ->orderBy('c1.id')->get();
@@ -689,6 +689,5 @@ class ControlController extends Controller
 
         // return
         return response()->download($filepath);
-
     }
 }

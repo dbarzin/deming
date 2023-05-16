@@ -2,9 +2,6 @@
 
 namespace App;
 
-use App\Domain;
-use App\Measure;
-
 use Illuminate\Database\Eloquent\Model;
 
 class Control extends Model

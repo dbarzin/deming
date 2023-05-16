@@ -141,7 +141,7 @@ class ReportController extends Controller
 
         // get status report
         $controls = DB::select(
-                '
+            '
             SELECT 
             c1.measure_id, 
             c1.domain_id,

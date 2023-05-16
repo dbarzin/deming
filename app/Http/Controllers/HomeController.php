@@ -161,7 +161,7 @@ class HomeController extends Controller
         $controls = DB::table('controls')
             ->select('id', 'clause', 'score', 'realisation_date', 'plan_date')
             ->get();
-        
+
         // return
         return view('welcome')
             ->with('active_domains_count', $active_domains_count)
@@ -177,6 +177,6 @@ class HomeController extends Controller
             ->with('late_controls_count', $late_controls_count)
 
             ->with('controls', $controls)
-            ;
+        ;
     }
 }

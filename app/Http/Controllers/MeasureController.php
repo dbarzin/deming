@@ -6,13 +6,13 @@ use App\Control;
 use App\Domain;
 use App\Exports\MeasuresExport;
 use App\Measure;
+use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
 use Maatwebsite\Excel\Facades\Excel;
-use Illuminate\Database\Query\JoinClause;
 
 class MeasureController extends Controller
 {
@@ -36,7 +36,7 @@ class MeasureController extends Controller
             $domain = $request->session()->get('domain');
         }
 
-        $measures = DB::table("measures")
+        $measures = DB::table('measures')
             ->select(
                 [
                     'measures.id',
@@ -44,20 +44,21 @@ class MeasureController extends Controller
                     'measures.clause',
                     'measures.name',
                     'controls.plan_date',
-                    'domains.title'
-                ])
+                    'domains.title',
+                ]
+            )
             ->leftjoin('domains', 'measures.domain_id', '=', 'domains.id')
             ->join('controls', function (JoinClause $join) {
                 $join->on('measures.id', '=', 'controls.measure_id')
-                     ->whereNull('controls.realisation_date');
-            },null,null,"left outer");
+                    ->whereNull('controls.realisation_date');
+            }, null, null, 'left outer');
 
         if (($domain !== null)) {
             $measures->where('measures.domain_id', $domain);
             $request->session()->put('domain', $domain);
         }
 
-        $measures= $measures->orderBy('clause')->get();
+        $measures = $measures->orderBy('clause')->get();
 
         // return
         return view('measures.index')
