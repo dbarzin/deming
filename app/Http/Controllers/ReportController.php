@@ -141,7 +141,6 @@ class ReportController extends Controller
 
         // get status report
         $controls = DB::select(
-            DB::raw(
                 '
             SELECT 
             c1.measure_id, 
@@ -153,7 +152,6 @@ class ReportController extends Controller
             WHERE
                 c2.realisation_date is null and c1.next_id is not null
             group by c1.measure_id order by c1.clause;'
-            )
         );
 
         $count_domains = count($domains);
