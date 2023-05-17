@@ -125,7 +125,7 @@ L'application est accessible à l'URL [http://127.0.0.1:8000]
     mot de passe : admin
 
 L'administrateur utilise la langue anglaise par défaut. Pour changer de langue, allez dans la page de profil de l'utilisateur 
-(en haut à droit de la page principale).
+(en haut à droite de la page principale).
 
 ## Apache
 
