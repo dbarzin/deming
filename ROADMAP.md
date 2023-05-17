@@ -15,7 +15,7 @@ This document contains the evolutions planned for Deming in 2023.
 * [x] Attributes (tags) - add attributes on security measures
 * [x] Improve test data generation
 * [x] User documentation
-* [ ] Implement import/export of controls
+* [x] Implement import/export of controls
 * [ ] Fix column sort with date (https://codepen.io/olton/pen/rNNmxaB)
 * [ ] Manage non-conformities
 * [ ] Multisites - introduce controls by site
