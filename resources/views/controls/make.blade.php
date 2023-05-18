@@ -213,8 +213,10 @@
 <br>
 
 <script>
-Dropzone.options.dropzoneFileUpload = { 
-            url: '/doc/store',
+Dropzone.autoDiscover = false;
+
+const myDropzone = new Dropzone("div#dropzoneFileUpload", {  
+        url: '/doc/store',
 	    headers: { 'x-csrf-token': '{{csrf_token()}}' },
 	    params: { 'control': '{{ $control->id }}' },
             maxFilesize: 10,
@@ -265,23 +267,22 @@ Dropzone.options.dropzoneFileUpload = {
             for (i = 0; i < existingFiles.length; i++) {
                 this.emit("addedfile", existingFiles[i]);                
                 this.emit("complete", existingFiles[i]);                
-            }            
+            	}            
         	}
-
     	}
+    );
 
-document.onpaste = function(event){
+document.onpaste = function(event) {
   const items = (event.clipboardData || event.originalEvent.clipboardData).items;
-  for (let index in items) {
-    const item = items[index];
-    console.log("paste "+item.kind);
+  items.forEach((item) => {
+  	console.log(item.kind);
     if (item.kind === 'file') {
-    // adds the file to your dropzone instance
-       console.log("file: "+item.name);
-      //Dropzone.options.dropzoneFileUpload.addFile(item.getAsFile())
-    }
-  }
+      	// adds the file to your dropzone instance
+      	myDropzone.addFile(item.getAsFile())
+    	}
+  	})
 }
+
 </script>
 
 @endsection
