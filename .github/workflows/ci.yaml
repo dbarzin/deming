@@ -31,14 +31,14 @@ jobs:
             php-version: '8.1'
             extensions: zip, curl, mbstring, dom, ldap, soap, xdebug, mysql, gd
 
+      - name: Configrue Storage Permission
+        run: chmod -R 777 storage bootstrap/cache
+
       - name: Install dependencies
         run: composer update --no-progress --no-interaction --prefer-dist --optimize-autoloader
 
       - name: Create Database
         run: mysql --host 127.0.0.1 --port 3306 -uroot -e "CREATE DATABASE deming CHARACTER SET utf8 COLLATE utf8_general_ci;"
-
-      - name: Configrue Storage Permission
-        run: chmod -R 777 storage bootstrap/cache
 
       - name: Prepare the application
         run: php -r "file_exists('.env') || copy('.env.ci', '.env');"

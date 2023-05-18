@@ -36,8 +36,13 @@
         }    
     },
     "autoload-dev": {
+        "classmap": [
+              "database"
+            ],        
         "psr-4": {
-            "Tests\\": "tests/"
+            "App\\": "app/",
+            "Database\\Factories\\": "database/factories/",
+            "Database\\Seeders\\": "database/seeders/"
         }
     },
     "scripts": {
