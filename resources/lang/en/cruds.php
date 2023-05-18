@@ -152,7 +152,14 @@ return [
          'identification' => 'Identification',
          'connection' => 'Connection',
      ],
-     'user' => [
+    'report' => [
+        'action_plan' => [
+            'id' => '#',
+            'title' => 'Action plan',
+            'next' => 'Review date'
+        ]
+    ],
+    'user' => [
          'index' => 'List of users',
          'edit' => 'Edit User',
          'add' => 'Add User',

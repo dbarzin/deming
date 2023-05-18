@@ -305,11 +305,11 @@ class ReportController extends Controller
         // create header
         $table->addRow();
         $table->addCell(2000, ['bgColor' => '#FFD5CA'])
-            ->addText('#', ['bold' => true], ['align' => 'center']);
+            ->addText(trans('cruds.report.action_plan.id'), ['bold' => true], ['align' => 'center']);
         $table->addCell(13000, ['bgColor' => '#FFD5CA'])
-            ->addText('Titre', ['bold' => true]);
+            ->addText(trans('cruds.report.action_plan.title'), ['bold' => true]);
         $table->addCell(3000, ['bgColor' => '#FFD5CA'])
-            ->addText('Next', ['bold' => true]);
+            ->addText(trans('cruds.report.action_plan.next'), ['bold' => true]);
 
         // table content
         foreach ($actions as $action) {

@@ -152,6 +152,13 @@ return [
         'identification' => 'Identification',
         'connection' => 'Connexion',
     ],
+    'report' => [
+        'action_plan' => [
+            'id' => '#',
+            'title' => 'Plan d\'action',
+            'next' => 'Date de revue'
+        ]
+    ],
     'user' => [
         'index' => 'Liste des utilisateurs',
         'edit' => 'Modifier un utilisateur',
