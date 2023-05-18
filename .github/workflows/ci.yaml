@@ -1,0 +1,71 @@
+name: Continuous Integration
+
+on:
+  push:
+    branches: 
+      - main
+
+jobs:
+
+  deploy:
+    runs-on: ubuntu-latest 
+
+    services:
+      mysql:
+        image: mysql:8.0.21
+        env:
+          MYSQL_ALLOW_EMPTY_PASSWORD: yes
+        ports:
+          - 3306:3306
+        options: --health-cmd="mysqladmin ping" --health-interval=10s --health-timeout=5s --health-retries=3
+
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Setup PHP
+        uses: shivammathur/setup-php@v2
+        with:
+            php-version: '8.1'
+            extensions: zip, curl, mbstring, dom, ldap, soap, xdebug, mysql, gd
+
+      - name: Install dependencies
+        run: composer update --no-progress --no-interaction --prefer-dist --optimize-autoloader
+
+      - name: Create Database
+        run: mysql --host 127.0.0.1 --port 3306 -uroot -e "CREATE DATABASE deming CHARACTER SET utf8 COLLATE utf8_general_ci;"
+
+      - name: Configrue Storage Permission
+        run: chmod -R 777 storage bootstrap/cache
+
+      - name: Prepare the application
+        run: php -r "file_exists('.env') || copy('.env.ci', '.env');"
+
+      - name: Set the application key
+        run: |
+          php artisan key:generate
+
+      - name: Publish any publishable assets from vendor packages
+        run: |
+          php artisan vendor:publish --all
+
+      - name: Remove the configuration cache file
+        run: |
+          php artisan config:clear
+
+      - name: Migrate and seed the database
+        run: |
+          php artisan migrate --seed 
+
+      - name: Insert test data
+        run: |
+          mysql deming --host 127.0.0.1 --port 3306 -uroot < deming-27001:2022.sql
+
+      - name: Check code quality
+        run: |
+          php artisan insights
+
+      - name: Run Laravel Server
+        run: php artisan serve --no-reload &
