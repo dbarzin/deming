@@ -32,7 +32,7 @@ jobs:
             extensions: zip, curl, mbstring, dom, ldap, soap, xdebug, mysql, gd
 
       - name: Configrue Storage Permission
-        run: chmod -R 777 storage bootstrap/cache
+        run: mkdir -p bootstrap/cache && chmod -R 777 storage bootstrap/cache
 
       - name: Install dependencies
         run: composer update --no-progress --no-interaction --prefer-dist --optimize-autoloader
