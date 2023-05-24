@@ -75,13 +75,13 @@ Cet écran contient :
 
 * Les observation du contrôle
 
-* Une zonz pour sauvegarder les preuves
+* Une zone pour sauvegarder les preuves
 
 * Un lien permettant de télécharger la fiche de contrôles
 
-* Le modèle aliqué au contrôle
+* Le modèle de calcul appliqué
 
-* La note du contrôles
+* La note
 
 * Le score
 

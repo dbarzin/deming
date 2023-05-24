@@ -76,13 +76,13 @@ This screen contains:
 
 * Control observations
 
-* A zonz to save evidence
+* A field to save evidence
 
 * A link to download the control sheet
 
-* The model alicated to the control
+* The computation model applied
 
-* The note of the controls
+* The note
 
 * The score
 

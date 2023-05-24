@@ -131,12 +131,10 @@ class UserController extends Controller
             ]
         );
 
-        if (request('password1') !== null) {
-            if (request('password1') !== request('password2')) {
-                return redirect('/users/' . $user->id . '/edit')
-                    ->withErrors(['password1' => 'Les mots de passe ne correspondent pas'])
-                    ->withInput();
-            }
+        if ((request('password1') !== null) && (request('password1') !== request('password2'))) {
+            return redirect('/users/' . $user->id . '/edit')
+                ->withErrors(['password1' => 'Les mots de passe ne correspondent pas'])
+                ->withInput();
         }
 
         $user->name = request('name');

@@ -11,18 +11,23 @@ class SetLocale
     {
         if (request('change_language')) {
             session()->put('language', request('change_language'));
-            $language = request('change_language');
-        // $user->languge = $language;
-        } elseif (isset(Auth::User()->language)) {
-            $language = Auth::User()->language;
-        } elseif (session('language')) {
-            $language = session('language');
-        } elseif (config('panel.primary_language')) {
-            $language = config('panel.primary_language');
-        }
+            app()->setLocale(request('change_language'));
+            return $next($request);
+        } 
 
-        if (isset($language)) {
-            app()->setLocale($language);
+        if (isset(Auth::User()->language)) {
+            app()->setLocale(Auth::User()->language);
+            return $next($request);
+        } 
+
+        if (session('language')) {
+            app()->setLocale(session('language'));
+            return $next($request);
+        } 
+
+        if (config('panel.primary_language')) {
+            app()->setLocale(config('panel.primary_language'));
+            return $next($request);
         }
 
         return $next($request);

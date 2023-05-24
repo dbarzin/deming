@@ -73,9 +73,25 @@ class ReportController extends Controller
         $templateProcessor->setValue('start_date', $start_date->format('d/m/Y'));
         $templateProcessor->setValue('end_date', $end_date->format('d/m/Y'));
 
-        // addText('', $fontStyle);
+        $this->generateMadeControlTable($templateProcessor, $start_date, $end_date);
+        $values = $this->generateControlTable($templateProcessor);
+        $this->generateKPITable($templateProcessor, $values);
+        $this->generateActionPlanTable($templateProcessor);
 
         //----------------------------------------------------------------
+        // save a copy
+        $filepath = storage_path('templates/pilotage-'. Carbon::today()->format('Y-m-d') .'.docx');
+        $templateProcessor->saveAs($filepath);
+
+        // return
+        return response()->download($filepath);
+    }
+
+    /*
+    * Generate Control Made table
+    */
+    private function generateMadeControlTable(TemplateProcessor $templateProcessor, $start_date, $end_date)
+    {
         $controls = Control::where(
             [
                 ['realisation_date','>=',$start_date],
@@ -83,25 +99,8 @@ class ReportController extends Controller
             ]
         )
             ->orderBy('realisation_Date')->get();
-        /*
-        $values = [];
-        foreach($controls as $control) {
 
-            $values[] =  [
-                'ctrl_id' => $control->clause,
-                'ctrl_date' => $control->realisation_date,
-                'ctrl_name' => $control->name,
-                'ctrl_score' => '<w:highlight w:val="red">'.'⬤'.$control->score.'</w:highlight>',
-            ];
-        }
-
-        $templateProcessor->cloneRowAndSetValues('ctrl_id', $values);
-        */
         //----------------------------------------------------------------
-
-        // $myParagraphStyle = array('align'=>'left', 'spaceBefore'=>50, 'spaceafter' => 50);
-        // $myFontStyle = array('name' => 'Arial', 'size' => 10, 'bold' => true, 'color' => '#FF0000');
-
         // create table
         $table = new Table(['borderSize' => 3, 'borderColor' => 'black', 'width' => 9800, 'unit' => TblWidth::TWIP]);
         // create header
@@ -129,11 +128,13 @@ class ReportController extends Controller
             );
         }
         $templateProcessor->setComplexBlock('made_control_table', $table);
+    }
 
-        // ---------------------------------------------------------------
-        // https://github.com/PHPOffice/PHPWord/pull/1864
-
-        // $domains = [];
+    /*
+    * Generate Control table
+    */
+    private function generateControlTable(TemplateProcessor $templateProcessor)
+    {
         $values = [];
 
         // get all domains
@@ -195,15 +196,19 @@ class ReportController extends Controller
             ->setShowAxisLabels(true)
             ->set3d(false)
             ->setShowLegend(false)
-            // ->setValueLabelPosition("none")
             ->setColors($colors)
             ->setDataLabelOptions(['showCatName' => false]);
 
         $templateProcessor->setChart('control_table', $chart);
 
-        //----------------------------------------------------------------
-        // kpi_table
+        return $values;
+    }
 
+    /*
+    * Genere KPI table
+    */
+    private function generateKPITable(TemplateProcessor $templateProcessor, $values)
+    {
         // get all domains
         $domains = DB::table('domains')->get();
 
@@ -277,9 +282,13 @@ class ReportController extends Controller
         }
 
         $templateProcessor->setComplexBlock('kpi_table', $table);
+    }
 
-        //----------------------------------------------------------------
-        // Action plans
+    /*
+    * Generate Action plan table
+    */
+    private function generateActionPlanTable(TemplateProcessor $templateProcessor)
+    {
         $actions =
             DB::select('
                 select
@@ -338,18 +347,6 @@ class ReportController extends Controller
             }
         }
 
-        // get action plans
-        // $domains = DB::table('domains')->get();
-
         $templateProcessor->setComplexBlock('action_plans_table', $table);
-
-        //----------------------------------------------------------------
-        // save a copy
-        $filepath = storage_path('templates/pilotage-'. Carbon::today()->format('Y-m-d') .'.docx');
-        // if (file_exists($filepath)) unlink($filepath);
-        $templateProcessor->saveAs($filepath);
-
-        // return
-        return response()->download($filepath);
     }
 }
