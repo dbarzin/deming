@@ -18,7 +18,7 @@
 		    <thead>
 		    <tr>
 				<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.clause') }}</th>
-				<th class="sortable-column sort-asc" width="60%">{{ trans('cruds.action.fields.action') }}</th>
+				<th width="60%">{{ trans('cruds.action.fields.action') }}</th>
 				<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.plan_date') }}</th>
 				<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.next_date') }}</th>
 				<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.note') }}</th>
@@ -28,7 +28,7 @@
 		@foreach($actions as $action)
 			<tr>
 				<td valign="top">
-					<a href="/measures/{{$action->measure_id}}">
+					<a id="{{ $action->clause }}" href="/measures/{{$action->measure_id}}">
 						{{ $action->clause }}
 					</a>
 				</td>
@@ -36,9 +36,10 @@
 					<b><a href="/action/{{ $action->id }}">{{ $action->name }}</a></b>
 					<pre>{{ $action->action_plan }}</pre>
 				</td>
-				<td><a href="/controls/{{ $action->id }}">{{ $action->plan_date }}</a></td>
-				<td><a href="/controls/{{ $action->next_id }}">{{ $action->next_date }}</a></td>
+				<td><a id="{{ $action->plan_date }}" href="/controls/{{ $action->id }}">{{ $action->plan_date }}</a></td>
+				<td><a id="{{ $action->next_date }}" href="/controls/{{ $action->next_id }}">{{ $action->next_date }}</a></td>
 				<td>
+					<center id="{{ $action->score }}">
 	                @if ($action->score==1)
 	                    &#128545;
 	                @elseif ($action->score==2)
@@ -48,6 +49,7 @@
 	                @else
 	                    &#9675; <!-- &#9899; -->
 	                @endif
+	                </center>
 				</td>
 			</tr>
 		@endforeach
