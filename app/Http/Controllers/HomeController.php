@@ -87,7 +87,8 @@ class HomeController extends Controller
                 order by id;');
         //dd($status);
 
-        // get controls todo
+        // Get controls todo
+        // TODO : improve me
         $controls_todo = DB::select(
             'select
                 c1.id,
@@ -133,6 +134,7 @@ class HomeController extends Controller
         $request->session()->put('late_controls_count', $late_controls_count);
 
         // Count number of action plans
+        // TODO : improve me
         $action_plans_count =
             count(DB::select('
                 select

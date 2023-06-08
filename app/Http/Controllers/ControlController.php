@@ -690,4 +690,5 @@ class ControlController extends Controller
         // return
         return response()->download($filepath);
     }
+
 }

@@ -122,7 +122,7 @@
             <tr>
                 <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.domain") }}</th>
                 <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.measure") }}</th>
-                <th class="sortable-column" width="50%">{{ trans("cruds.control.fields.name") }}</th>
+                <th width="50%">{{ trans("cruds.control.fields.name") }}</th>
                 <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.score") }}</th>
                 <th class="sortable-column sort-asc"  width="5%">{{ trans("cruds.control.fields.planned") }}</th>
                 <th class="sortable-column sort-asc"  width="5%">{{ trans("cruds.control.fields.realized") }}</th>
@@ -133,12 +133,12 @@
     @foreach($controls as $control)
         <tr>
             <td>
-                <a href="/domains/{{ $control->domain_id}} ">
+                <a id="{{ $control->title }}" href="/domains/{{ $control->domain_id}} ">
                     {{ $control->title }}
                 </a>
             </td>
             <td>
-                <a href="/measures/{{ $control->measure_id }}">
+                <a id="{{ $control->clause }}" href="/measures/{{ $control->measure_id }}">
                     {{ $control->clause }}
                 </a>
             </td>
@@ -146,7 +146,7 @@
                     {{ $control->name }} 
             </td>
             <td>
-                <center>
+                <center id="{{ $control->score }}">
                     @if ($control->score==1)
                     <a href="/action/{{ $control->id }}">
                         &#128545; 
@@ -165,7 +165,7 @@
             <td>
                 <!-- format in red when month passed -->
                 @if ($control->realisation_date == null)
-                <a href="/control/show/{{$control->id}}">
+                <a id="{{ $control->plan_date }}" href="/control/show/{{$control->id}}">
                 <b>
                     @if( strtotime($control->plan_date) >= strtotime('now') ) 
                         <font color="green">{{ $control->plan_date }}</font>
@@ -179,14 +179,14 @@
                 @endif
             </td>
             <td>
-                <b>
+                <b id="{{ $control->realisation_date }}">
                     <a href="/control/show/{{$control->id}}">
                         {{ $control->realisation_date }}
                     </a>
                 </b>
             </td>
             <td>
-                <b>
+                <b id="{{ $control->next_date }}">
                     @if ($control->next_id!=null)
                     <a href="/controls/{{$control->next_id}}">
                         {{ $control->next_date }}

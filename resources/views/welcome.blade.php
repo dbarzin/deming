@@ -113,28 +113,28 @@
                     <tr>
                         <th data-sortable="true">{{ trans('cruds.control.fields.domain') }}</th>
                         <th data-sortable="true">{{ trans('cruds.control.fields.clause') }}</th>
-                        <th >{{ trans('cruds.control.fields.name') }}</th>
-                        <th >{{ trans('cruds.control.fields.score') }}</th>
-                        <th>{{ trans('cruds.control.fields.realisation_date') }}</th>
-                        <th>{{ trans('cruds.control.fields.plan_date') }}</th>
+                        <th>{{ trans('cruds.control.fields.name') }}</th>
+                        <th data-sortable="true">{{ trans('cruds.control.fields.score') }}</th>
+                        <th data-sortable="true">{{ trans('cruds.control.fields.realisation_date') }}</th>
+                        <th data-sortable="true">{{ trans('cruds.control.fields.plan_date') }}</th>
                     </tr>
                 </thead>
             <tbody>
 
             @foreach($controls_todo as $control)
                 <tr onclick="window.location = '/controls/{{$control->id}}';">
-                    <td>
+                    <td id="{{ $control->domain }}">
                         <a href="/domains/{{$control->domain_id}}">
                             {{ $control->domain }}
                         </a>
-                        </td>
-                    <td>
-                        <a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a>
                     </td>
-                    <td >{{ $control->name }}</td>
+                    <td>
+                        <a id="{{ $control->clause }}" href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a>
+                    </td>
+                    <td>{{ $control->name }}</td>
 
                     <td>
-                        <center>
+                        <center id="{{ $control->score }}">
                             <a href="/control/show/{{ $control->prev_id }}">
                             @if ($control->score==1)
                                 &#128545; 
@@ -150,12 +150,12 @@
                     </td>
 
                     <td>
-                        <a href="/control/show/{{$control->prev_id}}">
+                        <a id="{{ $control->prev_date }}" href="/control/show/{{$control->prev_id}}">
                             {{ $control->prev_date }}
                         </a>
                     </td>
                     <td>
-                        <b>
+                        <b id="{{ $control->plan_date }}">
                             <a href="/controls/{{ $control->id }}">
                             @if( strtotime($control->plan_date) >= strtotime('now') ) 
                                 <font color="green">
