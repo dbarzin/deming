@@ -17,6 +17,7 @@ This document contains the evolutions planned for Deming in 2023.
 * [x] User documentation
 * [x] Implement import/export of controls
 * [x] Fix column sort with date
+* [ ] Envoi de mails aux utilisateurs pour la réalisation de contrôles
 * [ ] Manage non-conformities
 * [ ] Multisites - introduce controls by site
 * [ ] Dark theme (https://metroui.org.ua/examples/schemes/scheme.html)
