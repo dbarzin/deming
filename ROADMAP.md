@@ -18,6 +18,7 @@ This document contains the evolutions planned for Deming in 2023.
 * [x] Implement import/export of controls
 * [x] Fix column sort with date
 * [x] Send email notification to users for carrying out controls
+* [ ] Migration script from ISO 27001:2013 to ISO 27001:2022
 * [ ] Manage non-conformities
 * [ ] Multisites - introduce controls by site
 * [ ] Dark theme (https://metroui.org.ua/examples/schemes/scheme.html)
