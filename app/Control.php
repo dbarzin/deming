@@ -38,6 +38,6 @@ class Control extends Model
 
     public function owners()
     {
-        return $this->belongsToMany(User::class,'control_user', 'control_id')->orderBy('name');
+        return $this->belongsToMany(User::class, 'control_user', 'control_id')->orderBy('name');
     }
 }
