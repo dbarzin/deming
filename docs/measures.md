@@ -83,10 +83,11 @@ The screen contains:
 
 * The security objective;
 
-* The frequency of checks; And
+* The planning date; and
 
-* The planning date.
+* The frequency of checks;
 
+* Those responsible for carrying out the controls.
 
 [<img src="/deming/images/plan.png" width="600">](/deming/images/plan.png)
 

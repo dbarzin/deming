@@ -30,7 +30,7 @@ Cet écran contient les informations d’un contrôle :
 
 * Le nom d’un contrôles ;
 
-* L’objectif du contrpole ;
+* L’objectif du contrôle ;
 
 * Les attributs ;
 
@@ -52,11 +52,34 @@ Lorsque vous cliquez sur :
 
 * « Faire », vous êtes envoyé vers l’[écran de réalisation d’un contrôle](#make)
 
-* « Planifier », vous êtes envoyé vers l’[écran de planification d’un contrôles](/deming/measures/#plan)
+* « Planifier », vous êtes envoyé vers l’[écran de planification d’un contrôles](#plan)
 
 * « Modifier », vous êtes envoyé vers l’[écran de modification du contrôles](#edit)
 
 * « Annuler », vous êtes envoyé vers la [liste des contrôles](#list)
+
+### Planifier un contrôle<a name="plan"></a>
+
+Cet écran permet de planifier un contrôle.
+
+Cet écran contient les informations d’un contrôle :
+
+* Le nom d’un contrôles ;
+
+* L’objectif du contrôle ;
+
+* La date de palnification ;
+
+* La périodicité ; et
+
+* Les responsables de la réalisation du contrôles.
+
+Lorsque vous cliquez sur :
+
+* « Plan », la date de planifierion, la récurence et les responsables sont mis à jour et vous êtres renvoyés vers l’[écran d'affichage 
+du contrôles](#show)
+
+* « Annuler », Vous êtres renvoyés vers l’[écran d'affichage du contrôles](#show)
 
 
 ### Réaliser un contrôles <a name="make"></a>

@@ -41,7 +41,7 @@
 			<div class="cell-1">
 				<strong>{{ trans('cruds.control.fields.plan_date') }}</strong>
 	    	</div>
-			<div class="cell-2">
+			<div class="cell-3">
 					<input type="text" data-role="calendarpicker" name="plan_date" 
 					value="{{ $measure->planDate() }}" data-input-format="%Y-%m-%d"> 
 			</div>
@@ -51,7 +51,7 @@
 			<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.periodicity') }}</strong>
 	    	</div>
-			<div class="cell-2">
+			<div class="cell-3">
 				<select name="periodicity" data-role="select">
 				    <option value="1" {{ $measure->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
 				    <option value="3" {{ $measure->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>

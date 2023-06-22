@@ -60,6 +60,30 @@ When you click:
 * "Cancel", you are sent to the [list of controls](#list)
 
 
+### Schedule a control<a name="plan"></a>
+
+This screen is used to schedule a control.
+
+This screen contains the information of a control:
+
+* The name of a control;
+
+* The objective of the control;
+
+* The date of palnification;
+
+* Periodicity ; and
+
+* Those responsible for carrying out the controls.
+
+When you click:
+
+* "Plan", the planning date, the recurrence and the persons in charge are updated and you are returned to the [display screen
+of controls](#show)
+
+* "Cancel", You are returned to the [control display screen](#show)
+
+
 ### Making a <a name="make"></a> check
 
 This screen allows you to perform a security check.

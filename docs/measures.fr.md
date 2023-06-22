@@ -83,10 +83,11 @@ L’écran contient :
 
 * L’objectif de sécurité ;
 
-* La périodicité du contrôles ; et
+* La date de planification ;
 
-* La date de planification.
+* La périodicité du contrôles et 
 
+* Les responsable de la réalisation du contrôles.
 
 [<img src="/deming/images/plan.png" width="600">](/deming/images/plan.png)
 
