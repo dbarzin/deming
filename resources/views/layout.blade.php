@@ -134,13 +134,13 @@
                             <span class="icon"><span class="mif-file-excel"></span></span>
                             <span class="caption">{{ trans("menu.configuration.import") }}</span>
                         </a></li>
-                        <li><a href="/doc/stats"> 
+                        <li><a href="/doc"> 
                             <span class="icon"><span class="mif-file-text"></span></span>
                             <span class="caption">{{ trans("menu.configuration.documents") }}</span>
                         </a></li>
-                        <li><a href="/doc/templates"> 
-                            <span class="icon"><span class="mif-file-text"></span></span>
-                            <span class="caption">{{ trans("menu.configuration.models") }}</span>
+                        <li><a href="/config"> 
+                            <span class="icon"><span class="mif-alarm"></span></span>
+                            <span class="caption">{{ trans("menu.configuration.notifications") }}</span>
                         </a></li>
                         @endif
                     </ul>

@@ -6,6 +6,7 @@ use App\Control;
 use App\Domain;
 use App\Exports\MeasuresExport;
 use App\Measure;
+use App\User;
 use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -123,9 +124,6 @@ class MeasureController extends Controller
         $measure->model = request('model');
         $measure->indicator = request('indicator');
         $measure->action_plan = request('action_plan');
-        $measure->owner = request('owner');
-        $measure->periodicity = request('periodicity');
-        $measure->retention = request('retention');
 
         $measure->save();
 
@@ -205,9 +203,6 @@ class MeasureController extends Controller
         $measure->model = request('model');
         $measure->indicator = request('indicator');
         $measure->action_plan = request('action_plan');
-        $measure->owner = request('owner');
-        $measure->periodicity = request('periodicity');
-        $measure->retention = request('retention');
 
         $measure->save();
 
@@ -224,8 +219,6 @@ class MeasureController extends Controller
             $control->model = $measure->model;
             $control->indicator = $measure->indicator;
             $control->action_plan = $measure->action_plan;
-            $control->periodicity = $measure->periodicity;
-            $control->retention = $measure->retention;
             $control->save();
         }
 
@@ -256,8 +249,9 @@ class MeasureController extends Controller
     public function plan(Request $request)
     {
         $measure = Measure::find($request->id);
+        $users = User::orderBy('name')->get();
 
-        return view('measures.plan', compact('measure'));
+        return view('measures.plan', compact('measure', 'users'));
     }
 
     /**
@@ -298,10 +292,7 @@ class MeasureController extends Controller
      */
     public function activate(Request $request)
     {
-        // dd($request);
         $measure = Measure::find($request->id);
-        $measure->periodicity = $request->get('periodicity');
-        $measure->update();
 
         // Check control is disabled
         $control = DB::Table('controls')
@@ -323,12 +314,10 @@ class MeasureController extends Controller
             $control->model = $measure->model;
             $control->indicator = $measure->indicator;
             $control->action_plan = $measure->action_plan;
-            $control->owner = $measure->owner;
-            $control->periodicity = $measure->periodicity;
-            $control->retention = $measure->retention;
             $control->periodicity = $request->get('periodicity');
             $control->plan_date = $request->get('plan_date');
             // Save it
+            $control->owners()->sync($request->input('owners', []));
             $control->save();
 
             // Update link
@@ -345,6 +334,7 @@ class MeasureController extends Controller
             // just update the date
             $control = Control::find($control->id);
             $control->periodicity = $request->get('periodicity');
+            $control->owners()->sync($request->input('owners', []));
             $control->plan_date = $request->get('plan_date');
             $control->save();
         }
@@ -442,8 +432,6 @@ class MeasureController extends Controller
               6 | model       | text          | YES  |     | NULL    |                |
               7 | indicator   | text          | YES  |     | NULL    |                |
               8 | action_plan | text          | YES  |     | NULL    |                |
-              9 | owner       | varchar(255)  | YES  |     | NULL    |                |
-             10 | periodicity | int           | YES  |     | NULL    |                |
                 +-------------+---------------+------+-----+---------+----------------+
                 */
 
@@ -459,15 +447,14 @@ class MeasureController extends Controller
                         continue;
                     }
                     // delete line ?
-                    if ((count($data[$line]) < 10) || (($data[$line][2] === null) &&
+                    if ((count($data[$line]) < 8) ||
+                        (($data[$line][2] === null) &&
                         ($data[$line][3] === null) &&
                         ($data[$line][4] === null) &&
                         ($data[$line][5] === null) &&
                         ($data[$line][6] === null) &&
                         ($data[$line][7] === null) &&
-                        ($data[$line][8] === null) &&
-                        ($data[$line][9] === null) &&
-                        ($data[$line][10] === null))
+                        ($data[$line][8] === null))
                     ) {
                         continue;
                     }
@@ -487,23 +474,7 @@ class MeasureController extends Controller
                         $errors->push(($line + 1) . ': name too long');
                         continue;
                     }
-                    if (strlen($data[$line][9]) >= 255) {
-                        $errors->push(($line + 1) . ': responsible too long');
-                        continue;
-                    }
                     // TODO: check tags
-
-                    // TODO; check periodicity
-                    if (
-                        ($data[$line][10] !== null) &&
-                        ($data[$line][10] !== '1') &&
-                        ($data[$line][10] !== '3') &&
-                        ($data[$line][10] !== '6') &&
-                        ($data[$line][10] !== '12')
-                    ) {
-                        $errors->push(($line + 1) . ': invalid periodicity');
-                        continue;
-                    }
 
                     if ($errors->count() > 10) {
                         $errors->push('too many errors...');
@@ -515,15 +486,13 @@ class MeasureController extends Controller
                     $lastLine = count($data);
                     for ($line = 1; $line < $lastLine; $line++) {
                         // delete line ?
-                        if ((count($data[$line]) < 10) || (($data[$line][2] === null) &&
+                        if ((count($data[$line]) < 9) || (($data[$line][2] === null) &&
                             ($data[$line][3] === null) &&
                             ($data[$line][4] === null) &&
                             ($data[$line][5] === null) &&
                             ($data[$line][6] === null) &&
                             ($data[$line][7] === null) &&
-                            ($data[$line][8] === null) &&
-                            ($data[$line][9] === null) &&
-                            ($data[$line][10] === null))
+                            ($data[$line][8] === null))
                         ) {
                             // delete documents
                             $documents = DB::table('documents')
@@ -575,8 +544,6 @@ class MeasureController extends Controller
                             $measure->model = $data[$line][6];
                             $measure->indicator = $data[$line][7];
                             $measure->action_plan = $data[$line][8];
-                            $measure->owner = $data[$line][9];
-                            $measure->periodicity = $data[$line][10] === null ? 12 : intval($data[$line][10]);
 
                             $measure->save();
 
@@ -610,8 +577,6 @@ class MeasureController extends Controller
                             $measure->model = $data[$line][6];
                             $measure->indicator = $data[$line][7];
                             $measure->action_plan = $data[$line][8];
-                            $measure->owner = $data[$line][9];
-                            $measure->periodicity = $data[$line][10] === null ? 12 : intval($data[$line][10]);
 
                             $measure->save();
 

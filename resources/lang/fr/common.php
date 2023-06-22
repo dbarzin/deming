@@ -23,4 +23,9 @@ return [
     'green' => 'Vert',
     'orange' => 'Orange',
     'red' => 'Rouge',
+
+    'never' => 'Jamais',
+    'day' => 'Journalièrement',
+    'week' => 'Hebdomadairement',
+    'month' => 'Mensuellement'
 ];

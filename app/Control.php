@@ -26,7 +26,6 @@ class Control extends Model
     protected $fillable = [
     ];
 
-    // Return the measure associated to this control
     public function domain()
     {
         return $this->belongsTo(Domain::class, 'domain_id');
@@ -35,5 +34,10 @@ class Control extends Model
     public function measure()
     {
         return $this->belongsTo(Measure::class, 'measure_id');
+    }
+
+    public function owners()
+    {
+        return $this->belongsToMany(User::class)->orderBy('name');
     }
 }

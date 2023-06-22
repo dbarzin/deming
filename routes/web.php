@@ -58,12 +58,14 @@ Route::get('/control/radar/attributes', 'ControlController@attributes');
 Route::post('/doc/store', 'DocumentController@store');
 Route::get('/doc/delete/{id}', 'DocumentController@delete');
 Route::get('/doc/show/{id}', 'DocumentController@get');
-Route::get('/doc/stats', 'DocumentController@stats');
-Route::get('/doc/check', 'DocumentController@check');
 
-Route::get('/doc/templates', 'DocumentController@listTemplates');
+Route::get('/doc', 'DocumentController@index');
+Route::get('/doc/check', 'DocumentController@check');
 Route::get('/doc/template', 'DocumentController@getTemplate');
 Route::post('/doc/template', 'DocumentController@saveTemplate');
+
+Route::get('/config', 'ConfigurationController@index');
+Route::post('/config/save', 'ConfigurationController@save');
 
 /* Other */
 Route::resource('domains', 'DomainController');

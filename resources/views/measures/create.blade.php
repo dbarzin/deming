@@ -120,21 +120,6 @@
 			</div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
-					<strong>{{ trans("cruds.measure.fields.periodicity") }}</strong>
-				</div>
-				<div class="cell-2">
-					<select data-role="select" name="periodicity" size="1" width='20'>
-					    <option value="0" {{ old('periodicity')==0 ? 'selected' : ''}} ></option>
-					    <option value="1" {{ old('periodicity')==1 ? 'selected' : ''}}>{{ trans("common.monthly") }}</option>
-					    <option value="3" {{ old('periodicity')==3 ? 'selected' : ''}}>{{ trans("common.quarterly") }}</option>
-					    <option value="6" {{ old('periodicity')==6 ? 'selected' : ''}}>{{ trans("common.biannually") }}</option>
-					    <option value="12" {{ old('periodicity')==12 ? 'selected' : ''}}>{{ trans("common.annually") }}</option>
-					 </select>
-				</div>
-			</div>
-
-	    	<div class="row">
 	    		<div class="cell-5">
 					<button type="submit" class="button success">
 			            <span class="mif-floppy-disk"></span>

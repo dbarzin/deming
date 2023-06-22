@@ -36,6 +36,7 @@
 			</div>
 	    </div>
 
+		@if ($measure->attributes!=null)
     	<div class="row">
     		<div class="cell-1">
 	    		<strong>{{ trans("cruds.measure.fields.attributes") }}</strong>
@@ -44,6 +45,7 @@
 	    		{{ $measure->attributes }}
     		</div>
     	</div>
+    	@endif
 
     	<div class="row">
 			<div class="cell-1">
@@ -84,63 +86,45 @@
 
     	<div class="row">
 			<div class="cell-1">
-	    		<strong>{{ trans('cruds.measure.fields.owner') }}</strong>
-	    	</div>
-			<div class="cell">
-				{{ $measure->owner }}
 			</div>
-	    </div>
+		</div>
 
-    	<div class="row">
-			<div class="cell-1">
-	    		<strong>{{ trans('cruds.measure.fields.periodicity') }}</strong>
-	    	</div>
-			<div class="cell">
-				@if ($measure->periodicity==1) {{ trans("common.monthly") }} @endif
-				@if ($measure->periodicity==3) {{ trans("common.quarterly") }} @endif
-				@if ($measure->periodicity==6) {{ trans("common.biannually") }} @endif
-				@if ($measure->periodicity==12) {{ trans("common.annually") }} @endif
-				</div>
-			</div>
-	    </div>
-
-
-	<div class="form-group">
-	    <form action="/measure/plan/{{ $measure->id }}">
-	    	<button class="button info">
-	            <span class="mif-calendar"></span>
-	            &nbsp;
-		    	{{ trans('common.plan') }}
-	    	</button>
-	    </form>
-	    &nbsp;
-	    <form action="/measures/{{ $measure->id }}/edit">
-	    	<button class="button primary">
-	            <span class="mif-wrench"></span>
-	            &nbsp;
-		    	{{ trans('common.edit') }}
-	    	</button>
-	    </form>
-	    &nbsp;
-		<form action="/measures/{{ $measure->id }}" method="post">
-			{{ method_field('delete') }}
-			@csrf
-			<button class="button alert" type="submit">
-				<span class="mif-fire"></span>
-				&nbsp;
-			    {{ trans('common.delete') }}
-			</button>
-        </form>
-	    &nbsp;
-	    <form action="/measures">
-	    	<button class="button">
-				<span class="mif-cancel"></span>
-				&nbsp;
-		    	{{ trans('common.cancel') }}
-	    	</button>
-		</form>
+		<div class="form-group">
+		    <form action="/measure/plan/{{ $measure->id }}">
+		    	<button class="button info">
+		            <span class="mif-calendar"></span>
+		            &nbsp;
+			    	{{ trans('common.plan') }}
+		    	</button>
+		    </form>
+		    &nbsp;
+		    <form action="/measures/{{ $measure->id }}/edit">
+		    	<button class="button primary">
+		            <span class="mif-wrench"></span>
+		            &nbsp;
+			    	{{ trans('common.edit') }}
+		    	</button>
+		    </form>
+		    &nbsp;
+			<form action="/measures/{{ $measure->id }}" method="post">
+				{{ method_field('delete') }}
+				@csrf
+				<button class="button alert" type="submit">
+					<span class="mif-fire"></span>
+					&nbsp;
+				    {{ trans('common.delete') }}
+				</button>
+	        </form>
+		    &nbsp;
+		    <form action="/measures">
+		    	<button class="button">
+					<span class="mif-cancel"></span>
+					&nbsp;
+			    	{{ trans('common.cancel') }}
+		    	</button>
+			</form>
+		</div>
 	</div>
-</div>
 </div>
 
 @endsection

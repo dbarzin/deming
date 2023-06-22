@@ -38,27 +38,7 @@
 				{{ $control->objective }}
 			</div>
 		</div>
-    	<div class="row">
-    		<div class="cell-1">
-	    		<strong>Dernière mesure</strong>
-	    	</div>
-			<div class="cell">
-				...
-			</div>
-		</div>
-    	<div class="row">
-    		<div class="cell-1">
-	    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
-	    	</div>
-			<div class="cell-2">
-				<select name="periodicity" data-role="select">
-				    <option value="1" {{ $control->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
-				    <option value="3" {{ $control->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
-				    <option value="6" {{ $control->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>
-				    <option value="12" {{ $control->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
-				 </select>
-			</div>
-		</div>
+
     	<div class="row">
     		<div class="cell-1">
 				<strong>{{ trans('cruds.control.fields.plan_date') }}</strong>
@@ -72,6 +52,35 @@
 				data-input-format="%Y-%m-%d"> 
 			</div>
 		</div>
+
+    	<div class="row">
+    		<div class="cell-1">
+	    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
+	    	</div>
+			<div class="cell-2">
+				<select name="periodicity" data-role="select">
+				    <option value="1" {{ $control->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
+				    <option value="3" {{ $control->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
+				    <option value="6" {{ $control->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>
+				    <option value="12" {{ $control->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
+				 </select>
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="cell-1">
+				<strong>{{ trans('cruds.control.fields.owners') }}</strong>
+	    	</div>
+			<div class="cell-4">
+	            <select data-role="select" name="owners[]" id="owners" multiple>
+	                @foreach($users as $user)
+	                    <option value="{{ $user->id }}" {{ (in_array($user->id, old('owners', [])) || $control->owners->contains($user->id)) ? 'selected' : '' }}>{{ $user->name }}</option>
+	                @endforeach
+	            </select>
+				
+			</div>
+		</div>
+
     	<div class="row">
     		<div class="cell-12">
 				<button type="submit" class="button success">

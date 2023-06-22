@@ -7,13 +7,6 @@ use Illuminate\Http\Request;
 
 class DocumentController extends Controller
 {
-    // List templates
-    public function listTemplates()
-    {
-        // nothing to do
-        return view('/documents/templates');
-    }
-
     public function getTemplate(Request $request)
     {
         // nothing to do
@@ -134,7 +127,7 @@ class DocumentController extends Controller
         return null;
     }
 
-    public function stats()
+    public function index()
     {
         $count = Document::count();
         $sum = Document::sum('size');

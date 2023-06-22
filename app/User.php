@@ -35,4 +35,9 @@ class User extends Authenticatable
     protected $casts = [
         'email_verified_at' => 'datetime',
     ];
+
+    public function controls()
+    {
+        return $this->belongsToMany(Control::class)->orderBy('clause');
+    }
 }

@@ -33,9 +33,12 @@ class GenerateTestData extends Command
     {
         // remove all measurements
         $this->info('Remove all controls and documents');
+        // Disable key check
         DB::statement('SET foreign_key_checks=0');
+        // Remove tables
         DB::table('documents')->truncate();
         DB::table('controls')->truncate();
+        // Enable key checks
         DB::statement('SET foreign_key_checks=1');
 
         // get all attributes

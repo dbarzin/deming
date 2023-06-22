@@ -37,6 +37,15 @@
 			</div>
 	    </div>
 
+		<div class="row">
+			<div class="cell-1">
+				<strong>{{ trans('cruds.control.fields.plan_date') }}</strong>
+	    	</div>
+			<div class="cell-2">
+					<input type="text" data-role="calendarpicker" name="plan_date" 
+					value="{{ $measure->planDate() }}" data-input-format="%Y-%m-%d"> 
+			</div>
+		</div>
 
     	<div class="row">
 			<div class="cell-1">
@@ -55,11 +64,15 @@
 
 	<div class="row">
 		<div class="cell-1">
-			<strong>{{ trans('cruds.control.fields.plan_date') }}</strong>
+			<strong>{{ trans('cruds.control.fields.owners') }}</strong>
     	</div>
-		<div class="cell-2">
-				<input type="text" data-role="calendarpicker" name="plan_date" 
-				value="{{ $measure->planDate() }}" data-input-format="%Y-%m-%d"> 
+		<div class="cell-4">
+            <select data-role="select" name="owners[]" id="owners" multiple>
+                @foreach($users as $user)
+                    <option value="{{ $user->id }}" {{ (in_array($user->id, old('owners', [])) || $measure->control()->owners->contains($user->id)) ? 'selected' : '' }}>{{ $user->name }}</option>
+                @endforeach
+            </select>
+			
 		</div>
 	</div>
 

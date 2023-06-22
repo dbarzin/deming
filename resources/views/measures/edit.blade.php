@@ -112,27 +112,9 @@
 					<textarea name="action_plan" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('action_plan') ?  old('action_plan') : $measure->action_plan }}</textarea>
 				</div>
 			</div>
-			<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans('cruds.measure.fields.owner') }}</strong>
-		    	</div>
-				<div class="cell-2">
-				<input name="owner" type="text"
-					value="{{ $errors->has('owner') ?  old('owner') : $measure->owner }}" 
-					size='20'>
-				</div>
-			</div>
-			<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans('cruds.measure.fields.periodicity') }}</strong>
-		    	</div>
-				<div class="cell-2">
-					<select name="periodicity" data-role="select">
-					    <option value="1" {{ $measure->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
-					    <option value="3" {{ $measure->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
-					    <option value="6" {{ $measure->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>
-					    <option value="12" {{ $measure->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
-					 </select>
+
+	    	<div class="row">
+				<div class="cell-1">
 				</div>
 			</div>
 

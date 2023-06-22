@@ -68,6 +68,7 @@ return [
             'status_done' => 'Fait',
             'status_todo' => 'A faire',
             'status_all' => 'Tous',
+            'owners' => 'Responsables',
         ],
         'checklist' => 'Fiche de contrôle',
         'list' => 'Liste des contrôles',
@@ -91,7 +92,6 @@ return [
             'model' => 'Modèle',
             'indicator' => 'Indicateur',
             'action_plan' => 'Plan d\'action',
-            'owner' => 'Responsable',
             'periodicity' => 'Périodicité',
         ],
         'show' => 'Mesure de sécurité',
@@ -114,7 +114,10 @@ return [
         'title' => 'Domaine'
     ],
     'document' => [
-        'title' => 'Document',
+        'title' => [
+            'storage' => 'Entrepôt de documents',
+            'templates' => 'Modèles de documents',
+        ],
         'description' => 'Description',
         'list' => 'Liste des documents',
         'index' => 'Documents',
@@ -160,6 +163,7 @@ return [
         ]
     ],
     'user' => [
+        'show' => 'Afficher un utilisateur',
         'index' => 'Liste des utilisateurs',
         'edit' => 'Modifier un utilisateur',
         'add' => 'Ajouter un utilisateur',
@@ -171,6 +175,7 @@ return [
             'password' => 'Password',
             'email' => 'eMail',
             'language' => 'Langue',
+            'controls' => 'Contrôles de l\'utilisateur'
         ],
         'roles' => [
             'admin' => 'Administrateur',
@@ -178,4 +183,34 @@ return [
             'auditor' => 'Auditeur'
         ],
     ],
+    'config' => [
+        'notifications' => [
+            'title' => 'Configuration de l\'envoi de notifications',
+            'title_short' => 'Notifications',
+            'help' => 'Cet écran permet de configurer les notifications envoyées par mail aux utilisateurs.',
+            'message_subject' => 'Sujet du message',
+            'sent_from' => 'Envoyé depuis',
+
+            'to' => 'à',
+            'delay' => 'qui arrivent à échéance dans',
+
+            'recurence_day' => 'jour',
+            'recurence_week' => 'semaine',
+            'recurence_week' => 'deux semaines',
+            'recurence_week' => 'mois',
+
+            'one_mail' => 'Un mail par contrôle à réaliser',
+            'multiple_mails' => 'Un mail avec tout les contrôles à réaliser',
+            'one_notification' => 'Enoyer un mail par contrôler à réaliser',
+            'multiple_notifications' => 'Envoyer des mails de rappel',
+
+            'duration' => [
+                'day' => 'jour',
+                'days' => 'jours',
+                'month' => 'mois',
+                'months' => 'mois',
+            ],
+            'recurence' => 'envoyer un rappel tout les'
+         ]
+    ]
 ];

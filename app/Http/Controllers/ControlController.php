@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Control;
 use App\Domain;
 use App\Exports\ControlsExport;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -439,11 +440,14 @@ class ControlController extends Controller
             $months[$month] = $month;
         }
 
+        $users = User::orderBy('name')->get();
+
         return view('controls.plan', compact('control'))
             ->with('years', $years)
             ->with('day', date('d', strtotime($control->plan_date)))
             ->with('month', date('m', strtotime($control->plan_date)))
-            ->with('year', date('Y', strtotime($control->plan_date)));
+            ->with('year', date('Y', strtotime($control->plan_date)))
+            ->with('users', $users);
     }
 
     /**
@@ -463,6 +467,7 @@ class ControlController extends Controller
         }
 
         $control->plan_date = $request->plan_date;
+        $control->owners()->sync($request->input('owners', []));
         $control->save();
 
         return redirect('/controls/'.$request->id);
@@ -690,5 +695,4 @@ class ControlController extends Controller
         // return
         return response()->download($filepath);
     }
-
 }

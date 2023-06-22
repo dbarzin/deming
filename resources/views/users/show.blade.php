@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.user.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.user.show') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 		<div class="grid">
 
@@ -59,6 +59,39 @@
 		    	</div>
 	    		<div class="cell">
 		    		{{ $user->email }}
+	    		</div>
+	    	</div>
+
+	    	<div class="row">
+	    		<div class="cell-2">
+		    		<strong>{{ trans('cruds.user.fields.controls') }}</strong>
+		    	</div>
+		    </div>
+	    	<div class="row">
+	    		<div class="cell-8">
+    				<table>
+	    			@foreach($user->controls as $control)
+	    				@if($control->realisation_date==null)
+	    				<tr>
+		    				<td>
+					    		<a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a> &nbsp; - &nbsp; {{ $control->name }}		    					
+		    				</td>
+		    				<td>
+				                <a id="{{ $control->plan_date }}" href="/control/show/{{$control->id}}">
+				                <b>
+				                    @if( strtotime($control->plan_date) >= strtotime('now') ) 
+				                        <font color="green">{{ $control->plan_date }}</font>
+				                    @else
+				                        <font color="red">{{ $control->plan_date }}</font>
+				                    @endif
+				                </b>
+				                </a>
+		    				</td>
+		    			</tr>
+		    			@endif
+	    			</tr>
+	    			@endforeach
+	    			</table>
 	    		</div>
 	    	</div>
 

@@ -10,6 +10,7 @@ return [
      'plan' => 'Plan',
      'save' => 'Save',
      'unplan' => 'Unplan',
+     'test' => 'Test',
 
      'monthly' => 'Monthly',
      'quarterly' => 'Quarterly',
@@ -23,4 +24,9 @@ return [
      'green' => 'Green',
      'orange' => 'Orange',
      'red' => 'Red',
+
+    'never' => 'Never',
+    'day' => 'Daily',
+    'week' => 'Weekly',
+    'month' => 'Monthly'
 ];

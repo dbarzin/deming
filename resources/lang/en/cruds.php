@@ -67,7 +67,8 @@ return [
              'status_todo' => 'To do',
              'status_all' => 'All',
              'clause' => 'Clause',
-             'input' => 'Input'
+             'input' => 'Input',
+             'owners' => 'Responsibles',
          ],
          'checklist' => 'Control sheet',
          'list' => 'List of controls',
@@ -90,7 +91,6 @@ return [
              'model' => 'Model',
              'indicator' => 'Indicator',
              'action_plan' => 'Action Plan',
-             'owner' => 'Responsible',
              'periodicity' => 'Periodicity',
              'input' => 'Input',
          ],
@@ -114,7 +114,10 @@ return [
          'title' => 'Domain'
      ],
      'document' => [
-         'title' => 'Document',
+        'title' => [
+            'storage' => 'Storage',
+            'templates' => 'Templates',
+        ],
          'description' => 'Description',
          'list' => 'List of documents',
          'index' => 'Documents',

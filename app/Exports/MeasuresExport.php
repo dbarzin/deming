@@ -24,8 +24,6 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
             trans('cruds.measure.fields.model'),
             trans('cruds.measure.fields.indicator'),
             trans('cruds.measure.fields.action_plan'),
-            trans('cruds.measure.fields.owner'),
-            trans('cruds.measure.fields.periodicity'),
         ];
     }
 
@@ -53,8 +51,6 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
             'F' => 50,  // Modele
             'G' => 50,  // Indicateur
             'H' => 50,  // Plan d'action
-            'I' => 20,  // Responsable
-            'J' => 20,  // Period
         ];
     }
 
@@ -74,8 +70,6 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
                 $measure->model,
                 $measure->indicator,
                 $measure->action_plan,
-                $measure->owner,
-                $measure->periodicity,
             ],
         ];
     }

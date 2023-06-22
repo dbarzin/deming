@@ -119,17 +119,17 @@
 		    </div>
 		@endif
 
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.note") }}</strong>
-		    	</div>
-	    		<div class="cell-2">
-		    		{{ $control->note }}
-	    		</div>
-		    </div>
+    	<div class="row">
+    		<div class="cell-1">
+	    		<strong>{{ trans("cruds.control.fields.note") }}</strong>
+	    	</div>
+    		<div class="cell-2">
+	    		{{ $control->note }}
+    		</div>
+	    </div>
 
 
-		@if ($control->realisation_date !=null)
+		@if ($control->realisation_date != null)
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans("cruds.control.fields.indicator") }}</strong>
@@ -177,7 +177,34 @@
 				</div>
 			</div>
 
-	@endif
+		@endif
+
+    	<div class="row">
+			<div class="cell-1">
+	    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
+	    	</div>
+			<div class="cell">
+				@if ($control->periodicity==1) {{ trans("common.monthly") }} @endif
+				@if ($control->periodicity==3) {{ trans("common.quarterly") }} @endif
+				@if ($control->periodicity==6) {{ trans("common.biannually") }} @endif
+				@if ($control->periodicity==12) {{ trans("common.annually") }} @endif
+			</div>
+	    </div>
+
+    	<div class="row">
+			<div class="cell-1">
+	    		<strong>{{ trans('cruds.control.fields.owners') }}</strong>
+	    	</div>
+			<div class="cell">
+				@foreach($control->owners as $owner)
+					{{ $owner->name }}
+					@if ($control->owners->last()!=$owner)
+					,
+					@endif
+				@endforeach
+			</div>
+	    </div>
+
 
    	<div class="row">
    		<div class="cell-5">

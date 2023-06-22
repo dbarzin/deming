@@ -49,7 +49,8 @@ class UserController extends Controller
             $request,
             [
                 'login' => 'required|min:1|max:30',
-                'name' => 'required|min:1|max:30',
+                'name' => 'required|min:1|max:90',
+                'title' => 'required|min:1|max:30',
                 'email' => 'required|email:rfc',
                 'password1' => 'required|min:8',
                 'role' => 'required',

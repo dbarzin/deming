@@ -86,12 +86,6 @@
 		        		<tr>
 		        			<td>I</td><td>Action plan</td><td>text</td><td>The proposed action plan</td>
 		        		</tr>
-		        		<tr>
-		        			<td>J</td><td>Responsible</td><td>string(255)</td><td>The responsible of performing the control</td>
-		        		</tr>
-		        		<tr>
-		        			<td>K</td><td>Periodicity</td><td>integer</td><td>The periodicity in month : 1, 3, 6 or 12 (default=12)</td>
-		        		</tr>
 		        	</tbody>
 		    	</table>
 

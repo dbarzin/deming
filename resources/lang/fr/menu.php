@@ -14,7 +14,7 @@ return [
         'reports' => 'Rapports',
         'import' => "Import",
         'documents' => 'Documents',
-        'models' => 'Modèles'
+        'notifications' => 'Notifications'
     ]
 ];
 
