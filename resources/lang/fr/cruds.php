@@ -192,17 +192,12 @@ return [
             'sent_from' => 'Envoyé depuis',
 
             'to' => 'à',
-            'delay' => 'qui arrivent à échéance dans',
+            'delay' => 'pour les contrôles qui arrivent à échéance dans',
 
             'recurence_day' => 'jour',
             'recurence_week' => 'semaine',
             'recurence_week' => 'deux semaines',
             'recurence_week' => 'mois',
-
-            'one_mail' => 'Un mail par contrôle à réaliser',
-            'multiple_mails' => 'Un mail avec tout les contrôles à réaliser',
-            'one_notification' => 'Enoyer un mail par contrôler à réaliser',
-            'multiple_notifications' => 'Envoyer des mails de rappel',
 
             'duration' => [
                 'day' => 'jour',
