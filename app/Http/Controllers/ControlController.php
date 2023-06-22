@@ -465,7 +465,7 @@ class ControlController extends Controller
             return null;
         }
 
-        $control->plan_date = $request->plan_date;
+        $control->plan_date = $request->plan_date;   
         $control->owners()->sync($request->input('owners', []));
         $control->save();
 
@@ -550,9 +550,12 @@ class ControlController extends Controller
             $new_control->observations = null;
             $new_control->realisation_date = null;
             $new_control->note = null;
-            $new_control->score = null;            
+            $new_control->score = null;
             $new_control->plan_date = request('next_date');
             $new_control->save();
+
+            // Set owners
+            $new_control->owners()->sync($control->owners->pluck("id")->toArray());
 
             // make link
             $control->next_id = $new_control->id;

@@ -101,7 +101,7 @@ class GenerateTestData extends Command
             $control->input = $measure->input;
             $control->indicator = $measure->indicator;
             $control->action_plan = $measure->action_plan;
-            $control->periodicity = $measure->periodicity;
+            $control->periodicity = 12;
             /*
             $control->attributes =
                 $attributes[rand(0,count($attributes)-1)] . " ".
@@ -128,7 +128,7 @@ class GenerateTestData extends Command
             $prev_control->model = $measure->model;
             $prev_control->indicator = $measure->indicator;
             $prev_control->action_plan = $measure->action_plan;
-            $prev_control->periodicity = $measure->periodicity;
+            $prev_control->periodicity = 12;
             $prev_control->attributes = $measure->attributes;
             // do it
             $prev_control->plan_date = (new Carbon($curDate))->addMonth(-$measure->periodicity)->day(rand(0, 28))->toDateString();
@@ -152,10 +152,10 @@ class GenerateTestData extends Command
             $nextControl->model = $measure->model;
             $nextControl->indicator = $measure->indicator;
             $nextControl->action_plan = $measure->action_plan;
-            $nextControl->periodicity = $measure->periodicity;
+            $nextControl->periodicity = 12;
             $nextControl->attributes = $control->attributes;
             // next one
-            $nextControl->plan_date = (new Carbon($curDate))->day(rand(0, 28))->addMonth($measure->periodicity)->toDateString();
+            $nextControl->plan_date = (new Carbon($curDate))->day(rand(0, 28))->addMonth(12)->toDateString();
             // fix it
             $nextControl->realisation_date = null;
             $nextControl->note = null;
