@@ -214,7 +214,6 @@ class ControlController extends Controller
 
         // get associated documents
         $documents = DB::table('documents')->where('control_id', $id)->get();
-
         return view('controls.show')
             ->with('control', $control)
             ->with('next_id', $next_control !== null ? $next_control->id : null)
@@ -547,23 +546,14 @@ class ControlController extends Controller
         // if there is no next control
         if ($control->next_id === null) {
             // create a new control
-            $new_control = new Control();
-            $new_control->measure_id = $control->measure_id;
-            $new_control->domain_id = $control->domain_id;
-            $new_control->name = $control->name;
-            $new_control->clause = $control->clause;
-            $new_control->objective = $control->objective;
-            $new_control->input = $control->input;
-            $new_control->model = $control->model;
-            $new_control->indicator = $control->indicator;
-
-            // should action_plan comes from measure
-            $new_control->action_plan = $control->action_plan;
-            $new_control->owner = $control->owner;
-            $new_control->periodicity = $control->periodicity;
-            $new_control->retention = $control->retention;
+            $new_control = $control->replicate();
+            $new_control->observations = null;
+            $new_control->realisation_date = null;
+            $new_control->note = null;
+            $new_control->score = null;            
             $new_control->plan_date = request('next_date');
             $new_control->save();
+
             // make link
             $control->next_id = $new_control->id;
         }
