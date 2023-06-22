@@ -166,6 +166,7 @@ return [
          'index' => 'List of users',
          'edit' => 'Edit User',
          'add' => 'Add User',
+         'show' => 'Show user',
          'fields' => [
              'login' => 'Login',
              'name' => 'Name',
@@ -173,7 +174,8 @@ return [
              'role' => 'Role',
              'password' => 'Password',
              'email' => 'email',
-            'language' => 'Language',
+             'language' => 'Language',
+             'controls' => 'Controls'
          ],
          'roles' => [
              'admin' => 'Administrator',

@@ -69,7 +69,7 @@
 		    </div>
 	    	<div class="row">
 	    		<div class="cell-8">
-    				<table>
+    				<table class="table">
 	    			@foreach($user->controls as $control)
 	    				@if($control->realisation_date==null)
 	    				<tr>
