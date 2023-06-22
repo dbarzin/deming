@@ -50,14 +50,34 @@ It is possible to import controls from an .XLSX file.
 
 ### Documents <a name="documents"></a>
 
-This screen provides an overview of all the documents used as evidence when carrying out security checks.
+This screen is used to modify the document templates used for the control sheets and the ISMS management report and provides an overview of all the documents used as evidence when carrying out security checks.
 
 [<img src="/deming/images/documents.png" width="300">](/deming/images/documents.png)
 
 The "Verify" button allows you to verify the integrity of the documents stored in the application.
 
-### Models <a name="models"></a>
+### Config <a name="config"></a>
 
-This screen is used to modify the document templates used for the control sheets and the ISMS management report.
+This screen is used to configure the notifications sent to users when they have to carry out controls.
 
-[<img src="/deming/images/models.png" width="300">](/deming/images/models.png)
+The screen contains:
+
+* The subject of the mail sent to the user;
+
+* The sender of the email;
+
+* The periodicity of sending notifications;
+
+* The notification deadlines.
+
+[<img src="/deming/images/models.png" width="300">](/deming/images/config.png)
+
+When you click on:
+
+* "Save" - the configuration is saved;
+
+* "Test" - a test mail is sent to the current user;
+
+* "Cancel" - you return to the main page.
+
+

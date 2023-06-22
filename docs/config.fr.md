@@ -51,15 +51,34 @@ Il est possible d'importer des mesures de sécurité depuis un fichier .XLSX.
 
 ### Documents <a name="documents"></a>
 
-Cet écran permet d’avoir une vue sur l’ensemble des documents utilisés comme preuve lors de la réalisation des contrôles de sécurité.
+Cet écran permet de modifier les modèles de document utilisés pour les fiches de contrôle et le rapport de pilotage du SMSI.
+et permet d’avoir une vue sur l’ensemble des documents utilisés comme preuve lors de la réalisation des contrôles de sécurité.
 
 [<img src="/deming/images/documents.png" width="300">](/deming/images/documents.png)
 
 Le bouton « Vérifier » permet de vérifier l’intégrité des documents conservés dans l'application.
 
-### Modèles <a name="models"></a>
+### Configration <a name="config"></a>
 
-Cet écran permet de modifier les modèles de document utilisés pour les fiches de contrôle et le rapport de pilotage du SMSI.
+Cet écran permet de configurer les notifications envoyées aux utilisateurs lorsqu'ils doivent réaliser des contrôles.
 
-[<img src="/deming/images/models.png" width="300">](/deming/images/models.png)
+L'écran contient :
+
+* Le sujet du mail envoyé à l'utilisateur;
+
+* L'émetteur du mail;
+
+* La périodicité de l'envoi des notifications;
+
+* Le délais de notification.
+
+[<img src="/deming/images/models.png" width="300">](/deming/images/config.png)
+
+Lorsque vous cliquer sur :
+
+* "Sauver" - la configuration est sauvée;
+
+* "Test" - un mail de test est envoyé à l'utilisateur courant ;
+
+* "Cancel" - vous revenez à la page principale.
 

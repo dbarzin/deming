@@ -76,6 +76,8 @@ This screen contains the information of a control:
 
 * Those responsible for carrying out the controls.
 
+[<img src="/deming/images/c2.png" width="600">](/deming/images/pcontrol.png)
+
 When you click:
 
 * "Plan", the planning date, the recurrence and the persons in charge are updated and you are returned to the [display screen
