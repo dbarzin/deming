@@ -90,7 +90,7 @@
 				</button>
 				</form>
 				&nbsp;
-				<form action="/measures"/>
+				<form action="/control/show/{{$control->id}}"/>
 					<button type="submit" class="button">
 						<span class="mif-cancel"></span>
 						&nbsp;
