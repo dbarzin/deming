@@ -35,7 +35,7 @@
 	    		<strong>{{ trans('cruds.control.fields.objective') }}</strong>
 	    	</div>
 			<div class="cell-6">
-				{!! $control->objective !!}
+				<pre>{!! $control->objective !!}</pre>
 			</div>
 		</div>
 
