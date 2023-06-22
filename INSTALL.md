@@ -161,6 +161,32 @@ Enfin, redémarrez le service Apache pour activer les modifications :
 
     sudo systemctl restart apache2
 
+## Configuration du mail
+
+Si vous souhaitez envoyer des mails de notification depuis Deming.
+
+Installer postfix et mailx
+
+    sudo apt install postfix mailutils
+
+Configurer postfix
+
+    sudo dpkg-reconfigure postfix
+
+Envoyer un mail de test avec
+
+    echo "Test mail body" | mailx -r "deming@yourdomain.local" -s "Subject Test" yourname@yourdomain.local
+
+## Sheduler
+
+Modifier le crontab
+
+    sudo crontab -e
+
+ajouter cette ligne dans le crontab
+
+    * * * * * cd /var/www/deming && php artisan schedule:run >> /dev/null 2>&1
+
 ## Mise à jour
 
 Pour mettre à jour Deming, il faut aller dans le répoertoire de Deming et récupérer les sources
