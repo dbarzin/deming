@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\User;
+use App\Control;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -104,7 +105,8 @@ class UserController extends Controller
             '403 Forbidden'
         );
 
-        return view('users.edit', compact('user'));
+        $controls = Control::select("id","clause")->whereNull("realisation_date")->get();
+        return view('users.edit', compact('user', 'controls'));
     }
 
     /**
@@ -148,10 +150,14 @@ class UserController extends Controller
         if (request('password1') !== null) {
             $user->password = bcrypt(request('password1'));
         }
+
+        // TODO : should not update controls already made
+        $user->controls()->sync($request->input('controls', []));
+        
         $user->update();
 
         if (Auth::User()->role === 1) {
-            return redirect('/users');
+            return redirect('/users/' . $user->id);
         }
         return redirect('/');
     }

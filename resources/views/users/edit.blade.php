@@ -90,12 +90,32 @@
 	    		<div class="cell-1">
 					<label class="label" for="description">{{ trans('cruds.user.fields.password') }}</label>
 				</div>
-	    		<div class="cell-3">
+	    		<div class="cell-5">
 					<input type="password" name="password1"/>	
 					<input type="password" name="password2"/>
 				</div>
 			</div>
 		</div>
+
+    	<div class="row">
+    		<div class="cell-2">
+	    		<strong>{{ trans('cruds.user.fields.controls') }}</strong>
+	    	</div>
+	    </div>
+
+    	<div class="row">
+    		<div class="cell-8">
+
+	            <select data-role="select" name="controls[]" id="controls" multiple>
+	                @foreach($controls as $control)
+	                       <option value="{{ $control->id }}" {{ (in_array($control->id, old('controls', [])) || ($user->controls->contains($control->id))) ? 'selected' : '' }}>{{ $control->clause }}</option>
+	                @endforeach
+	            </select>
+    			
+    		</div>
+    	</div>
+
+
 
     	<div class="row">
     		<div class="cell-1">

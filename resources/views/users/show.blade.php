@@ -69,13 +69,39 @@
 		    </div>
 	    	<div class="row">
 	    		<div class="cell-8">
-    				<table class="table">
+				    <table class="table striped row-hover cell-border"
+				       data-role="table"
+				       data-rows="25"
+				       data-show-activity="true"
+				       data-rownum="false"
+				       data-check="false"
+				       data-check-style="1"
+				       onDraw="alert('change')"
+				       >
+				        <thead>
+				            <tr>
+				                <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.domain") }}</th>
+				                <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.measure") }}</th>
+				                <th width="50%">{{ trans("cruds.control.fields.name") }}</th>
+				                <th class="sortable-column sort-asc"  width="5%">{{ trans("cruds.control.fields.planned") }}</th>
+				            </tr>
+				        </thead>
+				        <tbody>
 	    			@foreach($user->controls as $control)
-	    				@if($control->realisation_date==null)
 	    				<tr>
-		    				<td>
-					    		<a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a> &nbsp; - &nbsp; {{ $control->name }}		    					
-		    				</td>
+				            <td>
+				                <a id="{{ $control->domain->title }}" href="/domains/{{ $control->domain_id}}">
+				                    {{ $control->domain->title }}
+				                </a>
+				            </td>
+				            <td>
+				                <a id="{{ $control->clause }}" href="/measures/{{ $control->measure_id }}">
+				                    {{ $control->clause }}
+				                </a>
+				            </td>
+				            <td>
+				                    {{ $control->name }} 
+				            </td>
 		    				<td>
 				                <a id="{{ $control->plan_date }}" href="/control/show/{{$control->id}}">
 				                <b>
@@ -88,8 +114,6 @@
 				                </a>
 		    				</td>
 		    			</tr>
-		    			@endif
-	    			</tr>
 	    			@endforeach
 	    			</table>
 	    		</div>

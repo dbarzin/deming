@@ -87,7 +87,7 @@ L’écran contient :
 
 * La périodicité du contrôles et 
 
-* Les responsable de la réalisation du contrôles.
+* Les responsables de la réalisation du contrôles.
 
 [<img src="/deming/images/plan.png" width="600">](/deming/images/plan.png)
 
