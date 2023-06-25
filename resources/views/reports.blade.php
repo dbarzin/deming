@@ -2,30 +2,11 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.exports.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
-
-		<b>{{ trans('cruds.exports.report_title') }}</b>
-
-		@if (count($errors))
-		<div class= “form-group”>
-			<div class= “alert alert-danger”>
-				<ul>
-				@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-				@endforeach
-				</ul>
-			</div>
-		</div>
-		@endif
+    <div data-role="panel" data-title-caption="{{ trans('cruds.exports.steering') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 		<form action="/reports/pilotage" target="_new">
 
 		<div class="grid">
-	    	<div class="row">
-	    		<div class="cell-5">
-				{{ trans('cruds.exports.steering') }}
-				</div>
-			</div>
 
 			<div class="row">
 		        <div class="cell-1">
@@ -57,20 +38,18 @@
 				    <button type="submit" class="button primary drop-shadow">{{ trans ('common.create') }}</button>
 				</div>
 			</div>
-			</form>
+		</div>
+	</form>
 
-			<div class="row">
-		        <div class="cell-3">
-		        	<b></b>
-				</div>
-			</div>
+	</div>
 
+	<div class="row">
+        <div class="cell-3">
+        	<b></b>
+		</div>
+	</div>
 
-			<div class="row">
-		        <div class="cell-3">	    
-					<b>{{ trans('cruds.exports.data_export_title') }}</b>
-				</div>
-			</div>
+    <div data-role="panel" data-title-caption="{{ trans('cruds.exports.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 			<div class="row">
 		        <div class="cell-3">
