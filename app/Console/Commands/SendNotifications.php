@@ -62,13 +62,12 @@ class SendNotifications extends Command
                     ->where('user_id', '=', $user->id)
                     ->where('plan_date', '<=', Carbon::now()
                         ->addDays(intval(config('deming.notification.expire-delay')))->toDateString())
+                    ->orderBy('plan_date')
                     ->get();
                 if ($controls->count() > 0) {
                     $txt = 'Liste des contrôles à réaliser<br><br>';
                     foreach ($controls as $control) {
-                        $txt .= '<a href="' . url('/measures/' . $control->measure_id) . '">'. $control->clause . '</a> &nbsp; - &nbsp; '. $control->name;
-                        $txt .= '</td>';
-                        $txt .= '<td>';
+                        // Date
                         $txt .= '<a href="' . url('/control/show/'. $control->id) . '">';
                         $txt .= '<b>';
                         if (strtotime($control->plan_date) >= strtotime('now')) {
@@ -78,6 +77,14 @@ class SendNotifications extends Command
                         }
                         $txt .= '</b>';
                         $txt .= '</a>';
+                        //
+                        $txt .= '&nbsp; - &nbsp;';                        
+                        // Clause
+                        $txt .= '<a href="' . url('/measures/' . $control->measure_id) . '">'. $control->clause . '</a>';
+                        //
+                        $txt .= '&nbsp; - &nbsp;';
+                        // Name
+                        $tht .= $control->name;
                         $txt .= '<br>';
                     }
 
