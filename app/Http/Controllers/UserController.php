@@ -151,8 +151,8 @@ class UserController extends Controller
             $user->password = bcrypt(request('password1'));
         }
 
-        // TODO : should not update controls already made
-        $user->controls()->sync($request->input('controls', []));
+        // Update controls not already made
+        $user->lastControls()->sync($request->input('controls', []));
 
         $user->update();
 

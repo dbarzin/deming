@@ -87,7 +87,7 @@
 				            </tr>
 				        </thead>
 				        <tbody>
-	    			@foreach($user->controls as $control)
+	    			@foreach($user->lastControls as $control)
 	    				<tr>
 				            <td>
 				                <a id="{{ $control->domain->title }}" href="/domains/{{ $control->domain_id}}">
