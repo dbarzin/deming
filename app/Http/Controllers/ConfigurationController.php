@@ -48,7 +48,7 @@ class ConfigurationController extends Controller
                 // put in config file
                 config(['deming.notification.mail-from' => $mail_from]);
                 config(['deming.notification.mail-subject' => $mail_subject]);
-                config(['deming.notification.check-frequency' => $frequency]);
+                config(['deming.notification.frequency' => $frequency]);
 
                 config(['deming.notification.expire-delay' => $expire_delay]);
                 config(['deming.notification.reminder' => $reminder]);
