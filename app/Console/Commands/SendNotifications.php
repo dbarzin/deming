@@ -104,10 +104,10 @@ class SendNotifications extends Command
                 }
             }
         } else {
-            Log::debug('CertificateExpiracy - no check');
+            Log::debug('SendNotifications - no check');
         }
 
-        Log::debug('CertificateExpiracy - DONE.');
+        Log::debug('SendNotifications - DONE.');
     }
 
     /**
