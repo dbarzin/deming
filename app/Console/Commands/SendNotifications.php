@@ -84,7 +84,7 @@ class SendNotifications extends Command
                         //
                         $txt .= '&nbsp; - &nbsp;';
                         // Name
-                        $tht .= $control->name;
+                        $txt .= $control->name;
                         $txt .= '<br>';
                     }
 
