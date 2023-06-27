@@ -35,7 +35,8 @@ class SendNotifications extends Command
 
         Log::debug('SendNotifications - day '. Carbon::now()->day);
 
-        if ($this->needCheck()) {
+        if (true) {
+        // if ($this->needCheck()) {
             // Check for control
             Log::debug('SendNotifications - check');
 
@@ -92,7 +93,7 @@ class SendNotifications extends Command
                     $mail_from = config('deming.notification.mail-from');
                     $headers = [
                         'MIME-Version: 1.0',
-                        'Content-type: text/html;charset=UTF-8',
+                        'Content-type: text/html;charset=iso-8859-1',
                         'From: '. $mail_from,
                     ];
                     $to_email = $user->email;
@@ -100,7 +101,7 @@ class SendNotifications extends Command
                     $message = $txt;
 
                     // Send mail
-                    if (mail($to_email, $mailSubject, $message, implode("\r\n", $headers))) {
+                    if (mail($to_email, '=?UTF-8?B?' . base64_encode($mailSubject) . '?=', $message, implode("\r\n", $headers))) { 
                         Log::debug('Mail sent to '.$to_email);
                     } else {
                         Log::debug('Email sending fail.');
