@@ -100,7 +100,7 @@ class SendNotifications extends Command
                     $message = $txt;
 
                     // Send mail
-                    if (mail($to_email, $mailSubject, $message, implode("\r\n", $headers), ' -f'. $mail_from)) {
+                    if (mail($to_email, $mailSubject, $message, implode("\r\n", $headers))) {
                         Log::debug('Mail sent to '.$to_email);
                     } else {
                         Log::debug('Email sending fail.');
