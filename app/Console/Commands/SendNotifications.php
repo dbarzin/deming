@@ -97,7 +97,7 @@ class SendNotifications extends Command
                         'From: '. $mail_from,
                     ];
                     $to_email = $user->email;
-                    $mailSubject = config('deming.notification.mail-subject');
+                    $subject = config('deming.notification.mail-subject');
                     $message = $txt;
 
                     // Send mail
