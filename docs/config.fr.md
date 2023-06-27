@@ -72,7 +72,7 @@ L'écran contient :
 
 * Le délais de notification.
 
-[<img src="/deming/images/models.png" width="300">](/deming/images/config.png)
+[<img src="/deming/images/config.png" width="300">](/deming/images/config.png)
 
 Lorsque vous cliquer sur :
 

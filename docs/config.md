@@ -70,7 +70,7 @@ The screen contains:
 
 * The notification deadlines.
 
-[<img src="/deming/images/models.png" width="300">](/deming/images/config.png)
+[<img src="/deming/images/config.png" width="300">](/deming/images/config.png)
 
 When you click on:
 
