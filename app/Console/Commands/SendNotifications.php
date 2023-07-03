@@ -66,7 +66,7 @@ class SendNotifications extends Command
                     ->orderBy('plan_date')
                     ->get();
                 if ($controls->count() > 0) {
-                    $txt = 'Liste des contrôles à réaliser<br><br>';
+                    $txt = htmlentities('Liste des contrôles à réaliser') . '<br><br>';
                     foreach ($controls as $control) {
                         // Date
                         $txt .= '<a href="' . url('/control/show/'. $control->id) . '">';
@@ -81,11 +81,11 @@ class SendNotifications extends Command
 
                         $txt .= ' &nbsp; - &nbsp; ';
                         // Clause
-                        $txt .= '<a href="' . url('/measures/' . $control->measure_id) . '">'. $control->clause . '</a>';
+                        $txt .= '<a href="' . url('/measures/' . $control->measure_id) . '">'. htmlentities($control->clause) . '</a>';
 
-                        $txt .= '&nbsp; - &nbsp;';
+                        $txt .= ' &nbsp; - &nbsp; ';
                         // Name
-                        $txt .= $control->name;
+                        $txt .= htmlentities($control->name);
                         $txt .= '<br>';
                     }
 
@@ -98,7 +98,9 @@ class SendNotifications extends Command
                     ];
                     $to_email = $user->email;
                     $subject = config('deming.notification.mail-subject');
-                    $message = $txt;
+		    $message = $txt;
+
+		    Log::debug( utf8_decode($message));
 
                     // Send mail
                     if (mail($to_email, '=?UTF-8?B?' . base64_encode($subject) . '?=', utf8_decode($message), implode("\r\n", $headers), ' -f'. $mail_from)) {
