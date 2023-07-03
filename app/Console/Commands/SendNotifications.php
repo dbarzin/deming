@@ -85,9 +85,9 @@ class SendNotifications extends Command
 
                         $txt .= ' &nbsp; - &nbsp; ';
                         // Name
-                        $txt .= htmlentities($control->name);
+			$txt .= htmlentities($control->name);
                         $txt .= '<br>';
-                    }
+	    		}
 
                     // send notification
                     $mail_from = config('deming.notification.mail-from');
