@@ -86,7 +86,7 @@ class SendNotifications extends Command
                         $txt .= ' &nbsp; - &nbsp; ';
                         // Name
 			$txt .= htmlentities($control->name);
-                        $txt .= '<br>';
+		$txt .= "<br>\n";
 	    		}
 
                     // send notification
@@ -103,7 +103,7 @@ class SendNotifications extends Command
 		    Log::debug( utf8_decode($message));
 
                     // Send mail
-                    if (mail($to_email, '=?UTF-8?B?' . base64_encode($subject) . '?=', utf8_decode($message), implode("\r\n", $headers), ' -f'. $mail_from)) {
+                    if (mail($to_email, '=?UTF-8?B?' . base64_encode($subject) . '?=', utf8_decode($message), implode("\r\n", $headers),'-f ' . $to_email)) {
                         Log::debug('Mail sent to '.$to_email);
                     } else {
                         Log::debug('Email sending fail.');
