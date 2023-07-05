@@ -78,16 +78,16 @@ class SendNotifications extends Command
                         }
                         $txt .= '</b>';
                         $txt .= '</a>';
-
+                        // Space
                         $txt .= ' &nbsp; - &nbsp; ';
                         // Clause
                         $txt .= '<a href="' . url('/measures/' . $control->measure_id) . '">'. htmlentities($control->clause) . '</a>';
-
+                        // Space
                         $txt .= ' &nbsp; - &nbsp; ';
                         // Name
-			$txt .= htmlentities($control->name);
-		$txt .= "<br>\n";
-	    		}
+                        $txt .= htmlentities($control->name);
+                        $txt .= "<br>\n";
+                    }
 
                     // send notification
                     $mail_from = config('deming.notification.mail-from');
@@ -98,12 +98,10 @@ class SendNotifications extends Command
                     ];
                     $to_email = $user->email;
                     $subject = config('deming.notification.mail-subject');
-		    $message = $txt;
-
-		    Log::debug( utf8_decode($message));
+                    $message = $txt;
 
                     // Send mail
-                    if (mail($to_email, '=?UTF-8?B?' . base64_encode($subject) . '?=', utf8_decode($message), implode("\r\n", $headers),'-f ' . $to_email)) {
+                    if (mail($to_email, '=?UTF-8?B?' . base64_encode($subject) . '?=', utf8_decode($message), implode("\r\n", $headers), '-f ' . $to_email)) {
                         Log::debug('Mail sent to '.$to_email);
                     } else {
                         Log::debug('Email sending fail.');
