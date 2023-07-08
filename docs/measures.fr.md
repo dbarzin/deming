@@ -71,7 +71,7 @@ Lorsque vous cliquez sur :
 * « Annluer », vous revenez à l’écran d’[affichage de la mesure de sécurité](#show).
 
 
-### Plannifier un contrôle <a name="plan"></a>
+### Planifier un contrôle <a name="plan"></a>
 
 Cet écran permet de planifier un contrôle de sécurité à partir d’une mesure.
 
