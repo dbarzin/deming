@@ -105,7 +105,7 @@ class UserController extends Controller
             '403 Forbidden'
         );
 
-        $controls = Control::select('id', 'clause')->whereNull('realisation_date')->get();
+        $controls = Control::select('id', 'clause')->whereNull('realisation_date')->orderBy('clause')->get();
         return view('users.edit', compact('user', 'controls'));
     }
 
