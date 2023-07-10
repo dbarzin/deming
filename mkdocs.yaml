@@ -14,6 +14,9 @@ copyright: Copyright <a href="https://www.gnu.org/licenses/licenses.en.html">GPL
 theme: 
   name: readthedocs
 
+extra_css:
+    - css/extra.css
+    
 plugins:
   - search
   - i18n:
@@ -51,6 +54,8 @@ nav:
 - Plans d'action : actions.fr.md
 - Configuration : config.md
 - Configuration : config.fr.md
+- Annexe: annexe.fr.md
+- Annexe: annexe.md
 - References: references.md
 - Références: references.fr.md
 
