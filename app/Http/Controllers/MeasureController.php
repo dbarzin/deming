@@ -317,8 +317,10 @@ class MeasureController extends Controller
             $control->periodicity = $request->get('periodicity');
             $control->plan_date = $request->get('plan_date');
             // Save it
-            $control->owners()->sync($request->input('owners', []));
             $control->save();
+
+            // Sync onwers
+            $control->owners()->sync($request->input('owners', []));
 
             // Update link
             $prev_control = Control::where('measure_id', '=', $measure->id)

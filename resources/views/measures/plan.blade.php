@@ -56,7 +56,7 @@
 				    <option value="1" {{ $measure->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
 				    <option value="3" {{ $measure->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
 				    <option value="6" {{ $measure->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>
-				    <option value="12" {{ $measure->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
+				    <option value="12" {{ ($measure->periodicity==null) || ($measure->periodicity==12) ? "selected" : ""}}>{{ trans('common.annually') }}</option>
 				 </select>
 			</div>
 		</div>
@@ -69,7 +69,7 @@
 		<div class="cell-4">
             <select data-role="select" name="owners[]" id="owners" multiple>
                 @foreach($users as $user)
-                    <option value="{{ $user->id }}" {{ (in_array($user->id, old('owners', [])) || $measure->control()->owners->contains($user->id)) ? 'selected' : '' }}>{{ $user->name }}</option>
+                    <option value="{{ $user->id }}" {{ (in_array($user->id, old('owners', [])) || (($measure->control()!=null) && $measure->control()->owners->contains($user->id))) ? 'selected' : '' }}>{{ $user->name }}</option>
                 @endforeach
             </select>
 			
