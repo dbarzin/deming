@@ -3,9 +3,10 @@
 namespace App\Http\Controllers;
 
 use App\Control;
+use App\Document;
 use App\Domain;
-use App\Exports\ControlsExport;
 use App\User;
+use App\Exports\ControlsExport;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -198,6 +199,11 @@ class ControlController extends Controller
     {
         $control = Control::find($id);
 
+        if ($control===null) {
+            // control not found
+            abort(404);
+            }
+
         if ($control->next_id !== null) {
             $next_control = DB::table('controls')
                 ->select('id', 'plan_date')
@@ -263,11 +269,25 @@ class ControlController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Control $control)
+    public function destroy(int $id)
     {
-        // does not exists in that way
+        // Only for administrator role
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // Get the control
+        $control = Control::find($id);
+
+        // Delete associated documents
+        Document::where('control_id', $id)->delete();
+
+        // Previous control must point to next control
+        Control::where('next_id', $control->id)
+          ->update(['next_id' => $control->next_id]);
+
+        // Then delete the control
         $control->delete();
-        return redirect('/control');
+
+        return redirect('/controls');
     }
 
     public function history()
@@ -422,7 +442,6 @@ class ControlController extends Controller
     public function plan(int $id)
     {
         // does not exists in that way
-        // $control->delete();
         $control = Control::find($id);
         if ($control === null) {
             return;

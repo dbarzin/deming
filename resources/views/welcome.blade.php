@@ -157,7 +157,7 @@
                     <td>
                         <b id="{{ $control->plan_date }}">
                             <a href="/controls/{{ $control->id }}">
-                            @if( strtotime($control->plan_date) >= strtotime('now') ) 
+                            @if (today()->lte($control->plan_date)) 
                                 <font color="green">
                             @else
                                 <font color="red">

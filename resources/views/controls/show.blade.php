@@ -235,6 +235,14 @@
 	    		</button>
 			</form>
 			&nbsp;
+		    <form action="/control/delete/{{ $control->id }}">
+	    		<button class="button alert">
+					<span class="mif-fire"></span>
+					&nbsp;
+	    			{{ trans("common.delete") }}
+	    		</button>
+			</form>
+			&nbsp;
    			@endif
 		    <form action="/controls">
 	    		<button class="button">
