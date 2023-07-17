@@ -127,7 +127,7 @@ class HomeController extends Controller
             ->where(
                 [
                     ['realisation_date','=',null],
-                    ['plan_date','<', Carbon::today()->format('Y-m-d')]
+                    ['plan_date','<', Carbon::today()->format('Y-m-d')],
                 ]
             )
             ->count();

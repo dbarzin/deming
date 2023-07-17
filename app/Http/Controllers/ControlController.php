@@ -5,8 +5,8 @@ namespace App\Http\Controllers;
 use App\Control;
 use App\Document;
 use App\Domain;
-use App\User;
 use App\Exports\ControlsExport;
+use App\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -199,10 +199,10 @@ class ControlController extends Controller
     {
         $control = Control::find($id);
 
-        if ($control===null) {
+        if ($control === null) {
             // control not found
             abort(404);
-            }
+        }
 
         if ($control->next_id !== null) {
             $next_control = DB::table('controls')
@@ -282,7 +282,7 @@ class ControlController extends Controller
 
         // Previous control must point to next control
         Control::where('next_id', $control->id)
-          ->update(['next_id' => $control->next_id]);
+            ->update(['next_id' => $control->next_id]);
 
         // Then delete the control
         $control->delete();
