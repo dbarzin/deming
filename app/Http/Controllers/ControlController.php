@@ -199,10 +199,9 @@ class ControlController extends Controller
     {
         $control = Control::find($id);
 
-        if ($control === null) {
-            // control not found
+        // Control not found
+        if ($control === null) 
             abort(404);
-        }
 
         if ($control->next_id !== null) {
             $next_control = DB::table('controls')
@@ -242,6 +241,11 @@ class ControlController extends Controller
         abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $control = Control::find($id);
+
+        // Control not found
+        if ($control === null) 
+            abort(404);
+
         $documents = DB::table('documents')->where('control_id', $id)->get();
 
         // get all attributes
@@ -276,6 +280,10 @@ class ControlController extends Controller
 
         // Get the control
         $control = Control::find($id);
+
+        // Control not found
+        if ($control === null) 
+            abort(404);
 
         // Delete associated documents
         Document::where('control_id', $id)->delete();
@@ -479,6 +487,10 @@ class ControlController extends Controller
     {
         $control = Control::find($request->id);
 
+        // Control not found
+        if ($control === null) 
+            abort(404);
+
         // Control already made ?
         if ($control->realisation_date !== null) {
             return null;
@@ -548,6 +560,10 @@ class ControlController extends Controller
         // Control fields
         $control = Control::find($id);
 
+        // Control not found
+        if ($control === null) 
+            abort(404);
+
         // control already made ?
         if ($control->realisation_date !== null) {
             return null;
@@ -593,12 +609,10 @@ class ControlController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function save(Request $request)
+    public function save(int $id)
     {
         // Only for CISO
         abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $id = intval($request->id);
 
         $control = Control::find($id);
 
