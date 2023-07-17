@@ -236,10 +236,10 @@ class ControlController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    // public function edit(int $id)
-    public function edit(Request $request)
+    public function edit(int $id)
     {
-        $id = intval($request->id);
+        // Only for administrator role
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $control = Control::find($id);
         $documents = DB::table('documents')->where('control_id', $id)->get();

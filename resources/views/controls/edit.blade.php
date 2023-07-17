@@ -31,6 +31,15 @@
 					</div>
 				</div>
 
+		    	<div class="row">
+		    		<div class="cell-1">
+			    		<strong>{{ trans("cruds.control.fields.objective") }}</strong>
+			    	</div>
+					<div class="cell-6">
+						<textarea name="objective" rows="5" data-role="textarea" data-clear-button="false">{{ $errors->has('objective') ?  old('objective') : $control->objective }}</textarea>
+					</div>
+				</div>
+
 				<div class="row">
 		    		<div class="cell-1">
 			    		<strong>{{ trans('cruds.control.fields.attributes') }}</strong>
@@ -43,15 +52,6 @@
 							    @endif
 						    @endforeach
 						 </select>
-					</div>
-				</div>
-
-		    	<div class="row">
-		    		<div class="cell-1">
-			    		<strong>{{ trans("cruds.control.fields.objective") }}</strong>
-			    	</div>
-					<div class="cell-6">
-						<textarea name="objective" rows="5" data-role="textarea" data-clear-button="false">{{ $errors->has('objective') ?  old('objective') : $control->objective }}</textarea>
 					</div>
 				</div>
 
