@@ -46,6 +46,8 @@ Cet écran contient les informations d’un contrôle :
 
 Les boutons « Faire » et « Planifier » sont présents si ce contôle n’a pas encore été réalisé.
 
+Les boutons « Modifier » et « Supprimer » sont présents si l'utilisateur est administrateur.
+
 [<img src="/deming/images/c2.png" width="600">](/deming/images/c2.png)
 
 Lorsque vous cliquez sur :
@@ -55,6 +57,8 @@ Lorsque vous cliquez sur :
 * « Planifier », vous êtes envoyé vers l’[écran de planification d’un contrôles](#plan)
 
 * « Modifier », vous êtes envoyé vers l’[écran de modification du contrôles](#edit)
+
+* « Supprimer », le contrôle est supprimer et vous êtes envoyé vers la [liste des contrôles](#list)
 
 * « Annuler », vous êtes envoyé vers la [liste des contrôles](#list)
 

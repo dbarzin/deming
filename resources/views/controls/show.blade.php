@@ -207,7 +207,7 @@
 
 
    	<div class="row">
-   		<div class="cell-5">
+   		<div class="cell-7">
 			@if ($control->realisation_date==null)
 		    <form action="/control/make/{{ $control->id }}">
 	    		<button class="button success">

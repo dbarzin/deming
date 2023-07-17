@@ -46,8 +46,9 @@ This screen contains the information of a control:
 
 The "Do" and "Schedule" buttons are present if this control has not yet been carried out.
 
-[<img src="/deming/images/c2.png" width="600">](/deming/images/c2.png)
+The "Modify" and "Delete" buttons are available if the user is an administrator.
 
+[<img src="/deming/images/c2.png" width="600">](/deming/images/c2.png)
 
 When you click:
 
@@ -56,6 +57,8 @@ When you click:
 * "Plan", you are sent to the [control planning screen](/deming/measures/#plan)
 
 * "Edit", you are sent to the [control edit screen](#edit)
+
+* "Delete", the control is deleted and you are sent to the [list of controls](#list).
 
 * "Cancel", you are sent to the [list of controls](#list)
 
