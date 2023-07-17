@@ -285,6 +285,11 @@ class ControlController extends Controller
         if ($control === null) 
             abort(404);
 
+        // Delete files
+        $documents = Document::select("id")->where("control_id",$id)->get();
+        foreach($documents as $doc) 
+            unlink(storage_path('docs/' . $doc->id));
+
         // Delete associated documents
         Document::where('control_id', $id)->delete();
 
@@ -609,12 +614,17 @@ class ControlController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function save(int $id)
+    public function save(Request $request)
     {
         // Only for CISO
         abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $control = Control::find($id);
+        // Get the control
+        $control = Control::find($request->id);
+
+        // Control not found
+        if ($control === null) 
+            abort(404);
 
         $control->name = request('name');
         $control->objective = request('objective');
@@ -630,7 +640,7 @@ class ControlController extends Controller
 
         $control->save();
 
-        return redirect('/control/show/'.$id);
+        return redirect('/control/show/' . $request->id);
     }
 
     /**
