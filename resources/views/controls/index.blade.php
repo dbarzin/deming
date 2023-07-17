@@ -166,8 +166,7 @@
                 <!-- format in red when month passed -->
                 @if ($control->realisation_date == null)
                 <a id="{{ $control->plan_date }}" href="/control/show/{{$control->id}}">
-                <b>
-                    @if( strtotime($control->plan_date) >= strtotime('now') ) 
+                <b> @if (today()->lte($control->plan_date))
                         <font color="green">{{ $control->plan_date }}</font>
                     @else
                         <font color="red">{{ $control->plan_date }}</font>

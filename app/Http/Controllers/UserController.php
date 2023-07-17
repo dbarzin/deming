@@ -20,6 +20,7 @@ class UserController extends Controller
     public function index()
     {
         $users = DB::table('users')->orderBy('id', 'asc')->get();
+
         return view('users.index')->with('users', $users);
     }
 

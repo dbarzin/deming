@@ -125,7 +125,7 @@ class ControlController extends Controller
         // Filter on status
         if ($late !== null) {
             $controls = $controls
-                ->where('c1.plan_date', '<=', Carbon::today()->format('Y-m-d'))
+                ->where('c1.plan_date', '<', Carbon::today()->format('Y-m-d'))
                 ->whereNull('c1.realisation_date');
         } elseif ($status === '1') {
             $controls = $controls->whereNotNull('c1.realisation_date');
