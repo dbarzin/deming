@@ -515,12 +515,10 @@ class ControlController extends Controller
 
         $id = (int) request('id');
 
-        // does not exists in that way
+        // Control not found
         $control = Control::find($id);
-        if ($control === null) {
-            Log::Error('Control:make - Control not found  '. request('id'));
-            return redirect('/controls');
-        }
+        if ($control === null) 
+            abort(404);
 
         // Control already made ?
         if ($control->realisation_date !== null) {
