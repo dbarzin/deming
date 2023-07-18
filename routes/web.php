@@ -94,4 +94,4 @@ Route::get('/export/controls', 'ControlController@export');
 Route::get('/export/controls', 'ControlController@export');
 
 /* test chart */
-Route::get('/testChart', 'ReportController@testChart');
+// Route::get('/testChart', 'ReportController@testChart');
