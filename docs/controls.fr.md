@@ -48,7 +48,7 @@ Les boutons « Faire » et « Planifier » sont présents si ce contôle n’a p
 
 Les boutons « Modifier » et « Supprimer » sont présents si l'utilisateur est administrateur.
 
-[<img src="/deming/images/c2.png" width="600">](/deming/images/c2.png)
+[<img src="/deming/images/c2.fr.png" width="600">](/deming/images/c2.fr.png)
 
 Lorsque vous cliquez sur :
 
@@ -102,7 +102,7 @@ Cet écran contient :
 
 * Les observation du contrôle
 
-* Une zone pour sauvegarder les preuves
+* Une zone pour sauvegarder les preuves (**CTRL+V** permet de coller une capture d'écran)
 
 * Un lien permettant de télécharger la fiche de contrôles
 

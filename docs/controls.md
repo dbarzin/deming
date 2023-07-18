@@ -105,7 +105,7 @@ This screen contains:
 
 * Control observations
 
-* A field to save evidence
+* A field to save evidences (**CTRL+V** allows you to paste a screenshot)
 
 * A link to download the control sheet
 
