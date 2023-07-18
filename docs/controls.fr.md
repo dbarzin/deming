@@ -78,6 +78,8 @@ Cet écran contient les informations d’un contrôle :
 
 * Les responsables de la réalisation du contrôles.
 
+[<img src="/deming/images/c5.png" width="600">](/deming/images/c5.png)
+
 Lorsque vous cliquez sur :
 
 * « Plan », la date de planifierion, la récurence et les responsables sont mis à jour et vous êtres renvoyés vers l’[écran d'affichage 
