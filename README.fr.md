@@ -107,7 +107,7 @@ L'application dispose d'une [documentation utilisateur](https://dbarzin.github.i
 
 ## Installation
 
-Procédure d'[installation](https://github.com/dbarzin/deming/blob/main/INSTALL.md) de l'application.
+Procédure d'[installation](https://github.com/dbarzin/deming/blob/main/INSTALL.fr.md) de l'application.
 
 
 ## Feuille de route

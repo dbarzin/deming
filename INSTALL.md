@@ -1,33 +1,33 @@
-# Procédure d'installation de Deming
+# Deming installation procedure
 
-## Configuration recommandée
+## Recommended configuration
 
 - OS : Ubuntu 22.04 LTS
 - RAM : 2G
-- Disque : 120G
+- Disk : 120G
 - VCPU 2
 
 ## Installation 
 
-Mettre à jour la distribution linux
+Update linux distribution
 
     sudo apt update && sudo apt upgrade
 
-Installer Apache, git, php et composer
+Install Apache, git, php and composer
 
     sudo apt-get install git composer apache2 libapache2-mod-php php php-cli php-opcache php-mysql php-zip php-gd php-mbstring php-curl php-xml -y
 
-Créer le répertoire du projet
+Create the project directory
 
     cd /var/www
     sudo mkdir deming
     sudo chown $USER:$GROUP deming
 
-Cloner le projet depuis Github
+Clone project from Github
 
     git clone https://www.github.com/dbarzin/deming
 
-Installer les packages avec composer :
+Install packages with composer :
 
     cd deming
     mkdir -p storage/framework/views
@@ -36,28 +36,28 @@ Installer les packages avec composer :
     mkdir -p bootstrap/cache
     composer install
 
-Publier tous les actifs publiables à partir des packages des fournisseurs
+Publish all publishable assets from vendor packages
 
     php artisan vendor:publish --all
 
 ## MySQL
 
-Installer MySQL
+Install MySQL
 
     sudo apt install mysql-server
 
-Vérifier que vous utilisez MySQL et pas MariaDB (Deming ne fonctionne pas avec MariaDB).
+Make sure you're using MySQL and not MariaDB (Deming doesn't work with MariaDB).
 
     sudo mysql --version
 
-Lancer MySQL avec les droits root
+Run MySQL with root rights
 
     sudo mysql
 
-Créer la base de données _deming_ et l'utilisateur _deming_user_
+Create database _deming_ and user _deming_user_.
 
     CREATE DATABASE deming CHARACTER SET utf8 COLLATE utf8_general_ci;
-	CREATE USER 'deming_user'@'localhost' IDENTIFIED BY 'demPasssword-123';
+    CREATE USER 'deming_user'@'localhost' IDENTIFIED BY 'demPasssword-123';
     GRANT ALL ON deming.* TO deming_user@localhost;
     GRANT PROCESS ON *.* TO 'deming_user'@'localhost';
 
@@ -66,12 +66,12 @@ Créer la base de données _deming_ et l'utilisateur _deming_user_
 
 ## Configuration
 
-Créer un fichier .env dans le répertoire racine du projet :
+Create an .env file in the project root directory:
 
     cd /var/www/deming
     cp .env.example .env
 
-Mettre les paramètre de connexion à la base de données :
+Set database connection parameters :
 
     vi .env
 
@@ -83,62 +83,64 @@ Mettre les paramètre de connexion à la base de données :
     DB_USERNAME=deming_user
     DB_PASSWORD=demPasssword-123
 
-## Créer la base de données
 
-Exécuter les migrations
+## Create database
+
+Run migrations
 
     php artisan migrate --seed
 
-Remarque: la graine est importante (--seed), car elle créera le premier utilisateur administrateur pour vous.
+Note: the seed is important (--seed), as it will create the first administrator user for you.
 
-Générer la clé de l'application
+Generate application key
 
     php artisan key:generate
 
-Créer le lien de stockage
+Create storage link
 
-	php artisan storage:link
+    php artisan storage:link
 
-Pour importer la base de données avec les mesures de sécurité de la norme 27001:2013
+To import the database with 27001:2013 security measures
 
     sudo mysql deming < deming-27001\:2013.sql
 
-ou avec les mesures de sécurité de la norme 27001:2022
+or with 27001:2022 security measures
 
     sudo mysql deming < deming-27001\:2022.sql
 
-Génrérer des données de test (optionnel)
+Generate test data (optional)
 
     php artisan deming:generateTests
 
-Démarrer l'application avec php
+Start application with php
 
     php artisan serve
 
-ou pour y accéder à l'application depuis un autre serveur
+or to access the application from another server
 
     php artisan serve --host 0.0.0.0 --port 8000
 
-L'application est accessible à l'URL [http://127.0.0.1:8000]
+The application can be accessed at URL [http://127.0.0.1:8000]
 
-    utilisateur : admin@admin.localhost
-    mot de passe : admin
+    user : admin@admin.localhost
+    password : admin
 
-L'administrateur utilise la langue anglaise par défaut. Pour changer de langue, allez dans la page de profil de l'utilisateur 
-(en haut à droite de la page principale).
+The administrator's default language is English. To change language, go to the user profile page 
+(top right of the main page).
+
 
 ## Apache
 
-Pour configurer Apache, modifiez les propriétés du répertoire Deming et accordez les autorisations appropriées au répertoire de stockage avec la commande suivante :
+To configure Apache, modify the properties of the Deming directory and grant the appropriate permissions to the hive with the following command:
 
     sudo chown -R www-data:www-data /var/www/deming
     sudo chmod -R 775 /var/www/deming/storage
 
-Ensuite, créez un nouveau fichier de configuration d'hôte virtuel Apache pour servir l'application :
+Next, create a new Apache virtual host configuration file to serve the application:
 
     sudo vi /etc/apache2/sites-available/deming.conf
 
-Ajouter les lignes suivantes :
+Add the following lines:
 
     <VirtualHost *:80>
     ServerName deming.local
@@ -151,62 +153,62 @@ Ajouter les lignes suivantes :
     CustomLog ${APACHE_LOG_DIR}/access.log combined
     </VirtualHost>
 
-Enregistrez et fermez le fichier lorsque vous avez terminé. Ensuite, activez l'hôte virtuel Apache et le module de réécriture avec les commandes suivantes :
+Save and close the file when finished. Next, activate the Apache virtual host and rewrite module with the following commands:
 
     sudo a2enmod rewrite
     sudo a2dissite 000-default.conf
     sudo a2ensite deming.conf
 
-Enfin, redémarrez le service Apache pour activer les modifications :
+Finally, restart the Apache service to activate the changes:
 
     sudo systemctl restart apache2
 
-## Configuration du mail
+## Mail configuration
 
-Si vous souhaitez envoyer des mails de notification depuis Deming.
+If you wish to send notification e-mails from Deming.
 
-Installer postfix et mailx
+Install postfix and mailx
 
     sudo apt install postfix mailutils
 
-Configurer postfix
+Configure postfix
 
     sudo dpkg-reconfigure postfix
 
-Envoyer un mail de test avec
+Send a test mail with
 
     echo "Test mail body" | mailx -r "deming@yourdomain.local" -s "Subject Test" yourname@yourdomain.local
 
 ## Sheduler
 
-Modifier le crontab
+Modify crontab
 
     sudo crontab -e
 
-ajouter cette ligne dans le crontab
+add this line to crontab
 
     * * * * * cd /var/www/deming && php artisan schedule:run >> /dev/null 2>&1
 
-## Mise à jour
+## Update
 
-Pour mettre à jour Deming, il faut aller dans le répoertoire de Deming et récupérer les sources
+To update Deming, go to the Deming directory and retrieve the sources
 
     cd /var/www/deming
     git pull
 
-Migrer la base de données
+Migrate database
 
     php artisan migrate
 
-Mettre à jour composer
+Update composer
 
     composer self-update
 
-Mettre à jour les librairies
+Update libraries
 
     composer update
 
-Vider les caches
+Empty caches
 
     php artisan optimize:clear
 
