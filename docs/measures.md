@@ -37,14 +37,9 @@ A security measure consists of:
 
 * of the verification model;
 
-* an indicator (green, orange, red)
+* an indicator (green, orange, red); and
 
-* an action plan to be applied if control of this security measure fails;
-
-* responsible; And
-
-* the periodicity of the measurement (monthly, quarterly, daily, annual).
-
+* an action plan to be applied if control of this security measure fails.
 
 When you click:
 

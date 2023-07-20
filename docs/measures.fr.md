@@ -37,13 +37,9 @@ Une mesure de sécurité est composée :
 
 * du modèle de vérification ;
 
-* d’un indicateur (vert, orange, rouge)
+* d’un indicateur (vert, orange, rouge) ; et
 
-* d’un plan d’action à appliquer si le contrôle de cette mesure de sécurité est en échec ;
-
-* de responsable ; et
-
-* de la périodicité de la mesure (mesuel, trimestriel, disanuel, annuel).
+* d’un plan d’action à appliquer si le contrôle de cette mesure de sécurité est en échec.
 
 
 Lorsque vous cliquez sur :
