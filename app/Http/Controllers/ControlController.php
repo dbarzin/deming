@@ -491,7 +491,7 @@ class ControlController extends Controller
     public function doPlan(Request $request)
     {
         // For administrators and users only
-        abort_if( (Auth::User()->role !== 1) && (Auth::User()->rol !==2) ), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if( (Auth::User()->role !== 1) && (Auth::User()->rol !==2), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $control = Control::find($request->id);
 
