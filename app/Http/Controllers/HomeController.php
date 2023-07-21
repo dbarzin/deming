@@ -26,7 +26,6 @@ class HomeController extends Controller
     public function index(Request $request)
     {
         // count active domains
-        // select domain_id, max(controls.id) from controls where realisation_date is null group by domain_id;
         $active_domains_count = DB::table('controls')
             ->select(
                 'domain_id',
@@ -34,6 +33,7 @@ class HomeController extends Controller
             )
             ->whereNull('realisation_date')
             ->groupBy('domain_id')
+            ->get()
             ->count();
 
         // count all measures
