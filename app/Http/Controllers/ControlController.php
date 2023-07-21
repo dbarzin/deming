@@ -490,6 +490,9 @@ class ControlController extends Controller
      */
     public function doPlan(Request $request)
     {
+        // For administrators and users only
+        abort_if( (Auth::User()->role !== 1) && (Auth::User()->rol !==2) ), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $control = Control::find($request->id);
 
         // Control not found
@@ -502,6 +505,7 @@ class ControlController extends Controller
         }
 
         $control->plan_date = $request->plan_date;
+        $control->periodicity = $request->periodicity;
         $control->owners()->sync($request->input('owners', []));
         $control->save();
 
