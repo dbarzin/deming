@@ -180,7 +180,8 @@ return [
         'roles' => [
             'admin' => 'Administrateur',
             'user' => 'Utilisateur',
-            'auditor' => 'Auditeur'
+            'auditor' => 'Auditeur',
+            'api' => 'API'
         ],
     ],
     'config' => [
@@ -190,22 +191,15 @@ return [
             'help' => 'Cet écran permet de configurer les notifications envoyées par mail aux utilisateurs.',
             'message_subject' => 'Sujet du message',
             'sent_from' => 'Envoyé depuis',
-
             'to' => 'à',
             'delay' => 'pour les contrôles qui arrivent à échéance dans',
-
-            'recurence_day' => 'jour',
-            'recurence_week' => 'semaine',
-            'recurence_week' => 'deux semaines',
-            'recurence_week' => 'mois',
-
+            'recurence' => 'envoyer un rappel tout les',
             'duration' => [
                 'day' => 'jour',
                 'days' => 'jours',
                 'month' => 'mois',
                 'months' => 'mois',
             ],
-            'recurence' => 'envoyer un rappel tout les'
          ]
     ]
 ];

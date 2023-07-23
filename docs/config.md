@@ -56,7 +56,7 @@ This screen is used to modify the document templates used for the control sheets
 
 The "Verify" button allows you to verify the integrity of the documents stored in the application.
 
-### Config <a name="config"></a>
+### Notifications <a name="notifications"></a>
 
 This screen is used to configure the notifications sent to users when they have to carry out controls.
 

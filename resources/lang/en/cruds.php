@@ -180,7 +180,8 @@ return [
          'roles' => [
              'admin' => 'Administrator',
              'user' => 'User',
-             'auditor' => 'Auditor'
+             'auditor' => 'Auditor',
+             'api' => 'API'
          ],
      ],
     'config' => [
@@ -190,22 +191,15 @@ return [
              'help' => 'This screen allows you to configure the notifications sent by email to users.',
              'message_subject' => 'Message subject',
              'sent_from' => 'Sent from',
-
              'to' => 'to',
              'delay' => 'for controls that expire within',
-
-             'recurrence_day' => 'day',
-             'recurrence_week' => 'week',
-             'recurrence_week' => 'two weeks',
-             'recurrence_week' => 'month',
-
+             'recurrence' => 'Send a reminder',
              'duration' => [
                  'day' => 'day',
                  'days' => 'days',
                  'month' => 'month',
                  'months' => 'months',
              ],
-             'recurrence' => 'send a reminder every'
           ]
      ]
 ];

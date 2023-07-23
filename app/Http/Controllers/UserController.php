@@ -53,7 +53,7 @@ class UserController extends Controller
                 'login' => 'required|min:1|max:30',
                 'name' => 'required|min:1|max:90',
                 'title' => 'required|min:1|max:30',
-                'email' => 'required|email:rfc',
+                'email' => 'required|unique:users|email:rfc',
                 'password1' => 'required|min:8',
                 'role' => 'required',
             ]

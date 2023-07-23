@@ -58,7 +58,7 @@ et permet d’avoir une vue sur l’ensemble des documents utilisés comme preuv
 
 Le bouton « Vérifier » permet de vérifier l’intégrité des documents conservés dans l'application.
 
-### Configration <a name="config"></a>
+### Notifications <a name="notifications"></a>
 
 Cet écran permet de configurer les notifications envoyées aux utilisateurs lorsqu'ils doivent réaliser des contrôles.
 

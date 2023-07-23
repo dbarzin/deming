@@ -53,7 +53,7 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.config.notifications.recurence") }}</strong>
+		    		<strong>{{ trans("cruds.config.notifications.recurrence") }}</strong>
 		    	</div>
 				<div class="cell-4">
 		            <select data-role="select" name="frequency" id="frequency">
