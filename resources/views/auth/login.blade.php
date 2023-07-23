@@ -25,7 +25,7 @@
             <h2 class="text-medium m-0 pl-7" style="line-height: 52px">Deming</h2>
             <div class="mb-4">{{ trans("cruds.login.connection") }}</div>
             <div class="form-group">
-                <input type="text" data-role="input" class="form-control @error('email') is-invalid @enderror" data-prepend="<span class='mif-user'></span>" name="email" value="{{ old('email') }}" required autofocus>
+                <input type="text" data-role="input" class="form-control @error('email') is-invalid @enderror" data-prepend="<span class='mif-user'></span>" name="email" value="{{ old('email') }}" id="email" required>
                 @error('email')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -54,6 +54,13 @@
                 form.removeClass("ani-ring");
             }, 1000);
         }
+
+   $(document).ready(function() {
+      setTimeout(function() {
+          $("#email").focus();
+      }, 1500);
+   });
+
     </script>
 </body>
 </html>
