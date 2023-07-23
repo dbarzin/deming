@@ -1,7 +1,4 @@
 <?php
-
-use App\Http\Controllers\API;
-
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -17,10 +14,10 @@ use App\Http\Controllers\AuthController;
 |
 */
 
-Route::group(['namespace'=>'App\Http\Controllers\API', 'prefix'=>'/api' ], function()
-{
+Route::post('login', [AuthController::class, 'login']);
 
-    Route::post('login', [AuthController::class, 'login']);
+Route::group(['namespace'=>'API'], function()
+{
 
     Route::apiResource('domains', DomainController::class);
     /*
