@@ -77,13 +77,13 @@
                     </a>
                     <ul class="navview-menu stay-open" data-role="dropdown" >
                         <li><a href="/control/radar/domains">
-                            <span class="caption">by domains</span>
+                            <span class="caption">{{ trans("menu.radar_by_domains") }}</span>
                         </a></li>
                         <li><a href="/control/radar/measures">
-                            <span class="caption">by measures</span>
+                            <span class="caption">{{ trans("menu.radar_by_controls") }}</span>
                         </a></li>
                         <li><a href="/control/radar/attributes">
-                            <span class="caption">by attributes</span>
+                            <span class="caption">{{ trans("menu.radar_by_attributes") }}</span>
                         </a></li>
                     </ul>
                 </li>
