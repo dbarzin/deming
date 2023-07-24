@@ -192,8 +192,8 @@ return [
             'message_subject' => 'Sujet du message',
             'sent_from' => 'Envoyé depuis',
             'to' => 'à',
-            'delay' => 'pour les contrôles qui arrivent à échéance dans',
-            'recurence' => 'envoyer un rappel tout les',
+            'delay' => 'Pour les contrôles qui arrivent à échéance dans',
+            'recurrence' => 'Envoyer un rappel tout les',
             'duration' => [
                 'day' => 'jour',
                 'days' => 'jours',
