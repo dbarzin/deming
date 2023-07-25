@@ -193,7 +193,7 @@ return [
             'sent_from' => 'Envoyé depuis',
             'to' => 'à',
             'delay' => 'Pour les contrôles qui arrivent à échéance dans',
-            'recurrence' => 'Envoyer un rappel tout les',
+            'recurrence' => 'Envoyer un rappel',
             'duration' => [
                 'day' => 'jour',
                 'days' => 'jours',
