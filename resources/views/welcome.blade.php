@@ -332,7 +332,10 @@
 
     var marksData = {
       labels: [
-            'Echec','Alerte','Réussi','Unknown'
+            "{{ trans('common.fail') }}",
+            "{{ trans('common.alert') }}",
+            "{{ trans('common.success') }}",
+            "{{ trans('common.unknown') }}"
             ],
       datasets: [
       { 

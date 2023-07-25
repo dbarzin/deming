@@ -24,6 +24,11 @@ return [
     'orange' => 'Orange',
     'red' => 'Rouge',
 
+    'fail' => 'Echec',
+    'alert' => 'Alerte',
+    'success' => 'Réussi',
+    'unknown' => 'Inconnu',
+
     'never' => 'Jamais',
     'day' => 'Journalièrement',
     'week' => 'Hebdomadairement',
