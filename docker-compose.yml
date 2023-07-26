@@ -1,0 +1,31 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile_web
+    ports:
+      - 80:8000
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:5.7
+    command: --init-file /opt/init.sql
+    environment:
+      # MYSQL_DATABASE: 'deming'
+      # # So you don't have to use root, but you can if you like
+      # MYSQL_USER: 'deming_user'
+      # # You can use whatever password you like
+      # MYSQL_PASSWORD: 'demPasssword-123'
+      MYSQL_ROOT_PASSWORD: 'root'
+    volumes:
+      - ./init.sql:/opt/init.sql
+    ports:
+      - "3306:3306"
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:3306"]
+        interval: 3s
+        timeout: 60s
+        retries: 5
