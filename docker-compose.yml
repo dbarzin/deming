@@ -1,0 +1,26 @@
+version: "3"
+services:
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile_web
+    ports:
+      - 80:80
+    depends_on:
+      mysql:
+        condition: service_healthy
+
+  mysql:
+    image: mysql:8
+    environment:
+      MYSQL_DATABASE: 'deming'
+      MYSQL_USER: 'deming_user'
+      MYSQL_PASSWORD: 'demPasssword-123'
+      MYSQL_ROOT_PASSWORD: 'root'
+    ports:
+      - "3306:3306"
+    healthcheck:
+        test: ["CMD", "curl", "-f", "http://localhost:3306"]
+        interval: 3s
+        timeout: 60s
+        retries: 5
