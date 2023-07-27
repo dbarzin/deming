@@ -70,8 +70,8 @@ Deming helps meet these requirements and retain appropriate documented informati
 
 ### Main Screen
 
-[<img src="public/screenshots/main1.png" width="400">](public/screenshots/main1.png)
-[<img src="public/screenshots/main2.png" width="400">](public/screenshots/main2.png)
+[<img src="public/screenshots/main1.png" width="500">](public/screenshots/main1.png)
+[<img src="public/screenshots/main2.png" width="500">](public/screenshots/main2.png)
 
 ### List of controls
 
@@ -87,7 +87,7 @@ Deming helps meet these requirements and retain appropriate documented informati
 
 ### View of the coverage of protective measures
 
-[<img src="public/screenshots/radar.png" width="500">](public/screenshots/radar.png)
+[<img src="public/screenshots/radar.png" width="450">](public/screenshots/radar.png)
 
 ### ISMS steering meeting report
 
