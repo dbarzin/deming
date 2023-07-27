@@ -14,7 +14,7 @@ En cliquant sur :
 
 * la clause, vous arrivez sur la [description de la mesure de sécurité](#show)
 
-* la date, vous arrivez l’écran de [planification de la mesure de sécurité](#plan)
+* la date, vous arrivez sur la [planification de la mesure de sécurité](#plan)
 
 
 ### Afficher une mesure de sécurité <a name="show"></a>
@@ -25,7 +25,7 @@ Cet écran permet d’afficher une mesure de sécurité.
 
 Une mesure de sécurité est composée :
 
-* d’un domaines ;
+* d’un domaine ;
 
 * d’un nom ;
 
@@ -100,4 +100,3 @@ Lorsque vous cliquez sur :
 * « Déplanifier », le contrôle de sécurité associé à cette mesure est supprimé et l’utilisateur revient vers la [liste des mesures de sécurité](#list).
 
 * « Annuler », vous revenez vers la [liste des mesures de sécurité](#list).
-

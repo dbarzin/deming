@@ -27,7 +27,7 @@ Il existe trois roles :
 
 * Utilisateurs : les utilisateur peuvent utiliser l’application sans pouvoir modifier les mesures, les attributs et les contrôles déjà réalisés.
    
-* Auditeur : l’auditeur a un accès en lecture à l’enseble des informations de l’application.
+* Auditeur : l’auditeur a un accès en lecture à l’ensemble des informations de l’application.
 
 
 ### Rapports <a name="report"></a>
