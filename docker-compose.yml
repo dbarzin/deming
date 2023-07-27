@@ -5,23 +5,18 @@ services:
       context: .
       dockerfile: Dockerfile_web
     ports:
-      - 80:8000
+      - 80:80
     depends_on:
       mysql:
         condition: service_healthy
 
   mysql:
     image: mysql:8
-    command: --init-file /opt/init.sql
     environment:
-      # MYSQL_DATABASE: 'deming'
-      # # So you don't have to use root, but you can if you like
-      # MYSQL_USER: 'deming_user'
-      # # You can use whatever password you like
-      # MYSQL_PASSWORD: 'demPasssword-123'
+      MYSQL_DATABASE: 'deming'
+      MYSQL_USER: 'deming_user'
+      MYSQL_PASSWORD: 'demPasssword-123'
       MYSQL_ROOT_PASSWORD: 'root'
-    volumes:
-      - ./init.sql:/opt/init.sql
     ports:
       - "3306:3306"
     healthcheck:

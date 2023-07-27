@@ -1,17 +1,16 @@
-FROM --platform=amd64 httpd:2.4-bookworm
+FROM --platform=amd64 nginx:bookworm
 
 RUN apt update && apt dist-upgrade -y
-RUN apt install -y git composer apache2 libapache2-mod-php php php-cli php-opcache php-mysql php-zip php-gd php-mbstring php-curl php-xml
+RUN apt install -y git composer php php-cli php-opcache php-mysql php-zip php-gd php-mbstring php-curl php-xml
 
 RUN  useradd -ms /bin/bash deming
-RUN mkdir /var/www/deming 
-COPY deming.conf /etc/apache2/site-availablr/deming.conf
-# RUN a2enmod rewrite && a2dissite 000-default.conf && a2ensite deming.conf
+RUN mkdir -p /var/www/deming 
+COPY deming.conf /etc/nginx/conf.d/default.conf
 
 WORKDIR /var/www/deming
 
 RUN git clone https://www.github.com/dbarzin/deming .
-RUN mkdir -p storage/framework/{views,cache,sessions} && mkdir -p bootstrap/cache
+RUN mkdir -p storage/framework/views && mkdir -p storage/framework/cache && mkdir -p storage/framework/sessions && mkdir -p bootstrap/cache
 RUN chmod -R 775 /var/www/deming/storage && chown -R www-data:www-data /var/www/deming
 RUN composer install
 RUN php artisan vendor:publish --all
@@ -19,9 +18,9 @@ RUN php artisan vendor:publish --all
 RUN cp .env.example .env
 RUN sed -i 's/DB_HOST=127\.0\.0\.1/DB_HOST=mysql/' .env
 
-COPY init.sh /opt/init.sh
-RUN chmod u+x /opt/init.sh
+COPY entrypoint.sh /opt/entrypoint.sh
+RUN chmod u+x /opt/entrypoint.sh
 
 EXPOSE 80
 
-CMD ["httpd-foreground"]
+ENTRYPOINT "/opt/entrypoint.sh"
