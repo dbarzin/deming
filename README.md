@@ -70,8 +70,8 @@ Deming helps meet these requirements and retain appropriate documented informati
 
 ### Main Screen
 
-[<img src="public/screenshots/main1.png" width="400" height="270">](public/screenshots/main1.png)
-[<img src="public/screenshots/main2.png" width="400" height="270">](public/screenshots/main2.png)
+[<img src="public/screenshots/main1.png" width="400" height="200">](public/screenshots/main1.png)
+[<img src="public/screenshots/main2.png" width="400" height="200">](public/screenshots/main2.png)
 
 ### List of controls
 
