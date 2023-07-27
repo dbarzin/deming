@@ -13,11 +13,11 @@ class ControlScoreToInt extends Migration
      */
     public function up()
     {
-        if (DB::getDriverName() !== 'pgsql') {
-            DB::statement('ALTER TABLE "controls" 
-                ALTER COLUMN "score" TYPE integer USING (score)::integer,
+        if (DB::getDriverName() === 'pgsql') {
+            DB::statement('ALTER TABLE "controls"  
+                ALTER COLUMN "score" TYPE integer USING (score)::integer, 
                 ALTER COLUMN "score" DROP NOT NULL, 
-                ALTER COLUMN "score" DROP DEFAULT, 
+                ALTER COLUMN "score" DROP DEFAULT,  
                 ALTER COLUMN "score" DROP identity IF EXISTS);');
         } else {
             Schema::table('controls', function (Blueprint $table) {
