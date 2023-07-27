@@ -98,7 +98,7 @@ class ReportController extends Controller
                 ['realisation_date','<',$end_date],
             ]
         )
-            ->orderBy('realisation_Date')->get();
+            ->orderBy('realisation_date')->get();
 
         //----------------------------------------------------------------
         // create table
