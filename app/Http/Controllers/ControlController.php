@@ -397,8 +397,8 @@ class ControlController extends Controller
             ->where('c2.realisation_date', '=', null)
             ->where('c1.next_id', '<>', null)
             ->where('c1.realisation_date', '<=', $cur_date)
-            ->groupBy('measure_id')
-            ->orderBy('clause')
+            ->groupBy('c1.measure_id')
+            ->orderBy('c1.clause')
             ->get();
 
         // return
