@@ -15,7 +15,7 @@ class DatabaseSeeder extends Seeder
     {
         DB::table('users')->insert([
             'login' => 'admin',
-            'name' => 'Jacks Barrow',
+            'name' => 'Administrator',
             'title' => 'Pirate Captain',
             'role' => 1,
             'language' => 'en',
