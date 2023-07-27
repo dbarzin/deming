@@ -12,7 +12,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Log;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpWord\TemplateProcessor;
 
@@ -200,8 +199,9 @@ class ControlController extends Controller
         $control = Control::find($id);
 
         // Control not found
-        if ($control === null) 
+        if ($control === null) {
             abort(404);
+        }
 
         if ($control->next_id !== null) {
             $next_control = DB::table('controls')
@@ -243,8 +243,9 @@ class ControlController extends Controller
         $control = Control::find($id);
 
         // Control not found
-        if ($control === null) 
+        if ($control === null) {
             abort(404);
+        }
 
         $documents = DB::table('documents')->where('control_id', $id)->get();
 
@@ -282,13 +283,15 @@ class ControlController extends Controller
         $control = Control::find($id);
 
         // Control not found
-        if ($control === null) 
+        if ($control === null) {
             abort(404);
+        }
 
         // Delete files
-        $documents = Document::select("id")->where("control_id",$id)->get();
-        foreach($documents as $doc) 
+        $documents = Document::select('id')->where('control_id', $id)->get();
+        foreach ($documents as $doc) {
             unlink(storage_path('docs/' . $doc->id));
+        }
 
         // Delete associated documents
         Document::where('control_id', $id)->delete();
@@ -491,13 +494,14 @@ class ControlController extends Controller
     public function doPlan(Request $request)
     {
         // For administrators and users only
-        abort_if( (Auth::User()->role !== 1) && (Auth::User()->rol !==2), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if((Auth::User()->role !== 1) && (Auth::User()->rol !== 2), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $control = Control::find($request->id);
 
         // Control not found
-        if ($control === null) 
+        if ($control === null) {
             abort(404);
+        }
 
         // Control already made ?
         if ($control->realisation_date !== null) {
@@ -521,8 +525,9 @@ class ControlController extends Controller
 
         // Control not found
         $control = Control::find($id);
-        if ($control === null) 
+        if ($control === null) {
             abort(404);
+        }
 
         // Control already made ?
         if ($control->realisation_date !== null) {
@@ -568,8 +573,9 @@ class ControlController extends Controller
         $control = Control::find($id);
 
         // Control not found
-        if ($control === null) 
+        if ($control === null) {
             abort(404);
+        }
 
         // control already made ?
         if ($control->realisation_date !== null) {
@@ -625,8 +631,9 @@ class ControlController extends Controller
         $control = Control::find($request->id);
 
         // Control not found
-        if ($control === null) 
+        if ($control === null) {
             abort(404);
+        }
 
         $control->name = request('name');
         $control->objective = request('objective');

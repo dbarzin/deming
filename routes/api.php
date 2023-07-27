@@ -1,8 +1,7 @@
 <?php
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Route;
 
 use App\Http\Controllers\AuthController;
+use Illuminate\Support\Facades\Route;
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -16,9 +15,7 @@ use App\Http\Controllers\AuthController;
 
 Route::post('login', [AuthController::class, 'login']);
 
-Route::group(['namespace'=>'API'], function()
-{
-
+Route::group(['namespace' => 'API'], function () {
     Route::apiResource('domains', DomainController::class);
     /*
     Route::apiResource('measures', API\MeasureController::class);
