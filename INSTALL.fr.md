@@ -99,6 +99,24 @@ Créer le lien de stockage
 
 	php artisan storage:link
 
+## Peupler la base de données
+
+Il y a deux aptions pour peupler la base de données : avec commandes SQL ou avec les seeders.
+
+### Seeder
+
+Exécter les commandes suivantes
+
+    php artisan db:seed --class=AttributeSeeder
+    php artisan db:seed --class=DomainSeeder
+    php artisan db:seed --class=MeasureSeeder
+
+Si le une des commandes renvoie une erreur, la base de données n'était pas vide, il faut alors recréer la base de données avec la commande:
+
+    php artisan migrate:fresh --seed
+
+### SQL
+
 Pour importer la base de données avec les mesures de sécurité de la norme 27001:2013
 
     sudo mysql deming < deming-27001\:2013.sql
