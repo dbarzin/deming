@@ -91,7 +91,7 @@ class HomeController extends Controller
         // Get controls todo
         // TODO : improve me
         $controls_todo = DB::select(
-            'select
+            "select
                 c1.id,
                 c1.measure_id,
                 c1.name,
@@ -105,8 +105,8 @@ class HomeController extends Controller
             from
                 controls c1 left join controls c2 on c2.next_id=c1.id
                 left join domains on c1.domain_id=domains.id
-            where (c1.realisation_date is null) and (c1.plan_date < NOW() + INTERVAL \'30 DAY\')
-            order by c1.plan_date'
+            where (c1.realisation_date is null) and (c1.plan_date < NOW() + INTERVAL 30 DAY)
+            order by c1.plan_date"
         );
 
         // dd($plannedMeasurements);
