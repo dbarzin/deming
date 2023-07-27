@@ -79,7 +79,7 @@ Deming helps meet these requirements and retain appropriate documented informati
 
 ### Control planning
 
-[<img src="public/screenshots/calendar.png" width="400">](public/screenshots/calendar.png)
+[<img src="public/screenshots/calendar.png" width="450">](public/screenshots/calendar.png)
 
 ### Action plan management
 
@@ -91,8 +91,8 @@ Deming helps meet these requirements and retain appropriate documented informati
 
 ### ISMS steering meeting report
 
-[<img src="public/screenshots/pilotage1.png" width="360">](public/screenshots/pilotage1.png)
-[<img src="public/screenshots/pilotage2.png" width="360">](public/screenshots/pilotage2.png)
+[<img src="public/screenshots/pilotage1.png" width="400">](public/screenshots/pilotage1.png)
+[<img src="public/screenshots/pilotage2.png" width="400">](public/screenshots/pilotage2.png)
 
 ## Technology
 - PHP, JavaScript, Laravel
