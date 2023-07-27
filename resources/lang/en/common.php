@@ -1,5 +1,7 @@
 <?php
 return [
+     'confirm' => 'Confirm deletion',
+
      'cancel' => 'Cancel',
      'check' => 'Check',
      'create' => 'Create',

@@ -235,7 +235,7 @@
 	    		</button>
 			</form>
 			&nbsp;
-		    <form action="/control/delete/{{ $control->id }}">
+		    <form action="/control/delete/{{ $control->id }}" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
 	    		<button class="button alert">
 					<span class="mif-fire"></span>
 					&nbsp;

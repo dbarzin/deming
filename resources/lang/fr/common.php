@@ -1,5 +1,7 @@
 <?php
 return [
+    'confirm' => 'Confirmer la suppression ?',
+
     'cancel' => 'Annuler',
     'check' => 'Vérifier',
     'create' => 'Créer',
