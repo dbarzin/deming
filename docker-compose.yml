@@ -11,7 +11,7 @@ services:
         condition: service_healthy
 
   mysql:
-    image: mysql:5.7
+    image: mysql:8
     command: --init-file /opt/init.sql
     environment:
       # MYSQL_DATABASE: 'deming'

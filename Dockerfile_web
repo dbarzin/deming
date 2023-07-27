@@ -4,7 +4,7 @@ RUN apt update && apt dist-upgrade -y
 RUN apt install -y git composer apache2 libapache2-mod-php php php-cli php-opcache php-mysql php-zip php-gd php-mbstring php-curl php-xml
 
 RUN  useradd -ms /bin/bash deming
-RUN mkdir /var/www/deming && chown -R www-data:www-data /var/www/deming
+RUN mkdir /var/www/deming 
 COPY deming.conf /etc/apache2/site-availablr/deming.conf
 # RUN a2enmod rewrite && a2dissite 000-default.conf && a2ensite deming.conf
 
@@ -12,7 +12,7 @@ WORKDIR /var/www/deming
 
 RUN git clone https://www.github.com/dbarzin/deming .
 RUN mkdir -p storage/framework/{views,cache,sessions} && mkdir -p bootstrap/cache
-RUN chmod -R 775 /var/www/deming/storage
+RUN chmod -R 775 /var/www/deming/storage && chown -R www-data:www-data /var/www/deming
 RUN composer install
 RUN php artisan vendor:publish --all
 
