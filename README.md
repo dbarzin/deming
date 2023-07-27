@@ -70,29 +70,29 @@ Deming helps meet these requirements and retain appropriate documented informati
 
 ### Main Screen
 
-[<img src="public/screenshots/main1.png" width="400" height="200">](public/screenshots/main1.png)
-[<img src="public/screenshots/main2.png" width="400" height="200">](public/screenshots/main2.png)
+[<img src="public/screenshots/main1.png" width="400">](public/screenshots/main1.png)
+[<img src="public/screenshots/main2.png" width="400">](public/screenshots/main2.png)
 
 ### List of controls
 
-[<img src="public/screenshots/controls.png" width="400" height="120">](public/screenshots/controls.png)
+[<img src="public/screenshots/controls.png" width="400">](public/screenshots/controls.png)
 
 ### Control planning
 
-[<img src="public/screenshots/calendar.png" width="400" height="200">](public/screenshots/calendar.png)
+[<img src="public/screenshots/calendar.png" width="400">](public/screenshots/calendar.png)
 
 ### Action plan management
 
-[<img src="public/screenshots/plans.png" width="450" height="230">](public/screenshots/plans.png)
+[<img src="public/screenshots/plans.png" width="450">](public/screenshots/plans.png)
 
 ### View of the coverage of protective measures
 
-[<img src="public/screenshots/radar.png" width="500" height="200">](public/screenshots/radar.png)
+[<img src="public/screenshots/radar.png" width="500">](public/screenshots/radar.png)
 
 ### ISMS steering meeting report
 
-[<img src="public/screenshots/pilotage1.png" width="360" height="270">](public/screenshots/pilotage1.png)
-[<img src="public/screenshots/pilotage2.png" width="360" height="270">](public/screenshots/pilotage2.png)
+[<img src="public/screenshots/pilotage1.png" width="360">](public/screenshots/pilotage1.png)
+[<img src="public/screenshots/pilotage2.png" width="360">](public/screenshots/pilotage2.png)
 
 ## Technology
 - PHP, JavaScript, Laravel
