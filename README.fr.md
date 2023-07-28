@@ -68,29 +68,29 @@ Deming permet de répondre à ces exigences et de conserver les informations doc
 
 ### Ecran principal
 
-[<img src="public/screenshots/main1.png" width="400" height="270">](public/screenshots/main1.png)
-[<img src="public/screenshots/main2.png" width="400" height="270">](public/screenshots/main2.png)
+[<img src="public/screenshots/main1.png" width="500">](public/screenshots/main1.png)
+[<img src="public/screenshots/main2.png" width="500">](public/screenshots/main2.png)
 
 ### Liste des contrôles
 
-[<img src="public/screenshots/controls.png" width="400" height="120">](public/screenshots/controls.png)
+[<img src="public/screenshots/controls.png" width="400">](public/screenshots/controls.png)
 
 ### Planification des contrôles
 
-[<img src="public/screenshots/calendar.png" width="400" height="200">](public/screenshots/calendar.png)
+[<img src="public/screenshots/calendar.png" width="450">](public/screenshots/calendar.png)
 
 ### Gestion des plans d'action
 
-[<img src="public/screenshots/plans.png" width="450" height="230">](public/screenshots/plans.png)
+[<img src="public/screenshots/plans.png" width="450">](public/screenshots/plans.png)
 
 ### Vue de la courverture des mesures de protection
 
-[<img src="public/screenshots/radar.png" width="500" height="200">](public/screenshots/radar.png)
+[<img src="public/screenshots/radar.png" width="500">](public/screenshots/radar.png)
 
 ### Rapport de réunion de pilotage du SMSI
 
-[<img src="public/screenshots/pilotage1.png" width="360" height="270">](public/screenshots/pilotage1.png)
-[<img src="public/screenshots/pilotage2.png" width="360" height="270">](public/screenshots/pilotage2.png)
+[<img src="public/screenshots/pilotage1.png" width="400">](public/screenshots/pilotage1.png)
+[<img src="public/screenshots/pilotage2.png" width="400">](public/screenshots/pilotage2.png)
 
 
 ## Documentation
