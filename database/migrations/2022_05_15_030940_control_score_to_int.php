@@ -18,7 +18,7 @@ class ControlScoreToInt extends Migration
                 ALTER COLUMN "score" TYPE integer USING (score)::integer, 
                 ALTER COLUMN "score" DROP NOT NULL, 
                 ALTER COLUMN "score" DROP DEFAULT,  
-                ALTER COLUMN "score" DROP identity IF EXISTS);');
+                ALTER COLUMN "score" DROP identity IF EXISTS;');
         } else {
             Schema::table('controls', function (Blueprint $table) {
                 $table->integer('score')->nullable()->change();
