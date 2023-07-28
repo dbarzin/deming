@@ -383,7 +383,8 @@ class ControlController extends Controller
         // Query controls
         $controls = DB::table('controls as c1')
             ->select(
-                DB::raw("
+                DB::raw(
+                    '
                     max(c1.id) AS control_id,
                     max(c1.name) AS name,
                     c1.clause AS clause, 
@@ -393,14 +394,14 @@ class ControlController extends Controller
                     max(c1.realisation_date) AS realisation_date, 
                     max(c1.score) AS score, 
                     max(c2.plan_date) AS next_date, 
-                    max(c2.id) AS next_id"
-                    )
+                    max(c2.id) AS next_id'
                 )
+            )
             ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id')
             ->where('c2.realisation_date', '=', null)
             ->where('c1.next_id', '<>', null)
             ->where('c1.realisation_date', '<=', $cur_date)
-            ->groupBy('c1.measure_id','c1.clause')
+            ->groupBy('c1.measure_id', 'c1.clause')
             ->orderBy('c1.clause')
             ->get();
 
