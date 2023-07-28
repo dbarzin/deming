@@ -145,14 +145,14 @@ class ReportController extends Controller
             '
             SELECT 
             c1.measure_id, 
-            c1.domain_id,
-            c1.score,
-            c1.realisation_date
+            max(c1.domain_id) AS "domain_id",
+            max(c1.score) AS "score",
+            max(c1.realisation_date) AS "realisation_date"
             FROM
                 controls c1 left join controls c2 on c1.next_id=c2.id
             WHERE
                 c2.realisation_date is null and c1.next_id is not null
-            group by c1.measure_id order by c1.clause;'
+            GROUP BY c1.measure_id, c1.clause ORDER BY c1.clause;'
         );
 
         $count_domains = count($domains);
