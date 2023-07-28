@@ -228,3 +228,16 @@ Vider les caches
 
     php artisan optimize:clear
 
+## Remise à zéro
+
+Pour repartir d'une base de données vide avec la norme ISO 27001:2022.
+
+Voici la commande pour recréer la DB :
+
+    php artisan migrate:fresh --seed
+
+Puis pour peupler la DB avec la 27001:2022
+
+    sudo mysql deming < deming-27001_2022.sql
+
+
