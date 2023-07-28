@@ -1,10 +1,10 @@
-## Security measures
+## Controls
 
-This part allows you to define, modify and plan new security measures.
+This part allows you to define, modify and plan new controls.
 
-### List of security measures <a name="list"></a>
+### List of controls <a name="list"></a>
 
-The list of security measures allows you to display the list of measures, to filter them by domain or to search for a measure based on part of its name.
+The list of controls allows you to display the list of controls, to filter them by domain or to search for a control based on part of its name.
 
 [<img src="/deming/images/m1.png" width="600">](/deming/images/m1.png)
 
@@ -12,18 +12,18 @@ Clicking on :
 
 * the domain, you arrive at the [chosen domain definition](/deming/config/#domain)
 
-* the clause, you arrive on the [description of the security measure](#show)
+* the clause, you arrive on the [description of the control](#show)
 
-* the date you arrive the [security measure planning](#plan) screen
+* the date you arrive the [control planning](#plan) screen
 
 
-### Show security measure <a name="show"></a>
+### Show control <a name="show"></a>
 
-This screen displays a security measure.
+This screen displays a control.
 
 [<img src="/deming/images/m2.png" width="600">](/deming/images/m2.png)
 
-A security measure consists of:
+A control consists of:
 
 * of a domain;
 
@@ -33,48 +33,48 @@ A security measure consists of:
 
 * attributes;
 
-* measurement data:
+* controlment data:
 
 * of the verification model;
 
 * an indicator (green, orange, red); and
 
-* an action plan to be applied if control of this security measure fails.
+* an action plan to be applied if control of this control fails.
 
 When you click:
 
-* “Plan”: you arrive at the [security measure planning](#plan) screen.
+* “Plan”: you arrive at the [control planning](#plan) screen.
 
-* "Modify": you arrive at [the measurement modification screen](#edit)
+* "Modify": you arrive at [the controlment modification screen](#edit)
 
-* “Delete”: allows you to delete the measure and return to [the list of security measures](#list)
+* “Delete”: allows you to delete the control and return to [the list of controls](#list)
 
-* "Cancel": returns you to the [list of security measures](#list)
+* "Cancel": returns you to the [list of controls](#list)
 
 
-### Edit a security measure <a name="edit"></a>
+### Edit a control <a name="edit"></a>
 
-This screen allows you to modify a security measure.
+This screen allows you to modify a control.
 
 [<img src="/deming/images/m3.png" width="600">](/deming/images/m3.png)
 
 
 When you click:
 
-* "Save", the changes are saved and you return to the [security measure display](#show) screen.
+* "Save", the changes are saved and you return to the [control display](#show) screen.
 
-* "Cancel", you return to the [security measure display](#show) screen.
+* "Cancel", you return to the [control display](#show) screen.
 
 
 ### Schedule a control <a name="plan"></a>
 
-This screen is used to plan a control based on a security measure.
+This screen is used to plan a control based on a control.
 
 The screen contains:
 
 * The domain ;
 
-* The name of the measure;
+* The name of the control;
 
 * The security objective;
 
@@ -90,12 +90,12 @@ When you click:
 
 * "Plan",
 
-     * If there is no control for this measure, a new control is created by copying all the data from the measure and is scheduled on the specified date.
+     * If there is no control for this control, a new control is created by copying all the data from the control and is scheduled on the specified date.
 
-     * If there is already an uncompleted check for this security measure, the planning date is updated.
+     * If there is already an uncompleted check for this control, the planning date is updated.
 
-You then return to the [list of security measures](#list).
+You then return to the [list of controls](#list).
 
-* "Unplan", the security check associated with this measure is deleted and the user returns to the [list of security measures](#list).
+* "Unplan", the security check associated with this control is deleted and the user returns to the [list of controls](#list).
 
-* "Cancel", you return to the [list of security measures](#list).
+* "Cancel", you return to the [list of controls](#list).
