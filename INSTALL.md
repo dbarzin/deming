@@ -102,11 +102,11 @@ Create storage link
 
 To import the database with 27001:2013 security measures
 
-    sudo mysql deming < deming-27001\:2013.sql
+    sudo mysql deming < deming-27001_2013.sql
 
 or with 27001:2022 security measures
 
-    sudo mysql deming < deming-27001\:2022.sql
+    sudo mysql deming < deming-27001_2022.sql
 
 Generate test data (optional)
 

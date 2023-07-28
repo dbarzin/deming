@@ -119,11 +119,11 @@ Si le une des commandes renvoie une erreur, la base de données n'était pas vid
 
 Pour importer la base de données avec les mesures de sécurité de la norme 27001:2013
 
-    sudo mysql deming < deming-27001\:2013.sql
+    sudo mysql deming < deming-27001_2013.sql
 
 ou avec les mesures de sécurité de la norme 27001:2022
 
-    sudo mysql deming < deming-27001\:2022.sql
+    sudo mysql deming < deming-27001_2022.sql
 
 Génrérer des données de test (optionnel)
 
