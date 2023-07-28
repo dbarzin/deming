@@ -31,9 +31,6 @@ class GenerateTestData extends Command
      */
     public function handle()
     {
-        // Remove all measurements
-        $this->info('Remove all controls and documents');
-
         // Remove data in documents and controls tables
         DB::table('documents')->delete();
         DB::table('controls')->update(['next_id' => null]);
@@ -58,7 +55,6 @@ class GenerateTestData extends Command
 
         // Start date
         $curDate = Carbon::now()->addMonth(-$period)->day(1);
-        // Log::Alert("startDate=" . $curDate->toDateString());
 
         // get all controls
         $measures = Measure::All();
@@ -68,18 +64,10 @@ class GenerateTestData extends Command
         // controls per period
         $perPeriod = (int) ($cntMeasure / $period);
 
-        // Log::Alert("control per period=" . $perPeriod);
-
         // loop on measures
         $delta = $perPeriod - rand(-$perPeriod / 2, $perPeriod / 2);
 
-        $this->info('perPeriod=' . $perPeriod);
-        $this->info('curDate=' . $curDate);
-        $this->info('delta=' . $delta);
-
-        $this->info('Lopp on measures');
         foreach ($measures as $measure) {
-            $this->info($measure->clause);
             $delta--;
             if ($delta <= 0) {
                 // go to next period
@@ -100,12 +88,6 @@ class GenerateTestData extends Command
             $control->indicator = $measure->indicator;
             $control->action_plan = $measure->action_plan;
             $control->periodicity = 12;
-            /*
-            $control->attributes =
-                $attributes[rand(0,count($attributes)-1)] . " ".
-                $attributes[rand(0,count($attributes)-1)] . " " .
-                $attributes[rand(0,count($attributes)-1)];
-            */
             $control->attributes = $measure->attributes;
             // do it
             $control->plan_date = (new Carbon($curDate))->day(rand(0, 28))->toDateString();
@@ -136,8 +118,6 @@ class GenerateTestData extends Command
             $prev_control->next_id = $control->id;
             $prev_control->save();
 
-            $this->info('Control ' . $control->id . ' plan_date=' . $control->plan_date);
-
             // create next control
             $nextControl = new Control();
             $nextControl->measure_id = $measure->id;
@@ -161,12 +141,9 @@ class GenerateTestData extends Command
             // save it
             $nextControl->save();
 
-            $this->info('nextControl ' . $nextControl->id . ' plan_date=' . $nextControl->plan_date);
-
             // link them
             $control->next_id = $nextControl->id;
             $control->update();
         }
-        $this->info('Done.');
     }
 }
