@@ -70,8 +70,8 @@ return [
              'input' => 'Input',
              'owners' => 'Responsibles',
          ],
-         'checklist' => 'Control sheet',
-         'list' => 'List of controls',
+         'checklist' => 'Measure sheet',
+         'list' => 'Measurement list',
          'edit' => 'Edit security check',
          'history' => 'Schedule',
          'make' => 'Make a check',
@@ -95,10 +95,10 @@ return [
              'input' => 'Input',
          ],
          'show' => 'Control',
-         'index' => 'List of controls',
-         'create' => 'Add control',
+         'index' => 'Control list',
+         'create' => 'Add a control',
          'edit' => 'Edit a control',
-         'plan' => 'Measurement planning'
+         'plan' => 'Control planning'
      ],
      'domain' => [
          'fields' => [
