@@ -2,14 +2,14 @@
 return [
     'home' => 'Home',
     'attributes' => 'Attributes',
-    'domains' => 'Domaines',
-    'measures' => 'Mesures',
-    'controls' => 'Controls',
+    'domains' => 'Domains',
+    'measures' => 'Controls',
+    'controls' => 'Measurements',
     'planning' => 'Planning',
     'radar' => 'Analysis',
     'radar_by_domains' => 'by domaines',
     'radar_by_controls' => 'by measures',
-    'radar_by_attributes' => 'by attributs',
+    'radar_by_attributes' => 'by attributes',
     'action_plan' => 'Action plans',
     'configuration' => [
         'title' => 'Configuration',
