@@ -52,11 +52,11 @@
               <ul class="current">
                 <li class="toctree-l1 current"><a class="reference internal current" href="./">Measures</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#list-of-security-measures">List of security measures </a>
+    <li class="toctree-l2"><a class="reference internal" href="#list-of-controls">List of controls </a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#show-security-measure">Show security measure </a>
+    <li class="toctree-l2"><a class="reference internal" href="#show-control">Show control </a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#edit-a-security-measure">Edit a security measure </a>
+    <li class="toctree-l2"><a class="reference internal" href="#edit-a-control">Edit a control </a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#schedule-a-control">Schedule a control </a>
     </li>
@@ -118,10 +118,10 @@
                 <ul>
 <li class="i18n-link i18n-link-found i18n-link-fr"><a href="../measures.fr/">Français</a></li>
 </ul>
-<h2 id="security-measures">Security measures</h2>
-<p>This part allows you to define, modify and plan new security measures.</p>
-<h3 id="list-of-security-measures">List of security measures <a name="list"></a></h3>
-<p>The list of security measures allows you to display the list of measures, to filter them by domain or to search for a measure based on part of its name.</p>
+<h2 id="controls">Controls</h2>
+<p>This part allows you to define, modify and plan new controls.</p>
+<h3 id="list-of-controls">List of controls <a name="list"></a></h3>
+<p>The list of controls allows you to display the list of controls, to filter them by domain or to search for a control based on part of its name.</p>
 <p><a href="/deming/images/m1.png"><img src="/deming/images/m1.png" width="600"></a></p>
 <p>Clicking on :</p>
 <ul>
@@ -129,16 +129,16 @@
 <p>the domain, you arrive at the <a href="/deming/config/#domain">chosen domain definition</a></p>
 </li>
 <li>
-<p>the clause, you arrive on the <a href="#show">description of the security measure</a></p>
+<p>the clause, you arrive on the <a href="#show">description of the control</a></p>
 </li>
 <li>
-<p>the date you arrive the <a href="#plan">security measure planning</a> screen</p>
+<p>the date you arrive the <a href="#plan">control planning</a> screen</p>
 </li>
 </ul>
-<h3 id="show-security-measure">Show security measure <a name="show"></a></h3>
-<p>This screen displays a security measure.</p>
+<h3 id="show-control">Show control <a name="show"></a></h3>
+<p>This screen displays a control.</p>
 <p><a href="/deming/images/m2.png"><img src="/deming/images/m2.png" width="600"></a></p>
-<p>A security measure consists of:</p>
+<p>A control consists of:</p>
 <ul>
 <li>
 <p>of a domain;</p>
@@ -153,7 +153,7 @@
 <p>attributes;</p>
 </li>
 <li>
-<p>measurement data:</p>
+<p>controlment data:</p>
 </li>
 <li>
 <p>of the verification model;</p>
@@ -162,45 +162,45 @@
 <p>an indicator (green, orange, red); and</p>
 </li>
 <li>
-<p>an action plan to be applied if control of this security measure fails.</p>
+<p>an action plan to be applied if control of this control fails.</p>
 </li>
 </ul>
 <p>When you click:</p>
 <ul>
 <li>
-<p>“Plan”: you arrive at the <a href="#plan">security measure planning</a> screen.</p>
+<p>“Plan”: you arrive at the <a href="#plan">control planning</a> screen.</p>
 </li>
 <li>
-<p>"Modify": you arrive at <a href="#edit">the measurement modification screen</a></p>
+<p>"Modify": you arrive at <a href="#edit">the controlment modification screen</a></p>
 </li>
 <li>
-<p>“Delete”: allows you to delete the measure and return to <a href="#list">the list of security measures</a></p>
+<p>“Delete”: allows you to delete the control and return to <a href="#list">the list of controls</a></p>
 </li>
 <li>
-<p>"Cancel": returns you to the <a href="#list">list of security measures</a></p>
+<p>"Cancel": returns you to the <a href="#list">list of controls</a></p>
 </li>
 </ul>
-<h3 id="edit-a-security-measure">Edit a security measure <a name="edit"></a></h3>
-<p>This screen allows you to modify a security measure.</p>
+<h3 id="edit-a-control">Edit a control <a name="edit"></a></h3>
+<p>This screen allows you to modify a control.</p>
 <p><a href="/deming/images/m3.png"><img src="/deming/images/m3.png" width="600"></a></p>
 <p>When you click:</p>
 <ul>
 <li>
-<p>"Save", the changes are saved and you return to the <a href="#show">security measure display</a> screen.</p>
+<p>"Save", the changes are saved and you return to the <a href="#show">control display</a> screen.</p>
 </li>
 <li>
-<p>"Cancel", you return to the <a href="#show">security measure display</a> screen.</p>
+<p>"Cancel", you return to the <a href="#show">control display</a> screen.</p>
 </li>
 </ul>
 <h3 id="schedule-a-control">Schedule a control <a name="plan"></a></h3>
-<p>This screen is used to plan a control based on a security measure.</p>
+<p>This screen is used to plan a control based on a control.</p>
 <p>The screen contains:</p>
 <ul>
 <li>
 <p>The domain ;</p>
 </li>
 <li>
-<p>The name of the measure;</p>
+<p>The name of the control;</p>
 </li>
 <li>
 <p>The security objective;</p>
@@ -222,21 +222,21 @@
 <p>"Plan",</p>
 <ul>
 <li>
-<p>If there is no control for this measure, a new control is created by copying all the data from the measure and is scheduled on the specified date.</p>
+<p>If there is no control for this control, a new control is created by copying all the data from the control and is scheduled on the specified date.</p>
 </li>
 <li>
-<p>If there is already an uncompleted check for this security measure, the planning date is updated.</p>
+<p>If an unperformed measurement already exists for this measure, the planning date, periodicity and those responsible for performing the measurement are updated.</p>
 </li>
 </ul>
 </li>
 </ul>
-<p>You then return to the <a href="#list">list of security measures</a>.</p>
+<p>You then return to the <a href="#list">list of controls</a>.</p>
 <ul>
 <li>
-<p>"Unplan", the security check associated with this measure is deleted and the user returns to the <a href="#list">list of security measures</a>.</p>
+<p>"Unplan", the security check associated with this control is deleted and the user returns to the <a href="#list">list of controls</a>.</p>
 </li>
 <li>
-<p>"Cancel", you return to the <a href="#list">list of security measures</a>.</p>
+<p>"Cancel", you return to the <a href="#list">list of controls</a>.</p>
 </li>
 </ul>
               
