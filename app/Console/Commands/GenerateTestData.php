@@ -22,7 +22,7 @@ class GenerateTestData extends Command
      *
      * @var string
      */
-    protected $description = 'Cleanup all database and generate test data';
+    protected $description = 'Generate test data';
 
     /**
      * Execute the console command.
@@ -31,6 +31,8 @@ class GenerateTestData extends Command
      */
     public function handle()
     {
+        $this->components->info('Generate test data');
+
         // Remove data in documents and controls tables
         DB::table('documents')->delete();
         DB::table('controls')->update(['next_id' => null]);
