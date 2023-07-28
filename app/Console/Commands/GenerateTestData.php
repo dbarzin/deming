@@ -31,17 +31,15 @@ class GenerateTestData extends Command
      */
     public function handle()
     {
-        // remove all measurements
+        // Remove all measurements
         $this->info('Remove all controls and documents');
-        // Disable key check
-        DB::statement('SET foreign_key_checks=0');
-        // Remove tables
-        DB::table('documents')->truncate();
-        DB::table('controls')->truncate();
-        // Enable key checks
-        DB::statement('SET foreign_key_checks=1');
 
-        // get all attributes
+        // Remove tables
+        DB::table('documents')->delete();
+        DB::table('controls')->update(['next_id' => null]);
+        DB::table('controls')->delete();
+
+        // Get all attributes
         $attributes = [];
         $attributesDB = DB::table('attributes')
             ->select('values')
