@@ -34,7 +34,7 @@ class GenerateTestData extends Command
         // Remove all measurements
         $this->info('Remove all controls and documents');
 
-        // Remove tables
+        // Remove data in documents and controls tables
         DB::table('documents')->delete();
         DB::table('controls')->update(['next_id' => null]);
         DB::table('controls')->delete();
