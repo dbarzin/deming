@@ -92,7 +92,7 @@ When you click:
 
      * If there is no control for this control, a new control is created by copying all the data from the control and is scheduled on the specified date.
 
-     * If there is already an uncompleted check for this control, the planning date is updated.
+     * If an unperformed measurement already exists for this measure, the planning date, periodicity and those responsible for performing the measurement are updated.
 
 You then return to the [list of controls](#list).
 

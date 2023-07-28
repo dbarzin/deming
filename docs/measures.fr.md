@@ -93,7 +93,7 @@ Lorsque vous cliquez sur :
 
     * s’il n’existe pas de contrôle pour cette mesure, un nouveau contrôle est créé en copiant toutes les données de le mesure et est planifié à la date spécifiée.
 
-    * S’il existe déjà un contrôle non-réalisé pour cette mesure de sécurité, la date de planification est mise à jour.
+    * S’il existe déjà un contrôle non-réalisé pour cette mesure de sécurité, la date de planification, la périodicité et les responsables de la réalisation de la mesure sont mis à jour.
 
 	Vous revenez ensuite à la [liste des mesures de sécurité](#list).
 
