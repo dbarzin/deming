@@ -369,7 +369,7 @@ class ControlController extends Controller
 
     public function measures(Request $request)
     {
-        // get all domains
+        // Get all domains
         $domains = Domain::All();
 
         $cur_date = $request->get('cur_date');
@@ -380,32 +380,7 @@ class ControlController extends Controller
             $cur_date = \Carbon\Carbon::createFromFormat('Y-m-d', $cur_date)->format('Y-m-d');
         }
 
-        // Build query
-        /*
-        $controls = DB::table('controls as c1')
-            ->select(
-                [
-                    'c1.id as control_id',
-                    'c1.name as name',
-                    'c1.clause as clause',
-                    'c1.measure_id as measure_id',
-                    'c1.domain_id as domain_id',
-                    'c1.plan_date as plan_date',
-                    'c1.realisation_date as realisation_date',
-                    'c1.score as score',
-                    'c2.plan_date as next_date',
-                    'c2.id as next_id',
-                ]
-            )
-            ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id')
-            ->where('c2.realisation_date', '=', null)
-            ->where('c1.next_id', '<>', null)
-            ->where('c1.realisation_date', '<=', $cur_date)
-            ->groupBy('measure_id')
-            ->orderBy('clause')
-            ->get();
-        */
-
+        // Query controls
         $controls = DB::table('controls as c1')
             ->select(
                 DB::raw("
