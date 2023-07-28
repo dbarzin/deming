@@ -61,7 +61,7 @@ jobs:
 
       - name: Insert test data
         run: |
-          mysql deming --host 127.0.0.1 --port 3306 -uroot < deming-27001:2022.sql
+          mysql deming --host 127.0.0.1 --port 3306 -uroot < deming-27001_2022.sql
 
       - name: Check code quality
         run: |
