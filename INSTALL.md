@@ -212,3 +212,16 @@ Empty caches
 
     php artisan optimize:clear
 
+## Reset to zero
+
+To start from an empty database with the ISO 27001:2022 standard.
+
+Here's the command to recreate the DB:
+
+    php artisan migrate:fresh --seed
+
+Then to populate the DB with 27001:2022
+
+    sudo mysql deming < deming-27001_2022.sql
+
+
