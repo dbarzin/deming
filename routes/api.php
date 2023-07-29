@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -13,14 +14,18 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('login', [AuthController::class, 'login']);
+Route::namespace('App\\Http\\Controllers\\API')->group(function(){
+ 
+    Route::post('login', 'AuthController@login');
+    Route::post('logout', 'AuthController@logout');
 
-Route::group(['namespace' => 'API'], function () {
-    Route::apiResource('domains', DomainController::class);
-    /*
-    Route::apiResource('measures', API\MeasureController::class);
-    Route::apiResource('controls', API\ControlController::class);
-    Route::apiResource('attbutes', API\AttributeController::class);
-    Route::apiResource('documents', API\DocumentController::class);
-    */
+    Route::group(['middleware'=>'auth:api'], function() {
+        
+        Route::apiResource('domains', DomainController::class);
+        Route::apiResource('measures', MeasureController::class);
+        Route::apiResource('controls', ControlController::class);
+        Route::apiResource('attributes', AttributeController::class);
+        Route::apiResource('documents', DocumentController::class);
+ 
+    }); 
 });

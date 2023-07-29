@@ -1,53 +1,53 @@
 <?php
 namespace App\Http\Controllers\API;
 
-use App\Domain;
+use App\Measure;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 
-class DomainController extends Controller
+class MeasureController extends Controller
 {
     public function index()
     {
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $activities = Domain::all();
+        $measures = Measure::all();
 
-        return response()->json($activities);
+        return response()->json($measures);
     }
 
     public function store(Request $request)
     {
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $domain = Domain::create($request->all());
+        $measure = Measure::create($request->all());
 
-        return response()->json($domain, 201);
+        return response()->json($measure, 201);
     }
 
-    public function show(Domain $domain)
+    public function show(Measure $measure)
     {
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new DomainResource($domain);
+        return new MeasureResource($measure);
     }
 
-    public function update(Request $request, Domain $domain)
+    public function update(Request $request, Measure $measure)
     {
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $domain->update($request->all());
+        $measure->update($request->all());
 
         return response()->json();
     }
 
-    public function destroy(Domain $domain)
+    public function destroy(Measure $measure)
     {
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $domain->delete();
+        $measure->delete();
 
         return response()->json();
     }
