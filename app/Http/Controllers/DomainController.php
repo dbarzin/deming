@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Domain;
 use App\Exports\DomainsExport;
+use App\Models\Domain;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;

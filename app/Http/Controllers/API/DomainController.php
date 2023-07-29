@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\API;
 
-use App\Models\Domain;
 use App\Http\Controllers\Controller;
+use App\Models\Domain;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;

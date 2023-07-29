@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\ControlsExport;
 use App\Models\Control;
 use App\Models\Document;
 use App\Models\Domain;
-use App\Exports\ControlsExport;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
