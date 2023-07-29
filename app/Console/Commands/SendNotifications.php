@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Control;
-use App\User;
+use App\Models\Control;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;

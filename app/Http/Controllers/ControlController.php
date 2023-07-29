@@ -2,11 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Control;
-use App\Document;
-use App\Domain;
+use App\Models\Control;
+use App\Models\Document;
+use App\Models\Domain;
 use App\Exports\ControlsExport;
-use App\User;
+use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;

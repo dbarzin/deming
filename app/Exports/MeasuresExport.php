@@ -2,7 +2,7 @@
 
 namespace App\Exports;
 
-use App\Measure;
+use App\Models\Measure;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithHeadings;

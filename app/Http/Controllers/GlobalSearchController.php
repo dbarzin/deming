@@ -8,9 +8,9 @@ use Illuminate\Support\Str;
 class GlobalSearchController extends Controller
 {
     private $models = [
-        'App\\Domain',
-        'App\\Measure',
-        'App\\Control',
+        'App\\Models\\Domain',
+        'App\\Models\\Measure',
+        'App\\Models\\Control',
     ];
 
     public function search(Request $request)

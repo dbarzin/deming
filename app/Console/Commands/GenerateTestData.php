@@ -2,8 +2,8 @@
 
 namespace App\Console\Commands;
 
-use App\Control;
-use App\Measure;
+use App\Models\Control;
+use App\Models\Measure;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
