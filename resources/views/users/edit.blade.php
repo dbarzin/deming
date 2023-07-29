@@ -87,6 +87,8 @@
 				</div>
 			</div>
 
+	        @if (Config::get('app.ldap_domain') === null) 
+
 	    	<div class="row">
 	    		<div class="cell-1">
 					<label class="label" for="description">{{ trans('cruds.user.fields.password') }}</label>
@@ -96,6 +98,9 @@
 					<input type="password" name="password2"/>
 				</div>
 			</div>
+			
+			@endif
+
 		</div>
 
     	<div class="row">

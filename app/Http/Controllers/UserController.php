@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use Config;
 use App\Models\Control;
 use App\Models\User;
 use Illuminate\Http\Request;
@@ -53,17 +54,28 @@ class UserController extends Controller
                 'login' => 'required|min:1|max:30',
                 'name' => 'required|min:1|max:90',
                 'title' => 'required|min:1|max:30',
-                'email' => 'required|unique:users|email:rfc',
-                'password1' => 'required|min:8',
+                'email' => 'required|email:rfc',
                 'role' => 'required',
             ]
         );
 
-        if (request('password1') !== request('password2')) {
-            return redirect('/users/create')
-                ->withErrors(['password1' => 'Les mots de passe ne correspondent pas'])
-                ->withInput();
-        }
+        if (Config::get('app.ldap_domain') === null) {
+            if (request('password1')==null) {
+                return redirect('/users/create')
+                    ->withErrors(['password1' => 'No password'])
+                    ->withInput();
+                    }
+            elseif (strlen(request('password1'))<8) {
+                return redirect('/users/create')
+                    ->withErrors(['password1' => 'Password too short'])
+                    ->withInput();
+                    }
+            elseif (request('password1') !== request('password2')) {
+                return redirect('/users/create')
+                    ->withErrors(['password1' => 'Passwords does not match'])
+                    ->withInput();
+                    }
+            }
 
         $user = new User();
         $user->login = request('login');
@@ -72,7 +84,8 @@ class UserController extends Controller
         $user->title = request('title');
         $user->role = request('role');
         $user->language = request('language');
-        $user->password = bcrypt(request('password1'));
+        if (Config::get('app.ldap_domain') === null)
+            $user->password = bcrypt(request('password1'));
         $user->save();
 
         return redirect('/users');
@@ -135,10 +148,19 @@ class UserController extends Controller
             ]
         );
 
-        if ((request('password1') !== null) && (request('password1') !== request('password2'))) {
-            return redirect('/users/' . $user->id . '/edit')
-                ->withErrors(['password1' => 'Les mots de passe ne correspondent pas'])
-                ->withInput();
+        if (Config::get('app.ldap_domain') === null) {
+            if (request('password1') !== null) {
+                if (strlen(request('password1'))<8) {
+                    return redirect('/users/create')
+                        ->withErrors(['password1' => 'Password too short'])
+                        ->withInput();
+                        }
+                elseif ((request('password1') !== null) && (request('password1') !== request('password2'))) {
+                    return redirect('/users/' . $user->id . '/edit')
+                        ->withErrors(['password1' => 'Passwords does not match'])
+                        ->withInput();
+                }
+            }
         }
 
         $user->name = request('name');
@@ -148,8 +170,10 @@ class UserController extends Controller
         }
         $user->title = request('title');
         $user->language = request('language');
-        if (request('password1') !== null) {
-            $user->password = bcrypt(request('password1'));
+        if (Config::get('app.ldap_domain') === null) {
+            if (request('password1') !== null) {
+                $user->password = bcrypt(request('password1'));
+            }
         }
 
         // Update controls not already made

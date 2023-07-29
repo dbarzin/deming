@@ -45,6 +45,17 @@
 				</div>
 		    	<div class="row">
 		    		<div class="cell-1">
+						<label>{{ trans('cruds.user.fields.language') }}</label>
+					</div>
+		    		<div class="cell-3">
+		    			<select name='language' value='language'>
+		    				<option {{ old('language')=='en' ? 'selected' : ''}} >en</option>
+		    				<option {{ old('language')=='fr' ? 'selected' : ''}} >fr</option>
+		    			</select>
+					</div>
+				</div>
+		    	<div class="row">
+		    		<div class="cell-1">
 						<label>{{ trans('cruds.user.fields.role') }}</label>
 					</div>
 		    		<div class="cell-3">
@@ -65,6 +76,8 @@
 						<input type="text" name="email" class="input {{ $errors->has('email') ? 'is-danger' : ''}}" value="{{ old('email') }}" size="120">
 					</div>
 				</div>
+
+		        @if (Config::get('app.ldap_domain') === null) 
 		    	<div class="row">
 		    		<div class="cell-1">
 						<label class="label" for="description">{{ trans('cruds.user.fields.password') }}</label>
@@ -74,6 +87,8 @@
 						<input type="password" name="password2"/>	
 					</div>
 				</div>
+				@endif
+
 			</div>
 	    	<div class="row">
 	    		<div class="cell-4">
