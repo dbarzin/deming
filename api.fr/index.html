@@ -88,11 +88,11 @@
         <ul>
     <li class="toctree-l3"><a class="reference internal" href="#authentification">Authentification</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#liste-des-utilisateurs">Liste des utilisateurs</a>
+    <li class="toctree-l3"><a class="reference internal" href="#liste-des-domaines">Liste des domaines</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#recuperer-un-utilisateur">Récupérer un utilisateur</a>
+    <li class="toctree-l3"><a class="reference internal" href="#recuperer-un-domaine">Récupérer un domaine</a>
     </li>
-    <li class="toctree-l3"><a class="reference internal" href="#mettre-a-jour-un-utilisateur">Mettre à jour un utilisateur</a>
+    <li class="toctree-l3"><a class="reference internal" href="#mettre-a-jour-un-domaine">Mettre à jour un domaine</a>
     </li>
         </ul>
     </li>
@@ -253,12 +253,12 @@ Cet utilisateur doit disposer du rôle "API". </p>
 
     var_dump($response);
 </code></pre>
-<h4 id="liste-des-utilisateurs">Liste des utilisateurs</h4>
+<h4 id="liste-des-domaines">Liste des domaines</h4>
 <pre><code class="language-php">&lt;?php
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL =&gt; &quot;http://127.0.0.1:8000/api/users&quot;,
+        CURLOPT_URL =&gt; &quot;http://127.0.0.1:8000/api/domains&quot;,
         CURLOPT_RETURNTRANSFER =&gt; true,
         CURLOPT_MAXREDIRS =&gt; 10,
         CURLOPT_TIMEOUT =&gt; 30,
@@ -281,12 +281,12 @@ Cet utilisateur doit disposer du rôle "API". </p>
     var_dump($response);
 
 </code></pre>
-<h4 id="recuperer-un-utilisateur">Récupérer un utilisateur</h4>
+<h4 id="recuperer-un-domaine">Récupérer un domaine</h4>
 <pre><code class="language-php">&lt;?php
     $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL =&gt; &quot;http://127.0.0.1:8000/api/users/1&quot;,
+        CURLOPT_URL =&gt; &quot;http://127.0.0.1:8000/api/domains/1&quot;,
         CURLOPT_RETURNTRANSFER =&gt; true,
         CURLOPT_MAXREDIRS =&gt; 10,
         CURLOPT_TIMEOUT =&gt; 30,
@@ -307,12 +307,12 @@ Cet utilisateur doit disposer du rôle "API". </p>
 
     var_dump($response);
 </code></pre>
-<h4 id="mettre-a-jour-un-utilisateur">Mettre à jour un utilisateur</h4>
+<h4 id="mettre-a-jour-un-domaine">Mettre à jour un domaine</h4>
 <pre><code class="language-php">&lt;?php
    $curl = curl_init();
 
     curl_setopt_array($curl, array(
-        CURLOPT_URL =&gt; &quot;http://127.0.0.1:8000/api/users/8&quot;,
+        CURLOPT_URL =&gt; &quot;http://127.0.0.1:8000/api/domains/8&quot;,
         CURLOPT_RETURNTRANSFER =&gt; true,
         CURLOPT_MAXREDIRS =&gt; 10,
         CURLOPT_TIMEOUT =&gt; 30,
@@ -321,12 +321,9 @@ Cet utilisateur doit disposer du rôle "API". </p>
         CURLOPT_CUSTOMREQUEST =&gt; &quot;PUT&quot;,
         CURLOPT_POSTFIELDS =&gt; http_build_query(
             array(
-                'name' =&gt; 'Henri',
-                'email' =&gt; 'henri@test.fr',
-                'language' =&gt; 'fr',
-                'roles[0]' =&gt; 1,
-                'roles[1]' =&gt; 3,
-                'granularity' =&gt; '3')
+                'title' =&gt; 'Nouveau titre',
+                'description' =&gt; 'Nouvelle description'
+                )
             ),
         CURLOPT_HTTPHEADER =&gt; array(
             &quot;accept: application/json&quot;,
