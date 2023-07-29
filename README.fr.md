@@ -69,6 +69,7 @@ Deming permet de répondre à ces exigences et de conserver les informations doc
 ### Ecran principal
 
 [<img src="public/screenshots/main1.png" width="500">](public/screenshots/main1.png)
+
 [<img src="public/screenshots/main2.png" width="500">](public/screenshots/main2.png)
 
 ### Liste des contrôles
