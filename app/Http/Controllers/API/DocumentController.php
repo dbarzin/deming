@@ -32,7 +32,7 @@ class DocumentController extends Controller
     {
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new DocumentResource($document);
+        return response()->json($document);
     }
 
     public function update(Request $request, Document $document)

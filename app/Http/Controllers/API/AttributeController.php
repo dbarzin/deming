@@ -32,7 +32,7 @@ class AttributeController extends Controller
     {
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new AttributeResource($attribute);
+        return response()->json($attribute);
     }
 
     public function update(Request $request, Attribute $attribute)

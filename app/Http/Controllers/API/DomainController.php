@@ -32,7 +32,7 @@ class DomainController extends Controller
     {
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new DomainResource($domain);
+        return response()->json($domain);
     }
 
     public function update(Request $request, Domain $domain)

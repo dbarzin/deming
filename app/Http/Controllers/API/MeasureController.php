@@ -32,7 +32,7 @@ class MeasureController extends Controller
     {
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new MeasureResource($measure);
+        return response()->json($measure);
     }
 
     public function update(Request $request, Measure $measure)

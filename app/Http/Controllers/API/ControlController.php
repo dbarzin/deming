@@ -32,7 +32,7 @@ class ControlController extends Controller
     {
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return new ControlResource($control);
+        return response()->json($control);
     }
 
     public function update(Request $request, Control $control)
