@@ -2,12 +2,9 @@
 
 namespace App\Http\Controllers\API;
 
-use Carbon\Carbon;
-use App\Models\User;
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
-use Illuminate\Support\Facades\Hash;
 
 class AuthController extends Controller
 {
@@ -31,11 +28,10 @@ class AuthController extends Controller
                 'token' => $tokenResult->accessToken,
             ], 200);
         }
-        else {
-            return response([
-                "message" => "Unauthorised."
-            ], 401);
-        }
+
+        return response([
+            'message' => 'Unauthorised.',
+        ], 401);
     }
 
     public function logout()

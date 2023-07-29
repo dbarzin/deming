@@ -1,11 +1,12 @@
 <?php
+
 namespace App\Http\Controllers\API;
 
-use App\Measure;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use App\Measure;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class MeasureController extends Controller
 {
@@ -51,5 +52,4 @@ class MeasureController extends Controller
 
         return response()->json();
     }
-
 }

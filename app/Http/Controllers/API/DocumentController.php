@@ -1,11 +1,12 @@
 <?php
+
 namespace App\Http\Controllers\API;
 
 use App\Document;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class DocumentController extends Controller
 {
@@ -51,5 +52,4 @@ class DocumentController extends Controller
 
         return response()->json();
     }
-
 }

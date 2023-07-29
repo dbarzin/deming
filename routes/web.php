@@ -13,8 +13,7 @@
 
 Auth::routes();
 
-Route::namespace('App\\Http\\Controllers')->group(function(){
-
+Route::namespace('App\\Http\\Controllers')->group(function () {
     /* Index */
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
@@ -98,4 +97,3 @@ Route::namespace('App\\Http\\Controllers')->group(function(){
     /* test chart */
     // Route::get('/testChart', 'ReportController@testChart');
 });
-
