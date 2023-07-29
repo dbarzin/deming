@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html class="writer-html5" lang="en" >
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <link rel="shortcut icon" href="../img/favicon.ico" />
+    <title>API - Deming</title>
+    <link rel="stylesheet" href="../css/theme.css" />
+    <link rel="stylesheet" href="../css/theme_extra.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link href="../css/extra.css" rel="stylesheet" />
+    
+      <script>
+        // Current page data
+        var mkdocs_page_name = "API";
+        var mkdocs_page_input_path = "api.md";
+        var mkdocs_page_url = null;
+      </script>
+    
+    <script src="../js/jquery-3.6.0.min.js" defer></script>
+    <!--[if lt IE 9]>
+      <script src="../js/html5shiv.min.js"></script>
+    <![endif]-->
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
+      <script>hljs.initHighlightingOnLoad();</script> 
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+  <div class="wy-grid-for-nav">
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side stickynav">
+    <div class="wy-side-scroll">
+      <div class="wy-side-nav-search">
+          <a href=".." class="icon icon-home"> Deming
+        </a><div role="search">
+  <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
+      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+  </form>
+</div>
+      </div>
+
+      <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="Navigation menu">
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="..">Introduction</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../home/">Homepage</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../measures/">Measures</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../controls/">Controls</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../plan/">Planning</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../dashboards/">Dashboards</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../actions/">Action plans</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../config/">Configuration</a>
+                </li>
+              </ul>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">API</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#installing-the-api">Installing the API</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#the-apis">The APIs</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#actions-managed-by-the-resource-controller">Actions managed by the resource controller</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#access-rights">Access rights</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#examples">Examples</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#authentication">Authentication</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#liste-des-domaines">Liste des domaines</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#get-a-control">Get a control</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#update-a-control">Update a control</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#python">Python</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#bash">bash</a>
+    </li>
+    </ul>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../annexe/">Annexe</a>
+                </li>
+              </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../references/">References</a>
+                </li>
+              </ul>
+      </div>
+    </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+      <nav class="wy-nav-top" role="navigation" aria-label="Mobile navigation menu">
+          <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+          <a href="..">Deming</a>
+        
+      </nav>
+      <div class="wy-nav-content">
+        <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
+      <li>API</li>
+    <li class="wy-breadcrumbs-aside">
+          <a href="https://github.com/dbarzin/deming/edit/main/docs/api.md" class="icon icon-github"> Edit on GitHub</a>
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+            <div class="section" itemprop="articleBody">
+              
+                <ul>
+<li class="i18n-link i18n-link-found i18n-link-fr"><a href="../api.fr/">Français</a></li>
+</ul>
+<h2 id="api">API</h2>
+<p>Deming can be modified or updated via a REST API.</p>
+<p>A REST API (<a href="https://fr.wikipedia.org/wiki/Representational_state_transfer">Representational State Transfer</a>) 
+is an application programming interface that respects the constraints of the REST 
+architecture and enables interaction with RESTful web services. </p>
+<h3 id="installing-the-api">Installing the API</h3>
+<p>To install the API, you need to install Passport by running this command:</p>
+<pre><code class="language-bash">php artisan passport:install
+</code></pre>
+<ul>
+<li>The Docker environment supports this functionality natively, via the entrypoint.</li>
+</ul>
+<h3 id="the-apis">The APIs</h3>
+<ul>
+<li>
+<p>/api/attributes</p>
+</li>
+<li>
+<p>/api/domains</p>
+</li>
+<li>
+<p>/api/measures</p>
+</li>
+<li>
+<p>/api/controls</p>
+</li>
+<li>
+<p>/api/documents</p>
+</li>
+</ul>
+<h3 id="actions-managed-by-the-resource-controller">Actions managed by the resource controller</h3>
+<p>Requests and URIs for each api are shown in the table below.</p>
+<table>
+<thead>
+<tr>
+<th>Request</th>
+<th>URI</th>
+<th>Action</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GET</td>
+<td>/api/objects</td>
+<td>returns the list of objects</td>
+</tr>
+<tr>
+<td>GET /api/objets/{id}</td>
+<td id="id">returns object</td>
+<td></td>
+</tr>
+<tr>
+<td>POST</td>
+<td>/api/objects</td>
+<td>save new object</td>
+</tr>
+<tr>
+<td>PUT/PATCH</td>
+<td>/api/objets/{id}</td>
+<td id="id">update object</td>
+</tr>
+<tr>
+<td>/api/objets/{id}</td>
+<td id="id">delete object</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="access-rights">Access rights</h3>
+<p>To access the APIs, you need to identify yourself as a Deming application user.
+This user must have the "API" role. </p>
+<p>When authentication is successful, the API sends a "token" which must be passed in the "Authorization" header of the API request.</p>
+<h3 id="examples">Examples</h3>
+<p>Here are a few examples of how to use the API with PHP:</p>
+<h4 id="authentication">Authentication</h4>
+<pre><code class="language-php">&lt;?php
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL =&gt; &quot;http://127.0.0.1:8000/api/login&quot;,
+        CURLOPT_RETURNTRANSFER =&gt; true,
+        CURLOPT_MAXREDIRS =&gt; 10,
+        CURLOPT_TIMEOUT =&gt; 30,
+        CURLOPT_HTTP_VERSION =&gt; CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST =&gt; &quot;POST&quot;,
+        CURLOPT_POSTFIELDS =&gt; http_build_query(
+            array(&quot;email&quot; =&gt; &quot;api@admin.com&quot;,
+                  &quot;password&quot; =&gt; &quot;12345678&quot;)),
+        CURLOPT_HTTPHEADER =&gt; array(
+            &quot;accept: application/json&quot;,
+            &quot;content-type: application/x-www-form-urlencoded&quot;,
+        ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    $info = curl_getinfo($curl);
+
+    curl_close($curl);
+
+    if ($err) {
+        set_error_handler($err);
+    } else {
+        if ($info['http_code'] == 200) {
+            $token = json_decode($response)-&gt;token;
+
+        } else {
+            set_error_handler(&quot;Login to api faild status 403&quot;);
+            error_log($responseInfo['http_code']);
+            error_log(&quot;No login api status 403&quot;);
+        }
+    }
+
+    var_dump($response);
+</code></pre>
+<h4 id="liste-des-domaines">Liste des domaines</h4>
+<pre><code class="language-php">&lt;?php
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL =&gt; &quot;http://127.0.0.1:8000/api/domains&quot;,
+        CURLOPT_RETURNTRANSFER =&gt; true,
+        CURLOPT_MAXREDIRS =&gt; 10,
+        CURLOPT_TIMEOUT =&gt; 30,
+        CURLOPT_HTTP_VERSION =&gt; CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST =&gt; &quot;GET&quot;,
+        CURLOPT_POSTFIELDS =&gt; null, // here you can send parameters
+        CURLOPT_HTTPHEADER =&gt; array(
+            &quot;accept: application/json&quot;,
+            &quot;Authorization: &quot; . &quot;Bearer&quot; . &quot; &quot; . $token . &quot;&quot;,
+            &quot;cache-control: no-cache&quot;,
+            &quot;content-type: application/json&quot;,
+        ),
+    ));
+
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+
+    var_dump($response);
+
+</code></pre>
+<h4 id="get-a-control">Get a control</h4>
+<pre><code class="language-php">&lt;?php
+    $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL =&gt; &quot;http://127.0.0.1:8000/api/controls/1&quot;,
+        CURLOPT_RETURNTRANSFER =&gt; true,
+        CURLOPT_MAXREDIRS =&gt; 10,
+        CURLOPT_TIMEOUT =&gt; 30,
+        CURLOPT_HTTP_VERSION =&gt; CURL_HTTP_VERSION_1_1,
+        CURLOPT_CUSTOMREQUEST =&gt; &quot;GET&quot;,
+        CURLOPT_POSTFIELDS =&gt; null, // here you can send parameters
+        CURLOPT_HTTPHEADER =&gt; array(
+            &quot;accept: application/json&quot;,
+            &quot;Authorization: &quot; . &quot;Bearer&quot; . &quot; &quot; . $token . &quot;&quot;,
+            &quot;cache-control: no-cache&quot;,
+            &quot;content-type: application/json&quot;,
+        ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+
+    var_dump($response);
+</code></pre>
+<h4 id="update-a-control">Update a control</h4>
+<pre><code class="language-php">&lt;?php
+   $curl = curl_init();
+
+    curl_setopt_array($curl, array(
+        CURLOPT_URL =&gt; &quot;http://127.0.0.1:8000/api/controls/1&quot;,
+        CURLOPT_RETURNTRANSFER =&gt; true,
+        CURLOPT_MAXREDIRS =&gt; 10,
+        CURLOPT_TIMEOUT =&gt; 30,
+        CURLOPT_HTTP_VERSION =&gt; CURL_HTTP_VERSION_1_1,
+        CURLOPT_POST =&gt; true,
+        CURLOPT_CUSTOMREQUEST =&gt; &quot;PUT&quot;,
+        CURLOPT_POSTFIELDS =&gt; http_build_query(
+            array(
+...
+            ),
+        CURLOPT_HTTPHEADER =&gt; array(
+            &quot;accept: application/json&quot;,
+            &quot;Authorization: &quot; . &quot;Bearer&quot; . &quot; &quot; . $token . &quot;&quot;,
+            &quot;cache-control: no-cache&quot;,
+        ),
+    ));
+
+    $response = curl_exec($curl);
+    $err = curl_error($curl);
+    curl_close($curl);
+
+    var_dump($response);
+</code></pre>
+<h3 id="python">Python</h3>
+<p>Voici un exemple d'utilisation de l'API en Python</p>
+<pre><code class="language-python">#!/usr/bin/python3
+
+import requests
+
+vheaders = {}
+vheaders['accept'] = 'application/json'
+
+print(&quot;Login&quot;)
+response = requests.post(&quot;http://127.0.0.1:8000/api/login&quot;, 
+    headers=vheaders, 
+    data= {'email':'api@admin.localhost', 'password':'12345678'} )
+print(response.status_code)
+
+vheaders['Authorization'] = &quot;Bearer &quot; + response.json()['token']
+
+print(&quot;Get domains&quot;)
+response = requests.get(&quot;http://127.0.0.1:8000/api/domains&quot;, headers=vheaders)
+print(response.status_code)
+print(response.json())
+
+</code></pre>
+<h3 id="bash">bash</h3>
+<p>Voici un exemple d'utilisation de l'API en ligne de commande avec <a href="https://curl.se/docs/manpage.html">CURL</a> et <a href="https://stedolan.github.io/jq/">JQ</a></p>
+<pre><code># valid login and password
+data='{&quot;email&quot;:&quot;api@admin.localhost&quot;,&quot;password&quot;:&quot;12345678&quot;}'
+
+# get a token after correct login
+token=$(curl -s -d ${data} -H &quot;Content-Type: application/json&quot; http://localhost:8000/api/login | jq -r .token)
+
+# query users and decode JSON data with JQ.
+curl -s -H &quot;Content-Type: application/json&quot; -H &quot;Authorization: Bearer ${token}&quot; &quot;http://127.0.0.1:8000/api/domains&quot; | jq .
+
+</code></pre>
+              
+            </div>
+          </div><footer>
+    <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
+        <a href="../config/" class="btn btn-neutral float-left" title="Configuration"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../annexe/" class="btn btn-neutral float-right" title="Annexe">Next <span class="icon icon-circle-arrow-right"></span></a>
+    </div>
+
+  <hr/>
+
+  <div role="contentinfo">
+    <!-- Copyright etc -->
+      <p>Copyright <a href="https://www.gnu.org/licenses/licenses.en.html">GPL</a>.</p>
+  </div>
+
+  Built with <a href="https://www.mkdocs.org/">MkDocs</a> using a <a href="https://github.com/readthedocs/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>.
+</footer>
+          
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+
+  <div class="rst-versions" role="note" aria-label="Versions">
+  <span class="rst-current-version" data-toggle="rst-current-version">
+    
+        <span>
+          <a href="https://github.com/dbarzin/deming" class="fa fa-github" style="color: #fcfcfc"> GitHub</a>
+        </span>
+    
+    
+      <span><a href="../config/" style="color: #fcfcfc">&laquo; Previous</a></span>
+    
+    
+      <span><a href="../annexe/" style="color: #fcfcfc">Next &raquo;</a></span>
+    
+  </span>
+</div>
+    <script>var base_url = '..';</script>
+    <script src="../js/theme_extra.js" defer></script>
+    <script src="../js/theme.js" defer></script>
+      <script src="../search/main.js" defer></script>
+    <script defer>
+        window.onload = function () {
+            SphinxRtdTheme.Navigation.enable(true);
+        };
+    </script>
+
+</body>
+</html>
