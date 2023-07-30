@@ -2,7 +2,7 @@
   
 namespace Database\Seeders;
   
-use App\Measure;
+use App\Models\Measure;
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
