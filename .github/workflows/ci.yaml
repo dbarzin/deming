@@ -55,10 +55,6 @@ jobs:
         run: |
           php artisan migrate --seed 
 
-      - name: Migrate and seed the database
-        run: |
-          php artisan migrate --seed 
-
       - name: Seed Attributes
         run: |
           php artisan db:seed --class=AttributeSeeder
