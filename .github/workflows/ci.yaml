@@ -51,17 +51,29 @@ jobs:
         run: |
           php artisan vendor:publish --all
 
-      - name: Remove the configuration cache file
+      - name: Migrate and seed the database
         run: |
-          php artisan config:clear
+          php artisan migrate --seed 
 
       - name: Migrate and seed the database
         run: |
           php artisan migrate --seed 
 
-      - name: Insert test data
+      - name: Seed Attributes
         run: |
-          mysql deming --host 127.0.0.1 --port 3306 -uroot < deming-27001_2022.sql
+          php artisan db:seed --class=AttributeSeeder
+
+      - name: Seed Domains
+        run: |
+          php artisan db:seed --class=DomainSeeder
+
+      - name: Seed Measures
+        run: |
+          php artisan db:seed --class=MeasureSeeder
+
+      - name: Generate Test Data
+        run: |
+          php artisan deming:generateTests
 
       - name: Check code quality
         run: |
