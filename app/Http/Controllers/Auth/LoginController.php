@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Auth;
 
+use App\Models\User;
 use App\Http\Controllers\Controller;
 use Config;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
@@ -62,7 +63,7 @@ class LoginController extends Controller
             $password = $credentials['password'];
             try {
                 if ($this->ldapLogin($username, $password)) {
-                    $user = \App\User::where('login', $username)->first();
+                    $user = User::where('login', $username)->first();
                     if (! $user) {
                         return false;
                     }
