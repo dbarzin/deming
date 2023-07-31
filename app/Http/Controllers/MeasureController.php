@@ -54,7 +54,7 @@ class MeasureController extends Controller
                     ->whereNull('controls.realisation_date');
             }, null, null, 'left outer');
 
-        if (($domain !== null)) {
+        if ($domain !== null) {
             $measures->where('measures.domain_id', $domain);
             $request->session()->put('domain', $domain);
         }

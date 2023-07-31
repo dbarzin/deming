@@ -65,12 +65,12 @@ class UserController extends Controller
                     ->withErrors(['password1' => 'No password'])
                     ->withInput();
                     }
-            elseif (strlen(request('password1'))<8) {
+            if (strlen(request('password1'))<8) {
                 return redirect('/users/create')
                     ->withErrors(['password1' => 'Password too short'])
                     ->withInput();
                     }
-            elseif (request('password1') !== request('password2')) {
+            if (request('password1') !== request('password2')) {
                 return redirect('/users/create')
                     ->withErrors(['password1' => 'Passwords does not match'])
                     ->withInput();

@@ -71,7 +71,7 @@ class SendNotifications extends Command
                         // Date
                         $txt .= '<a href="' . url('/control/show/'. $control->id) . '">';
                         $txt .= '<b>';
-                        if (strtotime($control->plan_date) >= strtotime('now')) {
+                        if (strtotime($control->plan_date) > strtotime('now')) {
                             $txt .= "<font color='green'>" . $control->plan_date .' </font>';
                         } else {
                             $txt .= "<font color='red'>" . $control->plan_date . '</font>';
