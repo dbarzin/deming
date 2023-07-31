@@ -70,10 +70,10 @@ class LoginController extends Controller
                     $this->guard()->login($user, true);
                     return true;
                 }
-                return false;
-            } finally {
-                return false;
-            }
+            } catch (\Exception $e) {
+                \Log::error($e->getMessage());
+            } 
+            return false;
         } else {
             return $this->guard()->attempt(
                 $this->credentials($request),
