@@ -15,7 +15,6 @@
 		</div>
 	@endif
 
-
 	<form method="POST" action="/measures">
 	@csrf
 		<div class="grid">
@@ -52,11 +51,20 @@
 				</div>
 			</div>
 
+	    	<div class="row">
+	    		<div class="cell-1">
+					<strong>{{ trans("cruds.measure.fields.objective") }}</strong>
+				</div>
+				<div class="cell-6">
+					<textarea name="objective" rows="3" data-clear-button="false" data-role="textarea">{{ old('objective') }}</textarea>
+				</div> 	
+			</div>
+
 			<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.measure.fields.attributes') }}</strong>
 		    	</div>
-				<div class="cell-5">
+				<div class="cell-6">
 					<select data-role="select" name="values[]" multiple>
 						@foreach($values as $value)
 					    <option {{ str_contains(old("vaues"),$value) ? "selected" : ""}}>{{$value}}</option>
@@ -67,19 +75,10 @@
 
 	    	<div class="row">
 	    		<div class="cell-1">
-					<strong>{{ trans("cruds.measure.fields.objective") }}</strong>
-				</div>
-				<div class="cell-5">
-					<textarea class="textarea" name="objective" rows="3" cols="80">{{ old('objective') }}</textarea>
-				</div> 	
-			</div>
-
-	    	<div class="row">
-	    		<div class="cell-1">
 					<strong>{{ trans("cruds.measure.fields.input") }}</strong>
 				</div>
-				<div class="cell-5">			
-					<textarea class="textarea" name="input" rows="3" cols="80">{{ old('input') }}</textarea>
+				<div class="cell-6">			
+					<textarea name="input" rows="3" data-role="textarea" data-clear-button="false">{{ old('input') }}</textarea>
 				</div>
 			</div>
 
@@ -87,8 +86,8 @@
 	    		<div class="cell-1">
 					<strong>{{ trans("cruds.measure.fields.model") }}</strong>
 				</div>
-				<div class="cell-5">			
-					<textarea class="textarea" name="model" rows="3" cols="80">{{ old('model') }}</textarea>
+				<div class="cell-6">			
+					<textarea name="model" rows="3" data-role="textarea" data-clear-button="false">{{ old('model') }}</textarea>
 				</div> 	
 			</div>
 
@@ -96,8 +95,8 @@
 	    		<div class="cell-1">
 					<strong>{{ trans("cruds.measure.fields.indicator") }}</strong>
 				</div>
-				<div class="cell-5">			
-					<textarea class="textarea" name="indicator" rows="3" cols="80">{{ old('indicator') }}</textarea>
+				<div class="cell-6">			
+					<textarea name="indicator" rows="3" data-role="textarea" data-clear-button="false">{{ old('indicator') }}</textarea>
 				</div> 	
 			</div>
 
@@ -105,18 +104,9 @@
 	    		<div class="cell-1">
 					<strong>{{ trans("cruds.measure.fields.action_plan") }}</strong>
 				</div>
-				<div class="cell-5">
-					<textarea class="textarea" name="action_plan" rows="3" cols="80">{{ old('action_plan') }}</textarea>
+				<div class="cell-6">
+					<textarea name="action_plan" rows="3" data-role="textarea" data-clear-button="false">{{ old('action_plan') }}</textarea>
 				</div> 	
-			</div>
-
-	    	<div class="row">
-	    		<div class="cell-1">
-					<strong>{{ trans("cruds.measure.fields.owner") }}</strong>
-				</div>
-				<div class="cell-5">
-					<input type="text" class="input" name="owner" value="{{ old('owner') }}" size='20'>
-				</div>
 			</div>
 
 	    	<div class="row">
@@ -143,3 +133,4 @@
 
 @endsection
 
+ 
