@@ -22,7 +22,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans("cruds.measure.fields.domain") }}</strong>
 		    	</div>
-				<div class="cell-5">
+				<div class="cell-6">
 					<select data-role="select" name="domain_id" value="{{ old('domain_id') }}" size="1" width='10'>
 					    <option value="">-- {{ trans("cruds.domain.choose") }} --</option>
 						@foreach ($domains as $domain)
@@ -46,7 +46,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans("cruds.measure.fields.name") }}</strong>
 		    	</div>
-				<div class="cell-5">
+				<div class="cell-6">
 					<input type="text" class="input" name="name" value="{{ old('name') }}" size='60'>
 				</div>
 			</div>
