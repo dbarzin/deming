@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Attribute;
+use App\Models\Attribute;
 use App\Exports\AttributesExport;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
