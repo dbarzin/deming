@@ -25,7 +25,7 @@
             <h2 class="text-medium m-0 pl-7" style="line-height: 52px">Deming</h2>
             <div class="mb-4">{{ trans("cruds.login.connection") }}</div>
             <div class="form-group">
-                <input type="text" data-role="input" class="form-control @error('email') is-invalid @enderror" data-prepend="<span class='mif-user'></span>" name="login" value="{{ old('login') }}" id="login" required>
+                <input type="text" data-role="input" class="form-control @error('login') is-invalid @enderror" data-prepend="<span class='mif-user'></span>" name="login" value="{{ old('login') }}" id="login" required>
                 @error('login')
                     <span class="invalid-feedback" role="alert">
                         <strong>{{ $message }}</strong>
@@ -57,7 +57,7 @@
 
    $(document).ready(function() {
       setTimeout(function() {
-          $("#email").focus();
+          $("#login").focus();
       }, 1500);
    });
 
