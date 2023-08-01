@@ -31,6 +31,13 @@ class LoginController extends Controller
     protected $redirectTo = '/home';
 
     /**
+     * Login username to be used by the controller.
+     *
+     * @var string
+     */
+    protected $username;
+
+    /**
      * Create a new controller instance.
      *
      * @return void
@@ -38,9 +45,14 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
+
+         $this->username = $this->findUsername();
     }
 
-    // LDAP Login
+    /**
+     * Login with LDAP
+     *
+     */
     protected function ldapLogin(string $userid, string $password)
     {
         $ldapserver = Config::get('app.ldap_url');
@@ -80,5 +92,31 @@ class LoginController extends Controller
                 $request->filled('remember')
             );
         }
+    }
+
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function findUsername()
+    {
+        $login = request()->input('login');
+
+        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'login';
+ 
+        request()->merge([$fieldType => $login]);
+
+        return $fieldType;
+    }
+ 
+    /**
+     * Get username property.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return $this->username;
     }
 }
