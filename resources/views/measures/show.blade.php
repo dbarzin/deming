@@ -106,7 +106,7 @@
 		    	</button>
 		    </form>
 		    &nbsp;
-			<form action="/measures/{{ $measure->id }}" method="post">
+			<form action="/measures/{{ $measure->id }}" method="post" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
 				{{ method_field('delete') }}
 				@csrf
 				<button class="button alert" type="submit">
