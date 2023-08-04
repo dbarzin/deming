@@ -51,6 +51,9 @@ Vérifier que vous utilisez MySQL et pas MariaDB (Deming ne fonctionne pas avec 
     sudo mysql --version
 
 Lancer MySQL avec les droits root
+php artisan db:seed --class=AttributeSeeder 
+php artisan db:seed --class=DomainSeeder 
+php artisan db:seed --class=MeasureSeeder
 
     sudo mysql
 
@@ -117,13 +120,11 @@ Si le une des commandes renvoie une erreur, la base de données n'était pas vid
 
 ### SQL
 
-Pour importer la base de données avec les mesures de sécurité de la norme 27001:2013
+Pour importer la base de données avec les mesures de sécurité de la norme 27001:2022
 
-    sudo mysql deming < deming-27001_2013.sql
-
-ou avec les mesures de sécurité de la norme 27001:2022
-
-    sudo mysql deming < deming-27001_2022.sql
+    php artisan db:seed --class=AttributeSeeder 
+    php artisan db:seed --class=DomainSeeder 
+    php artisan db:seed --class=MeasureSeeder
 
 Génrérer des données de test (optionnel)
 

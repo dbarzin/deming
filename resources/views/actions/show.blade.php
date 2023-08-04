@@ -76,11 +76,13 @@ form, table {
 
 		<div class="grid">
 	    	<div class="row-12">
+				@if (Auth::User()->role==1)
 				<button type="submit" class="button success">
 		            <span class="mif-floppy-disk"></span>
 		            &nbsp;
 					{{ trans('common.save') }}
 				</button>
+				@endif
 				</form>
 				&nbsp;
 	    		<form action="/actions">

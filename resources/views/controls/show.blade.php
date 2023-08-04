@@ -208,23 +208,25 @@
 
    	<div class="row">
    		<div class="cell-7">
-			@if ($control->realisation_date==null)
-		    <form action="/control/make/{{ $control->id }}">
-	    		<button class="button success">
-					<span class="mif-assignment"></span>
-					&nbsp;	    			
-		    		{{ trans("common.make") }}
-		    	</button>
-			</form>
-			&nbsp;
-		    <form action="/control/plan/{{ $control->id }}">
-	    		<button class="button info">
-					<span class="mif-calendar"></span>
-					&nbsp;
-		    		{{ trans("common.plan") }}
-	    		</button>
-			</form>
-			&nbsp;
+			@if ((Auth::User()->role==1)||(Auth::User()->role==2))
+				@if ($control->realisation_date==null)
+			    <form action="/control/make/{{ $control->id }}">
+		    		<button class="button success">
+						<span class="mif-assignment"></span>
+						&nbsp;	    			
+			    		{{ trans("common.make") }}
+			    	</button>
+				</form>
+				&nbsp;
+			    <form action="/control/plan/{{ $control->id }}">
+		    		<button class="button info">
+						<span class="mif-calendar"></span>
+						&nbsp;
+			    		{{ trans("common.plan") }}
+		    		</button>
+				</form>
+				&nbsp;
+				@endif
 			@endif
 			@if (Auth::User()->role==1)
 		    <form action="/control/edit/{{ $control->id }}">

@@ -2,8 +2,8 @@
 
 namespace App\Http\Controllers\Auth;
 
-use App\Models\User;
 use App\Http\Controllers\Controller;
+use App\Models\User;
 use Config;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
@@ -46,12 +46,37 @@ class LoginController extends Controller
     {
         $this->middleware('guest')->except('logout');
 
-         $this->username = $this->findUsername();
+        $this->username = $this->findUsername();
+    }
+
+    /**
+     * Get the login username to be used by the controller.
+     *
+     * @return string
+     */
+    public function findUsername()
+    {
+        $login = request()->input('login');
+
+        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'login';
+
+        request()->merge([$fieldType => $login]);
+
+        return $fieldType;
+    }
+
+    /**
+     * Get username property.
+     *
+     * @return string
+     */
+    public function username()
+    {
+        return $this->username;
     }
 
     /**
      * Login with LDAP
-     *
      */
     protected function ldapLogin(string $userid, string $password)
     {
@@ -84,39 +109,12 @@ class LoginController extends Controller
                 }
             } catch (\Exception $e) {
                 \Log::error($e->getMessage());
-            } 
+            }
             return false;
-        } else {
-            return $this->guard()->attempt(
-                $this->credentials($request),
-                $request->filled('remember')
-            );
         }
-    }
-
-    /**
-     * Get the login username to be used by the controller.
-     *
-     * @return string
-     */
-    public function findUsername()
-    {
-        $login = request()->input('login');
-
-        $fieldType = filter_var($login, FILTER_VALIDATE_EMAIL) ? 'email' : 'login';
- 
-        request()->merge([$fieldType => $login]);
-
-        return $fieldType;
-    }
- 
-    /**
-     * Get username property.
-     *
-     * @return string
-     */
-    public function username()
-    {
-        return $this->username;
+        return $this->guard()->attempt(
+            $this->credentials($request),
+            $request->filled('remember')
+        );
     }
 }

@@ -24,7 +24,6 @@ class MeasureController extends Controller
      */
     public function index(Request $request)
     {
-        // $measures = Measure::All();
         $domains = Domain::All();
 
         $domain = $request->get('domain');
@@ -74,6 +73,9 @@ class MeasureController extends Controller
      */
     public function create()
     {
+        // Not for Auditor
+        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         // get the list of domains
         $domains = Domain::All();
 
@@ -104,6 +106,9 @@ class MeasureController extends Controller
      */
     public function store(Request $request)
     {
+        // Not for Auditor
+        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $this->validate(
             $request,
             [
@@ -153,6 +158,9 @@ class MeasureController extends Controller
      */
     public function edit(Measure $measure)
     {
+        // Not for Auditor
+        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         // get the list of domains
         $domains = Domain::All();
 
@@ -183,6 +191,9 @@ class MeasureController extends Controller
      */
     public function update(Request $request, Measure $measure)
     {
+        // Not for Auditor
+        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $this->validate(
             $request,
             [
@@ -235,7 +246,11 @@ class MeasureController extends Controller
      */
     public function destroy(Measure $measure)
     {
+        // Not for Auditor
+        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $measure->delete();
+
         return redirect('/measures');
     }
 
@@ -263,6 +278,9 @@ class MeasureController extends Controller
      */
     public function unplan(Request $request)
     {
+        // Not for Auditor
+        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $control = Control
             ::whereNull('realisation_date')
                 ->where('measure_id', '=', $request->id)
@@ -292,6 +310,17 @@ class MeasureController extends Controller
      */
     public function activate(Request $request)
     {
+        // Not for Auditor
+        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $this->validate(
+            $request,
+            [
+                'plan_date' => 'required',
+                'periodicity' => 'required',
+            ]
+        );
+
         $measure = Measure::find($request->id);
 
         // Check control is disabled
@@ -354,6 +383,9 @@ class MeasureController extends Controller
      */
     public function disable(Request $request)
     {
+        // Not for Auditor
+        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $control_id = DB::table('controls')
             ->select('id')
             ->where('measure_id', '=', $request->id)

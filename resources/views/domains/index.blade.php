@@ -6,8 +6,8 @@
 		<div class="grid">
 			<div class="row">
 				<div class="cell-5">
-
 				</div>
+				@if (Auth::User()->role==1)
 				<div class="cell-7" align="right">
 					<button class="button primary" onclick="location.href = '/domains/create';">
 			            <span class="mif-plus"></span>
@@ -15,6 +15,7 @@
 						{{ trans('common.new') }}
 					</button>
 				</div>
+				@endif
 			</div>
 
 			<div class="row">

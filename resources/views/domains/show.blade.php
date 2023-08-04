@@ -29,6 +29,7 @@
     	</div>
     	
 		<div class="form-group">
+			@if (Auth::User()->role==1)
 		    <form action="/domains/{{ $domain->id }}/edit">
 		    	<button class="button primary">
 		            <span class="mif-wrench"></span>
@@ -47,6 +48,7 @@
 		    	</button>
         	</form>
 			&nbsp;
+			@endif
 			<form action="/domains">
 		    	<button class="button">
 					<span class="mif-cancel"></span>

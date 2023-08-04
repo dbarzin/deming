@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Exports\DomainsExport;
 use App\Models\Domain;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -36,6 +38,9 @@ class DomainController extends Controller
      */
     public function create()
     {
+        // Only for administrator role
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return view('domains.create');
     }
 
@@ -48,6 +53,9 @@ class DomainController extends Controller
      */
     public function store(Request $request)
     {
+        // Only for administrator role
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $this->validate(
             $request,
             [
@@ -86,6 +94,9 @@ class DomainController extends Controller
      */
     public function edit(int $id)
     {
+        // Only for administrator role
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $domain = Domain::find($id);
 
         return view('domains.edit', compact('domain'));
@@ -101,6 +112,9 @@ class DomainController extends Controller
      */
     public function update(Request $request, Domain $domain)
     {
+        // Only for administrator role
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $this->validate(
             $request,
             [
@@ -123,7 +137,11 @@ class DomainController extends Controller
      */
     public function destroy(Domain $domain)
     {
+        // Only for administrator role
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $domain->delete();
+
         return redirect('/domains');
     }
 

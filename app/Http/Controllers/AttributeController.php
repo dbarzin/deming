@@ -2,9 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Attribute;
 use App\Exports\AttributesExport;
+use App\Models\Attribute;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
@@ -29,6 +31,9 @@ class AttributeController extends Controller
      */
     public function create()
     {
+        // Only for administrator role
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return view('attributes.create');
     }
 
@@ -41,6 +46,9 @@ class AttributeController extends Controller
      */
     public function store(Request $request)
     {
+        // Only for administrator role
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $this->validate(
             $request,
             [
@@ -77,6 +85,9 @@ class AttributeController extends Controller
      */
     public function edit(Attribute $attribute)
     {
+        // Only for administrator role
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return view('attributes.edit', compact('attribute'));
     }
 
@@ -90,6 +101,9 @@ class AttributeController extends Controller
      */
     public function update(Request $request, Attribute $attribute)
     {
+        // Only for administrator role
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $this->validate(
             $request,
             [
@@ -112,7 +126,11 @@ class AttributeController extends Controller
      */
     public function destroy(Attribute $attribute)
     {
+        // Only for administrator role
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $attribute->delete();
+
         return redirect('/attributes');
     }
 

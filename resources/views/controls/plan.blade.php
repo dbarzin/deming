@@ -82,6 +82,7 @@
 		</div>
 
     	<div class="row">
+			@if (Auth::User()->role !== 3)
     		<div class="cell-12">
 				<button type="submit" class="button success">
 					<span class="mif-calendar"></span>
@@ -90,6 +91,7 @@
 				</button>
 				</form>
 				&nbsp;
+			@endif
 				<form action="/control/show/{{$control->id}}"/>
 					<button type="submit" class="button">
 						<span class="mif-cancel"></span>

@@ -100,13 +100,11 @@ Create storage link
 
     php artisan storage:link
 
-To import the database with 27001:2013 security measures
+To import the database with 27001:2022 security measures
 
-    sudo mysql deming < deming-27001_2013.sql
-
-or with 27001:2022 security measures
-
-    sudo mysql deming < deming-27001_2022.sql
+    php artisan db:seed --class=AttributeSeeder 
+    php artisan db:seed --class=DomainSeeder 
+    php artisan db:seed --class=MeasureSeeder
 
 Generate test data (optional)
 

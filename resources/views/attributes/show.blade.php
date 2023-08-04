@@ -29,6 +29,7 @@
     	</div>
     	
 		<div class="form-group">
+			@if (Auth::User()->role==1)
 		    <form action="/attributes/{{ $attribute->id }}/edit">
 		    	<button class="button primary" type="submit">
 		            <span class="mif-wrench"></span>
@@ -47,6 +48,7 @@
 			    </button>
 	        </form>
 			&nbsp;
+			@endif
 			<form action="/attributes">
 		    	<button class="button" type="submit">
 					<span class="mif-cancel"></span>

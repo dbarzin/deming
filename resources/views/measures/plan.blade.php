@@ -82,6 +82,9 @@
 	</div>
 
 	<div class="form-group">
+		@if (Auth::User()->role === 3)
+	    </form>
+	    @else
     	<button class="button success">
             <span class="mif-calendar"></span>
             &nbsp;
@@ -99,6 +102,7 @@
 	    </form>
 		@endif
 	    &nbsp;
+	    @endif
 	    <form action="/measures">
 	    	<button class="button">
 				<span class="mif-cancel"></span>

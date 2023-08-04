@@ -90,6 +90,7 @@
 		</div>
 
 		<div class="form-group">
+			@if (Auth::User()->role !== 3)
 		    <form action="/measure/plan/{{ $measure->id }}">
 		    	<button class="button info">
 		            <span class="mif-calendar"></span>
@@ -116,6 +117,7 @@
 				</button>
 	        </form>
 		    &nbsp;
+		    @endif
 		    <form action="/measures">
 		    	<button class="button">
 					<span class="mif-cancel"></span>
