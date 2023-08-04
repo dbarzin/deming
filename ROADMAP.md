@@ -20,6 +20,7 @@ This document contains the evolutions planned for Deming in 2023.
 * [x] Send email notification to users for carrying out controls
 * [x] API
 * [ ] Introduce controls by scope
+* [ ] Report of applicable/non-applicable controls by scope
 * [ ] Configure scoring system
 * [ ] Migration script from ISO 27001:2013 to ISO 27001:2022
 * [ ] Manage non-conformities
