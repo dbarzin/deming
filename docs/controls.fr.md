@@ -104,7 +104,7 @@ Cet écran contient :
 
 * Les observation du contrôle
 
-* Une zone pour sauvegarder les preuves (**CTRL+V** permet de coller une capture d'écran)
+* Une zone pour sauvegarder les preuves (**CTRL+V** permet de coller un fichier ou une capture d'écran)
 
 * Un lien permettant de télécharger la fiche de contrôles
 
@@ -142,7 +142,7 @@ Cette fiche permet de décrire les observations réalisés, d'ajouter des captur
 [<img src="/deming/images/report3.png" width="600">](/deming/images/report3.png)
 
 
-La fiche de contrôle peut être [adaptée](/deming/config.fr/#models) afin de respecter le modèle de document de votre organisation.
+La fiche de contrôle peut être [adaptée](/deming/config.fr/#documents) afin de respecter le modèle de document de votre organisation.
 
 
 

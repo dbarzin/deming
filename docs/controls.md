@@ -103,9 +103,9 @@ This screen contains:
 
 * Completion date, planning date
 
-* Observations
+* A text area for observations
 
-* A field to save evidences (**CTRL+V** allows you to paste a screenshot)
+* A file area for saving evidence (**CTRL+V** can be used to paste a file or screenshot)
 
 * A link to download the measurement sheet
 
@@ -143,4 +143,4 @@ This form allows you to describe the observations made, to add screenshots or ta
 [<img src="/deming/images/report3.png" width="600">](/deming/images/report3.png)
 
 
-The checklist can be [adapted](/deming/config/#models) to match your organization's document model.
+The checklist can be [adapted](/deming/config/#documents) to match your organization's document model.
