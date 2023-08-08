@@ -239,6 +239,8 @@ Voici la commande pour recréer la DB :
 
 Puis pour peupler la DB avec la 27001:2022
 
-    sudo mysql deming < deming-27001_2022.sql
+    php artisan db:seed --class=AttributeSeeder 
+    php artisan db:seed --class=DomainSeeder 
+    php artisan db:seed --class=MeasureSeeder
 
 
