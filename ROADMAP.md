@@ -24,4 +24,5 @@ This document contains the evolutions planned for Deming in 2023.
 * [ ] Configure scoring system
 * [ ] Migration script from ISO 27001:2013 to ISO 27001:2022
 * [ ] Manage non-conformities
+* [ ] Improve action plan with status (%)
 * [ ] Dark theme (https://metroui.org.ua/examples/schemes/scheme.html)
