@@ -138,7 +138,7 @@
 					<pre>{{ $control->indicator }}</pre>
 				</div>
 			</div>
-
+		@else
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans("cruds.control.fields.score") }}</strong>
@@ -167,7 +167,6 @@
 			</div>
 
 		</div>
-		@else
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans("cruds.control.fields.action_plan") }}</strong>
