@@ -161,6 +161,18 @@ Finally, restart the Apache service to activate the changes:
 
     sudo systemctl restart apache2
 
+## PHP
+
+You need to set the value of upload_max_filesize and post_max_size in your php.ini :
+
+    ; Maximum allowed size for uploaded files.
+    upload_max_filesize = 10M
+
+    ; Must be greater than or equal to upload_max_filesize
+    post_max_size = 10M
+
+After modifying php.ini file(s), you need to restart your HTTP server to use the new configuration.
+
 ## Mail configuration
 
 If you wish to send notification e-mails from Deming.
