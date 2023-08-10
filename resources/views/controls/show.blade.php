@@ -129,43 +129,43 @@
 	    </div>
 
 
-		@if ($control->realisation_date != null)
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans("cruds.control.fields.indicator") }}</strong>
-		    	</div>
-				<div class="cell-6">
-					<pre>{{ $control->indicator }}</pre>
-				</div>
+    	<div class="row">
+    		<div class="cell-1">
+	    		<strong>{{ trans("cruds.control.fields.indicator") }}</strong>
+	    	</div>
+			<div class="cell-6">
+				<pre>{{ $control->indicator }}</pre>
 			</div>
-		@else
+		</div>
+
+		@if ($control->realisation_date!=null)
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans("cruds.control.fields.score") }}</strong>
 		    	</div>
 				<div class="cell">
-                    @if ($control->score==1)
-                        &#128545;
-                    @elseif ($control->score==2)
-                        &#128528;
-                    @elseif ($control->score==3)
-                        <span style="filter: sepia(1) saturate(5) hue-rotate(80deg)">&#128512;</span>
-                    @else
-                        &#9899;
-                    @endif
+	                @if ($control->score==1)
+	                    &#128545;
+	                @elseif ($control->score==2)
+	                    &#128528;
+	                @elseif ($control->score==3)
+	                    <span style="filter: sepia(1) saturate(5) hue-rotate(80deg)">&#128512;</span>
+	                @else
+	                    &#9899;
+	                @endif
 					&nbsp; - &nbsp;
 					@if ($control->score==1) 
 						{{ trans("common.red") }}
 					@elseif ($control->score==2) 
 						{{ trans("common.orange") }}
 					@elseif ($control->score==3) 
-						{{ trans("common.green") }}
-					@else
-						
+						{{ trans("common.green") }}						
 					@endif
 				</div>
 			</div>
+		@endif
 
+		@if (($control->realisation_date!=null)&&($control->score!=3))
 		</div>
 	    	<div class="row">
 	    		<div class="cell-1">
@@ -175,7 +175,6 @@
 					<pre>{{ $control->action_plan }}</pre>
 				</div>
 			</div>
-
 		@endif
 
     	<div class="row">
