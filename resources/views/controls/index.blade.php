@@ -111,7 +111,7 @@
 
     <table class="table striped row-hover cell-border"
        data-role="table"
-       data-rows="25"
+       data-rows="100"
        data-show-activity="true"
        data-rownum="false"
        data-check="false"
