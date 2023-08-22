@@ -618,7 +618,19 @@ class ControlController extends Controller
 
         // Control already made ?
         if ($control->realisation_date !== null) {
-            return null;
+            return back()
+                ->withErrors(['msg' => 'Control already made'])
+                ->withInput();
+        }
+
+        // Check duplicate control on same scope
+        if (Control::whereNull('realisation_date')
+                ->where('id','<>',$request->id)
+                ->where('scope','=',$request->scope)
+                ->count() > 0) {
+            return back()
+                ->withErrors(['msg' => 'Control duplicate'])
+                ->withInput();
         }
 
         $control->scope = $request->scope;
@@ -645,8 +657,7 @@ class ControlController extends Controller
 
         // Control already made ?
         if ($control->realisation_date !== null) {
-            // TODO : return an error "Control already made"
-            return redirect('/control/show/'.$id);
+            return back()->withErrors(['msg' => 'Control already made']);
         }
 
         // get associated documents
@@ -693,7 +704,7 @@ class ControlController extends Controller
 
         // control already made ?
         if ($control->realisation_date !== null) {
-            return null;
+            return back()->withErrors(['msg' => 'Control already made']);
         }
 
         $control->observations = request('observations');
