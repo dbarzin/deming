@@ -16,6 +16,7 @@ return [
         'fields' => [
             'clause' => 'Clause',
             'name' => 'Nom',
+            'scope' => 'Périmètre',
             'action' => 'Plan d\'action',
             'plan_date' => 'Date de plannification',
             'next_date' => 'Date de revue',
@@ -44,6 +45,7 @@ return [
             'attributes' => 'Attributs',
             'input' => 'Données',
             'choose_domain' => 'Choisir un domaine',
+            'choose_scope' => 'Choisir un périmètre',
             'choose_period' => 'Choisir une periode',
             'choose_attribute' => 'Choisir un attribut',
             'clause' => 'Clause',
@@ -63,6 +65,7 @@ return [
             'realisation_date' => 'Date de réalisation',
             'realized' => 'Réalisé',
             'evidence' => 'Preuves',
+            'scope' => 'Périmètre',
             'score' => 'Score',
             'status' => 'Etat',
             'status_done' => 'Fait',

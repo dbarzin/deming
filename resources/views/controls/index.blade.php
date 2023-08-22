@@ -6,7 +6,7 @@
 
     <div class="grid">
         <div class="row">
-            <div class="cell-3">
+            <div class="cell-2">
                 <select id='domain' name="domain_id" data-role="select">
                     <option value="0">-- {{ trans("cruds.control.fields.choose_domain")}} --</option>
                     @foreach ($domains as $domain)
@@ -19,7 +19,20 @@
                     @endforeach
                 </select>
             </div>
-            <div class="cell-3">
+            <div class="cell-2">
+                <select id='scope' name="scope" data-role="select">
+                    <option value="none">-- {{ trans("cruds.control.fields.choose_scope")}} --</option>
+                    @foreach ($scopes as $scope)
+                        <option
+                            @if (Session::get("scope")==$scope)        
+                                selected 
+                            @endif >
+                            {{ $scope }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="cell-2">
                 <select id='attribute' name="attribute" data-role="select">
                     <option value="none">-- {{ trans("cruds.control.fields.choose_attribute")}} --</option>
                     @foreach ($attributes as $attribute)
@@ -81,6 +94,11 @@
                 window.location = '/controls?domain=' + this.value;
             }, false);
 
+            var select = document.getElementById('scope');
+            select.addEventListener('change', function(){
+                window.location = '/controls?scope=' + this.value;
+            }, false);
+
             var select = document.getElementById('attribute');
             select.addEventListener('change', function(){
                 window.location = '/controls?attribute=' + encodeURIComponent(this.value);
@@ -122,7 +140,8 @@
             <tr>
                 <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.domain") }}</th>
                 <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.measure") }}</th>
-                <th width="50%">{{ trans("cruds.control.fields.name") }}</th>
+                <th width="40%">{{ trans("cruds.control.fields.name") }}</th>
+                <th class="sortable-column" width="10%">{{ trans("cruds.control.fields.scope") }}</th>
                 <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.score") }}</th>
                 <th class="sortable-column sort-asc"  width="5%">{{ trans("cruds.control.fields.planned") }}</th>
                 <th class="sortable-column sort-asc"  width="5%">{{ trans("cruds.control.fields.realized") }}</th>
@@ -144,6 +163,9 @@
             </td>
             <td>
                     {{ $control->name }} 
+            </td>
+            <td>
+                    {{ $control->scope }} 
             </td>
             <td>
                 <center id="{{ $control->score }}">

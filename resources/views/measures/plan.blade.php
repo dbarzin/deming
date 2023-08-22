@@ -37,6 +37,16 @@
 			</div>
 	    </div>
 
+    	<div class="row">
+    		<div class="cell-1">
+	    		<strong>{{ trans('cruds.control.fields.scope') }}</strong>
+	    	</div>
+			<div class="cell-4">
+				<input type="text" name="scope" data-role="input" autocomplete="off" size="32"
+				value="" data-autocomplete=" {{ implode(",",$scopes) }} "/>
+			</div>
+		</div>
+
 		<div class="row">
 			<div class="cell-1">
 				<strong>{{ trans('cruds.control.fields.plan_date') }}</strong>

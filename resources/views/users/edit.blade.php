@@ -120,14 +120,10 @@
     			
     		</div>
     	</div>
-
-
-
     	<div class="row">
     		<div class="cell-1">
     		</div>
     	</div>
-    	
 			@if ((Auth::User()->role==1)||(Auth::User()->id===$user->id))
 				<button type="submit" class="button success">
 		            <span class="mif-floppy-disk"></span>
@@ -137,18 +133,6 @@
 		        &nbsp;
 			@endif
 			</form>
-			@if (Auth::User()->role==1)
-			<form action="/users/{{ $user->id }}" method="post">
-               {{ method_field('delete') }}
-               @csrf
-	            <button class="button alert" type="submit">
-					<span class="mif-fire"></span>
-					&nbsp;
-	            	{{ trans('common.delete') }}
-	            </button>
-	        </form>
-	        &nbsp;
-	        @endif
 			<form action="/users/{{ $user->id }}">
 	    		<button type="submit" class="button">
 	    			<span class="mif-cancel"></span>

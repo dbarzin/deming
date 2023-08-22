@@ -6,6 +6,27 @@
 
     <div class="row">
         <div class="cell-md-7">
+            <div class="row">
+                <div class="cell-9">
+                </div>
+                <div class="cell-3">
+                    <form action="/control/radar/domains">
+                    <strong>{{ trans("cruds.control.fields.scope") }}</strong>
+                    <select name="scope" data-role="select" id="scope">
+                        <option></option>
+                        @foreach ($scopes as $scope)
+                        <option 
+                            @if (Session::get("scope")==$scope)        
+                                selected 
+                            @endif >
+                            {{ $scope }}
+                        </option>
+                        @endforeach
+                    </select> 
+                    </form>
+                </div>
+            </div>
+
             <div class="panel mt-2">
                 <div data-role="panel" data-title-caption="Etat des contrôles au {{ date('d/m/Y')}}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
                     <div class="p-7">
@@ -115,7 +136,15 @@
             var label = barChartData.labels[firstPoint._index];
             var value = barChartData.datasets[firstPoint._datasetIndex].data[firstPoint._index];
             window.location.href="/controls?attribute=none&status=1&period=99&domain_title="+label;
-        };    
+        };   
+
+    window.addEventListener('load', function(){
+        var select = document.getElementById('scope');
+        select.addEventListener('change', function(){
+            window.location = '/control/radar/domains?scope=' + this.value;
+        }, false);
+    });
+
     </script>
 
 @endsection

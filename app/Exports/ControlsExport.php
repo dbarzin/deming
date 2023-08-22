@@ -18,6 +18,7 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
         return [
             trans('cruds.control.fields.clause'),
             trans('cruds.control.fields.name'),
+            trans('cruds.control.fields.scope'),
             trans('cruds.control.fields.objective'),
             trans('cruds.control.fields.attributes'),
             trans('cruds.control.fields.model'),
@@ -48,15 +49,16 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
         return [
             'A' => 10,  // Clause
             'B' => 30,  // Nom
-            'C' => 50,  // Objectif
-            'D' => 50,  // Attibuts
-            'E' => 50,  // Modele
-            'F' => 50,  // Indicateur
-            'G' => 15,  // Date
-            'H' => 50,  // Observation
-            'I' => 15,  // Score
-            'J' => 15,  // Note
-            'K' => 50,  // Plan d'action
+            'C' => 20,  // Scope
+            'D' => 50,  // Objectif
+            'E' => 50,  // Attibuts
+            'F' => 50,  // Modele
+            'G' => 50,  // Indicateur
+            'H' => 15,  // Date
+            'I' => 50,  // Observation
+            'J' => 15,  // Score
+            'K' => 15,  // Note
+            'L' => 50,  // Plan d'action
         ];
     }
 
@@ -69,6 +71,7 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
             [
                 $control->clause,
                 $control->name,
+                $control->scope,
                 $control->objective,
                 $control->input,
                 $control->model,

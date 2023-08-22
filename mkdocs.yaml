@@ -30,7 +30,7 @@ plugins:
       translate_nav:
         fr:
           section title: "Section"
-          subsection: "Souse-section"
+          subsection: "Sous-section"
           page title: "Titre"
         en:
           section title: "Section"
@@ -42,9 +42,9 @@ nav:
 - Introduction: index.fr.md
 - Homepage : home.md
 - Page principale : home.fr.md
-- Measures : measures.md
+- Controls : measures.md
 - Mesures : measures.fr.md
-- Controls : controls.md
+- Measures : controls.md
 - Contrôles : controls.fr.md
 - Planning : plan.md
 - Planning : plan.fr.md

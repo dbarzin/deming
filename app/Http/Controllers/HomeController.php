@@ -95,6 +95,7 @@ class HomeController extends Controller
                 c1.id,
                 c1.measure_id,
                 c1.name,
+                c1.scope,
                 c1.clause,
                 c1.domain_id,
                 c1.plan_date,

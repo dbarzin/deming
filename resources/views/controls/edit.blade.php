@@ -26,8 +26,17 @@
 			    		<strong>{{ trans("cruds.control.fields.name") }}</strong>
 			    	</div>
 					<div class="cell-6">
-			    		{{ $control->clause }} 
+			    		{{ $control->clause }} &nbsp;
 						<input type="text" name="name" value="{{ $control->name }}" size="64">
+					</div>
+				</div>
+		    	<div class="row">
+		    		<div class="cell-1">
+			    		<strong>{{ trans("cruds.control.fields.scope") }}</strong>
+			    	</div>
+					<div class="cell-4">
+						<input type="text" name="scope" data-role="input" autocomplete="off" size="32"
+						value="{{ $control->scope }}" data-autocomplete=" {{ implode(",",$scopes) }} "/>
 					</div>
 				</div>
 

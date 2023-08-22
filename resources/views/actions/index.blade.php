@@ -9,7 +9,7 @@
 
 		<table class="table striped row-hover cell-border"
 	       data-role="table"
-	       data-rows="10"
+	       data-rows="100"
 		   data-show-search="false"
 	       data-show-activity="true"
 	       data-rownum="false"
@@ -18,7 +18,8 @@
 		    <thead>
 		    <tr>
 				<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.clause') }}</th>
-				<th width="60%">{{ trans('cruds.action.fields.action') }}</th>
+				<th width="50%">{{ trans('cruds.action.fields.action') }}</th>
+				<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.scope') }}</th>
 				<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.plan_date') }}</th>
 				<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.next_date') }}</th>
 				<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.note') }}</th>
@@ -36,6 +37,7 @@
 					<b><a href="/action/{{ $action->id }}">{{ $action->name }}</a></b>
 					<pre>{{ $action->action_plan }}</pre>
 				</td>
+				<td>{{ $action->scope }}</td>
 				<td><a id="{{ $action->plan_date }}" href="/controls/{{ $action->id }}">{{ $action->plan_date }}</a></td>
 				<td><a id="{{ $action->next_date }}" href="/controls/{{ $action->next_id }}">{{ $action->next_date }}</a></td>
 				<td>

@@ -264,9 +264,23 @@ class MeasureController extends Controller
     public function plan(Request $request)
     {
         $measure = Measure::find($request->id);
+
+        // get all scopes
+        $scopes = DB::table('controls')
+            ->select('scope')
+            ->whereNotNull('scope')
+            ->where('scope', '<>', '')
+            ->whereNull('realisation_date')
+            ->distinct()
+            ->orderBy('scope')
+            ->get()
+            ->pluck('scope')
+            ->toArray();
+
+        // Get all users
         $users = User::orderBy('name')->get();
 
-        return view('measures.plan', compact('measure', 'users'));
+        return view('measures.plan', compact('measure', 'scopes', 'users'));
     }
 
     /**

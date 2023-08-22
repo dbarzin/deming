@@ -32,7 +32,6 @@
                     <a href="/measures" class="more"> {{ trans('common.more_info' )}} <span class="mif-arrow-right"></span></a>
                 </div>
             </div>
-
             <div class="cell-lg-3 cell-md-6 mt-2">
                 <div class="more-info-box bg-green fg-white">
                     <div class="content">
@@ -44,7 +43,7 @@
                     <div class="icon">
                         <span class="mif-paste"></span>
                     </div>
-                    <a href="/controls?attribute=none&domain=0&period=99&status=1" class="more"> {{ trans('common.more_info' )}} <span class="mif-arrow-right"></span></a>
+                    <a href="/controls?attribute=none&domain=0&scope=none&period=99&status=1" class="more"> {{ trans('common.more_info' )}} <span class="mif-arrow-right"></span></a>
                 </div>
             </div>
             <div class="cell-lg-3 cell-md-6 mt-2">
@@ -114,6 +113,7 @@
                         <th data-sortable="true">{{ trans('cruds.control.fields.domain') }}</th>
                         <th data-sortable="true">{{ trans('cruds.control.fields.clause') }}</th>
                         <th>{{ trans('cruds.control.fields.name') }}</th>
+                        <th data-sortable="true">{{ trans('cruds.control.fields.scope') }}</th>
                         <th data-sortable="true">{{ trans('cruds.control.fields.score') }}</th>
                         <th data-sortable="true">{{ trans('cruds.control.fields.realisation_date') }}</th>
                         <th data-sortable="true">{{ trans('cruds.control.fields.plan_date') }}</th>
@@ -132,7 +132,11 @@
                         <a id="{{ $control->clause }}" href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a>
                     </td>
                     <td>{{ $control->name }}</td>
-
+                    <td>
+                        <a id="{{ $control->clause }}" href="/controls/?domain=0&attribute=none&scope={{ urlencode($control->scope) }}&status=0&period=99">
+                        {{ $control->scope }}
+                        </a>
+                    </td>
                     <td>
                         <center id="{{ $control->score }}">
                             <a href="/control/show/{{ $control->prev_id }}">
@@ -313,7 +317,7 @@
             var activePoints = window.myBar.getElementsAtEvent(evt);
             var firstPoint = activePoints[0];
             // var label = barChartData.labels[firstPoint._index];
-            window.location.href="/controls?domain=0&attribute=none&status=0&period="+(firstPoint._index-12);
+            window.location.href="/controls?domain=0&attribute=none&scope=none&status=0&period="+(firstPoint._index-12);
         }; 
 
 

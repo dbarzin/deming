@@ -130,8 +130,22 @@
 		            &nbsp;
 		    		{{ trans('common.edit') }}
 		    	</button>
+		    </form>
 		    	&nbsp;
 		    	@endif
+				@if (Auth::User()->role==1)
+				<form action="/users/{{ $user->id }}" method="post" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
+	               {{ method_field('delete') }}
+	               @csrf
+		            <button class="button alert" type="submit">
+						<span class="mif-fire"></span>
+						&nbsp;
+		            	{{ trans('common.delete') }}
+		            </button>
+		        </form>
+		        &nbsp;
+		        @endif
+		        <form>
 		    	<button class="button" onclick='this.form.action="/users";'>
 					<span class="mif-cancel"></span>
 					&nbsp;

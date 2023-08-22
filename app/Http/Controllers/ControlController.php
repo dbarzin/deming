@@ -24,7 +24,7 @@ class ControlController extends Controller
      */
     public function index(Request $request)
     {
-        // get all doains
+        // get all domains
         $domains = Domain::All();
 
         // get all attributes
@@ -51,6 +51,18 @@ class ControlController extends Controller
             }
         }
 
+        // get all scopes
+        $scopes = DB::table('controls')
+            ->select('scope')
+            ->whereNotNull('scope')
+            ->where('scope', '<>', '')
+            ->whereNull('realisation_date')
+            ->distinct()
+            ->orderBy('scope')
+            ->get()
+            ->pluck('scope')
+            ->toArray();
+
         // Domain filter
         $domain = $request->get('domain');
         if ($domain !== null) {
@@ -62,6 +74,19 @@ class ControlController extends Controller
             }
         } else {
             $domain = $request->session()->get('domain');
+        }
+
+        // Scope filter
+        $scope = $request->get('scope');
+        if ($scope !== null) {
+            if ($scope === 'none') {
+                $request->session()->forget('scope');
+                $scope = null;
+            } else {
+                $request->session()->put('scope', $scope);
+            }
+        } else {
+            $scope = $request->session()->get('scope');
         }
 
         // Attribute filter
@@ -115,6 +140,11 @@ class ControlController extends Controller
             $controls = $controls->where('c1.domain_id', '=', $domain);
         }
 
+        // Filter on scope
+        if ($scope !== null) {
+            $controls = $controls->where('c1.scope', '=', $scope);
+        }
+
         // Filter on period
         if (($period !== null) && ($period !== 99)) {
             $controls = $controls
@@ -144,6 +174,7 @@ class ControlController extends Controller
                 'c1.id',
                 'c1.measure_id',
                 'c1.name',
+                'c1.scope',
                 'c1.clause',
                 'c1.domain_id',
                 'c1.plan_date',
@@ -160,6 +191,7 @@ class ControlController extends Controller
         return view('controls.index')
             ->with('controls', $controls)
             ->with('attributes', $attributes)
+            ->with('scopes', $scopes)
             ->with('domains', $domains);
     }
 
@@ -249,6 +281,18 @@ class ControlController extends Controller
 
         $documents = DB::table('documents')->where('control_id', $id)->get();
 
+        // get all scopes
+        $scopes = DB::table('controls')
+            ->select('scope')
+            ->whereNotNull('scope')
+            ->where('scope', '<>', '')
+            ->whereNull('realisation_date')
+            ->distinct()
+            ->orderBy('scope')
+            ->get()
+            ->pluck('scope')
+            ->toArray();
+
         // get all attributes
         $values = [];
         $attributes = DB::table('attributes')
@@ -264,6 +308,7 @@ class ControlController extends Controller
         return view('controls.edit')
             ->with('control', $control)
             ->with('documents', $documents)
+            ->with('scopes', $scopes)
             ->with('attributes', $values);
     }
 
@@ -318,21 +363,40 @@ class ControlController extends Controller
             ->with('controls', $controls);
     }
 
-    public function domains()
+    public function domains(Request $request)
     {
         // get all domains
         $domains = DB::table('domains')->get();
 
+        // get all scopes
+        $scopes = DB::table('controls')
+            ->select('scope')
+            ->whereNotNull('scope')
+            ->where('scope', '<>', '')
+            ->whereNull('realisation_date')
+            ->distinct()
+            ->orderBy('scope')
+            ->get()
+            ->pluck('scope')
+            ->toArray();
+
+        // Scope filter
+        $scope = $request->get('scope');
+        if ($scope !== null) {
+            $request->session()->put('scope', $scope);
+        } else {
+            $request->session()->forget('scope');
+        }
+
         // count control never made
         $controls_never_made = DB::select(
-            '
-                select domain_id 
-                from controls c1 
-                where realisation_date is null and 
-                not exists (
-                    select * 
-                    from controls c2 
-                    where realisation_date is not null and c1.measure_id=c2.measure_id);'
+            'select domain_id 
+            from controls c1 
+            where realisation_date is null and 
+            not exists (
+                select * 
+                from controls c2 
+                where realisation_date is not null and c1.measure_id=c2.measure_id);'
         );
 
         // Last controls made by measures
@@ -351,8 +415,9 @@ class ControlController extends Controller
                     from 
                         controls
                     where
-                        realisation_date is not null
-                    group by measure_id
+                        realisation_date is not null ' .
+                        ($scope !== null ? "and scope=\"{$scope}\"" : '') .
+                    'group by measure_id
                     ) as c1,                    
                     controls c2,
                     domains
@@ -363,6 +428,7 @@ class ControlController extends Controller
         // return
         return view('/radar/domains')
             ->with('domains', $domains)
+            ->with('scopes', $scopes)
             ->with('active_controls', $active_controls)
             ->with('controls_never_made', $controls_never_made);
     }
@@ -477,12 +543,25 @@ class ControlController extends Controller
 
         $users = User::orderBy('name')->get();
 
+        $scopes = DB::table('controls')
+            ->select('scope')
+            ->whereNotNull('scope')
+            ->where('scope', '<>', '')
+            ->whereNull('realisation_date')
+            ->distinct()
+            ->orderBy('scope')
+            ->get()
+            ->pluck('scope')
+            ->toArray();
+
         return view('controls.plan', compact('control'))
             ->with('years', $years)
             ->with('day', date('d', strtotime($control->plan_date)))
             ->with('month', date('m', strtotime($control->plan_date)))
             ->with('year', date('Y', strtotime($control->plan_date)))
-            ->with('users', $users);
+            ->with('scopes', $scopes)
+            ->with('users', $users)
+        ;
     }
 
     /**
@@ -509,6 +588,7 @@ class ControlController extends Controller
             return null;
         }
 
+        $control->scope = $request->scope;
         $control->plan_date = $request->plan_date;
         $control->periodicity = $request->periodicity;
         $control->owners()->sync($request->input('owners', []));
@@ -637,6 +717,7 @@ class ControlController extends Controller
         }
 
         $control->name = request('name');
+        $control->scope = request('scope');
         $control->objective = request('objective');
         $control->attributes = request('attributes') !== null ? implode(' ', request('attributes')) : null;
         $control->input = request('input');
@@ -701,6 +782,7 @@ class ControlController extends Controller
         // Replace names
         $templateProcessor->setValue('ref', $control->clause);
         $templateProcessor->setValue('name', $control->name);
+        $templateProcessor->setValue('scope', $control->scope);
         $templateProcessor->setValue('attributes', $control->attributes);
 
         $templateProcessor->setValue(

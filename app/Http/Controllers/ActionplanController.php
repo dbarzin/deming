@@ -24,6 +24,7 @@ class ActionplanController extends Controller
                     c2.action_plan,
                     c2.score,
                     c2.name,
+                    c2.scope,
                     c2.plan_date,
                     c3.id as next_id,
                     c3.plan_date as next_date
@@ -87,6 +88,7 @@ class ActionplanController extends Controller
                 'c1.measure_id',
                 'c1.clause',
                 'c1.name',
+                'c1.scope',
                 'c1.objective',
                 'c1.observations',
                 'c1.action_plan',
