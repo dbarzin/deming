@@ -565,6 +565,39 @@ class ControlController extends Controller
     }
 
     /**
+     * unPlan a control.
+     *
+     * @param  \App\Measure $measure
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function unplan(Request $request)
+    {
+        // Not for Auditor
+        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $control = Control
+                ::whereNull('realisation_date')
+                ->where('id', '=', $request->id)
+                ->get()
+                ->first();
+
+        if ($control !== null) {
+            // break previous link
+            $prev_control = Control::where('next_id', $control->id)->get()->first();
+            if ($prev_control !== null) {
+                $prev_control->next_id = null;
+                $prev_control->update();
+            }
+
+            $control->delete();
+        }
+
+        return redirect('/measures');
+    }
+
+
+    /**
      * Save a control for planing
      *
      * @param  \App\Domain $domain

@@ -102,6 +102,18 @@
 				</form>
 				&nbsp;
 			@endif
+			@if (Auth::User()->role !== 3)
+				<form action="/control/unplan" method="POST" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
+					@csrf
+					<input type="hidden" name="id" value="{{ $control->id }}"/>
+		            <button class="button alert" type="submit">
+						<span class="mif-fire"></span>
+						&nbsp;
+						{{ trans("common.unplan") }}
+					</button>
+				</form>
+				&nbsp;
+			@endif
 				<form action="/control/show/{{$control->id}}"/>
 					<button type="submit" class="button">
 						<span class="mif-cancel"></span>

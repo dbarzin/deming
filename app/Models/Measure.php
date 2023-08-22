@@ -67,11 +67,4 @@ class Measure extends Model
         return $res->plan_date;
     }
 
-    // Get the currect control associted with it
-    public function control()
-    {
-        return Control::where('measure_id', $this->id)
-            ->whereNull('realisation_date')
-            ->get()->first();
-    }
 }

@@ -29,7 +29,6 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
 
     /* Measures */
     Route::get('/measure/plan/{id}', 'MeasureController@plan');
-    Route::get('/measure/unplan/{id}', 'MeasureController@unplan');
     Route::post('/measure/activate/{id}', 'MeasureController@activate');
     Route::get('/measure/import', function () {
         return view('measures/import');
@@ -44,6 +43,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/control/delete/{id}', 'ControlController@destroy');
     Route::post('/control/make', 'ControlController@doMake');
     Route::post('/control/plan', 'ControlController@doPlan');
+    Route::post('/control/unplan', 'ControlController@unplan');
     Route::post('/control/draft', 'ControlController@draft');
     Route::post('/control/save', 'ControlController@save');
     Route::get('/control/history', 'ControlController@history');

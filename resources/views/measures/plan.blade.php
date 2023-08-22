@@ -79,7 +79,7 @@
 		<div class="cell-4">
             <select data-role="select" name="owners[]" id="owners" multiple>
                 @foreach($users as $user)
-                    <option value="{{ $user->id }}" {{ (in_array($user->id, old('owners', [])) || (($measure->control()!=null) && $measure->control()->owners->contains($user->id))) ? 'selected' : '' }}>{{ $user->name }}</option>
+                    <option value="{{ $user->id }}" {{ in_array($user->id, old('owners', [])) ? 'selected' : '' }}>{{ $user->name }}</option>
                 @endforeach
             </select>
 			
@@ -101,18 +101,8 @@
 	    	{{ trans('common.plan') }}
     	</button>
 	    </form>
-		@if ($measure->planDate()!==null)
-		&nbsp;
-	    <form action="/measure/unplan/{{ $measure->id }}">
-	    	<button class="button alert">
-	            <span class="mif-calendar"></span>
-	            &nbsp;
-		    	{{ trans('common.unplan') }}
-	    	</button>
-	    </form>
-		@endif
-	    &nbsp;
 	    @endif
+	    &nbsp;
 	    <form action="/measures">
 	    	<button class="button">
 				<span class="mif-cancel"></span>

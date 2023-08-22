@@ -43,6 +43,8 @@ class MeasureController extends Controller
                     'measures.domain_id',
                     'measures.clause',
                     'measures.name',
+                    'controls.id as control_id',
+                    'controls.scope',
                     'controls.plan_date',
                     'domains.title',
                 ]
@@ -284,38 +286,6 @@ class MeasureController extends Controller
     }
 
     /**
-     * unPlan a measure.
-     *
-     * @param  \App\Measure $measure
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function unplan(Request $request)
-    {
-        // Not for Auditor
-        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $control = Control
-            ::whereNull('realisation_date')
-                ->where('measure_id', '=', $request->id)
-                ->get()
-                ->first();
-
-        if ($control !== null) {
-            // break previous link
-            $prev_control = Control::where('next_id', $control->id)->get()->first();
-            if ($prev_control !== null) {
-                $prev_control->next_id = null;
-                $prev_control->update();
-            }
-
-            $control->delete();
-        }
-
-        return redirect('/measures');
-    }
-
-    /**
      * Activate a measure
      *
      * @param \Illuminate\Http\Request $request
@@ -337,10 +307,11 @@ class MeasureController extends Controller
 
         $measure = Measure::find($request->id);
 
-        // Check control is disabled
+        // Check control already exists
         $control = DB::Table('controls')
             ->select('id')
             ->where('measure_id', '=', $measure->id)
+            ->where('scope', '=', $request->scope)
             ->where('realisation_date', null)
             ->first();
 
@@ -350,6 +321,7 @@ class MeasureController extends Controller
             $control->measure_id = $measure->id;
             $control->domain_id = $measure->domain_id;
             $control->name = $measure->name;
+            $control->scope = $request->scope;
             $control->attributes = $measure->attributes;
             $control->clause = $measure->clause;
             $control->objective = $measure->objective;
@@ -418,7 +390,7 @@ class MeasureController extends Controller
     }
 
     /**
-     * Disable a measure
+     * Export all Measure in xlsx
      *
      * @param \Illuminate\Http\Request $request
      *
