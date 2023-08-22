@@ -14,7 +14,9 @@ Clicking on :
 
 * the clause, you arrive on the [description of the control](#show)
 
-* the date you arrive the [control planning](#plan) screen
+* the date, you arrive on the [control planning](/deming/controls.co.uk/#plan)
+
+* the "plan" button takes you to the [measure planning](#plan)
 
 
 ### Show control <a name="show"></a>

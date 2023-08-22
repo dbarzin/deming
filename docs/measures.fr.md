@@ -10,11 +10,13 @@ La liste des mesures de sécurité permet d’afficher la liste des mesures, de 
 
 En cliquant sur :
 
-* le domaine, vous arrivez sur la [définition du domaine choisi](/deming/config.fr/#domain)
+* le domaine, vous arrivez sur la [définition du domaine choisi](/config.fr/#domain)
 
 * la clause, vous arrivez sur la [description de la mesure de sécurité](#show)
 
-* la date, vous arrivez sur la [planification de la mesure de sécurité](#plan)
+* la date, vous arrivez sur la [planification du contrôle de sécurité](/deming/controls.fr/#plan)
+
+* le bouton "planifier", vous arrivez sur la [planification de la mesure de sécurité](#plan)
 
 
 ### Afficher une mesure de sécurité <a name="show"></a>
