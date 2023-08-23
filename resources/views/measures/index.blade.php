@@ -52,10 +52,9 @@
 				    <tr>
 						<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.measure.fields.domain') }}</th>
 						<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.measure.fields.clause') }}</th>
-						<th class="sortable-column sort-asc" width="70%">{{ trans('cruds.measure.fields.name') }}</th>
-						<th class="sortable-column sort-asc" width="70%">{{ trans('cruds.control.fields.scope') }}</th>
-						<th width="10% class="sortable-column sort-asc" width="70%">{{ trans('cruds.control.fields.plan_date') }}</th>
-						<th></th>
+						<th class="sortable-column sort-asc" width="60%">{{ trans('cruds.measure.fields.name') }}</th>
+						<th class="sortable-column sort-asc" data-cls-column="text-center" width="10%"># {{ trans('cruds.control.title') }}</th>
+						<th width="10%"></th>
 				    </tr>
 			    </thead>
 			    <tbody>
@@ -75,12 +74,7 @@
 						</a>
 					</td>
 					<td>{{ $measure->name }}</td>
-					<td>{{ $measure->scope }}</td>
-					<td>
-						@if ($measure->plan_date!==null)
-							<a href="/control/plan/{{ $measure->control_id }}">{{ $measure->plan_date }}</a>
-						@endif
-					</td>
+					<td>{{ $measure->control_count }}</td>
 					<td>
 					    <form action="/measure/plan/{{ $measure->id }}">
 					    	<button class="button info">

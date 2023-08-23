@@ -3,6 +3,19 @@
 @section("content")
 <div class="p-3">
     <div data-role="panel" data-title-caption="{{ trans('cruds.measure.plan') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+
+	@if (count($errors))
+		<div class="grid">
+		    <div class="cell-3 bg-red fg-white">
+					<ul>
+					@foreach ($errors->all() as $error)
+						<li>{{ $error }}</li>
+					@endforeach
+					</ul>
+		    </div>
+		</div>
+	@endif
+
     <form method="POST" action="/measure/activate/{{ $measure->id }}">
 	@csrf
 	<div class="grid">

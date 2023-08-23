@@ -43,7 +43,7 @@ class ActionplanController extends Controller
     }
 
     /**
-     * Save a Action plan
+     * Save an action plan
      *
      * @param  \App\Domain $domain
      *
@@ -89,9 +89,7 @@ class ActionplanController extends Controller
                 'c2.id as next_id'
             )
             ->leftJoin('controls as c2', function ($join) {
-                $join->on('c1.id', '<>', 'c2.id');
-                $join->on('c1.measure_id', '=', 'c2.measure_id');
-                $join->whereNull('c2.realisation_date');
+                $join->on('c1.next_id', '=', 'c2.id');
             })
             ->where('c1.id', '=', $id)
             ->first();

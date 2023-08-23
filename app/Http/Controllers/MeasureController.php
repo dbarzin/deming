@@ -43,9 +43,7 @@ class MeasureController extends Controller
                     'measures.domain_id',
                     'measures.clause',
                     'measures.name',
-                    'controls.id as control_id',
-                    'controls.scope',
-                    'controls.plan_date',
+                    DB::raw('count(controls.id) as control_count'),
                     'domains.title',
                 ]
             )
@@ -53,7 +51,9 @@ class MeasureController extends Controller
             ->join('controls', function (JoinClause $join) {
                 $join->on('measures.id', '=', 'controls.measure_id')
                     ->whereNull('controls.realisation_date');
-            }, null, null, 'left outer');
+            }, null, null, 'left outer')
+            ->groupBy('measures.id');
+            ;
 
         if ($domain !== null) {
             $measures->where('measures.domain_id', $domain);
@@ -315,45 +315,43 @@ class MeasureController extends Controller
             ->where('realisation_date', null)
             ->first();
 
-        if ($control === null) {
-            // create a new control
-            $control = new Control();
-            $control->measure_id = $measure->id;
-            $control->domain_id = $measure->domain_id;
-            $control->name = $measure->name;
-            $control->scope = $request->scope;
-            $control->attributes = $measure->attributes;
-            $control->clause = $measure->clause;
-            $control->objective = $measure->objective;
-            $control->input = $measure->input;
-            $control->model = $measure->model;
-            $control->indicator = $measure->indicator;
-            $control->action_plan = $measure->action_plan;
-            $control->periodicity = $request->get('periodicity');
-            $control->plan_date = $request->get('plan_date');
-            // Save it
-            $control->save();
-
-            // Sync onwers
-            $control->owners()->sync($request->input('owners', []));
-
-            // Update link
-            $prev_control = Control::where('measure_id', '=', $measure->id)
-                ->where('next_id', null)
-                ->whereNotNull('realisation_date')
-                ->orderBy('id', 'desc')
-                ->first();
-            if ($prev_control !== null) {
-                $prev_control->next_id = $control->id;
-                $prev_control->update();
+        if ($control !== null) {
+            // control already exixts
+            return back()
+                ->withErrors(['msg' => 'A control already exists for that scope'])
+                ->withInput();
             }
-        } else {
-            // just update the date
-            $control = Control::find($control->id);
-            $control->periodicity = $request->get('periodicity');
-            $control->owners()->sync($request->input('owners', []));
-            $control->plan_date = $request->get('plan_date');
-            $control->save();
+
+        // create a new control
+        $control = new Control();
+        $control->measure_id = $measure->id;
+        $control->domain_id = $measure->domain_id;
+        $control->name = $measure->name;
+        $control->scope = $request->scope;
+        $control->attributes = $measure->attributes;
+        $control->clause = $measure->clause;
+        $control->objective = $measure->objective;
+        $control->input = $measure->input;
+        $control->model = $measure->model;
+        $control->indicator = $measure->indicator;
+        $control->action_plan = $measure->action_plan;
+        $control->periodicity = $request->get('periodicity');
+        $control->plan_date = $request->get('plan_date');
+        // Save it
+        $control->save();
+
+        // Sync onwers
+        $control->owners()->sync($request->input('owners', []));
+
+        // Update link
+        $prev_control = Control::where('measure_id', '=', $measure->id)
+            ->where('scope','=',$measure->scope)
+            ->where('next_id', null)
+            ->whereNotNull('realisation_date')
+            ->first();
+        if ($prev_control !== null) {
+            $prev_control->next_id = $control->id;
+            $prev_control->update();
         }
 
         // return to the list of measures
