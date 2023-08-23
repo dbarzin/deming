@@ -165,6 +165,10 @@ return [
             'next' => 'Review date'
         ]
     ],
+    'soa' => [
+        'title' => 'Declaration of applicability',
+        'generate' => 'Generate report'
+    ],
     'user' => [
          'index' => 'List of users',
          'edit' => 'Edit User',
@@ -186,9 +190,8 @@ return [
              'auditor' => 'Auditor',
              'api' => 'API'
          ],
-     ],
-    'config' => [
-         'notifications' => [
+    ],
+    'notifications' => [
              'title' => 'Notifications configuration',
              'title_short' => 'Notifications',
              'help' => 'This screen allows you to configure the notifications sent by email to users.',
@@ -202,7 +205,6 @@ return [
                  'days' => 'days',
                  'month' => 'month',
                  'months' => 'months',
-             ],
-          ]
-     ]
-];
+            ],
+        ]
+    ];

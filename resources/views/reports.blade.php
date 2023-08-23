@@ -49,23 +49,39 @@
 		</div>
 	</div>
 
-    <div data-role="panel" data-title-caption="{{ trans('cruds.exports.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
-
-			<div class="row">
-		        <div class="cell-3">
-		        	<ul>
-		        		<li>
-							<a href="/export/domains" target="_blank">{{ trans('cruds.exports.domains_export') }}</a>
-						</li>
-						<li>
-							<a href="/export/measures" target="_blank">{{ trans('cruds.exports.measures_export') }}</a>
-						</li>
-						<li>
-							<a href="/export/controls" target="_blank">{{ trans('cruds.exports.controls_export') }}</a>
-						</li>
-					</ul>
-				</div>
+    <div data-role="panel" data-title-caption="{{ trans('cruds.soa.title') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+		<div class="row">
+	        <div class="cell-3">
+	        	<ul>
+	        		<li>
+						<a href="/reports/soa" target="_blank">{{ trans('cruds.soa.generate') }}</a>
+					</li>
+				</ul>
 			</div>
-
 		</div>
+	</div>
+
+	<div class="row">
+        <div class="cell-3">
+        	<b></b>
+		</div>
+	</div>
+
+    <div data-role="panel" data-title-caption="{{ trans('cruds.exports.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+		<div class="row">
+	        <div class="cell-3">
+	        	<ul>
+	        		<li>
+						<a href="/export/domains" target="_blank">{{ trans('cruds.exports.domains_export') }}</a>
+					</li>
+					<li>
+						<a href="/export/measures" target="_blank">{{ trans('cruds.exports.measures_export') }}</a>
+					</li>
+					<li>
+						<a href="/export/controls" target="_blank">{{ trans('cruds.exports.controls_export') }}</a>
+					</li>
+				</ul>
+			</div>
+		</div>
+	</div>
 @endsection

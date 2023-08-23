@@ -165,6 +165,10 @@ return [
             'next' => 'Date de revue'
         ]
     ],
+    'soa' => [
+        'title' => 'Déclaration d\'applicabilité',
+        'generate' => 'Générer le rapport'
+    ],
     'user' => [
         'show' => 'Afficher un utilisateur',
         'index' => 'Liste des utilisateurs',

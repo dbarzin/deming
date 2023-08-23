@@ -82,6 +82,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
 
     /* Reports */
     Route::get('/reports/pilotage', 'ReportController@pilotage');
+    Route::get('/reports/soa', 'ReportController@soa');
 
     /* Exports */
     Route::get('/reports', function () {
