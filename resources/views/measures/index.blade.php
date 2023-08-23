@@ -74,7 +74,15 @@
 						</a>
 					</td>
 					<td>{{ $measure->name }}</td>
-					<td>{{ $measure->control_count }}</td>
+					<td>
+						@if ($measure->control_count>0)
+						<a href="/controls?period=99&domain=0&scope=none&status=2&measure={{ $measure->id }}"> 
+							{{ $measure->control_count }}
+						</a>
+						@else
+						0
+						@endif
+					</td>
 					<td>
 					    <form action="/measure/plan/{{ $measure->id }}">
 					    	<button class="button info">

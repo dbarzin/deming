@@ -145,6 +145,12 @@ class ControlController extends Controller
             $controls = $controls->where('c1.scope', '=', $scope);
         }
 
+        // filter on measure
+        if ($request->measure!=null) {
+            $controls = $controls
+                ->where('c1.measure_id','=',$request->measure);
+        }
+        
         // Filter on period
         if (($period !== null) && ($period !== 99)) {
             $controls = $controls
