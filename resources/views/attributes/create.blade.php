@@ -4,8 +4,8 @@
 <div class="p-3">
     <div data-role="panel" data-title-caption="{{ trans('cruds.attribute.add') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 		@if (count($errors))
-		<div class= “form-group”>
-			<div class= “alert alert-danger”>
+		<div class="grid">
+		    <div class="cell-3 bg-red fg-white">
 				<ul>
 				@foreach ($errors->all() as $error)
 					<li>{{ $error }}</li>
@@ -33,6 +33,9 @@
 			    	</div>
 		    		<div class="cell-5">
 						<textarea name="values" rows="5" cols="80">{{ old('values') }}</textarea>
+						<br>
+						format: #tag #tag #tag ...
+						<br><br>
 					</div>
 				</div>
 
