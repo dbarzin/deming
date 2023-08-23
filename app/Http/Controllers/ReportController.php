@@ -375,7 +375,8 @@ class ReportController extends Controller
                     'domains.title',
                     'measures.clause',
                     'measures.name',
-                    'controls.scope'
+                    'controls.scope',
+                    'controls.plan_date'
                 ]
             )
             ->leftjoin('domains', 'measures.domain_id', '=', 'domains.id')
@@ -410,6 +411,7 @@ class ReportController extends Controller
         for ($i=0;$i<20;$i++) {
             $sheet->getColumnDimension(chr(ord('D')+$i))->setAutoSize(true);
             $sheet->getStyle(chr(ord('D')+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle(chr(ord('D')+$i))->getNumberFormat()->setFormatCode( \PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_DATE_DDMMYYYY);
         }
 
         // loop on measures
@@ -426,7 +428,7 @@ class ReportController extends Controller
             // find row
             $key = array_search($measure->scope,$scopes);
             $col = chr(ord('D')+$key);
-            $sheet->setCellValue("{$col}{$row}", '1');
+            $sheet->setCellValue("{$col}{$row}", $measure->plan_date);
         }
 
         // export to XLSX
