@@ -133,7 +133,7 @@
                     </td>
                     <td>{{ $control->name }}</td>
                     <td>
-                        <a id="{{ $control->clause }}" href="/controls/?domain=0&attribute=none&scope={{ urlencode($control->scope) }}&status=0&period=99">
+                        <a id="{{ $control->scope }}" href="/controls/?domain=0&attribute=none&scope={{ urlencode($control->scope) }}&status=0&period=99">
                         {{ $control->scope }}
                         </a>
                     </td>
