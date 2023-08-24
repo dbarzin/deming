@@ -86,15 +86,15 @@ L’écran contient :
 
 * Les responsables de la réalisation du contrôles.
 
-[<img src="/deming/images/plan.png" width="600">](/deming/images/plan.png)
+[<img src="/deming/images/plan.png" width="400">](/deming/images/plan.png)
 
 Lorsque vous cliquez sur : 
 
 * « Planifier », 
 
-    * s’il n’existe pas de contrôle pour cette mesure, un nouveau contrôle est créé en copiant toutes les données de le mesure et est planifié à la date spécifiée.
+    * s’il n’existe pas de contrôle avec ce périmètre pour cette mesure, un nouveau contrôle est créé en copiant toutes les données de le mesure et est planifié à la date spécifiée.
 
-    * S’il existe déjà un contrôle non-réalisé pour cette mesure de sécurité, la date de planification, la périodicité et les responsables de la réalisation de la mesure sont mis à jour.
+    * S’il existe déjà un contrôle avec ce périmètre pour cette mesure de sécurité, une erreur est affichée.
 
 	Vous revenez ensuite à la [liste des mesures de sécurité](#list).
 

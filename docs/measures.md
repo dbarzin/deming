@@ -92,9 +92,9 @@ When you click:
 
 * "Plan",
 
-     * If there is no control for this control, a new control is created by copying all the data from the control and is scheduled on the specified date.
+    * if there is no measurement with this scope for this control, a new measurement is created by copying all the control data and is scheduled for the specified date.
 
-     * If an unperformed measurement already exists for this measure, the planning date, periodicity and those responsible for performing the measurement are updated.
+    * if there is a measurement with this scope for this control, an error is displayed.
 
 You then return to the [list of controls](#list).
 
