@@ -13,7 +13,6 @@
                     <form action="/control/radar/domains">
                     <strong>{{ trans("cruds.control.fields.scope") }}</strong>
                     <select name="scope" data-role="select" id="scope">
-                        <option></option>
                         @foreach ($scopes as $scope)
                         <option 
                             @if (Session::get("scope")==$scope)        

@@ -8,15 +8,25 @@
     <div class="row">
         <div class="cell-12">
 
-    @foreach($domains as $domain)
-    <div class="row">
-        <div class="cell-10">
-            <b>{{ $domain->title }} - {{ $domain->description }}</b>
-        </div>
-
-        @if ($loop->first)
-        <div class="cell-2" valign="right">
-            <form action="/control/radar/measures">
+    <form action="/control/radar/measures">
+        <div class="row">
+            <div class="cell-8">
+            </div>
+            <div class="cell-2">
+                {{ trans("cruds.control.fields.scope") }}
+                <select name="scope" data-role="select" id="scope">
+                    @foreach ($scopes as $scope)
+                    <option 
+                        @if (Session::get("scope")==$scope)        
+                            selected 
+                        @endif >
+                        {{ $scope }}
+                    </option>
+                    @endforeach
+                </select>
+            </div>
+            <div class="cell-2" valign="right">
+                {{ trans("common.date") }}
                 <input type="text" 
                     data-role="calendarpicker" 
                     name="cur_date" 
@@ -24,10 +34,16 @@
                     value="{{$cur_date}}"
                     data-input-format="%Y-%m-%d"                    
                     onchange="this.form.submit()">            
-            </form>
+            </div>
         </div>
-        @endif
+    </form>
 
+    @foreach($domains as $domain)
+
+    <div class="row">
+        <div class="cell-10">
+            <b>{{ $domain->title }} - {{ $domain->description }}</b>
+        </div>
     </div>
     <div class="row">
         <div class="cell-4">
@@ -41,6 +57,7 @@
                     <th>{{ trans("cruds.control.fields.note") }}</th>
                     <th><center>#</center></th>
                     <th>{{ trans("cruds.control.fields.name") }}</th>
+                    <th>{{ trans("cruds.control.fields.scope") }}</th>
                     <th>{{ trans("cruds.control.fields.realisation_date") }}</th>
                     <th>{{ trans("cruds.control.fields.next") }}</th>
                   </tr>
@@ -63,6 +80,7 @@
 
                     <td><a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a></td>
                     <td>{{ $control->name }}</td>
+                    <td>{{ $control->scope }}</td>
                     <td><a href="/controls/{{ $control->control_id }}">{{ $control->realisation_date }}</a></td>
                     <td><a href="/controls/{{ $control->next_id }}">{{ $control->next_date }}</a></td>
                     </tr>                    
@@ -184,6 +202,13 @@
       options: options
     });
 @endforeach
+
+    window.addEventListener('load', function(){
+        var select = document.getElementById('scope');
+        select.addEventListener('change', function(){
+            window.location = '/control/radar/measures?scope=' + this.value;
+        }, false);
+    });
 
 </script>
 @endsection

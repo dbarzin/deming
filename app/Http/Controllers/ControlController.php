@@ -377,8 +377,6 @@ class ControlController extends Controller
         // get all scopes
         $scopes = DB::table('controls')
             ->select('scope')
-            ->whereNotNull('scope')
-            ->where('scope', '<>', '')
             ->whereNull('realisation_date')
             ->distinct()
             ->orderBy('scope')
@@ -444,6 +442,22 @@ class ControlController extends Controller
         // Get all domains
         $domains = Domain::All();
 
+        // get all scopes
+        $scopes = DB::table('controls')
+            ->select('scope')
+            ->whereNull('realisation_date')
+            ->distinct()
+            ->orderBy('scope')
+            ->get()
+            ->pluck('scope')
+            ->toArray();
+
+        $cur_scope = $request->get("scope");
+        if ($cur_scope !== null)
+            $request->session()->put('scope', $cur_scope);
+        else
+            $request->session()->forget('scope');
+
         $cur_date = $request->get('cur_date');
         if ($cur_date === null) {
             $cur_date = today()->format('Y-m-d');
@@ -457,28 +471,32 @@ class ControlController extends Controller
             ->select(
                 DB::raw(
                     '
-                    max(c1.id) AS control_id,
-                    max(c1.name) AS name,
-                    c1.clause AS clause, 
-                    c1.measure_id AS measure_id, 
-                    max(c1.domain_id) AS domain_id, 
-                    max(c1.plan_date) AS plan_date, 
-                    max(c1.realisation_date) AS realisation_date, 
-                    max(c1.score) AS score, 
-                    max(c2.plan_date) AS next_date, 
-                    max(c2.id) AS next_id'
+                    c1.id AS control_id,
+                    c1.name,
+                    c1.clause,
+                    c1.scope,
+                    c1.measure_id, 
+                    c1.domain_id, 
+                    c1.plan_date, 
+                    c1.realisation_date, 
+                    c1.score AS score, 
+                    c2.plan_date AS next_date, 
+                    c2.id AS next_id'
                 )
             )
             ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id')
-            ->where('c2.realisation_date', '=', null)
-            ->where('c1.next_id', '<>', null)
+            ->where('c2.realisation_date', '=', null);
+        if ($cur_scope !=null)
+            $controls = $controls->where('c1.scope','=',$cur_scope);
+        $controls = $controls
             ->where('c1.realisation_date', '<=', $cur_date)
-            ->groupBy('c1.measure_id', 'c1.clause')
-            ->orderBy('c1.clause')
+            ->orderBy('clause')
+            ->orderBy('scope')
             ->get();
 
         // return
         return view('radar.controls')
+            ->with('scopes', $scopes)
             ->with('controls', $controls)
             ->with('cur_date', $cur_date)
             ->with('domains', $domains);
@@ -551,8 +569,6 @@ class ControlController extends Controller
 
         $scopes = DB::table('controls')
             ->select('scope')
-            ->whereNotNull('scope')
-            ->where('scope', '<>', '')
             ->whereNull('realisation_date')
             ->distinct()
             ->orderBy('scope')

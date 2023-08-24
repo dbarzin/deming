@@ -93,8 +93,5 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/export/attributes', 'AttributeController@export');
     Route::get('/export/measures', 'MeasureController@export');
     Route::get('/export/controls', 'ControlController@export');
-    Route::get('/export/controls', 'ControlController@export');
 
-    /* test chart */
-    // Route::get('/testChart', 'ReportController@testChart');
 });

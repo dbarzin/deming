@@ -31,6 +31,8 @@ return [
     'success' => 'Réussi',
     'unknown' => 'Inconnu',
 
+    'date' => 'Date',
+    
     'never' => 'Jamais',
     'day' => 'Journalièrement',
     'week' => 'Hebdomadairement',

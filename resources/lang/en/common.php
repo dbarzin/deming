@@ -32,6 +32,8 @@ return [
     'success' => 'Success',
     'unknown' => 'Unknown',
 
+    'date' => 'Date',
+
     'never' => 'Never',
     'day' => 'Daily',
     'week' => 'Weekly',
