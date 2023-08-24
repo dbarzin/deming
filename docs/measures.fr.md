@@ -14,10 +14,9 @@ En cliquant sur :
 
 * la clause, vous arrivez sur la [description de la mesure de sécurité](#show)
 
-* la date, vous arrivez sur la [planification du contrôle de sécurité](/deming/controls.fr/#plan)
+* le nombre de contrôle, vous arrivez sur la [liste des contrôles](/deming/controls.fr/#list) de cette mesure de sécurité
 
 * le bouton "planifier", vous arrivez sur la [planification de la mesure de sécurité](#plan)
-
 
 ### Afficher une mesure de sécurité <a name="show"></a>
 

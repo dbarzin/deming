@@ -14,7 +14,7 @@ Clicking on :
 
 * the clause, you arrive on the [description of the control](#show)
 
-* the date, you arrive on the [control planning](/deming/controls.co.uk/#plan)
+* the number of measures, you arrive to the [list of measures](/deming/controls/#list) of this control
 
 * the "plan" button takes you to the [measure planning](#plan)
 
