@@ -457,7 +457,7 @@ class ControlController extends Controller
             $request->session()->put('scope', $cur_scope);
         else
             $request->session()->forget('scope');
-
+        /*
         $cur_date = $request->get('cur_date');
         if ($cur_date === null) {
             $cur_date = today()->format('Y-m-d');
@@ -465,7 +465,7 @@ class ControlController extends Controller
             // Avoid SQL Injection
             $cur_date = \Carbon\Carbon::createFromFormat('Y-m-d', $cur_date)->format('Y-m-d');
         }
-
+        */
         // Query controls
         $controls = DB::table('controls as c1')
             ->select(
@@ -484,12 +484,12 @@ class ControlController extends Controller
                     c2.id AS next_id'
                 )
             )
-            ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id')
+            ->join('controls as c2', 'c1.next_id', '=', 'c2.id')
             ->where('c2.realisation_date', '=', null);
         if ($cur_scope !=null)
             $controls = $controls->where('c1.scope','=',$cur_scope);
         $controls = $controls
-            ->where('c1.realisation_date', '<=', $cur_date)
+//            ->where('c1.realisation_date', '<=', $cur_date)
             ->orderBy('clause')
             ->orderBy('scope')
             ->get();
@@ -498,7 +498,7 @@ class ControlController extends Controller
         return view('radar.controls')
             ->with('scopes', $scopes)
             ->with('controls', $controls)
-            ->with('cur_date', $cur_date)
+//          ->with('cur_date', $cur_date)
             ->with('domains', $domains);
     }
 

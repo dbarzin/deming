@@ -10,7 +10,7 @@
 
     <form action="/control/radar/measures">
         <div class="row">
-            <div class="cell-8">
+            <div class="cell-10">
             </div>
             <div class="cell-2">
                 {{ trans("cruds.control.fields.scope") }}
@@ -24,16 +24,6 @@
                     </option>
                     @endforeach
                 </select>
-            </div>
-            <div class="cell-2" valign="right">
-                {{ trans("common.date") }}
-                <input type="text" 
-                    data-role="calendarpicker" 
-                    name="cur_date" 
-                    data-dialog-mode="true"
-                    value="{{$cur_date}}"
-                    data-input-format="%Y-%m-%d"                    
-                    onchange="this.form.submit()">            
             </div>
         </div>
     </form>
