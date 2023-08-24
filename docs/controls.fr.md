@@ -72,13 +72,15 @@ Cet écran contient les informations d’un contrôle :
 
 * L’objectif du contrôle ;
 
+* Le périmètre du contrôle ;
+
 * La date de palnification ;
 
 * La périodicité ; et
 
 * Les responsables de la réalisation du contrôles.
 
-[<img src="/deming/images/c5.png" width="600">](/deming/images/c5.png)
+[<img src="/deming/images/c5.png" width="400">](/deming/images/c5.png)
 
 Lorsque vous cliquez sur :
 

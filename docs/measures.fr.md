@@ -98,6 +98,4 @@ Lorsque vous cliquez sur :
 
 	Vous revenez ensuite à la [liste des mesures de sécurité](#list).
 
-* « Déplanifier », le contrôle de sécurité associé à cette mesure est supprimé et l’utilisateur revient vers la [liste des mesures de sécurité](#list).
-
 * « Annuler », vous revenez vers la [liste des mesures de sécurité](#list).

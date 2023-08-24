@@ -98,6 +98,4 @@ When you click:
 
 You then return to the [list of controls](#list).
 
-* "Unplan", the security check associated with this control is deleted and the user returns to the [list of controls](#list).
-
 * "Cancel", you return to the [list of controls](#list).
