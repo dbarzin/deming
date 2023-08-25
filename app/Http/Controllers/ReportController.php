@@ -193,20 +193,23 @@ class ReportController extends Controller
         $table = new Table(['borderSize' => 3, 'borderColor' => 'black', 'width' => 9800, 'unit' => TblWidth::TWIP]);
         // create header
         $table->addRow();
-        $table->addCell(2500, ['bgColor' => '#FFD5CA'])
-            ->addText('#', ['bold' => true ], ['align' => 'center']);
-        $table->addCell(12500, ['bgColor' => '#FFD5CA'])
-            ->addText('Nom', ['bold' => true]);
-        $table->addCell(2800, ['bgColor' => '#FFD5CA'])
-            ->addText('Date', ['bold' => true], ['align' => 'center']);
         $table->addCell(2000, ['bgColor' => '#FFD5CA'])
-            ->addText('Score', ['bold' => true], ['align' => 'center']);
+            ->addText('#', ['bold' => true ], ['align' => 'center']);
+        $table->addCell(12000, ['bgColor' => '#FFD5CA'])
+            ->addText(trans("cruds.control.fields.name"), ['bold' => true]);
+        $table->addCell(3300, ['bgColor' => '#FFD5CA'])
+            ->addText(trans("cruds.control.fields.realisation_date"), ['bold' => true], ['align' => 'center']);
+        $table->addCell(3000, ['bgColor' => '#FFD5CA'])
+                ->addText(trans("cruds.control.fields.scope"), ['bold' => true], ['align' => 'center']);
+        $table->addCell(2000, ['bgColor' => '#FFD5CA'])
+            ->addText(trans("cruds.control.fields.score"), ['bold' => true], ['align' => 'center']);
 
         foreach ($controls as $control) {
             $table->addRow();
             $table->addCell(2500)->addText($control->clause);
             $table->addCell(12500)->addText($control->name);
             $table->addCell(2800)->addText($control->realisation_date, null, ['align' => 'center']);
+            $table->addCell(12500)->addText($control->scope);
             $table->addCell(2000)->addText(
                 '⬤',
                 ($control->score === 1 ? ['color' => '#FF0000'] :
