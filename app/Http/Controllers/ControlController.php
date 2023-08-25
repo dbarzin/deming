@@ -146,11 +146,11 @@ class ControlController extends Controller
         }
 
         // filter on measure
-        if ($request->measure!=null) {
+        if ($request->measure !== null) {
             $controls = $controls
-                ->where('c1.measure_id','=',$request->measure);
+                ->where('c1.measure_id', '=', $request->measure);
         }
-        
+
         // Filter on period
         if (($period !== null) && ($period !== 99)) {
             $controls = $controls
@@ -452,11 +452,12 @@ class ControlController extends Controller
             ->pluck('scope')
             ->toArray();
 
-        $cur_scope = $request->get("scope");
-        if ($cur_scope !== null)
+        $cur_scope = $request->get('scope');
+        if ($cur_scope !== null) {
             $request->session()->put('scope', $cur_scope);
-        else
+        } else {
             $request->session()->forget('scope');
+        }
         /*
         $cur_date = $request->get('cur_date');
         if ($cur_date === null) {
@@ -486,8 +487,9 @@ class ControlController extends Controller
             )
             ->join('controls as c2', 'c1.next_id', '=', 'c2.id')
             ->where('c2.realisation_date', '=', null);
-        if ($cur_scope !=null)
-            $controls = $controls->where('c1.scope','=',$cur_scope);
+        if ($cur_scope !== null) {
+            $controls = $controls->where('c1.scope', '=', $cur_scope);
+        }
         $controls = $controls
 //            ->where('c1.realisation_date', '<=', $cur_date)
             ->orderBy('clause')
@@ -600,9 +602,9 @@ class ControlController extends Controller
 
         $control = Control
                 ::whereNull('realisation_date')
-                ->where('id', '=', $request->id)
-                ->get()
-                ->first();
+                    ->where('id', '=', $request->id)
+                    ->get()
+                    ->first();
 
         if ($control !== null) {
             // break previous link
@@ -617,7 +619,6 @@ class ControlController extends Controller
 
         return redirect('/measures');
     }
-
 
     /**
      * Save a control for planing
@@ -647,9 +648,9 @@ class ControlController extends Controller
 
         // Check duplicate control on same scope
         if (Control::whereNull('realisation_date')
-                ->where('id','<>',$request->id)
-                ->where('scope','=',$request->scope)
-                ->count() > 0) {
+            ->where('id', '<>', $request->id)
+            ->where('scope', '=', $request->scope)
+            ->count() > 0) {
             return back()
                 ->withErrors(['msg' => 'Control duplicate'])
                 ->withInput();

@@ -87,6 +87,94 @@ class ReportController extends Controller
         return response()->download($filepath);
     }
 
+    /**
+     * Générer le SOA
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function soa(Request $request)
+    {
+        // Get all scopes
+        $scopes = DB::table('controls')
+            ->select('scope')
+            ->whereNull('realisation_date')
+            ->distinct()
+            ->orderBy('scope')
+            ->get()
+            ->pluck('scope')
+            ->toArray();
+
+        // Get all measures with scope
+        $measures = DB::table('measures')
+            ->select(
+                [
+                    'domains.title',
+                    'measures.clause',
+                    'measures.name',
+                    'controls.scope',
+                    'controls.plan_date',
+                ]
+            )
+            ->leftjoin('domains', 'measures.domain_id', '=', 'domains.id')
+            ->leftjoin('controls', 'measures.id', '=', 'controls.measure_id')
+            ->whereNull('controls.realisation_date')
+            ->orderBy('domains.title')
+            ->orderBy('measures.clause')
+            ->get();
+
+        // create XLSX
+        $path = storage_path('app/soa-'. Carbon::today()->format('Ymd') .'.xlsx');
+
+        $header = [
+            trans('cruds.domain.title'),
+            trans('cruds.measure.fields.clause'),
+            trans('cruds.measure.fields.name'),
+        ];
+        foreach ($scopes as $scope) {
+            array_push($header, $scope);
+        }
+
+        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+        $sheet->fromArray([$header], null, 'A1');
+
+        // bold title
+        $sheet->getStyle('1')->getFont()->setBold(true);
+
+        // column size
+        $sheet->getColumnDimension('A')->setAutoSize(true);
+        $sheet->getColumnDimension('B')->setAutoSize(true);
+        $sheet->getColumnDimension('C')->setAutoSize(true);
+        for ($i = 0;$i < 20;$i++) {
+            $sheet->getColumnDimension(chr(ord('D') + $i))->setAutoSize(true);
+            $sheet->getStyle(chr(ord('D') + $i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
+            $sheet->getStyle(chr(ord('D') + $i))->getNumberFormat()->setFormatCode(\PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_DATE_DDMMYYYY);
+        }
+
+        // loop on measures
+        $cur_clause = null;
+        $row = 1;
+        foreach ($measures as $measure) {
+            if ($cur_clause !== $measure->clause) {
+                $cur_clause = $measure->clause;
+                $row++;
+                $sheet->setCellValue("A{$row}", $measure->title);
+                $sheet->setCellValue("B{$row}", $measure->clause);
+                $sheet->setCellValue("C{$row}", $measure->name);
+            }
+            // find row
+            $key = array_search($measure->scope, $scopes);
+            $col = chr(ord('D') + $key);
+            $sheet->setCellValue("{$col}{$row}", $measure->plan_date);
+        }
+
+        // export to XLSX
+        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
+        $writer->save($path);
+
+        return response()->download($path);
+    }
+
     /*
     * Generate Control Made table
     */
@@ -349,93 +437,4 @@ class ReportController extends Controller
 
         $templateProcessor->setComplexBlock('action_plans_table', $table);
     }
-
-
-    /**
-     * Générer le SOA
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function soa(Request $request)
-    {
-        // Get all scopes
-        $scopes = DB::table('controls')
-            ->select('scope')
-            ->whereNull('realisation_date')
-            ->distinct()
-            ->orderBy('scope')
-            ->get()
-            ->pluck('scope')
-            ->toArray();
-
-        // Get all measures with scope
-        $measures = DB::table('measures')
-            ->select(
-                [
-                    'domains.title',
-                    'measures.clause',
-                    'measures.name',
-                    'controls.scope',
-                    'controls.plan_date'
-                ]
-            )
-            ->leftjoin('domains', 'measures.domain_id', '=', 'domains.id')
-            ->leftjoin('controls','measures.id', '=', 'controls.measure_id')
-            ->whereNull('controls.realisation_date')
-            ->orderBy('domains.title')
-            ->orderBy('measures.clause')
-            ->get();
-
-        // create XLSX
-        $path = storage_path('app/soa-'. Carbon::today()->format('Ymd') .'.xlsx');
-
-        $header = [
-            trans('cruds.domain.title'),
-            trans('cruds.measure.fields.clause'),
-            trans('cruds.measure.fields.name'),
-        ];
-        foreach($scopes as $scope) 
-            array_push($header,$scope);
-
-        $spreadsheet = new \PhpOffice\PhpSpreadsheet\Spreadsheet();
-        $sheet = $spreadsheet->getActiveSheet();
-        $sheet->fromArray([$header], null, 'A1');
-
-        // bold title
-        $sheet->getStyle('1')->getFont()->setBold(true);
-
-        // column size
-        $sheet->getColumnDimension('A')->setAutoSize(true);
-        $sheet->getColumnDimension('B')->setAutoSize(true);
-        $sheet->getColumnDimension('C')->setAutoSize(true);
-        for ($i=0;$i<20;$i++) {
-            $sheet->getColumnDimension(chr(ord('D')+$i))->setAutoSize(true);
-            $sheet->getStyle(chr(ord('D')+$i))->getAlignment()->setHorizontal(\PhpOffice\PhpSpreadsheet\Style\Alignment::HORIZONTAL_CENTER);
-            $sheet->getStyle(chr(ord('D')+$i))->getNumberFormat()->setFormatCode( \PhpOffice\PhpSpreadsheet\Style\NumberFormat::FORMAT_DATE_DDMMYYYY);
-        }
-
-        // loop on measures
-        $cur_clause = null;
-        $row = 1;
-        foreach($measures as $measure) {
-            if ($cur_clause != $measure->clause) {
-                $cur_clause = $measure->clause;
-                $row++;
-                $sheet->setCellValue("A{$row}", $measure->title);
-                $sheet->setCellValue("B{$row}", $measure->clause);
-                $sheet->setCellValue("C{$row}", $measure->name);
-            }
-            // find row
-            $key = array_search($measure->scope,$scopes);
-            $col = chr(ord('D')+$key);
-            $sheet->setCellValue("{$col}{$row}", $measure->plan_date);
-        }
-
-        // export to XLSX
-        $writer = new \PhpOffice\PhpSpreadsheet\Writer\Xlsx($spreadsheet);
-        $writer->save($path);
-
-        return response()->download($path);
-    }
-
 }

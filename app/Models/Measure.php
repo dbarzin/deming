@@ -66,5 +66,4 @@ class Measure extends Model
         }
         return $res->plan_date;
     }
-
 }

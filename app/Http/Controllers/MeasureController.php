@@ -53,7 +53,6 @@ class MeasureController extends Controller
                     ->whereNull('controls.realisation_date');
             }, null, null, 'left outer')
             ->groupBy('measures.id');
-            ;
 
         if ($domain !== null) {
             $measures->where('measures.domain_id', $domain);
@@ -320,7 +319,7 @@ class MeasureController extends Controller
             return back()
                 ->withErrors(['msg' => 'A control already exists for that scope'])
                 ->withInput();
-            }
+        }
 
         // create a new control
         $control = new Control();
@@ -345,7 +344,7 @@ class MeasureController extends Controller
 
         // Update link
         $prev_control = Control::where('measure_id', '=', $measure->id)
-            ->where('scope','=',$measure->scope)
+            ->where('scope', '=', $measure->scope)
             ->where('next_id', null)
             ->whereNotNull('realisation_date')
             ->first();
