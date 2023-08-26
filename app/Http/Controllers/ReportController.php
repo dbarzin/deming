@@ -196,13 +196,13 @@ class ReportController extends Controller
         $table->addCell(2000, ['bgColor' => '#FFD5CA'])
             ->addText('#', ['bold' => true ], ['align' => 'center']);
         $table->addCell(12000, ['bgColor' => '#FFD5CA'])
-            ->addText(trans("cruds.control.fields.name"), ['bold' => true]);
+            ->addText(trans('cruds.control.fields.name'), ['bold' => true]);
         $table->addCell(3300, ['bgColor' => '#FFD5CA'])
-            ->addText(trans("cruds.control.fields.realisation_date"), ['bold' => true], ['align' => 'center']);
+            ->addText(trans('cruds.control.fields.realisation_date'), ['bold' => true], ['align' => 'center']);
         $table->addCell(3000, ['bgColor' => '#FFD5CA'])
-                ->addText(trans("cruds.control.fields.scope"), ['bold' => true], ['align' => 'center']);
+            ->addText(trans('cruds.control.fields.scope'), ['bold' => true], ['align' => 'center']);
         $table->addCell(2000, ['bgColor' => '#FFD5CA'])
-            ->addText(trans("cruds.control.fields.score"), ['bold' => true], ['align' => 'center']);
+            ->addText(trans('cruds.control.fields.score'), ['bold' => true], ['align' => 'center']);
 
         foreach ($controls as $control) {
             $table->addRow();
