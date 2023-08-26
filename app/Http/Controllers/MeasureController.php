@@ -317,7 +317,7 @@ class MeasureController extends Controller
         if ($control !== null) {
             // control already exixts
             return back()
-                ->withErrors(['msg' => 'A control already exists for that scope'])
+                ->withErrors(['msg' => trans('cruds.control.error.duplicate')])
                 ->withInput();
         }
 

@@ -73,6 +73,10 @@ return [
             'input' => 'Input',
             'owners' => 'Responsibles',
          ],
+        'error' => [
+            'made' => 'This control has already been made.',
+            'duplicate' => 'This control already exists.',
+        ],
          'checklist' => 'Measure sheet',
          'list' => 'Measurement list',
          'edit' => 'Edit security check',

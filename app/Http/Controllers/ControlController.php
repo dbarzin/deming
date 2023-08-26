@@ -642,7 +642,7 @@ class ControlController extends Controller
         // Control already made ?
         if ($control->realisation_date !== null) {
             return back()
-                ->withErrors(['msg' => 'Control already made'])
+                ->withErrors(['msg' => trans('cruds.control.error.made')])
                 ->withInput();
         }
 
@@ -652,7 +652,7 @@ class ControlController extends Controller
             ->where('scope', '=', $request->scope)
             ->count() > 0) {
             return back()
-                ->withErrors(['msg' => 'Control duplicate'])
+                ->withErrors(['msg' => trans('cruds.control.error.duplicate')])
                 ->withInput();
         }
 
@@ -680,7 +680,7 @@ class ControlController extends Controller
 
         // Control already made ?
         if ($control->realisation_date !== null) {
-            return back()->withErrors(['msg' => 'Control already made']);
+            return back()->withErrors(['msg' => trans('cruds.control.error.made')]);
         }
 
         // get associated documents

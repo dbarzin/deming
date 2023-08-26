@@ -73,6 +73,10 @@ return [
             'status_all' => 'Tous',
             'owners' => 'Responsables',
         ],
+        'error' => [
+            'made' => 'Ce contrôle a déjà été réalisé.',
+            'duplicate' => 'Ce contrôle existe déjà.',
+        ],
         'checklist' => 'Fiche de contrôle',
         'list' => 'Liste des contrôles',
         'edit' => 'Modifier un contrôle de sécurité',
