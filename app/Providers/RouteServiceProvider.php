@@ -23,6 +23,10 @@ class RouteServiceProvider extends ServiceProvider
         //     return Limit::perMinute(60)->by($request->user()?->id ? : $request->ip());
         // });
 
+        if (App::environment('production')) {
+            URL::forceScheme('https');
+        }
+
         $this->routes(function () {
             Route::middleware('api')
                 ->prefix('api')
