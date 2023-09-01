@@ -195,20 +195,22 @@ return [
              'api' => 'API'
          ],
     ],
-    'notifications' => [
-             'title' => 'Notifications configuration',
-             'title_short' => 'Notifications',
-             'help' => 'This screen allows you to configure the notifications sent by email to users.',
-             'message_subject' => 'Message subject',
-             'sent_from' => 'Sent from',
-             'to' => 'to',
-             'delay' => 'for controls that expire within',
-             'recurrence' => 'Send a reminder',
-             'duration' => [
-                 'day' => 'day',
-                 'days' => 'days',
-                 'month' => 'month',
-                 'months' => 'months',
+    'config' => [
+        'notifications' => [
+                 'title' => 'Notifications configuration',
+                 'title_short' => 'Notifications',
+                 'help' => 'This screen allows you to configure the notifications sent by email to users.',
+                 'message_subject' => 'Message subject',
+                 'sent_from' => 'Sent from',
+                 'to' => 'to',
+                 'delay' => 'for controls that expire within',
+                 'recurrence' => 'Send a reminder',
+                 'duration' => [
+                     'day' => 'day',
+                     'days' => 'days',
+                     'month' => 'month',
+                     'months' => 'months',
+                ],
             ],
-        ]
+        ],
     ];
