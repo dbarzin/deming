@@ -395,7 +395,7 @@ class MeasureController extends Controller
      */
     public function export()
     {
-        return Excel::download(new MeasuresExport(), 'measures '. now()->format('Y-m-d Hi') . '.xlsx');
+        return Excel::download(new MeasuresExport(), trans('cruds.measure.title') . '-' . now()->format('Y-m-d Hi') . '.xlsx');
     }
 
     /**
