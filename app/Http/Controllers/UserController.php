@@ -61,17 +61,17 @@ class UserController extends Controller
 
         if (Config::get('app.ldap_domain') === null) {
             if (request('password1') === null) {
-                return redirect('/users/create')
+                return back()
                     ->withErrors(['password1' => 'No password'])
                     ->withInput();
             }
             if (strlen(request('password1')) < 8) {
-                return redirect('/users/create')
+                return back()
                     ->withErrors(['password1' => 'Password too short'])
                     ->withInput();
             }
             if (request('password1') !== request('password2')) {
-                return redirect('/users/create')
+                return back()
                     ->withErrors(['password1' => 'Passwords does not match'])
                     ->withInput();
             }
@@ -152,12 +152,12 @@ class UserController extends Controller
         if (Config::get('app.ldap_domain') === null) {
             if (request('password1') !== null) {
                 if (strlen(request('password1')) < 8) {
-                    return redirect('/users/create')
+                    return back()
                         ->withErrors(['password1' => 'Password too short'])
                         ->withInput();
                 }
                 if ((request('password1') !== null) && (request('password1') !== request('password2'))) {
-                    return redirect('/users/' . $user->id . '/edit')
+                    return back()
                         ->withErrors(['password1' => 'Passwords does not match'])
                         ->withInput();
                 }
