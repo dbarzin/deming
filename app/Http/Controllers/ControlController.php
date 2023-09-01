@@ -827,7 +827,7 @@ class ControlController extends Controller
 
     public function export()
     {
-        return Excel::download(new ControlsExport(), trans('cruds.control.title') . '-' . now()->format('Y-m-d Hi') '.xlsx');
+        return Excel::download(new ControlsExport(), trans('cruds.control.title') . '-' . now()->format('Y-m-d Hi') . '.xlsx');
     }
 
     public function template()
