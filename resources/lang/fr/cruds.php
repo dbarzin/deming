@@ -150,8 +150,8 @@ return [
         'steering' => 'Rapport de pilotage du SMSI',
         'data_export_title' => 'Exportation des données',
         'domains_export'=> 'Exportation des domaines',
-        'measures_export' => 'Exportation des mesures de sécurité',
-        'controls_export' => 'Exportation des contrôles',
+        'measures_export' => 'Exportation des contrôles',
+        'controls_export' => 'Exportation des mesures de sécurité',
     ],
     'imports' => [
          'index' => 'Importer',
