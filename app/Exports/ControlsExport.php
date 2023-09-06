@@ -79,6 +79,7 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
                 $control->realisation_date,
                 $control->observations,
                 $control->score,
+                $control->note,
                 $control->action_plan,
             ],
         ];

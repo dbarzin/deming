@@ -48,9 +48,10 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
             'C' => 30,  // Name
             'D' => 50,  // Objectif
             'E' => 50,  // Attibuts
-            'F' => 50,  // Modele
-            'G' => 50,  // Indicateur
-            'H' => 50,  // Plan d'action
+            'F' => 50,  // Input
+            'G' => 50,  // Modele
+            'H' => 50,  // Indicateur
+            'I' => 50,  // Plan d'action
         ];
     }
 
