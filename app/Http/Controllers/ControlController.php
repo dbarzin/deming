@@ -648,8 +648,10 @@ class ControlController extends Controller
 
         // Check duplicate control on same scope
         if (Control::whereNull('realisation_date')
-            ->where('id', '<>', $request->id)
+            ->where('id', '<>', $control->id)
+            ->where("measure_id","=",$control->measure_id)
             ->where('scope', '=', $request->scope)
+            ->get()
             ->count() > 0) {
             return back()
                 ->withErrors(['msg' => trans('cruds.control.error.duplicate')])
