@@ -651,7 +651,6 @@ class ControlController extends Controller
             ->where('id', '<>', $control->id)
             ->where("measure_id","=",$control->measure_id)
             ->where('scope', '=', $request->scope)
-            ->get()
             ->count() > 0) {
             return back()
                 ->withErrors(['msg' => trans('cruds.control.error.duplicate')])
