@@ -376,6 +376,7 @@ class ControlController extends Controller
             ->select(DB::raw('distinct domains.id, domains.title'))
             ->join('controls', 'domains.id', '=', 'controls.domain_id')
             ->whereNull("realisation_date")
+            ->orderBy("domains.title")
             ->get();
 
         // get all scopes
@@ -443,8 +444,13 @@ class ControlController extends Controller
 
     public function measures(Request $request)
     {
-        // Get all domains
-        $domains = Domain::All();
+        // get all active domains
+        $domains = DB::table('domains')
+            ->select(DB::raw('distinct domains.id, domains.title, domains.description'))
+            ->join('controls', 'domains.id', '=', 'controls.domain_id')
+            ->whereNull("realisation_date")
+            ->orderBy("domains.title")
+            ->get();
 
         // get all scopes
         $scopes = DB::table('controls')
