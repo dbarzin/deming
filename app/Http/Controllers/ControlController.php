@@ -476,14 +476,14 @@ class ControlController extends Controller
                     '
                     c1.id AS control_id,
                     c1.name,
-                    c1.clause,
+                    c2.clause,
                     c1.scope,
-                    c1.measure_id, 
-                    c1.domain_id, 
+                    c2.measure_id, 
+                    c2.domain_id, 
                     c1.plan_date, 
                     c1.realisation_date, 
-                    c1.score AS score, 
-                    c2.plan_date AS next_date, 
+                    c1.score as score, 
+                    c2.plan_date as next_date, 
                     c2.id AS next_id'
                 )
             )
@@ -517,24 +517,18 @@ class ControlController extends Controller
         $controls = DB::select('
                 select
                     c2.id,
-                    c2.name,
-                    c2.attributes,
+                    c1.name,
+                    c1.attributes,
                     c2.realisation_date, 
                     c2.score
                 from 
-                    (
-                    select 
-                        measure_id,
-                        max(id) as id
-                    from 
-                        controls
-                    where
-                        realisation_date is not null
-                    group by measure_id
-                    ) as c1,                    
-                    controls c2
+                    controls c1,
+                    controls c2,
+                    domains
                 where
-                    c1.id=c2.id
+                    c1.realisation_date is null and
+                    c1.id = c2.next_id and 
+                    domains.id=c1.domain_id
                 order by id;');
 
         // return
