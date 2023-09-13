@@ -371,8 +371,12 @@ class ControlController extends Controller
 
     public function domains(Request $request)
     {
-        // get all domains
-        $domains = DB::table('domains')->get();
+        // get all active domains
+        $domains = DB::table('domains')
+            ->select(DB::raw('distinct domains.id, domains.title'))
+            ->join('controls', 'domains.id', '=', 'controls.domain_id')
+            ->whereNull("realisation_date")
+            ->get();
 
         // get all scopes
         $scopes = DB::table('controls')
