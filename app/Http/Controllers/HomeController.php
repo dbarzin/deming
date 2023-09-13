@@ -59,7 +59,7 @@ class HomeController extends Controller
                 not exists (
                     select * 
                     from controls c2 
-                    where realisation_date is not null and c1.measure_id=c2.measure_id);'
+                    where c1.id=c2.next_id);'
         );
 
         // Last controls made by measures
