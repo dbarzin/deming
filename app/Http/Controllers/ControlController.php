@@ -405,7 +405,7 @@ class ControlController extends Controller
             not exists (
                 select * 
                 from controls c2 
-                where realisation_date is not null and c1.measure_id=c2.measure_id);'
+                where realisation_date is not null and c1.id=c2.next_id);'
         );
 
         // Last controls made by measures
@@ -417,22 +417,14 @@ class ControlController extends Controller
                     c2.realisation_date, 
                     c2.score
                 from 
-                    (
-                    select 
-                        measure_id,
-                        max(id) as id
-                    from 
-                        controls
-                    where
-                        realisation_date is not null ' .
-                        ($scope !== null ? "and scope=\"{$scope}\"" : '') .
-                    'group by measure_id
-                    ) as c1,                    
+                    controls c1,
                     controls c2,
                     domains
                 where
-                    c1.id=c2.id and domains.id=c2.domain_id
-                order by id;');
+                    c1.realisation_date is null and
+                    c1.id = c2.next_id and 
+                    domains.id=c1.domain_id
+                order by domains.title;');
 
         // return
         return view('/radar/domains')
