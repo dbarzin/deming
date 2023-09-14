@@ -89,7 +89,7 @@ class HomeController extends Controller
                 'c2.score as score',
                 'domains.title as domain',
             ])
-            ->join('controls as c2', 'c1.id', '=', 'c2.next_id')
+            ->leftjoin('controls as c2', 'c1.id', '=', 'c2.next_id')
             ->join('domains', 'domains.id', '=', 'c1.domain_id')
             ->whereNull('c1.realisation_date')
             ->where('c1.plan_date', '<', Carbon::today()->addDays(30)->format('Y-m-d'))
