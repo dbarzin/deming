@@ -62,30 +62,15 @@ class HomeController extends Controller
         );
 
         // Last controls made by measures
-        $active_controls = DB::select('
-                select
-                    c2.id,
-                    c2.measure_id,
-                    domains.title, 
-                    c2.realisation_date, 
-                    c2.score
-                from 
-                    (
-                    select 
-                        measure_id,
-                        max(id) as id
-                    from 
-                        controls
-                    where
-                        realisation_date is not null
-                    group by measure_id
-                    ) as c1,                    
-                    controls c2,
-                    domains
-                where
-                    c1.id=c2.id and domains.id=c2.domain_id
-                order by id;');
-        //dd($status);
+        $active_controls = 
+        DB::table('controls as c1')
+            ->select(['c1.id', 'c1.measure_id', 'domains.title', 'c1.realisation_date', 'c1.score'])
+            ->join('controls as c2', 'c2.id', '=', 'c1.next_id')
+            ->join('domains', 'domains.id', '=', 'c1.domain_id')
+            ->whereNull("c2.realisation_date")
+            ->orderBy('c1.id')
+            ->get();
+        // dd($active_controls);
 
         // Get controls todo
         // TODO : improve me
@@ -135,28 +120,16 @@ class HomeController extends Controller
         $request->session()->put('late_controls_count', $late_controls_count);
 
         // Count number of action plans
-        // TODO : improve me
         $action_plans_count =
-            count(DB::select('
-                select
-                    c2.measure_id,
-                    c2.id,
-                    c2.clause,
-                    c2.name,
-                    c2.plan_date
-                from
-                    controls c2,
-                    (
-                    select max(id) as id
-                    from controls
-                    where realisation_date is not null
-                    group by measure_id
-                    ) as c1
-                where
-                    c1.id = c2.id and
-                    (c2.score=1 or c2.score=2);'));
-
-        //dd($action_plans_count);
+                DB::table('controls as c1')
+                ->leftjoin('controls as c2', 'c1.id', '=', 'c2.next_id')
+                ->whereNull("c1.realisation_date")
+                ->where(function ($query) {
+                    return $query
+                        ->where("c2.score","=",1)
+                        ->orWhere("c2.score","=",2);
+                    })
+                ->count();
 
         $request->session()->put('action_plans_count', $action_plans_count);
 
