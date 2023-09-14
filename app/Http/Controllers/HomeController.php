@@ -73,27 +73,27 @@ class HomeController extends Controller
         // dd($active_controls);
 
         // Get controls todo
-        // TODO : improve me
-        $controls_todo = DB::select(
-            "select
-                c1.id,
-                c1.measure_id,
-                c1.name,
-                c1.scope,
-                c1.clause,
-                c1.domain_id,
-                c1.plan_date,
-                c2.id as prev_id,
-                c2.realisation_date as prev_date,
-                c2.score as score,
-                domains.title as domain
-            from
-                controls c1 left join controls c2 on c2.next_id=c1.id
-                left join domains on c1.domain_id=domains.id
-            where (c1.realisation_date is null) and (c1.plan_date < '" . Carbon::today()->addDays(30)->format('Y-m-d') . "')
-            order by c1.plan_date"
-        );
-
+        $controls_todo = 
+        DB::table("controls as c1")
+        ->select([
+                "c1.id",
+                "c1.measure_id",
+                "c1.name",
+                "c1.scope",
+                "c1.clause",
+                "c1.domain_id",
+                "c1.plan_date",
+                "c2.id as prev_id",
+                "c2.realisation_date as prev_date",
+                "c2.score as score",
+                "domains.title as domain"
+                ])
+            ->join('controls as c2', 'c1.id', '=', 'c2.next_id')
+            ->join('domains', 'domains.id', '=', 'c1.domain_id')
+            ->whereNull("c1.realisation_date")
+            ->where("c1.plan_date", "<", Carbon::today()->addDays(30)->format('Y-m-d'))
+            ->orderBy("c1.plan_date")
+            ->get();
         // dd($plannedMeasurements);
 
         // planed controls this month
@@ -135,7 +135,7 @@ class HomeController extends Controller
 
         // Get all controls
         $controls = DB::table('controls')
-            ->select('id', 'clause', 'score', 'realisation_date', 'plan_date')
+            ->select(['id', 'clause', 'score', 'realisation_date', 'plan_date'])
             ->get();
 
         // return

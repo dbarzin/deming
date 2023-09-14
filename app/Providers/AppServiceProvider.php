@@ -31,8 +31,8 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        if (true) {
-        // if (Config::get('APP_DEBUG')) {
+        // if (true) {
+        if (Config::get('APP_DEBUG')) {
             DB::listen(function ($query) {
                 Log::info(
                     $query->sql,
