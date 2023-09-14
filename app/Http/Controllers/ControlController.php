@@ -375,8 +375,8 @@ class ControlController extends Controller
         $domains = DB::table('domains')
             ->select(DB::raw('distinct domains.id, domains.title'))
             ->join('controls', 'domains.id', '=', 'controls.domain_id')
-            ->whereNull("realisation_date")
-            ->orderBy("domains.title")
+            ->whereNull('realisation_date')
+            ->orderBy('domains.title')
             ->get();
 
         // get all scopes
@@ -440,8 +440,8 @@ class ControlController extends Controller
         $domains = DB::table('domains')
             ->select(DB::raw('distinct domains.id, domains.title, domains.description'))
             ->join('controls', 'domains.id', '=', 'controls.domain_id')
-            ->whereNull("realisation_date")
-            ->orderBy("domains.title")
+            ->whereNull('realisation_date')
+            ->orderBy('domains.title')
             ->get();
 
         // get all scopes
@@ -645,7 +645,7 @@ class ControlController extends Controller
         // Check duplicate control on same scope
         if (Control::whereNull('realisation_date')
             ->where('id', '<>', $control->id)
-            ->where("measure_id","=",$control->measure_id)
+            ->where('measure_id', '=', $control->measure_id)
             ->where('scope', '=', $request->scope)
             ->count() > 0) {
             return back()

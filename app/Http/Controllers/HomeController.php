@@ -51,7 +51,8 @@ class HomeController extends Controller
             ->count();
 
         // count control never made
-        $controls_never_made = DB::select('
+        $controls_never_made = DB::select(
+            '
             select domain_id 
             from controls c1 
             where realisation_date is null and 
@@ -62,37 +63,37 @@ class HomeController extends Controller
         );
 
         // Last controls made by measures
-        $active_controls = 
+        $active_controls =
         DB::table('controls as c1')
             ->select(['c1.id', 'c1.measure_id', 'domains.title', 'c1.realisation_date', 'c1.score'])
             ->join('controls as c2', 'c2.id', '=', 'c1.next_id')
             ->join('domains', 'domains.id', '=', 'c1.domain_id')
-            ->whereNull("c2.realisation_date")
+            ->whereNull('c2.realisation_date')
             ->orderBy('c1.id')
             ->get();
         // dd($active_controls);
 
         // Get controls todo
-        $controls_todo = 
-        DB::table("controls as c1")
-        ->select([
-                "c1.id",
-                "c1.measure_id",
-                "c1.name",
-                "c1.scope",
-                "c1.clause",
-                "c1.domain_id",
-                "c1.plan_date",
-                "c2.id as prev_id",
-                "c2.realisation_date as prev_date",
-                "c2.score as score",
-                "domains.title as domain"
-                ])
+        $controls_todo =
+        DB::table('controls as c1')
+            ->select([
+                'c1.id',
+                'c1.measure_id',
+                'c1.name',
+                'c1.scope',
+                'c1.clause',
+                'c1.domain_id',
+                'c1.plan_date',
+                'c2.id as prev_id',
+                'c2.realisation_date as prev_date',
+                'c2.score as score',
+                'domains.title as domain',
+            ])
             ->join('controls as c2', 'c1.id', '=', 'c2.next_id')
             ->join('domains', 'domains.id', '=', 'c1.domain_id')
-            ->whereNull("c1.realisation_date")
-            ->where("c1.plan_date", "<", Carbon::today()->addDays(30)->format('Y-m-d'))
-            ->orderBy("c1.plan_date")
+            ->whereNull('c1.realisation_date')
+            ->where('c1.plan_date', '<', Carbon::today()->addDays(30)->format('Y-m-d'))
+            ->orderBy('c1.plan_date')
             ->get();
         // dd($plannedMeasurements);
 
@@ -122,14 +123,14 @@ class HomeController extends Controller
         // Count number of action plans
         $action_plans_count =
                 DB::table('controls as c1')
-                ->leftjoin('controls as c2', 'c1.id', '=', 'c2.next_id')
-                ->whereNull("c1.realisation_date")
-                ->where(function ($query) {
-                    return $query
-                        ->where("c2.score","=",1)
-                        ->orWhere("c2.score","=",2);
+                    ->leftjoin('controls as c2', 'c1.id', '=', 'c2.next_id')
+                    ->whereNull('c1.realisation_date')
+                    ->where(function ($query) {
+                        return $query
+                            ->where('c2.score', '=', 1)
+                            ->orWhere('c2.score', '=', 2);
                     })
-                ->count();
+                    ->count();
 
         $request->session()->put('action_plans_count', $action_plans_count);
 
