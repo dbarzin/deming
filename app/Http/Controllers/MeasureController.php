@@ -92,6 +92,7 @@ class MeasureController extends Controller
                 }
             }
             sort($values);
+            $values=array_unique($values);
         }
 
         // store it in the response
@@ -178,6 +179,7 @@ class MeasureController extends Controller
             }
         }
         sort($values);
+        $values=array_unique($values);
 
         return view('measures.edit', compact('measure', 'values', 'domains'))->with('domains', $domains);
     }
