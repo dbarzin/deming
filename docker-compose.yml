@@ -1,4 +1,4 @@
-version: "3"
+version: "3.7"
 services:
   web:
     build:
@@ -7,7 +7,7 @@ services:
     ports:
       - 80:80
     depends_on:
-      mysql:
+      - "mysql":
         condition: service_healthy
 
   mysql:
@@ -17,10 +17,10 @@ services:
       MYSQL_USER: 'deming_user'
       MYSQL_PASSWORD: 'demPasssword-123'
       MYSQL_ROOT_PASSWORD: 'root'
-    ports:
-      - "3306:3306"
+    expose:
+      - 3306
     healthcheck:
-        test: ["CMD", "curl", "-f", "http://localhost:3306"]
-        interval: 3s
-        timeout: 60s
-        retries: 5
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
