@@ -40,7 +40,7 @@ class ControlController extends Controller
             }
         }
         sort($attributes);
-        $values=array_unique($values);
+        $attributes=array_unique($attributes);
 
         // get domain base on his title
         $domain_title = $request->get('domain_title');
