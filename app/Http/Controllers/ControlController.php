@@ -114,6 +114,8 @@ class ControlController extends Controller
             }
         } else {
             $period = $request->session()->get('period');
+            if ($period==null)
+                $request->session()->put('period', 99);
         }
 
         // Status filter

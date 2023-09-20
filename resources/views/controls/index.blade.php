@@ -46,15 +46,16 @@
                 </select>
             </div>
             <div class="cell-3"> 
+
                 <select id='cur_period' name="period" data-role="select">
                     <option value="99"
-                        @if (Session::get("period")=="99")
+                        @if (Session::get("period")==="99")
                             selected 
                         @endif
                     >-- {{ trans("cruds.control.fields.choose_period") }} --</option>
                         @for ($i = -12; $i < 12; $i++)
                             <option value="{{ $i }}"
-                            @if (((int)Session::get("period"))==$i)
+                            @if ((Session::get("period"))==strval($i))
                                 selected 
                             @endif 
                             >
