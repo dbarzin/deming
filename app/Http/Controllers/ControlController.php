@@ -124,6 +124,8 @@ class ControlController extends Controller
             $request->session()->put('status', $status);
         } else {
             $status = $request->session()->get('status');
+            if ($status==null)
+                $status="2";
         }
 
         // Late filter

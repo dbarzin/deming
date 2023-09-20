@@ -175,8 +175,6 @@
 					</div>
 				</div>
 
-
-				
 		    	<div class="row-12">
 		    		<div><br></div>
 		    	</div>

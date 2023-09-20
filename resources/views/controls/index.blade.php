@@ -67,7 +67,7 @@
             <div class="cell-3">
                 <input type="radio" data-role="radio" data-style="2" 
                 name="status" value="0" id="status0"
-                @if (Session::get("status")=="0" || Session::get("status")==null)
+                @if (Session::get("status")=="0")
                 checked
                 @endif
                 > 
@@ -80,7 +80,7 @@
                 > {{ trans("cruds.control.fields.status_done") }}
                 <input type="radio" data-role="radio" data-style="2" 
                 name="status" value="2" id="status2"
-                @if (Session::get("status")=="2")
+                @if ((Session::get("status")=="2") || (Session::get("status")==null))
                 checked
                 @endif
                 > {{ trans("cruds.control.fields.status_todo") }}
