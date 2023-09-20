@@ -160,8 +160,20 @@
 						    <option value="12" {{ $control->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
 						 </select>
 					</div>
+		    		<div class="cell-1">
+		    		</div>
+		    		<div class="cell-1" align="right">
+			    		<strong>Next ID</strong>
+			    	</div>
+					<div class="cell-1">
+						<select data-role="select" name="next_id">
+							<option></option>
+							@foreach($ids as $id)
+							    <option {{ $control->next_id === $id ? "selected" : ""}}>{{$id}}</option>
+						    @endforeach
+						 </select>
+					</div>
 				</div>
-
 		    	<div class="row-12">
 		    		<div><br></div>
 		    	</div>

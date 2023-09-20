@@ -40,6 +40,7 @@ class ControlController extends Controller
             }
         }
         sort($attributes);
+        $values=array_unique($values);
 
         // get domain base on his title
         $domain_title = $request->get('domain_title');
@@ -287,6 +288,14 @@ class ControlController extends Controller
 
         $documents = DB::table('documents')->where('control_id', $id)->get();
 
+        // get all ids
+        $ids = DB::table('controls')
+            ->select('id')
+            ->orderBy('id')
+            ->get()
+            ->pluck('id')
+            ->toArray();
+
         // get all scopes
         $scopes = DB::table('controls')
             ->select('scope')
@@ -310,11 +319,13 @@ class ControlController extends Controller
             }
         }
         sort($values);
+        $values=array_unique($values);
 
         return view('controls.edit')
             ->with('control', $control)
             ->with('documents', $documents)
             ->with('scopes', $scopes)
+            ->with('ids', $ids)
             ->with('attributes', $values);
     }
 
@@ -792,6 +803,7 @@ class ControlController extends Controller
         $control->score = request('score');
         $control->action_plan = request('action_plan');
         $control->periodicity = request('periodicity');
+        $control->next_id = request('next_id');
 
         $control->save();
 
