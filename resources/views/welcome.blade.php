@@ -295,7 +295,7 @@
             <?php } ?> 
         ]
       },
-      ]
+      ],
     };
 
     var ctx = document.getElementById('canvas-status').getContext('2d');
@@ -309,17 +309,17 @@
             },
             title: {
                 display: false
+            },
+            onHover: (event, chartElement) => {
+              event.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+            },
+            onClick:  (event, elements, chart) => {
+                var activePoints = window.myBar.getElementsAtEvent(event);
+                var firstPoint = activePoints[0];
+                window.location.href="/controls?domain=0&attribute=none&scope=none&status=0&period="+(firstPoint._index-12);
             }
-        }
+        },
     });
-
-    document.getElementById('canvas-status').onclick = function(evt){
-            var activePoints = window.myBar.getElementsAtEvent(evt);
-            var firstPoint = activePoints[0];
-            // var label = barChartData.labels[firstPoint._index];
-            window.location.href="/controls?domain=0&attribute=none&scope=none&status=0&period="+(firstPoint._index-12);
-        }; 
-
 
     var options = {
         responsive: true,

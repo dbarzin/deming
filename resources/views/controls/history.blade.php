@@ -425,20 +425,17 @@
                 },
                 title: {
                     display: false
-                }
-            }
-        });
-
-    };
-
-
-    document.getElementById('canvas-status').onclick = function(evt){
-            var activePoints = window.myBar.getElementsAtEvent(evt);
-            var firstPoint = activePoints[0];
-            // var label = barChartData.labels[firstPoint._index];
-            // alert(firstPoint._index - 12);
-            // alert(barChartData.labels[firstPoint._index]);
-            window.location.href="/control/history?date="+(barChartData.labels[firstPoint._index]);
+                },
+                onHover: (event, chartElement) => {
+                    event.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+                    },
+                onClick:  (event, elements, chart) => {
+                    var activePoints = window.myBar.getElementsAtEvent(event);
+                    var firstPoint = activePoints[0];
+                    window.location.href="/control/history?date="+(barChartData.labels[firstPoint._index]);
+                    }
+                },
+            });
         };
 
     window.addEventListener('load', function(){
