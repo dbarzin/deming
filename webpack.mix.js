@@ -15,7 +15,7 @@ let mix = require('laravel-mix');
 mix.js([
         'public/vendors/chartjs/Chart.js',
         'public/vendors/ckeditor/ckeditor.js',
-        'public/vendors/jquery/jquery-3.6.1.min.js',
+        'node_modules/jquery/dist/jquery.min.js',
         'public/vendors/metro4/js/metro.js',
         'vendor/enyo/dropzone/dist/dropzone.js',
         'resources/js/utils.js',

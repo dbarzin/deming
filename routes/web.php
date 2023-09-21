@@ -20,7 +20,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/index', 'HomeController@index');
 
     /* Global-search engine */
-    Route::get('global-search', 'GlobalSearchController@search')->name('globalSearch');
+    Route::get('global-search', 'GlobalSearchController@search');
 
     /* Profile */
     Route::get('/profile', 'ProfileController@index')->name('profile');
