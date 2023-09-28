@@ -41,7 +41,7 @@
 				<tr>
 					<td><a href="/domains/{{ $domain->id}}">{{ $domain->title }}</a></td>
 					<td>{{ $domain->description }}</td>
-					<td><a href="/measures?domain={{ $domain->id }}">{{ $domain->cnt }}</a></td>
+					<td><a href="/measures?domain={{ $domain->id }}">{{ $domain->measures }}</a></td>
 				</tr>
 			@endforeach
 				</tbody>

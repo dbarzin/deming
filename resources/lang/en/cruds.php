@@ -111,7 +111,7 @@ return [
          'fields' => [
              'name' => 'Name',
              'description' => 'Description',
-             'measures' => '# Measures',
+             'measures' => '# Controls',
          ],
          'add' => 'Add Domain',
          'edit' => 'Edit Domain',
