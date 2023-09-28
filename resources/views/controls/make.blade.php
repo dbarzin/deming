@@ -19,10 +19,10 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.control.fields.name') }}</strong>
 		    	</div>
-	    		<div class="cell-4">
+	    		<div class="cell-5">
 					{{ $control->clause }} - {{ $control->name }}
 				</div>
-	    		<div class="cell-3">
+	    		<div class="cell-2">
 		    		<strong>{{ trans("cruds.control.fields.scope") }}</strong>
 		    		&nbsp;
 	    			{{ $control->scope }}
