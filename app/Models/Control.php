@@ -10,11 +10,11 @@ class Control extends Model
         'name',
         'clause',
         'objective',
+        'observations',
         'input',
         'attributes',
         'model',
         'action_plan',
-        'realisation_date',
     ];
 
     protected $dates = [
