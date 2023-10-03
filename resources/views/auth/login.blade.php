@@ -13,7 +13,7 @@
 
 <body class="d-flex flex-justify-center flex-align-center bg-default">
     <form  
-          method="POST" action="{{ route('login') }}"
+          method="POST" action="/login"
           class="login-form bg-white p-6 mx-auto border fg-black win-shadow"
           data-role="validator"
           action="javascript:"
