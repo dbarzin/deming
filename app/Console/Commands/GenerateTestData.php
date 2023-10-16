@@ -8,6 +8,8 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 
+use Faker;
+
 class GenerateTestData extends Command
 {
     /**
@@ -69,6 +71,9 @@ class GenerateTestData extends Command
         // loop on measures
         $delta = $perPeriod - rand(-$perPeriod / 2, $perPeriod / 2);
 
+
+        $faker = Faker\Factory::create();
+
         foreach ($measures as $measure) {
             $delta--;
             if ($delta <= 0) {
@@ -94,6 +99,7 @@ class GenerateTestData extends Command
             // do it
             $control->plan_date = (new Carbon($curDate))->day(rand(0, 28))->toDateString();
             $control->realisation_date = (new Carbon($curDate))->addDay(rand(0, 28))->toDateString();
+            $control->observations = $faker->text(256);
             $control->note = rand(0, 10);
             $control->score = rand(0, 100) < 90 ? 3 : (rand(0, 2) < 2 ? 2 : 1);
             $control->save();
@@ -115,6 +121,7 @@ class GenerateTestData extends Command
             // do it
             $prev_control->plan_date = (new Carbon($curDate))->addMonth(-$measure->periodicity)->day(rand(0, 28))->toDateString();
             $prev_control->realisation_date = (new Carbon($curDate))->addMonth(-$measure->periodicity)->addDay(rand(0, 28))->toDateString();
+            $prev_control->observations = $faker->text(256);
             $prev_control->note = rand(0, 10);
             $prev_control->score = rand(0, 100) < 90 ? 3 : (rand(0, 2) < 2 ? 2 : 1);
             $prev_control->next_id = $control->id;
