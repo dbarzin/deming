@@ -9,12 +9,13 @@
     		<div class="cell-1">
 	    		<strong>{{ trans("cruds.control.fields.name") }}</strong>
 	    	</div>
-    		<div class="cell-3">
+    		<div class="cell-4">
 	    		<a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a> &nbsp; - &nbsp; {{ $control->name }}
     		</div>
-    		<div class="cell-2" align="right">
+    		<div class="cell-1" align="right">
 	    		<strong>{{ trans("cruds.control.fields.scope") }}</strong>
-	    		&nbsp;
+	    	</div>
+    		<div class="cell-1">
     			{{ $control->scope }}
     		</div>
     	</div>
