@@ -40,7 +40,7 @@ class ControlController extends Controller
             }
         }
         sort($attributes);
-        $attributes=array_unique($attributes);
+        $attributes = array_unique($attributes);
 
         // get domain base on his title
         $domain_title = $request->get('domain_title');
@@ -114,8 +114,9 @@ class ControlController extends Controller
             }
         } else {
             $period = $request->session()->get('period');
-            if ($period==null)
+            if ($period === null) {
                 $request->session()->put('period', 99);
+            }
         }
 
         // Status filter
@@ -124,8 +125,9 @@ class ControlController extends Controller
             $request->session()->put('status', $status);
         } else {
             $status = $request->session()->get('status');
-            if ($status==null)
-                $status="2";
+            if ($status === null) {
+                $status = '2';
+            }
         }
 
         // Late filter
@@ -214,7 +216,7 @@ class ControlController extends Controller
     public function create()
     {
         // does not exists in that way
-        return redirect('/control');
+        return redirect('/bob/index');
     }
 
     /**
@@ -242,9 +244,7 @@ class ControlController extends Controller
         $control = Control::find($id);
 
         // Control not found
-        if ($control === null) {
-            abort(404);
-        }
+        abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         if ($control->next_id !== null) {
             $next_control = DB::table('controls')
@@ -286,9 +286,7 @@ class ControlController extends Controller
         $control = Control::find($id);
 
         // Control not found
-        if ($control === null) {
-            abort(404);
-        }
+        abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         $documents = DB::table('documents')->where('control_id', $id)->get();
 
@@ -323,7 +321,7 @@ class ControlController extends Controller
             }
         }
         sort($values);
-        $values=array_unique($values);
+        $values = array_unique($values);
 
         return view('controls.edit')
             ->with('control', $control)
@@ -349,9 +347,7 @@ class ControlController extends Controller
         $control = Control::find($id);
 
         // Control not found
-        if ($control === null) {
-            abort(404);
-        }
+        abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // Delete files
         $documents = Document::select('id')->where('control_id', $id)->get();
@@ -369,7 +365,7 @@ class ControlController extends Controller
         // Then delete the control
         $control->delete();
 
-        return redirect('/controls');
+        return redirect('/bob/index');
     }
 
     public function history()
@@ -413,6 +409,7 @@ class ControlController extends Controller
         }
 
         // count control never made
+        // TODO : improve me
         $controls_never_made = DB::select(
             'select domain_id 
             from controls c1 
@@ -424,6 +421,7 @@ class ControlController extends Controller
         );
 
         // Last controls made by measures
+        // TODO : improve me
         $active_controls = DB::select('
                 select
                     c2.id,
@@ -442,7 +440,7 @@ class ControlController extends Controller
                 order by domains.title;');
 
         // return
-        return view('/radar/domains')
+        return view('radar.domains')
             ->with('domains', $domains)
             ->with('scopes', $scopes)
             ->with('active_controls', $active_controls)
@@ -514,7 +512,7 @@ class ControlController extends Controller
             ->get();
 
         // return
-        return view('radar.controls')
+        return view('/radar/controls')
             ->with('scopes', $scopes)
             ->with('controls', $controls)
 //          ->with('cur_date', $cur_date)
@@ -529,6 +527,7 @@ class ControlController extends Controller
             ->get();
 
         // Controls made
+        // TODO : improve me
         $controls = DB::select('
                 select
                     c2.id,
@@ -628,7 +627,7 @@ class ControlController extends Controller
             $control->delete();
         }
 
-        return redirect('/measures');
+        return redirect('/alice/index');
     }
 
     /**
@@ -674,7 +673,7 @@ class ControlController extends Controller
         $control->owners()->sync($request->input('owners', []));
         $control->save();
 
-        return redirect('/controls/'.$request->id);
+        return redirect('/bob/show/'.$request->id);
     }
 
     public function make(Request $request)
@@ -811,7 +810,7 @@ class ControlController extends Controller
 
         $control->save();
 
-        return redirect('/control/show/' . $request->id);
+        return redirect('/bob/show/' . $request->id);
     }
 
     /**
@@ -835,7 +834,7 @@ class ControlController extends Controller
 
         $control->save();
 
-        return redirect('/control/show/'.$id);
+        return redirect('/bob/show/'.$id);
     }
 
     public function export()

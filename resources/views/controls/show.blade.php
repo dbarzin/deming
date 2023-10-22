@@ -10,7 +10,7 @@
 	    		<strong>{{ trans("cruds.control.fields.name") }}</strong>
 	    	</div>
     		<div class="cell-4">
-	    		<a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a> &nbsp; - &nbsp; {{ $control->name }}
+	    		<a href="/alice/show/{{ $control->measure_id }}">{{ $control->clause }}</a> &nbsp; - &nbsp; {{ $control->name }}
     		</div>
     		<div class="cell-1" align="right">
 	    		<strong>{{ trans("cruds.control.fields.scope") }}</strong>
@@ -80,7 +80,7 @@
 	    	</div>
 			<div class="cell-1">
 		    	@if ($prev_id!=null)
-					<a href="/controls/{{ $prev_id }}">
+					<a href="/bob/show/{{ $prev_id }}">
 		    			{{ $prev_date }}
 		    		</a>
 				@else
@@ -88,7 +88,7 @@
 				@endif
 				<br>
 		    	@if ($next_id!=null)
-					<a href="/controls/{{ $next_id }}">
+					<a href="/bob/show/{{ $next_id }}">
 		    			{{ $next_date }}
 		    		</a>
 				@else
@@ -214,7 +214,7 @@
    		<div class="cell-7">
 			@if ((Auth::User()->role==1)||(Auth::User()->role==2))
 				@if ($control->realisation_date==null)
-			    <form action="/control/make/{{ $control->id }}">
+			    <form action="/bob/make/{{ $control->id }}">
 		    		<button class="button success">
 						<span class="mif-assignment"></span>
 						&nbsp;	    			
@@ -222,7 +222,7 @@
 			    	</button>
 				</form>
 				&nbsp;
-			    <form action="/control/plan/{{ $control->id }}">
+			    <form action="/bob/plan/{{ $control->id }}">
 		    		<button class="button info">
 						<span class="mif-calendar"></span>
 						&nbsp;
@@ -233,7 +233,7 @@
 				@endif
 			@endif
 			@if (Auth::User()->role==1)
-		    <form action="/control/edit/{{ $control->id }}">
+		    <form action="/bob/edit/{{ $control->id }}">
 	    		<button class="button primary">
 					<span class="mif-wrench"></span>
 					&nbsp;
@@ -241,7 +241,7 @@
 	    		</button>
 			</form>
 			&nbsp;
-		    <form action="/control/delete/{{ $control->id }}" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
+		    <form action="/bob/delete/{{ $control->id }}" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
 	    		<button class="button alert">
 					<span class="mif-fire"></span>
 					&nbsp;
@@ -250,7 +250,7 @@
 			</form>
 			&nbsp;
    			@endif
-		    <form action="/controls">
+		    <form action="/bob/index">
 	    		<button class="button">
 					<span class="mif-cancel"></span>
 					&nbsp;

@@ -15,7 +15,7 @@
 		</div>
 	@endif
 
-	<form method="POST" action="/measures">
+	<form method="POST" action="/alice/store">
 	@csrf
 		<div class="grid">
 	    	<div class="row">
@@ -118,7 +118,7 @@
 					</button>
 					</form>
 					&nbsp;
-					<form action="/measures">
+					<form action="/alices">
 						<button type="submit" class="button">
 							<span class="mif-cancel"></span> 
 							&nbsp;

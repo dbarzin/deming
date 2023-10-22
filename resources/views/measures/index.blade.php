@@ -20,7 +20,7 @@
 						</select>
 					</div>
 					<div class="cell-8" align="right">
-						<button class="button primary" onclick="location.href = '/measures/create';">
+						<button class="button primary" onclick="location.href = '/alice/create';">
 			            <span class="mif-plus"></span>
 			            &nbsp;
 						{{ trans('common.new') }}
@@ -33,7 +33,7 @@
 			    var select = document.getElementById('domain_id');
 
 			    select.addEventListener('change', function(){
-			        window.location = '/measures?domain=' + this.value;
+			        window.location = '/alice/index?domain=' + this.value;
 			    }, false);
 			}, false);
 			</script>
@@ -61,11 +61,11 @@
 			@foreach($measures as $measure)
 				<tr>
 					<td>
-						<a href="/domains/{{$measure->domain_id}}">
+						<a href="/domain/show/{{$measure->domain_id}}">
 							{{ $measure->title }}
 						</a>
 					</td>
-					<td><a href="/measures/{{ $measure->id}}">
+					<td><a href="/alice/show/{{ $measure->id}}">
 						@if (strlen($measure->clause)==0)
 							None
 						@else
@@ -76,7 +76,7 @@
 					<td>{{ $measure->name }}</td>
 					<td>
 						@if ($measure->control_count>0)
-						<a href="/controls?period=99&domain=0&scope=none&status=2&measure={{ $measure->id }}"> 
+						<a href="/bob/index?period=99&domain=0&scope=none&status=2&measure={{ $measure->id }}"> 
 							{{ $measure->control_count }}
 						</a>
 						@else
@@ -84,7 +84,7 @@
 						@endif
 					</td>
 					<td>
-					    <form action="/measure/plan/{{ $measure->id }}">
+					    <form action="/alice/plan/{{ $measure->id }}">
 					    	<button class="button info">
 					            <span class="mif-calendar"></span>
 					            &nbsp;

@@ -29,7 +29,7 @@
 		@foreach($actions as $action)
 			<tr>
 				<td valign="top">
-					<a id="{{ $action->clause }}" href="/measures/{{$action->measure_id}}">
+					<a id="{{ $action->clause }}" href="/alice/show/{{$action->measure_id}}">
 						{{ $action->clause }}
 					</a>
 				</td>
@@ -38,8 +38,8 @@
 					<pre>{{ $action->action_plan }}</pre>
 				</td>
 				<td>{{ $action->scope }}</td>
-				<td><a id="{{ $action->plan_date }}" href="/controls/{{ $action->id }}">{{ $action->plan_date }}</a></td>
-				<td><a id="{{ $action->next_date }}" href="/controls/{{ $action->next_id }}">{{ $action->next_date }}</a></td>
+				<td><a id="{{ $action->plan_date }}" href="/bob/show/{{ $action->id }}">{{ $action->plan_date }}</a></td>
+				<td><a id="{{ $action->next_date }}" href="/bob/show/{{ $action->next_id }}">{{ $action->next_date }}</a></td>
 				<td>
 					<center id="{{ $action->score }}">
 	                @if ($action->score==1)

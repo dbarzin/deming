@@ -92,7 +92,7 @@ class MeasureController extends Controller
                 }
             }
             sort($values);
-            $values=array_unique($values);
+            $values = array_unique($values);
         }
 
         // store it in the response
@@ -136,7 +136,7 @@ class MeasureController extends Controller
 
         $request->session()->put('domain', $measure->domain_id);
 
-        return redirect('/measures');
+        return redirect('/alice/index');
     }
 
     /**
@@ -146,9 +146,11 @@ class MeasureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function show(Measure $measure)
+    public function show(int $id)
     {
-        return view('measures.show', compact('measure'));
+        $measure = Measure::where('id', $id)->get()->first();
+        return view('measures.show')
+            ->with('measure', $measure);
     }
 
     /**
@@ -158,10 +160,15 @@ class MeasureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function edit(Measure $measure)
+    public function edit(int $id)
     {
         // Not for Auditor
         abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $measure = Measure::find($id);
+
+        // not found
+        abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // get the list of domains
         $domains = Domain::All();
@@ -179,7 +186,7 @@ class MeasureController extends Controller
             }
         }
         sort($values);
-        $values=array_unique($values);
+        $values = array_unique($values);
 
         return view('measures.edit', compact('measure', 'values', 'domains'))->with('domains', $domains);
     }
@@ -254,7 +261,7 @@ class MeasureController extends Controller
 
         $measure->delete();
 
-        return redirect('/measures');
+        return redirect('/alice/index');
     }
 
     /**

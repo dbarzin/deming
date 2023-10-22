@@ -15,7 +15,7 @@
 		</div>
 		@endif
 
-		<form method="POST" action="/control/save">
+		<form method="POST" action="/bob/save">
 			@csrf
 			<input type="hidden" name="id" value="{{ $control->id }}"/>
 
@@ -98,8 +98,6 @@
 		    	<div class="row">
 		    		<div class="cell-1">
 			    		<strong>{{ trans("cruds.control.fields.evidence") }}</strong>
-			    		<br>
-						<a target="_new" href="/control/template/{{ $control->id }}">{{ trans("cruds.control.fields.model") }}</a>
 			    	</div>
 					<div class="cell-6">
 						<div class="dropzone dropzone-previews" id="dropzoneFileUpload"></div>
@@ -187,7 +185,7 @@
 					</button>
 					</form>
 					&nbsp;
-		    		<form action="/controls/{{$control->id}}">
+		    		<form action="/bob/show/{{$control->id}}">
 			    		<button type="submit" class="button cancel">
 			    			<span class="mif-cancel"></span>
 			    			&nbsp;

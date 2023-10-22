@@ -5,10 +5,9 @@ namespace App\Console\Commands;
 use App\Models\Control;
 use App\Models\Measure;
 use Carbon\Carbon;
+use Faker;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
-
-use Faker;
 
 class GenerateTestData extends Command
 {
@@ -70,7 +69,6 @@ class GenerateTestData extends Command
 
         // loop on measures
         $delta = $perPeriod - rand(-$perPeriod / 2, $perPeriod / 2);
-
 
         $faker = Faker\Factory::create();
 

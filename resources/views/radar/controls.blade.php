@@ -8,7 +8,7 @@
     <div class="row">
         <div class="cell-12">
 
-    <form action="/control/radar/measures">
+    <form action="/radar/alice">
         <div class="row">
             <div class="cell-10">
             </div>
@@ -68,11 +68,11 @@
                     @endif
                         </center></td>
 
-                    <td><a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a></td>
+                    <td><a href="/alice/show/{{ $control->measure_id }}">{{ $control->clause }}</a></td>
                     <td>{{ $control->name }}</td>
                     <td>{{ $control->scope }}</td>
-                    <td><a href="/controls/{{ $control->control_id }}">{{ $control->realisation_date }}</a></td>
-                    <td><a href="/controls/{{ $control->next_id }}">{{ $control->next_date }}</a></td>
+                    <td><a href="/bob/show/{{ $control->control_id }}">{{ $control->realisation_date }}</a></td>
+                    <td><a href="/bob/show/{{ $control->next_id }}">{{ $control->next_date }}</a></td>
                     </tr>                    
                 @endif
             @endforeach
@@ -196,7 +196,7 @@
     window.addEventListener('load', function(){
         var select = document.getElementById('scope');
         select.addEventListener('change', function(){
-            window.location = '/control/radar/measures?scope=' + this.value;
+            window.location = '/radar/alice?scope=' + this.value;
         }, false);
     });
 

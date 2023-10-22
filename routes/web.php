@@ -28,32 +28,39 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/profile/avatar/{id}', 'ProfileController@avatar');
 
     /* Measures */
-    Route::get('/measure/plan/{id}', 'MeasureController@plan');
-    Route::post('/measure/activate/{id}', 'MeasureController@activate');
-    Route::get('/measure/import', function () {
+    Route::get('/alice/index', 'MeasureController@index');
+    Route::get('/alice/create', 'MeasureController@create');
+    Route::post('/alice/store', 'MeasureController@store');
+    Route::get('/alice/{id}/edit', 'MeasureController@edit');
+    Route::get('/alice/plan/{id}', 'MeasureController@plan');
+    Route::get('/alice/show/{id}', 'MeasureController@show');
+    Route::delete('/alice/delete/{id}', 'MeasureController@destroy');
+    Route::post('/alice/activate/{id}', 'MeasureController@activate');
+    Route::get('/alice/import', function () {
         return view('measures/import');
     });
-    Route::post('/measure/import', 'MeasureController@import');
+    Route::post('/alice/import', 'MeasureController@import');
 
     /* Controls */
-    Route::get('/control/show/{id}', 'ControlController@show');
-    Route::get('/control/make/{id}', 'ControlController@make');
-    Route::get('/control/edit/{id}', 'ControlController@edit');
-    Route::get('/control/template/{id}', 'ControlController@template');
-    Route::get('/control/delete/{id}', 'ControlController@destroy');
-    Route::post('/control/make', 'ControlController@doMake');
-    Route::post('/control/plan', 'ControlController@doPlan');
-    Route::post('/control/unplan', 'ControlController@unplan');
-    Route::post('/control/draft', 'ControlController@draft');
-    Route::post('/control/save', 'ControlController@save');
-    Route::get('/control/history', 'ControlController@history');
-    Route::get('/control/upload/{id}', 'ControlController@upload');
-    Route::get('/control/plan/{id}', 'ControlController@plan');
+    Route::get('/bob/index', 'ControlController@index');
+    Route::get('/bob/show/{id}', 'ControlController@show');
+    Route::get('/bob/make/{id}', 'ControlController@make');
+    Route::get('/bob/edit/{id}', 'ControlController@edit');
+    Route::get('/bob/template/{id}', 'ControlController@template');
+    Route::get('/bob/delete/{id}', 'ControlController@destroy');
+    Route::post('/bob/make', 'ControlController@doMake');
+    Route::post('/bob/plan', 'ControlController@doPlan');
+    Route::post('/bob/unplan', 'ControlController@unplan');
+    Route::post('/bob/draft', 'ControlController@draft');
+    Route::post('/bob/save', 'ControlController@save');
+    Route::get('/bob/history', 'ControlController@history');
+    Route::get('/bob/upload/{id}', 'ControlController@upload');
+    Route::get('/bob/plan/{id}', 'ControlController@plan');
 
     /* Radars */
-    Route::get('/control/radar/domains', 'ControlController@domains');
-    Route::get('/control/radar/measures', 'ControlController@measures');
-    Route::get('/control/radar/attributes', 'ControlController@attributes');
+    Route::get('/radar/domains', 'ControlController@domains');
+    Route::get('/radar/alice', 'ControlController@measures');
+    Route::get('/radar/attributes', 'ControlController@attributes');
 
     /* Documents */
     Route::post('/doc/store', 'DocumentController@store');
@@ -65,17 +72,16 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/doc/template', 'DocumentController@getTemplate');
     Route::post('/doc/template', 'DocumentController@saveTemplate');
 
+    /* Configuration */
     Route::get('/config', 'ConfigurationController@index');
     Route::post('/config/save', 'ConfigurationController@save');
 
     /* Other */
     Route::resource('domains', 'DomainController');
     Route::resource('attributes', 'AttributeController');
-    Route::resource('measures', 'MeasureController');
-    Route::resource('controls', 'ControlController');
     Route::resource('users', 'UserController');
 
-    /* actions */
+    /* Actions */
     Route::get('/actions', 'ActionplanController@index');
     Route::get('/action/{id}', 'ActionplanController@show');
     Route::post('/action/save', 'ActionplanController@save');
@@ -91,6 +97,6 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
 
     Route::get('/export/domains', 'DomainController@export');
     Route::get('/export/attributes', 'AttributeController@export');
-    Route::get('/export/measures', 'MeasureController@export');
-    Route::get('/export/controls', 'ControlController@export');
+    Route::get('/export/alices', 'MeasureController@export');
+    Route::get('/export/bobs', 'ControlController@export');
 });

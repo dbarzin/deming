@@ -16,7 +16,7 @@
 	</div>
 	@endif
 
-	<form method="POST" action="/measures/{{ $measure->id }}">
+	<form method="POST" action="/alices/{{ $measure->id }}">
 		@method("PATCH")
 		@csrf
 		<div class="grid">
@@ -127,7 +127,7 @@
 					</button>
 					</form>
 					&nbsp;
-					<form action="/measures/{{ $measure->id }}">
+					<form action="/alices/{{ $measure->id }}">
 						<button type="submit" class="button">
 							<span class="mif-cancel"></span>
 							&nbsp;

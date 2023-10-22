@@ -16,7 +16,7 @@
 			</div>
 			@endif
 
-			<a href="/export/measures" target="_blank">Current security Measures</a>
+			<a href="/export/alices" target="_blank">Current security Measures</a>
 
 			<div class="row">
 		        <div class="cell-3">
@@ -24,7 +24,7 @@
 				</div>
 			</div>
 
-			<form action="/measure/import" method="post" enctype="multipart/form-data">
+			<form action="/alice/import" method="post" enctype="multipart/form-data">
 			@csrf
 			<div class="row">
 		        <div class="cell-5">

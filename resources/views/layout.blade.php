@@ -40,7 +40,7 @@
                 </li>
 
                 <li>
-                    <a href="/measures">
+                    <a href="/alice/index">
                         <span class="icon"><span class="mif-books"></span></span>
                         <span class="caption">{{ trans("menu.measures") }}</span>
                     </a>
@@ -48,7 +48,7 @@
 
 
                 <li>
-                    <a href="/controls">
+                    <a href="/bob/index">
                         <span class="icon"><span class="mif-paste"></span></span>
                         <span class="caption">{{ trans("menu.controls") }}</span>
                         <span class="badges ml-auto mr-3">
@@ -63,7 +63,7 @@
                 </li>
 
                 <li>
-                    <a href="/control/history">
+                    <a href="/bob/history">
                         <span class="icon"><span class="mif-calendar"></span></span>
                         <span class="caption">{{ trans("menu.planning") }}</span>
                     </a>
@@ -76,13 +76,13 @@
                         <span class="caption">{{ trans("menu.radar") }}</span>
                     </a>
                     <ul class="navview-menu stay-open" data-role="dropdown" >
-                        <li><a href="/control/radar/domains">
+                        <li><a href="/radar/domains">
                             <span class="caption">{{ trans("menu.radar_by_domains") }}</span>
                         </a></li>
-                        <li><a href="/control/radar/measures">
+                        <li><a href="/radar/alice">
                             <span class="caption">{{ trans("menu.radar_by_controls") }}</span>
                         </a></li>
-                        <li><a href="/control/radar/attributes">
+                        <li><a href="/radar/attributes">
                             <span class="caption">{{ trans("menu.radar_by_attributes") }}</span>
                         </a></li>
                     </ul>
@@ -130,7 +130,7 @@
                             <span class="caption">{{ trans("menu.configuration.reports") }}</span>
                         </a></li>
                         @if (Auth::User()->role==1)
-                        <li><a href="/measure/import">
+                        <li><a href="/alice/import">
                             <span class="icon"><span class="mif-file-excel"></span></span>
                             <span class="caption">{{ trans("menu.configuration.import") }}</span>
                         </a></li>
@@ -172,13 +172,13 @@
             <a href="#" class="app-bar-item d-block d-none-lg" id="paneToggle"><span class="mif-menu"></span></a>
 
             <div class="app-bar-container ml-auto">
-                <a href="/controls?attribute=none&period=0&domain=0&status=2" class="app-bar-item">
+                <a href="/bob/index?attribute=none&period=0&domain=0&status=2" class="app-bar-item">
                     <span class="mif-envelop"></span>
                     @if (Session::get("planed_controls_this_month_count")!=null)
                     <span class="badge bg-green fg-white mt-2 mr-1">{{Session::get("planed_controls_this_month_count")}}</span>
                     @endif
                 </a>
-                <a href="/controls?attribute=none&period=99&domain=0&status=1&late=1" class="app-bar-item">
+                <a href="/bob/index?attribute=none&period=99&domain=0&status=1&late=1" class="app-bar-item">
                     <span class="mif-bell"></span>
                     @if (Session::get("late_controls_count")!=null)                    
                     <span class="badge bg-red fg-white mt-2 mr-1">{{Session::get("late_controls_count")}}</span>

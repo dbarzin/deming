@@ -75,10 +75,10 @@
 						<a href="/export/domains" target="_blank">{{ trans('cruds.exports.domains_export') }}</a>
 					</li>
 					<li>
-						<a href="/export/measures" target="_blank">{{ trans('cruds.exports.controls_export') }}</a>
+						<a href="/export/alices" target="_blank">{{ trans('cruds.exports.controls_export') }}</a>
 					</li>
 					<li>
-						<a href="/export/controls" target="_blank">{{ trans('cruds.exports.measures_export') }}</a>
+						<a href="/export/bobs" target="_blank">{{ trans('cruds.exports.measures_export') }}</a>
 					</li>
 				</ul>
 			</div>

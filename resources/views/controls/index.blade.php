@@ -92,37 +92,37 @@
         window.addEventListener('load', function(){
             var select = document.getElementById('domain');
             select.addEventListener('change', function(){
-                window.location = '/controls?domain=' + this.value;
+                window.location = '/bob/index?domain=' + this.value;
             }, false);
 
             var select = document.getElementById('scope');
             select.addEventListener('change', function(){
-                window.location = '/controls?scope=' + this.value;
+                window.location = '/bob/index?scope=' + this.value;
             }, false);
 
             var select = document.getElementById('attribute');
             select.addEventListener('change', function(){
-                window.location = '/controls?attribute=' + encodeURIComponent(this.value);
+                window.location = '/bob/index?attribute=' + encodeURIComponent(this.value);
             }, false);
 
             select = document.getElementById('cur_period');
             select.addEventListener('change', function(){
-                window.location = '/controls?period=' + this.value;
+                window.location = '/bob/index?period=' + this.value;
             }, false);
 
             select = document.getElementById('status0');
             select.addEventListener('change', function(){
-                window.location = '/controls?status=0';
+                window.location = '/bob/index?status=0';
             }, false);
 
             select = document.getElementById('status1');
             select.addEventListener('change', function(){
-                window.location = '/controls?status=1';
+                window.location = '/bob/index?status=1';
             }, false);
 
             select = document.getElementById('status2');
             select.addEventListener('change', function(){
-                window.location = '/controls?status=2';
+                window.location = '/bob/index?status=2';
             }, false);
         }, false);
 
@@ -158,7 +158,7 @@
                 </a>
             </td>
             <td>
-                <a id="{{ $control->clause }}" href="/measures/{{ $control->measure_id }}">
+                <a id="{{ $control->clause }}" href="/alice/show/{{ $control->measure_id }}">
                     {{ $control->clause }}
                 </a>
             </td>
@@ -188,7 +188,7 @@
             <td>
                 <!-- format in red when month passed -->
                 @if ($control->realisation_date == null)
-                <a id="{{ $control->plan_date }}" href="/control/show/{{$control->id}}">
+                <a id="{{ $control->plan_date }}" href="/bob/show/{{$control->id}}">
                 <b> @if (today()->lte($control->plan_date))
                         <font color="green">{{ $control->plan_date }}</font>
                     @else
@@ -202,7 +202,7 @@
             </td>
             <td>
                 <b id="{{ $control->realisation_date }}">
-                    <a href="/control/show/{{$control->id}}">
+                    <a href="/bob/show/{{$control->id}}">
                         {{ $control->realisation_date }}
                     </a>
                 </b>
@@ -210,7 +210,7 @@
             <td>
                 <b id="{{ $control->next_date }}">
                     @if ($control->next_id!=null)
-                    <a href="/controls/{{$control->next_id}}">
+                    <a href="/bob/show/{{$control->next_id}}">
                         {{ $control->next_date }}
                     </a>
                     @endif

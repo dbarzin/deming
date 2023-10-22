@@ -40,7 +40,7 @@
                             @endif
                         @endforeach
                     <tr>
-                        <td><a href="/controls?domain=0&period=99&status=1&attribute={{ urlencode($value) }}">{{ $value }}</a></td>
+                        <td><a href="/bob/index?domain=0&period=99&status=1&attribute={{ urlencode($value) }}">{{ $value }}</a></td>
                         <td>
                             <font color="30FF30"><?php echo $score3; ?></font> -
                             <font color="ff5733"><?php echo $score2; ?></font> -

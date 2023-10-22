@@ -11,10 +11,10 @@
 	    	</div>
 			<div class="cell">
 				<a href="/domains/{{$measure->domain_id}}">
-				{{ $measure->domain->title }}
+				{{ $measure->domain->title ?? ""}}
 				</a>
 				-
-				{{ $measure->domain->description }}
+				{{ $measure->domain->description ?? "" }}
 			</div>
 	    </div>
 
@@ -91,7 +91,7 @@
 
 		<div class="form-group">
 			@if (Auth::User()->role !== 3)
-		    <form action="/measure/plan/{{ $measure->id }}">
+		    <form action="/alice/plan/{{ $measure->id }}">
 		    	<button class="button info">
 		            <span class="mif-calendar"></span>
 		            &nbsp;
@@ -99,7 +99,7 @@
 		    	</button>
 		    </form>
 		    &nbsp;
-		    <form action="/measures/{{ $measure->id }}/edit">
+		    <form action="/alice/{{ $measure->id }}/edit">
 		    	<button class="button primary">
 		            <span class="mif-wrench"></span>
 		            &nbsp;
@@ -107,7 +107,7 @@
 		    	</button>
 		    </form>
 		    &nbsp;
-			<form action="/measures/{{ $measure->id }}" method="post" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
+			<form action="/alice/delete/{{ $measure->id }}" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
 				{{ method_field('delete') }}
 				@csrf
 				<button class="button alert" type="submit">
@@ -118,7 +118,7 @@
 	        </form>
 		    &nbsp;
 		    @endif
-		    <form action="/measures">
+		    <form action="/alice/index">
 		    	<button class="button">
 					<span class="mif-cancel"></span>
 					&nbsp;

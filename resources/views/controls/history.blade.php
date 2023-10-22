@@ -31,7 +31,7 @@
                     ?>
                     <tr>
                         <td align="center">
-                        <a href="/controls?period={{$i+$delta}}&domain=0&scope=none&status=0">
+                        <a href="/bob/index?period={{$i+$delta}}&domain=0&scope=none&status=0">
                           <?php        
 	                     echo $first->format("m/Y");
                           ?>
@@ -145,7 +145,7 @@
             ?>
             <tr>
                 <td align="center">
-                <a href="/controls?period={{$i+$delta}}&domain=0&scope=none&status=0">
+                <a href="/bob/index?period={{$i+$delta}}&domain=0&scope=none&status=0">
                 <?php        
 	             echo $first->format("m/Y");
                 ?>
@@ -432,7 +432,7 @@
                 onClick:  (event, elements, chart) => {
                     var activePoints = window.myBar.getElementsAtEvent(event);
                     var firstPoint = activePoints[0];
-                    window.location.href="/control/history?date="+(barChartData.labels[firstPoint._index]);
+                    window.location.href="/bob/history?date="+(barChartData.labels[firstPoint._index]);
                     }
                 },
             });
@@ -440,7 +440,7 @@
 
     window.addEventListener('load', function(){
         document.getElementById('date').addEventListener('change', function(){
-            window.location = '/control/history?date=' + this.value;
+            window.location = '/bob/history?date=' + this.value;
         }, false);
     }, false);
 

@@ -10,7 +10,7 @@
 		@endforeach
 	@endif
 
-	<form method="POST" action="/control/make" enctype="multipart/form-data">
+	<form method="POST" action="/bob/make" enctype="multipart/form-data">
 		@csrf
 		<input type="hidden" name="id" value="{{ $control->id }}"/>
 
@@ -87,7 +87,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.control.fields.evidence') }}</strong>
 		    		<br>
-					<a target="_new" href="/control/template/{{ $control->id }}">{{ trans('cruds.control.checklist') }}</a>
+					<a target="_new" href="/bob/template/{{ $control->id }}">{{ trans('cruds.control.checklist') }}</a>
 		    	</div>
 				<div class="cell-6">
 					<div class="dropzone dropzone-previews" id="dropzoneFileUpload"></div>
@@ -194,14 +194,14 @@
 						{{ trans('common.make') }}
 					</button>
 					&nbsp;
-					<button type="submit" class="button primary" onclick='this.form.action="/control/draft"'>
+					<button type="submit" class="button primary" onclick='this.form.action="/bob/draft"'>
 			            <span class="mif-floppy-disk"></span>
 			            &nbsp;
 						{{ trans('common.save') }}
 					</button>
 					&nbsp;
 					</form>
-					<form action="/controls/{{ $control->id }}">
+					<form action="/bob/show/{{ $control->id }}">
 			    		<button type="submit" class="button">
 							<span class="mif-cancel"></span>
 							&nbsp;

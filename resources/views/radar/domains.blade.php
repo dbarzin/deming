@@ -10,7 +10,7 @@
                 <div class="cell-9">
                 </div>
                 <div class="cell-3">
-                    <form action="/control/radar/domains">
+                    <form action="/radar/domains">
                     <strong>{{ trans("cruds.control.fields.scope") }}</strong>
                     <select name="scope" data-role="select" id="scope">
                         @foreach ($scopes as $scope)
@@ -140,7 +140,7 @@
     window.addEventListener('load', function(){
         var select = document.getElementById('scope');
         select.addEventListener('change', function(){
-            window.location = '/control/radar/domains?scope=' + this.value;
+            window.location = '/radar/domains?scope=' + this.value;
         }, false);
     });
 

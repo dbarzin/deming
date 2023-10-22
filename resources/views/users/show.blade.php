@@ -91,12 +91,12 @@
 	    			@foreach($user->lastControls as $control)
 	    				<tr>
 				            <td>
-				                <a id="{{ $control->domain->title }}" href="/domains/{{ $control->domain_id}}">
+				                <a id="{{ $control->domain->title }}" href="/alice/show/{{ $control->domain_id}}">
 				                    {{ $control->domain->title }}
 				                </a>
 				            </td>
 				            <td>
-				                <a id="{{ $control->clause }}" href="/measures/{{ $control->measure_id }}">
+				                <a id="{{ $control->clause }}" href="/alice/show/{{ $control->measure_id }}">
 				                    {{ $control->clause }}
 				                </a>
 				            </td>
@@ -104,7 +104,7 @@
 				                    {{ $control->name }} 
 				            </td>
 		    				<td>
-				                <a id="{{ $control->plan_date }}" href="/control/show/{{$control->id}}">
+				                <a id="{{ $control->plan_date }}" href="/bob/show/{{$control->id}}">
 				                <b>
 				                    @if( strtotime($control->plan_date) >= strtotime('now') ) 
 				                        <font color="green">{{ $control->plan_date }}</font>

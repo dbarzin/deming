@@ -29,7 +29,7 @@
                     <div class="icon">
                         <span class="mif-books"></span>
                     </div>
-                    <a href="/measures" class="more"> {{ trans('common.more_info' )}} <span class="mif-arrow-right"></span></a>
+                    <a href="/alice/index" class="more"> {{ trans('common.more_info' )}} <span class="mif-arrow-right"></span></a>
                 </div>
             </div>
             <div class="cell-lg-3 cell-md-6 mt-2">
@@ -43,7 +43,7 @@
                     <div class="icon">
                         <span class="mif-paste"></span>
                     </div>
-                    <a href="/controls?attribute=none&domain=0&scope=none&period=99&status=1" class="more"> {{ trans('common.more_info' )}} <span class="mif-arrow-right"></span></a>
+                    <a href="/bob/index?attribute=none&domain=0&scope=none&period=99&status=1" class="more"> {{ trans('common.more_info' )}} <span class="mif-arrow-right"></span></a>
                 </div>
             </div>
             <div class="cell-lg-3 cell-md-6 mt-2">
@@ -122,24 +122,24 @@
             <tbody>
 
             @foreach($controls_todo as $control)
-                <tr onclick="window.location = '/controls/{{$control->id}}';">
+                <tr onclick="window.location = '/bob/show/{{$control->id}}';">
                     <td id="{{ $control->domain }}">
-                        <a href="/domains/{{$control->domain_id}}">
+                        <a href="/domain/show/{{$control->domain_id}}">
                             {{ $control->domain }}
                         </a>
                     </td>
                     <td>
-                        <a id="{{ $control->clause }}" href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a>
+                        <a id="{{ $control->clause }}" href="/alice/show/{{ $control->measure_id }}">{{ $control->clause }}</a>
                     </td>
                     <td>{{ $control->name }}</td>
                     <td>
-                        <a id="{{ $control->scope }}" href="/controls/?domain=0&attribute=none&scope={{ urlencode($control->scope) }}&status=0&period=99">
+                        <a id="{{ $control->scope }}" href="/bob/index?domain=0&attribute=none&scope={{ urlencode($control->scope) }}&status=0&period=99">
                         {{ $control->scope }}
                         </a>
                     </td>
                     <td>
                         <center id="{{ $control->score }}">
-                            <a href="/control/show/{{ $control->prev_id }}">
+                            <a href="/bob/show/{{ $control->prev_id }}">
                             @if ($control->score==1)
                                 &#128545; 
                             @elseif ($control->score==2)
@@ -154,13 +154,13 @@
                     </td>
 
                     <td>
-                        <a id="{{ $control->prev_date }}" href="/control/show/{{$control->prev_id}}">
+                        <a id="{{ $control->prev_date }}" href="/bob/show/{{$control->prev_id}}">
                             {{ $control->prev_date }}
                         </a>
                     </td>
                     <td>
                         <b id="{{ $control->plan_date }}">
-                            <a href="/controls/{{ $control->id }}">
+                            <a href="/bob/show/{{ $control->id }}">
                             @if (today()->lte($control->plan_date)) 
                                 <font color="green">
                             @else
@@ -316,7 +316,7 @@
             onClick:  (event, elements, chart) => {
                 var activePoints = window.myBar.getElementsAtEvent(event);
                 var firstPoint = activePoints[0];
-                window.location.href="/controls?domain=0&attribute=none&scope=none&status=0&period="+(firstPoint._index-12);
+                window.location.href="/bob/index?domain=0&attribute=none&scope=none&status=0&period="+(firstPoint._index-12);
             }
         },
     });
