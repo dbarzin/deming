@@ -214,6 +214,9 @@ class MeasureController extends Controller
             ]
         );
 
+        // not found
+        abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+
         // update measure
         $measure->domain_id = request('domain_id');
         $measure->name = request('name');
@@ -244,7 +247,7 @@ class MeasureController extends Controller
         }
 
         // retun to view measure
-        return redirect('/measures/'.$measure->id);
+        return redirect('/alice/show/'.$measure->id);
     }
 
     /**
@@ -363,7 +366,7 @@ class MeasureController extends Controller
         }
 
         // return to the list of measures
-        return redirect('/measures');
+        return redirect('/alice/index');
     }
 
     /**
@@ -392,7 +395,7 @@ class MeasureController extends Controller
         }
 
         // return to the list of measures
-        return redirect('/measures');
+        return redirect('/alice/index');
     }
 
     /**

@@ -31,6 +31,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/alice/index', 'MeasureController@index');
     Route::get('/alice/create', 'MeasureController@create');
     Route::post('/alice/store', 'MeasureController@store');
+    Route::patch('/alice/save/{id}', 'MeasureController@update');
     Route::get('/alice/{id}/edit', 'MeasureController@edit');
     Route::get('/alice/plan/{id}', 'MeasureController@plan');
     Route::get('/alice/show/{id}', 'MeasureController@show');
