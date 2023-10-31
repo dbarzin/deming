@@ -16,7 +16,7 @@
 	</div>
 	@endif
 
-	<form method="POST" action="/alices/{{ $measure->id }}">
+	<form method="POST" action="/alice/{{ $measure->id }}">
 		@method("PATCH")
 		@csrf
 		<div class="grid">
@@ -42,7 +42,7 @@
 		    	</div>
 				<div class="cell-3">
 					<input type="text" name="clause" data-role="input"
-					value="{{ $errors->has('clause') ?  old('clause') : $measure->clause }}" 
+					value="{{ $errors->has('clause') ?  old('clause') : $measure->clause }}"
 					size='60'>
 				</div>
 			</div>
@@ -52,8 +52,8 @@
 		    		<strong>{{ trans('cruds.measure.fields.name') }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<input type="text" name="name" data-role="input" 
-						value="{{ $errors->has('name') ?  old('name') : $measure->name }}" 
+					<input type="text" name="name" data-role="input"
+						value="{{ $errors->has('name') ?  old('name') : $measure->name }}"
 						size='60'>
 				</div>
 			</div>
@@ -140,4 +140,3 @@
 	</div>
 </div>
 @endsection
-
