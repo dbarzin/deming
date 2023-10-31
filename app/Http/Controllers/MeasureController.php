@@ -199,7 +199,7 @@ class MeasureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Measure $measure)
+    public function update(Request $request)
     {
         // Not for Auditor
         abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -213,6 +213,9 @@ class MeasureController extends Controller
                 'objective' => 'required',
             ]
         );
+
+        // find measure
+        $measure = Measure::find($request->id);
 
         // not found
         abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
@@ -228,7 +231,7 @@ class MeasureController extends Controller
         $measure->indicator = request('indicator');
         $measure->action_plan = request('action_plan');
 
-        $measure->save();
+        $measure->update();
 
         // update the current control
         $control = Control::where('measure_id', $measure->id)
@@ -257,12 +260,12 @@ class MeasureController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Measure $measure)
+    public function destroy(Request $request)
     {
         // Not for Auditor
         abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $measure->delete();
+        Measure::destroy($request->id);
 
         return redirect('/alice/index');
     }

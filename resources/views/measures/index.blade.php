@@ -11,8 +11,8 @@
 						    <option value="0">-- {{ trans('cruds.domain.choose') }} --</option>
 							@foreach ($domains as $domain)
 						    	<option value="{{ $domain->id }}"
-									@if (((int)Session::get("domain"))==$domain->id)		
-										selected 
+									@if (((int)Session::get("domain"))==$domain->id)
+										selected
 									@endif >
 						    		{{ $domain->title }} - {{ $domain->description }}
 						    	</option>
@@ -61,7 +61,7 @@
 			@foreach($measures as $measure)
 				<tr>
 					<td>
-						<a href="/domain/show/{{$measure->domain_id}}">
+						<a href="/domains/{{$measure->domain_id}}">
 							{{ $measure->title }}
 						</a>
 					</td>
@@ -76,7 +76,7 @@
 					<td>{{ $measure->name }}</td>
 					<td>
 						@if ($measure->control_count>0)
-						<a href="/bob/index?period=99&domain=0&scope=none&status=2&measure={{ $measure->id }}"> 
+						<a href="/bob/index?period=99&domain=0&scope=none&status=2&measure={{ $measure->id }}">
 							{{ $measure->control_count }}
 						</a>
 						@else

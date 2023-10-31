@@ -17,7 +17,6 @@
 	@endif
 
 	<form method="POST" action="/alice/save/{{ $measure->id }}">
-		@method("PATCH")
 		@csrf
 		<div class="grid">
 	    	<div class="row">

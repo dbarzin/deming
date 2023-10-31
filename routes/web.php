@@ -31,11 +31,11 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/alice/index', 'MeasureController@index');
     Route::get('/alice/create', 'MeasureController@create');
     Route::post('/alice/store', 'MeasureController@store');
-    Route::patch('/alice/save/{id}', 'MeasureController@update');
+    Route::post('/alice/save/{id}', 'MeasureController@update');
     Route::get('/alice/{id}/edit', 'MeasureController@edit');
     Route::get('/alice/plan/{id}', 'MeasureController@plan');
     Route::get('/alice/show/{id}', 'MeasureController@show');
-    Route::delete('/alice/delete/{id}', 'MeasureController@destroy');
+    Route::post('/alice/delete/{id}', 'MeasureController@destroy');
     Route::post('/alice/activate/{id}', 'MeasureController@activate');
     Route::get('/alice/import', function () {
         return view('measures/import');
