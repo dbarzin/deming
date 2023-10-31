@@ -217,7 +217,7 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
 	              'X-CSRF-TOKEN': '{{csrf_token()}}'
 	               },
 	            type: 'GET',
-	            url: '{{ url( "/doc/delete" ) }}'+"/"+file.id,
+	            url: '/doc/delete/'+file.id,
 	            success: function (data) {
 	                console.log("File has been successfully removed");
 	            	},

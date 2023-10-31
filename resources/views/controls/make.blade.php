@@ -52,23 +52,23 @@
 		    		<strong>{{ trans('cruds.control.fields.realisation_date') }}</strong>
 		    	</div>
 				<div class="cell-2">
-					<input type="text" 
-						data-role="calendarpicker" 
-						name="realisation_date" 
-						value="{{ 
+					<input type="text"
+						data-role="calendarpicker"
+						name="realisation_date"
+						value="{{
 							\Carbon\Carbon::now()
 							->format('Y-m-d')
-							}}" 
+							}}"
 						data-input-format="%Y-%m-%d">
 				</div>
 				<div class="cell-2">
 					<b>{{ trans('cruds.control.fields.plan_date') }}</b>
 				</div>
-				<div class="cell-2">				
-					<input type="text" 
-						data-role="calendarpicker" 
+				<div class="cell-2">
+					<input type="text"
+						data-role="calendarpicker"
 						name="plan_date"
-						value="{{ count($errors)>0 ?  old('plan_date') : $control->plan_date }}" 
+						value="{{ count($errors)>0 ?  old('plan_date') : $control->plan_date }}"
 						data-input-format="%Y-%m-%d">
 
 				</div>
@@ -102,7 +102,7 @@
 					<pre>{{ $control->model }}</pre>
 				</div>
 			</div>
-			
+
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.control.fields.note') }}</strong>
@@ -122,7 +122,7 @@
 			</div>
 
 	    	<div class="row">
-	    		<div class="cell-1">	    			
+	    		<div class="cell-1">
 		    		<strong>
 		    			{{ trans('cruds.control.fields.score') }}
 		    		</strong>
@@ -130,9 +130,9 @@
 				<div class="cell">
 					<input type="radio" name="score" value="3" data-role="radio" {{ $control->score==3 ? "selected" : "" }} >
 					<font color="green">{{ trans('common.green') }}</font> &nbsp;
-					<input type="radio" name="score" value="2" data-role="radio" {{ $control->score==2 ? "selected" : "" }}> 
+					<input type="radio" name="score" value="2" data-role="radio" {{ $control->score==2 ? "selected" : "" }}>
 					<font color="orange">{{ trans('common.orange') }}</font> &nbsp;
-					<input type="radio" name="score" value="1" data-role="radio" {{ $control->score==1 ? "selected" : "" }}> 
+					<input type="radio" name="score" value="1" data-role="radio" {{ $control->score==1 ? "selected" : "" }}>
 					<font color="red">{{ trans('common.red') }}</font>
 				</div>
 			</div>
@@ -151,10 +151,10 @@
 		    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
 		    	</div>
 				<div class="cell-2">
-					<input type="text" 
-						data-role="calendarpicker" 
-						name="next_date" 
-						value="{{ 
+					<input type="text"
+						data-role="calendarpicker"
+						name="next_date"
+						value="{{
 							$control->next_date==null ?
 							\Carbon\Carbon::createFromFormat('Y-m-d',$control->plan_date)
 								->addMonths($control->periodicity)
@@ -165,14 +165,14 @@
 				</div>
 				<div class="cell-1">
 				(
-				@if ($control->periodicity==1) 
-					{{ trans("common.monthly") }} 
-				@elseif ($control->periodicity==3) 
-					{{ trans("common.quarterly") }} 
-				@elseif ($control->periodicity==6) 
-					{{ trans("common.biannually") }} 
-				@elseif ($control->periodicity==12) 
-					{{ trans("common.annually") }} 
+				@if ($control->periodicity==1)
+					{{ trans("common.monthly") }}
+				@elseif ($control->periodicity==3)
+					{{ trans("common.quarterly") }}
+				@elseif ($control->periodicity==6)
+					{{ trans("common.biannually") }}
+				@elseif ($control->periodicity==12)
+					{{ trans("common.annually") }}
 				@else
 					{{ $control->periodicity }}
 				@endif
@@ -190,7 +190,7 @@
 		    	<div class="row-12">
 					<button type="submit" class="button success">
 						<span class="mif-done"></span>
-						&nbsp;	    			
+						&nbsp;
 						{{ trans('common.make') }}
 					</button>
 					&nbsp;
@@ -221,7 +221,7 @@
 <script>
 Dropzone.autoDiscover = false;
 
-const myDropzone = new Dropzone("div#dropzoneFileUpload", {  
+const myDropzone = new Dropzone("div#dropzoneFileUpload", {
         url: '/doc/store',
 	    headers: { 'x-csrf-token': '{{csrf_token()}}' },
 	    params: { 'control': '{{ $control->id }}' },
@@ -229,7 +229,7 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
             // acceptedFiles: ".jpeg,.jpg,.png,.gif",
             addRemoveLinks: true,
             timeout: 50000,
-            removedfile: function(file) 
+            removedfile: function(file)
             {
                 console.log("remove file " + file.name + " " + file.id);
                 $.ajax({
@@ -237,7 +237,7 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
                       'X-CSRF-TOKEN': '{{csrf_token()}}'
                        },
                     type: 'GET',
-                    url: '{{ url( "/doc/delete" ) }}'+"/"+file.id,
+                    url: '/doc/delete/'+file.id,
                     success: function (data){
                         console.log("File has been successfully removed");
                     },
@@ -247,11 +247,11 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
                     }});
                     // console.log('{{ url( "/doc/delete" ) }}'+"/"+file.id+']');
                     var fileRef;
-                    return (fileRef = file.previewElement) != null ? 
+                    return (fileRef = file.previewElement) != null ?
                     fileRef.parentNode.removeChild(file.previewElement) : void 0;
             },
-       
-            success: function(file, response) 
+
+            success: function(file, response)
             {
                 file.id=response.id;
                 console.log("success response");
@@ -264,16 +264,16 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
                return false;
             },
             init: function () {
-            //Add existing files into dropzone            
+            //Add existing files into dropzone
             var existingFiles = [
-            @foreach ($documents as $document) 
+            @foreach ($documents as $document)
                 { name: "{{ $document->filename }}", size: {{ $document->size }}, id: {{ $document->id }} },
             @endforeach
             ];
             for (i = 0; i < existingFiles.length; i++) {
-                this.emit("addedfile", existingFiles[i]);                
-                this.emit("complete", existingFiles[i]);                
-            	}            
+                this.emit("addedfile", existingFiles[i]);
+                this.emit("complete", existingFiles[i]);
+            	}
         	}
     	}
     );
