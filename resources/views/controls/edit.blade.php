@@ -75,14 +75,14 @@
 			    	</div>
 					<div class="cell-2">
 						<input type="text" data-role="calendarpicker" name="plan_date" value="{{$control->plan_date}}"
-						data-input-format="%Y-%m-%d"> 
+						data-input-format="%Y-%m-%d">
 					</div>
 		    		<div class="cell-1">
 			    		<strong>{{ trans("cruds.control.fields.realisation_date") }}</strong>
 			    	</div>
 					<div class="cell-2">
-						<input type="text" data-role="calendarpicker" name="realisation_date" value="{{$control->realisation_date}}" 
-					data-input-format="%Y-%m-%d"> 
+						<input type="text" data-role="calendarpicker" name="realisation_date" value="{{$control->realisation_date}}"
+					data-input-format="%Y-%m-%d">
 					</div>
 				</div>
 
@@ -127,11 +127,11 @@
 			    		<strong>{{ trans("cruds.control.fields.score") }}</strong>
 			    	</div>
 					<div class="cell">
-						<input type="radio" name="score" value="3" data-role="radio" {{ ($control->score==3) ? 'checked' : '' }}> 
+						<input type="radio" name="score" value="3" data-role="radio" {{ ($control->score==3) ? 'checked' : '' }}>
 						<font color="green">{{ trans("common.green") }}</font> &nbsp;
-						<input type="radio" name="score" value="2" data-role="radio" {{ ($control->score==2) ? 'checked' : '' }}> 
+						<input type="radio" name="score" value="2" data-role="radio" {{ ($control->score==2) ? 'checked' : '' }}>
 						<font color="orange">{{ trans("common.orange") }}</font> &nbsp;
-						<input type="radio" name="score" value="1" data-role="radio" {{ ($control->score==1) ? 'checked' : '' }}> 
+						<input type="radio" name="score" value="1" data-role="radio" {{ ($control->score==1) ? 'checked' : '' }}>
 						<font color="red">{{ trans("common.red") }}</font>
 					</div>
 				</div>
@@ -199,7 +199,9 @@
 </div>
 
 <script>
-Dropzone.options.dropzoneFileUpload = { 
+Dropzone.autoDiscover = false;
+
+const myDropzone = new Dropzone("div#dropzoneFileUpload", {
 	    url: '/doc/store',
 	    headers: { 'x-csrf-token': '{{csrf_token()}}'},
 	    params: { 'control': '{{ $control->id }}' },
@@ -207,7 +209,7 @@ Dropzone.options.dropzoneFileUpload = {
 	    // acceptedFiles: ".jpeg,.jpg,.png,.gif",
 	    addRemoveLinks: true,
 	    timeout: 50000,
-	    removedfile: function(file) 
+	    removedfile: function(file)
 	    {
 	        console.log("remove file " + file.name + " " + file.id);
 	        $.ajax({
@@ -226,11 +228,11 @@ Dropzone.options.dropzoneFileUpload = {
 	            });
 	            // console.log('{{ url( "/doc/delete" ) }}'+"/"+file.id+']');
 	            var fileRef;
-	            return (fileRef = file.previewElement) != null ? 
+	            return (fileRef = file.previewElement) != null ?
 	            fileRef.parentNode.removeChild(file.previewElement) : void 0;
 	    },
 
-	    success: function(file, response) 
+	    success: function(file, response)
 	    {
 	        file.id=response.id;
 	        console.log("respose");
@@ -242,17 +244,28 @@ Dropzone.options.dropzoneFileUpload = {
 	       return false;
 	    },
 		init: function () {
-	    //Add existing files into dropzone            
+	    //Add existing files into dropzone
 	    var existingFiles = [
-	    @foreach ($documents as $document) 
+	    @foreach ($documents as $document)
 	        { name: "{{ $document->filename }}", size: {{ $document->size }}, id: {{ $document->id }} },
 	    @endforeach
 	    ];
 	    for (i = 0; i < existingFiles.length; i++) {
-	        this.emit("addedfile", existingFiles[i]);                
-	        this.emit("complete", existingFiles[i]);                
-		    }            
+	        this.emit("addedfile", existingFiles[i]);
+	        this.emit("complete", existingFiles[i]);
+		    }
 		}
-	}
+	});
+
+    document.onpaste = function(event) {
+      const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+      items.forEach((item) => {
+      	console.log(item.kind);
+        if (item.kind === 'file') {
+          	// adds the file to your dropzone instance
+          	myDropzone.addFile(item.getAsFile())
+        	}
+      	})
+    }
 </script>
 @endsection
