@@ -565,7 +565,7 @@ class ControlController extends Controller
         if ($control === null) {
             return;
         }
-
+xxxxx
         $years = [];
         $cur_year = Carbon::now()->year;
         for ($i = 0; $i <= 3; $i++) {
@@ -645,9 +645,7 @@ class ControlController extends Controller
         $control = Control::find($request->id);
 
         // Control not found
-        if ($control === null) {
-            abort(404);
-        }
+        abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // Control already made ?
         if ($control->realisation_date !== null) {
@@ -683,11 +681,10 @@ class ControlController extends Controller
 
         $id = (int) request('id');
 
-        // Control not found
         $control = Control::find($id);
-        if ($control === null) {
-            abort(404);
-        }
+
+        // Control not found
+        abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // Control already made ?
         if ($control->realisation_date !== null) {
@@ -732,9 +729,7 @@ class ControlController extends Controller
         $control = Control::find($id);
 
         // Control not found
-        if ($control === null) {
-            abort(404);
-        }
+        abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // control already made ?
         if ($control->realisation_date !== null) {
@@ -790,9 +785,7 @@ class ControlController extends Controller
         $control = Control::find($request->id);
 
         // Control not found
-        if ($control === null) {
-            abort(404);
-        }
+        abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         $control->name = request('name');
         $control->scope = request('scope');
