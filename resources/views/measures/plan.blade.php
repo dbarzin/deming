@@ -55,8 +55,8 @@
 	    		<strong>{{ trans('cruds.control.fields.scope') }}</strong>
 	    	</div>
 			<div class="cell-4">
-				<input type="text" name="scope" data-role="input" autocomplete="off" size="32"
-				value="" data-autocomplete=" {{ implode(",",$scopes) }} "/>
+				<input type="text" name="scope" data-role="input" autocomplete="on" size="32"
+				value="{{ $measure->scope }}" data-autocomplete="{{ implode(",",$scopes) }}"/>
 			</div>
 		</div>
 
@@ -65,8 +65,8 @@
 				<strong>{{ trans('cruds.control.fields.plan_date') }}</strong>
 	    	</div>
 			<div class="cell-3">
-					<input type="text" data-role="calendarpicker" name="plan_date" 
-					value="{{ $measure->planDate() }}" data-input-format="%Y-%m-%d"> 
+					<input type="text" data-role="calendarpicker" name="plan_date"
+					value="{{ $measure->planDate() }}" data-input-format="%Y-%m-%d">
 			</div>
 		</div>
 
@@ -95,7 +95,6 @@
                     <option value="{{ $user->id }}" {{ in_array($user->id, old('owners', [])) ? 'selected' : '' }}>{{ $user->name }}</option>
                 @endforeach
             </select>
-			
 		</div>
 	</div>
 
@@ -128,4 +127,3 @@
 </div>
 
 @endsection
-
