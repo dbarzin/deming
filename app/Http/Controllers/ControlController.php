@@ -562,10 +562,10 @@ class ControlController extends Controller
     {
         // does not exists in that way
         $control = Control::find($id);
-        if ($control === null) {
-            return;
-        }
-xxxxx
+
+        // Control not found
+        abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+
         $years = [];
         $cur_year = Carbon::now()->year;
         for ($i = 0; $i <= 3; $i++) {
