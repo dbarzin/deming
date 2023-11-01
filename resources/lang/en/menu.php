@@ -19,6 +19,6 @@ return [
         'documents' => 'Documents',
         'models' => 'Models',
         'notifications' => 'Notifications'
-    ]
+    ],
+    'logout' => 'Logout'
 ];
-

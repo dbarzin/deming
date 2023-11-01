@@ -18,6 +18,6 @@ return [
         'import' => "Import",
         'documents' => 'Documents',
         'notifications' => 'Notifications'
-    ]
+    ],
+    'logout' => 'Quitter'
 ];
-

@@ -28,7 +28,7 @@
                 <button class="holder">
                     <span class="mif-search fg-white"></span>
                 </button>
-            </form>            
+            </form>
         </div>
 
         <ul class="navview-menu mt-4" id="side-menu">
@@ -134,11 +134,11 @@
                             <span class="icon"><span class="mif-file-excel"></span></span>
                             <span class="caption">{{ trans("menu.configuration.import") }}</span>
                         </a></li>
-                        <li><a href="/doc"> 
+                        <li><a href="/doc">
                             <span class="icon"><span class="mif-file-text"></span></span>
                             <span class="caption">{{ trans("menu.configuration.documents") }}</span>
                         </a></li>
-                        <li><a href="/config"> 
+                        <li><a href="/config">
                             <span class="icon"><span class="mif-alarm"></span></span>
                             <span class="caption">{{ trans("menu.configuration.notifications") }}</span>
                         </a></li>
@@ -151,7 +151,7 @@
                        onclick="event.preventDefault();
                                      document.getElementById('logout-form').submit();">
                         <span class="icon"><span class="mif-switch"></span></span>
-                        <span class="caption">Quitter</span>
+                        <span class="caption">{{ trans("menu.logout") }}</span>
 
                     </a>
                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
@@ -180,7 +180,7 @@
                 </a>
                 <a href="/bob/index?attribute=none&period=99&domain=0&status=1&late=1" class="app-bar-item">
                     <span class="mif-bell"></span>
-                    @if (Session::get("late_controls_count")!=null)                    
+                    @if (Session::get("late_controls_count")!=null)
                     <span class="badge bg-red fg-white mt-2 mr-1">{{Session::get("late_controls_count")}}</span>
                     @endif
                 </a>
