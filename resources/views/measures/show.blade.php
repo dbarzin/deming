@@ -108,6 +108,7 @@
 		    </form>
 		    &nbsp;
 			<form action="/alice/delete/{{ $measure->id }}" method="POST" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
+                @csrf
 				<button class="button alert" type="submit">
 					<span class="mif-fire"></span>
 					&nbsp;
