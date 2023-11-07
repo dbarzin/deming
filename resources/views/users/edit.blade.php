@@ -48,15 +48,15 @@
 					<input type="text" class="input {{ $errors->has('title') ? 'is-danger' : ''}}" name="title" value="{{ $errors->has('title') ?  old('title') : $user->title }}" size='80'>
 				</div>
 			</div>
-			
+
 	    	<div class="row">
 	    		<div class="cell-1">
 					<label>{{ trans('cruds.user.fields.language') }}</label>
 				</div>
 	    		<div class="cell-3">
 	    			<select name='language' value='language'>
-	    				<option {{ $user->language=='en' ? 'selected' : ''}} >en</option>
-	    				<option {{ $user->language=='fr' ? 'selected' : ''}} >fr</option>
+	    				<option {{ (count($errors)>0 ?  old('language') : $user->language) =='en' ? 'selected' : ''}} >en</option>
+                        <option {{ (count($errors)>0 ?  old('language') : $user->language) =='fr' ? 'selected' : ''}} >fr</option>
 	    			</select>
 				</div>
 			</div>
@@ -82,23 +82,23 @@
 	    		<div class="cell-1">
 					<label class="label" for="description">{{ trans('cruds.user.fields.email') }}</label>
 				</div>
-	    		<div class="cell-3">					
+	    		<div class="cell-3">
 					<input type="text" name="email" class="input {{ $errors->has('email') ? 'is-danger' : ''}}" value="{{ $errors->has('email') ?  old('email') : $user->email }}" size="120">
 				</div>
 			</div>
 
-	        @if (Config::get('app.ldap_domain') === null) 
+	        @if (Config::get('app.ldap_domain') === null)
 
 	    	<div class="row">
 	    		<div class="cell-1">
 					<label class="label" for="description">{{ trans('cruds.user.fields.password') }}</label>
 				</div>
 	    		<div class="cell-5">
-					<input type="password" name="password1"/>	
+					<input type="password" name="password1"/>
 					<input type="password" name="password2"/>
 				</div>
 			</div>
-			
+
 			@endif
 
 		</div>
@@ -116,7 +116,7 @@
 	                       <option value="{{ $control->id }}" {{ (in_array($control->id, old('controls', [])) || ($user->controls->contains($control->id))) ? 'selected' : '' }}>{{ $control->clause }}</option>
 	                @endforeach
 	            </select>
-    			
+
     		</div>
     	</div>
     	<div class="row">
@@ -139,8 +139,5 @@
 	    			{{ trans('common.cancel') }}</button>
 			</form>
 		</div>
-	</div>	
+	</div>
 @endsection
-
-
-
