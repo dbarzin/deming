@@ -263,8 +263,8 @@ class ControlController extends Controller
             (
                 (Auth::User()->role === 5)&&
                 !DB::table('control_user')
-                    ->where('user_id',$id)
-                    ->where('control_id',Auth::User()->id)
+                    ->where('control_id', $id)
+                    ->where('user_id', Auth::User()->id)
                     ->exists()
             ), Response::HTTP_FORBIDDEN, '403 Forbidden');
 

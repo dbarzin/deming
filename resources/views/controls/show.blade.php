@@ -76,7 +76,7 @@
     		<div class="cell-1">
     			<strong>{{ trans("common.previous") }}</strong>
     			<br>
-	    		<strong>{{ trans("common.next") }}</strong>	    		
+	    		<strong>{{ trans("common.next") }}</strong>
 	    	</div>
 			<div class="cell-1">
 		    	@if ($prev_id!=null)
@@ -160,12 +160,12 @@
 	                    &#9899;
 	                @endif
 					&nbsp; - &nbsp;
-					@if ($control->score==1) 
+					@if ($control->score==1)
 						{{ trans("common.red") }}
-					@elseif ($control->score==2) 
+					@elseif ($control->score==2)
 						{{ trans("common.orange") }}
-					@elseif ($control->score==3) 
-						{{ trans("common.green") }}						
+					@elseif ($control->score==3)
+						{{ trans("common.green") }}
 					@endif
 				</div>
 			</div>
@@ -212,16 +212,18 @@
 
    	<div class="row">
    		<div class="cell-7">
-			@if ((Auth::User()->role==1)||(Auth::User()->role==2))
+			@if ((Auth::User()->role===1)||(Auth::User()->role===2)||(Auth::User()->role===5))
 				@if ($control->realisation_date==null)
 			    <form action="/bob/make/{{ $control->id }}">
 		    		<button class="button success">
 						<span class="mif-assignment"></span>
-						&nbsp;	    			
+						&nbsp;
 			    		{{ trans("common.make") }}
 			    	</button>
 				</form>
 				&nbsp;
+            @endif
+            @if ((Auth::User()->role===1)||(Auth::User()->role===2))
 			    <form action="/bob/plan/{{ $control->id }}">
 		    		<button class="button info">
 						<span class="mif-calendar"></span>

@@ -90,7 +90,7 @@
 		</div>
 
 		<div class="form-group">
-			@if (Auth::User()->role !== 3)
+			@if (Auth::User()->role === 1)
 		    <form action="/alice/plan/{{ $measure->id }}">
 		    	<button class="button info">
 		            <span class="mif-calendar"></span>
