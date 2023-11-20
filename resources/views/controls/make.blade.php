@@ -136,7 +136,7 @@
 					<font color="red">{{ trans('common.red') }}</font>
 				</div>
 			</div>
-
+            @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.control.fields.action_plan') }}</strong>
@@ -145,23 +145,21 @@
 					<textarea name="action_plan" rows="5" data-role="textarea" data-clear-button="false">{{ $errors->count()>0 ?  old('action_plan') : $control->action_plan }}</textarea>
 				</div>
 			</div>
-
+            @endif
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
 		    	</div>
 				<div class="cell-2">
-					<input type="text"
-						data-role="calendarpicker"
-						name="next_date"
-						value="{{
-							$control->next_date==null ?
-							\Carbon\Carbon::createFromFormat('Y-m-d',$control->plan_date)
-								->addMonths($control->periodicity)
-								->format('Y-m-d')
-							: $control->next_date->format('Y-m-d')
-							}}"
-						data-input-format="%Y-%m-%d">
+                    @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
+    					<input type="text"
+    						data-role="calendarpicker"
+    						name="next_date"
+    						value="{{ $next_date }}"
+    						data-input-format="%Y-%m-%d"/>
+                    @else
+                        {{ $control->next_date }}
+                    @endif
 				</div>
 				<div class="cell-1">
 				(
@@ -179,7 +177,6 @@
 				)
 				</div>
 			</div>
-
 			<div class="grid">
 		    	<div class="row">
 		    		&nbsp;

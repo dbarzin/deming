@@ -60,9 +60,9 @@
 					</div>
 		    		<div class="cell-3">
 						<select name="role" class="input">
-							<option></option>
 						    <option value="1" {{ old('role')==1 ? "selected" : "" }}>{{ trans('cruds.user.roles.admin') }}</option>
 						    <option value="2" {{ old('role')==2 ? "selected" : "" }}>{{ trans('cruds.user.roles.user') }}</option>
+                            <option value="5" {{ old('role')==3 ? "selected" : "" }}>{{ trans('cruds.user.roles.auditee') }}</option>
 						    <option value="3" {{ old('role')==3 ? "selected" : "" }}>{{ trans('cruds.user.roles.auditor') }}</option>
 						    <option value="4" {{ old('role')==4 ? "selected" : "" }}>{{ trans('cruds.user.roles.api') }}</option>
 						</select>
@@ -77,14 +77,14 @@
 					</div>
 				</div>
 
-		        @if (Config::get('app.ldap_domain') === null) 
+		        @if (Config::get('app.ldap_domain') === null)
 		    	<div class="row">
 		    		<div class="cell-1">
 						<label class="label" for="description">{{ trans('cruds.user.fields.password') }}</label>
 					</div>
 		    		<div class="cell-5">
-						<input type="password" name="password1"/>	
-						<input type="password" name="password2"/>	
+						<input type="password" name="password1"/>
+						<input type="password" name="password2"/>
 					</div>
 				</div>
 				@endif
@@ -98,7 +98,7 @@
 						{{ trans('common.save') }}
 					</button>
 					<button type="submit" class="button" onclick="this.form.method='GET';">
-						<span class="mif-cancel"></span> 
+						<span class="mif-cancel"></span>
 						&nbsp;
 						{{ trans('common.cancel') }}
 					</button>
@@ -109,4 +109,3 @@
 </div>
 
 @endsection
-

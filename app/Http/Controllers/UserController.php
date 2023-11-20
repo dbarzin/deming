@@ -20,6 +20,9 @@ class UserController extends Controller
      */
     public function index()
     {
+        // Only for administrator role
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $users = DB::table('users')->orderBy('id', 'asc')->get();
 
         return view('users.index')->with('users', $users);
@@ -101,6 +104,13 @@ class UserController extends Controller
      */
     public function show(User $user)
     {
+        abort_if(
+            (Auth::User()->role !== 1) &&
+            (Auth::User()->id !== $user->id),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
         return view('users.show', compact('user'));
     }
 
@@ -121,6 +131,7 @@ class UserController extends Controller
         );
 
         $controls = Control::select('id', 'clause')->whereNull('realisation_date')->orderBy('clause')->get();
+
         return view('users.edit', compact('user', 'controls'));
     }
 
@@ -204,6 +215,8 @@ class UserController extends Controller
 
     public function export()
     {
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return Excel::download(new UsersExport(), 'users.xlsx');
     }
 }

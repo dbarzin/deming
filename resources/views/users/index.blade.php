@@ -35,25 +35,25 @@
 		       data-check-style="1">
 			    <thead>
 			    <tr>
-					<th 
+					<th
 						data-sortable="true"
 						data-sort-dir="asc"
 						data-format="string"
 						width="50"
 						>{{ trans('cruds.user.fields.login') }}</th>
-					<th 
+					<th
 						data-sortable="true"
 						data-sort-dir="asc"
 						data-format="string"
 						width="50"
 						>{{ trans('cruds.user.fields.name') }}</th>
-					<th 
+					<th
 						data-sortable="true"
 						data-sort-dir="asc"
 						data-format="string"
 						width="50"
-						>{{ trans('cruds.user.fields.title') }}</th>
-					<th 
+						>{{ trans('cruds.user.fields.role') }}</th>
+					<th
 						data-sortable="true"
 						data-format="string"
 						data-format="string"
@@ -65,7 +65,13 @@
 				<tr>
 					<td><a href="/users/{{ $user->id}}">{{ $user->login==null ? "N/A" : $user->login }}</a></td>
 					<td>{{ $user->name }}</td>
-					<td>{{ $user->title }}</td>
+                    <td>
+                    {{ $user->role==1 ? trans('cruds.user.roles.admin') : "" }}
+		    		{{ $user->role==2 ? trans('cruds.user.roles.user') : "" }}
+                    {{ $user->role==5 ? trans('cruds.user.roles.auditee') : "" }}
+		    		{{ $user->role==3 ? trans('cruds.user.roles.auditor') : "" }}
+		    		{{ $user->role==4 ? trans('cruds.user.roles.api') : "" }}
+                    </td>
 					<td>{{ $user->email }}</td>
 				</tr>
 			@endforeach
@@ -76,4 +82,3 @@
 	</div>
 </div></div>
 @endsection
-

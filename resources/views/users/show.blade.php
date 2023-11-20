@@ -49,6 +49,7 @@
 	    		<div class="cell">
 		    		{{ $user->role==1 ? trans('cruds.user.roles.admin') : "" }}
 		    		{{ $user->role==2 ? trans('cruds.user.roles.user') : "" }}
+                    {{ $user->role==5 ? trans('cruds.user.roles.auditee') : "" }}
 		    		{{ $user->role==3 ? trans('cruds.user.roles.auditor') : "" }}
 		    		{{ $user->role==4 ? trans('cruds.user.roles.api') : "" }}
 	    		</div>
@@ -101,12 +102,12 @@
 				                </a>
 				            </td>
 				            <td>
-				                    {{ $control->name }} 
+				                    {{ $control->name }}
 				            </td>
 		    				<td>
 				                <a id="{{ $control->plan_date }}" href="/bob/show/{{$control->id}}">
 				                <b>
-				                    @if( strtotime($control->plan_date) >= strtotime('now') ) 
+				                    @if( strtotime($control->plan_date) >= strtotime('now') )
 				                        <font color="green">{{ $control->plan_date }}</font>
 				                    @else
 				                        <font color="red">{{ $control->plan_date }}</font>

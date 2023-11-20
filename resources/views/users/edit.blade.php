@@ -70,6 +70,7 @@
 					<select name="role" class="input">
 					    <option value="1" {{ $user->role==1 ? "selected" : "" }}>{{ trans('cruds.user.roles.admin') }}</option>
 					    <option value="2" {{ $user->role==2 ? "selected" : "" }}>{{ trans('cruds.user.roles.user') }}</option>
+                        <!-- option value="5" {{ $user->role==5 ? "selected" : "" }}>{{ trans('cruds.user.roles.auditee') }}</option-->
 					    <option value="3" {{ $user->role==3 ? "selected" : "" }}>{{ trans('cruds.user.roles.auditor') }}</option>
 					    <option value="4" {{ $user->role==4 ? "selected" : "" }}>{{ trans('cruds.user.roles.api') }}</option>
 					</select>

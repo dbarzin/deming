@@ -8,7 +8,7 @@ return [
          'action_plans' => "Action Plans",
          'next_controls' => 'Checks scheduled for the next 30 days',
          'control_status' => 'Measurement status',
-         'control_planning' => 'Schedule measure',        
+         'control_planning' => 'Schedule measure',
     ],
      'action' => [
          'index' => 'Action plans',
@@ -36,7 +36,7 @@ return [
         'show' => 'Attribute',
         'index' => 'List of attributes',
         'choose' => 'Choose an attribute',
-        'title' => 'Attribute'     
+        'title' => 'Attribute'
     ],
      'control' => [
          'description' => '',
@@ -86,6 +86,9 @@ return [
          'radar' => 'Security measurement status',
          'title' => 'Measurements',
          'title_singular' => 'Measurement',
+     ],
+     'notification' => [
+         'subject' => 'Measurement list to carry out',
      ],
      'measure' => [
          'title' => 'Control',
@@ -192,7 +195,8 @@ return [
              'admin' => 'Administrator',
              'user' => 'User',
              'auditor' => 'Auditor',
-             'api' => 'API'
+             'api' => 'API',
+             'auditee' => 'Auditee',
          ],
     ],
     'config' => [

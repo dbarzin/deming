@@ -107,6 +107,9 @@ return [
         'edit' => 'Modifier une mesure de sécurité',
         'plan' => 'Plannifier un contrôle'
     ],
+    'notification' => [
+        'subject' => 'Liste des contrôles à réaliser',
+    ],
     'domain' => [
         'fields' => [
             'name' => 'Nom',
@@ -192,7 +195,8 @@ return [
             'admin' => 'Administrateur',
             'user' => 'Utilisateur',
             'auditor' => 'Auditeur',
-            'api' => 'API'
+            'api' => 'API',
+            'auditee' => 'Audité',
         ],
     ],
     'config' => [

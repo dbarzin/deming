@@ -32,6 +32,7 @@
         </div>
 
         <ul class="navview-menu mt-4" id="side-menu">
+            @if ((Auth::User()->role === 1)||(Auth::User()->role === 2)||(Auth::User()->role === 3))
                 <li>
                     <a href="/">
                         <span class="icon"><span class="mif-home"></span></span>
@@ -69,7 +70,6 @@
                     </a>
                 </li>
 
-
                 <li>
                     <a href="#" class="dropdown-toggle">
                         <span class="icon"><span class="mif-meter"></span></span>
@@ -87,8 +87,6 @@
                         </a></li>
                     </ul>
                 </li>
-
-
 
                 <li>
                     <a href="/actions">
@@ -145,7 +143,7 @@
                         @endif
                     </ul>
                 </li>
-
+                @endif
                 <li>
                     <a class="dropdown-item" href="/logout"
                        onclick="event.preventDefault();
@@ -168,6 +166,7 @@
 
     <div class="navview-content h-100">
         <div data-role="appbar" class="pos-absolute bg-chem fg-black">
+            @if ((Auth::User()->role === 1)||(Auth::User()->role === 2)||(Auth::User()->role === 3))
 
             <a href="#" class="app-bar-item d-block d-none-lg" id="paneToggle"><span class="mif-menu"></span></a>
 
@@ -194,6 +193,7 @@
                     <span class="mif-cogs"></span>
                 </a>
             </div>
+            @endif
         </div>
     <div id="content-wrapper" class="h-100" style="overflow-y: auto">
     @yield('content')

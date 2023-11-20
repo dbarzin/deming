@@ -7,6 +7,7 @@ use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\App;
 
 class SendNotifications extends Command
 {
@@ -66,10 +67,11 @@ class SendNotifications extends Command
                     ->orderBy('plan_date')
                     ->get();
                 if ($controls->count() > 0) {
-                    $txt = htmlentities('Liste des contrôles à réaliser') . '<br><br>';
+                    App::setlocale($user->language);
+                    $txt = htmlentities(trans('cruds.notification.subject')) . '<br><br>';
                     foreach ($controls as $control) {
                         // Date
-                        $txt .= '<a href="' . url('/control/show/'. $control->id) . '">';
+                        $txt .= '<a href="' . url('/bob/show/'. $control->id) . '">';
                         $txt .= '<b>';
                         if (strtotime($control->plan_date) > strtotime('now')) {
                             $txt .= "<font color='green'>" . $control->plan_date .' </font>';
@@ -81,7 +83,7 @@ class SendNotifications extends Command
                         // Space
                         $txt .= ' &nbsp; - &nbsp; ';
                         // Clause
-                        $txt .= '<a href="' . url('/measures/' . $control->measure_id) . '">'. htmlentities($control->clause) . '</a>';
+                        $txt .= '<a href="' . url('/alice/' . $control->measure_id) . '">'. htmlentities($control->clause) . '</a>';
                         // Space
                         $txt .= ' &nbsp; - &nbsp; ';
                         // Name

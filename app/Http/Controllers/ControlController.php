@@ -24,6 +24,9 @@ class ControlController extends Controller
      */
     public function index(Request $request)
     {
+        // Not for API
+        abort_if(Auth::User()->role === 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         // get all domains
         $domains = Domain::All();
 
@@ -56,7 +59,12 @@ class ControlController extends Controller
         $scopes = DB::table('controls')
             ->select('scope')
             ->whereNotNull('scope')
-            ->where('scope', '<>', '')
+            ->where('scope', '<>', '');
+        if (Auth::User()->role === 5)
+            $scopes = $scopes
+                ->leftjoin('control_user', 'controls.id', '=', 'control_user.control_id')
+                ->where('control_user.user_id','=',Auth::User()->id);
+        $scopes = $scopes
             ->whereNull('realisation_date')
             ->distinct()
             ->orderBy('scope')
@@ -142,6 +150,12 @@ class ControlController extends Controller
             ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id')
             ->leftjoin('domains', 'c1.domain_id', '=', 'domains.id');
 
+        // filter on auditee controls
+        if (Auth::User()->role === 5)
+            $controls = $controls
+                ->leftjoin('control_user', 'c1.id', '=', 'control_user.control_id')
+                ->where('control_user.user_id','=',Auth::User()->id);
+
         // Filter on domain
         if (($domain !== null) && ($domain !== 0)) {
             $controls = $controls->where('c1.domain_id', '=', $domain);
@@ -198,7 +212,7 @@ class ControlController extends Controller
                 'domains.title',
             ]
         )
-            ->orderBy('c1.id')->get();
+        ->orderBy('c1.id')->get();
 
         // return view
         return view('controls.index')
@@ -241,6 +255,20 @@ class ControlController extends Controller
      */
     public function show(int $id)
     {
+        // Not API
+        abort_if(Auth::User()->role === 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // for aditee only if he is assigne to that control
+        abort_if(
+            (
+                (Auth::User()->role === 5)&&
+                !DB::table('control_user')
+                    ->where('user_id',$id)
+                    ->where('control_id',Auth::User()->id)
+                    ->exists()
+            ), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // Get control
         $control = Control::find($id);
 
         // Control not found
@@ -370,6 +398,12 @@ class ControlController extends Controller
 
     public function history()
     {
+        // Not API and auditee
+        abort_if(
+            (Auth::User()->role === 4)||
+            (Auth::User()->role === 5),
+            Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         // Get all controls
         $controls = DB::table('controls')
             ->select('id', 'clause', 'score', 'realisation_date', 'plan_date')
@@ -382,6 +416,12 @@ class ControlController extends Controller
 
     public function domains(Request $request)
     {
+        // Not API and auditee
+        abort_if(
+            (Auth::User()->role === 4)||
+            (Auth::User()->role === 5),
+            Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         // get all active domains
         $domains = DB::table('domains')
             ->select(DB::raw('distinct domains.id, domains.title'))
@@ -506,7 +546,6 @@ class ControlController extends Controller
             $controls = $controls->where('c1.scope', '=', $cur_scope);
         }
         $controls = $controls
-//            ->where('c1.realisation_date', '<=', $cur_date)
             ->orderBy('clause')
             ->orderBy('scope')
             ->get();
@@ -521,6 +560,12 @@ class ControlController extends Controller
 
     public function attributes(Request $request)
     {
+        // Not API and auditee
+        abort_if(
+            (Auth::User()->role === 4)||
+            (Auth::User()->role === 5),
+            Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         // get all attributes
         $attributes = DB::table('attributes')
             ->orderBy('name')
@@ -560,6 +605,9 @@ class ControlController extends Controller
      */
     public function plan(int $id)
     {
+        // For administrators and users only
+        abort_if((Auth::User()->role !== 1) && (Auth::User()->role !== 2), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         // does not exists in that way
         $control = Control::find($id);
 
@@ -607,8 +655,8 @@ class ControlController extends Controller
      */
     public function unplan(Request $request)
     {
-        // Not for Auditor
-        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // For administrators and users only
+        abort_if((Auth::User()->role !== 1) && (Auth::User()->rol !== 2), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $control = Control
                 ::whereNull('realisation_date')
@@ -681,6 +729,17 @@ class ControlController extends Controller
 
         $id = (int) request('id');
 
+        // for aditee only if he is assigne to that control
+        abort_if(
+            (
+                (Auth::User()->role === 5)&&
+                !DB::table('control_user')
+                    ->where('user_id',$id)
+                    ->where('control_id',Auth::User()->id)
+                    ->exists()
+            ), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // Get control
         $control = Control::find($id);
 
         // Control not found
@@ -697,10 +756,21 @@ class ControlController extends Controller
         // save control_id in session for document upload
         $request->session()->put('control', $id);
 
+        // compute next control date
+        $next_date=date('Y-m-d', strtotime($control->periodicity." months", strtotime($control->plan_date)));
+
+        // compute next control date
+        $next_date = $control->next_date==null ?
+            \Carbon\Carbon::createFromFormat('Y-m-d',$control->plan_date)
+                ->addMonths($control->periodicity)
+                ->format('Y-m-d')
+            : $control->next_date->format('Y-m-d');
+
         // return view
         return view('controls.make')
             ->with('control', $control)
-            ->with('documents', $documents);
+            ->with('documents', $documents)
+            ->with('next_date', $next_date);
     }
 
     /**
@@ -712,10 +782,23 @@ class ControlController extends Controller
      */
     public function doMake()
     {
-        // Log::Alert("doMake START");
+        // Not API and auditee
+        abort_if(
+            (Auth::User()->role === 4)||
+            (Auth::User()->role === 5),
+            Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $id = (int) request('id');
-        // Log::Alert("doMake id=".$id);
-        // dd($request);
+
+        // for aditee only if he is assigne to that control
+        abort_if(
+            (
+                (Auth::User()->role === 5)&&
+                !DB::table('control_user')
+                    ->where('user_id',$id)
+                    ->where('control_id',Auth::User()->id)
+                    ->exists()
+            ), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // check :
         // plan date not in the past
@@ -737,12 +820,20 @@ class ControlController extends Controller
         }
 
         $control->observations = request('observations');
-        $control->plan_date = request('plan_date');
-        $control->realisation_date = request('realisation_date');
         $control->note = request('note');
         $control->score = request('score');
-        $control->action_plan = request('action_plan');
-
+        // only admin and user can update the plan_date, realisation_date and action_plan
+        if (
+            (Auth::User()->role === 1)||
+            (Auth::User()->role === 2)
+            ) {
+            $control->plan_date = request('plan_date');
+            $control->realisation_date = request('realisation_date');
+            $control->action_plan = request('action_plan');
+        }
+        else {
+            $control->realisation_date = date("Y-m-d", strtotime('today'));
+        }
         // Log::Alert("doMake realisation_date=".request("realisation_date"));
 
         // if there is no next control
@@ -753,7 +844,15 @@ class ControlController extends Controller
             $new_control->realisation_date = null;
             $new_control->note = null;
             $new_control->score = null;
-            $new_control->plan_date = request('next_date');
+            // only admin and user can update the plan_date, realisation_date and action_plan
+            if (
+                (Auth::User()->role === 1)||
+                (Auth::User()->role === 2)
+                )
+                $new_control->plan_date = request('next_date');
+            else
+                $new_control->plan_date=date('Y-m-d', strtotime($control->periodicity." months", strtotime($control->plan_date)));
+
             $new_control->save();
 
             // Set owners
@@ -766,7 +865,7 @@ class ControlController extends Controller
         // update control
         $control->update();
 
-        return redirect('/');
+        return redirect('/bob/index');
     }
 
     /**
@@ -815,15 +914,29 @@ class ControlController extends Controller
      */
     public function draft(Request $request)
     {
+        // Not API and auditee
+        abort_if(
+            (Auth::User()->role === 4)||
+            (Auth::User()->role === 5),
+            Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $id = (int) $request->get('id');
 
         $control = Control::find($id);
 
-        $control->plan_date = request('plan_date');
         $control->observations = request('observations');
         $control->note = request('note');
         $control->score = request('score');
-        $control->action_plan = request('action_plan');
+
+        // only admin and user can update the plan_date, realisation_date and action_plan
+        if (
+            (Auth::User()->role === 1)||
+            (Auth::User()->role === 2)
+            ) {
+            $control->plan_date = request('plan_date');
+            $control->realisation_date = request('realisation_date');
+            $control->action_plan = request('action_plan');
+        }
 
         $control->save();
 
@@ -832,11 +945,17 @@ class ControlController extends Controller
 
     public function export()
     {
+        // For administrators and users only
+        abort_if((Auth::User()->role !== 1) && (Auth::User()->rol !== 2), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return Excel::download(new ControlsExport(), trans('cruds.control.title') . '-' . now()->format('Y-m-d Hi') . '.xlsx');
     }
 
     public function template()
     {
+        // For administrators and users only
+        abort_if((Auth::User()->role !== 1) && (Auth::User()->rol !== 2), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $id = (int) request('id');
 
         // find associate measurement

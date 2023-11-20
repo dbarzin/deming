@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
@@ -25,6 +26,10 @@ class HomeController extends Controller
      */
     public function index(Request $request)
     {
+        // redirect user to controls list
+        if (Auth::User()->role === 5)
+            return redirect('/bob/index');
+
         // count active domains
         $active_domains_count = DB::table('controls')
             ->select(
@@ -53,12 +58,12 @@ class HomeController extends Controller
         // count control never made
         $controls_never_made = DB::select(
             '
-            select domain_id 
-            from controls c1 
-            where realisation_date is null and 
+            select domain_id
+            from controls c1
+            where realisation_date is null and
             not exists (
-                select * 
-                from controls c2 
+                select *
+                from controls c2
                 where c2.next_id=c1.id);'
         );
 
