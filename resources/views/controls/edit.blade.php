@@ -74,15 +74,14 @@
 			    		<strong>{{ trans("cruds.control.fields.plan_date") }}</strong>
 			    	</div>
 					<div class="cell-2">
-						<input type="text" data-role="calendarpicker" name="plan_date" value="{{$control->plan_date}}"
-						data-input-format="%Y-%m-%d">
+						<input type="text" data-role="calendarpicker" name="plan_date" value="{{$control->plan_date}}" data-input-format="%Y-%m-%d">
 					</div>
 		    		<div class="cell-1">
 			    		<strong>{{ trans("cruds.control.fields.realisation_date") }}</strong>
 			    	</div>
 					<div class="cell-2">
-						<input type="text" data-role="calendarpicker" name="realisation_date" value="{{$control->realisation_date}}"
-					data-input-format="%Y-%m-%d">
+						<input type="text" data-role="calendarpicker" name="realisation_date" data-clear-button="true"
+                            value="{{$control->realisation_date}}" data-input-format="%Y-%m-%d" />
 					</div>
 				</div>
 
