@@ -47,9 +47,14 @@ class GlobalSearchController extends Controller
                     ->where('control_user.user_id', '=', Auth::User()->id);
             }
 
-            foreach ($fields as $field) {
-                $query->orWhere($field, 'LIKE', '%' . $term . '%');
-            }
+            $query = $query->where(function ($subQuery) use ($fields, $term) {
+                foreach ($fields as $field) {
+                    if ( $field === reset( $fields ) )
+                        $subQuery = $subQuery->where($field, 'LIKE', '%' . $term . '%');
+                    else
+                        $subQuery = $subQuery->orWhere($field, 'LIKE', '%' . $term . '%');
+                    }
+            });
 
             // newest first
             $query->orderBy('id', 'desc');
