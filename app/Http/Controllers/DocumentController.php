@@ -41,7 +41,9 @@ class DocumentController extends Controller
         // Only for administrator
         abort_if(
             (Auth::User()->role !== 1),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $message = null;
 
@@ -71,7 +73,9 @@ class DocumentController extends Controller
         // Not for API
         abort_if(
             (Auth::User()->role === 4),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $document = Document::Find($id);
 
@@ -81,11 +85,13 @@ class DocumentController extends Controller
         // Auditee may get documents from assigned controls only
         abort_if(
             (Auth::User()->role === 5) &&
-            !DB::table('control_user')
-                ->where('user_id',Auth::User()->id)
-                ->where('control_id',$document->control_id)
+            ! DB::table('control_user')
+                ->where('user_id', Auth::User()->id)
+                ->where('control_id', $document->control_id)
                 ->exists(),
-                Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $path = storage_path('docs/' . $id);
         $file_contents = file_get_contents($path);
@@ -103,9 +109,11 @@ class DocumentController extends Controller
     {
         // Not for API and Auditor
         abort_if(
-            (Auth::User()->role === 3)||
+            (Auth::User()->role === 3) ||
             (Auth::User()->role === 4),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // Get file
         $file = $request->file('file');
@@ -116,11 +124,13 @@ class DocumentController extends Controller
         // Auditee may save document to assigned control only
         abort_if(
             (Auth::User()->role === 5) &&
-            !DB::table('control_user')
+            ! DB::table('control_user')
                 ->where('user_id', Auth::User()->id)
                 ->where('control_id', $control_id)
                 ->exists(),
-                Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // Save document
         $doc = new Document();
@@ -146,9 +156,11 @@ class DocumentController extends Controller
     {
         // Not for API and Auditor
         abort_if(
-            (Auth::User()->role === 3)||
+            (Auth::User()->role === 3) ||
             (Auth::User()->role === 4),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // Find the document
         $document = Document::Find($id);
@@ -162,11 +174,13 @@ class DocumentController extends Controller
         // and check if control has not been made ???
         abort_if(
             (Auth::User()->role === 5) &&
-            !DB::table('control_user')
+            ! DB::table('control_user')
                 ->where('user_id', Auth::User()->id)
                 ->where('control_id', $document->control_id)
                 ->exists(),
-                Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $path = storage_path('docs/'.$document->id);
 
@@ -183,7 +197,9 @@ class DocumentController extends Controller
         // Only for administrator
         abort_if(
             (Auth::User()->role !== 1),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $count = Document::count();
         $sum = Document::sum('size');
@@ -198,7 +214,9 @@ class DocumentController extends Controller
         // Only for administrator
         abort_if(
             (Auth::User()->role !== 1),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $documents = Document::with('control')->get();
 

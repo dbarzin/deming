@@ -4,8 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Str;
 
 class GlobalSearchController extends Controller
 {
@@ -30,31 +30,29 @@ class GlobalSearchController extends Controller
         foreach ($this->models as $model) {
             // user does not search on domain and measures
             if (
-                    (Auth::User()->role===5)&&
-                    (
-                        ($model=='App\\Models\\Domain')||
-                        ($model=='App\\Models\\Measure')
-                    )
-                )
+                (Auth::User()->role === 5) &&
+                (($model === 'App\\Models\\Domain') ||
+                    ($model === 'App\\Models\\Measure'))
+            ) {
                 continue;
+            }
 
             $query = $model::query();
             $fields = $model::$searchable;
 
             // user only search on assigned controls
-            if (Auth::User()->role===5)
-            $query = $query
-                ->join('control_user', 'controls.id', '=', 'control_user.control_id')
-                ->where('control_user.user_id','=',Auth::User()->id);
-
+            if (Auth::User()->role === 5) {
+                $query = $query
+                    ->join('control_user', 'controls.id', '=', 'control_user.control_id')
+                    ->where('control_user.user_id', '=', Auth::User()->id);
+            }
 
             foreach ($fields as $field) {
                 $query->orWhere($field, 'LIKE', '%' . $term . '%');
             }
 
-
             // newest first
-            $query->orderBy('id','desc');
+            $query->orderBy('id', 'desc');
             $results = $query->take(20)->get();
 
             foreach ($results as $result) {

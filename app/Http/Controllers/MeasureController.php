@@ -26,9 +26,11 @@ class MeasureController extends Controller
     {
         // Not for Auditor, API and auditee
         abort_if(
-            (Auth::User()->role === 4)||
+            (Auth::User()->role === 4) ||
             (Auth::User()->role === 5),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $domains = Domain::All();
 
@@ -82,10 +84,12 @@ class MeasureController extends Controller
     {
         // Not for Auditor, API and auditee
         abort_if(
-            (Auth::User()->role === 3)||
-            (Auth::User()->role === 4)||
+            (Auth::User()->role === 3) ||
+            (Auth::User()->role === 4) ||
             (Auth::User()->role === 5),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // get the list of domains
         $domains = Domain::All();
@@ -120,10 +124,12 @@ class MeasureController extends Controller
     {
         // Not for Auditor, API and auditee
         abort_if(
-            (Auth::User()->role === 3)||
-            (Auth::User()->role === 4)||
+            (Auth::User()->role === 3) ||
+            (Auth::User()->role === 4) ||
             (Auth::User()->role === 5),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $this->validate(
             $request,
@@ -165,17 +171,21 @@ class MeasureController extends Controller
         // Not for API
         abort_if(
             (Auth::User()->role === 4),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // user must have and assigned controls
         abort_if(
             (Auth::User()->role === 5) &&
-            !DB::table('controls')
-                ->where('measure_id',$id)
+            ! DB::table('controls')
+                ->where('measure_id', $id)
                 ->leftjoin('control_user', 'control_id', '=', 'controls.id')
                 ->where('user_id', Auth::User()->id)
                 ->exists(),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $measure = Measure::where('id', $id)->get()->first();
         return view('measures.show')
@@ -193,10 +203,12 @@ class MeasureController extends Controller
     {
         // Not for Auditor, API and auditee
         abort_if(
-            (Auth::User()->role === 3)||
-            (Auth::User()->role === 4)||
+            (Auth::User()->role === 3) ||
+            (Auth::User()->role === 4) ||
             (Auth::User()->role === 5),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $measure = Measure::find($id);
 
@@ -236,10 +248,12 @@ class MeasureController extends Controller
     {
         // Not for Auditor, API and auditee
         abort_if(
-            (Auth::User()->role === 3)||
-            (Auth::User()->role === 4)||
+            (Auth::User()->role === 3) ||
+            (Auth::User()->role === 4) ||
             (Auth::User()->role === 5),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $this->validate(
             $request,
@@ -301,10 +315,12 @@ class MeasureController extends Controller
     {
         // Not for Auditor, API and auditee
         abort_if(
-            (Auth::User()->role === 3)||
-            (Auth::User()->role === 4)||
+            (Auth::User()->role === 3) ||
+            (Auth::User()->role === 4) ||
             (Auth::User()->role === 5),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         Measure::destroy($request->id);
 
@@ -322,10 +338,12 @@ class MeasureController extends Controller
     {
         // Not for Auditor, API and auditee
         abort_if(
-            (Auth::User()->role === 3)||
-            (Auth::User()->role === 4)||
+            (Auth::User()->role === 3) ||
+            (Auth::User()->role === 4) ||
             (Auth::User()->role === 5),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $measure = Measure::find($request->id);
 
@@ -358,10 +376,12 @@ class MeasureController extends Controller
     {
         // Not for Auditor, API and auditee
         abort_if(
-            (Auth::User()->role === 3)||
-            (Auth::User()->role === 4)||
+            (Auth::User()->role === 3) ||
+            (Auth::User()->role === 4) ||
             (Auth::User()->role === 5),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $this->validate(
             $request,
@@ -435,10 +455,12 @@ class MeasureController extends Controller
     {
         // Not for Auditor, API and auditee
         abort_if(
-            (Auth::User()->role === 3)||
-            (Auth::User()->role === 4)||
+            (Auth::User()->role === 3) ||
+            (Auth::User()->role === 4) ||
             (Auth::User()->role === 5),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $control_id = DB::table('controls')
             ->select('id')
@@ -468,10 +490,12 @@ class MeasureController extends Controller
     {
         // Not for Auditor, API and auditee
         abort_if(
-            (Auth::User()->role === 3)||
-            (Auth::User()->role === 4)||
+            (Auth::User()->role === 3) ||
+            (Auth::User()->role === 4) ||
             (Auth::User()->role === 5),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         return Excel::download(new MeasuresExport(), trans('cruds.measure.title') . '-' . now()->format('Y-m-d Hi') . '.xlsx');
     }

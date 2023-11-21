@@ -60,10 +60,11 @@ class ControlController extends Controller
             ->select('scope')
             ->whereNotNull('scope')
             ->where('scope', '<>', '');
-        if (Auth::User()->role === 5)
+        if (Auth::User()->role === 5) {
             $scopes = $scopes
                 ->leftjoin('control_user', 'controls.id', '=', 'control_user.control_id')
-                ->where('control_user.user_id','=',Auth::User()->id);
+                ->where('control_user.user_id', '=', Auth::User()->id);
+        }
         $scopes = $scopes
             ->whereNull('realisation_date')
             ->distinct()
@@ -151,10 +152,11 @@ class ControlController extends Controller
             ->leftjoin('domains', 'c1.domain_id', '=', 'domains.id');
 
         // filter on auditee controls
-        if (Auth::User()->role === 5)
+        if (Auth::User()->role === 5) {
             $controls = $controls
                 ->leftjoin('control_user', 'c1.id', '=', 'control_user.control_id')
-                ->where('control_user.user_id','=',Auth::User()->id);
+                ->where('control_user.user_id', '=', Auth::User()->id);
+        }
 
         // Filter on domain
         if (($domain !== null) && ($domain !== 0)) {
@@ -212,7 +214,7 @@ class ControlController extends Controller
                 'domains.title',
             ]
         )
-        ->orderBy('c1.id')->get();
+            ->orderBy('c1.id')->get();
 
         // return view
         return view('controls.index')
@@ -260,13 +262,14 @@ class ControlController extends Controller
 
         // for aditee only if he is assigne to that control
         abort_if(
-            (
-                (Auth::User()->role === 5)&&
-                !DB::table('control_user')
+            ((Auth::User()->role === 5) &&
+                ! DB::table('control_user')
                     ->where('control_id', $id)
                     ->where('user_id', Auth::User()->id)
-                    ->exists()
-            ), Response::HTTP_FORBIDDEN, '403 Forbidden');
+                    ->exists()),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // Get control
         $control = Control::find($id);
@@ -400,9 +403,11 @@ class ControlController extends Controller
     {
         // Not API and auditee
         abort_if(
-            (Auth::User()->role === 4)||
+            (Auth::User()->role === 4) ||
             (Auth::User()->role === 5),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // Get all controls
         $controls = DB::table('controls')
@@ -418,9 +423,11 @@ class ControlController extends Controller
     {
         // Not API and auditee
         abort_if(
-            (Auth::User()->role === 4)||
+            (Auth::User()->role === 4) ||
             (Auth::User()->role === 5),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // get all active domains
         $domains = DB::table('domains')
@@ -562,9 +569,11 @@ class ControlController extends Controller
     {
         // Not API and auditee
         abort_if(
-            (Auth::User()->role === 4)||
+            (Auth::User()->role === 4) ||
             (Auth::User()->role === 5),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // get all attributes
         $attributes = DB::table('attributes')
@@ -726,21 +735,24 @@ class ControlController extends Controller
     {
         // Not for auditor and API
         abort_if(
-            (Auth::User()->role === 3)||
+            (Auth::User()->role === 3) ||
             (Auth::User()->role === 4),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $id = (int) request('id');
 
         // for aditee only if he is assigne to that control
         abort_if(
-            (
-                (Auth::User()->role === 5)&&
-                !DB::table('control_user')
+            ((Auth::User()->role === 5) &&
+                ! DB::table('control_user')
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
-                    ->exists()
-            ), Response::HTTP_FORBIDDEN, '403 Forbidden');
+                    ->exists()),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // Get control
         $control = Control::find($id);
@@ -760,11 +772,11 @@ class ControlController extends Controller
         $request->session()->put('control', $id);
 
         // compute next control date
-        $next_date=date('Y-m-d', strtotime($control->periodicity." months", strtotime($control->plan_date)));
+        $next_date = date('Y-m-d', strtotime($control->periodicity.' months', strtotime($control->plan_date)));
 
         // compute next control date
-        $next_date = $control->next_date==null ?
-            \Carbon\Carbon::createFromFormat('Y-m-d',$control->plan_date)
+        $next_date = $control->next_date === null ?
+            \Carbon\Carbon::createFromFormat('Y-m-d', $control->plan_date)
                 ->addMonths($control->periodicity)
                 ->format('Y-m-d')
             : $control->next_date->format('Y-m-d');
@@ -788,19 +800,22 @@ class ControlController extends Controller
         // Not API and auditee
         abort_if(
             (Auth::User()->role === 4),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $id = (int) request('id');
 
         // for aditee only if he is assigne to that control
         abort_if(
-            (
-                (Auth::User()->role === 5)&&
-                !DB::table('control_user')
-                    ->where('user_id',Auth::User()->id)
-                    ->where('control_id',$id)
-                    ->exists()
-            ), Response::HTTP_FORBIDDEN, '403 Forbidden');
+            ((Auth::User()->role === 5) &&
+                ! DB::table('control_user')
+                    ->where('user_id', Auth::User()->id)
+                    ->where('control_id', $id)
+                    ->exists()),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // check :
         // plan date not in the past
@@ -827,14 +842,13 @@ class ControlController extends Controller
         $control->realisation_date = request('realisation_date');
         // only admin and user can update the plan_date and action_plan
         if (
-            (Auth::User()->role === 1)||
+            (Auth::User()->role === 1) ||
             (Auth::User()->role === 2)
-            ) {
+        ) {
             $control->plan_date = request('plan_date');
             $control->action_plan = request('action_plan');
-        }
-        else {
-            $control->realisation_date = date("Y-m-d", strtotime('today'));
+        } else {
+            $control->realisation_date = date('Y-m-d', strtotime('today'));
         }
         // Log::Alert("doMake realisation_date=".request("realisation_date"));
 
@@ -848,12 +862,13 @@ class ControlController extends Controller
             $new_control->score = null;
             // only admin and user can update the plan_date, realisation_date and action_plan
             if (
-                (Auth::User()->role === 1)||
+                (Auth::User()->role === 1) ||
                 (Auth::User()->role === 2)
-                )
+            ) {
                 $new_control->plan_date = request('next_date');
-            else
-                $new_control->plan_date=date('Y-m-d', strtotime($control->periodicity." months", strtotime($control->plan_date)));
+            } else {
+                $new_control->plan_date = date('Y-m-d', strtotime($control->periodicity.' months', strtotime($control->plan_date)));
+            }
 
             $new_control->save();
 
@@ -918,21 +933,24 @@ class ControlController extends Controller
     {
         // Not for API and Auditor
         abort_if(
-            (Auth::User()->role === 3)||
+            (Auth::User()->role === 3) ||
             (Auth::User()->role === 4),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $id = (int) $request->get('id');
 
         // for aditee only if he is assigned to that control
         abort_if(
-            (
-                (Auth::User()->role === 5)&&
-                !DB::table('control_user')
+            ((Auth::User()->role === 5) &&
+                ! DB::table('control_user')
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
-                    ->exists()
-            ), Response::HTTP_FORBIDDEN, '403 Forbidden');
+                    ->exists()),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // Get the control
         $control = Control::find($id);
@@ -946,9 +964,9 @@ class ControlController extends Controller
 
         // only admin and user can update the plan_date and action_plan
         if (
-            (Auth::User()->role === 1)||
+            (Auth::User()->role === 1) ||
             (Auth::User()->role === 2)
-            ) {
+        ) {
             $control->plan_date = request('plan_date');
             $control->action_plan = request('action_plan');
             // do not save the realisation date as it is in draft
@@ -970,10 +988,12 @@ class ControlController extends Controller
     {
         // For administrators and users only
         abort_if(
-                (Auth::User()->role !== 1) &&
+            (Auth::User()->role !== 1) &&
                 (Auth::User()->rol !== 2) &&
                 (Auth::User()->role !== 5),
-                Response::HTTP_FORBIDDEN, '403 Forbidden');
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $id = (int) request('id');
 

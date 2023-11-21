@@ -6,8 +6,8 @@ use App\Models\Control;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Log;
 
 class SendNotifications extends Command
 {
