@@ -724,8 +724,11 @@ class ControlController extends Controller
 
     public function make(Request $request)
     {
-        // Not for aditor
-        abort_if(Auth::User()->role === 3, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // Not for auditor and API
+        abort_if(
+            (Auth::User()->role === 3)||
+            (Auth::User()->role === 4),
+            Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $id = (int) request('id');
 
@@ -734,8 +737,8 @@ class ControlController extends Controller
             (
                 (Auth::User()->role === 5)&&
                 !DB::table('control_user')
-                    ->where('user_id',$id)
-                    ->where('control_id',Auth::User()->id)
+                    ->where('user_id', Auth::User()->id)
+                    ->where('control_id', $id)
                     ->exists()
             ), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -784,8 +787,7 @@ class ControlController extends Controller
     {
         // Not API and auditee
         abort_if(
-            (Auth::User()->role === 4)||
-            (Auth::User()->role === 5),
+            (Auth::User()->role === 4),
             Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $id = (int) request('id');
@@ -795,8 +797,8 @@ class ControlController extends Controller
             (
                 (Auth::User()->role === 5)&&
                 !DB::table('control_user')
-                    ->where('user_id',$id)
-                    ->where('control_id',Auth::User()->id)
+                    ->where('user_id',Auth::User()->id)
+                    ->where('control_id',$id)
                     ->exists()
             ), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
@@ -822,13 +824,13 @@ class ControlController extends Controller
         $control->observations = request('observations');
         $control->note = request('note');
         $control->score = request('score');
-        // only admin and user can update the plan_date, realisation_date and action_plan
+        $control->realisation_date = request('realisation_date');
+        // only admin and user can update the plan_date and action_plan
         if (
             (Auth::User()->role === 1)||
             (Auth::User()->role === 2)
             ) {
             $control->plan_date = request('plan_date');
-            $control->realisation_date = request('realisation_date');
             $control->action_plan = request('action_plan');
         }
         else {
@@ -914,27 +916,42 @@ class ControlController extends Controller
      */
     public function draft(Request $request)
     {
-        // Not API and auditee
+        // Not for API and Auditor
         abort_if(
-            (Auth::User()->role === 4)||
-            (Auth::User()->role === 5),
+            (Auth::User()->role === 3)||
+            (Auth::User()->role === 4),
             Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $id = (int) $request->get('id');
 
+        // for aditee only if he is assigned to that control
+        abort_if(
+            (
+                (Auth::User()->role === 5)&&
+                !DB::table('control_user')
+                    ->where('user_id', Auth::User()->id)
+                    ->where('control_id', $id)
+                    ->exists()
+            ), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // Get the control
         $control = Control::find($id);
+
+        // Control not found
+        abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         $control->observations = request('observations');
         $control->note = request('note');
         $control->score = request('score');
 
-        // only admin and user can update the plan_date, realisation_date and action_plan
+        // only admin and user can update the plan_date and action_plan
         if (
             (Auth::User()->role === 1)||
             (Auth::User()->role === 2)
             ) {
             $control->plan_date = request('plan_date');
             $control->action_plan = request('action_plan');
+            // do not save the realisation date as it is in draft
         }
         $control->save();
 
@@ -952,12 +969,19 @@ class ControlController extends Controller
     public function template()
     {
         // For administrators and users only
-        abort_if((Auth::User()->role !== 1) && (Auth::User()->rol !== 2), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(
+                (Auth::User()->role !== 1) &&
+                (Auth::User()->rol !== 2) &&
+                (Auth::User()->role !== 5),
+                Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $id = (int) request('id');
 
         // find associate measurement
         $control = Control::find($id);
+
+        // Control not found
+        abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // Get template file
         $template_filename = storage_path('app/models/control_.docx');

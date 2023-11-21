@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use App\Models\Document;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class DocumentController extends Controller
 {
     public function getTemplate(Request $request)
     {
-        // nothing to do
+        //  Get document teample id
         $id = (int) $request->get('id');
 
         if ($id === 1) {
@@ -35,6 +38,11 @@ class DocumentController extends Controller
 
     public function saveTemplate(Request $request)
     {
+        // Only for administrator
+        abort_if(
+            (Auth::User()->role !== 1),
+            Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $message = null;
 
         if ($request->has('template1')) {
@@ -60,7 +68,25 @@ class DocumentController extends Controller
 
     public function get(int $id)
     {
+        // Not for API
+        abort_if(
+            (Auth::User()->role === 4),
+            Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $document = Document::Find($id);
+
+        // Document not found
+        abort_if($document === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+
+        // Auditee may get documents from assigned controls only
+        abort_if(
+            (Auth::User()->role === 5) &&
+            !DB::table('control_user')
+                ->where('user_id',Auth::User()->id)
+                ->where('control_id',$document->control_id)
+                ->exists(),
+                Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $path = storage_path('docs/' . $id);
         $file_contents = file_get_contents($path);
 
@@ -75,29 +101,40 @@ class DocumentController extends Controller
 
     public function store(Request $request)
     {
-        //Log::Alert("store called");
+        // Not for API and Auditor
+        abort_if(
+            (Auth::User()->role === 3)||
+            (Auth::User()->role === 4),
+            Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // Get file
         $file = $request->file('file');
+
+        // Get Control
         $control_id = $request->get('control');
 
-        // Log::Alert($control_id);
+        // Auditee may save document to assigned control only
+        abort_if(
+            (Auth::User()->role === 5) &&
+            !DB::table('control_user')
+                ->where('user_id', Auth::User()->id)
+                ->where('control_id', $control_id)
+                ->exists(),
+                Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // Save document
         $doc = new Document();
         $doc->control_id = $control_id;
         $doc->filename = $file->getClientOriginalName();
-        // Log::Alert("store filenale ".$file->getClientOriginalName());
         $doc->mimetype = $file->getClientMimeType();
-        // Log::Alert("store mimetype ".$file->getClientMimeType());
         $doc->size = $file->getSize();
-        // Log::Alert("store size ".$file->getSize());
-        // Log::Alert("store path ".$file->path());
         $doc->hash = hash_file('sha256', $file->path());
         $doc->save();
 
-        // Log::Alert("store Doc saved");
-
+        // Move file to storage folder
         $file->move(storage_path('docs'), $doc->id);
 
-        // Log::Alert("store Done.");
-
+        // response
         return response()->json(
             ['success' => $doc->filename,
                 'id' => $doc->id,
@@ -107,28 +144,47 @@ class DocumentController extends Controller
 
     public function delete(int $id)
     {
-        // Log::Alert("delete called");
+        // Not for API and Auditor
+        abort_if(
+            (Auth::User()->role === 3)||
+            (Auth::User()->role === 4),
+            Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // Find the document
         $document = Document::Find($id);
+
         if ($document === null) {
-            return redirect('image/list')
+            return response()
                 ->with('errorMessage', 'File not found !');
         }
 
-        $path = storage_path('docs/'.$document->id);
-        // Log::Alert($path);
+        // Auditee may delete documents from assigned controls only
+        // and check if control has not been made ???
+        abort_if(
+            (Auth::User()->role === 5) &&
+            !DB::table('control_user')
+                ->where('user_id', Auth::User()->id)
+                ->where('control_id', $document->control_id)
+                ->exists(),
+                Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        // Log::Alert("delete file ".$path);
+        $path = storage_path('docs/'.$document->id);
+
         if (file_exists($path)) {
             unlink($path);
         }
         $document->delete();
 
-        // Log::Alert("delete done");
         return null;
     }
 
     public function index()
     {
+        // Only for administrator
+        abort_if(
+            (Auth::User()->role !== 1),
+            Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $count = Document::count();
         $sum = Document::sum('size');
 
@@ -139,6 +195,11 @@ class DocumentController extends Controller
 
     public function check()
     {
+        // Only for administrator
+        abort_if(
+            (Auth::User()->role !== 1),
+            Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         $documents = Document::with('control')->get();
 
         return view('/documents/check')

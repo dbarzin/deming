@@ -46,34 +46,45 @@
 					<pre>{{ $control->input }}</pre>
 				</div>
 			</div>
+
+            <div class="row">
+	    		<div class="cell-1">
+		    		<strong>{{ trans('cruds.control.fields.model') }}</strong>
+		    	</div>
+				<div class="cell-6">
+					<pre>{{ $control->model }}</pre>
+				</div>
+			</div>
+
             <div class="row">
 
 				<div class="cell-1">
 					<b>{{ trans('cruds.control.fields.plan_date') }}</b>
 				</div>
 				<div class="cell-2">
-					<input type="text"
-						data-role="calendarpicker"
-						name="plan_date"
-						value="{{ count($errors)>0 ?  old('plan_date') : $control->plan_date }}"
-						data-input-format="%Y-%m-%d">
-
-				</div>
-
-    	    		<div class="cell-1">
-    		    		<strong>{{ trans('cruds.control.fields.realisation_date') }}</strong>
-    		    	</div>
-    				<div class="cell-2">
+                    @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
     					<input type="text"
     						data-role="calendarpicker"
-    						name="realisation_date"
-    						value="{{
-    							\Carbon\Carbon::now()
-    							->format('Y-m-d')
-    							}}"
-    						data-input-format="%Y-%m-%d">
-    				</div>
-                </row>
+    						name="plan_date"
+    						value="{{ count($errors)>0 ?  old('plan_date') : $control->plan_date }}"
+    						data-input-format="%Y-%m-%d" />
+                    @else
+                        {{ $control->plan_date }}
+                    @endif
+				</div>
+	    		<div class="cell-1">
+		    		<strong>{{ trans('cruds.control.fields.realisation_date') }}</strong>
+		    	</div>
+				<div class="cell-2">
+					<input type="text"
+						data-role="calendarpicker"
+						name="realisation_date"
+						value="{{
+							\Carbon\Carbon::now()
+							->format('Y-m-d')
+							}}"
+						data-input-format="%Y-%m-%d">
+				</div>
 			</div>
 
 	    	<div class="row">
@@ -95,15 +106,6 @@
 					<div class="dropzone dropzone-previews" id="dropzoneFileUpload"></div>
 				</div>
 		    </div>
-
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans('cruds.control.fields.model') }}</strong>
-		    	</div>
-				<div class="cell-6">
-					<pre>{{ $control->model }}</pre>
-				</div>
-			</div>
 
 	    	<div class="row">
 	    		<div class="cell-1">
@@ -150,20 +152,21 @@
             @endif
 	    	<div class="row">
 	    		<div class="cell-1">
-		    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
+		    		<strong>{{ trans('cruds.control.fields.next') }}</strong>
 		    	</div>
 				<div class="cell-2">
                     @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
     					<input type="text"
+                            lenght="12"
     						data-role="calendarpicker"
     						name="next_date"
     						value="{{ $next_date }}"
     						data-input-format="%Y-%m-%d"/>
+                    </div>
+                    <div class="cell-2">
                     @else
-                        {{ $control->next_date }}
+                        {{ $next_date }}
                     @endif
-				</div>
-				<div class="cell-1">
 				(
 				@if ($control->periodicity==1)
 					{{ trans("common.monthly") }}

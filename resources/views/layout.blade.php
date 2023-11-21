@@ -8,6 +8,7 @@
     <title>Deming - ISMS Controls Made Easy</title>
 
     <link rel="stylesheet" href="/css/all.css" />
+    <link rel="shortcut icon" href="/favicon.ico">
     <script src="/js/all.js"></script>
 </head>
 
