@@ -46,22 +46,9 @@
 					<pre>{{ $control->input }}</pre>
 				</div>
 			</div>
+            <div class="row">
 
-	    	<div class="row">
-	    		<div class="cell-1">
-		    		<strong>{{ trans('cruds.control.fields.realisation_date') }}</strong>
-		    	</div>
-				<div class="cell-2">
-					<input type="text"
-						data-role="calendarpicker"
-						name="realisation_date"
-						value="{{
-							\Carbon\Carbon::now()
-							->format('Y-m-d')
-							}}"
-						data-input-format="%Y-%m-%d">
-				</div>
-				<div class="cell-2">
+				<div class="cell-1">
 					<b>{{ trans('cruds.control.fields.plan_date') }}</b>
 				</div>
 				<div class="cell-2">
@@ -72,6 +59,21 @@
 						data-input-format="%Y-%m-%d">
 
 				</div>
+
+    	    		<div class="cell-1">
+    		    		<strong>{{ trans('cruds.control.fields.realisation_date') }}</strong>
+    		    	</div>
+    				<div class="cell-2">
+    					<input type="text"
+    						data-role="calendarpicker"
+    						name="realisation_date"
+    						value="{{
+    							\Carbon\Carbon::now()
+    							->format('Y-m-d')
+    							}}"
+    						data-input-format="%Y-%m-%d">
+    				</div>
+                </row>
 			</div>
 
 	    	<div class="row">

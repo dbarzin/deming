@@ -934,10 +934,8 @@ class ControlController extends Controller
             (Auth::User()->role === 2)
             ) {
             $control->plan_date = request('plan_date');
-            $control->realisation_date = request('realisation_date');
             $control->action_plan = request('action_plan');
         }
-
         $control->save();
 
         return redirect('/bob/show/'.$id);
