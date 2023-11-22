@@ -170,13 +170,15 @@ class DocumentController extends Controller
                 ->with('errorMessage', 'File not found !');
         }
 
-        // Auditee may delete documents from assigned controls only
-        // and check if control has not been made ???
+        // Auditee may delete documents from assigned controls
+        // when control has not been made
         abort_if(
             (Auth::User()->role === 5) &&
             ! DB::table('control_user')
                 ->where('user_id', Auth::User()->id)
                 ->where('control_id', $document->control_id)
+                ->leftjoin('controls', 'controls.id', '=', 'control_user.control_id')
+                ->whereNull('controls.realisation_date')
                 ->exists(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
