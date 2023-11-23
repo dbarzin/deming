@@ -8,11 +8,12 @@
     <title>Deming :: Log in</title>
 
     <link rel="stylesheet" href="/css/all.css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <script src="/js/all.js"></script>
 </head>
 
 <body class="d-flex flex-justify-center flex-align-center bg-default">
-    <form  
+    <form
           method="POST" action="/login"
           class="login-form bg-white p-6 mx-auto border fg-black win-shadow"
           data-role="validator"
@@ -69,4 +70,3 @@
     </script>
 </body>
 </html>
-
