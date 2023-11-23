@@ -63,7 +63,7 @@ Cet écran permet de modifier une mesure de sécurité.
 
 Lorsque vous cliquez sur :
 
-* « Sauver », les modification sont sauvées et vous revenez à l’écran d’[affichage de la mesure de sécurité](#show).
+* « Sauver », les modifications sont sauvées et vous revenez à l’écran d’[affichage de la mesure de sécurité](#show).
 
 * « Annluer », vous revenez à l’écran d’[affichage de la mesure de sécurité](#show).
 
@@ -82,15 +82,15 @@ L’écran contient :
 
 * La date de planification ;
 
-* La périodicité du contrôles et 
+* La périodicité du contrôles et
 
 * Les responsables de la réalisation du contrôles.
 
 [<img src="/deming/images/plan.png" width="400">](/deming/images/plan.png)
 
-Lorsque vous cliquez sur : 
+Lorsque vous cliquez sur :
 
-* « Planifier », 
+* « Planifier »,
 
     * s’il n’existe pas de contrôle avec ce périmètre pour cette mesure, un nouveau contrôle est créé en copiant toutes les données de le mesure et est planifié à la date spécifiée.
 
