@@ -15,7 +15,7 @@ Update linux distribution
 
 Install Apache, git, php and composer
 
-    sudo apt-get install git composer apache2 libapache2-mod-php php php-cli php-opcache php-mysql php-zip php-gd php-mbstring php-curl php-xml -y
+    sudo apt-get install git composer apache2 php-fpm php php-cli php-opcache php-mysql php-zip php-gd php-mbstring php-curl php-xml -y
 
 Create the project directory
 
@@ -156,6 +156,9 @@ Save and close the file when finished. Next, activate the Apache virtual host an
     sudo a2enmod rewrite
     sudo a2dissite 000-default.conf
     sudo a2ensite deming.conf
+    sudo a2dismod php8.1
+    sudo a2enmod proxy_fcgi setenvif
+    sudo a2enconf php8.1-fpm
 
 Finally, restart the Apache service to activate the changes:
 
@@ -171,7 +174,7 @@ You need to set the value of upload_max_filesize and post_max_size in your php.i
     ; Must be greater than or equal to upload_max_filesize
     post_max_size = 10M
 
-After modifying php.ini file(s), you need to restart your HTTP server to use the new configuration.
+After modifying php.ini file(s), you need to restart your php-fpm Service to use the new configuration.
 
 ## Mail configuration
 
