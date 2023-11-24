@@ -8,6 +8,7 @@ RUN apt-get install -y --no-install-recommends \
     php-cli=2:8.2* \
     php-opcache \
     php-mysql=2:8.2* \
+    php-pgsql=2:8.2* \
     php-zip=2:8.2* \
     php-gd=2:8.2* \
     php-mbstring=2:8.2* \
