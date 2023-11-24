@@ -7,7 +7,7 @@
 - Disk : 120G
 - VCPU 2
 
-## Installation 
+## Installation
 
 Update linux distribution
 
@@ -102,8 +102,8 @@ Create storage link
 
 To import the database with 27001:2022 security measures
 
-    php artisan db:seed --class=AttributeSeeder 
-    php artisan db:seed --class=DomainSeeder 
+    php artisan db:seed --class=AttributeSeeder
+    php artisan db:seed --class=DomainSeeder
     php artisan db:seed --class=MeasureSeeder
 
 Generate test data (optional)
@@ -123,7 +123,7 @@ The application can be accessed at URL [http://127.0.0.1:8000]
     user : admin@admin.localhost
     password : admin
 
-The administrator's default language is English. To change language, go to the user profile page 
+The administrator's default language is English. To change language, go to the user profile page
 (top right of the main page).
 
 
@@ -174,7 +174,9 @@ You need to set the value of upload_max_filesize and post_max_size in your php.i
     ; Must be greater than or equal to upload_max_filesize
     post_max_size = 10M
 
-After modifying php.ini file(s), you need to restart your php-fpm Service to use the new configuration.
+After modifying php.ini file(s), you need to restart your php-fpm service to use the new configuration.
+
+    sudo systemctl restart php-fpm
 
 ## Mail configuration
 
@@ -235,8 +237,6 @@ Here's the command to recreate the DB:
 
 Then to populate the DB with 27001:2022
 
-    php artisan db:seed --class=AttributeSeeder 
-    php artisan db:seed --class=DomainSeeder 
+    php artisan db:seed --class=AttributeSeeder
+    php artisan db:seed --class=DomainSeeder
     php artisan db:seed --class=MeasureSeeder
-
-

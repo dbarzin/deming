@@ -7,7 +7,7 @@
 - Disque : 120G
 - VCPU 2
 
-## Installation 
+## Installation
 
 Mettre à jour la distribution linux
 
@@ -51,8 +51,8 @@ Vérifier que vous utilisez MySQL et pas MariaDB (Deming ne fonctionne pas avec 
     sudo mysql --version
 
 Lancer MySQL avec les droits root
-php artisan db:seed --class=AttributeSeeder 
-php artisan db:seed --class=DomainSeeder 
+php artisan db:seed --class=AttributeSeeder
+php artisan db:seed --class=DomainSeeder
 php artisan db:seed --class=MeasureSeeder
 
     sudo mysql
@@ -122,8 +122,8 @@ Si le une des commandes renvoie une erreur, la base de données n'était pas vid
 
 Pour importer la base de données avec les mesures de sécurité de la norme 27001:2022
 
-    php artisan db:seed --class=AttributeSeeder 
-    php artisan db:seed --class=DomainSeeder 
+    php artisan db:seed --class=AttributeSeeder
+    php artisan db:seed --class=DomainSeeder
     php artisan db:seed --class=MeasureSeeder
 
 Génrérer des données de test (optionnel)
@@ -143,7 +143,7 @@ L'application est accessible à l'URL [http://127.0.0.1:8000]
     utilisateur : admin@admin.localhost
     mot de passe : admin
 
-L'administrateur utilise la langue anglaise par défaut. Pour changer de langue, allez dans la page de profil de l'utilisateur 
+L'administrateur utilise la langue anglaise par défaut. Pour changer de langue, allez dans la page de profil de l'utilisateur
 (en haut à droite de la page principale).
 
 ## Apache
@@ -175,6 +175,9 @@ Enregistrez et fermez le fichier lorsque vous avez terminé. Ensuite, activez l'
     sudo a2enmod rewrite
     sudo a2dissite 000-default.conf
     sudo a2ensite deming.conf
+    sudo a2dismod php8.1
+    sudo a2enmod proxy_fcgi setenvif
+    sudo a2enconf php8.1-fpm
 
 Enfin, redémarrez le service Apache pour activer les modifications :
 
@@ -190,7 +193,9 @@ Vous devez définir les valeurs de upload_max_filesize et post_max_size dans vot
     ; Doit être supérieur ou égal à upload_max_filesize
     post_max_size = 10M
 
-Après avoir modifié le(s) fichier(s) php.ini, vous devez redémarrer votre serveur HTTP pour utiliser la nouvelle configuration.
+Après avoir modifié le(s) fichier(s) php.ini, vous devez redémarrer le service php-fpm  pour utiliser la nouvelle configuration.
+
+    sudo systemctl restart php-fpm
 
 ## Configuration du mail
 
@@ -251,8 +256,6 @@ Voici la commande pour recréer la DB :
 
 Puis pour peupler la DB avec la 27001:2022
 
-    php artisan db:seed --class=AttributeSeeder 
-    php artisan db:seed --class=DomainSeeder 
+    php artisan db:seed --class=AttributeSeeder
+    php artisan db:seed --class=DomainSeeder
     php artisan db:seed --class=MeasureSeeder
-
-
