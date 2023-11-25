@@ -62,7 +62,7 @@
 		    		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="objective" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('objective') ?  old('objective') : $measure->objective }}</textarea>
+					<textarea name="objective" rows="3" id="mde1">{{ $errors->has('objective') ?  old('objective') : $measure->objective }}</textarea>
 				</div>
 			</div>
 
@@ -138,4 +138,13 @@
 		</div>
 	</div>
 </div>
+<!------------------------------------------------------------------------------------->
+<script type="text/javascript">
+const mde = new SimpleMDE({
+    element: document.getElementById('mde1'),
+    minHeight: "200px",
+    maxHeight: "200px",
+    status: false,
+    });
+</script>
 @endsection

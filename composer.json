@@ -14,6 +14,7 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "maatwebsite/excel": "^3.1",
+        "michelf/php-markdown": "^2.0",
         "phpoffice/phpword": "^1.1.0"
     },
     "require-dev": {

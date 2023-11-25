@@ -10,6 +10,26 @@
     <link rel="stylesheet" href="/css/all.css" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <script src="/js/all.js"></script>
+
+
+    <!-- simplemde
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/latest/css/font-awesome.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.css">
+    <script src="https://cdn.jsdelivr.net/simplemde/latest/simplemde.min.js"></script>
+    -->
+    <script src="/js/simplemde.min.js"></script>
+
+    <!-- easymde
+    <link rel="stylesheet" href="https://unpkg.com/easymde/dist/easymde.min.css">
+    <script src="https://unpkg.com/easymde/dist/easymde.min.js"></script>
+    -->
+
+    <!-- editormd
+    <link rel="stylesheet" href="/css/editormd.css" />
+    <script src="/js/jquery.min.js"></script>
+    <script src="/js/editormd.min.js"></script>
+    <script src="/lib/marked.min.js"></script>
+    <script src="/lib/prettify.min.js"></script-->
 </head>
 
 <body class="m4-cloak h-vh-100">

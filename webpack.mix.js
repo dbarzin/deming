@@ -14,21 +14,21 @@ let mix = require('laravel-mix');
 
 mix.js([
         'public/vendors/chartjs/Chart.js',
-        'public/vendors/ckeditor/ckeditor.js',
         'node_modules/jquery/dist/jquery.min.js',
         'public/vendors/metro4/js/metro.js',
         'vendor/enyo/dropzone/dist/dropzone.js',
         'resources/js/utils.js',
-        ], 
+        ],
     'public/js/all.js')
     .sourceMaps();
 
 mix.styles([
-    'public/vendors/chartjs/Chart.css', 
+    'public/vendors/chartjs/Chart.css',
     'public/vendors/metro4/css/metro-all.css',
     'resources/css/app.css',
     'vendor/enyo/dropzone/dist/dropzone.css',
     'resources/css/calendar.css',
-    ], 
+    'node_modules/simplemde/dist/simplemde.min.css',
+    'node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css',
+    ],
     'public/css/all.css');
-

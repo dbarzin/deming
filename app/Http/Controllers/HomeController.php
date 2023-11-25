@@ -162,4 +162,13 @@ class HomeController extends Controller
             ->with('controls', $controls)
         ;
     }
+
+    public function test(Request $request) {
+
+        $domain = DB::table('domains')->first();
+
+        return view('test')
+            ->with('domain',$domain);
+    }
+
 }

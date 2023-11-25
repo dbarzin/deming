@@ -19,6 +19,9 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/home', 'HomeController@index');
     Route::get('/index', 'HomeController@index');
 
+    /* Testing */
+    Route::get('/test', 'HomeController@test');
+
     /* Global-search engine */
     Route::get('global-search', 'GlobalSearchController@search');
 

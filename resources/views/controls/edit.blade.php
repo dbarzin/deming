@@ -41,7 +41,7 @@
 			    		<strong>{{ trans("cruds.control.fields.objective") }}</strong>
 			    	</div>
 					<div class="cell-6">
-						<textarea name="objective" rows="5" data-role="textarea" data-clear-button="false">{{ $errors->has('objective') ?  old('objective') : $control->objective }}</textarea>
+						<textarea name="objective" rows="5" id="mde1">{{ $errors->has('objective') ?  old('objective') : $control->objective }}</textarea>
 					</div>
 				</div>
 
@@ -266,5 +266,13 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
         	}
       	})
     }
+
+    const mde = new SimpleMDE({
+        element: document.getElementById('mde1'),
+        minHeight: "200px",
+        maxHeight: "200px",
+        status: false,
+        });
+
 </script>
 @endsection

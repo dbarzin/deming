@@ -56,8 +56,8 @@
 					<strong>{{ trans("cruds.measure.fields.objective") }}</strong>
 				</div>
 				<div class="cell-6">
-					<textarea name="objective" rows="3" data-clear-button="false" data-role="textarea">{{ old('objective') }}</textarea>
-				</div> 	
+					<textarea name="objective" rows="3" id="mde1">{{ old('objective') }}</textarea>
+				</div>
 			</div>
 
 			<div class="row">
@@ -77,7 +77,7 @@
 	    		<div class="cell-1">
 					<strong>{{ trans("cruds.measure.fields.input") }}</strong>
 				</div>
-				<div class="cell-6">			
+				<div class="cell-6">
 					<textarea name="input" rows="3" data-role="textarea" data-clear-button="false">{{ old('input') }}</textarea>
 				</div>
 			</div>
@@ -86,18 +86,18 @@
 	    		<div class="cell-1">
 					<strong>{{ trans("cruds.measure.fields.model") }}</strong>
 				</div>
-				<div class="cell-6">			
+				<div class="cell-6">
 					<textarea name="model" rows="3" data-role="textarea" data-clear-button="false">{{ old('model') }}</textarea>
-				</div> 	
+				</div>
 			</div>
 
 	    	<div class="row">
 	    		<div class="cell-1">
 					<strong>{{ trans("cruds.measure.fields.indicator") }}</strong>
 				</div>
-				<div class="cell-6">			
+				<div class="cell-6">
 					<textarea name="indicator" rows="3" data-role="textarea" data-clear-button="false">{{ old('indicator') }}</textarea>
-				</div> 	
+				</div>
 			</div>
 
 	    	<div class="row">
@@ -106,7 +106,7 @@
 				</div>
 				<div class="cell-6">
 					<textarea name="action_plan" rows="3" data-role="textarea" data-clear-button="false">{{ old('action_plan') }}</textarea>
-				</div> 	
+				</div>
 			</div>
 
 	    	<div class="row">
@@ -120,7 +120,7 @@
 					&nbsp;
 					<form action="/alices">
 						<button type="submit" class="button">
-							<span class="mif-cancel"></span> 
+							<span class="mif-cancel"></span>
 							&nbsp;
 							{{ trans("common.cancel") }}
 						</button>
@@ -130,7 +130,13 @@
 		</div>
 	</form>
 </div>
-
+<!------------------------------------------------------------------------------------->
+<script type="text/javascript">
+const easyMDE = new EasyMDE({
+    element: document.getElementById('mde1'),
+    minHeight: "200px",
+    maxHeight: "200px",
+    status: false,
+    });
+</script>
 @endsection
-
- 

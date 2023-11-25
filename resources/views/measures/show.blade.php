@@ -32,7 +32,7 @@
 	    		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
 	    	</div>
 			<div class="cell-6">
-				{{ $measure->objective }}
+				{!! Michelf\Markdown::defaultTransform($measure->objective) !!}
 			</div>
 	    </div>
 
