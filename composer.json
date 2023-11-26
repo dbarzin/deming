@@ -7,6 +7,7 @@
     "require": {
         "php": "^8.1",
         "enyo/dropzone": "^5.9",
+        "erusev/parsedown": "^1.7",
         "guzzlehttp/guzzle": "^7.2",
         "laravel/framework": "^10.0",
         "laravel/passport": "^11.8",
@@ -14,7 +15,6 @@
         "laravel/tinker": "^2.8",
         "laravel/ui": "^4.2",
         "maatwebsite/excel": "^3.1",
-        "michelf/php-markdown": "^2.0",
         "phpoffice/phpword": "^1.1.0"
     },
     "require-dev": {

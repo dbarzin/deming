@@ -18,6 +18,7 @@ mix.js([
         'public/vendors/metro4/js/metro.js',
         'vendor/enyo/dropzone/dist/dropzone.js',
         'resources/js/utils.js',
+        'node_modules/easymde/dist/easymde.min.js',
         ],
     'public/js/all.js')
     .sourceMaps();
@@ -28,7 +29,7 @@ mix.styles([
     'resources/css/app.css',
     'vendor/enyo/dropzone/dist/dropzone.css',
     'resources/css/calendar.css',
-    'node_modules/simplemde/dist/simplemde.min.css',
+    'node_modules/easymde/dist/easymde.min.css',
     'node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css',
     ],
     'public/css/all.css');

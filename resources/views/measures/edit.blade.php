@@ -15,7 +15,6 @@
 		</div>
 	</div>
 	@endif
-
 	<form method="POST" action="/alice/save/{{ $measure->id }}">
 		@csrf
 		<div class="grid">
@@ -62,7 +61,7 @@
 		    		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="objective" rows="3" id="mde1">{{ $errors->has('objective') ?  old('objective') : $measure->objective }}</textarea>
+					<textarea name="objective" id="mde1">{{ $errors->has('objective') ?  old('objective') : $measure->objective }}</textarea>
 				</div>
 			</div>
 
@@ -84,7 +83,7 @@
 		    		<strong>{{ trans('cruds.measure.fields.input') }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="input" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('input') ?  old('input') : $measure->input }}</textarea>
+                    <textarea class="textarea" name="input" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('objective') ?  old('objective') : $measure->input }}</textarea>
 				</div>
 			</div>
 			<div class="row">
@@ -126,7 +125,7 @@
 					</button>
 					</form>
 					&nbsp;
-					<form action="/alices/{{ $measure->id }}">
+					<form action="/alice/show/{{ $measure->id }}">
 						<button type="submit" class="button">
 							<span class="mif-cancel"></span>
 							&nbsp;
@@ -139,12 +138,14 @@
 	</div>
 </div>
 <!------------------------------------------------------------------------------------->
-<script type="text/javascript">
-const mde = new SimpleMDE({
+<script type="text/javascript" defer>
+
+const mde1 = new EasyMDE({
     element: document.getElementById('mde1'),
-    minHeight: "200px",
-    maxHeight: "200px",
+    minHeight: "100px",
+    maxHeight: "100px",
     status: false,
+    spellChecker: false,
     });
 </script>
 @endsection
