@@ -178,7 +178,7 @@
 		    		<strong>{{ trans("cruds.control.fields.action_plan") }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<pre>{{ $control->action_plan }}</pre>
+                    {!! \Parsedown::instance()->text($control->action_plan) !!}
 				</div>
 			</div>
 		@endif
@@ -261,7 +261,6 @@
 			</form>
 		</div>
 	</div>
-
 </div>
 </div>
 

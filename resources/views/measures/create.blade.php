@@ -56,7 +56,7 @@
 					<strong>{{ trans("cruds.measure.fields.objective") }}</strong>
 				</div>
 				<div class="cell-6">
-					<textarea name="objective" rows="3" id="mde1">{{ old('objective') }}</textarea>
+					<textarea name="objective" id="mde1">{{ old('objective') }}</textarea>
 				</div>
 			</div>
 
@@ -105,7 +105,7 @@
 					<strong>{{ trans("cruds.measure.fields.action_plan") }}</strong>
 				</div>
 				<div class="cell-6">
-					<textarea name="action_plan" rows="3" data-role="textarea" data-clear-button="false">{{ old('action_plan') }}</textarea>
+					<textarea name="action_plan" id="mde2">{{ old('action_plan') }}</textarea>
 				</div>
 			</div>
 
@@ -132,8 +132,14 @@
 </div>
 <!------------------------------------------------------------------------------------->
 <script type="text/javascript">
-const easyMDE = new EasyMDE({
+const mde1 = new EasyMDE({
     element: document.getElementById('mde1'),
+    minHeight: "200px",
+    maxHeight: "200px",
+    status: false,
+    });
+const mde2 = new EasyMDE({
+    element: document.getElementById('mde2'),
     minHeight: "200px",
     maxHeight: "200px",
     status: false,

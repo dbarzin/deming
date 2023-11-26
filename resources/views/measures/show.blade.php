@@ -80,7 +80,7 @@
 	    		<strong>{{ trans('cruds.measure.fields.action_plan') }}</strong>
 	    	</div>
 			<div class="cell-6">
-	    		<pre>{{ $measure->action_plan }}</pre>
+                {!! \Parsedown::instance()->text($measure->action_plan) !!}
 			</div>
 	    </div>
 
@@ -127,5 +127,4 @@
 		</div>
 	</div>
 </div>
-
 @endsection

@@ -66,7 +66,7 @@ form, table {
 				<strong>{{ trans('cruds.action.fields.next_date') }}</strong>
 	    	</div>
 			<div class="cell-2">
-				<input type="text" data-role="calendarpicker" name="plan_date" value="{{$action->next_date}}" data-input-format="%Y-%m-%d"> 
+				<input type="text" data-role="calendarpicker" name="plan_date" value="{{$action->next_date}}" data-input-format="%Y-%m-%d">
 			</div>
 		</div>
 
@@ -75,10 +75,15 @@ form, table {
 	    		<strong>{{ trans('cruds.action.fields.action_plan') }}</strong>
 	    	</div>
 			<div class="cell-6">
-				<textarea name="action_plan" rows="10" cols="80">{{ $errors->has('action_plan') ?  old('action_plan') : $action->action_plan }}</textarea>
+				<textarea name="action_plan" id="mde1">{{ $errors->has('action_plan') ?  old('action_plan') : $action->action_plan }}</textarea>
 			</div>
 		</div>
 
+        <div class="row">
+    		<div class="cell-1">
+
+            </div>
+        </div>
 		<div class="grid">
 	    	<div class="row-12">
 				@if (Auth::User()->role==1)
@@ -103,4 +108,15 @@ form, table {
 	</form>
 </div>
 </div>
+
+<script>
+const mde1 = new EasyMDE({
+    element: document.getElementById('mde1'),
+    minHeight: "400px",
+    maxHeight: "400px",
+    status: false,
+    spellChecker: false,
+    });
+</script>
+
 @endsection

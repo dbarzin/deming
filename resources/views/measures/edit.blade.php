@@ -107,7 +107,7 @@
 		    		<strong>{{ trans('cruds.measure.fields.action_plan') }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="action_plan" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('action_plan') ?  old('action_plan') : $measure->action_plan }}</textarea>
+					<textarea name="action_plan" id="mde2">{{ $errors->has('action_plan') ?  old('action_plan') : $measure->action_plan }}</textarea>
 				</div>
 			</div>
 
@@ -139,13 +139,19 @@
 </div>
 <!------------------------------------------------------------------------------------->
 <script type="text/javascript" defer>
-
-const mde1 = new EasyMDE({
-    element: document.getElementById('mde1'),
-    minHeight: "100px",
-    maxHeight: "100px",
-    status: false,
-    spellChecker: false,
-    });
+    const mde1 = new EasyMDE({
+        element: document.getElementById('mde1'),
+        minHeight: "100px",
+        maxHeight: "100px",
+        status: false,
+        spellChecker: false,
+        });
+    const mde2 = new EasyMDE({
+        element: document.getElementById('mde2'),
+        minHeight: "100px",
+        maxHeight: "100px",
+        status: false,
+        spellChecker: false,
+        });
 </script>
 @endsection

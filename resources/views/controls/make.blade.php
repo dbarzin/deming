@@ -146,7 +146,7 @@
 		    		<strong>{{ trans('cruds.control.fields.action_plan') }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="action_plan" rows="5" data-role="textarea" data-clear-button="false">{{ $errors->count()>0 ?  old('action_plan') : $control->action_plan }}</textarea>
+					<textarea name="action_plan" id="mde1">{{ $errors->count()>0 ?  old('action_plan') : $control->action_plan }}</textarea>
 				</div>
 			</div>
             @endif
@@ -280,17 +280,26 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
     	}
     );
 
-document.onpaste = function(event) {
-  const items = (event.clipboardData || event.originalEvent.clipboardData).items;
-  items.forEach((item) => {
-  	console.log(item.kind);
-    if (item.kind === 'file') {
-      	// adds the file to your dropzone instance
-      	myDropzone.addFile(item.getAsFile())
-    	}
-  	})
-}
+    document.onpaste = function(event) {
+      const items = (event.clipboardData || event.originalEvent.clipboardData).items;
+      items.forEach((item) => {
+      	console.log(item.kind);
+        if (item.kind === 'file') {
+          	// adds the file to your dropzone instance
+          	myDropzone.addFile(item.getAsFile())
+        	}
+      	})
+    }
 
+@if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
+    const mde1 = new EasyMDE({
+        element: document.getElementById('mde1'),
+        minHeight: "200px",
+        maxHeight: "200px",
+        status: false,
+        spellChecker: false,
+        });
+@endif
 </script>
 
 @endsection
