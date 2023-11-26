@@ -35,7 +35,7 @@
 				</td>
 				<td>
 					<b><a href="/action/{{ $action->id }}">{{ $action->name }}</a></b>
-					<pre>{{ $action->action_plan }}</pre>
+                    {!! \Parsedown::instance()->text($action->action_plan) !!}
 				</td>
 				<td>{{ $action->scope }}</td>
 				<td><a id="{{ $action->plan_date }}" href="/bob/show/{{ $action->id }}">{{ $action->plan_date }}</a></td>
