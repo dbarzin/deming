@@ -46,7 +46,7 @@
 	    		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
 	    	</div>
 			<div class="cell-6">
-				<pre>{!! $measure->objective !!}</pre>
+                {!! \Parsedown::instance()->text($measure->objective) !!}
 			</div>
 	    </div>
 
@@ -115,7 +115,7 @@
 	    </form>
 	    @endif
 	    &nbsp;
-	    <form action="/alices">
+	    <form action="/alice/show/{{ $measure->id }}">
 	    	<button class="button">
 				<span class="mif-cancel"></span>
 				&nbsp;

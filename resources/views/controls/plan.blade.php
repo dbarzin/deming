@@ -35,7 +35,7 @@
 	    		<strong>{{ trans('cruds.control.fields.objective') }}</strong>
 	    	</div>
 			<div class="cell-6">
-				<pre>{!! $control->objective !!}</pre>
+                {!! \Parsedown::instance()->text($control->objective) !!}
 			</div>
 		</div>
 

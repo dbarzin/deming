@@ -52,7 +52,7 @@
 	    		<strong>{{ trans('cruds.measure.fields.input') }}</strong>
 	    	</div>
 			<div class="cell">
-				<pre>{{ $measure->input }}</pre>
+                {!! \Parsedown::instance()->text($measure->input) !!}
 			</div>
 	    </div>
 

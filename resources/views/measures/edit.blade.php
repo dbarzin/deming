@@ -83,7 +83,7 @@
 		    		<strong>{{ trans('cruds.measure.fields.input') }}</strong>
 		    	</div>
 				<div class="cell-6">
-                    <textarea class="textarea" name="input" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('objective') ?  old('objective') : $measure->input }}</textarea>
+                    <textarea name="input" id="mde2">{{ $errors->has('input') ?  old('input') : $measure->input }}</textarea>
 				</div>
 			</div>
 			<div class="row">
@@ -107,7 +107,7 @@
 		    		<strong>{{ trans('cruds.measure.fields.action_plan') }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="action_plan" id="mde2">{{ $errors->has('action_plan') ?  old('action_plan') : $measure->action_plan }}</textarea>
+					<textarea name="action_plan" id="mde3">{{ $errors->has('action_plan') ?  old('action_plan') : $measure->action_plan }}</textarea>
 				</div>
 			</div>
 
@@ -148,6 +148,13 @@
         });
     const mde2 = new EasyMDE({
         element: document.getElementById('mde2'),
+        minHeight: "100px",
+        maxHeight: "100px",
+        status: false,
+        spellChecker: false,
+        });
+    const mde3 = new EasyMDE({
+        element: document.getElementById('mde3'),
         minHeight: "100px",
         maxHeight: "100px",
         status: false,

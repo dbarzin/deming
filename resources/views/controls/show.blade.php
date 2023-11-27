@@ -45,7 +45,7 @@
 	    		<strong>{{ trans("cruds.control.fields.input") }}</strong>
 	    	</div>
 			<div class="cell-6">
-				<pre>{!! $control->input !!}</pre>
+                {!! \Parsedown::instance()->text($control->input) !!}
 			</div>
 		</div>
 

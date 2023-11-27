@@ -65,7 +65,7 @@
 			    		<strong>{{ trans("cruds.control.fields.input") }}</strong>
 			    	</div>
 					<div class="cell-6">
-						<textarea name="input" rows="5" data-role="textarea" data-clear-button="false">{{ $errors->has('input') ?  old('input') : $control->input }}</textarea>
+                        <textarea name="input" id="mde2">{{ $errors->has('input') ?  old('input') : $control->input }}</textarea>
 					</div>
 				</div>
 
@@ -140,7 +140,7 @@
 			    		<strong>{{ trans("cruds.control.fields.action_plan") }}</strong>
 			    	</div>
 					<div class="cell-6">
-						<textarea name="action_plan" id="mde2">{{ $errors->has('action_plan') ?  old('action_plan') : $control->action_plan }}</textarea>
+						<textarea name="action_plan" id="mde3">{{ $errors->has('action_plan') ?  old('action_plan') : $control->action_plan }}</textarea>
 					</div>
 				</div>
 
@@ -283,5 +283,12 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
         spellChecker: false,
         });
 
+    const mde3 = new EasyMDE({
+        element: document.getElementById('mde3'),
+        minHeight: "200px",
+        maxHeight: "200px",
+        status: false,
+        spellChecker: false,
+        });
 </script>
 @endsection
