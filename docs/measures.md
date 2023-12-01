@@ -14,9 +14,9 @@ Clicking on :
 
 * the clause, you arrive on the [description of the control](#show)
 
-* the number of measures, you arrive to the [list of measures](/deming/controls/#list) of this control
+* the number of measurements, you arrive to the [list of measurements](/deming/controls/#list) of this control
 
-* the "plan" button takes you to the [measure planning](#plan)
+* the "plan" button takes you to the [control planning](#plan)
 
 
 ### Show control <a name="show"></a>
@@ -92,9 +92,9 @@ When you click:
 
 * "Plan",
 
-    * if there is no measurement with this scope for this control, a new measurement is created by copying all the control data and is scheduled for the specified date.
+    * if there is no measurement with this scope, a new measurement is created by copying all the control data and is scheduled for the specified date.
 
-    * if there is a measurement with this scope for this control, an error is displayed.
+    * if there is a measurement with the same scope for this control, an error is displayed.
 
 You then return to the [list of controls](#list).
 
