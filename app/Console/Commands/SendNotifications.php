@@ -83,7 +83,7 @@ class SendNotifications extends Command
                         // Space
                         $txt .= ' &nbsp; - &nbsp; ';
                         // Clause
-                        $txt .= '<a href="' . url('/alice/' . $control->measure_id) . '">'. htmlentities($control->clause) . '</a>';
+                        $txt .= '<a href="' . url('/alice/show/' . $control->measure_id) . '">'. htmlentities($control->clause) . '</a>';
                         // Space
                         $txt .= ' &nbsp; - &nbsp; ';
                         // Name
