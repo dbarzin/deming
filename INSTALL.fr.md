@@ -27,13 +27,16 @@ Cloner le projet depuis Github
 
     git clone https://www.github.com/dbarzin/deming
 
-Installer les packages avec composer :
+Créer les répertoires temporaires
 
     cd deming
     mkdir -p storage/framework/views
     mkdir -p storage/framework/cache
     mkdir -p storage/framework/sessions
     mkdir -p bootstrap/cache
+
+Installer les packages avec composer 
+
     composer install
 
 Publier tous les actifs publiables à partir des packages des fournisseurs
