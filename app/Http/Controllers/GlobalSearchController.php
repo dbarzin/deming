@@ -49,11 +49,12 @@ class GlobalSearchController extends Controller
 
             $query = $query->where(function ($subQuery) use ($fields, $term) {
                 foreach ($fields as $field) {
-                    if ( $field === reset( $fields ) )
+                    if ($field === reset($fields)) {
                         $subQuery = $subQuery->where($field, 'LIKE', '%' . $term . '%');
-                    else
+                    } else {
                         $subQuery = $subQuery->orWhere($field, 'LIKE', '%' . $term . '%');
                     }
+                }
             });
 
             // newest first

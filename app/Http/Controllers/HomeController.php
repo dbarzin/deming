@@ -163,12 +163,11 @@ class HomeController extends Controller
         ;
     }
 
-    public function test(Request $request) {
-
+    public function test(Request $request)
+    {
         $domain = DB::table('domains')->first();
 
         return view('test')
-            ->with('domain',$domain);
+            ->with('domain', $domain);
     }
-
 }

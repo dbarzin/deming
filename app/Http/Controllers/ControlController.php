@@ -13,16 +13,11 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use PhpOffice\PhpWord\TemplateProcessor;
-
-/******************************************************************/
-
 use PhpOffice\PhpWord\Element\TextBox;
 use PhpOffice\PhpWord\Shared\Html;
 use PhpOffice\PhpWord\Shared\XMLWriter;
 use PhpOffice\PhpWord\TemplateProcessor as PhpWordTemplateProcessor;
 use PhpOffice\PhpWord\Writer\Word2007\Element\Container;
-
 
 /**
  * Custom PhpWord template processor.
@@ -30,10 +25,10 @@ use PhpOffice\PhpWord\Writer\Word2007\Element\Container;
  * Extends the generic template processor of PhpWord by means to
  * replace a macro with HTML markup content.
  */
- // see https://stackoverflow.com/questions/63756543/replace-html-tags-in-text-with-formatting-in-phpword
+// see https://stackoverflow.com/questions/63756543/replace-html-tags-in-text-with-formatting-in-phpword
 
-class MyTemplateProcessor extends PhpWordTemplateProcessor {
-
+class MyTemplateProcessor extends PhpWordTemplateProcessor
+{
     /**
      * Replaces a macro block with the given HTML markup.
      *
@@ -52,25 +47,22 @@ class MyTemplateProcessor extends PhpWordTemplateProcessor {
      */
     public function setHtmlBlockValue($search, $markup)
     {
-      // Create a dummy container element for the content.
-      $wrapper = new TextBox();
+        // Create a dummy container element for the content.
+        $wrapper = new TextBox();
 
-      // Parse the given HTML markup and add it as child elements
-      // to the container.
-      Html::addHtml($wrapper, $markup);
+        // Parse the given HTML markup and add it as child elements
+        // to the container.
+        Html::addHtml($wrapper, $markup);
 
-      // Render the child elements of the container.
-      $xmlWriter = new XMLWriter();
-      $containerWriter = new Container($xmlWriter, $wrapper, false);
-      $containerWriter->write();
+        // Render the child elements of the container.
+        $xmlWriter = new XMLWriter();
+        $containerWriter = new Container($xmlWriter, $wrapper, false);
+        $containerWriter->write();
 
-      // Replace the macro parent block with the rendered contents.
-      $this->replaceXmlBlock($search, $xmlWriter->getData(), 'w:p');
+        // Replace the macro parent block with the rendered contents.
+        $this->replaceXmlBlock($search, $xmlWriter->getData(), 'w:p');
     }
-
 }
-
-/******************************************************************/
 
 class ControlController extends Controller
 {

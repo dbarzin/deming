@@ -72,10 +72,11 @@ class GenerateTestData extends Command
 
         // get language for the faker
         $lang = env('LANG', 1);
-        if (strtolower($lang)==="fr")
-            $locale="fr_FR";
-        else
-            $locale="en_US";
+        if (strtolower($lang) === 'fr') {
+            $locale = 'fr_FR';
+        } else {
+            $locale = 'en_US';
+        }
 
         // Intialize faker
         $faker = Faker\Factory::create($locale);
