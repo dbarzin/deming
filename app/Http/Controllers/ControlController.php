@@ -15,6 +15,63 @@ use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 use PhpOffice\PhpWord\TemplateProcessor;
 
+/******************************************************************/
+
+use PhpOffice\PhpWord\Element\TextBox;
+use PhpOffice\PhpWord\Shared\Html;
+use PhpOffice\PhpWord\Shared\XMLWriter;
+use PhpOffice\PhpWord\TemplateProcessor as PhpWordTemplateProcessor;
+use PhpOffice\PhpWord\Writer\Word2007\Element\Container;
+
+
+/**
+ * Custom PhpWord template processor.
+ *
+ * Extends the generic template processor of PhpWord by means to
+ * replace a macro with HTML markup content.
+ */
+ // see https://stackoverflow.com/questions/63756543/replace-html-tags-in-text-with-formatting-in-phpword
+
+class MyTemplateProcessor extends PhpWordTemplateProcessor {
+
+    /**
+     * Replaces a macro block with the given HTML markup.
+     *
+     * PhpWord's variables replacing doesn't allow to use HTML markup as
+     * macro replacement content.
+     *
+     * This method is a workaround that uses the PhpWord Html service to
+     * parse Html into PhpWord elements, adds them as children to a
+     * container element (TextBox), then uses the Container writer to
+     * write its children elements only.
+     *
+     * @param string $search
+     *   The macro (variable) name.
+     * @param string $markup
+     *   The HTML markup as a string.
+     */
+    public function setHtmlBlockValue($search, $markup)
+    {
+      // Create a dummy container element for the content.
+      $wrapper = new TextBox();
+
+      // Parse the given HTML markup and add it as child elements
+      // to the container.
+      Html::addHtml($wrapper, $markup);
+
+      // Render the child elements of the container.
+      $xmlWriter = new XMLWriter();
+      $containerWriter = new Container($xmlWriter, $wrapper, false);
+      $containerWriter->write();
+
+      // Replace the macro parent block with the rendered contents.
+      $this->replaceXmlBlock($search, $xmlWriter->getData(), 'w:p');
+    }
+
+}
+
+/******************************************************************/
+
 class ControlController extends Controller
 {
     /**
@@ -1010,7 +1067,8 @@ class ControlController extends Controller
         }
 
         // create templateProcessor
-        $templateProcessor = new TemplateProcessor($template_filename);
+        // $templateProcessor = new TemplateProcessor($template_filename);
+        $templateProcessor = new MyTemplateProcessor($template_filename);
 
         // Replace names
         $templateProcessor->setValue('ref', $control->clause);
@@ -1018,6 +1076,28 @@ class ControlController extends Controller
         $templateProcessor->setValue('scope', $control->scope);
         $templateProcessor->setValue('attributes', $control->attributes);
 
+        /*
+        Markdown to HTML
+        {!! \Parsedown::instance()->text($control->objective) !!}
+
+        ex :
+        $wordTable = new \PhpOffice\PhpWord\Element\Table();
+        $wordTable->addRow();
+        $cell = $wordTable->addCell();
+         \PhpOffice\PhpWord\Shared\Html::addHtml($cell,$value);
+        $templateProcessor->setComplexBlock($block_id, $wordTable);
+        src: https://github.com/PHPOffice/PHPWord/issues/110
+
+
+        $parser = new \HTMLtoOpenXML\Parser();
+        \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(false);
+        $ooXml = $parser->fromHTML($value);
+        $this->t->setValue($key, $ooXml);
+        \PhpOffice\PhpWord\Settings::setOutputEscapingEnabled(true);
+        src: https://github.com/PHPOffice/PHPWord/issues/1366
+        */
+
+        /* orig code
         $templateProcessor->setValue(
             'objective',
             strtr(
@@ -1025,6 +1105,15 @@ class ControlController extends Controller
                 ["\n" => "</w:t>\n<w:br />\n<w:t xml:space=\"preserve\">"]
             )
         );
+        */
+        $templateProcessor->setValue(
+            'objective',
+            strtr(
+                $control->objective,
+                ["\n" => "</w:t>\n<w:br />\n<w:t xml:space=\"preserve\">"]
+            )
+        );
+
         $templateProcessor->setValue(
             'input',
             strtr(

@@ -673,12 +673,12 @@ class MeasureController extends Controller
                             // insert
 
                             // get domain id
-                            $domain = Domain::where('title', $data[$line][0])->get()->first();
+                            $domain = Domain::where('title', trim($data[$line][0]))->get()->first();
 
                             if ($domain === null) {
                                 // create domain
                                 $domain = new Domain();
-                                $domain->title = $data[$line][0];
+                                $domain->title = trim($data[$line][0]);
                                 $domain->save();
 
                                 $newDomainCount++;

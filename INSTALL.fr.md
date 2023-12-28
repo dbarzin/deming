@@ -51,9 +51,6 @@ Vérifier que vous utilisez MySQL et pas MariaDB (Deming ne fonctionne pas avec 
     sudo mysql --version
 
 Lancer MySQL avec les droits root
-php artisan db:seed --class=AttributeSeeder
-php artisan db:seed --class=DomainSeeder
-php artisan db:seed --class=MeasureSeeder
 
     sudo mysql
 
@@ -90,7 +87,7 @@ Mettre les paramètre de connexion à la base de données :
 
 Exécuter les migrations
 
-    php artisan migrate --seed
+    LANG=fr php artisan migrate --seed
 
 Remarque: la graine est importante (--seed), car elle créera le premier utilisateur administrateur pour vous.
 
@@ -104,27 +101,11 @@ Créer le lien de stockage
 
 ## Peupler la base de données
 
-Il y a deux aptions pour peupler la base de données : avec commandes SQL ou avec les seeders.
-
-### Seeder
-
-Exécter les commandes suivantes
-
-    php artisan db:seed --class=AttributeSeeder
-    php artisan db:seed --class=DomainSeeder
-    php artisan db:seed --class=MeasureSeeder
-
-Si le une des commandes renvoie une erreur, la base de données n'était pas vide, il faut alors recréer la base de données avec la commande:
-
-    php artisan migrate:fresh --seed
-
-### SQL
-
 Pour importer la base de données avec les mesures de sécurité de la norme 27001:2022
 
-    php artisan db:seed --class=AttributeSeeder
-    php artisan db:seed --class=DomainSeeder
-    php artisan db:seed --class=MeasureSeeder
+    LANG=fr php artisan db:seed --class=AttributeSeeder
+    LANG=fr php artisan db:seed --class=DomainSeeder
+    LANG=fr php artisan db:seed --class=MeasureSeeder
 
 Génrérer des données de test (optionnel)
 

@@ -1,7 +1,7 @@
 <?php
-  
+
 namespace Database\Seeders;
-  
+
 use App\Models\Measure;
 
 use Illuminate\Database\Seeder;
@@ -18,8 +18,19 @@ class MeasureSeeder extends Seeder
     {
         DB::table('measures')->delete();
 
-        $csvFile = fopen(base_path("database/data/measures.fr.csv"), "r");
-  
+        // get language
+        $lang = env('LANG', 1);
+
+        // get filename
+        if (strtolower($lang)==="fr")
+            $filename="database/data/measures.fr.csv";
+        else
+            $filename="database/data/measures.en.csv";
+
+        // Open CSV file
+        $csvFile = fopen(base_path($filename), "r");
+
+        // Loop on each line
         $firstline = true;
         while (($data = fgetcsv($csvFile, 8000, ",")) !== FALSE) {
             \Log::Debug($data);
@@ -27,7 +38,7 @@ class MeasureSeeder extends Seeder
                 Measure::create([
                     "domain_id" => $data['0'],
                     "clause" => $data['1'],
-                    "name" => $data['2'],   
+                    "name" => $data['2'],
                     "objective" => str_replace("\\n","\n",$data['3']),
                     "attributes" => str_replace("\\n","\n",$data['4']),
                     "input" => str_replace("\\n","\n",$data['5']),

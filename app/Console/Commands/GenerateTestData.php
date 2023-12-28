@@ -70,8 +70,17 @@ class GenerateTestData extends Command
         // loop on measures
         $delta = $perPeriod - rand(-$perPeriod / 2, $perPeriod / 2);
 
-        $faker = Faker\Factory::create();
+        // get language for the faker
+        $lang = env('LANG', 1);
+        if (strtolower($lang)==="fr")
+            $locale="fr_FR";
+        else
+            $locale="en_US";
 
+        // Intialize faker
+        $faker = Faker\Factory::create($locale);
+
+        // Loop on measures
         foreach ($measures as $measure) {
             $delta--;
             if ($delta <= 0) {

@@ -1,10 +1,10 @@
 <?php
-  
+
 namespace Database\Seeders;
-  
+
 use Illuminate\Database\Seeder;
 use App\Models\Attribute;
-  
+
 class AttributeSeeder extends Seeder
 {
     /**
@@ -14,10 +14,22 @@ class AttributeSeeder extends Seeder
      */
     public function run()
     {
+        // clear DB table
         Attribute::truncate();
-  
-        $csvFile = fopen(base_path("database/data/attributes.fr.csv"), "r");
-  
+
+        // get language
+        $lang = env('LANG', 1);
+
+        // get filename
+        if (strtolower($lang)==="fr")
+            $filename="database/data/attributes.fr.csv";
+        else
+            $filename="database/data/attributes.en.csv";
+
+        // Open CSV file
+        $csvFile = fopen(base_path($filename), "r");
+
+        // Loop on each line
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
             if (!$firstline) {

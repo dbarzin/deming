@@ -1,7 +1,7 @@
 <?php
-  
+
 namespace Database\Seeders;
-  
+
 use App\Models\Domain;
 
 use Illuminate\Database\Seeder;
@@ -18,8 +18,18 @@ class DomainSeeder extends Seeder
     {
         DB::table('domains')->delete();
 
-        $csvFile = fopen(base_path("database/data/domains.fr.csv"), "r");
-  
+        // get language
+        $lang = env('LANG', 1);
+
+        // get filename
+        if (strtolower($lang)==="fr")
+            $filename="database/data/domains.fr.csv";
+        else
+            $filename="database/data/domains.en.csv";
+        // Open CSV file
+        $csvFile = fopen(base_path($filename), "r");
+
+        // Loop on each line  
         $firstline = true;
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
             if (!$firstline) {
