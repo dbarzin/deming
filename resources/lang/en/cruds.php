@@ -162,7 +162,7 @@ return [
      ],
      'login' => [
          'title' => 'Enter a password',
-         'identification' => 'Identification',
+         'identification' => 'Login',
          'connection' => 'Connection',
      ],
     'report' => [
