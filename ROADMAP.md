@@ -21,7 +21,8 @@ This document contains the evolutions planned for Deming in 2023.
 * [x] API
 * [x] Introduce controls by scope
 * [x] Report of applicable/non-applicable controls by scope
-* [ ] Migrate to Metro5 https://github.com/olton/metro5
+* [ ] Connverto Markdown to ODT in reports
+* [ ] Migrate to [Metro5](https://github.com/olton/metro5) or [Bootstrap](https://getbootstrap.com/)
 * [ ] Configure scoring system
 * [ ] Migration script from ISO 27001:2013 to ISO 27001:2022
 * [ ] Manage non-conformities
