@@ -45,7 +45,7 @@
 	    	</div>
 			<div class="cell-4">
 				<input type="text" name="scope" data-role="input" autocomplete="on" size="32"
-				value="" data-autocomplete="{{ implode(",",$scopes) }}"/>
+				value="{{ $control->scope }}" data-autocomplete="{{ implode(",",$scopes) }}"/>
 			</div>
 		</div>
 
