@@ -34,7 +34,7 @@ class SendNotifications extends Command
     {
         Log::debug('SendNotifications - Start.');
 
-        Log::debug('SendNotifications - day '. Carbon::now()->day);
+        Log::debug('SendNotifications - day '. Carbon::today()->day);
 
         // if (true) {
         if ($this->needCheck()) {
@@ -43,7 +43,7 @@ class SendNotifications extends Command
 
             $controls = Control
                 ::whereNull('realisation_date')
-                    ->where('plan_date', '<=', Carbon::now()
+                    ->where('plan_date', '<=', Carbon::today()
                         ->addDays(intval(config('deming.notification.expire-delay')))->toDateString())
                     ->orderBy('plan_date')
                     ->count();
@@ -62,7 +62,7 @@ class SendNotifications extends Command
                 $controls = Control::whereNull('realisation_date')
                     ->join('control_user', 'control_id', '=', 'controls.id')
                     ->where('user_id', '=', $user->id)
-                    ->where('plan_date', '<=', Carbon::now()
+                    ->where('plan_date', '<=', Carbon::today()
                         ->addDays(intval(config('deming.notification.expire-delay')))->toDateString())
                     ->orderBy('plan_date')
                     ->get();
@@ -73,7 +73,7 @@ class SendNotifications extends Command
                         // Date
                         $txt .= '<a href="' . url('/bob/show/'. $control->id) . '">';
                         $txt .= '<b>';
-                        if (strtotime($control->plan_date) > strtotime('now')) {
+                        if (strtotime($control->plan_date) >= strtotime('today')) {
                             $txt .= "<font color='green'>" . $control->plan_date .' </font>';
                         } else {
                             $txt .= "<font color='red'>" . $control->plan_date . '</font>';
@@ -129,10 +129,10 @@ class SendNotifications extends Command
         return // Daily
             ($check_frequency === '1') ||
             // Weekly
-            (($check_frequency === '7') && (Carbon::now()->dayOfWeek === 1)) ||
+            (($check_frequency === '7') && (Carbon::today()->dayOfWeek === 1)) ||
             // Every two weeks
-            (($check_frequency === '15') && (Carbon::now()->dayOfWeek === 15)) ||
+            (($check_frequency === '15') && (Carbon::today()->dayOfWeek === 15)) ||
             // Monthly
-            (($check_frequency === '30') && (Carbon::now()->day === 1));
+            (($check_frequency === '30') && (Carbon::today()->day === 1));
     }
 }
