@@ -27,6 +27,7 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
             trans('cruds.control.fields.observations'),
             trans('cruds.control.fields.score'),
             trans('cruds.control.fields.note'),
+            trans('cruds.control.fields.owners'),
             trans('cruds.control.fields.action_plan'),
         ];
     }
@@ -58,7 +59,8 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
             'I' => 50,  // Observation
             'J' => 15,  // Score
             'K' => 15,  // Note
-            'L' => 50,  // Plan d'action
+            'L' => 50,  // Responsibles
+            'M' => 50,  // Plan d'action
         ];
     }
 
@@ -80,6 +82,7 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
                 $control->observations,
                 $control->score,
                 $control->note,
+                $control->owners()->implode('name', ', '),
                 $control->action_plan,
             ],
         ];
@@ -90,6 +93,6 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
      */
     public function query()
     {
-        return DB::table('controls')->orderBy('clause');
+        return Control::orderBy('clause');
     }
 }
