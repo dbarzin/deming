@@ -11,7 +11,7 @@ Read this in other languages: [French](README.fr.md)
 
 To manage the security of their information system, organizations must set up a
 set of security measures and regularly check that these measures are effective and
-effective. These regular checks make it possible to guarantee that the security measures implemented
+efficient. These regular checks ensure that the security measures put in
 place achieve their security objectives.
 
 ### What is Deming?
