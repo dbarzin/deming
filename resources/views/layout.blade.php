@@ -98,6 +98,11 @@
                     </a>
                 </li>
 
+                <li><a href="/reports">
+                    <span class="icon"><span class="mif-file-text"></span></span>
+                    <span class="caption">{{ trans("menu.configuration.reports") }}</span>
+                </a></li>
+
                 <li>
                     <a href="#" class="dropdown-toggle">
                         <span class="icon"><span class="mif-cog"></span></span>
@@ -118,19 +123,11 @@
                             <span class="caption">{{ trans("menu.domains") }}</span>
                         </a>
                     </li>
-
-
                         @if (Auth::User()->role==1)
                         <li><a href="/users">
                             <span class="icon"><span class="mif-users"></span></span>
                             <span class="caption">{{ trans("menu.configuration.users") }}</span>
                         </a></li>
-                        @endif
-                        <li><a href="/reports">
-                            <span class="icon"><span class="mif-open-book"></span></span>
-                            <span class="caption">{{ trans("menu.configuration.reports") }}</span>
-                        </a></li>
-                        @if (Auth::User()->role==1)
                         <li><a href="/alice/import">
                             <span class="icon"><span class="mif-file-excel"></span></span>
                             <span class="caption">{{ trans("menu.configuration.import") }}</span>
