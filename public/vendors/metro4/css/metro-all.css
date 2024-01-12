@@ -35995,7 +35995,7 @@ html.metro-touch-device .streamer .stream.focused .stream-icon {
   display: none!important;
 }
 .table .data-wrapper {
-  white-space: nowrap;
+  white-space: wrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }

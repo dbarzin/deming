@@ -33,7 +33,7 @@
 						{{ $action->clause }}
 					</a>
 				</td>
-				<td>
+				<td style="overflow-wrap: break-word;">
 					<b><a href="/action/{{ $action->id }}">{{ $action->name }}</a></b>
                     {!! \Parsedown::instance()->text($action->action_plan) !!}
 				</td>

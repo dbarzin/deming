@@ -17,21 +17,21 @@ body {
 }
 .navview .navview-content {
   padding-top: 52px;
-  background-color: #ECF0F5; 
+  background-color: #ECF0F5;
 }
 .navview .pull-button {
   height: 52px;
   width: 52px;
 }
 .navview .navview-menu {
-  /* background-color: #E1D3D0; */ 
+  /* background-color: #E1D3D0; */
   /* background-color: #FFDDD0; */
-  background-color: #FFFFFF; 
+  background-color: #FFFFFF;
 }
 
 .navview .navview-menu li a:hover {
   color: #000000;
-  background: #c2c2c2; 
+  background: #c2c2c2;
 }
 .navview .navview-menu li.active a {
   color: #111111;
@@ -56,7 +56,7 @@ body {
 .navview .suggest-box img.holder {
   width: 32px!important;
   height: auto!important;
-}   
+}
 .navview .navview-menu .navview-menu {
   color: #222;
   background-color: #FFFFFF;
@@ -503,7 +503,6 @@ body {
     padding: 5px 80px 0;
   }
 }
-
 
 pre {
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
