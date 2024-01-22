@@ -61,11 +61,12 @@
 			@foreach($measures as $measure)
 				<tr>
 					<td>
-						<a href="/domains/{{$measure->domain_id}}">
+						<a id="{{$measure->domain_id}}" href="/domains/{{$measure->domain_id}}">
 							{{ $measure->title }}
 						</a>
 					</td>
-					<td><a href="/alice/show/{{ $measure->id}}">
+					<td>
+                        <a id="{{ $measure->id }}" href="/alice/show/{{ $measure->id }}">
 						@if (strlen($measure->clause)==0)
 							None
 						@else
@@ -74,7 +75,7 @@
 						</a>
 					</td>
 					<td>{{ $measure->name }}</td>
-					<td>
+					<td id="{{ $measure->control_count }}">
 						@if ($measure->control_count>0)
 						<a href="/bob/index?period=99&domain=0&scope=none&status=2&measure={{ $measure->id }}">
 							{{ $measure->control_count }}
