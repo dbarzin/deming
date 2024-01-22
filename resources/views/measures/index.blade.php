@@ -61,12 +61,12 @@
 			@foreach($measures as $measure)
 				<tr>
 					<td>
-						<a id="{{$measure->domain_id}}" href="/domains/{{$measure->domain_id}}">
+						<a id="{{ $measure->title }}" href="/domains/{{$measure->domain_id}}">
 							{{ $measure->title }}
 						</a>
 					</td>
 					<td>
-                        <a id="{{ $measure->id }}" href="/alice/show/{{ $measure->id }}">
+                        <a id="{{ $measure->clause }}" href="/alice/show/{{ $measure->id }}">
 						@if (strlen($measure->clause)==0)
 							None
 						@else
