@@ -26,7 +26,7 @@ class ActionplanController extends Controller
                     c1.score,
                     c1.name,
                     c1.scope,
-                    c2.plan_date,
+                    c1.plan_date,
                     c2.id as next_id,
                     c2.plan_date as next_date
                 from
