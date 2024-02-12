@@ -26,7 +26,7 @@
             </a>
         </div>
         <div class="suggest-box">
-            <form id="search-form" action="/admin/global-search" method="GET">
+            <form id="search-form" action="/global-search" method="GET">
                 <input type="text" data-role="input" name="search" value="{{ $search ?? '' }}" id="search" data-clear-button="false" data-search-button="true">
                 <button class="holder">
                     <span class="mif-search fg-white"></span>
