@@ -14,14 +14,14 @@
                     <strong>{{ trans("cruds.control.fields.scope") }}</strong>
                     <select name="scope" data-role="select" id="scope">
                         @foreach ($scopes as $scope)
-                        <option 
-                            @if (Session::get("scope")==$scope)        
-                                selected 
+                        <option
+                            @if (Session::get("scope")==$scope)
+                                selected
                             @endif >
                             {{ $scope }}
                         </option>
                         @endforeach
-                    </select> 
+                    </select>
                     </form>
                 </div>
             </div>
@@ -41,26 +41,26 @@
     var color = Chart.helpers.color;
     var barChartData = {
         labels : [
-            @foreach ($domains as $domain) 
+            @foreach ($domains as $domain)
                 '{{ $domain->title }}'
                  {{ $loop->last ? '' : ',' }}
-            @endforeach 
+            @endforeach
             ],
         datasets: [{
             // label: 'Vert',
             backgroundColor: '#60a917',
             borderColor: window.chartColors.green,
-            pointBackgroundColor: window.chartColors.green,        
+            pointBackgroundColor: window.chartColors.green,
             stack: 'Stack 0',
             data: [
-                @foreach ($domains as $domain) 
+                @foreach ($domains as $domain)
                     <?php $count=0; ?>
                     @foreach($active_controls as $c)
                       <?php if (($c->score==3)&&($c->title==$domain->title)) { $count++; } ?>
-                    @endforeach 
+                    @endforeach
                     {{ $count }}
                     {{ $loop->last ? '' : ',' }}
-                @endforeach 
+                @endforeach
             ]
         }, {
             // label: 'Orange',
@@ -69,32 +69,32 @@
             borderWidth: 1,
             stack: 'Stack 0',
             data: [
-                @foreach ($domains as $domain) 
+                @foreach ($domains as $domain)
                     <?php $count=0; ?>
                     @foreach($active_controls as $c)
-                      <?php if (($c->score==2)&&($c->title==$domain->title)) { $count++; 
+                      <?php if (($c->score==2)&&($c->title==$domain->title)) { $count++;
                       } ?>
-                    @endforeach 
+                    @endforeach
                     {{ $count }}
                     {{ $loop->last ? '' : ',' }}
-                @endforeach 
+                @endforeach
             ]
         }, {
             // label: 'Rouge',
             backgroundColor: '#ce352c',
             borderColor: window.chartColors.red,
-            pointBackgroundColor: window.chartColors.red,        
+            pointBackgroundColor: window.chartColors.red,
             stack: 'Stack 0',
             data: [
-                @foreach ($domains as $domain) 
+                @foreach ($domains as $domain)
                     <?php $count=0; ?>
                     @foreach($active_controls as $c)
-                      <?php if (($c->score==1)&&($c->title==$domain->title)) { $count++; 
+                      <?php if (($c->score==1)&&($c->title==$domain->title)) { $count++;
                       } ?>
-                    @endforeach 
+                    @endforeach
                     {{ $count }}
                     {{ $loop->last ? '' : ',' }}
-                @endforeach 
+                @endforeach
             ]
         }, {
             label: 'Gris',
@@ -103,14 +103,14 @@
             borderWidth: 1,
             stack: 'Stack 0',
             data: [
-                @foreach ($domains as $domain) 
+                @foreach ($domains as $domain)
                     <?php $count=0; ?>
                     @foreach($controls_never_made as $c)
                       <?php if ($c->domain_id==$domain->id) { $count++; } ?>
-                    @endforeach 
+                    @endforeach
                     {{ $count }}
                     {{ $loop->last ? '' : ',' }}
-                @endforeach 
+                @endforeach
             ]
         }]
     };
@@ -134,8 +134,8 @@
             var firstPoint = activePoints[0];
             var label = barChartData.labels[firstPoint._index];
             var value = barChartData.datasets[firstPoint._datasetIndex].data[firstPoint._index];
-            window.location.href="/controls?attribute=none&status=1&period=99&domain_title="+label;
-        };   
+            window.location.href="/bob/index?attribute=none&status=2&period=99&domain_title="+label;
+        };
 
     window.addEventListener('load', function(){
         var select = document.getElementById('scope');

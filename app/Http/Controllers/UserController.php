@@ -63,17 +63,20 @@ class UserController extends Controller
         );
 
         if (Config::get('app.ldap_domain') === null) {
-            if (request('password1') === null) {
+
+            $password = request('password1');
+
+            if ($password === null) {
                 return back()
                     ->withErrors(['password1' => 'No password'])
                     ->withInput();
             }
-            if (strlen(request('password1')) < 8) {
+            if (strlen($password) < 8) {
                 return back()
                     ->withErrors(['password1' => 'Password too short'])
                     ->withInput();
             }
-            if (request('password1') !== request('password2')) {
+            if ($password !== request('password2')) {
                 return back()
                     ->withErrors(['password1' => 'Passwords does not match'])
                     ->withInput();
