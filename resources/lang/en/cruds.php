@@ -173,7 +173,7 @@ return [
         ]
     ],
     'soa' => [
-        'title' => 'Declaration of applicability',
+        'title' => 'Statement of Applicability (SoA)',
         'generate' => 'Generate report'
     ],
     'user' => [
