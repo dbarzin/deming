@@ -8,9 +8,13 @@ use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
+use PhpOffice\PhpSpreadsheet\Style\NumberFormat;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use \PhpOffice\PhpSpreadsheet\Cell\StringValueBinder;
 
-class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles, WithColumnWidths
+class MeasuresExport
+    extends StringValueBinder
+    implements FromQuery, WithMapping, WithHeadings, WithStyles, WithColumnWidths
 {
     public function headings(): array
     {
@@ -37,6 +41,14 @@ class MeasuresExport implements FromQuery, WithMapping, WithHeadings, WithStyles
                     'vertical' => 'top',
                 ],
             ],
+        ];
+    }
+
+    public function columnFormats(): array
+    {
+        return [
+            'A' => NumberFormat::FORMAT_TEXT,
+            'B' => NumberFormat::FORMAT_TEXT,
         ];
     }
 
