@@ -57,8 +57,13 @@ class ActionplanController extends Controller
         // save control
         $control = Control::find($id);
         $control->action_plan = request('action_plan');
-        $control->plan_date = request('plan_date');
         $control->update();
+        
+        // save next control
+        $next_id = $control->next_id;
+        $next_control = Control::find($next_id);
+        $next_control->plan_date = request('plan_date');
+        $next_control->update();
 
         return redirect('/actions');
     }
