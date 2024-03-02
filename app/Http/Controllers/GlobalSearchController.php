@@ -28,11 +28,9 @@ class GlobalSearchController extends Controller
         $searchableData = [];
 
         foreach ($this->models as $model) {
-            // user does not search on domain and measures
+            // user only search on controls
             if (
-                (Auth::User()->role === 5) &&
-                (($model === 'App\\Models\\Domain') ||
-                    ($model === 'App\\Models\\Measure'))
+                (Auth::User()->role === 5) && ($model != 'App\\Models\\Control')
             ) {
                 continue;
             }
