@@ -72,7 +72,7 @@
 				<div class="cell-6">
 					<select data-role="select" name="attributes[]" multiple>
 						@foreach($values as $value)
-					    <option {{ str_contains($measure->attributes,$value) ? "selected" : ""}}>{{$value}}</option>
+					    <option {{ old('attributes') ? (in_array($value, old("attributes")) ? "selected" : "") : (str_contains($measure->attributes,$value) ? "selected" : "")}}>{{$value}}</option>
 					    @endforeach
 					 </select>
 				</div>
