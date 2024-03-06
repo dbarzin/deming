@@ -34,10 +34,9 @@ class SendNotifications extends Command
     {
         Log::debug('SendNotifications - Start.');
 
-        // if (true) {
+        // Need to send notifications today ?
         if ($this->needCheck()) {
-            // Check for control
-            Log::debug('SendNotifications - check');
+            Log::debug('SendNotifications - notifications today');
 
             $controls = Control
                 ::whereNull('realisation_date')
