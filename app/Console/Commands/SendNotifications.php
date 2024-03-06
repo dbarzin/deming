@@ -131,7 +131,7 @@ class SendNotifications extends Command
             // Weekly
             (($check_frequency === '7') && (Carbon::today()->dayOfWeek === 1)) ||
             // Every two weeks
-            (($check_frequency === '15') && ((Carbon::today()->day === 1)||(Carbon::today()->day === 15))) ||
+            (($check_frequency === '15') && ((Carbon::today()->day === 1) || (Carbon::today()->day === 15))) ||
             // Monthly
             (($check_frequency === '30') && (Carbon::today()->day === 1));
     }

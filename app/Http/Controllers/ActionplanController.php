@@ -58,7 +58,7 @@ class ActionplanController extends Controller
         $control = Control::find($id);
         $control->action_plan = request('action_plan');
         $control->update();
-        
+
         // save next control
         $next_id = $control->next_id;
         $next_control = Control::find($next_id);

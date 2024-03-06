@@ -30,7 +30,7 @@ class GlobalSearchController extends Controller
         foreach ($this->models as $model) {
             // user only search on controls
             if (
-                (Auth::User()->role === 5) && ($model != 'App\\Models\\Control')
+                (Auth::User()->role === 5) && ($model !== 'App\\Models\\Control')
             ) {
                 continue;
             }

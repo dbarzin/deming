@@ -63,7 +63,6 @@ class UserController extends Controller
         );
 
         if (Config::get('app.ldap_domain') === null) {
-
             $password = request('password1');
 
             if ($password === null) {
