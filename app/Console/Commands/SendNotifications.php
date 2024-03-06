@@ -111,7 +111,7 @@ class SendNotifications extends Command
                 }
             }
         } else {
-            Log::debug('SendNotifications - no check');
+            Log::debug('SendNotifications - no notifications today');
         }
 
         Log::debug('SendNotifications - DONE.');
@@ -126,8 +126,9 @@ class SendNotifications extends Command
     {
         $check_frequency = config('deming.notification.frequency');
 
-        return // Daily
-            ($check_frequency === '1') ||
+        Log::debug('SendNotifications - frequency=' . $check_frequency . ' day=' . Carbon::today()->day . ' dayOfWeek=' . Carbon::today()->dayOfWeek);
+
+        return ($check_frequency === '1') ||
             // Weekly
             (($check_frequency === '7') && (Carbon::today()->dayOfWeek === 1)) ||
             // Every two weeks
