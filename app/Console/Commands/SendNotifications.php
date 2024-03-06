@@ -34,8 +34,6 @@ class SendNotifications extends Command
     {
         Log::debug('SendNotifications - Start.');
 
-        Log::debug('SendNotifications - day '. Carbon::today()->day);
-
         // if (true) {
         if ($this->needCheck()) {
             // Check for control
