@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Control;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 
 class ActionplanController extends Controller
@@ -15,28 +16,44 @@ class ActionplanController extends Controller
      */
     public function index()
     {
-        // TODO : improve me
-        $actions =
-            DB::select('
-                select
-                    c1.measure_id,
-                    c1.id,
-                    c1.clause,
-                    c1.action_plan,
-                    c1.score,
-                    c1.name,
-                    c1.scope,
-                    c1.plan_date,
-                    c2.id as next_id,
-                    c2.plan_date as next_date
-                from
-                    controls c1,
-                    controls c2
-                where
-                    (c1.next_id = c2.id) and
-                    (c1.score=1 or c1.score=2) and
-                    (c2.realisation_date is null)
-                order by c1.realisation_date;');
+        // Build query
+        $actions = DB::table('controls as c1')
+            ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id');
+
+        // filter on auditee controls
+        if (Auth::User()->role === 5) {
+            $actions = $actions
+                ->leftjoin('control_user', 'c1.id', '=', 'control_user.control_id')
+                ->where('control_user.user_id', '=', Auth::User()->id);
+        }
+
+        // filter on scores that are red or orange
+        $actions = $actions
+            ->where(function($query) {
+                $query->where('c1.score', '=', 1)
+                      ->orWhere('c1.score', '=', 2);
+            });
+
+        // filter on not yet realised next control
+        $actions = $actions
+            ->whereNull('c2.realisation_date');
+
+        // Query DB
+        $actions = $actions->select(
+            [
+                'c1.measure_id',
+                'c1.id',
+                'c1.clause',
+                'c1.action_plan',
+                'c1.score',
+                'c1.name',
+                'c1.scope',
+                'c1.plan_date',
+                'c2.id as next_id',
+                'c2.plan_date as next_date'
+            ]
+        )
+            ->orderBy('c1.realisation_date')->get();
 
         // return
         return view('actions.index')
