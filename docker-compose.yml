@@ -4,10 +4,19 @@ services:
     build:
       context: .
       dockerfile: Dockerfile_web
+    environment:
+      ### PLEASE DISABLE FOR PRODUCTION
+      - USE_DEMO_DATA=1
+      ### PLEASE DISABLE FOR PRODUCTION
+      #- RESET_DB=EN #EN OR FR
+      ### PLEASE AFTER ONE RUN DISABLE FOR OPTIMIZATION
+      - UPLOAD_DB_ISO27001=FR #EN OR FR
+      ### PLEASE AFTER ONE RUN DISABLE FOR OPTIMIZATION
+      - INITIAL_DB=FR #EN OR FR
     ports:
       - 80:80
     depends_on:
-      - "mysql":
+      mysql:
         condition: service_healthy
 
   mysql:
@@ -24,3 +33,8 @@ services:
       interval: 10s
       timeout: 5s
       retries: 3
+### PLEASE ENABLE FOR PERSISTENT DATABASE DATA
+    volumes:
+      - dbdata:/var/lib/mysql
+volumes:
+  dbdata:
