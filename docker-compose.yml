@@ -17,8 +17,7 @@ services:
       - 80:80
     depends_on:
       mysql:
-        condition: service_healthy
-
+        condition: service_health
   mysql:
     image: mysql:8
     environment:
