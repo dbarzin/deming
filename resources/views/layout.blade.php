@@ -166,7 +166,7 @@
 
     <div class="navview-content h-100">
         <div data-role="appbar" class="pos-absolute bg-chem fg-black">
-            @if ((Auth::User()->role === 1)||(Auth::User()->role === 2)||(Auth::User()->role === 3))
+            @if ((Auth::User()->role === 1)||(Auth::User()->role === 2)||(Auth::User()->role === 3)||(Auth::User()->role === 5))
 
             <a href="#" class="app-bar-item d-block d-none-lg" id="paneToggle"><span class="mif-menu"></span></a>
 
