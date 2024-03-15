@@ -23,6 +23,11 @@ WORKDIR /var/www/deming
 
 RUN git clone https://www.github.com/dbarzin/deming .
 RUN cp deming.conf /etc/nginx/conf.d/default.conf
+COPY userdemo.sh /etc/userdemo.sh
+COPY resetdb.sh /etc/resetdb.sh
+COPY uploadiso27001db.sh /etc/uploadiso27001db.sh
+COPY initialdb.sh /etc/initialdb.sh
+RUN chmod +x /etc/*.sh
 RUN mkdir -p storage/framework/views && mkdir -p storage/framework/cache && mkdir -p storage/framework/sessions && mkdir -p bootstrap/cache
 RUN chmod -R 775 /var/www/deming/storage && chown -R www-data:www-data /var/www/deming
 RUN composer install

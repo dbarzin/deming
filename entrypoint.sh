@@ -1,13 +1,12 @@
 #!/usr/bin/env bash
 
 cd /var/www/deming
-php artisan migrate:fresh --seed
+bash /etc/resetdb.sh
+bash /etc/initialdb.sh
 php artisan key:generate
 php artisan storage:link
-php artisan db:seed --class=AttributeSeeder 
-php artisan db:seed --class=DomainSeeder 
-php artisan db:seed --class=MeasureSeeder
-php artisan deming:generateTests
+bash /etc/uploadiso27001db.sh
+bash /etc/userdemo.sh
 php artisan passport:install
 php artisan serve --host 0.0.0.0 --port 8000 &
 
