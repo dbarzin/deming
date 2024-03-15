@@ -124,9 +124,9 @@
 	    </div>
 
 		<div class="form-group">
-		    <form action="">
+		    <form>
 				@if ((Auth::User()->role==1)||($user->id==Auth::User()->id))
-		    	<button class="button primary" onclick='this.form.action="/users/{{ $user->id }}/edit"';>
+		    	<button class="button primary" onclick='this.form.action="/users/{{ $user->id }}/edit"'>
 		            <span class="mif-wrench"></span>
 		            &nbsp;
 		    		{{ trans('common.edit') }}

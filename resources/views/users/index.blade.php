@@ -58,6 +58,10 @@
 						data-format="string"
 						data-format="string"
 						width="200">{{ trans('cruds.user.fields.email') }}</th>
+    				@if (Auth::User()->role==1)
+                    <th>
+                    </th>
+                    @endif
 			    </tr>
 			    </thead>
 			    <tbody>
@@ -73,6 +77,17 @@
 		    		{{ $user->role==4 ? trans('cruds.user.roles.api') : "" }}
                     </td>
 					<td>{{ $user->email }}</td>
+    				@if (Auth::User()->role==1)
+                    <td>
+            		    <form>
+            		    	<button class="button primary" onclick='this.form.action="/users/{{ $user->id }}/edit"'>
+            		            <span class="mif-wrench"></span>
+            		            &nbsp;
+            		    		{{ trans('common.edit') }}
+            		    	</button>
+                        </form>
+                    </td>
+                    @endif
 				</tr>
 			@endforeach
 				</tbody>
