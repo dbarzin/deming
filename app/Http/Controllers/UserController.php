@@ -190,8 +190,10 @@ class UserController extends Controller
             }
         }
 
-        // Update controls not already made
-        $user->lastControls()->sync($request->input('controls', []));
+        // Update controls assigned to the user
+        if ((Auth::User()->role === 1)||(Auth::User()->role === 2)) {
+            $user->lastControls()->sync($request->input('controls', []));
+        }
 
         $user->update();
 

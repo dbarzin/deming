@@ -103,7 +103,7 @@
 			@endif
 
 		</div>
-
+        @if (($user->role==1)||($user->role==2))
     	<div class="row">
     		<div class="cell-2">
 	    		<strong>{{ trans('cruds.user.fields.controls') }}</strong>
@@ -120,6 +120,7 @@
 
     		</div>
     	</div>
+        @endif
     	<div class="row">
     		<div class="cell-1">
     		</div>
