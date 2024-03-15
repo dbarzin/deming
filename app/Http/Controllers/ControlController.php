@@ -957,6 +957,7 @@ class ControlController extends Controller
         $control->objective = request('objective');
         $control->attributes = request('attributes') !== null ? implode(' ', request('attributes')) : null;
         $control->input = request('input');
+        $control->model = request('model');
         $control->plan_date = request('plan_date');
         $control->realisation_date = request('realisation_date');
         $control->observations = request('observations');

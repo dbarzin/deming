@@ -68,6 +68,14 @@
                         <textarea name="input" id="mde2">{{ $errors->has('input') ?  old('input') : $control->input }}</textarea>
 					</div>
 				</div>
+				<div class="row">
+                    <div class="cell-1">
+                        <strong>{{ trans('cruds.control.fields.model') }}</strong>
+                    </div>
+                    <div class="cell-6">
+                        <textarea class="textarea" name="model" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('model') ?  old('model') : $control->model }}</textarea>
+                    </div>
+                </div>
 
 		    	<div class="row">
 		    		<div class="cell-1">
