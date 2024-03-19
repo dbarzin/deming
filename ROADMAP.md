@@ -16,6 +16,7 @@ This document contains the evolutions planned in 2024.
 * [ ] Manage non-conformities
 * [ ] Improve action plan with status (%)
 * [ ] Dark theme (https://metroui.org.ua/examples/schemes/scheme.html)
+* [ ] Import Security Controls from [OSCAL](https://pages.nist.gov/OSCAL/)
 
 # Evalutions made in 2023
 
