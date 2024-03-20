@@ -208,7 +208,7 @@ return [
                  'sent_from' => 'Sent from',
                  'to' => 'to',
                  'delay' => 'for controls that expire within',
-                 'recurrence' => 'Send a reminder',
+                 'recurrence' => 'Send a notification',
                  'duration' => [
                      'day' => 'day',
                      'days' => 'days',

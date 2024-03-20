@@ -32,9 +32,9 @@ return [
     'unknown' => 'Inconnu',
 
     'date' => 'Date',
-    
+
     'never' => 'Jamais',
-    'day' => 'Journalièrement',
+    'day' => 'Quotidiennement',
     'week' => 'Hebdomadairement',
     'month' => 'Mensuellement'
 ];
