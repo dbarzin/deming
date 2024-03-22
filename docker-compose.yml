@@ -5,14 +5,24 @@ services:
       context: .
       dockerfile: Dockerfile_web
     environment:
+      ### PLEASE DISABLE AFTER THE FIRST RUN FOR OPTIMIZATION PRODUCTION
+      - DB_SLEEP=10
       ### PLEASE DISABLE FOR PRODUCTION
       - USE_DEMO_DATA=1
       ### PLEASE DISABLE FOR PRODUCTION
-      #- RESET_DB=EN #EN OR FR
+      #- RESET_DB=FR #EN OR FR
       ### PLEASE AFTER ONE RUN DISABLE FOR OPTIMIZATION
       - UPLOAD_DB_ISO27001=FR #EN OR FR
       ### PLEASE AFTER ONE RUN DISABLE FOR OPTIMIZATION
       - INITIAL_DB=FR #EN OR FR
+      - TZ=Europe/Paris
+    #volumes:
+     # - ./custom/.env:/var/www/deming/.env
+     # - ./custom/custom_postfix_main.cf:/etc/postfix/main.cf
+     # - ./custom/custom_postfix_mailname:/etc/mailname
+     # - ./custom/deming.php:/var/www/deming/config/deming.php
+     # - ./custom/Kernel.php:/var/www/deming/app/Console/Kernel.php
+     # - ./custom/app.php:/var/www/deming/config/app.php
     ports:
       - 80:80
     depends_on:

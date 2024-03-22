@@ -32,7 +32,7 @@ RUN cp deming.conf /etc/nginx/conf.d/default.conf
 RUN cp userdemo.sh /etc/userdemo.sh
 RUN cp resetdb.sh /etc/resetdb.sh
 RUN cp uploadiso27001db.sh /etc/uploadiso27001db.sh
-RUN cp initialdb.sh /etc/initialdb.sh
+RUN cpinitialdb.sh /etc/initialdb.sh
 RUN chmod +x /etc/*.sh
 RUN mkdir -p storage/framework/views && mkdir -p storage/framework/cache && mkdir -p storage/framework/sessions && mkdir -p bootstrap/cache
 RUN chmod -R 775 /var/www/deming/storage && chown -R www-data:www-data /var/www/deming
