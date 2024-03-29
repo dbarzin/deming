@@ -16,13 +16,13 @@ services:
       ### PLEASE AFTER ONE RUN DISABLE FOR OPTIMIZATION
       - INITIAL_DB=FR #EN OR FR
       - TZ=Europe/Paris
-    #volumes:
-     # - ./custom/.env:/var/www/deming/.env
-     # - ./custom/custom_postfix_main.cf:/etc/postfix/main.cf
-     # - ./custom/custom_postfix_mailname:/etc/mailname
-     # - ./custom/deming.php:/var/www/deming/config/deming.php
-     # - ./custom/Kernel.php:/var/www/deming/app/Console/Kernel.php
-     # - ./custom/app.php:/var/www/deming/config/app.php
+    volumes:
+      - ./custom/.env:/var/www/deming/.env
+      - ./custom/custom_postfix_main.cf:/etc/postfix/main.cf
+      - ./custom/custom_postfix_mailname:/etc/mailname
+      - ./custom/deming.php:/var/www/deming/config/deming.php
+      - ./custom/Kernel.php:/var/www/deming/app/Console/Kernel.php
+      - ./custom/app.php:/var/www/deming/config/app.php
     ports:
       - 80:80
     depends_on:
