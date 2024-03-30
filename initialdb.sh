@@ -1,5 +1,22 @@
 #!/bin/bash
 
+# Définit un délai de sommeil par défaut de 10 secondes
+DEFAULT_SLEEP=1 
+
+# Vérifie si la variable d'environnement RESET_DB_SLEEP est définie
+if [ -n "${DB_SLEEP}" ]; then
+    # Utilise la valeur définie par l'utilisateur
+    SLEEP_TIME="${DB_SLEEP}"
+else
+    # Utilise la valeur par défaut
+    SLEEP_TIME="${DEFAULT_SLEEP}"
+fi
+
+# Affiche le message
+echo "Waiting for ${SLEEP_TIME} seconds before executing migration..."
+# Attend le nombre de secondes spécifié
+sleep "${SLEEP_TIME}"
+
 # Vérifie si la variable d'environnement est égale à 1
 if [ "${INITIAL_DB}" = "EN" ]; then
     # Se déplace vers le répertoire /var/www/deming/
