@@ -8,7 +8,7 @@
                 <div class="more-info-box bg-orange fg-white">
                     <div class="content">
                         <h2 class="text-bold mb-0">
-                            {{ $active_domains_count }} 
+                            {{ $active_domains_count }}
                         </h2>
                         <div>{{ trans("cruds.welcome.domains") }}</div>
                     </div>
@@ -22,7 +22,7 @@
                 <div class="more-info-box bg-cyan fg-white">
                     <div class="content">
                         <h2 class="text-bold mb-0">
-                            {{ $active_measures_count }} 
+                            {{ $active_measures_count }}
                         </h2>
                         <div>{{ trans('cruds.welcome.measures') }}</div>
                     </div>
@@ -82,8 +82,8 @@
         <div class="panel mt-2">
             <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_status') }}" data-collapsible="true" data-title-icon="<span class='mif-meter'></span>">
                 <div class="p-7">
-                    <canvas id="canvas-doughnut" style="display: block; width: 100%; height: 500px;"  class="chartjs-render-monitor" 
-                    ></canvas>                    
+                    <canvas id="canvas-doughnut" style="display: block; width: 100%; height: 500px;"  class="chartjs-render-monitor"
+                    ></canvas>
                 </div>
             </div>
         </div>
@@ -104,7 +104,7 @@
                data-rows-steps="5, 10"
                data-show-activity="false"
                data-check-style="2"
-               data-cell-wrapper="false" 
+               data-cell-wrapper="false"
                data-show-search="false"
                data-show-rows-steps="false"
                >
@@ -141,7 +141,7 @@
                         <center id="{{ $control->score }}">
                             <a href="/bob/show/{{ $control->prev_id }}">
                             @if ($control->score==1)
-                                &#128545; 
+                                &#128545;
                             @elseif ($control->score==2)
                                 &#128528;
                             @elseif ($control->score==3)
@@ -166,7 +166,7 @@
                             @else
                                 <font color="red">
                             @endif
-                                {{ $control->plan_date }} 
+                                {{ $control->plan_date }}
                             </font>
                             </a>
                         </b>
@@ -189,8 +189,8 @@
     var color = Chart.helpers.color;
     var barChartData = {
         labels : [
-        <?php 
-        for ($i=-12;$i<12;$i++) { 
+        <?php
+        for ($i=-12;$i<12;$i++) {
             $now = \Carbon\Carbon::now();
             echo '"';
             echo $now->startOfMonth()->addMonth($i)->format("m/Y");
@@ -199,86 +199,86 @@
         ?>
       ],
       datasets: [
-      { 
+      {
         backgroundColor: "#60a917",
         borderColor: "#60a917",
-        pointBackgroundColor: window.chartColors.green,        
+        pointBackgroundColor: window.chartColors.green,
         stack: 'Stack 0',
         data: [
-            <?php 
-            for ($i=-12; $i<12; $i++) { 
+            <?php
+            for ($i=-12; $i<12; $i++) {
                 $count=0;
                 $first = \Carbon\Carbon::today()->startOfMonth()->addMonth($i);
                 $second = \Carbon\Carbon::today()->startOfMonth()->addMonth($i)->endOfMonth();
                 ?>
             @foreach ($controls as $control)
                 <?php
-                if (($control->score==3) && 
-                    ($control->realisation_date!=null) && 
+                if (($control->score==3) &&
+                    ($control->realisation_date!=null) &&
                     (\Carbon\Carbon::parse($control->plan_date)->between($first, $second))
                 ) { $count++; } ?>
-            @endforeach   
+            @endforeach
             {{ $count }},
-            <?php } ?> 
+            <?php } ?>
         ]
       },
-      { 
+      {
         backgroundColor: "#fa6800",
         borderColor: "#fa6800",
-        pointBackgroundColor: window.chartColors.orange,        
+        pointBackgroundColor: window.chartColors.orange,
         stack: 'Stack 0',
         data: [
-            <?php 
-            for ($i=-12; $i<12; $i++) { 
-                $count=0; 
+            <?php
+            for ($i=-12; $i<12; $i++) {
+                $count=0;
                 $first = \Carbon\Carbon::today()->startOfMonth()->addMonth($i);
                 $second = \Carbon\Carbon::today()->startOfMonth()->addMonth($i)->endOfMonth();
                 ?>
             @foreach ($controls as $control)
                 <?php
-                if (($control->score==2) && 
-                    ($control->realisation_date!=null) && 
+                if (($control->score==2) &&
+                    ($control->realisation_date!=null) &&
                     (\Carbon\Carbon::parse($control->plan_date)->between($first, $second))
                 ) { $count++; }
                 ?>
-            @endforeach          
+            @endforeach
             {{ $count }},
-            <?php } ?> 
+            <?php } ?>
         ]
       },
-      { 
+      {
         backgroundColor: "#ce352c",
         borderColor: "#ce352c",
-        pointBackgroundColor: window.chartColors.red,        
+        pointBackgroundColor: window.chartColors.red,
         stack: 'Stack 0',
         data: [
-            <?php 
-            for ($i=-12; $i<12; $i++) { 
-                $count=0; 
+            <?php
+            for ($i=-12; $i<12; $i++) {
+                $count=0;
                 $first = \Carbon\Carbon::today()->startOfMonth()->addMonth($i);
                 $second = \Carbon\Carbon::today()->startOfMonth()->addMonth($i)->endOfMonth();
                 ?>
             @foreach ($controls as $control)
                 <?php
                 if (($control->score==1) &&
-                    ($control->realisation_date!=null) && 
+                    ($control->realisation_date!=null) &&
                     (\Carbon\Carbon::parse($control->plan_date)->between($first, $second))
                 ) { $count++; }
                 ?>
-            @endforeach          
+            @endforeach
             {{ $count }},
-            <?php } ?> 
+            <?php } ?>
         ]
       },
-      { 
+      {
         backgroundColor: color(window.chartColors.grey).alpha(0.3).rgbString(),
         borderColor: window.chartColors.grey,
-        pointBackgroundColor: window.chartColors.grey,        
+        pointBackgroundColor: window.chartColors.grey,
         stack: 'Stack 0',
         data: [
-            <?php 
-            for ($i=-12; $i<12; $i++) { 
-                $count=0; 
+            <?php
+            for ($i=-12; $i<12; $i++) {
+                $count=0;
                 $first = \Carbon\Carbon::today()->startOfMonth()->addMonth($i);
                 $second = \Carbon\Carbon::today()->startOfMonth()->addMonth($i)->endOfMonth();
                 ?>
@@ -290,9 +290,9 @@
                         $count++;
                 }
                 ?>
-            @endforeach          
+            @endforeach
             {{ $count }},
-            <?php } ?> 
+            <?php } ?>
         ]
       },
       ],
@@ -342,40 +342,40 @@
             "{{ trans('common.unknown') }}"
             ],
       datasets: [
-      { 
-        backgroundColor: 
+      {
+        backgroundColor:
             [
                 '#ce352c', '#fa6800', '#60a917', window.chartColors.grey
             ],
-        borderColor: 
+        borderColor:
             [
                 window.chartColors.red,
                 window.chartColors.orange,
                 window.chartColors.green,
                 window.chartColors.gray,
             ],
-        data: [ 
+        data: [
             <?php $count=0; ?>
             @foreach($active_controls as $c)
               <?php if ($c->score=="1") { $count++; } ?>
-            @endforeach 
+            @endforeach
             {{ $count }},
             <?php $count=0; ?>
             @foreach($active_controls as $c)
               <?php if ($c->score=="2") { $count++; } ?>
-            @endforeach 
+            @endforeach
             {{ $count }},
             <?php $count=0; ?>
             @foreach($active_controls as $c)
               <?php if ($c->score=="3") { $count++; } ?>
-            @endforeach 
+            @endforeach
             {{ $count }},
             {{ count($controls_never_made) }}
             ]
-        } 
+        }
       ]
     };
-         
+
     var radarChart = new Chart(ctx2, {
       type: 'doughnut',
       data: marksData,
@@ -386,4 +386,3 @@
 
 
 @endsection
-
