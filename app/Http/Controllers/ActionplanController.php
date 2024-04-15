@@ -29,9 +29,9 @@ class ActionplanController extends Controller
 
         // filter on scores that are red or orange
         $actions = $actions
-            ->where(function($query) {
+            ->where(function ($query) {
                 $query->where('c1.score', '=', 1)
-                      ->orWhere('c1.score', '=', 2);
+                    ->orWhere('c1.score', '=', 2);
             });
 
         // filter on not yet realised next control
@@ -50,7 +50,7 @@ class ActionplanController extends Controller
                 'c1.scope',
                 'c1.plan_date',
                 'c2.id as next_id',
-                'c2.plan_date as next_date'
+                'c2.plan_date as next_date',
             ]
         )
             ->orderBy('c1.realisation_date')->get();

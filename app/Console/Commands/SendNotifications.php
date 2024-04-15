@@ -46,7 +46,7 @@ class SendNotifications extends Command
                     ->count();
 
             Log::debug(
-                "SendNotifications - " .
+                'SendNotifications - ' .
                 $controls .
                 ' control(s) will expire within '.
                 config('deming.notification.expire-delay') .
