@@ -108,9 +108,11 @@ class MeasureController extends Controller
             sort($values);
             $values = array_unique($values);
         }
+        // for clone action
+        $measure = null;
 
         // store it in the response
-        return view('measures.create', compact('values', 'domains'));
+        return view('measures.create', compact('measure','values', 'domains'));
     }
 
     /**
@@ -160,7 +162,7 @@ class MeasureController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display a measure
      *
      * @param  \App\Measure $measure
      *
@@ -192,8 +194,9 @@ class MeasureController extends Controller
             ->with('measure', $measure);
     }
 
+
     /**
-     * Show the form for editing the specified resource.
+     * Clone measure.
      *
      * @param  \App\Measure $measure
      *
@@ -233,7 +236,55 @@ class MeasureController extends Controller
         sort($values);
         $values = array_unique($values);
 
-        return view('measures.edit', compact('measure', 'values', 'domains'))->with('domains', $domains);
+        return view('measures.edit', compact('measure','values', 'domains'));
+    }
+
+    /**
+     * Clone measure.
+     *
+     * @param  \App\Measure $measure
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function clone(int $id)
+    {
+        // Not for Auditor, API and auditee
+        abort_if(
+            (Auth::User()->role === 3) ||
+            (Auth::User()->role === 4) ||
+            (Auth::User()->role === 5),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
+        $measure = Measure::find($id);
+
+        // not found
+        abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+
+        // get the list of domains
+        $domains = Domain::All();
+
+        // get all attributes
+        $values = [];
+        $attributes = DB::table('attributes')
+            ->select('values')
+            ->get();
+        foreach ($attributes as $attribute) {
+            foreach (explode(' ', $attribute->values) as $value) {
+                if (strlen($value) > 0) {
+                    array_push($values, $value);
+                }
+            }
+        }
+        sort($values);
+        $values = array_unique($values);
+
+        // transform to array
+        $measure->attributes = explode(' ', $measure->attributes);
+//        dd($measure->attributes);
+
+        return view('measures.create', compact('measure','values', 'domains'));
     }
 
     /**

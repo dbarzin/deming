@@ -38,6 +38,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/alice/{id}/edit', 'MeasureController@edit');
     Route::get('/alice/plan/{id}', 'MeasureController@plan');
     Route::get('/alice/show/{id}', 'MeasureController@show');
+    Route::get('/alice/clone/{id}', 'MeasureController@clone');
     Route::post('/alice/delete/{id}', 'MeasureController@destroy');
     Route::post('/alice/activate/{id}', 'MeasureController@activate');
     Route::get('/alice/import', function () {

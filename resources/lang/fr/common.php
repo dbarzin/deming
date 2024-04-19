@@ -4,6 +4,7 @@ return [
 
     'cancel' => 'Annuler',
     'check' => 'Vérifier',
+    'clone' => 'Copier',
     'create' => 'Créer',
     'delete' => 'Supprimer',
     'edit' => 'Modifier',

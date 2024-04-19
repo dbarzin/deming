@@ -107,6 +107,14 @@
 		    	</button>
 		    </form>
 		    &nbsp;
+		    <form action="/alice/clone/{{ $measure->id }}">
+		    	<button class="button primary">
+		            <span class="mif-plus"></span>
+		            &nbsp;
+			    	{{ trans('common.clone') }}
+		    	</button>
+		    </form>
+		    &nbsp;
 			<form action="/alice/delete/{{ $measure->id }}" method="POST" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
                 @csrf
 				<button class="button alert" type="submit">

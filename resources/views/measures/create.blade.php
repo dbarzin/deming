@@ -26,7 +26,7 @@
 					<select data-role="select" name="domain_id" value="{{ old('domain_id') }}" size="1" width='10'>
 					    <option value="">-- {{ trans("cruds.domain.choose") }} --</option>
 						@foreach ($domains as $domain)
-					    	<option value="{{ $domain->id }}" {{ old('domain_id')==$domain->id ? "selected" : "" }} >
+					    	<option value="{{ $domain->id }}" {{ old('domain_id', optional($measure)->domain_id)==$domain->id ? "selected" : "" }} >
 					    		{{ $domain->title }} - {{ $domain->description }}
 					    	</option>
 					    @endforeach
@@ -38,7 +38,7 @@
 		    		<strong>{{ trans("cruds.measure.fields.clause") }}</strong>
 		    	</div>
 				<div class="cell-2">
-					<input type="text" class="input" name="clause" value="{{ old('clause') }}" size='60'>
+					<input type="text" class="input" name="clause" value="{{ old('clause', optional($measure)->clause) }}" size='60'>
 				</div>
 			</div>
 
@@ -47,7 +47,7 @@
 		    		<strong>{{ trans("cruds.measure.fields.name") }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<input type="text" class="input" name="name" value="{{ old('name') }}" size='60'>
+					<input type="text" class="input" name="name" value="{{ old('name', optional($measure)->name) }}" size='60'>
 				</div>
 			</div>
 
@@ -56,7 +56,7 @@
 					<strong>{{ trans("cruds.measure.fields.objective") }}</strong>
 				</div>
 				<div class="cell-6">
-					<textarea name="objective" id="mde1">{{ old('objective') }}</textarea>
+					<textarea name="objective" id="mde1">{{ old('objective', optional($measure)->objective) }}</textarea>
 				</div>
 			</div>
 
@@ -67,7 +67,7 @@
 				<div class="cell-6">
 					<select data-role="select" name="attributes[]" multiple>
 						@foreach($values as $value)
-					    <option {{ old("attributes") ? (in_array($value, old("attributes")) ? "selected" : "") : ""}}>{{$value}}</option>
+					    <option {{ old("attributes", optional($measure)->attributes) ? (in_array($value, old("attributes", optional($measure)->attributes)) ? "selected" : "") : ""}}>{{$value}}</option>
 					    @endforeach
 					 </select>
 				</div>
@@ -78,7 +78,7 @@
 					<strong>{{ trans("cruds.measure.fields.input") }}</strong>
 				</div>
 				<div class="cell-6">
-                    <textarea name="input" id="mde2">{{ old('input') }}</textarea>
+                    <textarea name="input" id="mde2">{{ old('input', optional($measure)->input) }}</textarea>
 				</div>
 			</div>
 
@@ -87,7 +87,7 @@
 					<strong>{{ trans("cruds.measure.fields.model") }}</strong>
 				</div>
 				<div class="cell-6">
-					<textarea name="model" rows="3" data-role="textarea" data-clear-button="false">{{ old('model') }}</textarea>
+					<textarea name="model" rows="3" data-role="textarea" data-clear-button="false">{{ old('model', optional($measure)->model) }}</textarea>
 				</div>
 			</div>
 
@@ -96,7 +96,7 @@
 					<strong>{{ trans("cruds.measure.fields.indicator") }}</strong>
 				</div>
 				<div class="cell-6">
-					<textarea name="indicator" rows="3" data-role="textarea" data-clear-button="false">{{ old('indicator') }}</textarea>
+					<textarea name="indicator" rows="3" data-role="textarea" data-clear-button="false">{{ old('indicator', optional($measure)->indicator) }}</textarea>
 				</div>
 			</div>
 
@@ -105,7 +105,7 @@
 					<strong>{{ trans("cruds.measure.fields.action_plan") }}</strong>
 				</div>
 				<div class="cell-6">
-					<textarea name="action_plan" id="mde3">{{ old('action_plan') }}</textarea>
+					<textarea name="action_plan" id="mde3">{{ old('action_plan', optional($measure)->action_plan) }}</textarea>
 				</div>
 			</div>
 
