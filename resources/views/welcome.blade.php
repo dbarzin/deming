@@ -161,7 +161,7 @@
                     <td>
                         <b id="{{ $control->plan_date }}">
                             <a href="/bob/show/{{ $control->id }}">
-                            @if (today()->lte($control->plan_date)) 
+                            @if (today()->lte($control->plan_date))
                                 <font color="green">
                             @else
                                 <font color="red">
@@ -370,7 +370,7 @@
               <?php if ($c->score=="3") { $count++; } ?>
             @endforeach
             {{ $count }},
-            {{ count($controls_never_made) }}
+            {{ $controls_never_made }}
             ]
         }
       ]

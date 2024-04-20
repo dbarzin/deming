@@ -282,7 +282,6 @@ class MeasureController extends Controller
 
         // transform to array
         $measure->attributes = explode(' ', $measure->attributes);
-//        dd($measure->attributes);
 
         return view('measures.create', compact('measure','values', 'domains'));
     }

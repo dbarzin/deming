@@ -57,16 +57,11 @@ class HomeController extends Controller
             ->count();
 
         // count control never made
-        $controls_never_made = DB::select(
-            '
-            select domain_id
-            from controls c1
-            where realisation_date is null and
-            not exists (
-                select *
-                from controls c2
-                where c2.next_id=c1.id);'
-        );
+        $controls_never_made = DB::table('controls as c1')
+            ->leftJoin('controls as c2', 'c2.next_id', '=', 'c1.id')
+            ->whereNull('c1.realisation_date')
+            ->whereNull('c2.id')
+            ->count();
 
         // Last controls made by measures
         $active_controls =
