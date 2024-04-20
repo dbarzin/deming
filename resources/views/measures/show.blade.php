@@ -125,6 +125,15 @@
 	        </form>
 		    &nbsp;
 		    @endif
+			@if (Auth::User()->role === 5)
+		    <form action="/bob/index">
+		    	<button class="button">
+					<span class="mif-cancel"></span>
+					&nbsp;
+			    	{{ trans('common.cancel') }}
+		    	</button>
+			</form>
+            @else
 		    <form action="/alice/index">
 		    	<button class="button">
 					<span class="mif-cancel"></span>
@@ -132,6 +141,7 @@
 			    	{{ trans('common.cancel') }}
 		    	</button>
 			</form>
+            @endif
 		</div>
 	</div>
 </div>
