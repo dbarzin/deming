@@ -403,12 +403,15 @@ class ControlController extends Controller
         sort($values);
         $values = array_unique($values);
 
+        $users = User::orderBy('name')->get();
+
         return view('controls.edit')
             ->with('control', $control)
             ->with('documents', $documents)
             ->with('scopes', $scopes)
             ->with('ids', $ids)
-            ->with('attributes', $values);
+            ->with('attributes', $values)
+            ->with('users', $users);
     }
 
     /**
@@ -966,6 +969,7 @@ class ControlController extends Controller
         $control->action_plan = request('action_plan');
         $control->periodicity = request('periodicity');
         $control->next_id = request('next_id');
+        $control->owners()->sync($request->input('owners', []));
 
         $control->save();
 
