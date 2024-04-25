@@ -180,6 +180,19 @@
 					</div>
 				</div>
 
+				<div class="row">
+                    <div class="cell-1">
+                        <strong>{{ trans('cruds.control.fields.owners') }}</strong>
+                    </div>
+                    <div class="cell-4">
+                        <select data-role="select" name="owners[]" id="owners" multiple>
+                            @foreach($users as $user)
+                                <option value="{{ $user->id }}" {{ (in_array($user->id, old('owners', [])) || $control->owners->contains($user->id)) ? 'selected' : '' }}>{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
 		    	<div class="row-12">
 		    		<div><br></div>
 		    	</div>
