@@ -1,0 +1,27 @@
+# Laravel / Dependencies
+/vendor
+.env
+/public/.htaccess
+/storage
+storage/*.key
+node_modules
+.cache/
+
+# IDEs / editors / System Files
+*.swp
+*.swo
+.idea
+.vscode
+.history
+ehthumbs.db
+Thumbs.db
+.DS_Store
+.DS_Store?
+.Spotlight-V100
+.Trashes
+.bash_history
+
+# log files and databases
+*.log
+*.sql
+*.sqlite
