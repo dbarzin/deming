@@ -7,7 +7,6 @@ use App\Models\Control;
 use App\Models\Domain;
 use App\Models\Measure;
 use App\Models\User;
-use Illuminate\Database\Query\JoinClause;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -58,7 +57,7 @@ class MeasureController extends Controller
             ->leftjoin('domains', 'measures.domain_id', '=', 'domains.id')
             ->join('controls', 'measures.id', 'controls.measure_id')
             // ->whereNull('controls.realisation_date');
-            ->whereIn('controls.status',[0,1])
+            ->whereIn('controls.status', [0,1])
             ->groupBy('measures.id');
 
         if ($domain !== null) {
@@ -111,7 +110,7 @@ class MeasureController extends Controller
         $measure = null;
 
         // store it in the response
-        return view('measures.create', compact('measure','values', 'domains'));
+        return view('measures.create', compact('measure', 'values', 'domains'));
     }
 
     /**
@@ -193,7 +192,6 @@ class MeasureController extends Controller
             ->with('measure', $measure);
     }
 
-
     /**
      * Clone measure.
      *
@@ -235,7 +233,7 @@ class MeasureController extends Controller
         sort($values);
         $values = array_unique($values);
 
-        return view('measures.edit', compact('measure','values', 'domains'));
+        return view('measures.edit', compact('measure', 'values', 'domains'));
     }
 
     /**
@@ -282,7 +280,7 @@ class MeasureController extends Controller
         // transform to array
         $measure->attributes = explode(' ', $measure->attributes);
 
-        return view('measures.create', compact('measure','values', 'domains'));
+        return view('measures.create', compact('measure', 'values', 'domains'));
     }
 
     /**
@@ -336,7 +334,7 @@ class MeasureController extends Controller
         // update the current control
         $control = Control::where('measure_id', $measure->id)
             // ->where('realisation_date', null)
-            ->whereIn("status", [0,1])
+            ->whereIn('status', [0,1])
             ->get()->first();
         if ($control !== null) {
             $control->clause = $measure->clause;
@@ -403,7 +401,7 @@ class MeasureController extends Controller
             ->whereNotNull('scope')
             ->where('scope', '<>', '')
             // ->whereNull('realisation_date')
-            ->whereIn("status",[0,1])
+            ->whereIn('status', [0,1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -450,7 +448,7 @@ class MeasureController extends Controller
             ->where('measure_id', '=', $measure->id)
             ->where('scope', '=', $request->scope)
             // ->where('realisation_date', null)
-            ->where("status",[0,1])
+            ->where('status', [0,1])
             ->first();
 
         if ($control !== null) {
@@ -486,7 +484,7 @@ class MeasureController extends Controller
             ->where('scope', '=', $measure->scope)
             ->where('next_id', null)
             // ->whereNotNull('realisation_date')
-            ->where("status",2)
+            ->where('status', 2)
             ->first();
         if ($prev_control !== null) {
             $prev_control->next_id = $control->id;
@@ -519,7 +517,7 @@ class MeasureController extends Controller
             ->select('id')
             ->where('measure_id', '=', $request->id)
             // ->where('realisation_date', null)
-            ->where("status",[0,1])
+            ->where('status', [0,1])
             ->get()
             ->first()->id;
         if ($control_id !== null) {

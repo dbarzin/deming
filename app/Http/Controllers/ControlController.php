@@ -75,8 +75,11 @@ class ControlController extends Controller
     public function index(Request $request)
     {
         // Not for API
-        abort_if(Auth::User()->role === 4,
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(
+            Auth::User()->role === 4,
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // get all domains
         $domains = Domain::All();
@@ -118,7 +121,7 @@ class ControlController extends Controller
         }
         $scopes = $scopes
             //->whereNull('realisation_date')
-            ->whereIn('status',[0,1])
+            ->whereIn('status', [0,1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -238,24 +241,26 @@ class ControlController extends Controller
             $controls = $controls
                 ->where('c1.plan_date', '<', Carbon::today()->format('Y-m-d'))
                 // ->whereNull('c1.realisation_date');
-                ->whereIn('c1.status',[0,1]);
+                ->whereIn('c1.status', [0,1]);
         } elseif ($status === '1') { // Done
-            if (Auth::User()->role===5)
+            if (Auth::User()->role === 5) {
                 // Auditee want to see his proposed controls too
                 $controls = $controls
                     ->whereIn('c1.status', [1,2]);
-            else
+            } else {
                 $controls = $controls
                     ->where('c1.status', 2);
+            }
         } elseif ($status === '2') { // Todo
-            if (Auth::User()->role===5)
+            if (Auth::User()->role === 5) {
                 $controls = $controls
                     //->whereNull('c1.realisation_date');
-                    ->where('c1.status',0);
-            else
+                    ->where('c1.status', 0);
+            } else {
                 $controls = $controls
                     //->whereNull('c1.realisation_date');
-                    ->whereIn('c1.status',[0,1]);
+                    ->whereIn('c1.status', [0,1]);
+            }
         }
 
         // Filter on attribute
@@ -281,7 +286,7 @@ class ControlController extends Controller
                 'domains.title',
             ]
         )
-        ->orderBy('c1.id')->get();
+            ->orderBy('c1.id')->get();
 
         // return view
         return view('controls.index')
@@ -402,7 +407,7 @@ class ControlController extends Controller
             ->whereNotNull('scope')
             ->where('scope', '<>', '')
             // ->whereNull('realisation_date')
-            ->whereIn('status',[0,1])
+            ->whereIn('status', [0,1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -505,7 +510,7 @@ class ControlController extends Controller
             ->select(DB::raw('distinct domains.id, domains.title'))
             ->join('controls', 'domains.id', '=', 'controls.domain_id')
             //->whereNull('realisation_date')
-            ->whereIn('status',[0,1])
+            ->whereIn('status', [0,1])
             ->orderBy('domains.title')
             ->get();
 
@@ -513,7 +518,7 @@ class ControlController extends Controller
         $scopes = DB::table('controls')
             ->select('scope')
             // ->whereNull('realisation_date')
-            ->whereIn('status',[0,1])
+            ->whereIn('status', [0,1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -540,7 +545,6 @@ class ControlController extends Controller
                 from controls c2
                 where c2.status=2 and c1.id=c2.next_id);'
         );
-
 
         // Last controls made by measures
         // TODO : improve me
@@ -576,7 +580,7 @@ class ControlController extends Controller
             ->select(DB::raw('distinct domains.id, domains.title, domains.description'))
             ->join('controls', 'domains.id', '=', 'controls.domain_id')
             // ->whereNull('realisation_date')
-            ->whereIn('status',[0,1])
+            ->whereIn('status', [0,1])
             ->orderBy('domains.title')
             ->get();
 
@@ -584,7 +588,7 @@ class ControlController extends Controller
         $scopes = DB::table('controls')
             ->select('scope')
             //->whereNull('realisation_date')
-            ->whereIn('status',[0,1])
+            ->whereIn('status', [0,1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -717,7 +721,7 @@ class ControlController extends Controller
         $scopes = DB::table('controls')
             ->select('scope')
             // ->whereNull('realisation_date')
-            ->whereIn('status',[0,1])
+            ->whereIn('status', [0,1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -748,7 +752,7 @@ class ControlController extends Controller
 
         $control = Control
                 // ::whereNull('realisation_date')
-                ::whereIn('status',[0,1])
+                ::whereIn('status', [0,1])
                     ->where('id', '=', $request->id)
                     ->get()
                     ->first();
@@ -795,11 +799,11 @@ class ControlController extends Controller
         // Check duplicate control on same scope
         if (Control
             // ::whereNull('realisation_date')
-            ::whereIn("status",[0,1])
-            ->where('id', '<>', $control->id)
-            ->where('measure_id', '=', $control->measure_id)
-            ->where('scope', '=', $request->scope)
-            ->count() > 0) {
+            ::whereIn('status', [0,1])
+                ->where('id', '<>', $control->id)
+                ->where('measure_id', '=', $control->measure_id)
+                ->where('scope', '=', $request->scope)
+                ->count() > 0) {
             return back()
                 ->withErrors(['msg' => trans('cruds.control.error.duplicate')])
                 ->withInput();
@@ -883,10 +887,9 @@ class ControlController extends Controller
     {
         // Only for admin, user and auditee
         abort_if(
-            !((Auth::User()->role === 1)
-            ||(Auth::User()->role === 2)
-            ||(Auth::User()->role === 5)
-            ),
+            ! ((Auth::User()->role === 1)
+            || (Auth::User()->role === 2)
+            || (Auth::User()->role === 5)),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -942,7 +945,7 @@ class ControlController extends Controller
 
         // Auditee -> propose control
         if (Auth::User()->role === 5) {
-                $control->status = 1;
+            $control->status = 1;
         }
         // if there is no next control
         elseif ($control->next_id === null) {
@@ -969,7 +972,7 @@ class ControlController extends Controller
             $new_control->owners()->sync($control->owners->pluck('id')->toArray());
 
             // set status done
-            $control->status=2;
+            $control->status = 2;
 
             // make link
             $control->next_id = $new_control->id;
@@ -1091,10 +1094,8 @@ class ControlController extends Controller
     {
         // Only for Admin and user
         abort_if(
-            !(
-            (Auth::User()->role === 1) ||
-            (Auth::User()->role === 2)
-            ),
+            ! ((Auth::User()->role === 1) ||
+            (Auth::User()->role === 2)),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1138,10 +1139,8 @@ class ControlController extends Controller
     {
         // Only for Admin and user
         abort_if(
-            !(
-            (Auth::User()->role === 1) ||
-            (Auth::User()->role === 2)
-            ),
+            ! ((Auth::User()->role === 1) ||
+            (Auth::User()->role === 2)),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1192,7 +1191,7 @@ class ControlController extends Controller
         $control->next_id = $new_control->id;
 
         // set status done
-        $control->status=2;
+        $control->status = 2;
 
         // update control
         $control->update();

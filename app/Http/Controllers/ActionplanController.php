@@ -17,8 +17,11 @@ class ActionplanController extends Controller
      */
     public function index()
     {
-        abort_if(!((Auth::User()->role === 1)||(Auth::User()->role === 2)),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(
+            ! ((Auth::User()->role === 1) || (Auth::User()->role === 2)),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // Build query
         $actions = DB::table('controls as c1')
@@ -41,7 +44,7 @@ class ActionplanController extends Controller
         // filter on not yet realised next control
         $actions = $actions
             // ->whereNull('c2.realisation_date');
-            ->whereIn('c2.status',[0,1]);
+            ->whereIn('c2.status', [0,1]);
 
         // Query DB
         $actions = $actions->select(
@@ -74,8 +77,11 @@ class ActionplanController extends Controller
      */
     public function save(Request $request)
     {
-        abort_if(!((Auth::User()->role === 1)||(Auth::User()->role === 2)),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(
+            ! ((Auth::User()->role === 1) || (Auth::User()->role === 2)),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $id = (int) $request->get('id');
 
@@ -102,8 +108,11 @@ class ActionplanController extends Controller
      */
     public function show(int $id)
     {
-        abort_if(!((Auth::User()->role === 1)||(Auth::User()->role === 2)),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(
+            ! ((Auth::User()->role === 1) || (Auth::User()->role === 2)),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $action = DB::table('controls as c1')
             ->select(

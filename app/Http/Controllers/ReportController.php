@@ -98,7 +98,7 @@ class ReportController extends Controller
         $scopes = DB::table('controls')
             ->select('scope')
             //->whereNull('realisation_date')
-            ->whereIn('status',[0,1])
+            ->whereIn('status', [0,1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -119,7 +119,7 @@ class ReportController extends Controller
             ->leftjoin('domains', 'measures.domain_id', '=', 'domains.id')
             ->leftjoin('controls', 'measures.id', '=', 'controls.measure_id')
             // ->whereNull('controls.realisation_date')
-            ->whereIn('controls.status',[0,1])
+            ->whereIn('controls.status', [0,1])
             ->orderBy('domains.title')
             ->orderBy('measures.clause')
             ->get();
@@ -183,12 +183,12 @@ class ReportController extends Controller
     private function generateMadeControlTable(TemplateProcessor $templateProcessor, $start_date, $end_date)
     {
         $controls = Control::where(
-                [
+            [
                     ['realisation_date','>=',$start_date],
                     ['realisation_date','<',$end_date],
                 ]
-            )
-            ->where('status',2)
+        )
+            ->where('status', 2)
             ->orderBy('realisation_date')->get();
 
         //----------------------------------------------------------------
