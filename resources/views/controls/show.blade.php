@@ -16,7 +16,9 @@
 	    		<strong>{{ trans("cruds.control.fields.scope") }}</strong>
 	    	</div>
     		<div class="cell-1">
+                <a href="/bob/index?scope={{ $control->scope }}">
     			{{ $control->scope }}
+                </a>
     		</div>
     	</div>
 
