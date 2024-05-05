@@ -2,6 +2,7 @@
 return [
     'confirm' => 'Confirmer la suppression ?',
 
+    'accept' => 'Accepter',
     'cancel' => 'Annuler',
     'check' => 'Vérifier',
     'clone' => 'Copier',
@@ -11,8 +12,10 @@ return [
     'make' => 'Faire',
     'new' => 'Nouveau',
     'plan' => 'Planifier',
+    'reject' => "Rejeter",
     'save' => 'Sauver',
     'unplan' => 'Déplanifier',
+    'validate' => 'Valider',
 
     'monthly' => 'Mensuel',
     'quarterly' => 'Trimestriel',

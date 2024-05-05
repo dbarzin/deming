@@ -97,7 +97,8 @@ class ReportController extends Controller
         // Get all scopes
         $scopes = DB::table('controls')
             ->select('scope')
-            ->whereNull('realisation_date')
+            //->whereNull('realisation_date')
+            ->whereIn('status',[0,1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -117,7 +118,8 @@ class ReportController extends Controller
             )
             ->leftjoin('domains', 'measures.domain_id', '=', 'domains.id')
             ->leftjoin('controls', 'measures.id', '=', 'controls.measure_id')
-            ->whereNull('controls.realisation_date')
+            // ->whereNull('controls.realisation_date')
+            ->whereIn('controls.status',[0,1])
             ->orderBy('domains.title')
             ->orderBy('measures.clause')
             ->get();
@@ -181,11 +183,12 @@ class ReportController extends Controller
     private function generateMadeControlTable(TemplateProcessor $templateProcessor, $start_date, $end_date)
     {
         $controls = Control::where(
-            [
-                ['realisation_date','>=',$start_date],
-                ['realisation_date','<',$end_date],
-            ]
-        )
+                [
+                    ['realisation_date','>=',$start_date],
+                    ['realisation_date','<',$end_date],
+                ]
+            )
+            ->where('status',2)
             ->orderBy('realisation_date')->get();
 
         //----------------------------------------------------------------
@@ -234,15 +237,15 @@ class ReportController extends Controller
         // get status report
         $controls = DB::select(
             '
-            SELECT 
-            c1.measure_id, 
+            SELECT
+            c1.measure_id,
             max(c1.domain_id) AS "domain_id",
             max(c1.score) AS "score",
             max(c1.realisation_date) AS "realisation_date"
             FROM
                 controls c1 left join controls c2 on c1.next_id=c2.id
             WHERE
-                c2.realisation_date is null and c1.next_id is not null
+                c1.status=2 and c2.next_id is null
             GROUP BY c1.measure_id, c1.clause ORDER BY c1.clause;'
         );
 
@@ -393,11 +396,11 @@ class ReportController extends Controller
                     c1.realisation_date,
                     c2.id as next_id,
                     c2.plan_date as next_date,
-                    c1.action_plan 
+                    c1.action_plan
                 from
                     controls c1 left join controls c2 on c1.next_id=c2.id
                 where
-                    (c1.score=1 or c1.score=2) and c2.next_id is null
+                    (c1.score=1 or c1.score=2) and (c2.status=0 or c2.status=1) and c2.next_id is null
                 order by measure_id;');
 
         $table = new Table(['borderSize' => 3, 'borderColor' => 'black', 'width' => 9800, 'unit' => TblWidth::TWIP]);

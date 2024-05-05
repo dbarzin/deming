@@ -171,13 +171,13 @@
             <a href="#" class="app-bar-item d-block d-none-lg" id="paneToggle"><span class="mif-menu"></span></a>
 
             <div class="app-bar-container ml-auto">
-                <a href="/bob/index?attribute=none&period=0&domain=0&status=2" class="app-bar-item">
+                <a href="/bob/index?attribute=none&period=0&scope=none&domain=0&status=2" class="app-bar-item">
                     <span class="mif-envelop"></span>
                     @if (Session::get("planed_controls_this_month_count")!=null)
                     <span class="badge bg-green fg-white mt-2 mr-1">{{Session::get("planed_controls_this_month_count")}}</span>
                     @endif
                 </a>
-                <a href="/bob/index?attribute=none&period=99&domain=0&status=1&late=1" class="app-bar-item">
+                <a href="/bob/index?attribute=none&period=99&scope=none&domain=0&status=1&late=1" class="app-bar-item">
                     <span class="mif-bell"></span>
                     @if (Session::get("late_controls_count")!=null)
                     <span class="badge bg-red fg-white mt-2 mr-1">{{Session::get("late_controls_count")}}</span>

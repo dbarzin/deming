@@ -146,7 +146,7 @@
 			</div>
 		</div>
 
-		@if ($control->realisation_date!=null)
+		@if ($control->score!==null)
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans("cruds.control.fields.score") }}</strong>
@@ -214,8 +214,15 @@
 
    	<div class="row">
    		<div class="cell-7">
-			@if ((Auth::User()->role===1)||(Auth::User()->role===2)||(Auth::User()->role===5))
-				@if ($control->realisation_date==null)
+
+            @if (
+                    ($control->status===0) &&
+                    (
+                        (Auth::User()->role===1)||
+                        (Auth::User()->role===2)||
+                        (Auth::User()->role===5)
+                    )
+                )
 			    <form action="/bob/make/{{ $control->id }}">
 		    		<button class="button success">
 						<span class="mif-assignment"></span>
@@ -225,15 +232,33 @@
 				</form>
 				&nbsp;
             @endif
-            @if ((Auth::User()->role===1)||(Auth::User()->role===2))
-			    <form action="/bob/plan/{{ $control->id }}">
-		    		<button class="button info">
-						<span class="mif-calendar"></span>
+
+			@if (
+                    ($control->status===1) &&
+                    (
+                        (Auth::User()->role===1)||
+                        (Auth::User()->role===2)
+                    )
+                )
+			    <form action="/bob/make/{{ $control->id }}">
+		    		<button class="button success">
+						<span class="mif-assignment"></span>
 						&nbsp;
-			    		{{ trans("common.plan") }}
-		    		</button>
+			    		{{ trans("common.validate") }}
+			    	</button>
 				</form>
 				&nbsp;
+            @endif
+            @if (($control->status===0)||($control->status===1))
+                @if ((Auth::User()->role===1)||(Auth::User()->role===2))
+    			    <form action="/bob/plan/{{ $control->id }}">
+    		    		<button class="button info">
+    						<span class="mif-calendar"></span>
+    						&nbsp;
+    			    		{{ trans("common.plan") }}
+    		    		</button>
+    				</form>
+    				&nbsp;
 				@endif
 			@endif
 			@if (Auth::User()->role==1)

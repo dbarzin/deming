@@ -54,6 +54,8 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/bob/template/{id}', 'ControlController@template');
     Route::get('/bob/delete/{id}', 'ControlController@destroy');
     Route::post('/bob/make', 'ControlController@doMake');
+    Route::post('/bob/accept', 'ControlController@accept');
+    Route::post('/bob/reject', 'ControlController@reject');
     Route::post('/bob/plan', 'ControlController@doPlan');
     Route::post('/bob/unplan', 'ControlController@unplan');
     Route::post('/bob/draft', 'ControlController@draft');

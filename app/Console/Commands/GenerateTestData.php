@@ -110,6 +110,7 @@ class GenerateTestData extends Command
             $control->observations = $faker->text(256);
             $control->note = rand(0, 10);
             $control->score = rand(0, 100) < 90 ? 3 : (rand(0, 2) < 2 ? 2 : 1);
+            $control->status = 2;
             $control->save();
 
             // create a previous
@@ -133,6 +134,7 @@ class GenerateTestData extends Command
             $prev_control->note = rand(0, 10);
             $prev_control->score = rand(0, 100) < 90 ? 3 : (rand(0, 2) < 2 ? 2 : 1);
             $prev_control->next_id = $control->id;
+            $prev_control->status = 2;
             $prev_control->save();
 
             // create next control
@@ -155,6 +157,7 @@ class GenerateTestData extends Command
             $nextControl->realisation_date = null;
             $nextControl->note = null;
             $nextControl->score = null;
+            $nextControl->status = 0;
             // save it
             $nextControl->save();
 

@@ -19,6 +19,7 @@ use PhpOffice\PhpWord\Shared\XMLWriter;
 use PhpOffice\PhpWord\TemplateProcessor as PhpWordTemplateProcessor;
 use PhpOffice\PhpWord\Writer\Word2007\Element\Container;
 
+// TODO : fixme
 /**
  * Custom PhpWord template processor.
  *
@@ -74,7 +75,8 @@ class ControlController extends Controller
     public function index(Request $request)
     {
         // Not for API
-        abort_if(Auth::User()->role === 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Auth::User()->role === 4,
+            Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // get all domains
         $domains = Domain::All();
@@ -115,7 +117,8 @@ class ControlController extends Controller
                 ->where('control_user.user_id', '=', Auth::User()->id);
         }
         $scopes = $scopes
-            ->whereNull('realisation_date')
+            //->whereNull('realisation_date')
+            ->whereIn('status',[0,1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -231,14 +234,28 @@ class ControlController extends Controller
         }
 
         // Filter on status
-        if ($late !== null) {
+        if ($late !== null) { // All
             $controls = $controls
                 ->where('c1.plan_date', '<', Carbon::today()->format('Y-m-d'))
-                ->whereNull('c1.realisation_date');
-        } elseif ($status === '1') {
-            $controls = $controls->whereNotNull('c1.realisation_date');
-        } elseif ($status === '2') {
-            $controls = $controls->whereNull('c1.realisation_date');
+                // ->whereNull('c1.realisation_date');
+                ->whereIn('c1.status',[0,1]);
+        } elseif ($status === '1') { // Done
+            if (Auth::User()->role===5)
+                // Auditee want to see his proposed controls too
+                $controls = $controls
+                    ->whereIn('c1.status', [1,2]);
+            else
+                $controls = $controls
+                    ->where('c1.status', 2);
+        } elseif ($status === '2') { // Todo
+            if (Auth::User()->role===5)
+                $controls = $controls
+                    //->whereNull('c1.realisation_date');
+                    ->where('c1.status',0);
+            else
+                $controls = $controls
+                    //->whereNull('c1.realisation_date');
+                    ->whereIn('c1.status',[0,1]);
         }
 
         // Filter on attribute
@@ -258,12 +275,13 @@ class ControlController extends Controller
                 'c1.plan_date',
                 'c1.realisation_date',
                 'c1.score as score',
+                'c1.status',
                 'c2.id as next_id',
                 'c2.plan_date as next_date',
                 'domains.title',
             ]
         )
-            ->orderBy('c1.id')->get();
+        ->orderBy('c1.id')->get();
 
         // return view
         return view('controls.index')
@@ -383,7 +401,8 @@ class ControlController extends Controller
             ->select('scope')
             ->whereNotNull('scope')
             ->where('scope', '<>', '')
-            ->whereNull('realisation_date')
+            // ->whereNull('realisation_date')
+            ->whereIn('status',[0,1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -485,14 +504,16 @@ class ControlController extends Controller
         $domains = DB::table('domains')
             ->select(DB::raw('distinct domains.id, domains.title'))
             ->join('controls', 'domains.id', '=', 'controls.domain_id')
-            ->whereNull('realisation_date')
+            //->whereNull('realisation_date')
+            ->whereIn('status',[0,1])
             ->orderBy('domains.title')
             ->get();
 
         // get all scopes
         $scopes = DB::table('controls')
             ->select('scope')
-            ->whereNull('realisation_date')
+            // ->whereNull('realisation_date')
+            ->whereIn('status',[0,1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -512,12 +533,14 @@ class ControlController extends Controller
         $controls_never_made = DB::select(
             'select domain_id
             from controls c1
-            where realisation_date is null and
+            where
+            (status=0 or status=1) and
             not exists (
                 select *
                 from controls c2
-                where realisation_date is not null and c1.id=c2.next_id);'
+                where c2.status=2 and c1.id=c2.next_id);'
         );
+
 
         // Last controls made by measures
         // TODO : improve me
@@ -533,7 +556,7 @@ class ControlController extends Controller
                     controls c2,
                     domains
                 where
-                    c1.realisation_date is null and
+                    (c1.status=0 or c1.status=1) and
                     c1.id = c2.next_id and
                     domains.id=c1.domain_id
                 order by domains.title;');
@@ -552,14 +575,16 @@ class ControlController extends Controller
         $domains = DB::table('domains')
             ->select(DB::raw('distinct domains.id, domains.title, domains.description'))
             ->join('controls', 'domains.id', '=', 'controls.domain_id')
-            ->whereNull('realisation_date')
+            // ->whereNull('realisation_date')
+            ->whereIn('status',[0,1])
             ->orderBy('domains.title')
             ->get();
 
         // get all scopes
         $scopes = DB::table('controls')
             ->select('scope')
-            ->whereNull('realisation_date')
+            //->whereNull('realisation_date')
+            ->whereIn('status',[0,1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -600,7 +625,8 @@ class ControlController extends Controller
                 )
             )
             ->join('controls as c2', 'c1.next_id', '=', 'c2.id')
-            ->where('c2.realisation_date', '=', null);
+            // ->where('c2.realisation_date', '=', null);
+            ->whereIn('c2.status', [0, 1]);
         if ($cur_scope !== null) {
             $controls = $controls->where('c1.scope', '=', $cur_scope);
         }
@@ -646,7 +672,7 @@ class ControlController extends Controller
                     controls c2,
                     domains
                 where
-                    c1.realisation_date is null and
+                    c1.status=0 and
                     c1.id = c2.next_id and
                     domains.id=c1.domain_id
                 order by id;');
@@ -690,7 +716,8 @@ class ControlController extends Controller
 
         $scopes = DB::table('controls')
             ->select('scope')
-            ->whereNull('realisation_date')
+            // ->whereNull('realisation_date')
+            ->whereIn('status',[0,1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -720,7 +747,8 @@ class ControlController extends Controller
         abort_if((Auth::User()->role !== 1) && (Auth::User()->rol !== 2), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $control = Control
-                ::whereNull('realisation_date')
+                // ::whereNull('realisation_date')
+                ::whereIn('status',[0,1])
                     ->where('id', '=', $request->id)
                     ->get()
                     ->first();
@@ -757,14 +785,17 @@ class ControlController extends Controller
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // Control already made ?
-        if ($control->realisation_date !== null) {
+        // if ($control->realisation_date !== null) {
+        if ($control->status === 2) {
             return back()
                 ->withErrors(['msg' => trans('cruds.control.error.made')])
                 ->withInput();
         }
 
         // Check duplicate control on same scope
-        if (Control::whereNull('realisation_date')
+        if (Control
+            // ::whereNull('realisation_date')
+            ::whereIn("status",[0,1])
             ->where('id', '<>', $control->id)
             ->where('measure_id', '=', $control->measure_id)
             ->where('scope', '=', $request->scope)
@@ -813,7 +844,8 @@ class ControlController extends Controller
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // Control already made ?
-        if ($control->realisation_date !== null) {
+        // if ($control->realisation_date !== null) {
+        if ($control->status === 2) {
             return back()->withErrors(['msg' => trans('cruds.control.error.made')]);
         }
 
@@ -849,9 +881,12 @@ class ControlController extends Controller
      */
     public function doMake()
     {
-        // Not API and auditee
+        // Only for admin, user and auditee
         abort_if(
-            (Auth::User()->role === 4),
+            !((Auth::User()->role === 1)
+            ||(Auth::User()->role === 2)
+            ||(Auth::User()->role === 5)
+            ),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -884,7 +919,8 @@ class ControlController extends Controller
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // control already made ?
-        if ($control->realisation_date !== null) {
+        // if ($control->realisation_date !== null) {
+        if ($control->status === 2) {
             return back()->withErrors(['msg' => 'Control already made']);
         }
 
@@ -904,14 +940,19 @@ class ControlController extends Controller
         }
         // Log::Alert("doMake realisation_date=".request("realisation_date"));
 
+        // Auditee -> propose control
+        if (Auth::User()->role === 5) {
+                $control->status = 1;
+        }
         // if there is no next control
-        if ($control->next_id === null) {
+        elseif ($control->next_id === null) {
             // create a new control
             $new_control = $control->replicate();
             $new_control->observations = null;
             $new_control->realisation_date = null;
             $new_control->note = null;
             $new_control->score = null;
+            $new_control->status = 0;
             // only admin and user can update the plan_date, realisation_date and action_plan
             if (
                 (Auth::User()->role === 1) ||
@@ -926,6 +967,9 @@ class ControlController extends Controller
 
             // Set owners
             $new_control->owners()->sync($control->owners->pluck('id')->toArray());
+
+            // set status done
+            $control->status=2;
 
             // make link
             $control->next_id = $new_control->id;
@@ -968,6 +1012,7 @@ class ControlController extends Controller
         $control->score = request('score');
         $control->action_plan = request('action_plan');
         $control->periodicity = request('periodicity');
+        $control->status = request('status');
         $control->next_id = request('next_id');
         $control->owners()->sync($request->input('owners', []));
 
@@ -1012,6 +1057,11 @@ class ControlController extends Controller
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
+        // Control already made ?
+        if ($control->status === 2) {
+            return back()->withErrors(['msg' => trans('cruds.control.error.made')]);
+        }
+
         $control->observations = request('observations');
         $control->note = request('note');
         $control->score = request('score');
@@ -1028,6 +1078,126 @@ class ControlController extends Controller
         $control->save();
 
         return redirect('/bob/show/'.$id);
+    }
+
+    /**
+     * Reject a Control
+     *
+     * @param  \App\Domain $domain
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function reject(Request $request)
+    {
+        // Only for Admin and user
+        abort_if(
+            !(
+            (Auth::User()->role === 1) ||
+            (Auth::User()->role === 2)
+            ),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
+        $id = (int) $request->get('id');
+
+        // Get the control
+        $control = Control::find($id);
+
+        // Control not found
+        abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+
+        // Control already made ?
+        if ($control->status === 2) {
+            return back()->withErrors(['msg' => trans('cruds.control.error.made')]);
+        }
+
+        // Change fields
+        $control->observations = request('observations');
+        $control->note = request('note');
+        $control->score = request('score');
+        $control->plan_date = request('plan_date');
+        $control->action_plan = request('action_plan');
+
+        // Reject -> set status=0
+        $control->status = 0;
+
+        $control->save();
+
+        return redirect('/bob/index');
+    }
+
+    /**
+     * Accept a Control
+     *
+     * @param  \App\Domain $domain
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function accept()
+    {
+        // Only for Admin and user
+        abort_if(
+            !(
+            (Auth::User()->role === 1) ||
+            (Auth::User()->role === 2)
+            ),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
+        $id = (int) request('id');
+
+        // check :
+        // plan date not in the past
+        if (request('score') === null) {
+            return back()
+                ->withErrors(['score' => 'score not set'])
+                ->withInput();
+        }
+
+        // Control fields
+        $control = Control::find($id);
+
+        // Control not found
+        abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+
+        // control already made ?
+        // if ($control->realisation_date !== null) {
+        if ($control->status === 2) {
+            return back()->withErrors(['msg' => 'Control already made']);
+        }
+
+        $control->observations = request('observations');
+        $control->note = request('note');
+        $control->score = request('score');
+        $control->realisation_date = request('realisation_date');
+        $control->plan_date = request('plan_date');
+        $control->action_plan = request('action_plan');
+
+        // create a new control
+        $new_control = $control->replicate();
+        $new_control->observations = null;
+        $new_control->realisation_date = null;
+        $new_control->note = null;
+        $new_control->score = null;
+        $new_control->plan_date = request('next_date');
+
+        $new_control->save();
+
+        // Set owners
+        $new_control->owners()->sync($control->owners->pluck('id')->toArray());
+
+        // make link
+        $control->next_id = $new_control->id;
+
+        // set status done
+        $control->status=2;
+
+        // update control
+        $control->update();
+
+        return redirect('/bob/index');
     }
 
     public function export()

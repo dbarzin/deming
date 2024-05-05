@@ -84,7 +84,9 @@
 					<div class="cell-2">
 						<input type="text" data-role="calendarpicker" name="plan_date" value="{{$control->plan_date}}" data-input-format="%Y-%m-%d">
 					</div>
-		    		<div class="cell-1">
+					<div class="cell-1">
+                    </div>
+		    		<div class="cell-1" align="right">
 			    		<strong>{{ trans("cruds.control.fields.realisation_date") }}</strong>
 			    	</div>
 					<div class="cell-2">
@@ -157,7 +159,7 @@
 		    		<div class="cell-1">
 			    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
 			    	</div>
-					<div class="cell-3">
+					<div class="cell-2">
 						<select data-role="select" name="periodicity">
 						    <option value="1" {{ $control->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
 						    <option value="3" {{ $control->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
@@ -165,7 +167,15 @@
 						    <option value="12" {{ $control->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
 						 </select>
 					</div>
-		    		<div class="cell-1">
+		    		<div class="cell-1" align="right">
+			    		<strong>Status</strong>
+		    		</div>
+					<div class="cell-1">
+						<select data-role="select" name="status">
+							<option {{ $control->status==0 ? "selected" : ""}}>Todo</option>
+							<option {{ $control->status==1 ? "selected" : ""}}>Proposed</option>
+							<option {{ $control->status==2 ? "selected" : ""}}>Done</option>
+						 </select>
 		    		</div>
 		    		<div class="cell-1" align="right">
 			    		<strong>Next ID</strong>

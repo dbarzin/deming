@@ -39,7 +39,7 @@ class SendNotifications extends Command
             Log::debug('SendNotifications - notifications today');
 
             $controls = Control
-                ::whereNull('realisation_date')
+                ::where('status',0)
                     ->where('plan_date', '<=', Carbon::today()
                         ->addDays(intval(config('deming.notification.expire-delay')))->toDateString())
                     ->orderBy('plan_date')
@@ -57,7 +57,7 @@ class SendNotifications extends Command
             $users = User::all();
             foreach ($users as $user) {
                 // get controls
-                $controls = Control::whereNull('realisation_date')
+                $controls = Control::where('status',0)
                     ->join('control_user', 'control_id', '=', 'controls.id')
                     ->where('user_id', '=', $user->id)
                     ->where('plan_date', '<=', Carbon::today()

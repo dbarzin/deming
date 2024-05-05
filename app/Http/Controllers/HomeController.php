@@ -37,7 +37,8 @@ class HomeController extends Controller
                 'domain_id',
                 DB::raw('max(controls.id)')
             )
-            ->whereNull('realisation_date')
+            // ->whereNull('realisation_date')
+            ->whereIn('status', [0,1])
             ->groupBy('domain_id')
             ->get()
             ->count();
@@ -48,12 +49,14 @@ class HomeController extends Controller
 
         // count active controls
         $active_measures_count = DB::table('controls')
-            ->whereNull('realisation_date')
+            //->whereNull('realisation_date')
+            ->whereIn('status', [0,1])
             ->count();
 
         // count controls made
         $controls_made_count = DB::table('controls')
-            ->whereNotNull('realisation_date')
+            //->whereNotNull('realisation_date')
+            ->where('status', 2)
             ->count();
 
         // count control never made
@@ -85,6 +88,7 @@ class HomeController extends Controller
                 'c1.clause',
                 'c1.domain_id',
                 'c1.plan_date',
+                'c1.status',
                 'c2.id as prev_id',
                 'c2.realisation_date as prev_date',
                 'c2.score as score',
@@ -92,7 +96,8 @@ class HomeController extends Controller
             ])
             ->leftjoin('controls as c2', 'c1.id', '=', 'c2.next_id')
             ->join('domains', 'domains.id', '=', 'c1.domain_id')
-            ->whereNull('c1.realisation_date')
+            // ->whereNull('c1.realisation_date')
+            ->whereIn('c1.status', [0,1])
             ->where('c1.plan_date', '<', Carbon::today()->addDays(30)->format('Y-m-d'))
             ->orderBy('c1.plan_date')
             ->get();
@@ -126,11 +131,7 @@ class HomeController extends Controller
                 DB::table('controls as c1')
                     ->leftjoin('controls as c2', 'c1.id', '=', 'c2.next_id')
                     ->whereNull('c1.realisation_date')
-                    ->where(function ($query) {
-                        return $query
-                            ->where('c2.score', '=', 1)
-                            ->orWhere('c2.score', '=', 2);
-                    })
+                    ->whereIn('c2.score', [1, 2])
                     ->count();
 
         $request->session()->put('action_plans_count', $action_plans_count);

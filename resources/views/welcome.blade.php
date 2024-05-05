@@ -122,16 +122,18 @@
             <tbody>
 
             @foreach($controls_todo as $control)
-                <tr onclick="window.location = '/bob/show/{{$control->id}}';">
+                <tr>
                     <td id="{{ $control->domain }}">
-                        <a href="/domain/show/{{$control->domain_id}}">
+                        <a href="/domains/{{$control->domain_id}}">
                             {{ $control->domain }}
                         </a>
                     </td>
                     <td>
                         <a id="{{ $control->clause }}" href="/alice/show/{{ $control->measure_id }}">{{ $control->clause }}</a>
                     </td>
-                    <td>{{ $control->name }}</td>
+                    <td class="table-danger">
+                        {{ $control->name }}
+                    </td>
                     <td>
                         <a id="{{ $control->scope }}" href="/bob/index?domain=0&attribute=none&scope={{ urlencode($control->scope) }}&status=0&period=99">
                         {{ $control->scope }}
@@ -169,10 +171,13 @@
                                 {{ $control->plan_date }}
                             </font>
                             </a>
+                            @if ($control->status===1)
+                                &nbsp;
+                                <a href="/bob/make/{{ $control->id }}">&#8987;</a>
+                            @endif
                         </b>
                     </td>
                 </tr>
-                </a>
             @endforeach
             </tbody>
         </table>

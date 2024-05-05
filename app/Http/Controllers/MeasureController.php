@@ -56,10 +56,9 @@ class MeasureController extends Controller
                 ]
             )
             ->leftjoin('domains', 'measures.domain_id', '=', 'domains.id')
-            ->join('controls', function (JoinClause $join) {
-                $join->on('measures.id', '=', 'controls.measure_id')
-                    ->whereNull('controls.realisation_date');
-            }, null, null, 'left outer')
+            ->join('controls', 'measures.id', 'controls.measure_id')
+            // ->whereNull('controls.realisation_date');
+            ->whereIn('controls.status',[0,1])
             ->groupBy('measures.id');
 
         if ($domain !== null) {
@@ -336,7 +335,8 @@ class MeasureController extends Controller
 
         // update the current control
         $control = Control::where('measure_id', $measure->id)
-            ->where('realisation_date', null)
+            // ->where('realisation_date', null)
+            ->whereIn("status", [0,1])
             ->get()->first();
         if ($control !== null) {
             $control->clause = $measure->clause;
@@ -402,7 +402,8 @@ class MeasureController extends Controller
             ->select('scope')
             ->whereNotNull('scope')
             ->where('scope', '<>', '')
-            ->whereNull('realisation_date')
+            // ->whereNull('realisation_date')
+            ->whereIn("status",[0,1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -448,7 +449,8 @@ class MeasureController extends Controller
             ->select('id')
             ->where('measure_id', '=', $measure->id)
             ->where('scope', '=', $request->scope)
-            ->where('realisation_date', null)
+            // ->where('realisation_date', null)
+            ->where("status",[0,1])
             ->first();
 
         if ($control !== null) {
@@ -483,7 +485,8 @@ class MeasureController extends Controller
         $prev_control = Control::where('measure_id', '=', $measure->id)
             ->where('scope', '=', $measure->scope)
             ->where('next_id', null)
-            ->whereNotNull('realisation_date')
+            // ->whereNotNull('realisation_date')
+            ->where("status",2)
             ->first();
         if ($prev_control !== null) {
             $prev_control->next_id = $control->id;
@@ -515,14 +518,19 @@ class MeasureController extends Controller
         $control_id = DB::table('controls')
             ->select('id')
             ->where('measure_id', '=', $request->id)
-            ->where('realisation_date', null)
+            // ->where('realisation_date', null)
+            ->where("status",[0,1])
             ->get()
             ->first()->id;
         if ($control_id !== null) {
             // break link
-            DB::update('UPDATE controls SET next_id = null WHERE next_id =' . $control_id);
+            // DB::update('UPDATE controls SET next_id = null WHERE next_id =' . $control_id);
+            Control::where('next_id', $control_id)
+                ->update(['next_id' => null]);
             // delete control
-            DB::delete('DELETE FROM controls WHERE id = ' . $control_id);
+            // DB::delete('DELETE FROM controls WHERE id = ' . $control_id);
+            Control::where('id', $control_id)
+                ->delete();
         }
 
         // return to the list of measures

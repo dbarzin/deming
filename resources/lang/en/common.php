@@ -2,6 +2,7 @@
 return [
     'confirm' => 'Confirm deletion',
 
+    'accept' => 'Accept',
     'cancel' => 'Cancel',
     'check' => 'Check',
     'create' => 'Create',
@@ -11,9 +12,10 @@ return [
     'make' => 'Make',
     'new' => 'New',
     'plan' => 'Plan',
+    'reject' => 'Reject',
     'save' => 'Save',
     'unplan' => 'Unplan',
-    'test' => 'Test',
+    'validate' => 'Validate',
 
     'monthly' => 'Monthly',
     'quarterly' => 'Quarterly',
@@ -27,7 +29,7 @@ return [
     'green' => 'Green',
     'orange' => 'Orange',
     'red' => 'Red',
-    
+
     'fail' => 'Fail',
     'alert' => 'Alert',
     'success' => 'Success',

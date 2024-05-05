@@ -11,8 +11,8 @@
                     <option value="0">-- {{ trans("cruds.control.fields.choose_domain")}} --</option>
                     @foreach ($domains as $domain)
                         <option value="{{ $domain->id }}"
-                            @if (((int)Session::get("domain"))==$domain->id)        
-                                selected 
+                            @if (((int)Session::get("domain"))==$domain->id)
+                                selected
                             @endif >
                             {{ $domain->title }} - {{ $domain->description }}
                         </option>
@@ -24,8 +24,8 @@
                     <option value="none">-- {{ trans("cruds.control.fields.choose_scope")}} --</option>
                     @foreach ($scopes as $scope)
                         <option
-                            @if (Session::get("scope")==$scope)        
-                                selected 
+                            @if (Session::get("scope")==$scope)
+                                selected
                             @endif >
                             {{ $scope }}
                         </option>
@@ -37,27 +37,27 @@
                     <option value="none">-- {{ trans("cruds.control.fields.choose_attribute")}} --</option>
                     @foreach ($attributes as $attribute)
                         <option
-                            @if (Session::get("attribute")==$attribute)        
-                                selected 
+                            @if (Session::get("attribute")==$attribute)
+                                selected
                             @endif >
                             {{ $attribute }}
                         </option>
                     @endforeach
                 </select>
             </div>
-            <div class="cell-3"> 
+            <div class="cell-3">
 
                 <select id='cur_period' name="period" data-role="select">
                     <option value="99"
                         @if (Session::get("period")==="99")
-                            selected 
+                            selected
                         @endif
                     >-- {{ trans("cruds.control.fields.choose_period") }} --</option>
                         @for ($i = -12; $i < 12; $i++)
                             <option value="{{ $i }}"
                             @if ((Session::get("period"))==strval($i))
-                                selected 
-                            @endif 
+                                selected
+                            @endif
                             >
                             {{ now()->day(1)->addMonth($i)->format("M Y") }}
                             </option>
@@ -65,20 +65,20 @@
                     </select>
                 </div>
             <div class="cell-3">
-                <input type="radio" data-role="radio" data-style="2" 
+                <input type="radio" data-role="radio" data-style="2"
                 name="status" value="0" id="status0"
                 @if (Session::get("status")=="0")
                 checked
                 @endif
-                > 
+                >
                 {{ trans("cruds.control.fields.status_all") }}
-                <input type="radio" data-role="radio" data-style="2" 
+                <input type="radio" data-role="radio" data-style="2"
                 name="status" value="1" id="status1"
                 @if (Session::get("status")=="1")
                 checked
                 @endif
                 > {{ trans("cruds.control.fields.status_done") }}
-                <input type="radio" data-role="radio" data-style="2" 
+                <input type="radio" data-role="radio" data-style="2"
                 name="status" value="2" id="status2"
                 @if ((Session::get("status")=="2") || (Session::get("status")==null))
                 checked
@@ -163,16 +163,16 @@
                 </a>
             </td>
             <td>
-                    {{ $control->name }} 
+                    {{ $control->name }}
             </td>
             <td>
-                    {{ $control->scope }} 
+                    {{ $control->scope }}
             </td>
             <td>
                 <center id="{{ $control->score }}">
                     @if ($control->score==1)
                     <a href="/action/{{ $control->id }}">
-                        &#128545; 
+                        &#128545;
                     </a>
                     @elseif ($control->score==2)
                     <a href="/action/{{ $control->id }}">
@@ -187,7 +187,7 @@
             </td>
             <td>
                 <!-- format in red when month passed -->
-                @if ($control->realisation_date == null)
+                @if (($control->status === 0)||($control->status === 1))
                 <a id="{{ $control->plan_date }}" href="/bob/show/{{$control->id}}">
                 <b> @if (today()->lte($control->plan_date))
                         <font color="green">{{ $control->plan_date }}</font>
@@ -196,7 +196,7 @@
                     @endif
                 </b>
                 </a>
-                @else 
+                @else
                     {{ $control->plan_date }}
                 @endif
             </td>
@@ -205,6 +205,10 @@
                     <a href="/bob/show/{{$control->id}}">
                         {{ $control->realisation_date }}
                     </a>
+                    @if ( ($control->status===1 )&& ((Auth::User()->role===1)||(Auth::User()->role===2)))
+                        &nbsp;
+                        <a href="/bob/make/{{ $control->id }}">&#8987;</a>
+                    @endif
                 </b>
             </td>
             <td>
@@ -223,4 +227,3 @@
 </div>
 </div>
 @endsection
-

@@ -27,6 +27,11 @@ class Control extends Model
     protected $fillable = [
     ];
 
+    // Control status :
+    // O - Todo => relisation date null
+    // 1 - Proposed by auditee => relisation date not null
+    // 2 - Done => relisation date not null
+
     public function domain()
     {
         return $this->belongsTo(Domain::class, 'domain_id');

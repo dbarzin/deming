@@ -132,11 +132,11 @@
 		    		</strong>
 		    	</div>
 				<div class="cell">
-					<input type="radio" name="score" value="3" data-role="radio" {{ $control->score==3 ? "selected" : "" }} >
+					<input type="radio" name="score" value="3" data-role="radio" {{ $control->score===3 ? "checked" : "" }} >
 					<font color="green">{{ trans('common.green') }}</font> &nbsp;
-					<input type="radio" name="score" value="2" data-role="radio" {{ $control->score==2 ? "selected" : "" }}>
+					<input type="radio" name="score" value="2" data-role="radio" {{ $control->score===2 ? "checked" : "" }}>
 					<font color="orange">{{ trans('common.orange') }}</font> &nbsp;
-					<input type="radio" name="score" value="1" data-role="radio" {{ $control->score==1 ? "selected" : "" }}>
+					<input type="radio" name="score" value="1" data-role="radio" {{ $control->score===1 ? "checked" : "" }}>
 					<font color="red">{{ trans('common.red') }}</font>
 				</div>
 			</div>
@@ -190,18 +190,44 @@
 
 			<div class="grid">
 		    	<div class="row-12">
-					<button type="submit" class="button success">
-						<span class="mif-done"></span>
-						&nbsp;
-						{{ trans('common.make') }}
-					</button>
-					&nbsp;
-					<button type="submit" class="button primary" onclick='this.form.action="/bob/draft"'>
-			            <span class="mif-floppy-disk"></span>
-			            &nbsp;
-						{{ trans('common.save') }}
-					</button>
-					&nbsp;
+                    @if ($control->status===0)
+                        @if ((Auth::User()->role === 1)||(Auth::User()->role === 2)||(Auth::User()->role === 5))
+    					<button type="submit" class="button success">
+    						<span class="mif-done"></span>
+    						&nbsp;
+    						{{ trans('common.make') }}
+    					</button>
+    					&nbsp;
+                        @endif
+                    @endif
+                    @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
+                        @if ($control->status===1)
+    					<button type="submit" class="button success" onclick='this.form.action="/bob/accept"'>
+    						<span class="mif-done"></span>
+    						&nbsp;
+    						{{ trans('common.accept') }}
+    					</button>
+    					&nbsp;
+    					<button type="submit" class="button alert" onclick='this.form.action="/bob/reject"'>
+    						<span class="mif-fire"></span>
+    						&nbsp;
+    						{{ trans('common.reject') }}
+    					</button>
+    					&nbsp;
+                        @endif
+                    @endif
+                    @if (
+                        (Auth::User()->role === 1)||
+                        (Auth::User()->role === 2)||
+                        ((Auth::User()->role === 5)&&($control->status=0))
+                        )
+    					<button type="submit" class="button primary" onclick='this.form.action="/bob/draft"'>
+    			            <span class="mif-floppy-disk"></span>
+    			            &nbsp;
+    						{{ trans('common.save') }}
+    					</button>
+    					&nbsp;
+                    @endif
 					</form>
 					<form action="/bob/show/{{ $control->id }}">
 			    		<button type="submit" class="button">
