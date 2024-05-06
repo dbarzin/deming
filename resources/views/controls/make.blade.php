@@ -72,7 +72,9 @@
                         {{ $control->plan_date }}
                     @endif
 				</div>
-	    		<div class="cell-1">
+                <div class="cell-1">
+                </div>
+	    		<div class="cell-1" align="right">
 		    		<strong>{{ trans('cruds.control.fields.realisation_date') }}</strong>
 		    	</div>
 				<div class="cell-2">

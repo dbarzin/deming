@@ -18,7 +18,9 @@ class ActionplanController extends Controller
     public function index()
     {
         abort_if(
-            ! ((Auth::User()->role === 1) || (Auth::User()->role === 2)),
+            ! ((Auth::User()->role === 1) ||
+            (Auth::User()->role === 2) ||
+            (Auth::User()->role === 3)),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -109,7 +111,10 @@ class ActionplanController extends Controller
     public function show(int $id)
     {
         abort_if(
-            ! ((Auth::User()->role === 1) || (Auth::User()->role === 2)),
+            ! ((Auth::User()->role === 1) ||
+            (Auth::User()->role === 2)||
+            (Auth::User()->role === 3)
+            ),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
