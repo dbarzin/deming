@@ -54,10 +54,13 @@ class MeasureController extends Controller
                     'domains.title',
                 ]
             )
-            ->leftjoin('domains', 'measures.domain_id', '=', 'domains.id')
-            ->join('controls', 'measures.id', 'controls.measure_id')
-            // ->whereNull('controls.realisation_date');
-            ->whereIn('controls.status', [0,1])
+            ->join('domains', 'domains.id', '=', 'measures.domain_id')
+            ->leftjoin('controls', 'controls.measure_id', 'measures.id')
+            ->where(function ($query) {
+                $query
+                    ->whereIn('controls.status', [0,1])
+                    ->orWhere('controls.status', null);
+            })
             ->groupBy('measures.id');
 
         if ($domain !== null) {
