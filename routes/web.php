@@ -44,7 +44,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/alice/import', function () {
         return view('measures/import');
     });
-    Route::post('/alice/import', 'MeasureController@import');
+    Route::post('/alice/import', 'MeasureImportController@import');
 
     /* Controls */
     Route::get('/bob/index', 'ControlController@index');

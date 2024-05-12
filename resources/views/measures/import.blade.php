@@ -52,9 +52,15 @@
 		    		</thead>
 		    		<tbody>
 		        		<tr>
-		        			<td>A</td><td>Domain</td><td>string(32)</td>
+		        			<td>A</td><td>Domain name</td><td>string(32)</td>
 		        			<td>
 		        				The domains name must be provided, it is created if it does not exists.
+		        			</td>
+		        		</tr>
+		        		<tr>
+		        			<td>A</td><td>Domain description</td><td>string(255)</td>
+		        			<td>
+                                The description of the domain (could be null).
 		        			</td>
 		        		</tr>
 		        		<tr>

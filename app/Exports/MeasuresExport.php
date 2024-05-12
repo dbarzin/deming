@@ -17,7 +17,8 @@ class MeasuresExport extends StringValueBinder implements FromQuery, WithMapping
     public function headings(): array
     {
         return [
-            trans('cruds.measure.fields.domain'),
+            trans('cruds.domain.fields.title'),
+            trans('cruds.domain.fields.description'),
             trans('cruds.measure.fields.clause'),
             trans('cruds.measure.fields.name'),
             trans('cruds.measure.fields.objective'),
@@ -46,22 +47,23 @@ class MeasuresExport extends StringValueBinder implements FromQuery, WithMapping
     {
         return [
             'A' => NumberFormat::FORMAT_TEXT,
-            'B' => NumberFormat::FORMAT_TEXT,
+            'C' => NumberFormat::FORMAT_TEXT,
         ];
     }
 
     public function columnWidths(): array
     {
         return [
-            'A' => 10,  // Domain
-            'B' => 10,  // Clause
-            'C' => 30,  // Name
-            'D' => 50,  // Objectif
-            'E' => 50,  // Attibuts
-            'F' => 50,  // Input
-            'G' => 50,  // Modele
-            'H' => 50,  // Indicateur
-            'I' => 50,  // Plan d'action
+            'A' => 10,  // Domain name
+            'B' => 30,  // Domain description
+            'C' => 10,  // Clause
+            'D' => 30,  // Name
+            'E' => 50,  // Objectif
+            'F' => 50,  // Attibuts
+            'G' => 50,  // Input
+            'H' => 50,  // Modele
+            'I' => 50,  // Indicateur
+            'J' => 50,  // Plan d'action
         ];
     }
 
@@ -73,6 +75,7 @@ class MeasuresExport extends StringValueBinder implements FromQuery, WithMapping
         return [
             [
                 $measure->domain->title,
+                $measure->domain->description,
                 $measure->clause,
                 $measure->name,
                 $measure->objective,
