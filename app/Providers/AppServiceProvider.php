@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Log;
+use Config;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -30,8 +31,8 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        if (true) {
-            //if (Config::get('APP_DEBUG')) {
+        // if (true) {
+        if (Config::get('APP_DEBUG')) {
             DB::listen(function ($query) {
                 Log::info(
                     $query->sql,

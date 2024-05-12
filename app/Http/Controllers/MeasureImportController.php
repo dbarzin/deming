@@ -5,13 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Control;
 use App\Models\Domain;
 use App\Models\Measure;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
-use Maatwebsite\Excel\Facades\Excel;
 
 class MeasureImportController extends Controller
 {
@@ -126,8 +124,7 @@ class MeasureImportController extends Controller
                     $lastLine = count($data);
                     for ($line = 1; $line < $lastLine; $line++) {
                         // delete line ?
-                        if
-                            (
+                        if (
                             ($data[$line][2] !== null) &&
                             ($data[$line][3] === null) &&
                             ($data[$line][4] === null) &&

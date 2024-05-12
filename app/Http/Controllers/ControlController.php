@@ -647,7 +647,7 @@ class ControlController extends Controller
             ->with('domains', $domains);
     }
 
-    public function attributes(Request $request)
+    public function attributes()
     {
         // Not API and auditee
         abort_if(

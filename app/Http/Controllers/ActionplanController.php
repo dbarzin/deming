@@ -112,9 +112,8 @@ class ActionplanController extends Controller
     {
         abort_if(
             ! ((Auth::User()->role === 1) ||
-            (Auth::User()->role === 2)||
-            (Auth::User()->role === 3)
-            ),
+            (Auth::User()->role === 2) ||
+            (Auth::User()->role === 3)),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );

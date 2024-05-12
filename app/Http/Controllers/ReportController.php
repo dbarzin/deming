@@ -92,7 +92,7 @@ class ReportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function soa(Request $request)
+    public function soa()
     {
         // Get all scopes
         $scopes = DB::table('controls')
@@ -184,9 +184,9 @@ class ReportController extends Controller
     {
         $controls = Control::where(
             [
-                    ['realisation_date','>=',$start_date],
-                    ['realisation_date','<',$end_date],
-                ]
+                ['realisation_date','>=',$start_date],
+                ['realisation_date','<',$end_date],
+            ]
         )
             ->where('status', 2)
             ->orderBy('realisation_date')->get();
