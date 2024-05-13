@@ -123,6 +123,7 @@ class MeasureImportController extends Controller
                 if ($errors->isEmpty()) {
                     $lastLine = count($data);
                     for ($line = 1; $line < $lastLine; $line++) {
+                        // Update domain description ?
                         // delete line ?
                         if (
                             ($data[$line][2] !== null) &&
@@ -174,18 +175,33 @@ class MeasureImportController extends Controller
                         $measure = Measure::where('clause', $data[$line][2])->get()->first();
 
                         if ($measure !== null) {
-                            // update
 
-                            // $measure = Measure::where('clause', $data[$line][1])->get()->first();
+                            // update or create domain
+                            $domain = Domain::where('title', trim($data[$line][0]))->get()->first();
+                            if ($domain==null) {
+                                // create domain
+                                $domain = new Domain();
+                                $domain->title = trim($data[$line][0]);
+                                $domain->description = trim($data[$line][1]);
+                                $domain->save();
+
+                                $newDomainCount++;
+                            }
+                            else {
+                                $domain->description = $data[$line][1];
+                                $domain->update();
+                            }
+
+                            // update measure
                             $measure->name = $data[$line][3];
+                            $measure->domain_id = $domain->id;
                             $measure->objective = $data[$line][4];
                             $measure->attributes = $data[$line][5];
                             $measure->input = $data[$line][6];
                             $measure->model = $data[$line][7];
                             $measure->indicator = $data[$line][8];
                             $measure->action_plan = $data[$line][9];
-
-                            $measure->save();
+                            $measure->update();
 
                             // TODO : update last control
 
@@ -204,6 +220,9 @@ class MeasureImportController extends Controller
                                 $domain->save();
 
                                 $newDomainCount++;
+                            } else {
+                                $domain->description = trim($data[$line][1]);
+                                $domain->update();
                             }
 
                             // create measure
