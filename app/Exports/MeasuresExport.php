@@ -17,8 +17,8 @@ class MeasuresExport extends StringValueBinder implements FromQuery, WithMapping
     public function headings(): array
     {
         return [
-            trans('cruds.domain.fields.title'),
-            trans('cruds.domain.fields.description'),
+            trans('cruds.domain.title'),
+            trans('cruds.domain.title') . ' - ' . trans('cruds.domain.fields.description'),
             trans('cruds.measure.fields.clause'),
             trans('cruds.measure.fields.name'),
             trans('cruds.measure.fields.objective'),
