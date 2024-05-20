@@ -24,6 +24,7 @@ Tha auditee can :
 - sort the list by each column
 - select a measurement to perform
 
+
 ### Performing an measurement
 
 When an auditee performs an mesurement, they can :
@@ -41,6 +42,7 @@ When the auditee clicks on :
 - "Make", the changes made are saved and the measurement changes to the status to be validated. From the auditee's point of view, the measurement is in the list of measurements performed.
 
 - If the auditee selects "Cancel", the changes are not saved and the auditee returns to the measuremet view.
+
 
 ### Accepting / Rejecting a measurement
 

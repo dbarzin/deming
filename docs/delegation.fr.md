@@ -24,6 +24,7 @@ L'audité peut :
 - trier la liste par chacune des colonnes
 - sélectionner un contrôle à réaliser
 
+
 ### Réaliser un contrôle
 
 Lorsqu'un audité réalise un contrôle, il peut :
@@ -41,6 +42,7 @@ Lorsqu'il clique sur :
 - "faire", les modifications qu'il a faite sont sauvées et le contrôle passe dans l'état à valider. Du point de vue de l'audité, le contrôle se trouve dans la liste des contrôles réalisés.
 
 - "annuler", les modifications ne sont pas sauvée, lutilisateur retourne vers la vue du contrôle.
+
 
 ### Accepter / Refuser un contrôle
 
