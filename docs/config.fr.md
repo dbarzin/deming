@@ -56,7 +56,7 @@ Il est possible d'importer des mesures de sécurité depuis un fichier .XLSX.
 Cet écran permet de modifier les modèles de document utilisés pour les fiches de contrôle et le rapport de pilotage du SMSI.
 et permet d’avoir une vue sur l’ensemble des documents utilisés comme preuve lors de la réalisation des contrôles de sécurité.
 
-[<img src="/deming/images/documents.png" width="300">](/deming/images/documents.png)
+[<img src="/deming/images/documents.png" width="400">](/deming/images/documents.png)
 
 Le bouton « Vérifier » permet de vérifier l’intégrité des documents conservés dans l'application.
 
@@ -74,7 +74,7 @@ L'écran contient :
 
 * Le délais de notification.
 
-[<img src="/deming/images/config.png" width="300">](/deming/images/config.png)
+[<img src="/deming/images/config.png" width="500">](/deming/images/config.png)
 
 Lorsque vous cliquer sur :
 

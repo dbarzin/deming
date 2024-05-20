@@ -49,7 +49,7 @@ Une fois qu'un contrôle a été réalisé par un audité, il passe dans l'état
 Cela se matérialise par un sablier à côté de la date de réalisation dans la liste des contrôles à réaliser :
 
 [<img src="/deming/images/d3.fr.png" width="600">](/deming/images/d3.fr.png)
-'
+
 Lorsque l'utilisateur clique sur la date de réalisation à côté du sablier, il arrive sur le contrôle réalisé par l'audité.
 
 Il peut alors accepter ou refuser le contrôle en ajoutant une note dans les observations du contrôle et, selon les résultats du contrôle, proposer un plan d'action et une date de revue du contrôle.

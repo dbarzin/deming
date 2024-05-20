@@ -54,7 +54,7 @@ It is possible to import controls from an .XLSX file.
 
 This screen is used to modify the document templates used for the control sheets and the ISMS management report and provides an overview of all the documents used as evidence when carrying out security checks.
 
-[<img src="/deming/images/documents.png" width="300">](/deming/images/documents.png)
+[<img src="/deming/images/documents.png" width="400">](/deming/images/documents.png)
 
 The "Verify" button allows you to verify the integrity of the documents stored in the application.
 
@@ -72,7 +72,7 @@ The screen contains:
 
 * The notification deadlines.
 
-[<img src="/deming/images/config.png" width="300">](/deming/images/config.png)
+[<img src="/deming/images/config.png" width="500">](/deming/images/config.png)
 
 When you click on:
 
