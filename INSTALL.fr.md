@@ -197,7 +197,7 @@ Envoyer un mail de test avec
 
     echo "Test mail body" | mailx -r "deming@yourdomain.local" -s "Subject Test" yourname@yourdomain.local
 
-N'oubliez pas de (configurer)[https://dbarzin.github.io/deming/config.fr/#notifications] le contenu et la fréquence d'envoi des mails.
+N'oubliez pas de [configurer](https://dbarzin.github.io/deming/config.fr/#notifications) le contenu et la fréquence d'envoi des mails.
 
 ## Sheduler
 
