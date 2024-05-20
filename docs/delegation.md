@@ -21,8 +21,8 @@ Tha auditee can :
 
 - Search the list of measurements
 - Filter measurements by domain, scope, attribute or period.
-- sort the list by each column
-- select a measurement to perform
+- Sort the list by each column
+- Select a measurement to perform
 
 
 ### Performing an measurement
@@ -48,7 +48,7 @@ When the auditee clicks on :
 
 Once an measurement has been carried out by an auditee, it changes status to "to be validated".
 
-This is shown by an hourglass next to the completion date in the list of measurements to be carried out:
+For other users, this is shown by an hourglass next to the completion date in the list of checks to be carried out:
 
 [<img src="/deming/images/d3.png" width="600">](/deming/images/d3.png)
 

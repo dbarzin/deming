@@ -29,26 +29,26 @@ L'audité peut :
 
 Lorsqu'un audité réalise un contrôle, il peut :
 
-- sauver le contrôle
+- Sauver le contrôle
 
-- faire le contrôle
+- Faire le contrôle
 
 [<img src="/deming/images/d2.fr.png" width="300">](/deming/images/d2.fr.png)
 
 Lorsqu'il clique sur :
 
-- "sauver", les modifications qu'il a faites sont sauvées, le contrôle reste dans la liste des contrôles à réaliser
+- "Sauver", les modifications qu'il a faites sont sauvées, le contrôle reste dans la liste des contrôles à réaliser
 
-- "faire", les modifications qu'il a faite sont sauvées et le contrôle passe dans l'état à valider. Du point de vue de l'audité, le contrôle se trouve dans la liste des contrôles réalisés.
+- "Faire", les modifications qu'il a faite sont sauvées et le contrôle passe dans l'état à valider. Du point de vue de l'audité, le contrôle se trouve dans la liste des contrôles réalisés.
 
-- "annuler", les modifications ne sont pas sauvée, lutilisateur retourne vers la vue du contrôle.
+- "Annuler", les modifications ne sont pas sauvée, lutilisateur retourne vers la vue du contrôle.
 
 
 ### Accepter / Refuser un contrôle
 
 Une fois qu'un contrôle a été réalisé par un audité, il passe dans l'état "à valider".
 
-Cela se matérialise par un sablier à côté de la date de réalisation dans la liste des contrôles à réaliser :
+Cela se matérialise pour les autres utilisateurs par un sablier à côté de la date de réalisation dans la liste des contrôles à réaliser :
 
 [<img src="/deming/images/d3.fr.png" width="600">](/deming/images/d3.fr.png)
 
