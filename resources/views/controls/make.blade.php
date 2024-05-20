@@ -221,7 +221,7 @@
                     @if (
                         (Auth::User()->role === 1)||
                         (Auth::User()->role === 2)||
-                        ((Auth::User()->role === 5)&&($control->status=0))
+                        ((Auth::User()->role === 5) && ($control->status===0))
                         )
     					<button type="submit" class="button primary" onclick='this.form.action="/bob/draft"'>
     			            <span class="mif-floppy-disk"></span>
