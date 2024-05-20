@@ -13,7 +13,7 @@ This delegation complies with the following rules:
 
 ### List of measurements to be performed
 
-From the auditee's point of view, the application's main page contains the list of measurements that are assigned to the user.
+From the auditee's point of view, the application's main page contains the list of measurements that are assigned to him.
 
 [<img src="/deming/images/d1.png" width="600">](/deming/images/d1.png)
 

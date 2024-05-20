@@ -6,14 +6,14 @@ L'assignation du rôle audité à un utilisateur se fait via l'écran de [gestio
 Cette délégation respecte les règles suivantes :
 
 - Les audités sont informés régulièrement par mail des contrôles à réaliser ;
-- Les audités ne voient que les contrôles à réaliser et les contrôles qu'ils ont réalisés précédemment ;
+- Les audités ne voient que les contrôles qui leur sont assignés et les contrôles qu'ils ont réalisés précédemment ;
 - Les utilisateurs peuvent accepter ou refuser un contrôle réalisé par un audité ;
 - Lorsqu'un contrôle est refusé, il retourne dans la liste des contrôles à réaliser de l'audité.
 
 
 ### Liste des contrôles à réaliser
 
-Du point de revu de l'audité, la page principale de l'application contient la liste des contrôles qui sont assignés à l'utilisateur.
+Du point de revu de l'audité, la page principale de l'application contient la liste des contrôles qui lui sont assignés.
 
 [<img src="/deming/images/d1.fr.png" width="600">](/deming/images/d1.fr.png)
 
