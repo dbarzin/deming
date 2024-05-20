@@ -35,7 +35,7 @@ Créer les répertoires temporaires
     mkdir -p storage/framework/sessions
     mkdir -p bootstrap/cache
 
-Installer les packages avec composer 
+Installer les packages avec composer
 
     composer install
 
@@ -196,6 +196,8 @@ Configurer postfix
 Envoyer un mail de test avec
 
     echo "Test mail body" | mailx -r "deming@yourdomain.local" -s "Subject Test" yourname@yourdomain.local
+
+N'oubliez pas de (configurer)[https://dbarzin.github.io/deming/config.fr/#notifications] le contenu et la fréquence d'envoi des mails.
 
 ## Sheduler
 

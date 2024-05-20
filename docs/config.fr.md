@@ -2,7 +2,7 @@
 
 ### Attributs <a name="tags"></a>
 
-Cet écran permet de gérer les attributs associés aux mesures de sécurité. 
+Cet écran permet de gérer les attributs associés aux mesures de sécurité.
 Il contient la liste des attributs et permet de créer, supprimer ou modifier des listes d’attributs.
 
 [<img src="/deming/images/tags.png" width="600">](/deming/images/tags.png)
@@ -21,12 +21,14 @@ Les utilisateurs sont définits dans l’application.
 
 [<img src="/deming/images/users.png" width="600">](/deming/images/users.png)
 
-Il existe trois roles :
+Il existe quatres roles différents :
 
 * RSSI : le RSSI est l’adminsitrateur de l’application. Il peut créer de nouvelles mesures, de nouveaux attributs, modifier des contrôles déjà réalisés...
 
 * Utilisateurs : les utilisateur peuvent utiliser l’application sans pouvoir modifier les mesures, les attributs et les contrôles déjà réalisés.
-   
+
+* Audité : les audités ne peuvent réaliser et voir que les contrôles qui leur sont assignés ou qu'ils ont réalisé précédement.
+
 * Auditeur : l’auditeur a un accès en lecture à l’ensemble des informations de l’application.
 
 
@@ -37,7 +39,7 @@ L’application permet de générer le rapport de pilotage du SMSI et d’export
 [<img src="/deming/images/reports.png" width="500">](/deming/images/reports.png)
 
 
-Voici le rapport de pilotage du SMSI : 
+Voici le rapport de pilotage du SMSI :
 
 [<img src="/deming/images/report1.png" width="600">](/deming/images/report1.png)
 
@@ -81,4 +83,3 @@ Lorsque vous cliquer sur :
 * "Test" - un mail de test est envoyé à l'utilisateur courant ;
 
 * "Cancel" - vous revenez à la page principale.
-

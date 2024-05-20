@@ -25,6 +25,21 @@ This information security management application is a powerful and customizable 
 With its intuitive user interface, the ability to define new controls and its ISO 27001:2022 compatibility, it offers CISOs great flexibility to adapt the application to their specific needs.
 
 
+### What is not Deming? <a name="notDeming"></a>
+
+Deming is not a miracle solution that performs risk analysis, imports all existing standards, automatically manages your documentation, provides default procedures or uses artificial intelligence autonomously...
+
+But :
+
+- it's not in the cloud ;
+
+- you don't need 5 days' training to use it ;
+
+- you are not contacted by a consultancy firm and
+
+- it's free.
+
+
 ### Why control?
 
 To manage the security of the information system, it is necessary to put in place a set of security measures and regularly check that these measures are effective and efficient. These regular checks make it possible to guarantee that the security measures put in place achieve their security objectives.
@@ -67,12 +82,11 @@ Deming helps meet these requirements and retain appropriate documented informati
 
 **Controls** : set of provisions to be implemented. These are the controls to be taken to implement the security policy.
 
-**Measurement**: process of obtaining relative to the effectiveness of an ISMS and security measures, using an evaluation method, 
+**Measurement**: process of obtaining relative to the effectiveness of an ISMS and security measures, using an evaluation method,
 a function assessment, analytical model, and decision criteria [ISO/IEC 27004].
 
-**Indicator**: result of the application of an analytical model to one or more variables in relation to the decision criteria or 
+**Indicator**: result of the application of an analytical model to one or more variables in relation to the decision criteria or
 an information need [ISO/IEC 27004].
 
-**Attribute**: property or characteristic of an object that can be quantitatively or qualitatively distinguished by human or 
+**Attribute**: property or characteristic of an object that can be quantitatively or qualitatively distinguished by human or
 automatic means [ISO/IEC 15939:2007].
-

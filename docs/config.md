@@ -21,12 +21,14 @@ Users are directly defined in the application.
 
 [<img src="/deming/images/users.png" width="600">](/deming/images/users.png)
 
-There are three roles:
+There are four different roles:
 
 * RSSI: the RSSI is the administrator of the application. He can create new measurements, new attributes, modify controls already carried out...
 
 * Users: users can use the application without being able to modify the measurements, attributes and controls already carried out.
-   
+
+* Auditee: Auditees can only carry out and see the mesurements that have been assigned to them or that they have carried out previously.
+
 * Auditor: the auditor has read access to all the information in the application.
 
 
@@ -79,5 +81,3 @@ When you click on:
 * "Test" - a test mail is sent to the current user;
 
 * "Cancel" - you return to the main page.
-
-

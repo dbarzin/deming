@@ -6,9 +6,9 @@
 Deming est un outil Open Source conçu pour aider les RSSI à mettre en place et à maintenir leur système de management de la sécurité de l'information. Grâce à cette application, les RSSI peuvent facilement planifier et suivre la mise en œuvre des contrôles de sécurité et le cycle d'amélioration continue requis par la norme ISO 27001. L'application est conçue pour être facile à utiliser et à personnaliser, avec une interface utilisateur intuitive.
 
 
-Deming offre des fonctionnalités telles que la [gestion des mesures de sécurité](/deming/measures.fr/), 
-la [planification des contrôles](/deming/plan.fr/), la création des [fiches de contrôle](/deming/controls.fr/#sheet), l’enregistrement des preuves, 
-le suivi [des plans d’action](/deming/actions.fr/) ainsi que des [tableaux de bord](/deming/dashboards.fr/) et 
+Deming offre des fonctionnalités telles que la [gestion des mesures de sécurité](/deming/measures.fr/),
+la [planification des contrôles](/deming/plan.fr/), la création des [fiches de contrôle](/deming/controls.fr/#sheet), l’enregistrement des preuves,
+le suivi [des plans d’action](/deming/actions.fr/) ainsi que des [tableaux de bord](/deming/dashboards.fr/) et
 des [rapports de pilotage du SMSI](/deming/config.fr/#report) pour aider les RSSI à suivre le maintient des mesures de sécurité de l'information.
 
 
@@ -19,10 +19,24 @@ Elle est également conçue pour aider les RSSI à préparer leur organisation a
 Cette application est publiée sous la licence [GPL](https://www.gnu.org/licenses/licenses.fr.html), permettant aux utilisateurs de l'utiliser, de la modifier et de la distribuer librement. Cette approche open source permet aux utilisateurs de contribuer au développement de l'application en soumettant des demandes de changement, des rapports de bogues ou des fonctionnalités supplémentaires.
 
 
-Cette application de gestion de la sécurité de l'information est un outil puissant et personnalisable pour les RSSI qui cherchent à mettre en place et à maintenir un système de management de la sécurité de l'information conforme à la norme ISO 27001. 
+Cette application de gestion de la sécurité de l'information est un outil puissant et personnalisable pour les RSSI qui cherchent à mettre en place et à maintenir un système de management de la sécurité de l'information conforme à la norme ISO 27001.
 
 
 Avec son interface utilisateur intuitive, la possibilité de définir de nouveaux contrôles et sa compatibilité ISO 27001:2022, elle offre aux RSSI une grande flexibilité pour adapter l'application à leurs besoins spécifiques.
+
+### Qu'est-ce qui n'est pas Deming ? <a name="notDeming"></a>
+
+Deming n'est pas une solution miracle qui réalise l'analyse des risques, importe toutes les normes existantes, gère automatiquement votre documentation, fournit des procédures par défaut ou utilise de l'intelligence artificielle de manière autonome...
+
+Mais :
+
+- elle n'est pas dans le nuage;
+
+- vous n'avez pas besoin de 5 jours de formation pour l'utiliser;
+
+- vous n'êtes pas contacté par une société de conseil et
+
+- elle est gratuite.
 
 
 ### Pourquoi contrôler ?

@@ -194,6 +194,8 @@ Send a test mail with
 
     echo "Test mail body" | mailx -r "deming@yourdomain.local" -s "Subject Test" yourname@yourdomain.local
 
+Don't forget to (configure)[https://dbarzin.github.io/deming/config/#notifications] the content and frequency of your emails.
+
 ## Sheduler
 
 Modify crontab

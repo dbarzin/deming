@@ -11,12 +11,12 @@ edit_uri: edit/main/docs
 # Copyright
 copyright: Copyright <a href="https://www.gnu.org/licenses/licenses.en.html">GPL</a>.
 
-theme: 
+theme:
   name: readthedocs
 
 extra_css:
     - css/extra.css
-    
+
 plugins:
   - search
   - i18n:
@@ -46,6 +46,8 @@ nav:
 - Mesures : measures.fr.md
 - Measures : controls.md
 - Contrôles : controls.fr.md
+- Delegation : delegation.md
+- Délégation : delegation.fr.md
 - Planning : plan.md
 - Planning : plan.fr.md
 - Dashboards : dashboards.md
@@ -72,4 +74,3 @@ extra:
     - name: Français
       link: index.fr/
       lang: fr
-
