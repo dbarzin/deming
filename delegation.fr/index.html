@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>Tableaux de bords - Deming</title>
+    <title>Délégation - Deming</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "Tableaux de bords";
-        var mkdocs_page_input_path = "dashboards.fr.md";
+        var mkdocs_page_name = "D\u00e9l\u00e9gation";
+        var mkdocs_page_input_path = "delegation.fr.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -57,24 +57,24 @@
                 <li class="toctree-l1"><a class="reference internal" href="../controls.fr/">Contrôles</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../delegation.fr/">Délégation</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Délégation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#liste-des-controles-a-realiser">Liste des contrôles à réaliser</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#realiser-un-controle">Réaliser un contrôle</a>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#accepter-refuser-un-controle">Accepter / Refuser un contrôle</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
                 <li class="toctree-l1"><a class="reference internal" href="../plan.fr/">Planning</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Tableaux de bords</a>
-    <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#les-controles-par-domaines">Les contrôles par domaines</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#les-controle-par-domaine-et-par-mesure">Les contrôle par domaine et par mesure</a>
-    </li>
-    <li class="toctree-l2"><a class="reference internal" href="#les-controles-par-attribut">Les contrôles par attribut</a>
-    </li>
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../dashboards.fr/">Tableaux de bords</a>
                 </li>
               </ul>
               <ul>
@@ -111,9 +111,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Tableaux de bords</li>
+      <li>Délégation</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/dbarzin/deming/edit/main/docs/dashboards.fr.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/dbarzin/deming/edit/main/docs/delegation.fr.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -122,33 +122,80 @@
             <div class="section" itemprop="articleBody">
               
                 <ul>
-<li class="i18n-link i18n-link-found i18n-link-en"><a href="../dashboards/">English</a></li>
+<li class="i18n-link i18n-link-found i18n-link-en"><a href="../delegation/">English</a></li>
 </ul>
-<h2 id="tableaux-de-bords">Tableaux de bords</h2>
-<p>Il existe trois tableaux de bord :</p>
+<h2 id="delegation">Délégation</h2>
+<p>Deming permet de déléguer la réalisation des contrôles de sécurité à des utilisateurs qui ont le rôle <em>audité</em>.
+L'assignation du rôle audité à un utilisateur se fait via l'écran de <a href="/deming/config/#users">gestion des utilisateurs</a>.</p>
+<p>Cette délégation respecte les règles suivantes :</p>
+<ul>
+<li>Les audités sont informés régulièrement par mail des contrôles à réaliser ;</li>
+<li>Les audités ne voient que les contrôles à réaliser et les contrôles qu'ils ont réalisés précédemment ;</li>
+<li>Les utilisateurs peuvent accepter ou refuser un contrôle réalisé par un audité ;</li>
+<li>Lorsqu'un contrôle est refusé, il retourne dans la liste des contrôles à réaliser de l'audité.</li>
+</ul>
+<h3 id="liste-des-controles-a-realiser">Liste des contrôles à réaliser</h3>
+<p>Du point de revu de l'audité, la page principale de l'application contient la liste des contrôles qui sont assignés à l'utilisateur.</p>
+<p><a href="/deming/images/d1.fr.png"><img src="/deming/images/d1.fr.png" width="600"></a></p>
+<p>L'audité peut :</p>
+<ul>
+<li>Effectuer des recherches dans la liste des contrôles</li>
+<li>Filtrer les contrôles par domaine, périmètre, attribut, période.</li>
+<li>trier la liste par chacune des colonnes</li>
+<li>sélectionner un contrôle à réaliser</li>
+</ul>
+<h3 id="realiser-un-controle">Réaliser un contrôle</h3>
+<p>Lorsqu'un audité réalise un contrôle, il peut :</p>
 <ul>
 <li>
-<p>les contrôles par domaines</p>
+<p>sauver le contrôle</p>
 </li>
 <li>
-<p>les contrôle par domaine et par mesure</p>
-</li>
-<li>
-<p>les contrôles par attribut</p>
+<p>faire le contrôle</p>
 </li>
 </ul>
-<h3 id="les-controles-par-domaines">Les contrôles par domaines</h3>
-<p><a href="/deming/images/r1.png"><img src="/deming/images/r1.png" width="300"></a></p>
-<h3 id="les-controle-par-domaine-et-par-mesure">Les contrôle par domaine et par mesure</h3>
-<p><a href="/deming/images/r2.png"><img src="/deming/images/r2.png" width="600"></a></p>
-<h3 id="les-controles-par-attribut">Les contrôles par attribut</h3>
-<p><a href="/deming/images/r3.png"><img src="/deming/images/r3.png" width="600"></a></p>
+<p><a href="/deming/images/d2.fr.png"><img src="/deming/images/d2.fr.png" width="600"></a></p>
+<p>Lorsqu'il clique sur :</p>
+<ul>
+<li>
+<p>"sauver", les modifications qu'il a faites sont sauvées, le contrôle reste dans la liste des contrôles à réaliser</p>
+</li>
+<li>
+<p>"faire", les modifications qu'il a faite sont sauvées et le contrôle passe dans l'état à valider. Du point de vue de l'audité, le contrôle se trouve dans la liste des contrôles réalisés.</p>
+</li>
+<li>
+<p>"annuler", les modifications ne sont pas sauvée, lutilisateur retourne vers la vue du contrôle.</p>
+</li>
+</ul>
+<h3 id="accepter-refuser-un-controle">Accepter / Refuser un contrôle</h3>
+<p>Une fois qu'un contrôle a été réalisé par un audité, il passe dans l'état "à valider".</p>
+<p>Cela se matérialise par un sablier à côté de la date de réalisation dans la liste des contrôles à réaliser :</p>
+<p><a href="/deming/images/d3.fr.png"><img src="/deming/images/d3.fr.png" width="200"></a>
+'
+Lorsque l'utilisateur clique sur la date de réalisation à côté du sablier, il arrive sur le contrôle réalisé par l'audité.</p>
+<p>Il peut alors accepter ou refuser le contrôle en ajoutant une note dans les observations du contrôle et, selon les résultats du contrôle, proposer un plan d'action et une date de revue du contrôle.</p>
+<p><a href="/deming/images/d4.fr.png"><img src="/deming/images/d4.fr.png" width="300"></a></p>
+<p>Si l'utilisateur clique sur :</p>
+<ul>
+<li>
+<p>"Accepter" : les données modifiées sont sauvées et un nouveau contrôle est créé à la date de planification introduite.</p>
+</li>
+<li>
+<p>"Rejeté" : les données modifiées sont sauvées et le contrôle est renvoyé dans la liste des contrôles à réaliser de l'audité.</p>
+</li>
+<li>
+<p>"Sauvé" : les données sont sauvées et l'utilisateur revient à la vue du contrôle.</p>
+</li>
+<li>
+<p>"Annuler" : l'utilisateur revient à la vue du contrôle.</p>
+</li>
+</ul>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../plan.fr/" class="btn btn-neutral float-left" title="Planning"><span class="icon icon-circle-arrow-left"></span> Previous</a>
-        <a href="../actions.fr/" class="btn btn-neutral float-right" title="Plans d'action">Next <span class="icon icon-circle-arrow-right"></span></a>
+        <a href="../controls.fr/" class="btn btn-neutral float-left" title="Contrôles"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../plan.fr/" class="btn btn-neutral float-right" title="Planning">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -176,10 +223,10 @@
         </span>
     
     
-      <span><a href="../plan.fr/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../controls.fr/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
     
-      <span><a href="../actions.fr/" style="color: #fcfcfc">Next &raquo;</a></span>
+      <span><a href="../plan.fr/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>

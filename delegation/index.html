@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <link rel="shortcut icon" href="../img/favicon.ico" />
-    <title>References - Deming</title>
+    <title>Delegation - Deming</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
@@ -13,8 +13,8 @@
     
       <script>
         // Current page data
-        var mkdocs_page_name = "References";
-        var mkdocs_page_input_path = "references.md";
+        var mkdocs_page_name = "Delegation";
+        var mkdocs_page_input_path = "delegation.md";
         var mkdocs_page_url = null;
       </script>
     
@@ -57,8 +57,18 @@
                 <li class="toctree-l1"><a class="reference internal" href="../controls/">Measures</a>
                 </li>
               </ul>
-              <ul>
-                <li class="toctree-l1"><a class="reference internal" href="../delegation/">Delegation</a>
+              <ul class="current">
+                <li class="toctree-l1 current"><a class="reference internal current" href="./">Delegation</a>
+    <ul class="current">
+    <li class="toctree-l2"><a class="reference internal" href="#list-of-measurements-to-be-performed">List of measurements to be performed</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#performing-an-measurement">Performing an measurement</a>
+    </li>
+        </ul>
+    </li>
+    <li class="toctree-l2"><a class="reference internal" href="#accepting-rejecting-a-measurement">Accepting / Rejecting a measurement</a>
+    </li>
+    </ul>
                 </li>
               </ul>
               <ul>
@@ -85,10 +95,8 @@
                 <li class="toctree-l1"><a class="reference internal" href="../annexe/">Annexe</a>
                 </li>
               </ul>
-              <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">References</a>
-    <ul class="current">
-    </ul>
+              <ul>
+                <li class="toctree-l1"><a class="reference internal" href="../references/">References</a>
                 </li>
               </ul>
       </div>
@@ -105,9 +113,9 @@
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
     <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>References</li>
+      <li>Delegation</li>
     <li class="wy-breadcrumbs-aside">
-          <a href="https://github.com/dbarzin/deming/edit/main/docs/references.md" class="icon icon-github"> Edit on GitHub</a>
+          <a href="https://github.com/dbarzin/deming/edit/main/docs/delegation.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
   </ul>
   <hr/>
@@ -116,23 +124,79 @@
             <div class="section" itemprop="articleBody">
               
                 <ul>
-<li class="i18n-link i18n-link-found i18n-link-fr"><a href="../references.fr/">Français</a></li>
+<li class="i18n-link i18n-link-found i18n-link-fr"><a href="../delegation.fr/">Français</a></li>
 </ul>
-<h2 id="references">References</h2>
-<p>The references used in this documentation are:</p>
+<h2 id="delegation">Delegation</h2>
+<p>Deming allows you to delegate the realisation of measurements to users who have the <em>auditee</em> role.
+The auditee role is assigned to a user via the <a href="/deming/config/#users">user management screen</a>.</p>
+<p>This delegation complies with the following rules:</p>
+<ul>
+<li>Auditees are regularly informed by email of the measurements to be carried out;</li>
+<li>Auditees only see the measurements to be carried out and the measurements they have previously carried out;</li>
+<li>Users can accept or reject a measurement performed by an auditee;</li>
+<li>When a measurement is rejected, it returns to the list of measurements to be carried out by the auditee.</li>
+</ul>
+<h3 id="list-of-measurements-to-be-performed">List of measurements to be performed</h3>
+<p>From the auditee's point of view, the application's main page contains the list of measurements that are assigned to the user.</p>
+<p><a href="/deming/images/d1.png"><img src="/deming/images/d1.png" width="600"></a></p>
+<p>Tha auditee can :</p>
+<ul>
+<li>Search the list of measurements</li>
+<li>Filter measurements by domain, scope, attribute or period.</li>
+<li>sort the list by each column</li>
+<li>select a measurement to perform</li>
+</ul>
+<h4 id="performing-an-measurement">Performing an measurement</h4>
+<p>When an auditee performs an mesurement, they can :</p>
 <ul>
 <li>
-<p><a href="https://www.iso.org/fr/isoiec-27001-information-security.html">ISO/IEC 27001</a> The ISO 27001 standard on Information security management</p>
+<p>"Save" the measurement</p>
 </li>
 <li>
-<p><a href="https://github.com/dbarzin/deming">Project Github</a> The source code of the Deming application.</p>
+<p>"Make" the mesurement</p>
+</li>
+</ul>
+<p><a href="/deming/images/d2.png"><img src="/deming/images/d2.png" width="600"></a></p>
+<p>When the auditee clicks on :</p>
+<ul>
+<li>
+<p>"Save", the changes made are saved and the measurement remains in the list of measurements to be performed</p>
+</li>
+<li>
+<p>"Make", the changes made are saved and the measurement changes to the status to be validated. From the auditee's point of view, the measurement is in the list of measurements performed.</p>
+</li>
+<li>
+<p>If the auditee selects "Cancel", the changes are not saved and the auditee returns to the measuremet view.</p>
+</li>
+</ul>
+<h3 id="accepting-rejecting-a-measurement">Accepting / Rejecting a measurement</h3>
+<p>Once an measurement has been carried out by an auditee, it changes status to "to be validated".</p>
+<p>This is shown by an hourglass next to the completion date in the list of measurements to be carried out:</p>
+<p><a href="/deming/images/d3.png"><img src="/deming/images/d3.png" width="200"></a></p>
+<p>When the user clicks on the date next to the hourglass, they are taken to the measurement performed by the auditee.</p>
+<p>They can then accept or reject the measurement, adding a note in the measurement observations and, depending on the measurement score, propose an action plan and anmeasurement review date.</p>
+<p><a href="/deming/images/d4.png"><img src="/deming/images/d4.png" width="300"></a></p>
+<p>If the user clicks on :</p>
+<ul>
+<li>
+<p>"Accept": the modified data is saved and a new measurement is created on the planning date entered.</p>
+</li>
+<li>
+<p>"Reject": the modified data is saved and the measurement is returned to the auditee list of controls to be performed.</p>
+</li>
+<li>
+<p>"Save": the data is saved and the user returns to the measurement view.</p>
+</li>
+<li>
+<p>"Cancel": the user returns to the measurement view.</p>
 </li>
 </ul>
               
             </div>
           </div><footer>
     <div class="rst-footer-buttons" role="navigation" aria-label="Footer Navigation">
-        <a href="../annexe/" class="btn btn-neutral float-left" title="Annexe"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../controls/" class="btn btn-neutral float-left" title="Measures"><span class="icon icon-circle-arrow-left"></span> Previous</a>
+        <a href="../plan/" class="btn btn-neutral float-right" title="Planning">Next <span class="icon icon-circle-arrow-right"></span></a>
     </div>
 
   <hr/>
@@ -160,8 +224,10 @@
         </span>
     
     
-      <span><a href="../annexe/" style="color: #fcfcfc">&laquo; Previous</a></span>
+      <span><a href="../controls/" style="color: #fcfcfc">&laquo; Previous</a></span>
     
+    
+      <span><a href="../plan/" style="color: #fcfcfc">Next &raquo;</a></span>
     
   </span>
 </div>
