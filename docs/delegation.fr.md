@@ -21,8 +21,8 @@ L'audité peut :
 
 - Effectuer des recherches dans la liste des contrôles
 - Filtrer les contrôles par domaine, périmètre, attribut, période.
-- trier la liste par chacune des colonnes
-- sélectionner un contrôle à réaliser
+- Trier la liste par chacune des colonnes
+- Sélectionner un contrôle à réaliser
 
 
 ### Réaliser un contrôle
@@ -41,7 +41,7 @@ Lorsqu'il clique sur :
 
 - "Faire", les modifications qu'il a faite sont sauvées et le contrôle passe dans l'état à valider. Du point de vue de l'audité, le contrôle se trouve dans la liste des contrôles réalisés.
 
-- "Annuler", les modifications ne sont pas sauvée, lutilisateur retourne vers la vue du contrôle.
+- "Annuler", les modifications ne sont pas sauvée, l'utilisateur retourne vers la vue du contrôle.
 
 
 ### Accepter / Refuser un contrôle
