@@ -45,17 +45,12 @@ Pour gérer la sécurité du système d’information il faut mettre en place un
 
 Les exigences de mesure de l’efficacité sont :
 
-a) d’évaluer l'efficacité des contrôles;
-
-b) d’évaluer l'efficacité du système de gestion de l'information;
-
-c) de vérifier dans quelle mesure les exigences de sécurité identifiées ont été respectées;
-
-d) de faciliter l’amélioration des performances de la sécurité de l’information par rapport aux objectifs;
-
-e) de fournir des données pour la revue de la direction afin de faciliter la prise de décisions liées au SMSI;
-
-f) de justifier les besoins d'amélioration du ISMS.
+- a) d’évaluer l'efficacité des contrôles;
+- b) d’évaluer l'efficacité du système de gestion de l'information;
+- c) de vérifier dans quelle mesure les exigences de sécurité identifiées ont été respectées;
+- d) de faciliter l’amélioration des performances de la sécurité de l’information par rapport aux objectifs;
+- e) de fournir des données pour la revue de la direction afin de faciliter la prise de décisions liées au SMSI;
+- f) de justifier les besoins d'amélioration du ISMS.
 
 ### Evaluation des performances
 
@@ -63,17 +58,12 @@ La norme ISO 27001 au chapitre 9.1, impose d’évaluer les performances de séc
 
 Pour évaluer ces performances, il faut déterminer :
 
-a) ce qu’il est nécessaire de surveiller et de mesurer, y compris les processus et les mesures de sécurité de l’information;
-
-b) les méthodes de surveillance, de mesurage, d’analyse et d’évaluation, selon le cas, pour assurer la validité des résultats;
-
-c) quand la surveillance et les mesures doivent être effectuées;
-
-d) qui doit effectuer la surveillance et les mesures;
-
-e) quand les résultats de la surveillance et des mesures doivent être analysés et évalués; et
-
-f) qui doit analyser et évaluer ces résultats.
+- a) ce qu’il est nécessaire de surveiller et de mesurer, y compris les processus et les mesures de sécurité de l’information;
+- b) les méthodes de surveillance, de mesurage, d’analyse et d’évaluation, selon le cas, pour assurer la validité des résultats;
+- c) quand la surveillance et les mesures doivent être effectuées;
+- d) qui doit effectuer la surveillance et les mesures;
+- e) quand les résultats de la surveillance et des mesures doivent être analysés et évalués; et
+- f) qui doit analyser et évaluer ces résultats.
 
 Deming permet de répondre à ces exigences et de conserver les informations documentées appropriées comme preuves des résultats de la surveillance et des mesures.
 
