@@ -12,9 +12,9 @@ En haut des indicateurs sur :
 * le nombre de domaines de sécurité
 * le nombre de mesures de sécurité sélectionnées
 * le nombre de contrôles réalisés
-* le nombre de plans d’action 
+* le nombre de plans d’action
 
-Note : 
+Note :
 
 * si un domaine n'a aucune mesure de sécurité ou qu'aucunes des mesures de sécurité de ce domaine n'est planifiée alors le domaine n'est pas pris en compte.
 * si une mesure de sécurité n'est pas planifiée, elle n'est pas prise en compte dans le comptage.
@@ -26,20 +26,17 @@ Au milieu :
 * Un état global des contrôles
 
 
-[<img src="/deming/images/home1.png" width="600">](/deming/images/home1.png)
+[<img src="/deming/images/home1_fr.png" width="600">](/deming/images/home1_fr.png)
 
 La partie inférieur de la page principale contient la liste des contôles pannifiés dans les 30 prochains jours :
 
-[<img src="/deming/images/home2.png" width="600">](/deming/images/home2.png)
+[<img src="/deming/images/home2_fr.png" width="600">](/deming/images/home2_fr.png)
 
 Les dates des contrôles en retard sont affichés en rouge.
 
 ### Recherche
 
-Un outil de recherche permet de rechecher la présence d’un mot dans le nom, les objectifs, les observations des contrôles 
+Un outil de recherche permet de rechecher la présence d’un mot dans le nom, les objectifs, les observations des contrôles
 et dans leurs plans d’action.
 
 [<img src="/deming/images/search.png" width="600">](/deming/images/search.png)
-
-
-
