@@ -3,22 +3,20 @@
 namespace App\Http\Controllers;
 
 use App\Models\Control;
+use App\Models\Document;
 use App\Models\Domain;
 use App\Models\Measure;
-use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\Artisan;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\File;
-use Illuminate\Support\Collection;
-use Illuminate\Support\Facades\Artisan;
 
 class MeasureImportController extends Controller
 {
-
     /**
      * Show Import Measure screen
      *
@@ -32,7 +30,7 @@ class MeasureImportController extends Controller
         $models = Storage::disk('local')->files('repository');
 
         return view('measures/import')
-                ->with('models', $models);
+            ->with('models', $models);
     }
 
     /**
@@ -60,20 +58,19 @@ class MeasureImportController extends Controller
             $this->clean();
         }
 
-        try
-        {
+        try {
             // Get Filename
-            if ($request->file())
+            if ($request->file()) {
                 // Save temp file
                 $fileName = Storage::path($request->file('file')->store());
-            else {
+            } else {
                 // Find file from repositories
-                $model = '/' . $request->get("model") . '.xlsx';
+                $model = '/' . $request->get('model') . '.xlsx';
                 $file = current(
                     array_filter(
                         Storage::disk('local')->files('repository'),
-                        function($e)  use ($model) {
-                            return str_contains($e,$model);
+                        function ($e) use ($model) {
+                            return str_contains($e, $model);
                         }
                     )
                 );
@@ -83,16 +80,16 @@ class MeasureImportController extends Controller
 
             // Import file
             $this->importFromFile($fileName, $errors);
-
-        }
-        finally {
-            if ($request->file())
+        } finally {
+            if ($request->file()) {
                 unlink($fileName);
+            }
         }
 
         // add this message after...
-        if ($request->has('clean'))
+        if ($request->has('clean')) {
             $errors->prepend('Database cleared');
+        }
 
         // Generate fake test data
         if ($request->has('test')) {
@@ -111,7 +108,8 @@ class MeasureImportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private function importFromFile(String $fileName, Collection $errors) {
+    private function importFromFile(string $fileName, Collection $errors)
+    {
         // XLSX
         $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
         $reader->setReadDataOnly(true);
@@ -250,10 +248,9 @@ class MeasureImportController extends Controller
                 $measure = Measure::where('clause', $data[$line][2])->get()->first();
 
                 if ($measure !== null) {
-
                     // update or create domain
                     $domain = Domain::where('title', trim($data[$line][0]))->get()->first();
-                    if ($domain==null) {
+                    if ($domain === null) {
                         // create domain
                         $domain = new Domain();
                         $domain->title = trim($data[$line][0]);
@@ -261,8 +258,7 @@ class MeasureImportController extends Controller
                         $domain->save();
 
                         $newDomainCount++;
-                    }
-                    else {
+                    } else {
                         $domain->description = $data[$line][1];
                         $domain->update();
                     }
@@ -338,7 +334,7 @@ class MeasureImportController extends Controller
             $errors->push($newDomainCount . ' new domains created');
         }
 
-    return $errors;
+        return $errors;
     }
 
     /**
@@ -346,7 +342,8 @@ class MeasureImportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private function clean()  {
+    private function clean()
+    {
         Schema::disableForeignKeyConstraints();
 
         // Delete all documents
@@ -363,5 +360,4 @@ class MeasureImportController extends Controller
 
         Schema::enableForeignKeyConstraints();
     }
-
 }

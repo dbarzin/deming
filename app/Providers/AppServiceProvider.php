@@ -2,12 +2,12 @@
 
 namespace App\Providers;
 
+use Config;
 use DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Log;
-use Config;
 
 class AppServiceProvider extends ServiceProvider
 {
