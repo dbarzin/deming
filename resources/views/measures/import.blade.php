@@ -26,14 +26,41 @@
 
 			<form action="/alice/import" method="post" enctype="multipart/form-data">
 			@csrf
-			<div class="row">
-		        <div class="cell-5">
-					<input name="file" type="file" data-role="file" data-prepend="Select import file:">
-				</div>
-		        <div class="cell-1">
-				    <button type="submit" class="button success drop-shadow">Import</button>
-		        </div>
-		    </div>
+    			<div class="row">
+    		        <div class="cell-4">
+        				<select data-role="select" name="model" id="model" data-prepend="Select model">
+                            <option id="emptyOption"></option>
+    						@foreach($models as $model)
+                                <option>{{ basename($model,'.xlsx') }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+    		        <div class="cell-1" align="center">
+                        or
+                    </div>
+                </div>
+    			<div class="row">
+    		        <div class="cell-5">
+    					<input name="file" type="file" id="file" data-role="file" data-prepend="Select import file:">
+    				</div>
+    		    </div>
+    			<div class="row">
+    		        <div class="cell-4">
+                        <input type="checkbox" name="clean">
+                        Remove all other measures and controls
+                    </div>
+                </div>
+    			<div class="row">
+    		        <div class="cell-4">
+                        <input type="checkbox" name="test">
+                        Generate fake measurements
+                    </div>
+    		        <div class="cell-1" align="right">
+    				    <button type="submit" class="button success drop-shadow">Import</button>
+    		        </div>
+                </div>
+
+            </form>
 
 
 			<div class="row">
@@ -99,13 +126,25 @@
 		    </div>
 
 			<div class="row">
-		        <div class="cell-6">
+		        <div class="cell-6 fg-red">
 		        	This action could not be undone, take a backup before !
 		        </div>
 		    </div>
 
-
-			</form>
-
 		</div>
+<script>
+/* TODO: fixme
+$('#modelFile').change(function(){
+    console.log('modelFile changed '+$(this).val());
+    if ($(this).val()!='')
+        $("#dataFile").val("").trigger( "change" );
+})
+$('#dataFile').change(function(){
+    console.log('dataFile changed '+$(this).val());
+    if ($(this).val()!='') {
+        $("#modelFile").val("").trigger( "change" );
+        }
+})
+*/
+</script>
 @endsection

@@ -7,9 +7,9 @@
 
 ## Introduction
 
-Pour gérer la sécurité de leur système d’information les organisations doivent mettre en place un 
-ensemble de mesures de sécurité et contrôler régulièrement que ces mesures sont effectives et 
-efficaces. Ces contrôles réguliers permettent de garantir que les mesures de sécurité mises en 
+Pour gérer la sécurité de leur système d’information les organisations doivent mettre en place un
+ensemble de mesures de sécurité et contrôler régulièrement que ces mesures sont effectives et
+efficaces. Ces contrôles réguliers permettent de garantir que les mesures de sécurité mises en
 place atteignent leurs objectifs de sécurité.
 
 ### Qu’est-ce que Deming ?
@@ -68,13 +68,13 @@ Deming permet de répondre à ces exigences et de conserver les informations doc
 
 ### Ecran principal
 
-[<img src="public/screenshots/main1.png" width="500">](public/screenshots/main1.png)
+[<img src="public/screenshots/main1_fr.png" width="500">](public/screenshots/main1_fr.png)
 
-[<img src="public/screenshots/main2.png" width="500">](public/screenshots/main2.png)
+[<img src="public/screenshots/main2_fr.png" width="500">](public/screenshots/main2_fr.png)
 
 ### Liste des contrôles
 
-[<img src="public/screenshots/controls.png" width="400">](public/screenshots/controls.png)
+[<img src="public/screenshots/controls_fr.png" width="400">](public/screenshots/controls_fr.png)
 
 ### Planification des contrôles
 
@@ -119,4 +119,3 @@ Une [feuille de route](https://github.com/dbarzin/deming/blob/main/ROADMAP.md) r
 ## License
 
 Deming est un logiciel open source distribué sous la licence [GPL](https://www.gnu.org/licenses/licenses.fr.html).
-

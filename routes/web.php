@@ -41,9 +41,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/alice/clone/{id}', 'MeasureController@clone');
     Route::post('/alice/delete/{id}', 'MeasureController@destroy');
     Route::post('/alice/activate/{id}', 'MeasureController@activate');
-    Route::get('/alice/import', function () {
-        return view('measures/import');
-    });
+    Route::get('/alice/import', 'MeasureImportController@show');
     Route::post('/alice/import', 'MeasureImportController@import');
 
     /* Controls */
