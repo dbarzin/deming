@@ -24,17 +24,17 @@ This management of controls must allow the implementation of adequate and propor
 
 The objectives of measuring the effectiveness of the requirements of an ISMS are:
 
-a) assess the effectiveness of controls;
+- a) assess the effectiveness of controls;
 
-b) assess the effectiveness of the information management system;
+- b) assess the effectiveness of the information management system;
 
-c) to verify the extent to which the identified security requirements have been met;
+- c) to verify the extent to which the identified security requirements have been met;
 
-d) facilitate the improvement of information security performance against objectives;
+- d) facilitate the improvement of information security performance against objectives;
 
-e) provide input for management review to facilitate ISMS-related decision-making;
+- e) provide input for management review to facilitate ISMS-related decision-making;
 
-f) to justify the needs for improvement of the ISMS.
+- f) to justify the needs for improvement of the ISMS.
 
 ### Evaluation of performances
 
@@ -42,17 +42,17 @@ The ISO 27001 standard in chapter 9.1 requires the evaluation of information sec
 
 To assess this performance, it is necessary to determine:
 
-a) what needs to be monitored and measured, including information security processes and measures;
+- a) what needs to be monitored and measured, including information security processes and measures;
 
-b) the monitoring, measurement, analysis and evaluation methods, as applicable, to ensure the validity of the results;
+- b) the monitoring, measurement, analysis and evaluation methods, as applicable, to ensure the validity of the results;
 
-c) when monitoring and measurements should be carried out;
+- c) when monitoring and measurements should be carried out;
 
-d) who is to carry out the monitoring and measurements;
+- d) who is to carry out the monitoring and measurements;
 
-e) when the results of monitoring and measurements should be analyzed and evaluated; and
+- e) when the results of monitoring and measurements should be analyzed and evaluated; and
 
-f) who should analyze and evaluate these results.
+- f) who should analyze and evaluate these results.
 
 Deming helps meet these requirements and retain appropriate documented information as evidence of monitoring and measurement results.
 

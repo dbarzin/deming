@@ -14,7 +14,7 @@ place atteignent leurs objectifs de sécurité.
 
 ### Qu’est-ce que Deming ?
 
-Deming est un outil qui permet de gérer, de planifier, de suivre et de rapporter l’efficacité des contrôles de sécurité.
+Deming est un outil qui permet de gérer, de planifier, de suivre et de rapporter l’efficacité des mesures de sécurité.
 
 Cette gestion des contrôles doit permettre la mise en œuvre d’une sécurité adéquate et proportionnée. Cette approche est conforme aux recommandations de la norme ISO / IEC 27001:2013, chapitre 9 qui traite de l’évaluation des performances.
 
@@ -22,17 +22,17 @@ Cette gestion des contrôles doit permettre la mise en œuvre d’une sécurité
 
 Les objectifs de mesure de l’efficacité des exigences d’un SMSI sont :
 
-a) d’évaluer l'efficacité des contrôles;
+- a) d’évaluer l'efficacité des contrôles;
 
-b) d’évaluer l'efficacité du système de gestion de l'information;
+- b) d’évaluer l'efficacité du système de gestion de l'information;
 
-c) de vérifier dans quelle mesure les exigences de sécurité identifiées ont été respectées;
+- c) de vérifier dans quelle mesure les exigences de sécurité identifiées ont été respectées;
 
-d) de faciliter l’amélioration des performances de la sécurité de l’information par rapport aux objectifs;
+- d) de faciliter l’amélioration des performances de la sécurité de l’information par rapport aux objectifs;
 
-e) de fournir des données pour la revue de la direction afin de faciliter la prise de décisions liées au SMSI;
+- e) de fournir des données pour la revue de la direction afin de faciliter la prise de décisions liées au SMSI;
 
-f) de justifier les besoins d'amélioration du ISMS.
+- f) de justifier les besoins d'amélioration du ISMS.
 
 ### Evaluation des performances
 
@@ -40,17 +40,17 @@ La norme ISO 27001 au chapitre 9.1, impose d’évaluer les performances de séc
 
 Pour évaluer ces performances, il faut déterminer :
 
-a) ce qu’il est nécessaire de surveiller et de mesurer, y compris les processus et les mesures de sécurité de l’information;
+- a) ce qu’il est nécessaire de surveiller et de mesurer, y compris les processus et les mesures de sécurité de l’information;
 
-b) les méthodes de surveillance, de mesurage, d’analyse et d’évaluation, selon le cas, pour assurer la validité des résultats;
+- b) les méthodes de surveillance, de mesurage, d’analyse et d’évaluation, selon le cas, pour assurer la validité des résultats;
 
-c) quand la surveillance et les mesures doivent être effectuées;
+- c) quand la surveillance et les mesures doivent être effectuées;
 
-d) qui doit effectuer la surveillance et les mesures;
+- d) qui doit effectuer la surveillance et les mesures;
 
-e) quand les résultats de la surveillance et des mesures doivent être analysés et évalués; et
+- e) quand les résultats de la surveillance et des mesures doivent être analysés et évalués; et
 
-f) qui doit analyser et évaluer ces résultats.
+- f) qui doit analyser et évaluer ces résultats.
 
 Deming permet de répondre à ces exigences et de conserver les informations documentées appropriées comme preuves des résultats de la surveillance et des mesures.
 

@@ -16,11 +16,11 @@
 			</div>
 			@endif
 
-			<a href="/export/alices" target="_blank">Current security Measures</a>
-
 			<div class="row">
-		        <div class="cell-3">
+		        <div class="cell-5">
 					<b>{{ trans('cruds.imports.title') }}</b>
+                    /
+                    <a href="/export/alices" target="_blank">Current security Measures</a>
 				</div>
 			</div>
 
