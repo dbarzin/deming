@@ -9,6 +9,7 @@ return [
     'create' => 'Créer',
     'delete' => 'Supprimer',
     'edit' => 'Modifier',
+    'import' => 'Importer',
     'make' => 'Faire',
     'new' => 'Nouveau',
     'plan' => 'Planifier',

@@ -9,6 +9,7 @@ return [
     'clone' => 'Copy',
     'delete' => 'Delete',
     'edit' => 'Edit',
+    'import' => 'Import',
     'make' => 'Make',
     'new' => 'New',
     'plan' => 'Plan',

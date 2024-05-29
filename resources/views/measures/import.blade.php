@@ -46,7 +46,7 @@
     		    </div>
     			<div class="row">
     		        <div class="cell-4">
-                        <input type="checkbox" name="clean">
+                        <input type="checkbox" name="clean" id="clean">
                         Remove all other measures and controls
                     </div>
                 </div>
@@ -56,7 +56,10 @@
                         Generate fake measurements
                     </div>
     		        <div class="cell-1" align="right">
-    				    <button type="submit" class="button success drop-shadow">Import</button>
+    				    <button type="submit" class="button success drop-shadow"
+                            onclick="if ($('#clean').val()) return confirm('Do you want to remove all other measures and controls  ?')">
+                                {{ trans("common.import") }}
+                        </button>
     		        </div>
                 </div>
 
