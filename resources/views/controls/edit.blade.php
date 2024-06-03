@@ -172,9 +172,9 @@
 		    		</div>
 					<div class="cell-1">
 						<select data-role="select" name="status">
-							<option {{ $control->status==0 ? "selected" : ""}}>Todo</option>
-							<option {{ $control->status==1 ? "selected" : ""}}>Proposed</option>
-							<option {{ $control->status==2 ? "selected" : ""}}>Done</option>
+							<option value="0" {{ $control->status==0 ? "selected" : ""}}>Todo</option>
+							<option value="1" {{ $control->status==1 ? "selected" : ""}}>Proposed</option>
+							<option value="2" {{ $control->status==2 ? "selected" : ""}}>Done</option>
 						 </select>
 		    		</div>
 		    		<div class="cell-1" align="right">
