@@ -29,6 +29,11 @@ class MeasureImportController extends Controller
 
         $models = Storage::disk('local')->files('repository');
 
+        // filter .xlsx files
+        $models = array_filter( $models,
+            fn($str) => str_ends_with($str, ".xlsx")
+        );
+
         return view('measures/import')
             ->with('models', $models);
     }
