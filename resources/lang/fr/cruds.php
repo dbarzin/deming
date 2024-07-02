@@ -112,6 +112,7 @@ return [
     ],
     'domain' => [
         'fields' => [
+            'framework' => 'Référentiel',
             'name' => 'Nom',
             'description' => 'Description',
             'measures' => '# Mesures',

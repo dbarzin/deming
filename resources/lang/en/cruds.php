@@ -112,6 +112,7 @@ return [
      ],
      'domain' => [
          'fields' => [
+             'framework' => 'Framework',
              'name' => 'Name',
              'description' => 'Description',
              'measures' => '# Controls',

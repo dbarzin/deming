@@ -17,6 +17,7 @@ class MeasuresExport extends StringValueBinder implements FromQuery, WithMapping
     public function headings(): array
     {
         return [
+            trans('cruds.domain.fields.framework'),
             trans('cruds.domain.title'),
             trans('cruds.domain.title') . ' - ' . trans('cruds.domain.fields.description'),
             trans('cruds.measure.fields.clause'),
@@ -54,16 +55,17 @@ class MeasuresExport extends StringValueBinder implements FromQuery, WithMapping
     public function columnWidths(): array
     {
         return [
-            'A' => 10,  // Domain name
-            'B' => 30,  // Domain description
-            'C' => 10,  // Clause
-            'D' => 30,  // Name
-            'E' => 50,  // Objectif
-            'F' => 50,  // Attibuts
-            'G' => 50,  // Input
-            'H' => 50,  // Modele
-            'I' => 50,  // Indicateur
-            'J' => 50,  // Plan d'action
+            'A' => 10,  // Framework
+            'B' => 10,  // Domain name
+            'C' => 30,  // Domain description
+            'D' => 10,  // Clause
+            'E' => 30,  // Name
+            'F' => 50,  // Objectif
+            'G' => 50,  // Attibuts
+            'H' => 50,  // Input
+            'I' => 50,  // Modele
+            'J' => 50,  // Indicateur
+            'K' => 50,  // Plan d'action
         ];
     }
 
@@ -74,6 +76,7 @@ class MeasuresExport extends StringValueBinder implements FromQuery, WithMapping
     {
         return [
             [
+                $measure->domain->framework,
                 $measure->domain->title,
                 $measure->domain->description,
                 $measure->clause,
@@ -93,6 +96,7 @@ class MeasuresExport extends StringValueBinder implements FromQuery, WithMapping
      */
     public function query()
     {
-        return Measure::with('domain')->orderBy('clause');
+        return Measure::with('domain')
+            ->orderBy('clause');
     }
 }

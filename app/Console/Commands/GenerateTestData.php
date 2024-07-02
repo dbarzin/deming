@@ -37,6 +37,7 @@ class GenerateTestData extends Command
         // Remove data in documents and controls tables
         DB::table('documents')->delete();
         DB::table('controls')->update(['next_id' => null]);
+        DB::table('control_measure')->delete();
         DB::table('controls')->delete();
 
         // Get all attributes

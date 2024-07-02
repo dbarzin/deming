@@ -13,7 +13,7 @@ Cette délégation respecte les règles suivantes :
 
 ### Liste des contrôles à réaliser
 
-Du point de revu de l'audité, la page principale de l'application contient la liste des contrôles qui lui sont assignés.
+Du point de vue de l'audité, la page principale de l'application contient la liste des contrôles qui lui sont assignés.
 
 [<img src="/deming/images/d1.fr.png" width="600">](/deming/images/d1.fr.png)
 

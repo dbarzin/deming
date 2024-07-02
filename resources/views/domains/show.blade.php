@@ -6,6 +6,15 @@
 		<div class="grid">
 	    	<div class="row">
 	    		<div class="cell-1">
+		    		<strong>{{ trans('cruds.domain.fields.framework') }}</strong>
+		    	</div>
+	    		<div class="cell">
+		    		{{ $domain->framework }}
+	    		</div>
+		    </div>
+
+	    	<div class="row">
+	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.domain.fields.name') }}</strong>
 		    	</div>
 	    		<div class="cell">
@@ -27,7 +36,7 @@
     		<div class="cell-1">
     		</div>
     	</div>
-    	
+
 		<div class="form-group">
 			@if (Auth::User()->role==1)
 		    <form action="/domains/{{ $domain->id }}/edit">

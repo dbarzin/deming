@@ -37,9 +37,15 @@ class Control extends Model
         return $this->belongsTo(Domain::class, 'domain_id');
     }
 
+    // deprecated
     public function measure()
     {
         return $this->belongsTo(Measure::class, 'measure_id');
+    }
+
+    public function measures()
+    {
+        return $this->belongsToMany(Measure::class);
     }
 
     public function owners()

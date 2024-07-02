@@ -20,18 +20,26 @@
 			<div class="grid">
 		    	<div class="row">
 		    		<div class="cell-1">
+						<label>{{ trans('cruds.domain.fields.framework') }}</label>
+			    	</div>
+					<div class="cell-3">
+						<input type="text" class="input {{ $errors->has('framework') ? 'is-danger' : ''}}" name="framework" value="{{ $errors->has('framework') ?  old('framework') : $domain->framework }}" maxlength='32'>
+					</div>
+				</div>
+		    	<div class="row">
+		    		<div class="cell-1">
 						<label>{{ trans('cruds.domain.fields.name') }}</label>
 			    	</div>
 					<div class="cell-3">
-						<input type="text" class="input {{ $errors->has('title') ? 'is-danger' : ''}}" name="title" value="{{ $errors->has('title') ?  old('title') : $domain->title }}" size='5'>
+						<input type="text" class="input {{ $errors->has('title') ? 'is-danger' : ''}}" name="title" value="{{ $errors->has('title') ?  old('title') : $domain->title }}" maxlength='32'>
 					</div>
 				</div>
 		    	<div class="row">
 		    		<div class="cell-1">
 						<label class="label" for="description">{{ trans('cruds.domain.fields.description') }}</label>
 			    	</div>
-					<div class="cell-8">						
-						<input type="text" class="input {{ $errors->has('description') ? 'is-danger' : ''}}" name="description" value="{{ $errors->has('description') ?  old('description') : $domain->description }}" size='40'>
+					<div class="cell-8">
+						<input type="text" class="input {{ $errors->has('description') ? 'is-danger' : ''}}" name="description" value="{{ $errors->has('description') ?  old('description') : $domain->description }}" maxlength='255'>
 					</div>
 				</div>
 			</div>
@@ -52,6 +60,3 @@
 	</div>
 </div>
 @endsection
-
-
-
