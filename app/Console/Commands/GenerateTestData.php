@@ -93,7 +93,6 @@ class GenerateTestData extends Command
 
             // create a control
             $control = new Control();
-            $control->measure_id = $measure->id;
             $control->domain_id = $measure->domain_id;
             $control->name = $measure->name;
             $control->clause = $measure->clause;
@@ -113,10 +112,10 @@ class GenerateTestData extends Command
             $control->score = rand(0, 100) < 90 ? 3 : (rand(0, 2) < 2 ? 2 : 1);
             $control->status = 2;
             $control->save();
+            $control->measures()->sync([$measure->id]);
 
             // create a previous
             $prev_control = new Control();
-            $prev_control->measure_id = $measure->id;
             $prev_control->domain_id = $measure->domain_id;
             $prev_control->name = $measure->name;
             $prev_control->clause = $measure->clause;
@@ -137,6 +136,7 @@ class GenerateTestData extends Command
             $prev_control->next_id = $control->id;
             $prev_control->status = 2;
             $prev_control->save();
+            $prev_control->measures()->sync([$measure->id]);
 
             // create next control
             $nextControl = new Control();
@@ -161,6 +161,7 @@ class GenerateTestData extends Command
             $nextControl->status = 0;
             // save it
             $nextControl->save();
+            $nextControl->measures()->sync([$measure->id]);
 
             // link them
             $control->next_id = $nextControl->id;

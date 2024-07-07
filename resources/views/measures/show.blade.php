@@ -20,10 +20,19 @@
 
     	<div class="row">
 			<div class="cell-1">
+	    		<strong>{{ trans('cruds.measure.fields.clause') }}</strong>
+	    	</div>
+			<div class="cell">
+				{{ $measure->clause }}
+			</div>
+	    </div>
+
+    	<div class="row">
+			<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.name') }}</strong>
 	    	</div>
 			<div class="cell">
-				{{ $measure->clause }} - {{ $measure->name }}
+				{{ $measure->name }}
 			</div>
 	    </div>
 

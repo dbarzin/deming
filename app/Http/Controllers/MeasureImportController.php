@@ -188,8 +188,16 @@ class MeasureImportController extends Controller
                 $errors->push(($line + 1) . ': domain description is too long');
                 continue;
             }
+            if (strlen($data[$line][3]) === 0) {
+                $errors->push(($line + 1) . ': close name is empty');
+                continue;
+            }
             if (strlen($data[$line][3]) >= 32) {
                 $errors->push(($line + 1) . ': close name too long');
+                continue;
+            }
+            if (Measure::where('clause',$data[$line][3])->exists()) {
+                $errors->push(($line + 1) . ': close name not unique');
                 continue;
             }
             if (strlen($data[$line][4]) === 0) {

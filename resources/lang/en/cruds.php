@@ -70,6 +70,7 @@ return [
             'status_all' => 'All',
             'scope' => 'Scope',
             'clause' => 'Clause',
+            'clauses' => 'Clauses',
             'input' => 'Input',
             'owners' => 'Responsibles',
          ],

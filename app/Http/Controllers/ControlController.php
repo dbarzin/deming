@@ -351,6 +351,12 @@ class ControlController extends Controller
             ->pluck('id')
             ->toArray();
 
+        // get all clauses
+        $measures = DB::table('measures')
+            ->select('id', 'clause')
+            ->orderBy('id')
+            ->get();
+
         // get all scopes
         $scopes = DB::table('controls')
             ->select('scope')
@@ -383,6 +389,7 @@ class ControlController extends Controller
             ->with('control', $control)
             ->with('documents', $documents)
             ->with('scopes', $scopes)
+            ->with('measures', $measures)
             ->with('ids', $ids)
             ->with('attributes', $values)
             ->with('users', $users);

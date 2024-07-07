@@ -110,8 +110,7 @@
                >
                 <thead>
                     <tr>
-                        <th data-sortable="true">{{ trans('cruds.control.fields.domain') }}</th>
-                        <th data-sortable="true">{{ trans('cruds.control.fields.clause') }}</th>
+                        <th data-sortable="true">{{ trans('cruds.control.fields.clauses') }}</th>
                         <th>{{ trans('cruds.control.fields.name') }}</th>
                         <th data-sortable="true">{{ trans('cruds.control.fields.scope') }}</th>
                         <th data-sortable="true">{{ trans('cruds.control.fields.score') }}</th>
@@ -123,13 +122,10 @@
 
             @foreach($controls_todo as $control)
                 <tr>
-                    <td id="{{ $control->domain }}">
-                        <a href="/domains/{{$control->domain_id}}">
-                            {{ $control->domain }}
-                        </a>
-                    </td>
                     <td>
-                        <a id="{{ $control->clause }}" href="/alice/show/{{ $control->measure_id }}">{{ $control->clause }}</a>
+                        @foreach($control->measures as $measure)
+                        <a href="/alice/show/{{ $measure['id'] }}">{{ $measure['clause'] }}</a>
+                        @endforeach
                     </td>
                     <td class="table-danger">
                         {{ $control->name }}

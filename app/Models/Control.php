@@ -52,4 +52,14 @@ class Control extends Model
     {
         return $this->belongsToMany(User::class, 'control_user', 'control_id')->orderBy('name');
     }
+
+
+    public static function clauses(int $id) {
+        return DB::table('measures')
+            ->select('measure_id','clause')
+            ->join('control_measure', 'control_measure.control_id', $id)
+            ->get();
+
+    }
+
 }

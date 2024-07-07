@@ -20,6 +20,11 @@ return new class extends Migration
             $table->foreign('measure_id')->references('id')->on('measures');
         });
 
+        Schema::table('controls', function (Blueprint $table) {
+                $table->dropForeign(['measure_id']);
+            });
+
+        //
         // Fill table
         foreach(Control::All() as $control) {
             $control->measures()->sync([$control->measure_id]);
@@ -31,6 +36,10 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('controls_measures');
+        Schema::dropIfExists('control_measure');
+
+        Schema::table('controls', function (Blueprint $table) {
+            $table->foreign('measure_id')->references('id')->on('measures');
+            });
     }
 };

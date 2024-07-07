@@ -49,6 +49,7 @@ return [
             'choose_period' => 'Choisir une periode',
             'choose_attribute' => 'Choisir un attribut',
             'clause' => 'Clause',
+            'clauses' => 'Clauses',
             'domain' => 'Domaine',
             'indicator' => 'Fonction',
             'measure' => 'Mesure',
