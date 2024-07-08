@@ -35,12 +35,15 @@
                             @endforeach
                         </select>
                     </div>
-    		        <div class="cell-1" align="center">
-                        or
-                    </div>
+    		        <div class="cell-1" align="right">
+    				    <button type="submit" name="action" value="download" class="button info drop-shadow">
+                                {{ trans("common.download") }}
+                        </button>
+    		        </div>
                 </div>
     			<div class="row">
     		        <div class="cell-5">
+                        or
     					<input name="file" type="file" id="file" data-role="file" data-prepend="Select import file:">
     				</div>
     		    </div>

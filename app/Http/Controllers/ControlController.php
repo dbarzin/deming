@@ -1,5 +1,4 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use App\Exports\ControlsExport;
@@ -222,11 +221,8 @@ class ControlController extends Controller
         $controls = $controls->select(
             [
                 'c1.id',
-                'c1.measure_id',
                 'c1.name',
                 'c1.scope',
-                'c1.clause',
-                'c1.domain_id',
                 'c1.plan_date',
                 'c1.realisation_date',
                 'c1.score as score',
@@ -237,6 +233,30 @@ class ControlController extends Controller
             ]
         )
             ->orderBy('c1.id')->get();
+
+        // Fetch measures for all controls in one query
+        $controlMeasures = DB::table('control_measure')
+            ->select([
+                'control_id',
+                'measure_id',
+                'clause'
+            ])
+            ->leftjoin('measures', 'measures.id', '=', 'measure_id')
+            ->whereIn('control_id', $controls->pluck('id'))
+            ->get();
+
+        // Group measures by control_id
+        $measuresByControlId = $controlMeasures->groupBy('control_id');
+
+        // map clauses
+        foreach($controls as $control) {
+            $control->measures = $measuresByControlId->get($control->id, collect())->map(function ($controlMeasure) {
+                return [
+                    'id' => $controlMeasure->measure_id,
+                    'clause' => $controlMeasure->clause
+                    ];
+                });
+            }
 
         // return view
         return view('controls.index')
@@ -452,8 +472,28 @@ class ControlController extends Controller
 
         // Get all controls
         $controls = DB::table('controls')
-            ->select('id', 'clause', 'score', 'realisation_date', 'plan_date')
+            ->select('id', 'score', 'realisation_date', 'plan_date')
             ->get();
+
+        // Fetch measures for all controls in one query
+        $controlMeasures = DB::table('control_measure')
+            ->select([
+                'control_id',
+                'clause'
+            ])
+            ->leftjoin('measures', 'measures.id', '=', 'measure_id')
+            ->whereIn('control_id', $controls->pluck('id'))
+            ->get();
+
+        // Group measures by control_id
+        $measuresByControlId = $controlMeasures->groupBy('control_id');
+
+        // map clauses
+        foreach($controls as $control) {
+            $control->measures = $measuresByControlId->get($control->id, collect())->map(function ($controlMeasure) {
+                return $controlMeasure->clause;
+                });
+            }
 
         // return
         return view('controls.history')
@@ -473,11 +513,24 @@ class ControlController extends Controller
         // get all active domains
         $domains = DB::table('domains')
             ->select(DB::raw('distinct domains.id, domains.title'))
-            ->join('controls', 'domains.id', '=', 'controls.domain_id')
-            //->whereNull('realisation_date')
-            ->whereIn('status', [0,1])
+            ->join('measures', 'domains.id', '=', 'measures.domain_id')
+            ->join('control_measure', 'control_measure.measure_id', '=', 'measures.id')
+            ->join('controls', 'control_measure.control_id', '=', 'controls.id')
+            ->whereIn('controls.status', [0,1])
             ->orderBy('domains.title')
             ->get();
+
+        // get all frameworks
+        $frameworks = DB::table('domains')
+            ->select(DB::raw('distinct domains.framework'))
+            ->join('measures', 'domains.id', '=', 'measures.domain_id')
+            ->join('control_measure', 'control_measure.measure_id', '=', 'measures.id')
+            ->join('controls', 'control_measure.control_id', '=', 'controls.id')
+            ->whereIn('controls.status', [0,1])
+            ->orderBy('domains.framework')
+            ->get()
+            ->pluck('framework')
+            ->toArray();
 
         // get all scopes
         $scopes = DB::table('controls')
@@ -532,6 +585,7 @@ class ControlController extends Controller
 
         // return
         return view('radar.domains')
+            ->with('frameworks', $frameworks)
             ->with('domains', $domains)
             ->with('scopes', $scopes)
             ->with('active_controls', $active_controls)

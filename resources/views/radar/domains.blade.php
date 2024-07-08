@@ -1,41 +1,54 @@
 @extends("layout")
 
 @section("content")
-<div class="p-3">
-    <div data-role="panel" data-title-caption="Tableau de bord" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+<form action="/radar/domains">
+    <div class="p-3">
+        <div data-role="panel" data-title-caption="Tableau de bord" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
-    <div class="row">
-        <div class="cell-md-7">
-            <div class="row">
-                <div class="cell-9">
+        <div class="row">
+            <div class="cell-md-7">
+                <div class="row">
+                    <div class="cell-8">
+                    </div>
+                    <div class="cell-2">
+                        <strong>{{ trans("cruds.domain.fields.framework") }}</strong>
+                        <select name="framework" data-role="select" id="framework">
+                            @foreach ($frameworks as $framework)
+                            <option
+                                @if (Session::get("framework")==$framework)
+                                    selected
+                                @endif >
+                                {{ $framework }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
+                    <div class="cell-2">
+                        <strong>{{ trans("cruds.control.fields.scope") }}</strong>
+                        <select name="scope" data-role="select" id="scope">
+                            @foreach ($scopes as $scope)
+                            <option
+                                @if (Session::get("scope")==$scope)
+                                    selected
+                                @endif >
+                                {{ $scope }}
+                            </option>
+                            @endforeach
+                        </select>
+                    </div>
                 </div>
-                <div class="cell-3">
-                    <form action="/radar/domains">
-                    <strong>{{ trans("cruds.control.fields.scope") }}</strong>
-                    <select name="scope" data-role="select" id="scope">
-                        @foreach ($scopes as $scope)
-                        <option
-                            @if (Session::get("scope")==$scope)
-                                selected
-                            @endif >
-                            {{ $scope }}
-                        </option>
-                        @endforeach
-                    </select>
-                    </form>
-                </div>
-            </div>
 
-            <div class="panel mt-2">
-                <div data-role="panel" data-title-caption="Etat des contrôles au {{ date('d/m/Y')}}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
-                    <div class="p-7">
-                        <canvas id="canvas-status" class="chartjs-render-monitor"></canvas>
+                <div class="panel mt-2">
+                    <div data-role="panel" data-title-caption="Etat des contrôles au {{ date('d/m/Y')}}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+                        <div class="p-7">
+                            <canvas id="canvas-status" class="chartjs-render-monitor"></canvas>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
+</form>
 
 <script>
     var color = Chart.helpers.color;
@@ -141,6 +154,10 @@
         var select = document.getElementById('scope');
         select.addEventListener('change', function(){
             window.location = '/radar/domains?scope=' + this.value;
+        }, false);
+        var select = document.getElementById('framework');
+        select.addEventListener('framework', function(){
+            window.location = '/radar/domains?framework=' + this.value;
         }, false);
     });
 

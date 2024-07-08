@@ -139,7 +139,6 @@
        >
         <thead>
             <tr>
-                <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.domain") }}</th>
                 <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.measure") }}</th>
                 <th width="40%">{{ trans("cruds.control.fields.name") }}</th>
                 <th class="sortable-column" width="10%">{{ trans("cruds.control.fields.scope") }}</th>
@@ -153,14 +152,14 @@
     @foreach($controls as $control)
         <tr>
             <td>
-                <a id="{{ $control->title }}" href="/domains/{{ $control->domain_id}} ">
-                    {{ $control->title }}
+                @foreach($control->measures as $measure)
+                <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">
+                    {{ $measure['clause'] }}
                 </a>
-            </td>
-            <td>
-                <a id="{{ $control->clause }}" href="/alice/show/{{ $control->measure_id }}">
-                    {{ $control->clause }}
-                </a>
+                @if (!$loop->last)
+                ,
+                @endif
+                @endforeach
             </td>
             <td>
                     {{ $control->name }}

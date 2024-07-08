@@ -57,6 +57,27 @@ class MeasureImportController extends Controller
             'model' => 'required_without:file',
         ]);
 
+        // Download model ?
+        if (request('action') ==='download') {
+            // Find file from repositories
+            $model = '/' . $request->get('model') . '.xlsx';
+            $file = current(
+                array_filter(
+                    Storage::disk('local')->files('repository'),
+                    function ($e) use ($model) {
+                        return str_contains($e, $model);
+                    }
+                )
+            );
+            // Get full path
+            $fileName = Storage::disk('local')->path($file);
+
+            return response()->download(
+                $fileName,
+                $request->get('model') . '.xlsx',
+                ['Content-Type: application/octet-stream']);
+        }
+
         $errors = Collect();
 
         // Clear database
