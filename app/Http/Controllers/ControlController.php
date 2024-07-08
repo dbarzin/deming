@@ -352,10 +352,17 @@ class ControlController extends Controller
             ->toArray();
 
         // get all clauses
-        $measures = DB::table('measures')
+        $all_measures = DB::table('measures')
             ->select('id', 'clause')
             ->orderBy('id')
             ->get();
+
+        $measures = DB::table('control_measure')
+            ->select('measure_id')
+            ->where('control_id',$id)
+            ->get()
+            ->pluck('measure_id')
+            ->toArray();
 
         // get all scopes
         $scopes = DB::table('controls')
@@ -389,6 +396,7 @@ class ControlController extends Controller
             ->with('control', $control)
             ->with('documents', $documents)
             ->with('scopes', $scopes)
+            ->with('all_measures', $all_measures)
             ->with('measures', $measures)
             ->with('ids', $ids)
             ->with('attributes', $values)
@@ -973,6 +981,7 @@ class ControlController extends Controller
         $control->status = request('status');
         $control->next_id = request('next_id');
         $control->owners()->sync($request->input('owners', []));
+        $control->measures()->sync($request->input('measures', []));
 
         $control->save();
 

@@ -189,7 +189,11 @@ class MeasureController extends Controller
             '403 Forbidden'
         );
 
-        $measure = Measure::where('id', $id)->get()->first();
+        $measure = Measure::find($id);
+
+        // not found
+        abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+
         return view('measures.show')
             ->with('measure', $measure);
     }

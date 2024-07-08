@@ -26,9 +26,12 @@
 			    		<strong>{{ trans("cruds.control.fields.clauses") }}</strong>
 					</div>
 		    		<div class="cell-6">
-						<select data-role="select" name="clauses[]" multiple>
-							@foreach($measures as $measure)
-							    <option value="{{ $measure->id }}">{{ $measure->clause }}</option>
+						<select data-role="select" name="measures[]" multiple>
+							@foreach($all_measures as $measure)
+							    <option
+                                    value="{{ $measure->id }}"
+                                    {{ in_array($measure->id, old("measures", $measures)) ? "selected" : "" }}
+                                        >{{ $measure->clause }}</option>
 						    @endforeach
 						 </select>
 					</div>
@@ -39,13 +42,13 @@
 			    		<strong>{{ trans("cruds.control.fields.name") }}</strong>
 		    		</div>
 		    		<div class="cell-4">
-						<input type="text" data-role="input" name="name" value="{{ $control->name }}" size="30">
+						<input type="text" data-role="input" name="name" value="{{ $control->name }}" maxlength="255">
 					</div>
 		    		<div class="cell-1" align="right">
 			    		<strong>{{ trans("cruds.control.fields.scope") }}</strong>
                     </div>
 		    		<div class="cell-1">
-						<input type="text" name="scope" data-role="input" autocomplete="off" size="5"
+						<input type="text" name="scope" data-role="input" autocomplete="off" maxlength="32"
 						value="{{ $control->scope }}" data-autocomplete=" {{ implode(",",$scopes) }} "/>
 					</div>
 				</div>
