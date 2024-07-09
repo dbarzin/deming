@@ -15,20 +15,20 @@ return new class extends Migration
         //
         Schema::create('control_measure', function (Blueprint $table) {
             $table->integer('control_id')->unsigned();
-            $table->foreign('control_id')->references('id')->on('controls');
+//            $table->foreign('control_id')->references('id')->on('controls');
             $table->integer('measure_id')->unsigned();
-            $table->foreign('measure_id')->references('id')->on('measures');
+//            $table->foreign('measure_id')->references('id')->on('measures');
         });
 
-        Schema::table('controls', function (Blueprint $table) {
-                $table->dropForeign(['measure_id']);
-            });
-
-        //
         // Fill table
         foreach(Control::All() as $control) {
             $control->measures()->sync([$control->measure_id]);
         }
+
+        Schema::table('controls', function (Blueprint $table) {
+//                $table->dropForeign(['measure_id']);
+                $table->dropForeign(['domain_id']);
+            });
     }
 
     /**
@@ -36,9 +36,15 @@ return new class extends Migration
      */
     public function down(): void
     {
+        Schema::table('control_measure', function (Blueprint $table) {
+            $table->dropForeign('domain_id');
+            $table->dropForeign('measure_id');
+            });
+
         Schema::dropIfExists('control_measure');
 
         Schema::table('controls', function (Blueprint $table) {
+            $table->foreign('domain_id')->references('id')->on('domains');
             $table->foreign('measure_id')->references('id')->on('measures');
             });
     }

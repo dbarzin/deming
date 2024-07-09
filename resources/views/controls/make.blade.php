@@ -17,10 +17,26 @@
 		<div class="grid">
 	    	<div class="row">
 	    		<div class="cell-1">
+		    		<strong>{{ trans('cruds.control.fields.clauses') }}</strong>
+		    	</div>
+        		<div class="cell-4">
+                    @foreach($control->measures as $measure)
+                        <a href="/alice/show/{{ $measure->id }}">{{ $measure->clause }}</a>
+                        @if(!$loop->last)
+                        ,
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+        </div>
+
+		<div class="grid">
+	    	<div class="row">
+	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.control.fields.name') }}</strong>
 		    	</div>
 	    		<div class="cell-5">
-					{{ $control->clause }} - {{ $control->name }}
+					{{ $control->name }}
 				</div>
 	    		<div class="cell-2">
 		    		<strong>{{ trans("cruds.control.fields.scope") }}</strong>

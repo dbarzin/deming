@@ -24,11 +24,35 @@
 	<div class="grid">
     	<div class="row">
     		<div class="cell-1">
+	    		<strong>{{ trans("cruds.control.fields.clauses") }}</strong>
+	    	</div>
+    		<div class="cell-6">
+				<select data-role="select" name="measures[]" multiple>
+					@foreach($all_measures as $measure)
+					    <option
+                            value="{{ $measure->id }}"
+                            {{ in_array($measure->id, old("measures", $measures)) ? "selected" : "" }}
+                                >{{ $measure->clause }}</option>
+				    @endforeach
+				 </select>
+            </div>
+        </div>
+
+    	<div class="row">
+    		<div class="cell-1">
 	    		<strong>{{ trans('cruds.control.fields.name') }}</strong>
 	    	</div>
-			<div class="cell">
-	    		<a href="/measures/{{ $control->measure_id }}">{{ $control->clause }}</a> &nbsp; - &nbsp; {{ $control->name }}
+			<div class="cell-4">
+	    		{{ $control->name }}
 			</div>
+    		<div class="cell-1" align="right">
+	    		<strong>{{ trans('cruds.control.fields.scope') }}</strong>
+	    	</div>
+			<div class="cell-1">
+				<input type="text" name="scope" data-role="input" autocomplete="on" maxlength="32"
+				value="{{ $control->scope }}" data-autocomplete="{{ implode(",",$scopes) }}"/>
+			</div>
+
 		</div>
     	<div class="row">
     		<div class="cell-1">
@@ -36,16 +60,6 @@
 	    	</div>
 			<div class="cell-6">
                 {!! \Parsedown::instance()->text($control->objective) !!}
-			</div>
-		</div>
-
-    	<div class="row">
-    		<div class="cell-1">
-	    		<strong>{{ trans('cruds.control.fields.scope') }}</strong>
-	    	</div>
-			<div class="cell-4">
-				<input type="text" name="scope" data-role="input" autocomplete="on" size="32"
-				value="{{ $control->scope }}" data-autocomplete="{{ implode(",",$scopes) }}"/>
 			</div>
 		</div>
 

@@ -13,6 +13,7 @@
                     <div class="cell-2">
                         <strong>{{ trans("cruds.domain.fields.framework") }}</strong>
                         <select name="framework" data-role="select" id="framework">
+                            <option></option>
                             @foreach ($frameworks as $framework)
                             <option
                                 @if (Session::get("framework")==$framework)
@@ -156,7 +157,7 @@
             window.location = '/radar/domains?scope=' + this.value;
         }, false);
         var select = document.getElementById('framework');
-        select.addEventListener('framework', function(){
+        select.addEventListener('change', function(){
             window.location = '/radar/domains?framework=' + this.value;
         }, false);
     });

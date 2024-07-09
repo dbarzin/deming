@@ -389,7 +389,6 @@ class ControlController extends Controller
             ->select('scope')
             ->whereNotNull('scope')
             ->where('scope', '<>', '')
-            // ->whereNull('realisation_date')
             ->whereIn('status', [0,1])
             ->distinct()
             ->orderBy('scope')
@@ -510,13 +509,34 @@ class ControlController extends Controller
             '403 Forbidden'
         );
 
+        // Scope filter
+        $scope = $request->get('scope');
+        if ($scope !== null) {
+            $request->session()->put('scope', $scope);
+        } else {
+            $request->session()->forget('scope');
+        }
+
+        // Framework filter
+        $framework = $request->get('framework');
+        if ($framework !== null) {
+            $request->session()->put('framework', $framework);
+        } else {
+            $request->session()->forget('framework');
+        }
+
         // get all active domains
         $domains = DB::table('domains')
             ->select(DB::raw('distinct domains.id, domains.title'))
             ->join('measures', 'domains.id', '=', 'measures.domain_id')
             ->join('control_measure', 'control_measure.measure_id', '=', 'measures.id')
             ->join('controls', 'control_measure.control_id', '=', 'controls.id')
-            ->whereIn('controls.status', [0,1])
+            ->whereIn('controls.status', [0,1]);
+
+        if ($framework!==null)
+            $domains = $domains->where('framework','=',$framework);
+
+        $domains = $domains
             ->orderBy('domains.title')
             ->get();
 
@@ -535,7 +555,6 @@ class ControlController extends Controller
         // get all scopes
         $scopes = DB::table('controls')
             ->select('scope')
-            // ->whereNull('realisation_date')
             ->whereIn('status', [0,1])
             ->distinct()
             ->orderBy('scope')
@@ -543,13 +562,6 @@ class ControlController extends Controller
             ->pluck('scope')
             ->toArray();
 
-        // Scope filter
-        $scope = $request->get('scope');
-        if ($scope !== null) {
-            $request->session()->put('scope', $scope);
-        } else {
-            $request->session()->forget('scope');
-        }
 
         // count control never made
         // TODO : improve me
@@ -737,9 +749,23 @@ class ControlController extends Controller
 
         $users = User::orderBy('name')->get();
 
+        // get all measures
+        $all_measures = DB::table('measures')
+            ->select('id', 'clause')
+            ->orderBy('id')
+            ->get();
+
+        // Get current measures
+        $measures = DB::table('control_measure')
+            ->select('measure_id')
+            ->where('control_id',$id)
+            ->get()
+            ->pluck('measure_id')
+            ->toArray();
+
+        // Get al active scopes
         $scopes = DB::table('controls')
             ->select('scope')
-            // ->whereNull('realisation_date')
             ->whereIn('status', [0,1])
             ->distinct()
             ->orderBy('scope')
@@ -752,9 +778,10 @@ class ControlController extends Controller
             ->with('day', date('d', strtotime($control->plan_date)))
             ->with('month', date('m', strtotime($control->plan_date)))
             ->with('year', date('Y', strtotime($control->plan_date)))
+            ->with('all_measures', $all_measures)
+            ->with('measures', $measures)
             ->with('scopes', $scopes)
-            ->with('users', $users)
-        ;
+            ->with('users', $users);
     }
 
     /**
@@ -802,13 +829,21 @@ class ControlController extends Controller
         // For administrators and users only
         abort_if((Auth::User()->role !== 1) && (Auth::User()->rol !== 2), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $this->validate(
+            $request,
+            [
+                'plan_date' => 'required',
+                'periodicity' => 'required',
+                'measures' => 'array|min:1'
+            ]
+        );
+
         $control = Control::find($request->id);
 
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // Control already made ?
-        // if ($control->realisation_date !== null) {
         if ($control->status === 2) {
             return back()
                 ->withErrors(['msg' => trans('cruds.control.error.made')])
@@ -832,6 +867,7 @@ class ControlController extends Controller
         $control->plan_date = $request->plan_date;
         $control->periodicity = $request->periodicity;
         $control->owners()->sync($request->input('owners', []));
+        $control->measures()->sync($request->input('measures', []));
         $control->save();
 
         return redirect('/bob/show/'.$request->id);
@@ -987,6 +1023,9 @@ class ControlController extends Controller
 
             // Set owners
             $new_control->owners()->sync($control->owners->pluck('id')->toArray());
+
+            // Set measures
+            $control->measures()->sync($control->measures->pluck('id')->toArray());
 
             // set status done
             $control->status = 2;
