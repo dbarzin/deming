@@ -49,12 +49,13 @@ class MeasureController extends Controller
                     'measures.domain_id',
                     'measures.clause',
                     'measures.name',
-                    DB::raw('count(controls.id) as control_count'),
+                    DB::raw('count(control_id) as control_count'),
                     'domains.title',
                 ]
             )
             ->join('domains', 'domains.id', '=', 'measures.domain_id')
-            ->leftjoin('controls', 'controls.measure_id', 'measures.id')
+            ->leftjoin('control_measure', 'control_measure.measure_id', 'measures.id')
+            ->join('controls', 'control_measure.control_id', 'controls.id')
             ->where(function ($query) {
                 $query
                     ->whereIn('controls.status', [0,1])

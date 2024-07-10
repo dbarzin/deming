@@ -33,13 +33,11 @@ class HomeController extends Controller
 
         // count active domains
         $active_domains_count = DB::table('controls')
-            ->select(
-                'domain_id',
-                DB::raw('max(controls.id)')
-            )
-            // ->whereNull('realisation_date')
+            ->select('measures.domain_id')
+            ->join('control_measure','controls.id','=','control_id')
+            ->join('measures','control_measure.measure_id','=','measures.id')
             ->whereIn('status', [0,1])
-            ->groupBy('domain_id')
+            ->distinct()
             ->get()
             ->count();
 
@@ -69,9 +67,11 @@ class HomeController extends Controller
         // Last controls made by measures
         $active_controls =
         DB::table('controls as c1')
-            ->select(['c1.id', 'c1.measure_id', 'domains.title', 'c1.realisation_date', 'c1.score'])
+            ->select(['c1.id', 'measures.id', 'domains.title', 'c1.realisation_date', 'c1.score'])
             ->join('controls as c2', 'c2.id', '=', 'c1.next_id')
-            ->join('domains', 'domains.id', '=', 'c1.domain_id')
+            ->join('control_measure', 'control_measure.control_id', '=', 'c1.id')
+            ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
+            ->join('domains', 'domains.id', '=', 'measures.domain_id')
             ->whereNull('c2.realisation_date')
             ->orderBy('c1.id')
             ->get();
@@ -83,7 +83,7 @@ class HomeController extends Controller
                     'c1.id',
                     'c1.name',
                     'c1.scope',
-                    'c1.domain_id',
+                    'domains.id',
                     'c1.plan_date',
                     'c1.status',
                     'c2.id as prev_id',
@@ -92,7 +92,9 @@ class HomeController extends Controller
                     'domains.title as domain',
                 ])
             ->leftjoin('controls as c2', 'c1.id', '=', 'c2.next_id')
-            ->join('domains', 'domains.id', '=', 'c1.domain_id')
+            ->join('control_measure', 'control_measure.control_id', '=', 'c1.id')
+            ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
+            ->join('domains', 'domains.id', '=', 'measures.domain_id')
             // ->whereNull('c1.realisation_date')
             ->whereIn('c1.status', [0,1])
             ->where('c1.plan_date', '<', Carbon::today()->addDays(30)->format('Y-m-d'))

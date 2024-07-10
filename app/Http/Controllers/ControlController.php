@@ -153,7 +153,9 @@ class ControlController extends Controller
         // Build query
         $controls = DB::table('controls as c1')
             ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id')
-            ->leftjoin('domains', 'c1.domain_id', '=', 'domains.id');
+            ->join('control_measure','control_measure.control_id','=','c1.id')
+            ->join('measures','control_measure.measure_id','=','measures.id')
+            ->join('domains','measures.domain_id','=','domains.id');
 
         // filter on auditee controls
         if (Auth::User()->role === 5) {
@@ -164,7 +166,7 @@ class ControlController extends Controller
 
         // Filter on domain
         if (($domain !== null) && ($domain !== 0)) {
-            $controls = $controls->where('c1.domain_id', '=', $domain);
+            $controls = $controls->where('measures.domain_id', '=', $domain);
         }
 
         // Filter on scope
@@ -175,7 +177,7 @@ class ControlController extends Controller
         // filter on measure
         if ($request->measure !== null) {
             $controls = $controls
-                ->where('c1.measure_id', '=', $request->measure);
+                ->where('control_measure.measure_id', '=', $request->measure);
         }
 
         // Filter on period
@@ -229,10 +231,11 @@ class ControlController extends Controller
                 'c1.status',
                 'c2.id as next_id',
                 'c2.plan_date as next_date',
-                'domains.title',
             ]
         )
-            ->orderBy('c1.id')->get();
+            ->orderBy('c1.id')
+            ->distinct()
+            ->get();
 
         // Fetch measures for all controls in one query
         $controlMeasures = DB::table('control_measure')
@@ -243,6 +246,7 @@ class ControlController extends Controller
             ])
             ->leftjoin('measures', 'measures.id', '=', 'measure_id')
             ->whereIn('control_id', $controls->pluck('id'))
+            ->orderBy('clause')
             ->get();
 
         // Group measures by control_id
@@ -562,14 +566,15 @@ class ControlController extends Controller
             ->pluck('scope')
             ->toArray();
 
-
         // count control never made
         // TODO : improve me
         $controls_never_made = DB::select(
             'select domain_id
-            from controls c1
+            from controls c1, control_measure, measures
             where
-            (status=0 or status=1) and
+            control_measure.control_id = c1.id and
+            control_measure.measure_id = measures.id and
+            (c1.status=0 or c1.status=1) and
             not exists (
                 select *
                 from controls c2
@@ -577,23 +582,16 @@ class ControlController extends Controller
         );
 
         // Last controls made by measures
-        // TODO : improve me
-        $active_controls = DB::select('
-                select
-                    c2.id,
-                    c2.measure_id,
-                    domains.title,
-                    c2.realisation_date,
-                    c2.score
-                from
-                    controls c1,
-                    controls c2,
-                    domains
-                where
-                    (c1.status=0 or c1.status=1) and
-                    c1.id = c2.next_id and
-                    domains.id=c1.domain_id
-                order by domains.title;');
+        $active_controls =
+        DB::table('controls as c1')
+            ->select(['c1.id', 'measures.id', 'domains.title', 'c1.realisation_date', 'c1.score'])
+            ->join('controls as c2', 'c2.id', '=', 'c1.next_id')
+            ->join('control_measure', 'control_measure.control_id', '=', 'c1.id')
+            ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
+            ->join('domains', 'domains.id', '=', 'measures.domain_id')
+            ->whereIn('c2.status',[0,1])
+            ->orderBy('domains.title')
+            ->get();
 
         // return
         return view('radar.domains')
@@ -850,6 +848,7 @@ class ControlController extends Controller
                 ->withInput();
         }
 
+        /*
         // Check duplicate control on same scope
         if (Control
             // ::whereNull('realisation_date')
@@ -862,7 +861,7 @@ class ControlController extends Controller
                 ->withErrors(['msg' => trans('cruds.control.error.duplicate')])
                 ->withInput();
         }
-
+        */
         $control->scope = $request->scope;
         $control->plan_date = $request->plan_date;
         $control->periodicity = $request->periodicity;

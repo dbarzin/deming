@@ -32,6 +32,7 @@ class Control extends Model
     // 1 - Proposed by auditee => relisation date not null
     // 2 - Done => relisation date not null
 
+    /*
     public function domain()
     {
         return $this->belongsTo(Domain::class, 'domain_id');
@@ -42,7 +43,7 @@ class Control extends Model
     {
         return $this->belongsTo(Measure::class, 'measure_id');
     }
-
+    */
     public function measures()
     {
         return $this->belongsToMany(Measure::class);
