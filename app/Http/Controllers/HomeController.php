@@ -102,7 +102,7 @@ class HomeController extends Controller
             ->get();
 
         // Fetch measures for all controls in one query
-        $controlMeasures = DB::table('control_measure')
+        $measuresByControlId = DB::table('control_measure')
             ->select([
                 'control_id',
                 'measure_id',
@@ -110,10 +110,8 @@ class HomeController extends Controller
             ])
             ->leftjoin('measures', 'measures.id', '=', 'measure_id')
             ->whereIn('control_id', $controls_todo->pluck('id'))
-            ->get();
-
-        // Group measures by control_id
-        $measuresByControlId = $controlMeasures->groupBy('control_id');
+            ->get()
+            ->groupBy('control_id');
 
         // map clauses
         foreach($controls_todo as $control) {

@@ -46,7 +46,7 @@ class Control extends Model
     */
     public function measures()
     {
-        return $this->belongsToMany(Measure::class);
+        return $this->belongsToMany(Measure::class)->orderBy('clause');
     }
 
     public function owners()

@@ -295,9 +295,9 @@ class ControlController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display a control
      *
-     * @param  \App\Domain $domain
+     * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -607,8 +607,9 @@ class ControlController extends Controller
         // get all active domains
         $domains = DB::table('domains')
             ->select(DB::raw('distinct domains.id, domains.title, domains.description'))
-            ->join('controls', 'domains.id', '=', 'controls.domain_id')
-            // ->whereNull('realisation_date')
+            ->join('measures', 'domains.id', '=', 'measures.domain_id')
+            ->join('control_measure', 'measures.id', '=', 'control_measure.measure_id')
+            ->join('controls', 'control_measure.control_id', '=', 'controls.id')
             ->whereIn('status', [0,1])
             ->orderBy('domains.title')
             ->get();
@@ -616,7 +617,6 @@ class ControlController extends Controller
         // get all scopes
         $scopes = DB::table('controls')
             ->select('scope')
-            //->whereNull('realisation_date')
             ->whereIn('status', [0,1])
             ->distinct()
             ->orderBy('scope')
@@ -646,10 +646,10 @@ class ControlController extends Controller
                     '
                     c1.id AS control_id,
                     c1.name,
-                    c2.clause,
+                    measures.clause,
                     c1.scope,
-                    c2.measure_id,
-                    c2.domain_id,
+                    control_measure.measure_id,
+                    measures.domain_id,
                     c1.plan_date,
                     c1.realisation_date,
                     c1.score as score,
@@ -658,7 +658,8 @@ class ControlController extends Controller
                 )
             )
             ->join('controls as c2', 'c1.next_id', '=', 'c2.id')
-            // ->where('c2.realisation_date', '=', null);
+            ->join('control_measure', 'control_measure.control_id', '=', 'c2.id')
+            ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
             ->whereIn('c2.status', [0, 1]);
         if ($cur_scope !== null) {
             $controls = $controls->where('c1.scope', '=', $cur_scope);
@@ -1024,7 +1025,7 @@ class ControlController extends Controller
             $new_control->owners()->sync($control->owners->pluck('id')->toArray());
 
             // Set measures
-            $control->measures()->sync($control->measures->pluck('id')->toArray());
+            $new_control->measures()->sync($control->measures->pluck('id')->toArray());
 
             // set status done
             $control->status = 2;

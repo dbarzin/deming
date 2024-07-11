@@ -165,7 +165,7 @@ class MeasureController extends Controller
     /**
      * Display a measure
      *
-     * @param  \App\Measure $measure
+     * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
