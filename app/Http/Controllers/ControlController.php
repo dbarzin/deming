@@ -457,6 +457,11 @@ class ControlController extends Controller
         Control::where('next_id', $control->id)
             ->update(['next_id' => $control->next_id]);
 
+        // delete control_measures
+        DB::Table('control_measure')
+            ->where('control_id','=',$control->id)
+            ->delete();
+
         // Then delete the control
         $control->delete();
 

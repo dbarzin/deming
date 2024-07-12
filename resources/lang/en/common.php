@@ -16,6 +16,7 @@ return [
     'plan' => 'Plan',
     'reject' => 'Reject',
     'save' => 'Save',
+    'test' => 'Test',
     'unplan' => 'Unplan',
     'validate' => 'Validate',
 
