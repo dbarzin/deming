@@ -60,7 +60,7 @@
                     </div>
     		        <div class="cell-1" align="right">
     				    <button type="submit" class="button success drop-shadow"
-                            onclick="if ($('#clean').val()) return confirm('Do you want to remove all other measures and controls  ?')">
+                            onclick="if ($('#clean').is(':checked')) return confirm('Do you want to remove all other measures and controls  ?')">
                                 {{ trans("common.import") }}
                         </button>
     		        </div>
