@@ -26,7 +26,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                @foreach(explode(" ",$attribute->values) as $value)
+                  @foreach(explode(" ",$attribute->values) as $value)
                     @if(strlen($value)>0)
                         <?php $score1=0; $score2=0; $score3=0; ?>
                         @foreach($controls as $control)

@@ -55,7 +55,7 @@ class MeasureController extends Controller
             )
             ->join('domains', 'domains.id', '=', 'measures.domain_id')
             ->leftjoin('control_measure', 'control_measure.measure_id', 'measures.id')
-            ->join('controls', 'control_measure.control_id', 'controls.id')
+            ->leftjoin('controls', 'control_measure.control_id', 'controls.id')
             ->where(function ($query) {
                 $query
                     ->whereIn('controls.status', [0,1])
