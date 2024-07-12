@@ -18,7 +18,7 @@ return new class extends Migration
             $table->dropColumn('domain_id');
             $table->dropColumn('measure_id');
             });
-*
+
         Schema::create('control_measure', function (Blueprint $table) {
             $table->integer('control_id')->unsigned();
             $table->foreign('control_id')->references('id')->on('controls');

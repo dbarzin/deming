@@ -342,7 +342,7 @@ class MeasureImportController extends Controller
 
                         $newDomainCount++;
                     } else {
-                        $domain->description = trim($data[$line][1]);
+                        $domain->description = trim($data[$line][2]);
                         $domain->update();
                     }
 

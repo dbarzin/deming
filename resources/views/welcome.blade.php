@@ -124,7 +124,10 @@
                 <tr>
                     <td>
                         @foreach($control->measures as $measure)
-                        <a href="/alice/show/{{ $measure['id'] }}">{{ $measure['clause'] }}</a>
+                        <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">{{ $measure['clause'] }}</a>
+                            @if(!$loop->last)
+                            ,
+                            @endif
                         @endforeach
                     </td>
                     <td class="table-danger">

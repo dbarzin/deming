@@ -673,11 +673,10 @@ class ControlController extends Controller
         return view('/radar/controls')
             ->with('scopes', $scopes)
             ->with('controls', $controls)
-//          ->with('cur_date', $cur_date)
             ->with('domains', $domains);
     }
 
-    public function attributes()
+    public function attributes(Request $request)
     {
         // Not API and auditee
         abort_if(
@@ -693,23 +692,42 @@ class ControlController extends Controller
             ->get();
 
         // Controls made
-        // TODO : improve me
-        $controls = DB::select('
-                select
-                    c2.id,
-                    c1.name,
-                    c1.attributes,
-                    c2.realisation_date,
-                    c2.score
-                from
-                    controls c1,
-                    controls c2,
-                    domains
-                where
-                    c1.status=0 and
-                    c1.id = c2.next_id and
-                    domains.id=c1.domain_id
-                order by id;');
+        $controls = DB::table('controls as c1')
+            ->select([
+                    'c2.id',
+                    'c2.name',
+                    'c2.attributes',
+                    'c2.realisation_date',
+                    'c2.score'])
+            ->join('controls as c2','c1.id','=','c2.next_id')
+            ->where('c1.status','=',0)
+            ->orderBy('id')
+            ->get();
+
+        // Fetch measures for all controls in one query
+        $controlMeasures = DB::table('control_measure')
+            ->select([
+                'control_id',
+                'measure_id',
+                'clause'
+            ])
+            ->leftjoin('measures', 'measures.id', '=', 'measure_id')
+            ->whereIn('control_id', $controls->pluck('id'))
+            ->orderBy('clause')
+            ->get();
+
+        // Group measures by control_id
+        $measuresByControlId = $controlMeasures->groupBy('control_id');
+
+        // map clauses
+        foreach($controls as $control) {
+            $control->measures = $measuresByControlId->get($control->id, collect())->map(function ($controlMeasure) {
+                return [
+                    'id' => $controlMeasure->measure_id,
+                    'clause' => $controlMeasure->clause
+                    ];
+                });
+            }
 
         // return
         return view('radar.attributes')

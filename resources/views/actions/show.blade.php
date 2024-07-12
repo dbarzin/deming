@@ -29,6 +29,20 @@ form, table {
 		<input type="hidden" name="id" value="{{ $action->id }}"/>
 
 		<div class="grid">
+        	<div class="row">
+        		<div class="cell-1">
+    	    		<strong>{{ trans("cruds.control.fields.clauses") }}</strong>
+    	    	</div>
+        		<div class="cell-4">
+                    @foreach($action->measures as $measure)
+                        <a href="/alice/show/{{ $measure['id'] }}">{{ $measure['clause'] }}</a>
+                        @if(!$loop->last)
+                        ,
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.action.fields.name') }}</strong>

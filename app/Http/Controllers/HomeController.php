@@ -83,26 +83,20 @@ class HomeController extends Controller
                     'c1.id',
                     'c1.name',
                     'c1.scope',
-                    'domains.id',
                     'c1.plan_date',
                     'c1.status',
                     'c2.id as prev_id',
                     'c2.realisation_date as prev_date',
                     'c2.score as score',
-                    'domains.title as domain',
                 ])
             ->leftjoin('controls as c2', 'c1.id', '=', 'c2.next_id')
-            ->join('control_measure', 'control_measure.control_id', '=', 'c1.id')
-            ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
-            ->join('domains', 'domains.id', '=', 'measures.domain_id')
-            // ->whereNull('c1.realisation_date')
             ->whereIn('c1.status', [0,1])
             ->where('c1.plan_date', '<', Carbon::today()->addDays(30)->format('Y-m-d'))
             ->orderBy('c1.plan_date')
             ->get();
 
         // Fetch measures for all controls in one query
-        $measuresByControlId = DB::table('control_measure')
+        $controlMeasures = DB::table('control_measure')
             ->select([
                 'control_id',
                 'measure_id',
@@ -110,8 +104,11 @@ class HomeController extends Controller
             ])
             ->leftjoin('measures', 'measures.id', '=', 'measure_id')
             ->whereIn('control_id', $controls_todo->pluck('id'))
-            ->get()
-            ->groupBy('control_id');
+            ->orderBy('clause')
+            ->get();
+
+        // Group measures by control_id
+        $measuresByControlId = $controlMeasures->groupBy('control_id');
 
         // map clauses
         foreach($controls_todo as $control) {

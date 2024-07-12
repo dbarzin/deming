@@ -117,8 +117,8 @@ class ReportController extends Controller
                 ]
             )
             ->leftjoin('domains', 'measures.domain_id', '=', 'domains.id')
-            ->leftjoin('controls', 'measures.id', '=', 'controls.measure_id')
-            // ->whereNull('controls.realisation_date')
+            ->leftjoin('control_measure', 'control_measure.measure_id', '=', 'measures.id')
+            ->leftjoin('controls', 'control_measure.control_id', '=', 'controls.id')
             ->whereIn('controls.status', [0,1])
             ->orderBy('domains.title')
             ->orderBy('measures.clause')
@@ -209,7 +209,7 @@ class ReportController extends Controller
 
         foreach ($controls as $control) {
             $table->addRow();
-            $table->addCell(2500)->addText($control->clause);
+            $table->addCell(2500)->addText($control->measures->implode('clause',', '));
             $table->addCell(12500)->addText($control->name);
             $table->addCell(2800)->addText($control->realisation_date, null, ['align' => 'center']);
             $table->addCell(12500)->addText($control->scope);
@@ -235,20 +235,46 @@ class ReportController extends Controller
         $domains = DB::table('domains')->get();
 
         // get status report
-        $controls = DB::select(
-            '
-            SELECT
-            c1.measure_id,
-            max(c1.domain_id) AS "domain_id",
-            max(c1.score) AS "score",
-            max(c1.realisation_date) AS "realisation_date"
-            FROM
-                controls c1 left join controls c2 on c1.next_id=c2.id
-            WHERE
-                c1.status=2 and c2.next_id is null
-            GROUP BY c1.measure_id, c1.clause ORDER BY c1.clause;'
-        );
+        $controls = DB::table('controls as c1')
+            ->select([
+                'c1.id',
+                'c1.score',
+                'c1.realisation_date'
+                ])
+            ->leftJoin('controls as c2', 'c1.next_id', '=', 'c2.id')
+            ->whereNull('c2.next_id')
+            ->where('c1.status', 2)
+            ->get();
 
+
+        // Fetch measures for all controls in one query
+        $controlMeasures = DB::table('control_measure')
+            ->select([
+                'control_id',
+                'measure_id',
+                'domain_id',
+                'clause'
+            ])
+            ->leftjoin('measures', 'measures.id', '=', 'measure_id')
+            ->whereIn('control_id', $controls->pluck('id'))
+            ->orderBy('clause')
+            ->get();
+
+        // Group measures by control_id
+        $measuresByControlId = $controlMeasures->groupBy('control_id');
+
+        // map clauses
+        foreach($controls as $control) {
+            $control->measures = $measuresByControlId->get($control->id, collect())->map(function ($controlMeasure) {
+                return [
+                    'id' => $controlMeasure->measure_id,
+                    'domain_id' => $controlMeasure->domain_id,
+                    'clause' => $controlMeasure->clause
+                    ];
+                });
+            }
+
+        //
         $count_domains = count($domains);
         for ($j = 0; $j < $count_domains; $j++) {
             $values[0][$j] = 0;
@@ -271,8 +297,10 @@ class ReportController extends Controller
         foreach ($domains as $domain) {
             $domains[$i] = $domain->title;
             foreach ($controls as $control) {
-                if ($control->domain_id === $domain->id) {
+                foreach ($control->measures as $measure) {
+                if ($measure['domain_id'] === $domain->id) {
                     $values[3 - $control->score][$i] += 1;
+                    }
                 }
             }
             $i++;
@@ -384,24 +412,24 @@ class ReportController extends Controller
     private function generateActionPlanTable(TemplateProcessor $templateProcessor)
     {
         $actions =
-            DB::select('
-                select
-                    c1.measure_id,
-                    c1.id,
-                    c1.clause,
-                    c1.action_plan,
-                    c1.score,
-                    c1.name,
-                    c1.plan_date,
-                    c1.realisation_date,
-                    c2.id as next_id,
-                    c2.plan_date as next_date,
-                    c1.action_plan
-                from
-                    controls c1 left join controls c2 on c1.next_id=c2.id
-                where
-                    (c1.score=1 or c1.score=2) and (c2.status=0 or c2.status=1) and c2.next_id is null
-                order by measure_id;');
+            DB::table('controls as c1')
+            ->select([
+                'c1.id',
+                'c1.clause',
+                'c1.action_plan',
+                'c1.score',
+                'c1.name',
+                'c1.plan_date',
+                'c1.realisation_date',
+                'c2.id as next_id',
+                'c2.plan_date as next_date',
+                'c1.action_plan'
+            ])
+            ->leftjoin('controls as c2','c1.next_id','=','c2.id')
+            ->whereIn('c1.score',[1,2])
+            ->whereIn('c2.status',[0,1])
+            ->whereNull('c2.next_id')
+            ->get();
 
         $table = new Table(['borderSize' => 3, 'borderColor' => 'black', 'width' => 9800, 'unit' => TblWidth::TWIP]);
 

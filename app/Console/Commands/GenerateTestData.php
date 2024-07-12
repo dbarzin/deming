@@ -94,8 +94,8 @@ class GenerateTestData extends Command
             // create a control
             $control = new Control();
             // $control->domain_id = $measure->domain_id;
+            // $control->clause = $measure->clause;
             $control->name = $measure->name;
-            $control->clause = $measure->clause;
             $control->objective = $measure->objective;
             $control->attributes = $measure->attributes;
             $control->model = $measure->model;
@@ -117,8 +117,8 @@ class GenerateTestData extends Command
             // create a previous
             $prev_control = new Control();
             // $prev_control->domain_id = $measure->domain_id;
+            // $prev_control->clause = $measure->clause;
             $prev_control->name = $measure->name;
-            $prev_control->clause = $measure->clause;
             $prev_control->objective = $measure->objective;
             $prev_control->attributes = $measure->attributes;
             $prev_control->input = $measure->input;
@@ -142,8 +142,8 @@ class GenerateTestData extends Command
             $nextControl = new Control();
             // $nextControl->measure_id = $measure->id;
             // $nextControl->domain_id = $measure->domain_id;
+            // $nextControl->clause = $measure->clause;
             $nextControl->name = $measure->name;
-            $nextControl->clause = $measure->clause;
             $nextControl->objective = $measure->objective;
             $nextControl->attributes = $measure->attributes;
             $nextControl->input = $measure->input;
