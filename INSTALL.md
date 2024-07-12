@@ -100,15 +100,9 @@ Create storage link
 
     php artisan storage:link
 
-To import the database with 27001:2022 security measures
+To import the database with 27001:2022 attributes (optional)
 
     php artisan db:seed --class=AttributeSeeder
-    php artisan db:seed --class=DomainSeeder
-    php artisan db:seed --class=MeasureSeeder
-
-Generate test data (optional)
-
-    php artisan deming:generateTests
 
 Start application with php
 
@@ -126,6 +120,7 @@ The application can be accessed at URL [http://127.0.0.1:8000]
 The administrator's default language is English. To change language, go to the user profile page
 (top right of the main page).
 
+To import a framework and generate test data, go to "Configuration" -> "Import" (optional).
 
 ## Apache
 
