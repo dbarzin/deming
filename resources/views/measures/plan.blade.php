@@ -67,7 +67,7 @@
 	    	</div>
 			<div class="cell-3">
 					<input type="text" data-role="calendarpicker" name="plan_date"
-					value="" data-input-format="%Y-%m-%d">
+				value="" data-input-format="%Y-%m-%d">
 			</div>
 		</div>
 

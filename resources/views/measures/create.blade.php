@@ -118,7 +118,7 @@
 					</button>
 					</form>
 					&nbsp;
-					<form action="/alices">
+					<form action="/alice/index">
 						<button type="submit" class="button">
 							<span class="mif-cancel"></span>
 							&nbsp;

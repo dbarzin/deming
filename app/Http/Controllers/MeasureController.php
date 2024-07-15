@@ -338,6 +338,7 @@ class MeasureController extends Controller
 
         $measure->update();
 
+        /*
         // update the current control
         $control = Control::where('measure_id', $measure->id)
             // ->where('realisation_date', null)
@@ -354,7 +355,7 @@ class MeasureController extends Controller
             $control->action_plan = $measure->action_plan;
             $control->save();
         }
-
+        */
         // retun to view measure
         return redirect('/alice/show/'.$measure->id);
     }
