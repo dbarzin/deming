@@ -54,6 +54,7 @@ class Measure extends Model
     }
 
     // check if there is an empty control associated with this measure
+    /* Dos not exists as we have multiple plan dates
     public function planDate()
     {
         $res = DB::table('controls')
@@ -66,4 +67,5 @@ class Measure extends Model
         }
         return $res->plan_date;
     }
+    */
 }

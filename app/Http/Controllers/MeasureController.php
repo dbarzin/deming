@@ -49,12 +49,13 @@ class MeasureController extends Controller
                     'measures.domain_id',
                     'measures.clause',
                     'measures.name',
-                    DB::raw('count(controls.id) as control_count'),
+                    DB::raw('count(control_id) as control_count'),
                     'domains.title',
                 ]
             )
             ->join('domains', 'domains.id', '=', 'measures.domain_id')
-            ->leftjoin('controls', 'controls.measure_id', 'measures.id')
+            ->leftjoin('control_measure', 'control_measure.measure_id', 'measures.id')
+            ->leftjoin('controls', 'control_measure.control_id', 'controls.id')
             ->where(function ($query) {
                 $query
                     ->whereIn('controls.status', [0,1])
@@ -164,7 +165,7 @@ class MeasureController extends Controller
     /**
      * Display a measure
      *
-     * @param  \App\Measure $measure
+     * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -189,7 +190,11 @@ class MeasureController extends Controller
             '403 Forbidden'
         );
 
-        $measure = Measure::where('id', $id)->get()->first();
+        $measure = Measure::find($id);
+
+        // not found
+        abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+
         return view('measures.show')
             ->with('measure', $measure);
     }
@@ -333,6 +338,7 @@ class MeasureController extends Controller
 
         $measure->update();
 
+        /*
         // update the current control
         $control = Control::where('measure_id', $measure->id)
             // ->where('realisation_date', null)
@@ -349,7 +355,7 @@ class MeasureController extends Controller
             $control->action_plan = $measure->action_plan;
             $control->save();
         }
-
+        */
         // retun to view measure
         return redirect('/alice/show/'.$measure->id);
     }
@@ -397,12 +403,23 @@ class MeasureController extends Controller
 
         $measure = Measure::find($request->id);
 
-        // get all scopes
+        // Control not found
+        abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+
+        // get all clauses
+        $all_measures = DB::table('measures')
+            ->select('id', 'clause')
+            ->orderBy('id')
+            ->get();
+
+        // get all measures for this measure
+        $measures = [$request->id];
+
+        // get all active scopes
         $scopes = DB::table('controls')
             ->select('scope')
             ->whereNotNull('scope')
             ->where('scope', '<>', '')
-            // ->whereNull('realisation_date')
             ->whereIn('status', [0,1])
             ->distinct()
             ->orderBy('scope')
@@ -413,7 +430,12 @@ class MeasureController extends Controller
         // Get all users
         $users = User::orderBy('name')->get();
 
-        return view('measures.plan', compact('measure', 'scopes', 'users'));
+        return view('measures.plan',
+            compact('measure',
+                'all_measures',
+                'measures',
+                'scopes',
+                'users'));
     }
 
     /**
@@ -439,17 +461,19 @@ class MeasureController extends Controller
             [
                 'plan_date' => 'required',
                 'periodicity' => 'required',
+                'measures' => 'array|min:1'
             ]
         );
 
         $measure = Measure::find($request->id);
 
+        /*
+        // This is not the case anymore
         // Check control already exists
         $control = DB::Table('controls')
             ->select('id')
             ->where('measure_id', '=', $measure->id)
             ->where('scope', '=', $request->scope)
-            // ->where('realisation_date', null)
             ->where('status', [0,1])
             ->first();
 
@@ -459,11 +483,10 @@ class MeasureController extends Controller
                 ->withErrors(['msg' => trans('cruds.control.error.duplicate')])
                 ->withInput();
         }
+        */
 
         // create a new control
         $control = new Control();
-        $control->measure_id = $measure->id;
-        $control->domain_id = $measure->domain_id;
         $control->name = $measure->name;
         $control->scope = $request->scope;
         $control->attributes = $measure->attributes;
@@ -481,17 +504,22 @@ class MeasureController extends Controller
         // Sync onwers
         $control->owners()->sync($request->input('owners', []));
 
+        // Sync measures
+        $control->measures()->sync($request->input('measures', []));
+
+        /*
         // Update link
+        // This is not the case anymore
         $prev_control = Control::where('measure_id', '=', $measure->id)
             ->where('scope', '=', $measure->scope)
             ->where('next_id', null)
-            // ->whereNotNull('realisation_date')
             ->where('status', 2)
             ->first();
         if ($prev_control !== null) {
             $prev_control->next_id = $control->id;
             $prev_control->update();
         }
+        */
 
         // return to the list of measures
         return redirect('/alice/index');

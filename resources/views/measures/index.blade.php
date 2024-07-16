@@ -14,7 +14,7 @@
 									@if (((int)Session::get("domain"))==$domain->id)
 										selected
 									@endif >
-						    		{{ $domain->title }} - {{ $domain->description }}
+						    		{{ $domain->title }}
 						    	</option>
 						    @endforeach
 						</select>

@@ -8,6 +8,7 @@ return [
     'create' => 'Create',
     'clone' => 'Copy',
     'delete' => 'Delete',
+    'download' => 'Download',
     'edit' => 'Edit',
     'import' => 'Import',
     'make' => 'Make',
@@ -15,6 +16,7 @@ return [
     'plan' => 'Plan',
     'reject' => 'Reject',
     'save' => 'Save',
+    'test' => 'Test',
     'unplan' => 'Unplan',
     'validate' => 'Validate',
 

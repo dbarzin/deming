@@ -19,25 +19,36 @@
     <form method="POST" action="/alice/activate/{{ $measure->id }}">
 	@csrf
 	<div class="grid">
+
     	<div class="row">
     		<div class="cell-1">
-	    		<strong>{{ trans('cruds.measure.fields.domain') }}</strong>
+	    		<strong>{{ trans("cruds.control.fields.clauses") }}</strong>
 	    	</div>
-			<div class="cell">
-				<a href="/domains/{{$measure->domain_id}}">
-				{{ $measure->domain->title }}
-				</a>
-				-
-				{{ $measure->domain->description }}
-			</div>
-	    </div>
+    		<div class="cell-6">
+				<select data-role="select" name="measures[]" multiple>
+					@foreach($all_measures as $m)
+					    <option
+                            value="{{ $m->id }}"
+                            {{ in_array($m->id, old("measures", $measures)) ? "selected" : "" }}
+                                >{{ $m->clause }}</option>
+				    @endforeach
+				 </select>
+            </div>
+        </div>
 
     	<div class="row">
 			<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.name') }}</strong>
 	    	</div>
-			<div class="cell">
-				{{ $measure->clause }} - {{ $measure->name }}
+			<div class="cell-4">
+				{{ $measure->name }}
+			</div>
+    		<div class="cell-1" align="right">
+	    		<strong>{{ trans('cruds.control.fields.scope') }}</strong>
+	    	</div>
+			<div class="cell-1">
+				<input type="text" name="scope" data-role="input" autocomplete="on" size="32"
+				value="{{ $measure->scope }}" data-autocomplete="{{ implode(",",$scopes) }}"/>
 			</div>
 	    </div>
 
@@ -50,23 +61,13 @@
 			</div>
 	    </div>
 
-    	<div class="row">
-    		<div class="cell-1">
-	    		<strong>{{ trans('cruds.control.fields.scope') }}</strong>
-	    	</div>
-			<div class="cell-4">
-				<input type="text" name="scope" data-role="input" autocomplete="on" size="32"
-				value="{{ $measure->scope }}" data-autocomplete="{{ implode(",",$scopes) }}"/>
-			</div>
-		</div>
-
 		<div class="row">
 			<div class="cell-1">
 				<strong>{{ trans('cruds.control.fields.plan_date') }}</strong>
 	    	</div>
 			<div class="cell-3">
 					<input type="text" data-role="calendarpicker" name="plan_date"
-					value="{{ $measure->planDate() }}" data-input-format="%Y-%m-%d">
+				value="" data-input-format="%Y-%m-%d">
 			</div>
 		</div>
 

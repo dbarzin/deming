@@ -57,6 +57,27 @@ class MeasureImportController extends Controller
             'model' => 'required_without:file',
         ]);
 
+        // Download model ?
+        if (request('action') ==='download') {
+            // Find file from repositories
+            $model = '/' . $request->get('model') . '.xlsx';
+            $file = current(
+                array_filter(
+                    Storage::disk('local')->files('repository'),
+                    function ($e) use ($model) {
+                        return str_contains($e, $model);
+                    }
+                )
+            );
+            // Get full path
+            $fileName = Storage::disk('local')->path($file);
+
+            return response()->download(
+                $fileName,
+                $request->get('model') . '.xlsx',
+                ['Content-Type: application/octet-stream']);
+        }
+
         $errors = Collect();
 
         // Clear database
@@ -134,61 +155,78 @@ class MeasureImportController extends Controller
         +-------------+---------------+------+-----+---------+----------------+
         | Field       | Type          | Null | Key | Default | Extra          |
         +-------------+---------------+------+-----+---------+----------------+
-      0 | domain.name | varchar(32)  | NO   | MUL | NULL     |                |
-      1 | domain.desc | varchar(255)  | NO   | MUL | NULL    |                |
-      2 | clause      | varchar(32)   | NO   |     | NULL    |                |
-      3 | name        | varchar(255)  | NO   |     | NULL    |                |
-      4 | objective   | text          | YES  |     | NULL    |                |
-      5 | attributes  | varchar(1024) | YES  |     | NULL    |                |
-      6 | input       | text          | YES  |     | NULL    |                |
-      7 | model       | text          | YES  |     | NULL    |                |
-      8 | indicator   | text          | YES  |     | NULL    |                |
-      9 | action_plan | text          | YES  |     | NULL    |                |
+      0 | framework | varchar(32)  | NO   | MUL | NULL     |                |
+      1 | domain.name | varchar(32)  | NO   | MUL | NULL     |                |
+      2 | domain.desc | varchar(255)  | NO   | MUL | NULL    |                |
+      3 | clause      | varchar(32)   | NO   |     | NULL    |                |
+      4 | name        | varchar(255)  | NO   |     | NULL    |                |
+      5 | objective   | text          | YES  |     | NULL    |                |
+      6 | attributes  | varchar(1024) | YES  |     | NULL    |                |
+      7 | input       | text          | YES  |     | NULL    |                |
+      8 | model       | text          | YES  |     | NULL    |                |
+      9 | indicator   | text          | YES  |     | NULL    |                |
+      10 | action_plan | text          | YES  |     | NULL    |                |
         +-------------+---------------+------+-----+---------+----------------+
         */
 
         // Check for errors
         $lastLine = count($data);
         for ($line = 1; $line < $lastLine; $line++) {
-            if (($data[$line][0] === null)) {
-                $errors->push(($line + 1) . ': domain is empty');
+            if (($data[$line][1] === null)) {
+                $errors->push(($line + 1) . ': framework name is empty');
                 continue;
             }
-            if (($data[$line][2] === null)) {
+            if (($data[$line][1] === null)) {
+                $errors->push(($line + 1) . ': domain name is empty');
+                continue;
+            }
+            if (($data[$line][3] === null)) {
                 $errors->push(($line + 1) . ': close is empty');
                 continue;
             }
             // delete line ?
             if (
-                ($data[$line][2] !== null) &&
-                ($data[$line][3] === null) &&
+                ($data[$line][3] !== null) &&
                 ($data[$line][4] === null) &&
                 ($data[$line][5] === null) &&
                 ($data[$line][6] === null) &&
                 ($data[$line][7] === null) &&
                 ($data[$line][8] === null) &&
-                ($data[$line][9] === null)
+                ($data[$line][9] === null) &&
+                ($data[$line][10] === null)
             ) {
                 continue;
             }
             if (strlen($data[$line][0]) >= 32) {
+                $errors->push(($line + 1) . ': framework name is too long');
+                continue;
+            }
+            if (strlen($data[$line][1]) >= 32) {
                 $errors->push(($line + 1) . ': domain name is too long');
                 continue;
             }
-            if (strlen($data[$line][1]) >= 255) {
+            if (strlen($data[$line][2]) >= 255) {
                 $errors->push(($line + 1) . ': domain description is too long');
                 continue;
             }
-            if (strlen($data[$line][2]) >= 32) {
-                $errors->push(($line + 1) . ': close too long');
+            if (strlen($data[$line][3]) === 0) {
+                $errors->push(($line + 1) . ': close name is empty');
                 continue;
             }
-            if (strlen($data[$line][3]) === 0) {
+            if (strlen($data[$line][3]) >= 32) {
+                $errors->push(($line + 1) . ': close name too long');
+                continue;
+            }
+            if (Measure::where('clause',$data[$line][3])->exists()) {
+                $errors->push(($line + 1) . ': close name not unique');
+                continue;
+            }
+            if (strlen($data[$line][4]) === 0) {
                 $errors->push(($line + 1) . ': name is empty');
                 continue;
             }
-            if (strlen($data[$line][3]) >= 255) {
-                $errors->push(($line + 1) . ': name too long');
+            if (strlen($data[$line][4]) >= 255) {
+                $errors->push(($line + 1) . ': name too long ');
                 continue;
             }
             // TODO: check tags
@@ -205,20 +243,20 @@ class MeasureImportController extends Controller
                 // Update domain description ?
                 // delete line ?
                 if (
-                    ($data[$line][2] !== null) &&
-                    ($data[$line][3] === null) &&
+                    ($data[$line][3] !== null) &&
                     ($data[$line][4] === null) &&
                     ($data[$line][5] === null) &&
                     ($data[$line][6] === null) &&
                     ($data[$line][7] === null) &&
                     ($data[$line][8] === null) &&
-                    ($data[$line][9] === null)
+                    ($data[$line][9] === null) &&
+                    ($data[$line][10] === null)
                 ) {
                     // delete documents
                     $documents = DB::table('documents')
                         ->join('controls', 'controls.id', '=', 'documents.control_id')
                         ->join('measures', 'measures.id', '=', 'controls.measure_id')
-                        ->where('measures.clause', $data[$line][2])
+                        ->where('measures.clause', $data[$line][3])
                         ->select('documents.id', )
                         ->get();
 
@@ -230,12 +268,12 @@ class MeasureImportController extends Controller
 
                     // Break link between controls
                     Control::join('measures', 'measures.id', '=', 'controls.measure_id')
-                        ->where('measures.clause', $data[$line][2])
+                        ->where('measures.clause', $data[$line][3])
                         ->update(['next_id' => null]);
 
                     // Delete controls
                     $controls = Control::join('measures', 'measures.id', '=', 'controls.measure_id')
-                        ->where('measures.clause', $data[$line][2])
+                        ->where('measures.clause', $data[$line][3])
                         ->get(['controls.id']);
 
                     Control::destroy($controls->toArray());
@@ -243,7 +281,7 @@ class MeasureImportController extends Controller
                     $deleteControlCount += count($controls);
 
                     // delete measure
-                    measure::where('clause', $data[$line][2])->delete();
+                    measure::where('clause', $data[$line][3])->delete();
 
                     // TODO: delete empty domains
 
@@ -251,54 +289,60 @@ class MeasureImportController extends Controller
                     continue;
                 }
                 // update or insert ?
-                $measure = Measure::where('clause', $data[$line][2])->get()->first();
+                $measure = Measure::where('clause', $data[$line][3])->get()->first();
 
                 if ($measure !== null) {
                     // update or create domain
-                    $domain = Domain::where('title', trim($data[$line][0]))->get()->first();
+                    $domain = Domain
+                        ::where('framework', trim($data[$line][0]))
+                        ->where('title', trim($data[$line][1]))
+                        ->get()->first();
                     if ($domain === null) {
                         // create domain
                         $domain = new Domain();
-                        $domain->title = trim($data[$line][0]);
-                        $domain->description = trim($data[$line][1]);
+                        $domain->framework = trim($data[$line][0]);
+                        $domain->title = trim($data[$line][1]);
+                        $domain->description = trim($data[$line][2]);
                         $domain->save();
 
                         $newDomainCount++;
                     } else {
-                        $domain->description = $data[$line][1];
+                        $domain->description = trim($data[$line][2]);
                         $domain->update();
                     }
 
                     // update measure
-                    $measure->name = $data[$line][3];
+                    $measure->name = $data[$line][4];
                     $measure->domain_id = $domain->id;
-                    $measure->objective = $data[$line][4];
-                    $measure->attributes = $data[$line][5];
-                    $measure->input = $data[$line][6];
-                    $measure->model = $data[$line][7];
-                    $measure->indicator = $data[$line][8];
-                    $measure->action_plan = $data[$line][9];
+                    $measure->objective = $data[$line][5];
+                    $measure->attributes = $data[$line][6];
+                    $measure->input = $data[$line][7];
+                    $measure->model = $data[$line][8];
+                    $measure->indicator = $data[$line][9];
+                    $measure->action_plan = $data[$line][10];
                     $measure->update();
-
-                    // TODO : update last control
 
                     $updateCount++;
                 } else {
                     // insert
 
                     // get domain id
-                    $domain = Domain::where('title', trim($data[$line][0]))->get()->first();
+                    $domain = Domain
+                        ::where('framework', trim($data[$line][0]))
+                        ->where('title', trim($data[$line][1]))
+                        ->get()->first();
 
                     if ($domain === null) {
                         // create domain
                         $domain = new Domain();
-                        $domain->title = trim($data[$line][0]);
-                        $domain->description = trim($data[$line][1]);
+                        $domain->framework = trim($data[$line][0]);
+                        $domain->title = trim($data[$line][1]);
+                        $domain->description = trim($data[$line][2]);
                         $domain->save();
 
                         $newDomainCount++;
                     } else {
-                        $domain->description = trim($data[$line][1]);
+                        $domain->description = trim($data[$line][2]);
                         $domain->update();
                     }
 
@@ -306,14 +350,14 @@ class MeasureImportController extends Controller
                     $measure = new Measure();
 
                     $measure->domain_id = $domain->id;
-                    $measure->clause = $data[$line][2];
-                    $measure->name = $data[$line][3];
-                    $measure->objective = $data[$line][4];
-                    $measure->attributes = $data[$line][5];
-                    $measure->input = $data[$line][6];
-                    $measure->model = $data[$line][7];
-                    $measure->indicator = $data[$line][8];
-                    $measure->action_plan = $data[$line][9];
+                    $measure->clause = $data[$line][3];
+                    $measure->name = $data[$line][4];
+                    $measure->objective = $data[$line][5];
+                    $measure->attributes = $data[$line][6];
+                    $measure->input = $data[$line][7];
+                    $measure->model = $data[$line][8];
+                    $measure->indicator = $data[$line][9];
+                    $measure->action_plan = $data[$line][10];
 
                     $measure->save();
 

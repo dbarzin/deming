@@ -51,9 +51,9 @@ class ActionplanController extends Controller
         // Query DB
         $actions = $actions->select(
             [
-                'c1.measure_id',
                 'c1.id',
-                'c1.clause',
+//                'control_measure.measure_id',
+//                'c1.clause',
                 'c1.action_plan',
                 'c1.score',
                 'c1.name',
@@ -64,6 +64,28 @@ class ActionplanController extends Controller
             ]
         )
             ->orderBy('c1.realisation_date')->get();
+
+        // Fetch measures for all controls in one query
+        $measuresByControlId = DB::table('control_measure')
+            ->select([
+                'control_id',
+                'measure_id',
+                'clause'
+            ])
+            ->leftjoin('measures', 'measures.id', '=', 'measure_id')
+            ->whereIn('control_id', $actions->pluck('id'))
+            ->get()
+            ->groupBy('control_id');
+
+        // map clauses
+        foreach($actions as $action) {
+            $action->measures = $measuresByControlId->get($action->id, collect())->map(function ($controlMeasure) {
+                return [
+                    'id' => $controlMeasure->measure_id,
+                    'clause' => $controlMeasure->clause
+                    ];
+                });
+            }
 
         // return
         return view('actions.index')
@@ -121,8 +143,8 @@ class ActionplanController extends Controller
         $action = DB::table('controls as c1')
             ->select(
                 'c1.id',
-                'c1.measure_id',
-                'c1.clause',
+//                'c1.measure_id',
+//                'c1.clause',
                 'c1.name',
                 'c1.scope',
                 'c1.objective',
@@ -140,6 +162,27 @@ class ActionplanController extends Controller
             })
             ->where('c1.id', '=', $id)
             ->first();
+
+        // Fetch measures for all controls in one query
+        $measuresByControlId = DB::table('control_measure')
+            ->select([
+                'control_id',
+                'measure_id',
+                'clause'
+            ])
+            ->leftjoin('measures', 'measures.id', '=', 'measure_id')
+            ->where('control_id', '=',$action->id)
+            ->get()
+            ->groupBy('control_id');
+
+        // map clauses
+        $action->measures = $measuresByControlId->get($action->id, collect())->map(function ($controlMeasure) {
+            return [
+                'id' => $controlMeasure->measure_id,
+                'clause' => $controlMeasure->clause
+                ];
+            });
+
 
         // return
         return view('actions.show')

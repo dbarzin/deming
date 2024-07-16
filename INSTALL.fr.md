@@ -104,15 +104,9 @@ Créer le lien de stockage
 
 ## Peupler la base de données
 
-Pour importer la base de données avec les mesures de sécurité de la norme 27001:2022
+Pour importer la base de données avec les attributs de sécurité de la norme 27001:2022 (optionel)
 
     LANG=fr php artisan db:seed --class=AttributeSeeder
-    LANG=fr php artisan db:seed --class=DomainSeeder
-    LANG=fr php artisan db:seed --class=MeasureSeeder
-
-Génrérer des données de test (optionnel)
-
-    php artisan deming:generateTests
 
 Démarrer l'application avec php
 
@@ -129,6 +123,8 @@ L'application est accessible à l'URL [http://127.0.0.1:8000]
 
 L'administrateur utilise la langue anglaise par défaut. Pour changer de langue, allez dans la page de profil de l'utilisateur
 (en haut à droite de la page principale).
+
+Pour importer un référentiel et générer des données de test, allez dans "Configuration" -> "Import" (optionel).
 
 ## Apache
 

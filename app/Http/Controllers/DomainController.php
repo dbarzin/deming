@@ -22,7 +22,7 @@ class DomainController extends Controller
         $domains = DB::table('domains')->orderBy('id')->get();
 
         $domains = DB::table('domains')
-            ->select('domains.id', 'domains.title', 'domains.description', DB::raw('COUNT(measures.id) AS measures'))
+            ->select('domains.id', 'domains.framework', 'domains.title', 'domains.description', DB::raw('COUNT(measures.id) AS measures'))
             ->leftJoin('measures', 'measures.domain_id', '=', 'domains.id')
             ->groupBy('domains.id')
             ->get();
@@ -59,15 +59,18 @@ class DomainController extends Controller
         $this->validate(
             $request,
             [
-                'title' => 'required|min:1|max:30',
-                'description' => 'required',
+                'framework' => 'required|min:1|max:32',
+                'title' => 'required|min:1|max:32',
+                'description' => 'required|max:255',
             ]
         );
 
-        $tag = new Domain();
-        $tag->title = request('title');
-        $tag->description = request('description');
-        $tag->save();
+        $domain = new Domain();
+        $domain->framework = request('framework');
+        $domain->description = request('description');
+        $domain->title = request('title');
+        $domain->save();
+
         return redirect('/domains');
     }
 
@@ -118,13 +121,17 @@ class DomainController extends Controller
         $this->validate(
             $request,
             [
-                'title' => 'required|min:1|max:30',
-                'description' => 'required',
+                'framework' => 'required|min:1|max:32',
+                'title' => 'required|min:1|max:32',
+                'description' => 'required|max:255',
             ]
         );
+
+        $domain->framework = request('framework');
         $domain->title = request('title');
         $domain->description = request('description');
         $domain->save();
+
         return redirect('/domains/' . $domain->id);
     }
 

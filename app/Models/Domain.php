@@ -8,6 +8,7 @@ class Domain extends Model
 {
     public static $searchable = [
         'title',
+        'framework',
         'description',
     ];
 

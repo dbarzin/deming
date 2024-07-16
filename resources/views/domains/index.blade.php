@@ -31,6 +31,7 @@
 		       data-check-style="1">
 			    <thead>
 			    <tr>
+					<th width="50">{{ trans('cruds.domain.fields.framework') }}</th>
 					<th width="50">{{ trans('cruds.domain.fields.name') }}</th>
 					<th width="200">{{ trans('cruds.domain.fields.description') }}</th>
 					<th width="200">{{ trans('cruds.domain.fields.measures') }}</th>
@@ -39,6 +40,7 @@
 			    <tbody>
 			@foreach($domains as $domain)
 				<tr>
+					<td>{{ $domain->framework }}</td>
 					<td><a href="/domains/{{ $domain->id}}">{{ $domain->title }}</a></td>
 					<td>{{ $domain->description }}</td>
 					<td><a href="/alice/index?domain={{ $domain->id }}">{{ $domain->measures }}</a></td>
@@ -51,4 +53,3 @@
 	</div>
 </div>
 @endsection
-

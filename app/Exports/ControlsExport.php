@@ -72,7 +72,7 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
     {
         return [
             [
-                $control->clause,
+                $control->measures()->implode('clause',', '),
                 $control->name,
                 $control->scope,
                 $control->objective,

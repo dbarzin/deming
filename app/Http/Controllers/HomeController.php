@@ -33,13 +33,11 @@ class HomeController extends Controller
 
         // count active domains
         $active_domains_count = DB::table('controls')
-            ->select(
-                'domain_id',
-                DB::raw('max(controls.id)')
-            )
-            // ->whereNull('realisation_date')
+            ->select('measures.domain_id')
+            ->join('control_measure','controls.id','=','control_id')
+            ->join('measures','control_measure.measure_id','=','measures.id')
             ->whereIn('status', [0,1])
-            ->groupBy('domain_id')
+            ->distinct()
             ->get()
             ->count();
 
@@ -69,39 +67,58 @@ class HomeController extends Controller
         // Last controls made by measures
         $active_controls =
         DB::table('controls as c1')
-            ->select(['c1.id', 'c1.measure_id', 'domains.title', 'c1.realisation_date', 'c1.score'])
+            ->select(['c1.id', 'measures.id', 'domains.title', 'c1.realisation_date', 'c1.score'])
             ->join('controls as c2', 'c2.id', '=', 'c1.next_id')
-            ->join('domains', 'domains.id', '=', 'c1.domain_id')
+            ->join('control_measure', 'control_measure.control_id', '=', 'c1.id')
+            ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
+            ->join('domains', 'domains.id', '=', 'measures.domain_id')
             ->whereNull('c2.realisation_date')
             ->orderBy('c1.id')
             ->get();
-        // dd($active_controls);
 
         // Get controls todo
         $controls_todo =
-        DB::table('controls as c1')
-            ->select([
-                'c1.id',
-                'c1.measure_id',
-                'c1.name',
-                'c1.scope',
-                'c1.clause',
-                'c1.domain_id',
-                'c1.plan_date',
-                'c1.status',
-                'c2.id as prev_id',
-                'c2.realisation_date as prev_date',
-                'c2.score as score',
-                'domains.title as domain',
-            ])
+            DB::table('controls as c1')
+                ->select([
+                    'c1.id',
+                    'c1.name',
+                    'c1.scope',
+                    'c1.plan_date',
+                    'c1.status',
+                    'c2.id as prev_id',
+                    'c2.realisation_date as prev_date',
+                    'c2.score as score',
+                ])
             ->leftjoin('controls as c2', 'c1.id', '=', 'c2.next_id')
-            ->join('domains', 'domains.id', '=', 'c1.domain_id')
-            // ->whereNull('c1.realisation_date')
             ->whereIn('c1.status', [0,1])
             ->where('c1.plan_date', '<', Carbon::today()->addDays(30)->format('Y-m-d'))
             ->orderBy('c1.plan_date')
             ->get();
-        // dd($plannedMeasurements);
+
+        // Fetch measures for all controls in one query
+        $controlMeasures = DB::table('control_measure')
+            ->select([
+                'control_id',
+                'measure_id',
+                'clause'
+            ])
+            ->leftjoin('measures', 'measures.id', '=', 'measure_id')
+            ->whereIn('control_id', $controls_todo->pluck('id'))
+            ->orderBy('clause')
+            ->get();
+
+        // Group measures by control_id
+        $measuresByControlId = $controlMeasures->groupBy('control_id');
+
+        // map clauses
+        foreach($controls_todo as $control) {
+            $control->measures = $measuresByControlId->get($control->id, collect())->map(function ($controlMeasure) {
+                return [
+                    'id' => $controlMeasure->measure_id,
+                    'clause' => $controlMeasure->clause
+                    ];
+                });
+            }
 
         // planed controls this month
         $planed_controls_this_month_count = DB::table('controls')

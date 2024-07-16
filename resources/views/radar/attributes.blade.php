@@ -4,11 +4,12 @@
 <div class="p-3">
     <div data-role="panel" data-title-caption="{{ trans('cruds.control.radar') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
-<div class="grid">    
+<div class="grid">
     <div class="row">
         <div class="cell-12">
 
     @foreach($attributes as $attribute)
+
     <div class="row">
         <div class="cell-10">
         </div>
@@ -25,7 +26,7 @@
                   </tr>
                   </thead>
                   <tbody>
-                @foreach(explode(" ",$attribute->values) as $value)
+                  @foreach(explode(" ",$attribute->values) as $value)
                     @if(strlen($value)>0)
                         <?php $score1=0; $score2=0; $score3=0; ?>
                         @foreach($controls as $control)
@@ -46,7 +47,7 @@
                             <font color="ff5733"><?php echo $score2; ?></font> -
                             <font color="FF1010"><?php echo $score1; ?></font>
                         </td>
-                    </tr>                    
+                    </tr>
                     @endif
                 @endforeach
                 </tbody>
@@ -88,7 +89,7 @@
             @foreach(explode(" ",$attribute->values) as $value)
                 @if(strlen($value)>0)
                     "{{ $value }}"
-                    {{ $loop->last ? '' : ',' }}  
+                    {{ $loop->last ? '' : ',' }}
                 @endif
             @endforeach
             ],
@@ -114,8 +115,8 @@
                             <?php $total++; ?>
                         @endif
                     @endforeach
-                    {{ $total == 0 ? 0 : 2.5 * $score3 / $total }} 
-                    {{ $loop->last ? '' : ',' }}  
+                    {{ $total == 0 ? 0 : 2.5 * $score3 / $total }}
+                    {{ $loop->last ? '' : ',' }}
                 @endif
             @endforeach
         ]
@@ -124,14 +125,14 @@
        // red
         backgroundColor: color(window.chartColors.red).alpha(0.3).rgbString(),
         borderColor: window.chartColors.red,
-        pointBackgroundColor: window.chartColors.red,        
+        pointBackgroundColor: window.chartColors.red,
         data: [
         @foreach (explode(" ",$attribute->values) as $value)
             @if (strlen($value)>0)
                 2
-            {{ $loop->last ? '' : ',' }}  
+            {{ $loop->last ? '' : ',' }}
             @endif
-        @endforeach 
+        @endforeach
         ]
       },{
         // orange
@@ -142,9 +143,9 @@
         @foreach (explode(" ",$attribute->values) as $value)
             @if (strlen($value)>0)
                 2.5
-            {{ $loop->last ? '' : ',' }}  
+            {{ $loop->last ? '' : ',' }}
             @endif
-        @endforeach 
+        @endforeach
         ]
       },{
         // green
@@ -155,19 +156,19 @@
         @foreach (explode(" ",$attribute->values) as $value)
             @if (strlen($value)>0)
                 3
-            {{ $loop->last ? '' : ',' }}  
+            {{ $loop->last ? '' : ',' }}
             @endif
-        @endforeach 
+        @endforeach
         ]
       },
        {
         // label: "Zero",
         backgroundColor: "rgba(0,0,0,1)",
         data: [0,0,0,0]
-      } 
+      }
       ]
     };
-         
+
     var radarChart_{{ $attribute->id }} = new Chart(ctx_{{ $attribute->id }}, {
       type: 'radar',
       data: marksData_{{ $attribute->id }},
@@ -177,5 +178,3 @@
 
 </script>
 @endsection
-
-

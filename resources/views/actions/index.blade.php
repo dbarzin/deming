@@ -29,9 +29,11 @@
 		@foreach($actions as $action)
 			<tr>
 				<td valign="top">
-					<a id="{{ $action->clause }}" href="/alice/show/{{$action->measure_id}}">
-						{{ $action->clause }}
+                    @foreach($action->measures as $measure)
+					<a id="{{ $measure['clause'] }}" href="/alice/show/{{$measure['id']}}">
+						{{ $measure['clause'] }}
 					</a>
+                    @endforeach
 				</td>
 				<td style="overflow-wrap: break-word;">
 					<b><a href="/action/{{ $action->id }}">{{ $action->name }}</a></b>

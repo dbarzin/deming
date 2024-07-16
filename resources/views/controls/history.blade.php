@@ -24,7 +24,7 @@
                         $delta = -$delta;
                 ?>
                 <tbody>
-                    @for ($i=-12;$i<0;$i++) 
+                    @for ($i=-12;$i<0;$i++)
                     <?php
                         $first = today()->floorMonth()->addMonth($i+$delta);
                         $second = \Carbon\Carbon::today()->floorMonth()->addMonth($i+$delta)->endOfMonth();
@@ -32,7 +32,7 @@
                     <tr>
                         <td align="center">
                         <a href="/bob/index?period={{$i+$delta}}&domain=0&scope=none&status=0">
-                          <?php        
+                          <?php
 	                     echo $first->format("m/Y");
                           ?>
                         </a>
@@ -41,15 +41,15 @@
                             <?php $count=0; ?>
                             @foreach ($controls as $control)
                                 <?php
-                                if (($control->score!=null) && 
+                                if (($control->score!=null) &&
                                     (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
-                                ) 
+                                )
                                 {
                                         $count++;
                                 }
                                 ?>
                             @endforeach
-                            {{ $count }} 
+                            {{ $count }}
                             /
                             <?php $count=0; ?>
                             @foreach ($controls as $control)
@@ -63,13 +63,13 @@
                                         ($control->score!=null)&&
                                         (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
                                     )
-                                ) 
+                                )
                                 {
                                         $count++;
                                 }
                                 ?>
                             @endforeach
-                            {{ $count }} 
+                            {{ $count }}
                         </td>
                         <td  align="center">
                             <?php $count=0; ?>
@@ -82,11 +82,11 @@
                                 }
                                 ?>
                             @endforeach
-                            <font color="red">   
-                            @if ($count>0) {{ $count }} 
-                                &nbsp; &#9679; 
+                            <font color="red">
+                            @if ($count>0) {{ $count }}
+                                &nbsp; &#9679;
                             @else
-                                &nbsp; &nbsp; &nbsp; 
+                                &nbsp; &nbsp; &nbsp;
                             @endif
                             </font>
                         </td>
@@ -100,16 +100,16 @@
                                         $count++;
                                 }
                                 ?>
-                            @endforeach          
-                            <font color="orange">   
-                            @if ($count>0) {{ $count }} 
-                                &nbsp; &#9679; 
+                            @endforeach
+                            <font color="orange">
+                            @if ($count>0) {{ $count }}
+                                &nbsp; &#9679;
                             @else
                                 &nbsp; &nbsp; &nbsp;
                             @endif
                             </font>
                         </td>
-                        <td align="center"> 
+                        <td align="center">
                             <?php $count=0; ?>
                             @foreach ($controls as $control)
                                 <?php
@@ -119,9 +119,9 @@
                                         $count++;
                                 }
                                 ?>
-                            @endforeach          
-                            <font color="green">   
-                            @if ($count>0) {{ $count }} &nbsp; &#9679; 
+                            @endforeach
+                            <font color="green">
+                            @if ($count>0) {{ $count }} &nbsp; &#9679;
                             @else
                             &nbsp; &nbsp; &nbsp;
                             @endif
@@ -138,15 +138,15 @@
     <div class="cell-6">
     <table class="table subcompact cell-border">
         <tbody>
-        <?php 
-        for ($i=0;$i<12;$i++) { 
+        <?php
+        for ($i=0;$i<12;$i++) {
             $first = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta);
             $second = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta)->endOfMonth();
             ?>
             <tr>
                 <td align="center">
                 <a href="/bob/index?period={{$i+$delta}}&domain=0&scope=none&status=0">
-                <?php        
+                <?php
 	             echo $first->format("m/Y");
                 ?>
                 </a>
@@ -162,7 +162,7 @@
                     }
                     ?>
                     @endforeach
-                    {{ $count }} 
+                    {{ $count }}
                     /
                     <?php $count=0; ?>
                     @foreach ($controls as $control)
@@ -181,7 +181,7 @@
                         }
                         ?>
                     @endforeach
-                    {{ $count }} 
+                    {{ $count }}
                 </td>
                 <td  align="center">
                     <?php $count=0; ?>
@@ -194,8 +194,8 @@
                         }
                         ?>
                     @endforeach
-                    <font color="red">   
-                    @if ($count>0) {{ $count }} &nbsp; &#9679; 
+                    <font color="red">
+                    @if ($count>0) {{ $count }} &nbsp; &#9679;
                     @else
                     &nbsp; &nbsp; &nbsp;
                     @endif
@@ -206,34 +206,34 @@
                     @foreach ($controls as $control)
                         <?php
                         if (
-                            ($control->score==2) && 
+                            ($control->score==2) &&
                             (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
-                            ) 
+                            )
                         {
                                 $count++;
                         }
                         ?>
-                    @endforeach          
-                    <font color="orange">   
-                    @if ($count>0) {{ $count }} &nbsp; &#9679; 
+                    @endforeach
+                    <font color="orange">
+                    @if ($count>0) {{ $count }} &nbsp; &#9679;
                     @else
                     &nbsp; &nbsp; &nbsp;
                     @endif
                     </font>
                 </td>
-                <td align="center"> 
+                <td align="center">
                     <?php $count=0; ?>
                     @foreach ($controls as $control)
                         <?php
-                        if (($control->score==3) && 
+                        if (($control->score==3) &&
                             (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
                         ) {
                                 $count++;
                         }
                         ?>
-                    @endforeach          
+                    @endforeach
                     <font color="green">
-                    @if ($count>0) {{ $count }} &nbsp; &#9679; 
+                    @if ($count>0) {{ $count }} &nbsp; &#9679;
                     @else
                     &nbsp; &nbsp; &nbsp;
                     @endif
@@ -262,19 +262,19 @@
                 $calendar = new \App\Calendar(Request::get('date'));
             else
                 $calendar = new \App\Calendar(\Carbon\Carbon::now()->format('m/Y'));
-            
+
             foreach ($controls as $control) {
                 if (($control->score==null) && ($control->plan_date!=null)) {
-                        $calendar->addEvent($control->clause, $control->plan_date, 1, 'grey', $control->id);
+                        $calendar->addEvent($control->measures->implode(', '), $control->plan_date, 1, 'grey', $control->id);
                     }
                 else if (($control->score==1) && ($control->realisation_date!=null)) {
-                        $calendar->addEvent($control->clause, $control->realisation_date, 1, 'red', $control->id);
+                        $calendar->addEvent($control->measures->implode(', '), $control->realisation_date, 1, 'red', $control->id);
                         }
                 else if (($control->score==2) && ($control->realisation_date!=null)) {
-                        $calendar->addEvent($control->clause, $control->realisation_date, 1, 'orange', $control->id);
+                        $calendar->addEvent($control->measures->implode(', '), $control->realisation_date, 1, 'orange', $control->id);
                         }
                 else if (($control->score==3) && ($control->realisation_date!=null)) {
-                        $calendar->addEvent($control->clause, $control->realisation_date, 1, 'green', $control->id);
+                        $calendar->addEvent($control->measures->implode(', '), $control->realisation_date, 1, 'green', $control->id);
                     }
                 }
             echo $calendar;
@@ -298,8 +298,8 @@
     var color = Chart.helpers.color;
     var barChartData = {
         labels : [
-        <?php 
-        for ($i=-12;$i<12;$i++) { 
+        <?php
+        for ($i=-12;$i<12;$i++) {
             $now = \Carbon\Carbon::now();
             echo '"';
             echo $now->startOfMonth()->addMonth($i+$delta)->format("m/Y");
@@ -308,91 +308,91 @@
         ?>
       ],
       datasets: [
-      { 
+      {
         backgroundColor: "#60a917",
         borderColor: "#60a917",
-        pointBackgroundColor: window.chartColors.green,        
+        pointBackgroundColor: window.chartColors.green,
         stack: 'Stack 0',
         data: [
-            <?php 
-            for ($i=-12; $i<12; $i++) { 
-                $count=0; 
+            <?php
+            for ($i=-12; $i<12; $i++) {
+                $count=0;
                 $first = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta);
                 $second = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta)->endOfMonth();
                 ?>
             @foreach ($controls as $control)
                 <?php
-                if (($control->score==3) && 
-                    ($control->realisation_date!=null) && 
+                if (($control->score==3) &&
+                    ($control->realisation_date!=null) &&
                     (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
                 ) { $count++;
                 }
                 ?>
-            @endforeach          
+            @endforeach
             {{ $count }},
-            <?php } ?> 
+            <?php } ?>
         ]
       },
-      { 
+      {
         backgroundColor: "#fa6800",
         borderColor: "#fa6800",
-        pointBackgroundColor: window.chartColors.orange,        
+        pointBackgroundColor: window.chartColors.orange,
         stack: 'Stack 0',
         data: [
-            <?php 
-            for ($i=-12; $i<12; $i++) { 
-                $count=0; 
+            <?php
+            for ($i=-12; $i<12; $i++) {
+                $count=0;
                 $first = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta);
                 $second = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta)->endOfMonth();
                 ?>
             @foreach ($controls as $control)
                 <?php
-                if (($control->score==2) && 
-                    ($control->realisation_date!=null) && 
+                if (($control->score==2) &&
+                    ($control->realisation_date!=null) &&
                     (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
                 ) { $count++;
                 }
                 ?>
-            @endforeach          
+            @endforeach
             {{ $count }},
-            <?php } ?> 
+            <?php } ?>
         ]
       },
-      { 
+      {
         backgroundColor: "#ce352c",
         borderColor: "#ce352c",
-        pointBackgroundColor: window.chartColors.red,        
+        pointBackgroundColor: window.chartColors.red,
         stack: 'Stack 0',
         data: [
-            <?php 
-            for ($i=-12; $i<12; $i++) { 
-                $count=0; 
+            <?php
+            for ($i=-12; $i<12; $i++) {
+                $count=0;
                 $first = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta);
                 $second = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta)->endOfMonth();
                 ?>
             @foreach ($controls as $control)
                 <?php
                 if (($control->score==1) &&
-                    ($control->realisation_date!=null) && 
+                    ($control->realisation_date!=null) &&
                     (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
                 ) {
                     $count++;
                 }
                 ?>
-            @endforeach          
+            @endforeach
             {{ $count }},
-            <?php } ?> 
+            <?php } ?>
         ]
       },
-      { 
+      {
         backgroundColor: color(window.chartColors.grey).alpha(0.3).rgbString(),
         borderColor: window.chartColors.grey,
-        pointBackgroundColor: window.chartColors.grey,        
+        pointBackgroundColor: window.chartColors.grey,
         stack: 'Stack 0',
         data: [
-            <?php 
-            for ($i=-12; $i<12; $i++) { 
-                $count=0; 
+            <?php
+            for ($i=-12; $i<12; $i++) {
+                $count=0;
                 $first = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta);
                 $second = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta)->endOfMonth();
                 ?>
@@ -405,14 +405,14 @@
                         $count++;
                 }
                 ?>
-            @endforeach          
+            @endforeach
             {{ $count }},
-            <?php } ?> 
+            <?php } ?>
         ]
       },
       ]
     };
-         
+
     window.onload = function() {
         var ctx = document.getElementById('canvas-status').getContext('2d');
         window.myBar = new Chart(ctx, {

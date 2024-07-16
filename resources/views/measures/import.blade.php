@@ -35,12 +35,15 @@
                             @endforeach
                         </select>
                     </div>
-    		        <div class="cell-1" align="center">
-                        or
-                    </div>
+    		        <div class="cell-1" align="right">
+    				    <button type="submit" name="action" value="download" class="button info drop-shadow">
+                                {{ trans("common.download") }}
+                        </button>
+    		        </div>
                 </div>
     			<div class="row">
     		        <div class="cell-5">
+                        or
     					<input name="file" type="file" id="file" data-role="file" data-prepend="Select import file:">
     				</div>
     		    </div>
@@ -57,7 +60,7 @@
                     </div>
     		        <div class="cell-1" align="right">
     				    <button type="submit" class="button success drop-shadow"
-                            onclick="if ($('#clean').val()) return confirm('Do you want to remove all other measures and controls  ?')">
+                            onclick="if ($('#clean').is(':checked')) return confirm('Do you want to remove all other measures and controls  ?')">
                                 {{ trans("common.import") }}
                         </button>
     		        </div>
@@ -82,19 +85,25 @@
 		    		</thead>
 		    		<tbody>
 		        		<tr>
-		        			<td>A</td><td>Domain name</td><td>string(32)</td>
+		        			<td>A</td><td>Framework</td><td>string(32)</td>
 		        			<td>
-		        				The domains name must be provided, it is created if it does not exists.
+                                The security framework used.
 		        			</td>
 		        		</tr>
 		        		<tr>
-		        			<td>A</td><td>Domain description</td><td>string(255)</td>
+		        			<td>B</td><td>Domain name</td><td>string(32)</td>
 		        			<td>
-                                The description of the domain (could be null).
+		        				The domains name, it is created if it does not exists.
 		        			</td>
 		        		</tr>
 		        		<tr>
-		        			<td>B</td><td>Clause</td><td>string(32)</td>
+		        			<td>C</td><td>Domain description</td><td>string(255)</td>
+		        			<td>
+                                The description of the domain.
+		        			</td>
+		        		</tr>
+		        		<tr>
+		        			<td>D</td><td>Clause</td><td>string(32)</td>
 		        			<td>
 		        					If the clause exists the security measure is updated,<br>
 		        					if the clause does not exists, a new security measure is created,<br>
@@ -102,25 +111,25 @@
 		        			</td>
 		        		</tr>
 		        		<tr>
-		        			<td>C</td><td>Name</td><td>string(255)</td><td>The name of the security measure</td>
+		        			<td>E</td><td>Name</td><td>string(255)</td><td>The name of the security measure</td>
 		        		</tr>
 		        		<tr>
-		        			<td>D</td><td>Description</td><td>text</td><td>The description of the security measure</td>
+		        			<td>F</td><td>Description</td><td>text</td><td>The description of the security measure</td>
 		        		</tr>
 		        		<tr>
-		        			<td>E</td><td>Attributes</td><td>text</td><td>List of tags (#... #... #...)</td>
+		        			<td>G</td><td>Attributes</td><td>text</td><td>List of tags (#... #... #...)</td>
 		        		</tr>
 		        		<tr>
-		        			<td>F</td><td>Input</td><td>text</td><td>The input elements</td>
+		        			<td>H</td><td>Input</td><td>text</td><td>The input elements</td>
 		        		</tr>
 		        		<tr>
-		        			<td>G</td><td>Model</td><td>text</td><td>The computation model</td>
+		        			<td>I</td><td>Model</td><td>text</td><td>The computation model</td>
 		        		</tr>
 		        		<tr>
-		        			<td>H</td><td>Indicator</td><td>text</td><td>The indicator (Green, Orange, Red)</td>
+		        			<td>J</td><td>Indicator</td><td>text</td><td>The indicator (Green, Orange, Red)</td>
 		        		</tr>
 		        		<tr>
-		        			<td>I</td><td>Action plan</td><td>text</td><td>The proposed action plan</td>
+		        			<td>K</td><td>Action plan</td><td>text</td><td>The proposed action plan</td>
 		        		</tr>
 		        	</tbody>
 		    	</table>
@@ -135,19 +144,4 @@
 		    </div>
 
 		</div>
-<script>
-/* TODO: fixme
-$('#modelFile').change(function(){
-    console.log('modelFile changed '+$(this).val());
-    if ($(this).val()!='')
-        $("#dataFile").val("").trigger( "change" );
-})
-$('#dataFile').change(function(){
-    console.log('dataFile changed '+$(this).val());
-    if ($(this).val()!='') {
-        $("#modelFile").val("").trigger( "change" );
-        }
-})
-*/
-</script>
 @endsection

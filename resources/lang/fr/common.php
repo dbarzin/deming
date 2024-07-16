@@ -8,6 +8,7 @@ return [
     'clone' => 'Copier',
     'create' => 'Créer',
     'delete' => 'Supprimer',
+    'download' => 'Télécharger',
     'edit' => 'Modifier',
     'import' => 'Importer',
     'make' => 'Faire',
