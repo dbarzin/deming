@@ -12,13 +12,6 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('controls', function (Blueprint $table) {
-            $table->dropForeign('controls_domain_id_foreign');
-            $table->dropForeign('controls_measure_id_foreign');
-            $table->dropColumn('domain_id');
-            $table->dropColumn('measure_id');
-            });
-
         Schema::create('control_measure', function (Blueprint $table) {
             $table->integer('control_id')->unsigned();
             $table->foreign('control_id')->references('id')->on('controls');
@@ -31,6 +24,13 @@ return new class extends Migration
             if (($control->measure_id !== null)&&($control->measure_id !== 0))
                 $control->measures()->sync([$control->measure_id]);
         }
+
+        Schema::table('controls', function (Blueprint $table) {
+            $table->dropForeign('controls_domain_id_foreign');
+            $table->dropForeign('controls_measure_id_foreign');
+            $table->dropColumn('domain_id');
+            $table->dropColumn('measure_id');
+            });
     }
 
     /**
