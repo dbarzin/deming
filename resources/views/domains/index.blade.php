@@ -31,10 +31,10 @@
 		       data-check-style="1">
 			    <thead>
 			    <tr>
-					<th width="50">{{ trans('cruds.domain.fields.framework') }}</th>
-					<th width="50">{{ trans('cruds.domain.fields.name') }}</th>
-					<th width="200">{{ trans('cruds.domain.fields.description') }}</th>
-					<th width="200">{{ trans('cruds.domain.fields.measures') }}</th>
+					<th class="sortable-column" width="50">{{ trans('cruds.domain.fields.framework') }}</th>
+					<th class="sortable-column" width="50">{{ trans('cruds.domain.fields.name') }}</th>
+					<th class="sortable-column" width="200">{{ trans('cruds.domain.fields.description') }}</th>
+					<th class="sortable-column"  width="200">{{ trans('cruds.domain.fields.measures') }}</th>
 			    </tr>
 			    </thead>
 			    <tbody>

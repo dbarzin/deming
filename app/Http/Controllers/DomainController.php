@@ -25,6 +25,7 @@ class DomainController extends Controller
             ->select('domains.id', 'domains.framework', 'domains.title', 'domains.description', DB::raw('COUNT(measures.id) AS measures'))
             ->leftJoin('measures', 'measures.domain_id', '=', 'domains.id')
             ->groupBy('domains.id')
+            ->orderBy('domains.title')
             ->get();
 
         return view('domains.index')
