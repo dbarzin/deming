@@ -70,7 +70,7 @@ class ActionplanController extends Controller
             ->select([
                 'control_id',
                 'measure_id',
-                'clause'
+                'clause',
             ])
             ->leftjoin('measures', 'measures.id', '=', 'measure_id')
             ->whereIn('control_id', $actions->pluck('id'))
@@ -78,14 +78,14 @@ class ActionplanController extends Controller
             ->groupBy('control_id');
 
         // map clauses
-        foreach($actions as $action) {
+        foreach ($actions as $action) {
             $action->measures = $measuresByControlId->get($action->id, collect())->map(function ($controlMeasure) {
                 return [
                     'id' => $controlMeasure->measure_id,
-                    'clause' => $controlMeasure->clause
-                    ];
-                });
-            }
+                    'clause' => $controlMeasure->clause,
+                ];
+            });
+        }
 
         // return
         return view('actions.index')
@@ -168,10 +168,10 @@ class ActionplanController extends Controller
             ->select([
                 'control_id',
                 'measure_id',
-                'clause'
+                'clause',
             ])
             ->leftjoin('measures', 'measures.id', '=', 'measure_id')
-            ->where('control_id', '=',$action->id)
+            ->where('control_id', '=', $action->id)
             ->get()
             ->groupBy('control_id');
 
@@ -179,10 +179,9 @@ class ActionplanController extends Controller
         $action->measures = $measuresByControlId->get($action->id, collect())->map(function ($controlMeasure) {
             return [
                 'id' => $controlMeasure->measure_id,
-                'clause' => $controlMeasure->clause
-                ];
-            });
-
+                'clause' => $controlMeasure->clause,
+            ];
+        });
 
         // return
         return view('actions.show')

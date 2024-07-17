@@ -2,7 +2,6 @@
 
 namespace App\Providers;
 
-use Config;
 use DB;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\URL;
@@ -32,7 +31,7 @@ class AppServiceProvider extends ServiceProvider
         }
 
         if (true) {
-        //if (Config::get('APP_DEBUG')) {
+            //if (Config::get('APP_DEBUG')) {
             DB::listen(function ($query) {
                 Log::info(
                     $query->sql,
