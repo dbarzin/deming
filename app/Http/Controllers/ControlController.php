@@ -40,7 +40,7 @@ class ControlController extends Controller
             ->select('attributes')
             ->get();
         foreach ($allAttributes as $attribute) {
-            foreach (explode(' ', $attribute->values) as $value) {
+            foreach (explode(' ', $attribute->attributes) as $value) {
                 if (strlen($value) > 0) {
                     array_push($attributes, $value);
                 }
