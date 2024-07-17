@@ -92,14 +92,11 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::post('/action/save', 'ActionplanController@save');
 
     /* Reports */
+    Route::get('/reports', 'ReportController@show');
     Route::get('/reports/pilotage', 'ReportController@pilotage');
     Route::get('/reports/soa', 'ReportController@soa');
 
     /* Exports */
-    Route::get('/reports', function () {
-        return view('reports');
-    });
-
     Route::get('/export/domains', 'DomainController@export');
     Route::get('/export/attributes', 'AttributeController@export');
     Route::get('/export/alices', 'MeasureController@export');

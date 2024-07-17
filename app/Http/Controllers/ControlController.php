@@ -508,6 +508,9 @@ class ControlController extends Controller
             ->with('controls', $controls);
     }
 
+    /*
+    * Radar par domaine
+    */
     public function domains(Request $request)
     {
         // Not API and auditee
@@ -572,29 +575,30 @@ class ControlController extends Controller
             ->toArray();
 
         // count control never made
-        // TODO : improve me
-        $controls_never_made = DB::select(
-            'select domain_id
-            from controls c1, control_measure, measures
-            where
-            control_measure.control_id = c1.id and
-            control_measure.measure_id = measures.id and
-            (c1.status=0 or c1.status=1) and
-            not exists (
-                select *
-                from controls c2
-                where c2.status=2 and c1.id=c2.next_id);'
-        );
+        $controls_never_made = DB::table('controls as c1')
+            ->select('domain_id')
+            ->join('control_measure','c1.id','=','control_measure.control_id')
+            ->join('measures','measures.id','=','control_measure.measure_id')
+            ->leftJoin('controls as c2', 'c2.next_id', '=', 'c1.id')
+            ->whereIn('c1.status',[0,1])
+            ->whereNull('c2.id')
+            ->get();
 
         // Last controls made by measures
         $active_controls =
-        DB::table('controls as c1')
-            ->select(['c1.id', 'measures.id', 'domains.title', 'c1.realisation_date', 'c1.score'])
-            ->join('controls as c2', 'c2.id', '=', 'c1.next_id')
-            ->join('control_measure', 'control_measure.control_id', '=', 'c1.id')
-            ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
-            ->join('domains', 'domains.id', '=', 'measures.domain_id')
-            ->whereIn('c2.status',[0,1])
+            DB::table('controls as c1')
+                ->select(['c1.id', 'measures.id', 'domains.title', 'c1.realisation_date', 'c1.score'])
+                ->join('controls as c2', 'c2.id', '=', 'c1.next_id')
+                ->join('control_measure', 'control_measure.control_id', '=', 'c1.id')
+                ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
+                ->join('domains', 'domains.id', '=', 'measures.domain_id')
+                ->whereIn('c2.status',[0,1]);
+
+        if ($scope!=null)
+            $active_controls = $active_controls->where('c1.scope','=',$scope);
+
+        $active_controls =
+            $active_controls
             ->orderBy('domains.title')
             ->get();
 
@@ -635,15 +639,7 @@ class ControlController extends Controller
         } else {
             $request->session()->forget('scope');
         }
-        /*
-        $cur_date = $request->get('cur_date');
-        if ($cur_date === null) {
-            $cur_date = today()->format('Y-m-d');
-        } else {
-            // Avoid SQL Injection
-            $cur_date = \Carbon\Carbon::createFromFormat('Y-m-d', $cur_date)->format('Y-m-d');
-        }
-        */
+
         // Query controls
         $controls = DB::table('controls as c1')
             ->select(
