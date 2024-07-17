@@ -35,8 +35,8 @@ class ControlController extends Controller
 
         // get all attributes
         $attributes = [];
-        $allAttributes = DB::table('attributes')
-            ->select('values')
+        $allAttributes = DB::table('measures')
+            ->select('attributes')
             ->get();
         foreach ($allAttributes as $attribute) {
             foreach (explode(' ', $attribute->values) as $value) {
@@ -402,8 +402,8 @@ class ControlController extends Controller
 
         // get all attributes
         $values = [];
-        $attributes = DB::table('attributes')
-            ->select('values')
+        $attributes = DB::table('measures')
+            ->select('attributes')
             ->get();
         foreach ($attributes as $attribute) {
             foreach (explode(' ', $attribute->values) as $value) {
