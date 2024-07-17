@@ -14,6 +14,19 @@ use PhpOffice\PhpWord\TemplateProcessor;
 
 class ReportController extends Controller
 {
+
+    public function show(Request $request) {
+
+        // get all frameworks
+        $frameworks = DB::table('domains')
+            ->select(DB::raw('distinct framework'))
+            ->orderBy('framework')
+            ->get();
+
+        return view('reports')
+            ->with('frameworks', $frameworks);
+    }
+
     /**
      * Rapport de pilotage du SMSI
      *
@@ -21,11 +34,13 @@ class ReportController extends Controller
      */
     public function pilotage(Request $request)
     {
+        $framework = $request->get("framework");
+
         // start date
         $start_date = $request->get('start_date');
         if ($start_date === null) {
             return back()
-                ->withErrors(['pilotage' => 'pas de date de début'])
+                ->withErrors(['pilotage' => 'no start date'])
                 ->withInput();
         }
 
@@ -35,7 +50,7 @@ class ReportController extends Controller
         $end_date = $request->get('end_date');
         if ($end_date === null) {
             return back()
-                ->withErrors(['pilotage' => 'pas de date de fin'])
+                ->withErrors(['pilotage' => 'no end date'])
                 ->withInput();
         }
         $end_date = \Carbon\Carbon::createFromFormat('Y-m-d', $end_date);
@@ -43,7 +58,7 @@ class ReportController extends Controller
         // start_date > end_date
         if ($start_date->gt($end_date)) {
             return back()
-                ->withErrors(['pilotage' => 'date début > date fin'])
+                ->withErrors(['pilotage' => 'start date > end date'])
                 ->withInput();
         }
 
@@ -53,7 +68,7 @@ class ReportController extends Controller
         // end_date<=today
         if ($end_date->gt($today)) {
             return back()
-                ->withErrors(['pilotage' => 'date de fin dans le futur'])
+                ->withErrors(['pilotage' => 'end date in the futur'])
                 ->withInput();
         }
 
@@ -73,10 +88,10 @@ class ReportController extends Controller
         $templateProcessor->setValue('start_date', $start_date->format('d/m/Y'));
         $templateProcessor->setValue('end_date', $end_date->format('d/m/Y'));
 
-        $this->generateMadeControlTable($templateProcessor, $start_date, $end_date);
-        $values = $this->generateControlTable($templateProcessor);
-        $this->generateKPITable($templateProcessor, $values);
-        $this->generateActionPlanTable($templateProcessor);
+        $this->generateMadeControlTable($templateProcessor, $framework, $start_date, $end_date);
+        $values = $this->generateControlTable($templateProcessor, $framework);
+        $this->generateKPITable($templateProcessor, $framework, $values);
+        $this->generateActionPlanTable($templateProcessor, $framework);
 
         //----------------------------------------------------------------
         // save a copy
@@ -180,16 +195,30 @@ class ReportController extends Controller
     /*
     * Generate Control Made table
     */
-    private function generateMadeControlTable(TemplateProcessor $templateProcessor, $start_date, $end_date)
+    private function generateMadeControlTable(
+        TemplateProcessor $templateProcessor,
+        string|null $framework,
+        string $start_date,
+        string $end_date)
     {
         $controls = Control::where(
             [
                 ['realisation_date','>=',$start_date],
                 ['realisation_date','<',$end_date],
             ]
-        )
-            ->where('status', 2)
-            ->orderBy('realisation_date')->get();
+        );
+
+        if ($framework !== null) {
+            $controls = $controls
+                ->join("control_measure","controls.id","=","control_measure.control_id")
+                ->join("measures","control_measure.measure_id","=","measures.id")
+                ->join("domains","measures.domain_id","=","domains.id")
+                ->where("domains.framework", "=", $framework);
+            }
+            $controls = $controls
+                ->where('status', 2)
+                ->orderBy('realisation_date')
+                ->get();
 
         //----------------------------------------------------------------
         // create table
@@ -227,12 +256,18 @@ class ReportController extends Controller
     /*
     * Generate Control table
     */
-    private function generateControlTable(TemplateProcessor $templateProcessor)
-    {
+    private function generateControlTable(
+        TemplateProcessor $templateProcessor,
+        string|null $framework)
+        {
         $values = [];
 
-        // get all domains
-        $domains = DB::table('domains')->get();
+        // get domains
+        $domains = DB::table('domains');
+        if ($framework !== null) {
+            $domains =  $domains->where("framework", "=", $framework);
+        }
+        $domains = $domains->get();
 
         // get status report
         $controls = DB::table('controls as c1')
@@ -243,9 +278,15 @@ class ReportController extends Controller
                 ])
             ->leftJoin('controls as c2', 'c1.next_id', '=', 'c2.id')
             ->whereNull('c2.next_id')
-            ->where('c1.status', 2)
-            ->get();
-
+            ->where('c1.status', 2);
+        if ($framework !== null) {
+            $controls = $controls
+                ->join("control_measure","c1.id","=","control_measure.control_id")
+                ->join("measures","control_measure.measure_id","=","measures.id")
+                ->join("domains","measures.domain_id","=","domains.id")
+                ->where("domains.framework", "=", $framework);
+            }
+        $controls = $controls->get();
 
         // Fetch measures for all controls in one query
         $controlMeasures = DB::table('control_measure')
@@ -255,7 +296,7 @@ class ReportController extends Controller
                 'domain_id',
                 'clause'
             ])
-            ->leftjoin('measures', 'measures.id', '=', 'measure_id')
+            ->join('measures', 'measures.id', '=', 'measure_id')
             ->whereIn('control_id', $controls->pluck('id'))
             ->orderBy('clause')
             ->get();
@@ -329,10 +370,14 @@ class ReportController extends Controller
     /*
     * Genere KPI table
     */
-    private function generateKPITable(TemplateProcessor $templateProcessor, $values)
+    private function generateKPITable(TemplateProcessor $templateProcessor, $framework, $values)
     {
-        // get all domains
-        $domains = DB::table('domains')->get();
+        // get domains
+        $domains = DB::table('domains');
+        if ($framework !== null) {
+            $domains =  $domains->where("framework", "=", $framework);
+        }
+        $domains = $domains->get();
 
         // create table
         $table = new Table(['borderSize' => 3, 'borderColor' => 'black', 'width' => 9800, 'unit' => TblWidth::TWIP]);
@@ -409,13 +454,14 @@ class ReportController extends Controller
     /*
     * Generate Action plan table
     */
-    private function generateActionPlanTable(TemplateProcessor $templateProcessor)
+    private function generateActionPlanTable(
+        TemplateProcessor $templateProcessor,
+        string|null $framework)
     {
         $actions =
             DB::table('controls as c1')
             ->select([
                 'c1.id',
-                'c1.clause',
                 'c1.action_plan',
                 'c1.score',
                 'c1.name',
@@ -428,8 +474,43 @@ class ReportController extends Controller
             ->leftjoin('controls as c2','c1.next_id','=','c2.id')
             ->whereIn('c1.score',[1,2])
             ->whereIn('c2.status',[0,1])
-            ->whereNull('c2.next_id')
+            ->whereNull('c2.next_id');
+        // filter on framework
+        if ($framework !==null )
+            $ations = $actions
+                ->join("control_measure","c1.id",'=',"control_measure.control_id")
+                ->join('measures','measures.id','=','control_measure.measure_id')
+                ->join('domains','domains.id','=','measures.domain_id')
+                ->where('domains.framework','=',$framework);
+        // get it
+        $actions = $actions->get();
+
+        // Fetch measures for all controls in one query
+        $controlMeasures = DB::table('control_measure')
+            ->select([
+                'control_id',
+                'measure_id',
+                'domain_id',
+                'clause'
+            ])
+            ->join('measures', 'measures.id', '=', 'measure_id')
+            ->whereIn('control_id', $actions->pluck('id'))
+            ->orderBy('clause')
             ->get();
+
+        // Group measures by control_id
+        $measuresByControlId = $controlMeasures->groupBy('control_id');
+
+        // map clauses
+        foreach($actions as $control) {
+            $control->measures = $measuresByControlId->get($control->id, collect())->map(function ($controlMeasure) {
+                return [
+                    'id' => $controlMeasure->measure_id,
+                    'domain_id' => $controlMeasure->domain_id,
+                    'clause' => $controlMeasure->clause
+                    ];
+                });
+            }
 
         $table = new Table(['borderSize' => 3, 'borderColor' => 'black', 'width' => 9800, 'unit' => TblWidth::TWIP]);
 
@@ -446,7 +527,7 @@ class ReportController extends Controller
         foreach ($actions as $action) {
             $table->addRow();
             $table->addCell(2000)->addText(
-                $action->clause,
+                $action->measures->implode('clause',', '),
                 null,
                 ['align' => 'center']
             );
