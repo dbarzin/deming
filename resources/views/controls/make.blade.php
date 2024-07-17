@@ -38,11 +38,13 @@
 	    		<div class="cell-5">
 					{{ $control->name }}
 				</div>
+                @if ($control->scope!==null)
 	    		<div class="cell-2">
 		    		<strong>{{ trans("cruds.control.fields.scope") }}</strong>
 		    		&nbsp;
 	    			{{ $control->scope }}
 	    		</div>
+                @endif
 			</div>
 
 	    	<div class="row">
