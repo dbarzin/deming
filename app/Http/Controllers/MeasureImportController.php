@@ -58,7 +58,7 @@ class MeasureImportController extends Controller
         ]);
 
         // Download model ?
-        if (request('action') ==='download') {
+        if (request('action') === 'download') {
             // Find file from repositories
             $model = '/' . $request->get('model') . '.xlsx';
             $file = current(
@@ -75,7 +75,8 @@ class MeasureImportController extends Controller
             return response()->download(
                 $fileName,
                 $request->get('model') . '.xlsx',
-                ['Content-Type: application/octet-stream']);
+                ['Content-Type: application/octet-stream']
+            );
         }
 
         $errors = Collect();
@@ -217,7 +218,7 @@ class MeasureImportController extends Controller
                 $errors->push(($line + 1) . ': close name too long');
                 continue;
             }
-            if (Measure::where('clause',$data[$line][3])->exists()) {
+            if (Measure::where('clause', $data[$line][3])->exists()) {
                 $errors->push(($line + 1) . ': close name not unique');
                 continue;
             }
@@ -295,8 +296,8 @@ class MeasureImportController extends Controller
                     // update or create domain
                     $domain = Domain
                         ::where('framework', trim($data[$line][0]))
-                        ->where('title', trim($data[$line][1]))
-                        ->get()->first();
+                            ->where('title', trim($data[$line][1]))
+                            ->get()->first();
                     if ($domain === null) {
                         // create domain
                         $domain = new Domain();
@@ -329,8 +330,8 @@ class MeasureImportController extends Controller
                     // get domain id
                     $domain = Domain
                         ::where('framework', trim($data[$line][0]))
-                        ->where('title', trim($data[$line][1]))
-                        ->get()->first();
+                            ->where('title', trim($data[$line][1]))
+                            ->get()->first();
 
                     if ($domain === null) {
                         // create domain

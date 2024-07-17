@@ -445,13 +445,17 @@ class MeasureController extends Controller
             $values = array_unique($values);
         }
 
-        return view('measures.plan',
-            compact('measure',
+        return view(
+            'measures.plan',
+            compact(
+                'measure',
                 'all_measures',
                 'measures',
                 'scopes',
                 'users',
-                'values'));
+                'values'
+            )
+        );
     }
 
     /**
@@ -477,7 +481,7 @@ class MeasureController extends Controller
             [
                 'plan_date' => 'required',
                 'periodicity' => 'required',
-                'measures' => 'array|min:1'
+                'measures' => 'array|min:1',
             ]
         );
 
@@ -487,7 +491,7 @@ class MeasureController extends Controller
         $control = new Control();
         $control->name = $request->get('name');
         $control->scope = $request->get('scope');
-        $control->attributes = $request->get('attributes');
+        $control->attributes = $request->get('attributes[]');
         $control->clause = $request->get('clause');
         $control->objective = $request->get('objective');
         $control->input = $request->get('input');

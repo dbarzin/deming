@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Exports\ControlsExport;
@@ -153,9 +154,9 @@ class ControlController extends Controller
         // Build query
         $controls = DB::table('controls as c1')
             ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id')
-            ->join('control_measure','control_measure.control_id','=','c1.id')
-            ->join('measures','control_measure.measure_id','=','measures.id')
-            ->join('domains','measures.domain_id','=','domains.id');
+            ->join('control_measure', 'control_measure.control_id', '=', 'c1.id')
+            ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
+            ->join('domains', 'measures.domain_id', '=', 'domains.id');
 
         // filter on auditee controls
         if (Auth::User()->role === 5) {
@@ -242,7 +243,7 @@ class ControlController extends Controller
             ->select([
                 'control_id',
                 'measure_id',
-                'clause'
+                'clause',
             ])
             ->leftjoin('measures', 'measures.id', '=', 'measure_id')
             ->whereIn('control_id', $controls->pluck('id'))
@@ -253,14 +254,14 @@ class ControlController extends Controller
         $measuresByControlId = $controlMeasures->groupBy('control_id');
 
         // map clauses
-        foreach($controls as $control) {
+        foreach ($controls as $control) {
             $control->measures = $measuresByControlId->get($control->id, collect())->map(function ($controlMeasure) {
                 return [
                     'id' => $controlMeasure->measure_id,
-                    'clause' => $controlMeasure->clause
-                    ];
-                });
-            }
+                    'clause' => $controlMeasure->clause,
+                ];
+            });
+        }
 
         // return view
         return view('controls.index')
@@ -383,7 +384,7 @@ class ControlController extends Controller
 
         $measures = DB::table('control_measure')
             ->select('measure_id')
-            ->where('control_id',$id)
+            ->where('control_id', $id)
             ->get()
             ->pluck('measure_id')
             ->toArray();
@@ -459,7 +460,7 @@ class ControlController extends Controller
 
         // delete control_measures
         DB::Table('control_measure')
-            ->where('control_id','=',$control->id)
+            ->where('control_id', '=', $control->id)
             ->delete();
 
         // Then delete the control
@@ -487,7 +488,7 @@ class ControlController extends Controller
         $controlMeasures = DB::table('control_measure')
             ->select([
                 'control_id',
-                'clause'
+                'clause',
             ])
             ->leftjoin('measures', 'measures.id', '=', 'measure_id')
             ->whereIn('control_id', $controls->pluck('id'))
@@ -497,11 +498,11 @@ class ControlController extends Controller
         $measuresByControlId = $controlMeasures->groupBy('control_id');
 
         // map clauses
-        foreach($controls as $control) {
+        foreach ($controls as $control) {
             $control->measures = $measuresByControlId->get($control->id, collect())->map(function ($controlMeasure) {
                 return $controlMeasure->clause;
-                });
-            }
+            });
+        }
 
         // return
         return view('controls.history')
@@ -545,8 +546,9 @@ class ControlController extends Controller
             ->join('controls', 'control_measure.control_id', '=', 'controls.id')
             ->whereIn('controls.status', [0,1]);
 
-        if ($framework!==null)
-            $domains = $domains->where('framework','=',$framework);
+        if ($framework !== null) {
+            $domains = $domains->where('framework', '=', $framework);
+        }
 
         $domains = $domains
             ->orderBy('domains.title')
@@ -577,10 +579,10 @@ class ControlController extends Controller
         // count control never made
         $controls_never_made = DB::table('controls as c1')
             ->select('domain_id')
-            ->join('control_measure','c1.id','=','control_measure.control_id')
-            ->join('measures','measures.id','=','control_measure.measure_id')
+            ->join('control_measure', 'c1.id', '=', 'control_measure.control_id')
+            ->join('measures', 'measures.id', '=', 'control_measure.measure_id')
             ->leftJoin('controls as c2', 'c2.next_id', '=', 'c1.id')
-            ->whereIn('c1.status',[0,1])
+            ->whereIn('c1.status', [0,1])
             ->whereNull('c2.id')
             ->get();
 
@@ -592,15 +594,16 @@ class ControlController extends Controller
                 ->join('control_measure', 'control_measure.control_id', '=', 'c1.id')
                 ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
                 ->join('domains', 'domains.id', '=', 'measures.domain_id')
-                ->whereIn('c2.status',[0,1]);
+                ->whereIn('c2.status', [0,1]);
 
-        if ($scope!=null)
-            $active_controls = $active_controls->where('c1.scope','=',$scope);
+        if ($scope !== null) {
+            $active_controls = $active_controls->where('c1.scope', '=', $scope);
+        }
 
         $active_controls =
             $active_controls
-            ->orderBy('domains.title')
-            ->get();
+                ->orderBy('domains.title')
+                ->get();
 
         // return
         return view('radar.domains')
@@ -695,13 +698,14 @@ class ControlController extends Controller
         // Controls made
         $controls = DB::table('controls as c1')
             ->select([
-                    'c2.id',
-                    'c2.name',
-                    'c2.attributes',
-                    'c2.realisation_date',
-                    'c2.score'])
-            ->join('controls as c2','c1.id','=','c2.next_id')
-            ->where('c1.status','=',0)
+                'c2.id',
+                'c2.name',
+                'c2.attributes',
+                'c2.realisation_date',
+                'c2.score',
+            ])
+            ->join('controls as c2', 'c1.id', '=', 'c2.next_id')
+            ->where('c1.status', '=', 0)
             ->orderBy('id')
             ->get();
 
@@ -710,7 +714,7 @@ class ControlController extends Controller
             ->select([
                 'control_id',
                 'measure_id',
-                'clause'
+                'clause',
             ])
             ->leftjoin('measures', 'measures.id', '=', 'measure_id')
             ->whereIn('control_id', $controls->pluck('id'))
@@ -721,14 +725,14 @@ class ControlController extends Controller
         $measuresByControlId = $controlMeasures->groupBy('control_id');
 
         // map clauses
-        foreach($controls as $control) {
+        foreach ($controls as $control) {
             $control->measures = $measuresByControlId->get($control->id, collect())->map(function ($controlMeasure) {
                 return [
                     'id' => $controlMeasure->measure_id,
-                    'clause' => $controlMeasure->clause
-                    ];
-                });
-            }
+                    'clause' => $controlMeasure->clause,
+                ];
+            });
+        }
 
         // return
         return view('radar.attributes')
@@ -776,7 +780,7 @@ class ControlController extends Controller
         // Get current measures
         $measures = DB::table('control_measure')
             ->select('measure_id')
-            ->where('control_id',$id)
+            ->where('control_id', $id)
             ->get()
             ->pluck('measure_id')
             ->toArray();
@@ -852,7 +856,7 @@ class ControlController extends Controller
             [
                 'plan_date' => 'required',
                 'periodicity' => 'required',
-                'measures' => 'array|min:1'
+                'measures' => 'array|min:1',
             ]
         );
 

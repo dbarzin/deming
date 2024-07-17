@@ -34,8 +34,8 @@ class HomeController extends Controller
         // count active domains
         $active_domains_count = DB::table('controls')
             ->select('measures.domain_id')
-            ->join('control_measure','controls.id','=','control_id')
-            ->join('measures','control_measure.measure_id','=','measures.id')
+            ->join('control_measure', 'controls.id', '=', 'control_id')
+            ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
             ->whereIn('status', [0,1])
             ->distinct()
             ->get()
@@ -89,18 +89,18 @@ class HomeController extends Controller
                     'c2.realisation_date as prev_date',
                     'c2.score as score',
                 ])
-            ->leftjoin('controls as c2', 'c1.id', '=', 'c2.next_id')
-            ->whereIn('c1.status', [0,1])
-            ->where('c1.plan_date', '<', Carbon::today()->addDays(30)->format('Y-m-d'))
-            ->orderBy('c1.plan_date')
-            ->get();
+                ->leftjoin('controls as c2', 'c1.id', '=', 'c2.next_id')
+                ->whereIn('c1.status', [0,1])
+                ->where('c1.plan_date', '<', Carbon::today()->addDays(30)->format('Y-m-d'))
+                ->orderBy('c1.plan_date')
+                ->get();
 
         // Fetch measures for all controls in one query
         $controlMeasures = DB::table('control_measure')
             ->select([
                 'control_id',
                 'measure_id',
-                'clause'
+                'clause',
             ])
             ->leftjoin('measures', 'measures.id', '=', 'measure_id')
             ->whereIn('control_id', $controls_todo->pluck('id'))
@@ -111,14 +111,14 @@ class HomeController extends Controller
         $measuresByControlId = $controlMeasures->groupBy('control_id');
 
         // map clauses
-        foreach($controls_todo as $control) {
+        foreach ($controls_todo as $control) {
             $control->measures = $measuresByControlId->get($control->id, collect())->map(function ($controlMeasure) {
                 return [
                     'id' => $controlMeasure->measure_id,
-                    'clause' => $controlMeasure->clause
-                    ];
-                });
-            }
+                    'clause' => $controlMeasure->clause,
+                ];
+            });
+        }
 
         // planed controls this month
         $planed_controls_this_month_count = DB::table('controls')
