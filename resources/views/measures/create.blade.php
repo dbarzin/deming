@@ -38,7 +38,7 @@
 		    		<strong>{{ trans("cruds.measure.fields.clause") }}</strong>
 		    	</div>
 				<div class="cell-2">
-					<input type="text" class="input" name="clause" value="{{ old('clause', optional($measure)->clause) }}" size='60'>
+					<input type="text" class="input" name="clause" value="{{ old('clause', optional($measure)->clause) }}" maxlength='32'>
 				</div>
 			</div>
 
@@ -47,7 +47,7 @@
 		    		<strong>{{ trans("cruds.measure.fields.name") }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<input type="text" class="input" name="name" value="{{ old('name', optional($measure)->name) }}" size='60'>
+					<input type="text" class="input" name="name" value="{{ old('name', optional($measure)->name) }}" maxlength='255'>
 				</div>
 			</div>
 

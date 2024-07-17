@@ -430,12 +430,28 @@ class MeasureController extends Controller
         // Get all users
         $users = User::orderBy('name')->get();
 
+        // get all attributes
+        $values = [];
+        $attributes = DB::table('measures')
+            ->select('attributes')
+            ->get();
+        foreach ($attributes as $attribute) {
+            foreach (explode(' ', $attribute->attributes) as $value) {
+                if (strlen($value) > 0) {
+                    array_push($values, $value);
+                }
+            }
+            sort($values);
+            $values = array_unique($values);
+        }
+
         return view('measures.plan',
             compact('measure',
                 'all_measures',
                 'measures',
                 'scopes',
-                'users'));
+                'users',
+                'values'));
     }
 
     /**
@@ -467,35 +483,17 @@ class MeasureController extends Controller
 
         $measure = Measure::find($request->id);
 
-        /*
-        // This is not the case anymore
-        // Check control already exists
-        $control = DB::Table('controls')
-            ->select('id')
-            ->where('measure_id', '=', $measure->id)
-            ->where('scope', '=', $request->scope)
-            ->where('status', [0,1])
-            ->first();
-
-        if ($control !== null) {
-            // control already exixts
-            return back()
-                ->withErrors(['msg' => trans('cruds.control.error.duplicate')])
-                ->withInput();
-        }
-        */
-
         // create a new control
         $control = new Control();
-        $control->name = $measure->name;
-        $control->scope = $request->scope;
-        $control->attributes = $measure->attributes;
-        $control->clause = $measure->clause;
-        $control->objective = $measure->objective;
-        $control->input = $measure->input;
-        $control->model = $measure->model;
-        $control->indicator = $measure->indicator;
-        $control->action_plan = $measure->action_plan;
+        $control->name = $request->get('name');
+        $control->scope = $request->get('scope');
+        $control->attributes = $request->get('attributes');
+        $control->clause = $request->get('clause');
+        $control->objective = $request->get('objective');
+        $control->input = $request->get('input');
+        $control->model = $request->get('model');
+        $control->indicator = $request->get('indicator');
+        $control->action_plan = $request->get('action_plan');
         $control->periodicity = $request->get('periodicity');
         $control->plan_date = $request->get('plan_date');
         // Save it
@@ -506,20 +504,6 @@ class MeasureController extends Controller
 
         // Sync measures
         $control->measures()->sync($request->input('measures', []));
-
-        /*
-        // Update link
-        // This is not the case anymore
-        $prev_control = Control::where('measure_id', '=', $measure->id)
-            ->where('scope', '=', $measure->scope)
-            ->where('next_id', null)
-            ->where('status', 2)
-            ->first();
-        if ($prev_control !== null) {
-            $prev_control->next_id = $control->id;
-            $prev_control->update();
-        }
-        */
 
         // return to the list of measures
         return redirect('/alice/index');

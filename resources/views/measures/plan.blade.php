@@ -41,14 +41,14 @@
 	    		<strong>{{ trans('cruds.measure.fields.name') }}</strong>
 	    	</div>
 			<div class="cell-4">
-				{{ $measure->name }}
+				<input type="text" class="input" name="name" value="{{ old('name', $measure->name) }}" maxlength='255'>
 			</div>
     		<div class="cell-1" align="right">
 	    		<strong>{{ trans('cruds.control.fields.scope') }}</strong>
 	    	</div>
 			<div class="cell-1">
 				<input type="text" name="scope" data-role="input" autocomplete="on" size="32"
-				value="{{ $measure->scope }}" data-autocomplete="{{ implode(",",$scopes) }}"/>
+				value="{{ old('scope',$measure->scope) }}" data-autocomplete="{{ implode(",",$scopes) }}"/>
 			</div>
 	    </div>
 
@@ -57,9 +57,58 @@
 	    		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
 	    	</div>
 			<div class="cell-6">
-                {!! \Parsedown::instance()->text($measure->objective) !!}
+				<textarea name="objective" id="mde1">{{ old('objective', optional($measure)->objective) }}</textarea>
 			</div>
 	    </div>
+
+			<div class="row">
+	    		<div class="cell-1">
+		    		<strong>{{ trans('cruds.measure.fields.attributes') }}</strong>
+		    	</div>
+				<div class="cell-6">
+					<select data-role="select" name="attributes[]" multiple>
+						@foreach($values as $value)
+					    <option {{ str_contains($measure->attributes, $value) ? "selected" : ""}} >{{$value}}</option>
+					    @endforeach
+					 </select>
+				</div>
+			</div>
+
+	    	<div class="row">
+	    		<div class="cell-1">
+					<strong>{{ trans("cruds.measure.fields.input") }}</strong>
+				</div>
+				<div class="cell-6">
+                    <textarea name="input" id="mde2">{{ old('input', optional($measure)->input) }}</textarea>
+				</div>
+			</div>
+
+	    	<div class="row">
+	    		<div class="cell-1">
+					<strong>{{ trans("cruds.measure.fields.model") }}</strong>
+				</div>
+				<div class="cell-6">
+					<textarea name="model" rows="3" data-role="textarea" data-clear-button="false">{{ old('model', optional($measure)->model) }}</textarea>
+				</div>
+			</div>
+
+	    	<div class="row">
+	    		<div class="cell-1">
+					<strong>{{ trans("cruds.measure.fields.indicator") }}</strong>
+				</div>
+				<div class="cell-6">
+					<textarea name="indicator" rows="3" data-role="textarea" data-clear-button="false">{{ old('indicator', optional($measure)->indicator) }}</textarea>
+				</div>
+			</div>
+
+	    	<div class="row">
+	    		<div class="cell-1">
+					<strong>{{ trans("cruds.measure.fields.action_plan") }}</strong>
+				</div>
+				<div class="cell-6">
+					<textarea name="action_plan" id="mde3">{{ old('action_plan', optional($measure)->action_plan) }}</textarea>
+				</div>
+			</div>
 
 		<div class="row">
 			<div class="cell-1">
@@ -127,4 +176,25 @@
 </div>
 </div>
 
+<!------------------------------------------------------------------------------------->
+<script type="text/javascript">
+const mde1 = new EasyMDE({
+    element: document.getElementById('mde1'),
+    minHeight: "200px",
+    maxHeight: "200px",
+    status: false,
+    });
+const mde2 = new EasyMDE({
+    element: document.getElementById('mde2'),
+    minHeight: "200px",
+    maxHeight: "200px",
+    status: false,
+    });
+const mde3 = new EasyMDE({
+    element: document.getElementById('mde3'),
+    minHeight: "200px",
+    maxHeight: "200px",
+    status: false,
+    });
+</script>
 @endsection
