@@ -50,11 +50,13 @@ form, table {
 				<div class="cell-4">
 					{{ $action->name }}
 				</div>
+                @if ($action->scope!==null)
 	    		<div class="cell-3">
 		    		<strong>{{ trans("cruds.control.fields.scope") }}</strong>
 		    		&nbsp;
 	    			{{ $action->scope }}
 	    		</div>
+                @endif
 			</div>
 
 	    	<div class="row">
