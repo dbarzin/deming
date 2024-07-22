@@ -35,7 +35,7 @@ class SendNotifications extends Command
         Log::debug('SendNotifications - Start.');
 
         // Need to send notifications today ?
-        if ($this->needCheck()) {
+        if ($this->needCheck())
             Log::debug('SendNotifications - notifications today');
 
             $controls = Control
@@ -80,10 +80,13 @@ class SendNotifications extends Command
                         $txt .= '</a>';
                         // Space
                         $txt .= ' &nbsp; - &nbsp; ';
-                        // Clause
-                        $txt .= '<a href="' . url('/alice/show/' . $control->measure_id) . '">'. htmlentities($control->clause) . '</a>';
-                        // Space
-                        $txt .= ' &nbsp; - &nbsp; ';
+                        // Clauses
+                        foreach($control->measures as $measure) {
+                            $txt .= '<a href="' . url('/alice/show/' . $measure->id) . '">'. htmlentities($measure->clause) . '</a>';
+                            // Space
+                            $txt .= ' &nbsp; ';
+                        }
+                        $txt .= ' - &nbsp; ';
                         // Name
                         $txt .= htmlentities($control->name);
                         $txt .= "<br>\n";
