@@ -13,7 +13,7 @@
                     <div class="cell-2">
                         <strong>{{ trans("cruds.domain.fields.framework") }}</strong>
                         <select name="framework" data-role="select" id="framework">
-                            <option></option>
+                            <option value='none'></option>
                             @foreach ($frameworks as $framework)
                             <option
                                 @if (Session::get("framework")==$framework)
@@ -27,12 +27,13 @@
                     <div class="cell-2">
                         <strong>{{ trans("cruds.control.fields.scope") }}</strong>
                         <select name="scope" data-role="select" id="scope">
-                            @foreach ($scopes as $scope)
+                            <option value='none'></option>
+                            @foreach ($scopes as $key => $value)
                             <option
-                                @if (Session::get("scope")==$scope)
+                                @if (Session::get("scope")==$value->scope)
                                     selected
                                 @endif >
-                                {{ $scope }}
+                                {{ $value->scope }}
                             </option>
                             @endforeach
                         </select>
