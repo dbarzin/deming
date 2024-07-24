@@ -406,8 +406,8 @@ class ControlController extends Controller
         $attributes = DB::table('measures')
             ->select('attributes')
             ->get();
-        foreach ($attributes as $attribute) {
-            foreach (explode(' ', $attribute->values) as $value) {
+        foreach ($attributes as $id => $key) {
+            foreach (explode(' ', $key->attributes) as $value) {
                 array_push($values, $value);
             }
         }
