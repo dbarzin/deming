@@ -526,24 +526,24 @@ class ControlController extends Controller
         $scope = $request->get('scope');
         if ($scope !== null) {
             if ($scope === 'none') {
-                $scope=null;
+                $scope = null;
                 $request->session()->forget('scope');
-                }
-            else
+            } else {
                 $request->session()->put('scope', $scope);
+            }
         } else {
             $scope = $request->session()->get('scope');
         }
-//dd($scope);
+        //dd($scope);
         // Framework filter
         $framework = $request->get('framework');
         if ($framework !== null) {
             if ($framework === 'none') {
-                $framework=null;
+                $framework = null;
                 $request->session()->forget('framework');
-                }
-            else
-            $request->session()->put('framework', $framework);
+            } else {
+                $request->session()->put('framework', $framework);
+            }
         } else {
             $framework = $request->session()->get('framework');
         }

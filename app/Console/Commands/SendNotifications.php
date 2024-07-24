@@ -81,7 +81,7 @@ class SendNotifications extends Command
                         // Space
                         $txt .= ' &nbsp; - &nbsp; ';
                         // Clauses
-                        foreach($control->measures as $measure) {
+                        foreach ($control->measures as $measure) {
                             $txt .= '<a href="' . url('/alice/show/' . $measure->id) . '">'. htmlentities($measure->clause) . '</a>';
                             // Space
                             $txt .= ' &nbsp; ';
