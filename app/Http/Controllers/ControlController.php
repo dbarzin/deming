@@ -525,17 +525,27 @@ class ControlController extends Controller
         // Scope filter
         $scope = $request->get('scope');
         if ($scope !== null) {
-            $request->session()->put('scope', $scope);
+            if ($scope === 'none') {
+                $scope=null;
+                $request->session()->forget('scope');
+                }
+            else
+                $request->session()->put('scope', $scope);
         } else {
-            $request->session()->forget('scope');
+            $scope = $request->session()->get('scope');
         }
-
+//dd($scope);
         // Framework filter
         $framework = $request->get('framework');
         if ($framework !== null) {
+            if ($framework === 'none') {
+                $framework=null;
+                $request->session()->forget('framework');
+                }
+            else
             $request->session()->put('framework', $framework);
         } else {
-            $request->session()->forget('framework');
+            $framework = $request->session()->get('framework');
         }
 
         // get all active domains
@@ -570,11 +580,10 @@ class ControlController extends Controller
         $scopes = DB::table('controls')
             ->select('scope')
             ->whereIn('status', [0,1])
+            ->whereNotNull('scope')
             ->distinct()
             ->orderBy('scope')
-            ->get()
-            ->pluck('scope')
-            ->toArray();
+            ->get();
 
         // count control never made
         $controls_never_made = DB::table('controls as c1')
