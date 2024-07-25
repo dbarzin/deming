@@ -16,10 +16,10 @@
                             <option value='none'></option>
                             @foreach ($frameworks as $framework)
                             <option
-                                @if (Session::get("framework")==$framework)
+                                @if (Session::get("framework")==$framework->title)
                                     selected
                                 @endif >
-                                {{ $framework }}
+                                {{ $framework->title }}
                             </option>
                             @endforeach
                         </select>

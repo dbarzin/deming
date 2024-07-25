@@ -534,7 +534,7 @@ class ControlController extends Controller
         } else {
             $scope = $request->session()->get('scope');
         }
-        //dd($scope);
+
         // Framework filter
         $framework = $request->get('framework');
         if ($framework !== null) {
@@ -566,15 +566,13 @@ class ControlController extends Controller
 
         // get all frameworks
         $frameworks = DB::table('domains')
-            ->select(DB::raw('distinct domains.framework'))
+            ->select(DB::raw('distinct domains.framework as title'))
             ->join('measures', 'domains.id', '=', 'measures.domain_id')
             ->join('control_measure', 'control_measure.measure_id', '=', 'measures.id')
             ->join('controls', 'control_measure.control_id', '=', 'controls.id')
             ->whereIn('controls.status', [0,1])
             ->orderBy('domains.framework')
-            ->get()
-            ->pluck('framework')
-            ->toArray();
+            ->get();
 
         // get all scopes
         $scopes = DB::table('controls')
@@ -595,7 +593,7 @@ class ControlController extends Controller
             ->whereNull('c2.id')
             ->get();
 
-        // Last controls made by measures
+        // Last controls made and measures
         $active_controls =
             DB::table('controls as c1')
                 ->select(['c1.id', 'measures.id', 'domains.title', 'c1.realisation_date', 'c1.score'])
