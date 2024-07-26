@@ -36,9 +36,7 @@ class ControlController extends Controller
 
         // get all attributes
         $attributes = [];
-        $allAttributes = DB::table('measures')
-            ->select('attributes')
-            ->get();
+        $allAttributes = DB::table('measures')->select('attributes')->get();
         foreach ($allAttributes as $attribute) {
             foreach (explode(' ', $attribute->attributes) as $value) {
                 if (strlen($value) > 0) {
@@ -66,12 +64,17 @@ class ControlController extends Controller
             ->where('scope', '<>', '');
         if (Auth::User()->role === 5) {
             $scopes = $scopes
-                ->leftjoin('control_user', 'controls.id', '=', 'control_user.control_id')
+                ->leftjoin(
+                    'control_user',
+                    'controls.id',
+                    '=',
+                    'control_user.control_id'
+                )
                 ->where('control_user.user_id', '=', Auth::User()->id);
         }
         $scopes = $scopes
             //->whereNull('realisation_date')
-            ->whereIn('status', [0,1])
+            ->whereIn('status', [0, 1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -154,19 +157,29 @@ class ControlController extends Controller
         // Build query
         $controls = DB::table('controls as c1')
             ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id')
-            ->join('control_measure', 'control_measure.control_id', '=', 'c1.id')
+            ->join(
+                'control_measure',
+                'control_measure.control_id',
+                '=',
+                'c1.id'
+            )
             ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
             ->join('domains', 'measures.domain_id', '=', 'domains.id');
 
         // filter on auditee controls
         if (Auth::User()->role === 5) {
             $controls = $controls
-                ->leftjoin('control_user', 'c1.id', '=', 'control_user.control_id')
+                ->leftjoin(
+                    'control_user',
+                    'c1.id',
+                    '=',
+                    'control_user.control_id'
+                )
                 ->where('control_user.user_id', '=', Auth::User()->id);
         }
 
         // Filter on domain
-        if (($domain !== null) && ($domain !== 0)) {
+        if ($domain !== null && $domain !== 0) {
             $controls = $controls->where('measures.domain_id', '=', $domain);
         }
 
@@ -177,33 +190,49 @@ class ControlController extends Controller
 
         // filter on measure
         if ($request->measure !== null) {
-            $controls = $controls
-                ->where('control_measure.measure_id', '=', $request->measure);
+            $controls = $controls->where(
+                'control_measure.measure_id',
+                '=',
+                $request->measure
+            );
         }
 
         // Filter on period
-        if (($period !== null) && ($period !== 99)) {
+        if ($period !== null && $period !== 99) {
             $controls = $controls
-                ->where('c1.plan_date', '>=', (new Carbon('first day of this month'))->addMonth($period)->format('Y-m-d'))
-                ->where('c1.plan_date', '<', (new Carbon('first day of next month'))->addMonth($period)->format('Y-m-d'));
+                ->where(
+                    'c1.plan_date',
+                    '>=',
+                    (new Carbon('first day of this month'))
+                        ->addMonth($period)
+                        ->format('Y-m-d')
+                )
+                ->where(
+                    'c1.plan_date',
+                    '<',
+                    (new Carbon('first day of next month'))
+                        ->addMonth($period)
+                        ->format('Y-m-d')
+                );
         }
 
         // Filter on status
-        if ($late !== null) { // All
+        if ($late !== null) {
+            // All
             $controls = $controls
                 ->where('c1.plan_date', '<', Carbon::today()->format('Y-m-d'))
                 // ->whereNull('c1.realisation_date');
-                ->whereIn('c1.status', [0,1]);
-        } elseif ($status === '1') { // Done
+                ->whereIn('c1.status', [0, 1]);
+        } elseif ($status === '1') {
+            // Done
             if (Auth::User()->role === 5) {
                 // Auditee want to see his proposed controls too
-                $controls = $controls
-                    ->whereIn('c1.status', [1,2]);
+                $controls = $controls->whereIn('c1.status', [1, 2]);
             } else {
-                $controls = $controls
-                    ->where('c1.status', 2);
+                $controls = $controls->where('c1.status', 2);
             }
-        } elseif ($status === '2') { // Todo
+        } elseif ($status === '2') {
+            // Todo
             if (Auth::User()->role === 5) {
                 $controls = $controls
                     //->whereNull('c1.realisation_date');
@@ -211,18 +240,22 @@ class ControlController extends Controller
             } else {
                 $controls = $controls
                     //->whereNull('c1.realisation_date');
-                    ->whereIn('c1.status', [0,1]);
+                    ->whereIn('c1.status', [0, 1]);
             }
         }
 
         // Filter on attribute
         if ($attribute !== null) {
-            $controls = $controls->where('c1.attributes', 'LIKE', '%'.$attribute.'%');
+            $controls = $controls->where(
+                'c1.attributes',
+                'LIKE',
+                '%' . $attribute . '%'
+            );
         }
 
         // Query DB
-        $controls = $controls->select(
-            [
+        $controls = $controls
+            ->select([
                 'c1.id',
                 'c1.name',
                 'c1.scope',
@@ -232,19 +265,14 @@ class ControlController extends Controller
                 'c1.status',
                 'c2.id as next_id',
                 'c2.plan_date as next_date',
-            ]
-        )
+            ])
             ->orderBy('c1.id')
             ->distinct()
             ->get();
 
         // Fetch measures for all controls in one query
         $controlMeasures = DB::table('control_measure')
-            ->select([
-                'control_id',
-                'measure_id',
-                'clause',
-            ])
+            ->select(['control_id', 'measure_id', 'clause'])
             ->leftjoin('measures', 'measures.id', '=', 'measure_id')
             ->whereIn('control_id', $controls->pluck('id'))
             ->orderBy('clause')
@@ -255,12 +283,14 @@ class ControlController extends Controller
 
         // map clauses
         foreach ($controls as $control) {
-            $control->measures = $measuresByControlId->get($control->id, collect())->map(function ($controlMeasure) {
-                return [
-                    'id' => $controlMeasure->measure_id,
-                    'clause' => $controlMeasure->clause,
-                ];
-            });
+            $control->measures = $measuresByControlId
+                ->get($control->id, collect())
+                ->map(function ($controlMeasure) {
+                    return [
+                        'id' => $controlMeasure->measure_id,
+                        'clause' => $controlMeasure->clause,
+                    ];
+                });
         }
 
         // return view
@@ -305,15 +335,19 @@ class ControlController extends Controller
     public function show(int $id)
     {
         // Not API
-        abort_if(Auth::User()->role === 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(
+            Auth::User()->role === 4,
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // for aditee only if he is assigne to that control
         abort_if(
-            ((Auth::User()->role === 5) &&
+            Auth::User()->role === 5 &&
                 ! DB::table('control_user')
                     ->where('control_id', $id)
                     ->where('user_id', Auth::User()->id)
-                    ->exists()),
+                    ->exists(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -328,7 +362,8 @@ class ControlController extends Controller
             $next_control = DB::table('controls')
                 ->select('id', 'plan_date')
                 ->where('id', '=', $control->next_id)
-                ->get()->first();
+                ->get()
+                ->first();
         } else {
             $next_control = null;
         }
@@ -336,16 +371,23 @@ class ControlController extends Controller
         $prev_control = DB::table('controls')
             ->select('id', 'plan_date')
             ->where('next_id', '=', $id)
-            ->get()->first();
+            ->get()
+            ->first();
 
         // get associated documents
         $documents = DB::table('documents')->where('control_id', $id)->get();
         return view('controls.show')
             ->with('control', $control)
             ->with('next_id', $next_control !== null ? $next_control->id : null)
-            ->with('next_date', $next_control !== null ? $next_control->plan_date : null)
+            ->with(
+                'next_date',
+                $next_control !== null ? $next_control->plan_date : null
+            )
             ->with('prev_id', $prev_control !== null ? $prev_control->id : null)
-            ->with('prev_date', $prev_control !== null ? $prev_control->plan_date : null)
+            ->with(
+                'prev_date',
+                $prev_control !== null ? $prev_control->plan_date : null
+            )
             ->with('documents', $documents);
     }
 
@@ -359,7 +401,11 @@ class ControlController extends Controller
     public function edit(int $id)
     {
         // Only for administrator role
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(
+            Auth::User()->role !== 1,
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $control = Control::find($id);
 
@@ -394,7 +440,7 @@ class ControlController extends Controller
             ->select('scope')
             ->whereNotNull('scope')
             ->where('scope', '<>', '')
-            ->whereIn('status', [0,1])
+            ->whereIn('status', [0, 1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -403,9 +449,7 @@ class ControlController extends Controller
 
         // get all attributes
         $values = [];
-        $attributes = DB::table('measures')
-            ->select('attributes')
-            ->get();
+        $attributes = DB::table('measures')->select('attributes')->get();
         foreach ($attributes as $id => $key) {
             foreach (explode(' ', $key->attributes) as $value) {
                 array_push($values, $value);
@@ -437,7 +481,11 @@ class ControlController extends Controller
     public function destroy(int $id)
     {
         // Only for administrator role
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(
+            Auth::User()->role !== 1,
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // Get the control
         $control = Control::find($id);
@@ -455,8 +503,9 @@ class ControlController extends Controller
         Document::where('control_id', $id)->delete();
 
         // Previous control must point to next control
-        Control::where('next_id', $control->id)
-            ->update(['next_id' => $control->next_id]);
+        Control::where('next_id', $control->id)->update([
+            'next_id' => $control->next_id,
+        ]);
 
         // delete control_measures
         DB::Table('control_measure')
@@ -473,8 +522,7 @@ class ControlController extends Controller
     {
         // Not API and auditee
         abort_if(
-            (Auth::User()->role === 4) ||
-            (Auth::User()->role === 5),
+            Auth::User()->role === 4 || Auth::User()->role === 5,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -486,10 +534,7 @@ class ControlController extends Controller
 
         // Fetch measures for all controls in one query
         $controlMeasures = DB::table('control_measure')
-            ->select([
-                'control_id',
-                'clause',
-            ])
+            ->select(['control_id', 'clause'])
             ->leftjoin('measures', 'measures.id', '=', 'measure_id')
             ->whereIn('control_id', $controls->pluck('id'))
             ->get();
@@ -499,25 +544,25 @@ class ControlController extends Controller
 
         // map clauses
         foreach ($controls as $control) {
-            $control->measures = $measuresByControlId->get($control->id, collect())->map(function ($controlMeasure) {
-                return $controlMeasure->clause;
-            });
+            $control->measures = $measuresByControlId
+                ->get($control->id, collect())
+                ->map(function ($controlMeasure) {
+                    return $controlMeasure->clause;
+                });
         }
 
         // return
-        return view('controls.history')
-            ->with('controls', $controls);
+        return view('controls.history')->with('controls', $controls);
     }
 
     /*
-    * Radar par domaine
-    */
+     * Radar par domaine
+     */
     public function domains(Request $request)
     {
         // Not API and auditee
         abort_if(
-            (Auth::User()->role === 4) ||
-            (Auth::User()->role === 5),
+            Auth::User()->role === 4 || Auth::User()->role === 5,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -534,7 +579,7 @@ class ControlController extends Controller
         } else {
             $scope = $request->session()->get('scope');
         }
-        //dd($scope);
+
         // Framework filter
         $framework = $request->get('framework');
         if ($framework !== null) {
@@ -548,38 +593,52 @@ class ControlController extends Controller
             $framework = $request->session()->get('framework');
         }
 
+        // Group by
+        $group = $request->get('group');
+        if ($group !== null) {
+            $request->session()->put('group', $group);
+        } else {
+            $group = $request->session()->get('group');
+        }
+
         // get all active domains
         $domains = DB::table('domains')
             ->select(DB::raw('distinct domains.id, domains.title'))
             ->join('measures', 'domains.id', '=', 'measures.domain_id')
-            ->join('control_measure', 'control_measure.measure_id', '=', 'measures.id')
+            ->join(
+                'control_measure',
+                'control_measure.measure_id',
+                '=',
+                'measures.id'
+            )
             ->join('controls', 'control_measure.control_id', '=', 'controls.id')
-            ->whereIn('controls.status', [0,1]);
+            ->whereIn('controls.status', [0, 1]);
 
         if ($framework !== null) {
             $domains = $domains->where('framework', '=', $framework);
         }
 
-        $domains = $domains
-            ->orderBy('domains.title')
-            ->get();
+        $domains = $domains->orderBy('domains.title')->get();
 
         // get all frameworks
         $frameworks = DB::table('domains')
-            ->select(DB::raw('distinct domains.framework'))
+            ->select(DB::raw('distinct domains.framework as title'))
             ->join('measures', 'domains.id', '=', 'measures.domain_id')
-            ->join('control_measure', 'control_measure.measure_id', '=', 'measures.id')
+            ->join(
+                'control_measure',
+                'control_measure.measure_id',
+                '=',
+                'measures.id'
+            )
             ->join('controls', 'control_measure.control_id', '=', 'controls.id')
-            ->whereIn('controls.status', [0,1])
+            ->whereIn('controls.status', [0, 1])
             ->orderBy('domains.framework')
-            ->get()
-            ->pluck('framework')
-            ->toArray();
+            ->get();
 
         // get all scopes
         $scopes = DB::table('controls')
             ->select('scope')
-            ->whereIn('status', [0,1])
+            ->whereIn('status', [0, 1])
             ->whereNotNull('scope')
             ->distinct()
             ->orderBy('scope')
@@ -588,31 +647,76 @@ class ControlController extends Controller
         // count control never made
         $controls_never_made = DB::table('controls as c1')
             ->select('domain_id')
-            ->join('control_measure', 'c1.id', '=', 'control_measure.control_id')
+            ->join(
+                'control_measure',
+                'c1.id',
+                '=',
+                'control_measure.control_id'
+            )
             ->join('measures', 'measures.id', '=', 'control_measure.measure_id')
             ->leftJoin('controls as c2', 'c2.next_id', '=', 'c1.id')
-            ->whereIn('c1.status', [0,1])
+            ->whereIn('c1.status', [0, 1])
             ->whereNull('c2.id')
             ->get();
 
-        // Last controls made by measures
-        $active_controls =
-            DB::table('controls as c1')
-                ->select(['c1.id', 'measures.id', 'domains.title', 'c1.realisation_date', 'c1.score'])
-                ->join('controls as c2', 'c2.id', '=', 'c1.next_id')
-                ->join('control_measure', 'control_measure.control_id', '=', 'c1.id')
-                ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
-                ->join('domains', 'domains.id', '=', 'measures.domain_id')
-                ->whereIn('c2.status', [0,1]);
+        // Last controls made and measures
+        $active_controls = DB::table('controls as c1');
+
+        if ($group === '1') {
+            $active_controls = $active_controls->select([
+                'domains.title',
+                'measures.id as measure_id',
+                'measures.clause as clause',
+                'c1.id as control_id',
+                'c1.name as name',
+                'c1.scope as scope',
+                DB::raw('min(c1.score) as score'),
+            ]);
+        } else {
+            $active_controls = $active_controls->select([
+                'domains.title',
+                'measures.id as measure_id',
+                'measures.clause as clause',
+                'c1.id as control_id',
+                'c1.name as name',
+                'c1.scope as scope',
+                'c1.score as score',
+            ]);
+        }
+
+        $active_controls = $active_controls
+            ->join('controls as c2', 'c2.id', '=', 'c1.next_id')
+            ->join(
+                'control_measure',
+                'control_measure.control_id',
+                '=',
+                'c1.id'
+            )
+            ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
+            ->join('domains', 'domains.id', '=', 'measures.domain_id')
+            ->whereIn('c2.status', [0, 1]);
+
+        if ($framework !== null) {
+            $active_controls = $active_controls->where(
+                'domains.framework',
+                '=',
+                $framework
+            );
+        }
 
         if ($scope !== null) {
             $active_controls = $active_controls->where('c1.scope', '=', $scope);
         }
 
-        $active_controls =
-            $active_controls
-                ->orderBy('domains.title')
-                ->get();
+        if ($group === '1') {
+            $active_controls = $active_controls->groupBy([
+                'domains.title',
+                'measures.id',
+                'measures.clause',
+            ]);
+        }
+
+        $active_controls = $active_controls->orderBy('domains.title')->get();
 
         // return
         return view('radar.domains')
@@ -627,18 +731,27 @@ class ControlController extends Controller
     {
         // get all active domains
         $domains = DB::table('domains')
-            ->select(DB::raw('distinct domains.id, domains.title, domains.description'))
+            ->select(
+                DB::raw(
+                    'distinct domains.id, domains.title, domains.description'
+                )
+            )
             ->join('measures', 'domains.id', '=', 'measures.domain_id')
-            ->join('control_measure', 'measures.id', '=', 'control_measure.measure_id')
+            ->join(
+                'control_measure',
+                'measures.id',
+                '=',
+                'control_measure.measure_id'
+            )
             ->join('controls', 'control_measure.control_id', '=', 'controls.id')
-            ->whereIn('status', [0,1])
+            ->whereIn('status', [0, 1])
             ->orderBy('domains.title')
             ->get();
 
         // get all scopes
         $scopes = DB::table('controls')
             ->select('scope')
-            ->whereIn('status', [0,1])
+            ->whereIn('status', [0, 1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -671,16 +784,18 @@ class ControlController extends Controller
                 )
             )
             ->join('controls as c2', 'c1.next_id', '=', 'c2.id')
-            ->join('control_measure', 'control_measure.control_id', '=', 'c2.id')
+            ->join(
+                'control_measure',
+                'control_measure.control_id',
+                '=',
+                'c2.id'
+            )
             ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
             ->whereIn('c2.status', [0, 1]);
         if ($cur_scope !== null) {
             $controls = $controls->where('c1.scope', '=', $cur_scope);
         }
-        $controls = $controls
-            ->orderBy('clause')
-            ->orderBy('scope')
-            ->get();
+        $controls = $controls->orderBy('clause')->orderBy('scope')->get();
 
         // return
         return view('/radar/controls')
@@ -693,16 +808,13 @@ class ControlController extends Controller
     {
         // Not API and auditee
         abort_if(
-            (Auth::User()->role === 4) ||
-            (Auth::User()->role === 5),
+            Auth::User()->role === 4 || Auth::User()->role === 5,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
 
         // get all attributes
-        $attributes = DB::table('attributes')
-            ->orderBy('name')
-            ->get();
+        $attributes = DB::table('attributes')->orderBy('name')->get();
 
         // Controls made
         $controls = DB::table('controls as c1')
@@ -720,11 +832,7 @@ class ControlController extends Controller
 
         // Fetch measures for all controls in one query
         $controlMeasures = DB::table('control_measure')
-            ->select([
-                'control_id',
-                'measure_id',
-                'clause',
-            ])
+            ->select(['control_id', 'measure_id', 'clause'])
             ->leftjoin('measures', 'measures.id', '=', 'measure_id')
             ->whereIn('control_id', $controls->pluck('id'))
             ->orderBy('clause')
@@ -735,12 +843,14 @@ class ControlController extends Controller
 
         // map clauses
         foreach ($controls as $control) {
-            $control->measures = $measuresByControlId->get($control->id, collect())->map(function ($controlMeasure) {
-                return [
-                    'id' => $controlMeasure->measure_id,
-                    'clause' => $controlMeasure->clause,
-                ];
-            });
+            $control->measures = $measuresByControlId
+                ->get($control->id, collect())
+                ->map(function ($controlMeasure) {
+                    return [
+                        'id' => $controlMeasure->measure_id,
+                        'clause' => $controlMeasure->clause,
+                    ];
+                });
         }
 
         // return
@@ -759,7 +869,11 @@ class ControlController extends Controller
     public function plan(int $id)
     {
         // For administrators and users only
-        abort_if((Auth::User()->role !== 1) && (Auth::User()->role !== 2), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(
+            Auth::User()->role !== 1 && Auth::User()->role !== 2,
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // does not exists in that way
         $control = Control::find($id);
@@ -797,7 +911,7 @@ class ControlController extends Controller
         // Get al active scopes
         $scopes = DB::table('controls')
             ->select('scope')
-            ->whereIn('status', [0,1])
+            ->whereIn('status', [0, 1])
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -825,18 +939,24 @@ class ControlController extends Controller
     public function unplan(Request $request)
     {
         // For administrators and users only
-        abort_if((Auth::User()->role !== 1) && (Auth::User()->rol !== 2), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(
+            Auth::User()->role !== 1 && Auth::User()->rol !== 2,
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         $control = Control
-                // ::whereNull('realisation_date')
-                ::whereIn('status', [0,1])
-                    ->where('id', '=', $request->id)
-                    ->get()
-                    ->first();
+            // ::whereNull('realisation_date')
+            ::whereIn('status', [0, 1])
+                ->where('id', '=', $request->id)
+                ->get()
+                ->first();
 
         if ($control !== null) {
             // break previous link
-            $prev_control = Control::where('next_id', $control->id)->get()->first();
+            $prev_control = Control::where('next_id', $control->id)
+                ->get()
+                ->first();
             if ($prev_control !== null) {
                 $prev_control->next_id = null;
                 $prev_control->update();
@@ -858,16 +978,17 @@ class ControlController extends Controller
     public function doPlan(Request $request)
     {
         // For administrators and users only
-        abort_if((Auth::User()->role !== 1) && (Auth::User()->rol !== 2), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $this->validate(
-            $request,
-            [
-                'plan_date' => 'required',
-                'periodicity' => 'required',
-                'measures' => 'array|min:1',
-            ]
+        abort_if(
+            Auth::User()->role !== 1 && Auth::User()->rol !== 2,
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
         );
+
+        $this->validate($request, [
+            'plan_date' => 'required',
+            'periodicity' => 'required',
+            'measures' => 'array|min:1',
+        ]);
 
         $control = Control::find($request->id);
 
@@ -902,15 +1023,14 @@ class ControlController extends Controller
         $control->measures()->sync($request->input('measures', []));
         $control->save();
 
-        return redirect('/bob/show/'.$request->id);
+        return redirect('/bob/show/' . $request->id);
     }
 
     public function make(Request $request)
     {
         // Not for auditor and API
         abort_if(
-            (Auth::User()->role === 3) ||
-            (Auth::User()->role === 4),
+            Auth::User()->role === 3 || Auth::User()->role === 4,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -919,11 +1039,11 @@ class ControlController extends Controller
 
         // for aditee only if he is assigne to that control
         abort_if(
-            ((Auth::User()->role === 5) &&
+            Auth::User()->role === 5 &&
                 ! DB::table('control_user')
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
-                    ->exists()),
+                    ->exists(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -936,7 +1056,9 @@ class ControlController extends Controller
 
         // Control already made ?
         if ($control->status === 2) {
-            return back()->withErrors(['msg' => trans('cruds.control.error.made')]);
+            return back()->withErrors([
+                'msg' => trans('cruds.control.error.made'),
+            ]);
         }
 
         // get associated documents
@@ -946,14 +1068,21 @@ class ControlController extends Controller
         $request->session()->put('control', $id);
 
         // compute next control date
-        $next_date = date('Y-m-d', strtotime($control->periodicity.' months', strtotime($control->plan_date)));
+        $next_date = date(
+            'Y-m-d',
+            strtotime(
+                $control->periodicity . ' months',
+                strtotime($control->plan_date)
+            )
+        );
 
         // compute next control date
-        $next_date = $control->next_date === null ?
-            \Carbon\Carbon::createFromFormat('Y-m-d', $control->plan_date)
-                ->addMonths($control->periodicity)
-                ->format('Y-m-d')
-            : $control->next_date->format('Y-m-d');
+        $next_date =
+            $control->next_date === null
+                ? \Carbon\Carbon::createFromFormat('Y-m-d', $control->plan_date)
+                    ->addMonths($control->periodicity)
+                    ->format('Y-m-d')
+                : $control->next_date->format('Y-m-d');
 
         // return view
         return view('controls.make')
@@ -973,9 +1102,9 @@ class ControlController extends Controller
     {
         // Only for admin, user and auditee
         abort_if(
-            ! ((Auth::User()->role === 1)
-            || (Auth::User()->role === 2)
-            || (Auth::User()->role === 5)),
+            ! (Auth::User()->role === 1 ||
+                Auth::User()->role === 2 ||
+                Auth::User()->role === 5),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -984,11 +1113,11 @@ class ControlController extends Controller
 
         // for aditee only if he is assigne to that control
         abort_if(
-            ((Auth::User()->role === 5) &&
+            Auth::User()->role === 5 &&
                 ! DB::table('control_user')
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
-                    ->exists()),
+                    ->exists(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1017,10 +1146,7 @@ class ControlController extends Controller
         $control->score = request('score');
         $control->realisation_date = request('realisation_date');
         // only admin and user can update the plan_date and action_plan
-        if (
-            (Auth::User()->role === 1) ||
-            (Auth::User()->role === 2)
-        ) {
+        if (Auth::User()->role === 1 || Auth::User()->role === 2) {
             $control->plan_date = request('plan_date');
             $control->action_plan = request('action_plan');
         } else {
@@ -1042,22 +1168,29 @@ class ControlController extends Controller
             $new_control->score = null;
             $new_control->status = 0;
             // only admin and user can update the plan_date, realisation_date and action_plan
-            if (
-                (Auth::User()->role === 1) ||
-                (Auth::User()->role === 2)
-            ) {
+            if (Auth::User()->role === 1 || Auth::User()->role === 2) {
                 $new_control->plan_date = request('next_date');
             } else {
-                $new_control->plan_date = date('Y-m-d', strtotime($control->periodicity.' months', strtotime($control->plan_date)));
+                $new_control->plan_date = date(
+                    'Y-m-d',
+                    strtotime(
+                        $control->periodicity . ' months',
+                        strtotime($control->plan_date)
+                    )
+                );
             }
 
             $new_control->save();
 
             // Set owners
-            $new_control->owners()->sync($control->owners->pluck('id')->toArray());
+            $new_control
+                ->owners()
+                ->sync($control->owners->pluck('id')->toArray());
 
             // Set measures
-            $new_control->measures()->sync($control->measures->pluck('id')->toArray());
+            $new_control
+                ->measures()
+                ->sync($control->measures->pluck('id')->toArray());
 
             // set status done
             $control->status = 2;
@@ -1082,7 +1215,11 @@ class ControlController extends Controller
     public function save(Request $request)
     {
         // Only for CISO
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(
+            Auth::User()->role !== 1,
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // Get the control
         $control = Control::find($request->id);
@@ -1093,7 +1230,10 @@ class ControlController extends Controller
         $control->name = request('name');
         $control->scope = request('scope');
         $control->objective = request('objective');
-        $control->attributes = request('attributes') !== null ? implode(' ', request('attributes')) : null;
+        $control->attributes =
+            request('attributes') !== null
+                ? implode(' ', request('attributes'))
+                : null;
         $control->input = request('input');
         $control->model = request('model');
         $control->plan_date = request('plan_date');
@@ -1124,8 +1264,7 @@ class ControlController extends Controller
     {
         // Not for API and Auditor
         abort_if(
-            (Auth::User()->role === 3) ||
-            (Auth::User()->role === 4),
+            Auth::User()->role === 3 || Auth::User()->role === 4,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1134,11 +1273,11 @@ class ControlController extends Controller
 
         // for aditee only if he is assigned to that control
         abort_if(
-            ((Auth::User()->role === 5) &&
+            Auth::User()->role === 5 &&
                 ! DB::table('control_user')
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
-                    ->exists()),
+                    ->exists(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1151,7 +1290,9 @@ class ControlController extends Controller
 
         // Control already made ?
         if ($control->status === 2) {
-            return back()->withErrors(['msg' => trans('cruds.control.error.made')]);
+            return back()->withErrors([
+                'msg' => trans('cruds.control.error.made'),
+            ]);
         }
 
         $control->observations = request('observations');
@@ -1159,17 +1300,14 @@ class ControlController extends Controller
         $control->score = request('score');
 
         // only admin and user can update the plan_date and action_plan
-        if (
-            (Auth::User()->role === 1) ||
-            (Auth::User()->role === 2)
-        ) {
+        if (Auth::User()->role === 1 || Auth::User()->role === 2) {
             $control->plan_date = request('plan_date');
             $control->action_plan = request('action_plan');
             // do not save the realisation date as it is in draft
         }
         $control->save();
 
-        return redirect('/bob/show/'.$id);
+        return redirect('/bob/show/' . $id);
     }
 
     /**
@@ -1183,8 +1321,7 @@ class ControlController extends Controller
     {
         // Only for Admin and user
         abort_if(
-            ! ((Auth::User()->role === 1) ||
-            (Auth::User()->role === 2)),
+            ! (Auth::User()->role === 1 || Auth::User()->role === 2),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1199,7 +1336,9 @@ class ControlController extends Controller
 
         // Control already made ?
         if ($control->status === 2) {
-            return back()->withErrors(['msg' => trans('cruds.control.error.made')]);
+            return back()->withErrors([
+                'msg' => trans('cruds.control.error.made'),
+            ]);
         }
 
         // Change fields
@@ -1228,8 +1367,7 @@ class ControlController extends Controller
     {
         // Only for Admin and user
         abort_if(
-            ! ((Auth::User()->role === 1) ||
-            (Auth::User()->role === 2)),
+            ! (Auth::User()->role === 1 || Auth::User()->role === 2),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1291,18 +1429,28 @@ class ControlController extends Controller
     public function export()
     {
         // For administrators and users only
-        abort_if((Auth::User()->role !== 1) && (Auth::User()->rol !== 2), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(
+            Auth::User()->role !== 1 && Auth::User()->rol !== 2,
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
-        return Excel::download(new ControlsExport(), trans('cruds.control.title') . '-' . now()->format('Y-m-d Hi') . '.xlsx');
+        return Excel::download(
+            new ControlsExport(),
+            trans('cruds.control.title') .
+                '-' .
+                now()->format('Y-m-d Hi') .
+                '.xlsx'
+        );
     }
 
     public function template()
     {
         // For administrators and users only
         abort_if(
-            (Auth::User()->role !== 1) &&
-                (Auth::User()->rol !== 2) &&
-                (Auth::User()->role !== 5),
+            Auth::User()->role !== 1 &&
+                Auth::User()->rol !== 2 &&
+                Auth::User()->role !== 5,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1332,35 +1480,32 @@ class ControlController extends Controller
 
         $templateProcessor->setValue(
             'objective',
-            strtr(
-                $control->objective,
-                ["\n" => "</w:t>\n<w:br />\n<w:t xml:space=\"preserve\">"]
-            )
+            strtr($control->objective, [
+                "\n" => "</w:t>\n<w:br />\n<w:t xml:space=\"preserve\">",
+            ])
         );
 
         $templateProcessor->setValue(
             'input',
-            strtr(
-                $control->input,
-                ["\n" => "</w:t>\n<w:br />\n<w:t xml:space=\"preserve\">"]
-            )
+            strtr($control->input, [
+                "\n" => "</w:t>\n<w:br />\n<w:t xml:space=\"preserve\">",
+            ])
         );
         $templateProcessor->setValue(
             'model',
-            strtr(
-                $control->model,
-                ["\n" => "</w:t>\n<w:br />\n<w:t xml:space=\"preserve\">"]
-            )
+            strtr($control->model, [
+                "\n" => "</w:t>\n<w:br />\n<w:t xml:space=\"preserve\">",
+            ])
         );
         $templateProcessor->setValue('date', Carbon::today()->format('d/m/Y'));
 
         // save a copy
         $filepath = storage_path(
             'templates/control-' .
-            $control->clause .
-            '-' .
-            now()->format('Ymd') .
-            '.docx'
+                $control->clause .
+                '-' .
+                now()->format('Ymd') .
+                '.docx'
         );
 
         // if (file_exists($filepath)) unlink($filepath);
