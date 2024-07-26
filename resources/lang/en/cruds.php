@@ -87,6 +87,7 @@ return [
          'radar' => 'Security measurement status',
          'title' => 'Measurements',
          'title_singular' => 'Measurement',
+        'groupBy' => 'Groop by',
      ],
      'notification' => [
          'subject' => 'Measurement list to carry out',
