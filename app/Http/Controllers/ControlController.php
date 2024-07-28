@@ -1068,21 +1068,16 @@ class ControlController extends Controller
         $request->session()->put('control', $id);
 
         // compute next control date
-        $next_date = date(
-            'Y-m-d',
-            strtotime(
-                $control->periodicity . ' months',
-                strtotime($control->plan_date)
-            )
-        );
-
-        // compute next control date
-        $next_date =
-            $control->next_date === null
-                ? \Carbon\Carbon::createFromFormat('Y-m-d', $control->plan_date)
-                    ->addMonths($control->periodicity)
-                    ->format('Y-m-d')
-                : $control->next_date->format('Y-m-d');
+        if ($control->periodicity===0)
+            // Once
+            $next_date = null;
+        else
+            $next_date =
+                $control->next_date === null
+                    ? \Carbon\Carbon::createFromFormat('Y-m-d', $control->plan_date)
+                        ->addMonths($control->periodicity)
+                        ->format('Y-m-d')
+                    : $control->next_date->format('Y-m-d');
 
         // return view
         return view('controls.make')
@@ -1158,45 +1153,47 @@ class ControlController extends Controller
         if (Auth::User()->role === 5) {
             $control->status = 1;
         }
-        // if there is no next control
-        elseif ($control->next_id === null) {
-            // create a new control
-            $new_control = $control->replicate();
-            $new_control->observations = null;
-            $new_control->realisation_date = null;
-            $new_control->note = null;
-            $new_control->score = null;
-            $new_control->status = 0;
-            // only admin and user can update the plan_date, realisation_date and action_plan
-            if (Auth::User()->role === 1 || Auth::User()->role === 2) {
-                $new_control->plan_date = request('next_date');
-            } else {
-                $new_control->plan_date = date(
-                    'Y-m-d',
-                    strtotime(
-                        $control->periodicity . ' months',
-                        strtotime($control->plan_date)
-                    )
-                );
-            }
-
-            $new_control->save();
-
-            // Set owners
-            $new_control
-                ->owners()
-                ->sync($control->owners->pluck('id')->toArray());
-
-            // Set measures
-            $new_control
-                ->measures()
-                ->sync($control->measures->pluck('id')->toArray());
-
+        else {
             // set status done
             $control->status = 2;
 
-            // make link
-            $control->next_id = $new_control->id;
+            // if there is no next control and control not once
+            if (($control->next_id === null) && ($control->periodicity !==0 )) {
+                // create a new control
+                $new_control = $control->replicate();
+                $new_control->observations = null;
+                $new_control->realisation_date = null;
+                $new_control->note = null;
+                $new_control->score = null;
+                $new_control->status = 0;
+                // only admin and user can update the plan_date, realisation_date and action_plan
+                if (Auth::User()->role === 1 || Auth::User()->role === 2) {
+                    $new_control->plan_date = request('next_date');
+                } else {
+                    $new_control->plan_date = date(
+                        'Y-m-d',
+                        strtotime(
+                            $control->periodicity . ' months',
+                            strtotime($control->plan_date)
+                        )
+                    );
+                }
+
+                $new_control->save();
+
+                // Set owners
+                $new_control
+                    ->owners()
+                    ->sync($control->owners->pluck('id')->toArray());
+
+                // Set measures
+                $new_control
+                    ->measures()
+                    ->sync($control->measures->pluck('id')->toArray());
+
+                // make link
+                $control->next_id = $new_control->id;
+            }
         }
 
         // update control
