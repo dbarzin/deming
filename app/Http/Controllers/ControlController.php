@@ -1068,16 +1068,17 @@ class ControlController extends Controller
         $request->session()->put('control', $id);
 
         // compute next control date
-        if ($control->periodicity===0)
+        if ($control->periodicity === 0) {
             // Once
             $next_date = null;
-        else
+        } else {
             $next_date =
                 $control->next_date === null
                     ? \Carbon\Carbon::createFromFormat('Y-m-d', $control->plan_date)
                         ->addMonths($control->periodicity)
                         ->format('Y-m-d')
                     : $control->next_date->format('Y-m-d');
+        }
 
         // return view
         return view('controls.make')
@@ -1152,13 +1153,12 @@ class ControlController extends Controller
         // Auditee -> propose control
         if (Auth::User()->role === 5) {
             $control->status = 1;
-        }
-        else {
+        } else {
             // set status done
             $control->status = 2;
 
             // if there is no next control and control not once
-            if (($control->next_id === null) && ($control->periodicity !==0 )) {
+            if (($control->next_id === null) && ($control->periodicity !== 0)) {
                 // create a new control
                 $new_control = $control->replicate();
                 $new_control->observations = null;

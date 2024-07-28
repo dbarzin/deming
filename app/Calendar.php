@@ -116,6 +116,6 @@ class Calendar
     public function addEvent($txt, $date, $days = 1, $color = '', $id = null)
     {
         $color = $color ? ' ' . $color : $color;
-        $this->events[] = [$txt == null ? "&nbsp" : $txt, $date, $days, $color, $id];
+        $this->events[] = [$txt === null ? '&nbsp' : $txt, $date, $days, $color, $id];
     }
 }
