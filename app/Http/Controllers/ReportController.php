@@ -14,7 +14,7 @@ use PhpOffice\PhpWord\TemplateProcessor;
 
 class ReportController extends Controller
 {
-    public function show(Request $request)
+    public function show()
     {
         // get all frameworks
         $frameworks = DB::table('domains')

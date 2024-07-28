@@ -104,7 +104,15 @@ class SendNotifications extends Command
                     $message = $txt;
 
                     // Send mail
-                    if (mail($to_email, '=?UTF-8?B?' . base64_encode($subject) . '?=', utf8_decode($message), implode("\r\n", $headers), '-f ' . $to_email)) {
+                    if (mail(
+                        $to_email,
+                        '=?UTF-8?B?' . base64_encode($subject) . '?=',
+                        mb_convert_encoding($message, 'UTF-8', 'ISO-8859-1'),
+                        implode("\r\n", $headers),
+                        '-f ' .
+                        $to_email
+                    )
+                    ) {
                         Log::debug('Mail sent to '.$to_email);
                     } else {
                         Log::debug('Email sending fail.');

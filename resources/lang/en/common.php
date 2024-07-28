@@ -20,6 +20,7 @@ return [
     'unplan' => 'Unplan',
     'validate' => 'Validate',
 
+    'once' => 'Once',
     'monthly' => 'Monthly',
     'quarterly' => 'Quarterly',
     'biannually' => 'Biannually',

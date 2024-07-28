@@ -19,6 +19,7 @@ return [
     'unplan' => 'Déplanifier',
     'validate' => 'Valider',
 
+    'once' => 'Une fois',
     'monthly' => 'Mensuel',
     'quarterly' => 'Trimestriel',
     'biannually' => 'Bisanuel',
