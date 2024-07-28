@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use DB;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Log;
@@ -30,8 +31,8 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        if (true) {
-            //if (Config::get('APP_DEBUG')) {
+//        if (true) {
+        if (Config::get('APP_DEBUG')) {
             DB::listen(function ($query) {
                 Log::info(
                     $query->sql,
