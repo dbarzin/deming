@@ -21,10 +21,10 @@
 					</div>
 					<div class="cell-7" align="right">
 						<button class="button primary" onclick="location.href = '/alice/create';">
-			            <span class="mif-plus"></span>
-			            &nbsp;
-						{{ trans('common.new') }}
-					</button>
+    			            <span class="mif-plus"></span>
+    			            &nbsp;
+    						{{ trans('common.new') }}
+		               </button>
 					</div>
 				</div>
 

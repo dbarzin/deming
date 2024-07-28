@@ -64,7 +64,7 @@
                         @endfor
                     </select>
                 </div>
-            <div class="cell-3">
+            <div class="cell-2">
                 <input type="radio" data-role="radio" data-style="2"
                 name="status" value="0" id="status0"
                 @if (Session::get("status")=="0")
@@ -85,6 +85,13 @@
                 @endif
                 > {{ trans("cruds.control.fields.status_todo") }}
             </div>
+			<div class="cell-1" align="right">
+				<button class="button primary" onclick="location.href = '/bob/create';">
+		            <span class="mif-plus"></span>
+		            &nbsp;
+					{{ trans('common.new') }}
+               </button>
+			</div>
         </div>
     </div>
 
