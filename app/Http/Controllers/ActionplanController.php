@@ -115,7 +115,7 @@ class ActionplanController extends Controller
         $next_id = $control->next_id;
         if ($next_id !== null) {
             $next_control = Control::find($next_id);
-            if ($next_control!==null) {
+            if ($next_control !== null) {
                 $next_control->plan_date = request('plan_date');
                 $next_control->update();
             }

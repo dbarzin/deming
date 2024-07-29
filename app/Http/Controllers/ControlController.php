@@ -376,7 +376,7 @@ class ControlController extends Controller
                 'scope' => 'max:32',
                 'objective' => 'required',
                 'plan_date' => 'required',
-                'periodicity' => 'required|integer'
+                'periodicity' => 'required|integer',
             ]
         );
 
@@ -896,7 +896,7 @@ class ControlController extends Controller
             ->with('domains', $domains);
     }
 
-    public function attributes(Request $request)
+    public function attributes()
     {
         // Not API and auditee
         abort_if(
