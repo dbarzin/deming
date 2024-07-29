@@ -86,11 +86,13 @@
                 > {{ trans("cruds.control.fields.status_todo") }}
             </div>
 			<div class="cell-1" align="right">
+			@if ((Auth::User()->role==1)||(Auth::User()->role==2))
 				<button class="button primary" onclick="location.href = '/bob/create';">
 		            <span class="mif-plus"></span>
 		            &nbsp;
 					{{ trans('common.new') }}
                </button>
+            @endif
 			</div>
         </div>
     </div>

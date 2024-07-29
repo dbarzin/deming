@@ -157,14 +157,14 @@ class ControlController extends Controller
         // Build query
         $controls = DB::table('controls as c1')
             ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id')
-            ->join(
+            ->leftjoin(
                 'control_measure',
                 'control_measure.control_id',
                 '=',
                 'c1.id'
             )
-            ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
-            ->join('domains', 'measures.domain_id', '=', 'domains.id');
+            ->leftjoin('measures', 'control_measure.measure_id', '=', 'measures.id')
+            ->leftjoin('domains', 'measures.domain_id', '=', 'domains.id');
 
         // filter on auditee controls
         if (Auth::User()->role === 5) {
@@ -308,8 +308,49 @@ class ControlController extends Controller
      */
     public function create()
     {
-        // does not exists in that way
-        return redirect('/bob/index');
+        // Only for admin and users
+        abort_if(
+            (Auth::User()->role !== 1) && (Auth::User()->role !== 2),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
+        // get all clauses
+        $all_measures = DB::table('measures')
+            ->select('id', 'clause')
+            ->orderBy('id')
+            ->get();
+
+        // get all scopes
+        $scopes = DB::table('controls')
+            ->select('scope')
+            ->whereNotNull('scope')
+            ->where('scope', '<>', '')
+            ->whereIn('status', [0, 1])
+            ->distinct()
+            ->orderBy('scope')
+            ->get()
+            ->pluck('scope')
+            ->toArray();
+
+        // get all attributes
+        $values = [];
+        $attributes = DB::table('measures')->select('attributes')->get();
+        foreach ($attributes as $key) {
+            foreach (explode(' ', $key->attributes) as $value) {
+                array_push($values, $value);
+            }
+        }
+        sort($values);
+        $values = array_unique($values);
+
+        $users = User::orderBy('name')->get();
+
+        return view('controls.create')
+            ->with('scopes', $scopes)
+            ->with('all_measures', $all_measures)
+            ->with('attributes', $values)
+            ->with('users', $users);
     }
 
     /**
@@ -319,10 +360,52 @@ class ControlController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function store()
+    public function store(Request $request)
     {
-        // does not exist in that way
-        return redirect('/control');
+        // Only for admin and users
+        abort_if(
+            (Auth::User()->role !== 1) && (Auth::User()->role !== 2),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
+        $this->validate(
+            $request,
+            [
+                'name' => 'required|min:3|max:255',
+                'scope' => 'max:32',
+                'objective' => 'required',
+                'plan_date' => 'required',
+                'periodicity' => 'required|integer'
+            ]
+        );
+
+        // Create control
+        $control = new Control();
+        // Fill fields
+        $control->name = request('name');
+        $control->scope = request('scope');
+        $control->objective = request('objective');
+        $control->attributes =
+            request('attributes') !== null
+                ? implode(' ', request('attributes'))
+                : null;
+        $control->input = request('input');
+        $control->model = request('model');
+        $control->plan_date = request('plan_date');
+        $control->action_plan = request('action_plan');
+        $control->periodicity = request('periodicity');
+        // Save it
+        $control->save();
+
+        // Sync onwers
+        $control->owners()->sync($request->input('owners', []));
+
+        // Sync measures
+        $control->measures()->sync($request->input('measures', []));
+
+        // Redirect to index
+        return redirect('/bob/index');
     }
 
     /**
@@ -663,6 +746,7 @@ class ControlController extends Controller
         $active_controls = DB::table('controls as c1');
 
         if ($group === '1') {
+            // Group by measurements
             $active_controls = $active_controls->select([
                 'domains.title',
                 'measures.id as measure_id',
@@ -673,6 +757,7 @@ class ControlController extends Controller
                 DB::raw('min(c1.score) as score'),
             ]);
         } else {
+            // All controls
             $active_controls = $active_controls->select([
                 'domains.title',
                 'measures.id as measure_id',
@@ -696,6 +781,7 @@ class ControlController extends Controller
             ->join('domains', 'domains.id', '=', 'measures.domain_id')
             ->whereIn('c2.status', [0, 1]);
 
+        // Filter on framework
         if ($framework !== null) {
             $active_controls = $active_controls->where(
                 'domains.framework',
@@ -704,10 +790,12 @@ class ControlController extends Controller
             );
         }
 
+        // Filter on scope
         if ($scope !== null) {
             $active_controls = $active_controls->where('c1.scope', '=', $scope);
         }
 
+        // Group by measures
         if ($group === '1') {
             $active_controls = $active_controls->groupBy([
                 'domains.title',
@@ -716,7 +804,11 @@ class ControlController extends Controller
             ]);
         }
 
-        $active_controls = $active_controls->orderBy('domains.title')->get();
+        // Sort result
+        $active_controls = $active_controls
+            ->orderBy('domains.title')
+            ->orderBy('clause')
+            ->get();
 
         // return
         return view('radar.domains')

@@ -139,7 +139,7 @@ class MeasureController extends Controller
             [
                 'domain_id' => 'required',
                 'clause' => 'required|min:3|max:30',
-                'name' => 'required|min:5',
+                'name' => 'required|min:5|max:255',
                 'objective' => 'required',
             ]
         );
@@ -399,6 +399,17 @@ class MeasureController extends Controller
             (Auth::User()->role === 5),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
+        );
+
+        $this->validate(
+            $request,
+            [
+                'name' => 'required|min:3|max:255',
+                'scope' => 'max:32',
+                'objective' => 'required',
+                'plan_date' => 'required',
+                'periodicity' => 'required|integer'
+            ]
         );
 
         $measure = Measure::find($request->id);

@@ -170,6 +170,7 @@
 				</div>
 			</div>
             @endif
+			@if ($control->periodicity!==0)
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.control.fields.next') }}</strong>
@@ -202,6 +203,7 @@
 				)
 				</div>
 			</div>
+            @endif
 			<div class="grid">
 		    	<div class="row">
 		    		&nbsp;
