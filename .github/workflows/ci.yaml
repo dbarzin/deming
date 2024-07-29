@@ -2,13 +2,13 @@ name: Continuous Integration
 
 on:
   push:
-    branches: 
+    branches:
       - main
 
 jobs:
 
   deploy:
-    runs-on: ubuntu-latest 
+    runs-on: ubuntu-latest
 
     services:
       mysql:
@@ -53,19 +53,11 @@ jobs:
 
       - name: Migrate and seed the database
         run: |
-          php artisan migrate --seed 
+          php artisan migrate --seed
 
       - name: Seed Attributes
         run: |
           php artisan db:seed --class=AttributeSeeder
-
-      - name: Seed Domains
-        run: |
-          php artisan db:seed --class=DomainSeeder
-
-      - name: Seed Measures
-        run: |
-          php artisan db:seed --class=MeasureSeeder
 
       - name: Generate Test Data
         run: |

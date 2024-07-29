@@ -21,7 +21,7 @@ class UserController extends Controller
     public function index()
     {
         // Only for administrator role
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(! $this->isAdmin(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $users = DB::table('users')->orderBy('id', 'asc')->get();
 
@@ -35,7 +35,8 @@ class UserController extends Controller
      */
     public function create()
     {
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // Only for administrator role
+        abort_if(! $this->isAdmin(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('users.create');
     }
@@ -49,49 +50,39 @@ class UserController extends Controller
      */
     public function store(Request $request)
     {
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // Only for administrator role
+        abort_if(! $this->isAdmin(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $this->validate(
-            $request,
-            [
-                'login' => 'required|min:1|max:30',
-                'name' => 'required|min:1|max:90',
-                'title' => 'required|min:1|max:30',
-                'email' => 'required|email:rfc',
-                'role' => 'required',
-            ]
-        );
+        // Validate request data
+        $this->validate($request, [
+            'login' => 'required|min:1|max:30',
+            'name' => 'required|min:1|max:90',
+            'title' => 'required|min:1|max:30',
+            'email' => 'required|email:rfc',
+            'role' => 'required',
+        ]);
 
+        // Custom password validation if LDAP is not enabled
         if (Config::get('app.ldap_domain') === null) {
-            $password = request('password1');
-
-            if ($password === null) {
-                return back()
-                    ->withErrors(['password1' => 'No password'])
-                    ->withInput();
-            }
-            if (strlen($password) < 8) {
-                return back()
-                    ->withErrors(['password1' => 'Password too short'])
-                    ->withInput();
-            }
-            if ($password !== request('password2')) {
-                return back()
-                    ->withErrors(['password1' => 'Passwords does not match'])
-                    ->withInput();
+            $validationResponse = $this->validatePassword($request);
+            if ($validationResponse) {
+                return $validationResponse;
             }
         }
 
+        // Create and save the new user
         $user = new User();
-        $user->login = request('login');
-        $user->name = request('name');
-        $user->email = request('email');
-        $user->title = request('title');
-        $user->role = request('role');
-        $user->language = request('language');
+        $user->login = $request->input('login');
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        $user->title = $request->input('title');
+        $user->role = $request->input('role');
+        $user->language = $request->input('language');
+
         if (Config::get('app.ldap_domain') === null) {
-            $user->password = bcrypt(request('password1'));
+            $user->password = bcrypt($request->input('password1'));
         }
+
         $user->save();
 
         return redirect('/users');
@@ -100,18 +91,14 @@ class UserController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Domain $domain
+     * @param  User $user
      *
      * @return \Illuminate\Http\Response
      */
     public function show(User $user)
     {
-        abort_if(
-            (Auth::User()->role !== 1) &&
-            (Auth::User()->id !== $user->id),
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
+        // Allow only admin or the owner of the profile to view
+        $this->authorizeAdminOrOwner($user);
 
         return view('users.show', compact('user'));
     }
@@ -119,18 +106,14 @@ class UserController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Domain $domain
+     * @param  User $user
      *
      * @return \Illuminate\Http\Response
      */
     public function edit(User $user)
     {
-        abort_if(
-            (Auth::User()->role !== 1) &&
-            (Auth::User()->id !== $user->id),
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
+        // Allow only admin or the owner of the profile to edit
+        $this->authorizeAdminOrOwner($user);
 
         $controls = Control::select('id', 'clause')->whereNull('realisation_date')->orderBy('clause')->get();
 
@@ -141,86 +124,133 @@ class UserController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Domain              $domain
+     * @param  User $user
      *
      * @return \Illuminate\Http\Response
      */
     public function update(Request $request, User $user)
     {
-        abort_if(
-            (Auth::User()->role !== 1) &&
-            (Auth::User()->id !== $user->id),
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
+        // Allow only admin or the owner of the profile to update
+        $this->authorizeAdminOrOwner($user);
 
-        $this->validate(
-            $request,
-            [
-                'name' => 'required|min:1|max:40',
-                'email' => 'required|email:rfc',
-            ]
-        );
+        // Validate request data
+        $this->validate($request, [
+            'name' => 'required|min:1|max:40',
+            'email' => 'required|email:rfc',
+        ]);
 
+        // Custom password validation if LDAP is not enabled
         if (Config::get('app.ldap_domain') === null) {
-            if (request('password1') !== null) {
-                if (strlen(request('password1')) < 8) {
-                    return back()
-                        ->withErrors(['password1' => 'Password too short'])
-                        ->withInput();
+            if ($request->input('password1') !== null) {
+                $validationResponse = $this->validatePassword($request);
+                if ($validationResponse) {
+                    return $validationResponse;
                 }
-                if ((request('password1') !== null) && (request('password1') !== request('password2'))) {
-                    return back()
-                        ->withErrors(['password1' => 'Passwords does not match'])
-                        ->withInput();
-                }
+                $user->password = bcrypt($request->input('password1'));
             }
         }
 
-        $user->name = request('name');
-        $user->email = request('email');
-        if (Auth::User()->role === 1) {
-            $user->role = request('role');
+        // Update user information
+        $user->name = $request->input('name');
+        $user->email = $request->input('email');
+        if ($this->isAdmin()) {
+            $user->role = $request->input('role');
         }
-        $user->title = request('title');
-        $user->language = request('language');
-        if (Config::get('app.ldap_domain') === null) {
-            if (request('password1') !== null) {
-                $user->password = bcrypt(request('password1'));
-            }
-        }
+        $user->title = $request->input('title');
+        $user->language = $request->input('language');
 
         // Update controls assigned to the user
-        if ((Auth::User()->role === 1) || (Auth::User()->role === 2)) {
+        if ($this->isAdmin() || Auth::user()->role === 2) {
             $user->lastControls()->sync($request->input('controls', []));
         }
 
         $user->update();
 
-        if (Auth::User()->role === 1) {
-            return redirect('/users/' . $user->id);
-        }
-        return redirect('/');
+        return $this->isAdmin() ? redirect('/users/' . $user->id) : redirect('/');
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Domain $domain
+     * @param  User $user
      *
      * @return \Illuminate\Http\Response
      */
     public function destroy(User $user)
     {
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // Only for administrator role
+        abort_if(! $this->isAdmin(), Response::HTTP_FORBIDDEN, '403 Forbidden');
         $user->delete();
         return redirect('/users');
     }
 
+    /**
+     * Export the list of users.
+     *
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
+     */
     public function export()
     {
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        // Only for administrator role
+        abort_if(! $this->isAdmin(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return Excel::download(new UsersExport(), 'users.xlsx');
+    }
+    /**
+     * Check if the authenticated user is an administrator.
+     *
+     * @return bool
+     */
+    private function isAdmin()
+    {
+        return Auth::user()->role === 1;
+    }
+
+    /**
+     * Check if the authenticated user is the owner of the resource.
+     *
+     * @param User $user
+     *
+     * @return bool
+     */
+    private function isOwner(User $user)
+    {
+        return Auth::user()->id === $user->id;
+    }
+
+    /**
+     * Authorize the action if the user is either an admin or the owner.
+     *
+     * @param User $user
+     */
+    private function authorizeAdminOrOwner(User $user)
+    {
+        abort_if(! $this->isAdmin() && ! $this->isOwner($user), Response::HTTP_FORBIDDEN, '403 Forbidden');
+    }
+
+    /**
+     * Validate the password input from the request.
+     *
+     * @param Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse|null
+     */
+    private function validatePassword(Request $request)
+    {
+        $password = $request->input('password1');
+
+        if ($password === null) {
+            return back()->withErrors(['password1' => 'No password'])->withInput();
+        }
+
+        if (strlen($password) < 8) {
+            return back()->withErrors(['password1' => 'Password too short'])->withInput();
+        }
+
+        if ($password !== $request->input('password2')) {
+            return back()->withErrors(['password1' => 'Passwords do not match'])->withInput();
+        }
+
+        return null;
     }
 }

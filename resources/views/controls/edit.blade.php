@@ -179,6 +179,7 @@
 			    	</div>
 					<div class="cell-2">
 						<select data-role="select" name="periodicity">
+						    <option value="0" {{ $control->periodicity==0 ? "selected" : ""}}>{{ trans('common.once') }}</option>
 						    <option value="1" {{ $control->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
 						    <option value="3" {{ $control->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
 						    <option value="6" {{ $control->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>

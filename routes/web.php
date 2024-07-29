@@ -46,6 +46,8 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
 
     /* Controls */
     Route::get('/bob/index', 'ControlController@index');
+    Route::get('/bob/create', 'ControlController@create');
+    Route::post('/bob/store', 'ControlController@store');
     Route::get('/bob/show/{id}', 'ControlController@show');
     Route::get('/bob/make/{id}', 'ControlController@make');
     Route::get('/bob/edit/{id}', 'ControlController@edit');

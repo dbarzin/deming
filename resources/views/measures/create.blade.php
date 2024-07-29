@@ -67,7 +67,7 @@
 				<div class="cell-6">
 					<select data-role="select" name="attributes[]" multiple>
 						@foreach($values as $value)
-					    <option {{ old("attributes", optional($measure)->attributes) ? (in_array($value, old("attributes", optional($measure)->attributes)) ? "selected" : "") : ""}}>{{$value}}</option>
+					    <option oncl>{{$value}}</option>
 					    @endforeach
 					 </select>
 				</div>
@@ -116,15 +116,12 @@
 						&nbsp;
 						{{ trans("common.save") }}
 					</button>
-					</form>
 					&nbsp;
-					<form action="/alice/index">
-						<button type="submit" class="button">
-							<span class="mif-cancel"></span>
-							&nbsp;
-							{{ trans("common.cancel") }}
-						</button>
-					</form>
+					<button type="submit" class="button" onclick="location.href = '/alice/index';">
+						<span class="mif-cancel"></span>
+						&nbsp;
+						{{ trans("common.cancel") }}
+					</button>
 				</div>
 			</div>
 		</div>

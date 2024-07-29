@@ -34,6 +34,9 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
 
     public function styles(Worksheet $sheet)
     {
+        // fix unused
+        $sheet;
+        // return
         return [
             // Style the first row as bold text.
             1 => ['font' => ['bold' => true],

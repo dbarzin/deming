@@ -45,15 +45,12 @@ class ActionplanController extends Controller
 
         // filter on not yet realised next control
         $actions = $actions
-            // ->whereNull('c2.realisation_date');
             ->whereIn('c2.status', [0,1]);
 
         // Query DB
         $actions = $actions->select(
             [
                 'c1.id',
-//                'control_measure.measure_id',
-//                'c1.clause',
                 'c1.action_plan',
                 'c1.score',
                 'c1.name',
@@ -116,9 +113,13 @@ class ActionplanController extends Controller
 
         // save next control
         $next_id = $control->next_id;
-        $next_control = Control::find($next_id);
-        $next_control->plan_date = request('plan_date');
-        $next_control->update();
+        if ($next_id !== null) {
+            $next_control = Control::find($next_id);
+            if ($next_control !== null) {
+                $next_control->plan_date = request('plan_date');
+                $next_control->update();
+            }
+        }
 
         return redirect('/actions');
     }
@@ -143,8 +144,6 @@ class ActionplanController extends Controller
         $action = DB::table('controls as c1')
             ->select(
                 'c1.id',
-//                'c1.measure_id',
-//                'c1.clause',
                 'c1.name',
                 'c1.scope',
                 'c1.objective',
