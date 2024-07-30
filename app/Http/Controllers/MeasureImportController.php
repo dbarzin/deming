@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use App\Models\Control;
@@ -134,18 +135,16 @@ class MeasureImportController extends Controller
             ->with('file', $fileName);
     }
 
-
     /**
      * Check Measures from an XLSX file
      *
      * @return \Illuminate\Http\Response
      */
     public function canImportFromFile(
-        Array $data,
-        Bool $clear,
-        Collection $errors)
-    {
-
+        array $data,
+        bool $clear,
+        Collection $errors
+    ) {
         /*
         +-------------+---------------+------+-----+---------+----------------+
         | Field       | Type          | Null | Key | Default | Extra          |
@@ -168,7 +167,6 @@ class MeasureImportController extends Controller
         $lastLine = count($data);
 
         for ($line = 1; $line < $lastLine; $line++) {
-
             if ($errors->count() > 10) {
                 $errors->push('too many errors...');
                 break;
@@ -219,7 +217,7 @@ class MeasureImportController extends Controller
                 $errors->push(($line + 1) . ': close name too long');
                 continue;
             }
-            if (!$clear && Measure::where('clause', $data[$line][3])->exists()) {
+            if (! $clear && Measure::where('clause', $data[$line][3])->exists()) {
                 $errors->push(($line + 1) . ': close name not unique');
                 continue;
             }
@@ -232,12 +230,10 @@ class MeasureImportController extends Controller
                 continue;
             }
             // TODO: check tags
-
         }
 
-        return $errors->count()===0;
+        return $errors->count() === 0;
     }
-
 
     /**
      * Import Measures from an XLSX file
@@ -245,10 +241,9 @@ class MeasureImportController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function importFromFile(
-        Array $data,
-        Collection $errors)
-    {
-
+        array $data,
+        Collection $errors
+    ) {
         // Initialize counters
         $deleteCount = 0;
         $insertCount = 0;
@@ -403,7 +398,6 @@ class MeasureImportController extends Controller
         if ($newDomainCount > 0) {
             $errors->push($newDomainCount . ' new domains created');
         }
-
     }
 
     /**
