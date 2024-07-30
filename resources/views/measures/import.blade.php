@@ -13,7 +13,7 @@
 					@endforeach
 					</ul>
 				</div>
-			</div>
+            </div>
 			@endif
 
 			<div class="row">
