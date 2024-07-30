@@ -126,7 +126,7 @@ class MeasureImportController extends Controller
         // Generate fake test data
         if ($request->has('test')) {
             // Call command
-            Artisan::call('deming:generateTests');
+            Artisan::call('deming:generate-tests');
             $errors->push('Test data generated');
         }
 
