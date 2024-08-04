@@ -59,9 +59,13 @@ jobs:
         run: |
           php artisan db:seed --class=AttributeSeeder
 
+      - name: Import framework ISO27001-2002.en
+        run: |
+            php artisan deming:import-framework ./storage/app/repository/ISO27001-2022.en.xlsx --clean
+
       - name: Generate Test Data
         run: |
-          php artisan deming:generateTests
+          php artisan deming:generate-tests
 
       - name: Check code quality
         run: |

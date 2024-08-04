@@ -475,7 +475,7 @@ class ReportController extends Controller
                 ->whereNull('c2.next_id');
         // filter on framework
         if ($framework !== null) {
-            $ations = $actions
+            $actions = $actions
                 ->join('control_measure', 'c1.id', '=', 'control_measure.control_id')
                 ->join('measures', 'measures.id', '=', 'control_measure.measure_id')
                 ->join('domains', 'domains.id', '=', 'measures.domain_id')

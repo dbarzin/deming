@@ -1037,25 +1037,27 @@ class ControlController extends Controller
             '403 Forbidden'
         );
 
+        // Get the control
         $control = Control
-            // ::whereNull('realisation_date')
             ::whereIn('status', [0, 1])
                 ->where('id', '=', $request->id)
                 ->get()
                 ->first();
 
-        if ($control !== null) {
-            // break previous link
-            $prev_control = Control::where('next_id', $control->id)
-                ->get()
-                ->first();
-            if ($prev_control !== null) {
-                $prev_control->next_id = null;
-                $prev_control->update();
-            }
+        // Control not found
+        abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
-            $control->delete();
+        // Break previous link
+        $prev_control = Control::where('next_id', $control->id)
+            ->get()
+            ->first();
+        if ($prev_control !== null) {
+            $prev_control->next_id = null;
+            $prev_control->update();
         }
+
+        // Delete control
+        $control->delete();
 
         return redirect('/alice/index');
     }
@@ -1101,7 +1103,7 @@ class ControlController extends Controller
         $control->owners()->sync($request->input('owners', []));
         $control->save();
 
-        // Redirect 
+        // Redirect
         return redirect('/bob/show/' . $request->id);
     }
 
