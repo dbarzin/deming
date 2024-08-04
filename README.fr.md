@@ -86,7 +86,7 @@ Deming permet de répondre à ces exigences et de conserver les informations doc
 
 ### Vue de la courverture des mesures de protection
 
-[<img src="public/screenshots/radar.png" width="500">](public/screenshots/radar.png)
+[<img src="public/screenshots/radar.fr.png" width="500">](public/screenshots/radar.fr.png)
 
 ### Rapport de réunion de pilotage du SMSI
 
