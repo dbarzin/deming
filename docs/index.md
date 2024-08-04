@@ -6,10 +6,10 @@
 Deming is an Open Source tool designed to help CISOs set up and maintain their information security management system. Using this app, CISOs can easily plan and track the implementation of security controls and the continuous improvement cycle required by ISO 27001. The app is designed to be easy to use and customize, with a intuitive user interface.
 
 
-Deming offers features such as [security measures management](/deming/measures/),
-the [planning of controls](/deming/plan/), the creation of [control sheets](/deming/controls/#sheet), the recording of evidence,
-monitoring [action plans](/deming/actions/) as well as [dashboards](/deming/dashboards/) and
-[ISMS management reports](/deming/config/#report) to help CISOs monitor the maintenance of information security measures.
+Deming offers features such as [security measures management](measures.md),
+the [planning of controls](plan.md), the creation of [control sheets](controls.md/#sheet), the recording of evidence,
+monitoring [action plans](actions.md) as well as [dashboards](dashboards.md) and
+[ISMS management reports](config.md/#report) to help CISOs monitor the maintenance of information security measures.
 
 
 The application is designed to be compatible with the ISO 27001:2022 standard, following the specific requirements of the standard for the planning, implementation, verification and continuous improvement of the security management system of the information.

@@ -6,15 +6,15 @@ This part allows you to define, modify and plan new controls.
 
 The list of controls allows you to display the list of controls, to filter them by domain or to search for a control based on part of its name.
 
-[<img src="/deming/images/m1.png" width="600">](/deming/images/m1.png)
+[![Screenshot](images/m1.png)](images/m1.png)
 
 Clicking on :
 
-* the domain, you arrive at the [chosen domain definition](/deming/config/#domain)
+* the domain, you arrive at the [chosen domain definition](config.md/#domains)
 
 * the clause, you arrive on the [description of the control](#show)
 
-* the number of measurements, you arrive to the [list of measurements](/deming/controls/#list) of this control
+* the number of measurements, you arrive to the [list of measurements](controls.md/#list) of this control
 
 * the "plan" button takes you to the [control planning](#plan)
 
@@ -23,7 +23,7 @@ Clicking on :
 
 This screen displays a control.
 
-[<img src="/deming/images/m2.png" width="600">](/deming/images/m2.png)
+[![Screenshot](images/m2.png)](images/m2.png)
 
 A control consists of:
 
@@ -58,7 +58,7 @@ When you click:
 
 This screen allows you to modify a control.
 
-[<img src="/deming/images/m3.png" width="600">](/deming/images/m3.png)
+[![Screenshot](images/m3.png)](images/m3.png)
 
 
 When you click:
@@ -86,7 +86,7 @@ The screen contains:
 
 * Those responsible for carrying out the controls.
 
-[<img src="/deming/images/plan.png" width="600">](/deming/images/plan.png)
+[![Screenshot](images/plan.png)](images/plan.png)
 
 When you click:
 

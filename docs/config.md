@@ -5,13 +5,13 @@
 This screen allows you to manage the attributes associated with the security measures.
 It contains the list of attributes and allows you to create, delete or modify attribute lists.
 
-[<img src="/deming/images/tags.png" width="600">](/deming/images/tags.png)
+[![Screenshot](images/tags.png)](images/tags.png)
 
 ### Domains <a name="domains"></a>
 
 This screen allows you to create, modify or delete lists of security domains.
 
-[<img src="/deming/images/domains.png" width="600">](/deming/images/domains.png)
+[![Screenshot](images/domains.png)](images/domains.png)
 
 The application is provided with a security measurement base inspired by the ISO 27001:2022 standard, but it is possible to define new security domains inspired by other standards such as PCIDSS, HDS, etc.
 
@@ -19,7 +19,7 @@ The application is provided with a security measurement base inspired by the ISO
 
 Users are directly defined in the application.
 
-[<img src="/deming/images/users.png" width="600">](/deming/images/users.png)
+[![Screenshot](images/users.png)](images/users.png)
 
 There are four different roles:
 
@@ -36,25 +36,27 @@ There are four different roles:
 
 The application allows you to generate the ISMS management report and to export the list of domains, the security measures and all the checks carried out in an Excell file.
 
-[<img src="/deming/images/reports.png" width="500">](/deming/images/reports.png)
+[![Screenshot](images/reports.png){: style="width:500px"}](images/reports.png)
 
 Here is the ISMS pilot report:
 
-[<img src="/deming/images/report1.png" width="600">](/deming/images/report1.png)
+[![Screenshot](images/report1.png)](images/report1.png)
 
-[<img src="/deming/images/report2.png" width="600">](/deming/images/report2.png)
+[![Screenshot](images/report2.png)](images/report2.png)
 
 ### Import <a name="import"></a>
 
-It is possible to import controls from an .XLSX file.
+Measures can be imported from an .XLSX file or from the template database.
 
-[<img src="/deming/images/import.png" width="600">](/deming/images/import.png)
+When importing, all other controls and measures can be deleted and test data generated.
+
+[![Screenshot](images/import.png)](images/import.png)
 
 ### Documents <a name="documents"></a>
 
 This screen is used to modify the document templates used for the control sheets and the ISMS management report and provides an overview of all the documents used as evidence when carrying out security checks.
 
-[<img src="/deming/images/documents.png" width="400">](/deming/images/documents.png)
+[![Screenshot](images/documents.png){: style="width:400px"}](images/documents.png)
 
 The "Verify" button allows you to verify the integrity of the documents stored in the application.
 
@@ -72,7 +74,7 @@ The screen contains:
 
 * The notification deadlines.
 
-[<img src="/deming/images/config.png" width="500">](/deming/images/config.png)
+[![Screenshot](images/config.png){: style="width:500px"}](images/config.png)
 
 When you click on:
 

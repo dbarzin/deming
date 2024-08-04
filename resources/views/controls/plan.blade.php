@@ -26,15 +26,13 @@
     		<div class="cell-1">
 	    		<strong>{{ trans("cruds.control.fields.clauses") }}</strong>
 	    	</div>
-    		<div class="cell-6">
-				<select data-role="select" name="measures[]" multiple>
-					@foreach($all_measures as $measure)
-					    <option
-                            value="{{ $measure->id }}"
-                            {{ in_array($measure->id, old("measures", $measures)) ? "selected" : "" }}
-                                >{{ $measure->clause }}</option>
-				    @endforeach
-				 </select>
+    		<div class="cell-4">
+                @foreach($control->measures as $measure)
+                    <a href="/alice/show/{{ $measure->id }}">{{ $measure->clause }}</a>
+                    @if(!$loop->last)
+                    ,
+                    @endif
+                @endforeach
             </div>
         </div>
 
@@ -45,14 +43,16 @@
 			<div class="cell-4">
 	    		{{ $control->name }}
 			</div>
+            @if ($control->scope!==null)
     		<div class="cell-1" align="right">
-	    		<strong>{{ trans('cruds.control.fields.scope') }}</strong>
+	    		<strong>{{ trans("cruds.control.fields.scope") }}</strong>
 	    	</div>
-			<div class="cell-1">
-				<input type="text" name="scope" data-role="input" autocomplete="on" maxlength="32"
-				value="{{ $control->scope }}" data-autocomplete="{{ implode(",",$scopes) }}"/>
-			</div>
-
+    		<div class="cell-1">
+                <a href="/bob/index?scope={{ $control->scope }}">
+    			{{ $control->scope }}
+                </a>
+    		</div>
+            @endif
 		</div>
     	<div class="row">
     		<div class="cell-1">

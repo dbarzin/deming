@@ -1076,12 +1076,13 @@ class ControlController extends Controller
             '403 Forbidden'
         );
 
+        // Validate fields
         $this->validate($request, [
             'plan_date' => 'required',
             'periodicity' => 'required',
-            'measures' => 'array|min:1',
         ]);
 
+        // Find the control
         $control = Control::find($request->id);
 
         // Control not found
@@ -1094,27 +1095,13 @@ class ControlController extends Controller
                 ->withInput();
         }
 
-        /*
-        // Check duplicate control on same scope
-        if (Control
-            // ::whereNull('realisation_date')
-            ::whereIn('status', [0,1])
-                ->where('id', '<>', $control->id)
-                ->where('measure_id', '=', $control->measure_id)
-                ->where('scope', '=', $request->scope)
-                ->count() > 0) {
-            return back()
-                ->withErrors(['msg' => trans('cruds.control.error.duplicate')])
-                ->withInput();
-        }
-        */
-        $control->scope = $request->scope;
+        // Update fields
         $control->plan_date = $request->plan_date;
         $control->periodicity = $request->periodicity;
         $control->owners()->sync($request->input('owners', []));
-        $control->measures()->sync($request->input('measures', []));
         $control->save();
 
+        // Redirect 
         return redirect('/bob/show/' . $request->id);
     }
 
