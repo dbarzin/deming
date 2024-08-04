@@ -8,8 +8,6 @@ if [ "${USE_DEMO_DATA}" = "1" ]; then
     php artisan db:seed --class=AttributeSeeder
     # Import framework
     php artisan deming:import-framework ./storage/app/repository/ISO27001-2022.en.xlsx --clean
-    # Generate tests
-    php artisan deming:generate-tests
     # Exécute la commande "php artisan deming:generateTests"
     php artisan deming:generate-tests
     # Exit avec le code 0 pour indiquer que le script s'est terminé avec succès
