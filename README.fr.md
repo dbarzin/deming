@@ -82,7 +82,7 @@ Deming permet de répondre à ces exigences et de conserver les informations doc
 
 ### Gestion des plans d'action
 
-[<img src="public/screenshots/plans.png" width="450">](public/screenshots/plans.png)
+[<img src="public/screenshots/plans.fr.png" width="450">](public/screenshots/plans.fr.png)
 
 ### Vue de la courverture des mesures de protection
 
