@@ -8,7 +8,7 @@
     <title>Delegation - Deming</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
         <link href="../css/extra.css" rel="stylesheet" />
     
       <script>
@@ -18,12 +18,11 @@
         var mkdocs_page_url = null;
       </script>
     
-    <script src="../js/jquery-3.6.0.min.js" defer></script>
     <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
     <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-      <script>hljs.initHighlightingOnLoad();</script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -35,7 +34,7 @@
           <a href=".." class="icon icon-home"> Deming
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -58,7 +57,7 @@
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Delegation</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Delegation</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#list-of-measurements-to-be-performed">List of measurements to be performed</a>
     </li>
@@ -110,8 +109,8 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Delegation</li>
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Delegation</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/dbarzin/deming/edit/main/docs/delegation.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
@@ -126,7 +125,7 @@
 </ul>
 <h2 id="delegation">Delegation</h2>
 <p>Deming allows you to delegate the realisation of measurements to users who have the <em>auditee</em> role.
-The auditee role is assigned to a user via the <a href="/deming/config/#users">user management screen</a>.</p>
+The auditee role is assigned to a user via the <a href="../config/#users">user management screen</a>.</p>
 <p>This delegation complies with the following rules:</p>
 <ul>
 <li>Auditees are regularly informed by email of the measurements to be carried out;</li>
@@ -136,7 +135,7 @@ The auditee role is assigned to a user via the <a href="/deming/config/#users">u
 </ul>
 <h3 id="list-of-measurements-to-be-performed">List of measurements to be performed</h3>
 <p>From the auditee's point of view, the application's main page contains the list of measurements that are assigned to him.</p>
-<p><a href="/deming/images/d1.png"><img src="/deming/images/d1.png" width="600"></a></p>
+<p><a href="../images/d1.png"><img alt="Screenshot" src="../images/d1.png" /></a></p>
 <p>Tha auditee can :</p>
 <ul>
 <li>Search the list of measurements</li>
@@ -154,7 +153,7 @@ The auditee role is assigned to a user via the <a href="/deming/config/#users">u
 <p>"Make" the mesurement</p>
 </li>
 </ul>
-<p><a href="/deming/images/d2.png"><img src="/deming/images/d2.png" width="300"></a></p>
+<p><a href="../images/d2.png"><img alt="Screenshot" src="../images/d2.png" style="width:300px" /></a></p>
 <p>When the auditee clicks on :</p>
 <ul>
 <li>
@@ -170,10 +169,10 @@ The auditee role is assigned to a user via the <a href="/deming/config/#users">u
 <h3 id="accepting-rejecting-a-measurement">Accepting / Rejecting a measurement</h3>
 <p>Once an measurement has been carried out by an auditee, it changes status to "to be validated".</p>
 <p>For other users, this is shown by an hourglass next to the completion date in the list of checks to be carried out:</p>
-<p><a href="/deming/images/d3.png"><img src="/deming/images/d3.png" width="600"></a></p>
+<p><a href="../images/d3.png"><img alt="Screenshot" src="../images/d3.png" /></a></p>
 <p>When the user clicks on the date next to the hourglass, they are taken to the measurement performed by the auditee.</p>
 <p>They can then accept or reject the measurement, adding a note in the measurement observations and, depending on the measurement score, propose an action plan and anmeasurement review date.</p>
-<p><a href="/deming/images/d4.png"><img src="/deming/images/d4.png" width="600"></a></p>
+<p><a href="../images/d4.png"><img alt="Screenshot" src="../images/d4.png" style="width:500px" /></a></p>
 <p>If the user clicks on :</p>
 <ul>
 <li>
@@ -229,14 +228,15 @@ The auditee role is assigned to a user via the <a href="/deming/config/#users">u
     
   </span>
 </div>
-    <script>var base_url = '..';</script>
-    <script src="../js/theme_extra.js" defer></script>
-    <script src="../js/theme.js" defer></script>
-      <script src="../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
             SphinxRtdTheme.Navigation.enable(true);
-        };
+        });
     </script>
 
 </body>

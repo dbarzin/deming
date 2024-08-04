@@ -8,7 +8,7 @@
     <title>Controls - Deming</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
         <link href="../css/extra.css" rel="stylesheet" />
     
       <script>
@@ -18,12 +18,11 @@
         var mkdocs_page_url = null;
       </script>
     
-    <script src="../js/jquery-3.6.0.min.js" defer></script>
     <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
     <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-      <script>hljs.initHighlightingOnLoad();</script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -35,7 +34,7 @@
           <a href=".." class="icon icon-home"> Deming
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -50,15 +49,15 @@
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Controls</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Controls</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#list-of-controls">List of controls </a>
+    <li class="toctree-l2"><a class="reference internal" href="#list-of-controls">List of controls</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#show-control">Show control </a>
+    <li class="toctree-l2"><a class="reference internal" href="#show-control">Show control</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#edit-a-control">Edit a control </a>
+    <li class="toctree-l2"><a class="reference internal" href="#edit-a-control">Edit a control</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#schedule-a-control">Schedule a control </a>
+    <li class="toctree-l2"><a class="reference internal" href="#schedule-a-control">Schedule a control</a>
     </li>
     </ul>
                 </li>
@@ -112,8 +111,8 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Controls</li>
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Controls</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/dbarzin/deming/edit/main/docs/measures.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
@@ -130,17 +129,17 @@
 <p>This part allows you to define, modify and plan new controls.</p>
 <h3 id="list-of-controls">List of controls <a name="list"></a></h3>
 <p>The list of controls allows you to display the list of controls, to filter them by domain or to search for a control based on part of its name.</p>
-<p><a href="/deming/images/m1.png"><img src="/deming/images/m1.png" width="600"></a></p>
+<p><a href="../images/m1.png"><img alt="Screenshot" src="../images/m1.png" /></a></p>
 <p>Clicking on :</p>
 <ul>
 <li>
-<p>the domain, you arrive at the <a href="/deming/config/#domain">chosen domain definition</a></p>
+<p>the domain, you arrive at the <a href="../config/#domains">chosen domain definition</a></p>
 </li>
 <li>
 <p>the clause, you arrive on the <a href="#show">description of the control</a></p>
 </li>
 <li>
-<p>the number of measurements, you arrive to the <a href="/deming/controls/#list">list of measurements</a> of this control</p>
+<p>the number of measurements, you arrive to the <a href="../controls/#list">list of measurements</a> of this control</p>
 </li>
 <li>
 <p>the "plan" button takes you to the <a href="#plan">control planning</a></p>
@@ -148,7 +147,7 @@
 </ul>
 <h3 id="show-control">Show control <a name="show"></a></h3>
 <p>This screen displays a control.</p>
-<p><a href="/deming/images/m2.png"><img src="/deming/images/m2.png" width="600"></a></p>
+<p><a href="../images/m2.png"><img alt="Screenshot" src="../images/m2.png" /></a></p>
 <p>A control consists of:</p>
 <ul>
 <li>
@@ -193,7 +192,7 @@
 </ul>
 <h3 id="edit-a-control">Edit a control <a name="edit"></a></h3>
 <p>This screen allows you to modify a control.</p>
-<p><a href="/deming/images/m3.png"><img src="/deming/images/m3.png" width="600"></a></p>
+<p><a href="../images/m3.png"><img alt="Screenshot" src="../images/m3.png" /></a></p>
 <p>When you click:</p>
 <ul>
 <li>
@@ -226,7 +225,7 @@
 <p>Those responsible for carrying out the controls.</p>
 </li>
 </ul>
-<p><a href="/deming/images/plan.png"><img src="/deming/images/plan.png" width="600"></a></p>
+<p><a href="../images/plan.png"><img alt="Screenshot" src="../images/plan.png" /></a></p>
 <p>When you click:</p>
 <ul>
 <li>
@@ -285,14 +284,15 @@
     
   </span>
 </div>
-    <script>var base_url = '..';</script>
-    <script src="../js/theme_extra.js" defer></script>
-    <script src="../js/theme.js" defer></script>
-      <script src="../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
             SphinxRtdTheme.Navigation.enable(true);
-        };
+        });
     </script>
 
 </body>

@@ -8,7 +8,7 @@
     <title>Action plans - Deming</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
         <link href="../css/extra.css" rel="stylesheet" />
     
       <script>
@@ -18,12 +18,11 @@
         var mkdocs_page_url = null;
       </script>
     
-    <script src="../js/jquery-3.6.0.min.js" defer></script>
     <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
     <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-      <script>hljs.initHighlightingOnLoad();</script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -35,7 +34,7 @@
           <a href=".." class="icon icon-home"> Deming
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -70,11 +69,11 @@
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Action plans</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Action plans</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#list-of-action-plans">List of Action Plans </a>
+    <li class="toctree-l2"><a class="reference internal" href="#list-of-action-plans">List of Action Plans</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#edit-an-action-plan">Edit an action plan </a>
+    <li class="toctree-l2"><a class="reference internal" href="#edit-an-action-plan">Edit an action plan</a>
     </li>
     </ul>
                 </li>
@@ -108,8 +107,8 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Action plans</li>
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Action plans</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/dbarzin/deming/edit/main/docs/actions.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
@@ -126,22 +125,22 @@
 <p>Each time a control fails (orange or red), an action plan must be put in place and followed in order to remedy the situation.</p>
 <h3 id="list-of-action-plans">List of Action Plans <a name="list"></a></h3>
 <p>This screen allows you to follow the action plans:</p>
-<p><a href="/deming/images/a1.png"><img src="/deming/images/a1.png" width="600"></a></p>
+<p><a href="../images/a1.png"><img alt="Screenshot" src="../images/a1.png" /></a></p>
 <p>Clicking on :</p>
 <ul>
 <li>
 <p>the title of the associated control, you arrive at the corresponding <a href="#edit">modification of the action plan</a> page.</p>
 </li>
 <li>
-<p>On the planning date, you arrive at the <a href="/deming/controls/#show">control</a> that generated this action plan</p>
+<p>On the planning date, you arrive at the <a href="../controls/#show">control</a> that generated this action plan</p>
 </li>
 <li>
-<p>The next review date, you arrive at the next <a href="/deming/controls/#show">control</a></p>
+<p>The next review date, you arrive at the next <a href="../controls/#show">control</a></p>
 </li>
 </ul>
 <h3 id="edit-an-action-plan">Edit an action plan <a name="edit"></a></h3>
 <p>This screen allows you to edit an action plan and schedule the next control assessment.</p>
-<p><a href="/deming/images/a2.png"><img src="/deming/images/a2.png" width="600"></a></p>
+<p><a href="../images/a2.png"><img alt="Screenshot" src="../images/a2.png" /></a></p>
 <p>When you click:</p>
 <ul>
 <li>
@@ -191,14 +190,15 @@
     
   </span>
 </div>
-    <script>var base_url = '..';</script>
-    <script src="../js/theme_extra.js" defer></script>
-    <script src="../js/theme.js" defer></script>
-      <script src="../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
             SphinxRtdTheme.Navigation.enable(true);
-        };
+        });
     </script>
 
 </body>

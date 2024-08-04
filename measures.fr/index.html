@@ -8,7 +8,7 @@
     <title>Mesures - Deming</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
         <link href="../css/extra.css" rel="stylesheet" />
     
       <script>
@@ -18,12 +18,11 @@
         var mkdocs_page_url = null;
       </script>
     
-    <script src="../js/jquery-3.6.0.min.js" defer></script>
     <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
     <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-      <script>hljs.initHighlightingOnLoad();</script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -35,7 +34,7 @@
           <a href=".." class="icon icon-home"> Deming
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -50,15 +49,15 @@
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Mesures</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Mesures</a>
     <ul class="current">
-    <li class="toctree-l2"><a class="reference internal" href="#liste-des-mesures-de-securite">Liste des mesures de sécurité </a>
+    <li class="toctree-l2"><a class="reference internal" href="#liste-des-mesures-de-securite">Liste des mesures de sécurité</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#afficher-une-mesure-de-securite">Afficher une mesure de sécurité </a>
+    <li class="toctree-l2"><a class="reference internal" href="#afficher-une-mesure-de-securite">Afficher une mesure de sécurité</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#modifier-une-mesure-de-securite">Modifier une mesure de sécurité </a>
+    <li class="toctree-l2"><a class="reference internal" href="#modifier-une-mesure-de-securite">Modifier une mesure de sécurité</a>
     </li>
-    <li class="toctree-l2"><a class="reference internal" href="#planifier-un-controle">Planifier un contrôle </a>
+    <li class="toctree-l2"><a class="reference internal" href="#planifier-un-controle">Planifier un contrôle</a>
     </li>
     </ul>
                 </li>
@@ -112,8 +111,8 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Mesures</li>
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Mesures</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/dbarzin/deming/edit/main/docs/measures.fr.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
@@ -130,17 +129,17 @@
 <p>Cette partie permet de définir, de modifier et de plannifier de nouvelles mesures de sécurité.</p>
 <h3 id="liste-des-mesures-de-securite">Liste des mesures de sécurité <a name="list"></a></h3>
 <p>La liste des mesures de sécurité permet d’afficher la liste des mesures, de les filtrer par domaine ou de recherche une mesure sur base d’une partie de son nom.</p>
-<p><a href="/deming/images/m1.png"><img src="/deming/images/m1.png" width="600"></a></p>
+<p><a href="../images/m1.fr.png"><img alt="Screenshot" src="../images/m1.fr.png" /></a></p>
 <p>En cliquant sur :</p>
 <ul>
 <li>
-<p>le domaine, vous arrivez sur la <a href="/config.fr/#domain">définition du domaine choisi</a></p>
+<p>le domaine, vous arrivez sur la <a href="../config.fr/#domain">définition du domaine choisi</a></p>
 </li>
 <li>
 <p>la clause, vous arrivez sur la <a href="#show">description de la mesure de sécurité</a></p>
 </li>
 <li>
-<p>le nombre de contrôle, vous arrivez sur la <a href="/deming/controls.fr/#list">liste des contrôles</a> de cette mesure de sécurité</p>
+<p>le nombre de contrôle, vous arrivez sur la <a href="../controls.fr/#list">liste des contrôles</a> de cette mesure de sécurité</p>
 </li>
 <li>
 <p>le bouton "planifier", vous arrivez sur la <a href="#plan">planification de la mesure de sécurité</a></p>
@@ -148,7 +147,7 @@
 </ul>
 <h3 id="afficher-une-mesure-de-securite">Afficher une mesure de sécurité <a name="show"></a></h3>
 <p>Cet écran permet d’afficher une mesure de sécurité.</p>
-<p><a href="/deming/images/m2.png"><img src="/deming/images/m2.png" width="600"></a></p>
+<p><a href="../images/m2.fr.png"><img alt="Screenshot" src="../images/m2.fr.png" /></a></p>
 <p>Une mesure de sécurité est composée :</p>
 <ul>
 <li>
@@ -193,7 +192,7 @@
 </ul>
 <h3 id="modifier-une-mesure-de-securite">Modifier une mesure de sécurité <a name="edit"></a></h3>
 <p>Cet écran permet de modifier une mesure de sécurité.</p>
-<p><a href="/deming/images/m3.png"><img src="/deming/images/m3.png" width="600"></a></p>
+<p><a href="../images/m3.fr.png"><img alt="Screenshot" src="../images/m3.fr.png" /></a></p>
 <p>Lorsque vous cliquez sur :</p>
 <ul>
 <li>
@@ -226,7 +225,7 @@
 <p>Les responsables de la réalisation du contrôles.</p>
 </li>
 </ul>
-<p><a href="/deming/images/plan.png"><img src="/deming/images/plan.png" width="400"></a></p>
+<p><a href="../images/plan.fr.png"><img alt="Screenshot" src="../images/plan.fr.png" style="width:600px" /></a></p>
 <p>Lorsque vous cliquez sur :</p>
 <ul>
 <li>
@@ -285,14 +284,15 @@
     
   </span>
 </div>
-    <script>var base_url = '..';</script>
-    <script src="../js/theme_extra.js" defer></script>
-    <script src="../js/theme.js" defer></script>
-      <script src="../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
             SphinxRtdTheme.Navigation.enable(true);
-        };
+        });
     </script>
 
 </body>

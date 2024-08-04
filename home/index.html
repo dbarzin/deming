@@ -8,7 +8,7 @@
     <title>Homepage - Deming</title>
     <link rel="stylesheet" href="../css/theme.css" />
     <link rel="stylesheet" href="../css/theme_extra.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/styles/github.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/styles/github.min.css" />
         <link href="../css/extra.css" rel="stylesheet" />
     
       <script>
@@ -18,12 +18,11 @@
         var mkdocs_page_url = null;
       </script>
     
-    <script src="../js/jquery-3.6.0.min.js" defer></script>
     <!--[if lt IE 9]>
       <script src="../js/html5shiv.min.js"></script>
     <![endif]-->
-      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.5.0/highlight.min.js"></script>
-      <script>hljs.initHighlightingOnLoad();</script> 
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.8.0/highlight.min.js"></script>
+      <script>hljs.highlightAll();</script> 
 </head>
 
 <body class="wy-body-for-nav" role="document">
@@ -35,7 +34,7 @@
           <a href=".." class="icon icon-home"> Deming
         </a><div role="search">
   <form id ="rtd-search-form" class="wy-form" action="../search.html" method="get">
-      <input type="text" name="q" placeholder="Search docs" title="Type search term here" />
+      <input type="text" name="q" placeholder="Search docs" aria-label="Search docs" title="Type search term here" />
   </form>
 </div>
       </div>
@@ -46,7 +45,7 @@
                 </li>
               </ul>
               <ul class="current">
-                <li class="toctree-l1 current"><a class="reference internal current" href="./">Homepage</a>
+                <li class="toctree-l1 current"><a class="reference internal current" href="#">Homepage</a>
     <ul class="current">
     <li class="toctree-l2"><a class="reference internal" href="#main-page">Main page</a>
     </li>
@@ -108,8 +107,8 @@
       <div class="wy-nav-content">
         <div class="rst-content"><div role="navigation" aria-label="breadcrumbs navigation">
   <ul class="wy-breadcrumbs">
-    <li><a href=".." class="icon icon-home" alt="Docs"></a> &raquo;</li>
-      <li>Homepage</li>
+    <li><a href=".." class="icon icon-home" aria-label="Docs"></a></li>
+      <li class="breadcrumb-item active">Homepage</li>
     <li class="wy-breadcrumbs-aside">
           <a href="https://github.com/dbarzin/deming/edit/main/docs/home.md" class="icon icon-github"> Edit on GitHub</a>
     </li>
@@ -138,7 +137,7 @@ It is composed of:</p>
 <li>the number of measures carried out</li>
 <li>the number of action plans</li>
 </ul>
-<p>Note: </p>
+<p>Note:</p>
 <ul>
 <li>if a domain has no controls, or none of the domain's controls are planned, then the domain is not taken into account.</li>
 <li>if a control is not planned, it is not included in the count.</li>
@@ -149,14 +148,14 @@ It is composed of:</p>
 <li>The inspection schedule which shows the inspections to be carried out with their result (green, orange or red) and the planned inspections (in grey)</li>
 <li>An overall state of controls</li>
 </ul>
-<p><a href="/deming/images/home1.png"><img src="/deming/images/home1.png" width="600"></a></p>
+<p><a href="../images/home1.png"><img alt="Mon Screenshot" src="../images/home1.png" /></a></p>
 <p>The lower part of the main page contains the list of controls scheduled for the next 30 days:</p>
-<p><a href="/deming/images/home2.png"><img src="/deming/images/home2.png" width="600"></a></p>
+<p><a href="../images/home2.png"><img alt="Screenshot" src="../images/home2.png" /></a></p>
 <p>Overdue check dates are displayed in red.</p>
 <h3 id="search">Search</h3>
 <p>A search tool allows you to search for the presence of a word in the name, the objectives, the observations of the controls
 and in their action plans.</p>
-<p><a href="/deming/images/search.png"><img src="/deming/images/search.png" width="600"></a></p>
+<p><a href="../images/search.png"><img alt="Screenshot" src="../images/search.png" /></a></p>
               
             </div>
           </div><footer>
@@ -197,14 +196,15 @@ and in their action plans.</p>
     
   </span>
 </div>
-    <script>var base_url = '..';</script>
-    <script src="../js/theme_extra.js" defer></script>
-    <script src="../js/theme.js" defer></script>
-      <script src="../search/main.js" defer></script>
-    <script defer>
-        window.onload = function () {
+    <script src="../js/jquery-3.6.0.min.js"></script>
+    <script>var base_url = "..";</script>
+    <script src="../js/theme_extra.js"></script>
+    <script src="../js/theme.js"></script>
+      <script src="../search/main.js"></script>
+    <script>
+        jQuery(function () {
             SphinxRtdTheme.Navigation.enable(true);
-        };
+        });
     </script>
 
 </body>
