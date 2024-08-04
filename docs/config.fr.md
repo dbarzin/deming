@@ -45,9 +45,11 @@ Voici le rapport de pilotage du SMSI :
 
 ### Import <a name="import"></a>
 
-Il est possible d'importer des mesures de sécurité depuis un fichier .XLSX.
+Il est possible d'importer des mesures de sécurité depuis un fichier .XLSX ou depuis la base de données de modèles.
 
-[![Screenshot](images/import.fr.png){: style="width:600px"}](images/import.fr.png)
+Lors de l'importation, il est possible de supprimer tous les autres contrôles et mesures et de générer des données de test.
+
+[![Screenshot](images/import.png){: style="width:600px"}](images/import.png)
 
 ### Documents <a name="documents"></a>
 

@@ -46,7 +46,9 @@ Here is the ISMS pilot report:
 
 ### Import <a name="import"></a>
 
-It is possible to import controls from an .XLSX file.
+Measures can be imported from an .XLSX file or from the template database.
+
+When importing, all other controls and measures can be deleted and test data generated.
 
 [![Screenshot](images/import.png)](images/import.png)
 
