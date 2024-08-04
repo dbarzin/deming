@@ -72,4 +72,5 @@ jobs:
           php artisan insights
 
       - name: Run Laravel Server
-        run: php artisan serve --no-reload &
+        run: |
+            php artisan serve --no-reload &
