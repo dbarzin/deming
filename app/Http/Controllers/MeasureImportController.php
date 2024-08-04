@@ -81,11 +81,6 @@ class MeasureImportController extends Controller
 
         $errors = Collect();
 
-        // Clear database
-        if ($request->has('clean')) {
-            $this->clean();
-        }
-
         try {
             // Get Filename
             if ($request->file()) {
@@ -104,25 +99,34 @@ class MeasureImportController extends Controller
                 );
                 // Get full path
                 $fileName = Storage::disk('local')->path($file);
-            }
 
-            // Import file
-            $this->importFromFile($fileName, $errors);
+                // XLSX
+                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+                $reader->setReadDataOnly(true);
+                $spreadsheet = $reader->load($fileName);
+
+                $sheet = $spreadsheet->getSheet($spreadsheet->getFirstSheetIndex());
+                $data = $sheet->toArray();
+
+                if ($this->canImportFromFile($data, $request->has('clean'), $errors)) {
+                    // Clear database
+                    if ($request->has('clean')) {
+                        $this->clean();
+                        $errors->push('Database cleared');
+                    }
+                    $this->importFromFile($data, $errors);
+                }
+            }
         } finally {
             if ($request->file()) {
                 unlink($fileName);
             }
         }
 
-        // add this message after...
-        if ($request->has('clean')) {
-            $errors->prepend('Database cleared');
-        }
-
         // Generate fake test data
         if ($request->has('test')) {
             // Call command
-            Artisan::call('deming:generateTests');
+            Artisan::call('deming:generate-tests');
             $errors->push('Test data generated');
         }
 
@@ -132,26 +136,15 @@ class MeasureImportController extends Controller
     }
 
     /**
-     * Import Measures from an XLSX file
+     * Check Measures from an XLSX file
      *
      * @return \Illuminate\Http\Response
      */
-    private function importFromFile(string $fileName, Collection $errors)
-    {
-        // XLSX
-        $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-        $reader->setReadDataOnly(true);
-        $spreadsheet = $reader->load($fileName);
-
-        $sheet = $spreadsheet->getSheet($spreadsheet->getFirstSheetIndex());
-        $data = $sheet->toArray();
-
-        $deleteCount = 0;
-        $insertCount = 0;
-        $updateCount = 0;
-        $newDomainCount = 0;
-        $deleteControlCount = 0;
-        $deleteDocumentCount = 0;
+    public function canImportFromFile(
+        array $data,
+        bool $clear,
+        Collection $errors
+    ) {
         /*
         +-------------+---------------+------+-----+---------+----------------+
         | Field       | Type          | Null | Key | Default | Extra          |
@@ -172,7 +165,13 @@ class MeasureImportController extends Controller
 
         // Check for errors
         $lastLine = count($data);
+
         for ($line = 1; $line < $lastLine; $line++) {
+            if ($errors->count() > 10) {
+                $errors->push('too many errors...');
+                break;
+            }
+
             if (($data[$line][1] === null)) {
                 $errors->push(($line + 1) . ': framework name is empty');
                 continue;
@@ -218,7 +217,7 @@ class MeasureImportController extends Controller
                 $errors->push(($line + 1) . ': close name too long');
                 continue;
             }
-            if (Measure::where('clause', $data[$line][3])->exists()) {
+            if (! $clear && Measure::where('clause', $data[$line][3])->exists()) {
                 $errors->push(($line + 1) . ': close name not unique');
                 continue;
             }
@@ -231,141 +230,156 @@ class MeasureImportController extends Controller
                 continue;
             }
             // TODO: check tags
-
-            if ($errors->count() > 10) {
-                $errors->push('too many errors...');
-                break;
-            }
         }
 
-        if ($errors->isEmpty()) {
-            $lastLine = count($data);
-            for ($line = 1; $line < $lastLine; $line++) {
-                // Update domain description ?
-                // delete line ?
-                if (
-                    ($data[$line][3] !== null) &&
-                    ($data[$line][4] === null) &&
-                    ($data[$line][5] === null) &&
-                    ($data[$line][6] === null) &&
-                    ($data[$line][7] === null) &&
-                    ($data[$line][8] === null) &&
-                    ($data[$line][9] === null) &&
-                    ($data[$line][10] === null)
-                ) {
-                    // delete documents
-                    $documents = DB::table('documents')
-                        ->join('controls', 'controls.id', '=', 'documents.control_id')
-                        ->join('measures', 'measures.id', '=', 'controls.measure_id')
-                        ->where('measures.clause', $data[$line][3])
-                        ->select('documents.id', )
-                        ->get();
+        return $errors->count() === 0;
+    }
 
-                    foreach ($documents as $document) {
-                        unlink(storage_path('docs/' . $document->id));
-                        DB::table('documents')->where('id', $document->id)->delete();
-                        $deleteDocumentCount++;
-                    }
+    /**
+     * Import Measures from an XLSX file
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function importFromFile(
+        array $data,
+        Collection $errors
+    ) {
+        // Initialize counters
+        $deleteCount = 0;
+        $insertCount = 0;
+        $updateCount = 0;
+        $newDomainCount = 0;
+        $deleteControlCount = 0;
+        $deleteDocumentCount = 0;
 
-                    // Break link between controls
-                    Control::join('measures', 'measures.id', '=', 'controls.measure_id')
-                        ->where('measures.clause', $data[$line][3])
-                        ->update(['next_id' => null]);
+        // Read file
+        $lastLine = count($data);
+        for ($line = 1; $line < $lastLine; $line++) {
+            // Update domain description ?
+            // delete line ?
+            if (
+                ($data[$line][3] !== null) &&
+                ($data[$line][4] === null) &&
+                ($data[$line][5] === null) &&
+                ($data[$line][6] === null) &&
+                ($data[$line][7] === null) &&
+                ($data[$line][8] === null) &&
+                ($data[$line][9] === null) &&
+                ($data[$line][10] === null)
+            ) {
+                // delete documents
+                $documents = DB::table('documents')
+                    ->join('controls', 'controls.id', '=', 'documents.control_id')
+                    ->join('measures', 'measures.id', '=', 'controls.measure_id')
+                    ->where('measures.clause', $data[$line][3])
+                    ->select('documents.id', )
+                    ->get();
 
-                    // Delete controls
-                    $controls = Control::join('measures', 'measures.id', '=', 'controls.measure_id')
-                        ->where('measures.clause', $data[$line][3])
-                        ->get(['controls.id']);
-
-                    Control::destroy($controls->toArray());
-
-                    $deleteControlCount += count($controls);
-
-                    // delete measure
-                    measure::where('clause', $data[$line][3])->delete();
-
-                    // TODO: delete empty domains
-
-                    $deleteCount++;
-                    continue;
+                foreach ($documents as $document) {
+                    unlink(storage_path('docs/' . $document->id));
+                    DB::table('documents')->where('id', $document->id)->delete();
+                    $deleteDocumentCount++;
                 }
-                // update or insert ?
-                $measure = Measure::where('clause', $data[$line][3])->get()->first();
 
-                if ($measure !== null) {
-                    // update or create domain
-                    $domain = Domain
-                        ::where('framework', trim($data[$line][0]))
-                            ->where('title', trim($data[$line][1]))
-                            ->get()->first();
-                    if ($domain === null) {
-                        // create domain
-                        $domain = new Domain();
-                        $domain->framework = trim($data[$line][0]);
-                        $domain->title = trim($data[$line][1]);
-                        $domain->description = trim($data[$line][2]);
-                        $domain->save();
+                // Break link between controls
+                Control::join('measures', 'measures.id', '=', 'controls.measure_id')
+                    ->where('measures.clause', $data[$line][3])
+                    ->update(['next_id' => null]);
 
-                        $newDomainCount++;
-                    } else {
-                        $domain->description = trim($data[$line][2]);
-                        $domain->update();
-                    }
+                // Delete controls
+                $controls = Control::join('measures', 'measures.id', '=', 'controls.measure_id')
+                    ->where('measures.clause', $data[$line][3])
+                    ->get(['controls.id']);
 
-                    // update measure
-                    $measure->name = $data[$line][4];
-                    $measure->domain_id = $domain->id;
-                    $measure->objective = $data[$line][5];
-                    $measure->attributes = $data[$line][6];
-                    $measure->input = $data[$line][7];
-                    $measure->model = $data[$line][8];
-                    $measure->indicator = $data[$line][9];
-                    $measure->action_plan = $data[$line][10];
-                    $measure->update();
+                Control::destroy($controls->toArray());
 
-                    $updateCount++;
+                $deleteControlCount += count($controls);
+
+                // delete measure
+                measure::where('clause', $data[$line][3])->delete();
+
+                // TODO: delete empty domains
+
+                $deleteCount++;
+                continue;
+            }
+            // update or insert ?
+            $measure = Measure::where('clause', $data[$line][3])->get()->first();
+
+            if ($measure !== null) {
+                // update or create domain
+                $domain = Domain
+                    ::where('framework', trim($data[$line][0]))
+                        ->where('title', trim($data[$line][1]))
+                        ->get()->first();
+                if ($domain === null) {
+                    // create domain
+                    $domain = new Domain();
+                    $domain->framework = trim($data[$line][0]);
+                    $domain->title = trim($data[$line][1]);
+                    $domain->description = trim($data[$line][2]);
+                    $domain->save();
+
+                    $newDomainCount++;
                 } else {
-                    // insert
-
-                    // get domain id
-                    $domain = Domain
-                        ::where('framework', trim($data[$line][0]))
-                            ->where('title', trim($data[$line][1]))
-                            ->get()->first();
-
-                    if ($domain === null) {
-                        // create domain
-                        $domain = new Domain();
-                        $domain->framework = trim($data[$line][0]);
-                        $domain->title = trim($data[$line][1]);
-                        $domain->description = trim($data[$line][2]);
-                        $domain->save();
-
-                        $newDomainCount++;
-                    } else {
-                        $domain->description = trim($data[$line][2]);
-                        $domain->update();
-                    }
-
-                    // create measure
-                    $measure = new Measure();
-
-                    $measure->domain_id = $domain->id;
-                    $measure->clause = $data[$line][3];
-                    $measure->name = $data[$line][4];
-                    $measure->objective = $data[$line][5];
-                    $measure->attributes = $data[$line][6];
-                    $measure->input = $data[$line][7];
-                    $measure->model = $data[$line][8];
-                    $measure->indicator = $data[$line][9];
-                    $measure->action_plan = $data[$line][10];
-
-                    $measure->save();
-
-                    $insertCount++;
+                    $domain->description = trim($data[$line][2]);
+                    $domain->update();
                 }
+
+                // update measure
+                $measure->name = $data[$line][4];
+                $measure->domain_id = $domain->id;
+                $measure->objective = $data[$line][5];
+                $measure->attributes = $data[$line][6];
+                $measure->input = $data[$line][7];
+                $measure->model = $data[$line][8];
+                $measure->indicator = $data[$line][9];
+                $measure->action_plan = $data[$line][10];
+                $measure->update();
+
+                $updateCount++;
+            } else {
+                // insert
+
+                // get domain id
+                $domain = Domain
+                    ::where('framework', trim($data[$line][0]))
+                        ->where('title', trim($data[$line][1]))
+                        ->get()->first();
+
+                if ($domain === null) {
+                    // create domain
+                    $domain = new Domain();
+                    $domain->framework = trim($data[$line][0]);
+                    $domain->title = trim($data[$line][1]);
+                    $domain->description = trim($data[$line][2]);
+                    $domain->save();
+
+                    $newDomainCount++;
+                } else {
+                    $domain->description = trim($data[$line][2]);
+                    $domain->update();
+                }
+
+                // create measure
+                $measure = new Measure();
+
+                $measure->domain_id = $domain->id;
+                $measure->clause = $data[$line][3];
+                $measure->name = $data[$line][4];
+                $measure->objective = $data[$line][5];
+                $measure->attributes = $data[$line][6];
+                $measure->input = $data[$line][7];
+                $measure->model = $data[$line][8];
+                $measure->indicator = $data[$line][9];
+                $measure->action_plan = $data[$line][10];
+
+                $measure->save();
+
+                $insertCount++;
             }
         }
+
         if ($insertCount > 0) {
             $errors->push($insertCount . ' lines inserted');
         }
@@ -384,8 +398,6 @@ class MeasureImportController extends Controller
         if ($newDomainCount > 0) {
             $errors->push($newDomainCount . ' new domains created');
         }
-
-        return $errors;
     }
 
     /**
@@ -393,7 +405,7 @@ class MeasureImportController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    private function clean()
+    public function clean()
     {
         Schema::disableForeignKeyConstraints();
 

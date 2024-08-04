@@ -100,9 +100,14 @@ Create storage link
 
     php artisan storage:link
 
-To import the database with 27001:2022 attributes (optional)
+Import attributes
 
     php artisan db:seed --class=AttributeSeeder
+
+Then populate the database with 27001:2022 and generated tests data
+
+    php artisan deming:import-framework ./storage/app/repository/ISO27001-2022.en.xlsx --clean
+    php artisan deming:generate-tests
 
 Start application with php
 
@@ -232,8 +237,10 @@ Here's the command to recreate the DB:
 
     php artisan migrate:fresh --seed
 
-Then to populate the DB with 27001:2022
+Import attributes
 
     php artisan db:seed --class=AttributeSeeder
-    php artisan db:seed --class=DomainSeeder
-    php artisan db:seed --class=MeasureSeeder
+
+Then to populate the database with 27001:2022
+
+    php artisan deming:import-framework ./storage/app/repository/ISO27001-2022.en.xlsx

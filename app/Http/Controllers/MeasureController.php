@@ -401,17 +401,6 @@ class MeasureController extends Controller
             '403 Forbidden'
         );
 
-        $this->validate(
-            $request,
-            [
-                'name' => 'required|min:3|max:255',
-                'scope' => 'max:32',
-                'objective' => 'required',
-                'plan_date' => 'required',
-                'periodicity' => 'required|integer',
-            ]
-        );
-
         $measure = Measure::find($request->id);
 
         // Control not found

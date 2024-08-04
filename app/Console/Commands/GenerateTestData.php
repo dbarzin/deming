@@ -16,7 +16,7 @@ class GenerateTestData extends Command
      *
      * @var string
      */
-    protected $signature = 'deming:generateTests';
+    protected $signature = 'deming:generate-tests';
 
     /**
      * The console command description.

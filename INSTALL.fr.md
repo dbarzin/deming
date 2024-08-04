@@ -108,7 +108,12 @@ Pour importer la base de données avec les attributs de sécurité de la norme 2
 
     LANG=fr php artisan db:seed --class=AttributeSeeder
 
-Démarrer l'application avec php
+Peupler la base de données avec la norme ISO 27001:2022 et générer un jeu de tests (optionel)
+
+    php artisan deming:import-framework ./storage/app/repository/ISO27001-2022.fr.xlsx --clean
+    php artisan deming:generate-tests
+
+Démarrer l'application avec PHP
 
     php artisan serve
 
@@ -236,8 +241,10 @@ Voici la commande pour recréer la DB :
 
     php artisan migrate:fresh --seed
 
-Puis pour peupler la DB avec la 27001:2022
+Puis importer les attributs
 
     php artisan db:seed --class=AttributeSeeder
-    php artisan db:seed --class=DomainSeeder
-    php artisan db:seed --class=MeasureSeeder
+
+Peupler la base de données avec la norme ISO 27001:2022
+
+    php artisan deming:import-framework ./storage/app/repository/ISO27001-2022.fr.xlsx
