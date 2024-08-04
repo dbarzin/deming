@@ -14,13 +14,13 @@ Cet écran permet d’afficher la liste des contrôles et de les filtrer par :
 
 * texte libre sur le nom, l’objectif, les observations.
 
-[<img src="/deming/images/c1.png" width="600">](/deming/images/c1.png)
+[![Screenshot](images/c1.fr.png)](images/c1.fr.png)
 
 Lorsque vous cliquez sur :
 
-* Le domaine, vous arrivez l'écran d'[affichage du domaine de sécurité](/deming/config/#domains)
+* Le domaine, vous arrivez l'écran d'[affichage du domaine de sécurité](config.fr.md/#domains)
 
-* La clause, vous arrivez l'écran d'[affichage de la mesure de sécurité](/deming/measures/#show).
+* La clause, vous arrivez l'écran d'[affichage de la mesure de sécurité](measures.fr.md/#show).
 
 * La date de réalisation, de planification ou la date du contrôle suivant, vous arrivez l'écran d'[affichage du contrôle de sécurité](#show).
 
@@ -48,7 +48,7 @@ Les boutons « Faire » et « Planifier » sont présents si ce contôle n’a p
 
 Les boutons « Modifier » et « Supprimer » sont présents si l'utilisateur est administrateur.
 
-[<img src="/deming/images/c2.fr.png" width="600">](/deming/images/c2.fr.png)
+ [![Screenshot](images/c2.fr.png)](images/c2.fr.png)
 
 Lorsque vous cliquez sur :
 
@@ -74,18 +74,17 @@ Cet écran contient les informations d’un contrôle :
 
 * Le périmètre du contrôle ;
 
-* La date de palnification ;
+* La date de planification ;
 
 * La périodicité ; et
 
 * Les responsables de la réalisation du contrôles.
 
-[<img src="/deming/images/c5.png" width="400">](/deming/images/c5.png)
+[![Screenshot](images/c5.fr.png)](images/c5.fr.png)
 
 Lorsque vous cliquez sur :
 
-* « Plan », la date de planifierion, la récurence et les responsables sont mis à jour et vous êtres renvoyés vers l’[écran d'affichage 
-du contrôles](#show)
+* « Plan », la date de planifierion, la récurence et les responsables sont mis à jour et vous êtres renvoyés vers l’[écran d'affichage du contrôles](#show)
 
 * « Annuler », Vous êtres renvoyés vers l’[écran d'affichage du contrôles](#show)
 
@@ -120,8 +119,8 @@ Cet écran contient :
 
 * La date du prochaine contrôle
 
- [<img src="/deming/images/c3.png" width="600">](/deming/images/c3.png)
- [<img src="/deming/images/c4.png" width="600">](/deming/images/c4.png)
+[![Screenshot](images/c3.fr.png)](images/c3.fr.png)
+[![Screenshot](images/c4.fr.png)](images/c4.fr.png)
 
 Lorsque vous cliquez sur :
 
@@ -140,14 +139,6 @@ La fiche de contrôle est un document word généré par l'application sur base 
 
 Cette fiche permet de décrire les observations réalisés, d'ajouter des captures d'écran ou des tableaux et de __signer électroniquement__ les observations.
 
+[![Screenshot](images/report3.png)](images/report3.png)
 
-[<img src="/deming/images/report3.png" width="600">](/deming/images/report3.png)
-
-
-La fiche de contrôle peut être [adaptée](/deming/config.fr/#documents) afin de respecter le modèle de document de votre organisation.
-
-
-
-
-
-
+La fiche de contrôle peut être [adaptée](config.fr.md/#documents) afin de respecter le modèle de document de votre organisation.

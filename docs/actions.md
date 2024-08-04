@@ -6,23 +6,22 @@ Each time a control fails (orange or red), an action plan must be put in place a
 
 This screen allows you to follow the action plans:
 
-[<img src="/deming/images/a1.png" width="600">](/deming/images/a1.png)
-
+[![Screenshot](images/a1.png)](images/a1.png)
 
 Clicking on :
 
 * the title of the associated control, you arrive at the corresponding [modification of the action plan](#edit) page.
 
-* On the planning date, you arrive at the [control](/deming/controls/#show) that generated this action plan
+* On the planning date, you arrive at the [control](controls.md/#show) that generated this action plan
 
-* The next review date, you arrive at the next [control](/deming/controls/#show)
+* The next review date, you arrive at the next [control](controls.md/#show)
 
 
 ### Edit an action plan <a name="edit"></a>
 
 This screen allows you to edit an action plan and schedule the next control assessment.
 
-[<img src="/deming/images/a2.png" width="600">](/deming/images/a2.png)
+[![Screenshot](images/a2.png)](images/a2.png)
 
 
 When you click:

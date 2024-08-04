@@ -11,15 +11,12 @@ Il existe trois tableaux de bord :
 
 ### Les contrôles par domaines
 
-[<img src="/deming/images/r1.png" width="300">](/deming/images/r1.png)
+[![Screenshot](images/r1.fr.png){: style="width:500px"}](images/r1.fr.png)
 
+### Les contrôle par domaines et par mesures
 
-### Les contrôle par domaine et par mesure
+[![Screenshot](images/r2.fr.png)](images/r2.fr.png)
 
-[<img src="/deming/images/r2.png" width="600">](/deming/images/r2.png)
+### Les contrôles par attributs
 
-
-### Les contrôles par attribut
-
-[<img src="/deming/images/r3.png" width="600">](/deming/images/r3.png)
-
+[![Screenshot](images/r3.fr.png)](images/r3.fr.png)

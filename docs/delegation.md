@@ -1,7 +1,7 @@
 ## Delegation
 
 Deming allows you to delegate the realisation of measurements to users who have the *auditee* role.
-The auditee role is assigned to a user via the [user management screen](/deming/config/#users).
+The auditee role is assigned to a user via the [user management screen](config.md/#users).
 
 This delegation complies with the following rules:
 
@@ -15,7 +15,7 @@ This delegation complies with the following rules:
 
 From the auditee's point of view, the application's main page contains the list of measurements that are assigned to him.
 
-[<img src="/deming/images/d1.png" width="600">](/deming/images/d1.png)
+[![Screenshot](images/d1.png)](images/d1.png)
 
 Tha auditee can :
 
@@ -33,7 +33,7 @@ When an auditee performs an mesurement, they can :
 
 - "Make" the mesurement
 
-[<img src="/deming/images/d2.png" width="300">](/deming/images/d2.png)
+[![Screenshot](images/d2.png){: style="width:300px"}](images/d2.png)
 
 When the auditee clicks on :
 
@@ -50,13 +50,13 @@ Once an measurement has been carried out by an auditee, it changes status to "to
 
 For other users, this is shown by an hourglass next to the completion date in the list of checks to be carried out:
 
-[<img src="/deming/images/d3.png" width="600">](/deming/images/d3.png)
+[![Screenshot](images/d3.png)](images/d3.png)
 
 When the user clicks on the date next to the hourglass, they are taken to the measurement performed by the auditee.
 
 They can then accept or reject the measurement, adding a note in the measurement observations and, depending on the measurement score, propose an action plan and anmeasurement review date.
 
-[<img src="/deming/images/d4.png" width="600">](/deming/images/d4.png)
+[![Screenshot](images/d4.png){: style="width:500px"}](images/d4.png)
 
 If the user clicks on :
 

@@ -6,15 +6,15 @@ Cette partie permet de définir, de modifier et de plannifier de nouvelles mesur
 
 La liste des mesures de sécurité permet d’afficher la liste des mesures, de les filtrer par domaine ou de recherche une mesure sur base d’une partie de son nom.
 
-[<img src="/deming/images/m1.png" width="600">](/deming/images/m1.png)
+[![Screenshot](images/m1.fr.png)](images/m1.fr.png)
 
 En cliquant sur :
 
-* le domaine, vous arrivez sur la [définition du domaine choisi](/config.fr/#domain)
+* le domaine, vous arrivez sur la [définition du domaine choisi](config.fr.md/#domain)
 
 * la clause, vous arrivez sur la [description de la mesure de sécurité](#show)
 
-* le nombre de contrôle, vous arrivez sur la [liste des contrôles](/deming/controls.fr/#list) de cette mesure de sécurité
+* le nombre de contrôle, vous arrivez sur la [liste des contrôles](controls.fr.md/#list) de cette mesure de sécurité
 
 * le bouton "planifier", vous arrivez sur la [planification de la mesure de sécurité](#plan)
 
@@ -22,7 +22,7 @@ En cliquant sur :
 
 Cet écran permet d’afficher une mesure de sécurité.
 
-[<img src="/deming/images/m2.png" width="600">](/deming/images/m2.png)
+[![Screenshot](images/m2.fr.png)](images/m2.fr.png)
 
 Une mesure de sécurité est composée :
 
@@ -58,8 +58,7 @@ Lorsque vous cliquez sur :
 
 Cet écran permet de modifier une mesure de sécurité.
 
-[<img src="/deming/images/m3.png" width="600">](/deming/images/m3.png)
-
+[![Screenshot](images/m3.fr.png)](images/m3.fr.png)
 
 Lorsque vous cliquez sur :
 
@@ -86,7 +85,7 @@ L’écran contient :
 
 * Les responsables de la réalisation du contrôles.
 
-[<img src="/deming/images/plan.png" width="400">](/deming/images/plan.png)
+[![Screenshot](images/plan.fr.png){: style="width:600px"}](images/plan.fr.png)
 
 Lorsque vous cliquez sur :
 
