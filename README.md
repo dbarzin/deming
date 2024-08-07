@@ -105,7 +105,8 @@ The application has a [user documentation](https://dbarzin.github.io/deming/inde
 
 ## Facility
 
-[Installation](https://github.com/dbarzin/deming/blob/main/INSTALL.md) procedure of the application.
+- [RedHat Installation](https://github.com/dbarzin/deming/blob/main/INSTALL.md) procedure.
+- [Debian Installation](https://github.com/dbarzin/deming/blob/main/INSTALL.Debian.md) procedure.
 
 ## Roadmap
 
