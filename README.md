@@ -5,6 +5,8 @@
 ![Contributors](https://img.shields.io/github/contributors/dbarzin/deming.svg?style=flat-square)
 ![Stars](https://img.shields.io/github/stars/dbarzin/deming?style=flat-square)
 
+- Read this in other languages: [French](README.fr.md)
+
 ## 🚀 Introduction
 
 In a world where information security is more critical than ever, organizations must not only implement security measures, but also ensure that they are effective and efficient. **Deming** is here to help you meet this challenge head on.
@@ -48,6 +50,7 @@ According to ISO 27001, chapter 9.1, it is imperative to assess security perform
 ### 🌟 Main screen
 
 [<img src="public/screenshots/main1.png" width="500">](public/screenshots/main1.png)
+
 [<img src="public/screenshots/main2.png" width="500">](public/screenshots/main2.png)
 
 ### ✅ List of controls
