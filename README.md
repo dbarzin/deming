@@ -88,7 +88,9 @@ To find out more about using the application, please refer to the [user document
 
 ## ⚙️ Installation
 
-Follow the [installation procedure](https://github.com/dbarzin/deming/blob/main/INSTALL.md) to set up the application.
+Follow the [installation procedure for Debian](https://github.com/dbarzin/deming/blob/main/INSTALL.debian.md) to set up the application.
+
+Follow the [installation procedure for Ubuntu](https://github.com/dbarzin/deming/blob/main/INSTALL.md) to set up the application.
 
 ## 🛤️ Roadmap
 

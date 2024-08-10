@@ -83,7 +83,9 @@ Pour en savoir plus sur l'utilisation de l'application, consultez la [documentat
 
 ## ⚙️ Installation
 
-Suivez la [procédure d'installation](https://github.com/dbarzin/deming/blob/main/INSTALL.fr.md) pour mettre en place l'application.
+Suivez la [procédure d'installation pour Ubuntu](https://github.com/dbarzin/deming/blob/main/INSTALL.fr.md) pour mettre en place l'application.
+
+Suivez la [procédure d'installation pour Debian](https://github.com/dbarzin/deming/blob/main/INSTALL.debian.fr.md) pour mettre en place l'application.
 
 ## 🛤️ Feuille de route
 
