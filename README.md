@@ -76,7 +76,7 @@ According to ISO 27001, chapter 9.1, it is imperative to assess security perform
 
 ## 📚 Documentation
 
-To find out more about using the application, please refer to the [user documentation](https://dbarzin.github.io/deming/index/).
+To find out more about using the application, please refer to the [user documentation](https://dbarzin.github.io/deming).
 
 ## 🛠️ Technologies used
 
