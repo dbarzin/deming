@@ -80,10 +80,10 @@ To find out more about using the application, please refer to the [user document
 
 ## 🛠️ Technologies used
 
-- Languages**: PHP, JavaScript
+- **Languages**: PHP, JavaScript
 - **Framework** : Laravel
-- Database**: MySQL, PostgreSQL, SQLite, SQL Server
-- Graphics**: ChartJS
+- **Database**: MySQL, PostgreSQL, SQLite, SQL Server
+- **Graphics**: ChartJS
 
 ## ⚙️ Installation
 
