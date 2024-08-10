@@ -4,7 +4,7 @@
 
 - OS : Ubuntu 22.04 LTS
 - RAM : 2G
-- Disk : 120G
+- Disk : 30G
 - VCPU 2
 
 ## Installation

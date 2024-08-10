@@ -5,13 +5,11 @@
 ![Contributors](https://img.shields.io/github/contributors/dbarzin/deming.svg?style=flat-square)
 ![Stars](https://img.shields.io/github/stars/dbarzin/deming?style=flat-square)
 
+- Read this in other languages: [French](README.fr.md)
+
 ## 🚀 Introduction
 
 In a world where information security is more critical than ever, organizations must not only implement security measures, but also ensure that they are effective and efficient. **Deming** is here to help you meet this challenge head on.
-
-### ❓ What is Deming?
-
-**Deming** is a powerful and intuitive tool designed to manage, plan, monitor and report on the effectiveness of safety measures. In line with ISO/IEC 27001:2013, Chapter 9, **Deming** helps you guarantee appropriate and proportionate security, while complying with the most demanding standards.
 
 ### ❓ What is Deming?
 
@@ -52,6 +50,7 @@ According to ISO 27001, chapter 9.1, it is imperative to assess security perform
 ### 🌟 Main screen
 
 [<img src="public/screenshots/main1.png" width="500">](public/screenshots/main1.png)
+
 [<img src="public/screenshots/main2.png" width="500">](public/screenshots/main2.png)
 
 ### ✅ List of controls
@@ -70,7 +69,7 @@ According to ISO 27001, chapter 9.1, it is imperative to assess security perform
 
 [<img src="public/screenshots/radar.png" width="500">](public/screenshots/radar.png)
 
-### 🗂️ WSIS steering meeting report
+### 🗂️ ISMS steering meeting report
 
 [<img src="public/screenshots/pilotage1.png" width="400">](public/screenshots/pilotage1.png)
 [<img src="public/screenshots/pilotage2.png" width="400">](public/screenshots/pilotage2.png)
