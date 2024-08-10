@@ -5,117 +5,90 @@
 ![Contributors](https://img.shields.io/github/contributors/dbarzin/deming.svg?style=flat-square)
 ![Stars](https://img.shields.io/github/stars/dbarzin/deming?style=flat-square)
 
-## Introduction
+## 🚀 Introduction
 
-Pour gérer la sécurité de leur système d’information les organisations doivent mettre en place un
-ensemble de mesures de sécurité et contrôler régulièrement que ces mesures sont effectives et
-efficaces. Ces contrôles réguliers permettent de garantir que les mesures de sécurité mises en
-place atteignent leurs objectifs de sécurité.
+Dans un monde où la sécurité de l'information est plus critique que jamais, les organisations doivent non seulement implémenter des mesures de sécurité, mais aussi s'assurer que celles-ci sont effectives et performantes. **Deming** est là pour vous aider à relever ce défi avec brio.
 
-### Qu’est-ce que Deming ?
+### ❓ Qu’est-ce que Deming ?
 
-Deming est un outil qui permet de gérer, de planifier, de suivre et de rapporter l’efficacité des mesures de sécurité.
+**Deming** est un outil puissant et intuitif conçu pour la gestion, la planification, le suivi et le reporting de l’efficacité des mesures de sécurité. Conformément à la norme ISO/IEC 27001:2013, chapitre 9, **Deming** vous aide à garantir une sécurité adaptée et proportionnée, tout en respectant les standards les plus exigeants.
 
-Cette gestion des contrôles doit permettre la mise en œuvre d’une sécurité adéquate et proportionnée. Cette approche est conforme aux recommandations de la norme ISO / IEC 27001:2013, chapitre 9 qui traite de l’évaluation des performances.
+### 🎯 Pourquoi contrôler ?
 
-### Pourquoi contrôler ?
+Le contrôle et l'évaluation réguliers des mesures de sécurité sont essentiels pour :
 
-Les objectifs de mesure de l’efficacité des exigences d’un SMSI sont :
+- Évaluer l'efficacité des contrôles mis en place.
+- Vérifier que les exigences de sécurité sont respectées.
+- Améliorer continuellement la sécurité de l’information.
+- Fournir des données précises pour les prises de décision.
+- Justifier les besoins d'amélioration du système de gestion de la sécurité de l'information (SMSI).
 
-- a) d’évaluer l'efficacité des contrôles;
+**Deming** vous offre les outils nécessaires pour répondre à ces objectifs avec efficacité.
 
-- b) d’évaluer l'efficacité du système de gestion de l'information;
+### 📊 Évaluation des performances
 
-- c) de vérifier dans quelle mesure les exigences de sécurité identifiées ont été respectées;
+Selon la norme ISO 27001, chapitre 9.1, il est impératif d'évaluer les performances de sécurité. **Deming** vous guide à travers ce processus en vous permettant de :
 
-- d) de faciliter l’amélioration des performances de la sécurité de l’information par rapport aux objectifs;
+- Déterminer ce qui doit être surveillé et mesuré.
+- Choisir les méthodes adéquates pour assurer la validité des résultats.
+- Planifier les moments de surveillance et de mesure.
+- Identifier les responsables de chaque tâche.
+- Analyser et évaluer les résultats obtenus.
 
-- e) de fournir des données pour la revue de la direction afin de faciliter la prise de décisions liées au SMSI;
+## 🔍 Définitions clés
 
-- f) de justifier les besoins d'amélioration du ISMS.
+- **Mesures de sécurité** (Control) : Ensemble des dispositions mises en œuvre pour garantir la sécurité selon la politique définie.
+- **Contrôle** (Measurement) : Processus d'évaluation de l'efficacité d'un SMSI via des méthodes et critères spécifiques.
+- **Indicateur** : Résultat d'une analyse appliquée aux mesures de sécurité.
+- **Attribut** : Propriété d'un objet mesurable quantitativement ou qualitativement.
 
-### Evaluation des performances
+## 🖥️ Aperçu des écrans
 
-La norme ISO 27001 au chapitre 9.1, impose d’évaluer les performances de sécurité de l’information, ainsi que l’efficacité du système de management de la sécurité de l’information.
-
-Pour évaluer ces performances, il faut déterminer :
-
-- a) ce qu’il est nécessaire de surveiller et de mesurer, y compris les processus et les mesures de sécurité de l’information;
-
-- b) les méthodes de surveillance, de mesurage, d’analyse et d’évaluation, selon le cas, pour assurer la validité des résultats;
-
-- c) quand la surveillance et les mesures doivent être effectuées;
-
-- d) qui doit effectuer la surveillance et les mesures;
-
-- e) quand les résultats de la surveillance et des mesures doivent être analysés et évalués; et
-
-- f) qui doit analyser et évaluer ces résultats.
-
-Deming permet de répondre à ces exigences et de conserver les informations documentées appropriées comme preuves des résultats de la surveillance et des mesures.
-
-## Definitions
-
-**Mesures de sécurité** (en anglais « Control ») : ensemble de dispositions à mettre en œuvre. Ce sont les mesures à prendre pour mettre en œuvre la politique de sécurité.
-
-**Contrôle** ou Mesurage (en anglais « Measurement ») : processus d’obtention relative à l’efficacité d’un SMSI et de mesures de sécurité, à l’aide d’une méthode d’évaluation, d’une fonction d’évaluation, d’un modèle analytique, et de critère de décisions [ISO/IEC 27004].
-
-**Indicateur** : résultat de l’application d’un modèle analytique à une ou plusieurs variables en relation avec les critères de décision ou d’un besoin d’information [ISO/IEC 27004].
-
-**Attribut** : propriété ou caractéristique d’un objet qui peut être distingué quantitativement ou qualitativement par des moyens humains ou automatiques [ISO/IEC 15939:2007].
-
-## Ecrans
-
-### Ecran principal
+### 🌟 Écran principal
 
 [<img src="public/screenshots/main1_fr.png" width="500">](public/screenshots/main1_fr.png)
-
 [<img src="public/screenshots/main2_fr.png" width="500">](public/screenshots/main2_fr.png)
 
-### Liste des contrôles
+### ✅ Liste des contrôles
 
 [<img src="public/screenshots/controls_fr.png" width="400">](public/screenshots/controls_fr.png)
 
-### Planification des contrôles
+### 📅 Planification des contrôles
 
 [<img src="public/screenshots/calendar.png" width="450">](public/screenshots/calendar.png)
 
-### Gestion des plans d'action
+### 📝 Gestion des plans d'action
 
 [<img src="public/screenshots/plans.fr.png" width="450">](public/screenshots/plans.fr.png)
 
-### Vue de la courverture des mesures de protection
+### 📈 Vue de la couverture des mesures de protection
 
 [<img src="public/screenshots/radar.fr.png" width="500">](public/screenshots/radar.fr.png)
 
-### Rapport de réunion de pilotage du SMSI
+### 🗂️ Rapport de réunion de pilotage du SMSI
 
 [<img src="public/screenshots/pilotage1.png" width="400">](public/screenshots/pilotage1.png)
 [<img src="public/screenshots/pilotage2.png" width="400">](public/screenshots/pilotage2.png)
 
+## 📚 Documentation
 
-## Documentation
+Pour en savoir plus sur l'utilisation de l'application, consultez la [documentation utilisateur](https://dbarzin.github.io/deming/index.fr/).
 
-L'application dispose d'une [documentation utilisateur](https://dbarzin.github.io/deming/index.fr/).
+## 🛠️ Technologies utilisées
 
+- **Langages** : PHP, JavaScript
+- **Framework** : Laravel
+- **Base de données** : MySQL, PostgreSQL, SQLite, SQL Server
+- **Graphiques** : ChartJS
 
-## Technologies
+## ⚙️ Installation
 
-- PHP, Javascript, Laravel
-- Base de données supportées : MySQL, Postgres, SQLite, SQL Server
-- ChartJS
+Suivez la [procédure d'installation](https://github.com/dbarzin/deming/blob/main/INSTALL.fr.md) pour mettre en place l'application.
 
+## 🛤️ Feuille de route
 
-## Installation
+Consultez la [feuille de route](https://github.com/dbarzin/deming/blob/main/ROADMAP.md) pour découvrir les futures évolutions de **Deming**.
 
-Procédure d'[installation](https://github.com/dbarzin/deming/blob/main/INSTALL.fr.md) de l'application.
+## 📜 License
 
-
-## Feuille de route
-
-Une [feuille de route](https://github.com/dbarzin/deming/blob/main/ROADMAP.md) reprend les évolutions prévues de l'application.
-
-
-## License
-
-Deming est un logiciel open source distribué sous la licence [GPL](https://www.gnu.org/licenses/licenses.fr.html).
+**Deming** est un logiciel open source distribué sous la licence [GPL](https://www.gnu.org/licenses/licenses.fr.html). Contribuez, améliorez, et participez à la sécurisation des systèmes d'information à l'échelle mondiale !
