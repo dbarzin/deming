@@ -11,10 +11,6 @@ In a world where information security is more critical than ever, organizations 
 
 ### ❓ What is Deming?
 
-**Deming** is a powerful and intuitive tool designed to manage, plan, monitor and report on the effectiveness of safety measures. In line with ISO/IEC 27001:2013, Chapter 9, **Deming** helps you guarantee appropriate and proportionate security, while complying with the most demanding standards.
-
-### ❓ What is Deming?
-
 **Deming** is a powerful, intuitive tool designed for managing, planning, monitoring and reporting on the effectiveness of security measures. In line with ISO/IEC 27001:2013, Chapter 9, **Deming** helps you guarantee appropriate and proportionate security, while complying with the most demanding standards.
 
 ### 🎯 Why monitor?
@@ -70,7 +66,7 @@ According to ISO 27001, chapter 9.1, it is imperative to assess security perform
 
 [<img src="public/screenshots/radar.png" width="500">](public/screenshots/radar.png)
 
-### 🗂️ WSIS steering meeting report
+### 🗂️ ISMS steering meeting report
 
 [<img src="public/screenshots/pilotage1.png" width="400">](public/screenshots/pilotage1.png)
 [<img src="public/screenshots/pilotage2.png" width="400">](public/screenshots/pilotage2.png)
