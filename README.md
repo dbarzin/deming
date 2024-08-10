@@ -1,117 +1,101 @@
 # Deming
 
-[![Latest Release](https://img.shields.io/github/release/dbarzin/deming.svg?style=flat-square)](https://github.com/dbarzin/deming/releases/latest )
+[![Latest Release](https://img.shields.io/github/release/dbarzin/deming.svg?style=flat-square)](https://github.com/dbarzin/deming/releases/latest)
 ![License](https://img.shields.io/github/license/dbarzin/deming.svg?style=flat-square)
 ![Contributors](https://img.shields.io/github/contributors/dbarzin/deming.svg?style=flat-square)
 ![Stars](https://img.shields.io/github/stars/dbarzin/deming?style=flat-square)
 
-Read this in other languages: [French](README.fr.md)
+## 🚀 Introduction
 
-## Introduction
+In a world where information security is more critical than ever, organizations must not only implement security measures, but also ensure that they are effective and efficient. **Deming** is here to help you meet this challenge head on.
 
-To manage the security of their information system, organizations must set up a
-set of security measures and regularly check that these measures are effective and
-efficient. These regular checks ensure that the security measures put in
-place achieve their security objectives.
+### ❓ What is Deming?
 
-### What is Deming?
+**Deming** is a powerful and intuitive tool designed to manage, plan, monitor and report on the effectiveness of safety measures. In line with ISO/IEC 27001:2013, Chapter 9, **Deming** helps you guarantee appropriate and proportionate security, while complying with the most demanding standards.
 
-Deming is a tool for managing, planning, tracking and reporting the effectiveness of security controls.
+### ❓ What is Deming?
 
-This management of controls must allow the implementation of adequate and proportionate security. This approach is in line with the recommendations of ISO / IEC 27001:2013, chapter 9 which deals with performance evaluation.
+**Deming** is a powerful, intuitive tool designed for managing, planning, monitoring and reporting on the effectiveness of security measures. In line with ISO/IEC 27001:2013, Chapter 9, **Deming** helps you guarantee appropriate and proportionate security, while complying with the most demanding standards.
 
-### Why control?
+### 🎯 Why monitor?
 
-The objectives of measuring the effectiveness of the requirements of an ISMS are:
+Regular monitoring and evaluation of security measures is essential for :
 
-- a) assess the effectiveness of controls;
+- Evaluate the effectiveness of controls in place.
+- Verify that security requirements are being met.
+- Continuously improve information security.
+- Provide accurate data for decision-making.
+- Justify the need to improve the information security management system (ISMS).
 
-- b) assess the effectiveness of the information management system;
+**Deming** gives you the tools you need to meet these objectives effectively.
 
-- c) to verify the extent to which the identified security requirements have been met;
+### 📊 Performance assessment
 
-- d) facilitate the improvement of information security performance against objectives;
+According to ISO 27001, chapter 9.1, it is imperative to assess security performance. **Deming** guides you through this process, enabling you to:
 
-- e) provide input for management review to facilitate ISMS-related decision-making;
+- Determine what needs to be monitored and measured.
+- Choose the right methods to ensure valid results.
+- Schedule monitoring and measurement times.
+- Identify who is responsible for each task.
+- Analyze and evaluate results.
 
-- f) to justify the needs for improvement of the ISMS.
 
-### Evaluation of performances
+## 🔍 Key definitions
 
-The ISO 27001 standard in chapter 9.1 requires the evaluation of information security performance, as well as the effectiveness of the information security management system.
+- Security measures** (Control): All the measures implemented to guarantee security in accordance with the defined policy.
+- Control** (Measurement): The process of evaluating the effectiveness of an ISMS using specific methods and criteria.
+- Indicator**: Result of an analysis applied to security measures.
+- Attribute**: Property of an object that can be measured quantitatively or qualitatively.
 
-To assess this performance, it is necessary to determine:
+## 🖥️ Screen overview
 
-- a) what needs to be monitored and measured, including information security processes and measures;
-
-- b) the monitoring, measurement, analysis and evaluation methods, as applicable, to ensure the validity of the results;
-
-- c) when monitoring and measurements should be carried out;
-
-- d) who is to carry out the monitoring and measurements;
-
-- e) when the results of monitoring and measurements should be analyzed and evaluated; and
-
-- f) who should analyze and evaluate these results.
-
-Deming helps meet these requirements and retain appropriate documented information as evidence of monitoring and measurement results.
-
-## Definitions
-
-**Control** : processes and policies you put in place to minimize information security risks.
-
-**Measurement** : process of obtaining relative to the effectiveness of an ISMS and security measures, using an evaluation method, a function assessment, analytical model, and decision criteria [ISO/IEC 27004].
-
-**Indicator**: result of the application of an analytical model to one or more variables in relation to the decision criteria or an information need [ISO/IEC 27004].
-
-**Attribute**: property or characteristic of an object that can be quantitatively or qualitatively distinguished by human or automatic means [ISO/IEC 15939:2007].
-
-## Screens
-
-### Main Screen
+### 🌟 Main screen
 
 [<img src="public/screenshots/main1.png" width="500">](public/screenshots/main1.png)
 [<img src="public/screenshots/main2.png" width="500">](public/screenshots/main2.png)
 
-### List of controls
+### ✅ List of controls
 
 [<img src="public/screenshots/controls.png" width="400">](public/screenshots/controls.png)
 
-### Control planning
+### 📅 Control planning
 
 [<img src="public/screenshots/calendar.png" width="450">](public/screenshots/calendar.png)
 
-### Action plan management
+### 📝 Action plan management
 
 [<img src="public/screenshots/plans.png" width="450">](public/screenshots/plans.png)
 
-### View of the coverage of protective measures
+### 📈 Protective measures coverage view
 
-[<img src="public/screenshots/radar.png" width="450">](public/screenshots/radar.png)
+[<img src="public/screenshots/radar.png" width="500">](public/screenshots/radar.png)
 
-### ISMS steering meeting report
+### 🗂️ WSIS steering meeting report
 
 [<img src="public/screenshots/pilotage1.png" width="400">](public/screenshots/pilotage1.png)
 [<img src="public/screenshots/pilotage2.png" width="400">](public/screenshots/pilotage2.png)
 
-## Technology
-- PHP, JavaScript, Laravel
-- Supported databases: MySQL, Postgres, SQLite, SQL Server
-- ChartJS
+## 📚 Documentation
 
-## Documentation
+To find out more about using the application, please refer to the [user documentation](https://dbarzin.github.io/deming/index/).
 
-The application has a [user documentation](https://dbarzin.github.io/deming/index).
+## 🛠️ Technologies used
 
-## Facility
+- Languages**: PHP, JavaScript
+- **Framework** : Laravel
+- Database**: MySQL, PostgreSQL, SQLite, SQL Server
+- Graphics**: ChartJS
 
-- [RedHat Installation](https://github.com/dbarzin/deming/blob/main/INSTALL.md) procedure.
-- [Debian Installation](https://github.com/dbarzin/deming/blob/main/INSTALL.Debian.md) procedure.
+## ⚙️ Installation
 
-## Roadmap
+Follow the [installation procedure for Debian](https://github.com/dbarzin/deming/blob/main/INSTALL.debian.md) to set up the application.
 
-A [roadmap](https://github.com/dbarzin/deming/blob/main/ROADMAP.md) includes the planned changes to the application.
+Follow the [installation procedure for Ubuntu](https://github.com/dbarzin/deming/blob/main/INSTALL.md) to set up the application.
 
-## License
+## 🛤️ Roadmap
 
-Deming is open source software distributed under the [GPL](https://www.gnu.org/licenses/licenses.html) license.
+Consult the [roadmap](https://github.com/dbarzin/deming/blob/main/ROADMAP.md) to discover future developments of **Deming**.
+
+## 📜 License
+
+**Deming** is open source software distributed under the [GPL](https://www.gnu.org/licenses/licenses.html) license. Contribute, improve and participate in securing information systems worldwide!
