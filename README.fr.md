@@ -35,13 +35,6 @@ Selon la norme ISO 27001, chapitre 9.1, il est impératif d'évaluer les perform
 - Identifier les responsables de chaque tâche.
 - Analyser et évaluer les résultats obtenus.
 
-## :mag: Définitions clés
-
-- **Mesures de sécurité** (Control) : Ensemble des dispositions mises en œuvre pour garantir la sécurité selon la politique définie.
-- **Contrôle** (Measurement) : Processus d'évaluation de l'efficacité d'un SMSI via des méthodes et critères spécifiques.
-- **Indicateur** : Résultat d'une analyse appliquée aux mesures de sécurité.
-- **Attribut** : Propriété d'un objet mesurable quantitativement ou qualitativement.
-
 ## :computer: Aperçu des écrans
 
 ### :star: Écran principal
