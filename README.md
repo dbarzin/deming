@@ -37,14 +37,6 @@ According to ISO 27001, chapter 9.1, it is imperative to assess security perform
 - Identify who is responsible for each task.
 - Analyze and evaluate results.
 
-
-## :mag: Key definitions
-
-- **Security measures** (Control): All the measures implemented to guarantee security in accordance with the defined policy.
-- **Control** (Measurement): The process of evaluating the effectiveness of an ISMS using specific methods and criteria.
-- **Indicator**: Result of an analysis applied to security measures.
-- **Attribute**: Property of an object that can be measured quantitatively or qualitatively.
-
 ## :computer: Screen overview
 
 ### :star: Main screen
