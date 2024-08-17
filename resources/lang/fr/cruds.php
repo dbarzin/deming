@@ -79,6 +79,7 @@ return [
             'duplicate' => 'Ce contrôle existe déjà.',
         ],
         'checklist' => 'Fiche de contrôle',
+        'create' => 'Créer un contrôle',
         'list' => 'Liste des contrôles',
         'edit' => 'Modifier un contrôle de sécurité',
         'history' => 'Planning',
