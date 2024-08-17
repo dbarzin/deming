@@ -79,6 +79,7 @@ return [
             'duplicate' => 'This measurement already exists.',
         ],
          'checklist' => 'Measure sheet',
+         'create' => 'Create a measure',
          'list' => 'Measurement list',
          'edit' => 'Edit measurement',
          'history' => 'Schedule',
