@@ -53,7 +53,7 @@ class AttributeController extends Controller
             $request,
             [
                 'name' => 'required|min:1|max:30',
-                'values' => 'required|regex:/^(#[a-zA-Z0-9_èéÉ\']+ *)*$/|max:4000',
+                'values' => "required|regex:/^(#[\p{L}\p{M}\p{N}'_-]+ *)*$/u|max:4000",
             ]
         );
 
@@ -108,7 +108,7 @@ class AttributeController extends Controller
             $request,
             [
                 'name' => 'required|min:1|max:30',
-                'values' => 'required|regex:/^(#[a-zA-Z0-9_èéÉ\']+ *)*$/|max:4000',
+                'values' => "required|regex:/^(#[\p{L}\p{M}\p{N}'_-]+ *)*$/u|max:4000",
             ]
         );
         $attribute->name = request('name');
