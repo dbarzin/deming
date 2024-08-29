@@ -148,6 +148,14 @@ class DomainController extends Controller
         // Only for administrator role
         abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        // Has measures ?
+        abort_if(DB::table('measures')
+            ->where('domain_id', $domain->id)
+            ->exists(),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
         $domain->delete();
 
         return redirect('/domains');
