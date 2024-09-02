@@ -149,9 +149,10 @@ class DomainController extends Controller
         abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // Has measures ?
-        abort_if(DB::table('measures')
-            ->where('domain_id', $domain->id)
-            ->exists(),
+        abort_if(
+            DB::table('measures')
+                ->where('domain_id', $domain->id)
+                ->exists(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );

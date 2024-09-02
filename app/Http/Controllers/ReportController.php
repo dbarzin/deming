@@ -87,11 +87,13 @@ class ReportController extends Controller
         $templateProcessor->setValue('start_date', $start_date->format('d/m/Y'));
         $templateProcessor->setValue('end_date', $end_date->format('d/m/Y'));
 
+        /* xxxxxx */
         $this->generateMadeControlTable($templateProcessor, $framework, $start_date, $end_date);
+        /*
         $values = $this->generateControlTable($templateProcessor, $framework);
         $this->generateKPITable($templateProcessor, $framework, $values);
         $this->generateActionPlanTable($templateProcessor, $framework);
-
+        */
         //----------------------------------------------------------------
         // save a copy
         $filepath = storage_path('templates/pilotage-'. Carbon::today()->format('Y-m-d') .'.docx');
@@ -238,7 +240,7 @@ class ReportController extends Controller
         foreach ($controls as $control) {
             $table->addRow();
             $table->addCell(2500)->addText($control->measures->implode('clause', ', '));
-            $table->addCell(12500)->addText($control->name);
+            $table->addCell(12500)->addText(str_replace('&', 'x', $control->name));
             $table->addCell(2800)->addText($control->realisation_date, null, ['align' => 'center']);
             $table->addCell(12500)->addText($control->scope);
             $table->addCell(2000)->addText(
