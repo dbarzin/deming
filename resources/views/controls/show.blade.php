@@ -22,10 +22,14 @@
     		<div class="cell-1">
 	    		<strong>{{ trans("cruds.control.fields.name") }}</strong>
 	    	</div>
+            @if ($control->scope===null)
+    		<div class="cell-6">
+	    		 {{ $control->name }}
+    		</div>
+            @else
     		<div class="cell-4">
 	    		 {{ $control->name }}
     		</div>
-            @if ($control->scope!==null)
     		<div class="cell-1" align="right">
 	    		<strong>{{ trans("cruds.control.fields.scope") }}</strong>
 	    	</div>
