@@ -65,125 +65,124 @@
 
 <!---------------------------------------->
 
-<div class="row">
-    <div class="cell-md-7">
-        <div class="panel mt-2">
-            <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_planning') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
-                <div class="p-7">
-                    <canvas id="canvas-status" style="display: block; width: 100%; height:500px; " class="chartjs-render-monitor"></canvas>
+    <div class="row">
+        <div class="cell-md-7">
+            <div class="panel mt-2">
+                <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_planning') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+                    <div class="p-7">
+                        <canvas id="canvas-status" style="display: block; width: 100%; height:500px; " class="chartjs-render-monitor"></canvas>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-    <!--------------------------------------------------------------------->
+        <!--------------------------------------------------------------------->
 
-    <div class="cell-md-5">
-        <div class="panel mt-2">
-            <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_status') }}" data-collapsible="true" data-title-icon="<span class='mif-meter'></span>">
-                <div class="p-7">
-                    <canvas id="canvas-doughnut" style="display: block; width: 100%; height: 500px;"  class="chartjs-render-monitor"
-                    ></canvas>
+        <div class="cell-md-5">
+            <div class="panel mt-2">
+                <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_status') }}" data-collapsible="true" data-title-icon="<span class='mif-meter'></span>">
+                    <div class="p-7">
+                        <canvas id="canvas-doughnut" style="display: block; width: 100%; height: 500px;"  class="chartjs-render-monitor"
+                        ></canvas>
+                    </div>
                 </div>
             </div>
         </div>
-    </div>
 
-</div>
+    </div>
 
 <!------------------------------------------------------------------------------------------>
 
-<div class="row">
-    <div class="cell-md-12">
-        <div class="panel mt-2">
-            <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.next_controls') }}" data-collapsible="true" data-title-icon="<span class='mif-calendar'></span>" class="">
+    <div class="row">
+        <div class="cell-md-12">
+            <div class="panel mt-2">
+                <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.next_controls') }}" data-collapsible="true" data-title-icon="<span class='mif-calendar'></span>" class="">
 
-            <table class="table striped table-border mt-4"
-               data-role="table"
-               data-rows="20"
-               data-rows-steps="5, 10"
-               data-show-activity="false"
-               data-check-style="2"
-               data-cell-wrapper="false"
-               data-show-search="false"
-               data-show-rows-steps="false"
-               >
-                <thead>
+                <table class="table striped table-border mt-4"
+                   data-role="table"
+                   data-rows="20"
+                   data-rows-steps="5, 10"
+                   data-show-activity="false"
+                   data-check-style="2"
+                   data-cell-wrapper="false"
+                   data-show-search="false"
+                   data-show-rows-steps="false"
+                   >
+                    <thead>
+                        <tr>
+                            <th data-sortable="true">{{ trans('cruds.control.fields.clauses') }}</th>
+                            <th>{{ trans('cruds.control.fields.name') }}</th>
+                            <th data-sortable="true">{{ trans('cruds.control.fields.scope') }}</th>
+                            <th data-sortable="true">{{ trans('cruds.control.fields.score') }}</th>
+                            <th data-sortable="true">{{ trans('cruds.control.fields.realisation_date') }}</th>
+                            <th data-sortable="true">{{ trans('cruds.control.fields.plan_date') }}</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                    @foreach($controls_todo as $control)
                     <tr>
-                        <th data-sortable="true">{{ trans('cruds.control.fields.clauses') }}</th>
-                        <th>{{ trans('cruds.control.fields.name') }}</th>
-                        <th data-sortable="true">{{ trans('cruds.control.fields.scope') }}</th>
-                        <th data-sortable="true">{{ trans('cruds.control.fields.score') }}</th>
-                        <th data-sortable="true">{{ trans('cruds.control.fields.realisation_date') }}</th>
-                        <th data-sortable="true">{{ trans('cruds.control.fields.plan_date') }}</th>
+                        <td>
+                            @foreach($control->measures as $measure)
+                            <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">{{ $measure['clause'] }}</a>
+                                @if(!$loop->last)
+                                ,
+                                @endif
+                            @endforeach
+                        </td>
+                        <td class="table-danger">
+                            {{ $control->name }}
+                        </td>
+                        <td>
+                            <a id="{{ $control->scope }}" href="/bob/index?domain=0&attribute=none&scope={{ urlencode($control->scope) }}&status=0&period=99">
+                            {{ $control->scope }}
+                            </a>
+                        </td>
+                        <td>
+                            <center id="{{ $control->score }}">
+                                <a href="/bob/show/{{ $control->prev_id }}">
+                                @if ($control->score==1)
+                                    &#128545;
+                                @elseif ($control->score==2)
+                                    &#128528;
+                                @elseif ($control->score==3)
+                                    <span style="filter: sepia(1) saturate(5) hue-rotate(70deg)">&#128512;</span>
+                                @else
+                                    &#9675; <!-- &#9899; -->
+                                @endif
+                                </a>
+                            </center>
+                        </td>
+
+                        <td>
+                            <a id="{{ $control->prev_date }}" href="/bob/show/{{$control->prev_id}}">
+                                {{ $control->prev_date }}
+                            </a>
+                        </td>
+                        <td>
+                            <b id="{{ $control->plan_date }}">
+                                <a href="/bob/show/{{ $control->id }}">
+                                @if (today()->lte($control->plan_date))
+                                    <font color="green">
+                                @else
+                                    <font color="red">
+                                @endif
+                                    {{ $control->plan_date }}
+                                </font>
+                                </a>
+                                @if ($control->status===1)
+                                    &nbsp;
+                                    <a href="/bob/make/{{ $control->id }}">&#8987;</a>
+                                @endif
+                            </b>
+                        </td>
                     </tr>
-                </thead>
-            <tbody>
-
-            @foreach($controls_todo as $control)
-                <tr>
-                    <td>
-                        @foreach($control->measures as $measure)
-                        <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">{{ $measure['clause'] }}</a>
-                            @if(!$loop->last)
-                            ,
-                            @endif
-                        @endforeach
-                    </td>
-                    <td class="table-danger">
-                        {{ $control->name }}
-                    </td>
-                    <td>
-                        <a id="{{ $control->scope }}" href="/bob/index?domain=0&attribute=none&scope={{ urlencode($control->scope) }}&status=0&period=99">
-                        {{ $control->scope }}
-                        </a>
-                    </td>
-                    <td>
-                        <center id="{{ $control->score }}">
-                            <a href="/bob/show/{{ $control->prev_id }}">
-                            @if ($control->score==1)
-                                &#128545;
-                            @elseif ($control->score==2)
-                                &#128528;
-                            @elseif ($control->score==3)
-                                <span style="filter: sepia(1) saturate(5) hue-rotate(70deg)">&#128512;</span>
-                            @else
-                                &#9675; <!-- &#9899; -->
-                            @endif
-                            </a>
-                        </center>
-                    </td>
-
-                    <td>
-                        <a id="{{ $control->prev_date }}" href="/bob/show/{{$control->prev_id}}">
-                            {{ $control->prev_date }}
-                        </a>
-                    </td>
-                    <td>
-                        <b id="{{ $control->plan_date }}">
-                            <a href="/bob/show/{{ $control->id }}">
-                            @if (today()->lte($control->plan_date))
-                                <font color="green">
-                            @else
-                                <font color="red">
-                            @endif
-                                {{ $control->plan_date }}
-                            </font>
-                            </a>
-                            @if ($control->status===1)
-                                &nbsp;
-                                <a href="/bob/make/{{ $control->id }}">&#8987;</a>
-                            @endif
-                        </b>
-                    </td>
-                </tr>
-            @endforeach
-            </tbody>
-        </table>
+                    @endforeach
+                </tbody>
+            </table>
+            </div>
         </div>
     </div>
-    </div>
-
 </div>
 </div>
 
@@ -387,6 +386,4 @@
     });
 
 </script>
-
-
 @endsection
