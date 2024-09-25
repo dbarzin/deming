@@ -93,7 +93,13 @@ class DocumentController extends Controller
             '403 Forbidden'
         );
 
+        // get path
         $path = storage_path('docs/' . $id);
+
+        // check file exists
+        abort_if(!file_exists($path), Response::HTTP_NOT_FOUND, '404 Not Found');
+
+        // get file content
         $file_contents = file_get_contents($path);
 
         return response($file_contents)
