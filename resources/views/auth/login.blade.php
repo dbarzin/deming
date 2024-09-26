@@ -10,6 +10,36 @@
     <link rel="stylesheet" href="/css/all.css" />
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <script src="/js/all.js"></script>
+
+<style>
+        body {
+            background-image: url('/images/deming.png'); /* Remplacez par le chemin de votre logo */
+            background-size:  800px 800px;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+
+        .login-form {
+            background-color: rgba(255, 255, 255, 0.7) !important; /* Fond blanc avec 70% d'opacité */
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .form-control {
+            background-color: rgba(255, 255, 255, 0.7) !important; /* Fond partiellement transparent pour les champs de texte */
+            border: 1px solid rgba(0, 0, 0, 0.2);
+        }
+
+        .form-control:focus {
+            background-color: rgba(255, 255, 255, 0.9) !important; /* Augmente la visibilité lors du focus */
+        }
+
+        h2 {
+            color: #333; /* Couleur du texte du titre */
+            text-align: center;
+        }
+    </style>
 </head>
 
 <body class="d-flex flex-justify-center flex-align-center bg-default">
@@ -22,8 +52,6 @@
           data-on-error-form="invalidForm"
           data-on-validate-form="validateForm">
         @csrf
-        <span class="mif-lock mif-4x place-right ani-shake fg-cyan" style="margin-top: -10px;"></span>
-            <h2 class="text-medium m-0 pl-7" style="line-height: 52px">Deming</h2>
             <div class="mb-4">{{ trans("cruds.login.connection") }}</div>
             <div class="form-group">
                 <input type="text" data-role="input" class="form-control @error('login') is-invalid @enderror @error('email') is-invalid @enderror" data-prepend="<span class='mif-user'></span>" name="login" value="{{ old('login') }}" id="login" required>
