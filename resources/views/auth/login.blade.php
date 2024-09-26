@@ -13,32 +13,28 @@
 
 <style>
         body {
-            background-image: url('/images/deming.png'); /* Remplacez par le chemin de votre logo */
+            background-image: url('/images/deming.png');
             background-size:  800px 800px;
             background-position: center;
             background-repeat: no-repeat;
         }
 
         .login-form {
-            background-color: rgba(255, 255, 255, 0.7) !important; /* Fond blanc avec 70% d'opacité */
+            background-color: rgba(255, 255, 255, 0.5) !important;
             border-radius: 10px;
             padding: 20px;
             box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
         }
 
         .form-control {
-            background-color: rgba(255, 255, 255, 0.7) !important; /* Fond partiellement transparent pour les champs de texte */
+            background-color: rgba(255, 255, 255, 0.7) !important;
             border: 1px solid rgba(0, 0, 0, 0.2);
         }
 
         .form-control:focus {
-            background-color: rgba(255, 255, 255, 0.9) !important; /* Augmente la visibilité lors du focus */
+            background-color: rgba(255, 255, 255, 0.9) !important;
         }
 
-        h2 {
-            color: #333; /* Couleur du texte du titre */
-            text-align: center;
-        }
     </style>
 </head>
 
