@@ -95,29 +95,31 @@ This screen allows you to perform a measurement.
 
 This screen contains:
 
-* The name of the measurement
+* The clauses,
 
-* The goal
+* The name of the measurement,
 
-* Data
+* The objective,
 
-* Completion date, planning date
+* The input data,
+
+* Completion date, planning date,
 
 * A text area for observations
 
 * A file area for saving evidence (**CTRL+V** can be used to paste a file or screenshot)
 
-* A link to download the measurement sheet
+* A link to download the measurement sheet,
 
-* The computation model applied
+* The computation model applied,
 
-* The note
+* The note,
 
-* The score
+* The score,
 
-* The action plan
+* The action plan,
 
-* The date of the next check
+* The date of the next check,
 
 [![Screenshot](images/c3.png)](images/c3.png)
 [![Screenshot](images/c4.png)](images/c4.png)
