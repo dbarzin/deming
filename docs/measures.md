@@ -27,9 +27,11 @@ This screen displays a control.
 
 A control consists of:
 
-* of a domain;
+* a domain;
 
-* of a name;
+* a clause ;
+
+* a name;
 
 * a security objective;
 
@@ -37,7 +39,7 @@ A control consists of:
 
 * controlment data:
 
-* of the verification model;
+* the verification model;
 
 * an indicator (green, orange, red); and
 
@@ -74,15 +76,15 @@ This screen is used to plan a control based on a control.
 
 The screen contains:
 
-* The domain ;
+* One or more clauses;
 
 * The name of the control;
 
 * The security objective;
 
-* The planning date; and
+* The planning date;
 
-* The frequency of checks;
+* The frequency of checks; and
 
 * Those responsible for carrying out the controls.
 

@@ -4,15 +4,15 @@
 
 Cet écran permet d’afficher la liste des contrôles et de les filtrer par :
 
-* domaine,
+* Domaine,
 
-* attribut,
+* Périmètre,
 
-* période de planification,
+* Attribut,
+
+* la période de planification,
 
 * état du contrôle : tous, fait et à faire,
-
-* texte libre sur le nom, l’objectif, les observations.
 
 [![Screenshot](images/c1.fr.png)](images/c1.fr.png)
 
@@ -71,8 +71,6 @@ Cet écran contient les informations d’un contrôle :
 * Le nom d’un contrôles ;
 
 * L’objectif du contrôle ;
-
-* Le périmètre du contrôle ;
 
 * La date de planification ;
 

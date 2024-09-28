@@ -1,6 +1,6 @@
 ## Mesures de sécurité
 
-Cette partie permet de définir, de modifier et de plannifier de nouvelles mesures de sécurité.
+Cette partie permet de définir, de modifier et de planifier de nouvelles mesures de sécurité.
 
 ### Liste des mesures de sécurité <a name="list"></a>
 
@@ -27,6 +27,8 @@ Cet écran permet d’afficher une mesure de sécurité.
 Une mesure de sécurité est composée :
 
 * d’un domaine ;
+
+* d'une clause ;
 
 * d’un nom ;
 
@@ -73,7 +75,7 @@ Cet écran permet de planifier un contrôle de sécurité à partir d’une mesu
 
 L’écran contient :
 
-* Le domaine ;
+* Une ou plusieurs clauses ;
 
 * Le nom de la mesure ;
 

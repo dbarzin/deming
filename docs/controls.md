@@ -6,13 +6,13 @@ This screen is used to display the list of measurements and to filter them by:
 
 * domain,
 
+* périmètre,
+
 * attribute,
 
 * planning period,
 
 * measurement status: all, done and to do,
-
-* free text on name, purpose, comments.
 
 [![Screenshot](images/c1.png)](images/c1.png)
 
@@ -72,7 +72,7 @@ This screen contains the information of a measurement:
 
 * The objective of the measurement;
 
-* The date of palnification;
+* The date of planification;
 
 * Periodicity ; and
 
@@ -82,8 +82,7 @@ This screen contains the information of a measurement:
 
 When you click:
 
-* "Plan", the planning date, the recurrence and the persons in charge are updated and you are returned to the [display screen
-of measurements](#show)
+* "Plan", the planning date, the recurrence and the persons in charge are updated and you are returned to the [display screen of measurements](#show)
 
 * "Unplan", remove the measurement and you are returned to the [List of measurements](#list)
 
