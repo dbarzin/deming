@@ -156,7 +156,7 @@
 						{{ trans("common.save") }}
 					</button>
 					&nbsp;
-		    		<button type="button" class="button cancel" onclick="location.href = '/bob/index';">
+		    		<button type="button" class="button cancel" onclick="location.href = '/bob/index'">
 		    			<span class="mif-cancel"></span>
 		    			&nbsp;
 		    			{{ trans("common.cancel") }}

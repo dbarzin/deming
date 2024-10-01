@@ -117,7 +117,7 @@
 						{{ trans("common.save") }}
 					</button>
 					&nbsp;
-					<button type="submit" class="button" onclick="location.href = '/alice/index';">
+					<button type="button" class="button" onclick="location.href = '/alice/index'">
 						<span class="mif-cancel"></span>
 						&nbsp;
 						{{ trans("common.cancel") }}
