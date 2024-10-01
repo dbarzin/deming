@@ -117,7 +117,7 @@
 		    </form>
 		    &nbsp;
 		    <form action="/alice/clone/{{ $measure->id }}">
-		    	<button class="button primary">
+		    	<button class="button yellow">
 		            <span class="mif-plus"></span>
 		            &nbsp;
 			    	{{ trans('common.clone') }}

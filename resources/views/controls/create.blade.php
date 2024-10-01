@@ -70,9 +70,9 @@
 						<select data-role="select" name="attributes[]" multiple>
 							@foreach($attributes as $attribute)
 								@if (strlen($attribute)>0)
-    							    <option
-                                        {{ old("attributes") ? (in_array($attribute, old("attributes")) ? "selected" : "") : ""}}
-                                        >{{ $attribute }}</option>
+    							    <option {{ in_array($attribute, old("attributes",[])) ? "selected" : "" }}>
+                                        {{ $attribute }}
+                                    </option>
                                 @endif
 						    @endforeach
 						 </select>

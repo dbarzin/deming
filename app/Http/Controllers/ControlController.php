@@ -555,6 +555,79 @@ class ControlController extends Controller
     }
 
     /**
+     * Clone a control.
+     *
+     * @param  int Control id
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function clone(Request $request)
+    {
+        // Only for admin and users
+        abort_if(
+            (Auth::User()->role !== 1) && (Auth::User()->role !== 2),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
+        // get all clauses
+        $all_measures = DB::table('measures')
+            ->select('id', 'clause')
+            ->orderBy('id')
+            ->get();
+
+        // get all scopes
+        $scopes = DB::table('controls')
+            ->select('scope')
+            ->whereNotNull('scope')
+            ->where('scope', '<>', '')
+            ->whereIn('status', [0, 1])
+            ->distinct()
+            ->orderBy('scope')
+            ->get()
+            ->pluck('scope')
+            ->toArray();
+
+        // get all attributes
+        $values = [];
+        $attributes = DB::table('measures')->select('attributes')->get();
+        foreach ($attributes as $key) {
+            foreach (explode(' ', $key->attributes) as $value) {
+                array_push($values, $value);
+            }
+        }
+        sort($values);
+        $values = array_unique($values);
+
+        $users = User::orderBy('name')->get();
+
+        // Get Control
+        $control = Control::find($request->id);
+
+        // Workstation not found
+        abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+
+        $request->merge($control->only(
+            [
+                "name","scope", "objective",
+                "input", "periodicity", "model", "action_plan",
+                "plan_date"
+            ]
+            )
+        );
+        $request->merge(['measures' => $control->measures()->pluck('id')->toArray()]);
+        $request->merge(['attributes' => explode(' ', $control->attributes)]);
+        $request->merge(['owners' => $control->owners()->pluck('id')->toArray()]);
+        $request->flash();
+
+        return view('controls.create')
+            ->with('scopes', $scopes)
+            ->with('all_measures', $all_measures)
+            ->with('attributes', $values)
+            ->with('users', $users);
+    }
+
+    /**
      * Remove the specified resource from storage.
      *
      * @param  \App\Domain $domain

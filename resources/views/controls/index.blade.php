@@ -148,7 +148,7 @@
        >
         <thead>
             <tr>
-                <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.measure") }}</th>
+                <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.clauses") }}</th>
                 <th width="40%">{{ trans("cruds.control.fields.name") }}</th>
                 <th class="sortable-column" width="10%">{{ trans("cruds.control.fields.scope") }}</th>
                 <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.score") }}</th>

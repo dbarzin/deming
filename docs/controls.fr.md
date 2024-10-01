@@ -93,27 +93,29 @@ Cet écran permet de réaliser un contrôle de sécurité.
 
 Cet écran contient :
 
-* Le nom du contrôle
+* Le ou les clauses,
 
-* L’objectif
+* Le nom du contrôle,
 
-* Les données
+* L’objectif,
 
-* La date de réalisation, la date de planification
+* Les données,
 
-* Les observation du contrôle
+* La date de réalisation, la date de planification,
 
-* Une zone pour sauvegarder les preuves (**CTRL+V** permet de coller un fichier ou une capture d'écran)
+* Les observation du contrôle,
 
-* Un lien permettant de télécharger la fiche de contrôles
+* Une zone pour sauvegarder les preuves (**CTRL+V** permet de coller un fichier ou une capture d'écran),
 
-* Le modèle de calcul appliqué
+* Un lien permettant de télécharger la fiche de contrôles,
 
-* La note
+* Le modèle de calcul appliqué,
 
-* Le score
+* La note,
 
-* Le plan d’action
+* Le score,
+
+* Le plan d’action,
 
 * La date du prochaine contrôle
 

@@ -289,6 +289,14 @@
 	    		</button>
 			</form>
 			&nbsp;
+		    <form action="/bob/clone/{{ $control->id }}">
+		    	<button class="button yellow">
+		            <span class="mif-plus"></span>
+		            &nbsp;
+			    	{{ trans('common.clone') }}
+		    	</button>
+		    </form>
+			&nbsp;
 		    <form action="/bob/delete/{{ $control->id }}" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
 	    		<button class="button alert">
 					<span class="mif-fire"></span>
@@ -296,7 +304,7 @@
 	    			{{ trans("common.delete") }}
 	    		</button>
 			</form>
-			&nbsp;
+		    &nbsp;
    			@endif
 		    <form action="/bob/index">
 	    		<button class="button">
