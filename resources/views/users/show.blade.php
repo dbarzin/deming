@@ -82,8 +82,7 @@
 				       >
 				        <thead>
 				            <tr>
-				                <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.domain") }}</th>
-				                <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.measure") }}</th>
+				                <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.clauses") }}</th>
 				                <th width="50%">{{ trans("cruds.control.fields.name") }}</th>
 				                <th class="sortable-column sort-asc"  width="5%">{{ trans("cruds.control.fields.planned") }}</th>
 				            </tr>
@@ -92,17 +91,15 @@
 	    			@foreach($user->lastControls as $control)
 	    				<tr>
 				            <td>
-				                <a id="{{ $control->domain->title }}" href="/alice/show/{{ $control->domain_id}}">
-				                    {{ $control->domain->title }}
-				                </a>
-				            </td>
+                                @foreach($control->measures as $measure)
+                                    <a href="/alice/show/{{ $measure->id }}">{{ $measure->clause }}</a>
+                                    @if(!$loop->last)
+                                    ,
+                                    @endif
+                                @endforeach
+                            </td>
 				            <td>
-				                <a id="{{ $control->clause }}" href="/alice/show/{{ $control->measure_id }}">
-				                    {{ $control->clause }}
-				                </a>
-				            </td>
-				            <td>
-				                    {{ $control->name }}
+			                    {{ $control->name }}
 				            </td>
 		    				<td>
 				                <a id="{{ $control->plan_date }}" href="/bob/show/{{$control->id}}">

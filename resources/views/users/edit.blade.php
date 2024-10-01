@@ -98,7 +98,7 @@
 			@endif
 
 		</div>
-        @if ((Auth::User()->role === 1)||(Auth::User()->role === 2)) 
+        @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
     	<div class="row">
     		<div class="cell-2">
 	    		<strong>{{ trans('cruds.user.fields.controls') }}</strong>
@@ -109,7 +109,7 @@
     		<div class="cell-8">
 	            <select data-role="select" name="controls[]" id="controls" multiple>
 	                @foreach($controls as $control)
-	                       <option value="{{ $control->id }}" {{ (in_array($control->id, old('controls', [])) || ($user->controls->contains($control->id))) ? 'selected' : '' }}>{{ $control->clause }}</option>
+	                       <option value="{{ $control->id }}" {{ (in_array($control->id, old('controls', [])) || ($user->controls->contains($control->id))) ? 'selected' : '' }}>{{ $control->name }}</option>
 	                @endforeach
 	            </select>
 
