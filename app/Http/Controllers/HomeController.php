@@ -155,7 +155,7 @@ class HomeController extends Controller
 
         // Get all controls
         $controls = DB::table('controls')
-            ->select(['id', 'clause', 'score', 'realisation_date', 'plan_date'])
+            ->select(['id', 'score', 'realisation_date', 'plan_date'])
             ->get();
 
         // return
