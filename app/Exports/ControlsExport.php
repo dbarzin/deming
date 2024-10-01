@@ -98,6 +98,6 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
      */
     public function query()
     {
-        return Control::orderBy('clause');
+        return Control::orderBy('realisation_date');
     }
 }
