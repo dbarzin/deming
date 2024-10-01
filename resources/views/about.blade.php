@@ -10,9 +10,9 @@
                 </div>
 	    		<div class="cell">
 @if(Auth::User()->language==="fr")
-    <h1>À propos de Deming</h1>
+    <h1><strong>À propos de Deming</strong></h1>
 
-    <p><strong>Deming</strong> est un outil open-source conçue pour aider les organisations à gérer, surveiller et améliorer leurs processus de sécurité de l'information. Développée avec l'objectif de s'aligner sur la norme ISO/IEC 27001:2013, <strong>Deming</strong> offre une solution complète aux organisations qui cherchent à maintenir des mesures de sécurité efficaces et proportionnées.</p>
+    <p><strong>Deming</strong> est un projet open-source conçu pour aider les organisations à gérer, surveiller et améliorer leurs processus de sécurité de l'information. Développée avec l'objectif de s'aligner sur la norme ISO/IEC 27001:2013, <strong>Deming</strong> offre une solution complète aux organisations qui cherchent à maintenir des mesures de sécurité efficaces et proportionnées.</p>
 
     <h2>Pourquoi Deming ?</h2>
     <p>Dans l'environnement actuel, il est essentiel de s'assurer que vos mesures de sécurité ne sont pas seulement mises en œuvre, mais également surveillées en permanence. <strong>Deming</strong> simplifie le processus de suivi, de planification et de reporting sur l'efficacité de vos contrôles de sécurité, aidant ainsi votre organisation à répondre aux exigences strictes de conformité tout en optimisant la gestion de la sécurité.</p>
