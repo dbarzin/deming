@@ -30,6 +30,10 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::post('/profile/update', 'ProfileController@updateProfile')->name('profile.update');
     Route::get('/profile/avatar/{id}', 'ProfileController@avatar');
 
+    /* About */
+    Route::get('/about', 'HomeController@test');
+    Route::view('/about', 'about');
+
     /* Measures */
     Route::get('/alice/index', 'MeasureController@index');
     Route::get('/alice/create', 'MeasureController@create');

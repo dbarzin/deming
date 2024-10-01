@@ -20,6 +20,7 @@ mix
             'resources/css/app.css',
             'vendor/enyo/dropzone/dist/dropzone.css',
             'resources/css/calendar.css',
+            'resources/css/icons.css',
             'node_modules/easymde/dist/easymde.min.css',
             'node_modules/@fortawesome/fontawesome-free/css/fontawesome.min.css',
         ],
