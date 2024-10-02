@@ -8,7 +8,6 @@ class Control extends Model
 {
     public static $searchable = [
         'name',
-        'clause',
         'objective',
         'observations',
         'input',
