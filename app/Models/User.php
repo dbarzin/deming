@@ -40,11 +40,11 @@ class User extends Authenticatable
 
     public function controls()
     {
-        return $this->belongsToMany(Control::class)->orderBy('clause');
+        return $this->belongsToMany(Control::class)->orderBy('name');
     }
 
     public function lastControls()
     {
-        return $this->belongsToMany(Control::class)->whereNull('realisation_date')->orderBy('clause');
+        return $this->belongsToMany(Control::class)->whereNull('realisation_date')->orderBy('name');
     }
 }
