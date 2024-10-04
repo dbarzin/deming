@@ -99,23 +99,23 @@ class MeasureImportController extends Controller
                 );
                 // Get full path
                 $fileName = Storage::disk('local')->path($file);
+            }
+            
+            // XLSX
+            $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
+            $reader->setReadDataOnly(true);
+            $spreadsheet = $reader->load($fileName);
 
-                // XLSX
-                $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
-                $reader->setReadDataOnly(true);
-                $spreadsheet = $reader->load($fileName);
+            $sheet = $spreadsheet->getSheet($spreadsheet->getFirstSheetIndex());
+            $data = $sheet->toArray();
 
-                $sheet = $spreadsheet->getSheet($spreadsheet->getFirstSheetIndex());
-                $data = $sheet->toArray();
-
-                if ($this->canImportFromFile($data, $request->has('clean'), $errors)) {
-                    // Clear database
-                    if ($request->has('clean')) {
-                        $this->clean();
-                        $errors->push('Database cleared');
-                    }
-                    $this->importFromFile($data, $errors);
+            if ($this->canImportFromFile($data, $request->has('clean'), $errors)) {
+                // Clear database
+                if ($request->has('clean')) {
+                    $this->clean();
+                    $errors->push('Database cleared');
                 }
+                $this->importFromFile($data, $errors);
             }
         } finally {
             if ($request->file()) {
