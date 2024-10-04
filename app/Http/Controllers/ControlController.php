@@ -272,7 +272,7 @@ class ControlController extends Controller
 
         // Fetch measures for all controls in one query
         $controlMeasures = DB::table('control_measure')
-            ->select(['control_id', 'measure_id'])
+            ->select(['control_id', 'measure_id', 'clause'])
             ->leftjoin('measures', 'measures.id', '=', 'measure_id')
             ->whereIn('control_id', $controls->pluck('id'))
             ->orderBy('clause')
