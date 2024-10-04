@@ -492,7 +492,6 @@ class MeasureController extends Controller
         $control->name = $request->get('name');
         $control->scope = $request->get('scope');
         $control->attributes = $request->get('attributes[]');
-        $control->clause = $request->get('clause');
         $control->objective = $request->get('objective');
         $control->input = $request->get('input');
         $control->model = $request->get('model');
