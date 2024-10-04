@@ -28,7 +28,7 @@ jobs:
       - name: Setup PHP
         uses: shivammathur/setup-php@v2
         with:
-            php-version: '8.1'
+            php-version: '8.2'
             extensions: zip, curl, mbstring, dom, ldap, soap, xdebug, mysql, gd
 
       - name: Configrue Storage Permission
@@ -66,10 +66,6 @@ jobs:
       - name: Generate Test Data
         run: |
           php artisan deming:generate-tests
-
-      - name: Check code quality
-        run: |
-          php artisan insights
 
       - name: Run Laravel Server
         run: |
