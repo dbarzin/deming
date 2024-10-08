@@ -12,6 +12,12 @@
     <script src="/js/all.js"></script>
     <script src="/js/easymde.min.js"></script>
 
+
+    <style>
+        input[type="text"] {
+            padding-left: 13px;
+        }
+    </style>
 </head>
 
 <body class="m4-cloak h-vh-100">

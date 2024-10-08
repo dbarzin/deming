@@ -520,4 +520,8 @@ form {
      padding:0px;
 }
 
+input[type="text"] {
+    padding-left: 13px;
+}
+
 /*# sourceMappingURL=index.css.map */
