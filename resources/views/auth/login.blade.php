@@ -48,7 +48,7 @@
           data-on-error-form="invalidForm"
           data-on-validate-form="validateForm">
         @csrf
-            <div class="mb-4">Login</div>
+            <div class="mb-4">{{ trans("cruds.login.connection") }}</div>
             <div class="form-group">
                 <input type="text" data-role="input" class="form-control @error('login') is-invalid @enderror @error('email') is-invalid @enderror" data-prepend="<span class='mif-user'></span>" name="login" value="{{ old('login') }}" id="login" required>
                 @error('login')
