@@ -1,9 +1,9 @@
 {
-    "name": "laravel/laravel",
+    "name": "laravel/deming",
     "type": "project",
-    "description": "The skeleton application for the Laravel framework.",
+    "description": "Deming project",
     "keywords": ["laravel", "framework"],
-    "license": "MIT",
+    "license": "GPLv3",
     "require": {
         "php": "^8.2",
         "erusev/parsedown": "^1.7",

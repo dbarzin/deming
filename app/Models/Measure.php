@@ -52,20 +52,4 @@ class Measure extends Model
                 ->whereNull('realisation_date')
                 ->exists();
     }
-
-    // check if there is an empty control associated with this measure
-    /* Dos not exists as we have multiple plan dates
-    public function planDate()
-    {
-        $res = DB::table('controls')
-            ->select('plan_date')
-            ->where('measure_id', $this->id)
-            ->whereNull('realisation_date')
-            ->get()->first();
-        if ($res === null) {
-            return null;
-        }
-        return $res->plan_date;
-    }
-    */
 }

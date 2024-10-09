@@ -30,7 +30,7 @@ class ActionplanController extends Controller
             ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id');
 
         // filter on auditee controls
-        if (Auth::User()->role === 5) {
+        if (Auth::User()->role == 5) {
             $actions = $actions
                 ->leftjoin('control_user', 'c1.id', '=', 'control_user.control_id')
                 ->where('control_user.user_id', '=', Auth::User()->id);
@@ -127,16 +127,16 @@ class ActionplanController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Domain $domain
+     * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
     public function show(int $id)
     {
         abort_if(
-            ! ((Auth::User()->role === 1) ||
-            (Auth::User()->role === 2) ||
-            (Auth::User()->role === 3)),
+            ! ((Auth::User()->role == 1) ||
+            (Auth::User()->role == 2) ||
+            (Auth::User()->role == 3)),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );

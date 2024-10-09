@@ -1653,7 +1653,7 @@ class ControlController extends Controller
         // save a copy
         $filepath = storage_path(
             'templates/control-' .
-                $control->clause .
+                $control->id .
                 '-' .
                 now()->format('Ymd') .
                 '.docx'
