@@ -9,7 +9,7 @@
         "erusev/parsedown": "^1.7",
         "laravel/framework": "^11.9",
         "laravel/passport": "^12.3",
-        "laravel/sanctum": "*",
+        "laravel/sanctum": "^4.0",
         "laravel/tinker": "^2.9",
         "laravel/ui": "^4.5",
         "maatwebsite/excel": "^3.1",
