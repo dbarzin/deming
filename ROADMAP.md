@@ -12,7 +12,7 @@ This document contains the evolutions planned in 2024.
 * [ ] Connvert Markdown to ODT in reports
 * [ ] Migrate to [Metro5](https://github.com/olton/metro5) or [Bootstrap](https://getbootstrap.com/)
 * [ ] Configure scoring system
-* [ ] Migration script from ISO 27001:2013 to ISO 27001:2022
+* [o] Migration script from ISO 27001:2013 to ISO 27001:2022
 * [ ] Manage non-conformities
 * [ ] Improve action plan with status (%)
 * [ ] Dark theme (https://metroui.org.ua/examples/schemes/scheme.html)
