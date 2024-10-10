@@ -1631,25 +1631,10 @@ class ControlController extends Controller
         $templateProcessor->setValue('scope', $control->scope);
         $templateProcessor->setValue('attributes', $control->attributes);
 
-        $templateProcessor->setValue(
-            'objective',
-            strtr($control->objective, [
-                "\n" => "</w:t>\n<w:br />\n<w:t xml:space=\"preserve\">",
-            ])
-        );
+        $templateProcessor->setComplexValue('objective', self::string2Textrun($control->objective));
+        $templateProcessor->setComplexValue('input', self::string2Textrun($control->input));
+        $templateProcessor->setComplexValue('model', self::string2Textrun($control->model));
 
-        $templateProcessor->setValue(
-            'input',
-            strtr($control->input, [
-                "\n" => "</w:t>\n<w:br />\n<w:t xml:space=\"preserve\">",
-            ])
-        );
-        $templateProcessor->setValue(
-            'model',
-            strtr($control->model, [
-                "\n" => "</w:t>\n<w:br />\n<w:t xml:space=\"preserve\">",
-            ])
-        );
         $templateProcessor->setValue('date', Carbon::today()->format('d/m/Y'));
 
         // save a copy
@@ -1666,5 +1651,16 @@ class ControlController extends Controller
 
         // return
         return response()->download($filepath);
+    }
+
+    private static function string2Textrun(string $str) {
+        $textlines = explode("\n", $str);
+        $textrun = new \PhpOffice\PhpWord\Element\TextRun();
+        $textrun->addText(array_shift($textlines));
+        foreach ($textlines as $line) {
+            $textrun->addTextBreak();
+            $textrun->addText($line);
+        }
+        return $textrun;
     }
 }
