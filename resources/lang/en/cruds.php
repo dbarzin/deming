@@ -111,7 +111,7 @@ return [
          'index' => 'Control list',
          'create' => 'Add a control',
          'edit' => 'Edit a control',
-         'plan' => 'Control planning'
+         'plan' => 'Measurement planning'
      ],
      'domain' => [
          'fields' => [
