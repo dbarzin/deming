@@ -49,6 +49,7 @@
 					</div>
 		    		<div class="cell-3">
 		    			<select name='language' value='language'>
+		    				<option {{ old('language')=='de' ? 'selected' : ''}} >de</option>
 		    				<option {{ old('language')=='en' ? 'selected' : ''}} >en</option>
 		    				<option {{ old('language')=='fr' ? 'selected' : ''}} >fr</option>
 		    			</select>
