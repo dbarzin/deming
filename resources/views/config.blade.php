@@ -34,6 +34,15 @@
 
 		    	<div class="row">
 		    		<div class="cell-1">
+			    		<strong>{{ trans("cruds.config.notifications.sent_from") }}</strong>
+			    	</div>
+					<div class="cell-8">
+			            <input type="text" name="mail_from" id="mail_from" value="{{ $mail_from }}" required size=64/>
+					</div>
+				</div>
+
+		    	<div class="row">
+		    		<div class="cell-1">
 			    		<strong>{{ trans("cruds.config.notifications.message_subject") }}</strong>
 			    	</div>
 					<div class="cell-8">
@@ -43,13 +52,12 @@
 
 		    	<div class="row">
 		    		<div class="cell-1">
-			    		<strong>{{ trans("cruds.config.notifications.sent_from") }}</strong>
+			    		<strong>{{ trans("cruds.config.notifications.message_content") }}</strong>
 			    	</div>
-					<div class="cell-8">
-			            <input type="text" name="mail_from" id="mail_from" value="{{ $mail_from }}" required size=64/>
+					<div class="cell-6">
+			            <textarea name="mail_content" rows="10" data-role="textarea" data-clear-button="false">{{ strlen($mail_content)==0 ? trans('cruds.config.notifications.message_default_content') : $mail_content }}</textarea>
 					</div>
 				</div>
-
 
 	    	<div class="row">
 	    		<div class="cell-1">
@@ -78,7 +86,7 @@
 			            </select>
 					</div>
 				</div>
-           
+
 	    	<div class="row">
 	    		<div class="cell-6">
 		        </div>
@@ -110,5 +118,3 @@
     </div>
 </div>
 @endsection
-
-

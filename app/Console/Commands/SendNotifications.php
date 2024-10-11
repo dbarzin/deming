@@ -66,7 +66,7 @@ class SendNotifications extends Command
                     ->get();
                 if ($controls->count() > 0) {
                     App::setlocale($user->language);
-                    $txt = htmlentities(trans('cruds.notification.subject')) . '<br><br>';
+                    $txt = '';
                     foreach ($controls as $control) {
                         // Date
                         $txt .= '<a href="' . url('/bob/show/'. $control->id) . '">';
@@ -92,7 +92,7 @@ class SendNotifications extends Command
                         $txt .= "<br>\n";
                     }
 
-                    // send notification
+                    // Create message
                     $mail_from = config('deming.notification.mail-from');
                     $headers = [
                         'MIME-Version: 1.0',
@@ -101,7 +101,9 @@ class SendNotifications extends Command
                     ];
                     $to_email = $user->email;
                     $subject = config('deming.notification.mail-subject');
-                    $message = $txt;
+
+                    // Apply message model
+                    $message = str_replace("%table%",$txt,config('deming.notification.mail-content'));
 
                     // Send mail
                     if (mail(

@@ -209,6 +209,21 @@ return [
                  'title_short' => 'Notifications',
                  'help' => 'This screen allows you to configure the notifications sent by email to users.',
                  'message_subject' => 'Message subject',
+                 'message_content' => 'Message content',
+                 'message_default_content' => '<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body>
+<p>Here is the list of measurement that will be due soon:</p>
+%table%
+<p>This is an automatically generated email</p>
+<p>Best regards,</p>
+<p>Deming</p>
+</body>
+</html>',
                  'sent_from' => 'Sent from',
                  'to' => 'to',
                  'delay' => 'for controls that expire within',
