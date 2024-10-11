@@ -18,6 +18,7 @@ class ConfigurationController extends Controller
         // Get configuration
         $mail_from = config('deming.notification.mail-from');
         $mail_subject = config('deming.notification.mail-subject');
+        $mail_content = config('deming.notification.mail-content');
         $frequency = config('deming.notification.frequency');
         $expire_delay = config('deming.notification.expire-delay');
         $reminder = config('deming.notification.reminder');
@@ -25,7 +26,9 @@ class ConfigurationController extends Controller
         // Return
         return view(
             'config',
-            compact('mail_from', 'mail_subject', 'frequency', 'expire_delay', 'reminder')
+            compact(
+                'mail_from', 'mail_subject', 'mail_content',
+                'frequency', 'expire_delay', 'reminder')
         );
     }
 
@@ -39,6 +42,7 @@ class ConfigurationController extends Controller
         // read request
         $mail_from = request('mail_from');
         $mail_subject = request('mail_subject');
+        $mail_content = request('mail_content');
         $frequency = request('frequency');
         $expire_delay = request('expire_delay');
         $reminder = request('reminder');
@@ -48,6 +52,7 @@ class ConfigurationController extends Controller
                 // put in config file
                 config(['deming.notification.mail-from' => $mail_from]);
                 config(['deming.notification.mail-subject' => $mail_subject]);
+                config(['deming.notification.mail-content' => $mail_content]);
                 config(['deming.notification.frequency' => $frequency]);
 
                 config(['deming.notification.expire-delay' => $expire_delay]);
@@ -89,7 +94,7 @@ class ConfigurationController extends Controller
 
         return view(
             'config',
-            compact('mail_from', 'mail_subject', 'frequency', 'expire_delay', 'reminder')
+            compact('mail_from', 'mail_subject', 'mail_content', 'frequency', 'expire_delay', 'reminder')
         )
             ->withErrors($msg);
     }

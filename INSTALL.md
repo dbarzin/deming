@@ -166,7 +166,8 @@ Finally, restart the Apache service to activate the changes:
 
 ## PHP
 
-You need to set the value of upload_max_filesize and post_max_size in your php.ini :
+You need to set the value of upload_max_filesize and post_max_size in your php.ini
+(/etc/php/8.1/fpm/php.ini) :
 
     ; Maximum allowed size for uploaded files.
     upload_max_filesize = 10M
