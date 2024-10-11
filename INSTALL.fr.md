@@ -170,7 +170,8 @@ Enfin, redémarrez le service Apache pour activer les modifications :
 
 ## PHP
 
-Vous devez définir les valeurs de upload_max_filesize et post_max_size dans votre php.ini :
+Vous devez définir les valeurs de upload_max_filesize et post_max_size dans votre php.ini
+(/etc/php/8.1/fpm/php.ini) :
 
     ; Taille maximale autorisée pour les fichiers téléchargés.
     upload_max_filesize = 10M
