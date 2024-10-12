@@ -8,7 +8,7 @@
 	    		<div class="cell-4 text-center">
                     <img src="/images/deming.png" width=400>
                 </div>
-	    		<div class="cell">
+	    		<div class="cell-7">
 @if(Auth::User()->language==="fr")
     <h1>À propos de Deming</h1>
 
@@ -24,7 +24,7 @@
     <h2>Open Source</h2>
 
     <p>Distribué sous licence <a href="https://www.gnu.org/licenses/licenses.html">GPL</a>, Deming s'adapte aux besoins des entreprises en quête d'amélioration continue de leur sécurité de l'information. Pour en savoir plus sur l’utilisation et les fonctionnalités, consultez la <a href="https://dbarzin.github.io/deming/index.fr/">documentation utilisateur</a> et le  <a href="https://github.com/dbarzin">GitHub</a> du projet.</p>
-@if(Auth::User()->language==="de")
+@elseif(Auth::User()->language==="de")
 <h1>Über Deming</h1>
 
 <p><strong>Deming</strong> ist ein Open-Source-Projekt, das entwickelt wurde, um die Verwaltung der Informationssicherheit zu erleichtern. Es bietet Organisationen die notwendigen Werkzeuge, um ihre Sicherheitskontrollen effektiv zu überwachen und zu messen, während sie ihr Informationssicherheits-Managementsystem (ISMS) optimieren.</p>
