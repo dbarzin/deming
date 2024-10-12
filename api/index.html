@@ -143,9 +143,9 @@
 </ul>
 <h2 id="api">API</h2>
 <p>Deming can be modified or updated via a REST API.</p>
-<p>A REST API (<a href="https://fr.wikipedia.org/wiki/Representational_state_transfer">Representational State Transfer</a>) 
-is an application programming interface that respects the constraints of the REST 
-architecture and enables interaction with RESTful web services. </p>
+<p>A REST API (<a href="https://fr.wikipedia.org/wiki/Representational_state_transfer">Representational State Transfer</a>)
+is an application programming interface that respects the constraints of the REST
+architecture and enables interaction with RESTful web services.</p>
 <h3 id="installing-the-api">Installing the API</h3>
 <p>To install the API, you need to install Passport by running this command:</p>
 <pre><code class="language-bash">php artisan passport:install
@@ -211,7 +211,7 @@ architecture and enables interaction with RESTful web services. </p>
 </table>
 <h3 id="access-rights">Access rights</h3>
 <p>To access the APIs, you need to identify yourself as a Deming application user.
-This user must have the "API" role. </p>
+This user must have the "API" role.</p>
 <p>When authentication is successful, the API sends a "token" which must be passed in the "Authorization" header of the API request.</p>
 <h3 id="examples">Examples</h3>
 <p>Here are a few examples of how to use the API with PHP:</p>
@@ -248,7 +248,6 @@ This user must have the "API" role. </p>
             $token = json_decode($response)-&gt;token;
 
         } else {
-            set_error_handler(&quot;Login to api faild status 403&quot;);
             error_log($responseInfo['http_code']);
             error_log(&quot;No login api status 403&quot;);
         }
@@ -349,8 +348,8 @@ vheaders = {}
 vheaders['accept'] = 'application/json'
 
 print(&quot;Login&quot;)
-response = requests.post(&quot;http://127.0.0.1:8000/api/login&quot;, 
-    headers=vheaders, 
+response = requests.post(&quot;http://127.0.0.1:8000/api/login&quot;,
+    headers=vheaders,
     data= {'email':'api@admin.localhost', 'password':'12345678'} )
 print(response.status_code)
 

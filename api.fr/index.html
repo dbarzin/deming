@@ -143,9 +143,9 @@
 </ul>
 <h2 id="api">API</h2>
 <p>Deming peut être modifiée ou mis à jour via une REST API.</p>
-<p>Une API REST (<a href="https://fr.wikipedia.org/wiki/Representational_state_transfer">Representational State Transfer</a>) 
-est une interface de programmation d'application qui respecte les contraintes du style d'architecture REST 
-et permet d'interagir avec les services web RESTful. </p>
+<p>Une API REST (<a href="https://fr.wikipedia.org/wiki/Representational_state_transfer">Representational State Transfer</a>)
+est une interface de programmation d'application qui respecte les contraintes du style d'architecture REST
+et permet d'interagir avec les services web RESTful.</p>
 <h3 id="installer-lapi">Installer l'API</h3>
 <p>pour installer l'API, il est nécessaire d'installer Passport en lançant cette commande :</p>
 <pre><code class="language-bash">php artisan passport:install
@@ -211,7 +211,7 @@ et permet d'interagir avec les services web RESTful. </p>
 </table>
 <h3 id="droits-dacces">Droits d'accès</h3>
 <p>Il faut s'identifier avec un utilisateur de l'application Deming pour pouvoir accèder aux API.
-Cet utilisateur doit disposer du rôle "API". </p>
+Cet utilisateur doit disposer du rôle "API".</p>
 <p>Lorsque l'authentification réussi, l'API envoie un "token" qui doit être passé dans l'entête "Authorization" de la requête de l'API.</p>
 <h3 id="exemples">Exemples</h3>
 <p>Voici quelques exemples d'utilisation de l'API avec PHP :</p>
@@ -248,7 +248,6 @@ Cet utilisateur doit disposer du rôle "API". </p>
             $token = json_decode($response)-&gt;token;
 
         } else {
-            set_error_handler(&quot;Login to api faild status 403&quot;);
             error_log($responseInfo['http_code']);
             error_log(&quot;No login api status 403&quot;);
         }
@@ -351,8 +350,8 @@ vheaders = {}
 vheaders['accept'] = 'application/json'
 
 print(&quot;Login&quot;)
-response = requests.post(&quot;http://127.0.0.1:8000/api/login&quot;, 
-    headers=vheaders, 
+response = requests.post(&quot;http://127.0.0.1:8000/api/login&quot;,
+    headers=vheaders,
     data= {'email':'api@admin.localhost', 'password':'12345678'} )
 print(response.status_code)
 
