@@ -98,6 +98,10 @@ Générer la clé de l'application
 
     php artisan key:generate
 
+Si vous voulez utiliser l'API, installez [Laravel Passport](https://laravel.com/docs/11.x/passport) (option) :
+
+    php artisan passport:install
+
 Créer le lien de stockage
 
 	php artisan storage:link

@@ -2,11 +2,11 @@
 
 Deming can be modified or updated via a REST API.
 
-A REST API ([Representational State Transfer](https://fr.wikipedia.org/wiki/Representational_state_transfer)) 
-is an application programming interface that respects the constraints of the REST 
-architecture and enables interaction with RESTful web services. 
+A REST API ([Representational State Transfer](https://fr.wikipedia.org/wiki/Representational_state_transfer))
+is an application programming interface that respects the constraints of the REST
+architecture and enables interaction with RESTful web services.
 
-### Installing the API 
+### Installing the API
 
 To install the API, you need to install Passport by running this command:
 
@@ -44,7 +44,7 @@ Requests and URIs for each api are shown in the table below.
 ### Access rights
 
 To access the APIs, you need to identify yourself as a Deming application user.
-This user must have the "API" role. 
+This user must have the "API" role.
 
 When authentication is successful, the API sends a "token" which must be passed in the "Authorization" header of the API request.
 
@@ -87,7 +87,6 @@ Here are a few examples of how to use the API with PHP:
             $token = json_decode($response)->token;
 
         } else {
-            set_error_handler("Login to api faild status 403");
             error_log($responseInfo['http_code']);
             error_log("No login api status 403");
         }
@@ -201,8 +200,8 @@ vheaders = {}
 vheaders['accept'] = 'application/json'
 
 print("Login")
-response = requests.post("http://127.0.0.1:8000/api/login", 
-    headers=vheaders, 
+response = requests.post("http://127.0.0.1:8000/api/login",
+    headers=vheaders,
     data= {'email':'api@admin.localhost', 'password':'12345678'} )
 print(response.status_code)
 
@@ -229,4 +228,3 @@ token=$(curl -s -d ${data} -H "Content-Type: application/json" http://localhost:
 curl -s -H "Content-Type: application/json" -H "Authorization: Bearer ${token}" "http://127.0.0.1:8000/api/domains" | jq .
 
 ```
-
