@@ -55,9 +55,9 @@
 				</div>
 	    		<div class="cell-3">
 	    			<select name='language' value='language'>
-	    				<option {{ (count($errors)>0 ?  old('language') : $user->language) =='de' ? 'selected' : ''}} >de</option>
-	    				<option {{ (count($errors)>0 ?  old('language') : $user->language) =='en' ? 'selected' : ''}} >en</option>
-                        <option {{ (count($errors)>0 ?  old('language') : $user->language) =='fr' ? 'selected' : ''}} >fr</option>
+	    				<option {{ (old('language',$user->language) =='de') ? 'selected' : ''}} >de</option>
+	    				<option {{ (old('language',$user->language) =='en') ? 'selected' : ''}} >en</option>
+                        <option {{ (old('language',$user->language) =='fr') ? 'selected' : ''}} >fr</option>
 	    			</select>
 				</div>
 			</div>
