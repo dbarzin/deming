@@ -57,7 +57,7 @@
 	    			<select name='language' value='language'>
 	    				<option {{ (count($errors)>0 ?  old('language') : $user->language) =='de' ? 'selected' : ''}} >de</option>
 	    				<option {{ (count($errors)>0 ?  old('language') : $user->language) =='en' ? 'selected' : ''}} >en</option>
-		                        <option {{ (count($errors)>0 ?  old('language') : $user->language) =='fr' ? 'selected' : ''}} >fr</option>
+                        <option {{ (count($errors)>0 ?  old('language') : $user->language) =='fr' ? 'selected' : ''}} >fr</option>
 	    			</select>
 				</div>
 			</div>

@@ -49,9 +49,9 @@
 					</div>
 		    		<div class="cell-3">
 		    			<select name='language' value='language'>
-		    				<option {{ old('language')=='de' ? 'selected' : ''}} >de</option>
-		    				<option {{ old('language')=='en' ? 'selected' : ''}} >en</option>
-		    				<option {{ old('language')=='fr' ? 'selected' : ''}} >fr</option>
+		    				<option {{ old('language',Auth::user()->language)=='de' ? 'selected' : ''}} >de</option>
+		    				<option {{ old('language',Auth::user()->language)=='en' ? 'selected' : ''}} >en</option>
+		    				<option {{ old('language',Auth::user()->language)=='fr' ? 'selected' : ''}} >fr</option>
 		    			</select>
 					</div>
 				</div>
