@@ -24,6 +24,21 @@
     <h2>Open Source</h2>
 
     <p>Distribué sous licence <a href="https://www.gnu.org/licenses/licenses.html">GPL</a>, Deming s'adapte aux besoins des entreprises en quête d'amélioration continue de leur sécurité de l'information. Pour en savoir plus sur l’utilisation et les fonctionnalités, consultez la <a href="https://dbarzin.github.io/deming/index.fr/">documentation utilisateur</a> et le  <a href="https://github.com/dbarzin">GitHub</a> du projet.</p>
+@if(Auth::User()->language==="de")
+<h1>Über Deming</h1>
+
+<p><strong>Deming</strong> ist ein Open-Source-Projekt, das entwickelt wurde, um die Verwaltung der Informationssicherheit zu erleichtern. Es bietet Organisationen die notwendigen Werkzeuge, um ihre Sicherheitskontrollen effektiv zu überwachen und zu messen, während sie ihr Informationssicherheits-Managementsystem (ISMS) optimieren.</p>
+
+<h2>Wichtige Funktionen</h2>
+<ul>
+    <li>Überwachung der Informationssicherheitsleistung.</li>
+    <li>Planung und Verwaltung von Sicherheitskontrollen.</li>
+    <li>Erstellung detaillierter Berichte für fundierte Entscheidungen.</li>
+</ul>
+
+<h2>Open Source</h2>
+
+<p>Unter der <a href="https://www.gnu.org/licenses/licenses.html">GPL-Lizenz</a> vertrieben, passt sich Deming den Bedürfnissen von Unternehmen an, die eine kontinuierliche Verbesserung ihrer Informationssicherheit anstreben. Weitere Informationen zur Nutzung und den Funktionen finden Sie in der <a href="https://dbarzin.github.io/deming/index.fr/">Benutzerdokumentation</a> und auf dem <a href="https://github.com/dbarzin">GitHub-Projekt</a>.</p>
 @else
     <h1>About Deming</h1>
 

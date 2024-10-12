@@ -144,6 +144,7 @@ return [
          'model' => [
             'control' => 'Vorlage Kontrollblatt',
             'report' => 'Vorlage Lenkungsbericht',
+            'custom' => 'Maßgeschneidertes Modell'
          ],
          'count' => 'Anzahl an Dokumenten',
          'total_size' => 'Gesamtgröße',

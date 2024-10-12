@@ -20,7 +20,7 @@ function bytesToHuman($bytes) {
                     <div class="cell-4">
                         <a href="/doc/template?id=1" target="_new">{{ trans('cruds.document.model.control') }}</a>
                         @if (file_exists(storage_path('app/models/control_.docx')))
-                            / <a href="/doc/template?id=3" target="_new">current model</a>
+                            / <a href="/doc/template?id=3" target="_new">{{ trans('cruds.document.model.custom') }}</a>
                         @endif
                         <input type="file" data-role="file" name="template1">
                     </div>
@@ -29,7 +29,7 @@ function bytesToHuman($bytes) {
                     <div class="cell-4">
                         <a href="/doc/template?id=3" target="_new">{{ trans('cruds.document.model.report') }}</a>
                         @if (file_exists(storage_path('app/models/pilotage_.docx')))
-                            / <a href="/doc/template?id=4" target="_new">current model</a>
+                            / <a href="/doc/template?id=4" target="_new">{{ trans('cruds.document.model.custom') }}</a>
                         @endif
                         <input type="file" data-role="file" name="template2">
                     </div>

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Control;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use PhpOffice\PhpWord\Element\Chart;
 use PhpOffice\PhpWord\Element\Table;
@@ -74,7 +75,7 @@ class ReportController extends Controller
         // Get template file
         $template_filename = storage_path('app/models/pilotage_.docx');
         if (! file_exists($template_filename)) {
-            $template_filename = storage_path('app/models/pilotage.docx');
+            $template_filename = storage_path('app/models/pilotage_' . Auth::user()->language . '.docx');
         }
 
         // create templateProcessor
