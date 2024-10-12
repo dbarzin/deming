@@ -144,6 +144,7 @@ return [
          'model' => [
             'control' => 'Vorlage Kontrollblatt',
             'report' => 'Vorlage Lenkungsbericht',
+            'custom' => 'Maßgeschneidertes Modell'
          ],
          'count' => 'Anzahl an Dokumenten',
          'total_size' => 'Gesamtgröße',
@@ -186,7 +187,7 @@ return [
          'add' => 'Neuer Benutzer',
          'show' => 'Zeige Benutzer',
          'fields' => [
-             'login' => 'Login',
+             'login' => 'UserId',
              'name' => 'Name',
              'title' => 'Titel',
              'role' => 'Rolle',

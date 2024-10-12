@@ -144,6 +144,7 @@ return [
          'model' => [
             'control' => 'Control sheet template',
             'report' => 'Steering report template',
+            'custom' => 'Custom model',
          ],
          'count' => 'Number of documents',
          'total_size' => 'Total Size',
@@ -186,7 +187,7 @@ return [
          'add' => 'Add User',
          'show' => 'Show user',
          'fields' => [
-             'login' => 'Login',
+             'login' => 'UserId',
              'name' => 'Name',
              'title' => 'Title',
              'role' => 'Role',
