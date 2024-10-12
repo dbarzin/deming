@@ -16,22 +16,26 @@ class DocumentController extends Controller
         $id = (int) $request->get('id');
 
         if ($id === 1) {
+            // return default model
+            return response()->download(storage_path('app/models/control_'. Auth::user()->language .'.docx'));
+        }
+        if ($id === 2) {
             // check exists new model
             if (file_exists(storage_path('app/models/control_.docx'))) {
                 // return new model
                 return response()->download(storage_path('app/models/control_.docx'));
             }
-            // return default model
-            return response()->download(storage_path('app/models/control.docx'));
         }
-        if ($id === 2) {
+        if ($id === 3) {
+            // return default model
+            return response()->download(storage_path('app/models/pilotage_'. Auth::user()->language .'.docx'));
+        }
+        if ($id === 4) {
             // check exists new model
             if (file_exists(storage_path('app/models/pilotage_.docx'))) {
                 // return new model
                 return response()->download(storage_path('app/models/pilotage_.docx'));
             }
-            // return default model
-            return response()->download(storage_path('app/models/pilotage.docx'));
         }
         return null;
     }
