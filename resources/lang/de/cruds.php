@@ -186,7 +186,7 @@ return [
          'add' => 'Neuer Benutzer',
          'show' => 'Zeige Benutzer',
          'fields' => [
-             'login' => 'Login',
+             'login' => 'UserId',
              'name' => 'Name',
              'title' => 'Titel',
              'role' => 'Rolle',

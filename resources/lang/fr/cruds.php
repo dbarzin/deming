@@ -186,7 +186,7 @@ return [
         'edit' => 'Modifier un utilisateur',
         'add' => 'Ajouter un utilisateur',
         'fields' => [
-            'login' => 'Login',
+            'login' => 'UserId',
             'name' => 'Nom',
             'title' => 'Titre',
             'role' => 'Role',
