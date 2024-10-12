@@ -14,7 +14,7 @@ To install the API, you need to install Passport by running this command:
 php artisan passport:install
 ```
 
-- The Docker environment supports this functionality natively, via the entrypoint.
+The Docker environment supports this functionality natively, via the [entrypoint](https://github.com/dbarzin/deming/blob/main/docker/entrypoint.sh).
 
 ### The APIs
 
