@@ -2,11 +2,11 @@
 
 Deming peut être modifiée ou mis à jour via une REST API.
 
-Une API REST ([Representational State Transfer](https://fr.wikipedia.org/wiki/Representational_state_transfer)) 
-est une interface de programmation d'application qui respecte les contraintes du style d'architecture REST 
-et permet d'interagir avec les services web RESTful. 
+Une API REST ([Representational State Transfer](https://fr.wikipedia.org/wiki/Representational_state_transfer))
+est une interface de programmation d'application qui respecte les contraintes du style d'architecture REST
+et permet d'interagir avec les services web RESTful.
 
-### Installer l'API 
+### Installer l'API
 
 pour installer l'API, il est nécessaire d'installer Passport en lançant cette commande :
 
@@ -44,7 +44,7 @@ Les requêtes et URI de chaque api est représentée dans le tableau ci-dessous.
 ### Droits d'accès
 
 Il faut s'identifier avec un utilisateur de l'application Deming pour pouvoir accèder aux API.
-Cet utilisateur doit disposer du rôle "API". 
+Cet utilisateur doit disposer du rôle "API".
 
 Lorsque l'authentification réussi, l'API envoie un "token" qui doit être passé dans l'entête "Authorization" de la requête de l'API.
 
@@ -87,7 +87,6 @@ Voici quelques exemples d'utilisation de l'API avec PHP :
             $token = json_decode($response)->token;
 
         } else {
-            set_error_handler("Login to api faild status 403");
             error_log($responseInfo['http_code']);
             error_log("No login api status 403");
         }
@@ -203,8 +202,8 @@ vheaders = {}
 vheaders['accept'] = 'application/json'
 
 print("Login")
-response = requests.post("http://127.0.0.1:8000/api/login", 
-    headers=vheaders, 
+response = requests.post("http://127.0.0.1:8000/api/login",
+    headers=vheaders,
     data= {'email':'api@admin.localhost', 'password':'12345678'} )
 print(response.status_code)
 
@@ -231,4 +230,3 @@ token=$(curl -s -d ${data} -H "Content-Type: application/json" http://localhost:
 curl -s -H "Content-Type: application/json" -H "Authorization: Bearer ${token}" "http://127.0.0.1:8000/api/domains" | jq .
 
 ```
-
