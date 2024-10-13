@@ -74,7 +74,7 @@ To find out more about using the application, please refer to the [user document
 
 - **Languages**: PHP, JavaScript
 - **Framework** : Laravel
-- **Database**: MySQL, PostgreSQL, SQLite, SQL Server
+- **Database**: MariaDB, MySQL, PostgreSQL, and SQLite
 - **Graphics**: ChartJS
 
 ## ⚙️ Installation
