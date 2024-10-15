@@ -378,6 +378,25 @@ class MeasureController extends Controller
             '403 Forbidden'
         );
 
+        // Get measure
+        $measure = Measure::find($request->id);
+
+        // Check measure exists
+        abort_if(
+            !DB::table('measures')->where('id', $request->id)->exists(),
+            Response::HTTP_NOT_FOUND, '404 Not Found');
+
+        // Has controls ?
+        if (DB::table('measures')
+            ->where('id', $request->id)
+            ->join('control_measure','measures.id','control_measure.measure_id')
+            ->exists()) {
+            return back()
+                ->withErrors(['msg' => 'There are controls associated with this measure !'])
+                ->withInput();
+        }
+
+        // Destroy it
         Measure::destroy($request->id);
 
         return redirect('/alice/index');
