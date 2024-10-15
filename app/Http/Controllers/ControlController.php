@@ -1555,13 +1555,18 @@ class ControlController extends Controller
 
         // create a new control
         $new_control = $control->replicate();
+        $new_control->status = 0;
         $new_control->observations = null;
         $new_control->realisation_date = null;
         $new_control->note = null;
         $new_control->score = null;
         $new_control->plan_date = request('next_date');
 
+        // Save new control
         $new_control->save();
+
+        // Clone measures
+        $new_control->measures()->sync($control->measures->pluck('id')->toArray());
 
         // Set owners
         $new_control->owners()->sync($control->owners->pluck('id')->toArray());
