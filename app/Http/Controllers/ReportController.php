@@ -221,7 +221,14 @@ class ReportController extends Controller
 
         //----------------------------------------------------------------
         // create table
-        $table = new Table(['borderSize' => 3, 'borderColor' => 'black', 'width' => 9800, 'unit' => TblWidth::TWIP]);
+        $table = new Table(
+            [
+            'borderSize' => 3,
+            'borderColor' => 'black',
+            'width' => 9800,
+            'unit' => TblWidth::TWIP,
+            'layout' => \PhpOffice\PhpWord\Style\Table::LAYOUT_FIXED,
+            ]);
         // create header
         $table->addRow();
         $table->addCell(2000, ['bgColor' => '#FFD5CA'])
@@ -378,7 +385,14 @@ class ReportController extends Controller
         $domains = $domains->get();
 
         // create table
-        $table = new Table(['borderSize' => 3, 'borderColor' => 'black', 'width' => 9800, 'unit' => TblWidth::TWIP]);
+        $table = new Table(
+            [
+                'borderSize' => 3,
+                'borderColor' => 'black',
+                'width' => 9800,
+                'unit' => TblWidth::TWIP,
+                'layout' => \PhpOffice\PhpWord\Style\Table::LAYOUT_FIXED
+            ]);
         // create header
         $table->addRow();
         $table->addCell(2000, ['bgColor' => '#FFD5CA'])
@@ -511,7 +525,14 @@ class ReportController extends Controller
             });
         }
 
-        $table = new Table(['borderSize' => 3, 'borderColor' => 'black', 'width' => 9800, 'unit' => TblWidth::TWIP]);
+        $table = new Table(
+            [
+                'borderSize' => 3,
+                'borderColor' => 'black',
+                'width' => 9800,
+                'unit' => TblWidth::TWIP,
+                'layout' => \PhpOffice\PhpWord\Style\Table::LAYOUT_FIXED
+            ]);
 
         // create header
         $table->addRow();

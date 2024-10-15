@@ -1498,6 +1498,7 @@ class ControlController extends Controller
         $control->score = request('score');
         $control->plan_date = request('plan_date');
         $control->action_plan = request('action_plan');
+        // $control->realisation_date = null;
 
         // Reject -> set status=0
         $control->status = 0;
