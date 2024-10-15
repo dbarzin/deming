@@ -246,7 +246,7 @@ This user must have the "API" role.</p>
             $token = json_decode($response)-&gt;token;
 
         } else {
-            error_log($responseInfo['http_code']);
+            error_log($response);
             error_log(&quot;No login api status 403&quot;);
         }
     }
