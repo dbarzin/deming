@@ -82,7 +82,7 @@
 					<label class="label" for="description">{{ trans('cruds.user.fields.email') }}</label>
 				</div>
 	    		<div class="cell-3">
-					<input type="text" name="email" class="input {{ $errors->has('email') ? 'is-danger' : ''}}" value="{{ $errors->has('email') ?  old('email') : $user->email }}" size="120">
+					<input type="text" name="email" class="input {{ $errors->has('email') ? 'is-danger' : ''}}" value="{{ old('email', $user->email) }}" size="120">
 				</div>
 			</div>
 
