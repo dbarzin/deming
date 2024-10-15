@@ -19,5 +19,8 @@ class Domain extends Model
     ];
 
     protected $fillable = [
+        'title',
+        'framework',
+        'description',
     ];
 }

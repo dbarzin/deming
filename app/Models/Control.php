@@ -25,6 +25,15 @@ class Control extends Model
     ];
 
     protected $fillable = [
+        'name',
+        'objective',
+        'observations',
+        'input',
+        'attributes',
+        'model',
+        'action_plan',
+        'realisation_date',
+        'plan_date',
     ];
 
     // Control status :
