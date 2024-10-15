@@ -23,6 +23,12 @@ class Measure extends Model
     ];
 
     protected $fillable = [
+        'name',
+        'clause',
+        'objective',
+        'input',
+        'attributes',
+        'model',
     ];
 
     // Return the domain associated to this measure

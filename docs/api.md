@@ -87,7 +87,7 @@ Here are a few examples of how to use the API with PHP:
             $token = json_decode($response)->token;
 
         } else {
-            error_log($responseInfo['http_code']);
+            error_log($response);
             error_log("No login api status 403");
         }
     }
