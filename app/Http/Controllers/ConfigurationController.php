@@ -68,7 +68,6 @@ class ConfigurationController extends Controller
 
             case 'test':
                 // send test email alert
-                $message = '<html><body><br>This is a test message !<br><br></body></html>';
 
                 // define the header
                 $headers = [
@@ -78,7 +77,7 @@ class ConfigurationController extends Controller
                 ];
 
                 // En-têtes additionnels
-                if (mail(Auth::User()->email, '=?UTF-8?B?' . base64_encode($mail_subject) . '?=', $message, implode("\r\n", $headers), ' -f'. $mail_from)) {
+                if (mail(Auth::User()->email, '=?UTF-8?B?' . base64_encode($mail_subject) . '?=', $mail_content, implode("\r\n", $headers), ' -f'. $mail_from)) {
                     $msg = 'Mail sent to ' . Auth::User()->email;
                 } else {
                     $msg = 'Could not send email.';
