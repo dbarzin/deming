@@ -24,8 +24,12 @@ class ControlController extends Controller
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $control = Control::create($request->all());
+
         if ($request->has('measures'))
             $control->measures()->sync($request->input('measures', []));
+
+        if ($request->has('owners'))
+            $control->owners()->sync($request->input('owners', []));
 
         return response()->json($control, 201);
     }
@@ -42,8 +46,12 @@ class ControlController extends Controller
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $control->update($request->all());
+
         if ($request->has('measures'))
             $control->measures()->sync($request->input('measures', []));
+
+        if ($request->has('owners'))
+            $control->owners()->sync($request->input('owners', []));
 
         return response()->json();
     }
