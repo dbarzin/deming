@@ -102,8 +102,13 @@ class SendNotifications extends Command
                     $to_email = $user->email;
                     $subject = config('deming.notification.mail-subject');
 
-                    // Apply message model
-                    $message = str_replace("%table%",$txt,config('deming.notification.mail-content'));
+                    // Get message model
+                    $message = config('deming.notification.mail-content');
+                    if (($message==null)||(strlen($message)==0))
+                        $message = trans('cruds.config.notifications.message_default_content');
+
+                    // Replace %table% in message model
+                    $message = str_replace("%table%",$txt,$message);
 
                     // Send mail
                     if (mail(
