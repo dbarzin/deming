@@ -214,15 +214,14 @@ return [
                  'message_default_content' => '<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
+    <meta charset="ISO-8859-1">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
 <p>Here is the list of measurement that will be due soon:</p>
 %table%
 <p>This is an automatically generated email</p>
-<p>Best regards,</p>
-<p>Deming</p>
+<p>Best regards,<br>Deming</p>
 </body>
 </html>',
                  'sent_from' => 'Sent from',

@@ -213,15 +213,14 @@ return [
             'message_default_content' => '<!DOCTYPE html>
 <html lang="fr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 </head>
 <body>
-<p>Voici la liste des contrôles dû prochainement :</p>
+<p>Voici la liste des contr&ocirc;les d&ucirc; prochainement :</p>
 %table%
-<p>Ceci est un mail généré automatiquement.</p>
-<p>Cordialement,</p>
-<p>Deming</p>
+<p>Ceci est un mail g&eacute;n&eacute;r&eacute; automatiquement.</p>
+<p>Cordialement,<br>Deming</p>
 </body>
 </html>',
             'sent_from' => 'Envoyé depuis',
