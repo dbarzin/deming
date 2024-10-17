@@ -26,6 +26,8 @@ L'environnement Docker prend en charge cette fonctionnalité nativement, via l'[
 
 - /api/controls
 
+- /api/users
+
 - /api/documents
 
 ### Actions gérées par le contrôleur de ressources
