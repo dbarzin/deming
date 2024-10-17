@@ -26,6 +26,8 @@ The Docker environment supports this functionality natively, via the [entrypoint
 
 - /api/controls
 
+- /api/users
+
 - /api/documents
 
 ### Actions managed by the resource controller
