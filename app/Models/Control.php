@@ -34,6 +34,7 @@ class Control extends Model
         'action_plan',
         'realisation_date',
         'plan_date',
+        'periodicity'
     ];
 
     // Control status :
