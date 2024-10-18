@@ -25,10 +25,11 @@ return new class extends Migration
                 $control->measures()->sync([$control->measure_id]);
         }
 
-        Schema::table('controls', function (Blueprint $table) {
-            $table->dropForeign(['controls_domain_id_foreign']);
-            $table->dropForeign(['controls_measure_id_foreign']);
-        });
+        if (DB::getDriverName() !== 'pgsql')
+            Schema::table('controls', function (Blueprint $table) {
+                $table->dropForeign(['controls_domain_id_foreign']);
+                $table->dropForeign(['controls_measure_id_foreign']);
+            });
 
         if (DB::getDriverName() === 'sqlite')
             // Could not drop column with sqlite
