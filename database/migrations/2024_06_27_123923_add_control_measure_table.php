@@ -26,11 +26,22 @@ return new class extends Migration
         }
 
         Schema::table('controls', function (Blueprint $table) {
-            $table->dropForeign('controls_domain_id_foreign');
-            $table->dropForeign('controls_measure_id_foreign');
-            $table->dropColumn('domain_id');
-            $table->dropColumn('measure_id');
-            });
+            $table->dropForeign(['controls_domain_id_foreign']);
+            $table->dropForeign(['controls_measure_id_foreign']);
+        });
+
+        if (DB::getDriverName() === 'sqlite')
+            // Could not drop column with sqlite
+            Schema::table('controls', function (Blueprint $table) {
+                $table->integer('domain_id')->nullable()->change();
+                $table->integer('measure_id')->nullable()->change();
+                });
+        else
+            // Drop columns
+            Schema::table('controls', function (Blueprint $table) {
+                $table->dropColumn(['domain_id']);
+                $table->dropColumn(['measure_id']);
+                });
     }
 
     /**
