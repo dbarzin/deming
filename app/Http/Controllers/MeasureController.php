@@ -61,7 +61,7 @@ class MeasureController extends Controller
                     ->whereIn('controls.status', [0,1])
                     ->orWhere('controls.status', null);
             })
-            ->groupBy('measures.id');
+            ->groupBy('measures.id','domains.title');
 
         if ($domain !== null) {
             $measures->where('measures.domain_id', $domain);
