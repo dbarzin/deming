@@ -29,7 +29,6 @@ class Measure extends Model
         'input',
         'attributes',
         'model',
-        'periodicity'
     ];
 
     // Return the domain associated to this measure
