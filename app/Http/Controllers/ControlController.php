@@ -938,7 +938,7 @@ class ControlController extends Controller
                     c1.id AS control_id,
                     c1.name,
                     measures.clause,
-                    c1.scope,
+                    c1.scope as scope,
                     control_measure.measure_id,
                     measures.domain_id,
                     c1.plan_date,
@@ -992,7 +992,7 @@ class ControlController extends Controller
             ])
             ->join('controls as c2', 'c1.id', '=', 'c2.next_id')
             ->where('c1.status', '=', 0)
-            ->orderBy('id')
+            ->orderBy('c2.id')
             ->get();
 
         // Fetch measures for all controls in one query
