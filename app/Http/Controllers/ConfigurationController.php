@@ -1,10 +1,12 @@
 <?php
-
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 class ConfigurationController extends Controller
 {
@@ -67,21 +69,44 @@ class ConfigurationController extends Controller
                 break;
 
             case 'test':
-                // send test email alert
+                // Create a new PHPMailer instance
+                $mail = new PHPMailer(true);
 
-                // define the header
-                $headers = [
-                    'MIME-Version: 1.0',
-                    'Content-type: text/html;charset=iso-8859-1',
-                    'From: '. $mail_from,
-                ];
+                try {
+                    // Server settings
+                    $mail->isSMTP();                               // Use SMTP
+                    $mail->Host       = env('MAIL_HOST');          // Set the SMTP server
+                    $mail->SMTPAuth   = env('MAIL_AUTH');          // Enable SMTP authentication
+                    $mail->Username   = env('MAIL_USERNAME');      // SMTP username
+                    $mail->Password   = env('MAIL_PASSWORD');      // SMTP password
+                    $mail->SMTPSecure = env('MAIL_SMTPSECURE');    // Enable TLS encryption, `ssl` also accepted
+                    $mail->Port       = env('MAIL_PORT');          // TCP port to connect to
 
-                // En-têtes additionnels
-                if (mail(Auth::User()->email, '=?UTF-8?B?' . base64_encode($mail_subject) . '?=', $mail_content, implode("\r\n", $headers), ' -f'. $mail_from)) {
-                    $msg = 'Mail sent to ' . Auth::User()->email;
-                } else {
-                    $msg = 'Could not send email.';
+                    // Recipients
+                    $mail->setFrom($mail_from);
+                    $mail->addAddress(Auth::user()->email);         // Add a recipient
+
+                    // Content
+                    $mail->isHTML(true);                            // Set email format to HTML
+                    $mail->Subject = $mail_subject;
+                    $mail->Body    = $mail_content;
+                    // $mail->AltBody = 'This is the plain text version of the email body';
+
+                    // Optional: Add DKIM signing
+                    $mail->DKIM_domain = env('MAIL_DKIM_DOMAIN');
+                    $mail->DKIM_private =  env('MAIL_DKIM_PRIVATE');
+                    $mail->DKIM_selector = env('MAIL_DKIM_SELECTOR');
+                    $mail->DKIM_passphrase = env('MAIL_DKIM_PASSPHRASE');
+                    $mail->DKIM_identity = $mail->From;
+
+                    // Send email
+                    $mail->send();
+
+                    $msg = 'Message has been sent';
+                } catch (Exception $e) {
+                    $msg = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
+
                 break;
 
             case 'cancel':

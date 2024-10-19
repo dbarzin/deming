@@ -189,19 +189,24 @@ Après avoir modifié le(s) fichier(s) php.ini, vous devez redémarrer le servic
 
 ## Configuration du mail
 
-Si vous souhaitez envoyer des mails de notification depuis Deming.
+Si vous souhaitez envoyer des e-mails de notification depuis Deming.
+Vous devez configurer l'accès au serveur SMTP dans .env
 
-Installer postfix et mailx
+    MAIL_HOST='smtp.localhost'
+    MAIL_PORT=2525
+    MAIL_AUTH=true
+    MAIL_SMTP_SECURE='ssl'
+    MAIL_USERNAME=
+    MAIL_PASSWORD=
 
-    sudo apt install postfix mailutils
+Vous pouvez également configurer DKIM :
 
-Configurer postfix
+    MAIL_DKIM_DOMAIN = 'admin.local';
+    MAIL_DKIM_PRIVATE = '/path/to/private/key';
+    MAIL_DKIM_SELECTOR = 'default'; // Match your DKIM DNS selector
+    MAIL_DKIM_PASSPHRASE = '';      // Only if your key has a passphrase
 
-    sudo dpkg-reconfigure postfix
-
-Envoyer un mail de test avec
-
-    echo "Test mail body" | mailx -r "deming@yourdomain.local" -s "Subject Test" yourname@yourdomain.local
+Don't forget to [configure](https://dbarzin.github.io/deming/config/#notifications) the content and frequency of your emails.
 
 N'oubliez pas de [configurer](https://dbarzin.github.io/deming/config.fr/#notifications) le contenu et la fréquence d'envoi des mails.
 
