@@ -79,7 +79,9 @@ class ConfigurationController extends Controller
                     $mail->SMTPAuth   = env('MAIL_AUTH');          // Enable SMTP authentication
                     $mail->Username   = env('MAIL_USERNAME');      // SMTP username
                     $mail->Password   = env('MAIL_PASSWORD');      // SMTP password
-                    $mail->SMTPSecure = env('MAIL_SMTPSECURE');    // Enable TLS encryption, `ssl` also accepted
+                    $mail->SMTPSecure = env('MAIL_SMTPSECURE',false);    // Enable TLS encryption, `ssl` also accepted
+                    if ($mail->SMTPSecure==false)
+                        $mail->SMTPAutoTLS=false;
                     $mail->Port       = env('MAIL_PORT');          // TCP port to connect to
 
                     // Recipients
