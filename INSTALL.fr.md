@@ -196,6 +196,7 @@ Vous devez configurer l'accès au serveur SMTP dans .env
     MAIL_PORT=2525
     MAIL_AUTH=true
     MAIL_SMTP_SECURE='ssl'
+    MAIL_SMTP_AUTO_TLS=false
     MAIL_USERNAME=
     MAIL_PASSWORD=
 
