@@ -49,19 +49,18 @@ class MeasureController extends Controller
                     'measures.domain_id',
                     'measures.clause',
                     'measures.name',
-                    DB::raw('count(control_id) as control_count'),
-                    'domains.title',
+                    'domains.title'
                 ]
             )
             ->join('domains', 'domains.id', '=', 'measures.domain_id')
-            ->leftjoin('control_measure', 'control_measure.measure_id', 'measures.id')
-            ->leftjoin('controls', 'control_measure.control_id', 'controls.id')
-            ->where(function ($query) {
-                $query
-                    ->whereIn('controls.status', [0,1])
-                    ->orWhere('controls.status', null);
-            })
-            ->groupBy('measures.id','domains.title');
+            ->addSelect(
+                ['control_count' => DB::table('controls')
+                        ->selectRaw('count(*) as controls_count')
+                        ->leftjoin('control_measure', 'control_measure.measure_id', 'measures.id')
+                        ->whereColumn('control_measure.control_id', 'controls.id')
+                        ->whereIn('controls.status', [0,1])
+                ]
+            );
 
         if ($domain !== null) {
             $measures->where('measures.domain_id', $domain);
