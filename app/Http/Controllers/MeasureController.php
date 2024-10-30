@@ -177,13 +177,14 @@ class MeasureController extends Controller
             '403 Forbidden'
         );
 
-        // user must have and assigned controls
+        // user must have one control assigned
         abort_if(
             (Auth::User()->role === 5) &&
             ! DB::table('controls')
                 ->where('measure_id', $id)
-                ->leftjoin('control_user', 'control_id', '=', 'controls.id')
-                ->where('user_id', Auth::User()->id)
+                ->join('control_measure', 'control_measure.control_id', '=', 'controls.id')
+                ->join('control_user', 'control_user.control_id', '=', 'controls.id')
+                ->where('control_user.user_id', Auth::User()->id)
                 ->exists(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'

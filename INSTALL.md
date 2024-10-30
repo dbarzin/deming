@@ -226,10 +226,6 @@ Migrate database
 
     php artisan migrate
 
-Update composer
-
-    composer self-update
-
 Update libraries
 
     composer update
