@@ -13,12 +13,12 @@ class Calendar
     private $active_day;
     private $events = [];
 
-    public function __construct($date = null)
+    public function __construct($dateInput = null)
     {
-        $this->date = DateTime::createFromFormat('m/Y', $date)->getTimestamp();
-        $this->active_year = $date !== null ? date('Y', $this->date) : date('Y');
-        $this->active_month = $date !== null ? date('m', $this->date) : date('m');
-        $this->active_day = $date !== null ? date('d', $this->date) : date('d');
+        $this->date = DateTime::createFromFormat('d/m/Y', "01/".$dateInput)->getTimestamp();
+        $this->active_year = $dateInput !== null ? date('Y', $this->date) : date('Y');
+        $this->active_month = $dateInput !== null ? date('m', $this->date) : date('m');
+        $this->active_day = $dateInput !== null ? date('d', $this->date) : date('d');
     }
 
     public function __toString()
