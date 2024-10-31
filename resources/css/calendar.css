@@ -76,6 +76,10 @@
     background-color: #C9CBCF;
     cursor: pointer;
 }
+.MyCalendar .days .day_num .event.lblue {
+    background-color: #baccf0;
+    cursor: pointer;
+}
 .MyCalendar .days .day_num:nth-child(7n+1) {
     border-left: 1px solid #e6e9ea;
 }

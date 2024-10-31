@@ -685,7 +685,7 @@ class ControlController extends Controller
 
         // Get all controls
         $controls = DB::table('controls')
-            ->select('id', 'score', 'realisation_date', 'plan_date')
+            ->select('id', 'score', 'observations', 'realisation_date', 'plan_date')
             ->get();
 
         // Fetch measures for all controls in one query
