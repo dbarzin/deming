@@ -264,16 +264,19 @@
                 $calendar = new \App\Calendar(\Carbon\Carbon::now()->format('m/Y'));
 
             foreach ($controls as $control) {
-                if (($control->score==null) && ($control->plan_date!=null)) {
+                if (($control->score===null) && ($control->plan_date!==null)) {
+                    if ($control->observations===null)
                         $calendar->addEvent($control->measures->implode(', '), $control->plan_date, 1, 'grey', $control->id);
+                    else
+                        $calendar->addEvent($control->measures->implode(', '), $control->plan_date, 1, 'lblue', $control->id);
                     }
-                else if (($control->score==1) && ($control->realisation_date!=null)) {
+                else if (($control->score===1) && ($control->realisation_date!==null)) {
                         $calendar->addEvent($control->measures->implode(', '), $control->realisation_date, 1, 'red', $control->id);
                         }
-                else if (($control->score==2) && ($control->realisation_date!=null)) {
+                else if (($control->score===2) && ($control->realisation_date!==null)) {
                         $calendar->addEvent($control->measures->implode(', '), $control->realisation_date, 1, 'orange', $control->id);
                         }
-                else if (($control->score==3) && ($control->realisation_date!=null)) {
+                else if (($control->score===3) && ($control->realisation_date!==null)) {
                         $calendar->addEvent($control->measures->implode(', '), $control->realisation_date, 1, 'green', $control->id);
                     }
                 }
