@@ -111,7 +111,7 @@ class SocialiteController extends Controller
      
             Auth::guard('web')->login($user);   
      
-            return redirect(route('home'));
+            return redirect('/');
         } catch (Exception $exception) {
             return redirect('login');
         }
