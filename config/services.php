@@ -36,6 +36,12 @@ return [
                              : [],
         'keycloak' => [
             'display_name' => env('KEYCLAOK_DISPLAY_NAME', 'Keycloak'),
+            'allow_create_user' => env("KEYCLOAK_ALLOW_CREATE_USER", false),
+            'allow_update_user' => env("KEYCLOAK_ALLOW_UPDATE_USER", false),
+            // Set to null if you want role to be set explicitily
+            'default_role' => env('KEYCLOAK_DEFAULT_ROLE', 'auditee'),
+            'role_claim' => env('KEYCLOAK_ROLE_CLAIM', ''),
+            'additional_scopes' => explode(' ', env('KEYCLOAK_ADDITIONAL_SCOPES', "")),
         ],
     ],
     
