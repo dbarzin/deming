@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'socialite_controller' => [
+        'providers' => ! empty(env('SOCIALITE_PROVIDERS', "")) 
+                             ? explode(' ', env('SOCIALITE_PROVIDERS', ""))
+                             : [],
+    ]
+
 ];
