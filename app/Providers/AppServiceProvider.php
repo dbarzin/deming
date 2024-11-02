@@ -47,5 +47,24 @@ class AppServiceProvider extends ServiceProvider
                 $event->extendSocialite('keycloak', \SocialiteProviders\Keycloak\Provider::class);
             });
         }
+
+        if (in_array('oidc', Config::get('services.socialite_controller.providers'))){
+            $this->bootOIDCSocialite();
+        }
+    }
+
+    /**
+     * Register Generic OpenID Connect Provider.
+     */
+    private function bootOIDCSocialite()
+    {
+        $socialite = $this->app->make('Laravel\Socialite\Contracts\Factory');
+        $socialite->extend(
+            'oidc',
+            function ($app) use ($socialite) {
+                $config = $app['config']['services.oidc'];
+                return $socialite->buildProvider(\App\Providers\Socialite\GenericSocialiteProvider::class, $config);
+            }
+        );
     }
 }
