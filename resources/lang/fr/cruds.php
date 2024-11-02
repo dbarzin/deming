@@ -168,6 +168,10 @@ return [
         'title' => 'Entrez un mot de passe',
         'identification' => 'Identification',
         'connection' => 'Connexion',
+        'connection_with' => 'Connexion avec',
+        'error' => [
+            'user_not_exist' => 'L\'utilisateur n\'existe pas',
+        ],
     ],
     'report' => [
         'action_plan' => [
