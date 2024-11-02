@@ -34,6 +34,9 @@ return [
         'providers' => ! empty(env('SOCIALITE_PROVIDERS', "")) 
                              ? explode(' ', env('SOCIALITE_PROVIDERS', ""))
                              : [],
+        'keycloak' => [
+            'display_name' => env('KEYCLAOK_DISPLAY_NAME', 'Keycloak'),
+        ],
     ],
     
     'keycloak' => [
