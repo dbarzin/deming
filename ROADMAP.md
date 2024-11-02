@@ -5,7 +5,10 @@ This document contains the evolutions planned in 2024.
 ## Important,
 
 * [ ] Non-regression tests
-* [ ] Continuous integration in GitHub
+* [o] Continuous integration in GitHub
+* [ ] Docker
+* [ ] Create action plans not linked to a measurement
+* [ ] Change Logs
 
 ## Improvements
 
@@ -13,7 +16,7 @@ This document contains the evolutions planned in 2024.
 * [ ] Migrate to [Metro5](https://github.com/olton/metro5) or [Bootstrap](https://getbootstrap.com/)
 * [ ] Configure scoring system
 * [o] Migration script from ISO 27001:2013 to ISO 27001:2022
-* [ ] Manage non-conformities
+* [o] Manage non-conformities
 * [ ] Improve action plan with status (%)
 * [ ] Dark theme (https://metroui.org.ua/examples/schemes/scheme.html)
 * [ ] Import Security Controls from [OSCAL](https://pages.nist.gov/OSCAL/)
