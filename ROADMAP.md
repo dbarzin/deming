@@ -9,6 +9,7 @@ This document contains the evolutions planned in 2024.
 * [ ] Docker
 * [ ] Create action plans not linked to a measurement
 * [ ] Change Logs
+* [ ] Automatically remove measurements after a defined number of months
 
 ## Improvements
 
