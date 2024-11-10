@@ -74,6 +74,13 @@
                 </li>
 
                 <li>
+                    <a href="/actions">
+                        <span class="icon"><span class="mif-open-book"></span></span>
+                        <span class="caption">{{ trans("menu.action_plan") }}</span>
+                    </a>
+                </li>
+
+                <li>
                     <a href="#" class="dropdown-toggle">
                         <span class="icon"><span class="mif-meter"></span></span>
                         <span class="caption">{{ trans("menu.radar") }}</span>
@@ -89,13 +96,6 @@
                             <span class="caption">{{ trans("menu.radar_by_attributes") }}</span>
                         </a></li>
                     </ul>
-                </li>
-
-                <li>
-                    <a href="/actions">
-                        <span class="icon"><span class="mif-open-book"></span></span>
-                        <span class="caption">{{ trans("menu.action_plan") }}</span>
-                    </a>
                 </li>
 
                 <li><a href="/reports">
