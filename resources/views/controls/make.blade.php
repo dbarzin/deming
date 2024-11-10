@@ -1,6 +1,16 @@
 @extends("layout")
-
+@section("style")
+    <style>
+        .disabled-editor {
+            background-color: #f0f0f0; /* Couleur de fond pour l'état désactivé */
+        }
+        .CodeMirror {
+            height: auto;
+        }
+    </style>
+    @endsection
 @section("content")
+
 <div class="p-3">
     <div data-role="panel" data-title-caption="{{ trans('cruds.control.make') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
@@ -162,6 +172,14 @@
 				</div>
 			</div>
             @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
+	    	<div class="row">
+                <div class="cell-1">
+                </div>
+                <div class="cell-3">
+                    <input type="checkbox" name="add_action_plan" data-role="checkbox" id="toggleTextarea"/>
+                    Create an action plan
+                </div>
+            </div>
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.control.fields.action_plan') }}</strong>
@@ -334,20 +352,33 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
       items.forEach((item) => {
       	console.log(item.kind);
         if (item.kind === 'file') {
-          	// adds the file to your dropzone instance
           	myDropzone.addFile(item.getAsFile())
         	}
       	})
     }
 
 @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
-    const mde1 = new EasyMDE({
+    const easyMDE = new EasyMDE({
         element: document.getElementById('mde1'),
         minHeight: "200px",
         maxHeight: "200px",
         status: false,
         spellChecker: false,
         });
+
+    // Rendre l'éditeur en lecture seule par défaut
+    easyMDE.codemirror.setOption("readOnly", true);
+    easyMDE.codemirror.getWrapperElement().classList.add('disabled-editor');
+
+    document.getElementById('toggleTextarea').addEventListener('change', function() {
+            if (this.checked) {
+                easyMDE.codemirror.setOption("readOnly", false);
+                easyMDE.codemirror.getWrapperElement().classList.remove('disabled-editor');
+            } else {
+                easyMDE.codemirror.setOption("readOnly", true);
+                easyMDE.codemirror.getWrapperElement().classList.add('disabled-editor');
+            }
+    });
 @endif
 </script>
 

@@ -7,6 +7,8 @@ use App\Models\Control;
 use App\Models\Document;
 use App\Models\Domain;
 use App\Models\User;
+use App\Models\Action;
+
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -1242,13 +1244,13 @@ class ControlController extends Controller
     }
 
     /**
-     * Do a Control
+     * Make a Control
      *
-     * @param  \App\Domain $domain
+     * @param  Request $request
      *
      * @return \Illuminate\Http\Response
      */
-    public function doMake()
+    public function doMake(Request $request)
     {
         // Only for admin, user and auditee
         abort_if(
@@ -1295,10 +1297,39 @@ class ControlController extends Controller
         $control->note = request('note');
         $control->score = request('score');
         $control->realisation_date = request('realisation_date');
+
         // only admin and user can update the plan_date and action_plan
         if (Auth::User()->role === 1 || Auth::User()->role === 2) {
             $control->plan_date = request('plan_date');
             $control->action_plan = request('action_plan');
+
+            // Create an action plan ?
+            if ($request->has('add_action_plan')) {
+                $action = new Action();
+                $action->name = $control->name;
+                $action->scope = $control->scope;
+                $action->status = 0;
+                $action->cause = $control->observations;
+                $action->remediation = $control->action_plan;
+                $action->due_date = request('next_date');
+                $action->control_id = $control->id;
+                $action->save();
+
+                // Sync measures
+                $measures = DB::table('control_measure')
+                    ->select('measure_id')
+                    ->where('control_id',$control->id)
+                    ->pluck('measure_id')->toArray();
+                $action->measures()->sync($measures);
+
+                // Sync owners
+                $owners = DB::table('control_user')
+                    ->select('user_id')
+                    ->where('control_id',$control->id)
+                    ->pluck('user_id')->toArray();
+                $action->owners()->sync($owners);
+
+            }
         } else {
             $control->realisation_date = date('Y-m-d', strtotime('today'));
         }
