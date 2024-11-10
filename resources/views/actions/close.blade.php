@@ -10,7 +10,7 @@ form, table {
 </style>
 
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.action.show') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.action.close') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 	@if (count($errors))
 	<div class= “form-group”>
@@ -24,7 +24,7 @@ form, table {
 	</div>
 	@endif
 
-    <form method="POST" action="/action/update">
+    <form method="POST" action="/action/close">
 		@csrf
 		<input type="hidden" name="id" value="{{ $action->id }}"/>
 
@@ -103,35 +103,26 @@ form, table {
                 <strong>{{ trans('cruds.action.fields.remediation') }}</strong>
 	    	</div>
 			<div class="cell-6">
-                @if ($action->status==0)
-				    <textarea name="remediation" id="remediation">{{ $errors->has('remediation') ?  old('remediation') : $action->remediation }}</textarea>
-                @else
-                    {!! \Parsedown::instance()->text($action->remediation) !!}
-                @endif
+                {!! \Parsedown::instance()->text($action->remediation) !!}
 			</div>
 		</div>
-        @if ($action->status!=0)
-    	<div class="row">
-			<div class="cell-1">
-                <strong>{{ trans('cruds.action.fields.status') }}</strong>
-	    	</div>
-            <div class="cell-4">
-                @if ($action->status==0)
-                    {{ trans('cruds.action.fields.status_open') }}
-                @elseif ($action->status==1)
-                    {{ trans('cruds.action.fields.status_closed') }}
-                @elseif ($action->status==2)
-                    {{ trans('cruds.action.fields.status_rejected') }}
-                @else
-                    {{ $action->status }}
-                @endif
 
-	    	</div>
-			<div class="cell-1">
+    	<div class="row">
+            <div class="cell-1">
+                <strong>{{ trans('cruds.action.fields.status') }}</strong>
+            </div>
+            <div class="cell-3">
+                <select data-role="select" name="status" id="status">
+                    <option value="0" {{ $action->status==0 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_open') }}</option>
+                    <option value="1" {{ $action->status==1 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_closed') }}</option>
+                    <option value="2" {{ $action->status==2 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_rejected') }}</option>
+                </select>
+            </div>
+            <div class="cell-1" align="right">
                 <strong>{{ trans('cruds.action.fields.close_date') }}</strong>
 	    	</div>
-			<div class="cell-1">
-                {{ $action->close_date}}
+            <div class="cell-2">
+                <input type="text" data-role="calendarpicker" name="close_date" value="{{$action->close_date}}" data-input-format="%Y-%m-%d">
             </div>
         </div>
     	<div class="row">
@@ -139,10 +130,9 @@ form, table {
                 <strong>{{ trans('cruds.action.fields.justification') }}</strong>
 	    	</div>
 			<div class="cell-6">
-                {!! \Parsedown::instance()->text($action->justification) !!}
+                <textarea name="justification" id="mde1">{{ $errors->has('justification') ?  old('justification') : $action->justification }}</textarea>
 			</div>
 		</div>
-        @endif
 
     	<div class="row">
 			<div class="cell-1">
@@ -166,26 +156,14 @@ form, table {
 		<div class="grid">
 	    	<div class="row-12">
                 @if ($action->status==0)
-				<button type="submit" class="button success">
-		            <span class="mif-floppy-disk"></span>
-		            &nbsp;
-					{{ trans('common.save') }}
-				</button>
-	            &nbsp;
-                    <a class="button primary" href="/action/close/{{ $action->id }}">
+                    <button type="submit" class="button success">
                         <span class="mif-done"></span>
     					&nbsp;
-                        {{ trans("common.close") }}
-                    </a>
-	            &nbsp;
+                        {{ trans("common.save") }}
+                    </button>
                 @endif
-                <a class="button alert" href="/action/edit/{{ $action->id }}">
-					<span class="mif-wrench"></span>
-					&nbsp;
-	    			{{ trans("common.edit") }}
-                </a>
-				&nbsp;
-                <a class="button dafault" href="/actions">
+	            &nbsp;
+                <a class="button dafault" href="/action/show/{{$action->id}}">
 	    			<span class="mif-cancel"></span>
 	    			&nbsp;
 	    			{{ trans("common.cancel") }}
@@ -199,9 +177,9 @@ form, table {
 
 <script>
 const mde1 = new EasyMDE({
-    element: document.getElementById('remediation'),
-    minHeight: "400px",
-    maxHeight: "400px",
+    element: document.getElementById('mde1'),
+    minHeight: "200px",
+    maxHeight: "200px",
     status: false,
     spellChecker: false,
     });

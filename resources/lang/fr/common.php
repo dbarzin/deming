@@ -6,6 +6,7 @@ return [
     'cancel' => 'Annuler',
     'check' => 'Vérifier',
     'clone' => 'Copier',
+    'close' => 'Fermer',
     'create' => 'Créer',
     'delete' => 'Supprimer',
     'download' => 'Télécharger',

@@ -99,8 +99,15 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
 
     /* Actions */
     Route::get('/actions', 'ActionplanController@index');
-    Route::get('/action/{id}', 'ActionplanController@show');
+    Route::get('/action/show/{id}', 'ActionplanController@show');
+    Route::get('/action/create', 'ActionplanController@create');
+    Route::get('/action/edit/{id}', 'ActionplanController@edit');
+    Route::get('/action/close/{id}', 'ActionplanController@close');
+
+    Route::post('/action/store', 'ActionplanController@store');
+    Route::post('/action/update', 'ActionplanController@update');
     Route::post('/action/save', 'ActionplanController@save');
+    Route::post('/action/close', 'ActionplanController@doClose');
 
     /* Reports */
     Route::get('/reports', 'ReportController@show');
@@ -112,4 +119,5 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/export/attributes', 'AttributeController@export');
     Route::get('/export/alices', 'MeasureController@export');
     Route::get('/export/bobs', 'ControlController@export');
+    Route::get('/export/actions', 'ActionplanController@export');
 });

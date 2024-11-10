@@ -65,25 +65,21 @@
                     </select>
                 </div>
             <div class="cell-2">
-                <input type="radio" data-role="radio" data-style="2"
-                name="status" value="0" id="status0"
-                @if (Session::get("status")=="0")
-                checked
-                @endif
-                >
-                {{ trans("cruds.control.fields.status_all") }}
-                <input type="radio" data-role="radio" data-style="2"
-                name="status" value="1" id="status1"
-                @if (Session::get("status")=="1")
-                checked
-                @endif
-                > {{ trans("cruds.control.fields.status_done") }}
-                <input type="radio" data-role="radio" data-style="2"
-                name="status" value="2" id="status2"
-                @if ((Session::get("status")=="2") || (Session::get("status")==null))
-                checked
-                @endif
-                > {{ trans("cruds.control.fields.status_todo") }}
+                <input type="radio" data-role="radio" data-style="2" name="status"
+                value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}>
+                <span style="position: relative; top: -3px;">
+                    {{ trans("cruds.control.fields.status_all") }}
+                </span>
+                <input type="radio" data-role="radio" data-style="2" name="status"
+                value="1" id="status1" {{ (Session::get("status")=="1") ? 'checked' : '' }}>
+                <span style="position: relative; top: -3px;">
+                    {{ trans("cruds.control.fields.status_done") }}
+                </span>
+                <input type="radio" data-role="radio" data-style="2" name="status"
+                value="2" id="status2" {{ (Session::get("status")=="2") ? 'checked' : '' }}>
+                <span style="position: relative; top: -3px;">
+                    {{ trans("cruds.control.fields.status_todo") }}
+                </span>
             </div>
 			<div class="cell-1" align="right">
 			@if ((Auth::User()->role==1)||(Auth::User()->role==2))

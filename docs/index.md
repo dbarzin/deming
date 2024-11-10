@@ -3,7 +3,7 @@
 
 ### What is Deming?
 
-Deming is an Open Source tool designed to help CISOs set up and maintain their information security management system. Using this app, CISOs can easily plan and track the implementation of security controls and the continuous improvement cycle required by ISO 27001. The app is designed to be easy to use and customize, with a intuitive user interface.
+Deming is an Open Source tool designed to help CISOs maintain their information security management system. Using this app, CISOs can easily plan and track the implementation of security controls and the continuous improvement cycle. The app is designed to be easy to use and customize, with a intuitive user interface.
 
 
 Deming offers features such as [security measures management](measures.md),

@@ -28,10 +28,10 @@
 		    		<div class="cell-6">
 						<select data-role="select" name="measures[]" multiple>
 							@foreach($all_measures as $measure)
-							    <option
-                                    value="{{ $measure->id }}"
-                                    {{ in_array($measure->id, old("measures", $measures)) ? "selected" : "" }}
-                                        >{{ $measure->clause }}</option>
+							    <option value="{{ $measure->id }}"
+                                    {{ in_array($measure->id, old("measures", $measures)) ? "selected" : "" }}>
+                                        {{ $measure->clause }}
+                                </option>
 						    @endforeach
 						 </select>
 					</div>

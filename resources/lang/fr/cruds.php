@@ -13,6 +13,8 @@ return [
     'action' => [
         'index' => 'Liste des plans d\'action',
         'show' => 'Plan d\'action',
+        'edit' => 'Modifier un plan d\'action',
+        'title' => 'Actions',
         'fields' => [
             'clause' => 'Clause',
             'name' => 'Nom',
@@ -23,7 +25,23 @@ return [
             'note' => 'Score',
             'objective' => 'Objectif',
             'observation' => 'Observation',
-            'action_plan' => 'Plan d\'actions'
+            'action_plan' => 'Plan d\'actions',
+            'reference' => 'Ref',
+            'type' => 'Type',
+            'due_date' => 'Date due',
+            'choose_type' => 'Choisir un type',
+            'choose_scope' => 'Choisir un périmètre',
+            'remediation' => 'Remédiation',
+            'justification' => 'Justification',
+            'criticity' => 'Criticité',
+            'cause' => 'Cause',
+            'clauses' => 'Clauses',
+            'owners' => 'Responsables',
+            'status_open' => 'Ouvert',
+            'status_closed' => 'Fermé',
+            'status_rejected' => 'Rejeté',
+            'status_all' => 'Tous',
+            'close_date' => 'Date de clôture',
         ],
     ],
     'attribute' => [
@@ -159,6 +177,7 @@ return [
         'domains_export'=> 'Exportation des domaines',
         'measures_export' => 'Exportation des contrôles',
         'controls_export' => 'Exportation des mesures de sécurité',
+        'actions_export' => 'Exporter les plans d\'action',
     ],
     'imports' => [
          'index' => 'Importer',
