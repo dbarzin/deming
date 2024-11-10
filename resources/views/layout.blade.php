@@ -11,6 +11,7 @@
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
     <script src="/js/all.js"></script>
     <script src="/js/easymde.min.js"></script>
+    @yield('style')
 
 </head>
 

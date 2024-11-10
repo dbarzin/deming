@@ -489,4 +489,29 @@ class ActionplanController extends Controller
         );
     }
 
+    public function delete() {
+        // For administrators and users only
+        abort_if(
+            Auth::User()->role !== 1 && Auth::User()->rol !== 2,
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
+        // Get the action plan
+        $id = (int)request('id');
+        $action = Action::find($id);
+
+        // Action not found
+        abort_if($action === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+
+        // delete links
+        DB::table('action_measure')->where('action_id', $action->id)->delete();
+
+        // delete
+        $action->delete();
+
+        // Return
+        return redirect('/actions');
+    }
+
 }

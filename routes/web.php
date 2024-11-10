@@ -108,6 +108,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::post('/action/update', 'ActionplanController@update');
     Route::post('/action/save', 'ActionplanController@save');
     Route::post('/action/close', 'ActionplanController@doClose');
+    Route::post('/action/delete', 'ActionplanController@delete');
 
     /* Reports */
     Route::get('/reports', 'ReportController@show');
