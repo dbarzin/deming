@@ -172,19 +172,26 @@ form, table {
 					{{ trans('common.save') }}
 				</button>
 	            &nbsp;
-                    <a class="button primary" href="/action/close/{{ $action->id }}">
+                    <a class="button info" href="/action/close/{{ $action->id }}">
                         <span class="mif-done"></span>
     					&nbsp;
                         {{ trans("common.close") }}
                     </a>
 	            &nbsp;
                 @endif
-                <a class="button alert" href="/action/edit/{{ $action->id }}">
-					<span class="mif-wrench"></span>
-					&nbsp;
-	    			{{ trans("common.edit") }}
+                <a class="button primary" href="/action/edit/{{ $action->id }}">
+    		            <span class="mif-wrench"></span>
+    		            &nbsp;
+    			    	{{ trans('common.edit') }}
                 </a>
 				&nbsp;
+                <button class="button alert" type="submit" onclick='this.form.action="/action/delete"'
+                    onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
+					<span class="mif-fire"></span>
+					&nbsp;
+				    {{ trans('common.delete') }}
+				</button>
+                &nbsp;
                 <a class="button dafault" href="/actions">
 	    			<span class="mif-cancel"></span>
 	    			&nbsp;
