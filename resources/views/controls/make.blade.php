@@ -177,7 +177,7 @@
                 </div>
                 <div class="cell-3">
                     <input type="checkbox" name="add_action_plan" data-role="checkbox" id="toggleTextarea"/>
-                    Create an action plan
+                    {{ trans('cruds.control.create_action') }}
                 </div>
             </div>
 	    	<div class="row">
