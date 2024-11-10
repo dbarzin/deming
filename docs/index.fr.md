@@ -3,7 +3,7 @@
 
 ### Qu’est-ce que Deming ?
 
-Deming est un outil Open Source conçu pour aider les RSSI à mettre en place et à maintenir leur système de management de la sécurité de l'information. Grâce à cette application, les RSSI peuvent facilement planifier et suivre la mise en œuvre des contrôles de sécurité et le cycle d'amélioration continue requis par la norme ISO 27001. L'application est conçue pour être facile à utiliser et à personnaliser, avec une interface utilisateur intuitive.
+Deming est un outil Open Source conçu pour aider les RSSI à maintenir leur système de management de la sécurité de l'information. Grâce à cette application, les RSSI peuvent facilement planifier et suivre la mise en œuvre des contrôles de sécurité et le cycle d'amélioration continue. L'application est conçue pour être facile à utiliser et à personnaliser, avec une interface utilisateur intuitive.
 
 
 Deming offre des fonctionnalités telles que la [gestion des mesures de sécurité](measures.fr.md),

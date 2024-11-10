@@ -145,10 +145,8 @@ class HomeController extends Controller
 
         // Count number of action plans
         $action_plans_count =
-                DB::table('controls as c1')
-                    ->leftjoin('controls as c2', 'c1.id', '=', 'c2.next_id')
-                    ->whereNull('c1.realisation_date')
-                    ->whereIn('c2.score', [1, 2])
+                DB::table('actions')
+                    ->where('status',0)
                     ->count();
 
         $request->session()->put('action_plans_count', $action_plans_count);

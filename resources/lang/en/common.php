@@ -7,6 +7,7 @@ return [
     'check' => 'Check',
     'create' => 'Create',
     'clone' => 'Copy',
+    'close' => 'Close',
     'delete' => 'Delete',
     'download' => 'Download',
     'edit' => 'Edit',
