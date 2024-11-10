@@ -106,7 +106,8 @@ return [
         'radar' => 'Etat des contrôles de sécurité',
         'title' => 'Contrôles',
         'title_singular' => 'Contrôle',
-        'groupBy' => 'Groupé par'
+        'groupBy' => 'Groupé par',
+        'create_action' => 'Créer un plan d\'action',
     ],
     'measure' => [
         'title' => 'Mesure',
