@@ -482,7 +482,7 @@ class ActionplanController extends Controller
 
         return Excel::download(
             new ActionsExport(),
-            trans('cruds.actions.title') .
+            trans('cruds.action.title') .
                 '-' .
                 now()->format('Y-m-d Hi') .
                 '.xlsx'
