@@ -10,7 +10,7 @@ form, table {
 </style>
 
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.action.edit') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.action.create') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
 	@if (count($errors))
 	<div class= “form-group”>
