@@ -10,6 +10,8 @@ This document contains the evolutions planned in 2024.
 * [x] Create action plans not linked to a measurement
 * [ ] Change Logs
 * [ ] Automatically remove measurements after a defined number of months
+* [x] Measurement not linked to a control
+* [x] Measurement linked to multiple controls
 
 ## Improvements
 
