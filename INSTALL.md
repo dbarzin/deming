@@ -205,6 +205,50 @@ You may also configure DKIM :
 
 Don't forget to [configure](https://dbarzin.github.io/deming/config/#notifications) the content and frequency of your emails.
 
+## Keycloak Configuration (optional)
+
+To configure Keycloak, follow these steps:
+
+- Open your `.env` file.
+- Modify the Keycloak configuration settings as follows:
+
+```bash
+SOCIALITE_PROVIDERS="keycloak"
+KEYCLOAK_CLIENT_ID= # Client Id (on Keycloak)
+KEYCLOAK_CLIENT_SECRET=  # Client Secret
+KEYCLOAK_REDIRECT_URI=${APP_URL}auth/callback/keycloak
+KEYCLOAK_BASE_URL=<KeyCloak IP Address>
+KEYCLOAK_REALM=   # Realm Name
+```
+
+After adding `keycloak` to the `SOCIALITE_PROVIDERS` variable, a button will appear on the login page, allowing users to log in via Keycloak. (It is possible to modify the button text with the `KEYCLOAK_DISPLAY_NAME` variable).
+
+To allow user creation and/or updates by Keycloak, add the following parameters:
+
+```bash
+KEYCLOAK_ALLOW_CREATE_USER=true
+KEYCLOAK_ALLOW_UPDATE_USER=true
+```
+
+If you want to retrieve the user role provided by Keycloak during creation or update, it is necessary to request an additional `scope` and define the name of the `claim` that will contain the role:
+
+```bash
+KEYCLOAK_ADDITIONAL_SCOPES="roles"
+KEYCLOAK_ROLE_CLAIM="resource_access.deming.roles.0"
+```
+
+It is also possible to provide a default role, used if Keycloak does not provide the role:
+
+```bash
+KEYCLOAK_DEFAULT_ROLE=<Possible value: auditee, auditor, user>
+```
+
+For more complete documentation on Keycloak configuration, consult the official Keycloak documentation.
+
+## Configuration of a Generic OpenID Connect Provider
+
+It is possible to add a generic OpenID Connect identity provider. Simply add `oidc` to the `SOCIALITE_PROVIDERS` variable. All the variables seen above exist, they start with `OIDC_` (see the `.env.example` file for more information).
+
 ## Sheduler
 
 Modify crontab
