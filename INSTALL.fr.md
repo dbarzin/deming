@@ -211,6 +211,48 @@ Don't forget to [configure](https://dbarzin.github.io/deming/config/#notificatio
 
 N'oubliez pas de [configurer](https://dbarzin.github.io/deming/config.fr/#notifications) le contenu et la fréquence d'envoi des mails.
 
+## Configuration de Keycloak (optionnel)
+
+Pour configurer Keycloak, suivez ces étapes :
+
+- Ouvrez votre fichier .env.
+- Modifiez les paramètres de configuration de Keycloak comme suit :
+
+```bash
+SOCIALITE_PROVIDERS="keycloak"
+KEYCLOAK_CLIENT_ID= # Client Id (on Keycloak)
+KEYCLOAK_CLIENT_SECRET=  # Client Secret
+KEYCLOAK_REDIRECT_URI=${APP_URL}auth/callback/keycloak
+KEYCLOAK_BASE_URL=<KeyCloak IP Address>
+KEYCLOAK_REALM=   # Realm Name
+```
+
+Après avoir ajouter `keycloak` à la variable `SOCIALITE_PROVIDERS` un bouton apparaîtra sur la page de connexion, permettant aux utilisateurs de se connecter via Keycloak. (Il est possible de modifier le texte du bouton avec la variable `KEYCLAOK_DISPLAY_NAME`).
+
+Pour autoriser la création d'utilisateur et/ou la mise à jour par Keycloak ajouter les paramètre suivants :
+
+```bash
+KEYCLOAK_ALLOW_CREATE_USER=true
+KEYCLOAK_ALLOW_UPDATE_USER=true
+```
+
+Si vous souhaitez que récupérer le rôle de l'utilisateur fourni par Keycloak lors de sa création ou la mise à jour, il est nécessaire de lui de demander un `scope` supplémentaires et de définir le nom `claim` qui contiendra le rôle :
+```bash
+KEYCLOAK_ADDITIONAL_SCOPES="roles"
+KEYCLOAK_ROLE_CLAIM="resource_access.deming.roles.0"
+```
+
+Il est également possible de fournir un rôle par défaut, utilisé si Keycloak ne fournit pas le rôle :
+```bash
+KEYCLOAK_DEFAULT_ROLE=<Valeur possible : auditee, auditor, user>
+```
+
+Pour une documentation plus complète sur la configuration de Keycloak, consultez la documentation officielle de Keycloak.
+
+## Configuration d'un fournisseur OpenID Connect Générique
+
+Il est possiblie d'ajouter un founisseur d'identité OpenID Connect générique, il suffit d'ajouter `oidc` à la variable `SOCIALITE_PROVIDERS`. Toutes les variables vu ci-dessus existe, elles commencent par `OIDC_` (voir le fichier .env.example pour plus d'information)
+
 ## Sheduler
 
 Modifier le crontab
