@@ -7,9 +7,11 @@ This document contains the evolutions planned in 2024.
 * [ ] Non-regression tests
 * [o] Continuous integration in GitHub
 * [ ] Docker
-* [ ] Create action plans not linked to a measurement
+* [x] Create action plans not linked to a measurement
 * [ ] Change Logs
 * [ ] Automatically remove measurements after a defined number of months
+* [x] Measurement not linked to a control
+* [x] Measurement linked to multiple controls
 
 ## Improvements
 

@@ -13,6 +13,7 @@ return [
      'action' => [
          'index' => 'Action plans',
          'show' => 'Action plan',
+         'create' => 'Create an action plan',
          'edit' => 'Edit action plan',
          'title' => 'Actions',
          'fields' => [
