@@ -471,33 +471,30 @@ class ReportController extends Controller
         string|null $framework
     ) {
         $actions =
-            DB::table('controls as c1')
+            DB::table('actions')
                 ->select([
-                    'c1.id',
-                    'c1.action_plan',
-                    'c1.score',
-                    'c1.name',
-                    'c1.plan_date',
-                    'c1.realisation_date',
-                    'c2.id as next_id',
-                    'c2.plan_date as next_date',
-                    'c1.action_plan',
+                    'id',
+                    'reference',
+                    'type',
+                    'scope',
+                    'name',
+                    'cause',
+                    'remediation',
+                    'due_date',
                 ])
-                ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id')
-                ->whereIn('c1.score', [1,2])
-                ->whereIn('c2.status', [0,1])
-                ->whereNull('c2.next_id');
+                ->where('status',0);
         // filter on framework
         if ($framework !== null) {
             $actions = $actions
-                ->join('control_measure', 'c1.id', '=', 'control_measure.control_id')
-                ->join('measures', 'measures.id', '=', 'control_measure.measure_id')
+                ->join('action_measure', 'actions.id', '=', 'action_measure.measure_id')
+                ->join('measures', 'measures.id', '=', 'action_measure.measure_id')
                 ->join('domains', 'domains.id', '=', 'measures.domain_id')
                 ->where('domains.framework', '=', $framework);
         }
         // get it
         $actions = $actions->get();
 
+        /*
         // Fetch measures for all controls in one query
         $controlMeasures = DB::table('control_measure')
             ->select([
@@ -514,6 +511,7 @@ class ReportController extends Controller
         // Group measures by control_id
         $measuresByControlId = $controlMeasures->groupBy('control_id');
 
+
         // map clauses
         foreach ($actions as $control) {
             $control->measures = $measuresByControlId->get($control->id, collect())->map(function ($controlMeasure) {
@@ -524,6 +522,7 @@ class ReportController extends Controller
                 ];
             });
         }
+        */
 
         $table = new Table(
             [
@@ -541,33 +540,41 @@ class ReportController extends Controller
         $table->addCell(13000, ['bgColor' => '#FFD5CA'])
             ->addText(trans('cruds.report.action_plan.title'), ['bold' => true]);
         $table->addCell(3000, ['bgColor' => '#FFD5CA'])
-            ->addText(trans('cruds.report.action_plan.next'), ['bold' => true]);
+            ->addText(trans('cruds.action.fields.due_date'), ['bold' => true]);
 
         // table content
         foreach ($actions as $action) {
             $table->addRow();
             $table->addCell(2000)->addText(
-                $action->measures->implode('clause', ', '),
+                $action->reference,
                 null,
                 ['align' => 'center']
             );
             $table->addCell(13000)->addText(
                 $action->name,
-                null,
+                ['bold' => true],
                 ['align' => 'left']
             );
             $table->addCell(3000)->addText(
-                $action->next_date,
+                $action->due_date,
                 null,
                 ['align' => 'left']
             );
 
             $table->addRow();
             $section = $table->addCell(18000, ['gridSpan' => 3]);
-            $textlines = explode("\n", $action->action_plan);
+            $textlines = explode("\n", $action->cause);
             foreach ($textlines as $textline) {
                 $section->addText($textline);
             }
+
+            $table->addRow();
+            $section = $table->addCell(18000, ['gridSpan' => 3]);
+            $textlines = explode("\n", $action->remediation);
+            foreach ($textlines as $textline) {
+                $section->addText($textline);
+            }
+
         }
 
         $templateProcessor->setComplexBlock('action_plans_table', $table);
