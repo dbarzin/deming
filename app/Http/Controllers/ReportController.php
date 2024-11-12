@@ -473,20 +473,20 @@ class ReportController extends Controller
         $actions =
             DB::table('actions')
                 ->select([
-                    'id',
-                    'reference',
-                    'type',
-                    'scope',
-                    'name',
-                    'cause',
-                    'remediation',
-                    'due_date',
+                    'actions.id',
+                    'actions.reference',
+                    'actions.type',
+                    'actions.scope',
+                    'actions.name',
+                    'actions.cause',
+                    'actions.remediation',
+                    'actions.due_date',
                 ])
                 ->where('status',0);
         // filter on framework
         if ($framework !== null) {
             $actions = $actions
-                ->join('action_measure', 'actions.id', '=', 'action_measure.measure_id')
+                ->join('action_measure', 'actions.id', '=', 'action_measure.action_id')
                 ->join('measures', 'measures.id', '=', 'action_measure.measure_id')
                 ->join('domains', 'domains.id', '=', 'measures.domain_id')
                 ->where('domains.framework', '=', $framework);
