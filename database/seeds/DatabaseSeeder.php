@@ -12,18 +12,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        $lang = ENV('LANG');
-        if (($lang!=="fr")&&($lang!=="de"))
-            $lang="en";
+        if (DB::table('users')->count()==0) {
 
-        DB::table('users')->insert([
-            'login' => 'admin',
-            'name' => 'Administrator',
-            'title' => 'Pirate Captain',
-            'role' => 1,
-            'language' => $lang,
-            'email' => 'admin@admin.localhost',
-            'password' => bcrypt('admin'),
-        ]);
+            $lang = ENV('LANG');
+            if (($lang!=="fr")&&($lang!=="de"))
+                $lang="en";
+
+            DB::table('users')->insert([
+                'login' => 'admin',
+                'name' => 'Administrator',
+                'title' => 'Pirate Captain',
+                'role' => 1,
+                'language' => $lang,
+                'email' => 'admin@admin.localhost',
+                'password' => bcrypt('admin'),
+            ]);
+        }
     }
 }
