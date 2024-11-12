@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
 
-class ActionplanController extends Controller
+class ActionController extends Controller
 {
     /**
      * Display a listing of the resource.

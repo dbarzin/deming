@@ -98,17 +98,17 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::resource('users', 'UserController');
 
     /* Actions */
-    Route::get('/actions', 'ActionplanController@index');
-    Route::get('/action/show/{id}', 'ActionplanController@show');
-    Route::get('/action/create', 'ActionplanController@create');
-    Route::get('/action/edit/{id}', 'ActionplanController@edit');
-    Route::get('/action/close/{id}', 'ActionplanController@close');
+    Route::get('/actions', 'ActionController@index');
+    Route::get('/action/show/{id}', 'ActionController@show');
+    Route::get('/action/create', 'ActionController@create');
+    Route::get('/action/edit/{id}', 'ActionController@edit');
+    Route::get('/action/close/{id}', 'ActionController@close');
 
-    Route::post('/action/store', 'ActionplanController@store');
-    Route::post('/action/update', 'ActionplanController@update');
-    Route::post('/action/save', 'ActionplanController@save');
-    Route::post('/action/close', 'ActionplanController@doClose');
-    Route::post('/action/delete', 'ActionplanController@delete');
+    Route::post('/action/store', 'ActionController@store');
+    Route::post('/action/update', 'ActionController@update');
+    Route::post('/action/save', 'ActionController@save');
+    Route::post('/action/close', 'ActionController@doClose');
+    Route::post('/action/delete', 'ActionController@delete');
 
     /* Reports */
     Route::get('/reports', 'ReportController@show');
@@ -120,5 +120,5 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/export/attributes', 'AttributeController@export');
     Route::get('/export/alices', 'MeasureController@export');
     Route::get('/export/bobs', 'ControlController@export');
-    Route::get('/export/actions', 'ActionplanController@export');
+    Route::get('/export/actions', 'ActionController@export');
 });
