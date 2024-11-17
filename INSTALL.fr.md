@@ -164,9 +164,9 @@ Enregistrez et fermez le fichier lorsque vous avez terminé. Ensuite, activez l'
     sudo a2enmod rewrite
     sudo a2dissite 000-default.conf
     sudo a2ensite deming.conf
-    sudo a2dismod php8.1
+    sudo a2dismod php8.3
     sudo a2enmod proxy_fcgi setenvif
-    sudo a2enconf php8.1-fpm
+    sudo a2enconf php8.3-fpm
 
 Enfin, redémarrez le service Apache pour activer les modifications :
 
@@ -175,7 +175,7 @@ Enfin, redémarrez le service Apache pour activer les modifications :
 ## PHP
 
 Vous devez définir les valeurs de upload_max_filesize et post_max_size dans votre php.ini
-(/etc/php/8.1/fpm/php.ini) :
+(/etc/php/8.3/fpm/php.ini) :
 
     ; Taille maximale autorisée pour les fichiers téléchargés.
     upload_max_filesize = 10M

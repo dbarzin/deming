@@ -160,9 +160,9 @@ Save and close the file when finished. Next, activate the Apache virtual host an
     sudo a2enmod rewrite
     sudo a2dissite 000-default.conf
     sudo a2ensite deming.conf
-    sudo a2dismod php8.1
+    sudo a2dismod php8.3
     sudo a2enmod proxy_fcgi setenvif
-    sudo a2enconf php8.1-fpm
+    sudo a2enconf php8.3-fpm
 
 Finally, restart the Apache service to activate the changes:
 
@@ -171,7 +171,7 @@ Finally, restart the Apache service to activate the changes:
 ## PHP
 
 You need to set the value of upload_max_filesize and post_max_size in your php.ini
-(/etc/php/8.1/fpm/php.ini) :
+(/etc/php/8.3/fpm/php.ini) :
 
     ; Maximum allowed size for uploaded files.
     upload_max_filesize = 10M
