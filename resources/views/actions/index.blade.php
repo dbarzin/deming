@@ -16,7 +16,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="cell-2">
+            <div class="cell-3">
                 <input type="radio" data-role="radio" data-style="2" name="status"
                 value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : ''}}>
                 <span style="position: relative; top: -3px;">
@@ -35,7 +35,7 @@
                     {{ trans("cruds.action.fields.status_all") }}
                 </span>
             </div>
-            <div class="cell-5">
+            <div class="cell-4">
             </div>
             <div class="cell-2">
                 <select id='scope' name="scope" data-role="select">
