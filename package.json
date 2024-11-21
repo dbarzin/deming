@@ -9,5 +9,10 @@
         "axios": "^1.7.4",
         "laravel-vite-plugin": "^1.0",
         "vite": "^5.0"
+    },
+    "dependencies": {
+        "dropzone": "^6.0.0-beta.2",
+        "easymde": "^2.18.0",
+        "fontawesome-free": "^1.0.4"
     }
 }
