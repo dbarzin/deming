@@ -199,11 +199,10 @@
             </div>
             @endif
         </div>
-    <div id="content-wrapper" class="h-100" style="overflow-y: auto">
-    @yield('content')
+        <div id="content-wrapper" class="h-100" style="overflow-y: auto">
+        @yield('content')
+        </div>
     </div>
-</div>
-</div>
 </div>
 
 </body>
