@@ -270,13 +270,9 @@ Migrer la base de données
 
     php artisan migrate
 
-Mettre à jour composer
-
-    composer self-update
-
 Mettre à jour les librairies
 
-    composer update
+    composer install
 
 Vider les caches
 
