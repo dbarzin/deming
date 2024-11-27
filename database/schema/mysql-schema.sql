@@ -4,6 +4,55 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+DROP TABLE IF EXISTS `action_measure`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `action_measure` (
+  `action_id` int(10) unsigned NOT NULL,
+  `measure_id` int(10) unsigned NOT NULL,
+  KEY `action_measure_action_id_foreign` (`action_id`),
+  KEY `action_measure_measure_id_foreign` (`measure_id`),
+  CONSTRAINT `action_measure_action_id_foreign` FOREIGN KEY (`action_id`) REFERENCES `actions` (`id`),
+  CONSTRAINT `action_measure_measure_id_foreign` FOREIGN KEY (`measure_id`) REFERENCES `measures` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `action_user`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `action_user` (
+  `action_id` int(10) unsigned NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
+  KEY `action_user_action_id_foreign` (`action_id`),
+  KEY `action_user_user_id_foreign` (`user_id`),
+  CONSTRAINT `action_user_action_id_foreign` FOREIGN KEY (`action_id`) REFERENCES `actions` (`id`),
+  CONSTRAINT `action_user_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `actions`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `actions` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `reference` varchar(32) DEFAULT NULL,
+  `type` varchar(32) DEFAULT NULL,
+  `criticity` int(11) NOT NULL,
+  `status` int(11) NOT NULL,
+  `scope` varchar(32) DEFAULT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `cause` text DEFAULT NULL,
+  `remediation` text DEFAULT NULL,
+  `control_id` int(10) unsigned DEFAULT NULL,
+  `creation_date` date DEFAULT NULL,
+  `due_date` date DEFAULT NULL,
+  `close_date` date DEFAULT NULL,
+  `justification` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  KEY `actions_control_id_foreign` (`control_id`),
+  CONSTRAINT `actions_control_id_foreign` FOREIGN KEY (`control_id`) REFERENCES `controls` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `attributes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
@@ -288,8 +337,9 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (20,'2024_06_27_123
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (21,'2024_07_02_101657_add_framework_to_domains',1);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (22,'2024_07_05_174735_clause_unique',1);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (23,'2024_10_01_181052_remove_clause',1);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (24,'2016_06_01_000001_create_oauth_auth_codes_table',2);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (25,'2016_06_01_000002_create_oauth_access_tokens_table',2);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (26,'2016_06_01_000003_create_oauth_refresh_tokens_table',2);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (27,'2016_06_01_000004_create_oauth_clients_table',2);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (28,'2016_06_01_000005_create_oauth_personal_access_clients_table',2);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (52,'2016_06_01_000001_create_oauth_auth_codes_table',2);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (53,'2016_06_01_000002_create_oauth_access_tokens_table',2);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (54,'2016_06_01_000003_create_oauth_refresh_tokens_table',2);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (55,'2016_06_01_000004_create_oauth_clients_table',2);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (56,'2016_06_01_000005_create_oauth_personal_access_clients_table',2);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (61,'2024_11_06_123808_add_actions',3);

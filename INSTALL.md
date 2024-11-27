@@ -2,7 +2,7 @@
 
 ## Recommended configuration
 
-- OS : Ubuntu 22.04 LTS
+- OS : Ubuntu 24.04 LTS
 - RAM : 2G
 - Disk : 30G
 - VCPU 2
@@ -35,10 +35,6 @@ Install packages with composer :
     mkdir -p storage/framework/sessions
     mkdir -p bootstrap/cache
     composer install
-
-Publish all publishable assets from vendor packages
-
-    php artisan vendor:publish --all
 
 ## MySQL
 

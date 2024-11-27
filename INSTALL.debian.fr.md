@@ -48,10 +48,6 @@ Installer les packages avec composer
 
     composer install
 
-Publier tous les actifs publiables à partir des packages des fournisseurs
-
-    php artisan vendor:publish --all
-
 ## MariaDB
 
 Installer MariaDB
