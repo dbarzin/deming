@@ -268,7 +268,7 @@ Migrate database
 
 Update libraries
 
-    composer update
+    composer install
 
 Empty caches
 
