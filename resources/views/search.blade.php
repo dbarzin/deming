@@ -11,10 +11,9 @@
 		   	<b>{{ trans("cruds.measure.title")}}</b> -
 			<a href="/alice/show/{{ $result['id'] }}">{{ $result['clause'] }}</a> : {{ $result["name"] }}
 		@elseif ($result['model']==='App\\Models\\Control')
-		   	<b>{{ trans("cruds.control.title_singular")}}</b> - {{ $result["name"] }}
-			@if (array_key_exists("realisation_date",$result))
-				- <a href="/bob/show/{{ $result['id'] }}">{{ $result["plan_date"] }}</a>
-			@endif
+		   	<b>{{ trans("cruds.control.title_singular")}}</b> -
+            {{ $result["name"] }} -
+            <a href="/bob/show/{{ $result['id'] }}">{{ $result["plan_date"] }}</a>
 		@endif
 		<br>
 		@endforeach

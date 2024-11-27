@@ -14,6 +14,7 @@ class Control extends Model
         'attributes',
         'model',
         'action_plan',
+        'plan_date'
     ];
 
     protected $dates = [
