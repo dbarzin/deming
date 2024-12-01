@@ -2,6 +2,7 @@
 
 | File                                 | Description                                                                    |
 |--------------------------------------|--------------------------------------------------------------------------------|
+| DORA.en.xlsx                         | Digital Operational Resilience Act                                             |
 | ISO27001-2013.fr.xlsx                | ISO/IEC 27001, 2013, in French                                                 |
 | ISO27001-2022.en.xlsx                | [ISO/IEC 27001, 2022, in English](https://www.iso.org/fr/standard/27001)       |
 | ISO27001-2022.fr.xlsx                | [ISO/IEC 27001, 2022, in French](https://www.iso.org/fr/standard/27001)        |
