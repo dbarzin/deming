@@ -103,7 +103,7 @@ return [
         'edit' => 'Modifier un contrôle de sécurité',
         'history' => 'Planning',
         'make' => 'Réaliser un contrôle',
-        'plan' => 'planificer un contrôle',
+        'plan' => 'Planifier un contrôle',
         'radar' => 'Etat des contrôles de sécurité',
         'title' => 'Contrôles',
         'title_singular' => 'Contrôle',
@@ -128,7 +128,7 @@ return [
         'index' => 'Liste des mesures de sécurité',
         'create' => 'Ajouter une mesure de sécurité',
         'edit' => 'Modifier une mesure de sécurité',
-        'plan' => 'planificer un contrôle'
+        'plan' => 'Planifier un contrôle'
     ],
     'notification' => [
         'subject' => 'Liste des contrôles à réaliser',
