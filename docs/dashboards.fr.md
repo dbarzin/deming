@@ -1,8 +1,8 @@
-## Tableaux de bords
+## Tableaux de bord
 
 Il existe trois tableaux de bord :
 
-* les contrôles par domaines
+* les contrôles par domaine
 
 * les contrôle par domaine et par mesure
 
@@ -13,7 +13,7 @@ Il existe trois tableaux de bord :
 
 [![Screenshot](images/r1.fr.png){: style="width:500px"}](images/r1.fr.png)
 
-### Les contrôle par domaines et par mesures
+### Les contrôles par domaines et par mesures
 
 [![Screenshot](images/r2.fr.png)](images/r2.fr.png)
 
