@@ -257,7 +257,7 @@ class ActionController extends Controller
         $scopes = DB::table('actions')
             ->select('scope')
             ->whereNotNull('scope')
-            ->where('status', '<> ', 2)
+            ->where('status', '<>', 2)
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -268,7 +268,7 @@ class ActionController extends Controller
         $types = DB::table('actions')
             ->select('type')
             ->whereNotNull('type')
-            ->where('status', '<> ', 2)
+            ->where('status', '<>', 2)
             ->distinct()
             ->orderBy('type')
             ->get()
@@ -322,7 +322,7 @@ class ActionController extends Controller
         $scopes = DB::table('actions')
             ->select('scope')
             ->whereNotNull('scope')
-            ->where('status', '<> ', 2)
+            ->where('status', '<>', 2)
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -333,7 +333,7 @@ class ActionController extends Controller
         $types = DB::table('actions')
             ->select('type')
             ->whereNotNull('type')
-            ->where('status', '<> ', 2)
+            ->where('status', '<>', 2)
             ->distinct()
             ->orderBy('type')
             ->get()
@@ -386,6 +386,9 @@ class ActionController extends Controller
         $action->scope = request('scope');
         $action->cause = request('cause');
         $action->remediation = request('remediation');
+        // for Postegres
+        $action->criticity = 0;
+        $action->status = 0;
 
         // Save
         $action->save();
