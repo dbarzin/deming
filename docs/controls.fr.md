@@ -18,9 +18,9 @@ Cet écran permet d’afficher la liste des contrôles et de les filtrer par :
 
 Lorsque vous cliquez sur :
 
-* Le domaine, vous arrivez l'écran d'[affichage du domaine de sécurité](config.fr.md/#domains)
+* Le domaine, vous arrivez à l'écran d'[affichage du domaine de sécurité](config.fr.md/#domains)
 
-* La clause, vous arrivez l'écran d'[affichage de la mesure de sécurité](measures.fr.md/#show).
+* La clause, vous arrivez à l'écran d'[affichage de la mesure de sécurité](measures.fr.md/#show).
 
 * La date de réalisation, de planification ou la date du contrôle suivant, vous arrivez l'écran d'[affichage du contrôle de sécurité](#show).
 
@@ -28,7 +28,7 @@ Lorsque vous cliquez sur :
 
 Cet écran contient les informations d’un contrôle :
 
-* Le nom d’un contrôles ;
+* Le nom du contrôle ;
 
 * L’objectif du contrôle ;
 
@@ -40,11 +40,11 @@ Cet écran contient les informations d’un contrôle :
 
 * La dates de planification, de réalisation et la date du contrôle suivant ;
 
-* La note attributée au contrôle ; et
+* La note attribuée au contrôle ; et
 
-* Le score attributé au contrôle (vert, orange ou rouge).
+* Le score attribué au contrôle (vert, orange ou rouge).
 
-Les boutons « Faire » et « Planifier » sont présents si ce contôle n’a pas encore été réalisé.
+Les boutons « Faire » et « Planifier » sont présents si ce contrôle n’a pas encore été réalisé.
 
 Les boutons « Modifier » et « Supprimer » sont présents si l'utilisateur est administrateur.
 
@@ -54,11 +54,11 @@ Lorsque vous cliquez sur :
 
 * « Faire », vous êtes envoyé vers l’[écran de réalisation d’un contrôle](#make)
 
-* « Planifier », vous êtes envoyé vers l’[écran de planification d’un contrôles](#plan)
+* « Planifier », vous êtes envoyé vers l’[écran de planification d’un contrôle](#plan)
 
-* « Modifier », vous êtes envoyé vers l’[écran de modification du contrôles](#edit)
+* « Modifier », vous êtes envoyé vers l’[écran de modification du contrôle](#edit)
 
-* « Supprimer », le contrôle est supprimer et vous êtes envoyé vers la [liste des contrôles](#list)
+* « Supprimer », le contrôle est supprimé et vous êtes envoyé vers la [liste des contrôles](#list)
 
 * « Annuler », vous êtes envoyé vers la [liste des contrôles](#list)
 
@@ -68,7 +68,7 @@ Cet écran permet de planifier un contrôle.
 
 Cet écran contient les informations d’un contrôle :
 
-* Le nom d’un contrôles ;
+* Le nom du contrôle ;
 
 * L’objectif du contrôle ;
 
@@ -76,18 +76,18 @@ Cet écran contient les informations d’un contrôle :
 
 * La périodicité ; et
 
-* Les responsables de la réalisation du contrôles.
+* Les responsables de la réalisation du contrôle.
 
 [![Screenshot](images/c5.fr.png)](images/c5.fr.png)
 
 Lorsque vous cliquez sur :
 
-* « Plan », la date de planifierion, la récurence et les responsables sont mis à jour et vous êtres renvoyés vers l’[écran d'affichage du contrôles](#show)
+* « Plan », la date de planification, la récurrence et les responsables sont mis à jour et vous êtes renvoyés vers l’[écran d'affichage du contrôle](#show)
 
-* « Annuler », Vous êtres renvoyés vers l’[écran d'affichage du contrôles](#show)
+* « Annuler », vous êtes renvoyés vers l’[écran d'affichage du contrôle](#show)
 
 
-### Réaliser un contrôles <a name="make"></a>
+### Réaliser un contrôle <a name="make"></a>
 
 Cet écran permet de réaliser un contrôle de sécurité.
 
@@ -103,7 +103,7 @@ Cet écran contient :
 
 * La date de réalisation, la date de planification,
 
-* Les observation du contrôle,
+* Les observations du contrôle,
 
 * Une zone pour sauvegarder les preuves (**CTRL+V** permet de coller un fichier ou une capture d'écran),
 
@@ -135,9 +135,9 @@ et vous revenez vers la [liste des contrôles](#list).
 ### Fiche de contrôle <a name="sheet"></a>
 
 
-La fiche de contrôle est un document word généré par l'application sur base des données du contrôle.
+La fiche de contrôle est un document Word généré par l'application sur base des données du contrôle.
 
-Cette fiche permet de décrire les observations réalisés, d'ajouter des captures d'écran ou des tableaux et de __signer électroniquement__ les observations.
+Cette fiche permet de décrire les observations réalisées, d'ajouter des captures d'écran ou des tableaux et de __signer électroniquement__ les observations.
 
 [![Screenshot](images/report3.png)](images/report3.png)
 

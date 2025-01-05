@@ -37,11 +37,11 @@ Lorsqu'un audité réalise un contrôle, il peut :
 
 Lorsqu'il clique sur :
 
-- "Sauver", les modifications qu'il a faites sont sauvées, le contrôle reste dans la liste des contrôles à réaliser
-
 - "Faire", les modifications qu'il a faite sont sauvées et le contrôle passe dans l'état à valider. Du point de vue de l'audité, le contrôle se trouve dans la liste des contrôles réalisés.
 
-- "Annuler", les modifications ne sont pas sauvée, l'utilisateur retourne vers la vue du contrôle.
+- "Sauver", les modifications qu'il a faites sont sauvées, le contrôle reste dans la liste des contrôles à réaliser
+
+- "Annuler", les modifications ne sont pas sauvées, l'utilisateur retourne vers la vue du contrôle.
 
 
 ### Accepter / Refuser un contrôle
@@ -62,8 +62,8 @@ Si l'utilisateur clique sur :
 
 - "Accepter" : les données modifiées sont sauvées et un nouveau contrôle est créé à la date de planification introduite.
 
-- "Rejeté" : les données modifiées sont sauvées et le contrôle est renvoyé dans la liste des contrôles à réaliser de l'audité.
+- "Rejeter" : les données modifiées sont sauvées et le contrôle est renvoyé dans la liste des contrôles à réaliser de l'audité.
 
-- "Sauvé" : les données sont sauvées et l'utilisateur revient à la vue du contrôle.
+- "Sauver" : les données sont sauvées et l'utilisateur revient à la vue du contrôle.
 
 - "Annuler" : l'utilisateur revient à la vue du contrôle.

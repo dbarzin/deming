@@ -9,14 +9,14 @@ Deming est un outil Open Source conçu pour aider les RSSI à maintenir leur sys
 Deming offre des fonctionnalités telles que la [gestion des mesures de sécurité](measures.fr.md),
 la [planification des contrôles](plan.fr.md), la création des [fiches de contrôle](controls.fr.md/#sheet), l’enregistrement des preuves,
 le suivi [des plans d’action](actions.fr.md) ainsi que des [tableaux de bord](dashboards.fr.md) et
-des [rapports de pilotage du SMSI](config.fr.md/#report) pour aider les RSSI à suivre le maintient des mesures de sécurité de l'information.
+des [rapports de pilotage du SMSI](config.fr.md/#report) pour aider les RSSI à suivre le maintien des mesures de sécurité de l'information.
 
 
 L'application est conçue pour être compatible avec la norme ISO 27001:2022, en suivant les exigences spécifiques de la norme pour la planification, la mise en œuvre, la vérification et l'amélioration continue du système de management de la sécurité de l'information.
 Elle est également conçue pour aider les RSSI à préparer leur organisation aux audits de certification ISO 27001 en fournissant des rapports détaillés sur les contrôles de sécurité et la mesure de leur efficacité.
 
 
-Cette application est publiée sous la licence [GPL](https://www.gnu.org/licenses/licenses.fr.html), permettant aux utilisateurs de l'utiliser, de la modifier et de la distribuer librement. Cette approche open source permet aux utilisateurs de contribuer au développement de l'application en soumettant des demandes de changement, des rapports de bogues ou des fonctionnalités supplémentaires.
+Cette application est publiée sous la licence [GPL](https://www.gnu.org/licenses/licenses.fr.html), permettant aux utilisateurs de l'utiliser, de la modifier et de la distribuer librement. Cette approche open source permet aux utilisateurs de contribuer au développement de l'application en soumettant des demandes de changement, des rapports d'anomalie ou en proposant des fonctionnalités supplémentaires.
 
 
 Cette application de gestion de la sécurité de l'information est un outil puissant et personnalisable pour les RSSI qui cherchent à mettre en place et à maintenir un système de management de la sécurité de l'information conforme à la norme ISO 27001.
@@ -50,7 +50,7 @@ Les exigences de mesure de l’efficacité sont :
 - c) de vérifier dans quelle mesure les exigences de sécurité identifiées ont été respectées;
 - d) de faciliter l’amélioration des performances de la sécurité de l’information par rapport aux objectifs;
 - e) de fournir des données pour la revue de la direction afin de faciliter la prise de décisions liées au SMSI;
-- f) de justifier les besoins d'amélioration du ISMS.
+- f) de justifier les besoins d'amélioration du SMSI.
 
 ### Evaluation des performances
 

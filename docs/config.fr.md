@@ -9,31 +9,31 @@ Il contient la liste des attributs et permet de créer, supprimer ou modifier de
 
 ### Domaines <a name="domains"></a>
 
-Cet écran permet de créer, modifier ou supprimer des liste de domaines de sécurité.
+Cet écran permet de créer, modifier ou supprimer des listes de domaines de sécurité.
 
 [![Screenshot](images/domains.fr.png)](images/domains.fr.png)
 
-L’application est founir avec une base de mesure de sécurité inspirée de la norme ISO 27001:2022 mais il est possible de définir de nouveaux domaines de sécurité inspirés d’autres normes comme PCIDSS, HDS...
+L’application est fournie avec une base de mesures de sécurité inspirée de la norme ISO 27001:2022, mais il est possible de définir de nouveaux domaines de sécurité inspirés d’autres normes comme PCI DSS, HDS...
 
 ### Utilisateurs <a name="users"></a>
 
-Les utilisateurs sont définits dans l’application.
+Les utilisateurs sont définis dans l’application.
 
 [![Screenshot](images/users.fr.png)](images/users.fr.png)
 
-Il existe quatres roles différents :
+Il existe quatre rôles différents :
 
-* RSSI : le RSSI est l’adminsitrateur de l’application. Il peut créer de nouvelles mesures, de nouveaux attributs, modifier des contrôles déjà réalisés...
+* RSSI : le RSSI est l'administrateur de l’application. Il peut créer de nouvelles mesures, de nouveaux attributs, modifier des contrôles déjà réalisés...
 
-* Utilisateurs : les utilisateur peuvent utiliser l’application sans pouvoir modifier les mesures, les attributs et les contrôles déjà réalisés.
+* Utilisateurs : les utilisateurs peuvent utiliser l’application sans pouvoir modifier les mesures, les attributs et les contrôles déjà réalisés.
 
-* Audité : les audités ne peuvent réaliser et voir que les contrôles qui leur sont assignés ou qu'ils ont réalisé précédement.
+* Audité : les audités ne peuvent réaliser et voir que les contrôles qui leur sont assignés ou qu'ils ont réalisés précédemment.
 
 * Auditeur : l’auditeur a un accès en lecture à l’ensemble des informations de l’application.
 
 ### Rapports <a name="report"></a>
 
-L’application permet de générer le rapport de pilotage du SMSI et d’exporter dans un fichier Excell la liste des domains, les mesures de sécurités et tous les contrôles réalisés.
+L’application permet de générer le rapport de pilotage du SMSI et d’exporter dans un fichier Excel la liste des domaines, les mesures de sécurités et tous les contrôles réalisés.
 
 [![Screenshot](images/reports.png){: style="width:500px"}](images/reports.png)
 
@@ -43,7 +43,7 @@ Voici le rapport de pilotage du SMSI :
 
 [![Screenshot](images/report2.png){: style="width:600px"}](images/report2.png)
 
-### Import <a name="import"></a>
+### Importation <a name="import"></a>
 
 Il est possible d'importer des mesures de sécurité depuis un fichier .XLSX ou depuis la base de données de modèles.
 
@@ -53,8 +53,7 @@ Lors de l'importation, il est possible de supprimer tous les autres contrôles e
 
 ### Documents <a name="documents"></a>
 
-Cet écran permet de modifier les modèles de document utilisés pour les fiches de contrôle et le rapport de pilotage du SMSI.
-et permet d’avoir une vue sur l’ensemble des documents utilisés comme preuve lors de la réalisation des contrôles de sécurité.
+Cet écran permet de modifier les modèles de document utilisés pour les fiches de contrôle et le rapport de pilotage du SMSI et permet d’avoir une vue sur l’ensemble des documents utilisés comme preuve lors de la réalisation des contrôles de sécurité.
 
 [![Screenshot](images/documents.png){: style="width:400px"}](images/documents.png)
 

@@ -93,7 +93,7 @@
 		        		<tr>
 		        			<td>B</td><td>Domain name</td><td>string(32)</td>
 		        			<td>
-		        				The domains name, it is created if it does not exists.
+		        				The domain name, it is created if it does not exist.
 		        			</td>
 		        		</tr>
 		        		<tr>
@@ -106,7 +106,7 @@
 		        			<td>D</td><td>Clause</td><td>string(32)</td>
 		        			<td>
 		        					If the clause exists the security measure is updated,<br>
-		        					if the clause does not exists, a new security measure is created,<br>
+		        					if the clause does not exist, a new security measure is created,<br>
 		        					if all other fields of the line are empty, the measure, related controls and documents are removed.
 		        			</td>
 		        		</tr>

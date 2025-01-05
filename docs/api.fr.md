@@ -1,6 +1,6 @@
 ## API
 
-Deming peut être modifiée ou mis à jour via une REST API.
+Deming peut être modifié ou mis à jour via une REST API.
 
 Une API REST ([Representational State Transfer](https://fr.wikipedia.org/wiki/Representational_state_transfer))
 est une interface de programmation d'application qui respecte les contraintes du style d'architecture REST
@@ -45,10 +45,10 @@ Les requêtes et URI de chaque api est représentée dans le tableau ci-dessous.
 
 ### Droits d'accès
 
-Il faut s'identifier avec un utilisateur de l'application Deming pour pouvoir accèder aux API.
+Il faut s'identifier avec un utilisateur de l'application Deming pour pouvoir accéder aux API.
 Cet utilisateur doit disposer du rôle "API".
 
-Lorsque l'authentification réussi, l'API envoie un "token" qui doit être passé dans l'entête "Authorization" de la requête de l'API.
+Lorsque l'authentification réussit, l'API envoie un "token" qui doit être passé dans l'entête "Authorization" de la requête de l'API.
 
 ### Exemples
 
