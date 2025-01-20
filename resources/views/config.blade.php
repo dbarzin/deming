@@ -17,6 +17,16 @@
 		</div>
 		@endif
 
+        @if ($message!=null)
+		<div class="form-group">
+			<div class= "remark success">
+				<ul>
+                    {{ $message }}
+				</ul>
+			</div>
+		</div>
+		@endif
+
         <form method="POST" action="/config/save" enctype="multipart/form-data">
             @csrf
 
