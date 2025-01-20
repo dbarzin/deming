@@ -56,20 +56,7 @@ class SendNotifications extends Command
                 ' days.'
             );
 
-            // Create a new PHPMailer instance
-            $mail = new PHPMailer(true);
-
             try {
-                // Server settings
-                $mail->isSMTP();                                     // Use SMTP
-                $mail->Host        = env('MAIL_HOST');               // Set the SMTP server
-                $mail->SMTPAuth    = env('MAIL_AUTH');               // Enable SMTP authentication
-                $mail->Username    = env('MAIL_USERNAME');           // SMTP username
-                $mail->Password    = env('MAIL_PASSWORD');           // SMTP password
-                $mail->SMTPSecure  = env('MAIL_SMTP_SECURE',false);  // Enable TLS encryption, `ssl` also accepted
-                $mail->SMTPAutoTLS = env('MAIL_SMTP_AUTO_TLS');      // Enable auto TLS
-                $mail->Port        = env('MAIL_PORT');               // TCP port to connect to
-
                 // Loop on all users
                 $users = User::all();
 
@@ -83,33 +70,46 @@ class SendNotifications extends Command
                         ->orderBy('plan_date')
                         ->get();
 
-                        if ($controls->count() > 0) {
-                            App::setlocale($user->language);
-                            $txt = '';
-                            foreach ($controls as $control) {
-                                // Date
-                                $txt .= '<a href="' . url('/bob/show/'. $control->id) . '">';
-                                $txt .= '<b>';
-                                if (strtotime($control->plan_date) >= strtotime('today')) {
-                                    $txt .= "<font color='green'>" . $control->plan_date .' </font>';
-                                } else {
-                                    $txt .= "<font color='red'>" . $control->plan_date . '</font>';
-                                }
-                                $txt .= '</b>';
-                                $txt .= '</a>';
-                                // Space
-                                $txt .= ' &nbsp; - &nbsp; ';
-                                // Clauses
-                                foreach ($control->measures as $measure) {
-                                    $txt .= '<a href="' . url('/alice/show/' . $measure->id) . '">'. htmlentities($measure->clause) . '</a>';
-                                    // Space
-                                    $txt .= ' &nbsp; ';
-                                }
-                                $txt .= ' - &nbsp; ';
-                                // Name
-                                $txt .= htmlentities($control->name);
-                                $txt .= "<br>\n";
+                    if ($controls->count() > 0) {
+                        App::setlocale($user->language);
+                        $txt = '';
+                        foreach ($controls as $control) {
+                            // Date
+                            $txt .= '<a href="' . url('/bob/show/'. $control->id) . '">';
+                            $txt .= '<b>';
+                            if (strtotime($control->plan_date) >= strtotime('today')) {
+                                $txt .= "<font color='green'>" . $control->plan_date .' </font>';
+                            } else {
+                                $txt .= "<font color='red'>" . $control->plan_date . '</font>';
                             }
+                            $txt .= '</b>';
+                            $txt .= '</a>';
+                            // Space
+                            $txt .= ' &nbsp; - &nbsp; ';
+                            // Clauses
+                            foreach ($control->measures as $measure) {
+                                $txt .= '<a href="' . url('/alice/show/' . $measure->id) . '">'. htmlentities($measure->clause) . '</a>';
+                                // Space
+                                $txt .= ' &nbsp; ';
+                            }
+                            $txt .= ' - &nbsp; ';
+                            // Name
+                            $txt .= htmlentities($control->name);
+                            $txt .= "<br>\n";
+                        }
+
+                    // Create a new PHPMailer instance
+                    $mail = new PHPMailer(true);
+
+                    // Server settings
+                    $mail->isSMTP();                                     // Use SMTP
+                    $mail->Host        = env('MAIL_HOST');               // Set the SMTP server
+                    $mail->SMTPAuth    = env('MAIL_AUTH');               // Enable SMTP authentication
+                    $mail->Username    = env('MAIL_USERNAME');           // SMTP username
+                    $mail->Password    = env('MAIL_PASSWORD');           // SMTP password
+                    $mail->SMTPSecure  = env('MAIL_SMTP_SECURE',false);  // Enable TLS encryption, `ssl` also accepted
+                    $mail->SMTPAutoTLS = env('MAIL_SMTP_AUTO_TLS');      // Enable auto TLS
+                    $mail->Port        = env('MAIL_PORT');               // TCP port to connect to
 
                     // Recipients
                     $mail->setFrom(config('deming.notification.mail-from'));
