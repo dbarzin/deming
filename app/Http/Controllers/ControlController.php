@@ -1652,9 +1652,12 @@ class ControlController extends Controller
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // Get template file
-        $template_filename = storage_path('app/models/control_'.Auth::User()->language.'.docx');
+        $template_filename = storage_path('app/models/control_.docx');
         if (! file_exists($template_filename)) {
-            $template_filename = storage_path('app/models/control.docx');
+            $template_filename = storage_path('app/models/control_'.Auth::User()->language.'.docx');
+            if (! file_exists($template_filename)) {
+                $template_filename = storage_path('app/models/control_en.docx');
+            }
         }
 
         // create templateProcessor
