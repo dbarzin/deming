@@ -25,12 +25,15 @@ class ConfigurationController extends Controller
         $expire_delay = config('deming.notification.expire-delay');
         $reminder = config('deming.notification.reminder');
 
+        // set emply message
+        $message = null;
+        
         // Return
         return view(
             'config',
             compact(
                 'mail_from', 'mail_subject', 'mail_content',
-                'frequency', 'expire_delay', 'reminder')
+                'frequency', 'expire_delay', 'reminder', 'message')
         );
     }
 
