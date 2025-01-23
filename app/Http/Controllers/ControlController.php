@@ -1231,7 +1231,7 @@ class ControlController extends Controller
             $next_date =
                 $control->next_date === null
                     ? \Carbon\Carbon::createFromFormat('Y-m-d', $control->plan_date)
-                        ->addMonths($control->periodicity)
+                        ->addMonthsNoOverflow($control->periodicity)
                         ->format('Y-m-d')
                     : $control->next_date->format('Y-m-d');
         }
