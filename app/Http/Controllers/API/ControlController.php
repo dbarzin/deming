@@ -60,6 +60,7 @@ class ControlController extends Controller
     {
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        $control->measures()->detach();
         $control->delete();
 
         return response()->json();
