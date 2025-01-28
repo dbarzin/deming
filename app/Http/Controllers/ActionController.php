@@ -510,6 +510,9 @@ class ActionController extends Controller
         // delete links
         DB::table('action_measure')->where('action_id', $action->id)->delete();
 
+        // relete links to owners
+        $action->owners()->detach();
+
         // delete
         $action->delete();
 
