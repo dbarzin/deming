@@ -185,6 +185,18 @@ return [
          'index' => 'Importer',
          'title' => 'Importer des mesures de sécurité',
     ],
+    'log' => [
+        'index' => 'Liste des logs',
+        'title' => 'Log',
+        'history' => 'Historique des changements',
+        'action' => 'Action',
+        'subject_type' => 'Type',
+        'subject_id' => 'ID',
+        'user' => 'Utilisateur',
+        'host' => 'Host',
+        'timestamp' => 'Horodatage',
+        'properties' => 'Données'
+    ],
     'login' => [
         'title' => 'Entrez un mot de passe',
         'identification' => 'Identification',

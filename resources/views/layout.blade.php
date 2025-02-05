@@ -134,6 +134,7 @@
                             request()->is('users*') ||
                             request()->is('alice/import*') ||
                             request()->is('doc*') ||
+                            request()->is('logs*') ||
                             request()->is('config*')
                             )
                             ? 'open' : '' }}" data-role="dropdown" >
@@ -173,6 +174,12 @@
                         <a href="/config">
                         <span class="icon"><span class="mif-alarm"></span></span>
                         <span class="caption">{{ trans("menu.configuration.notifications") }}</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->is('logs*') ? 'bg-gray': '' }}">
+                        <a href="/logs">
+                        <span class="icon"><span class="mif-log-file"></span></span>
+                        <span class="caption">Logs</span>
                         </a>
                     </li>
                     @endif

@@ -115,6 +115,11 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/reports/pilotage', 'ReportController@pilotage');
     Route::get('/reports/soa', 'ReportController@soa');
 
+    // Audit Logs
+    Route::get('/logs', 'AuditLogsController@index');
+    Route::get('/logs/show/{id}', 'AuditLogsController@show');
+    Route::get('/logs/history/{id}', 'AuditLogsController@history');
+
     /* Exports */
     Route::get('/export/domains', 'DomainController@export');
     Route::get('/export/attributes', 'AttributeController@export');

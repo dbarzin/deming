@@ -187,6 +187,18 @@ return [
          'index' => 'Import',
          'title' => 'Import security measures',
      ],
+    'log' => [
+        'index' => 'List of logs',
+        'title' => 'Log',
+        'history' => 'Change history',
+        'action' => 'Action',
+        'subject_type' => 'Type',
+        'subject_id' => 'ID',
+        'user' => 'User',
+        'host' => 'Host',
+        'timestamp' => 'Timestamp',
+        'properties' => 'Data'
+    ],
      'login' => [
          'title' => 'Enter a password',
          'identification' => 'Login',
