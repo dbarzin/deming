@@ -174,18 +174,20 @@
             </td>
             <td>
                 <center id="{{ $control->score }}">
+                    @if ($control->action_id!=null)
+                        <a href="/action/show/{{ $control->action_id }}">
+                    @endif
                     @if ($control->score==1)
-                    <a href="/action/{{ $control->id }}">
                         &#128545;
-                    </a>
                     @elseif ($control->score==2)
-                    <a href="/action/{{ $control->id }}">
                         &#128528;
-                    </a>
                     @elseif ($control->score==3)
                         <span style="filter: sepia(1) saturate(5) hue-rotate(70deg)">&#128512;</span>
                     @else
                         &#9675; <!-- &#9899; -->
+                    @endif
+                    @if ($control->action_id!=null)
+                    </a>
                     @endif
                 </center>
             </td>

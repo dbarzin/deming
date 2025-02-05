@@ -49,6 +49,11 @@ class Control extends Model
         return $this->belongsToMany(Measure::class)->orderBy('clause');
     }
 
+    public function actionPlan()
+    {
+        return DB::table('actions')->select('id')->where("control_id",'=',$this->id)->get();
+    }
+
     public function owners()
     {
         return $this->belongsToMany(User::class, 'control_user', 'control_id')->orderBy('name');

@@ -255,6 +255,9 @@ class ControlController extends Controller
             );
         }
 
+        // get action plan associated
+        $controls = $controls-> leftjoin("actions","actions.control_id","=","c1.id");
+
         // Query DB
         $controls = $controls
             ->select([
@@ -265,6 +268,7 @@ class ControlController extends Controller
                 'c1.realisation_date',
                 'c1.score as score',
                 'c1.status',
+                'actions.id as action_id',
                 'c2.id as next_id',
                 'c2.plan_date as next_date',
             ])
