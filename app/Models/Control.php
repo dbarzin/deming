@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 
 class Control extends Model
 {
+    use Auditable;
+
     public static $searchable = [
         'name',
         'objective',
@@ -44,6 +47,11 @@ class Control extends Model
     public function measures()
     {
         return $this->belongsToMany(Measure::class)->orderBy('clause');
+    }
+
+    public function actionPlan()
+    {
+        return DB::table('actions')->select('id')->where("control_id",'=',$this->id)->get();
     }
 
     public function owners()

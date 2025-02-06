@@ -44,7 +44,12 @@
                     </a>
                 </li>
 
-                <li>
+                <li class="{{
+                        request()->is('alice/index') ||
+                        request()->is('alice/show/*') ||
+                        request()->is('alice/*/edit') ||
+                        request()->is('alice/plan/*')
+                        ? 'bg-gray': '' }}">
                     <a href="/alice/index">
                         <span class="icon"><span class="mif-books"></span></span>
                         <span class="caption">{{ trans("menu.measures") }}</span>
@@ -52,7 +57,13 @@
                 </li>
 
 
-                <li>
+                <li class="{{
+                    request()->is('bob/index') ||
+                    request()->is('bob/show/*') ||
+                    request()->is('bob/edit/*') ||
+                    request()->is('bob/plan/*') ||
+                    request()->is('bob/make/*')
+                    ? 'bg-gray': '' }}">
                     <a href="/bob/index">
                         <span class="icon"><span class="mif-paste"></span></span>
                         <span class="caption">{{ trans("menu.controls") }}</span>
@@ -67,14 +78,14 @@
                     </a>
                 </li>
 
-                <li>
+                <li class="{{ request()->is('bob/history*') ? 'bg-gray': '' }}">
                     <a href="/bob/history">
                         <span class="icon"><span class="mif-calendar"></span></span>
                         <span class="caption">{{ trans("menu.planning") }}</span>
                     </a>
                 </li>
 
-                <li>
+                <li class="{{ request()->is('action*') ? 'bg-gray': '' }}">
                     <a href="/actions">
                         <span class="icon"><span class="mif-open-book"></span></span>
                         <span class="caption">{{ trans("menu.action_plan") }}</span>
@@ -86,62 +97,92 @@
                         <span class="icon"><span class="mif-meter"></span></span>
                         <span class="caption">{{ trans("menu.radar") }}</span>
                     </a>
-                    <ul class="navview-menu stay-open" data-role="dropdown" >
-                        <li><a href="/radar/domains">
+                    <ul class="navview-menu stay-open {{ request()->is('radar*') ? 'open' : '' }}" data-role="dropdown" >
+                        <li class="{{ request()->is('radar/domains') ? 'bg-gray': '' }}">
+                            <a href="/radar/domains">
                             <span class="caption">{{ trans("menu.radar_by_domains") }}</span>
-                        </a></li>
-                        <li><a href="/radar/alice">
+                            </a>
+                        </li>
+                        <li class="{{ request()->is('radar/alice') ? 'bg-gray': '' }}">
+                            <a href="/radar/alice">
                             <span class="caption">{{ trans("menu.radar_by_controls") }}</span>
-                        </a></li>
-                        <li><a href="/radar/attributes">
+                            </a>
+                        </li>
+                        <li class="{{ request()->is('radar/attributes') ? 'bg-gray': '' }}">
+                            <a href="/radar/attributes">
                             <span class="caption">{{ trans("menu.radar_by_attributes") }}</span>
                         </a></li>
                     </ul>
                 </li>
 
-                <li><a href="/reports">
-                    <span class="icon"><span class="mif-file-text"></span></span>
-                    <span class="caption">{{ trans("menu.configuration.reports") }}</span>
-                </a></li>
+                <li class="{{ request()->is('reports') ? 'bg-gray': '' }}">
+                    <a href="/reports">
+                        <span class="icon"><span class="mif-file-text"></span></span>
+                        <span class="caption">{{ trans("menu.configuration.reports") }}</span>
+                    </a>
+                </li>
 
                 <li>
                     <a href="#" class="dropdown-toggle">
                         <span class="icon"><span class="mif-cog"></span></span>
                         <span class="caption">{{ trans("menu.configuration.title") }}</span>
                     </a>
-                    <ul class="navview-menu stay-open" data-role="dropdown" >
-
-                    <li>
+                    <ul class="navview-menu stay-open
+                        {{  (
+                            request()->is('attributes*') ||
+                            request()->is('domains*') ||
+                            request()->is('users*') ||
+                            request()->is('alice/import*') ||
+                            request()->is('doc*') ||
+                            request()->is('logs*') ||
+                            request()->is('config*')
+                            )
+                            ? 'open' : '' }}" data-role="dropdown" >
+                    <li class="{{ request()->is('attributes*') ? 'bg-gray': '' }}">
                         <a href="/attributes">
                             <span class="icon"><span class="mif-tags"></span></span>
                             <span class="caption">{{ trans("menu.attributes") }}</span>
                         </a>
                     </li>
 
-                    <li>
+                    <li class="{{ request()->is('domains*') ? 'bg-gray': '' }}">
                         <a href="/domains">
                             <span class="icon"><span class="mif-books"></span></span>
                             <span class="caption">{{ trans("menu.domains") }}</span>
                         </a>
                     </li>
-                        @if (Auth::User()->role==1)
-                        <li><a href="/users">
-                            <span class="icon"><span class="mif-users"></span></span>
-                            <span class="caption">{{ trans("menu.configuration.users") }}</span>
-                        </a></li>
-                        <li><a href="/alice/import">
-                            <span class="icon"><span class="mif-file-excel"></span></span>
-                            <span class="caption">{{ trans("menu.configuration.import") }}</span>
-                        </a></li>
-                        <li><a href="/doc">
-                            <span class="icon"><span class="mif-file-text"></span></span>
-                            <span class="caption">{{ trans("menu.configuration.documents") }}</span>
-                        </a></li>
-                        <li><a href="/config">
-                            <span class="icon"><span class="mif-alarm"></span></span>
-                            <span class="caption">{{ trans("menu.configuration.notifications") }}</span>
-                        </a></li>
-                        @endif
+                    @if (Auth::User()->role==1)
+                    <li class="{{ request()->is('users*') ? 'bg-gray': '' }}">
+                        <a href="/users">
+                        <span class="icon"><span class="mif-users"></span></span>
+                        <span class="caption">{{ trans("menu.configuration.users") }}</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->is('alice/import*') ? 'bg-gray': '' }}">
+                        <a href="/alice/import">
+                        <span class="icon"><span class="mif-file-excel"></span></span>
+                        <span class="caption">{{ trans("menu.configuration.import") }}</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->is('doc*') ? 'bg-gray': '' }}">
+                        <a href="/doc">
+                        <span class="icon"><span class="mif-file-text"></span></span>
+                        <span class="caption">{{ trans("menu.configuration.documents") }}</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->is('config*') ? 'bg-gray': '' }}">
+                        <a href="/config">
+                        <span class="icon"><span class="mif-alarm"></span></span>
+                        <span class="caption">{{ trans("menu.configuration.notifications") }}</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->is('logs*') ? 'bg-gray': '' }}">
+                        <a href="/logs">
+                        <span class="icon"><span class="mif-log-file"></span></span>
+                        <span class="caption">Logs</span>
+                        </a>
+                    </li>
+                    @endif
                     </ul>
                 </li>
                 @endif

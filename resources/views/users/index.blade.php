@@ -11,13 +11,11 @@
 
 				<div class="cell-7" align="right">
 					@if (Auth::User()->role==1)
-					<form action="/users/create">
-						<button class="button primary" onclick="location.href = '/users/create';">
-				            <span class="mif-plus"></span>
-				            &nbsp;
-							{{ trans('common.new') }}
-						</button>
-					</form>
+                    <a class="button primary" href="/users/create">
+			            <span class="mif-plus"></span>
+			            &nbsp;
+						{{ trans('common.new') }}
+                    </a>
 					@endif
 				</div>
 			</div>
@@ -79,13 +77,11 @@
 					<td>{{ $user->email }}</td>
     				@if (Auth::User()->role==1)
                     <td>
-            		    <form>
-            		    	<button class="button primary" onclick='this.form.action="/users/{{ $user->id }}/edit"'>
-            		            <span class="mif-wrench"></span>
-            		            &nbsp;
-            		    		{{ trans('common.edit') }}
-            		    	</button>
-                        </form>
+                        <a class="button primary" href='/users/{{ $user->id }}/edit'>
+        		            <span class="mif-wrench"></span>
+        		            &nbsp;
+        		    		{{ trans('common.edit') }}
+                        </a>
                     </td>
                     @endif
 				</tr>

@@ -2,10 +2,13 @@
 
 namespace App\Models;
 
+use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 
 class Action extends Model
 {
+    use Auditable;
+
     public static $searchable = [
         'reference',
         'type',
