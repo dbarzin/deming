@@ -202,7 +202,7 @@
             </ul>
         <div class="w-100 text-center text-small data-box p-2 border-top bd-grayMouse" style="position: absolute; bottom: 0">
             <div>Github <a href="https://github.com/dbarzin/deming" class="no-decor">dbarzin/deming</a></div>
-            <div>Version 2024-11-R1</div>
+            <div>Version 2025-02-R1</div>
         </div>
     </div>
 
