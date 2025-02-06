@@ -78,13 +78,13 @@
                                 @endphp
                             <td {!! (($loop->first)||($value==$previous)) ? "" : "class='info'" !!}>
                                 @if ((gettype($value)=="string")&&(strlen($value)>100))
-                                {{ substr($value,0,100) }}
+                                    {{ substr($value,0,100) }}
                                 @elseif ((gettype($value)=="array"))
-                                @foreach($value as $v)
-                                {{ $v->name }}
-                                @endforeach
+                                    @foreach($value as $v)
+                                        {{ $v->name }}
+                                    @endforeach
                                 @else
-                                {{ $value }}
+                                    {{ $value }}
                                 @endif
                             </td>
                                 @php $previous = $value; @endphp
