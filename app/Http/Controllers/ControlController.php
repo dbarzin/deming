@@ -1188,18 +1188,18 @@ class ControlController extends Controller
 
     public function make(Request $request)
     {
-        // Not for auditor and API
+        // Not for API
         abort_if(
-            Auth::User()->role === 3 || Auth::User()->role === 4,
+            Auth::User()->role === 4,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
 
         $id = (int) request('id');
 
-        // for aditee only if he is assigne to that control
+        // for (aditee or auditor) only if he is assigne to that control
         abort_if(
-            Auth::User()->role === 5 &&
+            ((Auth::User()->role === 3) || (Auth::User()->role === 5)) &&
                 ! DB::table('control_user')
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
@@ -1256,20 +1256,17 @@ class ControlController extends Controller
      */
     public function doMake(Request $request)
     {
-        // Only for admin, user and auditee
-        abort_if(
-            ! (Auth::User()->role === 1 ||
-                Auth::User()->role === 2 ||
-                Auth::User()->role === 5),
+        // Not for API
+        abort_if(Auth::User()->role === 4,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
 
         $id = (int) request('id');
 
-        // for aditee only if he is assigne to that control
+        // for (aditee or auditor) only if he is assigne to that control
         abort_if(
-            Auth::User()->role === 5 &&
+            ((Auth::User()->role === 3)||(Auth::User()->role === 5)) &&
                 ! DB::table('control_user')
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
@@ -1448,9 +1445,9 @@ class ControlController extends Controller
      */
     public function draft(Request $request)
     {
-        // Not for API and Auditor
+        // Not for API
         abort_if(
-            Auth::User()->role === 3 || Auth::User()->role === 4,
+            Auth::User()->role === 4,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1459,7 +1456,7 @@ class ControlController extends Controller
 
         // for aditee only if he is assigned to that control
         abort_if(
-            Auth::User()->role === 5 &&
+            ((Auth::User()->role === 3)||(Auth::User()->role === 5)) &&
                 ! DB::table('control_user')
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
@@ -1638,22 +1635,31 @@ class ControlController extends Controller
 
     public function template()
     {
-        // For administrators and users only
+        // Not for API
         abort_if(
-            Auth::User()->role !== 1 &&
-                Auth::User()->rol !== 2 &&
-                Auth::User()->role !== 5,
+            Auth::User()->role === 4,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
 
         $id = (int) request('id');
 
-        // find associate measurement
+        // find associate control
         $control = Control::find($id);
 
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+
+        // for (aditee or auditor) only if he is assigne to that control
+        abort_if(
+            ((Auth::User()->role === 3)||(Auth::User()->role === 5)) &&
+                ! DB::table('control_user')
+                    ->where('user_id', Auth::User()->id)
+                    ->where('control_id', $id)
+                    ->exists(),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // Get template file
         $template_filename = storage_path('app/models/control_.docx');

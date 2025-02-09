@@ -232,7 +232,7 @@
 			<div class="grid">
 		    	<div class="row-12">
                     @if ($control->status===0)
-                        @if ((Auth::User()->role === 1)||(Auth::User()->role === 2)||(Auth::User()->role === 5))
+                        @if ($control->canMake())
     					<button type="submit" class="button success">
     						<span class="mif-done"></span>
     						&nbsp;
@@ -257,11 +257,7 @@
     					&nbsp;
                         @endif
                     @endif
-                    @if (
-                        (Auth::User()->role === 1)||
-                        (Auth::User()->role === 2)||
-                        ((Auth::User()->role === 5) && ($control->status===0))
-                        )
+                    @if ($control->canMake())
     					<button type="submit" class="button primary" onclick='this.form.action="/bob/draft"'>
     			            <span class="mif-floppy-disk"></span>
     			            &nbsp;

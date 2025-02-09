@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Auth;
 
 class Control extends Model
 {
@@ -54,12 +55,33 @@ class Control extends Model
         return DB::table('actions')->select('id')->where("control_id",'=',$this->id)->get();
     }
 
+    private $owners = null;
+
     public function owners()
     {
-        return $this->belongsToMany(User::class, 'control_user', 'control_id')->orderBy('name');
+        if ($this->owners === null)
+            $this->owners = $this->belongsToMany(User::class, 'control_user', 'control_id')->orderBy('name');
+        return $this->owners;
     }
 
-    public static function clauses(int $id)
+    public function canMake() {
+        if ($this->status !== 0)
+            return false;
+
+        // user or admin
+        if ((Auth::User()->role===1)||(Auth::User()->role===2))
+            return true;
+
+        // auditor or auditee
+        if ((Auth::User()->role === 3) || (Auth::User()->role === 5))
+            foreach($this->owners()->get() as $owner)
+                if ($owner->id===Auth::User()->id)
+                    return true;
+
+        return false;
+    }
+
+    public function clauses(int $id)
     {
         return DB::table('measures')
             ->select('measure_id', 'clause')

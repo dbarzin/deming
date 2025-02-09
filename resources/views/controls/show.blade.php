@@ -221,9 +221,9 @@
 	    		<strong>{{ trans('cruds.control.fields.owners') }}</strong>
 	    	</div>
 			<div class="cell">
-				@foreach($control->owners as $owner)
+                @foreach($control->owners as $owner)
 					{{ $owner->name }}
-					@if ($control->owners->last()!=$owner)
+                    @if ($control->owners->last()!=$owner)
 					,
 					@endif
 				@endforeach
@@ -234,14 +234,7 @@
    	<div class="row">
    		<div class="cell-7">
 
-            @if (
-                    ($control->status===0) &&
-                    (
-                        (Auth::User()->role===1)||
-                        (Auth::User()->role===2)||
-                        (Auth::User()->role===5)
-                    )
-                )
+            @if ($control->canMake())
 			    <form action="/bob/make/{{ $control->id }}">
 		    		<button class="button success">
 						<span class="mif-assignment"></span>

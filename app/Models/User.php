@@ -22,6 +22,14 @@ class User extends Authenticatable
         'login', 'name', 'email', 'password', 'title', 'role', 'language',
     ];
 
+    /* Roles :
+        1 - Admin
+        2 - User
+        3 - Auditor
+        4 - API
+        5 - Auditee
+    */
+
     /**
      * The attributes that should be hidden for arrays.
      *
