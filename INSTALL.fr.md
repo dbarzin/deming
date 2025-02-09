@@ -2,7 +2,7 @@
 
 ## Configuration recommandée
 
-- OS : Ubuntu 22.04 LTS
+- OS : Ubuntu 24.04.1 LTS
 - RAM : 2G
 - Disque : 30G
 - VCPU 2
@@ -39,19 +39,15 @@ Installer les packages avec composer
 
     composer install
 
-## MySQL
+## Database
 
-Installer MySQL
+Installer la base de données (fonctionne aussi avec PostgreSQL et MySQL)
 
-    sudo apt install mysql-server
+    sudo apt install mariadb-server
 
-Vérifier que vous utilisez MySQL et pas MariaDB (Deming ne fonctionne pas avec MariaDB).
+Lancer MariaDB avec les droits root
 
-    sudo mysql --version
-
-Lancer MySQL avec les droits root
-
-    sudo mysql
+    sudo mariadb
 
 Créer la base de données _deming_ et l'utilisateur _deming_user_
 
