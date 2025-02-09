@@ -1678,6 +1678,7 @@ class ControlController extends Controller
         $templateProcessor->setComplexValue('objective', self::string2Textrun($control->objective));
         $templateProcessor->setComplexValue('input', self::string2Textrun($control->input));
         $templateProcessor->setComplexValue('model', self::string2Textrun($control->model));
+        $templateProcessor->setComplexValue('observations', self::string2Textrun($control->observations));
 
         $templateProcessor->setValue('date', Carbon::today()->format('d/m/Y'));
 
@@ -1697,7 +1698,9 @@ class ControlController extends Controller
         return response()->download($filepath);
     }
 
-    private static function string2Textrun(string $str) {
+    private static function string2Textrun(?string $str) {
+        if ($str === null)
+            return new \PhpOffice\PhpWord\Element\TextRun();
         $textlines = explode("\n", $str);
         $textrun = new \PhpOffice\PhpWord\Element\TextRun();
         $textrun->addText(array_shift($textlines));
