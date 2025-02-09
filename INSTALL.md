@@ -2,7 +2,7 @@
 
 ## Recommended configuration
 
-- OS : Ubuntu 24.04 LTS
+- OS : Ubuntu 24.04.1 LTS
 - RAM : 2G
 - Disk : 30G
 - VCPU 2
@@ -36,19 +36,15 @@ Install packages with composer :
     mkdir -p bootstrap/cache
     composer install
 
-## MySQL
+## Database
 
-Install MySQL
+Install MariaDB (works also with ProgresSQL and MySQL)
 
-    sudo apt install mysql-server
+    sudo apt install mariadb-server
 
-Make sure you're using MySQL and not MariaDB (Deming doesn't work with MariaDB).
+Start database client 
 
-    sudo mysql --version
-
-Run MySQL with root rights
-
-    sudo mysql
+    sudo mariadb
 
 Create database _deming_ and user _deming_user_.
 
@@ -72,7 +68,7 @@ Set database connection parameters :
     vi .env
 
     ## .env file
-    DB_CONNECTION=mysql
+    DB_CONNECTION=mariadb
     DB_HOST=127.0.0.1
     DB_PORT=3306
     DB_DATABASE=deming
