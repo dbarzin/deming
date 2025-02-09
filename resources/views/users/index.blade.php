@@ -65,7 +65,7 @@
 			    <tbody>
 			@foreach($users as $user)
 				<tr>
-					<td><a href="/users/{{ $user->id}}">{{ $user->login==null ? "N/A" : $user->login }}</a></td>
+                    <td><a id="{{$user->login}}" href="/users/{{ $user->id}}">{{ $user->login==null ? "N/A" : $user->login }}</a></td>
 					<td>{{ $user->name }}</td>
                     <td>
                     {{ $user->role==1 ? trans('cruds.user.roles.admin') : "" }}
