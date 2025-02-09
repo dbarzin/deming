@@ -24,8 +24,9 @@ class MeasureController extends Controller
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $measure = Measure::create($request->all());
-        if ($request->has('controls'))
+        if ($request->has('controls')) {
             $measure->controls()->sync($request->input('controls', []));
+        }
 
         return response()->json($measure, 201);
     }
@@ -42,8 +43,9 @@ class MeasureController extends Controller
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $measure->update($request->all());
-        if ($request->has('controls'))
+        if ($request->has('controls')) {
             $measure->controls()->sync($request->input('controls', []));
+        }
 
         return response()->json();
     }

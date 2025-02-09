@@ -146,7 +146,7 @@ class HomeController extends Controller
         // Count number of action plans
         $action_plans_count =
                 DB::table('actions')
-                    ->where('status',0)
+                    ->where('status', 0)
                     ->count();
 
         $request->session()->put('action_plans_count', $action_plans_count);

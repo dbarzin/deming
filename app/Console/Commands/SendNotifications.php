@@ -8,9 +8,8 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Log;
-
-use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class SendNotifications extends Command
 {
@@ -98,53 +97,54 @@ class SendNotifications extends Command
                             $txt .= "<br>\n";
                         }
 
-                    // Create a new PHPMailer instance
-                    $mail = new PHPMailer(true);
+                        // Create a new PHPMailer instance
+                        $mail = new PHPMailer(true);
 
                     // Server settings
-                    $mail->isSMTP();                                     // Use SMTP
-                    $mail->Host        = env('MAIL_HOST');               // Set the SMTP server
-                    $mail->SMTPAuth    = env('MAIL_AUTH');               // Enable SMTP authentication
-                    $mail->Username    = env('MAIL_USERNAME');           // SMTP username
-                    $mail->Password    = env('MAIL_PASSWORD');           // SMTP password
-                    $mail->SMTPSecure  = env('MAIL_SMTP_SECURE',false);  // Enable TLS encryption, `ssl` also accepted
-                    $mail->SMTPAutoTLS = env('MAIL_SMTP_AUTO_TLS');      // Enable auto TLS
-                    $mail->Port        = env('MAIL_PORT');               // TCP port to connect to
+                        $mail->isSMTP();                                     // Use SMTP
+                        $mail->Host = env('MAIL_HOST');               // Set the SMTP server
+                        $mail->SMTPAuth = env('MAIL_AUTH');               // Enable SMTP authentication
+                        $mail->Username = env('MAIL_USERNAME');           // SMTP username
+                        $mail->Password = env('MAIL_PASSWORD');           // SMTP password
+                        $mail->SMTPSecure = env('MAIL_SMTP_SECURE', false);  // Enable TLS encryption, `ssl` also accepted
+                        $mail->SMTPAutoTLS = env('MAIL_SMTP_AUTO_TLS');      // Enable auto TLS
+                        $mail->Port = env('MAIL_PORT');               // TCP port to connect to
 
-                    // Recipients
-                    $mail->setFrom(config('deming.notification.mail-from'));
-                    $mail->addAddress($user->email);
-                    $mail->Subject = config('deming.notification.mail-subject');
+                        // Recipients
+                        $mail->setFrom(config('deming.notification.mail-from'));
+                        $mail->addAddress($user->email);
+                        $mail->Subject = config('deming.notification.mail-subject');
 
-                    // Get message model
-                    $message = config('deming.notification.mail-content');
-                    if (($message==null)||(strlen($message)==0))
-                        $message = trans('cruds.config.notifications.message_default_content');
+                        // Get message model
+                        $message = config('deming.notification.mail-content');
+                        if (($message === null) || (strlen($message) === 0)) {
+                            $message = trans('cruds.config.notifications.message_default_content');
+                        }
 
-                    // Replace %table% in message model
-                    $message = str_replace("%table%",$txt,$message);
+                        // Replace %table% in message model
+                        $message = str_replace('%table%', $txt, $message);
 
-                    // Content
-                    $mail->isHTML(true);
-                    $mail->Body = $message;
+                        // Content
+                        $mail->isHTML(true);
+                        $mail->Body = $message;
 
-                    // Optional: Add DKIM signing
-                    $mail->DKIM_domain = env('MAIL_DKIM_DOMAIN');
-                    $mail->DKIM_private =  env('MAIL_DKIM_PRIVATE');
-                    $mail->DKIM_selector = env('MAIL_DKIM_SELECTOR');
-                    $mail->DKIM_passphrase = env('MAIL_DKIM_PASSPHRASE');
-                    $mail->DKIM_identity = $mail->From;
+                        // Optional: Add DKIM signing
+                        $mail->DKIM_domain = env('MAIL_DKIM_DOMAIN');
+                        $mail->DKIM_private = env('MAIL_DKIM_PRIVATE');
+                        $mail->DKIM_selector = env('MAIL_DKIM_SELECTOR');
+                        $mail->DKIM_passphrase = env('MAIL_DKIM_PASSPHRASE');
+                        $mail->DKIM_identity = $mail->From;
 
-                    // Send email
-                    $mail->send();
+                        // Send email
+                        $mail->send();
 
-                    // Success
-                    Log::debug("Mail sent to {$user->email}");
+                        // Success
+                        Log::debug("Mail sent to {$user->email}");
+                    }
                 }
-            }
-        } catch (Exception $e) {
-            // Log error
-            Log::error("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
+            } catch (Exception $e) {
+                // Log error
+                Log::error("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
             }
         } else {
             Log::debug('SendNotifications - no notifications today');

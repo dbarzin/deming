@@ -223,12 +223,13 @@ class ReportController extends Controller
         // create table
         $table = new Table(
             [
-            'borderSize' => 3,
-            'borderColor' => 'black',
-            'width' => 9800,
-            'unit' => TblWidth::TWIP,
-            'layout' => \PhpOffice\PhpWord\Style\Table::LAYOUT_FIXED,
-            ]);
+                'borderSize' => 3,
+                'borderColor' => 'black',
+                'width' => 9800,
+                'unit' => TblWidth::TWIP,
+                'layout' => \PhpOffice\PhpWord\Style\Table::LAYOUT_FIXED,
+            ]
+        );
         // create header
         $table->addRow();
         $table->addCell(2000, ['bgColor' => '#FFD5CA'])
@@ -391,8 +392,9 @@ class ReportController extends Controller
                 'borderColor' => 'black',
                 'width' => 9800,
                 'unit' => TblWidth::TWIP,
-                'layout' => \PhpOffice\PhpWord\Style\Table::LAYOUT_FIXED
-            ]);
+                'layout' => \PhpOffice\PhpWord\Style\Table::LAYOUT_FIXED,
+            ]
+        );
         // create header
         $table->addRow();
         $table->addCell(2000, ['bgColor' => '#FFD5CA'])
@@ -482,7 +484,7 @@ class ReportController extends Controller
                     'actions.remediation',
                     'actions.due_date',
                 ])
-                ->where('status',0);
+                ->where('status', 0);
         // filter on framework
         if ($framework !== null) {
             $actions = $actions
@@ -530,8 +532,9 @@ class ReportController extends Controller
                 'borderColor' => 'black',
                 'width' => 9800,
                 'unit' => TblWidth::TWIP,
-                'layout' => \PhpOffice\PhpWord\Style\Table::LAYOUT_FIXED
-            ]);
+                'layout' => \PhpOffice\PhpWord\Style\Table::LAYOUT_FIXED,
+            ]
+        );
 
         // create header
         $table->addRow();
@@ -574,7 +577,6 @@ class ReportController extends Controller
             foreach ($textlines as $textline) {
                 $section->addText($textline);
             }
-
         }
 
         $templateProcessor->setComplexBlock('action_plans_table', $table);

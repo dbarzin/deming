@@ -1,12 +1,12 @@
 <?php
+
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-
-use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
+use PHPMailer\PHPMailer\PHPMailer;
 
 class ConfigurationController extends Controller
 {
@@ -27,13 +27,19 @@ class ConfigurationController extends Controller
 
         // set emply message
         $message = null;
-        
+
         // Return
         return view(
             'config',
             compact(
-                'mail_from', 'mail_subject', 'mail_content',
-                'frequency', 'expire_delay', 'reminder', 'message')
+                'mail_from',
+                'mail_subject',
+                'mail_content',
+                'frequency',
+                'expire_delay',
+                'reminder',
+                'message'
+            )
         );
     }
 
@@ -84,13 +90,13 @@ class ConfigurationController extends Controller
                     $mail->isSMTP();                               // Use SMTP
                     // Server settings
                     $mail->isSMTP();                                     // Use SMTP
-                    $mail->Host        = env('MAIL_HOST');               // Set the SMTP server
-                    $mail->SMTPAuth    = env('MAIL_AUTH');               // Enable SMTP authentication
-                    $mail->Username    = env('MAIL_USERNAME');           // SMTP username
-                    $mail->Password    = env('MAIL_PASSWORD');           // SMTP password
-                    $mail->SMTPSecure  = env('MAIL_SMTP_SECURE',false);  // Enable TLS encryption, `ssl` also accepted
+                    $mail->Host = env('MAIL_HOST');               // Set the SMTP server
+                    $mail->SMTPAuth = env('MAIL_AUTH');               // Enable SMTP authentication
+                    $mail->Username = env('MAIL_USERNAME');           // SMTP username
+                    $mail->Password = env('MAIL_PASSWORD');           // SMTP password
+                    $mail->SMTPSecure = env('MAIL_SMTP_SECURE', false);  // Enable TLS encryption, `ssl` also accepted
                     $mail->SMTPAutoTLS = env('MAIL_SMTP_AUTO_TLS');      // Enable auto TLS
-                    $mail->Port        = env('MAIL_PORT');               // TCP port to connect to
+                    $mail->Port = env('MAIL_PORT');               // TCP port to connect to
 
                     // Recipients
                     $mail->setFrom($mail_from);
@@ -99,12 +105,12 @@ class ConfigurationController extends Controller
                     // Content
                     $mail->isHTML(true);                            // Set email format to HTML
                     $mail->Subject = $mail_subject;
-                    $mail->Body    = $mail_content;
+                    $mail->Body = $mail_content;
                     // $mail->AltBody = 'This is the plain text version of the email body';
 
                     // Optional: Add DKIM signing
                     $mail->DKIM_domain = env('MAIL_DKIM_DOMAIN');
-                    $mail->DKIM_private =  env('MAIL_DKIM_PRIVATE');
+                    $mail->DKIM_private = env('MAIL_DKIM_PRIVATE');
                     $mail->DKIM_selector = env('MAIL_DKIM_SELECTOR');
                     $mail->DKIM_passphrase = env('MAIL_DKIM_PASSPHRASE');
                     $mail->DKIM_identity = $mail->From;

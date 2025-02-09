@@ -18,7 +18,7 @@ class Control extends Model
         'attributes',
         'model',
         'action_plan',
-        'plan_date'
+        'plan_date',
     ];
 
     protected $dates = [
@@ -37,8 +37,10 @@ class Control extends Model
         'action_plan',
         'realisation_date',
         'plan_date',
-        'periodicity'
+        'periodicity',
     ];
+
+    private $owners = null;
 
     // Control status :
     // O - Todo => relisation date null
@@ -52,31 +54,36 @@ class Control extends Model
 
     public function actionPlan()
     {
-        return DB::table('actions')->select('id')->where("control_id",'=',$this->id)->get();
+        return DB::table('actions')->select('id')->where('control_id', '=', $this->id)->get();
     }
-
-    private $owners = null;
 
     public function owners()
     {
-        if ($this->owners === null)
+        if ($this->owners === null) {
             $this->owners = $this->belongsToMany(User::class, 'control_user', 'control_id')->orderBy('name');
+        }
         return $this->owners;
     }
 
-    public function canMake() {
-        if ($this->status !== 0)
+    public function canMake()
+    {
+        if ($this->status !== 0) {
             return false;
+        }
 
         // user or admin
-        if ((Auth::User()->role===1)||(Auth::User()->role===2))
+        if ((Auth::User()->role === 1) || (Auth::User()->role === 2)) {
             return true;
+        }
 
         // auditor or auditee
-        if ((Auth::User()->role === 3) || (Auth::User()->role === 5))
-            foreach($this->owners()->get() as $owner)
-                if ($owner->id===Auth::User()->id)
+        if ((Auth::User()->role === 3) || (Auth::User()->role === 5)) {
+            foreach ($this->owners()->get() as $owner) {
+                if ($owner->id === Auth::User()->id) {
                     return true;
+                }
+            }
+        }
 
         return false;
     }

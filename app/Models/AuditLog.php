@@ -4,7 +4,6 @@ namespace App\Models;
 
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Support\Str;
 
 /**
  * App\AuditLog
@@ -34,12 +33,10 @@ class AuditLog extends Model
     public function subjectURL()
     {
         // Trouver la dernière occurrence de "\"
-        $position = strrpos($this->subject_type, "\\");
+        $position = strrpos($this->subject_type, '\\');
 
         // Extraire ce qui suit si "\" est trouvé
-        $resultat = ($position !== false) ? substr($this->subject_type, $position + 1) : $this->subject_type;
-
-        return $resultat;
+        return $position !== false ? substr($this->subject_type, $position + 1) : $this->subject_type;
     }
 
     protected function serializeDate(DateTimeInterface $date)
