@@ -15,7 +15,7 @@ class Action extends Model
         'scope',
         'cause',
         'remediation',
-        'justification'
+        'justification',
     ];
 
     protected $dates = [
@@ -34,7 +34,7 @@ class Action extends Model
         'creation_date',
         'due_date',
         'close_date',
-        'justification'
+        'justification',
     ];
 
     // Control status :

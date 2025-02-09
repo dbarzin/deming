@@ -100,7 +100,7 @@ class MeasureImportController extends Controller
                 // Get full path
                 $fileName = Storage::disk('local')->path($file);
             }
-            
+
             // XLSX
             $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
             $reader->setReadDataOnly(true);

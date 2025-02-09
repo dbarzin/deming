@@ -4,8 +4,8 @@ namespace App\Providers;
 
 use DB;
 use Illuminate\Support\Facades\App;
-use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
 use Log;
@@ -42,13 +42,13 @@ class AppServiceProvider extends ServiceProvider
             });
         }
 
-        if (in_array('keycloak', Config::get('services.socialite_controller.providers'))){
+        if (in_array('keycloak', Config::get('services.socialite_controller.providers'))) {
             Event::listen(function (\SocialiteProviders\Manager\SocialiteWasCalled $event) {
                 $event->extendSocialite('keycloak', \SocialiteProviders\Keycloak\Provider::class);
             });
         }
 
-        if (in_array('oidc', Config::get('services.socialite_controller.providers'))){
+        if (in_array('oidc', Config::get('services.socialite_controller.providers'))) {
             $this->bootOIDCSocialite();
         }
     }

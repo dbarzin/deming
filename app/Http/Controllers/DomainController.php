@@ -151,7 +151,7 @@ class DomainController extends Controller
         // Has measures ?
         if (DB::table('measures')
             ->where('domain_id', $domain->id)
-            ->join('control_measure','measures.id','control_measure.measure_id')
+            ->join('control_measure', 'measures.id', 'control_measure.measure_id')
             ->exists()) {
             return back()
                 ->withErrors(['msg' => 'There are measures associated with this framework !'])

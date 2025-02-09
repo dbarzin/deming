@@ -2,10 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Action;
-use App\Models\Control;
 use App\Exports\ActionsExport;
-
+use App\Models\Action;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -31,51 +29,57 @@ class ActionController extends Controller
 
         // Get type filter
         $type = $request->get('type');
-        if ($type !== null)
+        if ($type !== null) {
             $request->session()->put('type', $type);
-        elseif ($request->has('type'))
+        } elseif ($request->has('type')) {
             $request->session()->forget('type');
-        else
+        } else {
             $type = $request->session()->get('type');
+        }
 
         // Get status filter
         $status = $request->get('status');
-        if ($status !== null)
+        if ($status !== null) {
             $request->session()->put('status', $status);
-        elseif ($request->has('status'))
+        } elseif ($request->has('status')) {
             $request->session()->forget('status');
-        else
+        } else {
             $status = $request->session()->get('status');
+        }
 
         // Get scope filter
         $scope = $request->get('scope');
-        if ($scope !== null)
+        if ($scope !== null) {
             $request->session()->put('scope', $scope);
-        elseif ($request->has('scope'))
+        } elseif ($request->has('scope')) {
             $request->session()->forget('scope');
-        else
+        } else {
             $scope = $request->session()->get('scope');
+        }
 
         // Build query
         $actions = DB::table('actions')
             ->leftjoin('controls', 'control_id', '=', 'controls.id');
 
         // filter on type
-        if (($type!==null) && (strlen($type)>0))
-            $actions = $actions->where("type",$type);
+        if (($type !== null) && (strlen($type) > 0)) {
+            $actions = $actions->where('type', $type);
+        }
 
         // filter on status
-        if ($status=="0")
-            $actions = $actions->where("actions.status",0);
-        elseif ($status=="1")
-            $actions = $actions->where("actions.status",1);
+        if ($status === '0') {
+            $actions = $actions->where('actions.status', 0);
+        } elseif ($status === '1') {
+            $actions = $actions->where('actions.status', 1);
+        }
 
         // filter on scope
-        if (($scope!==null) && (strlen($scope)>0))
-            $actions = $actions->where("actions.scope",$scope);
+        if (($scope !== null) && (strlen($scope) > 0)) {
+            $actions = $actions->where('actions.scope', $scope);
+        }
 
         // filter on auditee controls
-        if (Auth::User()->role == 5) {
+        if (Auth::User()->role === 5) {
             $actions = $actions
                 ->leftjoin('action_user', 'controls.id', '=', 'control_user.control_id')
                 ->where('action_user.user_id', '=', Auth::User()->id);
@@ -100,7 +104,7 @@ class ActionController extends Controller
         $types = DB::table('actions')
             ->select('type')
             ->whereNotNull('type')
-            ->where('status','<>',3)
+            ->where('status', '<>', 3)
             ->distinct()
             ->orderBy('type')
             ->get()
@@ -111,7 +115,7 @@ class ActionController extends Controller
         $scopes = DB::table('actions')
             ->select('scope')
             ->whereNotNull('scope')
-            ->where('status','<>',3)
+            ->where('status', '<>', 3)
             ->distinct()
             ->orderBy('scope')
             ->get()
@@ -195,7 +199,7 @@ class ActionController extends Controller
         $action->remediation = request('remediation');
         $action->update();
 
-        return redirect("/actions");
+        return redirect('/actions');
     }
 
     /**
@@ -208,9 +212,9 @@ class ActionController extends Controller
     public function show(int $id)
     {
         abort_if(
-            ! ((Auth::User()->role == 1) ||
-            (Auth::User()->role == 2) ||
-            (Auth::User()->role == 3)),
+            ! ((Auth::User()->role === 1) ||
+            (Auth::User()->role === 2) ||
+            (Auth::User()->role === 3)),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -238,9 +242,9 @@ class ActionController extends Controller
     public function edit(int $id)
     {
         abort_if(
-            ! ((Auth::User()->role == 1) ||
-            (Auth::User()->role == 2) ||
-            (Auth::User()->role == 3)),
+            ! ((Auth::User()->role === 1) ||
+            (Auth::User()->role === 2) ||
+            (Auth::User()->role === 3)),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -290,7 +294,7 @@ class ActionController extends Controller
 
         // Get users
         $users = DB::table('users')
-            ->select('id','name')
+            ->select('id', 'name')
             ->orderBy('name')
             ->get();
 
@@ -312,8 +316,8 @@ class ActionController extends Controller
     public function create()
     {
         abort_if(
-            ! ((Auth::User()->role == 1) ||
-            (Auth::User()->role == 2)),
+            ! ((Auth::User()->role === 1) ||
+            (Auth::User()->role === 2)),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -348,7 +352,7 @@ class ActionController extends Controller
 
         // Get users
         $users = DB::table('users')
-            ->select('id','name')
+            ->select('id', 'name')
             ->orderBy('name')
             ->get();
 
@@ -370,8 +374,8 @@ class ActionController extends Controller
     public function store(Request $request)
     {
         abort_if(
-            ! ((Auth::User()->role == 1) ||
-            (Auth::User()->role == 2)),
+            ! ((Auth::User()->role === 1) ||
+            (Auth::User()->role === 2)),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -401,9 +405,7 @@ class ActionController extends Controller
 
         // Return
         return redirect('/actions');
-
     }
-
 
     /**
      * Show Close action.
@@ -415,9 +417,9 @@ class ActionController extends Controller
     public function close(int $id)
     {
         abort_if(
-            ! ((Auth::User()->role == 1) ||
-            (Auth::User()->role == 2) ||
-            (Auth::User()->role == 3)),
+            ! ((Auth::User()->role === 1) ||
+            (Auth::User()->role === 2) ||
+            (Auth::User()->role === 3)),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -435,7 +437,6 @@ class ActionController extends Controller
             ->with('action', $action);
     }
 
-
     /**
      * Show Close action.
      *
@@ -446,9 +447,9 @@ class ActionController extends Controller
     public function doClose(Request $request)
     {
         abort_if(
-            ! ((Auth::User()->role == 1) ||
-            (Auth::User()->role == 2) ||
-            (Auth::User()->role == 3)),
+            ! ((Auth::User()->role === 1) ||
+            (Auth::User()->role === 2) ||
+            (Auth::User()->role === 3)),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -463,9 +464,9 @@ class ActionController extends Controller
         abort_if($action === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // Get fields
-        $action->status=request('status');
-        $action->close_date=request('close_date');
-        $action->justification=request('justification');
+        $action->status = request('status');
+        $action->close_date = request('close_date');
+        $action->justification = request('justification');
 
         // Save action
         $action->save();
@@ -492,7 +493,8 @@ class ActionController extends Controller
         );
     }
 
-    public function delete() {
+    public function delete()
+    {
         // For administrators and users only
         abort_if(
             Auth::User()->role !== 1 && Auth::User()->rol !== 2,
@@ -501,7 +503,7 @@ class ActionController extends Controller
         );
 
         // Get the action plan
-        $id = (int)request('id');
+        $id = (int) request('id');
         $action = Action::find($id);
 
         // Action not found
@@ -519,5 +521,4 @@ class ActionController extends Controller
         // Return
         return redirect('/actions');
     }
-
 }

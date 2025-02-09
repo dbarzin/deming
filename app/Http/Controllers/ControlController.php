@@ -3,12 +3,11 @@
 namespace App\Http\Controllers;
 
 use App\Exports\ControlsExport;
+use App\Models\Action;
 use App\Models\Control;
 use App\Models\Document;
 use App\Models\Domain;
 use App\Models\User;
-use App\Models\Action;
-
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -256,7 +255,7 @@ class ControlController extends Controller
         }
 
         // get action plan associated
-        $controls = $controls-> leftjoin("actions","actions.control_id","=","c1.id");
+        $controls = $controls->leftjoin('actions', 'actions.control_id', '=', 'c1.id');
 
         // Query DB
         $controls = $controls
@@ -613,12 +612,13 @@ class ControlController extends Controller
         // Workstation not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
-        $request->merge($control->only(
-            [
-                "name","scope", "objective",
-                "input", "periodicity", "model", "action_plan",
-                "plan_date"
-            ]
+        $request->merge(
+            $control->only(
+                [
+                    'name','scope', 'objective',
+                    'input', 'periodicity', 'model', 'action_plan',
+                    'plan_date',
+                ]
             )
         );
         $request->merge(['measures' => $control->measures()->pluck('id')->toArray()]);
@@ -1257,7 +1257,8 @@ class ControlController extends Controller
     public function doMake(Request $request)
     {
         // Not for API
-        abort_if(Auth::User()->role === 4,
+        abort_if(
+            Auth::User()->role === 4,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1266,7 +1267,7 @@ class ControlController extends Controller
 
         // for (aditee or auditor) only if he is assigne to that control
         abort_if(
-            ((Auth::User()->role === 3)||(Auth::User()->role === 5)) &&
+            ((Auth::User()->role === 3) || (Auth::User()->role === 5)) &&
                 ! DB::table('control_user')
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
@@ -1319,17 +1320,16 @@ class ControlController extends Controller
                 // Sync measures
                 $measures = DB::table('control_measure')
                     ->select('measure_id')
-                    ->where('control_id',$control->id)
+                    ->where('control_id', $control->id)
                     ->pluck('measure_id')->toArray();
                 $action->measures()->sync($measures);
 
                 // Sync owners
                 $owners = DB::table('control_user')
                     ->select('user_id')
-                    ->where('control_id',$control->id)
+                    ->where('control_id', $control->id)
                     ->pluck('user_id')->toArray();
                 $action->owners()->sync($owners);
-
             }
         } else {
             $control->realisation_date = date('Y-m-d', strtotime('today'));
@@ -1456,7 +1456,7 @@ class ControlController extends Controller
 
         // for aditee only if he is assigned to that control
         abort_if(
-            ((Auth::User()->role === 3)||(Auth::User()->role === 5)) &&
+            ((Auth::User()->role === 3) || (Auth::User()->role === 5)) &&
                 ! DB::table('control_user')
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
@@ -1652,7 +1652,7 @@ class ControlController extends Controller
 
         // for (aditee or auditor) only if he is assigne to that control
         abort_if(
-            ((Auth::User()->role === 3)||(Auth::User()->role === 5)) &&
+            ((Auth::User()->role === 3) || (Auth::User()->role === 5)) &&
                 ! DB::table('control_user')
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
@@ -1674,7 +1674,9 @@ class ControlController extends Controller
         $templateProcessor = new PhpWordTemplateProcessor($template_filename);
 
         // Replace names
-        $clauses = $control->measures->map(function($measure) { return $measure->clause; })->implode(", ");
+        $clauses = $control->measures->map(function ($measure) {
+            return $measure->clause;
+        })->implode(', ');
 
         $templateProcessor->setValue('ref', $clauses);
         $templateProcessor->setValue('name', $control->name);
@@ -1704,9 +1706,11 @@ class ControlController extends Controller
         return response()->download($filepath);
     }
 
-    private static function string2Textrun(?string $str) {
-        if ($str === null)
+    private static function string2Textrun(?string $str)
+    {
+        if ($str === null) {
             return new \PhpOffice\PhpWord\Element\TextRun();
+        }
         $textlines = explode("\n", $str);
         $textrun = new \PhpOffice\PhpWord\Element\TextRun();
         $textrun->addText(array_shift($textlines));

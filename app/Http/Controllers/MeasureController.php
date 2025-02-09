@@ -49,16 +49,16 @@ class MeasureController extends Controller
                     'measures.domain_id',
                     'measures.clause',
                     'measures.name',
-                    'domains.title'
+                    'domains.title',
                 ]
             )
             ->join('domains', 'domains.id', '=', 'measures.domain_id')
             ->addSelect(
                 ['control_count' => DB::table('controls')
-                        ->selectRaw('count(*) as controls_count')
-                        ->leftjoin('control_measure', 'control_measure.measure_id', 'measures.id')
-                        ->whereColumn('control_measure.control_id', 'controls.id')
-                        ->whereIn('controls.status', [0,1])
+                    ->selectRaw('count(*) as controls_count')
+                    ->leftjoin('control_measure', 'control_measure.measure_id', 'measures.id')
+                    ->whereColumn('control_measure.control_id', 'controls.id')
+                    ->whereIn('controls.status', [0,1]),
                 ]
             );
 
@@ -383,13 +383,15 @@ class MeasureController extends Controller
 
         // Check measure exists
         abort_if(
-            !DB::table('measures')->where('id', $request->id)->exists(),
-            Response::HTTP_NOT_FOUND, '404 Not Found');
+            ! DB::table('measures')->where('id', $request->id)->exists(),
+            Response::HTTP_NOT_FOUND,
+            '404 Not Found'
+        );
 
         // Has controls ?
         if (DB::table('measures')
             ->where('id', $request->id)
-            ->join('control_measure','measures.id','control_measure.measure_id')
+            ->join('control_measure', 'measures.id', 'control_measure.measure_id')
             ->exists()) {
             return back()
                 ->withErrors(['msg' => 'There are controls associated with this measure !'])

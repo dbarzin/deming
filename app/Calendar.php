@@ -15,7 +15,7 @@ class Calendar
 
     public function __construct($dateInput = null)
     {
-        $this->date = DateTime::createFromFormat('d/m/Y', "01/".$dateInput)->getTimestamp();
+        $this->date = DateTime::createFromFormat('d/m/Y', '01/'.$dateInput)->getTimestamp();
         $this->active_year = $dateInput !== null ? date('Y', $this->date) : date('Y');
         $this->active_month = $dateInput !== null ? date('m', $this->date) : date('m');
         $this->active_day = $dateInput !== null ? date('d', $this->date) : date('d');
