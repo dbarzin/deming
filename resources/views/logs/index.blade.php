@@ -33,7 +33,7 @@
                 <th class="sortable-column">
                     {{ trans('cruds.log.host') }}
                 </th>
-                <th class="sortable-column">
+                <th class="sortable-column sort-desc">
                     {{ trans('cruds.log.timestamp') }}
                 </th>
                 <th>
