@@ -14,7 +14,6 @@ RUN apt-get install -y --no-install-recommends \
     php-mbstring \
     php-curl \
     php-xml \
-    mariadb-server \
     cron \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
