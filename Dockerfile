@@ -1,19 +1,19 @@
-FROM --platform=amd64 nginx:bookworm
+FROM nginx:bookworm
 
 RUN apt update && apt dist-upgrade -y
 RUN apt-get install -y --no-install-recommends \
-    git=1:2.39.5-* \
-    composer=2.5.5-* \
-    php=2:8.2* \
-    php-cli=2:8.2* \
+    git \
+    composer \
+    php \
+    php-cli \
     php-opcache \
-    php-mysql=2:8.2* \
-    php-pgsql=2:8.2* \
-    php-zip=2:8.2* \
-    php-gd=2:8.2* \
-    php-mbstring=2:8.2* \
-    php-curl=2:8.2* \
-    php-xml=2:8.2* \
+    php-mysql \
+    php-pgsql \
+    php-zip \
+    php-gd \
+    php-mbstring \
+    php-curl \
+    php-xml \
     mariadb-server \
     cron \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
@@ -46,4 +46,4 @@ RUN chmod u+x /opt/entrypoint.sh
 
 EXPOSE 80
 
-ENTRYPOINT "/opt/entrypoint.sh"
+ENTRYPOINT ["/opt/entrypoint.sh"]
