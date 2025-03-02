@@ -4,10 +4,10 @@ services:
     image: deming
     depends_on:
         mysql:
-            condition: service_healthy    
+            condition: service_healthy
     build:
         context: .
-        dockerfile: Dockerfile_web
+        dockerfile: Dockerfile
     environment:
         DB_HOST: mysql
         DB_DATABASE: 'deming'
@@ -43,12 +43,12 @@ services:
       MYSQL_PASSWORD: 'demPasssword-123'
       MYSQL_ROOT_PASSWORD: 'root'
     expose:
-      - 3306
+        - 3306
     healthcheck:
-      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$${MYSQL_ROOT_PASSWORD}"]
-      interval: 10s
-      timeout: 5s
-      retries: 3
+        test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$${MYSQL_ROOT_PASSWORD}"]
+        interval: 10s
+        timeout: 5s
+        retries: 3
 ### PLEASE ENABLE FOR PERSISTENT DATABASE DATA
     volumes:
       - dbdata:/var/lib/mysql
