@@ -1,7 +1,7 @@
 #!/bin/bash
 
 # Définit un délai de sommeil par défaut de 10 secondes
-DEFAULT_SLEEP=1 
+DEFAULT_SLEEP=1
 
 # Vérifie si la variable d'environnement RESET_DB_SLEEP est définie
 if [ -n "${DB_SLEEP}" ]; then
@@ -22,7 +22,7 @@ if [ "${INITIAL_DB}" = "EN" ]; then
     # Se déplace vers le répertoire /var/www/deming/
     cd /var/www/deming/
     # Exécute la commande
-    php artisan migrate --seed
+    php artisan migrate --seed --force
     # Exit avec le code 0 pour indiquer que le script s'est terminé avec succès
     exit 0
 fi
@@ -30,7 +30,7 @@ if [ "${INITIAL_DB}" = "FR" ]; then
     # Se déplace vers le répertoire /var/www/deming/
     cd /var/www/deming/
     # Exécute la commande
-    LANG=fr php artisan migrate --seed
+    LANG=fr php artisan migrate --seed --force
     # Exit avec le code 0 pour indiquer que le script s'est terminé avec succès
     exit 0
 fi
