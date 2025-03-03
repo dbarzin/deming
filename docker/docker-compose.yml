@@ -1,40 +1,33 @@
 version: "3.7"
 services:
   web:
-    image: deming
-    depends_on:
-        mysql:
-            condition: service_healthy
     build:
-        context: .
-        dockerfile: Dockerfile
+      context: .
+      dockerfile: Dockerfile_web
     environment:
-        DB_HOST: mysql
-        DB_DATABASE: 'deming'
-        DB_USER: 'deming_user'
-        DB_PASSWORD: 'demPasssword-123'
-        DB_ROOT_PASSWORD: 'root'
-        ### PLEASE DISABLE AFTER THE FIRST RUN FOR OPTIMIZATION PRODUCTION
-        DB_SLEEP=10
-        ### PLEASE DISABLE FOR PRODUCTION
-        USE_DEMO_DATA=1
-        ### PLEASE DISABLE FOR PRODUCTION
-        RESET_DB=FR #EN OR FR
-        ### PLEASE AFTER ONE RUN DISABLE FOR OPTIMIZATION
-        UPLOAD_DB_ISO27001=FR #EN OR FR
-        ### PLEASE AFTER ONE RUN DISABLE FOR OPTIMIZATION
-        INITIAL_DB=FR #EN OR FR
-        TZ=Europe/Paris
+      ### PLEASE DISABLE AFTER THE FIRST RUN FOR OPTIMIZATION PRODUCTION
+      - DB_SLEEP=10
+      ### PLEASE DISABLE FOR PRODUCTION
+      - USE_DEMO_DATA=1
+      ### PLEASE DISABLE FOR PRODUCTION
+      #- RESET_DB=FR #EN OR FR
+      ### PLEASE AFTER ONE RUN DISABLE FOR OPTIMIZATION
+      - UPLOAD_DB_ISO27001=FR #EN OR FR
+      ### PLEASE AFTER ONE RUN DISABLE FOR OPTIMIZATION
+      - INITIAL_DB=FR #EN OR FR
+      - TZ=Europe/Paris
     volumes:
-        - ./custom/.env:/var/www/deming/.env
-        - ./custom/custom_postfix_main.cf:/etc/postfix/main.cf
-        - ./custom/custom_postfix_mailname:/etc/mailname
-        - ./custom/deming.php:/var/www/deming/config/deming.php
-        - ./custom/Kernel.php:/var/www/deming/app/Console/Kernel.php
-        - ./custom/app.php:/var/www/deming/config/app.php
+      - ./custom/.env:/var/www/deming/.env
+      - ./custom/custom_postfix_main.cf:/etc/postfix/main.cf
+      - ./custom/custom_postfix_mailname:/etc/mailname
+      - ./custom/deming.php:/var/www/deming/config/deming.php
+      - ./custom/Kernel.php:/var/www/deming/app/Console/Kernel.php
+      - ./custom/app.php:/var/www/deming/config/app.php
     ports:
-        - 8000:80
-
+      - 80:80
+    depends_on:
+      mysql:
+        condition: service_healthy
   mysql:
     image: mysql:8
     environment:
@@ -43,12 +36,12 @@ services:
       MYSQL_PASSWORD: 'demPasssword-123'
       MYSQL_ROOT_PASSWORD: 'root'
     expose:
-        - 3306
+      - 3306
     healthcheck:
-        test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$${MYSQL_ROOT_PASSWORD}"]
-        interval: 10s
-        timeout: 5s
-        retries: 3
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$${MYSQL_ROOT_PASSWORD}"]
+      interval: 10s
+      timeout: 5s
+      retries: 3
 ### PLEASE ENABLE FOR PERSISTENT DATABASE DATA
     volumes:
       - dbdata:/var/lib/mysql
