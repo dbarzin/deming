@@ -1,55 +1,49 @@
-FROM php:8.2-fpm
+FROM --platform=amd64 nginx:bookworm
 
-# Installer les extensions PHP nécessaires
-RUN apt-get update && apt-get install -y \
-    git \
+RUN apt update && apt dist-upgrade -y
+RUN apt-get install -y --no-install-recommends \
+    git=1:2.39.5-* \
+    composer=2.5.5-* \
+    php=2:8.2* \
+    php-cli=2:8.2* \
+    php-opcache \
+    php-mysql=2:8.2* \
+    php-pgsql=2:8.2* \
+    php-zip=2:8.2* \
+    php-gd=2:8.2* \
+    php-mbstring=2:8.2* \
+    php-curl=2:8.2* \
+    php-xml=2:8.2* \
+    mariadb-server \
     cron \
-    nginx \
-    php-mysql \
-    php-pgsql \
-    php-zip \
-    php-gd \
-    php-mbstring \
-    php-curl \
-    php-xml \
     && apt-get clean && rm -rf /var/lib/apt/lists/*
 
-# Installer Composer
-COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
+RUN touch /etc/mailname
+RUN echo "sender@yourdomain.org" > /etc/mailname
+RUN echo "* * * * * root cd /var/www/deming && php artisan schedule:run >> /dev/null 2>&1" >> /etc/crontab
+RUN useradd -ms /bin/bash deming
+RUN mkdir -p /var/www/deming
 
-# Définir le répertoire de travail
 WORKDIR /var/www/deming
 
-# Cloner le dépôt Git
 RUN git clone https://www.github.com/dbarzin/deming .
-
-# Copier les fichiers de configuration
-COPY docker/deming.conf /etc/nginx/conf.d/default.conf
-COPY docker/userdemo.sh /etc/userdemo.sh
+RUN cp docker/deming.conf /etc/nginx/conf.d/default.conf
+RUN cp docker/userdemo.sh /etc/userdemo.sh
 COPY docker/resetdb.sh /etc/resetdb.sh
-COPY docker/uploadiso27001db.sh /etc/uploadiso27001db.sh
+RUN cp docker/uploadiso27001db.sh /etc/uploadiso27001db.sh
 COPY docker/initialdb.sh /etc/initialdb.sh
-COPY docker/entrypoint.sh /opt/entrypoint.sh
-
-# Rendre les scripts exécutables
-RUN chmod +x /etc/*.sh /opt/entrypoint.sh
-
-# Configurer les permissions
-RUN mkdir -p storage/framework/views storage/framework/cache storage/framework/sessions bootstrap/cache
-RUN chmod -R 775 storage bootstrap/cache
-RUN chown -R www-data:www-data storage bootstrap/cache
-
-# Installer les dépendances PHP
+RUN chmod +x /etc/*.sh
+RUN mkdir -p storage/framework/views && mkdir -p storage/framework/cache && mkdir -p storage/framework/sessions && mkdir -p bootstrap/cache
+RUN chmod -R 775 /var/www/deming/storage && chown -R www-data:www-data /var/www/deming
 RUN composer install
 RUN php artisan vendor:publish --all
 
-# Configurer le fichier .env
 RUN cp .env.example .env
 RUN sed -i 's/DB_HOST=127\.0\.0\.1/DB_HOST=mysql/' .env
 
-# Exposer le port 80
+COPY docker/entrypoint.sh /opt/entrypoint.sh
+RUN chmod u+x /opt/entrypoint.sh
+
 EXPOSE 80
 
-# Démarrer Nginx et PHP-FPM
-ENTRYPOINT ["/opt/entrypoint.sh"]
-CMD ["nginx", "-g", "daemon off;"]
+ENTRYPOINT "/opt/entrypoint.sh"
