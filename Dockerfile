@@ -1,4 +1,4 @@
-FROM --platform=amd64 nginx:bookworm
+FROM nginx:bookworm
 
 RUN apt update && apt dist-upgrade -y
 RUN apt-get install -y --no-install-recommends \
@@ -46,4 +46,4 @@ RUN chmod u+x /opt/entrypoint.sh
 
 EXPOSE 80
 
-ENTRYPOINT "/opt/entrypoint.sh"
+ENTRYPOINT ["/opt/entrypoint.sh"]
