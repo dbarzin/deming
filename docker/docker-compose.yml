@@ -24,8 +24,6 @@ services:
       - ./docker/custom/app.php:/var/www/deming/config/app.php
     ports:
       - 80:8000
-    networks:
-      - deming
     depends_on:
       mysql:
         condition: service_healthy
@@ -38,8 +36,6 @@ services:
       MYSQL_ROOT_PASSWORD: 'root'
     expose:
       - 3306
-    networks:
-      - deming
     healthcheck:
       test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p$${MYSQL_ROOT_PASSWORD}"]
       interval: 10s
