@@ -1,9 +1,8 @@
-version: "3.7"
 services:
-  web:
+  deming:
     build:
       context: .
-      dockerfile: Dockerfile_web
+      dockerfile: Dockerfile
     environment:
       ### PLEASE DISABLE AFTER THE FIRST RUN FOR OPTIMIZATION PRODUCTION
       - DB_SLEEP=10
@@ -17,19 +16,19 @@ services:
       - INITIAL_DB=FR #EN OR FR
       - TZ=Europe/Paris
     volumes:
-      - ./custom/.env:/var/www/deming/.env
-      - ./custom/custom_postfix_main.cf:/etc/postfix/main.cf
-      - ./custom/custom_postfix_mailname:/etc/mailname
-      - ./custom/deming.php:/var/www/deming/config/deming.php
-      - ./custom/Kernel.php:/var/www/deming/app/Console/Kernel.php
-      - ./custom/app.php:/var/www/deming/config/app.php
+      - .env:/var/www/deming/.env
+      - ./docker/custom/custom_postfix_main.cf:/etc/postfix/main.cf
+      - ./docker/custom/custom_postfix_mailname:/etc/mailname
+      - ./docker/custom/deming.php:/var/www/deming/config/deming.php
+      - ./docker/custom/Kernel.php:/var/www/deming/app/Console/Kernel.php
+      - ./docker/custom/app.php:/var/www/deming/config/app.php
     ports:
-      - 80:80
+      - 80:8000
     depends_on:
       mysql:
         condition: service_healthy
   mysql:
-    image: mysql:8
+    image: mysql:9
     environment:
       MYSQL_DATABASE: 'deming'
       MYSQL_USER: 'deming_user'
