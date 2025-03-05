@@ -92,7 +92,8 @@ git clone https://github.com/dbarzin/deming.git
 cd deming
 cp .env.example .env
 sed -i 's/DB_HOST=127.0.0.1/DB_HOST=mysql/' .env
-docker compose up```
+docker compose up
+```
 
 ## :car: Roadmap
 
