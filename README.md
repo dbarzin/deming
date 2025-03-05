@@ -83,6 +83,17 @@ Follow the [installation procedure for Debian](https://github.com/dbarzin/deming
 
 Follow the [installation procedure for Ubuntu](https://github.com/dbarzin/deming/blob/main/INSTALL.md) to set up the application.
 
+### 🐳 Docker Installation
+
+Get up and running quickly using Docker. Run a local instance in development mode:
+
+```bash
+git clone https://github.com/dbarzin/deming.git
+cd deming
+cp .env.example .env
+sed -i 's/DB_HOST=127.0.0.1/DB_HOST=mysql/' .env
+docker compose up```
+
 ## :car: Roadmap
 
 Consult the [roadmap](https://github.com/dbarzin/deming/blob/main/ROADMAP.md) to discover future developments of **Deming**.
