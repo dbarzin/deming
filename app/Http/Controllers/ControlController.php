@@ -1135,6 +1135,9 @@ class ControlController extends Controller
             $prev_control->update();
         }
 
+        // Delete measure_control items
+        $control->measures()->detach();
+
         // Delete control
         $control->delete();
 
