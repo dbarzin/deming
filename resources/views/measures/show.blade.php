@@ -186,9 +186,7 @@
             @foreach($controls as $control)
 				<tr>
 					<td>
-                        <a id="{{ $control->name }}" href="/bob/show/{{$control->id}}">
-                            {{ $control->name }}
-						</a>
+                        {{ $control->name }}
 					</td>
 					<td>
                         <a id="{{ $control->scope }}" href="/bob/show/{{$control->id}}">
