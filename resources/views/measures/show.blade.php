@@ -163,6 +163,83 @@
 			</form>
             @endif
 		</div>
+        <div>
+            <br><br>
+        </div>
+        <div>
+			<table class="table striped row-hover cell-border"
+       data-role="table"
+                data-show-search="false"
+                    data-show-pagination="false"
+                    data-show-rows-steps="false"
+                   >
+			   <thead>
+                    <tr class="row-hover">
+                        <th class="sortable-column sort-asc" width="65%">{{ trans("cruds.welcome.controls") }}</th>
+                        <th class="sortable-column sort-asc" width="65%">{{ trans("cruds.control.fields.scope") }}</th>
+                        <th class="sortable-column sort-asc" width="5%">{{ trans("cruds.control.fields.score") }}</th>
+                        <th class="sortable-column sort-asc" width="15%">{{ trans("cruds.control.fields.plan_date") }}</th>
+                        <th class="sortable-column sort-asc" width="15%">{{ trans("cruds.control.fields.realisation_date") }}</th>
+				    </tr>
+			    </thead>
+			    <tbody>
+            @foreach($controls as $control)
+				<tr>
+					<td>
+                        {{ $control->name }}
+					</td>
+					<td>
+                        <a id="{{ $control->scope }}" href="/bob/show/{{$control->id}}">
+                            {{ $control->scope }}
+						</a>
+					</td>
+                    <td>
+                        <center id="{{ $control->score }}">
+                            @if ($control->score==1)
+                                &#128545;
+                            @elseif ($control->score==2)
+                                &#128528;
+                            @elseif ($control->score==3)
+                                <span style="filter: sepia(1) saturate(5) hue-rotate(70deg)">&#128512;</span>
+                            @else
+                                &#9675; <!-- &#9899; -->
+                            @endif
+                        </center>
+					</td>
+					<td>
+                        <!-- format in red when month passed -->
+                        @if (($control->status === 0)||($control->status === 1))
+                        <a id="{{ $control->plan_date }}" href="/bob/show/{{$control->id}}">
+                        <b> @if (today()->lte($control->plan_date))
+                                <font color="green">{{ $control->plan_date }}</font>
+                            @else
+                                <font color="red">{{ $control->plan_date }}</font>
+                            @endif
+                        </b>
+                        </a>
+                        @else
+                            {{ $control->plan_date }}
+                        @endif
+					</td>
+					<td>
+                        <b id="{{ $control->realisation_date }}">
+                            <a href="/bob/show/{{$control->id}}">
+                                {{ $control->realisation_date }}
+                            </a>
+                            @if ( ($control->status===1 )&& ((Auth::User()->role===1)||(Auth::User()->role===2)))
+                                &nbsp;
+                                <a href="/bob/make/{{ $control->id }}">&#8987;</a>
+                            @endif
+                        </b>
+					</td>
+                </tr>
+            @endforeach
+            </tbody>
+            </table>
+        </div>
+        <div>
+            <br><br>
+        </div>
 	</div>
 </div>
 @endsection
