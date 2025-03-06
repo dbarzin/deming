@@ -205,5 +205,4 @@ class HomeController extends Controller
             return $expanded;
         });
     }
-
 }
