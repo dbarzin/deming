@@ -50,7 +50,7 @@ class ControlController extends Controller
         $attributes = array_unique($attributes);
         */
         // get all clauses
-        $clauses = DB::table('measures')->select('clause')->get()->pluck("clause")->toArray();
+        $clauses = DB::table('measures')->select('clause')->get()->pluck('clause')->toArray();
 
         // get domain base on his title
         $domain_title = $request->get('domain_title');
@@ -104,7 +104,7 @@ class ControlController extends Controller
         if ($clause !== null) {
             if ($clause === 'none') {
                 $request->session()->forget('clause');
-                $clause=null;
+                $clause = null;
             } else {
                 $request->session()->put('clause', $clause);
             }
@@ -126,6 +126,7 @@ class ControlController extends Controller
         }
 
         // Attribute filter
+        /*
         $attribute = $request->get('attribute');
         if ($attribute !== null) {
             if ($attribute === 'none') {
@@ -137,6 +138,7 @@ class ControlController extends Controller
         } else {
             $attribute = $request->session()->get('attribute');
         }
+        */
 
         // Period filter
         $period = $request->get('period');
@@ -203,7 +205,7 @@ class ControlController extends Controller
 
         // Filter on clause
         if ($clause !== null) {
-            $controls = $controls->where('clause','=', $clause);
+            $controls = $controls->where('clause', '=', $clause);
         }
 
         // Filter on scope
@@ -212,6 +214,7 @@ class ControlController extends Controller
         }
 
         // filter on measure
+        /*
         if ($request->measure !== null) {
             $controls = $controls->where(
                 'control_measure.measure_id',
@@ -219,6 +222,7 @@ class ControlController extends Controller
                 $request->measure
             );
         }
+        */
 
         // Filter on period
         if ($period !== null && $period !== 99) {

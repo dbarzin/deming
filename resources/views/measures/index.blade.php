@@ -77,7 +77,7 @@
 					<td>{{ $measure->name }}</td>
 					<td id="{{ $measure->control_count }}">
 						@if ($measure->control_count>0)
-						<a href="/bob/index?period=99&domain=0&scope=none&status=2&measure={{ $measure->id }}">
+                        <a href="/bob/index?period=99&domain=0&scope=none&status=2&clause={{ htmlentities($measure->clause) }}">
 							{{ $measure->control_count }}
 						</a>
 						@else
