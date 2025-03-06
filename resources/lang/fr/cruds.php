@@ -67,6 +67,7 @@ return [
             'choose_scope' => 'Choisir un périmètre',
             'choose_period' => 'Choisir une periode',
             'choose_attribute' => 'Choisir un attribut',
+            'choose_clause' => 'Choisir une clause',
             'clause' => 'Clause',
             'clauses' => 'Clauses',
             'domain' => 'Domaine',

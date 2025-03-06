@@ -47,6 +47,7 @@ return [
             'choose_scope' => 'Wähle Geltungsbereich',
             'choose_period' => 'Wähle Periode',
             'choose_attribute' => 'Wähle Attribute',
+            'choose_clause' => 'Wähle Clause',
             'domain' => 'Domäne',
             'indicator' => 'Funktion',
             'measure' => 'Maßnahme',

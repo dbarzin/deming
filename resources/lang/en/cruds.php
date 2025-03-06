@@ -67,6 +67,7 @@ return [
             'choose_scope' => 'Choose scope',
             'choose_period' => 'Choose period',
             'choose_attribute' => 'Choose attribute',
+            'choose_clause' => 'Choose clause',
             'domain' => 'Domain',
             'indicator' => 'Function',
             'measure' => 'Measure',

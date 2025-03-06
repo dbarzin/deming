@@ -35,6 +35,7 @@ class ControlController extends Controller
         // get all domains
         $domains = Domain::All();
 
+        /*
         // get all attributes
         $attributes = [];
         $allAttributes = DB::table('measures')->select('attributes')->get();
@@ -47,6 +48,9 @@ class ControlController extends Controller
         }
         sort($attributes);
         $attributes = array_unique($attributes);
+        */
+        // get all clauses
+        $clauses = DB::table('measures')->select('clause')->get()->pluck("clause")->toArray();
 
         // get domain base on his title
         $domain_title = $request->get('domain_title');
@@ -93,6 +97,19 @@ class ControlController extends Controller
             }
         } else {
             $domain = $request->session()->get('domain');
+        }
+
+        // Clause filter
+        $clause = $request->get('clause');
+        if ($clause !== null) {
+            if ($clause === 'none') {
+                $request->session()->forget('clause');
+                $clause=null;
+            } else {
+                $request->session()->put('clause', $clause);
+            }
+        } else {
+            $clause = $request->session()->get('clause');
         }
 
         // Scope filter
@@ -184,6 +201,11 @@ class ControlController extends Controller
             $controls = $controls->where('measures.domain_id', '=', $domain);
         }
 
+        // Filter on clause
+        if ($clause !== null) {
+            $controls = $controls->where('clause','=', $clause);
+        }
+
         // Filter on scope
         if ($scope !== null) {
             $controls = $controls->where('c1.scope', '=', $scope);
@@ -246,6 +268,7 @@ class ControlController extends Controller
         }
 
         // Filter on attribute
+        /*
         if ($attribute !== null) {
             $controls = $controls->where(
                 'c1.attributes',
@@ -253,6 +276,7 @@ class ControlController extends Controller
                 '%' . $attribute . '%'
             );
         }
+        */
 
         // get action plan associated
         $controls = $controls->leftjoin('actions', 'actions.control_id', '=', 'c1.id');
@@ -301,7 +325,7 @@ class ControlController extends Controller
         // return view
         return view('controls.index')
             ->with('controls', $controls)
-            ->with('attributes', $attributes)
+            ->with('clauses', $clauses)
             ->with('scopes', $scopes)
             ->with('domains', $domains);
     }

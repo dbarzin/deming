@@ -19,6 +19,21 @@
                     @endforeach
                 </select>
             </div>
+
+            <div class="cell-2">
+                <select id='clause' name="clause" data-role="select">
+                    <option value="none">-- {{ trans("cruds.control.fields.choose_clause")}} --</option>
+                    @foreach ($clauses as $clause)
+                        <option
+                            @if (Session::get("clause")==trim($clause))
+                                selected
+                            @endif >
+                            {{ $clause }}
+                        </option>
+                    @endforeach
+                </select>
+            </div>
+
             <div class="cell-2">
                 <select id='scope' name="scope" data-role="select">
                     <option value="none">-- {{ trans("cruds.control.fields.choose_scope")}} --</option>
@@ -32,21 +47,8 @@
                     @endforeach
                 </select>
             </div>
-            <div class="cell-2">
-                <select id='attribute' name="attribute" data-role="select">
-                    <option value="none">-- {{ trans("cruds.control.fields.choose_attribute")}} --</option>
-                    @foreach ($attributes as $attribute)
-                        <option
-                            @if (Session::get("attribute")==$attribute)
-                                selected
-                            @endif >
-                            {{ $attribute }}
-                        </option>
-                    @endforeach
-                </select>
-            </div>
-            <div class="cell-3">
 
+            <div class="cell-3">
                 <select id='cur_period' name="period" data-role="select">
                     <option value="99"
                         @if (Session::get("period")==="99")
@@ -105,9 +107,9 @@
                 window.location = '/bob/index?scope=' + this.value;
             }, false);
 
-            var select = document.getElementById('attribute');
+            var select = document.getElementById('clause');
             select.addEventListener('change', function(){
-                window.location = '/bob/index?attribute=' + encodeURIComponent(this.value);
+                window.location = '/bob/index?clause=' + this.value;
             }, false);
 
             select = document.getElementById('cur_period');
