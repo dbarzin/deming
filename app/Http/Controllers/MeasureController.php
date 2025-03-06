@@ -197,11 +197,11 @@ class MeasureController extends Controller
 
         // Get associate controls
         $controls = DB::table('controls')
-                ->select('controls.id','controls.name','controls.scope','score','controls.status','realisation_date','plan_date')
-                ->join('control_measure', 'control_measure.control_id', '=', 'controls.id')
-                ->leftjoin('actions', 'actions.control_id', '=', 'controls.id')
-                ->where('control_measure.measure_id', $id)
-                ->get();
+            ->select('controls.id', 'controls.name', 'controls.scope', 'score', 'controls.status', 'realisation_date', 'plan_date')
+            ->join('control_measure', 'control_measure.control_id', '=', 'controls.id')
+            ->leftjoin('actions', 'actions.control_id', '=', 'controls.id')
+            ->where('control_measure.measure_id', $id)
+            ->get();
 
         return view('measures.show')
             ->with('measure', $measure)

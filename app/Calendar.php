@@ -92,13 +92,15 @@ class Calendar
             foreach ($this->events as $event) {
                 for ($d = 0; $d <= $event[2] - 1; $d++) {
                     if (date('y-m-d', strtotime($this->active_year . '-' . $this->active_month . '-' . $i . ' -' . $d . ' day')) === date('y-m-d', strtotime($event[1]))) {
-                        if ($event[4]!==null)
+                        if ($event[4] !== null) {
                             $html .= '<a href="/bob/show/' . $event[4] . '">';
+                        }
                         $html .= '<div class="event' . $event[3] . '">';
                         $html .= $event[0];
                         $html .= '</div>';
-                        if ($event[4]!==null)
+                        if ($event[4] !== null) {
                             $html .= '</a>';
+                        }
                     }
                 }
             }

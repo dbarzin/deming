@@ -722,7 +722,8 @@ class ControlController extends Controller
                 'controls.realisation_date',
                 'controls.plan_date',
                 'controls.periodicity',
-                'measures.clause')
+                'measures.clause'
+            )
             ->leftJoin('control_measure', 'controls.id', '=', 'control_measure.control_id')
             ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
             ->get();
@@ -739,8 +740,8 @@ class ControlController extends Controller
         foreach ($controls as $control) {
             $expandedControls->push($control);
 
-            if (($control->realisation_date==null)&&
-                ($control->periodicity>0)&&($control->periodicity<=12))
+            if (($control->realisation_date === null) &&
+                ($control->periodicity > 0) && ($control->periodicity <= 12)) {
                 for ($i = 1; $i <= 12 / $control->periodicity; $i++) {
                     $repeatedControl = clone $control;
                     $repeatedControl->id = null;
@@ -750,6 +751,7 @@ class ControlController extends Controller
                     $repeatedControl->plan_date = Carbon::parse($control->plan_date)->addMonthsNoOverflow($i * $control->periodicity);
                     $expandedControls->push($repeatedControl);
                 }
+            }
         }
         // Return view with controls
         return view('controls.history')
