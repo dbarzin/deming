@@ -126,6 +126,7 @@ class ControlController extends Controller
         }
 
         // Attribute filter
+        /*
         $attribute = $request->get('attribute');
         if ($attribute !== null) {
             if ($attribute === 'none') {
@@ -137,6 +138,7 @@ class ControlController extends Controller
         } else {
             $attribute = $request->session()->get('attribute');
         }
+        */
 
         // Period filter
         $period = $request->get('period');
@@ -212,6 +214,7 @@ class ControlController extends Controller
         }
 
         // filter on measure
+        /*
         if ($request->measure !== null) {
             $controls = $controls->where(
                 'control_measure.measure_id',
@@ -219,6 +222,7 @@ class ControlController extends Controller
                 $request->measure
             );
         }
+        */
 
         // Filter on period
         if ($period !== null && $period !== 99) {
