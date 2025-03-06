@@ -739,7 +739,8 @@ class ControlController extends Controller
         foreach ($controls as $control) {
             $expandedControls->push($control);
 
-            if (($control->realisation_date==null)&&($control->periodicity>0))
+            if (($control->realisation_date==null)&&
+                ($control->periodicity>0)&&($control->periodicity<=12))
                 for ($i = 1; $i <= 12 / $control->periodicity; $i++) {
                     $repeatedControl = clone $control;
                     $repeatedControl->id = null;
