@@ -195,8 +195,17 @@ class MeasureController extends Controller
         // not found
         abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
+        // Get associate controls
+        $controls = DB::table('controls')
+                ->select('controls.id','controls.name','controls.scope','score','controls.status','realisation_date','plan_date')
+                ->join('control_measure', 'control_measure.control_id', '=', 'controls.id')
+                ->leftjoin('actions', 'actions.control_id', '=', 'controls.id')
+                ->where('control_measure.measure_id', $id)
+                ->get();
+
         return view('measures.show')
-            ->with('measure', $measure);
+            ->with('measure', $measure)
+            ->with('controls', $controls);
     }
 
     /**
