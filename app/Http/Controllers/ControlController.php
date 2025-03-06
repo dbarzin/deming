@@ -710,39 +710,49 @@ class ControlController extends Controller
 
     public function history()
     {
-        // Not API and auditee
-        abort_if(
-            Auth::User()->role === 4 || Auth::User()->role === 5,
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
+        // Abort if user role is 4 or 5
+        abort_if(in_array(Auth::user()->role, [4, 5]), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        // Get all controls
-        $controls = DB::table('controls')
-            ->select('id', 'score', 'observations', 'realisation_date', 'plan_date')
-            ->get();
-
-        // Fetch measures for all controls in one query
-        $controlMeasures = DB::table('control_measure')
-            ->select(['control_id', 'clause'])
-            ->leftjoin('measures', 'measures.id', '=', 'measure_id')
-            ->whereIn('control_id', $controls->pluck('id'))
+        // Fetch controls and their measures in a single query
+        $controlsData = DB::table('controls')
+            ->select(
+                'controls.id',
+                'controls.score',
+                'controls.observations',
+                'controls.realisation_date',
+                'controls.plan_date',
+                'controls.periodicity',
+                'measures.clause')
+            ->leftJoin('control_measure', 'controls.id', '=', 'control_measure.control_id')
+            ->join('measures', 'control_measure.measure_id', '=', 'measures.id')
             ->get();
 
         // Group measures by control_id
-        $measuresByControlId = $controlMeasures->groupBy('control_id');
+        $controls = $controlsData->groupBy('id')->map(function ($controlGroup) {
+            $control = $controlGroup->first();
+            $control->measures = $controlGroup->pluck('clause')->filter()->values();
+            return $control;
+        })->values();
 
-        // map clauses
+        // Repeat controls based on periodicity
+        $expandedControls = collect();
         foreach ($controls as $control) {
-            $control->measures = $measuresByControlId
-                ->get($control->id, collect())
-                ->map(function ($controlMeasure) {
-                    return $controlMeasure->clause;
-                });
-        }
+            $expandedControls->push($control);
 
-        // return
-        return view('controls.history')->with('controls', $controls);
+            if (($control->realisation_date==null)&&($control->periodicity>0))
+                for ($i = 1; $i <= 12 / $control->periodicity; $i++) {
+                    $repeatedControl = clone $control;
+                    $repeatedControl->id = null;
+                    $repeatedControl->score = null;
+                    $repeatedControl->observations = null;
+                    $repeatedControl->realisation_date = null;
+                    $repeatedControl->plan_date = Carbon::parse($control->plan_date)->addMonthsNoOverflow($i * $control->periodicity);
+                    $expandedControls->push($repeatedControl);
+                }
+        }
+        // Return view with controls
+        return view('controls.history')
+            ->with('controls', $expandedControls);
     }
 
     /*
@@ -1265,7 +1275,7 @@ class ControlController extends Controller
         } else {
             $next_date =
                 $control->next_date === null
-                    ? \Carbon\Carbon::createFromFormat('Y-m-d', $control->plan_date)
+                    ? Carbon::createFromFormat('Y-m-d', $control->plan_date)
                         ->addMonthsNoOverflow($control->periodicity)
                         ->format('Y-m-d')
                     : $control->next_date->format('Y-m-d');
