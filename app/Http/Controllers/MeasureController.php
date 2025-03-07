@@ -137,7 +137,7 @@ class MeasureController extends Controller
             $request,
             [
                 'domain_id' => 'required',
-                'clause' => 'required|min:3|max:30',
+                'clause' => 'required|min:3|max:30|unique:measures,clause',
                 'name' => 'required|min:5|max:255',
                 'objective' => 'required',
             ]

@@ -32,60 +32,7 @@ class ControlController extends Controller
             '403 Forbidden'
         );
 
-        // get all domains
-        $domains = Domain::All();
-
-        /*
-        // get all attributes
-        $attributes = [];
-        $allAttributes = DB::table('measures')->select('attributes')->get();
-        foreach ($allAttributes as $attribute) {
-            foreach (explode(' ', $attribute->attributes) as $value) {
-                if (strlen($value) > 0) {
-                    array_push($attributes, $value);
-                }
-            }
-        }
-        sort($attributes);
-        $attributes = array_unique($attributes);
-        */
-        // get all clauses
-        $clauses = DB::table('measures')->select('clause')->get()->pluck('clause')->toArray();
-
-        // get domain base on his title
-        $domain_title = $request->get('domain_title');
-        if ($domain_title !== null) {
-            $domain = Domain::where('title', '=', $domain_title)->get();
-            if ($domain !== null) {
-                $domain = $domain->first()->id;
-                $request->session()->put('domain', $domain);
-            }
-        }
-
-        // get all scopes
-        $scopes = DB::table('controls')
-            ->select('scope')
-            ->whereNotNull('scope')
-            ->where('scope', '<>', '');
-        if (Auth::User()->role === 5) {
-            $scopes = $scopes
-                ->leftjoin(
-                    'control_user',
-                    'controls.id',
-                    '=',
-                    'control_user.control_id'
-                )
-                ->where('control_user.user_id', '=', Auth::User()->id);
-        }
-        $scopes = $scopes
-            //->whereNull('realisation_date')
-            ->whereIn('status', [0, 1])
-            ->distinct()
-            ->orderBy('scope')
-            ->get()
-            ->pluck('scope')
-            ->toArray();
-
+        // -----------------------------------------------------
         // Domain filter
         $domain = $request->get('domain');
         if ($domain !== null) {
@@ -125,21 +72,6 @@ class ControlController extends Controller
             $scope = $request->session()->get('scope');
         }
 
-        // Attribute filter
-        /*
-        $attribute = $request->get('attribute');
-        if ($attribute !== null) {
-            if ($attribute === 'none') {
-                $request->session()->forget('attribute');
-                $attribute = null;
-            } else {
-                $request->session()->put('attribute', $attribute);
-            }
-        } else {
-            $attribute = $request->session()->get('attribute');
-        }
-        */
-
         // Period filter
         $period = $request->get('period');
         if ($period !== null) {
@@ -174,6 +106,52 @@ class ControlController extends Controller
             $status = '2';
         }
 
+        // -----------------------------------------------------
+        // get all domains
+        $domains = Domain::All();
+
+        // get all clauses
+        $clauses = DB::table('measures')
+            ->select('clause')
+            ->when($domain!=null, function ($q) use ($domain) {
+                return $q->where('domain_id', '=', $domain);
+            })
+            ->get()
+            ->pluck('clause');
+
+        // get domain base on his title
+        $domain_title = $request->get('domain_title');
+        if ($domain_title !== null) {
+            $domain = Domain::where('title', '=', $domain_title)->get();
+            if ($domain !== null) {
+                $domain = $domain->first()->id;
+                $request->session()->put('domain', $domain);
+            }
+        }
+
+        // get all scopes
+        $scopes = DB::table('controls')
+            ->select('scope')
+            ->whereNotNull('scope')
+            ->where('scope', '<>', '');
+        if (Auth::User()->role === 5) {
+            $scopes = $scopes
+                ->leftjoin(
+                    'control_user',
+                    'controls.id',
+                    '=',
+                    'control_user.control_id'
+                )
+                ->where('control_user.user_id', '=', Auth::User()->id);
+        }
+        $scopes = $scopes
+            ->whereIn('status', [0, 1])
+            ->distinct()
+            ->orderBy('scope')
+            ->get()
+            ->pluck('scope');
+
+        // -----------------------------------------------------
         // Build query
         $controls = DB::table('controls as c1')
             ->leftjoin('controls as c2', 'c1.next_id', '=', 'c2.id')
@@ -212,17 +190,6 @@ class ControlController extends Controller
         if ($scope !== null) {
             $controls = $controls->where('c1.scope', '=', $scope);
         }
-
-        // filter on measure
-        /*
-        if ($request->measure !== null) {
-            $controls = $controls->where(
-                'control_measure.measure_id',
-                '=',
-                $request->measure
-            );
-        }
-        */
 
         // Filter on period
         if ($period !== null && $period !== 99) {
@@ -270,17 +237,6 @@ class ControlController extends Controller
                     ->whereIn('c1.status', [0, 1]);
             }
         }
-
-        // Filter on attribute
-        /*
-        if ($attribute !== null) {
-            $controls = $controls->where(
-                'c1.attributes',
-                'LIKE',
-                '%' . $attribute . '%'
-            );
-        }
-        */
 
         // get action plan associated
         $controls = $controls->leftjoin('actions', 'actions.control_id', '=', 'c1.id');
@@ -363,8 +319,7 @@ class ControlController extends Controller
             ->distinct()
             ->orderBy('scope')
             ->get()
-            ->pluck('scope')
-            ->toArray();
+            ->pluck('scope');
 
         // get all attributes
         $values = [];
@@ -535,8 +490,7 @@ class ControlController extends Controller
             ->select('id')
             ->orderBy('id')
             ->get()
-            ->pluck('id')
-            ->toArray();
+            ->pluck('id');
 
         // get all clauses
         $all_measures = DB::table('measures')
@@ -618,8 +572,7 @@ class ControlController extends Controller
             ->distinct()
             ->orderBy('scope')
             ->get()
-            ->pluck('scope')
-            ->toArray();
+            ->pluck('scope');
 
         // get all attributes
         $values = [];
@@ -967,8 +920,7 @@ class ControlController extends Controller
             ->distinct()
             ->orderBy('scope')
             ->get()
-            ->pluck('scope')
-            ->toArray();
+            ->pluck('scope');
 
         $cur_scope = $request->get('scope');
         if ($cur_scope !== null) {
@@ -1117,8 +1069,7 @@ class ControlController extends Controller
             ->select('measure_id')
             ->where('control_id', $id)
             ->get()
-            ->pluck('measure_id')
-            ->toArray();
+            ->pluck('measure_id');
 
         // Get al active scopes
         $scopes = DB::table('controls')
@@ -1127,8 +1078,7 @@ class ControlController extends Controller
             ->distinct()
             ->orderBy('scope')
             ->get()
-            ->pluck('scope')
-            ->toArray();
+            ->pluck('scope');
 
         return view('controls.plan', compact('control'))
             ->with('years', $years)
@@ -1365,14 +1315,14 @@ class ControlController extends Controller
                 $measures = DB::table('control_measure')
                     ->select('measure_id')
                     ->where('control_id', $control->id)
-                    ->pluck('measure_id')->toArray();
+                    ->pluck('measure_id');
                 $action->measures()->sync($measures);
 
                 // Sync owners
                 $owners = DB::table('control_user')
                     ->select('user_id')
                     ->where('control_id', $control->id)
-                    ->pluck('user_id')->toArray();
+                    ->pluck('user_id');
                 $action->owners()->sync($owners);
             }
         } else {
@@ -1414,12 +1364,12 @@ class ControlController extends Controller
                 // Set owners
                 $new_control
                     ->owners()
-                    ->sync($control->owners->pluck('id')->toArray());
+                    ->sync($control->owners->pluck('id'));
 
                 // Set measures
                 $new_control
                     ->measures()
-                    ->sync($control->measures->pluck('id')->toArray());
+                    ->sync($control->measures->pluck('id'));
 
                 // make link
                 $control->next_id = $new_control->id;

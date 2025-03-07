@@ -48,10 +48,9 @@
                     </div>
 		    		<div class="cell-1">
 						<input type="text" name="scope" data-role="input" autocomplete="off" maxlength="32"
-						value="{{ old('scope') }}" data-autocomplete=" {{ implode(",",$scopes) }} "/>
+                        value="{{ old('scope') }}" data-autocomplete=" {{ $scopes->implode(",") }} "/>
 					</div>
 				</div>
-
 
 		    	<div class="row">
 		    		<div class="cell-1">
