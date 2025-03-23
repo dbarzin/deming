@@ -86,7 +86,7 @@
 	    		{{ $control->plan_date }}
 			</div>
 
-    		<div class="cell-1">
+            <div class="cell-2 text-right">
 	    		<strong>{{ trans("cruds.control.fields.realisation_date") }}</strong>
 	    	</div>
 			<div class="cell-1">
