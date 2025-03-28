@@ -28,6 +28,6 @@ if [ "${UPLOAD_DB_ISO27001}" = "DE" ]; then
     LANG=de php artisan db:seed --class=AttributeSeeder
     LANG=de php artisan db:seed --class=DomainSeeder
     LANG=de php artisan db:seed --class=MeasureSeeder
-    # Eexit with code 0 to indicate that the script has ended successfully
+    # Exit with code 0 to indicate that the script has ended successfully
     exit 0
 fi
