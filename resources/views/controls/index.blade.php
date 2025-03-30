@@ -48,7 +48,7 @@
                 </select>
             </div>
 
-            <div class="cell-3">
+            <div class="cell-2">
                 <select id='cur_period' name="period" data-role="select">
                     <option value="99"
                         @if (Session::get("period")==="99")
@@ -66,7 +66,7 @@
                         @endfor
                     </select>
                 </div>
-            <div class="cell-2">
+            <div class="cell-3">
                 <input type="radio" data-role="radio" data-style="2" name="status"
                 value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}>
                 <span style="position: relative; top: -3px;">
