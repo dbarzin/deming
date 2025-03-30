@@ -1270,9 +1270,8 @@ class ControlController extends Controller
             '403 Forbidden'
         );
 
-        // check :
-        // plan date not in the past
-        if (request('score') === null) {
+        // Score must be set
+        if ((request('score') === null)||(request('score') == 0)) {
             return back()
                 ->withErrors(['score' => 'score not set'])
                 ->withInput();
@@ -1474,7 +1473,7 @@ class ControlController extends Controller
 
         $control->observations = request('observations');
         $control->note = request('note');
-        $control->score = request('score');
+        $control->score = request('score')==0 ? null : request('score');
 
         // only admin and user can update the plan_date and action_plan
         if (Auth::User()->role === 1 || Auth::User()->role === 2) {
@@ -1524,7 +1523,6 @@ class ControlController extends Controller
         $control->score = request('score');
         $control->plan_date = request('plan_date');
         $control->action_plan = request('action_plan');
-        // $control->realisation_date = null;
 
         // Reject -> set status=0
         $control->status = 0;
@@ -1552,9 +1550,8 @@ class ControlController extends Controller
 
         $id = (int) request('id');
 
-        // check :
-        // plan date not in the past
-        if (request('score') === null) {
+        // Score must be set
+        if ((request('score') === null)||(request('score') == 0)) {
             return back()
                 ->withErrors(['score' => 'score not set'])
                 ->withInput();
@@ -1681,7 +1678,6 @@ class ControlController extends Controller
         $templateProcessor->setComplexValue('input', self::string2Textrun($control->input));
         $templateProcessor->setComplexValue('model', self::string2Textrun($control->model));
 
-//dd(urldecode($request->observations))
        $templateProcessor->setComplexValue('observations', self::string2Textrun(urldecode($request->observations)));
 
         $templateProcessor->setValue('date', Carbon::today()->format('d/m/Y'));
