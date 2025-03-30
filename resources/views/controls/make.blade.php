@@ -379,11 +379,11 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
     });
 @endif
 
-    // Ajoute les observations en paramètre de la template de document
-    
-    let link = document.querySelector('#checklist-link');
-    let textarea = document.querySelector('textarea[name="observations"]');
+    const link = document.querySelector('#checklist-link');
+    const textarea = document.querySelector('textarea[name="observations"]');
 
+    // Ajoute les observations en paramètre de la template de document
+    /*
     link.addEventListener('click', function (event) {
         event.preventDefault(); // empêche l'ouverture immédiate
 
@@ -393,7 +393,40 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
 
         window.open(fullUrl, '_blank');
     });
+    */
 
+
+    link.addEventListener('click', function (event) {
+        event.preventDefault();
+
+        const action = this.getAttribute('href');
+        const observations = textarea.value;
+
+        // Créer le formulaire
+        const form = document.createElement('form');
+        form.method = 'POST';
+        form.action = action;
+        form.target = '_blank';
+
+        // Ajouter le champ observations
+        const input = document.createElement('input');
+        input.type = 'hidden';
+        input.name = 'observations';
+        input.value = observations;
+        form.appendChild(input);
+
+        // Ajouter le CSRF token
+        const csrfInput = document.createElement('input');
+        csrfInput.type = 'hidden';
+        csrfInput.name = '_token';
+        csrfInput.value = '{{csrf_token()}}';
+        form.appendChild(csrfInput);
+
+        // Ajouter le formulaire au DOM et le soumettre
+        document.body.appendChild(form);
+        form.submit();
+        document.body.removeChild(form);
+    });
 });
 
 </script>
