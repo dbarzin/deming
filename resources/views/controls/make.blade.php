@@ -130,7 +130,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.control.fields.evidence') }}</strong>
 		    		<br>
-					<a target="_new" href="/bob/template/{{ $control->id }}">{{ trans('cruds.control.checklist') }}</a>
+                    <a target="_new" href="/bob/template/{{ $control->id }}" id="checklist-link">{{ trans('cruds.control.checklist') }}</a>
 		    	</div>
 				<div class="cell-6">
 					<div class="dropzone dropzone-previews" id="dropzoneFileUpload"></div>
@@ -286,6 +286,8 @@
 <script>
 Dropzone.autoDiscover = false;
 
+document.addEventListener('DOMContentLoaded', function () {
+
 const myDropzone = new Dropzone("div#dropzoneFileUpload", {
         url: '/doc/store',
 	    headers: { 'x-csrf-token': '{{csrf_token()}}' },
@@ -376,6 +378,24 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
             }
     });
 @endif
+
+    // Ajoute les observations en paramètre de la template de document
+    
+    let link = document.querySelector('#checklist-link');
+    let textarea = document.querySelector('textarea[name="observations"]');
+
+    link.addEventListener('click', function (event) {
+        event.preventDefault(); // empêche l'ouverture immédiate
+
+        let baseUrl = this.getAttribute('href');
+        let observations = encodeURIComponent(textarea.value);
+        let fullUrl = baseUrl + '?observations=' + observations;
+
+        window.open(fullUrl, '_blank');
+    });
+
+});
+
 </script>
 
 @endsection
