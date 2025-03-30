@@ -1627,7 +1627,7 @@ class ControlController extends Controller
         );
     }
 
-    public function template()
+    public function template(Request $request)
     {
         // Not for API
         abort_if(
@@ -1636,7 +1636,7 @@ class ControlController extends Controller
             '403 Forbidden'
         );
 
-        $id = (int) request('id');
+        $id = (int)$request->id;
 
         // find associate control
         $control = Control::find($id);
@@ -1680,7 +1680,9 @@ class ControlController extends Controller
         $templateProcessor->setComplexValue('objective', self::string2Textrun($control->objective));
         $templateProcessor->setComplexValue('input', self::string2Textrun($control->input));
         $templateProcessor->setComplexValue('model', self::string2Textrun($control->model));
-        $templateProcessor->setComplexValue('observations', self::string2Textrun($control->observations));
+
+//dd(urldecode($request->observations))
+       $templateProcessor->setComplexValue('observations', self::string2Textrun(urldecode($request->observations)));
 
         $templateProcessor->setValue('date', Carbon::today()->format('d/m/Y'));
 
@@ -1705,13 +1707,20 @@ class ControlController extends Controller
         if ($str === null) {
             return new \PhpOffice\PhpWord\Element\TextRun();
         }
+
         $textlines = explode("\n", $str);
         $textrun = new \PhpOffice\PhpWord\Element\TextRun();
-        $textrun->addText(array_shift($textlines));
+
+        // Fonction d'échappement XML
+        $escape = fn($text) => htmlspecialchars($text, ENT_XML1 | ENT_QUOTES, 'UTF-8');
+
+        $textrun->addText($escape(array_shift($textlines)));
+
         foreach ($textlines as $line) {
             $textrun->addTextBreak();
-            $textrun->addText($line);
+            $textrun->addText($escape($line));
         }
+
         return $textrun;
     }
 }
