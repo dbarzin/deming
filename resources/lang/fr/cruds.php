@@ -165,7 +165,7 @@ return [
         'model' => [
             'control' => 'Modèle de fiche de contrôle',
             'report' => 'Modèle du rapport de pilotage',
-            'custom' => 'Modèle sur mesure',
+            'custom' => 'Modèle modifié',
         ],
         'count' => 'Nombre de documents',
         'total_size' => 'Taille totale',
