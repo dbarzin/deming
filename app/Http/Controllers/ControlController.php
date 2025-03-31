@@ -1677,9 +1677,7 @@ class ControlController extends Controller
         $templateProcessor->setComplexValue('objective', self::string2Textrun($control->objective));
         $templateProcessor->setComplexValue('input', self::string2Textrun($control->input));
         $templateProcessor->setComplexValue('model', self::string2Textrun($control->model));
-
-       $templateProcessor->setComplexValue('observations', self::string2Textrun(urldecode($request->observations)));
-
+        $templateProcessor->setComplexValue('observations', self::string2Textrun(urldecode($request->observations)));
         $templateProcessor->setValue('date', Carbon::today()->format('d/m/Y'));
 
         // save a copy
