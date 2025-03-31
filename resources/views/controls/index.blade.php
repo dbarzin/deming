@@ -199,11 +199,11 @@
             let params = new URLSearchParams(window.location.search);
             const searchValue =  params.get('search');
             if (searchValue) {
+                // get serach filter
                 let searchInput = document.querySelector('.table-search-block input');
                 searchInput.value = searchValue;
-
                 // Trouve la table et applique la recherche
-                let tableElement = document.querySelector('.data-table'); // ou un ID précis si tu veux
+                let tableElement = document.querySelector('.data-table');
                 let table = Metro.getPlugin(tableElement, "table");
                 if (table)
                     table.search(searchValue);
