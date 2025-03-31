@@ -95,7 +95,7 @@
         </div>
     </div>
 
-    <table class="table striped row-hover cell-border"
+    <table class="table data-table striped row-hover cell-border"
        data-role="table"
        data-rows="100"
        data-show-activity="true"
@@ -194,12 +194,20 @@
 </div>
 </div>
     <script>
-        window.addEventListener('load', function(){
+        document.addEventListener("DOMContentLoaded", function () {
             // Récupère le paramètre search
             let params = new URLSearchParams(window.location.search);
-            if (params.has('search')) {
+            const searchValue =  params.get('search');
+            if (searchValue) {
                 let searchInput = document.querySelector('.table-search-block input');
-                searchInput.value = params.get('search');
+                searchInput.value = searchValue;
+
+                // Trouve la table et applique la recherche
+                let tableElement = document.querySelector('.data-table'); // ou un ID précis si tu veux
+                let table = Metro.getPlugin(tableElement, "table");
+                if (table)
+                    table.search(searchValue);
+
             }
             // Auto submits
             var select = document.getElementById('domain');
