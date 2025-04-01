@@ -169,8 +169,6 @@
 					<font color="orange">{{ trans('common.orange') }}</font> &nbsp;
 					<input type="radio" name="score" value="1" data-role="radio" {{ $control->score===1 ? "checked" : "" }}>
 					<font color="red">{{ trans('common.red') }}</font>
-                    <input type="radio" name="score" value="0" data-role="radio" {{ $control->score===null ? "checked" : "" }}>
-                    N/A
 				</div>
 			</div>
             @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
@@ -429,6 +427,20 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
         form.submit();
         document.body.removeChild(form);
     });
+
+    let lastChecked = null;
+
+    document.querySelectorAll('input[type="radio"]').forEach(radio => {
+      radio.addEventListener('click', function() {
+        if (this === lastChecked) {
+          this.checked = false;
+          lastChecked = null;
+        } else {
+          lastChecked = this;
+        }
+      });
+    });
+
 });
 
 </script>
