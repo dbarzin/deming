@@ -13,6 +13,7 @@
     "dependencies": {
         "dropzone": "^6.0.0-beta.2",
         "easymde": "^2.18.0",
-        "fontawesome-free": "^1.0.4"
+        "fontawesome-free": "^1.0.4",
+        "moment": "^2.30.1"
     }
 }

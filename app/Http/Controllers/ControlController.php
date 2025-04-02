@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ControlsExport;
 use App\Models\Action;
+use App\Models\Measure;
 use App\Models\Control;
 use App\Models\Document;
 use App\Models\Domain;
@@ -1622,6 +1623,46 @@ class ControlController extends Controller
                 now()->format('Y-m-d Hi') .
                 '.xlsx'
         );
+    }
+
+    public function tempo(Request $request) {
+        // For administrators and users only
+        abort_if(
+            Auth::User()->role !== 1 && Auth::User()->rol !== 2,
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
+        // get controls
+        if ($request->id!==null) {
+            // Measure ID
+            $id = (int)$request->id;
+            // find associate control
+            $measure = Measure::find($id);
+
+            // Measure not found
+            abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+
+            // Get all date and score for that measure
+            $controls = DB::Table("controls")
+                ->select('id', 'realisation_date', 'note', 'controls.score')
+                ->whereNotNull('next_id')
+                ->leftjoin('control_measure', 'control_id', '=', 'controls.id')
+                ->where("measure_id",$id)
+                ->orderBy('realisation_date')
+                ->get();
+            }
+        else
+            $controls=null;
+
+        $measures = DB::Table('measures')
+            ->select('id','name')
+            ->orderby('name')->get();
+
+        // return view
+        return view('radar.measures')
+            ->with('controls', $controls)
+            ->with('measures', $measures);
     }
 
     public function template(Request $request)
