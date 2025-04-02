@@ -106,6 +106,7 @@ return [
         'make' => 'Réaliser un contrôle',
         'plan' => 'Planifier un contrôle',
         'radar' => 'Etat des contrôles de sécurité',
+        'status_date' => 'Etat des contrôles au ',
         'title' => 'Contrôles',
         'title_singular' => 'Contrôle',
         'groupBy' => 'Groupé par',

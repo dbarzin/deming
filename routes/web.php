@@ -77,6 +77,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/radar/domains', 'ControlController@domains');
     Route::get('/radar/alice', 'ControlController@measures');
     Route::get('/radar/attributes', 'ControlController@attributes');
+    Route::get('/radar/bob', 'ControlController@tempo');
 
     /* Documents */
     Route::post('/doc/store', 'DocumentController@store');
