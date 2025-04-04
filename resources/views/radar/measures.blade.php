@@ -6,8 +6,8 @@
         <div data-role="panel" data-title-caption="Tableau de bord" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
 
         <div class="row">
-            <div class="cell-7">
-                <strong>{{ trans("cruds.measure.title") }}</strong>
+            <div class="cell-2">
+                <strong>{{ trans("cruds.measure.fields.clause") }}</strong>
                 <select name="measures" data-role="select" id="measures">
                     <option></option>
                     @foreach ($measures as $measure)
@@ -15,7 +15,7 @@
                         @if (request()->get('id')==(string)$measure->id)
                             selected
                         @endif >
-                        {{ $measure->name }}
+                        {{ $measure->clause }}
                     </option>
                     @endforeach
                 </select>
