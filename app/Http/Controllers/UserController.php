@@ -55,10 +55,10 @@ class UserController extends Controller
 
         // Validate request data
         $this->validate($request, [
-            'login' => 'required|min:1|max:30',
+            'login' => 'required|unique:users|min:1|max:30',
             'name' => 'required|min:1|max:90',
             'title' => 'required|min:1|max:30',
-            'email' => 'required|email:rfc',
+            'email' => 'required|unique:users|email:rfc',
             'role' => 'required',
         ]);
 
@@ -136,7 +136,11 @@ class UserController extends Controller
         // Validate request data
         $this->validate($request, [
             'name' => 'required|min:1|max:40',
-            'email' => 'required|email:rfc',
+            'login' => 'required|min:1|max:30|unique:users,login,'.$user->id,
+            'name' => 'required|min:1|max:90',
+            'title' => 'required|min:1|max:30',
+            'email' => 'required|email:rfc|unique:users,email,'.$user->id,
+            'role' => 'required'
         ]);
 
         // Custom password validation if LDAP is not enabled
@@ -152,6 +156,7 @@ class UserController extends Controller
 
         // Update user information
         $user->name = $request->input('name');
+        $user->login = $request->input('login');
         $user->email = $request->input('email');
         if ($this->isAdmin()) {
             $user->role = $request->input('role');
