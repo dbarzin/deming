@@ -1656,7 +1656,7 @@ class ControlController extends Controller
             $controls=null;
 
         $measures = DB::Table('measures')
-            ->select('id','name')
+            ->select('id','name','clause')
             ->orderby('name')->get();
 
         // return view

@@ -205,7 +205,7 @@ N'oubliez pas de [configurer](https://dbarzin.github.io/deming/config.fr/#notifi
 
 ## Configuration de Keycloak (optionnel)
 
-Pour configurer Keycloak, suivez ces étapes :
+Pour configurer [Keycloak](https://www.keycloak.org), suivez ces étapes :
 
 - Ouvrez votre fichier .env.
 - Modifiez les paramètres de configuration de Keycloak comme suit :
