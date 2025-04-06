@@ -208,7 +208,7 @@ return [
          'input' => 'Eingabe-Elemente',
          'input_helper' => 'Die Eingabe-Elemente',
          'model' => 'Modell',
-         'model_helper' => 'Das Berechnungsmodell',
+         'model_helper' => 'Die Prüfungen für die Bewertung des Modells',
          'indicator' => 'Indikator',
          'indicator_helper' => 'Grün, wenn ..., Orange, wenn ..., Rot, wenn...',
          'action' => 'Aktionsplan',
