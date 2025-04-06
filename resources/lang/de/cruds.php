@@ -185,7 +185,7 @@ return [
      ],
     'imports' => [
          'index' => 'Import',
-	 'title' => 'Importiere Sicherheitsmaßnahmen'
+	 'title' => 'Importiere Sicherheitsmaßnahmen',
 	 'current' => 'Aktuelle Sicherheitsmaßnahme',
 	 'or' => 'oder',
 	 'remove_all' => 'Lösche alle anderen Maßnahmen und Kontrollen',
