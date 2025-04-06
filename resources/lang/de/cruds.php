@@ -197,7 +197,7 @@ return [
          'domain_helper' => 'Der Domänen-Name. Er wird erzeugt, wenn er noch nicht vorhanden ist.',
          'domain_description' => 'Domänen-Beschreibung',
          'domain_description_helper' => 'Die Beschreibung der Domäne',
-         'clause' => 'Clause',
+         'clause' => 'Klausel',
          'clause_helper' => 'Wenn die Klausel existiert, wird die Sicherheitsmaßnahme aktualisiert,<br>wenn die Klausel nicht exisitiert, wird eine neue Sicherheitsmaßnahme erstellt,<br>wenn alle anderen Felder der Zeile leer sind, werden die Maßnahme, die zugehörigen Kontrollen und alle Dokumente entfernt.<br>',
          'name' => 'Name',
          'name_helper' => 'Der Name der Sicherheits-Maßnahme',
