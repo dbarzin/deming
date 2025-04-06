@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exports\ControlsExport;
 use App\Models\Action;
+use App\Models\Measure;
 use App\Models\Control;
 use App\Models\Document;
 use App\Models\Domain;
@@ -1270,9 +1271,8 @@ class ControlController extends Controller
             '403 Forbidden'
         );
 
-        // check :
-        // plan date not in the past
-        if (request('score') === null) {
+        // Score must be set
+        if ((request('score') === null)||(request('score') == 0)) {
             return back()
                 ->withErrors(['score' => 'score not set'])
                 ->withInput();
@@ -1474,7 +1474,7 @@ class ControlController extends Controller
 
         $control->observations = request('observations');
         $control->note = request('note');
-        $control->score = request('score');
+        $control->score = request('score')==0 ? null : request('score');
 
         // only admin and user can update the plan_date and action_plan
         if (Auth::User()->role === 1 || Auth::User()->role === 2) {
@@ -1524,7 +1524,6 @@ class ControlController extends Controller
         $control->score = request('score');
         $control->plan_date = request('plan_date');
         $control->action_plan = request('action_plan');
-        // $control->realisation_date = null;
 
         // Reject -> set status=0
         $control->status = 0;
@@ -1552,9 +1551,8 @@ class ControlController extends Controller
 
         $id = (int) request('id');
 
-        // check :
-        // plan date not in the past
-        if (request('score') === null) {
+        // Score must be set
+        if ((request('score') === null)||(request('score') == 0)) {
             return back()
                 ->withErrors(['score' => 'score not set'])
                 ->withInput();
@@ -1627,7 +1625,47 @@ class ControlController extends Controller
         );
     }
 
-    public function template()
+    public function tempo(Request $request) {
+        // For administrators and users only
+        abort_if(
+            Auth::User()->role !== 1 && Auth::User()->rol !== 2,
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
+        // get controls
+        if ($request->id!==null) {
+            // Measure ID
+            $id = (int)$request->id;
+            // find associate control
+            $measure = Measure::find($id);
+
+            // Measure not found
+            abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+
+            // Get all date and score for that measure
+            $controls = DB::Table("controls")
+                ->select('id', 'realisation_date', 'note', 'controls.score')
+                ->whereNotNull('next_id')
+                ->leftjoin('control_measure', 'control_id', '=', 'controls.id')
+                ->where("measure_id",$id)
+                ->orderBy('realisation_date')
+                ->get();
+            }
+        else
+            $controls=null;
+
+        $measures = DB::Table('measures')
+            ->select('id','name','clause')
+            ->orderby('name')->get();
+
+        // return view
+        return view('radar.measures')
+            ->with('controls', $controls)
+            ->with('measures', $measures);
+    }
+
+    public function template(Request $request)
     {
         // Not for API
         abort_if(
@@ -1636,7 +1674,7 @@ class ControlController extends Controller
             '403 Forbidden'
         );
 
-        $id = (int) request('id');
+        $id = (int)$request->id;
 
         // find associate control
         $control = Control::find($id);
@@ -1680,8 +1718,7 @@ class ControlController extends Controller
         $templateProcessor->setComplexValue('objective', self::string2Textrun($control->objective));
         $templateProcessor->setComplexValue('input', self::string2Textrun($control->input));
         $templateProcessor->setComplexValue('model', self::string2Textrun($control->model));
-        $templateProcessor->setComplexValue('observations', self::string2Textrun($control->observations));
-
+        $templateProcessor->setComplexValue('observations', self::string2Textrun(urldecode($request->observations)));
         $templateProcessor->setValue('date', Carbon::today()->format('d/m/Y'));
 
         // save a copy
@@ -1705,13 +1742,20 @@ class ControlController extends Controller
         if ($str === null) {
             return new \PhpOffice\PhpWord\Element\TextRun();
         }
+
         $textlines = explode("\n", $str);
         $textrun = new \PhpOffice\PhpWord\Element\TextRun();
-        $textrun->addText(array_shift($textlines));
+
+        // Fonction d'échappement XML
+        $escape = fn($text) => htmlspecialchars($text, ENT_XML1 | ENT_QUOTES, 'UTF-8');
+
+        $textrun->addText($escape(array_shift($textlines)));
+
         foreach ($textlines as $line) {
             $textrun->addTextBreak();
-            $textrun->addText($line);
+            $textrun->addText($escape($line));
         }
+
         return $textrun;
     }
 }

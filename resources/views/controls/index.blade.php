@@ -48,7 +48,7 @@
                 </select>
             </div>
 
-            <div class="cell-3">
+            <div class="cell-2">
                 <select id='cur_period' name="period" data-role="select">
                     <option value="99"
                         @if (Session::get("period")==="99")
@@ -66,7 +66,7 @@
                         @endfor
                     </select>
                 </div>
-            <div class="cell-2">
+            <div class="cell-3">
                 <input type="radio" data-role="radio" data-style="2" name="status"
                 value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}>
                 <span style="position: relative; top: -3px;">
@@ -95,54 +95,13 @@
         </div>
     </div>
 
-    <script>
-        window.addEventListener('load', function(){
-            var select = document.getElementById('domain');
-            select.addEventListener('change', function(){
-                window.location = '/bob/index?domain=' + this.value;
-            }, false);
-
-            var select = document.getElementById('scope');
-            select.addEventListener('change', function(){
-                window.location = '/bob/index?scope=' + this.value;
-            }, false);
-
-            var select = document.getElementById('clause');
-            select.addEventListener('change', function(){
-                window.location = '/bob/index?clause=' + this.value;
-            }, false);
-
-            select = document.getElementById('cur_period');
-            select.addEventListener('change', function(){
-                window.location = '/bob/index?period=' + this.value;
-            }, false);
-
-            select = document.getElementById('status0');
-            select.addEventListener('change', function(){
-                window.location = '/bob/index?status=0';
-            }, false);
-
-            select = document.getElementById('status1');
-            select.addEventListener('change', function(){
-                window.location = '/bob/index?status=1';
-            }, false);
-
-            select = document.getElementById('status2');
-            select.addEventListener('change', function(){
-                window.location = '/bob/index?status=2';
-            }, false);
-        }, false);
-
-    </script>
-
-    <table class="table striped row-hover cell-border"
+    <table class="table data-table striped row-hover cell-border"
        data-role="table"
        data-rows="100"
        data-show-activity="true"
        data-rownum="false"
        data-check="false"
        data-check-style="1"
-       onDraw="alert('change')"
        >
         <thead>
             <tr>
@@ -234,5 +193,92 @@
 </table>
 </div>
 </div>
-</div>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            // Récupère le paramètre search
+            let params = new URLSearchParams(window.location.search);
+            const searchValue =  params.get('search');
+            if (searchValue) {
+                // get serach filter
+                let searchInput = document.querySelector('.table-search-block input');
+                searchInput.value = searchValue;
+                // Trouve la table et applique la recherche
+                let tableElement = document.querySelector('.data-table');
+                let table = Metro.getPlugin(tableElement, "table");
+                if (table)
+                    table.search(searchValue);
+
+            }
+            // Auto submits
+            var select = document.getElementById('domain');
+            select.addEventListener('change', function(){
+                let url = new URL(window.location.href);
+                url.pathname = '/bob/index';
+                url.searchParams.set('domain', this.value);
+                let searchInput = document.querySelector('.table-search-block input');
+                url.searchParams.set('search', searchInput.value);
+                window.location = url.toString();
+            }, false);
+
+            var select = document.getElementById('scope');
+            select.addEventListener('change', function(){
+                let url = new URL(window.location.href);
+                url.pathname = '/bob/index';
+                url.searchParams.set('scope', this.value);
+                let searchInput = document.querySelector('.table-search-block input');
+                url.searchParams.set('search', searchInput.value);
+                window.location = url.toString();
+            }, false);
+
+            var select = document.getElementById('clause');
+            select.addEventListener('change', function(){
+                let url = new URL(window.location.href);
+                url.pathname = '/bob/index';
+                url.searchParams.set('clause', this.value);
+                let searchInput = document.querySelector('.table-search-block input');
+                url.searchParams.set('search', searchInput.value);
+                window.location = url.toString();
+            }, false);
+
+            select = document.getElementById('cur_period');
+            select.addEventListener('change', function(){
+                let url = new URL(window.location.href);
+                url.pathname = '/bob/index';
+                url.searchParams.set('period', this.value);
+                let searchInput = document.querySelector('.table-search-block input');
+                url.searchParams.set('search', searchInput.value);
+                window.location = url.toString();
+            }, false);
+
+            select = document.getElementById('status0');
+            select.addEventListener('change', function() {
+                let url = new URL(window.location.href);
+                url.pathname = '/bob/index';
+                url.searchParams.set('status', 0);
+                let searchInput = document.querySelector('.table-search-block input');
+                url.searchParams.set('search', searchInput.value);
+                window.location = url.toString();
+            }, false);
+
+            select = document.getElementById('status1');
+            select.addEventListener('change', function(){
+                let url = new URL(window.location.href);
+                url.pathname = '/bob/index';
+                url.searchParams.set('status', 1);
+                let searchInput = document.querySelector('.table-search-block input');
+                url.searchParams.set('search', searchInput.value);
+                window.location = url.toString();
+            }, false);
+
+            select = document.getElementById('status2');
+            select.addEventListener('change', function(){
+                let url = new URL(window.location.href);
+                url.pathname = '/bob/index';
+                url.searchParams.set('status', 2);
+                let searchInput = document.querySelector('.table-search-block input');
+                url.searchParams.set('search', searchInput.value);
+                window.location = url.toString();
+            }, false);
+        }, false);
+    </script>
 @endsection

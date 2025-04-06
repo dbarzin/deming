@@ -33,5 +33,6 @@ mix
             'vendor/enyo/dropzone/dist/dropzone.js',
             'resources/js/utils.js',
             'node_modules/easymde/dist/easymde.min.js',
+            'node_modules/moment/dist/moment.js'
         ],
         'public/js/all.js');

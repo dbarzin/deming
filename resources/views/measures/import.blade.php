@@ -20,7 +20,7 @@
 		        <div class="cell-5">
 					<b>{{ trans('cruds.imports.title') }}</b>
                     /
-                    <a href="/export/alices" target="_blank">Current security Measures</a>
+                    <a href="/export/alices" target="_blank">{{ trans('cruds.imports.current') }}</a>
 				</div>
 			</div>
 
@@ -43,20 +43,20 @@
                 </div>
     			<div class="row">
     		        <div class="cell-5">
-                        or
+                        {{ trans('cruds.imports.or') }}
     					<input name="file" type="file" id="file" data-role="file" data-prepend="Select import file:">
     				</div>
     		    </div>
     			<div class="row">
     		        <div class="cell-4">
                         <input type="checkbox" name="clean" id="clean">
-                        Remove all other measures and controls
+                        {{ trans('cruds.imports.remove_all') }}
                     </div>
                 </div>
     			<div class="row">
     		        <div class="cell-4">
                         <input type="checkbox" name="test">
-                        Generate fake measurements
+                        {{ trans('cruds.imports.fake') }}
                     </div>
     		        <div class="cell-1" align="right">
     				    <button type="submit" class="button success drop-shadow"
@@ -65,81 +65,80 @@
                         </button>
     		        </div>
                 </div>
-
             </form>
-
 
 			<div class="row">
 		        <div class="cell-5">
-		        	The import format is an XLSX document with these columns :
+                    {{ trans('cruds.imports.format') }}
 		        </div>
 		    </div>
-			<div class="row">
-		        <div class="cell-6">
 
-		    	<table 	class="table subcompact">
-		    		<thead>
-		        		<tr>
-		        			<td>Column</td><td>Name</td><td>Type</td><td>Description</td>
-		        		</tr>
-		    		</thead>
-		    		<tbody>
-		        		<tr>
-		        			<td>A</td><td>Framework</td><td>string(32)</td>
-		        			<td>
-                                The security framework used.
-		        			</td>
-		        		</tr>
-		        		<tr>
-		        			<td>B</td><td>Domain name</td><td>string(32)</td>
-		        			<td>
-		        				The domain name, it is created if it does not exist.
-		        			</td>
-		        		</tr>
-		        		<tr>
-		        			<td>C</td><td>Domain description</td><td>string(255)</td>
-		        			<td>
-                                The description of the domain.
-		        			</td>
-		        		</tr>
-		        		<tr>
-		        			<td>D</td><td>Clause</td><td>string(32)</td>
-		        			<td>
-		        					If the clause exists the security measure is updated,<br>
-		        					if the clause does not exist, a new security measure is created,<br>
-		        					if all other fields of the line are empty, the measure, related controls and documents are removed.
-		        			</td>
-		        		</tr>
-		        		<tr>
-		        			<td>E</td><td>Name</td><td>string(255)</td><td>The name of the security measure</td>
-		        		</tr>
-		        		<tr>
-		        			<td>F</td><td>Description</td><td>text</td><td>The description of the security measure</td>
-		        		</tr>
-		        		<tr>
-		        			<td>G</td><td>Attributes</td><td>text</td><td>List of tags (#... #... #...)</td>
-		        		</tr>
-		        		<tr>
-		        			<td>H</td><td>Input</td><td>text</td><td>The input elements</td>
-		        		</tr>
-		        		<tr>
-		        			<td>I</td><td>Model</td><td>text</td><td>The computation model</td>
-		        		</tr>
-		        		<tr>
-		        			<td>J</td><td>Indicator</td><td>text</td><td>The indicator (Green, Orange, Red)</td>
-		        		</tr>
-		        		<tr>
-		        			<td>K</td><td>Action plan</td><td>text</td><td>The proposed action plan</td>
-		        		</tr>
-		        	</tbody>
-		    	</table>
-
-		        </div>
-		    </div>
+            <div class="row">
+                <div class="cell-md-6">
+                    <table class="table striped border subcompact">
+                        <thead>
+                            <tr>
+                                <th>Column</th>
+                                <th>Name</th>
+                                <th>Type</th>
+                                <th>Description</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>A</td><td>{{ trans('cruds.imports.framework') }}</td><td>string(32)</td>
+                                <td>{{ trans('cruds.imports.framework_helper') }}</td>
+                            </tr>
+                            <tr>
+                                <td>B</td><td>{{ trans('cruds.imports.domain') }}</td><td>string(32)</td>
+                                <td>{{ trans('cruds.imports.domain_helper') }}</td>
+                            </tr>
+                            <tr>
+                                <td>C</td><td>{{ trans('cruds.imports.domain_description') }}</td><td>string(255)</td>
+                                <td>{{ trans('cruds.imports.domain_description_helper') }}</td>
+                            </tr>
+                            <tr>
+                                <td>D</td><td>{{ trans('cruds.imports.clause') }}</td><td>string(32)</td>
+                                <td>
+                                    {!! trans('cruds.imports.clause_helper') !!}
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>E</td><td>{{ trans('cruds.imports.name') }}</td><td>string(255)</td>
+                                <td>{{ trans('cruds.imports.name_helper') }}</td>
+                            </tr>
+                            <tr>
+                                <td>F</td><td>{{ trans('cruds.imports.description') }}</td><td>text</td>
+                                <td>{{ trans('cruds.imports.description_helper') }}</td>
+                            </tr>
+                            <tr>
+                                <td>G</td><td>{{ trans('cruds.imports.attributes') }}</td><td>text</td>
+                                <td>{{ trans('cruds.imports.attributes_helper') }}</td>
+                            </tr>
+                            <tr>
+                                <td>H</td><td>{{ trans('cruds.imports.input') }}</td><td>text</td>
+                                <td>{{ trans('cruds.imports.input_helper') }}</td>
+                            </tr>
+                            <tr>
+                                <td>I</td><td>Model</td><td>text</td>
+                                <td>{{ trans('cruds.imports.model_helper') }}</td>
+                            </tr>
+                            <tr>
+                                <td>J</td><td>{{ trans('cruds.imports.indicator') }}</td><td>text</td>
+                                <td>{{ trans('cruds.imports.indicator_helper') }}</td>
+                            </tr>
+                            <tr>
+                                <td>K</td><td>{{ trans('cruds.imports.action') }}</td><td>text</td>
+                                <td>{{ trans('cruds.imports.action_helper') }}</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
 
 			<div class="row">
 		        <div class="cell-6 fg-red">
-		        	This action could not be undone, take a backup before !
+                    {{ trans('cruds.imports.warning') }}
 		        </div>
 		    </div>
 

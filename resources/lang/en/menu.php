@@ -9,6 +9,7 @@ return [
     'radar' => 'Analysis',
     'radar_by_domains' => 'by domaines',
     'radar_by_controls' => 'by measures',
+    'radar_by_measure' => 'by controls',
     'radar_by_attributes' => 'by attributes',
     'action_plan' => 'Action plans',
     'configuration' => [

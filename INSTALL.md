@@ -42,7 +42,7 @@ Install MariaDB (works also with ProgresSQL and MySQL)
 
     sudo apt install mariadb-server
 
-Start database client 
+Start database client
 
     sudo mariadb
 
@@ -199,7 +199,7 @@ Don't forget to [configure](https://dbarzin.github.io/deming/config/#notificatio
 
 ## Keycloak Configuration (optional)
 
-To configure Keycloak, follow these steps:
+To configure [Keycloak](https://www.keycloak.org), follow these steps:
 
 - Open your `.env` file.
 - Modify the Keycloak configuration settings as follows:

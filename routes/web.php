@@ -59,7 +59,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/bob/show/{id}', 'ControlController@show');
     Route::get('/bob/make/{id}', 'ControlController@make');
     Route::get('/bob/edit/{id}', 'ControlController@edit');
-    Route::get('/bob/template/{id}', 'ControlController@template');
+    Route::post('/bob/template/{id}', 'ControlController@template');
     Route::get('/bob/clone/{id}', 'ControlController@clone');
     Route::get('/bob/delete/{id}', 'ControlController@destroy');
     Route::post('/bob/make', 'ControlController@doMake');
@@ -77,6 +77,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/radar/domains', 'ControlController@domains');
     Route::get('/radar/alice', 'ControlController@measures');
     Route::get('/radar/attributes', 'ControlController@attributes');
+    Route::get('/radar/bob', 'ControlController@tempo');
 
     /* Documents */
     Route::post('/doc/store', 'DocumentController@store');

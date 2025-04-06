@@ -102,6 +102,10 @@
                             <a href="/radar/domains">
                             <span class="caption">{{ trans("menu.radar_by_domains") }}</span>
                             </a>
+                        <li class="{{ request()->is('radar/temp') ? 'bg-gray': '' }}">
+                            <a href="/radar/bob">
+                            <span class="caption">{{ trans("menu.radar_by_measure") }}</span>
+                        </a></li>
                         </li>
                         <li class="{{ request()->is('radar/alice') ? 'bg-gray': '' }}">
                             <a href="/radar/alice">
