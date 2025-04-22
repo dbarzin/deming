@@ -6,9 +6,9 @@ return [
          'measures' => 'Controls',
          'controls' => 'Measurements',
          'action_plans' => "Action Plans",
-         'next_controls' => 'Checks scheduled for the next 30 days',
-         'control_status' => 'Measurement status',
-         'control_planning' => 'Schedule measure',
+         'next_controls' => 'Measures scheduled for the next 30 days',
+         'control_status' => 'Measurements status',
+         'control_planning' => 'Scheduled measures',
     ],
      'action' => [
          'index' => 'Action plans',
