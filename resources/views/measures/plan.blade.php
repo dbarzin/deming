@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.plan') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.plan') }}" data-collapsible="true" data-title-icon="<span class='mif-pencil'></span>">
 
 	@if (count($errors))
 		<div class="grid">
@@ -179,23 +179,25 @@
 
 <!------------------------------------------------------------------------------------->
 <script type="text/javascript">
-const mde1 = new EasyMDE({
-    element: document.getElementById('mde1'),
-    minHeight: "200px",
-    maxHeight: "200px",
-    status: false,
-    });
-const mde2 = new EasyMDE({
-    element: document.getElementById('mde2'),
-    minHeight: "200px",
-    maxHeight: "200px",
-    status: false,
-    });
-const mde3 = new EasyMDE({
-    element: document.getElementById('mde3'),
-    minHeight: "200px",
-    maxHeight: "200px",
-    status: false,
+document.addEventListener("DOMContentLoaded", function () {
+    const mde1 = new EasyMDE({
+        element: document.getElementById('mde1'),
+        minHeight: "200px",
+        maxHeight: "200px",
+        status: false,
+        });
+    const mde2 = new EasyMDE({
+        element: document.getElementById('mde2'),
+        minHeight: "200px",
+        maxHeight: "200px",
+        status: false,
+        });
+    const mde3 = new EasyMDE({
+        element: document.getElementById('mde3'),
+        minHeight: "200px",
+        maxHeight: "200px",
+        status: false,
+        });
     });
 </script>
 @endsection

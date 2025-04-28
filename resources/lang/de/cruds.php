@@ -90,6 +90,8 @@ return [
          'title' => 'Maßnahmen',
          'title_singular' => 'Maßnahme',
         'groupBy' => 'Gruppiert nach',
+        'calendar' => 'Kalender'
+
      ],
      'notification' => [
          'subject' => 'Measurement list to carry out',

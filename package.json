@@ -1,19 +1,40 @@
 {
-    "private": true,
-    "type": "module",
-    "scripts": {
-        "dev": "vite",
-        "build": "vite build"
-    },
-    "devDependencies": {
-        "axios": "^1.7.4",
-        "laravel-vite-plugin": "^1.0",
-        "vite": "^5.0"
-    },
-    "dependencies": {
-        "dropzone": "^6.0.0-beta.2",
-        "easymde": "^2.18.0",
-        "fontawesome-free": "^1.0.4",
-        "moment": "^2.30.1"
-    }
+  "version": "2025.04.23",
+  "license": "GPL-3.0",
+  "author": "Didier Barzin",
+  "repository": "https://www.github.com/dbarzin/deming",
+  "homepage": "https://www.sourcentis.com/demong",
+  "main": "index.js",
+  "directories": {
+    "doc": "docs"
+  },
+  "private": true,
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build --config vite.config.mjs"
+  },
+  "require": {
+    "laravel/framework": "^12.0",
+    "laravel/sanctum": "^3.0"
+  },
+  "devDependencies": {
+    "laravel-vite-plugin": "^1.0.6",
+    "vite": "^6.2.5"
+  },
+  "dependencies": {
+    "@emotion/react": "^11.14.0",
+    "@emotion/styled": "^11.14.0",
+    "@mui/icons-material": "^7.0.2",
+    "@mui/lab": "^7.0.0-beta.11",
+    "@mui/material": "^7.0.2",
+    "@mui/styles": "^6.4.8",
+    "@olton/metroui": "^5.0.13",
+    "chart.js": "^4.4.9",
+    "chartjs-adapter-date-fns": "^3.0.0",
+    "dropzone": "^6.0.0-beta.2",
+    "easymde": "^2.18.0",
+    "fontawesome-free": "^1.0.4",
+    "less": "^4.3.0",
+    "moment": "^2.30.1"
+  }
 }

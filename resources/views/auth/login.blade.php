@@ -1,17 +1,11 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
     <title>Deming :: Log in</title>
-
-    <link rel="stylesheet" href="/css/all.css" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <script src="/js/all.js"></script>
-
-<style>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
+    <style>
         body {
             background-image: url('/images/deming.png');
             background-size:  800px 800px;
@@ -34,19 +28,17 @@
         .form-control:focus {
             background-color: rgba(255, 255, 255, 0.9) !important;
         }
-
     </style>
 </head>
 
 <body class="d-flex flex-justify-center flex-align-center bg-default">
     <div class="login-form bg-white p-6 mx-auto border fg-black win-shadow">
         <form
-            method="POST" action="/login" 
+            method="POST" action="/login"
             data-role="validator"
             action="javascript:"
             data-clear-invalid="2000"
-            data-on-error-form="invalidForm"
-            data-on-validate-form="validateForm">
+            data-on-error-form="invalidForm">
             @csrf
                 <div class="mb-4">{{ trans("cruds.login.connection") }}</div>
                 <div class="form-group">
@@ -80,7 +72,7 @@
             <hr />
             @foreach(Config::get('services.socialite_controller.providers') as $provider)
             <div class="d-flex flex-align-center my-2">
-                <a href="{{ route('socialite.redirect', $provider) }}" 
+                <a href="{{ route('socialite.redirect', $provider) }}"
                    class="button secondary w-100"
                    role="button"><span class="mif-share fg-white mr-2"></span>
                    {{ trans("cruds.login.connection_with") }}<strong>{{Config::get('services.socialite_controller.'.$provider.'.display_name')}}</strong></a>
@@ -94,7 +86,7 @@
                 @endif
         @endif
     </div>
-    
+
     <script>
         function invalidForm(){
             var form  = $(this);
@@ -103,13 +95,6 @@
                 form.removeClass("ani-ring");
             }, 1000);
         }
-
-   $(document).ready(function() {
-      setTimeout(function() {
-          $("#login").focus();
-      }, 1500);
-   });
-
     </script>
 </body>
 </html>

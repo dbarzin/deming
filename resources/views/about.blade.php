@@ -2,11 +2,11 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="About" data-collapsible="true" data-title-icon="<span class='mif-help2'></span>">
+    <div data-role="panel" data-title-caption="About" data-collapsible="true" data-title-icon="<span class='mif-help_outline mif-2x'></span>">
 		<div class="grid">
 	    	<div class="row">
 	    		<div class="cell-4 text-center">
-                    <img src="/images/deming.png" width=400>
+                    <img src="/images/deming.png" alt="Deming" width="400"/>
                 </div>
 	    		<div class="cell-7">
 @if(Auth::User()->language==="fr")

@@ -1,9 +1,8 @@
 @extends("layout")
 
 @section("content")
-<div class="p-3">
-    <div data-role="panel" data-title-caption='{{ trans("cruds.control.list")}}' data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
-
+<div class="p-2">
+    <div data-role="panel" data-title-caption='{{ trans("cruds.control.list")}}' data-collapsible="true" data-title-icon="<span class='mif-paste'></span>">
     <div class="grid">
         <div class="row">
             <div class="cell-2">
@@ -95,7 +94,8 @@
         </div>
     </div>
 
-    <table class="table data-table striped row-hover cell-border"
+    <table
+       class="table data-table striped row-hover cell-border"
        data-role="table"
        data-rows="100"
        data-show-activity="true"

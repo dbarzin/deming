@@ -1,9 +1,8 @@
 @extends("layout")
 
 @section("content")
-<div class="p-3">
-
-    <div data-role="panel" data-title-caption="{{ trans('cruds.config.notifications.title') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+<div class="p-2">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.config.notifications.title') }}" data-collapsible="true" data-title-icon="<span class='mif-alarm'></span>">
 
 		@if (count($errors))
 		<div class="form-group">

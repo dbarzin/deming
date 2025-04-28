@@ -12,7 +12,7 @@
 @section("content")
 
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.control.make') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.control.make') }}" data-collapsible="true" data-title-icon="<span class='mif-pencil'></span>">
 
 	@if (count($errors))
 		@foreach ($errors->all() as $error)
@@ -284,11 +284,9 @@
 <br>
 
 <script>
-Dropzone.autoDiscover = false;
-
 document.addEventListener('DOMContentLoaded', function () {
 
-const myDropzone = new Dropzone("div#dropzoneFileUpload", {
+    const myDropzone = new Dropzone("div#dropzoneFileUpload", {
         url: '/doc/store',
 	    headers: { 'x-csrf-token': '{{csrf_token()}}' },
 	    params: { 'control': '{{ $control->id }}' },

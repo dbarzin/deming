@@ -100,19 +100,16 @@
 </form>
 
 <script>
-    var color = Chart.helpers.color;
+document.addEventListener("DOMContentLoaded", function () {
     var barChartData = {
         labels : [
             @foreach ($domains as $domain)
-                '{{ $domain->title }}'
-                 {{ $loop->last ? '' : ',' }}
+                '{{ $domain->title }}'{{ $loop->last ? '' : ',' }}
             @endforeach
-            ],
+        ],
         datasets: [{
-            // label: 'Vert',
             backgroundColor: '#60a917',
-            borderColor: window.chartColors.green,
-            pointBackgroundColor: window.chartColors.green,
+            borderColor: '#60a917',
             stack: 'Stack 0',
             data: [
                 @foreach ($domains as $domain)
@@ -122,14 +119,12 @@
                           $count++;
                       } ?>
                     @endforeach
-                    {{ $count }}
-                    {{ $loop->last ? '' : ',' }}
+                    {{ $count }}{{ $loop->last ? '' : ',' }}
                 @endforeach
             ]
         }, {
-            // label: 'Orange',
             backgroundColor: '#fa6800',
-            borderColor: window.chartColors.orange,
+            borderColor: '#fa6800',
             borderWidth: 1,
             stack: 'Stack 0',
             data: [
@@ -140,15 +135,12 @@
                           $count++;
                       } ?>
                     @endforeach
-                    {{ $count }}
-                    {{ $loop->last ? '' : ',' }}
+                    {{ $count }}{{ $loop->last ? '' : ',' }}
                 @endforeach
             ]
         }, {
-            // label: 'Rouge',
             backgroundColor: '#ce352c',
-            borderColor: window.chartColors.red,
-            pointBackgroundColor: window.chartColors.red,
+            borderColor: '#ce352c',
             stack: 'Stack 0',
             data: [
                 @foreach ($domains as $domain)
@@ -158,14 +150,13 @@
                           $count++;
                       } ?>
                     @endforeach
-                    {{ $count }}
-                    {{ $loop->last ? '' : ',' }}
+                    {{ $count }}{{ $loop->last ? '' : ',' }}
                 @endforeach
             ]
         }, {
             label: 'Gris',
-            backgroundColor: color(window.chartColors.grey).alpha(1).rgbString(),
-            borderColor: window.chartColors.black,
+            backgroundColor: 'rgba(128,128,128,1)', // 100% opaque
+            borderColor: '#000000',
             borderWidth: 1,
             stack: 'Stack 0',
             data: [
@@ -176,58 +167,58 @@
                           $count++;
                       } ?>
                     @endforeach
-                    {{ $count }}
-                    {{ $loop->last ? '' : ',' }}
+                    {{ $count }}{{ $loop->last ? '' : ',' }}
                 @endforeach
             ]
         }]
     };
+
     var ctx1 = document.getElementById('canvas-status').getContext('2d');
     window.myBar = new Chart(ctx1, {
-        responsive: true,
         type: 'bar',
         data: barChartData,
         options: {
             responsive: true,
-            legend: {
-                display: false,
-            },
-            title: {
-                display: false
+            plugins: {
+                legend: {
+                    display: false,
+                },
+                title: {
+                    display: false,
+                }
             },
             scales: {
-                yAxes: [{
+                y: {
                     ticks: {
-                      reverse: false,
-                      stepSize: 10
-                    },
-                }]
+                        reverse: false,
+                        stepSize: 10
+                    }
+                }
             }
         }
     });
-    document.getElementById('canvas-status').onclick = function(evt){
-            var activePoints = window.myBar.getElementsAtEvent(evt);
-            var firstPoint = activePoints[0];
-            var label = barChartData.labels[firstPoint._index];
-            var value = barChartData.datasets[firstPoint._datasetIndex].data[firstPoint._index];
-            window.location.href="/bob/index?attribute=none&status=2&period=99&domain_title="+label;
-        };
 
-    window.addEventListener('load', function(){
-        var select = document.getElementById('scope');
-        select.addEventListener('change', function(){
-            window.location = '/radar/domains?scope=' + this.value;
-        }, false);
-        var select = document.getElementById('framework');
-        select.addEventListener('change', function(){
-            window.location = '/radar/domains?framework=' + this.value;
-        }, false);
-        var select = document.getElementById('group');
-        select.addEventListener('change', function(){
-            window.location = '/radar/domains?group=' + this.value;
-        }, false);
+    document.getElementById('canvas-status').onclick = function(evt) {
+        const points = window.myBar.getElementsAtEventForMode(evt, 'nearest', { intersect: true }, true);
+        if (points.length) {
+            const firstPoint = points[0];
+            const label = barChartData.labels[firstPoint.index];
+            const value = barChartData.datasets[firstPoint.datasetIndex].data[firstPoint.index];
+            window.location.href = "/bob/index?attribute=none&status=2&period=99&domain_title=" + encodeURIComponent(label);
+        }
+    };
+
+    window.addEventListener('load', function() {
+        ['scope', 'framework', 'group'].forEach(function(id) {
+            var select = document.getElementById(id);
+            if (select) {
+                select.addEventListener('change', function() {
+                    window.location = '/radar/domains?' + id + '=' + this.value;
+                }, false);
+            }
+        });
     });
-
-    </script>
+});
+</script>
 
 @endsection

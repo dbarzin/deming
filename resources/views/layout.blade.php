@@ -4,26 +4,20 @@
     <!-- Required meta tags -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-
     <title>Deming - ISMS Controls Made Easy</title>
-
-    <link rel="stylesheet" href="/css/all.css" />
-    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
-    <script src="/js/all.js"></script>
-    <script src="/js/easymde.min.js"></script>
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('style')
-
 </head>
 
 <body class="m4-cloak h-vh-100">
 <div data-role="navview" data-toggle="#paneToggle" data-expand="xl" data-compact="lg" data-active-state="true">
-    <div class="navview-pane">
+    <div class="navview-pane bg-chem">
         <div class="d-flex flex-align-center">
-            <button class="pull-button m-0 ">
-                <span class="mif-menu fg-black"></span>
+            <button class="pull-button">
+                <span class="default-icon-menu"></span>
             </button>
-            <a href="/" class="d-block fg-black text-medium no-decor">
-                <h2 class="text-medium m-0 fg-black pl-7" style="line-height: 52px">Deming</h2>
+            <a href="/" class="fg-black text-medium no-decor">
+                <h3 class="m-0 fg-black pl-7 text-bold">Deming</h3>
             </a>
         </div>
         <div class="suggest-box">
@@ -35,7 +29,7 @@
             </form>
         </div>
 
-        <ul class="navview-menu mt-4" id="side-menu">
+        <ul class="navview-menu mt-4 bg-white" id="side-menu">
             @if ((Auth::User()->role === 1)||(Auth::User()->role === 2)||(Auth::User()->role === 3))
                 <li>
                     <a href="/">
@@ -151,7 +145,7 @@
 
                     <li class="{{ request()->is('domains*') ? 'bg-gray': '' }}">
                         <a href="/domains">
-                            <span class="icon"><span class="mif-books"></span></span>
+                            <span class="icon"><span class="mif-library"></span></span>
                             <span class="caption">{{ trans("menu.domains") }}</span>
                         </a>
                     </li>
@@ -159,12 +153,12 @@
                     <li class="{{ request()->is('users*') ? 'bg-gray': '' }}">
                         <a href="/users">
                         <span class="icon"><span class="mif-users"></span></span>
-                        <span class="caption">{{ trans("menu.configuration.users") }}</span>
+                    <span class="caption">{{ trans("menu.configuration.users") }}</span>
                         </a>
                     </li>
                     <li class="{{ request()->is('alice/import*') ? 'bg-gray': '' }}">
                         <a href="/alice/import">
-                        <span class="icon"><span class="mif-file-excel"></span></span>
+                        <span class="icon"><span class="mif-import"></span></span>
                         <span class="caption">{{ trans("menu.configuration.import") }}</span>
                         </a>
                     </li>
@@ -201,7 +195,6 @@
                     <form id="logout-form" action="/logout" method="POST" style="display: none;">
                         @csrf
                     </form>
-                    </a>
                 </li>
             </ul>
         <div class="w-100 text-center text-small data-box p-2 border-top bd-grayMouse" style="position: absolute; bottom: 0">
@@ -210,8 +203,8 @@
         </div>
     </div>
 
-    <div class="navview-content h-100">
-        <div data-role="appbar" class="pos-absolute bg-chem fg-black">
+    <div class="navview-content h-100" data-expand-point="md">
+        <div data-role="appbar" class="pos-absolute fg-black bg-chem">
             @if ((Auth::User()->role === 1)||(Auth::User()->role === 2)||(Auth::User()->role === 3)||(Auth::User()->role === 5))
 
             <a href="#" class="app-bar-item d-block d-none-lg" id="paneToggle"><span class="mif-menu"></span></a>
@@ -224,7 +217,7 @@
                     @endif
                 </a>
                 <a href="/bob/index?attribute=none&period=99&scope=none&domain=0&status=1&late=1" class="app-bar-item">
-                    <span class="mif-bell"></span>
+                    <span class="mif-notifications"></span>
                     @if (Session::get("late_controls_count")!=null)
                     <span class="badge bg-red fg-white mt-2 mr-1">{{Session::get("late_controls_count")}}</span>
                     @endif
@@ -236,19 +229,20 @@
                     @endif
                 </a>
                 <a href="/users/{{ Auth::User()->id }}/edit" class="app-bar-item">
-                    <span class="mif-cogs"></span>
+                    <span class="mif-cog"></span>
                 </a>
                 <a href="/about" class="app-bar-item">
-                    <span class="mif-help2"></span>
+                    <span class="mif-help_outline mif-2x"></span>
                 </a>
             </div>
             @endif
         </div>
-        <div id="content-wrapper" class="h-100" style="overflow-y: auto">
-        @yield('content')
+        <div id="content-wrapper" class="h-100" style="overflow-y: auto; ">
+@yield('content')
         </div>
     </div>
 </div>
-
+<!-- @ vite('resources/js/metro.js') -->
+<!-- script src="https://cdn.metroui.org.ua/current/metro.js" type="module"></script -->
 </body>
 </html>

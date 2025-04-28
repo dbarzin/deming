@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.attribute.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.attribute.index') }}" data-collapsible="true" data-title-icon="<span class='mif-tags'></span>">
 		<div class="grid">
 			<div class="row">
 				<div class="cell-5">
@@ -52,6 +52,5 @@
 </div>
 
 
-	
-@endsection
 
+@endsection

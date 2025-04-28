@@ -66,15 +66,16 @@
 </form>
 
 <script>
-window.addEventListener('load', function(){
+window.addEventListener('load', function() {
     var select = document.getElementById('measures');
-    select.addEventListener('change', function(){
+    select.addEventListener('change', function() {
         const selectedOption = select.options[select.selectedIndex];
         window.location = '/radar/bob?id=' + selectedOption.id;
     }, false);
 });
 
-@if ($controls!=null)
+document.addEventListener("DOMContentLoaded", function () {
+@if ($controls != null)
     const labels = @json($controls->pluck('realisation_date'));
     const data = @json($controls->pluck('note'));
 
@@ -89,7 +90,7 @@ window.addEventListener('load', function(){
                 borderColor: 'rgba(0,123,255,1)',
                 backgroundColor: 'rgba(0,123,255,0.1)',
                 fill: true,
-                lineTension: 0.2,
+                tension: 0.2, // Remplace lineTension
                 pointRadius: 4,
                 pointHoverRadius: 6,
                 pointBackgroundColor: 'rgba(0,123,255,1)'
@@ -98,10 +99,16 @@ window.addEventListener('load', function(){
         options: {
             responsive: true,
             maintainAspectRatio: false,
-            legend: { display: false },
-            title: { display: false },
+            plugins: {
+                legend: {
+                    display: false
+                },
+                title: {
+                    display: false
+                }
+            },
             scales: {
-                xAxes: [{
+                x: {
                     type: 'time',
                     time: {
                         unit: 'day',
@@ -110,19 +117,21 @@ window.addEventListener('load', function(){
                     ticks: {
                         autoSkip: true
                     }
-                }],
-                yAxes: [{
+                },
+                y: {
                     ticks: {
                         beginAtZero: true
                     }
-                }]
+                }
             },
-            tooltips: {
+            interaction: {
                 mode: 'index',
                 intersect: false
             }
         }
     });
 @endif
+});
 </script>
+
 @endsection

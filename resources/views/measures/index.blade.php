@@ -1,9 +1,8 @@
 @extends("layout")
 
 @section("content")
-<div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
-
+<div class="p-2">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.index') }}" data-collapsible="true" data-title-icon="<span class='mif-books'></span>">
 			<div class="grid">
 				<div class="row">
 					<div class="cell-5">
@@ -40,14 +39,10 @@
 
 				<div class="row">
 					<div class="cell">
-
-			<table class="table striped row-hover cell-border"
-		       data-role="table"
-		       data-rows="100"
-		       data-show-activity="true"
-		       data-rownum="false"
-		       data-check="false"
-		       data-check-style="1">
+                <table
+                    id="measures"
+       class="table data-table striped row-hover cell-border"
+                    data-role="table">
 			   <thead>
 				    <tr>
 						<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.measure.fields.domain') }}</th>
@@ -86,7 +81,7 @@
 					</td>
 					<td>
 					    <form action="/alice/plan/{{ $measure->id }}">
-					    	<button class="button info">
+					    	<button class="button info small">
 					            <span class="mif-calendar"></span>
 					            &nbsp;
 						    	{{ trans('common.plan') }}

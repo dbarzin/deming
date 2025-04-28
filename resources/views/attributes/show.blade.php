@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.attribute.show') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.attribute.show') }}" data-collapsible="true" data-title-icon="<span class='mif-tags'></span>">
 		<div class="grid">
 	    	<div class="row">
 	    		<div class="cell-1">
@@ -27,7 +27,7 @@
     		<div class="cell-1">
     		</div>
     	</div>
-    	
+
 		<div class="form-group">
 			@if (Auth::User()->role==1)
 		    <form action="/attributes/{{ $attribute->id }}/edit">
