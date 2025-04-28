@@ -158,7 +158,7 @@
                     </li>
                     <li class="{{ request()->is('alice/import*') ? 'bg-gray': '' }}">
                         <a href="/alice/import">
-                        <span class="icon"><span class="mif-import"></span></span>
+                        <span class="icon"><span class="mif-download"></span></span>
                         <span class="caption">{{ trans("menu.configuration.import") }}</span>
                         </a>
                     </li>
