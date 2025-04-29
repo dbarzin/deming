@@ -43,7 +43,7 @@
                 <div class="icon">
                     <span class="mif-paste"></span>
                 </div>
-                <a href="/bob/index?attribute=none&amp;domain=0&amp;scope=none&amp;period=99&amp;status=1" class="more"> More info <span class="mif-arrow-right"></span></a>
+                <a href="/bob/index?attribute=none&amp;domain=0&amp;scope=none&amp;period=99&amp;status=1" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
             </div>
         </div>
         <div class="cell-lg-3 cell-md-6 mt-2">
