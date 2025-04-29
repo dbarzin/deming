@@ -111,6 +111,7 @@ return [
         'title_singular' => 'Contrôle',
         'groupBy' => 'Groupé par',
         'create_action' => 'Créer un plan d\'action',
+        'calendar' => 'Calendrier'
     ],
     'measure' => [
         'title' => 'Mesure',

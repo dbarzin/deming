@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption='{{ trans("cruds.control.edit")}}' data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption='{{ trans("cruds.control.edit")}}' data-collapsible="true" data-title-icon="<span class='mif-pencil'></span>">
 		@if (count($errors))
 		<div class="grid">
 		    <div class="cell-3 bg-red fg-white">
@@ -249,7 +249,7 @@
 </div>
 
 <script>
-Dropzone.autoDiscover = false;
+document.addEventListener("DOMContentLoaded", function () {
 
 const myDropzone = new Dropzone("div#dropzoneFileUpload", {
 	    url: '/doc/store',
@@ -341,5 +341,6 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
         status: false,
         spellChecker: false,
         });
+});
 </script>
 @endsection

@@ -37,7 +37,9 @@ class Calendar
         $html .= date('m/Y', strtotime('-1 month', $this->date));
         $html .= '" ';
         $html .= 'style="font-size: 30px; text-decoration: none"';
-        $html .= '>&lt;&lt;</a> &nbsp; ';
+        $html .= '>';
+        $html .= '<span class="mif-backward"></span>';
+        $html .= '</a> &nbsp; ';
         $html .= '</div>';
         $html .= '<div class="col">';
 
@@ -62,7 +64,9 @@ class Calendar
         $html .= date('m/Y', strtotime('+1 month', $this->date));
         $html .= '" ';
         $html .= 'style="font-size: 30px; text-decoration: none"';
-        $html .= '>&gt&gt;</a>';
+        $html .= '>';
+        $html .= '<span class="mif-forward"></span>';
+        $html .= '</a>';
         $html .= '</div>';
         $html .= '</div>';
         $html .= '</div>';

@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.show') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.show') }}" data-collapsible="true" data-title-icon="<span class='mif-books'></span>">
 		@if (count($errors))
 		<div class="grid">
 		    <div class="cell-5 bg-red fg-white">
@@ -163,9 +163,12 @@
 			</form>
             @endif
 		</div>
-        <div>
-            <br><br>
-        </div>
+    </div>
+</div>
+</div>
+<div class="p-3">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.control.title') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+
         <div>
 			<table class="table striped row-hover cell-border"
        data-role="table"
@@ -238,7 +241,6 @@
             </table>
         </div>
         <div>
-            <br><br>
         </div>
 	</div>
 </div>

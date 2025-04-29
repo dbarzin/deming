@@ -111,6 +111,7 @@ return [
         'title_singular' => 'Measurement',
         'groupBy' => 'Group by',
         'create_action' => 'Create an action plan',
+        'calendar' => 'Calendar'
     ],
      'notification' => [
          'subject' => 'Measurement list to carry out',

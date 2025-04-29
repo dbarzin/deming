@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.exports.steering') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.exports.steering') }}" data-collapsible="true" data-title-icon="<span class='mif-file-text'></span>">
 
 		@if (count($errors))
 		<div class="grid">
@@ -79,7 +79,7 @@
 		</div>
 	</div>
 
-    <div data-role="panel" data-title-caption="{{ trans('cruds.soa.title') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.soa.title') }}" data-collapsible="true" data-title-icon="<span class='mif-file-text'></span>">
 		<div class="row">
 	        <div class="cell-3">
 	        	<ul>
@@ -97,7 +97,7 @@
 		</div>
 	</div>
 
-    <div data-role="panel" data-title-caption="{{ trans('cruds.exports.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.exports.index') }}" data-collapsible="true" data-title-icon="<span class='mif-file-text'></span>">
 		<div class="row">
 	        <div class="cell-3">
 	        	<ul>

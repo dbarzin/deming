@@ -10,8 +10,7 @@ function bytesToHuman($bytes) {
 ?>
 
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.document.title.templates') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
-
+    <div data-role="panel" data-title-caption="{{ trans('cruds.document.title.templates') }}" data-collapsible="true" data-title-icon="<span class='mif-file-text'></span>">
 
         <form action="/doc/template" method="POST" role="form" enctype="multipart/form-data">
         @csrf
@@ -60,7 +59,7 @@ function bytesToHuman($bytes) {
 </div>
 
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.document.title.storage') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.document.title.storage') }}" data-collapsible="true" data-title-icon="<span class='mif-file-text'></span>">
 
     <div class="grid">
         <div class="row">

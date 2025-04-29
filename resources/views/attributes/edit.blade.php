@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.attribute.edit') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.attribute.edit') }}" data-collapsible="true" data-title-icon="<span class='mif-pencil'></span>">
 		@if (count($errors))
 		<div class="grid">
 		    <div class="cell-3 bg-red fg-white">
@@ -55,6 +55,3 @@
 	</div>
 </div>
 @endsection
-
-
-

@@ -11,7 +11,7 @@ function bytesToHuman($bytes) {
 ?>
 
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.document.list') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.document.list') }}" data-collapsible="true" data-title-icon="<span class='mif-file-text'></span>">
 
 <table class="table">
     <thead>
@@ -42,9 +42,9 @@ function bytesToHuman($bytes) {
             {{ $doc->hash }}
             <br>
         </td>
-        <td>    
-            <b>        
-            @if (file_exists(storage_path('docs/').$doc->id))            
+        <td>
+            <b>
+            @if (file_exists(storage_path('docs/').$doc->id))
                 @if ($doc->hash == hash_file("sha256", storage_path('docs/').$doc->id))
                     <font color="green">OK</font>
                 @else

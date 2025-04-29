@@ -2,11 +2,10 @@
 
 @section("content")
 
-<div class="p-3">
-<div class="row ">
+<div class="p-2">
+<div class="row">
     <div class="cell-md-6">
-
-        <div data-role="panel" data-title-caption="{{ trans('cruds.control.history') }}" data-collapsible="false" data-title-icon="<span class='mif-chart-line'></span>">
+        <div data-role="panel" data-title-caption="{{ trans('cruds.control.history') }}" data-collapsible="false" data-title-icon="<span class='mif-chart-bars2'></span>">
 
             <canvas id="canvas-status" width="600" height="300px" class="chartjs-render-monitor">
             </canvas>
@@ -255,7 +254,7 @@
 </div>
 
     <div class="cell-md-6">
-        <div class="panel">
+        <div data-role="panel" data-title-caption="{{ trans('cruds.control.calendar') }}" data-collapsible="false" data-title-icon="<span class='mif-calendar'></span>">
 
             <?php
             if (Request::get('date')!==null)
@@ -298,7 +297,6 @@
 <!------------------------------------------------------------------------------------->
 
 <script>
-    var color = Chart.helpers.color;
     var barChartData = {
         labels : [
         <?php
@@ -309,144 +307,150 @@
             echo '",';
         }
         ?>
-      ],
-      datasets: [
-      {
-        backgroundColor: "#60a917",
-        borderColor: "#60a917",
-        pointBackgroundColor: window.chartColors.green,
-        stack: 'Stack 0',
-        data: [
-            <?php
-            for ($i=-12; $i<12; $i++) {
-                $count=0;
-                $first = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta);
-                $second = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta)->endOfMonth();
-                ?>
-            @foreach ($controls as $control)
+        ],
+        datasets: [
+        {
+            backgroundColor: "#60a917",
+            borderColor: "#60a917",
+            stack: 'Stack 0',
+            data: [
                 <?php
-                if (($control->score==3) &&
-                    ($control->realisation_date!=null) &&
-                    (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
-                ) { $count++;
-                }
-                ?>
-            @endforeach
-            {{ $count }},
-            <?php } ?>
-        ]
-      },
-      {
-        backgroundColor: "#fa6800",
-        borderColor: "#fa6800",
-        pointBackgroundColor: window.chartColors.orange,
-        stack: 'Stack 0',
-        data: [
-            <?php
-            for ($i=-12; $i<12; $i++) {
-                $count=0;
-                $first = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta);
-                $second = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta)->endOfMonth();
-                ?>
-            @foreach ($controls as $control)
+                for ($i=-12; $i<12; $i++) {
+                    $count=0;
+                    $first = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta);
+                    $second = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta)->endOfMonth();
+                    ?>
+                @foreach ($controls as $control)
+                    <?php
+                    if (($control->score==3) &&
+                        ($control->realisation_date!=null) &&
+                        (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
+                    ) { $count++;
+                    }
+                    ?>
+                @endforeach
+                {{ $count }},
+                <?php } ?>
+            ]
+        },
+        {
+            backgroundColor: "#fa6800",
+            borderColor: "#fa6800",
+            stack: 'Stack 0',
+            data: [
                 <?php
-                if (($control->score==2) &&
-                    ($control->realisation_date!=null) &&
-                    (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
-                ) { $count++;
-                }
-                ?>
-            @endforeach
-            {{ $count }},
-            <?php } ?>
-        ]
-      },
-      {
-        backgroundColor: "#ce352c",
-        borderColor: "#ce352c",
-        pointBackgroundColor: window.chartColors.red,
-        stack: 'Stack 0',
-        data: [
-            <?php
-            for ($i=-12; $i<12; $i++) {
-                $count=0;
-                $first = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta);
-                $second = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta)->endOfMonth();
-                ?>
-            @foreach ($controls as $control)
+                for ($i=-12; $i<12; $i++) {
+                    $count=0;
+                    $first = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta);
+                    $second = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta)->endOfMonth();
+                    ?>
+                @foreach ($controls as $control)
+                    <?php
+                    if (($control->score==2) &&
+                        ($control->realisation_date!=null) &&
+                        (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
+                    ) { $count++;
+                    }
+                    ?>
+                @endforeach
+                {{ $count }},
+                <?php } ?>
+            ]
+        },
+        {
+            backgroundColor: "#ce352c",
+            borderColor: "#ce352c",
+            stack: 'Stack 0',
+            data: [
                 <?php
-                if (($control->score==1) &&
-                    ($control->realisation_date!=null) &&
-                    (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
-                ) {
-                    $count++;
-                }
-                ?>
-            @endforeach
-            {{ $count }},
-            <?php } ?>
-        ]
-      },
-      {
-        backgroundColor: color(window.chartColors.grey).alpha(0.3).rgbString(),
-        borderColor: window.chartColors.grey,
-        pointBackgroundColor: window.chartColors.grey,
-        stack: 'Stack 0',
-        data: [
-            <?php
-            for ($i=-12; $i<12; $i++) {
-                $count=0;
-                $first = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta);
-                $second = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta)->endOfMonth();
-                ?>
-            @foreach ($controls as $control)
-                <?php
-                if (($control->score==null)
-                    && ($control->plan_date!=null)
-                    && (\Carbon\Carbon::parse($control->plan_date)->between($first, $second))
-                ) {
+                for ($i=-12; $i<12; $i++) {
+                    $count=0;
+                    $first = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta);
+                    $second = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta)->endOfMonth();
+                    ?>
+                @foreach ($controls as $control)
+                    <?php
+                    if (($control->score==1) &&
+                        ($control->realisation_date!=null) &&
+                        (\Carbon\Carbon::parse($control->realisation_date)->between($first, $second))
+                    ) {
                         $count++;
-                }
-                ?>
-            @endforeach
-            {{ $count }},
-            <?php } ?>
+                    }
+                    ?>
+                @endforeach
+                {{ $count }},
+                <?php } ?>
+            ]
+        },
+        {
+            backgroundColor: "rgba(128,128,128,0.3)",
+            borderColor: "#808080",
+            stack: 'Stack 0',
+            data: [
+                <?php
+                for ($i=-12; $i<12; $i++) {
+                    $count=0;
+                    $first = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta);
+                    $second = \Carbon\Carbon::today()->day(1)->addMonth($i+$delta)->endOfMonth();
+                    ?>
+                @foreach ($controls as $control)
+                    <?php
+                    if (($control->score==null)
+                        && ($control->plan_date!=null)
+                        && (\Carbon\Carbon::parse($control->plan_date)->between($first, $second))
+                    ) {
+                            $count++;
+                    }
+                    ?>
+                @endforeach
+                {{ $count }},
+                <?php } ?>
+            ]
+        }
         ]
-      },
-      ]
     };
 
-    window.onload = function() {
+    window.addEventListener('load', function() {
         var ctx = document.getElementById('canvas-status').getContext('2d');
         window.myBar = new Chart(ctx, {
             type: 'bar',
             data: barChartData,
             options: {
                 responsive: true,
-                legend: {
-                    display: false,
-                },
-                title: {
-                    display: false
-                },
-                onHover: (event, chartElement) => {
-                    event.target.style.cursor = chartElement[0] ? 'pointer' : 'default';
+                plugins: {
+                    legend: {
+                        display: false
                     },
-                onClick:  (event, elements, chart) => {
-                    var activePoints = window.myBar.getElementsAtEvent(event);
-                    var firstPoint = activePoints[0];
-                    window.location.href="/bob/history?date="+(barChartData.labels[firstPoint._index]);
+                    title: {
+                        display: false
                     }
                 },
-            });
-        };
+                onHover: (event, chartElement) => {
+                    event.native.target.style.cursor = chartElement.length ? 'pointer' : 'default';
+                },
+                onClick: (event, elements, chart) => {
+                    const points = chart.getElementsAtEventForMode(event.native, 'nearest', { intersect: true }, true);
+                    if (points.length) {
+                        const firstPoint = points[0];
+                        const label = chart.data.labels[firstPoint.index];
+                        window.location.href = "/bob/history?date=" + label;
+                    }
+                },
+                scales: {
+                    x: {
+                        stacked: true
+                    },
+                    y: {
+                        stacked: true
+                    }
+                }
+            }
+        });
 
-    window.addEventListener('load', function(){
-        document.getElementById('date').addEventListener('change', function(){
+        document.getElementById('date').addEventListener('change', function() {
             window.location = '/bob/history?date=' + this.value;
-        }, false);
-    }, false);
-
-    </script>
+        });
+    });
+</script>
 
 @endsection

@@ -205,4 +205,9 @@ class HomeController extends Controller
             return $expanded;
         });
     }
+
+    public function test(Request $request) {
+        return view('test');
+    }
+
 }

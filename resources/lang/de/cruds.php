@@ -109,7 +109,8 @@ return [
          'title' => 'Maßnahmen',
          'title_singular' => 'Maßnahme',
          'groupBy' => 'Gruppiert nach',
-	 'create_action' => 'Aktionsplan erstellen',
+         'calendar' => 'Kalender'
+       	 'create_action' => 'Aktionsplan erstellen',
      ],
      'notification' => [
          'subject' => 'Liste der durchzuführenden Maßnahmen',

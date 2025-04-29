@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.user.index') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.user.index') }}" data-collapsible="true" data-title-icon="<span class='mif-users'></span>">
 
 		<div class="grid">
 			<div class="row">
@@ -77,7 +77,7 @@
 					<td>{{ $user->email }}</td>
     				@if (Auth::User()->role==1)
                     <td>
-                        <a class="button primary" href='/users/{{ $user->id }}/edit'>
+                        <a class="button primary small" href='/users/{{ $user->id }}/edit'>
         		            <span class="mif-wrench"></span>
         		            &nbsp;
         		    		{{ trans('common.edit') }}

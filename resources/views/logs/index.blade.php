@@ -90,10 +90,10 @@
                         {{ $log->created_at }}
                     </td>
                     <td nowrap>
-                        <a class="button success" href="/logs/show/{{ $log->id }}">
+                        <a class="button success small" href="/logs/show/{{ $log->id }}">
                             {{ trans('common.show') }}
                         </a>
-                        <a class="button info" href="/logs/history/{{ $log->id }}">
+                        <a class="button info small" href="/logs/history/{{ $log->id }}">
                             {{ trans('common.history') }}
                         </a>
                     </td>
