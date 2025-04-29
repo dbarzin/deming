@@ -14,6 +14,13 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v4
 
+      - name: Read version from version.txt
+        id: version
+        run: |
+          VERSION=$(cat version.txt | tr -d ' \n')
+          echo "VERSION=$VERSION"
+          echo "version=$VERSION" >> "$GITHUB_OUTPUT"
+
       - name: Test naming
         run: echo "ghcr.io/${{ github.repository }}:latest"
 
@@ -34,4 +41,7 @@ jobs:
           platforms: linux/amd64 #, linux/arm64 (build fails)
           push: true
           tags: |
+            ghcr.io/${{ github.repository }}:${{ steps.version.outputs.version }}
             ghcr.io/${{ github.repository }}:latest
+          build-args: |
+              APP_VERSION=${{ steps.version.outputs.version }}
