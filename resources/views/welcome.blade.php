@@ -10,12 +10,12 @@
                     <h2 class="text-bold mb-0">
                         {{ $active_domains_count }}
                     </h2>
-                    <div>Domains</div>
+                    <div>{{ trans('menu.domains') }}</div>
                 </div>
                 <div class="icon">
                     <span class="mif-library"></span>
                 </div>
-                <a href="/domains" class="more"> More info <span class="mif-arrow-right"></span></a>
+                <a href="/domains" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
             </div>
         </div>
         <div class="cell-lg-3 cell-md-6 mt-2">
@@ -24,12 +24,12 @@
                     <h2 class="text-bold mb-0">
                         {{ $active_measures_count }}
                     </h2>
-                    <div>Controls</div>
+                    <div>{{ trans('menu.measures') }}</div>
                 </div>
                 <div class="icon">
                     <span class="mif-books"></span>
                 </div>
-                <a href="/alice/index" class="more"> More info <span class="mif-arrow-right"></span></a>
+                <a href="/alice/index" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
             </div>
         </div>
         <div class="cell-lg-3 cell-md-6 mt-2">
@@ -38,7 +38,7 @@
                     <h2 class="text-bold mb-0">
                         {{ $controls_made_count }}
                     </h2>
-                    <div>Measurements</div>
+                    <div>{{ trans('menu.controls') }}</div>
                 </div>
                 <div class="icon">
                     <span class="mif-paste"></span>
@@ -52,12 +52,12 @@
                     <h2 class="text-bold mb-0">
                         {{ $action_plans_count }}
                     </h2>
-                <div>Action Plans</div>
+                <div>{{ trans('menu.action_plan') }}</div>
                 </div>
                 <div class="icon">
                     <span class="mif-pending-actions"></span>
                 </div>
-                <a href="/actions" class="more"> More info <span class="mif-arrow-right"></span></a>
+                <a href="/actions" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
             </div>
         </div>
     </div>
