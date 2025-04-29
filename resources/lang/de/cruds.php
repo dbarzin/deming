@@ -111,6 +111,7 @@ return [
          'groupBy' => 'Gruppiert nach',
          'calendar' => 'Kalender'
        	 'create_action' => 'Aktionsplan erstellen',
+	 'calendar' => 'Kalender'
      ],
      'notification' => [
          'subject' => 'Liste der durchzuführenden Maßnahmen',
