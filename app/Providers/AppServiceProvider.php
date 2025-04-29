@@ -51,6 +51,11 @@ class AppServiceProvider extends ServiceProvider
         if (in_array('oidc', Config::get('services.socialite_controller.providers'))) {
             $this->bootOIDCSocialite();
         }
+
+        view()->composer('*', function ($view) {
+            $version = trim(file_get_contents(base_path('version.txt')));
+            $view->with('appVersion', $version);
+        });
     }
 
     /**

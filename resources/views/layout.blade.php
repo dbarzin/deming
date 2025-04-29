@@ -3,7 +3,7 @@
 <head>
     <!-- Required meta tags -->
     <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Deming - ISMS Controls Made Easy</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('style')
@@ -199,7 +199,7 @@
             </ul>
         <div class="w-100 text-center text-small data-box p-2 border-top bd-grayMouse" style="position: absolute; bottom: 0">
             <div>Github <a href="https://github.com/dbarzin/deming" class="no-decor">dbarzin/deming</a></div>
-            <div>Version 2025-02-R1</div>
+            <div>Version {{ $appVersion }}</div>
         </div>
     </div>
 
