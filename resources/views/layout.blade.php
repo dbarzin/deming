@@ -130,6 +130,7 @@
                             request()->is('attributes*') ||
                             request()->is('domains*') ||
                             request()->is('users*') ||
+                            request()->is('groups*') ||
                             request()->is('alice/import*') ||
                             request()->is('doc*') ||
                             request()->is('logs*') ||
@@ -153,7 +154,13 @@
                     <li class="{{ request()->is('users*') ? 'bg-gray': '' }}">
                         <a href="/users">
                         <span class="icon"><span class="mif-users"></span></span>
-                    <span class="caption">{{ trans("menu.configuration.users") }}</span>
+                        <span class="caption">{{ trans("menu.configuration.users") }}</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->is('groups*') ? 'bg-gray': '' }}">
+                        <a href="/groups">
+                        <span class="icon"><span class="mif-groups"></span></span>
+                        <span class="caption">{{ trans("menu.configuration.groups") }}</span>
                         </a>
                     </li>
                     <li class="{{ request()->is('alice/import*') ? 'bg-gray': '' }}">

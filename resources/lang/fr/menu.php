@@ -15,6 +15,7 @@ return [
     'configuration' => [
         'title' => 'Configuration',
         'users' => 'Utilisateurs',
+        'groups' => 'Groupes',
         'reports' => 'Rapports',
         'import' => "Import",
         'documents' => 'Documents',

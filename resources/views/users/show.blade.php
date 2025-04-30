@@ -71,19 +71,17 @@
 		    </div>
 	    	<div class="row">
 	    		<div class="cell-8">
-				    <table class="table striped row-hover cell-border"
+				    <table class="table striped row-hover cell-border row-border"
 				       data-role="table"
 				       data-rows="25"
 				       data-show-activity="true"
 				       data-rownum="false"
-				       data-check="false"
-				       data-check-style="1"
-				       onDraw="alert('change')"
-				       >
+				       data-check="false">
 				        <thead>
 				            <tr>
 				                <th class="sortable-column" width="5%">{{ trans("cruds.control.fields.clauses") }}</th>
 				                <th width="50%">{{ trans("cruds.control.fields.name") }}</th>
+                                <th width="50%">{{ trans("cruds.control.fields.scope") }}</th>
 				                <th class="sortable-column sort-asc"  width="5%">{{ trans("cruds.control.fields.planned") }}</th>
 				            </tr>
 				        </thead>
@@ -100,6 +98,9 @@
                             </td>
 				            <td>
 			                    {{ $control->name }}
+				            </td>
+				            <td>
+                                {{ $control->scope }}
 				            </td>
 		    				<td>
 				                <a id="{{ $control->plan_date }}" href="/bob/show/{{$control->id}}">

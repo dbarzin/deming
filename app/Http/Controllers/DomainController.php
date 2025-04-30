@@ -110,7 +110,7 @@ class DomainController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Domain $tag
+     * @param  \App\Domain $domain
      *
      * @return \Illuminate\Http\Response
      */
