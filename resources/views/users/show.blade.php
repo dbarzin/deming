@@ -65,6 +65,21 @@
 	    	</div>
 
 	    	<div class="row">
+                <div class="cell-1">
+                    <strong>{{ trans('cruds.user.fields.groups') }}</strong>
+		    	</div>
+
+	    		<div class="cell-8">
+                    @foreach($user->groups as $group)
+                        <a href='/groups/{{ $group->id }}'> {{ $group->name }}</a>
+                        @if (!$loop->last)
+                        ,
+                        @endif
+                    @endforeach
+	    		</div>
+	    	</div>
+
+	    	<div class="row">
 	    		<div class="cell-2">
 		    		<strong>{{ trans('cruds.user.fields.controls') }}</strong>
 		    	</div>

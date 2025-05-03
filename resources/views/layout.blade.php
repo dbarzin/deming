@@ -153,13 +153,13 @@
                     @if (Auth::User()->role==1)
                     <li class="{{ request()->is('users*') ? 'bg-gray': '' }}">
                         <a href="/users">
-                        <span class="icon"><span class="mif-users"></span></span>
+                        <span class="icon"><span class="mif-user"></span></span>
                         <span class="caption">{{ trans("menu.configuration.users") }}</span>
                         </a>
                     </li>
                     <li class="{{ request()->is('groups*') ? 'bg-gray': '' }}">
                         <a href="/groups">
-                        <span class="icon"><span class="mif-groups"></span></span>
+                        <span class="icon"><span class="mif-users"></span></span>
                         <span class="caption">{{ trans("menu.configuration.groups") }}</span>
                         </a>
                     </li>

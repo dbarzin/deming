@@ -272,6 +272,7 @@ return [
             'role' => 'Role',
             'password' => 'Password',
             'email' => 'eMail',
+            'groups' => 'Groups',
             'language' => 'Langue',
             'controls' => 'Contrôles de l\'utilisateur'
         ],
