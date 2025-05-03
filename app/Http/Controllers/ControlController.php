@@ -9,8 +9,8 @@ use App\Models\Control;
 use App\Models\Document;
 use App\Models\Domain;
 use App\Models\User;
-use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Carbon\Carbon;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -335,9 +335,16 @@ class ControlController extends Controller
 
         $users = User::orderBy('name')->get();
 
+        // get all groups
+        $all_groups = DB::table('user_groups')
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
         return view('controls.create')
             ->with('scopes', $scopes)
             ->with('all_measures', $all_measures)
+            ->with('all_groups', $all_groups)
             ->with('attributes', $values)
             ->with('users', $users);
     }
@@ -466,7 +473,7 @@ class ControlController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Domain $domain
+     * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -497,6 +504,12 @@ class ControlController extends Controller
         $all_measures = DB::table('measures')
             ->select('id', 'clause')
             ->orderBy('id')
+            ->get();
+
+        // get all groups
+        $all_groups = DB::table('user_groups')
+            ->select('id', 'name')
+            ->orderBy('name')
             ->get();
 
         $measures = DB::table('control_measure')
@@ -536,6 +549,7 @@ class ControlController extends Controller
             ->with('documents', $documents)
             ->with('scopes', $scopes)
             ->with('all_measures', $all_measures)
+            ->with('all_groups', $all_groups)
             ->with('measures', $measures)
             ->with('ids', $ids)
             ->with('attributes', $values)
@@ -588,6 +602,12 @@ class ControlController extends Controller
 
         $users = User::orderBy('name')->get();
 
+        // get all groups
+        $all_groups = DB::table('user_groups')
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
         // Get Control
         $control = Control::find($request->id);
 
@@ -611,6 +631,7 @@ class ControlController extends Controller
         return view('controls.create')
             ->with('scopes', $scopes)
             ->with('all_measures', $all_measures)
+            ->with('all_groups', $all_groups)
             ->with('attributes', $values)
             ->with('users', $users);
     }
@@ -1422,7 +1443,9 @@ class ControlController extends Controller
         $control->periodicity = request('periodicity');
         $control->status = request('status');
         $control->next_id = request('next_id');
+        // Sync
         $control->owners()->sync($request->input('owners', []));
+        $control->groups()->sync($request->input('groups', []));
         $control->measures()->sync($request->input('measures', []));
 
         $control->save();

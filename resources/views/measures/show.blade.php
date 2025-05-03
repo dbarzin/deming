@@ -167,7 +167,7 @@
 </div>
 </div>
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.control.title') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.control.title') }}" data-collapsible="true" data-title-icon="<span class='mif-paste'></span>">
 
         <div>
 			<table class="table striped row-hover cell-border"

@@ -56,7 +56,11 @@
                                 {{ $user->email }}
 				            </td>
                             <td>
-                                {{ $user->role }}
+            		    		{{ $user->role==1 ? trans('cruds.user.roles.admin') : "" }}
+            		    		{{ $user->role==2 ? trans('cruds.user.roles.user') : "" }}
+                                {{ $user->role==5 ? trans('cruds.user.roles.auditee') : "" }}
+            		    		{{ $user->role==3 ? trans('cruds.user.roles.auditor') : "" }}
+            		    		{{ $user->role==4 ? trans('cruds.user.roles.api') : "" }}
                             </td>
 		    			</tr>
 	    			@endforeach

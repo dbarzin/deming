@@ -93,6 +93,7 @@ return [
             'status_todo' => 'A faire',
             'status_all' => 'Tous',
             'owners' => 'Responsables',
+            'groups' => 'Groupes'
         ],
         'error' => [
             'made' => 'Ce contrôle a déjà été réalisé.',

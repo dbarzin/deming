@@ -57,7 +57,7 @@
 	    		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
 	    	</div>
 			<div class="cell-6">
-				<textarea name="objective" id="mde1">{{ old('objective', optional($measure)->objective) }}</textarea>
+                <textarea name="objective" class="easymde" id="objetive">{{ old('objective', optional($measure)->objective) }}</textarea>
 			</div>
 	    </div>
 
@@ -79,7 +79,7 @@
 					<strong>{{ trans("cruds.measure.fields.input") }}</strong>
 				</div>
 				<div class="cell-6">
-                    <textarea name="input" id="mde2">{{ old('input', optional($measure)->input) }}</textarea>
+                    <textarea name="input" class="easymde" id="input">{{ old('input', optional($measure)->input) }}</textarea>
 				</div>
 			</div>
 
@@ -106,7 +106,7 @@
 					<strong>{{ trans("cruds.measure.fields.action_plan") }}</strong>
 				</div>
 				<div class="cell-6">
-					<textarea name="action_plan" id="mde3">{{ old('action_plan', optional($measure)->action_plan) }}</textarea>
+                    <textarea name="action_plan" class="easymde" id="action_plan">{{ old('action_plan', optional($measure)->action_plan) }}</textarea>
 				</div>
 			</div>
 
@@ -176,28 +176,4 @@
 	</div>
 </div>
 </div>
-
-<!------------------------------------------------------------------------------------->
-<script type="text/javascript">
-document.addEventListener("DOMContentLoaded", function () {
-    const mde1 = new EasyMDE({
-        element: document.getElementById('mde1'),
-        minHeight: "200px",
-        maxHeight: "200px",
-        status: false,
-        });
-    const mde2 = new EasyMDE({
-        element: document.getElementById('mde2'),
-        minHeight: "200px",
-        maxHeight: "200px",
-        status: false,
-        });
-    const mde3 = new EasyMDE({
-        element: document.getElementById('mde3'),
-        minHeight: "200px",
-        maxHeight: "200px",
-        status: false,
-        });
-    });
-</script>
 @endsection

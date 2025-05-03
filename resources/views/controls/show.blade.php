@@ -216,6 +216,7 @@
 			</div>
 	    </div>
 
+        @if ($control->owners->count()>0)
     	<div class="row">
 			<div class="cell-1">
 	    		<strong>{{ trans('cruds.control.fields.owners') }}</strong>
@@ -223,13 +224,29 @@
 			<div class="cell">
                 @foreach($control->owners as $owner)
 					{{ $owner->name }}
-                    @if ($control->owners->last()!=$owner)
+                    @if (!$loop->last)
 					,
 					@endif
 				@endforeach
 			</div>
 	    </div>
+        @endif
 
+        @if ($control->groups->count()>0)
+    	<div class="row">
+			<div class="cell-1">
+                <strong>{{ trans('cruds.control.fields.groups') }}</strong>
+	    	</div>
+			<div class="cell">
+                @foreach($control->groups as $group)
+                    {{ $group->name }}
+                    @if (!$loop->last)
+					,
+					@endif
+				@endforeach
+			</div>
+	    </div>
+        @endif
 
    	<div class="row">
    		<div class="cell-7">
@@ -299,13 +316,11 @@
 			</form>
 		    &nbsp;
    			@endif
-		    <form action="/bob/index">
-	    		<button class="button">
-					<span class="mif-cancel"></span>
-					&nbsp;
-		    		{{ trans("common.cancel") }}
-	    		</button>
-			</form>
+            <a class="button" href="/bob/index" role="button">
+                <span class="mif-cancel"></span>
+                &nbsp;
+                {{ trans("common.cancel") }}
+            </a>
 		</div>
 	</div>
 </div>

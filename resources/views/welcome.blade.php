@@ -110,7 +110,7 @@
                                 </a>
                             </td>
                             <td class="text-center">
-                                <a href="/bob/show/{{ $control->prev_id }} style="text-decoration: none;">
+                                <a href="/bob/show/{{ $control->prev_id }}" style="text-decoration: none;">
                                     @if ($control->score==1)
                                         &#128545;
                                     @elseif ($control->score==2)
@@ -139,8 +139,6 @@
             </div>
         </div>
     </div>
-</div>
-</div>
 </div>
 
 <!------------------------------------------------------------------------------------->

@@ -94,6 +94,7 @@ return [
             'clauses' => 'Clauses',
             'input' => 'Input',
             'owners' => 'Responsibles',
+            'groups' => 'Groupes'
          ],
         'error' => [
             'made' => 'This measurement has already been made.',

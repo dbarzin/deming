@@ -12,7 +12,7 @@
 @section("content")
 
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.control.make') }}" data-collapsible="true" data-title-icon="<span class='mif-pencil'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.control.make') }}" data-collapsible="true" data-title-icon="<span class='mif-paste'></span>">
 
 	@if (count($errors))
 		@foreach ($errors->all() as $error)
@@ -185,7 +185,7 @@
 		    		<strong>{{ trans('cruds.control.fields.action_plan') }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="action_plan" id="mde1">{{ $errors->count()>0 ?  old('action_plan') : $control->action_plan }}</textarea>
+                    <textarea name="action_plan" class="easymde" id="action_plan">{{ $errors->count()>0 ?  old('action_plan') : $control->action_plan }}</textarea>
 				</div>
 			</div>
             @endif
@@ -354,19 +354,22 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
-    const easyMDE = new EasyMDE({
-        element: document.getElementById('mde1'),
-        minHeight: "200px",
-        maxHeight: "200px",
-        status: false,
-        spellChecker: false,
-        });
+    function waitForEasyMDE(id, callback) {
+        const interval = setInterval(() => {
+            if (window.editors && window.editors[id]) {
+                clearInterval(interval);
+                callback(window.editors[id]);
+            }
+        }, 100); // Vérifie toutes les 100ms
+    }
 
     // Rendre l'éditeur en lecture seule par défaut
-    easyMDE.codemirror.setOption("readOnly", true);
-    easyMDE.codemirror.getWrapperElement().classList.add('disabled-editor');
+    waitForEasyMDE('action_plan', function(easyMDE) {
+        // Lire/écrire sur l'éditeur une fois prêt
+        easyMDE.codemirror.setOption("readOnly", true);
+        easyMDE.codemirror.getWrapperElement().classList.add('disabled-editor');
 
-    document.getElementById('toggleTextarea').addEventListener('change', function() {
+        document.getElementById('toggleTextarea').addEventListener('change', function() {
             if (this.checked) {
                 easyMDE.codemirror.setOption("readOnly", false);
                 easyMDE.codemirror.getWrapperElement().classList.remove('disabled-editor');
@@ -374,6 +377,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 easyMDE.codemirror.setOption("readOnly", true);
                 easyMDE.codemirror.getWrapperElement().classList.add('disabled-editor');
             }
+        });
     });
 @endif
 

@@ -104,7 +104,7 @@ form, table {
 	    	</div>
 			<div class="cell-6">
                 @if ($action->status==0)
-				    <textarea name="remediation" id="remediation">{{ $errors->has('remediation') ?  old('remediation') : $action->remediation }}</textarea>
+                    <textarea name="remediation" class="easymde" id="remediation">{{ $errors->has('remediation') ?  old('remediation') : $action->remediation }}</textarea>
                 @else
                     {!! \Parsedown::instance()->text($action->remediation) !!}
                 @endif
@@ -203,15 +203,4 @@ form, table {
 	</form>
 </div>
 </div>
-
-<script>
-const mde1 = new EasyMDE({
-    element: document.getElementById('remediation'),
-    minHeight: "400px",
-    maxHeight: "400px",
-    status: false,
-    spellChecker: false,
-    });
-</script>
-
 @endsection

@@ -130,7 +130,7 @@ form, table {
                 <strong>{{ trans('cruds.action.fields.justification') }}</strong>
 	    	</div>
 			<div class="cell-6">
-                <textarea name="justification" id="mde1">{{ $errors->has('justification') ?  old('justification') : $action->justification }}</textarea>
+                <textarea name="justification" class="easymde" id="justification">{{ $errors->has('justification') ?  old('justification') : $action->justification }}</textarea>
 			</div>
 		</div>
 
@@ -174,15 +174,4 @@ form, table {
 	</form>
 </div>
 </div>
-
-<script>
-const mde1 = new EasyMDE({
-    element: document.getElementById('mde1'),
-    minHeight: "200px",
-    maxHeight: "200px",
-    status: false,
-    spellChecker: false,
-    });
-</script>
-
 @endsection

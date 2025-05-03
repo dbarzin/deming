@@ -61,7 +61,7 @@
 		    		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="objective" id="mde1">{{ $errors->has('objective') ?  old('objective') : $measure->objective }}</textarea>
+                    <textarea name="objective" class="easymde" id="objective">{{ $errors->has('objective') ?  old('objective') : $measure->objective }}</textarea>
 				</div>
 			</div>
 
@@ -83,7 +83,7 @@
 		    		<strong>{{ trans('cruds.measure.fields.input') }}</strong>
 		    	</div>
 				<div class="cell-6">
-                    <textarea name="input" id="mde2">{{ $errors->has('input') ?  old('input') : $measure->input }}</textarea>
+                    <textarea name="input" class="easymde" id="input">{{ $errors->has('input') ?  old('input') : $measure->input }}</textarea>
 				</div>
 			</div>
 			<div class="row">
@@ -107,7 +107,7 @@
 		    		<strong>{{ trans('cruds.measure.fields.action_plan') }}</strong>
 		    	</div>
 				<div class="cell-6">
-					<textarea name="action_plan" id="mde3">{{ $errors->has('action_plan') ?  old('action_plan') : $measure->action_plan }}</textarea>
+                    <textarea name="action_plan" class="easymde" id="action_plan">{{ $errors->has('action_plan') ?  old('action_plan') : $measure->action_plan }}</textarea>
 				</div>
 			</div>
 
@@ -137,28 +137,4 @@
 		</div>
 	</div>
 </div>
-<!------------------------------------------------------------------------------------->
-<script type="text/javascript" defer>
-    const mde1 = new EasyMDE({
-        element: document.getElementById('mde1'),
-        minHeight: "100px",
-        maxHeight: "100px",
-        status: false,
-        spellChecker: false,
-        });
-    const mde2 = new EasyMDE({
-        element: document.getElementById('mde2'),
-        minHeight: "100px",
-        maxHeight: "100px",
-        status: false,
-        spellChecker: false,
-        });
-    const mde3 = new EasyMDE({
-        element: document.getElementById('mde3'),
-        minHeight: "100px",
-        maxHeight: "100px",
-        status: false,
-        spellChecker: false,
-        });
-</script>
 @endsection

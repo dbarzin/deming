@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption='{{ trans("cruds.control.edit")}}' data-collapsible="true" data-title-icon="<span class='mif-pencil'></span>">
+    <div data-role="panel" data-title-caption='{{ trans("cruds.control.edit")}}' data-collapsible="true" data-title-icon="<span class='mif-paste'></span>">
 		@if (count($errors))
 		<div class="grid">
 		    <div class="cell-3 bg-red fg-white">
@@ -26,7 +26,7 @@
 			    		<strong>{{ trans("cruds.control.fields.clauses") }}</strong>
 					</div>
 		    		<div class="cell-6">
-						<select data-role="select" name="measures[]" multiple>
+                        <select data-role="select" id="measures" name="measures[]" multiple>
 							@foreach($all_measures as $measure)
 							    <option value="{{ $measure->id }}"
                                     {{ in_array($measure->id, old("measures", $measures)) ? "selected" : "" }}>
@@ -59,7 +59,7 @@
 			    		<strong>{{ trans("cruds.control.fields.objective") }}</strong>
 			    	</div>
 					<div class="cell-6">
-						<textarea name="objective" id="mde1">{{ $errors->has('objective') ?  old('objective') : $control->objective }}</textarea>
+                        <textarea name="objective" class="easymde" id="objective">{{ $errors->has('objective') ?  old('objective') : $control->objective }}</textarea>
 					</div>
 				</div>
 
@@ -68,7 +68,7 @@
 			    		<strong>{{ trans('cruds.control.fields.attributes') }}</strong>
 			    	</div>
 					<div class="cell-6">
-						<select data-role="select" name="attributes[]" multiple>
+                        <select data-role="select" id="attributes" name="attributes[]" multiple>
 							@foreach($attributes as $attribute)
 								@if (strlen($attribute)>0)
 							    <option {{ str_contains($control->attributes, $attribute) ? "selected" : ""}}>{{$attribute}}</option>
@@ -83,7 +83,7 @@
 			    		<strong>{{ trans("cruds.control.fields.input") }}</strong>
 			    	</div>
 					<div class="cell-6">
-                        <textarea name="input" id="mde2">{{ $errors->has('input') ?  old('input') : $control->input }}</textarea>
+                        <textarea name="input" class="easymde" id="input">{{ $errors->has('input') ?  old('input') : $control->input }}</textarea>
 					</div>
 				</div>
 				<div class="row">
@@ -169,7 +169,7 @@
 			    		<strong>{{ trans("cruds.control.fields.action_plan") }}</strong>
 			    	</div>
 					<div class="cell-6">
-						<textarea name="action_plan" id="mde3">{{ $errors->has('action_plan') ?  old('action_plan') : $control->action_plan }}</textarea>
+                        <textarea name="action_plan" class="easymde" id="action_plan">{{ $errors->has('action_plan') ?  old('action_plan') : $control->action_plan }}</textarea>
 					</div>
 				</div>
 
@@ -179,7 +179,7 @@
 			    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
 			    	</div>
 					<div class="cell-2">
-						<select data-role="select" name="periodicity">
+                        <select data-role="select" id="periodicity" name="periodicity">
 						    <option value="0" {{ $control->periodicity==0 ? "selected" : ""}}>{{ trans('common.once') }}</option>
 						    <option value="1" {{ $control->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
 						    <option value="3" {{ $control->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
@@ -191,7 +191,7 @@
 			    		<strong>Status</strong>
 		    		</div>
 					<div class="cell-1">
-						<select data-role="select" name="status">
+                        <select data-role="select" id="status" name="status">
 							<option value="0" {{ $control->status==0 ? "selected" : ""}}>Todo</option>
 							<option value="1" {{ $control->status==1 ? "selected" : ""}}>Proposed</option>
 							<option value="2" {{ $control->status==2 ? "selected" : ""}}>Done</option>
@@ -201,7 +201,7 @@
 			    		<strong>Next ID</strong>
 			    	</div>
 					<div class="cell-1">
-						<select data-role="select" name="next_id">
+                        <select data-role="select" id="next_id" name="next_id">
 							<option></option>
 							@foreach($ids as $id)
 							    <option {{ $control->next_id === $id ? "selected" : ""}}>{{$id}}</option>
@@ -214,10 +214,23 @@
                     <div class="cell-1">
                         <strong>{{ trans('cruds.control.fields.owners') }}</strong>
                     </div>
-                    <div class="cell-4">
+                    <div class="cell-6">
                         <select data-role="select" name="owners[]" id="owners" multiple>
                             @foreach($users as $user)
                                 <option value="{{ $user->id }}" {{ (in_array($user->id, old('owners', [])) || $control->owners->contains($user->id)) ? 'selected' : '' }}>{{ $user->name }}</option>
+                            @endforeach
+                        </select>
+                    </div>
+                </div>
+
+				<div class="row">
+                    <div class="cell-1">
+                        <strong>{{ trans('cruds.control.fields.groups') }}</strong>
+                    </div>
+                    <div class="cell-6">
+                        <select data-role="select" name="groups[]" id="groups" multiple>
+                            @foreach($all_groups as $group)
+                                <option value="{{ $group->id }}" {{ (in_array($group->id, old('groups', [])) || $control->groups->contains($group->id)) ? 'selected' : '' }}>{{ $group->name }}</option>
                             @endforeach
                         </select>
                     </div>
@@ -233,21 +246,17 @@
 			            &nbsp;
 						{{ trans("common.save") }}
 					</button>
-					</form>
 					&nbsp;
-		    		<form action="/bob/show/{{$control->id}}">
-			    		<button type="submit" class="button cancel">
-			    			<span class="mif-cancel"></span>
-			    			&nbsp;
-			    			{{ trans("common.cancel") }}
-			    		</button>
-			    	</form>
+                    <a class="button" href="/bob/show/{{$control->id}}" role="button">
+                        <span class="mif-cancel"></span>
+                        &nbsp;
+                        {{ trans("common.cancel") }}
+                    </a>
 	    		</div>
 	    	</div>
-	    </div>
-	</form>
+        </form>
+    </div>
 </div>
-
 <script>
 document.addEventListener("DOMContentLoaded", function () {
 
@@ -317,30 +326,6 @@ const myDropzone = new Dropzone("div#dropzoneFileUpload", {
         	}
       	})
     }
-
-    const mde1 = new EasyMDE({
-        element: document.getElementById('mde1'),
-        minHeight: "200px",
-        maxHeight: "200px",
-        status: false,
-        spellChecker: false,
-        });
-
-    const mde2 = new EasyMDE({
-        element: document.getElementById('mde2'),
-        minHeight: "200px",
-        maxHeight: "200px",
-        status: false,
-        spellChecker: false,
-        });
-
-    const mde3 = new EasyMDE({
-        element: document.getElementById('mde3'),
-        minHeight: "200px",
-        maxHeight: "200px",
-        status: false,
-        spellChecker: false,
-        });
 });
 </script>
 @endsection

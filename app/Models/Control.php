@@ -40,9 +40,11 @@ class Control extends Model
         'periodicity',
     ];
 
+    private $groups = null;
     private $owners = null;
 
     // Control status :
+
     // O - Todo => relisation date null
     // 1 - Proposed by auditee => relisation date not null
     // 2 - Done => relisation date not null
@@ -63,6 +65,13 @@ class Control extends Model
             $this->owners = $this->belongsToMany(User::class, 'control_user', 'control_id')->orderBy('name');
         }
         return $this->owners;
+    }
+
+    public function groups()
+    {
+        if ($this->groups === null)
+            $this->groups = $this->belongsToMany(UserGroup::class)->orderBy('name');
+        return $this->groups;
     }
 
     public function canMake()

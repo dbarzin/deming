@@ -22,7 +22,24 @@ window.Chart = Chart;
 // EasyMDE
 import EasyMDE from 'easymde';
 window.EasyMDE = EasyMDE;
+window.editors = {};
+document.addEventListener("DOMContentLoaded", function () {
+	document.querySelectorAll('.easymde').forEach(function (textarea) {
+	    const instance = new EasyMDE({
+	        element: textarea,
+	        minHeight: "200px",
+	        maxHeight: "200px",
+	        status: false,
+	        spellChecker: false,
+	    });
+        // Stocke l'instance par id pour un accès futur
+        if (textarea.id) {
+            editors[textarea.id] = instance;
+        }
+	});
+});
 
+// Chart colors
 window.chartColors = {
 	red: 'rgb(255, 99, 132)',
 	orange: 'rgb(255, 159, 64)',

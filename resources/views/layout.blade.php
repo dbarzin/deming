@@ -249,7 +249,6 @@
         </div>
     </div>
 </div>
-<!-- @ vite('resources/js/metro.js') -->
-<!-- script src="https://cdn.metroui.org.ua/current/metro.js" type="module"></script -->
+@stack('scripts')
 </body>
 </html>

@@ -93,7 +93,7 @@ form, table {
                     <strong>{{ trans('cruds.action.fields.cause') }}</strong>
 		    	</div>
                 <div class="cell-6">
-                <textarea name="cause" id="mde1">{{ old('cause') }}</textarea>
+                <textarea name="cause" class="easymde" id="cause">{{ old('cause') }}</textarea>
 				</div>
 			</div>
 
@@ -105,7 +105,7 @@ form, table {
                 <strong>{{ trans('cruds.action.fields.remediation') }}</strong>
 	    	</div>
 			<div class="cell-6">
-                <textarea name="remediation" id="mde2">{{ old('remediation') }}</textarea>
+                <textarea name="remediation" class="easymde" id="remediation">{{ old('remediation') }}</textarea>
 			</div>
 		</div>
 
@@ -146,22 +146,4 @@ form, table {
 	</form>
 </div>
 </div>
-
-<script>
-const mde1 = new EasyMDE({
-    element: document.getElementById('mde1'),
-    minHeight: "200px",
-    maxHeight: "200px",
-    status: false,
-    spellChecker: false,
-    });
-const mde2 = new EasyMDE({
-    element: document.getElementById('mde2'),
-    minHeight: "400px",
-    maxHeight: "400px",
-    status: false,
-    spellChecker: false,
-    });
-</script>
-
 @endsection
