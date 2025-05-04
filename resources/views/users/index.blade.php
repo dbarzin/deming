@@ -1,8 +1,7 @@
 @extends("layout")
 
 @section("content")
-<div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.user.index') }}" data-collapsible="true" data-title-icon="<span class='mif-user'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.user.index') }}" data-collapsible="true" data-title-icon="<span class='mif-person'></span>">
 
 		<div class="grid">
 			<div class="row">
@@ -88,8 +87,7 @@
 			@endforeach
 				</tbody>
 			</table>
-			<br>
 		</div>
 	</div>
-</div></div>
+</div>
 @endsection

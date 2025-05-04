@@ -144,6 +144,7 @@ class ControlController extends Controller
                     'control_user.control_id'
                 )
                 ->where('control_user.user_id', '=', Auth::User()->id);
+                // TODO: add group filter here
         }
         $scopes = $scopes
             ->whereIn('status', [0, 1])
@@ -174,8 +175,10 @@ class ControlController extends Controller
                     '=',
                     'control_user.control_id'
                 )
+                // TODO: add group filter here
                 ->where('control_user.user_id', '=', Auth::User()->id);
         }
+        // TODO: add group filter here
 
         // Filter on domain
         if ($domain !== null && $domain !== 0) {
@@ -427,6 +430,7 @@ class ControlController extends Controller
                     ->where('control_id', $id)
                     ->where('user_id', Auth::User()->id)
                     ->exists(),
+            // TODO: add group filter here
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1048,7 +1052,7 @@ class ControlController extends Controller
     /**
      * Show a measurement for planing
      *
-     * @param  \App\Domain $domain
+     * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -1116,7 +1120,7 @@ class ControlController extends Controller
     /**
      * unPlan a control.
      *
-     * @param  \App\Measure $measure
+     * @param  Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -1160,11 +1164,11 @@ class ControlController extends Controller
     /**
      * Save a control for planing
      *
-     * @param  \App\Domain $domain
+     * @param  Request $Request
      *
      * @return \Illuminate\Http\Response
      */
-    public function doPlan(Request $request)
+    public function doPlan(Request $Request)
     {
         // For administrators and users only
         abort_if(
@@ -1220,6 +1224,7 @@ class ControlController extends Controller
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
                     ->exists(),
+            // TODO: add group filter here
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1288,6 +1293,7 @@ class ControlController extends Controller
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
                     ->exists(),
+                // TODO: add group filter here
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1478,6 +1484,7 @@ class ControlController extends Controller
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
                     ->exists(),
+                    // TODO: add group filter here
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1712,6 +1719,7 @@ class ControlController extends Controller
                     ->where('user_id', Auth::User()->id)
                     ->where('control_id', $id)
                     ->exists(),
+            // TODO: add group filter here
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );

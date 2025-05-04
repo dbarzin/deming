@@ -1,8 +1,7 @@
 @extends("layout")
 
 @section("content")
-<div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.create') }}" data-collapsible="true" data-title-icon="<span class='mif-pencil'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.create') }}" data-collapsible="true" data-title-icon="<span class='mif-books'></span>">
 	@if (count($errors))
 		<div class="grid">
 		    <div class="cell-3 bg-red fg-white">
@@ -112,16 +111,15 @@
 	    	<div class="row">
 	    		<div class="cell-5">
 					<button type="submit" class="button success">
-			            <span class="mif-floppy-disk"></span>
+                        <span class="mif-floppy-disk2"></span>
 						&nbsp;
 						{{ trans("common.save") }}
 					</button>
-					&nbsp;
-					<button type="button" class="button" onclick="location.href = '/alice/index'">
+                    <a class="button" href="/alice/index">
 						<span class="mif-cancel"></span>
 						&nbsp;
 						{{ trans("common.cancel") }}
-					</button>
+                    </a>
 				</div>
 			</div>
 		</div>

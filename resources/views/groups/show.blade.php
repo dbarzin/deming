@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.group.show') }}" data-collapsible="true" data-title-icon="<span class='mif-users'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.group.show') }}" data-collapsible="true" data-title-icon="<span class='mif-group'></span>">
 
 		<div class="grid">
 

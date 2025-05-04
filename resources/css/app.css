@@ -1,10 +1,15 @@
 
 /* Metro 4.5.12 */
-@import "../metroui/metro.css";
-@import "../metroui/icons.css";
-/* Metro from NPM
+/*
+@import "../metroui45/metro.css";
+@import "../metroui45/icons.css";
+*/
+/* Metro 5.0 from NPM
 @import "@olton/metroui/lib/metro.all.css";
 */
+/* Metro 5.1 */
+@import "../metroui51/metro.css";
+
 @import 'calendar.css';
 @import 'custom.css';
 @import 'easymde/dist/easymde.min.css';

@@ -1,7 +1,6 @@
 @extends("layout")
 
 @section("content")
-<div class="p-3">
     <div data-role="panel" data-title-caption="{{ trans('cruds.measure.show') }}" data-collapsible="true" data-title-icon="<span class='mif-books'></span>">
 		@if (count($errors))
 		<div class="grid">
@@ -20,7 +19,7 @@
     		<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.domain') }}</strong>
 	    	</div>
-			<div class="cell">
+			<div class="cell-6">
 				<a href="/domains/{{$measure->domain_id}}">
 				{{ $measure->domain->title ?? ""}}
 				</a>
@@ -33,7 +32,7 @@
 			<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.clause') }}</strong>
 	    	</div>
-			<div class="cell">
+			<div class="cell-6">
 				{{ $measure->clause }}
 			</div>
 	    </div>
@@ -42,7 +41,7 @@
 			<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.name') }}</strong>
 	    	</div>
-			<div class="cell">
+			<div class="cell-6">
 				{{ $measure->name }}
 			</div>
 	    </div>
@@ -71,7 +70,7 @@
 			<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.input') }}</strong>
 	    	</div>
-			<div class="cell">
+			<div class="cell-6">
                 {!! \Parsedown::instance()->text($measure->input) !!}
 			</div>
 	    </div>
@@ -90,7 +89,7 @@
 			<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.indicator') }}</strong>
 	    	</div>
-			<div class="cell">
+			<div class="cell-6">
 				<pre>{{ $measure->indicator }}</pre>
 			</div>
 	    </div>
@@ -109,7 +108,8 @@
 			</div>
 		</div>
 
-		<div class="form-group">
+		<div class="row">
+            <div class="cell-8">
 			@if (Auth::User()->role === 1)
 		    <form action="/alice/plan/{{ $measure->id }}">
 		    	<button class="button info">
@@ -128,7 +128,7 @@
 		    </form>
 		    &nbsp;
 		    <form action="/alice/clone/{{ $measure->id }}">
-		    	<button class="button yellow">
+		    	<button class="button warning">
 		            <span class="mif-plus"></span>
 		            &nbsp;
 			    	{{ trans('common.clone') }}
@@ -162,11 +162,13 @@
 		    	</button>
 			</form>
             @endif
+        </div>
 		</div>
     </div>
 </div>
+<div>
+    <br>
 </div>
-<div class="p-3">
     <div data-role="panel" data-title-caption="{{ trans('cruds.control.title') }}" data-collapsible="true" data-title-icon="<span class='mif-paste'></span>">
 
         <div>

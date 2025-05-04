@@ -1,10 +1,9 @@
 @extends("layout")
 
 @section("content")
-<div class="p-2">
     <div data-role="panel" data-title-caption="{{ trans('cruds.measure.index') }}" data-collapsible="true" data-title-icon="<span class='mif-books'></span>">
 			<div class="grid">
-				<div class="row">
+                <div class="row mb-3">
 					<div class="cell-5">
 						<select id='domain_id' name="domain_id" data-role="select">
 						    <option value="0">-- {{ trans('cruds.domain.choose') }} --</option>
@@ -37,11 +36,11 @@
 			}, false);
 			</script>
 
-				<div class="row">
-					<div class="cell">
+			<div class="row">
+				<div class="cell">
                 <table
                     id="measures"
-       class="table data-table striped row-hover cell-border"
+                    class="table data-table striped row-hover cell-border"
                     data-role="table">
 			   <thead>
 				    <tr>
@@ -94,6 +93,5 @@
 			</table>
 		</div>
 	</div>
-</div>
 </div>
 @endsection

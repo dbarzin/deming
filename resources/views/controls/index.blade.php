@@ -1,9 +1,8 @@
 @extends("layout")
 
 @section("content")
-<div class="p-2">
     <div data-role="panel" data-title-caption='{{ trans("cruds.control.list")}}' data-collapsible="true" data-title-icon="<span class='mif-paste'></span>">
-    <div class="grid">
+    <div class="grid mb-2">
         <div class="row">
             <div class="cell-2">
                 <select id='domain' name="domain_id" data-role="select">
@@ -65,7 +64,7 @@
                         @endfor
                     </select>
                 </div>
-            <div class="cell-3">
+            <div class="cell-3 mt-1">
                 <input type="radio" data-role="radio" data-style="2" name="status"
                 value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}>
                 <span style="position: relative; top: -3px;">
@@ -191,7 +190,6 @@
     @endforeach
     </tbody>
 </table>
-</div>
 </div>
     <script>
         document.addEventListener("DOMContentLoaded", function () {

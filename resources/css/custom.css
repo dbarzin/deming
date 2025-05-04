@@ -1,3 +1,113 @@
+:root {
+    --logo-background: #f6f6f6;
+    --logo-color: #292826;
+    --navview-pane-width: 200px;
+}
+
+body {
+    font-family: 'Noto Sans', sans-serif;
+}
+
+.dark-side {
+    --logo-background: #2c2d30;
+    --logo-color: #faf5f5;
+}
+
+.logo-container, .logo-container-big {
+    background: var(--logo-background);
+    color: var(--logo-color);
+    display: flex;
+    align-items: center;
+    height: 52px;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.logo-container-big {
+    width: 128px;
+    height: 128px;
+    flex-shrink: 0;
+    border-radius: 50%;
+}
+
+.navview {
+    &.compacted {
+        .text-logo {
+            display: none!important;
+        }
+    }
+
+    .navview-content {
+        overflow: hidden;
+    }
+}
+
+#page-content {
+    height: calc(100% - 52px);
+    width: calc(100% - 2px);
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    z-index: 1;
+    padding: .5rem;
+}
+
+@media screen and (min-width: 768px) {
+    #page-content {
+        padding: 1rem 1rem 4rem 1rem;
+        height: calc(100% - 2px);
+    }
+}
+
+.hljs {
+    color: #383a42;
+    background: #fafafa;
+}
+
+.dark-side {
+    .hljs {
+        color: #abb2bf;
+        background: #282c34;
+    }
+}
+
+pre:not(.stay-on) {
+    display: none;
+}
+
+html.show-code {
+    pre:not(.stay-on) {
+        display: block;
+    }
+}
+
+pre {
+    position: relative;
+}
+
+.copy-code-button {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+}
+
+.demo-cell {
+    height: 20px;
+    border: 1px solid var(--border-color);
+}
+
+#content-title {
+    display: none;
+}
+
+@media screen and (min-width: 500px) {
+    #content-title {
+        display: block;
+    }
+}
+.navview-pane a {
+    font-size: 15px;
+}
+/*
 body {
   background-color: #ECF0F5;
 }
@@ -11,7 +121,7 @@ body {
 }
 
 .navview .navview-pane {
-  background-color: #ecf0f5; /* #7C123E; */
+  background-color: #ecf0f5;
   color: #000000;
   font-size: 14px;
 }
@@ -28,6 +138,7 @@ body {
 .navview .navview-menu {
   background-color: #FFFFFF;
 }
+*/
 
 pre {
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;

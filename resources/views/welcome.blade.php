@@ -1,7 +1,6 @@
 @extends("layout")
 
 @section("content")
-<div class="p-2">
     <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.dashboard') }}" data-collapsible="true" data-title-icon="<span class='mif-home'></span>">
     <div class="row">
         <div class="cell-lg-3 cell-md-6 mt-2">
@@ -139,7 +138,6 @@
             </div>
         </div>
     </div>
-</div>
 
 <!------------------------------------------------------------------------------------->
 <script>

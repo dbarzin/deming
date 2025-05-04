@@ -1,16 +1,13 @@
 @extends("layout")
 
 @section("content")
-<div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.user.show') }}" data-collapsible="true" data-title-icon="<span class='mif-user'></span>">
-
+    <div data-role="panel" data-title-caption="{{ trans('cruds.user.show') }}" data-collapsible="true" data-title-icon="<span class='mif-person'></span>">
 		<div class="grid">
-
 	    	<div class="row">
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.user.fields.login') }}</strong>
 		    	</div>
-	    		<div class="cell">
+                <div class="cell-6">
 		    		{{ $user->login }}
 	    		</div>
 		    </div>
@@ -19,7 +16,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.user.fields.name') }}</strong>
 		    	</div>
-	    		<div class="cell">
+                <div class="cell-6">
 		    		{{ $user->name }}
 	    		</div>
 		    </div>
@@ -28,7 +25,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.user.fields.title') }}</strong>
 		    	</div>
-	    		<div class="cell">
+                <div class="cell-6">
 		    		{{ $user->title }}
 	    		</div>
 		    </div>
@@ -37,7 +34,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.user.fields.language') }}</strong>
 		    	</div>
-	    		<div class="cell">
+                <div class="cell-6">
 		    		{{ $user->language }}
 	    		</div>
 		    </div>
@@ -46,7 +43,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.user.fields.role') }}</strong>
 		    	</div>
-	    		<div class="cell">
+                <div class="cell-6">
 		    		{{ $user->role==1 ? trans('cruds.user.roles.admin') : "" }}
 		    		{{ $user->role==2 ? trans('cruds.user.roles.user') : "" }}
                     {{ $user->role==5 ? trans('cruds.user.roles.auditee') : "" }}
@@ -59,7 +56,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans('cruds.user.fields.email') }}</strong>
 		    	</div>
-	    		<div class="cell">
+                <div class="cell-6">
 		    		{{ $user->email }}
 	    		</div>
 	    	</div>
@@ -133,42 +130,35 @@
 	    			</table>
 	    		</div>
 	    	</div>
-
 	    </div>
 
-		<div class="form-group">
+    	<div class="row">
+            <div class="cell-6">
+			@if ((Auth::User()->role==1)||($user->id==Auth::User()->id))
 		    <form>
-				@if ((Auth::User()->role==1)||($user->id==Auth::User()->id))
 		    	<button class="button primary" onclick='this.form.action="/users/{{ $user->id }}/edit"'>
 		            <span class="mif-wrench"></span>
 		            &nbsp;
 		    		{{ trans('common.edit') }}
 		    	</button>
 		    </form>
-		    	&nbsp;
-		    	@endif
-				@if (Auth::User()->role==1)
-				<form action="/users/{{ $user->id }}" method="post" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
-	               {{ method_field('delete') }}
-	               @csrf
-		            <button class="button alert" type="submit">
-						<span class="mif-fire"></span>
-						&nbsp;
-		            	{{ trans('common.delete') }}
-		            </button>
-		        </form>
-		        &nbsp;
-		        @endif
-		        <form>
-		    	<button class="button" onclick='this.form.action="/users";'>
-					<span class="mif-cancel"></span>
+            @endif
+			@if (Auth::User()->role==1)
+			<form action="/users/{{ $user->id }}" method="post" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
+               {{ method_field('delete') }}
+               @csrf
+	            <button class="button alert" type="submit">
+					<span class="mif-fire"></span>
 					&nbsp;
-		    		{{ trans('common.cancel') }}
-		    	</button>
-			</form>
+	            	{{ trans('common.delete') }}
+	            </button>
+	        </form>
+	        @endif
+            <a class="button" href="/users">
+				<span class="mif-cancel"></span>
+				&nbsp;
+	    		{{ trans('common.cancel') }}
+            </a>
 		</div>
 	</div>
-</div>
-
-
 @endsection
