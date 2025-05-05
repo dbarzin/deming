@@ -63,14 +63,14 @@
 </div>
 <div class="row">
     <div class="cell-md-7">
-        <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_planning') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-bars2'></span>">
+        <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_planning') }}" data-collapsible="true" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
             <div>
                 <canvas id="canvas-status" style="width: 100%; max-height: 500px;"  class="chartjs-render-monitor"></canvas>
             </div>
         </div>
     </div>
     <div class="cell-md-5">
-        <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_status') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-pie'></span>">
+        <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_status') }}" data-collapsible="true" data-title-icon="<span class='mif-pie-chart'></span>">
             <div>
                 <canvas id="canvas-doughnut" style="width: 100%; max-height: 415px;"  class="chartjs-render-monitor"></canvas>
             </div>

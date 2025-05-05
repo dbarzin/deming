@@ -1,6 +1,5 @@
 @extends('layout')
 @section('content')
-<div class="p-3 table-responsive">
     <div class="table-responsive" data-role="panel" data-title-caption="{{ trans('cruds.log.title') }}" data-collapsible="true" data-title-icon="<span class='mif-log-file'></span>">
 
             <table class="table table-border cell-border">
@@ -120,7 +119,6 @@
             </a>
         </div>
     </div>
-</div>
 @endsection
 @section('style')
     <style>

@@ -64,7 +64,7 @@
                         @endfor
                     </select>
                 </div>
-            <div class="cell-3 mt-1">
+            <div class="cell-3 mt-2">
                 <input type="radio" data-role="radio" data-style="2" name="status"
                 value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}>
                 <span style="position: relative; top: -3px;">

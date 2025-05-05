@@ -1,7 +1,6 @@
 @extends("layout")
 
 @section("content")
-<div class="p-3">
     <div data-role="panel" data-title-caption="{{ trans('cruds.imports.index') }}" data-collapsible="true" data-title-icon="<span class='mif-download'></span>">
 
 			@if (count($errors))
@@ -142,5 +141,4 @@
 		        </div>
 		    </div>
 
-		</div>
 @endsection

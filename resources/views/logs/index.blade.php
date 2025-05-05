@@ -1,7 +1,6 @@
 @extends("layout")
 
 @section("content")
-<div class="p-3">
     <div data-role="panel" data-title-caption='{{ trans("cruds.log.index")}}' data-collapsible="true" data-title-icon="<span class='mif-log-file'></span>">
 
     <div class="grid">
@@ -105,5 +104,4 @@
         {{ $logs->links() }}
         </p>
     </div>
-</div>
 @endsection

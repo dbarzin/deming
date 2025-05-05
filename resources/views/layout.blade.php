@@ -29,39 +29,36 @@
         </div>
 
         <ul class="navview-menu pad-second-level" id="side-menu">
-            <li>
+            <li class="{{ request()->is('/') ? 'active': '' }}">
                 <a href="/">
                     <span class="icon mif-home"></span>
                     <span class="caption">{{ trans("menu.home") }}</span>
                 </a>
             </li>
-            <li>
+            <li class="{{ request()->is('alice*') ? 'active': '' }}">
                 <a href="/alice/index">
                     <span class="icon mif-books"></span>
                     <span class="caption">{{ trans("menu.measures") }}</span>
                 </a>
             </li>
-            <li>
+            <li class="{{ request()->is('bob/index') ? 'active': '' }}">
                 <a href="/bob/index">
                     <span class="icon mif-paste"></span>
                     <span class="caption">{{ trans("menu.controls") }}</span>
                 </a>
             </li>
-
-            <li>
+            <li class="{{ request()->is('bob/history') ? 'active': '' }}">
                 <a href="/bob/history">
                     <span class="icon mif-calendar"></span>
                     <span class="caption">{{ trans("menu.planning") }}</span>
                 </a>
             </li>
-
-            <li>
+            <li class="{{ request()->is('action*') ? 'active': '' }}">
                 <a href="/actions">
                     <span class="icon mif-pending-actions"></span>
                     <span class="caption">{{ trans("menu.action_plan") }}</span>
                 </a>
             </li>
-
             <li>
                 <a href="#" class="dropdown-toggle">
                     <span class="icon mif-meter"></span>
@@ -92,7 +89,7 @@
                 </ul>
             </li>
 
-            <li>
+            <li class="{{ request()->is('reports*') ? 'active': '' }}">
                 <a href="/reports">
                     <span class="icon mif-file-text"></span>
                     <span class="caption">{{ trans("menu.configuration.reports") }}</span>
@@ -101,12 +98,12 @@
 
 
             <li>
-                <a href="#" class="dropdown-toggle">
+                <a href="#" class="dropdown-toggle open">
                     <span class="icon mif-cog"></span>
                     <span class="caption">{{ trans("menu.configuration.title") }}</span>
                 </a>
                 <ul class="navview-menu " data-role="collapse" data-collapsed="true">
-                    <li>
+                    <li  class="{{ request()->is('attributes*') ? 'active': '' }}">
                         <a href="/attributes">
                             <span class="icon mif-tags"></span>
                             <span class="caption">{{ trans("menu.attributes") }}</span>
@@ -126,7 +123,7 @@
                         </a>
                     </li>
                     <li class="{{ request()->is('group*') ? 'bg-gray': '' }}">
-                        <a href="/users">
+                        <a href="/groups">
                         <span class="icon mif-group"></span>
                         <span class="caption">{{ trans("menu.configuration.groups") }}</span>
                         </a>
@@ -171,11 +168,10 @@
                     </form>
                 </li>
             </ul>
+    </div>
         <div class="w-100 text-center text-small data-box p-2 border-top bd-grayMouse" style="position: absolute; bottom: 0">
-            <div>Github <a href="https://github.com/dbarzin/deming">dbarzin/deming</a></div>
             <div>Version 2025-02-R1</div>
         </div>
-    </div>
 
     <div class="navview-content">
         <div data-role="appbar" class="bg-reserve-steppe border-bottom bd-default" data-expand-point="fs">
