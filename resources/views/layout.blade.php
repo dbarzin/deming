@@ -21,12 +21,14 @@
             </a>
         </div>
 
-        <div class="suggest-box">
-            <input type="text" data-role="input" data-clear-button="false" data-search-button="true">
-            <button class="holder">
-                <span class="mif-search"></span>
-            </button>
-        </div>
+        <form id="search-form" action="/global-search" method="GET">
+            <div class="suggest-box">
+                <input type="text" data-role="input" name="search" value="{{ $search ?? '' }}" id="search" data-clear-button="false" data-search-button="true">
+                <button class="holder">
+                    <span class="mif-search fg-white"></span>
+                </button>
+            </div>
+        </form>
 
         <ul class="navview-menu pad-second-level" id="side-menu">
             <li class="{{ request()->is('/') ? 'active': '' }}">
@@ -168,10 +170,10 @@
                     </form>
                 </li>
             </ul>
-    </div>
         <div class="w-100 text-center text-small data-box p-2 border-top bd-grayMouse" style="position: absolute; bottom: 0">
             <div>Version 2025-02-R1</div>
         </div>
+    </div>
 
     <div class="navview-content">
         <div data-role="appbar" class="bg-reserve-steppe border-bottom bd-default" data-expand-point="fs">

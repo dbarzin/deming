@@ -43,7 +43,7 @@
             @csrf
                 <div class="mb-4">{{ trans("cruds.login.connection") }}</div>
                 <div class="form-group">
-                    <input type="text" data-role="input" class="form-control @error('login') is-invalid @enderror @error('email') is-invalid @enderror" data-prepend="<span class='mif-user'></span>" name="login" value="{{ old('login') }}" id="login" required>
+                    <input type="text" data-role="input" class="form-control @error('login') is-invalid @enderror @error('email') is-invalid @enderror" data-prepend="<span class='mif-person'></span>" name="login" value="{{ old('login') }}" id="login" required>
                     @error('login')
                         <span class="invalid-feedback" role="alert">
                             <strong>{{ $message }}</strong>
@@ -87,15 +87,5 @@
                 @endif
         @endif
     </div>
-
-    <script>
-        function invalidForm(){
-            var form  = $(this);
-            form.addClass("ani-ring");
-            setTimeout(function(){
-                form.removeClass("ani-ring");
-            }, 1000);
-        }
-    </script>
 </body>
 </html>
