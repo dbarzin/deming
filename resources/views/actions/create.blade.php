@@ -9,8 +9,7 @@ form, table {
 }
 </style>
 
-<div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.action.create') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.action.create') }}" data-collapsible="true" data-title-icon="<span class='mif-pending-actions'></span>">
 
 	@if (count($errors))
 	<div class= “form-group”>
@@ -130,7 +129,7 @@ form, table {
 		<div class="grid">
 	    	<div class="row-12">
 				<button type="submit" class="button success">
-		            <span class="mif-floppy-disk"></span>
+                    <span class="mif-floppy-disk2"></span>
 		            &nbsp;
 					{{ trans('common.save') }}
 				</button>
@@ -144,6 +143,5 @@ form, table {
 		</div>
 	</div>
 	</form>
-</div>
 </div>
 @endsection

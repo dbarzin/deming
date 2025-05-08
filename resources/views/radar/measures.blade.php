@@ -2,66 +2,63 @@
 
 @section("content")
 <form action="/radar/domains">
-    <div class="p-3">
-        <div data-role="panel" data-title-caption="Tableau de bord" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="Tableau de bord" data-collapsible="true" data-title-icon="<span class='mif-timeline'></span>">
 
-        <div class="row">
-            <div class="cell-2">
-                <strong>{{ trans("cruds.measure.fields.clause") }}</strong>
-                <select name="measures" data-role="select" id="measures">
-                    <option></option>
-                    @foreach ($measures as $measure)
-                    <option id='{{ $measure->id }}'
-                        @if (request()->get('id')==(string)$measure->id)
-                            selected
-                        @endif >
-                        {{ $measure->clause }}
-                    </option>
-                    @endforeach
-                </select>
+    <div class="row">
+        <div class="cell-2">
+            <strong>{{ trans("cruds.measure.fields.clause") }}</strong>
+            <select name="measures" data-role="select" id="measures">
+                <option></option>
+                @foreach ($measures as $measure)
+                <option id='{{ $measure->id }}'
+                    @if (request()->get('id')==(string)$measure->id)
+                        selected
+                    @endif >
+                    {{ $measure->clause }}
+                </option>
+                @endforeach
+            </select>
+        </div>
+    </div>
+
+    <div class="panel mt-2">
+        <div data-role="panel" data-title-caption="Suivi temporel de la mesure" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+            <div class="p-7" style="height: 300px;">
+                <canvas id="scoreChart"></canvas>
             </div>
         </div>
+    </div>
 
-        <div class="panel mt-2">
-            <div data-role="panel" data-title-caption="Suivi temporel de la mesure" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
-                <div class="p-7" style="height: 300px;">
-                    <canvas id="scoreChart"></canvas>
-                </div>
-            </div>
+    <div>
+        &nbsp;
+    </div>
+
+    <div>
+        @if ($controls !== null)
+        <div style="overflow-x: auto;">
+            <table class="table table-border cell-border striped" style="width: max-content;">
+                <tbody>
+                    <tr>
+                        <td class="fw-bold">{{ trans("cruds.control.fields.realisation_date") }}</td>
+                        @foreach($controls as $control)
+                        <td><a href="/bob/show/{{ $control->id }}">{{ $control->realisation_date }}</a></td>
+                        @endforeach
+                    </tr>
+                    <tr>
+                        <td class="fw-bold">{{ trans("cruds.control.fields.score") }}</td>
+                        @foreach($controls as $control)
+                        <td class="text-center"
+                            {!! $control->score == 1 ? 'style="background-color: #ce352c;"' : '' !!}
+                            {!! $control->score == 2 ? 'style="background-color: #fa6800;"' : '' !!}
+                            {!! $control->score == 3 ? 'style="background-color: #60a917;"' : '' !!}>
+                        {{ $control->note }}
+                        </td>
+                        @endforeach
+                    </tr>
+                </tbody>
+            </table>
         </div>
-
-        <div>
-            &nbsp;
-        </div>
-
-        <div>
-            @if ($controls !== null)
-            <div style="overflow-x: auto;">
-                <table class="table table-border cell-border striped" style="width: max-content;">
-                    <tbody>
-                        <tr>
-                            <td class="fw-bold">{{ trans("cruds.control.fields.realisation_date") }}</td>
-                            @foreach($controls as $control)
-                            <td><a href="/bob/show/{{ $control->id }}">{{ $control->realisation_date }}</a></td>
-                            @endforeach
-                        </tr>
-                        <tr>
-                            <td class="fw-bold">{{ trans("cruds.control.fields.score") }}</td>
-                            @foreach($controls as $control)
-                            <td class="text-center"
-                                {!! $control->score == 1 ? 'style="background-color: #ce352c;"' : '' !!}
-                                {!! $control->score == 2 ? 'style="background-color: #fa6800;"' : '' !!}
-                                {!! $control->score == 3 ? 'style="background-color: #60a917;"' : '' !!}>
-                            {{ $control->note }}
-                            </td>
-                            @endforeach
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-            @endif
-        </div>
-
+        @endif
     </div>
 </form>
 

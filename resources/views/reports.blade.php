@@ -22,7 +22,7 @@
 	        <div class="cell-1">
                 {{ trans("cruds.domain.fields.framework") }}
             </div>
-            <div class="cell-2">
+			<div class="cell-3">
                 <select name="framework" data-role="select" id="framework">
                     <option></option>
                     @foreach ($frameworks as $framework)
@@ -41,24 +41,28 @@
 	        <div class="cell-1">
 				{{ trans('cruds.exports.start') }}
 			</div>
-	        <div class="cell-2">
+			<div class="cell-2">
 	            <input type="text"
 	                    data-role="calendarpicker"
 	                    name="start_date"
 	                    value="{{ (new \Carbon\Carbon('first day of this month'))->addMonth(-3)->format('Y-m-d')}}"
-	                    data-input-format="%Y-%m-%d">
+						data-format="YYYY-MM-DD"
+						data-inputFormat="YYYY-MM-DD"
+						/>
 	        </div>
 	    </div>
 		<div class="row">
 	        <div class="cell-1">
 			{{ trans('cruds.exports.end') }}
 			</div>
-	        <div class="cell-2">
+			<div class="cell-2">
 	            <input type="text"
 	                    data-role="calendarpicker"
 	                    name="end_date"
 	                    value="{{ (new \Carbon\Carbon('last day of this month'))->addMonth(-1)->format('Y-m-d')}}"
-	                    data-input-format="%Y-%m-%d">
+						data-format="YYYY-MM-DD"
+						data-inputFormat="YYYY-MM-DD"
+						/>
 	        </div>
 	    </div>
 
@@ -74,7 +78,7 @@
 
 <div class="mt-3" data-role="panel" data-title-caption="{{ trans('cruds.soa.title') }}" data-collapsible="true" data-title-icon="<span class='mif-file-text'></span>">
 	<div class="row">
-        <div class="cell-3">
+		<div class="cell-6">
         	<ul>
         		<li>
 					<a href="/reports/soa" target="_blank">{{ trans('cruds.soa.generate') }}</a>
@@ -86,7 +90,7 @@
 
 <div class="mt-3" data-role="panel" data-title-caption="{{ trans('cruds.exports.index') }}" data-collapsible="true" data-title-icon="<span class='mif-file-text'></span>">
 	<div class="row">
-        <div class="cell-3">
+		<div class="cell-6">
         	<ul>
         		<li>
 					<a href="/export/domains" target="_blank">{{ trans('cruds.exports.domains_export') }}</a>

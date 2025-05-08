@@ -681,6 +681,11 @@ class ControlController extends Controller
             ->where('control_id', '=', $control->id)
             ->delete();
 
+        // delete control_
+        DB::Table('control_user_group')
+            ->where('control_id', '=', $control->id)
+            ->delete();
+
         // Then delete the control
         $control->delete();
 
@@ -1168,7 +1173,7 @@ class ControlController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function doPlan(Request $Request)
+    public function doPlan(Request $request)
     {
         // For administrators and users only
         abort_if(

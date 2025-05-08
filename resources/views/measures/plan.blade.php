@@ -3,17 +3,14 @@
 @section("content")
 <div data-role="panel" data-title-caption="{{ trans('cruds.measure.plan') }}" data-collapsible="true" data-title-icon="<span class='mif-paste'></span>">
 
-    @if (count($errors))
-	<div class="grid">
-	    <div class="cell-3 bg-red fg-white">
-				<ul>
-				@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-				@endforeach
-				</ul>
-	    </div>
-	</div>
-    @endif
+	@if (count($errors))
+        <div class="remark alert">
+            <span class="mif-report icon"></span>
+    			@foreach ($errors->all() as $error)
+                    {{ $error }}<br>
+    			@endforeach
+        </div>
+	@endif
 
 <form method="POST" action="/alice/activate/{{ $measure->id }}">
 @csrf
@@ -114,8 +111,10 @@
     			<strong>{{ trans('cruds.control.fields.plan_date') }}</strong>
         	</div>
     		<div class="cell-3">
-    				<input type="text" data-role="calendarpicker" name="plan_date"
-    			value="" data-input-format="%Y-%m-%d">
+    			<input type="text" data-role="calendarpicker" name="plan_date"
+                    value=""
+					data-format="YYYY-MM-DD"
+					data-inputFormat="YYYY-MM-DD"/>
     		</div>
     	</div>
 
@@ -153,26 +152,22 @@
     </div>
 
     <div class="row">
-        <div class="form-group">
-        	@if (Auth::User()->role === 3)
-            </form>
-            @else
+        <div class="row-6">
+            @if (Auth::User()->role !== 3)
         	<button class="button success">
                 <span class="mif-calendar"></span>
                 &nbsp;
             	{{ trans('common.plan') }}
         	</button>
-            </form>
             @endif
             &nbsp;
-            <form action="/alice/show/{{ $measure->id }}">
-            	<button class="button">
+            <a href="/alice/show/{{ $measure->id }}" class="button">
         			<span class="mif-cancel"></span>
         			&nbsp;
         	    	{{ trans('common.cancel') }}
-            	</button>
-        	</form>
+            </a>
         </div>
     </div>
+    </form>
 </div>
 @endsection

@@ -1,17 +1,14 @@
 @extends("layout")
 
 @section("content")
-    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.create') }}" data-collapsible="true" data-title-icon="<span class='mif-books'></span>">
+<div data-role="panel" data-title-caption="{{ trans('cruds.measure.create') }}" data-collapsible="true" data-title-icon="<span class='mif-books'></span>">
 	@if (count($errors))
-		<div class="grid">
-		    <div class="cell-3 bg-red fg-white">
-				<ul>
-				@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-				@endforeach
-				</ul>
-			</div>
-		</div>
+        <div class="remark alert">
+            <span class="mif-report icon"></span>
+    			@foreach ($errors->all() as $error)
+                    {{ $error }}<br>
+    			@endforeach
+        </div>
 	@endif
 
 	<form method="POST" action="/alice/store">

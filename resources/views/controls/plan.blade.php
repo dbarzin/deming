@@ -3,17 +3,14 @@
 @section("content")
 <div data-role="panel" data-title-caption="{{ trans('cruds.control.plan') }}" data-collapsible="true" data-title-icon="<span class='mif-paste'></span>">
 
-    @if (count($errors))
-    <div class="grid">
-        <div class="cell-3 bg-red fg-white">
-    		<ul>
-    		@foreach ($errors->all() as $error)
-    			<li>{{ $error }}</li>
-    		@endforeach
-    		</ul>
-    	</div>
-    </div>
-    @endif
+	@if (count($errors))
+        <div class="remark alert">
+            <span class="mif-report icon"></span>
+    			@foreach ($errors->all() as $error)
+                    {{ $error }}<br>
+    			@endforeach
+        </div>
+	@endif
 
     <form method="POST" action="/bob/plan">
     @csrf
@@ -72,7 +69,9 @@
     			::createFromFormat('Y-m-d',$control->plan_date)
     			->format('Y-m-d')
     			}}"
-    			data-input-format="%Y-%m-%d">
+				data-format="YYYY-MM-DD"
+				data-inputFormat="YYYY-MM-DD"
+                />
     		</div>
     	</div>
 
@@ -117,7 +116,7 @@
     			&nbsp;
     		@endif
     		@if (Auth::User()->role !== 3)
-    			<form action="/bob/unplan" method="POST" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
+                <form action="/bob/unplan" method="POST" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}" class="d-inline">
     				@csrf
     				<input type="hidden" name="id" value="{{ $control->id }}"/>
     	            <button class="button alert" type="submit">
@@ -128,13 +127,11 @@
     			</form>
     			&nbsp;
     		@endif
-    			<form action="/bob/show/{{$control->id}}"/>
-    				<button type="submit" class="button">
-    					<span class="mif-cancel"></span>
-    					&nbsp;
-    					{{ trans("common.cancel") }}
-    				</button>
-    			</form>
+            <a href="/bob/show/{{$control->id}}" class="button">
+				<span class="mif-cancel"></span>
+				&nbsp;
+				{{ trans("common.cancel") }}
+            </a>
     		</div>
     	</div>
     </div>

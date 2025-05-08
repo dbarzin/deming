@@ -168,7 +168,7 @@
     		<div class="cell-1">
 	    		<strong>{{ trans("cruds.control.fields.score") }}</strong>
 	    	</div>
-			<div class="cell">
+			<div class="cell-6">
                 @if ($control->score==1)
                     &#128545;
                 @elseif ($control->score==2)
@@ -191,7 +191,6 @@
 	@endif
 
 	@if (($control->realisation_date!=null)&&($control->score!=3))
-	</div>
     	<div class="row">
     		<div class="cell-1">
 	    		<strong>{{ trans("cruds.control.fields.action_plan") }}</strong>
@@ -206,7 +205,7 @@
 		<div class="cell-1">
     		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
     	</div>
-		<div class="cell">
+		<div class="cell-6">
 			@if ($control->periodicity==0) {{ trans("common.once") }} @endif
 			@if ($control->periodicity==1) {{ trans("common.monthly") }} @endif
 			@if ($control->periodicity==3) {{ trans("common.quarterly") }} @endif
@@ -215,12 +214,20 @@
 		</div>
     </div>
 
-    @if ($control->owners->count()>0)
 	<div class="row">
 		<div class="cell-1">
     		<strong>{{ trans('cruds.control.fields.owners') }}</strong>
     	</div>
-		<div class="cell">
+		<div class="cell-6">
+            @foreach($control->groups as $group)
+                {{ $group->name }}
+                @if (!$loop->last)
+				,
+				@endif
+			@endforeach
+			@if (($control->groups->count()>0)&&($control->owners->count()>0))
+			,
+			@endif
             @foreach($control->owners as $owner)
 				{{ $owner->name }}
                 @if (!$loop->last)
@@ -229,35 +236,16 @@
 			@endforeach
 		</div>
     </div>
-    @endif
-
-    @if ($control->groups->count()>0)
-	<div class="row">
-		<div class="cell-1">
-            <strong>{{ trans('cruds.control.fields.groups') }}</strong>
-    	</div>
-		<div class="cell">
-            @foreach($control->groups as $group)
-                {{ $group->name }}
-                @if (!$loop->last)
-				,
-				@endif
-			@endforeach
-		</div>
-    </div>
-    @endif
 
    	<div class="row">
-   		<div class="cell-7">
+		<div class="cell-12">
 
             @if ($control->canMake())
-			    <form action="/bob/make/{{ $control->id }}">
-		    		<button class="button success">
-						<span class="mif-assignment"></span>
-						&nbsp;
-			    		{{ trans("common.make") }}
-			    	</button>
-				</form>
+				<a href="/bob/make/{{ $control->id }}" class="button success">
+					<span class="mif-assignment"></span>
+					&nbsp;
+		    		{{ trans("common.make") }}
+				</a>
 				&nbsp;
             @endif
 
@@ -268,45 +256,37 @@
                         (Auth::User()->role===2)
                     )
                 )
-			    <form action="/bob/make/{{ $control->id }}">
-		    		<button class="button success">
-						<span class="mif-assignment"></span>
-						&nbsp;
-			    		{{ trans("common.validate") }}
-			    	</button>
-				</form>
+				<a href="/bob/make/{{ $control->id }}" class="button success">
+					<span class="mif-assignment"></span>
+					&nbsp;
+		    		{{ trans("common.validate") }}
+				</a>
 				&nbsp;
             @endif
             @if (($control->status===0)||($control->status===1))
                 @if ((Auth::User()->role===1)||(Auth::User()->role===2))
-    			    <form action="/bob/plan/{{ $control->id }}">
-    		    		<button class="button info">
-    						<span class="mif-calendar"></span>
-    						&nbsp;
-    			    		{{ trans("common.plan") }}
-    		    		</button>
-    				</form>
+					<a href="/bob/plan/{{ $control->id }}" class="button info">
+						<span class="mif-calendar"></span>
+						&nbsp;
+			    		{{ trans("common.plan") }}
+					</a>
     				&nbsp;
 				@endif
 			@endif
 			@if (Auth::User()->role==1)
-		    <form action="/bob/edit/{{ $control->id }}">
-	    		<button class="button primary">
-					<span class="mif-wrench"></span>
-					&nbsp;
-	    			{{ trans("common.edit") }}
-	    		</button>
-			</form>
+			<a href="/bob/edit/{{ $control->id }}" class="button primary">
+				<span class="mif-wrench"></span>
+				&nbsp;
+    			{{ trans("common.edit") }}
+			</a>
 			&nbsp;
-		    <form action="/bob/clone/{{ $control->id }}">
-                <button class="button warning">
-		            <span class="mif-plus"></span>
-		            &nbsp;
-			    	{{ trans('common.clone') }}
-		    	</button>
-		    </form>
+			<a href="/bob/clone/{{ $control->id }}" class="button warning">
+	            <span class="mif-plus"></span>
+	            &nbsp;
+		    	{{ trans('common.clone') }}
+			</a>
 			&nbsp;
-		    <form action="/bob/delete/{{ $control->id }}" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
+		    <form action="/bob/delete/{{ $control->id }}" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}" class="d-inline">
 	    		<button class="button alert">
 					<span class="mif-fire"></span>
 					&nbsp;
@@ -315,7 +295,7 @@
 			</form>
 		    &nbsp;
    			@endif
-            <a class="button" href="/bob/index" role="button">
+            <a class="button" href="/bob/index">
                 <span class="mif-cancel"></span>
                 &nbsp;
                 {{ trans("common.cancel") }}

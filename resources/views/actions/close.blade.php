@@ -10,7 +10,7 @@ form, table {
 </style>
 
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.action.close') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.action.close') }}" data-collapsible="true" data-title-icon="<span class='mif-pending-actions'></span>">
 
 	@if (count($errors))
 	<div class= “form-group”>
@@ -122,7 +122,13 @@ form, table {
                 <strong>{{ trans('cruds.action.fields.close_date') }}</strong>
 	    	</div>
             <div class="cell-2">
-                <input type="text" data-role="calendarpicker" name="close_date" value="{{$action->close_date}}" data-input-format="%Y-%m-%d">
+                <input
+                    data-role="calendarpicker"
+                    name="close_date"
+                    value="{{$action->close_date}}"
+					data-format="YYYY-MM-DD"
+					data-inputFormat="YYYY-MM-DD"
+                    />
             </div>
         </div>
     	<div class="row">

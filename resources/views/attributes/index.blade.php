@@ -20,14 +20,16 @@
 		<div class="row">
 			<div class="cell-12">
 
-		<table class="table striped row-hover cell-border"
-	       data-role="table"
-	       data-rows="10"
-		   data-show-search="false"
-	       data-show-activity="true"
-	       data-rownum="false"
-	       data-check="false"
-	       data-check-style="1">
+		<table
+			id="attributes"
+			class="table striped row-hover cell-border"
+			data-role="table"
+			data-rows="10"
+			data-show-search="false"
+			data-show-activity="true"
+			data-rownum="false"
+			data-check="false"
+			data-check-style="1">
 		    <thead>
 		    <tr>
 				<th width="10">{{ trans('cruds.attribute.fields.name') }}</th>

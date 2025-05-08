@@ -65,21 +65,9 @@
                     </select>
                 </div>
             <div class="cell-3 mt-2">
-                <input type="radio" data-role="radio" data-style="2" name="status"
-                value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}>
-                <span style="position: relative; top: -3px;">
-                    {{ trans("cruds.control.fields.status_all") }}
-                </span>
-                <input type="radio" data-role="radio" data-style="2" name="status"
-                value="1" id="status1" {{ (Session::get("status")=="1") ? 'checked' : '' }}>
-                <span style="position: relative; top: -3px;">
-                    {{ trans("cruds.control.fields.status_done") }}
-                </span>
-                <input type="radio" data-role="radio" data-style="2" name="status"
-                value="2" id="status2" {{ (Session::get("status")=="2") ? 'checked' : '' }}>
-                <span style="position: relative; top: -3px;">
-                    {{ trans("cruds.control.fields.status_todo") }}
-                </span>
+                 <input type="radio" data-role="radio" data-append="{{ trans("cruds.control.fields.status_all") }}" value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}>
+                 <input type="radio" data-role="radio" data-append="{{ trans("cruds.control.fields.status_done") }}" value="1" id="status1" {{ (Session::get("status")=="1") ? 'checked' : '' }}>
+                 <input type="radio" data-role="radio" data-append="{{ trans("cruds.control.fields.status_todo") }}" value="2" id="status2" {{ (Session::get("status")=="2") ? 'checked' : '' }}>
             </div>
 			<div class="cell-1" align="right">
 			@if ((Auth::User()->role==1)||(Auth::User()->role==2))
@@ -94,13 +82,14 @@
     </div>
 
     <table
-       class="table data-table striped row-hover cell-border"
-       data-role="table"
-       data-rows="100"
-       data-show-activity="true"
-       data-rownum="false"
-       data-check="false"
-       data-check-style="1"
+        id="controls"
+        class="table data-table striped row-hover cell-border"
+        data-role="table"
+        data-rows="100"
+        data-show-activity="true"
+        data-rownum="false"
+        data-check="false"
+        data-check-style="1"
        >
         <thead>
             <tr>
@@ -135,7 +124,7 @@
             <td>
                 <center id="{{ $control->score }}">
                     @if ($control->action_id!=null)
-                        <a href="/action/show/{{ $control->action_id }}">
+                        <a href="/action/show/{{ $control->action_id }}" class="no-underline">
                     @endif
                     @if ($control->score==1)
                         &#128545;

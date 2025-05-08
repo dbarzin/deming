@@ -15,6 +15,7 @@ return [
         'show' => 'Plan d\'action',
         'create' => 'Créer un plan d\'action',
         'edit' => 'Modifier un plan d\'action',
+        'close' => 'Clôturer une action',
         'title' => 'Actions',
         'fields' => [
             'clause' => 'Clause',

@@ -1,71 +1,16 @@
 {
-  "__commonjs-dynamic-modules-TDtrdbi3.js": {
-    "file": "assets/_commonjs-dynamic-modules-TDtrdbi3.js",
-    "name": "_commonjs-dynamic-modules"
-  },
-  "node_modules/chart.js/dist/chart.umd.js?commonjs-entry": {
-    "file": "assets/chart.umd-BjCwoagr.js",
-    "name": "chart.umd",
-    "src": "node_modules/chart.js/dist/chart.umd.js?commonjs-entry",
-    "isEntry": true
-  },
-  "node_modules/dropzone/dist/dropzone-min.js": {
-    "file": "assets/dropzone-min-BWGTgUkI.js",
-    "name": "dropzone-min",
-    "src": "node_modules/dropzone/dist/dropzone-min.js",
-    "isEntry": true
-  },
-  "node_modules/dropzone/dist/dropzone.css": {
-    "file": "assets/dropzone-CIgf0F6L.css",
-    "src": "node_modules/dropzone/dist/dropzone.css",
-    "isEntry": true
-  },
-  "node_modules/easymde/dist/easymde.min.css": {
-    "file": "assets/easymde-00aRrcTG.css",
-    "src": "node_modules/easymde/dist/easymde.min.css",
-    "isEntry": true
-  },
-  "node_modules/easymde/dist/easymde.min.js?commonjs-entry": {
-    "file": "assets/easymde.min-xqEMlqmz.js",
-    "name": "easymde.min",
-    "src": "node_modules/easymde/dist/easymde.min.js?commonjs-entry",
-    "isEntry": true,
-    "imports": [
-      "__commonjs-dynamic-modules-TDtrdbi3.js"
-    ]
-  },
-  "node_modules/moment/dist/moment.js": {
-    "file": "assets/moment-Cijl8gKs.js",
-    "name": "moment",
-    "src": "node_modules/moment/dist/moment.js",
-    "isEntry": true
-  },
   "resources/css/app.css": {
-    "file": "assets/app-CM2H0dDn.css",
+    "file": "assets/app-BIHmrERN.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
-  "resources/css/calendar.css": {
-    "file": "assets/calendar-BOzTOjlB.css",
-    "src": "resources/css/calendar.css",
-    "isEntry": true
-  },
-  "resources/css/icons.css": {
-    "file": "assets/icons-e2OOr3XT.css",
-    "src": "resources/css/icons.css",
-    "isEntry": true
-  },
   "resources/js/app.js": {
-    "file": "assets/app-C1ixkH5B.js",
+    "file": "assets/app-Dwbjs3OP.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
-    "imports": [
-      "node_modules/moment/dist/moment.js",
-      "__commonjs-dynamic-modules-TDtrdbi3.js"
-    ],
     "css": [
-      "assets/dropzone-CIgf0F6L.css"
+      "assets/app-Bt2ZpZQL.css"
     ]
   }
 }

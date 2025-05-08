@@ -22,14 +22,16 @@
 			<div class="row">
 				<div class="cell-12">
 
-			<table class="table striped row-hover cell-border"
-		       data-role="table"
-		       data-rows="10"
-			   data-show-search="false"
-		       data-show-activity="true"
-		       data-rownum="false"
-		       data-check="false"
-		       data-check-style="1">
+			<table
+                id="users"
+                class="table striped row-hover cell-border"
+                data-role="table"
+                data-rows="10"
+                data-show-search="false"
+                data-show-activity="true"
+                data-rownum="false"
+                data-check="false"
+                data-check-style="1">
 			    <thead>
 			    <tr>
 					<th
@@ -76,7 +78,7 @@
 					<td>{{ $user->email }}</td>
     				@if (Auth::User()->role==1)
                     <td>
-                        <a class="button primary small" href='/users/{{ $user->id }}/edit'>
+                        <a class="button info small" href='/users/{{ $user->id }}/edit'>
         		            <span class="mif-wrench"></span>
         		            &nbsp;
         		    		{{ trans('common.edit') }}

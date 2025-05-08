@@ -8,6 +8,7 @@
     <meta name="metro:smooth_scroll" content="true">
     <title>Deming - ISMS Controls Made Easy</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
+    @yield('styles')
 </head>
 <body class="cloak">
 <div id="navview" data-role="navview" data-expand-point="md">
@@ -17,7 +18,7 @@
                 <span class="mif-menu"></span>
             </button>
            <a href="/" class="d-flex flex-align-center bg-transparent">
-                <div class="enlarge-4 ml-2 text-weight-9">Deming</div>
+                <div class="enlarge-2x text-weight-9">Deming</div>
             </a>
         </div>
 
@@ -61,30 +62,35 @@
                     <span class="caption">{{ trans("menu.action_plan") }}</span>
                 </a>
             </li>
-            <li>
-                <a href="#" class="dropdown-toggle">
+            <li class="{{ request()->is('radar/*') ? 'active': '' }}">
+                <a id="nav-radar" href="#" class="dropdown-toggle">
                     <span class="icon mif-meter"></span>
                     <span class="caption">{{ trans("menu.radar") }}</span>
                 </a>
-                <ul class="navview-menu " data-role="collapse" data-collapsed="true">
-                    <li>
+                <ul class="navview-menu"
+                    data-role="collapse"
+                    data-collapsed="{{ request()->is('radar/*') ? 'false': 'true' }}">
+                    <li class="{{ request()->is('radar/domains') ? 'active': '' }}">
                         <a href="/radar/domains">
                         <span class="icon mif-stacked-bar-chart"></span>
                         <span class="caption">{{ trans("menu.radar_by_domains") }}</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="{{ request()->is('radar/bob') ? 'active': '' }}">
                         <a href="/radar/bob">
+                        <span class="icon mif-timeline"></span>
                         <span class="caption">{{ trans("menu.radar_by_measure") }}</span>
                         </a>
                     </li>
-                    <li>
+                    <li class="{{ request()->is('radar/alice') ? 'active': '' }}">
                         <a href="/radar/alice">
+                        <span class="icon mif-pie-chart"></span>
                         <span class="caption">{{ trans("menu.radar_by_controls") }}</span>
                         </a>
                     </li>
-                    <li class="{{ request()->is('radar/attributes') ? 'bg-gray': '' }}">
+                    <li class="{{ request()->is('radar/attributes') ? 'active': '' }}">
                         <a href="/radar/attributes">
+                        <span class="icon mif-pie-chart"></span>
                         <span class="caption">{{ trans("menu.radar_by_attributes") }}</span>
                         </a>
                     </li>
@@ -99,56 +105,78 @@
             </li>
 
 
-            <li>
+            <li class="{{
+                (
+                    request()->is('attributes*')||
+                    request()->is('domains*')||
+                    request()->is('users*')||
+                    request()->is('group*')||
+                    request()->is('alice/import*')||
+                    request()->is('doc*')||
+                    request()->is('config*')||
+                    request()->is('logs*')
+                ) ? 'active': '' }}">
                 <a href="#" class="dropdown-toggle open">
                     <span class="icon mif-cog"></span>
                     <span class="caption">{{ trans("menu.configuration.title") }}</span>
                 </a>
-                <ul class="navview-menu " data-role="collapse" data-collapsed="true">
+                <ul class="navview-menu"
+                    data-role="collapse"
+                    data-collapsed="{{
+                        (
+                            request()->is('attributes*')||
+                            request()->is('domains*')||
+                            request()->is('users*')||
+                            request()->is('group*')||
+                            request()->is('alice/import*')||
+                            request()->is('doc*')||
+                            request()->is('config*')||
+                            request()->is('logs*')
+                        ) ? 'false': 'true' }}">
                     <li  class="{{ request()->is('attributes*') ? 'active': '' }}">
                         <a href="/attributes">
                             <span class="icon mif-tags"></span>
                             <span class="caption">{{ trans("menu.attributes") }}</span>
                         </a>
                     </li>
-                    <li class="{{ request()->is('domains*') ? 'bg-gray': '' }}">
+                    <li class="{{ request()->is('domains*') ? 'active': '' }}">
                         <a href="/domains">
-                            <span class="icon mif-books"></span>
+                            <span class="icon mif-library"></span>
                             <span class="caption">{{ trans("menu.domains") }}</span>
                         </a>
                     </li>
                     @if (Auth::User()->role==1)
-                    <li class="{{ request()->is('users*') ? 'bg-gray': '' }}">
+                    <li class="{{ request()->is('users*') ? 'active': '' }}">
                         <a href="/users">
                         <span class="icon mif-person"></span>
                         <span class="caption">{{ trans("menu.configuration.users") }}</span>
                         </a>
                     </li>
-                    <li class="{{ request()->is('group*') ? 'bg-gray': '' }}">
+                    <li class="{{ request()->is('group*') ? 'active': '' }}">
                         <a href="/groups">
                         <span class="icon mif-group"></span>
                         <span class="caption">{{ trans("menu.configuration.groups") }}</span>
                         </a>
                     </li>
-                    <li class="{{ request()->is('alice/import*') ? 'bg-gray': '' }}">
+                    <li class="{{ request()->is('alice/import*') ? 'active': '' }}">
                         <a href="/alice/import">
                         <span class="icon mif-import"></span>
                         <span class="caption">{{ trans("menu.configuration.import") }}</span>
                         </a>
                     </li>
-                    <li class="{{ request()->is('doc*') ? 'bg-gray': '' }}">
+                    <li class="{{ request()->is('doc*') ? 'active': '' }}">
                         <a href="/doc">
                         <span class="icon mif-file-text"></span>
                         <span class="caption">{{ trans("menu.configuration.documents") }}</span>
                         </a>
                     </li>
-                    <li class="{{ request()->is('config*') ? 'bg-gray': '' }}">
+                    <li class="{{ request()->is('config*') ? 'active': '' }}">
                         <a href="/config">
                         <span class="icon mif-alarm"></span>
                         <span class="caption">{{ trans("menu.configuration.notifications") }}</span>
                         </a>
                     </li>
-                    <li class="{{ request()->is('logs*') ? 'bg-gray': '' }}">
+                    <li class="{{ request()->is('logs*') ? 'active': '' }}">
                         <a href="/logs">
                         <span class="icon mif-log-file"></span>
                         <span class="caption">Logs</span>

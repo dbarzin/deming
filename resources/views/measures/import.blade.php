@@ -48,14 +48,12 @@
     		    </div>
     			<div class="row">
     		        <div class="cell-4">
-                        <input type="checkbox" name="clean" id="clean">
-                        {{ trans('cruds.imports.remove_all') }}
+                        <input type="checkbox" data-role="checkbox" name="clean" id="clean" data-append="{{ trans('cruds.imports.remove_all') }}"/>
                     </div>
                 </div>
     			<div class="row">
     		        <div class="cell-4">
-                        <input type="checkbox" name="test">
-                        {{ trans('cruds.imports.fake') }}
+                        <input type="checkbox" data-role="checkbox" name="test" data-append="{{ trans('cruds.imports.fake') }}"/>
                     </div>
     		        <div class="cell-1" align="right">
     				    <button type="submit" class="button success drop-shadow"

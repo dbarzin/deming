@@ -111,31 +111,25 @@
 		<div class="row">
             <div class="cell-8">
 			@if (Auth::User()->role === 1)
-		    <form action="/alice/plan/{{ $measure->id }}">
-		    	<button class="button info">
+                <a class="button info" href="/alice/plan/{{ $measure->id }}">
 		            <span class="mif-calendar"></span>
 		            &nbsp;
 			    	{{ trans('common.plan') }}
-		    	</button>
-		    </form>
+                </a>
 		    &nbsp;
-		    <form action="/alice/{{ $measure->id }}/edit">
-		    	<button class="button primary">
+                <a class="button primary" href="/alice/{{ $measure->id }}/edit">
 		            <span class="mif-wrench"></span>
 		            &nbsp;
 			    	{{ trans('common.edit') }}
-		    	</button>
-		    </form>
+                </a>
 		    &nbsp;
-		    <form action="/alice/clone/{{ $measure->id }}">
-		    	<button class="button warning">
+                <a class="button warning" href="/alice/clone/{{ $measure->id }}">
 		            <span class="mif-plus"></span>
 		            &nbsp;
 			    	{{ trans('common.clone') }}
-		    	</button>
-		    </form>
+                </a>
 		    &nbsp;
-			<form action="/alice/delete/{{ $measure->id }}" method="POST" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
+			<form action="/alice/delete/{{ $measure->id }}" class="d-inline" method="POST" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
                 @csrf
 				<button class="button alert" type="submit">
 					<span class="mif-fire"></span>
@@ -146,24 +140,20 @@
 		    &nbsp;
 		    @endif
 			@if (Auth::User()->role === 5)
-		    <form action="/bob/index">
-		    	<button class="button">
-					<span class="mif-cancel"></span>
-					&nbsp;
-			    	{{ trans('common.cancel') }}
-		    	</button>
-			</form>
+            <a href="/bob/index" class="button">
+				<span class="mif-cancel"></span>
+				&nbsp;
+		    	{{ trans('common.cancel') }}
+            </a>
             @else
-		    <form action="/alice/index">
-		    	<button class="button">
-					<span class="mif-cancel"></span>
-					&nbsp;
-			    	{{ trans('common.cancel') }}
-		    	</button>
-			</form>
+            <a href="/alice/index" class="button">
+				<span class="mif-cancel"></span>
+				&nbsp;
+		    	{{ trans('common.cancel') }}
+            </a>
             @endif
         </div>
-		</div>
+	</div>
     </div>
 </div>
 <div>
@@ -172,9 +162,9 @@
     <div data-role="panel" data-title-caption="{{ trans('cruds.control.title') }}" data-collapsible="true" data-title-icon="<span class='mif-paste'></span>">
 
         <div>
-			<table class="table striped row-hover cell-border"
-       data-role="table"
-                data-show-search="false"
+            <table id="controls" class="table striped row-hover cell-border"
+                    data-role="table"
+                    data-show-search="false"
                     data-show-pagination="false"
                     data-show-rows-steps="false"
                    >

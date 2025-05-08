@@ -3,17 +3,11 @@
 @section("content")
     <div data-role="panel" data-title-caption="{{ trans('cruds.user.edit') }}" data-collapsible="true" data-title-icon="<span class='mif-person'></span>">
 
-		@if (count($errors))
-		<div class="grid">
-		    <div class="cell-3 bg-red fg-white">
-				<ul>
-				@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-				@endforeach
-				</ul>
-			</div>
-		</div>
-		@endif
+        @if (count($errors))
+        	@foreach ($errors->all() as $error)
+        	<div class="remark alert" role="alert">{{ $error }}</div>
+        	@endforeach
+        @endif
 
 		<form method="POST" action="/users/{{ $user->id }}">
 		@method("PATCH")

@@ -29,6 +29,16 @@ body {
     border-radius: 50%;
 }
 
+.radio .caption-prepend, .radio .caption-append {
+    font-size: 15px !important;
+    margin: 0 10px !important;
+}
+
+input[type=text], input[type=password], input[type=email], input[type=date], input[type=datetime-local], input[type=search], input[type=tel], input[type=time], input[type=url], input[type=week], textarea, select, .metro-input, .file, .input, .textarea, .select, .tag-input, .spinner, .color-picker
+{
+    font-size: 15px !important;
+
+}
 .navview {
     &.compacted {
         .text-logo {
@@ -51,6 +61,7 @@ body {
     padding: .5rem;
 }
 
+
 @media screen and (min-width: 768px) {
     #page-content {
         padding: 1rem 1rem 4rem 1rem;
@@ -70,15 +81,19 @@ body {
     }
 }
 
+
+/* this cause problems with EasyMDE
 pre:not(.stay-on) {
     display: none;
 }
+*/
 
 html.show-code {
     pre:not(.stay-on) {
         display: block;
     }
 }
+
 
 pre {
     position: relative;
@@ -107,42 +122,11 @@ pre {
 .navview-pane a {
     font-size: 15px;
 }
-/*
-body {
-  background-color: #ECF0F5;
-}
 
-.bg-chem {
-  background-color:#ecf0f5 !important;
-}
-
-.bg-chem-hover:hover {
-  background-color: #8C325E !important;
-}
-
-.navview .navview-pane {
-  background-color: #ecf0f5;
-  color: #000000;
-  font-size: 14px;
-}
-.navview .navview-content {
-  padding-top: 52px;
-  background-color: #ECF0F5;
-}
-
-.navview .pull-button {
-  height: 52px;
-  width: 52px;
-}
-
-.navview .navview-menu {
-  background-color: #FFFFFF;
-}
-*/
 
 pre {
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
-    font-size: 1rem;
+    font-size: 15px;
     line-height: 1.5;
     font-style: normal;
     font-weight: 400;
@@ -158,4 +142,8 @@ form {
 
 input[type="text"] {
     padding-left: 13px;
+}
+
+textarea {
+    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
 }

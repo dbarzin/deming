@@ -8,8 +8,23 @@
 @import "@olton/metroui/lib/metro.all.css";
 */
 /* Metro 5.1 */
-@import "../metroui51/metro.css";
+/* @import "../metroui51/metro.css"; */
+
+@import "@olton/metroui/lib/metro.all.css";
 
 @import 'calendar.css';
 @import 'custom.css';
 @import 'easymde/dist/easymde.min.css';
+
+/* Why do I have to redefine these colors ? */
+.button.primary {
+  background-color: #0366D6 !important;
+  border-color: #0366D6 !important;
+  color: #fff !important;
+  outline-color: #75b5fd !important;
+}
+
+.button.primary:hover {
+  background-color: #024ea4 !important;
+  border-color: #023671 !important;
+}

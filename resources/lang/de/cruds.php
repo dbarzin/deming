@@ -15,6 +15,7 @@ return [
 	 'show' => 'Aktionsplan',
 	 'create' => 'Aktionsplan erzeugen',
 	 'edit' => 'Aktionsplan ändern',
+    'close' => 'Aktionsplan zäune',
          'fields' => [
             'clause' => 'Klausel',
             'name' => 'Name',

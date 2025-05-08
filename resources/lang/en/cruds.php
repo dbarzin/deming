@@ -16,6 +16,7 @@ return [
          'create' => 'Create an action plan',
          'edit' => 'Edit action plan',
          'title' => 'Actions',
+        'close' => 'Close an action',
          'fields' => [
             'clauses' => 'Clauses',
             'name' => 'Name',
