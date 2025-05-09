@@ -148,7 +148,8 @@ return [
          'show' => 'Domäne',
          'index' => 'Liste der Domänen',
          'choose' => 'Wähle eine Domäne',
-         'title' => 'Domänen'
+         'title' => 'Domänen',
+         'radar' => 'Ergebnis der Kontrollen nach Domänen',
      ],
      'document' => [
         'title' => [
