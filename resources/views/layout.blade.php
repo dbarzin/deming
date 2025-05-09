@@ -203,7 +203,7 @@
                 </li>
             </ul>
         <div class="w-100 text-center text-small data-box p-2 border-top bd-grayMouse" style="position: absolute; bottom: 0">
-            <div>Version 2025-02-R1</div>
+            Version {{ $appVersion }}
         </div>
     </div>
 
