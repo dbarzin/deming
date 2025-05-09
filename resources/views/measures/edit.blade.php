@@ -117,7 +117,7 @@
 		<div class="row">
     		<div class="cell-5">
 				<button type="submit" class="button success">
-		            <span class="mif-floppy-disk"></span>
+                    <span class="mif-floppy-disk2"></span>
 		            &nbsp;
 					{{ trans('common.save') }}
 				</button>
