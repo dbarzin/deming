@@ -4,10 +4,10 @@ namespace App\Http\Controllers;
 
 use App\Exports\ControlsExport;
 use App\Models\Action;
-use App\Models\Measure;
 use App\Models\Control;
 use App\Models\Document;
 use App\Models\Domain;
+use App\Models\Measure;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -114,7 +114,7 @@ class ControlController extends Controller
         // get all clauses
         $clauses = DB::table('measures')
             ->select('clause')
-            ->when($domain!=null, function ($q) use ($domain) {
+            ->when($domain !== null, function ($q) use ($domain) {
                 return $q->where('domain_id', '=', $domain);
             })
             ->get()
@@ -137,13 +137,13 @@ class ControlController extends Controller
             ->where('scope', '<>', '');
         if (Auth::User()->role === 5) {
             $scopes = $scopes
-                ->leftjoin(
-                    'control_user',
-                    'controls.id',
-                    '=',
-                    'control_user.control_id'
-                )
-                ->where('control_user.user_id', '=', Auth::User()->id);
+                ->leftJoin('control_user', 'controls.id', '=', 'control_user.control_id')
+                ->leftJoin('control_user_group', 'controls.id', '=', 'control_user_group.control_id')
+                ->leftJoin('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
+                ->where(function ($query) {
+                    $query->where('control_user.user_id', '=', Auth::User()->id)
+                        ->orWhere('user_user_group.user_id', '=', Auth::User()->id);
+                });
         }
         $scopes = $scopes
             ->whereIn('status', [0, 1])
@@ -168,13 +168,13 @@ class ControlController extends Controller
         // filter on auditee controls
         if (Auth::User()->role === 5) {
             $controls = $controls
-                ->leftjoin(
-                    'control_user',
-                    'c1.id',
-                    '=',
-                    'control_user.control_id'
-                )
-                ->where('control_user.user_id', '=', Auth::User()->id);
+                ->leftJoin('control_user', 'c1.id', '=', 'control_user.control_id')
+                ->leftJoin('control_user_group', 'c1.id', '=', 'control_user_group.control_id')
+                ->leftJoin('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
+                ->where(function ($query) {
+                    $query->where('control_user.user_id', '=', Auth::User()->id)
+                        ->orWhere('user_user_group.user_id', '=', Auth::User()->id);
+                });
         }
 
         // Filter on domain
@@ -227,7 +227,7 @@ class ControlController extends Controller
                 $controls = $controls->where('c1.status', 2);
             }
         } elseif ($status === '2') {
-            // Todo
+            // TODO: ??
             if (Auth::User()->role === 5) {
                 $controls = $controls
                     //->whereNull('c1.realisation_date');
@@ -335,9 +335,16 @@ class ControlController extends Controller
 
         $users = User::orderBy('name')->get();
 
+        // get all groups
+        $all_groups = DB::table('user_groups')
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
         return view('controls.create')
             ->with('scopes', $scopes)
             ->with('all_measures', $all_measures)
+            ->with('all_groups', $all_groups)
             ->with('attributes', $values)
             ->with('users', $users);
     }
@@ -416,10 +423,16 @@ class ControlController extends Controller
         // for aditee only if he is assigne to that control
         abort_if(
             Auth::User()->role === 5 &&
-                ! DB::table('control_user')
+                ! (DB::table('control_user')
                     ->where('control_id', $id)
                     ->where('user_id', Auth::User()->id)
-                    ->exists(),
+                    ->exists()
+                    ||
+                DB::table('control_user_group')
+                    ->join('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
+                    ->where('control_user_group.control_id', $id)
+                    ->where('user_user_group.user_id', Auth::User()->id)
+                    ->exists()),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -448,6 +461,8 @@ class ControlController extends Controller
 
         // get associated documents
         $documents = DB::table('documents')->where('control_id', $id)->get();
+
+        // Return
         return view('controls.show')
             ->with('control', $control)
             ->with('next_id', $next_control !== null ? $next_control->id : null)
@@ -466,7 +481,7 @@ class ControlController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Domain $domain
+     * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -497,6 +512,12 @@ class ControlController extends Controller
         $all_measures = DB::table('measures')
             ->select('id', 'clause')
             ->orderBy('id')
+            ->get();
+
+        // get all groups
+        $all_groups = DB::table('user_groups')
+            ->select('id', 'name')
+            ->orderBy('name')
             ->get();
 
         $measures = DB::table('control_measure')
@@ -536,6 +557,7 @@ class ControlController extends Controller
             ->with('documents', $documents)
             ->with('scopes', $scopes)
             ->with('all_measures', $all_measures)
+            ->with('all_groups', $all_groups)
             ->with('measures', $measures)
             ->with('ids', $ids)
             ->with('attributes', $values)
@@ -588,6 +610,12 @@ class ControlController extends Controller
 
         $users = User::orderBy('name')->get();
 
+        // get all groups
+        $all_groups = DB::table('user_groups')
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
         // Get Control
         $control = Control::find($request->id);
 
@@ -611,6 +639,7 @@ class ControlController extends Controller
         return view('controls.create')
             ->with('scopes', $scopes)
             ->with('all_measures', $all_measures)
+            ->with('all_groups', $all_groups)
             ->with('attributes', $values)
             ->with('users', $users);
     }
@@ -647,14 +676,24 @@ class ControlController extends Controller
         Document::where('control_id', $id)->delete();
 
         // Previous control must point to next control
-        Control::where('next_id', $control->id)->update([
-            'next_id' => $control->next_id,
-        ]);
+        Control::where('next_id', $control->id)
+            ->update(['next_id' => $control->next_id,
+            ]);
 
         // delete control_measures
         DB::Table('control_measure')
             ->where('control_id', '=', $control->id)
             ->delete();
+
+        // delete control_
+        DB::Table('control_user_group')
+            ->where('control_id', '=', $control->id)
+            ->delete();
+
+        // Delete link with actions
+        DB::Table('actions')
+            ->where('control_id', $control->id)
+            ->update(['control_id' => null]);
 
         // Then delete the control
         $control->delete();
@@ -1027,7 +1066,7 @@ class ControlController extends Controller
     /**
      * Show a measurement for planing
      *
-     * @param  \App\Domain $domain
+     * @param  int $id
      *
      * @return \Illuminate\Http\Response
      */
@@ -1095,7 +1134,7 @@ class ControlController extends Controller
     /**
      * unPlan a control.
      *
-     * @param  \App\Measure $measure
+     * @param  Request $request
      *
      * @return \Illuminate\Http\Response
      */
@@ -1139,7 +1178,7 @@ class ControlController extends Controller
     /**
      * Save a control for planing
      *
-     * @param  \App\Domain $domain
+     * @param  Request $Request
      *
      * @return \Illuminate\Http\Response
      */
@@ -1183,25 +1222,7 @@ class ControlController extends Controller
 
     public function make(Request $request)
     {
-        // Not for API
-        abort_if(
-            Auth::User()->role === 4,
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
-
         $id = (int) request('id');
-
-        // for (aditee or auditor) only if he is assigne to that control
-        abort_if(
-            ((Auth::User()->role === 3) || (Auth::User()->role === 5)) &&
-                ! DB::table('control_user')
-                    ->where('user_id', Auth::User()->id)
-                    ->where('control_id', $id)
-                    ->exists(),
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
 
         // Get control
         $control = Control::find($id);
@@ -1209,12 +1230,8 @@ class ControlController extends Controller
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
-        // Control already made ?
-        if ($control->status === 2) {
-            return back()->withErrors([
-                'msg' => trans('cruds.control.error.made'),
-            ]);
-        }
+        // for (aditee or auditor) only if he is assigne to that control
+        abort_if(! $control->canMake(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // get associated documents
         $documents = DB::table('documents')->where('control_id', $id)->get();
@@ -1260,33 +1277,20 @@ class ControlController extends Controller
 
         $id = (int) request('id');
 
-        // for (aditee or auditor) only if he is assigne to that control
-        abort_if(
-            ((Auth::User()->role === 3) || (Auth::User()->role === 5)) &&
-                ! DB::table('control_user')
-                    ->where('user_id', Auth::User()->id)
-                    ->where('control_id', $id)
-                    ->exists(),
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
-
-        // Score must be set
-        if ((request('score') === null)||(request('score') == 0)) {
-            return back()
-                ->withErrors(['score' => 'score not set'])
-                ->withInput();
-        }
-
         // Control fields
         $control = Control::find($id);
 
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
-        // control already made ?
-        if ($control->status === 2) {
-            return back()->withErrors(['msg' => 'Control already made']);
+        // for (aditee or auditor) only if he is assigne to that control
+        abort_if(! $control->canMake(), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // Score must be set
+        if ((request('score') === null) || (request('score') === 0)) {
+            return back()
+                ->withErrors(['score' => 'score not set'])
+                ->withInput();
         }
 
         $control->observations = request('observations');
@@ -1328,7 +1332,6 @@ class ControlController extends Controller
         } else {
             $control->realisation_date = date('Y-m-d', strtotime('today'));
         }
-        // Log::Alert("doMake realisation_date=".request("realisation_date"));
 
         // Auditee -> propose control
         if (Auth::User()->role === 5) {
@@ -1422,7 +1425,9 @@ class ControlController extends Controller
         $control->periodicity = request('periodicity');
         $control->status = request('status');
         $control->next_id = request('next_id');
+        // Sync
         $control->owners()->sync($request->input('owners', []));
+        $control->groups()->sync($request->input('groups', []));
         $control->measures()->sync($request->input('measures', []));
 
         $control->save();
@@ -1448,33 +1453,25 @@ class ControlController extends Controller
 
         $id = (int) $request->get('id');
 
-        // for aditee only if he is assigned to that control
-        abort_if(
-            ((Auth::User()->role === 3) || (Auth::User()->role === 5)) &&
-                ! DB::table('control_user')
-                    ->where('user_id', Auth::User()->id)
-                    ->where('control_id', $id)
-                    ->exists(),
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
-
         // Get the control
         $control = Control::find($id);
 
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
+        // For aditee only if he is assigned to that control
+        abort_if(! $control->canMake(), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         // Control already made ?
         if ($control->status === 2) {
-            return back()->withErrors([
-                'msg' => trans('cruds.control.error.made'),
-            ]);
+            return back()
+                ->withErrors(['msg' => trans('cruds.control.error.made')])
+                ->withInput();
         }
 
         $control->observations = request('observations');
         $control->note = request('note');
-        $control->score = request('score')==0 ? null : request('score');
+        $control->score = request('score') === 0 ? null : request('score');
 
         // only admin and user can update the plan_date and action_plan
         if (Auth::User()->role === 1 || Auth::User()->role === 2) {
@@ -1513,9 +1510,9 @@ class ControlController extends Controller
 
         // Control already made ?
         if ($control->status === 2) {
-            return back()->withErrors([
-                'msg' => trans('cruds.control.error.made'),
-            ]);
+            return back()
+                ->withErrors(['msg' => trans('cruds.control.error.made')])
+                ->withInput();
         }
 
         // Change fields
@@ -1552,7 +1549,7 @@ class ControlController extends Controller
         $id = (int) request('id');
 
         // Score must be set
-        if ((request('score') === null)||(request('score') == 0)) {
+        if ((request('score') === null) || (request('score') === 0)) {
             return back()
                 ->withErrors(['score' => 'score not set'])
                 ->withInput();
@@ -1564,10 +1561,11 @@ class ControlController extends Controller
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
-        // control already made ?
-        // if ($control->realisation_date !== null) {
+        // Control already made ?
         if ($control->status === 2) {
-            return back()->withErrors(['msg' => 'Control already made']);
+            return back()
+                ->withErrors(['msg' => trans('cruds.control.error.made')])
+                ->withInput();
         }
 
         $control->observations = request('observations');
@@ -1625,7 +1623,8 @@ class ControlController extends Controller
         );
     }
 
-    public function tempo(Request $request) {
+    public function tempo(Request $request)
+    {
         // For administrators and users only
         abort_if(
             Auth::User()->role !== 1 && Auth::User()->rol !== 2,
@@ -1634,9 +1633,9 @@ class ControlController extends Controller
         );
 
         // get controls
-        if ($request->id!==null) {
+        if ($request->id !== null) {
             // Measure ID
-            $id = (int)$request->id;
+            $id = (int) $request->id;
             // find associate control
             $measure = Measure::find($id);
 
@@ -1644,19 +1643,19 @@ class ControlController extends Controller
             abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
             // Get all date and score for that measure
-            $controls = DB::Table("controls")
+            $controls = DB::Table('controls')
                 ->select('id', 'realisation_date', 'note', 'controls.score')
                 ->whereNotNull('next_id')
                 ->leftjoin('control_measure', 'control_id', '=', 'controls.id')
-                ->where("measure_id",$id)
+                ->where('measure_id', $id)
                 ->orderBy('realisation_date')
                 ->get();
-            }
-        else
-            $controls=null;
+        } else {
+            $controls = null;
+        }
 
         $measures = DB::Table('measures')
-            ->select('id','name','clause')
+            ->select('id', 'name', 'clause')
             ->orderby('name')->get();
 
         // return view
@@ -1674,7 +1673,7 @@ class ControlController extends Controller
             '403 Forbidden'
         );
 
-        $id = (int)$request->id;
+        $id = (int) $request->id;
 
         // find associate control
         $control = Control::find($id);
@@ -1683,15 +1682,7 @@ class ControlController extends Controller
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // for (aditee or auditor) only if he is assigne to that control
-        abort_if(
-            ((Auth::User()->role === 3) || (Auth::User()->role === 5)) &&
-                ! DB::table('control_user')
-                    ->where('user_id', Auth::User()->id)
-                    ->where('control_id', $id)
-                    ->exists(),
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
+        abort_if(! $control->canMake(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // Get template file
         $template_filename = storage_path('app/models/control_.docx');
@@ -1747,7 +1738,7 @@ class ControlController extends Controller
         $textrun = new \PhpOffice\PhpWord\Element\TextRun();
 
         // Fonction d'échappement XML
-        $escape = fn($text) => htmlspecialchars($text, ENT_XML1 | ENT_QUOTES, 'UTF-8');
+        $escape = fn ($text) => htmlspecialchars($text, ENT_XML1 | ENT_QUOTES, 'UTF-8');
 
         $textrun->addText($escape(array_shift($textlines)));
 

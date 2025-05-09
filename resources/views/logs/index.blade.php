@@ -1,18 +1,19 @@
 @extends("layout")
 
 @section("content")
-<div class="p-3">
     <div data-role="panel" data-title-caption='{{ trans("cruds.log.index")}}' data-collapsible="true" data-title-icon="<span class='mif-log-file'></span>">
 
     <div class="grid">
 
-    <table class="table striped row-hover cell-border"
-       data-role="table"
-       data-rows="100"
-       data-show-activity="true"
-       data-rownum="false"
-       data-check="false"
-       data-check-style="1"
+    <table
+        id="logs"
+        class="table striped row-hover cell-border"
+        data-role="table"
+        data-rows="100"
+        data-show-activity="true"
+        data-rownum="false"
+        data-check="false"
+        data-check-style="1"
        >
             <thead>
                 <th class="sortable-column">
@@ -105,5 +106,4 @@
         {{ $logs->links() }}
         </p>
     </div>
-</div>
 @endsection

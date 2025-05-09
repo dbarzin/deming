@@ -117,13 +117,8 @@ class DocumentController extends Controller
 
     public function store(Request $request)
     {
-        // Not for API and Auditor
-        abort_if(
-            (Auth::User()->role === 3) ||
-            (Auth::User()->role === 4),
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
+        // Not for API
+        abort_if((Auth::User()->role === 4), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // Get file
         $file = $request->file('file');
@@ -133,11 +128,17 @@ class DocumentController extends Controller
 
         // Auditee may save document to assigned control only
         abort_if(
-            (Auth::User()->role === 5) &&
-            ! DB::table('control_user')
-                ->where('user_id', Auth::User()->id)
-                ->where('control_id', $control_id)
-                ->exists(),
+            Auth::User()->role === 5 &&
+                ! (DB::table('control_user')
+                    ->where('control_id', $id)
+                    ->where('user_id', Auth::User()->id)
+                    ->exists()
+                    ||
+                DB::table('control_user_group')
+                    ->join('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
+                    ->where('control_user_group.control_id', $id)
+                    ->where('user_user_group.user_id', Auth::User()->id)
+                    ->exists()),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );

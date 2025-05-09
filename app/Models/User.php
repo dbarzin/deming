@@ -47,6 +47,11 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
+    public function groups()
+    {
+        return $this->belongsToMany(UserGroup::class)->orderBy('name');
+    }
+
     public function controls()
     {
         return $this->belongsToMany(Control::class)->orderBy('name');

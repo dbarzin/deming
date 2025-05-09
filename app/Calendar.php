@@ -38,10 +38,10 @@ class Calendar
         $html .= '" ';
         $html .= 'style="font-size: 30px; text-decoration: none"';
         $html .= '>';
-        $html .= '<span class="mif-backward"></span>';
+        $html .= '<span class="mif-previous"></span>';
         $html .= '</a> &nbsp; ';
         $html .= '</div>';
-        $html .= '<div class="col">';
+        $html .= '<div class="col-4">';
 
         $html .= "<select id='date' name='date' data-role='select'>";
         for ($i = -12; $i < 12; $i++) {
@@ -65,7 +65,7 @@ class Calendar
         $html .= '" ';
         $html .= 'style="font-size: 30px; text-decoration: none"';
         $html .= '>';
-        $html .= '<span class="mif-forward"></span>';
+        $html .= '<span class="mif-next"></span>';
         $html .= '</a>';
         $html .= '</div>';
         $html .= '</div>';

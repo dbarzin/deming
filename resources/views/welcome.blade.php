@@ -1,7 +1,6 @@
 @extends("layout")
 
 @section("content")
-<div class="p-2">
     <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.dashboard') }}" data-collapsible="true" data-title-icon="<span class='mif-home'></span>">
     <div class="row">
         <div class="cell-lg-3 cell-md-6 mt-2">
@@ -63,15 +62,15 @@
     </div>
 </div>
 <div class="row">
-    <div class="cell-md-7">
-        <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_planning') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-bars2'></span>">
+    <div class="cell-lg-7 cell-md-6 mt-1">
+        <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_planning') }}" data-collapsible="true" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
             <div>
                 <canvas id="canvas-status" style="width: 100%; max-height: 500px;"  class="chartjs-render-monitor"></canvas>
             </div>
         </div>
     </div>
-    <div class="cell-md-5">
-        <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_status') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-pie'></span>">
+    <div class="cell-lg-5 cell-md-6 mt-1">
+        <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_status') }}" data-collapsible="true" data-title-icon="<span class='mif-pie-chart'></span>">
             <div>
                 <canvas id="canvas-doughnut" style="width: 100%; max-height: 415px;"  class="chartjs-render-monitor"></canvas>
             </div>
@@ -110,7 +109,7 @@
                                 </a>
                             </td>
                             <td class="text-center">
-                                <a href="/bob/show/{{ $control->prev_id }} style="text-decoration: none;">
+                                <a href="/bob/show/{{ $control->prev_id }}" style="text-decoration: none;">
                                     @if ($control->score==1)
                                         &#128545;
                                     @elseif ($control->score==2)
@@ -135,12 +134,10 @@
                         @endforeach
                     </tbody>
                 </table>
+                <br><br><br><br><br>
             </div>
         </div>
     </div>
-</div>
-</div>
-</div>
 
 <!------------------------------------------------------------------------------------->
 <script>

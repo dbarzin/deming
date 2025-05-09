@@ -140,7 +140,7 @@ class UserController extends Controller
             'name' => 'required|min:1|max:90',
             'title' => 'required|min:1|max:30',
             'email' => 'required|email:rfc|unique:users,email,'.$user->id,
-            'role' => 'required'
+            'role' => 'required',
         ]);
 
         // Custom password validation if LDAP is not enabled

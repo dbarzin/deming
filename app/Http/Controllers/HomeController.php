@@ -67,6 +67,11 @@ class HomeController extends Controller
         ]);
     }
 
+    public function test(Request $request)
+    {
+        return view('test');
+    }
+
     private function getActiveDomainsCount()
     {
         return DB::table('controls')
@@ -205,9 +210,4 @@ class HomeController extends Controller
             return $expanded;
         });
     }
-
-    public function test(Request $request) {
-        return view('test');
-    }
-
 }

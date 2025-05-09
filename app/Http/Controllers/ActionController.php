@@ -144,6 +144,13 @@ class ActionController extends Controller
             '403 Forbidden'
         );
 
+        $this->validate(
+            $request,
+            [
+                'name' => 'required|min:3|max:255',
+            ]
+        );
+
         // Get the action plan
         $id = (int) $request->get('id');
         $action = Action::find($id);

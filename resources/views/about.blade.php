@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="About" data-collapsible="true" data-title-icon="<span class='mif-help_outline mif-2x'></span>">
+    <div data-role="panel" data-title-caption="About" data-collapsible="true" data-title-icon="<span class='mif-help-outline mif-2x'></span>">
 		<div class="grid">
 	    	<div class="row">
 	    		<div class="cell-4 text-center">

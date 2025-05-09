@@ -15,6 +15,7 @@ return [
         'show' => 'Plan d\'action',
         'create' => 'Créer un plan d\'action',
         'edit' => 'Modifier un plan d\'action',
+        'close' => 'Clôturer une action',
         'title' => 'Actions',
         'fields' => [
             'clause' => 'Clause',
@@ -93,6 +94,7 @@ return [
             'status_todo' => 'A faire',
             'status_all' => 'Tous',
             'owners' => 'Responsables',
+            'groups' => 'Groupes'
         ],
         'error' => [
             'made' => 'Ce contrôle a déjà été réalisé.',
@@ -184,6 +186,18 @@ return [
         'controls_export' => 'Exportation des mesures de sécurité',
         'actions_export' => 'Exporter les plans d\'action',
     ],
+    'group' => [
+        'index' => 'Liste des groupes',
+        'add' => 'Ajouter un groupe d\'utilisateurs',
+        'edit' => 'Modifier un groupe d\'utilisateurs',
+        'show' => 'Afficher un groupe d\'utilisateurs',
+        'fields' => [
+            'name' => 'Nom',
+            'description' => 'Description',
+            'users' => 'Utilisateurs',
+            'controls' => 'Contrôles',
+        ],
+    ],
     'imports' => [
         'index' => 'Importer',
         'title' => 'Importer des mesures de sécurité',
@@ -260,6 +274,7 @@ return [
             'role' => 'Role',
             'password' => 'Password',
             'email' => 'eMail',
+            'groups' => 'Groups',
             'language' => 'Langue',
             'controls' => 'Contrôles de l\'utilisateur'
         ],

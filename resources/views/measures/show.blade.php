@@ -1,7 +1,6 @@
 @extends("layout")
 
 @section("content")
-<div class="p-3">
     <div data-role="panel" data-title-caption="{{ trans('cruds.measure.show') }}" data-collapsible="true" data-title-icon="<span class='mif-books'></span>">
 		@if (count($errors))
 		<div class="grid">
@@ -20,7 +19,7 @@
     		<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.domain') }}</strong>
 	    	</div>
-			<div class="cell">
+			<div class="cell-6">
 				<a href="/domains/{{$measure->domain_id}}">
 				{{ $measure->domain->title ?? ""}}
 				</a>
@@ -33,7 +32,7 @@
 			<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.clause') }}</strong>
 	    	</div>
-			<div class="cell">
+			<div class="cell-6">
 				{{ $measure->clause }}
 			</div>
 	    </div>
@@ -42,7 +41,7 @@
 			<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.name') }}</strong>
 	    	</div>
-			<div class="cell">
+			<div class="cell-6">
 				{{ $measure->name }}
 			</div>
 	    </div>
@@ -71,7 +70,7 @@
 			<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.input') }}</strong>
 	    	</div>
-			<div class="cell">
+			<div class="cell-6">
                 {!! \Parsedown::instance()->text($measure->input) !!}
 			</div>
 	    </div>
@@ -90,7 +89,7 @@
 			<div class="cell-1">
 	    		<strong>{{ trans('cruds.measure.fields.indicator') }}</strong>
 	    	</div>
-			<div class="cell">
+			<div class="cell-6">
 				<pre>{{ $measure->indicator }}</pre>
 			</div>
 	    </div>
@@ -109,33 +108,28 @@
 			</div>
 		</div>
 
-		<div class="form-group">
+		<div class="row">
+            <div class="cell-8">
 			@if (Auth::User()->role === 1)
-		    <form action="/alice/plan/{{ $measure->id }}">
-		    	<button class="button info">
+                <a class="button info" href="/alice/plan/{{ $measure->id }}">
 		            <span class="mif-calendar"></span>
 		            &nbsp;
 			    	{{ trans('common.plan') }}
-		    	</button>
-		    </form>
+                </a>
 		    &nbsp;
-		    <form action="/alice/{{ $measure->id }}/edit">
-		    	<button class="button primary">
+                <a class="button primary" href="/alice/{{ $measure->id }}/edit">
 		            <span class="mif-wrench"></span>
 		            &nbsp;
 			    	{{ trans('common.edit') }}
-		    	</button>
-		    </form>
+                </a>
 		    &nbsp;
-		    <form action="/alice/clone/{{ $measure->id }}">
-		    	<button class="button yellow">
+                <a class="button warning" href="/alice/clone/{{ $measure->id }}">
 		            <span class="mif-plus"></span>
 		            &nbsp;
 			    	{{ trans('common.clone') }}
-		    	</button>
-		    </form>
+                </a>
 		    &nbsp;
-			<form action="/alice/delete/{{ $measure->id }}" method="POST" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
+			<form action="/alice/delete/{{ $measure->id }}" class="d-inline" method="POST" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
                 @csrf
 				<button class="button alert" type="submit">
 					<span class="mif-fire"></span>
@@ -146,33 +140,31 @@
 		    &nbsp;
 		    @endif
 			@if (Auth::User()->role === 5)
-		    <form action="/bob/index">
-		    	<button class="button">
-					<span class="mif-cancel"></span>
-					&nbsp;
-			    	{{ trans('common.cancel') }}
-		    	</button>
-			</form>
+            <a href="/bob/index" class="button">
+				<span class="mif-cancel"></span>
+				&nbsp;
+		    	{{ trans('common.cancel') }}
+            </a>
             @else
-		    <form action="/alice/index">
-		    	<button class="button">
-					<span class="mif-cancel"></span>
-					&nbsp;
-			    	{{ trans('common.cancel') }}
-		    	</button>
-			</form>
+            <a href="/alice/index" class="button">
+				<span class="mif-cancel"></span>
+				&nbsp;
+		    	{{ trans('common.cancel') }}
+            </a>
             @endif
-		</div>
+        </div>
+	</div>
     </div>
 </div>
+<div>
+    <br>
 </div>
-<div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.control.title') }}" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.control.title') }}" data-collapsible="true" data-title-icon="<span class='mif-paste'></span>">
 
         <div>
-			<table class="table striped row-hover cell-border"
-       data-role="table"
-                data-show-search="false"
+            <table id="controls" class="table striped row-hover cell-border"
+                    data-role="table"
+                    data-show-search="false"
                     data-show-pagination="false"
                     data-show-rows-steps="false"
                    >

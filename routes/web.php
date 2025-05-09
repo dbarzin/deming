@@ -97,6 +97,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::resource('domains', 'DomainController');
     Route::resource('attributes', 'AttributeController');
     Route::resource('users', 'UserController');
+    Route::resource('groups', 'UserGroupController');
 
     /* Actions */
     Route::get('/actions', 'ActionController@index');
@@ -127,4 +128,9 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/export/alices', 'MeasureController@export');
     Route::get('/export/bobs', 'ControlController@export');
     Route::get('/export/actions', 'ActionController@export');
+
+    /* Test */
+    Route::get('/easymde', function () {
+        return view('easymde');
+    });
 });

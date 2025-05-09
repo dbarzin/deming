@@ -1,18 +1,14 @@
 @extends("layout")
 
 @section("content")
-<div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.measure.create') }}" data-collapsible="true" data-title-icon="<span class='mif-pencil'></span>">
+<div data-role="panel" data-title-caption="{{ trans('cruds.measure.create') }}" data-collapsible="true" data-title-icon="<span class='mif-books'></span>">
 	@if (count($errors))
-		<div class="grid">
-		    <div class="cell-3 bg-red fg-white">
-				<ul>
-				@foreach ($errors->all() as $error)
-					<li>{{ $error }}</li>
-				@endforeach
-				</ul>
-			</div>
-		</div>
+        <div class="remark alert">
+            <span class="mif-report icon"></span>
+    			@foreach ($errors->all() as $error)
+                    {{ $error }}<br>
+    			@endforeach
+        </div>
 	@endif
 
 	<form method="POST" action="/alice/store">
@@ -56,7 +52,7 @@
 					<strong>{{ trans("cruds.measure.fields.objective") }}</strong>
 				</div>
 				<div class="cell-6">
-					<textarea name="objective" id="mde1">{{ old('objective', optional($measure)->objective) }}</textarea>
+                    <textarea name="objective" class="easymde" id="objetive">{{ old('objective', optional($measure)->objective) }}</textarea>
 				</div>
 			</div>
 
@@ -78,7 +74,7 @@
 					<strong>{{ trans("cruds.measure.fields.input") }}</strong>
 				</div>
 				<div class="cell-6">
-                    <textarea name="input" id="mde2">{{ old('input', optional($measure)->input) }}</textarea>
+                    <textarea name="input" class="easymde" id="input">{{ old('input', optional($measure)->input) }}</textarea>
 				</div>
 			</div>
 
@@ -105,47 +101,25 @@
 					<strong>{{ trans("cruds.measure.fields.action_plan") }}</strong>
 				</div>
 				<div class="cell-6">
-					<textarea name="action_plan" id="mde3">{{ old('action_plan', optional($measure)->action_plan) }}</textarea>
+                    <textarea name="action_plan" class="easymde" id="action_plan">{{ old('action_plan', optional($measure)->action_plan) }}</textarea>
 				</div>
 			</div>
 
 	    	<div class="row">
 	    		<div class="cell-5">
 					<button type="submit" class="button success">
-			            <span class="mif-floppy-disk"></span>
+                        <span class="mif-floppy-disk2"></span>
 						&nbsp;
 						{{ trans("common.save") }}
 					</button>
-					&nbsp;
-					<button type="button" class="button" onclick="location.href = '/alice/index'">
+                    <a class="button" href="/alice/index">
 						<span class="mif-cancel"></span>
 						&nbsp;
 						{{ trans("common.cancel") }}
-					</button>
+                    </a>
 				</div>
 			</div>
 		</div>
 	</form>
 </div>
-<!------------------------------------------------------------------------------------->
-<script type="text/javascript">
-const mde1 = new EasyMDE({
-    element: document.getElementById('mde1'),
-    minHeight: "200px",
-    maxHeight: "200px",
-    status: false,
-    });
-const mde2 = new EasyMDE({
-    element: document.getElementById('mde2'),
-    minHeight: "200px",
-    maxHeight: "200px",
-    status: false,
-    });
-const mde3 = new EasyMDE({
-    element: document.getElementById('mde3'),
-    minHeight: "200px",
-    maxHeight: "200px",
-    status: false,
-    });
-</script>
 @endsection

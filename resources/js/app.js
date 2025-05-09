@@ -1,12 +1,5 @@
-
-import moment from "moment";
-
-// Metro 5
-// import '@olton/metroui/lib/metro.js';
-// import "@olton/metroui/lib/metro.all.css";
-
-// Metro 4.5.12
-import '../metroui/metro.js';
+// Metro 5.0
+import '@olton/metroui/lib/metro.js';
 
 // DropZone
 import Dropzone from 'dropzone';
@@ -21,8 +14,29 @@ window.Chart = Chart;
 
 // EasyMDE
 import EasyMDE from 'easymde';
+import 'easymde/dist/easymde.min.css';
 window.EasyMDE = EasyMDE;
 
+window.editors = {};
+document.addEventListener("DOMContentLoaded", function () {
+	document.querySelectorAll('.easymde').forEach(function (textarea) {
+	    const instance = new EasyMDE({
+	        element: textarea,
+	        minHeight: "200px",
+	        maxHeight: "200px",
+	        status: false,
+	        spellChecker: false,
+			toggleFullscreen: false,
+			sideBySideFullscreen: false,
+	    });
+        // Stocke l'instance par id pour un accès futur
+        if (textarea.id) {
+            editors[textarea.id] = instance;
+        }
+	});
+});
+
+// Chart colors
 window.chartColors = {
 	red: 'rgb(255, 99, 132)',
 	orange: 'rgb(255, 159, 64)',

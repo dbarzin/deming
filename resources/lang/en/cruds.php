@@ -16,6 +16,7 @@ return [
          'create' => 'Create an action plan',
          'edit' => 'Edit action plan',
          'title' => 'Actions',
+        'close' => 'Close an action',
          'fields' => [
             'clauses' => 'Clauses',
             'name' => 'Name',
@@ -94,6 +95,7 @@ return [
             'clauses' => 'Clauses',
             'input' => 'Input',
             'owners' => 'Responsibles',
+            'groups' => 'Groupes'
          ],
         'error' => [
             'made' => 'This measurement has already been made.',
