@@ -150,7 +150,8 @@ return [
         'show' => 'Domaine',
         'index' => 'Liste des domaines',
         'choose' => 'Choisir un domaine',
-        'title' => 'Domaine'
+        'title' => 'Domaine',
+        'radar' => 'Résultat des contrôles par domaine',
     ],
     'document' => [
         'title' => [

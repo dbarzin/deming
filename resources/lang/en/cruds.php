@@ -150,8 +150,9 @@ return [
          'show' => 'Domain',
          'index' => 'List of domains',
          'choose' => 'Choose domain',
-         'title' => 'Domain'
-     ],
+         'title' => 'Domain',
+         'radar' => 'Measurements by domain',
+      ],
      'document' => [
         'title' => [
             'storage' => 'Storage',
@@ -264,7 +265,8 @@ return [
              'password' => 'Password',
              'email' => 'email',
              'language' => 'Language',
-             'controls' => 'Controls'
+             'controls' => 'Controls',
+             'groups' => 'Groups'
          ],
          'roles' => [
              'admin' => 'Administrator',
