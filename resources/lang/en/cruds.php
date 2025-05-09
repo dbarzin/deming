@@ -188,6 +188,18 @@ return [
          'import' => 'Import',
          'actions_export' => 'Export action plans',
      ],
+    'group' => [
+         'index' => 'List of groups',
+         'add' => 'Add a user group',
+         'edit' => 'Edit a user group',
+         'show' => 'Display a user group',
+         'fields' => [
+             'name' => 'Name',
+             'description' => 'Description',
+             'users' => 'Users',
+             'controls' => 'Controls',
+            ],
+         ],
     'imports' => [
         'index' => 'Import',
          'title' => 'Import security measures',
