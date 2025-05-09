@@ -70,8 +70,9 @@ class Control extends Model
 
     public function groups()
     {
-        if ($this->groups === null)
+        if ($this->groups === null) {
             $this->groups = $this->belongsToMany(UserGroup::class)->orderBy('name');
+        }
         return $this->groups;
     }
 
@@ -90,7 +91,7 @@ class Control extends Model
         if (
             ((Auth::User()->role === 3) || (Auth::User()->role === 5))
             &&
-                ( DB::table('control_user')
+                (DB::table('control_user')
                     ->where('control_id', $this->id)
                     ->where('user_id', Auth::User()->id)
                     ->exists()
@@ -99,10 +100,10 @@ class Control extends Model
                     ->join('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
                     ->where('control_user_group.control_id', $this->id)
                     ->where('user_user_group.user_id', Auth::User()->id)
-                    ->exists()
-                )
-            )
+                    ->exists())
+        ) {
             return true;
+        }
 
         return false;
     }

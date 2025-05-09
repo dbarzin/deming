@@ -62,8 +62,13 @@ class SendNotifications extends Command
                 foreach ($users as $user) {
                     // get controls
                     $controls = Control::where('status', 0)
-                        ->join('control_user', 'control_id', '=', 'controls.id')
-                        ->where('user_id', '=', $user->id)
+                        ->leftJoin('control_user', 'controls.id', '=', 'control_user.control_id')
+                        ->leftJoin('control_user_group', 'controls.id', '=', 'control_user_group.control_id')
+                        ->leftJoin('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
+                        ->where(function ($query) use ($user) {
+                            $query->where('control_user.user_id', '=', $user->id)
+                                ->orWhere('user_user_group.user_id', '=', $user->id);
+                        })
                         ->where('plan_date', '<=', Carbon::today()
                             ->addDays(intval(config('deming.notification.expire-delay')))->toDateString())
                         ->orderBy('plan_date')

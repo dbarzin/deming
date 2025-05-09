@@ -130,7 +130,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/export/actions', 'ActionController@export');
 
     /* Test */
-    Route::get('/easymde', function(){
-        return view("easymde");
+    Route::get('/easymde', function () {
+        return view('easymde');
     });
 });
