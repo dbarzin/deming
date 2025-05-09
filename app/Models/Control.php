@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class Control extends Model
 {
@@ -86,13 +87,22 @@ class Control extends Model
         }
 
         // auditor or auditee
-        if ((Auth::User()->role === 3) || (Auth::User()->role === 5)) {
-            foreach ($this->owners()->get() as $owner) {
-                if ($owner->id === Auth::User()->id) {
-                    return true;
-                }
-            }
-        }
+        if (
+            ((Auth::User()->role === 3) || (Auth::User()->role === 5))
+            &&
+                ( DB::table('control_user')
+                    ->where('control_id', $this->id)
+                    ->where('user_id', Auth::User()->id)
+                    ->exists()
+                    ||
+                DB::table('control_user_group')
+                    ->join('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
+                    ->where('control_user_group.control_id', $this->id)
+                    ->where('user_user_group.user_id', Auth::User()->id)
+                    ->exists()
+                )
+            )
+            return true;
 
         return false;
     }

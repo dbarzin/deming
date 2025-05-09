@@ -250,10 +250,10 @@
             @endif
 
 			@if (
-                    ($control->status===1) &&
+                    ($control->status===1)
+					&&
                     (
-                        (Auth::User()->role===1)||
-                        (Auth::User()->role===2)
+                        (Auth::User()->role===1) || (Auth::User()->role===2)
                     )
                 )
 				<a href="/bob/make/{{ $control->id }}" class="button success">

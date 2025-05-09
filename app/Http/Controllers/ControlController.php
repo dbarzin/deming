@@ -137,14 +137,13 @@ class ControlController extends Controller
             ->where('scope', '<>', '');
         if (Auth::User()->role === 5) {
             $scopes = $scopes
-                ->leftjoin(
-                    'control_user',
-                    'controls.id',
-                    '=',
-                    'control_user.control_id'
-                )
-                ->where('control_user.user_id', '=', Auth::User()->id);
-                // TODO: add group filter here
+                ->leftJoin('control_user', 'controls.id', '=', 'control_user.control_id')
+                ->leftJoin('control_user_group', 'controls.id', '=', 'control_user_group.control_id')
+                ->leftJoin('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
+                ->where(function ($query) {
+                    $query->where('control_user.user_id', '=', Auth::User()->id)
+                          ->orWhere('user_user_group.user_id', '=', Auth::User()->id);
+                });
         }
         $scopes = $scopes
             ->whereIn('status', [0, 1])
@@ -169,16 +168,14 @@ class ControlController extends Controller
         // filter on auditee controls
         if (Auth::User()->role === 5) {
             $controls = $controls
-                ->leftjoin(
-                    'control_user',
-                    'c1.id',
-                    '=',
-                    'control_user.control_id'
-                )
-                // TODO: add group filter here
-                ->where('control_user.user_id', '=', Auth::User()->id);
-        }
-        // TODO: add group filter here
+                ->leftJoin('control_user', 'c1.id', '=', 'control_user.control_id')
+                ->leftJoin('control_user_group', 'c1.id', '=', 'control_user_group.control_id')
+                ->leftJoin('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
+                ->where(function ($query) {
+                    $query->where('control_user.user_id', '=', Auth::User()->id)
+                          ->orWhere('user_user_group.user_id', '=', Auth::User()->id);
+                });
+            }
 
         // Filter on domain
         if ($domain !== null && $domain !== 0) {
@@ -230,7 +227,7 @@ class ControlController extends Controller
                 $controls = $controls->where('c1.status', 2);
             }
         } elseif ($status === '2') {
-            // Todo
+            // TODO: ??
             if (Auth::User()->role === 5) {
                 $controls = $controls
                     //->whereNull('c1.realisation_date');
@@ -426,11 +423,17 @@ class ControlController extends Controller
         // for aditee only if he is assigne to that control
         abort_if(
             Auth::User()->role === 5 &&
-                ! DB::table('control_user')
+                ! ( DB::table('control_user')
                     ->where('control_id', $id)
                     ->where('user_id', Auth::User()->id)
-                    ->exists(),
-            // TODO: add group filter here
+                    ->exists()
+                    ||
+                DB::table('control_user_group')
+                    ->join('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
+                    ->where('control_user_group.control_id', $id)
+                    ->where('user_user_group.user_id', Auth::User()->id)
+                    ->exists()
+                ),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -459,6 +462,8 @@ class ControlController extends Controller
 
         // get associated documents
         $documents = DB::table('documents')->where('control_id', $id)->get();
+
+        // Return
         return view('controls.show')
             ->with('control', $control)
             ->with('next_id', $next_control !== null ? $next_control->id : null)
@@ -672,9 +677,9 @@ class ControlController extends Controller
         Document::where('control_id', $id)->delete();
 
         // Previous control must point to next control
-        Control::where('next_id', $control->id)->update([
-            'next_id' => $control->next_id,
-        ]);
+        Control::where('next_id', $control->id)
+            ->update(['next_id' => $control->next_id,
+            ]);
 
         // delete control_measures
         DB::Table('control_measure')
@@ -685,6 +690,11 @@ class ControlController extends Controller
         DB::Table('control_user_group')
             ->where('control_id', '=', $control->id)
             ->delete();
+
+        // Delete link with actions
+        DB::Table('actions')
+            ->where('control_id', $control->id)
+            ->update(['control_id' => null]);
 
         // Then delete the control
         $control->delete();
@@ -1213,26 +1223,7 @@ class ControlController extends Controller
 
     public function make(Request $request)
     {
-        // Not for API
-        abort_if(
-            Auth::User()->role === 4,
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
-
         $id = (int) request('id');
-
-        // for (aditee or auditor) only if he is assigne to that control
-        abort_if(
-            ((Auth::User()->role === 3) || (Auth::User()->role === 5)) &&
-                ! DB::table('control_user')
-                    ->where('user_id', Auth::User()->id)
-                    ->where('control_id', $id)
-                    ->exists(),
-            // TODO: add group filter here
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
 
         // Get control
         $control = Control::find($id);
@@ -1240,12 +1231,8 @@ class ControlController extends Controller
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
-        // Control already made ?
-        if ($control->status === 2) {
-            return back()->withErrors([
-                'msg' => trans('cruds.control.error.made'),
-            ]);
-        }
+        // for (aditee or auditor) only if he is assigne to that control
+        abort_if(! $control->canMake(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // get associated documents
         $documents = DB::table('documents')->where('control_id', $id)->get();
@@ -1291,34 +1278,20 @@ class ControlController extends Controller
 
         $id = (int) request('id');
 
-        // for (aditee or auditor) only if he is assigne to that control
-        abort_if(
-            ((Auth::User()->role === 3) || (Auth::User()->role === 5)) &&
-                ! DB::table('control_user')
-                    ->where('user_id', Auth::User()->id)
-                    ->where('control_id', $id)
-                    ->exists(),
-                // TODO: add group filter here
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
-
-        // Score must be set
-        if ((request('score') === null)||(request('score') == 0)) {
-            return back()
-                ->withErrors(['score' => 'score not set'])
-                ->withInput();
-        }
-
         // Control fields
         $control = Control::find($id);
 
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
-        // control already made ?
-        if ($control->status === 2) {
-            return back()->withErrors(['msg' => 'Control already made']);
+        // for (aditee or auditor) only if he is assigne to that control
+        abort_if(! $control->canMake(), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        // Score must be set
+        if ((request('score') === null)||(request('score') == 0)) {
+            return back()
+                ->withErrors(['score' => 'score not set'])
+                ->withInput();
         }
 
         $control->observations = request('observations');
@@ -1360,7 +1333,6 @@ class ControlController extends Controller
         } else {
             $control->realisation_date = date('Y-m-d', strtotime('today'));
         }
-        // Log::Alert("doMake realisation_date=".request("realisation_date"));
 
         // Auditee -> propose control
         if (Auth::User()->role === 5) {
@@ -1482,29 +1454,20 @@ class ControlController extends Controller
 
         $id = (int) $request->get('id');
 
-        // for aditee only if he is assigned to that control
-        abort_if(
-            ((Auth::User()->role === 3) || (Auth::User()->role === 5)) &&
-                ! DB::table('control_user')
-                    ->where('user_id', Auth::User()->id)
-                    ->where('control_id', $id)
-                    ->exists(),
-                    // TODO: add group filter here
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
-
         // Get the control
         $control = Control::find($id);
 
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
+        // For aditee only if he is assigned to that control
+        abort_if(!$control->canMake(), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         // Control already made ?
         if ($control->status === 2) {
-            return back()->withErrors([
-                'msg' => trans('cruds.control.error.made'),
-            ]);
+            return back()
+                ->withErrors(['msg' => trans('cruds.control.error.made')])
+                ->withInput();
         }
 
         $control->observations = request('observations');
@@ -1548,9 +1511,9 @@ class ControlController extends Controller
 
         // Control already made ?
         if ($control->status === 2) {
-            return back()->withErrors([
-                'msg' => trans('cruds.control.error.made'),
-            ]);
+            return back()
+                ->withErrors(['msg' => trans('cruds.control.error.made')])
+                ->withInput();
         }
 
         // Change fields
@@ -1599,10 +1562,11 @@ class ControlController extends Controller
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
-        // control already made ?
-        // if ($control->realisation_date !== null) {
+        // Control already made ?
         if ($control->status === 2) {
-            return back()->withErrors(['msg' => 'Control already made']);
+            return back()
+                ->withErrors(['msg' => trans('cruds.control.error.made')])
+                ->withInput();
         }
 
         $control->observations = request('observations');
@@ -1718,16 +1682,7 @@ class ControlController extends Controller
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // for (aditee or auditor) only if he is assigne to that control
-        abort_if(
-            ((Auth::User()->role === 3) || (Auth::User()->role === 5)) &&
-                ! DB::table('control_user')
-                    ->where('user_id', Auth::User()->id)
-                    ->where('control_id', $id)
-                    ->exists(),
-            // TODO: add group filter here
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
+        abort_if(!$control->canMake(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // Get template file
         $template_filename = storage_path('app/models/control_.docx');

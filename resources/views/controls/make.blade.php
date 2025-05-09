@@ -39,9 +39,7 @@
                 @endforeach
             </div>
         </div>
-    </div>
 
-	<div class="grid">
     	<div class="row">
     		<div class="cell-1">
 	    		<strong>{{ trans('cruds.control.fields.name') }}</strong>
@@ -126,7 +124,7 @@
 	    		<strong>{{ trans('cruds.control.fields.observations') }}</strong>
 	    	</div>
 			<div class="cell-6">
-                <textarea name="observations" id="observations" rows="5" class="easymde">{{ count($errors)>0 ?  old('observations') : $control->observations }}</textarea>
+                <textarea name="observations" rows="5" data-role="textarea" data-clear-button="false">{{ count($errors)>0 ?  old('observations') : $control->observations }}</textarea>
 			</div>
 	    </div>
 
@@ -291,47 +289,47 @@ document.addEventListener('DOMContentLoaded', function () {
     const myDropzone = new Dropzone("div#dropzoneFileUpload", {
         url: '/doc/store',
 	    headers: { 'x-csrf-token': '{{csrf_token()}}' },
-	    params: { 'control': '{{ $control->id }}' },
-            maxFilesize: 10,
-            // acceptedFiles: ".jpeg,.jpg,.png,.gif",
-            addRemoveLinks: true,
-            timeout: 50000,
-            removedfile: function(file)
-            {
-                console.log("remove file " + file.name + " " + file.id);
-                $.ajax({
-                    headers: {
-                      'X-CSRF-TOKEN': '{{csrf_token()}}'
-                       },
-                    type: 'GET',
-                    url: '/doc/delete/'+file.id,
-                    success: function (data){
-                        console.log("File has been successfully removed");
-                    },
-                    error: function(e) {
-                        console.log("File not removed");
-                        console.log(e);
-                    }});
-                    // console.log('{{ url( "/doc/delete" ) }}'+"/"+file.id+']');
-                    var fileRef;
-                    return (fileRef = file.previewElement) != null ?
-                    fileRef.parentNode.removeChild(file.previewElement) : void 0;
-            },
-
-            success: function(file, response)
-            {
-                file.id=response.id;
-                console.log("success response");
-                console.log(response);
-            },
-            error: function(file, response)
-            {
-                console.log("error response");
-                console.log(response);
-               return false;
-            },
-            init: function () {
-            //Add existing files into dropzone
+        params: function params(files, xhr, chunk) { return { 'control': '{{ $control->id }}' }; },
+        maxFilesize: 10,
+        // acceptedFiles: ".jpeg,.jpg,.png,.gif",
+        addRemoveLinks: true,
+        timeout: 50000,
+        removedfile: function(file)
+        {
+            console.log("remove file " + file.name + " " + file.id);
+            $.ajax({
+                headers: {
+                  'X-CSRF-TOKEN': '{{csrf_token()}}'
+                   },
+                type: 'GET',
+                url: '/doc/delete/'+file.id,
+                success: function (data){
+                    console.log("File has been successfully removed");
+                },
+                error: function(e) {
+                    console.log("File not removed");
+                    console.log(e);
+                }
+            });
+            // console.log('{{ url( "/doc/delete" ) }}'+"/"+file.id+']');
+            var fileRef;
+            return (fileRef = file.previewElement) != null ?
+            fileRef.parentNode.removeChild(file.previewElement) : void 0;
+        },
+        success: function(file, response)
+        {
+            file.id=response.id;
+            console.log("success response");
+            console.log(response);
+        },
+        error: function(file, response)
+        {
+            console.log("error response");
+            console.log(response);
+            return false;
+        },
+        init: function () {
+            // Add existing files into dropzone
             var existingFiles = [
             @foreach ($documents as $document)
                 { name: "{{ $document->filename }}", size: {{ $document->size }}, id: {{ $document->id }} },
@@ -342,8 +340,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 this.emit("complete", existingFiles[i]);
             	}
         	}
-    	}
-    );
+    	});
 
     document.onpaste = function(event) {
       const items = (event.clipboardData || event.originalEvent.clipboardData).items;
@@ -398,7 +395,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
     link.addEventListener('click', function (event) {
         event.preventDefault();
-
         const action = this.getAttribute('href');
         const observations = textarea.value;
 

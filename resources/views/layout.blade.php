@@ -19,6 +19,7 @@
             </button>
            <a href="/" class="d-flex flex-align-center bg-transparent">
                 <div class="enlarge-2x text-weight-9">Deming</div>
+                {{Auth::User()->role}}
             </a>
         </div>
 
@@ -32,6 +33,7 @@
         </form>
 
         <ul class="navview-menu pad-second-level" id="side-menu">
+            @if (Auth::User()->role <= 3)
             <li class="{{ request()->is('/') ? 'active': '' }}">
                 <a href="/">
                     <span class="icon mif-home"></span>
@@ -44,12 +46,14 @@
                     <span class="caption">{{ trans("menu.measures") }}</span>
                 </a>
             </li>
+            @endif
             <li class="{{ request()->is('bob/index') ? 'active': '' }}">
                 <a href="/bob/index">
                     <span class="icon mif-paste"></span>
                     <span class="caption">{{ trans("menu.controls") }}</span>
                 </a>
             </li>
+            @if (Auth::User()->role <= 3)
             <li class="{{ request()->is('bob/history') ? 'active': '' }}">
                 <a href="/bob/history">
                     <span class="icon mif-calendar"></span>
@@ -185,6 +189,7 @@
                     @endif
                     </ul>
                 </li>
+                @endif
                 <li>
                     <a class="dropdown-item" href="/logout"
                        onclick="event.preventDefault();
