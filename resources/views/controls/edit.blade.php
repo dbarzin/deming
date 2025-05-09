@@ -268,7 +268,7 @@ document.addEventListener("DOMContentLoaded", function () {
 const myDropzone = new Dropzone("div#dropzoneFileUpload", {
 	    url: '/doc/store',
 	    headers: { 'x-csrf-token': '{{csrf_token()}}'},
-	    params: { 'control': '{{ $control->id }}' },
+        params: function params(files, xhr, chunk) { return { 'control': '{{ $control->id }}' }; },
 	    maxFilesize: 10,
 	    // acceptedFiles: ".jpeg,.jpg,.png,.gif",
 	    addRemoveLinks: true,

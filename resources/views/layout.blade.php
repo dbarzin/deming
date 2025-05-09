@@ -19,7 +19,6 @@
             </button>
            <a href="/" class="d-flex flex-align-center bg-transparent">
                 <div class="enlarge-2x text-weight-9">Deming</div>
-                {{Auth::User()->role}}
             </a>
         </div>
 
