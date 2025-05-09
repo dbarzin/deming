@@ -9,6 +9,7 @@ return [
     'radar' => 'Analyse',
     'radar_by_domains' => 'nach Domänen',
     'radar_by_controls' => 'nach Kontrollen',
+    'radar_by_measure' => 'nach Maßnahmen',
     'radar_by_attributes' => 'nach Attributen',
     'action_plan' => 'Aktionspläne',
     'configuration' => [
