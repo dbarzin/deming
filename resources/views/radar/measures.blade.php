@@ -7,7 +7,7 @@
     <div class="row">
         <div class="cell-2">
             <strong>{{ trans("cruds.measure.fields.clause") }}</strong>
-            <select name="measures" data-role="select" id="measures">
+            <select name="measures" data-role="select" id="measures" data-filter="true">
                 <option></option>
                 @foreach ($measures as $measure)
                 <option id='{{ $measure->id }}'
