@@ -110,7 +110,7 @@ return [
          'title' => 'Maßnahmen',
          'title_singular' => 'Maßnahme',
          'groupBy' => 'Gruppiert nach',
-         'calendar' => 'Kalender'
+         'calendar' => 'Kalender',
        	 'create_action' => 'Aktionsplan erstellen',
      ],
      'notification' => [
