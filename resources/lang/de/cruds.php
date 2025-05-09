@@ -186,6 +186,18 @@ return [
 	 'import' => 'Import',
 	 'actions_export' => 'Exportiere Aktionsplan',
      ],
+    'group' => [
+         'index' => 'Liste der Gruppen',
+         'add' => 'Hinzufügen einer Benutzergruppe',
+         'edit' => 'Bearbeiten einer Benutzergruppe',
+         'show' => 'Anzeigen einer Benutzergruppe',
+         'fields' => [
+             'name' => 'Name',
+             'description' => 'Beschreibung',
+             'users' => 'Users',
+             'controls' => 'Controls',
+             ],
+         ],
     'imports' => [
          'index' => 'Import',
 	 'title' => 'Importiere Sicherheitsmaßnahmen',
