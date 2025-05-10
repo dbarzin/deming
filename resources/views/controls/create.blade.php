@@ -96,7 +96,12 @@
 		    		<strong>{{ trans("cruds.control.fields.plan_date") }}</strong>
 		    	</div>
 				<div class="cell-2">
-					<input type="text" data-role="calendarpicker" name="plan_date" value="{{ old('plan_date') }}" data-input-format="%Y-%m-%d">
+					<input
+						data-role="calendarpicker"
+						data-format="YYYY-MM-DD"
+						data-inputFormat="YYYY-MM-DD"
+						name="plan_date"
+						value="{{ old('plan_date') }}"/>
 				</div>
 				<div class="cell-1">
                 </div>
