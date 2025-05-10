@@ -39,7 +39,10 @@ class UserGroupController extends Controller
 
         $all_users = User::select('id', 'name')->orderBy('name')->get();
 
-        return view('groups.create', compact('all_users'));
+        // Get Controls
+        $all_controls = Control::select('id', 'name')->whereNull('realisation_date')->orderBy('name')->get();
+
+        return view('groups.create', compact('all_users', 'all_controls'));
     }
 
     /**
@@ -56,17 +59,20 @@ class UserGroupController extends Controller
 
         // Validate request data
         $this->validate($request, [
-            'name' => 'required|min:1|max:90',
+            'name' => 'required|unique:user_groups|min:1|max:90',
         ]);
 
         // Create and save the new user
-        $userGroup = new UserGroup();
-        $userGroup->name = $request->input('name');
-        $userGroup->description = $request->input('description');
-        $userGroup->save();
+        $group = new UserGroup();
+        $group->name = $request->input('name');
+        $group->description = $request->input('description');
+        $group->save();
 
         // Sync users
-        $userGroup->users()->sync($request->input('users', []));
+        $group->users()->sync($request->input('users', []));
+
+        // Sync controls
+        $group->controls()->sync($request->input('controls', []));
 
         return redirect('/groups');
     }
