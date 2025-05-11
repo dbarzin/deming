@@ -49,7 +49,7 @@ class DocumentController extends Controller
             '403 Forbidden'
         );
 
-        $message = null;
+        $messages = Collect();
 
         if ($request->has('template1')) {
             // Get image file
@@ -57,7 +57,7 @@ class DocumentController extends Controller
             // Upload image
             $template->storeAs('models', 'control_.docx');
 
-            $message = 'Template updated !';
+            $messages->push('Template updated !');
         }
 
         if ($request->has('template2')) {
@@ -66,10 +66,12 @@ class DocumentController extends Controller
             // Upload image
             $template->storeAs('models', 'pilotage_.docx');
 
-            $message = 'Template updated !';
+            $messages->push('Template updated !');
         }
 
-        return redirect()->back()->with('message', $message);
+        return redirect()
+            ->back()
+            ->with('messages', $messages);
     }
 
     public function get(int $id)

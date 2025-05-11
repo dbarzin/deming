@@ -10,6 +10,8 @@ function bytesToHuman($bytes) {
 ?>
 <div data-role="panel" data-title-caption="{{ trans('cruds.document.title.templates') }}" data-collapsible="true" data-title-icon="<span class='mif-file-text'></span>">
 
+    @include('partials.errors')
+
     <form action="/doc/template" method="POST" role="form" enctype="multipart/form-data">
     @csrf
         <div class="grid">
