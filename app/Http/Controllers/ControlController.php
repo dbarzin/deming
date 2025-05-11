@@ -514,12 +514,16 @@ class ControlController extends Controller
             ->orderBy('id')
             ->get();
 
-        // get all groups
+        // Get all users
+        $users = User::orderBy('name')->get();
+
+        // Get all groups
         $all_groups = DB::table('user_groups')
             ->select('id', 'name')
             ->orderBy('name')
             ->get();
 
+        // get measures
         $measures = DB::table('control_measure')
             ->select('measure_id')
             ->where('control_id', $id)
@@ -549,8 +553,6 @@ class ControlController extends Controller
         }
         sort($values);
         $values = array_unique($values);
-
-        $users = User::orderBy('name')->get();
 
         return view('controls.edit')
             ->with('control', $control)
