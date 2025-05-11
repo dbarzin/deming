@@ -61,8 +61,8 @@ According to ISO 27001, chapter 9.1, it is imperative to assess security perform
 
 ### :page_facing_up:️ ISMS steering meeting report
 
-[<img src="public/screenshots/pilotage1.png" width="400">](public/screenshots/pilotage1.png)
-[<img src="public/screenshots/pilotage2.png" width="400">](public/screenshots/pilotage2.png)
+[<img src="public/screenshots/pilotage1.en.png" width="400">](public/screenshots/pilotage1.en.png)
+[<img src="public/screenshots/pilotage2.en.png" width="400">](public/screenshots/pilotage2.en.png)
 
 
 ## :classical_building: Referentials supproted

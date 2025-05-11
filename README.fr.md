@@ -60,8 +60,8 @@ Selon la norme ISO 27001, chapitre 9.1, il est impératif d'évaluer les perform
 
 ### :page_facing_up: Rapport de réunion de pilotage du SMSI
 
-[<img src="public/screenshots/pilotage1.png" width="400">](public/screenshots/pilotage1.png)
-[<img src="public/screenshots/pilotage2.png" width="400">](public/screenshots/pilotage2.png)
+[<img src="public/screenshots/pilotage1.fr.png" width="400">](public/screenshots/pilotage1.fr.png)
+[<img src="public/screenshots/pilotage2.fr.png" width="400">](public/screenshots/pilotage2.fr.png)
 
 ## :classical_building: Référentiels supportés
 
