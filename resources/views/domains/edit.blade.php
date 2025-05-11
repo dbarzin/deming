@@ -3,14 +3,7 @@
 @section("content")
 <div data-role="panel" data-title-caption="{{ trans('cruds.domain.edit') }}" data-collapsible="true" data-title-icon="<span class='mif-library'></span>">
 
-@if (count($errors))
-    <div class="remark alert">
-        <span class="mif-report icon"></span>
-			@foreach ($errors->all() as $error)
-                {{ $error }}<br>
-			@endforeach
-    </div>
-@endif
+    @include('partials.errors')
 
 	<form method="POST" action="/domains/{{ $domain->id }}">
 		@method("PATCH")

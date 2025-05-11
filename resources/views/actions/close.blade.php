@@ -12,17 +12,7 @@ form, table {
 <div class="p-3">
     <div data-role="panel" data-title-caption="{{ trans('cruds.action.close') }}" data-collapsible="true" data-title-icon="<span class='mif-pending-actions'></span>">
 
-	@if (count($errors))
-	<div class= “form-group”>
-		<div class= “alert alert-danger”>
-			<ul>
-			@foreach ($errors->all() as $error)
-				<li>{{ $error }}</li>
-			@endforeach
-			</ul>
-		</div>
-	</div>
-	@endif
+    @include('partials.errors')
 
     <form method="POST" action="/action/close">
 		@csrf

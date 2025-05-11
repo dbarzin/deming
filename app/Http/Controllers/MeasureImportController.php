@@ -80,6 +80,7 @@ class MeasureImportController extends Controller
         }
 
         $errors = Collect();
+        $messages = Collect();
 
         try {
             // Get Filename
@@ -113,9 +114,9 @@ class MeasureImportController extends Controller
                 // Clear database
                 if ($request->has('clean')) {
                     $this->clean();
-                    $errors->push('Database cleared');
+                    $messages->push('Database cleared');
                 }
-                $this->importFromFile($data, $errors);
+                $this->importFromFile($data, $messages);
             }
         } finally {
             if ($request->file()) {
@@ -127,11 +128,12 @@ class MeasureImportController extends Controller
         if ($request->has('test')) {
             // Call command
             Artisan::call('deming:generate-tests');
-            $errors->push('Test data generated');
+            $messages->push('Test data generated');
         }
 
         return back()
             ->with('errors', $errors)
+            ->with('messages', $messages)
             ->with('file', $fileName);
     }
 
@@ -242,7 +244,7 @@ class MeasureImportController extends Controller
      */
     public function importFromFile(
         array $data,
-        Collection $errors
+        Collection $messages
     ) {
         // Initialize counters
         $deleteCount = 0;
@@ -381,22 +383,22 @@ class MeasureImportController extends Controller
         }
 
         if ($insertCount > 0) {
-            $errors->push($insertCount . ' lines inserted');
+            $messages->push($insertCount . ' lines inserted');
         }
         if ($updateCount > 0) {
-            $errors->push($updateCount . ' lines updated');
+            $messages->push($updateCount . ' lines updated');
         }
         if ($deleteCount > 0) {
-            $errors->push($deleteCount . ' lines deleted');
+            $messages->push($deleteCount . ' lines deleted');
         }
         if ($deleteControlCount > 0) {
-            $errors->push($deleteControlCount . ' controls deleted');
+            $messages->push($deleteControlCount . ' controls deleted');
         }
         if ($deleteDocumentCount > 0) {
-            $errors->push($deleteDocumentCount . ' documents deleted');
+            $messages->push($deleteDocumentCount . ' documents deleted');
         }
         if ($newDomainCount > 0) {
-            $errors->push($newDomainCount . ' new domains created');
+            $messages->push($newDomainCount . ' new domains created');
         }
     }
 
