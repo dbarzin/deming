@@ -19,7 +19,8 @@ function bytesToHuman($bytes) {
                     @if (file_exists(storage_path('app/models/control_.docx')))
                         / <a href="/doc/template?id=2" target="_new">{{ trans('cruds.document.model.custom') }}</a>
                     @endif
-                    <input type="file" data-role="file" name="template1">
+                    <!-- input type="file" data-role="file" name="template1"/-->
+                    <br><br><input type="file" name="template1"/>
                 </div>
             </div>
             <div class="row">
@@ -28,7 +29,8 @@ function bytesToHuman($bytes) {
                     @if (file_exists(storage_path('app/models/pilotage_.docx')))
                         / <a href="/doc/template?id=4" target="_new">{{ trans('cruds.document.model.custom') }}</a>
                     @endif
-                    <input type="file" data-role="file" name="template2">
+                    <!-- input type="file" data-role="file" name="template2"/-->
+                    <br><br><input type="file" name="template2"/>
                 </div>
             </div>
             <div class="row">
