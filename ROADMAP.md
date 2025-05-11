@@ -16,7 +16,7 @@ This document contains the evolutions planned in 2024 / 2025.
 ## Improvements
 
 * [x] Migrate to [Metro5](https://metroui.org.ua/)
-* [x] Dark theme (https://metroui.org.ua/examples/schemes/scheme.html)
+* [x] Dark theme
 * [ ] Connvert Markdown to ODT in reports
 * [ ] Configure scoring system
 * [ ] Improve action plan with status (%)
