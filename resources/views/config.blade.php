@@ -24,7 +24,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans("cruds.config.notifications.sent_from") }}</strong>
 		    	</div>
-				<div class="cell-8">
+                <div class="cell-6">
 		            <input type="text" name="mail_from" id="mail_from" value="{{ $mail_from }}" required size=64/>
 				</div>
 			</div>
@@ -33,7 +33,7 @@
 	    		<div class="cell-1">
 		    		<strong>{{ trans("cruds.config.notifications.message_subject") }}</strong>
 		    	</div>
-				<div class="cell-8">
+                <div class="cell-6">
 		            <input type="text" name="mail_subject" id="mail_subject" value="{{ $mail_subject }}" required size=64/>
 				</div>
 			</div>

@@ -78,7 +78,7 @@ class ConfigurationController extends Controller
                 file_put_contents(config_path('deming.php'), $text);
 
                 // Return
-                $messages.push('Configuration saved !');
+                $messages->push('Configuration saved !');
                 break;
 
             case 'test':
@@ -118,10 +118,10 @@ class ConfigurationController extends Controller
                     // Send email
                     $mail->send();
 
-                    $messages.push('Message has been sent.');
+                    $messages->push('Message has been sent.');
                 } catch (Exception $e) {
-                    $errors.push("Message could not be sent.");
-                    $errors.push("Mailer Error: {$mail->ErrorInfo}");
+                    $errors->push("Message could not be sent.");
+                    $errors->push("Mailer Error: {$mail->ErrorInfo}");
                 }
 
                 break;
@@ -130,14 +130,14 @@ class ConfigurationController extends Controller
                 return redirect('/');
 
             default:
-                $messages.push('No actions made.');
+                $messages->push('No actions made.');
         }
 
         return view(
             'config',
             compact('mail_from', 'mail_subject', 'mail_content', 'frequency', 'expire_delay', 'reminder')
             )
-            ->with($messages)
-            ->withErrors($errors);
+            ->with('messages', $messages)
+            ->with('errors', $errors);
     }
 }
