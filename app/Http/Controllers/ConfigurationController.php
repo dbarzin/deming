@@ -51,8 +51,8 @@ class ConfigurationController extends Controller
         abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // Error and message variables
-        $error = null;
-        $message = null;
+        $errors = Collect();
+        $messages = Collect();
 
         // read request
         $mail_from = request('mail_from');
@@ -78,7 +78,7 @@ class ConfigurationController extends Controller
                 file_put_contents(config_path('deming.php'), $text);
 
                 // Return
-                $message = 'Configuration saved !';
+                $messages.push('Configuration saved !');
                 break;
 
             case 'test':
@@ -118,9 +118,10 @@ class ConfigurationController extends Controller
                     // Send email
                     $mail->send();
 
-                    $message = 'Message has been sent';
+                    $messages.push('Message has been sent.');
                 } catch (Exception $e) {
-                    $error = "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                    $errors.push("Message could not be sent.");
+                    $errors.push("Mailer Error: {$mail->ErrorInfo}");
                 }
 
                 break;
@@ -129,13 +130,14 @@ class ConfigurationController extends Controller
                 return redirect('/');
 
             default:
-                $message = 'No actions made.';
+                $messages.push('No actions made.');
         }
 
         return view(
             'config',
-            compact('mail_from', 'mail_subject', 'mail_content', 'frequency', 'expire_delay', 'reminder', 'message')
-        )
-            ->withErrors($error);
+            compact('mail_from', 'mail_subject', 'mail_content', 'frequency', 'expire_delay', 'reminder')
+            )
+            ->with($messages)
+            ->withErrors($errors);
     }
 }
