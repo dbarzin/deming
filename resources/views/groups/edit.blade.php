@@ -3,11 +3,7 @@
 @section("content")
 <div data-role="panel" data-title-caption="{{ trans('cruds.group.edit') }}" data-collapsible="true" data-title-icon="<span class='mif-group'></span>">
 
-    @if (count($errors))
-    	@foreach ($errors->all() as $error)
-    	<div class="remark alert" role="alert">{{ $error }}</div>
-    	@endforeach
-    @endif
+    @include('partials.errors')
 
     <form method="POST" action="/groups/{{ $group->id }}">
 	@method("PATCH")

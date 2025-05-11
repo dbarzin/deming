@@ -2,17 +2,7 @@
 
 @section("content")
 <div data-role="panel" data-title-caption="{{ trans('cruds.domain.show') }}" data-collapsible="true" data-title-icon="<span class='mif-library'></span>">
-	@if (count($errors))
-	<div class="grid">
-	    <div class="cell-5 bg-red fg-white">
-			<ul>
-			@foreach ($errors->all() as $error)
-				<li>{{ $error }}</li>
-			@endforeach
-			</ul>
-		</div>
-	</div>
-	@endif
+    @include('partials.errors')
 	<div class="grid">
     	<div class="row">
     		<div class="cell-1">

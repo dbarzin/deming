@@ -2,17 +2,8 @@
 
 @section("content")
 <div data-role="panel" data-title-caption="{{ trans('cruds.attribute.add') }}" data-collapsible="true" data-title-icon="<span class='mif-tags'></span>">
-	@if (count($errors))
-	<div class="grid">
-	    <div class="cell-3 bg-red fg-white">
-			<ul>
-			@foreach ($errors->all() as $error)
-				<li>{{ $error }}</li>
-			@endforeach
-			</ul>
-		</div>
-	</div>
-	@endif
+
+    @include('partials.errors')
 
 	<form method="POST" action="/attributes">
 	@csrf
