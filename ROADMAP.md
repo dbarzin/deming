@@ -9,6 +9,7 @@ This document contains the evolutions planned in 2024 / 2025.
 * [x] Continuous integration in GitHub
 * [x] Measurement not linked to a control
 * [x] Measurement linked to multiple controls
+* [x] Groups management
 * [ ] Docker
 * [ ] Non-regression tests
 * [ ] Automatically remove measurements after a defined number of months
