@@ -19,8 +19,6 @@ This document contains the evolutions planned in 2024 / 2025.
 * [x] Dark theme (https://metroui.org.ua/examples/schemes/scheme.html)
 * [ ] Connvert Markdown to ODT in reports
 * [ ] Configure scoring system
-* [~] Migration script from ISO 27001:2013 to ISO 27001:2022
-* [~] Manage non-conformities
 * [ ] Improve action plan with status (%)
 * [ ] Import Security Controls from [OSCAL](https://pages.nist.gov/OSCAL/)
 
