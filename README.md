@@ -41,23 +41,23 @@ According to ISO 27001, chapter 9.1, it is imperative to assess security perform
 
 ### :star: Main screen
 
-[<img src="public/screenshots/main1.en.png" width="500">](public/screenshots/main1.png)
+[<img src="public/screenshots/main1.en.png" width="500">](public/screenshots/main1.en.png)
 
 ### :white_check_mark: List of controls
 
-[<img src="public/screenshots/controls.en.png" width="400">](public/screenshots/controls.png)
+[<img src="public/screenshots/controls.en.png" width="500">](public/screenshots/controls.en.png)
 
 ### :calendar: Control planning
 
-[<img src="public/screenshots/calendar.en.png" width="450">](public/screenshots/calendar.png)
+[<img src="public/screenshots/calendar.en.png" width="500">](public/screenshots/calendar.en.png)
 
 ### :memo: Action plan management
 
-[<img src="public/screenshots/plans.en.png" width="450">](public/screenshots/plans.png)
+[<img src="public/screenshots/plans.en.png" width="500">](public/screenshots/plans.en.png)
 
 ### :satellite: Protective measures coverage view
 
-[<img src="public/screenshots/radar.en.png" width="500">](public/screenshots/radar.png)
+[<img src="public/screenshots/radar.en.png" width="500">](public/screenshots/radar.en.png)
 
 ### :page_facing_up:️ ISMS steering meeting report
 

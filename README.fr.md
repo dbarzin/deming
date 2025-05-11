@@ -44,15 +44,15 @@ Selon la norme ISO 27001, chapitre 9.1, il est impératif d'évaluer les perform
 
 ### :white_check_mark: Liste des contrôles
 
-[<img src="public/screenshots/controls.fr.png" width="400">](public/screenshots/controls_fr.png)
+[<img src="public/screenshots/controls.fr.png" width="500">](public/screenshots/controls.fr.png)
 
 ### :calendar: Planification des contrôles
 
-[<img src="public/screenshots/calendar.fr.png" width="450">](public/screenshots/calendar.png)
+[<img src="public/screenshots/calendar.fr.png" width="500">](public/screenshots/calendar.fr.png)
 
 ### :memo: Gestion des plans d'action
 
-[<img src="public/screenshots/plans.fr.png" width="450">](public/screenshots/plans.fr.png)
+[<img src="public/screenshots/plans.fr.png" width="500">](public/screenshots/plans.fr.png)
 
 ### :satellite: Vue de la couverture des mesures de protection
 
