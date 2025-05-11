@@ -1,27 +1,27 @@
 # Deming Roadmap
 
-This document contains the evolutions planned in 2024.
+This document contains the evolutions planned in 2024 / 2025.
 
-## Important,
+## Important
 
-* [ ] Non-regression tests
-* [^] Continuous integration in GitHub
-* [ ] Docker
 * [x] Create action plans not linked to a measurement
 * [x] Change Logs
-* [ ] Automatically remove measurements after a defined number of months
+* [x] Continuous integration in GitHub
 * [x] Measurement not linked to a control
 * [x] Measurement linked to multiple controls
+* [ ] Docker
+* [ ] Non-regression tests
+* [ ] Automatically remove measurements after a defined number of months
 
 ## Improvements
 
+* [x] Migrate to [Metro5](https://metroui.org.ua/)
+* [x] Dark theme (https://metroui.org.ua/examples/schemes/scheme.html)
 * [ ] Connvert Markdown to ODT in reports
-* [ ] Migrate to [Metro5](https://github.com/olton/metro5) or [Bootstrap](https://getbootstrap.com/)
 * [ ] Configure scoring system
-* [o] Migration script from ISO 27001:2013 to ISO 27001:2022
-* [o] Manage non-conformities
+* [~] Migration script from ISO 27001:2013 to ISO 27001:2022
+* [~] Manage non-conformities
 * [ ] Improve action plan with status (%)
-* [ ] Dark theme (https://metroui.org.ua/examples/schemes/scheme.html)
 * [ ] Import Security Controls from [OSCAL](https://pages.nist.gov/OSCAL/)
 
 # Evalutions made in 2023
