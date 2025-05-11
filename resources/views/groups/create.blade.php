@@ -4,15 +4,12 @@
 <div data-role="panel" data-title-caption="{{ trans('cruds.group.add') }}" data-collapsible="true" data-title-icon="<span class='mif-group'></span>">
 
 	@if (count($errors))
-	<div class="grid">
-	    <div class="cell-3 bg-red fg-white">
-			<ul>
-			@foreach ($errors->all() as $error)
-				<li>{{ $error }}</li>
-			@endforeach
-			</ul>
-		</div>
-	</div>
+        <div class="remark alert">
+            <span class="mif-report icon"></span>
+    			@foreach ($errors->all() as $error)
+                    {{ $error }}<br>
+    			@endforeach
+        </div>
 	@endif
 
     <form method="POST" action="/groups">
@@ -48,6 +45,20 @@
 					 </select>
 				</div>
 			</div>
+
+			<div class="row">
+		        <div class="cell-1">
+		            <strong>{{ trans('cruds.group.fields.controls') }}</strong>
+		    	</div>
+		        <div class="cell-6">
+		            <select data-role="select" data-filter="true" name="controls[]" id="controls" multiple>
+		                @foreach($all_controls as $control)
+							<option value="{{ $control->id }}" {{ (in_array($control->id, old('controls', []))) ? 'selected' : '' }}>{{ $control->name }}</option>
+		                @endforeach
+		            </select>
+		        </div>
+		    </div>
+
 	    	<div class="row">
                 <br><br>
             </div>

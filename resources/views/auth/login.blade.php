@@ -39,7 +39,7 @@
     data-on-error-form="invalidForm"
     data-on-validate-form="validateForm">
     @csrf
-    <div class="h-100 d-flex flex-center" style="margin-top: 350px;">
+    <div class="h-100 d-flex flex-center" style="margin-top: 320px;">
         <div class="row w-100 flex-justify-content-center">
             <div class="cell-md-6 d-flex flex-center">
                 <div class="box shadow-large-extra fg-black bd-black" style='background-color: rgba(255, 255, 255, 0.5)'>
