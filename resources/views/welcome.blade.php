@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("content")
-    <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.dashboard') }}" data-collapsible="true" data-title-icon="<span class='mif-home'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.dashboard') }}" data-collapsible="false" data-title-icon="<span class='mif-home'></span>">
     <div class="row">
         <div class="cell-lg-3 cell-md-6 mt-2">
             <div class="more-info-box fg-white" style="background-color: #fa6800 !important;">
@@ -62,17 +62,17 @@
     </div>
 </div>
 <div class="row">
-    <div class="cell-lg-7 cell-md-6 mt-1">
-        <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_planning') }}" data-collapsible="true" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
-            <div>
-                <canvas id="canvas-status" style="width: 100%; max-height: 500px;"  class="chartjs-render-monitor"></canvas>
+    <div class="cell-lg-7 cell-md-12 mt-1">
+        <div data-role="panel" data-height='600' data-title-caption="{{ trans('cruds.welcome.control_planning') }}" data-collapsible="false" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
+            <div class="d-flex justify-content-center align-items-center" style="height: 530px;">
+                <canvas id="canvas-status" style="max-height: 520px;"  class="chartjs-render-monitor"></canvas>
             </div>
         </div>
     </div>
-    <div class="cell-lg-5 cell-md-6 mt-1">
-        <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.control_status') }}" data-collapsible="true" data-title-icon="<span class='mif-pie-chart'></span>">
-            <div>
-                <canvas id="canvas-doughnut" style="width: 100%; max-height: 415px;"  class="chartjs-render-monitor"></canvas>
+    <div class="cell-lg-5 cell-md-12 mt-1">
+        <div data-role="panel" data-height='600' data-title-caption="{{ trans('cruds.welcome.control_status') }}" data-collapsible="false" data-title-icon="<span class='mif-pie-chart'></span>">
+            <div class="d-flex justify-content-center align-items-center" style="height: 530px;">
+                <canvas id="canvas-doughnut" style="max-height: 530px;"  class="chartjs-render-monitor"></canvas>
             </div>
         </div>
     </div>
@@ -80,7 +80,7 @@
 
 <div class="row">
     <div class="col-12">
-        <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.next_controls') }}" data-collapsible="true" data-title-icon="<span class='mif-alarm'></span>">
+        <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.next_controls') }}" data-collapsible="false" data-title-icon="<span class='mif-alarm'></span>">
                 <table
                     class="table data-table striped row-hover cell-border"
                     >
