@@ -337,9 +337,6 @@ document.addEventListener('DOMContentLoaded', function () {
           if (!clipboardData || !clipboardData.items) return;
           const items = Array.from(clipboardData.items);
           items.forEach((item) => {
-
-          console.log(items.kind);
-          
             if (item.kind === 'file') {
               const file = item.getAsFile();
               if (file) {
@@ -352,8 +349,6 @@ document.addEventListener('DOMContentLoaded', function () {
             }
           });
         });
-
-
 
 @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
 
