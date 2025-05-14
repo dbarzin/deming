@@ -6,7 +6,7 @@
     @include('partials.errors')
 
     <div class="row">
-        <div class="cell-5">
+        <div class="cell-lg-8 cell-md-12">
     		<b>{{ trans('cruds.imports.title') }}</b>
             /
             <a href="/export/alices" target="_blank">{{ trans('cruds.imports.current') }}</a>
@@ -16,7 +16,7 @@
     <form action="/alice/import" method="post" enctype="multipart/form-data">
     @csrf
     	<div class="row">
-            <div class="cell-4">
+            <div class="cell-lg-6 cell-md-7">
     			<select data-role="select" name="model" id="model" data-prepend="Select model">
                     <option id="emptyOption"></option>
     				@foreach($models as $model)
@@ -24,29 +24,29 @@
                     @endforeach
                 </select>
             </div>
-            <div class="cell-1" align="right">
+            <div class="cell-lg-1 cell-md-2" align="right">
     		    <button type="submit" name="action" value="download" class="button info drop-shadow">
                         {{ trans("common.download") }}
                 </button>
             </div>
         </div>
     	<div class="row">
-            <div class="cell-5">
+            <div class="cell-lg-7 cell-md-9">
                 {{ trans('cruds.imports.or') }}
                 <!-- input name="file" type="file" id="file" data-role="file" data-prepend="Select import file:"/-->
                 <input name="file" type="file" id="file"/>
     		</div>
         </div>
     	<div class="row">
-            <div class="cell-4">
+            <div class="cell-lg-4 cell-md-6">
                 <input type="checkbox" data-role="checkbox" name="clean" id="clean" data-append="{{ trans('cruds.imports.remove_all') }}"/>
             </div>
         </div>
     	<div class="row">
-            <div class="cell-4">
+            <div class="cell-lg-6 cell-md-7">
                 <input type="checkbox" data-role="checkbox" name="test" data-append="{{ trans('cruds.imports.fake') }}"/>
             </div>
-            <div class="cell-1" align="right">
+            <div class="cell-lg-1 cell-md-2" align="right">
     		    <button type="submit" class="button success drop-shadow"
                     onclick="if ($('#clean').is(':checked')) return confirm('Do you want to remove all other measures and controls  ?')">
                         {{ trans("common.import") }}
@@ -56,13 +56,13 @@
     </form>
 
     <div class="row">
-        <div class="cell-5">
+        <div class="cell-lg-9 cell-md-12">
             {{ trans('cruds.imports.format') }}
         </div>
     </div>
 
     <div class="row">
-        <div class="cell-md-6">
+        <div class="cell-lg-7 cell-md-9">
             <table class="table striped border subcompact">
                 <thead>
                     <tr>
@@ -125,7 +125,7 @@
     </div>
 
     <div class="row">
-        <div class="cell-6 fg-red">
+        <div class="cell-lg-6 cell-md-8 fg-red">
             {{ trans('cruds.imports.warning') }}
         </div>
     </div>

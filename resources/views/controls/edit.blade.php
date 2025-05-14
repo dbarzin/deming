@@ -12,10 +12,10 @@
 		<div class="grid">
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 		    		<strong>{{ trans("cruds.control.fields.clauses") }}</strong>
 				</div>
-	    		<div class="cell-6">
+	    		<div class="cell-lg-6 cell-md-8">
                     <select data-role="select" id="measures" name="measures[]" multiple>
 						@foreach($all_measures as $measure)
 						    <option value="{{ $measure->id }}"
@@ -28,16 +28,16 @@
 			</div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 		    		<strong>{{ trans("cruds.control.fields.name") }}</strong>
 	    		</div>
-	    		<div class="cell-4">
+                <div class="cell-lg-4 cell-md-5">
 					<input type="text" data-role="input" name="name" value="{{ $control->name }}" maxlength="255">
 				</div>
-	    		<div class="cell-1" align="right">
+                <div class="cell-lg-1 cell-md-1" align="right">
 		    		<strong>{{ trans("cruds.control.fields.scope") }}</strong>
                 </div>
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 					<input type="text" name="scope" data-role="input" autocomplete="off" maxlength="32"
 					value="{{ $control->scope }}" data-autocomplete=" {{ implode(",",$scopes) }} "/>
 				</div>
@@ -45,19 +45,19 @@
 
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 		    		<strong>{{ trans("cruds.control.fields.objective") }}</strong>
 		    	</div>
-				<div class="cell-6">
+				<div class="cell-lg-6 cell-md-8">
                     <textarea name="objective" class="easymde" id="objective">{{ $errors->has('objective') ?  old('objective') : $control->objective }}</textarea>
 				</div>
 			</div>
 
 			<div class="row">
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 		    		<strong>{{ trans('cruds.control.fields.attributes') }}</strong>
 		    	</div>
-				<div class="cell-6">
+				<div class="cell-lg-6 cell-md-8">
                     <select data-role="select" id="attributes" name="attributes[]" multiple>
 						@foreach($attributes as $attribute)
 							@if (strlen($attribute)>0)
@@ -69,27 +69,27 @@
 			</div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 		    		<strong>{{ trans("cruds.control.fields.input") }}</strong>
 		    	</div>
-				<div class="cell-6">
+				<div class="cell-lg-6 cell-md-8">
                     <textarea name="input" class="easymde" id="input">{{ $errors->has('input') ?  old('input') : $control->input }}</textarea>
 				</div>
 			</div>
 			<div class="row">
-                <div class="cell-1">
+                <div class="cell-lg-1 cell-md-2">
                     <strong>{{ trans('cruds.control.fields.model') }}</strong>
                 </div>
-                <div class="cell-6">
+                <div class="cell-lg-6 cell-md-8">
                     <textarea class="textarea" name="model" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('model') ?  old('model') : $control->model }}</textarea>
                 </div>
             </div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 		    		<strong>{{ trans("cruds.control.fields.plan_date") }}</strong>
 		    	</div>
-				<div class="cell-2">
+				<div class="cell-lg-2 cell-md-3">
 					<input
 					data-role="calendarpicker"
 					data-format="YYYY-MM-DD"
@@ -98,12 +98,12 @@
 					value="{{ $control->plan_date }}"
 					/>
 				</div>
-				<div class="cell-1">
+                <div class="cell-lg-1 cell-md-1">
                 </div>
-	    		<div class="cell-1" align="right">
+                <div class="cell-lg-1 cell-md-1" align="right">
 		    		<strong>{{ trans("cruds.control.fields.realisation_date") }}</strong>
 		    	</div>
-				<div class="cell-2">
+				<div class="cell-lg-2 cell-md-3">
 					<input
 					data-role="calendarpicker"
 					data-format="YYYY-MM-DD"
@@ -116,47 +116,47 @@
 			</div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 		    		<strong>{{ trans("cruds.control.fields.observations") }}</strong>
 		    	</div>
-				<div class="cell-6">
+				<div class="cell-lg-6 cell-md-8">
 					<textarea name="observations" rows="5" data-role="textarea" data-clear-button="false">{{ $errors->has('observations') ?  old('observations') : $control->observations }}</textarea>
 				</div>
 		    </div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 		    		<strong>{{ trans("cruds.control.fields.evidence") }}</strong>
 		    	</div>
-				<div class="cell-6">
+				<div class="cell-lg-6 cell-md-8">
 					<div class="dropzone dropzone-previews" id="dropzoneFileUpload"></div>
 				</div>
 		    </div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 		    		<strong>{{ trans("cruds.control.fields.note") }}</strong>
 		    	</div>
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 					<input type="text" data-role="spinner" name="note" data-min-value="0" data-max-value="100"
                     value="{{ count($errors)>0 ?  old('note') : $control->note }}">
 	    		</div>
 		    </div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 		    		<strong>{{ trans("cruds.control.fields.indicator") }}</strong>
 		    	</div>
-                <div class="cell-6">
+                <div class="cell-lg-6 cell-md-8">
 					<pre>{{ $control->indicator }}</pre>
 				</div>
 			</div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 		    		<strong>{{ trans("cruds.control.fields.score") }}</strong>
 		    	</div>
-                <div class="cell-6">
+                <div class="cell-lg-6 cell-md-8">
 					<input type="radio" name="score" value="3" data-role="radio" data-append="<font color='green'>{{ trans('common.green') }}</font>" {{ ($control->score==3) ? 'checked' : '' }}/>
 					<input type="radio" name="score" value="2" data-role="radio" data-append="<font color='orange'>{{ trans('common.orange') }}</font>" {{ ($control->score==2) ? 'checked' : '' }}/>
 					<input type="radio" name="score" value="1" data-role="radio" data-append="<font color='red'>{{ trans('common.red') }}</font>" {{ ($control->score==1) ? 'checked' : '' }}/>
@@ -164,20 +164,20 @@
 			</div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 		    		<strong>{{ trans("cruds.control.fields.action_plan") }}</strong>
 		    	</div>
-				<div class="cell-6">
+				<div class="cell-lg-6 cell-md-8">
                     <textarea name="action_plan" class="easymde" id="action_plan">{{ $errors->has('action_plan') ?  old('action_plan') : $control->action_plan }}</textarea>
 				</div>
 			</div>
 
 
 			<div class="row">
-	    		<div class="cell-1">
+	    		<div class="cell-lg-1 cell-md-2">
 		    		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
 		    	</div>
-				<div class="cell-2">
+                <div class="cell-lg-2 cell-md-2">
                     <select data-role="select" id="periodicity" name="periodicity">
 					    <option value="0" {{ $control->periodicity==0 ? "selected" : ""}}>{{ trans('common.once') }}</option>
 					    <option value="1" {{ $control->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
@@ -186,20 +186,20 @@
 					    <option value="12" {{ $control->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
 					 </select>
 				</div>
-	    		<div class="cell-1" align="right">
+                <div class="cell-lg-1 cell-md-1" align="right">
 		    		<strong>Status</strong>
 	    		</div>
-				<div class="cell-1">
+				<div class="cell-lg-1 cell-md-2">
                     <select data-role="select" id="status" name="status">
 						<option value="0" {{ $control->status==0 ? "selected" : ""}}>Todo</option>
 						<option value="1" {{ $control->status==1 ? "selected" : ""}}>Proposed</option>
 						<option value="2" {{ $control->status==2 ? "selected" : ""}}>Done</option>
 					 </select>
 	    		</div>
-	    		<div class="cell-1" align="right">
+                <div class="cell-lg-1 cell-md-1" align="right">
 		    		<strong>Next ID</strong>
 		    	</div>
-				<div class="cell-1">
+				<div class="cell-lg-1 cell-md-2">
                     <select data-role="select" id="next_id" name="next_id">
 						<option></option>
 						@foreach($ids as $id)
@@ -210,10 +210,10 @@
 			</div>
 
 			<div class="row">
-                <div class="cell-1">
+                <div class="cell-lg-1 cell-md-2">
                     <strong>{{ trans('cruds.control.fields.owners') }}</strong>
                 </div>
-                <div class="cell-6">
+                <div class="cell-lg-6 cell-md-8">
                     <select data-role="select" name="owners[]" id="owners" multiple>
                         @foreach($users as $user)
                             <option value="{{ $user->id }}" {{ (in_array($user->id, old('owners', [])) || $control->owners->contains($user->id)) ? 'selected' : '' }}>{{ $user->name }}</option>
@@ -223,10 +223,10 @@
             </div>
 
 			<div class="row">
-                <div class="cell-1">
+                <div class="cell-lg-1 cell-md-2">
                     <strong>{{ trans('cruds.control.fields.groups') }}</strong>
                 </div>
-                <div class="cell-6">
+                <div class="cell-lg-6 cell-md-8">
                     <select data-role="select" name="groups[]" id="groups" multiple>
                         @foreach($all_groups as $group)
                             <option value="{{ $group->id }}" {{ (in_array($group->id, old('groups', [])) || $control->groups->contains($group->id)) ? 'selected' : '' }}>{{ $group->name }}</option>
@@ -235,22 +235,20 @@
                 </div>
             </div>
 
-	    	<div class="row-12">
-	    		<div><br></div>
-	    	</div>
-
-	    	<div class="row-12">
-				<button type="submit" class="button success">
-					<span class="mif-floppy-disk2"></span>
-		            &nbsp;
-					{{ trans("common.save") }}
-				</button>
-				&nbsp;
-                <a class="button" href="/bob/show/{{$control->id}}" role="button">
-                    <span class="mif-cancel"></span>
-                    &nbsp;
-                    {{ trans("common.cancel") }}
-                </a>
+	    	<div class="row">
+                <div class="col-12">
+    				<button type="submit" class="button success">
+    					<span class="mif-floppy-disk2"></span>
+    		            &nbsp;
+    					{{ trans("common.save") }}
+    				</button>
+    				&nbsp;
+                    <a class="button" href="/bob/show/{{$control->id}}" role="button">
+                        <span class="mif-cancel"></span>
+                        &nbsp;
+                        {{ trans("common.cancel") }}
+                    </a>
+                </div>
     		</div>
     	</div>
     </form>
