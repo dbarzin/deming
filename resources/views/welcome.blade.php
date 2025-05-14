@@ -62,17 +62,17 @@
     </div>
 </div>
 <div class="row">
-    <div class="cell-lg-7 cell-md-12 mt-1">
-        <div data-role="panel" data-height='600' data-title-caption="{{ trans('cruds.welcome.control_planning') }}" data-collapsible="false" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
-            <div class="d-flex justify-content-center align-items-center" style="height: 530px;">
-                <canvas id="canvas-status" style="max-height: 520px;"  class="chartjs-render-monitor"></canvas>
+    <div class="cell-lg-7 cell-md-12 mt-3">
+        <div data-role="panel" data-height='580' data-title-caption="{{ trans('cruds.welcome.control_planning') }}" data-collapsible="false" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
+            <div class="d-flex justify-content-center align-items-center" style="height: 510px;">
+                <canvas id="canvas-status" style="max-height: 510px;"  class="chartjs-render-monitor"></canvas>
             </div>
         </div>
     </div>
-    <div class="cell-lg-5 cell-md-12 mt-1">
-        <div data-role="panel" data-height='600' data-title-caption="{{ trans('cruds.welcome.control_status') }}" data-collapsible="false" data-title-icon="<span class='mif-pie-chart'></span>">
-            <div class="d-flex justify-content-center align-items-center" style="height: 530px;">
-                <canvas id="canvas-doughnut" style="max-height: 530px;"  class="chartjs-render-monitor"></canvas>
+    <div class="cell-lg-5 cell-md-12 mt-3">
+        <div data-role="panel" data-height='580' data-title-caption="{{ trans('cruds.welcome.control_status') }}" data-collapsible="false" data-title-icon="<span class='mif-pie-chart'></span>">
+            <div class="d-flex justify-content-center align-items-center" style="height: 510px;">
+                <canvas id="canvas-doughnut" style="max-height: 510px;"  class="chartjs-render-monitor"></canvas>
             </div>
         </div>
     </div>
