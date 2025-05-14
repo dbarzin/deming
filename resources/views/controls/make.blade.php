@@ -20,10 +20,10 @@
 
 	<div class="grid">
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.clauses') }}</strong>
 	    	</div>
-    		<div class="cell-4">
+    		<div class="cell-lg-4 cell-md-5">
                 @foreach($control->measures as $measure)
                     <a href="/alice/show/{{ $measure->id }}">{{ $measure->clause }}</a>
                     @if(!$loop->last)
@@ -34,14 +34,14 @@
         </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.name') }}</strong>
 	    	</div>
-    		<div class="cell-5">
+    		<div class="cell-lg-5 cell-md-5">
 				{{ $control->name }}
 			</div>
             @if ($control->scope!==null)
-    		<div class="cell-2">
+            <div class="cell-2">
 	    		<strong>{{ trans("cruds.control.fields.scope") }}</strong>
 	    		&nbsp;
     			{{ $control->scope }}
@@ -50,38 +50,38 @@
 		</div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.objective') }}</strong>
 	    	</div>
-			<div class="cell-6">
+			<div class="cell-lg-6 cell-md-8">
                 {!! \Parsedown::instance()->text($control->objective) !!}
 			</div>
 		</div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.input') }}</strong>
 	    	</div>
-			<div class="cell-6">
+			<div class="cell-lg-6 cell-md-8">
                 {!! \Parsedown::instance()->text($control->input) !!}
 			</div>
 		</div>
 
         <div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.model') }}</strong>
 	    	</div>
-			<div class="cell-6">
+			<div class="cell-lg-6 cell-md-8">
 				<pre>{{ $control->model }}</pre>
 			</div>
 		</div>
 
         <div class="row">
 
-			<div class="cell-1">
+			<div class="cell-lg-1 cell-md-2">
 				<b>{{ trans('cruds.control.fields.plan_date') }}</b>
 			</div>
-			<div class="cell-2">
+            <div class="cell-lg-2 cell-md-3">
                 @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
 					<input type="text"
 						data-role="calendarpicker"
@@ -94,12 +94,10 @@
                     {{ $control->plan_date }}
                 @endif
 			</div>
-            <div class="cell-1">
-            </div>
-    		<div class="cell-1" align="right">
+            <div class="cell-lg-2 cell-md-2" align="right">
 	    		<strong>{{ trans('cruds.control.fields.realisation_date') }}</strong>
 	    	</div>
-			<div class="cell-2">
+            <div class="cell-lg-2 cell-md-3">
 				<input type="text"
 					data-role="calendarpicker"
 					name="realisation_date"
@@ -113,51 +111,51 @@
 		</div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.observations') }}</strong>
 	    	</div>
-			<div class="cell-6">
+			<div class="cell-lg-6 cell-md-8">
                 <textarea name="observations" rows="5" data-role="textarea" data-clear-button="false">{{ count($errors)>0 ?  old('observations') : $control->observations }}</textarea>
 			</div>
 	    </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.evidence') }}</strong>
 	    		<br>
                 <a target="_new" href="/bob/template/{{ $control->id }}" id="checklist-link">{{ trans('cruds.control.checklist') }}</a>
 	    	</div>
-			<div class="cell-6">
+			<div class="cell-lg-6 cell-md-8">
 				<div class="dropzone dropzone-previews" id="dropzoneFileUpload"></div>
 			</div>
 	    </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.note') }}</strong>
 	    	</div>
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 				<input type="text" data-role="spinner" name="note"  data-min-value="0" data-max-value="100"
                 value="{{ count($errors)>0 ?  old('note') : $control->note }}">
     		</div>
 	    </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.indicator') }}</strong>
 	    	</div>
-            <div class="cell-6">
+            <div class="cell-lg-6 cell-md-8">
 				<pre>{{ $control->indicator }}</pre>
 			</div>
 		</div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>
 	    			{{ trans('cruds.control.fields.score') }}
 	    		</strong>
 	    	</div>
-            <div class="cell-6">
+            <div class="cell-lg-6 cell-md-8">
                 <input type="radio" data-role="radio" name="score" value="3" data-role="radio" data-append="<font color='green'>{{ trans('common.green') }}</font>" {{ $control->score===3 ? "checked" : "" }} />
                 <input type="radio" data-role="radio" name="score" value="2" data-role="radio" data-append="<font color='orange'>{{ trans('common.orange') }}</font>" {{ $control->score===2 ? "checked" : "" }} />
                 <input type="radio" data-role="radio" name="score" value="2" data-role="radio" data-append="<font color='red'>{{ trans('common.red') }}</font>" {{ $control->score===1 ? "checked" : "" }} />
@@ -165,27 +163,27 @@
 		</div>
         @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
     	<div class="row">
-            <div class="cell-1">
+            <div class="cell-lg-1 cell-md-2">
             </div>
             <div class="cell-3">
                 <input type="checkbox" name="add_action_plan" data-role="checkbox" id="toggleTextarea" data-append="{{ trans('cruds.control.create_action') }}"/>
             </div>
         </div>
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.action_plan') }}</strong>
 	    	</div>
-            <div class="cell-6">
+            <div class="cell-lg-6 cell-md-8">
                 <textarea name="action_plan" class="form-control easymde disabled-editor" id="action_plan">{{ $errors->count()>0 ?  old('action_plan') : $control->action_plan }}</textarea>
 			</div>
 		</div>
         @endif
 		@if ($control->periodicity!==0)
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.next') }}</strong>
 	    	</div>
-			<div class="cell-2">
+            <div class="cell-ld-2 cell-md-3">
                 @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
 					<input type="text"
                         lenght="12"
@@ -216,16 +214,14 @@
 		</div>
         @endif
 
-		<div class="grid">
-	    	<div class="row">
-	    		&nbsp;
-	    	</div>
-	    </div>
+    	<div class="row">
+    		&nbsp;
+    	</div>
 
-		<div class="grid">
-	    	<div class="row-12">
+    	<div class="row">
+              <div class="cell-12">
+            @if ($control->canMake())
                 @if ($control->status===0)
-                    @if ($control->canMake())
 					<button type="submit" class="button success">
 						<span class="mif-done"></span>
 						&nbsp;
@@ -335,15 +331,24 @@ document.addEventListener('DOMContentLoaded', function () {
         	}
     	});
 
-    document.onpaste = function(event) {
-      const items = (event.clipboardData || event.originalEvent.clipboardData).items;
-      items.forEach((item) => {
-      	console.log(item.kind);
-        if (item.kind === 'file') {
-          	myDropzone.addFile(item.getAsFile())
-        	}
-      	})
-    }
+        // Paste document or image on page
+        document.addEventListener('paste', function(event) {
+          const clipboardData = event.clipboardData || window.clipboardData;
+          if (!clipboardData || !clipboardData.items) return;
+          const items = Array.from(clipboardData.items);
+          items.forEach((item) => {
+            if (item.kind === 'file') {
+              const file = item.getAsFile();
+              if (file) {
+                if (typeof myDropzone !== 'undefined' && typeof myDropzone.addFile === 'function') {
+                  myDropzone.addFile(file);
+                } else {
+                  console.warn('myDropzone n\'est pas défini ou n\'est pas un objet Dropzone valide.');
+                }
+              }
+            }
+          });
+        });
 
 @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
 

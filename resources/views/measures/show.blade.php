@@ -7,10 +7,10 @@
 
     <div class="grid">
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
         		<strong>{{ trans('cruds.measure.fields.domain') }}</strong>
         	</div>
-    		<div class="cell-6">
+            <div class="cell-lg-7 cell-md-9">
     			<a href="/domains/{{$measure->domain_id}}">
     			{{ $measure->domain->title ?? ""}}
     			</a>
@@ -20,87 +20,87 @@
         </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
         		<strong>{{ trans('cruds.measure.fields.clause') }}</strong>
         	</div>
-    		<div class="cell-6">
+            <div class="cell-lg-7 cell-md-9">
     			{{ $measure->clause }}
     		</div>
         </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
         		<strong>{{ trans('cruds.measure.fields.name') }}</strong>
         	</div>
-    		<div class="cell-6">
+            <div class="cell-lg-7 cell-md-9">
     			{{ $measure->name }}
     		</div>
         </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
         		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
         	</div>
-    		<div class="cell-6">
+            <div class="cell-lg-7 cell-md-9">
                 {!! \Parsedown::instance()->text($measure->objective) !!}
     		</div>
         </div>
 
     	@if ($measure->attributes!=null)
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
         		<strong>{{ trans("cruds.measure.fields.attributes") }}</strong>
         	</div>
-    		<div class="cell-6">
+            <div class="cell-lg-7 cell-md-9">
         		{{ $measure->attributes }}
     		</div>
     	</div>
     	@endif
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
         		<strong>{{ trans('cruds.measure.fields.input') }}</strong>
         	</div>
-    		<div class="cell-6">
+            <div class="cell-lg-7 cell-md-9">
                 {!! \Parsedown::instance()->text($measure->input) !!}
     		</div>
         </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
         		<strong>{{ trans('cruds.measure.fields.model') }}</strong>
         	</div>
-    		<div class="cell-6">
+            <div class="cell-lg-7 cell-md-9">
     			<pre>{{ $measure->model }}</pre>
     		</div>
         </div>
 
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
         		<strong>{{ trans('cruds.measure.fields.indicator') }}</strong>
         	</div>
-    		<div class="cell-6">
+    		<div class="cell-lg-6 cell-md-9">
     			<pre>{{ $measure->indicator }}</pre>
     		</div>
         </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
         		<strong>{{ trans('cruds.measure.fields.action_plan') }}</strong>
         	</div>
-    		<div class="cell-6">
+    		<div class="cell-lg-6 cell-md-9">
                 {!! \Parsedown::instance()->text($measure->action_plan) !!}
     		</div>
         </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
     		</div>
     	</div>
 
     	<div class="row">
-            <div class="cell-8">
+            <div class="cell-lg-8 cell-md-12" >
     		@if (Auth::User()->role === 1)
                 <a class="button info" href="/alice/plan/{{ $measure->id }}">
     	            <span class="mif-calendar"></span>

@@ -5,10 +5,10 @@
 
 <div class="grid">
 	<div class="row">
-		<div class="cell-1">
+		<div class="cell-lg-1 cell-md-2">
     		<strong>{{ trans("cruds.control.fields.clauses") }}</strong>
     	</div>
-		<div class="cell-4">
+		<div class="cell-lg-4 cell-md-5">
             @foreach($control->measures as $measure)
                 <a href="/alice/show/{{ $measure->id }}">{{ $measure->clause }}</a>
                 @if(!$loop->last)
@@ -18,21 +18,21 @@
         </div>
     </div>
 	<div class="row">
-		<div class="cell-1">
+		<div class="cell-lg-1 cell-md-2">
     		<strong>{{ trans("cruds.control.fields.name") }}</strong>
     	</div>
         @if ($control->scope===null)
-		<div class="cell-6">
+		<div class="cell-lg-6 cell-md-8">
     		 {{ $control->name }}
 		</div>
         @else
-		<div class="cell-4">
+		<div class="cell-lg-4 cell-md-5">
     		 {{ $control->name }}
 		</div>
-		<div class="cell-1" align="right">
+		<div class="cell-lg-1 cell-md-2" align="right">
     		<strong>{{ trans("cruds.control.fields.scope") }}</strong>
     	</div>
-		<div class="cell-1">
+		<div class="cell-lg-1 cell-md-2">
             <a href="/bob/index?scope={{ $control->scope }}">
 			{{ $control->scope }}
             </a>
@@ -40,64 +40,64 @@
         @endif
 	</div>
 	<div class="row">
-		<div class="cell-1">
+		<div class="cell-lg-1 cell-md-2">
     		<strong>{{ trans("cruds.control.fields.objective") }}</strong>
     	</div>
-		<div class="cell-6">
+		<div class="cell-lg-7 cell-md-9">
             {!! \Parsedown::instance()->text($control->objective) !!}
 		</div>
 	</div>
 
 	@if ($control->attributes!=null)
 	<div class="row">
-		<div class="cell-1">
+		<div class="cell-lg-1 cell-md-2">
     		<strong>{{ trans("cruds.control.fields.attributes") }}</strong>
     	</div>
-		<div class="cell-6">
+		<div class="cell-lg-7 cell-md-9">
     		{{ $control->attributes }}
 		</div>
 	</div>
 	@endif
 
 	<div class="row">
-		<div class="cell-1">
+		<div class="cell-lg-1 cell-md-2">
     		<strong>{{ trans("cruds.control.fields.input") }}</strong>
     	</div>
-		<div class="cell-6">
+		<div class="cell-lg-7 cell-md-9">
             {!! \Parsedown::instance()->text($control->input) !!}
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="cell-1">
+		<div class="cell-lg-1 cell-md-2">
     		<strong>{{ trans("cruds.control.fields.model") }}</strong>
     	</div>
-		<div class="cell-6">
+		<div class="cell-lg-7 cell-md-9">
 			<pre>{!! $control->model !!}</pre>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="cell-1">
+		<div class="cell-lg-1 cell-md-2">
     		<strong>{{ trans("cruds.control.fields.plan_date") }}</strong>
     	</div>
-		<div class="cell-1">
+		<div class="cell-lg-2 cell-md-2">
     		{{ $control->plan_date }}
 		</div>
 
-        <div class="cell-2 text-right">
+		<div class="cell-lg-1 cell-md-2 text-right">
     		<strong>{{ trans("cruds.control.fields.realisation_date") }}</strong>
     	</div>
-		<div class="cell-1">
+		<div class="cell-lg-2 cell-md-2">
     		{{ $control->realisation_date }}
 		</div>
 
-		<div class="cell-1">
+		<div class="cell-lg-1 cell-md-2">
 			<strong>{{ trans("common.previous") }}</strong>
 			<br>
     		<strong>{{ trans("common.next") }}</strong>
     	</div>
-		<div class="cell-1">
+		<div class="cell-lg-2 cell-md-2">
 	    	@if ($prev_id!=null)
 				<a href="/bob/show/{{ $prev_id }}">
 	    			{{ $prev_date }}
@@ -119,10 +119,10 @@
 
 	@if ($control->observations!=null)
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans("cruds.control.fields.observations") }}</strong>
 	    	</div>
-			<div class="cell-5">
+			<div class="cell-lg-7 cell-md-9">
 				<pre>{!! $control->observations !!}</pre>
 			</div>
 	    </div>
@@ -130,10 +130,10 @@
 
 	@if ($documents->isNotEmpty())
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans("cruds.control.fields.evidence") }}</strong>
 	    	</div>
-			<div class="cell-6">
+			<div class="cell-lg-6 cell-md-8">
 				@foreach ($documents as $document)
 					<a href="/doc/show/{{$document->id}}" target="_new">
 						{{$document->filename}}
@@ -145,7 +145,7 @@
 	@endif
 
 	<div class="row">
-		<div class="cell-1">
+		<div class="cell-lg-1 cell-md-2">
     		<strong>{{ trans("cruds.control.fields.note") }}</strong>
     	</div>
 		<div class="cell-2">
@@ -155,20 +155,20 @@
 
 
 	<div class="row">
-		<div class="cell-1">
+		<div class="cell-lg-1 cell-md-2">
     		<strong>{{ trans("cruds.control.fields.indicator") }}</strong>
     	</div>
-		<div class="cell-6">
+		<div class="cell-lg-6 cell-md-8">
 			<pre>{{ $control->indicator }}</pre>
 		</div>
 	</div>
 
 	@if ($control->score!==null)
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans("cruds.control.fields.score") }}</strong>
 	    	</div>
-			<div class="cell-6">
+			<div class="cell-lg-6 cell-md-8">
                 @if ($control->score==1)
                     &#128545;
                 @elseif ($control->score==2)
@@ -192,20 +192,20 @@
 
 	@if (($control->realisation_date!=null)&&($control->score!=3))
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans("cruds.control.fields.action_plan") }}</strong>
 	    	</div>
-			<div class="cell-6">
+			<div class="cell-lg-6 cell-md-8">
                 {!! \Parsedown::instance()->text($control->action_plan) !!}
 			</div>
 		</div>
 	@endif
 
 	<div class="row">
-		<div class="cell-1">
+		<div class="cell-lg-1 cell-md-2">
     		<strong>{{ trans('cruds.control.fields.periodicity') }}</strong>
     	</div>
-		<div class="cell-6">
+		<div class="cell-lg-6 cell-md-8">
 			@if ($control->periodicity==0) {{ trans("common.once") }} @endif
 			@if ($control->periodicity==1) {{ trans("common.monthly") }} @endif
 			@if ($control->periodicity==3) {{ trans("common.quarterly") }} @endif
@@ -215,10 +215,10 @@
     </div>
 
 	<div class="row">
-		<div class="cell-1">
+		<div class="cell-lg-1 cell-md-2">
     		<strong>{{ trans('cruds.control.fields.owners') }}</strong>
     	</div>
-		<div class="cell-6">
+		<div class="cell-lg-6 cell-md-8">
             @foreach($control->groups as $group)
                 {{ $group->name }}
                 @if (!$loop->last)
