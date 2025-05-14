@@ -26,9 +26,9 @@
 /* Temporary fix for file upload */
 input[type="file"] {
     display: block;
-    font-size: 18px;
+    font-size: 16px;
     padding: 3px;
     width: 100%;
-    border: 2px solid grey;
+    border: 1px solid #888888;
 
 }
