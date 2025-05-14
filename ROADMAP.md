@@ -11,8 +11,8 @@ This document contains the evolutions planned in 2024 / 2025.
 * [x] Measurement linked to multiple controls
 * [x] Groups management
 * [ ] Export set of controls for audit
-* [ ] Docker
 * [ ] Automatically remove measurements after a defined number of months
+* [ ] Docker
 * [ ] Non-regression tests
 
 ## Improvements
