@@ -18,12 +18,12 @@ This document contains the evolutions planned in 2024 / 2025.
 
 * [x] Migrate to [Metro5](https://metroui.org.ua/)
 * [x] Dark theme
-* [ ] Connvert Markdown to ODT in reports
+* [ ] Convert Markdown to ODT in reports
 * [ ] Configure scoring system
 * [ ] Improve action plan with status (%)
 * [ ] Import Security Controls from [OSCAL](https://pages.nist.gov/OSCAL/)
 
-# Evalutions made in 2023
+# Evaluations made in 2023
 
 ## Important
 
