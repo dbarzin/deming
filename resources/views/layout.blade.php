@@ -39,7 +39,9 @@
                     <span class="caption">{{ trans("menu.home") }}</span>
                 </a>
             </li>
-            <li class="{{ request()->is('alice*') ? 'active': '' }}">
+            <li class="{{
+                    request()->is('alice*') && !request()->is('alice/import')
+                    ? 'active': '' }}">
                 <a href="/alice/index">
                     <span class="icon mif-books"></span>
                     <span class="caption">{{ trans("menu.measures") }}</span>
