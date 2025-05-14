@@ -33,8 +33,8 @@
     	<div class="row">
             <div class="cell-5">
                 {{ trans('cruds.imports.or') }}
-                <!-- input name="file" type="file" id="file" data-role="file" data-prepend="Select import file:"-->
-                <br><input name="file" type="file" id="file"/><br><br>
+                <!-- input name="file" type="file" id="file" data-role="file" data-prepend="Select import file:"/-->
+                <input name="file" type="file" id="file"/>
     		</div>
         </div>
     	<div class="row">

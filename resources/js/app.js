@@ -1,5 +1,7 @@
-// Metro 5.0
+// Metro from NPM
 import '@olton/metroui/lib/metro.js';
+// Metro 5.1.3
+// import '../metro5.1.3/metro.js';
 
 // DropZone
 import Dropzone from 'dropzone';
