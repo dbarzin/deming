@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="row">
-    <div class="cell-md-6">
+    <div class="cell-lg-6 cell-md-12">
         <div data-role="panel" data-title-caption="{{ trans('cruds.control.history') }}" data-collapsible="false" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
 
             <canvas id="canvas-status" width="600" height="300px" class="chartjs-render-monitor">
@@ -132,7 +132,7 @@
 
     <!----------------------------------------------------------->
 
-    <div class="cell-6">
+    <div class="cell-lg-6 cell-md-12">
     <table class="table subcompact cell-border">
         <tbody>
         <?php

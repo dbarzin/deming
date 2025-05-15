@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.attribute.edit') }}" data-collapsible="true" data-title-icon="<span class='mif-tags'></span>">
+<div data-role="panel" data-title-caption="{{ trans('cruds.attribute.edit') }}" data-collapsible="false" data-title-icon="<span class='mif-tags'></span>">
 
     @include('partials.errors')
 

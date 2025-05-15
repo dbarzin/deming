@@ -1,6 +1,6 @@
 @extends('layout')
 @section('content')
-    <div class="table-responsive" data-role="panel" data-title-caption="{{ trans('cruds.log.title') }}" data-collapsible="true" data-title-icon="<span class='mif-log-file'></span>">
+    <div class="table-responsive" data-role="panel" data-title-caption="{{ trans('cruds.log.title') }}" data-collapsible="false" data-title-icon="<span class='mif-log-file'></span>">
 
             <table class="table table-border cell-border">
                 <tbody>

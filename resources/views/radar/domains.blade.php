@@ -2,7 +2,7 @@
 
 @section("content")
 <form action="/radar/domains">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.domain.radar') }}" data-collapsible="true" data-title-icon="<span class=' mif-stacked-bar-chart'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.domain.radar') }}" data-collapsible="false" data-title-icon="<span class=' mif-stacked-bar-chart'></span>">
 
     <div class="row">
         <div class="cell-md-9">
@@ -184,6 +184,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 title: {
                     display: false,
                 }
+            },
+            onHover: (event, chartElement) => {
+                event.native.target.style.cursor = chartElement.length ? 'pointer' : 'default';
             },
             scales: {
                 y: {
