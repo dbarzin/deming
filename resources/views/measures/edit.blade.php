@@ -2,7 +2,7 @@
 @section("styles")
 @endsection
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.measure.edit') }}" data-collapsible="true" data-title-icon="<span class='mif-books'></span>">
+<div data-role="panel" data-title-caption="{{ trans('cruds.measure.edit') }}" data-collapsible="false" data-title-icon="<span class='mif-books'></span>">
 
 @include('partials.errors')
 

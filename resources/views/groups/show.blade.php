@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.group.show') }}" data-collapsible="true" data-title-icon="<span class='mif-group'></span>">
+<div data-role="panel" data-title-caption="{{ trans('cruds.group.show') }}" data-collapsible="false" data-title-icon="<span class='mif-group'></span>">
 
 	<div class="grid">
 

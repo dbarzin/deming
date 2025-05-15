@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.exports.steering') }}" data-collapsible="true" data-title-icon="<span class='mif-file-text'></span>">
+<div data-role="panel" data-title-caption="{{ trans('cruds.exports.steering') }}" data-collapsible="false" data-title-icon="<span class='mif-file-text'></span>">
 
 	@if (count($errors))
 	<div class="grid">
@@ -76,7 +76,7 @@
 
 </div>
 
-<div class="mt-3" data-role="panel" data-title-caption="{{ trans('cruds.soa.title') }}" data-collapsible="true" data-title-icon="<span class='mif-file-text'></span>">
+<div class="mt-3" data-role="panel" data-title-caption="{{ trans('cruds.soa.title') }}" data-collapsible="false" data-title-icon="<span class='mif-file-text'></span>">
 	<div class="row">
 		<div class="cell-6">
         	<ul>
@@ -88,7 +88,7 @@
 	</div>
 </div>
 
-<div class="mt-3" data-role="panel" data-title-caption="{{ trans('cruds.exports.index') }}" data-collapsible="true" data-title-icon="<span class='mif-file-text'></span>">
+<div class="mt-3" data-role="panel" data-title-caption="{{ trans('cruds.exports.index') }}" data-collapsible="false" data-title-icon="<span class='mif-file-text'></span>">
 	<div class="row">
 		<div class="cell-6">
         	<ul>

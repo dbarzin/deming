@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.measure.show') }}" data-collapsible="true" data-title-icon="<span class='mif-books'></span>">
+<div data-role="panel" data-title-caption="{{ trans('cruds.measure.show') }}" data-collapsible="false" data-title-icon="<span class='mif-books'></span>">
 
     @include('partials.errors')
 
@@ -150,7 +150,7 @@
 <div>
     <br>
 </div>
-    <div data-role="panel" data-title-caption="{{ trans('cruds.control.title') }}" data-collapsible="true" data-title-icon="<span class='mif-paste'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.control.title') }}" data-collapsible="false" data-title-icon="<span class='mif-paste'></span>">
 
         <div>
             <table id="controls" class="table striped row-hover cell-border"

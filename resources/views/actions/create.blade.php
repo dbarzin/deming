@@ -9,7 +9,7 @@ form, table {
 }
 </style>
 
-    <div data-role="panel" data-title-caption="{{ trans('cruds.action.create') }}" data-collapsible="true" data-title-icon="<span class='mif-pending-actions'></span>">
+    <div data-role="panel" data-title-caption="{{ trans('cruds.action.create') }}" data-collapsible="false" data-title-icon="<span class='mif-pending-actions'></span>">
 
     @include('partials.errors')
 

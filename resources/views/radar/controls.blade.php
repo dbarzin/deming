@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.control.radar') }}" data-collapsible="true" data-title-icon="<span class='mif-pie-chart'></span>">
+<div data-role="panel" data-title-caption="{{ trans('cruds.control.radar') }}" data-collapsible="false" data-title-icon="<span class='mif-pie-chart'></span>">
 
 <div class="grid">
     <div class="row">

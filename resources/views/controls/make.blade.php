@@ -10,7 +10,7 @@
 @endsection
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.control.make') }}" data-collapsible="true" data-title-icon="<span class='mif-paste'></span>">
+<div data-role="panel" data-title-caption="{{ trans('cruds.control.make') }}" data-collapsible="false" data-title-icon="<span class='mif-paste'></span>">
 
 @include('partials.errors')
 

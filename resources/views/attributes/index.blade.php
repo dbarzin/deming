@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.attribute.index') }}" data-collapsible="true" data-title-icon="<span class='mif-tags'></span>">
+<div data-role="panel" data-title-caption="{{ trans('cruds.attribute.index') }}" data-collapsible="false" data-title-icon="<span class='mif-tags'></span>">
 	<div class="grid">
 		<div class="row">
 			<div class="cell-5">
