@@ -185,6 +185,9 @@ document.addEventListener("DOMContentLoaded", function () {
                     display: false,
                 }
             },
+            onHover: (event, chartElement) => {
+                event.native.target.style.cursor = chartElement.length ? 'pointer' : 'default';
+            },
             scales: {
                 y: {
                     ticks: {
