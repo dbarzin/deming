@@ -61,7 +61,7 @@
 	    		<strong>{{ trans('cruds.measure.fields.attributes') }}</strong>
 	    	</div>
 			<div class="cell-lg-6 cell-md-8">
-				<select data-role="select" name="attributes[]" multiple>
+				<select data-role="select" name="attributes[]" data-filter="true" multiple>
 					@foreach($values as $value)
 				    <option {{ old('attributes') ? (in_array($value, old("attributes")) ? "selected" : "") : (str_contains($measure->attributes,$value) ? "selected" : "")}}>{{$value}}</option>
 				    @endforeach
