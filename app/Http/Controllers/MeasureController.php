@@ -462,8 +462,8 @@ class MeasureController extends Controller
 
         // get all attributes
         $values = [];
-        $attributes = DB::table('measures')
-            ->select('attributes')
+        $attributes = DB::table('attributes')
+            ->select('values')
             ->get();
         foreach ($attributes as $attribute) {
             foreach (explode(' ', $attribute->attributes) as $value) {

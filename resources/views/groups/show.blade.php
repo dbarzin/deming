@@ -157,7 +157,7 @@
 	        </form>
 	        &nbsp;
 	        @endif
-            <a class="button" href="/users">
+			<a class="button" href="/groups">
 				<span class="mif-cancel"></span>
 				&nbsp;
 	    		{{ trans('common.cancel') }}
