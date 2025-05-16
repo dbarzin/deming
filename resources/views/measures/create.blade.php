@@ -54,7 +54,7 @@
 		    		<strong>{{ trans('cruds.measure.fields.attributes') }}</strong>
 		    	</div>
                     <div class="cell-lg-6 cell-md-9">
-					<select data-role="select" name="attributes[]" multiple>
+					<select data-role="select" name="attributes[]" data-filter="true" multiple>
 						@foreach($values as $value)
 					    <option oncl>{{$value}}</option>
 					    @endforeach

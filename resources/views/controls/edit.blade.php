@@ -58,7 +58,7 @@
 		    		<strong>{{ trans('cruds.control.fields.attributes') }}</strong>
 		    	</div>
 				<div class="cell-lg-6 cell-md-8">
-                    <select data-role="select" id="attributes" name="attributes[]" multiple>
+                    <select data-role="select" id="attributes" data-filter="true" name="attributes[]" multiple>
 						@foreach($attributes as $attribute)
 							@if (strlen($attribute)>0)
 						    <option {{ str_contains($control->attributes, $attribute) ? "selected" : ""}}>{{$attribute}}</option>
