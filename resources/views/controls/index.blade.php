@@ -4,7 +4,7 @@
     <div data-role="panel" data-title-caption='{{ trans("cruds.control.list")}}' data-collapsible="false" data-title-icon="<span class='mif-paste'></span>">
     <div class="grid mb-2">
         <div class="row">
-            <div class="cell-2">
+            <div class="cell-lg-2 cell-md-1">
                 <select id='domain' name="domain_id" data-role="select">
                     <option value="0">-- {{ trans("cruds.control.fields.choose_domain")}} --</option>
                     @foreach ($domains as $domain)
@@ -18,7 +18,7 @@
                 </select>
             </div>
 
-            <div class="cell-2">
+            <div class="cell-lg-2 cell-md-1">
                 <select id='clause' name="clause" data-role="select">
                     <option value="none">-- {{ trans("cruds.control.fields.choose_clause")}} --</option>
                     @foreach ($clauses as $clause)
@@ -32,7 +32,7 @@
                 </select>
             </div>
 
-            <div class="cell-2">
+            <div class="cell-lg-2 cell-md-1">
                 <select id='scope' name="scope" data-role="select">
                     <option value="none">-- {{ trans("cruds.control.fields.choose_scope")}} --</option>
                     @foreach ($scopes as $scope)
@@ -46,7 +46,7 @@
                 </select>
             </div>
 
-            <div class="cell-2">
+            <div class="cell-lg-2 cell-md-1">
                 <select id='cur_period' name="period" data-role="select">
                     <option value="99"
                         @if (Session::get("period")==="99")
@@ -64,12 +64,12 @@
                         @endfor
                     </select>
                 </div>
-            <div class="cell-3 mt-2">
+            <div class="cell-lg-3 cell-md-2 mt-2">
                  <input type="radio" data-role="radio" data-append="{{ trans("cruds.control.fields.status_all") }}" value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}>
                  <input type="radio" data-role="radio" data-append="{{ trans("cruds.control.fields.status_done") }}" value="1" id="status1" {{ (Session::get("status")=="1") ? 'checked' : '' }}>
                  <input type="radio" data-role="radio" data-append="{{ trans("cruds.control.fields.status_todo") }}" value="2" id="status2" {{ (Session::get("status")=="2") ? 'checked' : '' }}>
             </div>
-			<div class="cell-1" align="right">
+            <div class="cell-lg-1 cell-md-2" align="right">
 			@if ((Auth::User()->role==1)||(Auth::User()->role==2))
 				<button class="button primary" onclick="location.href = '/bob/create';">
 		            <span class="mif-plus"></span>
