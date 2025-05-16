@@ -466,7 +466,7 @@ class MeasureController extends Controller
             ->select('values')
             ->get();
         foreach ($attributes as $attribute) {
-            foreach (explode(' ', $attribute->attributes) as $value) {
+            foreach (explode(' ', $attribute->values) as $value) {
                 if (strlen($value) > 0) {
                     array_push($values, $value);
                 }
