@@ -47,7 +47,7 @@
     		<div class="cell-lg-1 cell-md-2">
         		<strong>{{ trans('cruds.control.fields.objective') }}</strong>
         	</div>
-    		<div class="cell-6">
+            <div class="cell-lg-6 cell-md-10">
                 {!! \Parsedown::instance()->text($control->objective) !!}
     		</div>
     	</div>
@@ -87,7 +87,7 @@
     		<div class="cell-lg-1 cell-md-2">
     			<strong>{{ trans('cruds.control.fields.owners') }}</strong>
         	</div>
-    		<div class="cell-lg-4 cell-md-5">
+            <div class="cell-lg-4 cell-md-8">
                 <select data-role="select" name="owners[]" id="owners" multiple>
                     @foreach($users as $user)
                         <option value="{{ $user->id }}" {{ (in_array($user->id, old('owners', [])) || $control->owners->contains($user->id)) ? 'selected' : '' }}>{{ $user->name }}</option>

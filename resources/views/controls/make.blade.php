@@ -53,7 +53,7 @@
     		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.objective') }}</strong>
 	    	</div>
-			<div class="cell-lg-6 cell-md-8">
+            <div class="cell-lg-6 cell-md-10">
                 {!! \Parsedown::instance()->text($control->objective) !!}
 			</div>
 		</div>
@@ -62,7 +62,7 @@
     		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.input') }}</strong>
 	    	</div>
-			<div class="cell-lg-6 cell-md-8">
+			<div class="cell-lg-6 cell-md-10">
                 {!! \Parsedown::instance()->text($control->input) !!}
 			</div>
 		</div>
@@ -71,7 +71,7 @@
     		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.model') }}</strong>
 	    	</div>
-			<div class="cell-lg-6 cell-md-8">
+			<div class="cell-lg-6 cell-md-10">
 				<pre>{{ $control->model }}</pre>
 			</div>
 		</div>
@@ -81,7 +81,7 @@
 			<div class="cell-lg-1 cell-md-2">
 				<b>{{ trans('cruds.control.fields.plan_date') }}</b>
 			</div>
-            <div class="cell-lg-2 cell-md-3">
+            <div class="cell-lg-2 cell-md-4">
                 @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
 					<input type="text"
 						data-role="calendarpicker"
@@ -94,7 +94,7 @@
                     {{ $control->plan_date }}
                 @endif
 			</div>
-            <div class="cell-lg-2 cell-md-2" align="right">
+            <div class="cell-lg-2 cell-md-3" align="right">
 	    		<strong>{{ trans('cruds.control.fields.realisation_date') }}</strong>
 	    	</div>
             <div class="cell-lg-2 cell-md-3">
@@ -114,7 +114,7 @@
     		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.observations') }}</strong>
 	    	</div>
-			<div class="cell-lg-6 cell-md-8">
+			<div class="cell-lg-6 cell-md-10">
                 <textarea name="observations" rows="5" data-role="textarea" data-clear-button="false">{{ count($errors)>0 ?  old('observations') : $control->observations }}</textarea>
 			</div>
 	    </div>
@@ -125,7 +125,7 @@
 	    		<br>
                 <a target="_new" href="/bob/template/{{ $control->id }}" id="checklist-link">{{ trans('cruds.control.checklist') }}</a>
 	    	</div>
-			<div class="cell-lg-6 cell-md-8">
+			<div class="cell-lg-6 cell-md-10">
 				<div class="dropzone dropzone-previews" id="dropzoneFileUpload"></div>
 			</div>
 	    </div>
@@ -144,7 +144,7 @@
     		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.indicator') }}</strong>
 	    	</div>
-            <div class="cell-lg-6 cell-md-8">
+            <div class="cell-lg-6 cell-md-10">
 				<pre>{{ $control->indicator }}</pre>
 			</div>
 		</div>
@@ -155,7 +155,7 @@
 	    			{{ trans('cruds.control.fields.score') }}
 	    		</strong>
 	    	</div>
-            <div class="cell-lg-6 cell-md-8">
+            <div class="cell-lg-6 cell-md-10">
                 <input type="radio" data-role="radio" name="score" value="3" data-role="radio" data-append="<font color='green'>{{ trans('common.green') }}</font>" {{ $control->score===3 ? "checked" : "" }} />
                 <input type="radio" data-role="radio" name="score" value="2" data-role="radio" data-append="<font color='orange'>{{ trans('common.orange') }}</font>" {{ $control->score===2 ? "checked" : "" }} />
                 <input type="radio" data-role="radio" name="score" value="2" data-role="radio" data-append="<font color='red'>{{ trans('common.red') }}</font>" {{ $control->score===1 ? "checked" : "" }} />
@@ -173,7 +173,7 @@
     		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans('cruds.control.fields.action_plan') }}</strong>
 	    	</div>
-            <div class="cell-lg-6 cell-md-8">
+            <div class="cell-lg-6 cell-md-10">
                 <textarea name="action_plan" class="form-control easymde disabled-editor" id="action_plan">{{ $errors->count()>0 ?  old('action_plan') : $control->action_plan }}</textarea>
 			</div>
 		</div>
