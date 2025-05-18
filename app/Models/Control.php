@@ -55,9 +55,14 @@ class Control extends Model
         return $this->belongsToMany(Measure::class)->orderBy('clause');
     }
 
-    public function actionPlan()
+    public function actions()
     {
-        return DB::table('actions')->select('id')->where('control_id', '=', $this->id)->get();
+        return $this->hasMany(Action::class);
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
     }
 
     public function users()

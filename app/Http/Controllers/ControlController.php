@@ -1246,8 +1246,17 @@ class ControlController extends Controller
             $prev_control->update();
         }
 
+        // Delete control_user items
+        $control->users()->detach();
+
+        // Delete control_user_group items
+        $control->groups()->detach();
+
         // Delete measure_control items
         $control->measures()->detach();
+
+        // Delete documents
+        $control->documents()->delete();
 
         // Delete control
         $control->delete();
