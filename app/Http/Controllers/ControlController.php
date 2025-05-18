@@ -8,7 +8,6 @@ use App\Models\Control;
 use App\Models\Document;
 use App\Models\Domain;
 use App\Models\Measure;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -408,17 +407,19 @@ class ControlController extends Controller
 
         // Sync users
         $users = collect();
-        foreach($request->input('owners', []) as $owner) {
-            if (str_starts_with($owner,'USR_'))
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'USR_')) {
                 $users->push(intval(substr($owner, 4)));
+            }
         }
         $control->users()->sync($users);
 
         // Sync groups
         $groups = collect();
-        foreach($request->input('owners', []) as $owner) {
-            if (str_starts_with($owner,'GRP_'))
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'GRP_')) {
                 $groups->push(intval(substr($owner, 4)));
+            }
         }
         $control->groups()->sync($groups);
 
@@ -1296,17 +1297,19 @@ class ControlController extends Controller
 
         // Sync users
         $users = collect();
-        foreach($request->input('owners', []) as $owner) {
-            if (str_starts_with($owner,'USR_'))
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'USR_')) {
                 $users->push(intval(substr($owner, 4)));
+            }
         }
         $control->users()->sync($users);
 
         // Sync groups
         $groups = collect();
-        foreach($request->input('owners', []) as $owner) {
-            if (str_starts_with($owner,'GRP_'))
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'GRP_')) {
                 $groups->push(intval(substr($owner, 4)));
+            }
         }
         $control->groups()->sync($groups);
 
@@ -1531,17 +1534,19 @@ class ControlController extends Controller
 
         // Sync users
         $users = collect();
-        foreach($request->input('owners', []) as $owner) {
-            if (str_starts_with($owner,'USR_'))
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'USR_')) {
                 $users->push(intval(substr($owner, 4)));
+            }
         }
         $control->users()->sync($users);
 
         // Sync groups
         $groups = collect();
-        foreach($request->input('owners', []) as $owner) {
-            if (str_starts_with($owner,'GRP_'))
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'GRP_')) {
                 $groups->push(intval(substr($owner, 4)));
+            }
         }
         $control->groups()->sync($groups);
 

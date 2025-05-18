@@ -86,12 +86,15 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
                 $control->observations,
                 $control->score,
                 $control->note,
-                implode(', ',
+                implode(
+                    ', ',
                     array_filter(
                         [
                             $control->users()->implode('name', ', '),
-                            $control->groups()->implode('name', ', ')
-                        ])),
+                            $control->groups()->implode('name', ', '),
+                        ]
+                    )
+                ),
                 $control->status,
                 $control->action_plan,
             ],

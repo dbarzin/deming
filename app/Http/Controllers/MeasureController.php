@@ -6,7 +6,6 @@ use App\Exports\MeasuresExport;
 use App\Models\Control;
 use App\Models\Domain;
 use App\Models\Measure;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -387,9 +386,6 @@ class MeasureController extends Controller
             '403 Forbidden'
         );
 
-        // Get measure
-        $measure = Measure::find($request->id);
-
         // Check measure exists
         abort_if(
             ! DB::table('measures')->where('id', $request->id)->exists(),
@@ -533,8 +529,6 @@ class MeasureController extends Controller
             ]
         );
 
-        $measure = Measure::find($request->id);
-
         // create a new control
         $control = new Control();
         $control->name = $request->get('name');
@@ -553,17 +547,19 @@ class MeasureController extends Controller
 
         // Sync users
         $users = collect();
-        foreach($request->input('owners', []) as $owner) {
-            if (str_starts_with($owner,'USR_'))
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'USR_')) {
                 $users->push(intval(substr($owner, 4)));
+            }
         }
         $control->users()->sync($users);
 
         // Sync groups
         $groups = collect();
-        foreach($request->input('owners', []) as $owner) {
-            if (str_starts_with($owner,'GRP_'))
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'GRP_')) {
                 $groups->push(intval(substr($owner, 4)));
+            }
         }
         $control->groups()->sync($groups);
 

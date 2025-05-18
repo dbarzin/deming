@@ -33,8 +33,6 @@ class ImportFramework extends Command
     {
         Log::debug('ImportFramework - Start.');
 
-        $controller = new MeasureImportController();
-
         $fileName = $this->argument('filename');
 
         if (! file_exists($fileName)) {

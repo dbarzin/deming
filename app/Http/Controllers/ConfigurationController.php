@@ -120,7 +120,7 @@ class ConfigurationController extends Controller
 
                     $messages->push('Message has been sent.');
                 } catch (Exception $e) {
-                    $errors->push("Message could not be sent.");
+                    $errors->push('Message could not be sent.');
                     $errors->push("Mailer Error: {$mail->ErrorInfo}");
                 }
 
@@ -136,7 +136,7 @@ class ConfigurationController extends Controller
         return view(
             'config',
             compact('mail_from', 'mail_subject', 'mail_content', 'frequency', 'expire_delay', 'reminder')
-            )
+        )
             ->with('messages', $messages)
             ->with('errors', $errors);
     }
