@@ -55,9 +55,14 @@ class Control extends Model
         return $this->belongsToMany(Measure::class)->orderBy('clause');
     }
 
-    public function actionPlan()
+    public function actions()
     {
-        return DB::table('actions')->select('id')->where('control_id', '=', $this->id)->get();
+        return $this->hasMany(Action::class);
+    }
+
+    public function documents()
+    {
+        return $this->hasMany(Document::class);
     }
 
     public function users()
@@ -82,30 +87,48 @@ class Control extends Model
             return false;
         }
 
-        // user or admin
-        if ((Auth::User()->role === 1) || (Auth::User()->role === 2)) {
+        $user = Auth::user();
+
+        if ($this->isAdminOrUser($user)) {
             return true;
         }
 
-        // auditor or auditee
-        if (
-            ((Auth::User()->role === 3) || (Auth::User()->role === 5))
-            &&
-                (DB::table('control_user')
-                    ->where('control_id', $this->id)
-                    ->where('user_id', Auth::User()->id)
-                    ->exists()
-                    ||
-                DB::table('control_user_group')
-                    ->join('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
-                    ->where('control_user_group.control_id', $this->id)
-                    ->where('user_user_group.user_id', Auth::User()->id)
-                    ->exists())
-        ) {
+        if ($this->isAuditorOrAuditeeWithAccess($user)) {
             return true;
         }
 
         return false;
+    }
+
+    private function isAdminOrUser($user): bool
+    {
+        return in_array($user->role, [1, 2]);
+    }
+
+    private function isAuditorOrAuditeeWithAccess($user): bool
+    {
+        if (!in_array($user->role, [3, 5])) {
+            return false;
+        }
+
+        return $this->isDirectlyAssignedToUser($user) || $this->isAssignedViaGroup($user);
+    }
+
+    private function isDirectlyAssignedToUser($user): bool
+    {
+        return DB::table('control_user')
+            ->where('control_id', $this->id)
+            ->where('user_id', $user->id)
+            ->exists();
+    }
+
+    private function isAssignedViaGroup($user): bool
+    {
+        return DB::table('control_user_group')
+            ->join('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
+            ->where('control_user_group.control_id', $this->id)
+            ->where('user_user_group.user_id', $user->id)
+            ->exists();
     }
 
     public function clauses(int $id)
