@@ -205,12 +205,14 @@ class SocialiteController extends Controller
     private function get_user_role(SocialiteUser $socialite_user, string $role_claim, string $default_role)
     {
         $role_name = '';
-        if (! empty($role_claim)) {
+        // if (! empty($role_claim)) {
+        if (isset($role_claim) && $role_claim !== '') {
             $role_name = $this->get_claim_value($socialite_user, $role_claim);
             Log::debug("Provided claim '{$role_claim}'='{$role_name}'");
         }
         if (! array_key_exists($role_name, self::ROLES_MAP)) {
-            if (! empty($default_role)) {
+            // if (! empty($default_role)) {
+            if (isset($default_role) && $default_role !== '') {
                 $role_name = $default_role;
             } else {
                 Log::error("No default role set! A valid role must be provided. role='{$role_name}'");
