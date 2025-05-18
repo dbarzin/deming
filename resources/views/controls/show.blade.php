@@ -225,11 +225,11 @@
 				,
 				@endif
 			@endforeach
-			@if (($control->groups->count()>0)&&($control->owners->count()>0))
+			@if (($control->groups->count()>0)&&($control->users->count()>0))
 			,
 			@endif
-            @foreach($control->owners as $owner)
-				{{ $owner->name }}
+			@foreach($control->users as $user)
+				{{ $user->name }}
                 @if (!$loop->last)
 				,
 				@endif

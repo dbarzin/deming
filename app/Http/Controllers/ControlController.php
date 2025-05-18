@@ -8,7 +8,6 @@ use App\Models\Control;
 use App\Models\Document;
 use App\Models\Domain;
 use App\Models\Measure;
-use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -333,20 +332,32 @@ class ControlController extends Controller
         sort($values);
         $values = array_unique($values);
 
-        $users = User::orderBy('name')->get();
-
-        // get all groups
-        $all_groups = DB::table('user_groups')
+        // get users
+        $users = DB::table('users')
             ->select('id', 'name')
             ->orderBy('name')
             ->get();
 
+        // get all groups
+        $groups = DB::table('user_groups')
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
+        // Owners list
+        $owners = collect();
+        foreach ($users as $user) {
+            $owners->put('USR_' . $user->id, $user->name);
+        }
+        foreach ($groups as $group) {
+            $owners->put('GRP_' . $group->id, $group->name);
+        }
+
         return view('controls.create')
             ->with('scopes', $scopes)
             ->with('all_measures', $all_measures)
-            ->with('all_groups', $all_groups)
             ->with('attributes', $values)
-            ->with('users', $users);
+            ->with('owners', $owners);
     }
 
     /**
@@ -394,8 +405,23 @@ class ControlController extends Controller
         // Save it
         $control->save();
 
-        // Sync onwers
-        $control->owners()->sync($request->input('owners', []));
+        // Sync users
+        $users = collect();
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'USR_')) {
+                $users->push(intval(substr($owner, 4)));
+            }
+        }
+        $control->users()->sync($users);
+
+        // Sync groups
+        $groups = collect();
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'GRP_')) {
+                $groups->push(intval(substr($owner, 4)));
+            }
+        }
+        $control->groups()->sync($groups);
 
         // Sync measures
         $control->measures()->sync($request->input('measures', []));
@@ -514,14 +540,26 @@ class ControlController extends Controller
             ->orderBy('id')
             ->get();
 
-        // Get all users
-        $users = User::orderBy('name')->get();
-
-        // Get all groups
-        $all_groups = DB::table('user_groups')
+        // get users
+        $users = DB::table('users')
             ->select('id', 'name')
             ->orderBy('name')
             ->get();
+
+        // get all groups
+        $groups = DB::table('user_groups')
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
+        // Owners list
+        $owners = collect();
+        foreach ($users as $user) {
+            $owners->put('USR_' . $user->id, $user->name);
+        }
+        foreach ($groups as $group) {
+            $owners->put('GRP_' . $group->id, $group->name);
+        }
 
         // get measures
         $measures = DB::table('control_measure')
@@ -559,11 +597,10 @@ class ControlController extends Controller
             ->with('documents', $documents)
             ->with('scopes', $scopes)
             ->with('all_measures', $all_measures)
-            ->with('all_groups', $all_groups)
             ->with('measures', $measures)
             ->with('ids', $ids)
             ->with('attributes', $values)
-            ->with('users', $users);
+            ->with('owners', $owners);
     }
 
     /**
@@ -610,13 +647,26 @@ class ControlController extends Controller
         sort($values);
         $values = array_unique($values);
 
-        $users = User::orderBy('name')->get();
-
-        // get all groups
-        $all_groups = DB::table('user_groups')
+        // get users
+        $users = DB::table('users')
             ->select('id', 'name')
             ->orderBy('name')
             ->get();
+
+        // get all groups
+        $groups = DB::table('user_groups')
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
+        // Owners list
+        $owners = collect();
+        foreach ($users as $user) {
+            $owners->put('USR_' . $user->id, $user->name);
+        }
+        foreach ($groups as $group) {
+            $owners->put('GRP_' . $group->id, $group->name);
+        }
 
         // Get Control
         $control = Control::find($request->id);
@@ -635,15 +685,24 @@ class ControlController extends Controller
         );
         $request->merge(['measures' => $control->measures()->pluck('id')->toArray()]);
         $request->merge(['attributes' => explode(' ', $control->attributes)]);
-        $request->merge(['owners' => $control->owners()->pluck('id')->toArray()]);
+
+        // Construct owners copy
+        $items = [];
+        foreach ($control->users as $user) {
+            array_push($items, 'USR_' . $user->id);
+        }
+        foreach ($control->groups as $group) {
+            array_push($items, 'GRP_' . $group->id);
+        }
+        $request->merge(['owners' => $items]);
+
         $request->flash();
 
         return view('controls.create')
             ->with('scopes', $scopes)
             ->with('all_measures', $all_measures)
-            ->with('all_groups', $all_groups)
             ->with('attributes', $values)
-            ->with('users', $users);
+            ->with('owners', $owners);
     }
 
     /**
@@ -1098,7 +1157,26 @@ class ControlController extends Controller
             $months[$month] = $month;
         }
 
-        $users = User::orderBy('name')->get();
+        // get users
+        $users = DB::table('users')
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
+        // get all groups
+        $groups = DB::table('user_groups')
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
+        // Owners list
+        $owners = collect();
+        foreach ($users as $user) {
+            $owners->put('USR_' . $user->id, $user->name);
+        }
+        foreach ($groups as $group) {
+            $owners->put('GRP_' . $group->id, $group->name);
+        }
 
         // get all measures
         $all_measures = DB::table('measures')
@@ -1130,7 +1208,7 @@ class ControlController extends Controller
             ->with('all_measures', $all_measures)
             ->with('measures', $measures)
             ->with('scopes', $scopes)
-            ->with('users', $users);
+            ->with('owners', $owners);
     }
 
     /**
@@ -1215,8 +1293,25 @@ class ControlController extends Controller
         // Update fields
         $control->plan_date = $request->plan_date;
         $control->periodicity = $request->periodicity;
-        $control->owners()->sync($request->input('owners', []));
         $control->save();
+
+        // Sync users
+        $users = collect();
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'USR_')) {
+                $users->push(intval(substr($owner, 4)));
+            }
+        }
+        $control->users()->sync($users);
+
+        // Sync groups
+        $groups = collect();
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'GRP_')) {
+                $groups->push(intval(substr($owner, 4)));
+            }
+        }
+        $control->groups()->sync($groups);
 
         // Redirect
         return redirect('/bob/show/' . $request->id);
@@ -1363,18 +1458,16 @@ class ControlController extends Controller
                         )
                     );
                 }
-
                 $new_control->save();
 
                 // Set owners
-                $new_control
-                    ->owners()
-                    ->sync($control->owners->pluck('id'));
+                $new_control->users()->sync($control->users->pluck('id'));
+
+                // Set groups
+                $new_control->groups()->sync($control->groups->pluck('id'));
 
                 // Set measures
-                $new_control
-                    ->measures()
-                    ->sync($control->measures->pluck('id'));
+                $new_control->measures()->sync($control->measures->pluck('id'));
 
                 // make link
                 $control->next_id = $new_control->id;
@@ -1409,6 +1502,17 @@ class ControlController extends Controller
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
+        $this->validate(
+            $request,
+            [
+                'name' => 'required|min:3|max:255',
+                'scope' => 'max:32',
+                'objective' => 'required',
+                'plan_date' => 'required',
+                'periodicity' => 'required|integer',
+            ]
+        );
+
         $control->name = request('name');
         $control->scope = request('scope');
         $control->objective = request('objective');
@@ -1427,9 +1531,26 @@ class ControlController extends Controller
         $control->periodicity = request('periodicity');
         $control->status = request('status');
         $control->next_id = request('next_id');
-        // Sync
-        $control->owners()->sync($request->input('owners', []));
-        $control->groups()->sync($request->input('groups', []));
+
+        // Sync users
+        $users = collect();
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'USR_')) {
+                $users->push(intval(substr($owner, 4)));
+            }
+        }
+        $control->users()->sync($users);
+
+        // Sync groups
+        $groups = collect();
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'GRP_')) {
+                $groups->push(intval(substr($owner, 4)));
+            }
+        }
+        $control->groups()->sync($groups);
+
+        // Sync Measures
         $control->measures()->sync($request->input('measures', []));
 
         $control->save();

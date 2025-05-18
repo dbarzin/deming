@@ -1,12 +1,13 @@
 :root {
     --logo-background: #f6f6f6;
     --logo-color: #292826;
-    --navview-pane-width: 255px;
+    --navview-pane-width: 220px;
 }
 
 body {
     font-family: 'Noto Sans', sans-serif;
 }
+
 
 .dark-side {
     --logo-background: #2c2d30;

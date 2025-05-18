@@ -6,7 +6,6 @@ use App\Exports\MeasuresExport;
 use App\Models\Control;
 use App\Models\Domain;
 use App\Models\Measure;
-use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -387,9 +386,6 @@ class MeasureController extends Controller
             '403 Forbidden'
         );
 
-        // Get measure
-        $measure = Measure::find($request->id);
-
         // Check measure exists
         abort_if(
             ! DB::table('measures')->where('id', $request->id)->exists(),
@@ -457,8 +453,26 @@ class MeasureController extends Controller
             ->pluck('scope')
             ->toArray();
 
-        // Get all users
-        $users = User::orderBy('name')->get();
+        // get users
+        $users = DB::table('users')
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
+        // get all groups
+        $groups = DB::table('user_groups')
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
+        // Owners list
+        $owners = collect();
+        foreach ($users as $user) {
+            $owners->put('USR_' . $user->id, $user->name);
+        }
+        foreach ($groups as $group) {
+            $owners->put('GRP_' . $group->id, $group->name);
+        }
 
         // get all attributes
         $values = [];
@@ -482,7 +496,7 @@ class MeasureController extends Controller
                 'all_measures',
                 'measures',
                 'scopes',
-                'users',
+                'owners',
                 'values'
             )
         );
@@ -515,8 +529,6 @@ class MeasureController extends Controller
             ]
         );
 
-        $measure = Measure::find($request->id);
-
         // create a new control
         $control = new Control();
         $control->name = $request->get('name');
@@ -529,11 +541,27 @@ class MeasureController extends Controller
         $control->action_plan = $request->get('action_plan');
         $control->periodicity = $request->get('periodicity');
         $control->plan_date = $request->get('plan_date');
+
         // Save it
         $control->save();
 
-        // Sync onwers
-        $control->owners()->sync($request->input('owners', []));
+        // Sync users
+        $users = collect();
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'USR_')) {
+                $users->push(intval(substr($owner, 4)));
+            }
+        }
+        $control->users()->sync($users);
+
+        // Sync groups
+        $groups = collect();
+        foreach ($request->input('owners', []) as $owner) {
+            if (str_starts_with($owner, 'GRP_')) {
+                $groups->push(intval(substr($owner, 4)));
+            }
+        }
+        $control->groups()->sync($groups);
 
         // Sync measures
         $control->measures()->sync($request->input('measures', []));
