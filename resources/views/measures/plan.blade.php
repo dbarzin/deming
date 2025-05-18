@@ -132,8 +132,8 @@
     	</div>
     	<div class="cell-lg-5 cell-md-7">
             <select data-role="select" name="owners[]" id="owners" multiple>
-                @foreach($users as $user)
-                    <option value="{{ $user->id }}" {{ in_array($user->id, old('owners', [])) ? 'selected' : '' }}>{{ $user->name }}</option>
+                @foreach($owners as $id => $name)
+                    <option value="{{ $id }}" {{ in_array($id, old('owners', [])) ? 'selected' : '' }}>{{ $name }}</option>
                 @endforeach
             </select>
     	</div>

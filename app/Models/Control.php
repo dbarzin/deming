@@ -42,7 +42,7 @@ class Control extends Model
     ];
 
     private $groups = null;
-    private $owners = null;
+    private $users = null;
 
     // Control status :
 
@@ -60,12 +60,12 @@ class Control extends Model
         return DB::table('actions')->select('id')->where('control_id', '=', $this->id)->get();
     }
 
-    public function owners()
+    public function users()
     {
-        if ($this->owners === null) {
-            $this->owners = $this->belongsToMany(User::class, 'control_user', 'control_id')->orderBy('name');
+        if ($this->users === null) {
+            $this->users = $this->belongsToMany(User::class, 'control_user', 'control_id')->orderBy('name');
         }
-        return $this->owners;
+        return $this->users;
     }
 
     public function groups()
