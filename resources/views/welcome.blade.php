@@ -64,8 +64,8 @@
 <div class="row">
     <div class="cell-lg-7 cell-md-12 mt-3">
         <div data-role="panel" data-height='580' data-title-caption="{{ trans('cruds.welcome.control_planning') }}" data-collapsible="false" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
-            <div class="d-flex justify-content-center align-items-center" >
-                <canvas id="canvas-status" style="height: 550px;" class="chartjs-render-monitor"></canvas>
+            <div class="d-flex justify-content-center align-items-center" style="height: 510px;">
+                <canvas id="canvas-status" style="max-height: 510px;"  class="chartjs-render-monitor"></canvas>
             </div>
         </div>
     </div>
