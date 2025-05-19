@@ -727,14 +727,12 @@ class ControlController extends Controller
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
-        // Delete files
-        $documents = Document::select('id')->where('control_id', $id)->get();
-        foreach ($documents as $doc) {
-            unlink(storage_path('docs/' . $doc->id));
+        // Delete documents
+        foreach($control->documents()->get() as $document) {
+            \Log::debug(storage_path('docs/' . $document->id));
+            unlink(storage_path('docs/' . $document->id));
         }
-
-        // Delete associated documents
-        Document::where('control_id', $id)->delete();
+        $control->documents()->delete();
 
         // Previous control must point to next control
         Control::where('next_id', $control->id)
@@ -1256,6 +1254,10 @@ class ControlController extends Controller
         $control->measures()->detach();
 
         // Delete documents
+        foreach($control->documents()->get() as $document) {
+            \Log::debug(storage_path('docs/' . $document->id));
+            unlink(storage_path('docs/' . $document->id));
+        }
         $control->documents()->delete();
 
         // Delete control
