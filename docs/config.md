@@ -31,6 +31,23 @@ There are four different roles:
 
 * Auditor: the auditor has read access to all the information in the application.
 
+### Groups <a name=“groups”></a>
+
+This screen is used to define user groups.
+A group brings together a set of users and controls.
+
+[![Screenshot](images/groups.png)](images/groups.png)
+
+A group is composed of :
+
+* a group name
+
+* a group description
+
+* a list of users
+
+* a list of controls
+
 
 ### Reports <a name="report"></a>
 

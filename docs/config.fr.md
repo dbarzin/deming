@@ -31,6 +31,20 @@ Il existe quatre rôles différents :
 
 * Auditeur : l’auditeur a un accès en lecture à l’ensemble des informations de l’application.
 
+### Groupes <a name="groups"></a>
+
+Cet écran permet de définir des groupes d'utilisateurs.
+Un groupe permet de rassembler un ensemble d'utilisateurs et de contrôles.
+
+[![Screenshot](images/groups.fr.png)](images/groups.fr.png)
+
+Un groupe est composé :
+
+* d'un nom de groupe
+* d'une description du groupe
+* d'une liste d'utilisateurs
+* d'une listes de contrôles
+
 ### Rapports <a name="report"></a>
 
 L’application permet de générer le rapport de pilotage du SMSI et d’exporter dans un fichier Excel la liste des domaines, les mesures de sécurités et tous les contrôles réalisés.

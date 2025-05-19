@@ -6,30 +6,30 @@
 	<div class="grid">
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
                 <strong>{{ trans('cruds.group.fields.name') }}</strong>
 	    	</div>
-            <div class="cell-6">
+            <div class="cell-lg-6 cell-md-10">
                 {{ $group->name }}
     		</div>
 	    </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
                 <strong>{{ trans('cruds.group.fields.description') }}</strong>
 	    	</div>
-            <div class="cell-8">
+			<div class="cell-lg-10 cell-md-10">
                 {!! $group->description !!}
     		</div>
 	    </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="cell-lg-1 cell-md-2">
                 <strong>{{ trans('cruds.group.fields.users') }}</strong>
 	    	</div>
         </div>
     	<div class="row">
-    		<div class="cell-8">
+			<div class="cell-lg-12 cell-md-12">
 			    <table class="table striped row-hover cell-border row-border"
 			       data-role="table"
 			       data-rows="25"
@@ -74,7 +74,7 @@
 	    	</div>
         </div>
     	<div class="row">
-    		<div class="cell-8">
+			<div class="cell-lg-12 cell-md-12">
 			    <table class="table striped row-hover cell-border row-border"
 			       data-role="table"
 			       data-rows="25"
@@ -134,7 +134,7 @@
     </div>
 
 	<div class="row">
-        <div class="cell-6">
+        <div class="cell-lg-6 cell-md-10">
         <form class="d-inline" action="/groups/{{ $group->id }}/edit">
 			@if (Auth::User()->role==1)
             <button class="button primary">
