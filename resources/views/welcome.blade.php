@@ -293,6 +293,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 backgroundColor: [
                     '#ce352c', '#fa6800', '#60a917', 'gray'
                 ],
+                borderWidth: 0,
                 data: [
                     <?php $count=0; ?>
                     @foreach($active_controls as $c)
