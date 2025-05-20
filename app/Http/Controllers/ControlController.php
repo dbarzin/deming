@@ -329,7 +329,8 @@ class ControlController extends Controller
                 ->get();
         foreach ($attributes as $key) {
             foreach (explode(' ', $key->values) as $value) {
-                array_push($values, $value);
+                if (strlen($value)>0)
+                    array_push($values, $value);
             }
         }
         sort($values);
@@ -592,7 +593,8 @@ class ControlController extends Controller
                 ->get();
         foreach ($attributes as $key) {
             foreach (explode(' ', $key->values) as $value) {
-                array_push($values, $value);
+                if (strlen($value)>0)
+                    array_push($values, $value);
             }
         }
         sort($values);
@@ -650,7 +652,8 @@ class ControlController extends Controller
                 ->get();
         foreach ($attributes as $key) {
             foreach (explode(' ', $key->values) as $value) {
-                array_push($values, $value);
+                if (strlen($value)>0)
+                    array_push($values, $value);
             }
         }
         sort($values);
