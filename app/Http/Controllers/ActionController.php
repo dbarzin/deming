@@ -400,7 +400,7 @@ class ActionController extends Controller
         // for Postegres
         $action->criticity = 0;
         $action->status = 0;
-
+        
         // Save
         $action->save();
 

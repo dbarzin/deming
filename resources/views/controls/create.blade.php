@@ -93,7 +93,6 @@
 					<input
 						data-role="calendarpicker"
 						data-format="YYYY-MM-DD"
-						data-inputFormat="YYYY-MM-DD"
 						name="plan_date"
 						value="{{ old('plan_date') }}"/>
 				</div>
