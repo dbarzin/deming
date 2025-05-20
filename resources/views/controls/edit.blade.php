@@ -93,7 +93,6 @@
 					<input
 					data-role="calendarpicker"
 					data-format="YYYY-MM-DD"
-					data-inputFormat="YYYY-MM-DD"
 					name="plan_date"
 					value="{{ $control->plan_date }}"
 					/>
@@ -107,7 +106,6 @@
 					<input
 					data-role="calendarpicker"
 					data-format="YYYY-MM-DD"
-					data-inputFormat="YYYY-MM-DD"
 					name="realisation_date"
 					value="{{ $control->realisation_date == '0000-00-00' ? null : $control->realisation_date}}"
 					data-clear-button="true"

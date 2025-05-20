@@ -43,8 +43,7 @@ form, table {
                             data-role="calendarpicker"
                             name="due_date"
                             value="{{$action->due_date}}"
-        					data-format="YYYY-MM-DD"
-                            data-inputFormat="YYYY-MM-DD"/>
+                            data-format="YYYY-MM-DD"/>
                         </td>
                     </tr>
                 </table>

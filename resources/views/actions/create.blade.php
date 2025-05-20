@@ -38,7 +38,11 @@ form, table {
                                 <strong>{{ trans('cruds.action.fields.due_date') }}</strong>
                             </td>
                             <td>
-                                <input type="text" data-role="calendarpicker" name="due_date" value=" {{ old('due_date') }}" data-input-format="%Y-%m-%d">
+                                <input type="text"
+                                    data-role="calendarpicker"
+                                    name="due_date"
+                                    value=" {{ old('due_date') }}"
+            						data-format="YYYY-MM-DD"/>
                             </td>
                         </tr>
                     </table>
