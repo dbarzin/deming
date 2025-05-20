@@ -4,9 +4,11 @@ namespace App\Providers;
 
 use DB;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Blade;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Number;
 use Illuminate\Support\ServiceProvider;
 use Log;
 
@@ -52,6 +54,7 @@ class AppServiceProvider extends ServiceProvider
             $this->bootOIDCSocialite();
         }
 
+        // Show appVersion from version.txt in Blades
         view()->composer('*', function ($view) {
             $version = trim(file_get_contents(base_path('version.txt')));
             $view->with('appVersion', $version);

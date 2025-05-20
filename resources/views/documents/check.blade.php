@@ -1,15 +1,6 @@
 @extends("layout")
 
 @section("content")
-
-<?php
-function bytesToHuman($bytes) {
-    $units = ['B', 'KB', 'MB', 'GB', 'TB', 'PB'];
-    for ($i = 0; $bytes > 1024; $i++) $bytes /= 1024;
-    return round($bytes, 2) . ' ' . $units[$i];
-}
-?>
-
 <div data-role="panel" data-title-caption="{{ trans('cruds.document.list') }}" data-collapsible="false" data-title-icon="<span class='mif-file-text'></span>">
 
 <table class="table">
@@ -35,7 +26,7 @@ function bytesToHuman($bytes) {
             <a href="/doc/show/{{ $doc->id }}">{{ substr($doc->filename,0,32) }}</a>
         </td>
         <td>
-            {{ bytesToHuman($doc->size) }}
+            {{ \Illuminate\Support\Number::fileSize($doc->size) }}
         </td>
         <td>
             {{ $doc->hash }}
