@@ -291,7 +291,7 @@ class ControlController extends Controller
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Show the form for creating a new Control.
      *
      * @return \Illuminate\Http\Response
      */
@@ -323,9 +323,12 @@ class ControlController extends Controller
 
         // get all attributes
         $values = [];
-        $attributes = DB::table('measures')->select('attributes')->get();
+        $attributes = DB::table('attributes')->select('values')
+            ->union(DB::table('measures')
+                ->select(DB::raw('attributes as value')))
+                ->get();
         foreach ($attributes as $key) {
-            foreach (explode(' ', $key->attributes) as $value) {
+            foreach (explode(' ', $key->values) as $value) {
                 array_push($values, $value);
             }
         }
@@ -583,9 +586,12 @@ class ControlController extends Controller
 
         // get all attributes
         $values = [];
-        $attributes = DB::table('measures')->select('attributes')->get();
+        $attributes = DB::table('attributes')->select('values')
+            ->union(DB::table('measures')
+                ->select(DB::raw('attributes as value')))
+                ->get();
         foreach ($attributes as $key) {
-            foreach (explode(' ', $key->attributes) as $value) {
+            foreach (explode(' ', $key->values) as $value) {
                 array_push($values, $value);
             }
         }
@@ -638,9 +644,12 @@ class ControlController extends Controller
 
         // get all attributes
         $values = [];
-        $attributes = DB::table('measures')->select('attributes')->get();
+        $attributes = DB::table('attributes')->select('values')
+            ->union(DB::table('measures')
+                ->select(DB::raw('attributes as value')))
+                ->get();
         foreach ($attributes as $key) {
-            foreach (explode(' ', $key->attributes) as $value) {
+            foreach (explode(' ', $key->values) as $value) {
                 array_push($values, $value);
             }
         }
