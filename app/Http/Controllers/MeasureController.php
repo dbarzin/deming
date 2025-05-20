@@ -95,18 +95,18 @@ class MeasureController extends Controller
 
         // get all attributes
         $values = [];
-        $attributes = DB::table('attributes')
-            ->select('values')
-            ->get();
-        foreach ($attributes as $attribute) {
-            foreach (explode(' ', $attribute->values) as $value) {
-                if (strlen($value) > 0) {
-                    array_push($values, $value);
-                }
+        $attributes = DB::table('attributes')->select('values')
+            ->union(DB::table('measures')
+                ->select(DB::raw('attributes as value')))
+                ->get();
+        foreach ($attributes as $key) {
+            foreach (explode(' ', $key->values) as $value) {
+                array_push($values, $value);
             }
-            sort($values);
-            $values = array_unique($values);
         }
+        sort($values);
+        $values = array_unique($values);
+
         // for clone action
         $measure = null;
 
@@ -235,14 +235,13 @@ class MeasureController extends Controller
 
         // get all attributes
         $values = [];
-        $attributes = DB::table('attributes')
-            ->select('values')
-            ->get();
-        foreach ($attributes as $attribute) {
-            foreach (explode(' ', $attribute->values) as $value) {
-                if (strlen($value) > 0) {
-                    array_push($values, $value);
-                }
+        $attributes = DB::table('attributes')->select('values')
+            ->union(DB::table('measures')
+                ->select(DB::raw('attributes as value')))
+                ->get();
+        foreach ($attributes as $key) {
+            foreach (explode(' ', $key->values) as $value) {
+                array_push($values, $value);
             }
         }
         sort($values);
