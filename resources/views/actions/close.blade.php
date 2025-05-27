@@ -134,7 +134,7 @@ form, table {
 			<div class="cell-1">
                 <strong>{{ trans('cruds.action.fields.owners') }}</strong>
 	    	</div>
-			<div class="cell">
+            <div class="cell-6">
                 @foreach($action->owners as $owner)
 					{{ $owner->name }}
                     @if ($action->owners->last()!=$owner)
