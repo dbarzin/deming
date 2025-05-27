@@ -35,6 +35,7 @@
     "easymde": "^2.18.0",
     "fontawesome-free": "^1.0.4",
     "less": "^4.3.0",
-    "moment": "^2.30.1"
+    "moment": "^2.30.1",
+    "simplemde": "^1.11.2"
   }
 }
