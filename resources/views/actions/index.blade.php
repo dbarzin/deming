@@ -98,7 +98,7 @@
 	@foreach($actions as $action)
 		<tr>
             <td>
-                <b><a href="/action/show/{{ $action->id }}">{{ $action->reference }}<a>
+                <b id="{{ $action->reference }}"><a href="/action/show/{{ $action->id }}">{{ $action->reference }}<a>
             </td>
             <td>
                 {{ $action->type }}
@@ -115,7 +115,7 @@
                 @endif
             </td>
             <td>
-                {{ $action->name }}</a></b>
+                <b>{{ $action->name }}</b>
                 {!! \Parsedown::instance()->text($action->cause) !!}
             </td>
             <td>
