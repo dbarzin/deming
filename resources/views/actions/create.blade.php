@@ -106,7 +106,7 @@ form, table {
             <div class="cell-1">
                 <strong>{{ trans('cruds.action.fields.owners') }}</strong>
             </div>
-            <div class="cell-4">
+            <div class="cell-6">
                 <select data-role="select" name="owners[]" id="owners" multiple>
                     @foreach($users as $user)
                         <option value="{{ $user->id }}" {{ in_array($user->id, old('owners', [])) ? 'selected' : ''  }}>{{ $user->name }}</option>

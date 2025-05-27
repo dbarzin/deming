@@ -137,7 +137,7 @@ form, table {
 			<div class="cell-1">
                 <strong>{{ trans('cruds.action.fields.owners') }}</strong>
 	    	</div>
-			<div class="cell">
+            <div class="cell-6">
                 @foreach($action->owners as $owner)
 					{{ $owner->name }}
                     @if ($action->owners->last()!=$owner)
@@ -174,12 +174,12 @@ form, table {
     			    	{{ trans('common.edit') }}
                 </a>
 				&nbsp;
-                <button class="button alert" type="submit" onclick='this.form.action="/action/delete"'
-                    onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
-					<span class="mif-fire"></span>
-					&nbsp;
-				    {{ trans('common.delete') }}
-				</button>
+                <button class="button alert" type="submit"
+                    onclick="if (!confirm('{{ trans('common.confirm') }}')) return false; this.form.action='/action/delete';">
+                    <span class="mif-fire"></span>
+                    &nbsp;
+                    {{ trans('common.delete') }}
+                </button>
                 &nbsp;
                 <a class="button dafault" href="/actions">
 	    			<span class="mif-cancel"></span>
