@@ -98,7 +98,7 @@
 	@foreach($actions as $action)
 		<tr>
             <td>
-                {{ $action->reference }}
+                <b><a href="/action/show/{{ $action->id }}">{{ $action->reference }}<a>
             </td>
             <td>
                 {{ $action->type }}
@@ -115,14 +115,22 @@
                 @endif
             </td>
             <td>
-                <b><a href="/action/show/{{ $action->id }}">{{ $action->name }}</a></b>
+                {{ $action->name }}</a></b>
                 {!! \Parsedown::instance()->text($action->cause) !!}
             </td>
             <td>
                 {{ $action->scope }}
             </td>
             <td>
-                {{ $action->due_date }}
+            @if ($action->due_date!==null)
+                <b>
+                @if (today()->lte($action->due_date))
+                    <font color="green">{{ $action->due_date }}</font>
+                @else
+                    <font color="red">{{ $action->due_date }}</font>
+                @endif
+                </b>
+            @endif
             </td>
 		</tr>
 	@endforeach
