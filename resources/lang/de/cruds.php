@@ -11,12 +11,12 @@ return [
          'control_planning' => 'Maßnahmenplanung',
     ],
      'action' => [
-         'index' => 'Aktionspläne',
-	 'show' => 'Aktionsplan',
-	 'create' => 'Aktionsplan erzeugen',
-	 'edit' => 'Aktionsplan ändern',
-    'close' => 'Aktionsplan zäune',
-         'fields' => [
+        'index' => 'Aktionspläne',
+        'show' => 'Aktionsplan',
+        'create' => 'Aktionsplan erzeugen',
+        'edit' => 'Aktionsplan ändern',
+        'close' => 'Aktionsplan zäune',
+        'fields' => [
             'clause' => 'Klausel',
             'name' => 'Name',
             'scope' => 'Geltungsbereich',
@@ -25,8 +25,8 @@ return [
             'next_date' => 'Reviewdatum',
             'note' => 'Punktzahl',
             'objective' => 'Zielsetzung',
-	    'observation' => 'Beobachtung',
-	    'justification' => 'Rechtfertigung',
+            'observation' => 'Beobachtung',
+            'justification' => 'Rechtfertigung',
             'action_plan' => 'Aktionsplan',
             'reference' => 'Referenz',
             'type' => 'Typ',
@@ -44,7 +44,14 @@ return [
             'status_rejected' => 'Abgelehnt',
             'status_all' => 'Alle',
             'close_date' => 'Abschlussdatum',
+            'progress' => 'Stand der Dinge',
          ],
+        'types' => [
+            'major' => 'Major',
+            'minor' => 'Minor',
+            'opportunity' => 'Gelegenheit',
+            'observation' => 'Beobachtung'
+        ],
      ],
     'attribute' => [
         'fields' => [
@@ -234,7 +241,7 @@ return [
         'index' => 'Liste der Logdateien',
         'title' => 'Logdatei',
         'history' => 'Änderungshistorie',
-	'action' => 'Aktion',
+        'action' => 'Aktion',
         'subject_type' => 'Typ',
         'subject_id' => 'ID',
         'user' => 'Benutzer',
@@ -243,10 +250,10 @@ return [
         'properties' => 'Daten',
     ],
      'login' => [
-         'title' => 'Passwort eingeben',
-         'identification' => 'Login',
-	 'connection' => 'Verbindung',
-	 'connection_with' => 'Verbinden mit',
+        'title' => 'Passwort eingeben',
+        'identification' => 'Login',
+        'connection' => 'Verbindung',
+        'connection_with' => 'Verbinden mit',
          'error' => [
             'user_not_exist' => 'Benutzer nicht vorhanden',
         ],

@@ -45,7 +45,14 @@ return [
             'status_rejected' => 'Rejected',
             'status_all' => 'All',
             'close_date' => 'Close date',
+            'progress' => 'Progress',
          ],
+        'types' => [
+            'major' => 'Major',
+            'minor' => 'Minor',
+            'opportunity' => 'Opportunité',
+            'observation' => 'Observation'
+        ],
      ],
     'attribute' => [
         'fields' => [

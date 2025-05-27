@@ -22,31 +22,30 @@ form, table {
     		<div class="cell-1">
                 <strong>{{ trans("cruds.action.fields.reference") }}</strong>
 	    	</div>
-            <div class="cell-6">
-                <table>
-                    <tr>
-                        <td>
-                            <input type="text" data-role="input" name="reference" value="{{ $action->reference }}" maxlength="32">
-                        </td>
-                        <td style="white-space: nowrap; padding-left: 10px; padding-right: 10px;">
-                            <strong>{{ trans("cruds.action.fields.type") }}</strong>
-                        </td>
-                        <td>
-                            <input type="text" name="type" data-role="input" autocomplete="on" maxlength="32"
-                            value="{{ $action->type }}" data-autocomplete=" {{ implode(",",$types) }} "/>
-                        </td>
-                        <td style="white-space: nowrap; padding-left: 10px; padding-right: 10px;">
-                            <strong>{{ trans('cruds.action.fields.due_date') }}</strong>
-                        </td>
-                        <td>
-                            <input
-                            data-role="calendarpicker"
-                            name="due_date"
-                            value="{{$action->due_date}}"
-                            data-format="YYYY-MM-DD"/>
-                        </td>
-                    </tr>
-                </table>
+            <div class="cell-1">
+                <input type="text" data-role="input" name="reference" value="{{ $action->reference }}" maxlength="32">
+            </div>
+            <div class="cell-1 text-right">
+                <strong>{{ trans("cruds.action.fields.type") }}</strong>
+            </div>
+            <div class="cell-2">
+                <select name="type">
+                    <option></option>
+                    <option value="1" {{ ($action->type==1) ? 'selected' : '' }}>{{ trans('cruds.action.types.major') }}</option>
+                    <option value="2" {{ ($action->type==2) ? 'selected' : '' }}>{{ trans('cruds.action.types.minor') }}</option>
+                    <option value="3" {{ ($action->type==3) ? 'selected' : '' }}>{{ trans('cruds.action.types.observation') }}</option>
+                    <option value="4" {{ ($action->type==4) ? 'selected' : '' }}>{{ trans('cruds.action.types.opportunity') }}</option>
+                </select>
+            </div>
+            <div class="cell-1 text-right">
+                <strong>{{ trans('cruds.action.fields.due_date') }}</strong>
+            </div>
+            <div class="cell-1">
+                <input
+                data-role="calendarpicker"
+                name="due_date"
+                value="{{$action->due_date}}"
+                data-format="YYYY-MM-DD"/>
 			</div>
         </div>
 
@@ -73,7 +72,7 @@ form, table {
     		<div class="cell-4">
 				<input type="text" data-role="input" name="name" value="{{ $action->name }}" maxlength="255">
 			</div>
-    		<div class="cell-1" align="right">
+    		<div class="cell-1 text-right">
 	    		<strong>{{ trans("cruds.action.fields.scope") }}</strong>
             </div>
     		<div class="cell-1">
@@ -104,20 +103,29 @@ form, table {
 	</div>
 
 	<div class="row">
+		<div class="cell-1">
+            <strong>{{ trans('cruds.action.fields.progress') }}</strong>
+    	</div>
+		<div class="cell-6">
+            <input type="text" name="progress" data-role="slider" data-value="{{ $action->progress }}" data-hint="true" data-hint-always="true"/>
+        </div>
+    </div>
+
+	<div class="row">
         <div class="cell-1">
             <strong>{{ trans('cruds.action.fields.status') }}</strong>
         </div>
-        <div class="cell-3">
+        <div class="cell-2">
             <select data-role="select" name="status" id="status">
                 <option value="0" {{ $action->status==0 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_open') }}</option>
                 <option value="1" {{ $action->status==1 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_closed') }}</option>
                 <option value="2" {{ $action->status==2 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_rejected') }}</option>
             </select>
         </div>
-        <div class="cell-1" align="right">
+        <div class="cell-3 text-right">
             <strong>{{ trans('cruds.action.fields.close_date') }}</strong>
         </div>
-        <div class="cell-2">
+        <div class="cell-1">
             <input
                 data-role="calendarpicker"
                 name="close_date"

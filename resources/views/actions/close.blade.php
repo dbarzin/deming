@@ -101,17 +101,17 @@ form, table {
             <div class="cell-1">
                 <strong>{{ trans('cruds.action.fields.status') }}</strong>
             </div>
-            <div class="cell-3">
+            <div class="cell-2">
                 <select data-role="select" name="status" id="status">
                     <option value="0" {{ $action->status==0 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_open') }}</option>
                     <option value="1" {{ $action->status==1 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_closed') }}</option>
                     <option value="2" {{ $action->status==2 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_rejected') }}</option>
                 </select>
             </div>
-            <div class="cell-1" align="right">
+            <div class="cell-3 text-right">
                 <strong>{{ trans('cruds.action.fields.close_date') }}</strong>
 	    	</div>
-            <div class="cell-2">
+            <div class="cell-1">
                 <input
                     data-role="calendarpicker"
                     name="close_date"
