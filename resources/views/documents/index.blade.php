@@ -78,4 +78,40 @@ function bytesToHuman($bytes) {
         </div>
     </div>
 </div>
+<br>
+<div data-role="panel" data-title-caption="{{ trans('cruds.document.title.cleanup') }}" data-collapsible="false" data-title-icon="<span class='mif-file-text'></span>">
+    <form action="/doc/config" method="POST">
+	@csrf
+    <div class="grid">
+        <div class="row">
+            <div class="cell-3">
+                Délais de suppression automatique des contrôles et documents
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell-1">
+                <select>
+                    <option>Never</option>
+                    <option>One year</option>
+                    <option>Two years</option>
+                    <option>Three years</option>
+                    <option>Five years</option>
+                </select>
+            </div>
+
+        </div>
+
+        <div class="row">
+            <div class="cell-3">
+                <button type="submit" class="button success">
+                    <span class="mif-floppy-disk2"></span>
+                    &nbsp;
+                    {{ trans("common.save") }}
+                </button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
 @endsection

@@ -18,11 +18,6 @@ return new class extends Migration
             $table->integer('progress')->nullable()->after('type');
         });
 
-        Schema::table('documents', function (Blueprint $table) {
-            $table->integer('action_id')->nullable()->unsigned();
-            $table->foreign('action_id')->references('id')->on('actions');
-        });
-
     }
 
     /**
@@ -37,9 +32,5 @@ return new class extends Migration
             $table->dropColumn('progress');
         });
 
-        Schema::table('documents', function (Blueprint $table) {
-            $table->dropForeign(['action_id']);
-            $table->dropColumn('action_id');
-        });
     }
 };

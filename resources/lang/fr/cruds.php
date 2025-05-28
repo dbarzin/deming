@@ -164,6 +164,7 @@ return [
         'title' => [
             'storage' => 'Entrepôt de documents',
             'templates' => 'Modèles de documents',
+            'cleanup' => 'Durée de conservation'
         ],
         'description' => 'Description',
         'list' => 'Liste des documents',

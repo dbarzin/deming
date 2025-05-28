@@ -238,4 +238,18 @@ class DocumentController extends Controller
         return view('/documents/check')
             ->with('documents', $documents);
     }
+
+    public function saveConfig(Request $request) {
+        // Only for administrator
+        abort_if(
+            (Auth::User()->role !== 1),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
+        return redirect()
+            ->back()
+            ->with('messages', Collect('Configuration saved !'));
+    }
+
 }
