@@ -83,6 +83,9 @@ class Cleanup extends Command
                 // Supprimer les liens dans control_measure
                 DB::table('control_measure')->where('control_id', $control->id)->delete();
 
+                // Supprimer les plans d'action
+                DB::table('actions')->where('control_id', $control->id)->delete();
+
                 // Supprimer le contrôle lui-même
                 $control->delete();
 
