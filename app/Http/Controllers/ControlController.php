@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use App\Exports\ControlsExport;
 use App\Models\Action;
 use App\Models\Control;
-use App\Models\Document;
 use App\Models\Domain;
 use App\Models\Measure;
 use Carbon\Carbon;
@@ -326,11 +325,12 @@ class ControlController extends Controller
         $attributes = DB::table('attributes')->select('values')
             ->union(DB::table('measures')
                 ->select(DB::raw('attributes as value')))
-                ->get();
+            ->get();
         foreach ($attributes as $key) {
             foreach (explode(' ', $key->values) as $value) {
-                if (strlen($value)>0)
+                if (strlen($value) > 0) {
                     array_push($values, $value);
+                }
             }
         }
         sort($values);
@@ -590,11 +590,12 @@ class ControlController extends Controller
         $attributes = DB::table('attributes')->select('values')
             ->union(DB::table('measures')
                 ->select(DB::raw('attributes as value')))
-                ->get();
+            ->get();
         foreach ($attributes as $key) {
             foreach (explode(' ', $key->values) as $value) {
-                if (strlen($value)>0)
+                if (strlen($value) > 0) {
                     array_push($values, $value);
+                }
             }
         }
         sort($values);
@@ -649,11 +650,12 @@ class ControlController extends Controller
         $attributes = DB::table('attributes')->select('values')
             ->union(DB::table('measures')
                 ->select(DB::raw('attributes as value')))
-                ->get();
+            ->get();
         foreach ($attributes as $key) {
             foreach (explode(' ', $key->values) as $value) {
-                if (strlen($value)>0)
+                if (strlen($value) > 0) {
                     array_push($values, $value);
+                }
             }
         }
         sort($values);
@@ -740,7 +742,7 @@ class ControlController extends Controller
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // Delete documents
-        foreach($control->documents()->get() as $document) {
+        foreach ($control->documents()->get() as $document) {
             \Log::debug(storage_path('docs/' . $document->id));
             unlink(storage_path('docs/' . $document->id));
         }
@@ -1266,7 +1268,7 @@ class ControlController extends Controller
         $control->measures()->detach();
 
         // Delete documents
-        foreach($control->documents()->get() as $document) {
+        foreach ($control->documents()->get() as $document) {
             \Log::debug(storage_path('docs/' . $document->id));
             unlink(storage_path('docs/' . $document->id));
         }

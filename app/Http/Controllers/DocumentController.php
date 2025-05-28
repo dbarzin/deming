@@ -7,7 +7,6 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Artisan;
 
 class DocumentController extends Controller
 {
@@ -245,7 +244,8 @@ class DocumentController extends Controller
             ->with('documents', $documents);
     }
 
-    public function saveConfig(Request $request) {
+    public function saveConfig(Request $request)
+    {
         // Only for administrator
         abort_if(
             (Auth::User()->role !== 1),
@@ -269,10 +269,9 @@ class DocumentController extends Controller
 
         // Redirect
         return view('/documents/index')
-            ->with('count',$count)
-            ->with('sum',$sum)
-            ->with('duration',$duration)
+            ->with('count', $count)
+            ->with('sum', $sum)
+            ->with('duration', $duration)
             ->with('messages', Collect('Configuration saved !'));
     }
-
 }

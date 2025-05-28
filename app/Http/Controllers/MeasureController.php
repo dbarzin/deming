@@ -98,11 +98,12 @@ class MeasureController extends Controller
         $attributes = DB::table('attributes')->select('values')
             ->union(DB::table('measures')
                 ->select(DB::raw('attributes as value')))
-                ->get();
+            ->get();
         foreach ($attributes as $key) {
             foreach (explode(' ', $key->values) as $value) {
-                if (strlen($value)>0)
+                if (strlen($value) > 0) {
                     array_push($values, $value);
+                }
             }
         }
         sort($values);
@@ -239,11 +240,12 @@ class MeasureController extends Controller
         $attributes = DB::table('attributes')->select('values')
             ->union(DB::table('measures')
                 ->select(DB::raw('attributes as value')))
-                ->get();
+            ->get();
         foreach ($attributes as $key) {
             foreach (explode(' ', $key->values) as $value) {
-                if (strlen($value)>0)
+                if (strlen($value) > 0) {
                     array_push($values, $value);
+                }
             }
         }
         sort($values);

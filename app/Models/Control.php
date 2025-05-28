@@ -100,6 +100,14 @@ class Control extends Model
         return false;
     }
 
+    public function clauses(int $id)
+    {
+        return DB::table('measures')
+            ->select('measure_id', 'clause')
+            ->join('control_measure', 'control_measure.control_id', $id)
+            ->get();
+    }
+
     private function isAdminOrUser($user): bool
     {
         return in_array($user->role, [1, 2]);
@@ -107,7 +115,7 @@ class Control extends Model
 
     private function isAuditorOrAuditeeWithAccess($user): bool
     {
-        if (!in_array($user->role, [3, 5])) {
+        if (! in_array($user->role, [3, 5])) {
             return false;
         }
 
@@ -129,13 +137,5 @@ class Control extends Model
             ->where('control_user_group.control_id', $this->id)
             ->where('user_user_group.user_id', $user->id)
             ->exists();
-    }
-
-    public function clauses(int $id)
-    {
-        return DB::table('measures')
-            ->select('measure_id', 'clause')
-            ->join('control_measure', 'control_measure.control_id', $id)
-            ->get();
     }
 }

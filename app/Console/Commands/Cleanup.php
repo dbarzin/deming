@@ -2,14 +2,12 @@
 
 namespace App\Console\Commands;
 
-use Illuminate\Console\Command;
-use Carbon\Carbon;
-use Illuminate\Support\Facades\DB;
 use App\Models\Control;
 use App\Models\Document;
-use App\Models\ControlMeasure;
+use Carbon\Carbon;
+use Illuminate\Console\Command;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-
 
 class Cleanup extends Command
 {
@@ -46,14 +44,14 @@ class Cleanup extends Command
     {
         Log::info('Cleanup started');
         // Get duration in months
-        $durationInMonths =  config('deming.cleanup-duration');
+        $durationInMonths = config('deming.cleanup-duration');
 
-        Log::info("Cleanup $durationInMonths months");
+        Log::info("Cleanup {$durationInMonths} months");
 
         // Compute date in the past
         $dateLimit = Carbon::now()->subMonths($durationInMonths)->toDateString();
 
-        Log::info("Cleanup limit date $dateLimit");
+        Log::info("Cleanup limit date {$dateLimit}");
 
         // Initialise counters
         $documentCount = 0;
@@ -61,8 +59,8 @@ class Cleanup extends Command
 
         // Get conctrols
         $oldControls = Control::whereNotNull('realisation_date')
-                              ->where('realisation_date', '<', $dateLimit)
-                              ->get();
+            ->where('realisation_date', '<', $dateLimit)
+            ->get();
 
         foreach ($oldControls as $control) {
             DB::transaction(function () use ($control) {
@@ -92,10 +90,9 @@ class Cleanup extends Command
             });
         }
 
-        Log::info("Cleanup $documentCount document(s).");
-        Log::info("Cleanup $controlCount control(s).");
+        Log::info("Cleanup {$documentCount} document(s).");
+        Log::info("Cleanup {$controlCount} control(s).");
 
         Log::info('Cleanup Done.');
-
     }
 }
