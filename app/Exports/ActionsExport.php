@@ -72,7 +72,10 @@ class ActionsExport implements FromQuery, WithMapping, WithHeadings, WithStyles,
         return [
             [
                 $action->reference,
-                $action->type,
+                    ($action->type==1) ? trans('cruds.action.types.major') : (
+                    ($action->type==2) ? trans('cruds.action.types.minor') : (
+                    ($action->type==3) ? trans('cruds.action.types.observation') : (
+                    ($action->type==4) ? trans('cruds.action.types.opportunity') : '' ))),
                 $action->due_date,
                 $action->scope,
                 $action->measures()->implode('clause', ', '),
@@ -80,7 +83,9 @@ class ActionsExport implements FromQuery, WithMapping, WithHeadings, WithStyles,
                 $action->cause,
                 $action->owners()->implode('name', ', '),
                 $action->remediation,
-                $action->status,
+                    ($action->status==1) ? trans('cruds.action.fields.status_open') : (
+                    ($action->status==2) ? trans('cruds.action.fields.status_closed') : (
+                    ($action->status==3) ? trans('cruds.action.fields.status_rejected') : '' )),
                 $action->close_date,
                 $action->justification,
             ],
