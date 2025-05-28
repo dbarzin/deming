@@ -84,21 +84,21 @@ function bytesToHuman($bytes) {
 	@csrf
     <div class="grid">
         <div class="row">
-            <div class="cell-3">
-                Délais de suppression automatique des contrôles et documents
+            <div class="cell-4">
+                {{ trans('cruds.document.title.cleanup_detail') }}
             </div>
         </div>
         <div class="row">
-            <div class="cell-1">
-                <select>
-                    <option>Never</option>
-                    <option>One year</option>
-                    <option>Two years</option>
-                    <option>Three years</option>
-                    <option>Five years</option>
+            <div class="cell-2">
+                <select name="duration" data-role="select" data-prepend="{{ trans('cruds.document.month') }}">
+                    <option value="0" {{ ($duration=="0" || $duration==null)  ? 'selected' : '' }}>{{ trans('cruds.document.never') }}</option>
+                    <option {{ $duration=="12" ? 'selected' : '' }}>12</option>
+                    <option {{ $duration=="24" ? 'selected' : '' }}>24</option>
+                    <option {{ $duration=="36" ? 'selected' : '' }}>36</option>
+                    <option {{ $duration=="48" ? 'selected' : '' }}>48</option>
+                    <option {{ $duration=="60" ? 'selected' : '' }}>60</option>
                 </select>
             </div>
-
         </div>
 
         <div class="row">

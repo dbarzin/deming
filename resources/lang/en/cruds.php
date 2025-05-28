@@ -164,11 +164,15 @@ return [
         'title' => [
             'storage' => 'Storage',
             'templates' => 'Templates',
+            'cleanup' => 'Retention period',
+            'cleanup_detail' => 'Number of months before automatic deletion of controls and documents',
         ],
-         'description' => 'Description',
-         'list' => 'List of documents',
-         'index' => 'Documents',
-         'fields' => [
+        'month' => 'Months',
+        'never' => 'Never',
+        'description' => 'Description',
+        'list' => 'List of documents',
+        'index' => 'Documents',
+        'fields' => [
              'name' => 'Name',
              'control' => 'Control',
              'size' => 'Size',

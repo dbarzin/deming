@@ -164,8 +164,11 @@ return [
         'title' => [
             'storage' => 'Entrepôt de documents',
             'templates' => 'Modèles de documents',
-            'cleanup' => 'Durée de conservation'
+            'cleanup' => 'Durée de conservation',
+            'cleanup_detail' => 'Nombre de mois avant suppression automatique des contrôles et des documents',
         ],
+        'month' => 'Mois',
+        'never' => 'jamais',
         'description' => 'Description',
         'list' => 'Liste des documents',
         'index' => 'Documents',

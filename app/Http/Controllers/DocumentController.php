@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Artisan;
 
 class DocumentController extends Controller
 {
@@ -219,9 +220,12 @@ class DocumentController extends Controller
         $count = Document::count();
         $sum = Document::sum('size');
 
+        $duration = config('deming.cleanup-duration');
+
         return view('/documents/index')
             ->with('count', $count)
-            ->with('sum', $sum);
+            ->with('sum', $sum)
+            ->with('duration', $duration);
     }
 
     public function check()
@@ -233,8 +237,10 @@ class DocumentController extends Controller
             '403 Forbidden'
         );
 
+        // Get all documents
         $documents = Document::with('control')->get();
 
+        // show view
         return view('/documents/check')
             ->with('documents', $documents);
     }
@@ -247,8 +253,25 @@ class DocumentController extends Controller
             '403 Forbidden'
         );
 
-        return redirect()
-            ->back()
+        // Get duration from request
+        $duration = $request->get('duration');
+
+        // Set duration
+        config(['deming.cleanup-duration' => $duration]);
+
+        // Save configuration
+        $text = '<?php return ' . var_export(config('deming'), true) . ';';
+        file_put_contents(config_path('deming.php'), $text);
+
+        // get previous fields
+        $count = Document::count();
+        $sum = Document::sum('size');
+
+        // Redirect
+        return view('/documents/index')
+            ->with('count',$count)
+            ->with('sum',$sum)
+            ->with('duration',$duration)
             ->with('messages', Collect('Configuration saved !'));
     }
 
