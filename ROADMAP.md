@@ -10,8 +10,8 @@ This document contains the evolutions planned in 2024 / 2025.
 * [x] Measurement not linked to a control
 * [x] Measurement linked to multiple controls
 * [x] Groups management
+* [x] Automatically remove measurements after a defined number of months
 * [ ] Export set of controls for audit
-* [ ] Automatically remove measurements after a defined number of months
 * [ ] Docker
 * [ ] Non-regression tests
 
@@ -19,9 +19,9 @@ This document contains the evolutions planned in 2024 / 2025.
 
 * [x] Migrate to [Metro5](https://metroui.org.ua/)
 * [x] Dark theme
+* [x] Improve action plan with status (%)
 * [ ] Convert Markdown to ODT in reports
 * [ ] Configure scoring system
-* [ ] Improve action plan with status (%)
 * [ ] Import Security Controls from [OSCAL](https://pages.nist.gov/OSCAL/)
 
 # Evaluations made in 2023
