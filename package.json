@@ -3,7 +3,7 @@
   "license": "GPL-3.0",
   "author": "Didier Barzin",
   "repository": "https://www.github.com/dbarzin/deming",
-  "homepage": "https://www.sourcentis.com/demong",
+  "homepage": "https://www.sourcentis.com/deming",
   "main": "index.js",
   "directories": {
     "doc": "docs"

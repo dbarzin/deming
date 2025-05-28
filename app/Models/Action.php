@@ -27,6 +27,7 @@ class Action extends Model
     protected $fillable = [
         'reference',
         'type',
+        'progress',
         'criticity',
         'scope',
         'cause',
@@ -41,6 +42,12 @@ class Action extends Model
     // O - Open
     // 1 - Closed
     // 2 - Rejected
+
+    // Type
+    // 1 - Major - red
+    // 2 - Minor - organge
+    // 3 - Observation - yellow
+    // 4 - Opportunity - green
 
     public function owners()
     {

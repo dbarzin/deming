@@ -78,4 +78,40 @@ function bytesToHuman($bytes) {
         </div>
     </div>
 </div>
+<br>
+<div data-role="panel" data-title-caption="{{ trans('cruds.document.title.cleanup') }}" data-collapsible="false" data-title-icon="<span class='mif-file-text'></span>">
+    <form action="/doc/config" method="POST">
+	@csrf
+    <div class="grid">
+        <div class="row">
+            <div class="cell-4">
+                {{ trans('cruds.document.title.cleanup_detail') }}
+            </div>
+        </div>
+        <div class="row">
+            <div class="cell-2">
+                <select name="duration" data-role="select" data-prepend="{{ trans('cruds.document.month') }}">
+                    <option value="0" {{ ($duration=="0" || $duration==null)  ? 'selected' : '' }}>{{ trans('cruds.document.never') }}</option>
+                    <option {{ $duration=="12" ? 'selected' : '' }}>12</option>
+                    <option {{ $duration=="24" ? 'selected' : '' }}>24</option>
+                    <option {{ $duration=="36" ? 'selected' : '' }}>36</option>
+                    <option {{ $duration=="48" ? 'selected' : '' }}>48</option>
+                    <option {{ $duration=="60" ? 'selected' : '' }}>60</option>
+                </select>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="cell-3">
+                <button type="submit" class="button success">
+                    <span class="mif-floppy-disk2"></span>
+                    &nbsp;
+                    {{ trans("common.save") }}
+                </button>
+            </div>
+        </div>
+    </div>
+    </form>
+</div>
+
 @endsection

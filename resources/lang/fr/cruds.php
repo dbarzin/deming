@@ -44,6 +44,13 @@ return [
             'status_rejected' => 'Rejeté',
             'status_all' => 'Tous',
             'close_date' => 'Date de clôture',
+            'progress' => 'Etat d\'avacement',
+        ],
+        'types' => [
+            'major' => 'Majeure',
+            'minor' => 'Mineure',
+            'opportunity' => 'Opportunité',
+            'observation' => 'Observation'
         ],
     ],
     'attribute' => [
@@ -157,7 +164,11 @@ return [
         'title' => [
             'storage' => 'Entrepôt de documents',
             'templates' => 'Modèles de documents',
+            'cleanup' => 'Durée de conservation',
+            'cleanup_detail' => 'Nombre de mois avant suppression automatique des contrôles et des documents',
         ],
+        'month' => 'Mois',
+        'never' => 'jamais',
         'description' => 'Description',
         'list' => 'Liste des documents',
         'index' => 'Documents',

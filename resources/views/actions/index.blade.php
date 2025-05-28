@@ -8,11 +8,10 @@
         <div class="cell-2">
             <select id='type' name="type" data-role="select">
                 <option value="">-- {{ trans("cruds.action.fields.choose_type")}} --</option>
-                @foreach ($types as $type)
-                    <option {{ (Session::get('type')===$type) ? 'selected' : '' }}>
-                        {{ $type }}
-                    </option>
-                @endforeach
+                <option value="1" {{ (Session::get('type')==1) ? 'selected' : '' }}>{{ trans('cruds.action.types.major') }}</option>
+                <option value="2" {{ (Session::get('type')==2) ? 'selected' : '' }}>{{ trans('cruds.action.types.minor') }}</option>
+                <option value="3" {{ (Session::get('type')==3) ? 'selected' : '' }}>{{ trans('cruds.action.types.observation') }}</option>
+                <option value="4" {{ (Session::get('type')==4) ? 'selected' : '' }}>{{ trans('cruds.action.types.opportunity') }}</option>
             </select>
         </div>
         <div class="cell-3 mt-2">
@@ -89,6 +88,7 @@
             <th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.reference') }}</th>
             <th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.type') }}</th>
             <th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.status') }}</th>
+            <th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.progress') }}</th>
             <th class="sortable-column sort-asc" width="50%">{{ trans('cruds.action.fields.name') }}</th>
 			<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.scope') }}</th>
             <th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.due_date') }}</th>
@@ -96,14 +96,30 @@
 	    </thead>
 	    <tbody>
 	@foreach($actions as $action)
-		<tr>
+        <tr>
             <td>
                 <b id="{{ $action->reference }}"><a href="/action/show/{{ $action->id }}">{{ $action->reference }}<a>
             </td>
-            <td>
-                {{ $action->type }}
+            <td id="{{ $action->type }}">
+                    @if ($action->type==1)
+                    <p class="fg-red text-bold">
+                    {{ trans('cruds.action.types.major') }}
+                    </p>
+                    @elseif ($action->type==2)
+                    <p class="fg-orange text-bold">
+                    {{ trans('cruds.action.types.minor') }}
+                    </p>
+                    @elseif ($action->type==3)
+                    <p class="fg-yellow text-bold">
+                    {{ trans('cruds.action.types.observation') }}
+                    </p>
+                    @elseif ($action->type==4)
+                    <p class="fg-green text-bold">
+                    {{ trans('cruds.action.types.opportunity') }}
+                    </p>
+                    @endif
             </td>
-            <td>
+            <td id="{{ $action->status }}">
                 @if ($action->status==0)
                 {{ trans('cruds.action.fields.status_open') }}
                 @elseif ($action->status==1)
@@ -112,6 +128,11 @@
                 {{ trans('cruds.action.fields.status_rejected') }}
                 @else
                 {{ $action->status }}
+                @endif
+            </td>
+            <td>
+                @if ($action->progress!==null)
+                {{ $action->progress }} %
                 @endif
             </td>
             <td>

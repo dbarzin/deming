@@ -96,20 +96,10 @@ class ActionController extends Controller
                 'actions.scope',
                 'actions.cause',
                 'actions.status',
+                'actions.progress',
                 'actions.due_date',
             ]
         )->get();
-
-        // Get types
-        $types = DB::table('actions')
-            ->select('type')
-            ->whereNotNull('type')
-            ->where('status', '<>', 3)
-            ->distinct()
-            ->orderBy('type')
-            ->get()
-            ->pluck('type')
-            ->toArray();
 
         // Get scopes
         $scopes = DB::table('actions')
@@ -124,7 +114,6 @@ class ActionController extends Controller
 
         // return
         return view('actions.index')
-            ->with('types', $types)
             ->with('scopes', $scopes)
             ->with('actions', $actions);
     }
@@ -163,6 +152,7 @@ class ActionController extends Controller
         $action->type = request('type');
         $action->due_date = request('due_date');
         $action->name = request('name');
+        $action->progress = request('progress');
         $action->scope = request('scope');
         $action->cause = request('cause');
         $action->remediation = request('remediation');
@@ -204,6 +194,7 @@ class ActionController extends Controller
 
         // Update fields
         $action->remediation = request('remediation');
+        $action->progress = request('progress');
         $action->update();
 
         return redirect('/actions');
@@ -275,17 +266,6 @@ class ActionController extends Controller
             ->pluck('scope')
             ->toArray();
 
-        // Get all types
-        $types = DB::table('actions')
-            ->select('type')
-            ->whereNotNull('type')
-            ->where('status', '<>', 2)
-            ->distinct()
-            ->orderBy('type')
-            ->get()
-            ->pluck('type')
-            ->toArray();
-
         // Get all measures
         $all_measures = DB::table('measures')
             ->select('id', 'clause')
@@ -308,7 +288,6 @@ class ActionController extends Controller
         // Return
         return view('actions.edit')
             ->with('scopes', $scopes)
-            ->with('types', $types)
             ->with('all_measures', $all_measures)
             ->with('measures', $measures)
             ->with('users', $users)
@@ -340,17 +319,6 @@ class ActionController extends Controller
             ->pluck('scope')
             ->toArray();
 
-        // Get all types
-        $types = DB::table('actions')
-            ->select('type')
-            ->whereNotNull('type')
-            ->where('status', '<>', 2)
-            ->distinct()
-            ->orderBy('type')
-            ->get()
-            ->pluck('type')
-            ->toArray();
-
         // Get all measures
         $all_measures = DB::table('measures')
             ->select('id', 'clause')
@@ -366,7 +334,6 @@ class ActionController extends Controller
         // Return
         return view('actions.create')
             ->with('scopes', $scopes)
-            ->with('types', $types)
             ->with('all_measures', $all_measures)
             ->with('users', $users);
     }
@@ -394,13 +361,14 @@ class ActionController extends Controller
         $action->type = request('type');
         $action->due_date = request('due_date');
         $action->name = request('name');
+        $action->progress = request('progress');
         $action->scope = request('scope');
         $action->cause = request('cause');
         $action->remediation = request('remediation');
         // for Postegres
         $action->criticity = 0;
         $action->status = 0;
-        
+
         // Save
         $action->save();
 
