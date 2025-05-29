@@ -47,6 +47,10 @@ class ActionController extends Controller
             $request->session()->forget('status');
         } else {
             $status = $request->session()->get('status');
+            if ($status==null) {
+                $status='0';
+                $request->session()->put('status', $status);
+                }
         }
 
         // Get scope filter
