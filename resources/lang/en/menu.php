@@ -11,6 +11,7 @@ return [
     'radar_by_controls' => 'by measures',
     'radar_by_measure' => 'by controls',
     'radar_by_attributes' => 'by attributes',
+    'radar_by_actions' => 'by action plans',
     'action_plan' => 'Action plans',
     'configuration' => [
         'title' => 'Configuration',

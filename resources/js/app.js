@@ -11,7 +11,8 @@ window.Dropzone = Dropzone;
 // Chart.js
 import { Chart, registerables } from 'chart.js';
 import 'chartjs-adapter-date-fns';
-Chart.register(...registerables);
+import ChartDataLabels from 'chartjs-plugin-datalabels';
+Chart.register(...registerables, ChartDataLabels);
 window.Chart = Chart;
 
 // EasyMDE
