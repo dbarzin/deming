@@ -9,6 +9,8 @@ use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
+use Carbon\Carbon;
+
 
 class ActionController extends Controller
 {
@@ -45,6 +47,10 @@ class ActionController extends Controller
             $request->session()->forget('status');
         } else {
             $status = $request->session()->get('status');
+            if ($status==null) {
+                $status='0';
+                $request->session()->put('status', $status);
+                }
         }
 
         // Get scope filter
@@ -157,7 +163,10 @@ class ActionController extends Controller
         $action->cause = request('cause');
         $action->remediation = request('remediation');
         $action->status = request('status');
-        $action->close_date = request('close_date');
+        if ($action->status==0)
+            $action->close_date = null;
+        else
+            $action->close_date = request('close_date');
         $action->justification = request('justification');
         $action->update();
 
@@ -496,4 +505,87 @@ class ActionController extends Controller
         // Return
         return redirect('/actions');
     }
+
+    /**
+     * Display the actions chart
+     *
+     * @return \Illuminate\Http\Response
+     */
+    public function chart(Request $request)
+    {
+        abort_if(
+            ! ((Auth::User()->role === 1) ||
+            (Auth::User()->role === 2)) ,
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
+        // Start
+        $start = $request->get('start');
+        if ($start==null) {
+            $start = Carbon::now()->startOfYear()->toDateString();
+        }
+        // Get scope
+        $scope = $request->get('scope');
+        if ($scope!==null) {
+            $request->session()->put('scope',$scope);
+            }
+        else {
+            if ($request->has('scope'))
+                $request->session()->forget('scope');
+            else
+                $scope = $request->session()->get('scope');
+        }
+
+        // Get scopes
+        $scopes = DB::table('actions')
+            ->select('scope')
+            ->whereNotNull('scope')
+            ->where('status', '<>', 3)
+            ->distinct()
+            ->orderBy('scope')
+            ->get()
+            ->pluck('scope')
+            ->toArray();
+
+        // Get data
+        $types = [1, 2, 3, 4];
+        $data = [];
+
+        foreach ($types as $type) {
+            $count_open = Action::where('type', $type)
+                ->where('status', 0)
+                ->where(function($query) use ($start) {
+                    $query->whereDate('close_date', '>', $start)
+                          ->orWhereNull('close_date');
+                })
+                ->when(!is_null($scope), function ($query) use ($scope) {
+                    $query->where('scope', $scope);
+                })
+                ->count();
+            $count_closed = Action::where('type', $type)
+                ->whereIn('status', [1, 2])
+                ->where(function($query) use ($start) {
+                    $query->whereDate('close_date', '>', $start)
+                          ->orWhereNull('close_date');
+                })
+                ->when(!is_null($scope), function ($query) use ($scope) {
+                    $query->where('scope', $scope);
+                })
+                ->count();
+
+            $data[] = [
+                'type' => $type,
+                'open' => $count_open,
+                'closed' => $count_closed,
+            ];
+        }
+
+        // Return
+        return view('radar.actions')
+            ->with('start', $start)
+            ->with('scopes', $scopes)
+            ->with('data', $data);
+    }
+
 }

@@ -1,5 +1,5 @@
 {
-  "version": "2025.05.28",
+  "version": "2025.05.29",
   "license": "GPL-3.0",
   "author": "Didier Barzin",
   "repository": "https://www.github.com/dbarzin/deming",
@@ -31,6 +31,7 @@
     "@olton/metroui": "^5.0.13",
     "chart.js": "^4.4.9",
     "chartjs-adapter-date-fns": "^3.0.0",
+    "chartjs-plugin-datalabels": "^2.2.0",
     "dropzone": "^6.0.0-beta.2",
     "easymde": "^2.18.0",
     "fontawesome-free": "^1.0.4",

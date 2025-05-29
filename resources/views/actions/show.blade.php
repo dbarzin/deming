@@ -23,7 +23,7 @@ form, table {
                     <strong>{{ trans("cruds.action.fields.reference") }}</strong>
     	    	</div>
                 <div class="cell-2">
-                    {{ $action->reference }}
+                    {{ $action->reference==null ? ("ACT-".$action->id) : $action->reference }}
                 </div>
                 <div class="cell-1" align="right">
                     <strong>{{ trans("cruds.action.fields.type") }}</strong>

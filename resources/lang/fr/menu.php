@@ -11,6 +11,7 @@ return [
     'radar_by_measure' => 'par mesure',
     'radar_by_controls' => 'par contrôles',
     'radar_by_attributes' => 'par attributs',
+    'radar_by_actions' => 'par plans d\'actions',
     'action_plan' => 'Plans d\'action',
     'configuration' => [
         'title' => 'Configuration',

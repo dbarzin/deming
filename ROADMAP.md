@@ -22,8 +22,9 @@ This document contains the evolutions planned in 2024 / 2025.
 * [x] Improve action plan with status (%)
 * [ ] Convert Markdown to ODT in reports
 * [ ] Configure scoring system
+* [ ] Put configuration in database in place of PHP file (for Docker)
 * [ ] Import Security Controls from [OSCAL](https://pages.nist.gov/OSCAL/)
-
+¨
 # Evaluations made in 2023
 
 ## Important

@@ -99,6 +99,12 @@
                         <span class="caption">{{ trans("menu.radar_by_attributes") }}</span>
                         </a>
                     </li>
+                    <li class="{{ request()->is('radar/actions') ? 'active': '' }}">
+                        <a href="/radar/actions">
+                        <span class="icon mif-stacked-bar-chart"></span>
+                        <span class="caption">{{ trans("menu.radar_by_actions") }}</span>
+                        </a>
+                    </li>
                 </ul>
             </li>
 
