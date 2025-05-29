@@ -14,12 +14,12 @@
                 <option value="4" {{ (Session::get('type')==4) ? 'selected' : '' }}>{{ trans('cruds.action.types.opportunity') }}</option>
             </select>
         </div>
-        <div class="cell-3 mt-2">
+        <div class="cell-5 mt-2">
              <input type="radio" data-role="radio" data-append="{{ trans("cruds.action.fields.status_open") }}" value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}/>
              <input type="radio" data-role="radio" data-append="{{ trans("cruds.action.fields.status_closed") }}" value="1" id="status1" {{ (Session::get("status")=="1") ? 'checked' : '' }}/>
              <input type="radio" data-role="radio" data-append="{{ trans("cruds.action.fields.status_all") }}" value="2" id="status2" {{ (Session::get("status")=="2") ? 'checked' : '' }}/>
         </div>
-        <div class="cell-4">
+        <div class="cell-2">
         </div>
         <div class="cell-2">
             <select id='scope' name="scope" data-role="select">
@@ -89,7 +89,7 @@
             <th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.type') }}</th>
             <th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.status') }}</th>
             <th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.progress') }}</th>
-            <th class="sortable-column sort-asc" width="50%">{{ trans('cruds.action.fields.name') }}</th>
+            <th class="sortable-column sort-asc" width="40%">{{ trans('cruds.action.fields.name') }}</th>
 			<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.scope') }}</th>
             <th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.due_date') }}</th>
 	    </tr>
@@ -100,7 +100,8 @@
             <td>
                 <b id="{{ $action->reference }}"><a href="/action/show/{{ $action->id }}">{{ $action->reference==null ? ("ACT-".$action->id) : $action->reference }}<a>
             </td>
-            <td id="{{ $action->type }}">
+            <td>
+                <p id="{{ $action->type }}">
                     @if ($action->type==1)
                     <p class="fg-red text-bold">
                     {{ trans('cruds.action.types.major') }}
@@ -118,6 +119,7 @@
                     {{ trans('cruds.action.types.opportunity') }}
                     </p>
                     @endif
+                </p>
             </td>
             <td id="{{ $action->status }}">
                 @if ($action->status==0)

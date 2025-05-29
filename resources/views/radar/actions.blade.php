@@ -8,16 +8,17 @@
         <div class="cell-md-9">
             <div class="row">
                 <div class="cell-2">
+                    <strong>Period</strong>
                     <input
                     id="start"
                     name="start"
                     value="{{ $start }}"
                     data-role="calendarpicker"
-                    data-format="YYYY-MM-DD"
-                    data-prepend="Period"/>
+                    data-format="YYYY-MM-DD"/>
                 </div>
                 <div class="cell-3">
-                    <select id='scope' name="scope" data-prepend="Scope" data-role="select">
+                    <strong>Scope</strong>
+                    <select id='scope' name="scope" data-role="select">
                         <option value="">-- {{ trans("cruds.action.fields.choose_scope")}} --</option>
                         @foreach ($scopes as $scope)
                             <option {{ (Session::get('scope')==$scope) ? 'selected' : '' }}>
