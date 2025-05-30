@@ -17,8 +17,6 @@ services:
       - TZ=Europe/Paris
     volumes:
       - .env:/var/www/deming/.env
-      - ./docker/custom/custom_postfix_main.cf:/etc/postfix/main.cf
-      - ./docker/custom/custom_postfix_mailname:/etc/mailname
       - ./docker/custom/deming.php:/var/www/deming/config/deming.php
       - ./docker/custom/Kernel.php:/var/www/deming/app/Console/Kernel.php
       - ./docker/custom/app.php:/var/www/deming/config/app.php
