@@ -208,6 +208,10 @@ A group brings together a set of users and controls.</p>
 <h4 id="retention">Retention</h4>
 <p>This part of the screen lets you configure the retention period (in months) for checks carried out in the application.</p>
 <p>All checks carried out after this date are deleted, along with the associated documents and action plans.</p>
+<p>This is done by executing the command</p>
+<pre><code>php artisan deming:cleanup
+</code></pre>
+<p>command via a cron.</p>
 <h3 id="notifications">Notifications <a name="notifications"></a></h3>
 <p>This screen is used to configure the notifications sent to users when they have to carry out controls.</p>
 <p>The screen contains:</p>

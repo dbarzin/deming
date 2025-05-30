@@ -200,6 +200,10 @@ Un groupe permet de rassembler un ensemble d'utilisateurs et de contrôles.</p>
 <h4 id="conservation">Conservation</h4>
 <p>Cette partie de l'écran permet de configurer la durée de conservation (en mois) des contrôles réalisés dans l'application.</p>
 <p>Touts les contrôles réalisés passé cette date sont supprimés ainsi que les documents et plans d'actions associés.</p>
+<p>Cette suppression est effectuée en exécutant la commande</p>
+<pre><code>php artisan deming:cleanup
+</code></pre>
+<p>au travers d'un cron.</p>
 <h3 id="notifications">Notifications <a name="notifications"></a></h3>
 <p>Cet écran permet de configurer les notifications envoyées aux utilisateurs lorsqu'ils doivent réaliser des contrôles.</p>
 <p>L'écran contient :</p>
