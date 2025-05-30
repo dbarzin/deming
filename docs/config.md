@@ -91,6 +91,12 @@ This part of the screen lets you configure the retention period (in months) for 
 
 All checks carried out after this date are deleted, along with the associated documents and action plans.
 
+This is done by executing the command
+
+    php artisan deming:cleanup
+
+command via a cron.
+
 ### Notifications <a name="notifications"></a>
 
 This screen is used to configure the notifications sent to users when they have to carry out controls.

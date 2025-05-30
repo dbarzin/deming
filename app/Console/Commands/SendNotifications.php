@@ -165,7 +165,6 @@ class SendNotifications extends Command
      */
     private function needCheck()
     {
-        return true;
         $check_frequency = config('deming.notification.frequency');
 
         Log::debug('SendNotifications - frequency=' . $check_frequency . ' day=' . Carbon::today()->day . ' dayOfWeek=' . Carbon::today()->dayOfWeek);

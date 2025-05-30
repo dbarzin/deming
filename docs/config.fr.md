@@ -87,6 +87,12 @@ Cette partie de l'écran permet de configurer la durée de conservation (en mois
 
 Touts les contrôles réalisés passé cette date sont supprimés ainsi que les documents et plans d'actions associés.
 
+Cette suppression est effectuée en exécutant la commande
+
+    php artisan deming:cleanup
+
+au travers d'un cron.
+
 ### Notifications <a name="notifications"></a>
 
 Cet écran permet de configurer les notifications envoyées aux utilisateurs lorsqu'ils doivent réaliser des contrôles.
