@@ -34,11 +34,11 @@ class SendNotifications extends Command
      */
     public function handle()
     {
-        Log::debug('SendNotifications - Start.');
+        Log::info('SendNotifications - Start.');
 
         // Need to send notifications today ?
         if ($this->needCheck()) {
-            Log::debug('SendNotifications - notifications today');
+            Log::info('SendNotifications - notifications today');
 
             $controls = Control
                 ::where('status', 0)
@@ -47,7 +47,7 @@ class SendNotifications extends Command
                     ->orderBy('plan_date')
                     ->count();
 
-            Log::debug(
+            Log::info(
                 'SendNotifications - ' .
                 $controls .
                 ' control(s) will expire within '.
@@ -144,7 +144,7 @@ class SendNotifications extends Command
                         $mail->send();
 
                         // Success
-                        Log::debug("Mail sent to {$user->email}");
+                        Log::info("Mail sent to {$user->email}");
                     }
                 }
             } catch (Exception $e) {
@@ -152,10 +152,10 @@ class SendNotifications extends Command
                 Log::error("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
             }
         } else {
-            Log::debug('SendNotifications - no notifications today');
+            Log::info('SendNotifications - no notifications today');
         }
 
-        Log::debug('SendNotifications - DONE.');
+        Log::info('SendNotifications - DONE.');
     }
 
     /**
@@ -167,7 +167,7 @@ class SendNotifications extends Command
     {
         $check_frequency = config('deming.notification.frequency');
 
-        Log::debug('SendNotifications - frequency=' . $check_frequency . ' day=' . Carbon::today()->day . ' dayOfWeek=' . Carbon::today()->dayOfWeek);
+        Log::info('SendNotifications - frequency=' . $check_frequency . ' day=' . Carbon::today()->day . ' dayOfWeek=' . Carbon::today()->dayOfWeek);
 
         return ($check_frequency === '1') ||
             // Weekly

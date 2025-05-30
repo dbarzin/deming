@@ -31,7 +31,7 @@ class ImportFramework extends Command
      */
     public function handle()
     {
-        Log::debug('ImportFramework - Start.');
+        Log::info('ImportFramework - Start.');
 
         $fileName = $this->argument('filename');
 
@@ -39,7 +39,7 @@ class ImportFramework extends Command
             Log::error('ImportFramework - file does not exists');
             $this->components->error('File does not exists');
         } else {
-            Log::debug('ImportFramework - Import ' . $fileName);
+            Log::info('ImportFramework - Import ' . $fileName);
 
             // XLSX
             $reader = new \PhpOffice\PhpSpreadsheet\Reader\Xlsx();
@@ -78,6 +78,6 @@ class ImportFramework extends Command
             }
         }
 
-        Log::debug('ImportFramework - DONE.');
+        Log::info('ImportFramework - DONE.');
     }
 }
