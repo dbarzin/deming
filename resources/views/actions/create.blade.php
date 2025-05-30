@@ -21,31 +21,32 @@ form, table {
         		<div class="cell-1">
                     <strong>{{ trans("cruds.action.fields.reference") }}</strong>
     	    	</div>
-                <div class="cell-6">
-                    <table>
-                        <tr>
-                            <td>
-                                <input type="text" data-role="input" name="reference" value="{{ old('reference') }}" maxlength="32">
-                            </td>
-                            <td style="white-space: nowrap; padding-left: 10px; padding-right: 10px;">
-                                <strong>{{ trans("cruds.action.fields.type") }}</strong>
-                            </td>
-                            <td>
-                                <input type="text" name="type" data-role="input" autocomplete="on" maxlength="32"
-                                value="{{ old('type') }}" data-autocomplete=" {{ implode(",",$types) }} "/>
-                            </td>
-                            <td style="white-space: nowrap; padding-left: 10px; padding-right: 10px;">
-                                <strong>{{ trans('cruds.action.fields.due_date') }}</strong>
-                            </td>
-                            <td>
-                                <input type="text"
-                                    data-role="calendarpicker"
-                                    name="due_date"
-                                    value=" {{ old('due_date') }}"
-            						data-format="YYYY-MM-DD"/>
-                            </td>
-                        </tr>
-                    </table>
+                <div class="cell-1">
+                    <input type="text" data-role="input" name="reference" value="{{ old('reference') }}" maxlength="32">
+                </div>
+                <div class="cell-1 text-right">
+                    <strong>{{ trans("cruds.action.fields.type") }}</strong>
+                </div>
+                <div class="cell-2">
+                    <select name="type" data-type="select">
+                        <option></option>
+                        <option value="1" {{ old('type')==1 ? 'selected' : '' }}>{{ trans('cruds.action.types.major') }}</option>
+                        <option value="2" {{ old('type')==2 ? 'selected' : '' }}>{{ trans('cruds.action.types.minor') }}</option>
+                        <option value="3" {{ old('type')==3 ? 'selected' : '' }}>{{ trans('cruds.action.types.observation') }}</option>
+                        <option value="4" {{ old('type')==4 ? 'selected' : '' }}>{{ trans('cruds.action.types.opportunity') }}</option>
+                    </select>
+                </div>
+                <div class="cell-1 text-right">
+                    <strong>{{ trans('cruds.action.fields.due_date') }}</strong>
+                </div>
+                <div class="cell-1">
+                    <td>
+                        <input type="text"
+                            data-role="calendarpicker"
+                            name="due_date"
+                            value=" {{ old('due_date') }}"
+    						data-format="YYYY-MM-DD"/>
+                    </td>
     			</div>
             </div>
 
