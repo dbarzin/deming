@@ -88,6 +88,14 @@
     <li class="toctree-l2"><a class="reference internal" href="#importation">Importation</a>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#documents">Documents</a>
+        <ul>
+    <li class="toctree-l3"><a class="reference internal" href="#modeles">Modèles</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#stockage">Stockage</a>
+    </li>
+    <li class="toctree-l3"><a class="reference internal" href="#conservation">Conservation</a>
+    </li>
+        </ul>
     </li>
     <li class="toctree-l2"><a class="reference internal" href="#notifications">Notifications</a>
     </li>
@@ -182,9 +190,16 @@ Un groupe permet de rassembler un ensemble d'utilisateurs et de contrôles.</p>
 <p>Lors de l'importation, il est possible de supprimer tous les autres contrôles et mesures et de générer des données de test.</p>
 <p><a href="../images/import.png"><img alt="Screenshot" src="../images/import.png" style="width:600px" /></a></p>
 <h3 id="documents">Documents <a name="documents"></a></h3>
-<p>Cet écran permet de modifier les modèles de document utilisés pour les fiches de contrôle et le rapport de pilotage du SMSI et permet d’avoir une vue sur l’ensemble des documents utilisés comme preuve lors de la réalisation des contrôles de sécurité.</p>
+<p>Cet écran permet de modifier la configuration de la gestion des document utilisés dans Deming.</p>
 <p><a href="../images/documents.png"><img alt="Screenshot" src="../images/documents.png" style="width:400px" /></a></p>
-<p>Le bouton « Vérifier » permet de vérifier l’intégrité des documents conservés dans l'application.</p>
+<h4 id="modeles">Modèles</h4>
+<p>Cette partie de l'écran permet de modifier les modèles de document utilisés pour les fiches de contrôle et le rapport de pilotage du SMSI et permet d’avoir une vue sur l’ensemble des documents utilisés comme preuve lors de la réalisation des contrôles de sécurité.</p>
+<h4 id="stockage">Stockage</h4>
+<p>Cette partie de l'écran permet de vérifier l'intégrité des documents conservés dans l'application.</p>
+<p>En cliquant sur « Vérifier », Deming lance le contrôle d'’intégrité des documents conservés dans l'application en utilisant un CRC32.</p>
+<h4 id="conservation">Conservation</h4>
+<p>Cette partie de l'écran permet de configurer la durée de conservation (en mois) des contrôles réalisés dans l'application.</p>
+<p>Touts les contrôles réalisés passé cette date sont supprimés ainsi que les documents et plans d'actions associés.</p>
 <h3 id="notifications">Notifications <a name="notifications"></a></h3>
 <p>Cet écran permet de configurer les notifications envoyées aux utilisateurs lorsqu'ils doivent réaliser des contrôles.</p>
 <p>L'écran contient :</p>
