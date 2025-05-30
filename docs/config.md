@@ -71,11 +71,25 @@ When importing, all other controls and measures can be deleted and test data gen
 
 ### Documents <a name="documents"></a>
 
-This screen is used to modify the document templates used for the control sheets and the ISMS management report and provides an overview of all the documents used as evidence when carrying out security checks.
+This screen lets you modify the document management settings used in Deming.
 
 [![Screenshot](images/documents.png){: style="width:400px"}](images/documents.png)
 
-The "Verify" button allows you to verify the integrity of the documents stored in the application.
+#### Templates
+
+This part of the screen lets you modify the document templates used for control sheets and the ISMS management report, and gives you an overview of all the documents used as proof when carrying out security controls.
+
+#### Storage
+
+This part of the screen lets you check the integrity of documents stored in the application.
+
+By clicking on “Verify”, Deming launches the integrity check of documents stored in the application, using a CRC32.
+
+#### Retention
+
+This part of the screen lets you configure the retention period (in months) for checks carried out in the application.
+
+All checks carried out after this date are deleted, along with the associated documents and action plans.
 
 ### Notifications <a name="notifications"></a>
 
