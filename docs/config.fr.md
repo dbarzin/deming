@@ -67,11 +67,25 @@ Lors de l'importation, il est possible de supprimer tous les autres contrôles e
 
 ### Documents <a name="documents"></a>
 
-Cet écran permet de modifier les modèles de document utilisés pour les fiches de contrôle et le rapport de pilotage du SMSI et permet d’avoir une vue sur l’ensemble des documents utilisés comme preuve lors de la réalisation des contrôles de sécurité.
+Cet écran permet de modifier la configuration de la gestion des document utilisés dans Deming.
 
 [![Screenshot](images/documents.png){: style="width:400px"}](images/documents.png)
 
-Le bouton « Vérifier » permet de vérifier l’intégrité des documents conservés dans l'application.
+#### Modèles
+
+Cette partie de l'écran permet de modifier les modèles de document utilisés pour les fiches de contrôle et le rapport de pilotage du SMSI et permet d’avoir une vue sur l’ensemble des documents utilisés comme preuve lors de la réalisation des contrôles de sécurité.
+
+#### Stockage
+
+Cette partie de l'écran permet de vérifier l'intégrité des documents conservés dans l'application.
+
+En cliquant sur « Vérifier », Deming lance le contrôle d'’intégrité des documents conservés dans l'application en utilisant un CRC32.
+
+#### Conservation
+
+Cette partie de l'écran permet de configurer la durée de conservation (en mois) des contrôles réalisés dans l'application.
+
+Touts les contrôles réalisés passé cette date sont supprimés ainsi que les documents et plans d'actions associés.
 
 ### Notifications <a name="notifications"></a>
 
