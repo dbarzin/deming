@@ -137,7 +137,7 @@
                 {{ $action->progress }} %
                 @endif
             </td>
-            <td>
+            <td >
                 <b>{{ $action->name }}</b>
                 {!! \Parsedown::instance()->text($action->cause) !!}
             </td>

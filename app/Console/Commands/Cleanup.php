@@ -8,6 +8,7 @@ use Carbon\Carbon;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\File;
 
 class Cleanup extends Command
 {
@@ -63,7 +64,7 @@ class Cleanup extends Command
             ->get();
 
         foreach ($oldControls as $control) {
-            DB::transaction(function () use ($control) {
+            DB::transaction(function () use ($control, &$documentCount, &$controlCount) {
                 // Supprimer les documents associés
                 $documents = Document::where('control_id', $control->id)->get();
 

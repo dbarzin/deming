@@ -24,7 +24,7 @@ class Calendar
     public function __toString()
     {
         $num_days = date('t', $this->date);
-        $num_days_last_month = date('j', strtotime('last day of previous month', $this->date));
+        $num_days_last_month = (int) date('j', strtotime('last day of previous month', $this->date));
         $days = [0 => 'Di', 1 => 'Lu', 2 => 'Ma', 3 => 'Me', 4 => 'Je', 5 => 'Ve', 6 => 'Sa'];
         $first_day_of_week = date('w', strtotime('1-' . $this->active_month . '-' . $this->active_year));
 

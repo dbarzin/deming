@@ -148,3 +148,9 @@ input[type="text"] {
 textarea {
     font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
 }
+
+td {
+    white-space: normal !important; /* Autorise le retour à la ligne */
+    word-wrap: break-word;          /* Permet de couper les mots trop longs */
+    word-break: break-word;         /* Couper les mots s'ils sont trop longs */
+}
