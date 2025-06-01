@@ -253,7 +253,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     display: false,
                 },
                 datalabels: {
-                    display: false
+                    display: false,
                 }
             },
             onHover: (event, chartElement) => {
