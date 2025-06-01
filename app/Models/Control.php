@@ -104,7 +104,7 @@ class Control extends Model
     {
         return DB::table('measures')
             ->select('measure_id', 'clause')
-            ->join('control_measure', 'control_measure.control_id', $id)
+            ->join('control_measure', 'control_measure.control_id', strval($id))
             ->get();
     }
 
