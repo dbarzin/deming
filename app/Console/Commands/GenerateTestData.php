@@ -36,7 +36,11 @@ class GenerateTestData extends Command
 
         // Remove data in documents and controls tables
         DB::table('documents')->delete();
+        DB::table('action_measure')->delete();
+        DB::table('action_user')->delete();
+        DB::table('actions')->delete();
         DB::table('controls')->update(['next_id' => null]);
+        DB::table('control_user_group')->delete();
         DB::table('control_measure')->delete();
         DB::table('controls')->delete();
 
@@ -58,7 +62,7 @@ class GenerateTestData extends Command
         $period = 12;
 
         // Start date
-        $curDate = Carbon::now()->addMonth(-$period)->day(1);
+        $curDate = Carbon::now()->addMonths(-$period)->day(1);
 
         // get all controls
         $measures = Measure::All();
@@ -72,7 +76,7 @@ class GenerateTestData extends Command
         $delta = $perPeriod - rand(-$perPeriod / 2, $perPeriod / 2);
 
         // get language for the faker
-        $lang = env('LANG', 1);
+        $lang = getenv('LANG');
         if (strtolower($lang) === 'fr') {
             $locale = 'fr_FR';
         } else {
@@ -87,7 +91,7 @@ class GenerateTestData extends Command
             $delta--;
             if ($delta <= 0) {
                 // go to next period
-                $curDate->addMonth(1);
+                $curDate->addMonth();
                 $delta = $perPeriod - rand(-$perPeriod / 3, $perPeriod / 3);
             }
 
@@ -106,7 +110,7 @@ class GenerateTestData extends Command
             $control->attributes = $measure->attributes;
             // do it
             $control->plan_date = (new Carbon($curDate))->day(rand(0, 28))->toDateString();
-            $control->realisation_date = (new Carbon($curDate))->addDay(rand(0, 28))->toDateString();
+            $control->realisation_date = (new Carbon($curDate))->addDays(rand(0, 28))->toDateString();
             $control->observations = $faker->text(256);
             $control->note = rand(0, 10);
             $control->score = rand(0, 100) < 90 ? 3 : (rand(0, 2) < 2 ? 2 : 1);
@@ -128,8 +132,8 @@ class GenerateTestData extends Command
             $prev_control->periodicity = 12;
             $prev_control->attributes = $measure->attributes;
             // do it
-            $prev_control->plan_date = (new Carbon($curDate))->addMonth(-$measure->periodicity)->day(rand(0, 28))->toDateString();
-            $prev_control->realisation_date = (new Carbon($curDate))->addMonth(-$measure->periodicity)->addDay(rand(0, 28))->toDateString();
+            $prev_control->plan_date = (new Carbon($curDate))->addMonths(-$control->periodicity)->day(rand(0, 28))->toDateString();
+            $prev_control->realisation_date = (new Carbon($curDate))->addMonths(-$control->periodicity)->addDays(rand(0, 28))->toDateString();
             $prev_control->observations = $faker->text(256);
             $prev_control->note = rand(0, 10);
             $prev_control->score = rand(0, 100) < 90 ? 3 : (rand(0, 2) < 2 ? 2 : 1);
@@ -153,7 +157,7 @@ class GenerateTestData extends Command
             $nextControl->periodicity = 12;
             $nextControl->attributes = $control->attributes;
             // next one
-            $nextControl->plan_date = (new Carbon($curDate))->day(rand(0, 28))->addMonth(12)->toDateString();
+            $nextControl->plan_date = (new Carbon($curDate))->day(rand(0, 28))->addMonths(12)->toDateString();
             // fix it
             $nextControl->realisation_date = null;
             $nextControl->note = null;

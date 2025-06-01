@@ -419,6 +419,12 @@
                     },
                     title: {
                         display: false
+                    },
+                    datalabels: {
+                        color: 'black',
+                        anchor: 'center',
+                        align: 'center',
+                        formatter: (value) => value > 0 ? value : ''
                     }
                 },
                 onHover: (event, chartElement) => {

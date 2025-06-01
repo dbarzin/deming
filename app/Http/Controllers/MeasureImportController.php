@@ -47,7 +47,7 @@ class MeasureImportController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    public function import(Request $request)
+    public function import(Request $request) : Response
     {
         // Only for Administrator
         abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
@@ -140,13 +140,13 @@ class MeasureImportController extends Controller
     /**
      * Check Measures from an XLSX file
      *
-     * @return \Illuminate\Http\Response
+     * @return Bool
      */
     public function canImportFromFile(
         array $data,
         bool $clear,
         Collection $errors
-    ) {
+    ) : Bool {
         /*
         +-------------+---------------+------+-----+---------+----------------+
         | Field       | Type          | Null | Key | Default | Extra          |
