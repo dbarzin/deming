@@ -132,8 +132,8 @@ class GenerateTestData extends Command
             $prev_control->periodicity = 12;
             $prev_control->attributes = $measure->attributes;
             // do it
-            $prev_control->plan_date = (new Carbon($curDate))->addMonths(-$measure->periodicity)->day(rand(0, 28))->toDateString();
-            $prev_control->realisation_date = (new Carbon($curDate))->addMonths(-$measure->periodicity)->addDays(rand(0, 28))->toDateString();
+            $prev_control->plan_date = (new Carbon($curDate))->addMonths(-$control->periodicity)->day(rand(0, 28))->toDateString();
+            $prev_control->realisation_date = (new Carbon($curDate))->addMonths(-$control->periodicity)->addDays(rand(0, 28))->toDateString();
             $prev_control->observations = $faker->text(256);
             $prev_control->note = rand(0, 10);
             $prev_control->score = rand(0, 100) < 90 ? 3 : (rand(0, 2) < 2 ? 2 : 1);
