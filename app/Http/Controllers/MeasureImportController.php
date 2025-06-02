@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Http\RedirectResponse;
 
 class MeasureImportController extends Controller
 {
@@ -44,10 +45,10 @@ class MeasureImportController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
 
-    public function import(Request $request) : Response
+    public function import(Request $request) : RedirectResponse
     {
         // Only for Administrator
         abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
