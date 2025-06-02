@@ -22,5 +22,6 @@ return [
         'documents' => 'Documents',
         'notifications' => 'Notifications'
     ],
+    'test' => 'Vous êtes en environnement de test – Les données sont fictives',
     'logout' => 'Quitter'
 ];

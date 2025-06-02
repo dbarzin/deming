@@ -23,5 +23,6 @@ return [
         'models' => 'Models',
         'notifications' => 'Notifications'
     ],
+    'test' => 'You are in a test environment - The data is fictitious',
     'logout' => 'Logout'
 ];

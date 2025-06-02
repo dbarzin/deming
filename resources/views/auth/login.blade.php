@@ -44,6 +44,13 @@
     </style>
 </head>
 <body>
+@if (!app()->environment('production'))
+<div class="app-bar pos-fixed bg-orange fg-white" data-role="appbar">
+    <div class="app-bar-section">
+        <span class="mif-warning"></span> {{ trans('menu.test') }}
+    </div>
+</div>
+@endif
 <form
     method="POST"
     action="/login"
