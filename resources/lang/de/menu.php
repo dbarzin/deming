@@ -22,5 +22,6 @@ return [
         'models' => 'Models',
         'notifications' => 'Benachrichtigungen'
     ],
+    'test' => 'Sie befinden sich in einer Test-Umgebung - Die Daten sind fiktiv',
     'logout' => 'Logout'
 ];

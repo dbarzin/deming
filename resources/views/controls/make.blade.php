@@ -135,7 +135,7 @@
 	    		<strong>{{ trans('cruds.control.fields.note') }}</strong>
 	    	</div>
     		<div class="cell-lg-1 cell-md-2">
-				<input type="text" data-role="spinner" name="note"  data-min-value="0" data-max-value="100"
+				<input type="text" data-role="spinner" name="note" data-min-value="0" data-max-value="100"
                 value="{{ count($errors)>0 ?  old('note') : $control->note }}">
     		</div>
 	    </div>

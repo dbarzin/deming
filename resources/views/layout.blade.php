@@ -9,8 +9,25 @@
     <title>Deming - ISMS Controls Made Easy</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('styles')
+    @if (!app()->environment('production'))
+    <style>
+    .navview-content {
+        padding-top: 50px;
+    }
+    .navview-pane {
+        padding-top: 50px;
+    }
+    </style>
+    @endif
 </head>
 <body class="cloak">
+@if (!app()->environment('production'))
+<div class="app-bar pos-fixed bg-orange fg-white" data-role="appbar">
+      <div class="app-bar-section">
+        <span class="mif-warning"></span> &nbsp; {{ app()->environment() }} - {{ trans('menu.test') }}
+    </div>
+</div>
+@endif
 <div id="navview" data-role="navview" data-expand-point="md">
     <div class="navview-pane">
         <div class="logo-container">
@@ -26,7 +43,7 @@
             <div class="suggest-box">
                 <input type="text" data-role="input" name="search" value="{{ $search ?? '' }}" id="search" data-clear-button="false" data-search-button="true">
                 <button class="holder">
-                    <span class="mif-search fg-white"></span>
+                    <span class="mif-search"></span>
                 </button>
             </div>
         </form>
