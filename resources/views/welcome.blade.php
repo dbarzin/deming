@@ -253,7 +253,13 @@ document.addEventListener("DOMContentLoaded", function () {
                     display: false,
                 },
                 datalabels: {
-                    display: false,
+                    color: 'white',
+                    anchor: 'center',
+                    align: 'center',
+                    font: {
+                        weight: 'bold'
+                    },
+                    formatter: (value) => value > 0 ? value : ''
                 }
             },
             onHover: (event, chartElement) => {
@@ -280,7 +286,13 @@ document.addEventListener("DOMContentLoaded", function () {
                 display: false,
             },
             datalabels: {
-                display: false
+                color: 'white',
+                anchor: 'center',
+                align: 'center',
+                font: {
+                    weight: 'bold'
+                },
+                formatter: (value) => value > 0 ? value : ''
             }
         }
     };

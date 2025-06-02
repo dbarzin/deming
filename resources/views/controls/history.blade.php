@@ -421,9 +421,12 @@
                         display: false
                     },
                     datalabels: {
-                        color: 'black',
+                        color: 'white',
                         anchor: 'center',
                         align: 'center',
+                        font: {
+                            weight: 'bold'
+                        },
                         formatter: (value) => value > 0 ? value : ''
                     }
                 },
