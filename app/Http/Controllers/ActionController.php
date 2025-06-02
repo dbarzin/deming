@@ -56,11 +56,11 @@ class ActionController extends Controller
         // Get scope filter
         $scope = $request->get('scope');
         if ($scope !== null) {
-            $request->session()->put('scope', $scope);
+            $request->session()->put('ascope', $scope);
         } elseif ($request->has('scope')) {
-            $request->session()->forget('scope');
+            $request->session()->forget('ascope');
         } else {
-            $scope = $request->session()->get('scope');
+            $scope = $request->session()->get('ascope');
         }
 
         // Build query
