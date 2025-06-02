@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 legend: { display: false },
                 title: { display: false },
                 datalabels: {
-                    color: 'black',
+                    color: 'white',
                     anchor: 'center',
                     align: 'center',
                     font: {
