@@ -127,7 +127,7 @@
                                     <span style="font-weight: bold; color: {{ today()->lte($control->plan_date) ? 'green' : 'red' }}">{{ $control->plan_date }}</span>
                                 </a>
                                 @if ($control->status===1)
-                                    &nbsp;<a href="/bob/make/{{ $control->id }}">⌗</a>
+                                    &nbsp;<a href="/bob/make/{{ $control->id }}"><span class="mif-hour-glass"/></a>
                                 @endif
                             </td>
                         </tr>

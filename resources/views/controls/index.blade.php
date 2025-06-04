@@ -162,7 +162,7 @@
                     </a>
                     @if ( ($control->status===1 )&& ((Auth::User()->role===1)||(Auth::User()->role===2)))
                         &nbsp;
-                        <a href="/bob/make/{{ $control->id }}">&#8987;</a>
+                        <a href="/bob/make/{{ $control->id }}"><span class="mif-hour-glass"/></a>
                     @endif
                 </b>
             </td>
