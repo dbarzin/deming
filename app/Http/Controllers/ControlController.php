@@ -1353,7 +1353,17 @@ class ControlController extends Controller
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // for (aditee or auditor) only if he is assigne to that control
-        abort_if(! $control->canMake(), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(
+            !
+            ($control->canMake() ||
+                (
+                    ($control->status==1) &&
+                        (
+                        (Auth::User()->role==1) || (Auth::User()->role==2)
+                        )
+                )
+            )
+            , Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // get associated documents
         $documents = DB::table('documents')->where('control_id', $id)->get();
@@ -1739,7 +1749,8 @@ class ControlController extends Controller
         $new_control->measures()->sync($control->measures->pluck('id')->toArray());
 
         // Set owners
-        $new_control->owners()->sync($control->owners->pluck('id')->toArray());
+        $new_control->users()->sync($control->users->pluck('id')->toArray());
+        $new_control->groups()->sync($control->groups->pluck('id')->toArray());
 
         // make link
         $control->next_id = $new_control->id;
