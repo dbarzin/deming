@@ -81,7 +81,7 @@ class Control extends Model
         return $this->groups;
     }
 
-    public function canMake()
+    public function canMake() : Bool
     {
         if ($this->status !== 0) {
             return false;
@@ -94,6 +94,21 @@ class Control extends Model
         }
 
         if ($this->isAuditorOrAuditeeWithAccess($user)) {
+            return true;
+        }
+
+        return false;
+    }
+
+    public function canValidate() : Bool {
+
+        if ($this->status !== 1) {
+            return false;
+        }
+
+        $user = Auth::user();
+
+        if ($this->isAdminOrUser($user)) {
             return true;
         }
 
