@@ -70,6 +70,7 @@ According to ISO 27001, chapter 9.1, it is imperative to assess security perform
 | File                                 | Description                                                                    |
 |--------------------------------------|--------------------------------------------------------------------------------|
 | DORA.en.xlsx                         | [Digital Operational Resilience Act](https://www.esma.europa.eu/esmas-activities/digital-finance-and-innovation/digital-operational-resilience-act-dora)                                             |
+| HDS.fr.xlsx                         | [Hébergeur de Données de Santé](https://esante.gouv.fr/services/hebergeurs-de-donnees-de-sante/les-referentiels-de-la-procedure-de-certification) |
 | ISO27001-2013.fr.xlsx                | ISO/IEC 27001, 2013, in French                                                 |
 | ISO27001-2022.en.xlsx                | [ISO/IEC 27001, 2022, in English](https://www.iso.org/standard/27001)          |
 | ISO27001-2022.fr.xlsx                | [ISO/IEC 27001, 2022, in French](https://www.iso.org/fr/standard/27001)        |
