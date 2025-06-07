@@ -48,7 +48,7 @@ class MeasureImportController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      */
 
-    public function import(Request $request) : RedirectResponse
+    public function import(Request $request)
     {
         // Only for Administrator
         abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
