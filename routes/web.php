@@ -51,6 +51,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::post('/alice/activate/{id}', 'MeasureController@activate');
     Route::get('/alice/import', 'MeasureImportController@show');
     Route::post('/alice/import', 'MeasureImportController@import');
+    Route::get('/alice/download', 'MeasureImportController@download');
 
     /* Controls */
     Route::get('/bob/index', 'ControlController@index');

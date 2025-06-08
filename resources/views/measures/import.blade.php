@@ -25,9 +25,9 @@
                 </select>
             </div>
             <div class="cell-lg-1 cell-md-2" align="right">
-    		    <button type="submit" name="action" value="download" class="button info drop-shadow">
-                        {{ trans("common.download") }}
-                </button>
+                <a href="#" onclick="downloadModel()" class="button info drop-shadow">
+                    {{ trans("common.download") }}
+                </a>
             </div>
         </div>
     	<div class="row">
@@ -130,4 +130,14 @@
         </div>
     </div>
 </div>
+<script>
+function downloadModel() {
+    const model = document.getElementById('model').value;
+    if (!model) {
+        alert('Please select a model.');
+        return;
+    }
+    window.location.href = `/alice/download?model=${encodeURIComponent(model)}`;
+}
+</script>
 @endsection
