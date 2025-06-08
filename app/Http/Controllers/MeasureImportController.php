@@ -40,6 +40,44 @@ class MeasureImportController extends Controller
             ->with('models', $models);
     }
 
+
+    /**
+     * Download Measures
+     *
+     * @param \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
+
+    public function download(Request $request)
+    {
+        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $request->validate([
+            'model' => 'required|string',
+        ]);
+
+        $model = '/' . $request->get('model') . '.xlsx';
+        $file = current(
+            array_filter(
+                Storage::disk('local')->files('repository'),
+                fn($e) => str_contains($e, $model)
+            )
+        );
+
+        if (!$file) {
+            abort(404, 'Model not found');
+        }
+
+        $fileName = Storage::disk('local')->path($file);
+
+        return response()->download(
+            $fileName,
+            $request->get('model') . '.xlsx',
+            ['Content-Type' => 'application/octet-stream']
+        );
+    }
+
     /**
      * Import Measures
      *
@@ -57,28 +95,6 @@ class MeasureImportController extends Controller
             'file' => 'required_without:model|mimes:xls,xlsx',
             'model' => 'required_without:file',
         ]);
-
-        // Download model ?
-        if (request('action') === 'download') {
-            // Find file from repositories
-            $model = '/' . $request->get('model') . '.xlsx';
-            $file = current(
-                array_filter(
-                    Storage::disk('local')->files('repository'),
-                    function ($e) use ($model) {
-                        return str_contains($e, $model);
-                    }
-                )
-            );
-            // Get full path
-            $fileName = Storage::disk('local')->path($file);
-
-            return response()->download(
-                $fileName,
-                $request->get('model') . '.xlsx',
-                ['Content-Type: application/octet-stream']
-            );
-        }
 
         $errors = Collect();
         $messages = Collect();
