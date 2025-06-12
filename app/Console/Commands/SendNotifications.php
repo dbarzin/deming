@@ -55,7 +55,6 @@ class SendNotifications extends Command
                 ' days.'
             );
 
-            try {
                 // Loop on all users
                 $users = User::all();
 
@@ -91,7 +90,7 @@ class SendNotifications extends Command
                             // Space
                             $txt .= ' &nbsp; - &nbsp; ';
                             // Clauses
-                            foreach ($control->measures as $measure) {
+                            foreach ($control->measures() as $measure) {
                                 $txt .= '<a href="' . url('/alice/show/' . $measure->id) . '">'. htmlentities($measure->clause) . '</a>';
                                 // Space
                                 $txt .= ' &nbsp; ';
@@ -102,10 +101,11 @@ class SendNotifications extends Command
                             $txt .= "<br>\n";
                         }
 
+                    try {
                         // Create a new PHPMailer instance
                         $mail = new PHPMailer(true);
 
-                    // Server settings
+                        // Server settings
                         $mail->isSMTP();                                     // Use SMTP
                         $mail->Host = env('MAIL_HOST');               // Set the SMTP server
                         $mail->SMTPAuth = env('MAIL_AUTH');               // Enable SMTP authentication
@@ -145,12 +145,12 @@ class SendNotifications extends Command
 
                         // Success
                         Log::info("Mail sent to {$user->email}");
+                    } catch (Exception $e) {
+                        // Log error
+                        Log::error("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
                     }
                 }
-            } catch (Exception $e) {
-                // Log error
-                Log::error("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
-            }
+        }
         } else {
             Log::info('SendNotifications - no notifications today');
         }

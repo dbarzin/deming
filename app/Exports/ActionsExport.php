@@ -9,6 +9,7 @@ use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
+use Illuminate\Database\Eloquent\Builder;
 
 class ActionsExport implements FromQuery, WithMapping, WithHeadings, WithStyles, WithColumnWidths
 {
@@ -33,7 +34,7 @@ class ActionsExport implements FromQuery, WithMapping, WithHeadings, WithStyles,
     public function styles(Worksheet $sheet)
     {
         // fix unused
-        $sheet;
+        $sheet = null;
         // return
         return [
             // Style the first row as bold text.
@@ -64,9 +65,6 @@ class ActionsExport implements FromQuery, WithMapping, WithHeadings, WithStyles,
         ];
     }
 
-    /**
-     * @var action $action
-     */
     public function map($action): array
     {
         return [
@@ -87,10 +85,7 @@ class ActionsExport implements FromQuery, WithMapping, WithHeadings, WithStyles,
         ];
     }
 
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function query()
+    public function query(): Builder
     {
         return Action::orderBy('creation_date');
     }

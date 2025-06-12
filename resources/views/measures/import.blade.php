@@ -13,23 +13,25 @@
     	</div>
     </div>
 
-    <form action="/alice/import" method="post" enctype="multipart/form-data">
-    @csrf
+    <form action="/alice/download" method="get" enctype="multipart/form-data" target="_blank">
     	<div class="row">
             <div class="cell-lg-6 cell-md-7">
-    			<select data-role="select" name="model" id="model" data-prepend="Select model">
-                    <option id="emptyOption"></option>
+                <select data-role="select" name="model" id="model" data-prepend="Select model" required>
+                    <option></option>
     				@foreach($models as $model)
-                        <option>{{ basename($model,'.xlsx') }}</option>
+                        <option>{{ basename($model, '.xlsx') }}</option>
                     @endforeach
                 </select>
             </div>
             <div class="cell-lg-1 cell-md-2" align="right">
-                <a href="#" onclick="downloadModel()" class="button info drop-shadow">
+                <button type="submit" class="button info drop-shadow">
                     {{ trans("common.download") }}
-                </a>
+                </button>
             </div>
         </div>
+    </form>
+    <form action="/alice/import" method="post" enctype="multipart/form-data">
+    @csrf
     	<div class="row">
             <div class="cell-lg-7 cell-md-9">
                 {{ trans('cruds.imports.or') }}
@@ -122,21 +124,10 @@
             </table>
         </div>
     </div>
-
     <div class="row">
         <div class="cell-lg-6 cell-md-8 fg-red">
             {{ trans('cruds.imports.warning') }}
         </div>
     </div>
 </div>
-<script>
-function downloadModel() {
-    const model = document.getElementById('model').value;
-    if (!model) {
-        alert('Please select a model.');
-        return;
-    }
-    window.location.href = `/alice/download?model=${encodeURIComponent(model)}`;
-}
-</script>
 @endsection
