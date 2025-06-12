@@ -30,7 +30,7 @@ return [
             'action_plan' => 'Plan d\'actions',
             'reference' => 'Ref',
             'type' => 'Type',
-            'due_date' => 'Date due',
+            'due_date' => 'Date d\'échéance',
             'choose_type' => 'Choisir un type',
             'choose_scope' => 'Choisir un périmètre',
             'remediation' => 'Remédiation',
