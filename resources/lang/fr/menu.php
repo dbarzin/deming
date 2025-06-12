@@ -1,6 +1,6 @@
 <?php
 return [
-    'home' => 'Home',
+    'home' => 'Accueil',
     'attributes' => 'Attributs',
     'domains' => 'Domaines',
     'measures' => 'Mesures',
