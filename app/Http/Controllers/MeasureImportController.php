@@ -53,6 +53,8 @@ class MeasureImportController extends Controller
     {
         abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
+        \Log::debug('download called');
+
         $request->validate([
             'model' => 'required|string',
         ]);

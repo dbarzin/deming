@@ -17,10 +17,10 @@
     @csrf
     	<div class="row">
             <div class="cell-lg-6 cell-md-7">
-    			<select data-role="select" name="model" id="model" data-prepend="Select model">
-                    <option id="emptyOption"></option>
+                <select data-role="select" name="model" id="model" data-prepend="Select model" required>
+                    <option></option>
     				@foreach($models as $model)
-                        <option>{{ basename($model,'.xlsx') }}</option>
+                        <option>{{ basename($model, '.xlsx') }}</option>
                     @endforeach
                 </select>
             </div>
@@ -122,13 +122,13 @@
             </table>
         </div>
     </div>
-
     <div class="row">
         <div class="cell-lg-6 cell-md-8 fg-red">
             {{ trans('cruds.imports.warning') }}
         </div>
     </div>
 </div>
+
 <script>
 function downloadModel() {
     const model = document.getElementById('model').value;
