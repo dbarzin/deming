@@ -60,7 +60,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/bob/show/{id}', 'ControlController@show');
     Route::get('/bob/make/{id}', 'ControlController@make');
     Route::get('/bob/edit/{id}', 'ControlController@edit');
-    Route::post('/bob/template/{id}', 'ControlController@template');
+    Route::get('/bob/template/{id}', 'ControlController@template');
     Route::get('/bob/clone/{id}', 'ControlController@clone');
     Route::get('/bob/delete/{id}', 'ControlController@destroy');
     Route::post('/bob/make', 'ControlController@doMake');
