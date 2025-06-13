@@ -37,7 +37,7 @@
 					<label>{{ trans('cruds.user.fields.language') }}</label>
 				</div>
 	    		<div class="cell-3">
-	    			<select name='language' value='language'>
+	    			<select name='language' data-role="select">
 	    				<option {{ old('language',Auth::user()->language)=='de' ? 'selected' : ''}} >de</option>
 	    				<option {{ old('language',Auth::user()->language)=='en' ? 'selected' : ''}} >en</option>
 	    				<option {{ old('language',Auth::user()->language)=='fr' ? 'selected' : ''}} >fr</option>
@@ -49,7 +49,7 @@
 					<label>{{ trans('cruds.user.fields.role') }}</label>
 				</div>
 	    		<div class="cell-3">
-					<select name="role" class="input">
+                    <select name="role" data-role="select">
 					    <option value="1" {{ old('role')==1 ? "selected" : "" }}>{{ trans('cruds.user.roles.admin') }}</option>
 					    <option value="2" {{ old('role')==2 ? "selected" : "" }}>{{ trans('cruds.user.roles.user') }}</option>
                         <option value="5" {{ old('role')==3 ? "selected" : "" }}>{{ trans('cruds.user.roles.auditee') }}</option>

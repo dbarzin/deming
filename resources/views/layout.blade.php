@@ -263,6 +263,7 @@
                 <li>
                     <a href="/users/{{ Auth::User()->id }}/edit">
                         <span class="mif-person mif-2x"></span>
+                        <span class="badge bg-black fg-white mt-2 mr-1">{{ Auth::User()->initiales() }}</span>
                     </a>
                 </li>
                 <li>
