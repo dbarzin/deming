@@ -28,7 +28,7 @@ form, table {
                     <strong>{{ trans("cruds.action.fields.type") }}</strong>
                 </div>
                 <div class="cell-2">
-                    <select name="type" data-type="select">
+                    <select name="type" data-role="select">
                         <option></option>
                         <option value="1" {{ old('type')==1 ? 'selected' : '' }}>{{ trans('cruds.action.types.major') }}</option>
                         <option value="2" {{ old('type')==2 ? 'selected' : '' }}>{{ trans('cruds.action.types.minor') }}</option>
