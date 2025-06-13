@@ -13,7 +13,8 @@
     	</div>
     </div>
 
-    <form action="/alice/download" method="get" enctype="multipart/form-data" target="_blank">
+    <form action="/alice/import" method="post" enctype="multipart/form-data">
+    @csrf
     	<div class="row">
             <div class="cell-lg-6 cell-md-7">
                 <select data-role="select" name="model" id="model" data-prepend="Select model" required>
@@ -24,14 +25,11 @@
                 </select>
             </div>
             <div class="cell-lg-1 cell-md-2" align="right">
-                <button type="submit" class="button info drop-shadow">
+                <a href="#" onclick="downloadModel()" class="button info drop-shadow">
                     {{ trans("common.download") }}
-                </button>
+                </a>
             </div>
         </div>
-    </form>
-    <form action="/alice/import" method="post" enctype="multipart/form-data">
-    @csrf
     	<div class="row">
             <div class="cell-lg-7 cell-md-9">
                 {{ trans('cruds.imports.or') }}
@@ -130,4 +128,15 @@
         </div>
     </div>
 </div>
+
+<script>
+function downloadModel() {
+    const model = document.getElementById('model').value;
+    if (!model) {
+        alert('Please select a model.');
+        return;
+    }
+    window.location.href = `/alice/download?model=${encodeURIComponent(model)}`;
+}
+</script>
 @endsection
