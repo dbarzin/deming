@@ -95,6 +95,9 @@
         		<li>
 					<a href="/export/domains" target="_blank">{{ trans('cruds.exports.domains_export') }}</a>
 				</li>
+        		<li>
+					<a href="/export/attributes" target="_blank">{{ trans('cruds.exports.attributes_export') }}</a>
+				</li>
 				<li>
 					<a href="/export/alices" target="_blank">{{ trans('cruds.exports.controls_export') }}</a>
 				</li>

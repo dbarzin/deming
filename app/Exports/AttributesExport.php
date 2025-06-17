@@ -24,8 +24,7 @@ class AttributesExport implements FromQuery, WithMapping, WithHeadings, WithStyl
 
     public function styles(Worksheet $sheet)
     {
-        // Fix unused
-        $sheet;
+        $sheet = null;
         // Return
         return [
             // Style the first row as bold text.
@@ -41,9 +40,6 @@ class AttributesExport implements FromQuery, WithMapping, WithHeadings, WithStyl
         ];
     }
 
-    /**
-     * @var Attribute $attribute
-     */
     public function map($attribute): array
     {
         return [
@@ -54,7 +50,7 @@ class AttributesExport implements FromQuery, WithMapping, WithHeadings, WithStyl
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Database\Query\Builder
      */
     public function query()
     {

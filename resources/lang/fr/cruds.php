@@ -194,6 +194,7 @@ return [
         'steering' => 'Rapport de pilotage du SMSI',
         'data_export_title' => 'Exportation des données',
         'domains_export'=> 'Exportation des domaines',
+        'attributes_export' => 'Exportation des attributs',
         'measures_export' => 'Exportation des contrôles',
         'controls_export' => 'Exportation des mesures de sécurité',
         'actions_export' => 'Exporter les plans d\'action',

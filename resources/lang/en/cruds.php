@@ -194,6 +194,7 @@ return [
          'steering' => 'ISMS steering report',
          'data_export_title' => 'Data Export',
          'domains_export'=> 'Export domains ',
+         'attributes_export' => 'Export attributes',
          'measures_export' => 'Export security measures',
          'controls_export' => 'Export controls',
          'import' => 'Import',

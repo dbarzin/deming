@@ -40,7 +40,7 @@ class MeasuresExport extends StringValueBinder implements FromQuery, WithMapping
                     'wrapText' => true,
                     'vertical' => 'top',
                 ],
-            ],
+²            ],
         ];
     }
 
@@ -69,9 +69,6 @@ class MeasuresExport extends StringValueBinder implements FromQuery, WithMapping
         ];
     }
 
-    /**
-     * @var Measure $measure
-     */
     public function map($measure): array
     {
         return [
