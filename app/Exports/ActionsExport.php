@@ -25,6 +25,7 @@ class ActionsExport implements FromQuery, WithMapping, WithHeadings, WithStyles,
             trans('cruds.action.fields.cause'),
             trans('cruds.action.fields.owners'),
             trans('cruds.action.fields.remediation'),
+            trans('cruds.action.fields.progress'),
             trans('cruds.action.fields.status'),
             trans('cruds.action.fields.close_date'),
             trans('cruds.action.fields.justification'),
@@ -59,9 +60,10 @@ class ActionsExport implements FromQuery, WithMapping, WithHeadings, WithStyles,
             'G' => 50,  // Cause
             'H' => 20,  // Owners
             'I' => 50,  // remediation
-            'J' => 10,  // status
-            'K' => 10,  // close_date
-            'L' => 50,  // justification
+            'J' => 10,  // progress
+            'K' => 10,  // status
+            'L' => 10,  // close_date
+            'M' => 50,  // justification
         ];
     }
 
@@ -78,6 +80,7 @@ class ActionsExport implements FromQuery, WithMapping, WithHeadings, WithStyles,
                 $action->cause,
                 $action->owners()->implode('name', ', '),
                 $action->remediation,
+                $action->progress,
                 $action->status === 1 ? trans('cruds.action.fields.status_open') : ($action->status === 2 ? trans('cruds.action.fields.status_closed') : ($action->status === 3 ? trans('cruds.action.fields.status_rejected') : '')),
                 $action->close_date,
                 $action->justification,
