@@ -74,10 +74,6 @@
                         @else
                             {{ $log->subject_id }}
                         @endif
-
-
-
-
                     </td>
                     <td>
                         <a href="{{ route('users.show', $log->user_id) }}">
