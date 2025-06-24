@@ -1,7 +1,7 @@
 @extends("layout")
 
 @section("content")
-    <div data-role="panel" data-title-caption='{{ trans("cruds.log.index")}}' data-collapsible="false" data-title-icon="<span class='mif-log-file'></span>">
+<div data-role="panel" data-title-caption='{{ trans("cruds.log.index")}}' data-collapsible="false" data-title-icon="<span class='mif-log-file'></span>">
 
     <div class="grid">
 
@@ -98,8 +98,9 @@
                 @endforeach
             </tbody>
         </table>
-        <p>
-        {{ $logs->links() }}
-        </p>
+        <!------------------------------------------>
+        {!! $logs->links('pagination.metro') !!}
+        <!------------------------------------------>
     </div>
+</div>
 @endsection

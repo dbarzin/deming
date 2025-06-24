@@ -31,7 +31,8 @@ class AuditLogsController extends Controller
                 'audit_logs.created_at'
             )
             ->join('users', 'users.id', '=', 'user_id')
-            ->orderBy('audit_logs.id', 'desc')->paginate(100);
+            ->orderBy('audit_logs.id', 'desc')
+            ->paginate(100);
 
         return view('logs.index', ['logs' => $logs]);
     }
