@@ -98,8 +98,8 @@
                 @endforeach
             </tbody>
         </table>
-        <p>
-        {{ $logs->links() }}
-        </p>
+        <!------------------------------------------>
+        {!! $logs->links('pagination.metro') !!}
+        <!------------------------------------------>
     </div>
 @endsection
