@@ -98,9 +98,7 @@
                 @endforeach
             </tbody>
         </table>
-        <!------------------------------------------>
-        {!! $logs->links('pagination.metro') !!}
-        <!------------------------------------------>
+        {!! $logs->links('vendor.pagination.metro-5') !!}
     </div>
 </div>
 @endsection
