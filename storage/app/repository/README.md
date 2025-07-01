@@ -4,6 +4,7 @@
 |--------------------------------------|--------------------------------------------------------------------------------|
 | DORA.en.xlsx                         | Digital Operational Resilience Act                                             |
 | HDS.fr.xlsx                          | Hébergeur de Données de Santé (https://esante.gouv.fr/services/hebergeurs-de-donnees-de-sante/les-referentiels-de-la-procedure-| HDS-V2.fr.xlsx                       | Hébergeur de Données de Santé (https://esante.gouv.fr/services/hebergeurs-de-donnees-de-sante/les-referentiels-de-la-procedure-de-certification) |
+| ISO22301-2019.fr.xlsx                | ISO/IEC 22301, 2019, in French                                                 |
 | ISO27001-2013.fr.xlsx                | ISO/IEC 27001, 2013, in French                                                 |
 | ISO27001-2022.en.xlsx                | [ISO/IEC 27001, 2022, in English](https://www.iso.org/standard/27001)          |
 | ISO27001-2022.fr.xlsx                | [ISO/IEC 27001, 2022, in French](https://www.iso.org/fr/standard/27001)        |
