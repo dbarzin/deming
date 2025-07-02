@@ -40,7 +40,7 @@ class MeasuresExport extends StringValueBinder implements FromQuery, WithMapping
                     'wrapText' => true,
                     'vertical' => 'top',
                 ],
-²            ],
+            ],
         ];
     }
 
