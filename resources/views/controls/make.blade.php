@@ -158,7 +158,7 @@
             <div class="cell-lg-6 cell-md-10">
                 <input type="radio" data-role="radio" name="score" value="3" data-role="radio" data-append="<font color='green'>{{ trans('common.green') }}</font>" {{ $control->score===3 ? "checked" : "" }} />
                 <input type="radio" data-role="radio" name="score" value="2" data-role="radio" data-append="<font color='orange'>{{ trans('common.orange') }}</font>" {{ $control->score===2 ? "checked" : "" }} />
-                <input type="radio" data-role="radio" name="score" value="2" data-role="radio" data-append="<font color='red'>{{ trans('common.red') }}</font>" {{ $control->score===1 ? "checked" : "" }} />
+                <input type="radio" data-role="radio" name="score" value="1" data-role="radio" data-append="<font color='red'>{{ trans('common.red') }}</font>" {{ $control->score===1 ? "checked" : "" }} />
             </div>
 		</div>
         @if ((Auth::User()->role === 1)||(Auth::User()->role === 2))
