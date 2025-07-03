@@ -388,39 +388,59 @@ document.addEventListener('DOMContentLoaded', function () {
     // Ajoute les observations en paramètre de la template de document
     // ---------------------------------------------------------
 
+
     const link = document.querySelector('#checklist-link');
     const textarea = document.querySelector('textarea[name="observations"]');
 
-    link.addEventListener('click', function (event) {
+    link.addEventListener('click', async function (event) {
         event.preventDefault();
+
         const action = this.getAttribute('href');
         const observations = textarea.value;
 
-        // Créer le formulaire
-        const form = document.createElement('form');
-        form.method = 'POST';
-        form.action = action;
-        form.target = '_blank';
+        // Préparation des données à envoyer
+        const formData = new FormData();
+        formData.append('observations', observations);
+        formData.append('_token', '{{csrf_token()}}'); // à générer côté serveur avant rendu
 
-        // Ajouter le champ observations
-        const input = document.createElement('input');
-        input.type = 'hidden';
-        input.name = 'observations';
-        input.value = observations;
-        form.appendChild(input);
+        try {
+            const response = await fetch(action, {
+                method: 'POST',
+                body: formData
+            });
 
-        // Ajouter le CSRF token
-        const csrfInput = document.createElement('input');
-        csrfInput.type = 'hidden';
-        csrfInput.name = '_token';
-        csrfInput.value = '{{csrf_token()}}';
-        form.appendChild(csrfInput);
+            if (!response.ok) {
+                throw new Error('Erreur lors de la génération du document');
+            }
 
-        // Ajouter le formulaire au DOM et le soumettre
-        document.body.appendChild(form);
-        form.submit();
-        document.body.removeChild(form);
+            const blob = await response.blob();
+
+            // Récupération du nom du fichier depuis les en-têtes si disponible
+            let filename = 'document.doc';
+            const disposition = response.headers.get('Content-Disposition');
+            if (disposition && disposition.includes('filename=')) {
+                const match = disposition.match(/filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/);
+                if (match && match[1]) {
+                    filename = match[1].replace(/['"]/g, '');
+                }
+            }
+
+            // Création d'un lien de téléchargement temporaire
+            const url = window.URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = filename;
+            document.body.appendChild(a);
+            a.click();
+            a.remove();
+            window.URL.revokeObjectURL(url);
+
+        } catch (error) {
+            console.error('Erreur pendant le téléchargement :', error);
+            alert('Le téléchargement a échoué.');
+        }
     });
+
 
     // ---------------------------------------------------------
     // Check-uncheck radio buttons
