@@ -1,3 +1,4 @@
+/*M!999999\- enable the sandbox mode */ 
 /*!40103 SET @OLD_TIME_ZONE=@@TIME_ZONE */;
 /*!40103 SET TIME_ZONE='+00:00' */;
 /*!40014 SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0 */;
@@ -6,7 +7,7 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 DROP TABLE IF EXISTS `action_measure`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `action_measure` (
   `action_id` int(10) unsigned NOT NULL,
   `measure_id` int(10) unsigned NOT NULL,
@@ -18,7 +19,7 @@ CREATE TABLE `action_measure` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `action_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `action_user` (
   `action_id` int(10) unsigned NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
@@ -30,11 +31,11 @@ CREATE TABLE `action_user` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `actions`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `actions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `reference` varchar(32) DEFAULT NULL,
-  `type` varchar(32) DEFAULT NULL,
+  `type` int(11) NOT NULL,
   `criticity` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `scope` varchar(32) DEFAULT NULL,
@@ -55,7 +56,7 @@ CREATE TABLE `actions` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `attributes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `attributes` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -66,9 +67,25 @@ CREATE TABLE `attributes` (
   UNIQUE KEY `tags_name_unique` (`name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `audit_logs`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `audit_logs` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `description` text NOT NULL,
+  `subject_id` int(10) unsigned DEFAULT NULL,
+  `subject_type` varchar(255) DEFAULT NULL,
+  `user_id` int(10) unsigned DEFAULT NULL,
+  `properties` text DEFAULT NULL,
+  `host` varchar(45) DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `control_measure`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `control_measure` (
   `control_id` int(10) unsigned NOT NULL,
   `measure_id` int(10) unsigned NOT NULL,
@@ -80,7 +97,7 @@ CREATE TABLE `control_measure` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `control_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `control_user` (
   `control_id` int(10) unsigned NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
@@ -90,9 +107,21 @@ CREATE TABLE `control_user` (
   CONSTRAINT `user_id_fk_304958543` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`) ON DELETE CASCADE ON UPDATE NO ACTION
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `control_user_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `control_user_group` (
+  `control_id` int(10) unsigned NOT NULL,
+  `user_group_id` int(10) unsigned NOT NULL,
+  KEY `control_user_group_control_id_foreign` (`control_id`),
+  KEY `control_user_group_user_group_id_foreign` (`user_group_id`),
+  CONSTRAINT `control_user_group_control_id_foreign` FOREIGN KEY (`control_id`) REFERENCES `controls` (`id`),
+  CONSTRAINT `control_user_group_user_group_id_foreign` FOREIGN KEY (`user_group_id`) REFERENCES `user_groups` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `controls`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `controls` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `name` varchar(255) NOT NULL,
@@ -112,7 +141,6 @@ CREATE TABLE `controls` (
   `next_id` int(10) unsigned DEFAULT NULL,
   `standard` varchar(255) DEFAULT NULL,
   `attributes` varchar(1024) DEFAULT NULL,
-  `site` varchar(255) DEFAULT NULL,
   `scope` varchar(32) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
   PRIMARY KEY (`id`),
@@ -122,7 +150,7 @@ CREATE TABLE `controls` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `documents`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `documents` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `control_id` int(10) unsigned NOT NULL,
@@ -139,7 +167,7 @@ CREATE TABLE `documents` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `domains`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `domains` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `framework` varchar(255) DEFAULT NULL,
@@ -152,7 +180,7 @@ CREATE TABLE `domains` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `measures`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `measures` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `domain_id` int(10) unsigned NOT NULL,
@@ -175,7 +203,7 @@ CREATE TABLE `measures` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `migrations`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `migrations` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `migration` varchar(255) NOT NULL,
@@ -185,7 +213,7 @@ CREATE TABLE `migrations` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `oauth_access_tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `oauth_access_tokens` (
   `id` varchar(100) NOT NULL,
   `user_id` bigint(20) unsigned DEFAULT NULL,
@@ -202,7 +230,7 @@ CREATE TABLE `oauth_access_tokens` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `oauth_auth_codes`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `oauth_auth_codes` (
   `id` varchar(100) NOT NULL,
   `user_id` bigint(20) unsigned NOT NULL,
@@ -216,7 +244,7 @@ CREATE TABLE `oauth_auth_codes` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `oauth_clients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `oauth_clients` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `user_id` bigint(20) unsigned DEFAULT NULL,
@@ -235,7 +263,7 @@ CREATE TABLE `oauth_clients` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `oauth_personal_access_clients`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `oauth_personal_access_clients` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `client_id` bigint(20) unsigned NOT NULL,
@@ -246,7 +274,7 @@ CREATE TABLE `oauth_personal_access_clients` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `oauth_refresh_tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `oauth_refresh_tokens` (
   `id` varchar(100) NOT NULL,
   `access_token_id` varchar(100) NOT NULL,
@@ -258,7 +286,7 @@ CREATE TABLE `oauth_refresh_tokens` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `password_resets`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `password_resets` (
   `email` varchar(255) NOT NULL,
   `token` varchar(255) NOT NULL,
@@ -268,7 +296,7 @@ CREATE TABLE `password_resets` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `personal_access_tokens`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `personal_access_tokens` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `tokenable_type` varchar(255) NOT NULL,
@@ -285,9 +313,33 @@ CREATE TABLE `personal_access_tokens` (
   KEY `personal_access_tokens_tokenable_type_tokenable_id_index` (`tokenable_type`,`tokenable_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `user_groups`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_groups` (
+  `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(255) NOT NULL,
+  `description` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `user_user_group`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `user_user_group` (
+  `user_id` bigint(20) unsigned NOT NULL,
+  `user_group_id` int(10) unsigned NOT NULL,
+  KEY `user_user_group_user_id_foreign` (`user_id`),
+  KEY `user_user_group_user_group_id_foreign` (`user_group_id`),
+  CONSTRAINT `user_user_group_user_group_id_foreign` FOREIGN KEY (`user_group_id`) REFERENCES `user_groups` (`id`),
+  CONSTRAINT `user_user_group_user_id_foreign` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `users`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
+/*!40101 SET character_set_client = utf8mb4 */;
 CREATE TABLE `users` (
   `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
   `login` varchar(255) NOT NULL,
@@ -314,6 +366,7 @@ CREATE TABLE `users` (
 /*!40014 SET UNIQUE_CHECKS=@OLD_UNIQUE_CHECKS */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
+/*M!999999\- enable the sandbox mode */ 
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (1,'2014_10_12_000000_create_users_table',1);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (2,'2014_10_12_100000_create_password_resets_table',1);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (3,'2019_07_28_175941_create_domains_table',1);
@@ -343,3 +396,7 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (54,'2016_06_01_000
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (55,'2016_06_01_000004_create_oauth_clients_table',2);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (56,'2016_06_01_000005_create_oauth_personal_access_clients_table',2);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (61,'2024_11_06_123808_add_actions',3);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (62,'2025_02_04_064646_create_audit_logs_table',4);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (63,'2025_02_05_121035_cleanup',4);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (64,'2025_04_29_123908_add_user_group',4);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (65,'2025_05_27_152856_change_actions',4);
