@@ -49,8 +49,10 @@ return new class extends Migration
                 $table->string('type')->nullable()->change();
             });
         }
-        Schema::table('actions', function (Blueprint $table) {
-            $table->dropColumn('progress');
-        });
+        if (Schema::hasColumn('actions', 'progress')) {
+            Schema::table('actions', function (Blueprint $table) {
+                $table->dropColumn('progress');
+            });
+        }
     }
 };
