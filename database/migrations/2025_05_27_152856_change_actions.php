@@ -30,6 +30,9 @@ return new class extends Migration
                 $table->integer('type')->nullable(false)->change();
             });
         }
+        Schema::table('actions', function (Blueprint $table) {
+            $table->integer('progress')->nullable()->after('type');
+        });
     }
 
     public function down()
@@ -46,5 +49,8 @@ return new class extends Migration
                 $table->string('type')->nullable()->change();
             });
         }
+        Schema::table('actions', function (Blueprint $table) {
+            $table->dropColumn('progress');
+        });
     }
 };
