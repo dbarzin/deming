@@ -239,7 +239,6 @@
                 @yield('title')
                 </div>
             </div>
-
             <ul class="app-bar-menu ml-auto">
                 <a href="/bob/index?attribute=none&period=0&scope=none&domain=0&status=2" class="no-underline">
                     <span class="mif-mail-outline mif-2x"></span>
