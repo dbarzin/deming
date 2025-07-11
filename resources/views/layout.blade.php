@@ -241,33 +241,36 @@
             </div>
 
             <ul class="app-bar-menu ml-auto">
-
-                <a href="/bob/index?attribute=none&period=0&scope=none&domain=0&status=2">
+                <a href="/bob/index?attribute=none&period=0&scope=none&domain=0&status=2" class="no-underline">
                     <span class="mif-mail-outline mif-2x"></span>
                     @if (Session::get("planed_controls_this_month_count")!=null)
                     <span class="badge bg-green fg-white mt-2 mr-1">{{Session::get("planed_controls_this_month_count")}}</span>
+                    @else
+                        &nbsp;
                     @endif
                 </a>
-                <a href="/bob/index?attribute=none&period=99&scope=none&domain=0&status=1&late=1">
+                <a href="/bob/index?attribute=none&period=99&scope=none&domain=0&status=1&late=1" class="no-underline">
                     <span class="mif-notifications mif-2x"></span>
                     @if (Session::get("late_controls_count")!=null)
                     <span class="badge bg-red fg-white mt-2 mr-1">{{Session::get("late_controls_count")}}</span>
+                    @else
+                        &nbsp;
                     @endif
                 </a>
-                <a href="/actions">
+                <a href="/actions" class="no-underline">
                     <span class="mif-flag mif-2x"></span>
                     @if (Session::get("action_plans_count")!=null)
                     <span class="badge bg-blue fg-white mt-2 mr-1">{{Session::get("action_plans_count")}}</span>
+                    @else
+                        &nbsp;
                     @endif
                 </a>
+                <a href="/users/{{ Auth::User()->id }}/edit" class="no-underline">
+                    <span class="mif-person mif-2x"></span>
+                    <span class="badge bg-black fg-white mt-2 mr-1">{{ Auth::User()->initiales() }}</span>
+                </a>
                 <li>
-                    <a href="/users/{{ Auth::User()->id }}/edit">
-                        <span class="mif-person mif-2x"></span>
-                        <span class="badge bg-black fg-white mt-2 mr-1">{{ Auth::User()->initiales() }}</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="/about">
+                    <a href="/about" class="no-underline">
                         <span class="mif-help-outline mif-2x"></span>
                     </a>
                 </li>
