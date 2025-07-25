@@ -54,49 +54,12 @@ class Cleanup extends Command
 
         Log::info("Cleanup limit date {$dateLimit}");
 
-        // Initialise counters
-        $documentCount = 0;
-        $controlCount = 0;
+        $result = Control::cleanup($dateLimit, false);
 
-        // Get conctrols
-        $oldControls = Control::whereNotNull('realisation_date')
-            ->where('realisation_date', '<', $dateLimit)
-            ->get();
-
-        foreach ($oldControls as $control) {
-            DB::transaction(function () use ($control, &$documentCount, &$controlCount) {
-                // Supprimer les documents associés
-                $documents = Document::where('control_id', $control->id)->get();
-
-                foreach ($documents as $document) {
-                    // Supprimer le fichier physique s'il existe
-                    $filePath = storage_path('docs/' . $document->id);
-                    if (File::exists($filePath)) {
-                        File::delete($filePath);
-                    }
-
-                    // Supprimer l'enregistrement du document
-                    $document->delete();
-
-                    $documentCount++;
-                }
-
-                // Supprimer les liens dans control_measure
-                DB::table('control_measure')->where('control_id', $control->id)->delete();
-
-                // Supprimer les plans d'action
-                DB::table('actions')->where('control_id', $control->id)->delete();
-
-                // Supprimer le contrôle lui-même
-                $control->delete();
-
-                $controlCount++;
-            });
-        }
-
-        Log::info("Cleanup {$documentCount} document(s).");
-        Log::info("Cleanup {$controlCount} control(s).");
+        Log::info("Cleanup {$result['documentCount']} document(s).");
+        Log::info("Cleanup {$result['controlCount']} control(s).");
 
         Log::info('Cleanup Done.');
     }
+
 }

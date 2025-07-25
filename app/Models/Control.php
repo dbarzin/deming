@@ -153,4 +153,54 @@ class Control extends Model
             ->where('user_user_group.user_id', $user->id)
             ->exists();
     }
+
+    public static function cleanup(string $startDate, bool $dryRun) {
+
+        // Initialise counters
+        $documentCount = 0;
+        $controlCount = 0;
+
+        // Get conctrols
+        $oldControls = Control::whereNotNull('realisation_date')
+            ->where('realisation_date', '<', $startDate)
+            ->get();
+
+        foreach ($oldControls as $control) {
+            DB::transaction(function () use ($control, &$documentCount, &$controlCount) {
+                // Supprimer les documents associés
+                $documents = Document::where('control_id', $control->id)->get();
+
+                foreach ($documents as $document) {
+                    // Supprimer le fichier physique s'il existe
+                    if (!$dryRun) {
+                        $filePath = storage_path('docs/' . $document->id);
+                        if (File::exists($filePath)) {
+                            File::delete($filePath);
+                        }
+                        // Supprimer l'enregistrement du document
+                        $document->delete();
+                    }
+                    $documentCount++;
+                }
+
+                // Supprimer les liens dans control_measure
+                DB::table('control_measure')->where('control_id', $control->id)->delete();
+
+                // Supprimer les plans d'action
+                DB::table('actions')->where('control_id', $control->id)->delete();
+
+                // Supprimer le contrôle lui-même
+                if (!$dryRun)
+                    $control->delete();
+
+                $controlCount++;
+            });
+        }
+
+       return [
+            'documentCount' => $documentCount,
+            'controlCount' => $controlCount,
+        ];
+    }
+
 }

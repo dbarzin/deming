@@ -101,10 +101,22 @@ function bytesToHuman($bytes) {
 
         <div class="row">
             <div class="cell-3">
-                <button type="submit" class="button success">
+                <button type="submit" class="button success" name="action" value="save">
                     <span class="mif-floppy-disk2"></span>
                     &nbsp;
                     {{ trans("common.save") }}
+                </button>
+                &nbsp;
+                <button type="submit" class="button info" name="action" value="test">
+                    <span class="mif-lab"></span>
+                    &nbsp;
+                    {{ trans("common.test") }}
+                </button>
+                &nbsp;
+                <button type="submit" class="button alert" name="action" value="delete">
+                    <span class="mif-bin"></span>
+                    &nbsp;
+                    {{ trans("common.delete") }}
                 </button>
             </div>
         </div>
