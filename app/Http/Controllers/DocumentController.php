@@ -2,7 +2,11 @@
 
 namespace App\Http\Controllers;
 
+// Models
 use App\Models\Document;
+use App\Models\Control;
+// Framework
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -256,12 +260,49 @@ class DocumentController extends Controller
         // Get duration from request
         $duration = $request->get('duration');
 
-        // Set duration
-        config(['deming.cleanup-duration' => $duration]);
+        // Get action
+        $action = $request->input('action');
 
-        // Save configuration
-        $text = '<?php return ' . var_export(config('deming'), true) . ';';
-        file_put_contents(config_path('deming.php'), $text);
+        // Act
+        if ($action =='save') {
+
+
+            // Set duration
+            config(['deming.cleanup-duration' => $duration]);
+
+            // Save configuration
+            $text = '<?php return ' . var_export(config('deming'), true) . ';';
+            file_put_contents(config_path('deming.php'), $text);
+
+            // Message
+            $messages = Collect('Configuration saved !');
+            }
+        else if ($action =='test') {
+            $dateLimit = Carbon::now()->subMonths($duration)->toDateString();
+
+            $result = Control::cleanup($dateLimit, true);
+
+            $messages = Collect(
+                    [
+                        "{$result['documentCount']} document(s) will be deleted.",
+                        "{$result['controlCount']} control(s) will be deleted."
+                    ]
+                );
+            }
+        else if ($action == 'delete') {
+            $dateLimit = Carbon::now()->subMonths($duration)->toDateString();
+
+            $result = Control::cleanup($dateLimit, false);
+
+            $messages = Collect(
+                    [
+                        "{$result['documentCount']} document(s) deleted.",
+                        "{$result['controlCount']} control(s) deleted."
+                    ]
+                );
+        }
+        else
+            $messages = null;
 
         // get previous fields
         $count = Document::count();
@@ -272,6 +313,6 @@ class DocumentController extends Controller
             ->with('count', $count)
             ->with('sum', $sum)
             ->with('duration', $duration)
-            ->with('messages', Collect('Configuration saved !'));
+            ->with('messages', $messages);
     }
 }

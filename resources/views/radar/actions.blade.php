@@ -7,16 +7,27 @@
     <div class="row">
         <div class="cell-md-9">
             <div class="row">
-                <div class="cell-2">
+                <div class="cell-auto">
                     <strong>Period</strong>
                     <input
                     id="start"
                     name="start"
                     value="{{ $start }}"
+                    data-prepend="Start"
                     data-role="calendarpicker"
                     data-format="YYYY-MM-DD"/>
                 </div>
-                <div class="cell-3">
+                <div class="cell-auto">
+                    <br>
+                    <input
+                    id="end"
+                    name="end"
+                    data-prepend="End"
+                    value="{{ $end }}"
+                    data-role="calendarpicker"
+                    data-format="YYYY-MM-DD"/>
+                </div>
+                <div class="cell-4">
                     <strong>Scope</strong>
                     <select id='scope' name="scope" data-role="select">
                         <option value="">-- {{ trans("cruds.action.fields.choose_scope")}} --</option>
@@ -33,6 +44,49 @@
                 <div data-role="panel" data-title-caption="Etat des actions au {{ date('d/m/Y')}}" data-collapsible="false" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
                     <div class="p-8">
                         <canvas id="actionsChart" class="chartjs-render-monitor"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <div class="panel mt-2">
+                <div class="row">
+                    <div class="cell-md-12">
+                        <table
+                            id="controls"
+                            class="table striped row-hover cell-border"
+                            data-role="table"
+                            data-rows="100"
+                            data-show-activity="true"
+                            data-rownum="false"
+                            data-check="false"
+                            data-check-style="1"
+                            data-show-search="false"
+                            data-show-pagination="false"
+                            data-show-rows-steps="false"
+                            >
+                            <thead>
+                                <tr>
+                                    <th>Reference</th>
+                                    <th>Scope</th>
+                                    <th>Name</th>
+                                    <th>Progress</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                        @foreach($actions as $action)
+                        <tr>
+                            <td>{{ $action->reference }}</td>
+                            <td>{{ $action->scope }}</td>
+                            <td>{{ $action->name }}</td>
+                            <td>
+                                <div data-role="donut" data-value="{{ $action->progress }}" class="donut-red"
+                                    data-stroke="#f5f5f5" data-fill="#9C27B0" data-color="#FFFFFF">
+                                </div>
+                            </td>
+                        </tr>
+                        @endforeach
+                    </tbody>
+                        </table>
                     </div>
                 </div>
             </div>

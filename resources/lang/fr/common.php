@@ -19,6 +19,7 @@ return [
     'reject' => "Rejeter",
     'save' => 'Sauver',
     'show' => 'Voir',
+    'test' => 'Tester',
     'unplan' => 'Déplanifier',
     'validate' => 'Valider',
 

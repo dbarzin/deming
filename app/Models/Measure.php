@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Facades\DB;
 
 class Measure extends Model
@@ -40,7 +41,14 @@ class Measure extends Model
         return $this->belongsTo(Domain::class, 'domain_id');
     }
 
-    // check if there is an empty control associated with this measure
+    // Return the controls associated to this measure
+    public function controls(): BelongsToMany
+    {
+        return $this->belongsToMany(Control::class)
+            ->whereNotNull('realisation_date')->orderBy('realisation_date');
+    }
+
+    // Check if there is an empty control associated with this measure
     public function isActive()
     {
         return DB::table('controls')
@@ -48,6 +56,7 @@ class Measure extends Model
             ->whereNull('realisation_date')
             ->exists();
     }
+
 
     // check if there is an empty control associated with this measure
     public function isDisabled()

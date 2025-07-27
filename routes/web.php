@@ -91,6 +91,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/doc/template', 'DocumentController@getTemplate');
     Route::post('/doc/template', 'DocumentController@saveTemplate');
     Route::post('/doc/config', 'DocumentController@saveConfig');
+    Route::get('/doc/config', 'DocumentController@index');
 
     /* Configuration */
     Route::get('/config', 'ConfigurationController@index');
