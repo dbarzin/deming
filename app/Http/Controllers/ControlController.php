@@ -1782,35 +1782,24 @@ class ControlController extends Controller
             '403 Forbidden'
         );
 
-        // get controls
+        // get measures
         if ($request->id !== null) {
-            // Measure ID
-            $id = (int) $request->id;
-            // find associate control
-            $measure = Measure::find($id);
-
-            // Measure not found
-            abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
-
-            // Get all date and score for that measure
-            $controls = DB::Table('controls')
-                ->select('id', 'realisation_date', 'note', 'controls.score')
-                ->whereNotNull('next_id')
-                ->leftjoin('control_measure', 'control_id', '=', 'controls.id')
-                ->where('measure_id', $id)
-                ->orderBy('realisation_date')
-                ->get();
+            // Find associate control
+            $measures = Measure::where('clause', '=', $request->id)->get();
         } else {
-            $controls = null;
+            $measures = Collect();
         }
 
-        $measures = DB::Table('measures')
-            ->select('id', 'name', 'clause')
-            ->orderby('name')->get();
+        $clauses = DB::Table('measures')
+            ->select('clause')
+            ->distinct()
+            ->orderby('clause')
+            ->get()
+            ->pluck('clause');
 
         // return view
         return view('radar.measures')
-            ->with('controls', $controls)
+            ->with('clauses', $clauses)
             ->with('measures', $measures);
     }
 

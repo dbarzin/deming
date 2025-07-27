@@ -2,64 +2,62 @@
 
 @section("content")
 <form action="/radar/domains">
-    <div data-role="panel" data-title-caption="Tableau de bord" data-collapsible="false" data-title-icon="<span class='mif-timeline'></span>">
+    <div data-role="panel" data-title-caption="Tableau de bord" data-collapsible="false" data-title-icon="<span class='mif-gauge'></span>">
 
-    <div class="row">
-        <div class="cell-2">
-            <strong>{{ trans("cruds.measure.fields.clause") }}</strong>
-            <select name="measures" data-role="select" id="measures" data-filter="true">
-                <option></option>
-                @foreach ($measures as $measure)
-                <option id='{{ $measure->id }}'
-                    @if (request()->get('id')==(string)$measure->id)
-                        selected
-                    @endif >
-                    {{ $measure->clause }}
-                </option>
-                @endforeach
-            </select>
-        </div>
-    </div>
-
-    <div class="panel mt-2">
-        <div data-role="panel" data-title-caption="Suivi temporel de la mesure" data-collapsible="true" data-title-icon="<span class='mif-chart-line'></span>">
-            <div class="p-7" style="height: 300px;">
-                <canvas id="scoreChart"></canvas>
+        <div class="row">
+            <div class="cell-2">
+                <strong>{{ trans("cruds.measure.fields.clause") }}</strong>
+                <select name="measures" data-role="select" id="measures" data-filter="true">
+                    <option></option>
+                    @foreach ($clauses as $clause)
+                    <option
+                        @if (request()->get('id')==trim($clause))
+                            selected
+                        @endif >
+                        {{ $clause }}
+                    </option>
+                    @endforeach
+                </select>
             </div>
         </div>
     </div>
 
-    <div>
-        &nbsp;
+    @foreach($measures as $measure)
+    <div class="mt-2" data-role="panel" data-title-caption="{{ $measure->name }}" data-collapsible="true" data-title-icon="<span class='mif-line-chart'></span>">
+
+        <div class="p-7" style="height: 300px;">
+            <canvas id="scoreChart-{{ $measure->id }}"></canvas>
+        </div>
+
+        <div>
+            <div style="overflow-x: auto;">
+                <table class="table table-border cell-border striped" style="width: max-content;">
+                    <tbody>
+                        <tr>
+                            <td class="fw-bold">{{ trans("cruds.control.fields.realisation_date") }}</td>
+                            @foreach($measure->controls as $control)
+                            <td><a href="/bob/show/{{ $control->id }}">{{ $control->realisation_date }}</a></td>
+                            @endforeach
+                        </tr>
+                        <tr>
+                            <td class="fw-bold">{{ trans("cruds.control.fields.score") }}</td>
+                            @foreach($measure->controls as $control)
+                            <td class="text-center"
+                                {!! $control->score == 1 ? 'style="background-color: #ce352c;"' : '' !!}
+                                {!! $control->score == 2 ? 'style="background-color: #fa6800;"' : '' !!}
+                                {!! $control->score == 3 ? 'style="background-color: #60a917;"' : '' !!}>
+                            {{ $control->note }}
+                            </td>
+                            @endforeach
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 
-    <div>
-        @if ($controls !== null)
-        <div style="overflow-x: auto;">
-            <table class="table table-border cell-border striped" style="width: max-content;">
-                <tbody>
-                    <tr>
-                        <td class="fw-bold">{{ trans("cruds.control.fields.realisation_date") }}</td>
-                        @foreach($controls as $control)
-                        <td><a href="/bob/show/{{ $control->id }}">{{ $control->realisation_date }}</a></td>
-                        @endforeach
-                    </tr>
-                    <tr>
-                        <td class="fw-bold">{{ trans("cruds.control.fields.score") }}</td>
-                        @foreach($controls as $control)
-                        <td class="text-center"
-                            {!! $control->score == 1 ? 'style="background-color: #ce352c;"' : '' !!}
-                            {!! $control->score == 2 ? 'style="background-color: #fa6800;"' : '' !!}
-                            {!! $control->score == 3 ? 'style="background-color: #60a917;"' : '' !!}>
-                        {{ $control->note }}
-                        </td>
-                        @endforeach
-                    </tr>
-                </tbody>
-            </table>
-        </div>
-        @endif
-    </div>
+    @endforeach
+
 </form>
 
 <script>
@@ -67,23 +65,24 @@ window.addEventListener('load', function() {
     var select = document.getElementById('measures');
     select.addEventListener('change', function() {
         const selectedOption = select.options[select.selectedIndex];
-        window.location = '/radar/bob?id=' + selectedOption.id;
+        window.location = '/radar/bob?id=' + encodeURIComponent(selectedOption.value);
     }, false);
 });
 
 document.addEventListener("DOMContentLoaded", function () {
-@if ($controls != null)
-    const labels = @json($controls->pluck('realisation_date'));
-    const data = @json($controls->pluck('note'));
+@foreach($measures as $measure)
 
-    const ctx = document.getElementById('scoreChart').getContext('2d');
+    const labels{{$measure->id}} = @json($measure->controls->pluck('realisation_date'));
+    const data{{$measure->id}} = @json($measure->controls->pluck('note'));
 
-    new Chart(ctx, {
+    const ctx{{$measure->id}} = document.getElementById('scoreChart-{{$measure->id}}').getContext('2d');
+
+    new Chart(ctx{{$measure->id}}, {
         type: 'line',
         data: {
-            labels: labels,
+            labels: labels{{$measure->id}},
             datasets: [{
-                data: data,
+                data: data{{$measure->id}},
                 borderColor: 'rgba(0,123,255,1)',
                 backgroundColor: 'rgba(0,123,255,0.1)',
                 fill: true,
@@ -112,7 +111,7 @@ document.addEventListener("DOMContentLoaded", function () {
                     type: 'time',
                     time: {
                         unit: 'day',
-                        tooltipFormat: 'YYYY-MM-DD'
+                        tooltipFormat: 'yyyy-MM-dd'
                     },
                     ticks: {
                         autoSkip: true
@@ -130,7 +129,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
-@endif
+@endforeach
 });
 </script>
 

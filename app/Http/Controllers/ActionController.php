@@ -525,6 +525,11 @@ class ActionController extends Controller
         if ($start==null) {
             $start = Carbon::now()->startOfYear()->toDateString();
         }
+        // End
+        $end = $request->get('start');
+        if ($end==null) {
+            $end = Carbon::now()->today()->toDateString();
+        }
         // Get scope
         $scope = $request->get('scope');
         if ($scope!==null) {
@@ -559,6 +564,10 @@ class ActionController extends Controller
                     $query->whereDate('close_date', '>', $start)
                           ->orWhereNull('close_date');
                 })
+                ->where(function($query) use ($end) {
+                    $query->whereDate('close_date', '<', $end)
+                          ->orWhereNull('close_date');
+                })
                 ->when(!is_null($scope), function ($query) use ($scope) {
                     $query->where('scope', $scope);
                 })
@@ -567,6 +576,10 @@ class ActionController extends Controller
                 ->whereIn('status', [1, 2])
                 ->where(function($query) use ($start) {
                     $query->whereDate('close_date', '>', $start)
+                          ->orWhereNull('close_date');
+                })
+                ->where(function($query) use ($end) {
+                    $query->whereDate('close_date', '<', $end)
                           ->orWhereNull('close_date');
                 })
                 ->when(!is_null($scope), function ($query) use ($scope) {
@@ -580,11 +593,27 @@ class ActionController extends Controller
                 'closed' => $count_closed,
             ];
         }
+        // Get Actions in scrope
+        $actions = Action
+            ::where(function($query) use ($start) {
+                $query->whereDate('close_date', '>', $start)
+                      ->orWhereNull('close_date');
+            })
+            ->where(function($query) use ($end) {
+                $query->whereDate('close_date', '<', $end)
+                      ->orWhereNull('close_date');
+            })
+            ->when(!is_null($scope), function ($query) use ($scope) {
+                $query->where('scope', $scope);
+            })
+            ->get();
 
         // Return
         return view('radar.actions')
             ->with('start', $start)
+            ->with('end', $end)
             ->with('scopes', $scopes)
+            ->with('actions', $actions)
             ->with('data', $data);
     }
 
