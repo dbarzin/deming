@@ -3,12 +3,9 @@
 namespace App\Console\Commands;
 
 use App\Models\Control;
-use App\Models\Document;
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
-use Illuminate\Support\Facades\File;
 
 class Cleanup extends Command
 {
@@ -48,7 +45,6 @@ class Cleanup extends Command
         $durationInMonths = config('deming.cleanup-duration');
 
         if ($durationInMonths > 0) {
-
             Log::info("Cleanup {$durationInMonths} months");
 
             // Compute date in the past
@@ -65,5 +61,4 @@ class Cleanup extends Command
 
         Log::info('Cleanup Done.');
     }
-
 }

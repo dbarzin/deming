@@ -81,7 +81,7 @@ class Control extends Model
         return $this->groups;
     }
 
-    public function canMake() : Bool
+    public function canMake(): bool
     {
         if ($this->status !== 0) {
             return false;
@@ -100,8 +100,8 @@ class Control extends Model
         return false;
     }
 
-    public function canValidate() : Bool {
-
+    public function canValidate(): bool
+    {
         if ($this->status !== 1) {
             return false;
         }
@@ -121,6 +121,66 @@ class Control extends Model
             ->select('measure_id', 'clause')
             ->join('control_measure', 'control_measure.control_id', strval($id))
             ->get();
+    }
+
+    public static function cleanup(string $startDate, bool $dryRun)
+    {
+        // Initialise counters
+        $documentCount = 0;
+        $controlCount = 0;
+        $logCount = 0;
+
+        // Remove logs
+        $logCount = AuditLog::where('created_at', '<', $startDate)->count();
+        if (! $dryRun) {
+            AuditLog::where('created_at', '<', $startDate)->delete();
+        }
+
+        // Get conctrols
+        $oldControls = Control::whereNotNull('realisation_date')
+            ->where('realisation_date', '<', $startDate)
+            ->get();
+
+        foreach ($oldControls as $control) {
+            DB::transaction(function () use ($dryRun, $control, &$documentCount, &$controlCount) {
+                // Supprimer les documents associés
+                $documents = Document::where('control_id', $control->id)->get();
+
+                foreach ($documents as $document) {
+                    // Supprimer le fichier physique s'il existe
+                    if (! $dryRun) {
+                        $filePath = storage_path('docs/' . $document->id);
+                        if (File::exists($filePath)) {
+                            File::delete($filePath);
+                        }
+                        // Supprimer l'enregistrement du document
+                        $document->delete();
+                    }
+                    $documentCount++;
+                }
+
+                // Supprimer les liens dans control_measure
+                DB::table('control_measure')->where('control_id', $control->id)->delete();
+
+                // Supprimer les plans d'action
+                DB::table('actions')->where('control_id', $control->id)->delete();
+
+                // Supprimer le contrôle lui-même
+                if (! $dryRun) {
+                    // Remove next_id link
+                    Control::where('next_id', $control->id)->update(['next_id' => null]);
+                    // delete control
+                    $control->delete();
+                }
+                $controlCount++;
+            });
+        }
+
+        return [
+            'documentCount' => $documentCount,
+            'controlCount' => $controlCount,
+            'logCount' => $logCount,
+        ];
     }
 
     private function isAdminOrUser($user): bool
@@ -153,64 +213,4 @@ class Control extends Model
             ->where('user_user_group.user_id', $user->id)
             ->exists();
     }
-
-    public static function cleanup(string $startDate, bool $dryRun) {
-
-        // Initialise counters
-        $documentCount = 0;
-        $controlCount = 0;
-        $logCount = 0;
-
-        // Remove logs
-        $logCount = AuditLog::where('created_at','<',$startDate)->count();
-        if (!$dryRun)
-            AuditLog::where('created_at','<',$startDate)->delete();
-
-        // Get conctrols
-        $oldControls = Control::whereNotNull('realisation_date')
-            ->where('realisation_date', '<', $startDate)
-            ->get();
-
-        foreach ($oldControls as $control) {
-            DB::transaction(function () use ($dryRun, $control, &$documentCount, &$controlCount, &$logCount) {
-                // Supprimer les documents associés
-                $documents = Document::where('control_id', $control->id)->get();
-
-                foreach ($documents as $document) {
-                    // Supprimer le fichier physique s'il existe
-                    if (!$dryRun) {
-                        $filePath = storage_path('docs/' . $document->id);
-                        if (File::exists($filePath)) {
-                            File::delete($filePath);
-                        }
-                        // Supprimer l'enregistrement du document
-                        $document->delete();
-                    }
-                    $documentCount++;
-                }
-
-                // Supprimer les liens dans control_measure
-                DB::table('control_measure')->where('control_id', $control->id)->delete();
-
-                // Supprimer les plans d'action
-                DB::table('actions')->where('control_id', $control->id)->delete();
-
-                // Supprimer le contrôle lui-même
-                if (!$dryRun) {
-                    // Remove next_id link
-                    Control::where('next_id', $control->id)->update(['next_id' => null]);
-                    // delete control
-                    $control->delete();
-                    }
-                $controlCount++;
-            });
-        }
-
-       return [
-            'documentCount' => $documentCount,
-            'controlCount' => $controlCount,
-            'logCount' => $logCount
-        ];
-    }
-
 }

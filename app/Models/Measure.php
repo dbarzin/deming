@@ -57,7 +57,6 @@ class Measure extends Model
             ->exists();
     }
 
-
     // check if there is an empty control associated with this measure
     public function isDisabled()
     {

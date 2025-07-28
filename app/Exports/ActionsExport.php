@@ -3,13 +3,13 @@
 namespace App\Exports;
 
 use App\Models\Action;
+use Illuminate\Database\Eloquent\Builder;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-use Illuminate\Database\Eloquent\Builder;
 
 class ActionsExport implements FromQuery, WithMapping, WithHeadings, WithStyles, WithColumnWidths
 {

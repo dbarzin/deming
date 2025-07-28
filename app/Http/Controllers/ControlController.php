@@ -1353,8 +1353,11 @@ class ControlController extends Controller
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // Can make of validate control ?
-        abort_if(!($control->canMake() || $control->canValidate()),
-            Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(
+            ! ($control->canMake() || $control->canValidate()),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // get associated documents
         $documents = DB::table('documents')->where('control_id', $id)->get();
