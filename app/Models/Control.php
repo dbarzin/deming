@@ -160,14 +160,14 @@ class Control extends Model
                     $documentCount++;
                 }
 
-                // Supprimer les liens dans control_measure
-                DB::table('control_measure')->where('control_id', $control->id)->delete();
-
-                // Supprimer les plans d'action
-                DB::table('actions')->where('control_id', $control->id)->delete();
-
                 // Supprimer le contrôle lui-même
                 if (! $dryRun) {
+                    // Supprimer les liens dans control_measure
+                    DB::table('control_measure')->where('control_id', $control->id)->delete();
+
+                    // Supprimer les plans d'action
+                    DB::table('actions')->where('control_id', $control->id)->delete();
+
                     // Remove next_id link
                     Control::where('next_id', $control->id)->update(['next_id' => null]);
                     // delete control
