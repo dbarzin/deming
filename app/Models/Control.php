@@ -159,6 +159,12 @@ class Control extends Model
         // Initialise counters
         $documentCount = 0;
         $controlCount = 0;
+        $logCount = 0;
+
+        // Remove logs
+        $logCount = AuditLog::where('created_at','<',$startDate)->count();
+        if (!$dryRun)
+            AuditLog::where('created_at','<',$startDate)->delete();
 
         // Get conctrols
         $oldControls = Control::whereNotNull('realisation_date')
@@ -166,7 +172,7 @@ class Control extends Model
             ->get();
 
         foreach ($oldControls as $control) {
-            DB::transaction(function () use ($control, &$documentCount, &$controlCount) {
+            DB::transaction(function () use ($dryRun, $control, &$documentCount, &$controlCount, &$logCount) {
                 // Supprimer les documents associés
                 $documents = Document::where('control_id', $control->id)->get();
 
@@ -190,9 +196,12 @@ class Control extends Model
                 DB::table('actions')->where('control_id', $control->id)->delete();
 
                 // Supprimer le contrôle lui-même
-                if (!$dryRun)
+                if (!$dryRun) {
+                    // Remove next_id link
+                    Control::where('next_id', $control->id)->update(['next_id' => null]);
+                    // delete control
                     $control->delete();
-
+                    }
                 $controlCount++;
             });
         }
@@ -200,6 +209,7 @@ class Control extends Model
        return [
             'documentCount' => $documentCount,
             'controlCount' => $controlCount,
+            'logCount' => $logCount
         ];
     }
 

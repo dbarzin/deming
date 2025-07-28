@@ -277,25 +277,27 @@ class DocumentController extends Controller
             // Message
             $messages = Collect('Configuration saved !');
             }
-        else if ($action =='test') {
+        else if (($action =='test')&&($duration>0)) {
             $dateLimit = Carbon::now()->subMonths($duration)->toDateString();
 
             $result = Control::cleanup($dateLimit, true);
 
             $messages = Collect(
                     [
+                        "{$result['logCount']} log(s) will be deleted.",
                         "{$result['documentCount']} document(s) will be deleted.",
                         "{$result['controlCount']} control(s) will be deleted."
                     ]
                 );
             }
-        else if ($action == 'delete') {
+        else if (($action =='delete')&&($duration>0)) {
             $dateLimit = Carbon::now()->subMonths($duration)->toDateString();
 
             $result = Control::cleanup($dateLimit, false);
 
             $messages = Collect(
                     [
+                        "{$result['logCount']} log(s) deleted.",
                         "{$result['documentCount']} document(s) deleted.",
                         "{$result['controlCount']} control(s) deleted."
                     ]
