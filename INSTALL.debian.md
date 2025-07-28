@@ -114,7 +114,7 @@ Populate database with ISO 27001:2022 standard and generate test set (optional)
     php artisan deming:import-framework ./storage/app/repository/ISO27001-2022.en.xlsx
     php artisan deming:generate-tests
 
-Start application with PHP
+## Start application with PHP
 
     php artisan serve
 
@@ -131,6 +131,36 @@ The administrator's default language is English. To change language, go to the u
 (top right of the main page).
 
 To import a repository and generate test data, go to "Configuration" -> "Import" (optional).
+
+## Start application with systemd
+
+It is also possible to have the application start as a `systemd` service. For this you will need to create the service's defintion file:
+
+	su root -c "vi /etc/systemd/system/deming.service"
+ 
+and add it the following content:
+
+	[Unit]
+	Description=Deming
+	After=network.target
+	After=mariadb.service
+	After=apache2.service
+	
+	[Service]
+	Type=simple
+	ExecStart=/usr/bin/php artisan serve --host 127.0.0.1 --port 8000
+	User=www-data
+	Group=www-data
+	WorkingDirectory=/var/www/deming
+	KillMode=mixed
+	
+	[Install]
+	WantedBy=multi-user.target
+
+Reload `systemd` to take this new service in account and start the application:
+
+	systemctl daemon-reload
+ 	systemctl enable --now deming.service
 
 ## Apache
 
@@ -165,6 +195,58 @@ Save and close the file when finished. Next, activate the Apache virtual host an
 Finally, restart the Apache service to activate the changes:
 
     su - root -c "systemctl restart apache2"
+
+## Apache with HTTPS configuration
+
+In addition to the above instructions, create or modify the virtual host configuration's file:
+
+    su root -c "vi /etc/apache2/sites-available/deming.conf"
+
+and add the following content:
+
+	<VirtualHost *:80>
+	   ServerName deming.local
+	
+	    RewriteEngine On
+	    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1
+	</VirtualHost>
+	
+	<VirtualHost *:443>
+	    ServerName deming.local
+	    DocumentRoot /var/www/deming/public
+	
+	    Protocols h2 h2c http/1.1
+	
+	    <Directory /var/www/deming>
+	        AllowOverride All
+	    </Directory>
+	
+	    ProxyPass / http://127.0.0.1:8000/
+	    ProxyPassReverse / http://127.0.0.1:8000/
+	    ProxyPreserveHost On
+
+ 	    # If you user php-fpm adapt the socket's path below and uncomment
+	    #<FilesMatch \.php$>
+	    #    SetHandler "proxy:unix:/var/run/php/php8.2-fpm.sock|fcgi://localhost/"
+	    #</FilesMatch>
+	
+    	    ErrorLog ${APACHE_LOG_DIR}/error.log
+    	    CustomLog ${APACHE_LOG_DIR}/access.log combined
+	
+	    <IfModule mod_headers.c>
+	        Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains; preload"
+	        Header always set Referrer-Policy "no-referrer"
+	        Header always set X-Content-Type-Options "no-sniff"
+	        Header always set X-XSS-Protection "1; mode=block"
+	        Header always set X-Robots-Tag "none"
+	        Header always set X-Frame-Options "SAMEORIGIN"
+	        Header edit Set-Cookie ^(.*)$ "$1;HttpOnly;Secure;SameSite=Strict"
+	    </IfModule>
+	
+	    SSLEngine on
+	    SSLCertificateFile  /etc/apache2/ssl/deming.local.crt
+	    SSLCertificateKeyFile /etc/apache2/ssl/deming.local.key
+	</VirtualHost>
 
 ## PHP
 

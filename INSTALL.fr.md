@@ -52,7 +52,7 @@ Lancer MariaDB avec les droits root
 Créer la base de données _deming_ et l'utilisateur _deming_user_
 
     CREATE DATABASE deming CHARACTER SET utf8 COLLATE utf8_general_ci;
-	CREATE USER 'deming_user'@'localhost' IDENTIFIED BY 'demPasssword-123';
+    CREATE USER 'deming_user'@'localhost' IDENTIFIED BY 'demPasssword-123';
     GRANT ALL ON deming.* TO deming_user@localhost;
     GRANT PROCESS ON *.* TO 'deming_user'@'localhost';
 
@@ -109,7 +109,7 @@ Peupler la base de données avec la norme ISO 27001:2022 et générer un jeu de 
     php artisan deming:import-framework ./storage/app/repository/ISO27001-2022.fr.xlsx --clean
     php artisan deming:generate-tests
 
-Démarrer l'application avec PHP
+## Démarrer l'application avec PHP
 
     php artisan serve
 
@@ -126,6 +126,36 @@ L'administrateur utilise la langue anglaise par défaut. Pour changer de langue,
 (en haut à droite de la page principale).
 
 Pour importer un référentiel et générer des données de test, allez dans "Configuration" -> "Import" (optionel).
+
+## Démarrer l'application avec systemd
+
+Il est également possible de faire démarrer l'application en tant que service `systemd`. Pour cela, créez un nouveau fichier de définition du service :
+
+	su root -c "vi /etc/systemd/system/deming.service"
+ 
+Ajoutez les lignes suivantes:
+
+	[Unit]
+	Description=Deming
+	After=network.target
+	After=mariadb.service
+	After=apache2.service
+	
+	[Service]
+	Type=simple
+	ExecStart=/usr/bin/php artisan serve --host 127.0.0.1 --port 8000
+	User=www-data
+	Group=www-data
+	WorkingDirectory=/var/www/deming
+	KillMode=mixed
+	
+	[Install]
+	WantedBy=multi-user.target
+
+Prenez en compte ce nouveau service et démarrez l'application :
+
+	systemctl daemon-reload
+ 	systemctl enable --now deming.service
 
 ## Apache
 
@@ -163,6 +193,60 @@ Enregistrez et fermez le fichier lorsque vous avez terminé. Ensuite, activez l'
 Enfin, redémarrez le service Apache pour activer les modifications :
 
     sudo systemctl restart apache2
+
+## Apache avec configuration HTTPS
+
+En complément des étapes ci-dessus, créez ou modifiez le fichier de configuration d'hôte virtuel Apache pour servir l'application :
+
+    su root -c "vi /etc/apache2/sites-available/deming.conf"
+
+Ajouter les lignes suivantes :
+
+	<VirtualHost *:80>
+	   ServerName deming.local
+	
+	    RewriteEngine On
+	    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1
+	</VirtualHost>
+	
+	<VirtualHost *:443>
+	    ServerName deming.local
+	    DocumentRoot /var/www/deming/public
+	
+	    Protocols h2 h2c http/1.1
+	
+	    <Directory /var/www/deming>
+	        AllowOverride All
+	    </Directory>
+	
+	    ProxyPass / http://127.0.0.1:8000/
+	    ProxyPassReverse / http://127.0.0.1:8000/
+	    ProxyPreserveHost On
+
+ 	    # Si vous utilisez php-fpm (chemin de la socket à adapter à votre cas)
+	    #<FilesMatch \.php$>
+	    #    SetHandler "proxy:unix:/var/run/php/php8.3-fpm.sock|fcgi://localhost/"
+	    #</FilesMatch>
+	
+    	    ErrorLog ${APACHE_LOG_DIR}/error.log
+    	    CustomLog ${APACHE_LOG_DIR}/access.log combined
+	
+	    <IfModule mod_headers.c>
+	        Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains; preload"
+	        Header always set Referrer-Policy "no-referrer"
+	        Header always set X-Content-Type-Options "no-sniff"
+	        Header always set X-XSS-Protection "1; mode=block"
+	        Header always set X-Robots-Tag "none"
+	        Header always set X-Frame-Options "SAMEORIGIN"
+	        Header edit Set-Cookie ^(.*)$ "$1;HttpOnly;Secure;SameSite=Strict"
+	    </IfModule>
+	
+	    SSLEngine on
+	    SSLCertificateFile  /etc/apache2/ssl/deming.local.crt
+	    SSLCertificateKeyFile /etc/apache2/ssl/deming.local.key
+	</VirtualHost>
+
+Dans le cadre de cette configuration servant l'application en HTTPS, il pourra être nécessaire de positionner la variable `APP_ENV` à la valeur `production` dans le fichier `.env` de Deming.
 
 ## PHP
 
