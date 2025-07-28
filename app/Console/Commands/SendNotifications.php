@@ -55,51 +55,51 @@ class SendNotifications extends Command
                 ' days.'
             );
 
-                // Loop on all users
-                $users = User::all();
+            // Loop on all users
+            $users = User::all();
 
-                foreach ($users as $user) {
-                    // get controls
-                    $controls = Control::where('status', 0)
-                        ->leftJoin('control_user', 'controls.id', '=', 'control_user.control_id')
-                        ->leftJoin('control_user_group', 'controls.id', '=', 'control_user_group.control_id')
-                        ->leftJoin('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
-                        ->where(function ($query) use ($user) {
-                            $query->where('control_user.user_id', '=', $user->id)
-                                ->orWhere('user_user_group.user_id', '=', $user->id);
-                        })
-                        ->where('plan_date', '<=', Carbon::today()
-                            ->addDays(intval(config('deming.notification.expire-delay')))->toDateString())
-                        ->orderBy('plan_date')
-                        ->get();
+            foreach ($users as $user) {
+                // get controls
+                $controls = Control::where('status', 0)
+                    ->leftJoin('control_user', 'controls.id', '=', 'control_user.control_id')
+                    ->leftJoin('control_user_group', 'controls.id', '=', 'control_user_group.control_id')
+                    ->leftJoin('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
+                    ->where(function ($query) use ($user) {
+                        $query->where('control_user.user_id', '=', $user->id)
+                            ->orWhere('user_user_group.user_id', '=', $user->id);
+                    })
+                    ->where('plan_date', '<=', Carbon::today()
+                        ->addDays(intval(config('deming.notification.expire-delay')))->toDateString())
+                    ->orderBy('plan_date')
+                    ->get();
 
-                    if ($controls->count() > 0) {
-                        App::setlocale($user->language);
-                        $txt = '';
-                        foreach ($controls as $control) {
-                            // Date
-                            $txt .= '<a href="' . url('/bob/show/'. $control->id) . '">';
-                            $txt .= '<b>';
-                            if (strtotime($control->plan_date) >= strtotime('today')) {
-                                $txt .= "<font color='green'>" . $control->plan_date .' </font>';
-                            } else {
-                                $txt .= "<font color='red'>" . $control->plan_date . '</font>';
-                            }
-                            $txt .= '</b>';
-                            $txt .= '</a>';
-                            // Space
-                            $txt .= ' &nbsp; - &nbsp; ';
-                            // Clauses
-                            foreach ($control->measures() as $measure) {
-                                $txt .= '<a href="' . url('/alice/show/' . $measure->id) . '">'. htmlentities($measure->clause) . '</a>';
-                                // Space
-                                $txt .= ' &nbsp; ';
-                            }
-                            $txt .= ' - &nbsp; ';
-                            // Name
-                            $txt .= htmlentities($control->name);
-                            $txt .= "<br>\n";
+                if ($controls->count() > 0) {
+                    App::setlocale($user->language);
+                    $txt = '';
+                    foreach ($controls as $control) {
+                        // Date
+                        $txt .= '<a href="' . url('/bob/show/'. $control->id) . '">';
+                        $txt .= '<b>';
+                        if (strtotime($control->plan_date) >= strtotime('today')) {
+                            $txt .= "<font color='green'>" . $control->plan_date .' </font>';
+                        } else {
+                            $txt .= "<font color='red'>" . $control->plan_date . '</font>';
                         }
+                        $txt .= '</b>';
+                        $txt .= '</a>';
+                        // Space
+                        $txt .= ' &nbsp; - &nbsp; ';
+                        // Clauses
+                        foreach ($control->measures() as $measure) {
+                            $txt .= '<a href="' . url('/alice/show/' . $measure->id) . '">'. htmlentities($measure->clause) . '</a>';
+                            // Space
+                            $txt .= ' &nbsp; ';
+                        }
+                        $txt .= ' - &nbsp; ';
+                        // Name
+                        $txt .= htmlentities($control->name);
+                        $txt .= "<br>\n";
+                    }
 
                     try {
                         // Create a new PHPMailer instance
@@ -150,7 +150,7 @@ class SendNotifications extends Command
                         Log::error("Message could not be sent. Mailer Error: {$mail->ErrorInfo}");
                     }
                 }
-        }
+            }
         } else {
             Log::info('SendNotifications - no notifications today');
         }

@@ -4,13 +4,12 @@ namespace App\Http\Controllers;
 
 use App\Exports\ActionsExport;
 use App\Models\Action;
+use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Facades\Excel;
-use Carbon\Carbon;
-
 
 class ActionController extends Controller
 {
@@ -47,10 +46,10 @@ class ActionController extends Controller
             $request->session()->forget('status');
         } else {
             $status = $request->session()->get('status');
-            if ($status==null) {
-                $status='0';
+            if ($status === null) {
+                $status = '0';
                 $request->session()->put('status', $status);
-                }
+            }
         }
 
         // Get scope filter
@@ -163,10 +162,11 @@ class ActionController extends Controller
         $action->cause = request('cause');
         $action->remediation = request('remediation');
         $action->status = request('status');
-        if ($action->status==0)
+        if ($action->status === 0) {
             $action->close_date = null;
-        else
+        } else {
             $action->close_date = request('close_date');
+        }
         $action->justification = request('justification');
         $action->update();
 
@@ -515,31 +515,31 @@ class ActionController extends Controller
     {
         abort_if(
             ! ((Auth::User()->role === 1) ||
-            (Auth::User()->role === 2)) ,
+            (Auth::User()->role === 2)),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
 
         // Start
         $start = $request->get('start');
-        if ($start==null) {
+        if ($start === null) {
             $start = Carbon::now()->startOfYear()->toDateString();
         }
         // End
         $end = $request->get('start');
-        if ($end==null) {
+        if ($end === null) {
             $end = Carbon::now()->today()->toDateString();
         }
         // Get scope
         $scope = $request->get('scope');
-        if ($scope!==null) {
-            $request->session()->put('scope',$scope);
-            }
-        else {
-            if ($request->has('scope'))
+        if ($scope !== null) {
+            $request->session()->put('scope', $scope);
+        } else {
+            if ($request->has('scope')) {
                 $request->session()->forget('scope');
-            else
+            } else {
                 $scope = $request->session()->get('scope');
+            }
         }
 
         // Get scopes
@@ -560,29 +560,29 @@ class ActionController extends Controller
         foreach ($types as $type) {
             $count_open = Action::where('type', $type)
                 ->where('status', 0)
-                ->where(function($query) use ($start) {
+                ->where(function ($query) use ($start) {
                     $query->whereDate('close_date', '>', $start)
-                          ->orWhereNull('close_date');
+                        ->orWhereNull('close_date');
                 })
-                ->where(function($query) use ($end) {
+                ->where(function ($query) use ($end) {
                     $query->whereDate('close_date', '<', $end)
-                          ->orWhereNull('close_date');
+                        ->orWhereNull('close_date');
                 })
-                ->when(!is_null($scope), function ($query) use ($scope) {
+                ->when(! is_null($scope), function ($query) use ($scope) {
                     $query->where('scope', $scope);
                 })
                 ->count();
             $count_closed = Action::where('type', $type)
                 ->whereIn('status', [1, 2])
-                ->where(function($query) use ($start) {
+                ->where(function ($query) use ($start) {
                     $query->whereDate('close_date', '>', $start)
-                          ->orWhereNull('close_date');
+                        ->orWhereNull('close_date');
                 })
-                ->where(function($query) use ($end) {
+                ->where(function ($query) use ($end) {
                     $query->whereDate('close_date', '<', $end)
-                          ->orWhereNull('close_date');
+                        ->orWhereNull('close_date');
                 })
-                ->when(!is_null($scope), function ($query) use ($scope) {
+                ->when(! is_null($scope), function ($query) use ($scope) {
                     $query->where('scope', $scope);
                 })
                 ->count();
@@ -595,18 +595,18 @@ class ActionController extends Controller
         }
         // Get Actions in scrope
         $actions = Action
-            ::where(function($query) use ($start) {
+            ::where(function ($query) use ($start) {
                 $query->whereDate('close_date', '>', $start)
-                      ->orWhereNull('close_date');
+                    ->orWhereNull('close_date');
             })
-            ->where(function($query) use ($end) {
-                $query->whereDate('close_date', '<', $end)
-                      ->orWhereNull('close_date');
-            })
-            ->when(!is_null($scope), function ($query) use ($scope) {
-                $query->where('scope', $scope);
-            })
-            ->get();
+                ->where(function ($query) use ($end) {
+                    $query->whereDate('close_date', '<', $end)
+                        ->orWhereNull('close_date');
+                })
+                ->when(! is_null($scope), function ($query) use ($scope) {
+                    $query->where('scope', $scope);
+                })
+                ->get();
 
         // Return
         return view('radar.actions')
@@ -616,5 +616,4 @@ class ActionController extends Controller
             ->with('actions', $actions)
             ->with('data', $data);
     }
-
 }

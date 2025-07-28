@@ -3,8 +3,8 @@
 namespace App\Http\Controllers;
 
 // Models
-use App\Models\Document;
 use App\Models\Control;
+use App\Models\Document;
 // Framework
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -264,9 +264,7 @@ class DocumentController extends Controller
         $action = $request->input('action');
 
         // Act
-        if ($action =='save') {
-
-
+        if ($action === 'save') {
             // Set duration
             config(['deming.cleanup-duration' => $duration]);
 
@@ -276,35 +274,33 @@ class DocumentController extends Controller
 
             // Message
             $messages = Collect('Configuration saved !');
-            }
-        else if (($action =='test')&&($duration>0)) {
+        } elseif (($action === 'test') && ($duration > 0)) {
             $dateLimit = Carbon::now()->subMonths($duration)->toDateString();
 
             $result = Control::cleanup($dateLimit, true);
 
             $messages = Collect(
-                    [
+                [
                         "{$result['logCount']} log(s) will be deleted.",
                         "{$result['documentCount']} document(s) will be deleted.",
-                        "{$result['controlCount']} control(s) will be deleted."
+                        "{$result['controlCount']} control(s) will be deleted.",
                     ]
-                );
-            }
-        else if (($action =='delete')&&($duration>0)) {
+            );
+        } elseif (($action === 'delete') && ($duration > 0)) {
             $dateLimit = Carbon::now()->subMonths($duration)->toDateString();
 
             $result = Control::cleanup($dateLimit, false);
 
             $messages = Collect(
-                    [
+                [
                         "{$result['logCount']} log(s) deleted.",
                         "{$result['documentCount']} document(s) deleted.",
-                        "{$result['controlCount']} control(s) deleted."
+                        "{$result['controlCount']} control(s) deleted.",
                     ]
-                );
-        }
-        else
+            );
+        } else {
             $messages = null;
+        }
 
         // get previous fields
         $count = Document::count();

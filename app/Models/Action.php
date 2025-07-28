@@ -42,7 +42,7 @@ class Action extends Model
     // O - Open
     // 1 - Closed
     // 2 - Rejected
-    
+
     // Type
     // 1 - Major - red
     // 2 - Minor - organge

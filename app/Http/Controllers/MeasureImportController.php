@@ -14,7 +14,6 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Schema;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Http\RedirectResponse;
 
 class MeasureImportController extends Controller
 {
@@ -40,7 +39,6 @@ class MeasureImportController extends Controller
             ->with('models', $models);
     }
 
-
     /**
      * Download Measures
      *
@@ -63,11 +61,11 @@ class MeasureImportController extends Controller
         $file = current(
             array_filter(
                 Storage::disk('local')->files('repository'),
-                fn($e) => str_contains($e, $model)
+                fn ($e) => str_contains($e, $model)
             )
         );
 
-        if (!$file) {
+        if (! $file) {
             abort(404, 'Model not found');
         }
 
@@ -165,7 +163,7 @@ class MeasureImportController extends Controller
         array $data,
         bool $clear,
         Collection $errors
-    ) : Bool {
+    ): bool {
         /*
         +-------------+---------------+------+-----+---------+----------------+
         | Field       | Type          | Null | Key | Default | Extra          |
