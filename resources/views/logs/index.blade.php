@@ -14,6 +14,7 @@
         data-rownum="false"
         data-check="false"
         data-check-style="1"
+        data-show-pagination="false"
        >
             <thead>
                 <th class="sortable-column">
