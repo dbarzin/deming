@@ -47,17 +47,21 @@ class Cleanup extends Command
         // Get duration in months
         $durationInMonths = config('deming.cleanup-duration');
 
-        Log::info("Cleanup {$durationInMonths} months");
+        if ($durationInMonths > 0) {
 
-        // Compute date in the past
-        $dateLimit = Carbon::now()->subMonths($durationInMonths)->toDateString();
+            Log::info("Cleanup {$durationInMonths} months");
 
-        Log::info("Cleanup limit date {$dateLimit}");
+            // Compute date in the past
+            $dateLimit = Carbon::now()->subMonths($durationInMonths)->toDateString();
 
-        $result = Control::cleanup($dateLimit, false);
+            Log::info("Cleanup limit date {$dateLimit}");
 
-        Log::info("Cleanup {$result['documentCount']} document(s).");
-        Log::info("Cleanup {$result['controlCount']} control(s).");
+            $result = Control::cleanup($dateLimit, false);
+
+            Log::info("Cleanup {$result['logCount']} log(s).");
+            Log::info("Cleanup {$result['documentCount']} document(s).");
+            Log::info("Cleanup {$result['controlCount']} control(s).");
+        }
 
         Log::info('Cleanup Done.');
     }
