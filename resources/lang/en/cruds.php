@@ -120,7 +120,8 @@ return [
         'title_singular' => 'Measurement',
         'groupBy' => 'Group by',
         'create_action' => 'Create an action plan',
-        'calendar' => 'Calendar'
+        'calendar' => 'Calendar',
+        'confirm_delete' => 'Are you sure you want to delete measurements?'
     ],
      'notification' => [
          'subject' => 'Measurement list to carry out',

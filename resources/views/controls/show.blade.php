@@ -294,6 +294,12 @@
 	    		</button>
 			</form>
 		    &nbsp;
+			<a class="button" href="/logs/history/{{ $control->id }}">
+                <span class="mif-log-file"></span>
+                &nbsp;
+				{{ trans("common.history") }}
+            </a>
+		    &nbsp;
    			@endif
             <a class="button" href="/bob/index">
                 <span class="mif-cancel"></span>

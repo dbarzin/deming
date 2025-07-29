@@ -119,6 +119,7 @@ return [
          'groupBy' => 'Gruppiert nach',
          'calendar' => 'Kalender',
        	 'create_action' => 'Aktionsplan erstellen',
+         'confirm_delete' => 'Möchten Sie die Kontrollen löschen?'
      ],
      'notification' => [
          'subject' => 'Liste der durchzuführenden Maßnahmen',

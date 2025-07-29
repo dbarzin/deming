@@ -120,7 +120,8 @@ return [
         'title_singular' => 'Contrôle',
         'groupBy' => 'Groupé par',
         'create_action' => 'Créer un plan d\'action',
-        'calendar' => 'Calendrier'
+        'calendar' => 'Calendrier',
+        'confirm_delete' => 'Etes vous sur de vouloir supprimer des contrôles ?'
     ],
     'measure' => [
         'title' => 'Mesure',
