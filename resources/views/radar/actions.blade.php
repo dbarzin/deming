@@ -54,15 +54,6 @@
                         <table
                             id="controls"
                             class="table striped row-hover cell-border"
-                            data-role="table"
-                            data-rows="100"
-                            data-show-activity="true"
-                            data-rownum="false"
-                            data-check="false"
-                            data-check-style="1"
-                            data-show-search="false"
-                            data-show-pagination="false"
-                            data-show-rows-steps="false"
                             >
                             <thead>
                                 <tr>
@@ -78,10 +69,8 @@
                             <td>{{ $action->reference }}</td>
                             <td>{{ $action->scope }}</td>
                             <td>{{ $action->name }}</td>
-                            <td>
-                                <div data-role="donut" data-value="{{ $action->progress }}" class="donut-red"
-                                    data-stroke="#f5f5f5" data-fill="#9C27B0" data-color="#FFFFFF">
-                                </div>
+                            <td style="padding: 0; text-align: center; vertical-align: middle;" width=400 height=110>
+                                <canvas id="progressChart1" width="400" height="100"></canvas>
                             </td>
                         </tr>
                         @endforeach
@@ -92,6 +81,7 @@
             </div>
         </div>
     </div>
+
 </form>
 
 <script>
@@ -118,7 +108,6 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         ]
     };
-
 
     const ctx = document.getElementById('actionsChart').getContext('2d');
     const myChart = new Chart(ctx, {
@@ -160,6 +149,48 @@ document.addEventListener("DOMContentLoaded", function () {
                 }, false);
             }
         });
+    });
+
+
+    new Chart(document.getElementById("progressChart1"), {
+        type: 'line',
+        data: {
+            datasets: [{
+                label: 'Progression',
+                data: [
+                    { x: '2025-07-01', y: 10 },
+                    { x: '2025-07-10', y: 35 },
+                    { x: '2025-07-15', y: 50 },
+                    { x: '2025-07-25', y: 80 },
+                    { x: '2025-07-29', y: 100 }
+                ],
+                borderColor: "#2196F3",
+                backgroundColor: "transparent",
+                borderWidth: 2,
+                pointRadius: 3
+            }]
+        },
+        options: {
+            responsive: false,
+            scales: {
+                x: {
+                    type: 'time',
+                    display: false // ⛔️ masque les dates
+                },
+
+                y: {
+                    beginAtZero: true,
+                    max: 100,
+                    display: false
+                }
+            },
+            plugins: {
+                legend: { display: false },
+               datalabels: {
+                    display: false // 👈 Désactive les labels à côté des points
+                },
+            }
+        }
     });
 
 });

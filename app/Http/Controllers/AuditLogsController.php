@@ -55,7 +55,7 @@ class AuditLogsController extends Controller
         return view('logs.show', compact('auditLog'));
     }
 
-    public function history(int $id)
+    public function history(string $type, int $id)
     {
         // Only for admin and users
         abort_if(
@@ -64,10 +64,17 @@ class AuditLogsController extends Controller
             '403 Forbidden'
         );
 
-        // Get audit Log
-        $auditLog = AuditLog::find($id);
-
-        abort_if($auditLog === null, 400, '400 log not found');
+        // Set the object type
+        if ($type=='bob')
+            $type = 'App\Models\Control';
+        elseif ($type='alice')
+            $type = 'App\Models\Measure';
+        elseif ($type='action')
+            $type = 'App\Models\Action';
+        elseif ($type='user')
+            $type = 'App\Models\User';
+        else
+            abort(404, 'Not found');
 
         // Get the list
         $auditLogs =
@@ -84,8 +91,8 @@ class AuditLogsController extends Controller
                     'audit_logs.created_at'
                 )
                 ->join('users', 'users.id', '=', 'user_id')
-                ->where('subject_id', $auditLog->subject_id)
-                ->where('subject_type', $auditLog->subject_type)
+                ->where('subject_id', $id)
+                ->where('subject_type', $type)
                 ->orderBy('audit_logs.id')
                 ->get();
 
