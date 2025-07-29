@@ -132,10 +132,18 @@
                 {{ $action->status }}
                 @endif
             </td>
-            <td>
-                @if ($action->progress!==null)
-                {{ $action->progress }} %
+            <td width="40">
+                <div data-role="donut" data-value="{{ $action->progress }}"
+                {{ $action->progress }}
+                @if ($action->progress<25)
+                    class="donut-red"
+                @elseif ($action->progress<50)
+                    class="donut-orange"
+                @else
+                    class="donut-green"
                 @endif
+                    >
+                </div>
             </td>
             <td >
                 <b>{{ $action->name }}</b>

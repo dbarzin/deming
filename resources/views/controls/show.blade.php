@@ -294,7 +294,7 @@
 	    		</button>
 			</form>
 		    &nbsp;
-			<a class="button" href="/logs/history/{{ $control->id }}">
+			<a class="button" href="/logs/history/bob/{{ $control->id }}">
                 <span class="mif-log-file"></span>
                 &nbsp;
 				{{ trans("common.history") }}

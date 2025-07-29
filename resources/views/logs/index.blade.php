@@ -91,7 +91,17 @@
                         <a class="button success small" href="/logs/show/{{ $log->id }}">
                             {{ trans('common.show') }}
                         </a>
-                        <a class="button info small" href="/logs/history/{{ $log->id }}">
+                        <a class="button info small"
+                        @if ($log->subject_type=='App\\Models\\Measure')
+                            href="/logs/history/alice/{{ $log->subject_id }}"
+                        @elseif ($log->subject_type=='App\\Models\\Control')
+                            href="/logs/history/bob/{{ $log->subject_id }}"
+                        @elseif ($log->subject_type=='App\\Models\\Action')
+                            href="/logs/history/action/{{ $log->subject_id }}"
+                        @elseif ($log->subject_type=='App\\Models\\User')
+                            href="/logs/history/user/{{ $log->subject_id }}"
+                        @endif
+                        >
                             {{ trans('common.history') }}
                         </a>
                     </td>
