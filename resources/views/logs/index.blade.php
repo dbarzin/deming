@@ -69,7 +69,7 @@
                                 {{ $log->subject_id }}
                             </a>
                         @elseif ($log->subject_type=='App\\Models\\User')
-                            <a href="/user/show/{{ $log->subject_id }} ">
+                            <a href="/users/{{ $log->subject_id }} ">
                                 {{ $log->subject_id }}
                             </a>
                         @else
