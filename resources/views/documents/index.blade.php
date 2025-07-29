@@ -78,7 +78,7 @@ function bytesToHuman($bytes) {
 </div>
 <br>
 <div data-role="panel" data-title-caption="{{ trans('cruds.document.title.cleanup') }}" data-collapsible="false" data-title-icon="<span class='mif-file-text'></span>">
-    <form action="/doc/config" method="POST">
+    <form id="cleanupForm" action="/doc/config" method="POST">
 	@csrf
     <div class="grid">
         <div class="row">
@@ -88,7 +88,7 @@ function bytesToHuman($bytes) {
         </div>
         <div class="row">
             <div class="cell-2">
-                <select name="duration" data-role="select" data-prepend="{{ trans('cruds.document.month') }}">
+                <select id="durationSelect" name="duration" data-role="select" data-prepend="{{ trans('cruds.document.month') }}">
                     <option value="0" {{ ($duration=="0" || $duration==null)  ? 'selected' : '' }}>{{ trans('cruds.document.never') }}</option>
                     <option {{ $duration=="12" ? 'selected' : '' }}>12</option>
                     <option {{ $duration=="24" ? 'selected' : '' }}>24</option>
@@ -113,7 +113,7 @@ function bytesToHuman($bytes) {
                     {{ trans("common.test") }}
                 </button>
                 &nbsp;
-                <button type="submit" class="button alert" name="action" value="delete">
+                <button type="submit" class="button alert" name="action" value="delete" id="deleteButton">
                     <span class="mif-bin"></span>
                     &nbsp;
                     {{ trans("common.delete") }}
@@ -123,5 +123,16 @@ function bytesToHuman($bytes) {
     </div>
     </form>
 </div>
+
+<script>
+document.addEventListener("DOMContentLoaded", function () {
+    document.getElementById("deleteButton").addEventListener("click", function (event) {
+        const select = document.getElementById("durationSelect");
+        const selected = select.options[select.selectedIndex].value;
+        if ((selected==0)||(!confirm("{{ trans('cruds.control.confirm_delete') }}")))
+            event.preventDefault();
+    });
+});
+</script>
 
 @endsection
