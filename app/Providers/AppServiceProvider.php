@@ -28,11 +28,16 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        if (App::environment('production')) {
+        if (
+            (App::environment('production')  && (config('app.force_https')===null))
+            ||
+            Config::get('app.force_https')
+            )
+        {
             URL::forceScheme('https');
         }
 
-        if (env('APP_DEBUG')) {
+        if (config('app.debug')) {
             DB::listen(function ($query) {
                 Log::info(
                     $query->sql,
