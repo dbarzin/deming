@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         if (
-            (App::environment('production')  && (config('app.force_https')===null))
+            (App::environment('production')  && (Config::get('app.force_https')===null))
             ||
             Config::get('app.force_https')
             )
@@ -37,7 +37,7 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        if (config('app.debug')) {
+        if (Config::get('app.debug')) {
             DB::listen(function ($query) {
                 Log::info(
                     $query->sql,

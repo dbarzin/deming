@@ -53,7 +53,7 @@ jobs:
 
       - name: Migrate and seed the database
         run: |
-          php artisan migrate --seed
+          php artisan migrate --seed --force
 
       - name: Seed Attributes
         run: |
