@@ -57,7 +57,7 @@ jobs:
 
       - name: Seed Attributes
         run: |
-          php artisan db:seed --class=AttributeSeeder
+          php artisan db:seed --class=AttributeSeeder --force
 
       - name: Import framework ISO27001-2002.en
         run: |
