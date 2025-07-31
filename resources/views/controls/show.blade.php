@@ -81,23 +81,23 @@
 		<div class="cell-lg-1 cell-md-2">
     		<strong>{{ trans("cruds.control.fields.plan_date") }}</strong>
     	</div>
-		<div class="cell-lg-2 cell-md-2">
+		<div class="cell-lg-1 cell-md-2 no-wrap">
     		{{ $control->plan_date }}
 		</div>
 
 		<div class="cell-lg-1 cell-md-2 text-right">
     		<strong>{{ trans("cruds.control.fields.realisation_date") }}</strong>
     	</div>
-		<div class="cell-lg-2 cell-md-2">
+		<div class="cell-lg-1 cell-md-2 no-wrap">
     		{{ $control->realisation_date }}
 		</div>
 
-		<div class="cell-lg-1 cell-md-2">
+		<div class="cell-lg-1 cell-md-2 text-right">
 			<strong>{{ trans("common.previous") }}</strong>
 			<br>
     		<strong>{{ trans("common.next") }}</strong>
     	</div>
-		<div class="cell-lg-2 cell-md-2">
+		<div class="cell-lg-1 cell-md-2 no-wrap">
 	    	@if ($prev_id!=null)
 				<a href="/bob/show/{{ $prev_id }}">
 	    			{{ $prev_date }}
@@ -122,7 +122,7 @@
     		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans("cruds.control.fields.observations") }}</strong>
 	    	</div>
-			<div class="cell-lg-7 cell-md-9">
+			<div class="cell-lg-5 cell-md-9">
 				<pre>{!! $control->observations !!}</pre>
 			</div>
 	    </div>
@@ -133,7 +133,7 @@
     		<div class="cell-lg-1 cell-md-2">
 	    		<strong>{{ trans("cruds.control.fields.evidence") }}</strong>
 	    	</div>
-			<div class="cell-lg-6 cell-md-8">
+			<div class="cell-lg-5 cell-md-8">
 				@foreach ($documents as $document)
 					<a href="/doc/show/{{$document->id}}" target="_new">
 						{{$document->filename}}
@@ -149,7 +149,7 @@
     		<strong>{{ trans("cruds.control.fields.note") }}</strong>
     	</div>
 		<div class="cell-2">
-    		{{ $control->note }}
+			{{ fmod($control->note, 1) == 0 ? intval($control->note) : $control->note }}
 		</div>
     </div>
 
