@@ -159,6 +159,7 @@ return [
          'choose' => 'Wähle eine Domäne',
          'title' => 'Domänen',
          'radar' => 'Ergebnis der Kontrollen nach Domänen',
+	 'measure_date' => 'Stand der Maßnahmen zum',
      ],
      'document' => [
         'title' => [
