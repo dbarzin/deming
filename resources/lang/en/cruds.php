@@ -161,6 +161,7 @@ return [
          'choose' => 'Choose domain',
          'title' => 'Domain',
          'radar' => 'Measurements by domain',
+         'measure_date' => 'Status of measures to',
       ],
      'document' => [
         'title' => [
