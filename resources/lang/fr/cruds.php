@@ -160,6 +160,7 @@ return [
         'choose' => 'Choisir un domaine',
         'title' => 'Domaine',
         'radar' => 'Résultat des contrôles par domaine',
+        'measure_date' => 'Etat des contrôles au',
     ],
     'document' => [
         'title' => [
