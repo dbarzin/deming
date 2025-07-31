@@ -41,7 +41,7 @@
             </div>
 
             <div class="panel mt-2">
-                <div data-role="panel" data-title-caption="Etat des actions au {{ date('d/m/Y')}}" data-collapsible="false" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
+                <div data-role="panel" data-title-caption="{{ trans("cruds.domain.measure_date") }} {{ date('d/m/Y')}}" data-collapsible="false" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
                     <div class="p-8">
                         <canvas id="actionsChart" class="chartjs-render-monitor"></canvas>
                     </div>

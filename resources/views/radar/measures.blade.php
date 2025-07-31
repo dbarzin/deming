@@ -2,7 +2,7 @@
 
 @section("content")
 <form action="/radar/domains">
-    <div data-role="panel" data-title-caption="Tableau de bord" data-collapsible="false" data-title-icon="<span class='mif-gauge'></span>">
+    <div data-role="panel" data-title-caption={{ trans("cruds.welcome.dashboard") }} data-collapsible="false" data-title-icon="<span class='mif-gauge'></span>">
 
         <div class="row">
             <div class="cell-2">
