@@ -65,16 +65,17 @@ class AuditLogsController extends Controller
         );
 
         // Set the object type
-        if ($type == 'bob')
+        if ($type === 'bob') {
             $type = 'App\Models\Control';
-        elseif ($type =='alice')
+        } elseif ($type === 'alice') {
             $type = 'App\Models\Measure';
-        elseif ($type == 'action')
+        } elseif ($type === 'action') {
             $type = 'App\Models\Action';
-        elseif ($type == 'user')
+        } elseif ($type === 'user') {
             $type = 'App\Models\User';
-        else
+        } else {
             abort(404, 'Not found');
+        }
 
         // Get the list
         $auditLogs =

@@ -14,7 +14,7 @@
 
 @include('partials.errors')
 
-<form method="POST" action="/bob/make" enctype="multipart/form-data" class="needs-validation">
+<form method="POST" action="/bob/make" enctype="multipart/form-data">
 	@csrf
 	<input type="hidden" name="id" value="{{ $control->id }}"/>
 
@@ -135,22 +135,17 @@
 	    		<strong>{{ trans('cruds.control.fields.note') }}</strong>
 	    	</div>
             <div class="cell-lg-2 cell-md-3">
-				<input type="text" data-role="spinner" name="note" data-min-value="0" data-max-value="100"
-                value="{{ count($errors)>0 ?  old('note') : $control->note }}">
-<!--
-<br><br>
-    <input
-        data-role="spinner"
-        type="number"
-        id="percentage"
-        name="percentage"
-        min="0"
-        max="100"
-        step="1"
-        placeholder="0.00"
-    >
--->
-
+                <input
+                    type="number"
+                    id="note"
+                    name="note"
+                    value="{{ count($errors)>0 ?  old('note') : $control->note }}"
+                    min="0"
+                    max="100"
+                    step="0.01"
+                    placeholder="0.00"
+                    data-role="spinner"
+                />
     		</div>
 	    </div>
 
@@ -474,6 +469,7 @@ document.addEventListener('DOMContentLoaded', function () {
     //--------------------------------------------------
     // Validation
     //---------------------------------------------------
+    /*
     const forms = document.querySelectorAll('.needs-validation');
 
     forms.forEach(function (form) {
@@ -486,6 +482,7 @@ document.addEventListener('DOMContentLoaded', function () {
             form.classList.add('was-validated');
         }, false);
     });
+    */
 });
 
 </script>
