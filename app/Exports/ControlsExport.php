@@ -3,13 +3,13 @@
 namespace App\Exports;
 
 use App\Models\Control;
+use Illuminate\Database\Eloquent\Builder;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithHeadings;
 use Maatwebsite\Excel\Concerns\WithMapping;
 use Maatwebsite\Excel\Concerns\WithStyles;
 use PhpOffice\PhpSpreadsheet\Worksheet\Worksheet;
-use Illuminate\Database\Eloquent\Builder;
 
 class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles, WithColumnWidths
 {
@@ -100,7 +100,7 @@ class ControlsExport implements FromQuery, WithMapping, WithHeadings, WithStyles
         ];
     }
 
-    public function query() : Builder
+    public function query(): Builder
     {
         return Control::orderBy('realisation_date');
     }

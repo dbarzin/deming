@@ -170,7 +170,7 @@ class Control extends Model
 
                     // Remove next_id link
                     Control::where('next_id', $control->id)->update(['next_id' => null]);
-                    
+
                     // delete control
                     $control->delete();
                 }

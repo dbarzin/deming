@@ -281,10 +281,10 @@ class DocumentController extends Controller
 
             $messages = Collect(
                 [
-                        "{$result['logCount']} log(s) will be deleted.",
-                        "{$result['documentCount']} document(s) will be deleted.",
-                        "{$result['controlCount']} control(s) will be deleted.",
-                    ]
+                    "{$result['logCount']} log(s) will be deleted.",
+                    "{$result['documentCount']} document(s) will be deleted.",
+                    "{$result['controlCount']} control(s) will be deleted.",
+                ]
             );
         } elseif (($action === 'delete') && ($duration > 0)) {
             $dateLimit = Carbon::now()->subMonths($duration)->toDateString();
@@ -293,10 +293,10 @@ class DocumentController extends Controller
 
             $messages = Collect(
                 [
-                        "{$result['logCount']} log(s) deleted.",
-                        "{$result['documentCount']} document(s) deleted.",
-                        "{$result['controlCount']} control(s) deleted.",
-                    ]
+                    "{$result['logCount']} log(s) deleted.",
+                    "{$result['documentCount']} document(s) deleted.",
+                    "{$result['controlCount']} control(s) deleted.",
+                ]
             );
         } else {
             $messages = null;
