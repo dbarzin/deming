@@ -114,6 +114,7 @@ return [
          'make' => 'Maßnahme durchführen',
          'plan' => 'Planung einer Maßnahme',
          'radar' => 'Status der Sicherheitsmaßnahmen',
+	 'status_date' => 'Stand der Kontrolle am',
          'title' => 'Maßnahmen',
          'title_singular' => 'Maßnahme',
          'groupBy' => 'Gruppiert nach',
@@ -158,6 +159,7 @@ return [
          'choose' => 'Wähle eine Domäne',
          'title' => 'Domänen',
          'radar' => 'Ergebnis der Kontrollen nach Domänen',
+	 'measure_date' => 'Stand der Maßnahmen zum',
      ],
      'document' => [
         'title' => [
