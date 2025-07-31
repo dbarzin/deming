@@ -137,6 +137,7 @@
             <div class="cell-lg-2 cell-md-3">
 				<input type="text" data-role="spinner" name="note" data-min-value="0" data-max-value="100"
                 value="{{ count($errors)>0 ?  old('note') : $control->note }}">
+<!--
 <br><br>
     <input
         data-role="spinner"
@@ -148,6 +149,7 @@
         step="1"
         placeholder="0.00"
     >
+-->
 
     		</div>
 	    </div>
