@@ -7,7 +7,11 @@
 
 ## :rocket: Introduction
 
-Dans un monde où la sécurité de l'information est plus critique que jamais, les organisations doivent non seulement implémenter des mesures de sécurité, mais aussi s'assurer que celles-ci sont effectives et performantes. **Deming** est là pour vous aider à relever ce défi avec brio.
+Dans un contexte où la sécurité de l'information est devenue un enjeu stratégique, les organisations doivent non seulement mettre en place des mesures de protection, mais aussi démontrer leur efficacité et leur cohérence dans le temps. Deming accompagne cette démarche en proposant une solution open source robuste, conçue pour piloter un système de management de la sécurité de l'information (SMSI) conforme à la norme ISO/IEC 27001.
+
+Pensé par des RSSI pour des RSSI, Deming allie une couverture fonctionnelle complète, une architecture claire et une forte adaptabilité aux réalités du terrain. Adossé à une documentation soignée et à une communauté active, il s’impose progressivement comme une référence incontournable dans les environnements critiques.
+
+Reconnu pour sa qualité et son impact, Deming est aujourd’hui le meilleur outil open source de gestion du SMSI.
 
 ### :question: Qu’est-ce que Deming ?
 
