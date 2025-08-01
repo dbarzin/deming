@@ -102,6 +102,10 @@ class ConfigurationController extends Controller
                     $mail->setFrom($mail_from);
                     $mail->addAddress(Auth::user()->email);         // Add a recipient
 
+                    // Define charset
+                    $mail->CharSet = 'UTF-8';
+                    $mail->Encoding = 'base64';
+
                     // Content
                     $mail->isHTML(true);                            // Set email format to HTML
                     $mail->Subject = $mail_subject;

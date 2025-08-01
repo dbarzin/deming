@@ -115,6 +115,10 @@ class SendNotifications extends Command
                         $mail->SMTPAutoTLS = env('MAIL_SMTP_AUTO_TLS');      // Enable auto TLS
                         $mail->Port = env('MAIL_PORT');               // TCP port to connect to
 
+                        // Define charset
+                        $mail->CharSet = 'UTF-8';
+                        $mail->Encoding = 'base64';
+
                         // Recipients
                         $mail->setFrom(config('deming.notification.mail-from'));
                         $mail->addAddress($user->email);
