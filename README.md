@@ -13,7 +13,7 @@ In a context where information security has become a strategic priority, organiz
 
 Created by CISOs for CISOs, Deming combines comprehensive functional coverage, a clear architecture, and strong adaptability to real-world operational needs. Backed by thorough documentation and an active community, it is steadily establishing itself as a key reference in critical environments.
 
-Recognized for its quality and impact, Deming is now the leading open source tool for GRC and ISMS management.
+Recognized for its quality and impact, Deming is the best open source tool for GRC and ISMS management.
 
 ### :question: What is Deming?
 
