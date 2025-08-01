@@ -9,7 +9,11 @@
 
 ## :rocket: Introduction
 
-In a world where information security is more critical than ever, organizations must not only implement security measures, but also ensure that they are effective and efficient. **Deming** is here to help you meet this challenge head on.
+In a context where information security has become a strategic priority, organizations must not only implement protection measures but also demonstrate their effectiveness and long-term consistency. Deming supports this effort by providing a robust open source solution designed to manage an Information Security Management System (ISMS) in compliance with the ISO/IEC 27001 standard.
+
+Created by CISOs for CISOs, Deming combines comprehensive functional coverage, a clear architecture, and strong adaptability to real-world operational needs. Backed by thorough documentation and an active community, it is steadily establishing itself as a key reference in critical environments.
+
+Recognized for its quality and impact, Deming is now the leading open source tool for ISMS management.
 
 ### :question: What is Deming?
 
