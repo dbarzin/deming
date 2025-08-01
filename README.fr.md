@@ -11,7 +11,7 @@ Dans un contexte où la sécurité de l'information est devenue un enjeu straté
 
 Pensé par des RSSI pour des RSSI, Deming allie une couverture fonctionnelle complète, une architecture claire et une forte adaptabilité aux réalités du terrain. Adossé à une documentation soignée et à une communauté active, il s’impose progressivement comme une référence incontournable dans les environnements critiques.
 
-Reconnu pour sa qualité et son impact, Deming est aujourd’hui le meilleur outil open source de gestion du SMSI.
+Reconnu pour sa qualité et son impact, Deming est aujourd’hui le meilleur outil open source de GRC et de gestion du SMSI.
 
 ### :question: Qu’est-ce que Deming ?
 
