@@ -33,7 +33,7 @@ return [
     | Application Force HTTPS
     |--------------------------------------------------------------------------
     |
-    | This ariable force the use of HTTPS in the applucation URL
+    | This variable force the use of HTTPS in the applucation URL
     |
     */
 

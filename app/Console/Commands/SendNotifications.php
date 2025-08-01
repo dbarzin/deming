@@ -91,9 +91,11 @@ class SendNotifications extends Command
                         $txt .= ' &nbsp; - &nbsp; ';
                         // Clauses
                         foreach ($control->measures() as $measure) {
-                            $txt .= '<a href="' . url('/alice/show/' . $measure->id) . '">'. htmlentities($measure->clause) . '</a>';
-                            // Space
-                            $txt .= ' &nbsp; ';
+                            if ($measure!==null) {
+                                $txt .= '<a href="' . url('/alice/show/' . $measure->id) . '">'. htmlentities($measure->clause) . '</a>';
+                                // Space
+                                $txt .= ' &nbsp; ';
+                            }
                         }
                         $txt .= ' - &nbsp; ';
                         // Name
