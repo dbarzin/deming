@@ -29,7 +29,7 @@ class AppServiceProvider extends ServiceProvider
     public function boot()
     {
         if (
-            (App::environment('production') && !Config::has('app.force_https'))
+            (App::environment('production') && (Config::get('app.force_https')===null))
             ||
             Config::get('app.force_https')
         ) {
