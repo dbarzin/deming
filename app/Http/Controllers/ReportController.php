@@ -30,7 +30,7 @@ class ReportController extends Controller
     /**
      * Rapport de pilotage du SMSI
      *
-     * @return \Illuminate\Http\Response
+     * @return  \Illuminate\Http\Response|\Illuminate\Http\RedirectResponse|\Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function pilotage(Request $request)
     {
@@ -104,7 +104,7 @@ class ReportController extends Controller
     /**
      * Générer le SOA
      *
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function soa()
     {
@@ -115,7 +115,6 @@ class ReportController extends Controller
             ->whereIn('status', [0,1])
             ->distinct()
             ->orderBy('scope')
-            ->get()
             ->pluck('scope')
             ->toArray();
 
@@ -245,7 +244,7 @@ class ReportController extends Controller
 
         foreach ($controls as $control) {
             $table->addRow();
-            $table->addCell(2500)->addText($control->measures->implode('clause', ', '));
+            $table->addCell(2500)->addText($control->measures()->implode('clause', ', '));
             $table->addCell(12500)->addText(str_replace('&', 'x', $control->name));
             $table->addCell(2800)->addText($control->realisation_date, null, ['align' => 'center']);
             $table->addCell(12500)->addText($control->scope);
@@ -274,7 +273,7 @@ class ReportController extends Controller
         if ($framework !== null) {
             $domains = $domains->where('framework', '=', $framework);
         }
-        $domains = $domains->get();
+        $domains = $domains->get()->toArray();
 
         // get status report
         $controls = DB::table('controls as c1')
