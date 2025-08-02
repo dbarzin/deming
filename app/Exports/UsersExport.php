@@ -1,4 +1,5 @@
 <?php
+
 namespace App\Exports;
 
 use App\Models\User;
@@ -64,7 +65,7 @@ class UsersExport implements FromQuery, WithMapping, WithHeadings, WithStyles, W
                 $user->email,
                 $user->groups()->implode('name', ', '),
                 $user->language,
-                $user->controls->implode('name', ', ')
+                $user->controls->implode('name', ', '),
             ],
         ];
     }

@@ -32,10 +32,8 @@ class ActionsExport implements FromQuery, WithMapping, WithHeadings, WithStyles,
         ];
     }
 
-    public function styles(Worksheet $sheet)
+    public function styles(Worksheet $_sheet)
     {
-        // fix unused
-        $sheet = null;
         // return
         return [
             // Style the first row as bold text.

@@ -206,7 +206,7 @@ class UserController extends Controller
      *
      * @return bool
      */
-    private function isAdmin() : bool
+    private function isAdmin(): bool
     {
         return Auth::user()->role === 1;
     }

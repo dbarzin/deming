@@ -67,7 +67,7 @@ class HomeController extends Controller
         ]);
     }
 
-    public function test(Request $request)
+    public function test(Request $_request)
     {
         return view('test');
     }

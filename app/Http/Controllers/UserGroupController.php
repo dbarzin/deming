@@ -15,7 +15,7 @@ class UserGroupController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -30,7 +30,7 @@ class UserGroupController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -50,7 +50,7 @@ class UserGroupController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -82,15 +82,16 @@ class UserGroupController extends Controller
      *
      * @param  UserGroup $group
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show(UserGroup $group)
     {
         // Only for administrator role
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        // $group = UserGroup::find($id);
-        abort_if($group === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+        abort_if(
+            (Auth::User() === null) || (Auth::User()->role !== 1),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         return view('groups.show', compact('group'));
     }
@@ -100,15 +101,16 @@ class UserGroupController extends Controller
      *
      * @param  UserGroup $group
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(UserGroup $group)
     {
         // Only for administrator role
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        // Get Group
-        abort_if($group === null, Response::HTTP_NOT_FOUND, '404 Not Found');
+        abort_if(
+            (Auth::User() === null) || (Auth::User()->role !== 1),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
 
         // Get Users
         $all_users = User::select('id', 'name')->orderBy('name')->get();
@@ -125,7 +127,7 @@ class UserGroupController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  UserGroup $group
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, UserGroup $group)
     {
@@ -156,7 +158,7 @@ class UserGroupController extends Controller
      *
      * @param  UserGroup $group
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(UserGroup $group)
     {

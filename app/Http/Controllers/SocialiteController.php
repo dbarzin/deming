@@ -51,7 +51,7 @@ class SocialiteController extends Controller
     /**
      * Callback action use when OIDC provider redirect user to app.
      */
-    public function callback(Request $request, string $provider)
+    public function callback(Request $_request, string $provider)
     {
         $providers = config('services.socialite_controller.providers', []);
 
