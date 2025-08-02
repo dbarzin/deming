@@ -194,6 +194,7 @@ return [
         'end' => 'Fin',
         'report_title' => 'Rapport',
         'steering' => 'Rapport de pilotage du SMSI',
+        'users_export' => 'Exportation des utilisateurs',
         'data_export_title' => 'Exportation des données',
         'domains_export'=> 'Exportation des domaines',
         'attributes_export' => 'Exportation des attributs',

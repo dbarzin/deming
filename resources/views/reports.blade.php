@@ -92,6 +92,9 @@
 	<div class="row">
 		<div class="cell-6">
         	<ul>
+				<li>
+					<a href="/export/users" target="_blank">{{ trans('cruds.exports.users_export') }}</a>
+				</li>
         		<li>
 					<a href="/export/domains" target="_blank">{{ trans('cruds.exports.domains_export') }}</a>
 				</li>
