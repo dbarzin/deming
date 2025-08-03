@@ -56,7 +56,10 @@
                     <div class="cell-lg-6 cell-md-9">
 					<select data-role="select" name="attributes[]" data-filter="true" multiple>
 						@foreach($values as $value)
-					    <option oncl>{{$value}}</option>
+					    <option value="{{ $value }}"
+                            @if(in_array($value, old('attributes', $selectedAttributes ?? []))) selected @endif>
+                            {{$value}}
+                        </option>
 					    @endforeach
 					 </select>
 				</div>

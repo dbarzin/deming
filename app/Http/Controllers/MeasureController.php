@@ -17,7 +17,7 @@ class MeasureController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -77,7 +77,7 @@ class MeasureController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -121,7 +121,7 @@ class MeasureController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -167,7 +167,7 @@ class MeasureController extends Controller
      *
      * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show(int $id)
     {
@@ -212,9 +212,9 @@ class MeasureController extends Controller
     /**
      * Clone measure.
      *
-     * @param  \App\Measure $measure
+     * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(int $id)
     {
@@ -257,57 +257,62 @@ class MeasureController extends Controller
     /**
      * Clone measure.
      *
-     * @param  \App\Measure $measure
+     * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function clone(int $id)
     {
-        // Not for Auditor, API and auditee
+        // Restriction d'accès
         abort_if(
-            (Auth::User()->role === 3) ||
-            (Auth::User()->role === 4) ||
-            (Auth::User()->role === 5),
+            in_array(Auth::user()->role, [3, 4, 5]),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
 
         $measure = Measure::find($id);
 
-        // not found
         abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
-        // get the list of domains
-        $domains = Domain::All();
+        $domains = Domain::all();
 
-        // get all attributes
+        // Récupération de toutes les valeurs d'attributs disponibles
         $values = [];
-        $attributes = DB::table('attributes')
-            ->select('values')
-            ->get();
+        $attributes = DB::table('attributes')->select('values')->get();
+
         foreach ($attributes as $attribute) {
             foreach (explode(' ', $attribute->values) as $value) {
                 if (strlen($value) > 0) {
-                    array_push($values, $value);
+                    $values[] = $value;
                 }
             }
         }
-        sort($values);
+        // Add attributes from measure
+        foreach (explode(' ', $measure->attributes) as $value) {
+            if (strlen($value) > 0) {
+                $values[] = $value;
+            }
+        }
+
         $values = array_unique($values);
+        sort($values);
 
-        // transform to array
-        $measure->attributes = explode(' ', $measure->attributes);
+        // Extraire les attributs sélectionnés de la mesure existante
+        $selectedAttributes = array_filter(
+            explode(' ', $measure->attributes ?? ''),
+            fn($val) => strlen($val) > 0
+        );
 
-        return view('measures.create', compact('measure', 'values', 'domains'));
+        return view('measures.create',
+            compact('measure', 'values', 'domains', 'selectedAttributes'));
     }
 
     /**
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Measure             $measure
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request)
     {
@@ -374,9 +379,9 @@ class MeasureController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Measure $measure
+     * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request)
     {
@@ -415,9 +420,9 @@ class MeasureController extends Controller
     /**
      * Plan a measure.
      *
-     * @param  \App\Measure $measure
+     * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function plan(Request $request)
     {
@@ -445,14 +450,12 @@ class MeasureController extends Controller
         $measures = [$request->id];
 
         // get all active scopes
-        $scopes = DB::table('controls')
-            ->select('scope')
+        $scopes = Control::query()
             ->whereNotNull('scope')
-            ->where('scope', '<>', '')
-            ->whereIn('status', [0,1])
+            ->where('scope', '!=', '')
+            ->whereIn('status', [0, 1])
             ->distinct()
             ->orderBy('scope')
-            ->get()
             ->pluck('scope')
             ->toArray();
 
@@ -510,7 +513,7 @@ class MeasureController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function activate(Request $request)
     {
@@ -578,7 +581,7 @@ class MeasureController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function disable(Request $request)
     {
@@ -594,17 +597,15 @@ class MeasureController extends Controller
         $control_id = DB::table('controls')
             ->select('id')
             ->where('measure_id', '=', $request->id)
-            // ->where('realisation_date', null)
             ->where('status', [0,1])
-            ->get()
-            ->first()->id;
+            ->first()
+            ->id;
+
         if ($control_id !== null) {
             // break link
-            // DB::update('UPDATE controls SET next_id = null WHERE next_id =' . $control_id);
             Control::where('next_id', $control_id)
                 ->update(['next_id' => null]);
             // delete control
-            // DB::delete('DELETE FROM controls WHERE id = ' . $control_id);
             Control::where('id', $control_id)
                 ->delete();
         }
@@ -616,9 +617,7 @@ class MeasureController extends Controller
     /**
      * Export all Measure in xlsx
      *
-     * @param \Illuminate\Http\Request $request
-     *
-     * @return \Illuminate\Http\Response
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
     public function export()
     {
