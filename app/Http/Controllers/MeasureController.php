@@ -278,7 +278,10 @@ class MeasureController extends Controller
 
         // Récupération de toutes les valeurs d'attributs disponibles
         $values = [];
-        $attributes = DB::table('attributes')->select('values')->get();
+        $attributes = DB::table('attributes')->select('values')
+            ->union(DB::table('measures')
+                ->select(DB::raw('attributes as value')))
+            ->get();
 
         foreach ($attributes as $attribute) {
             foreach (explode(' ', $attribute->values) as $value) {
@@ -287,13 +290,7 @@ class MeasureController extends Controller
                 }
             }
         }
-        // Add attributes from measure
-        foreach (explode(' ', $measure->attributes) as $value) {
-            if (strlen($value) > 0) {
-                $values[] = $value;
-            }
-        }
-
+        
         $values = array_unique($values);
         sort($values);
 
