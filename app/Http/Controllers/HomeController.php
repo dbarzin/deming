@@ -22,7 +22,7 @@ class HomeController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -65,11 +65,6 @@ class HomeController extends Controller
             'late_controls_count' => $lateControlsCount,
             'controls' => $expandedControls,
         ]);
-    }
-
-    public function test(Request $request)
-    {
-        return view('test');
     }
 
     private function getActiveDomainsCount()

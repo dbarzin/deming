@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\UsersExport;
 use App\Models\Control;
 use App\Models\User;
 use Config;
@@ -16,7 +17,7 @@ class UserController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -31,7 +32,7 @@ class UserController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -46,7 +47,7 @@ class UserController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -93,7 +94,7 @@ class UserController extends Controller
      *
      * @param  User $user
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show(User $user)
     {
@@ -108,7 +109,7 @@ class UserController extends Controller
      *
      * @param  User $user
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(User $user)
     {
@@ -126,7 +127,7 @@ class UserController extends Controller
      * @param  \Illuminate\Http\Request $request
      * @param  User $user
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View|\Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, User $user)
     {
@@ -135,7 +136,6 @@ class UserController extends Controller
 
         // Validate request data
         $this->validate($request, [
-            'name' => 'required|min:1|max:40',
             'login' => 'required|min:1|max:30|unique:users,login,'.$user->id,
             'name' => 'required|min:1|max:90',
             'title' => 'required|min:1|max:30',
@@ -179,7 +179,7 @@ class UserController extends Controller
      *
      * @param  User $user
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(User $user)
     {
@@ -206,7 +206,7 @@ class UserController extends Controller
      *
      * @return bool
      */
-    private function isAdmin()
+    private function isAdmin(): bool
     {
         return Auth::user()->role === 1;
     }

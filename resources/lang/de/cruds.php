@@ -194,6 +194,7 @@ return [
          'report_title' => 'Report',
          'steering' => 'ISMS Lenkungsbericht',
          'data_export_title' => 'Datenexport',
+         'users_export' => 'Exportiere Benutzern',
          'attributes_export' => 'Exportiere Attributen',
          'domains_export'=> 'Exportiere Domänen',
          'measures_export' => 'Exportiere Sicherheitsmaßnahmen',

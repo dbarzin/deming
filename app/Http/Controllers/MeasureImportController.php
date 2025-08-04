@@ -20,7 +20,7 @@ class MeasureImportController extends Controller
     /**
      * Show Import Measure screen
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show()
     {
@@ -44,7 +44,7 @@ class MeasureImportController extends Controller
      *
      * @param \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\RedirectResponse
+     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
 
     public function download(Request $request)
@@ -101,6 +101,7 @@ class MeasureImportController extends Controller
 
         try {
             // Get Filename
+            $fileName = null;
             if ($request->file()) {
                 // Save temp file
                 $fileName = Storage::path($request->file('file')->store());
@@ -136,7 +137,7 @@ class MeasureImportController extends Controller
                 $this->importFromFile($data, $messages);
             }
         } finally {
-            if ($request->file()) {
+            if ($request->file() && ($fileName!==null)) {
                 unlink($fileName);
             }
         }
@@ -191,7 +192,7 @@ class MeasureImportController extends Controller
                 break;
             }
 
-            if (($data[$line][1] === null)) {
+            if (($data[$line][0] === null)) {
                 $errors->push(($line + 1) . ': framework name is empty');
                 continue;
             }
@@ -205,7 +206,6 @@ class MeasureImportController extends Controller
             }
             // delete line ?
             if (
-                ($data[$line][3] !== null) &&
                 ($data[$line][4] === null) &&
                 ($data[$line][5] === null) &&
                 ($data[$line][6] === null) &&
@@ -256,8 +256,6 @@ class MeasureImportController extends Controller
 
     /**
      * Import Measures from an XLSX file
-     *
-     * @return \Illuminate\Http\Response
      */
     public function importFromFile(
         array $data,
@@ -323,14 +321,14 @@ class MeasureImportController extends Controller
                 continue;
             }
             // update or insert ?
-            $measure = Measure::where('clause', $data[$line][3])->get()->first();
+            $measure = Measure::where('clause', $data[$line][3])->first();
 
             if ($measure !== null) {
                 // update or create domain
                 $domain = Domain
                     ::where('framework', trim($data[$line][0]))
                         ->where('title', trim($data[$line][1]))
-                        ->get()->first();
+                        ->first();
                 if ($domain === null) {
                     // create domain
                     $domain = new Domain();
@@ -364,7 +362,7 @@ class MeasureImportController extends Controller
                 $domain = Domain
                     ::where('framework', trim($data[$line][0]))
                         ->where('title', trim($data[$line][1]))
-                        ->get()->first();
+                        ->first();
 
                 if ($domain === null) {
                     // create domain
@@ -421,8 +419,6 @@ class MeasureImportController extends Controller
 
     /**
      * Truncate database
-     *
-     * @return \Illuminate\Http\Response
      */
     public function clean()
     {

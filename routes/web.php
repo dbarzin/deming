@@ -23,9 +23,6 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('auth/redirect/{driver}', 'SocialiteController@redirect')->name('socialite.redirect');
     Route::get('auth/callback/{driver}', 'SocialiteController@callback')->name('socialite.callback');
 
-    /* Testing */
-    Route::get('/test', 'HomeController@test');
-
     /* Global-search engine */
     Route::get('global-search', 'GlobalSearchController@search');
 
@@ -132,4 +129,5 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/export/alices', 'MeasureController@export');
     Route::get('/export/bobs', 'ControlController@export');
     Route::get('/export/actions', 'ActionController@export');
+    Route::get('/export/users', 'UserController@export');
 });
