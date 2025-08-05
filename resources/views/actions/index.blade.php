@@ -85,13 +85,13 @@
 	       data-check-style="1">
 	    <thead>
 	    <tr>
-            <th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.reference') }}</th>
-            <th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.type') }}</th>
-            <th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.status') }}</th>
-            <th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.progress') }}</th>
-            <th class="sortable-column sort-asc" width="40%">{{ trans('cruds.action.fields.name') }}</th>
-			<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.scope') }}</th>
-            <th class="sortable-column sort-asc" width="10%">{{ trans('cruds.action.fields.due_date') }}</th>
+            <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.reference') }}</th>
+            <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.type') }}</th>
+            <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.status') }}</th>
+            <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.progress') }}</th>
+            <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.name') }}</th>
+			<th class="sortable-column sort-asc">{{ trans('cruds.action.fields.scope') }}</th>
+            <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.due_date') }}</th>
 	    </tr>
 	    </thead>
 	    <tbody>
