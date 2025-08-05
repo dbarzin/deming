@@ -2,8 +2,13 @@
 
 namespace App\Http\Controllers;
 
-use App\Exports\ActionsExport;
+
+// Models
 use App\Models\Action;
+use App\Models\AuditLog;
+// Export
+use App\Exports\ActionsExport;
+// Laravel
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -607,6 +612,45 @@ class ActionController extends Controller
                     $query->where('scope', $scope);
                 })
                 ->get();
+
+        // Get progress history
+        $actions = $actions->map(function ($action) {
+            $logs = AuditLog::where('subject_type', Action::class)
+                            ->where('subject_id', $action->id)
+                            ->orderBy('created_at', 'asc')
+                            ->get();
+
+            $history = [];
+            $lastProgressDate = null;
+
+            foreach ($logs as $log) {
+                $properties = json_decode($log->properties[0], true);
+
+                if (!isset($properties['progress'])) {
+                    continue;
+                }
+
+                $progress = (int) $properties['progress'];
+                $progressDate = $log->created_at->toDateString();
+
+                // Same day ?
+                if ($progressDate == $lastProgressDate) {
+                    // replace last value
+                    end($history)['progress'] = $progress;
+                }
+                else {
+                    // add history
+                    $history[] = [
+                        'date' => $progressDate,
+                        'progress' => $progress,
+                    ];
+                    // save last date
+                    $lastProgressDate = $progressDate;
+                }
+            }
+            $action->progress_history = $history;
+            return $action;
+        });
 
         // Return
         return view('radar.actions')

@@ -57,20 +57,80 @@
                             >
                             <thead>
                                 <tr>
-                                    <th>Reference</th>
-                                    <th>Scope</th>
-                                    <th>Name</th>
-                                    <th>Progress</th>
+                                    <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.reference') }}</th>
+                                    <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.type') }}</th>
+                                    <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.status') }}</th>
+                                    <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.name') }}</th>
+                                    <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.due_date') }}</th>
+                                    <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.progress') }}</th>
+                        			<th class="sortable-column sort-asc"></th>
                                 </tr>
                             </thead>
                             <tbody>
                         @foreach($actions as $action)
                         <tr>
-                            <td>{{ $action->reference }}</td>
-                            <td>{{ $action->scope }}</td>
+                            <td>
+                            <b id="{{ $action->reference }}"><a href="/action/show/{{ $action->id }}">{{ $action->reference==null ? ("ACT-".$action->id) : $action->reference }}<a>
+                            </td>
+                            <td>
+                                <p id="{{ $action->type }}">
+                                    @if ($action->type==1)
+                                    <p class="fg-red text-bold">
+                                    {{ trans('cruds.action.types.major') }}
+                                    </p>
+                                    @elseif ($action->type==2)
+                                    <p class="fg-orange text-bold">
+                                    {{ trans('cruds.action.types.minor') }}
+                                    </p>
+                                    @elseif ($action->type==3)
+                                    <p class="fg-yellow text-bold">
+                                    {{ trans('cruds.action.types.observation') }}
+                                    </p>
+                                    @elseif ($action->type==4)
+                                    <p class="fg-green text-bold">
+                                    {{ trans('cruds.action.types.opportunity') }}
+                                    </p>
+                                    @endif
+                                </p>
+                            </td>
+                            <td id="{{ $action->status }}">
+                                @if ($action->status==0)
+                                {{ trans('cruds.action.fields.status_open') }}
+                                @elseif ($action->status==1)
+                                {{ trans('cruds.action.fields.status_closed') }}
+                                @elseif ($action->status==2)
+                                {{ trans('cruds.action.fields.status_rejected') }}
+                                @else
+                                {{ $action->status }}
+                                @endif
+                            </td>
                             <td>{{ $action->name }}</td>
+                            <td>
+                            @if ($action->due_date!==null)
+                                <b>
+                                @if (today()->lte($action->due_date))
+                                    <font color="green">{{ $action->due_date }}</font>
+                                @else
+                                    <font color="red">{{ $action->due_date }}</font>
+                                @endif
+                                </b>
+                            @endif
+                            </td>
+                            <td width="40">
+                                <div data-role="donut" data-value="{{ $action->progress }}"
+                                {{ $action->progress }}
+                                @if ($action->progress<25)
+                                    class="donut-red"
+                                @elseif ($action->progress<50)
+                                    class="donut-orange"
+                                @else
+                                    class="donut-green"
+                                @endif
+                                    >
+                                </div>
+                            </td>
                             <td style="padding: 0; text-align: center; vertical-align: middle;" width=400 height=110>
-                                <canvas id="progressChart1" width="400" height="100"></canvas>
+                                <canvas id="progressChart{{ $action->id }}" width="400" height="100"></canvas>
                             </td>
                         </tr>
                         @endforeach
@@ -152,17 +212,16 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
 
-    new Chart(document.getElementById("progressChart1"), {
+    @foreach($actions as $action)
+    new Chart(document.getElementById("progressChart{{$action->id}}"), {
         type: 'line',
         data: {
             datasets: [{
                 label: 'Progression',
                 data: [
-                    { x: '2025-07-01', y: 10 },
-                    { x: '2025-07-10', y: 35 },
-                    { x: '2025-07-15', y: 50 },
-                    { x: '2025-07-25', y: 80 },
-                    { x: '2025-07-29', y: 100 }
+                    @foreach($action->progress_history as $history)
+                    { x: "{{ $history['date'] }}", y: {{ $history['progress'] }} },
+                    @endforeach
                 ],
                 borderColor: "#2196F3",
                 backgroundColor: "transparent",
@@ -192,6 +251,7 @@ document.addEventListener("DOMContentLoaded", function () {
             }
         }
     });
+    @endforeach
 
 });
 </script>
