@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\GenerateTestData::class,
         Commands\SendNotifications::class,
+        Commands\Cleanup::class,
     ];
 
     /**
@@ -27,6 +28,7 @@ class Kernel extends ConsoleKernel
     protected function schedule(Schedule $schedule)
     {
         $schedule->command('deming:send-notifications')->daily();
+        $schedule->command('deming:cleanup')->daily();
     }
 
     /**

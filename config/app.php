@@ -67,6 +67,8 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
+    'editor' => env('APP_EDITOR', 'sublime'),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
