@@ -15,7 +15,7 @@
 		    		<strong>{{ trans("cruds.control.fields.clauses") }}</strong>
 				</div>
 	    		<div class="cell-lg-6 cell-md-8">
-                    <select data-role="select" id="measures" name="measures[]" multiple>
+                    <select id="measures" name="measures[]" multiple  data-role="select" data-filter="true" >
 						@foreach($all_measures as $measure)
                             <option value="{{ $measure->id }}"
                                 {{ in_array($measure->id, old('measures', [])) ? 'selected' : '' }}>

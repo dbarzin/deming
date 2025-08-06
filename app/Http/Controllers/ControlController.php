@@ -306,7 +306,7 @@ class ControlController extends Controller
         // get all clauses
         $all_measures = DB::table('measures')
             ->select('id', 'clause')
-            ->orderBy('id')
+            ->orderBy('clause')
             ->get();
 
         // get all scopes
