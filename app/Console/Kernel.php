@@ -15,6 +15,7 @@ class Kernel extends ConsoleKernel
     protected $commands = [
         Commands\GenerateTestData::class,
         Commands\SendNotifications::class,
+        Commands\Cleanup::class,
     ];
 
     /**
