@@ -87,7 +87,6 @@
     background-color: #fdfdfd;
 }
 .MyCalendar .days .day_num.ignore {
-    background-color: #fdfdfd;
     color: #ced2d4;
     cursor: inherit;
 }
