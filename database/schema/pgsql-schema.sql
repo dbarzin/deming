@@ -60,7 +60,8 @@ CREATE TABLE public.actions (
     close_date date,
     justification text,
     created_at timestamp(0) without time zone,
-    updated_at timestamp(0) without time zone
+    updated_at timestamp(0) without time zone,
+    progress integer
 );
 
 
@@ -181,7 +182,7 @@ CREATE TABLE public.controls (
     realisation_date date,
     observations text,
     score integer,
-    note integer,
+    note numeric(5,2),
     created_at timestamp(0) without time zone,
     updated_at timestamp(0) without time zone,
     next_id integer,
@@ -1117,7 +1118,8 @@ COPY public.migrations (id, migration, batch) FROM stdin;
 30	2025_02_04_064646_create_audit_logs_table	2
 31	2025_02_05_121035_cleanup	2
 32	2025_04_29_123908_add_user_group	2
-33	2025_05_27_152856_change_actions	2
+34	2025_05_27_152856_change_actions	3
+35	2025_07_31_090259_alter_note_on_controls_table	3
 \.
 
 
@@ -1125,9 +1127,10 @@ COPY public.migrations (id, migration, batch) FROM stdin;
 -- Name: migrations_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.migrations_id_seq', 33, true);
+SELECT pg_catalog.setval('public.migrations_id_seq', 35, true);
 
 
 --
 -- PostgreSQL database dump complete
 --
+
