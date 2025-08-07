@@ -36,6 +36,7 @@ CREATE TABLE `actions` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
   `reference` varchar(32) DEFAULT NULL,
   `type` int(11) NOT NULL,
+  `progress` int(11) DEFAULT NULL,
   `criticity` int(11) NOT NULL,
   `status` int(11) NOT NULL,
   `scope` varchar(32) DEFAULT NULL,
@@ -135,7 +136,7 @@ CREATE TABLE `controls` (
   `realisation_date` date DEFAULT NULL,
   `observations` longtext DEFAULT NULL,
   `score` int(11) DEFAULT NULL,
-  `note` int(11) DEFAULT NULL,
+  `note` decimal(5,2) DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `next_id` int(10) unsigned DEFAULT NULL,
@@ -396,7 +397,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (54,'2016_06_01_000
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (55,'2016_06_01_000004_create_oauth_clients_table',2);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (56,'2016_06_01_000005_create_oauth_personal_access_clients_table',2);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (61,'2024_11_06_123808_add_actions',3);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (62,'2025_02_04_064646_create_audit_logs_table',4);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (63,'2025_02_05_121035_cleanup',4);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (64,'2025_04_29_123908_add_user_group',4);
-INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (65,'2025_05_27_152856_change_actions',4);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (70,'2025_02_04_064646_create_audit_logs_table',4);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (71,'2025_02_05_121035_cleanup',4);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (72,'2025_04_29_123908_add_user_group',4);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (76,'2025_05_27_152856_change_actions',5);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (77,'2025_07_31_090259_alter_note_on_controls_table',5);

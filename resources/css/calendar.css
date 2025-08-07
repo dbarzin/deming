@@ -84,10 +84,9 @@
     border-left: 1px solid #e6e9ea;
 }
 .MyCalendar .days .day_num:hover {
-    background-color: #fdfdfd;
+/*    background-color: #dddddd;*/
 }
 .MyCalendar .days .day_num.ignore {
-    background-color: #fdfdfd;
     color: #ced2d4;
     cursor: inherit;
 }
