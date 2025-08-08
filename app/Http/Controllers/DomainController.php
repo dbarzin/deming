@@ -15,7 +15,7 @@ class DomainController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index()
     {
@@ -35,7 +35,7 @@ class DomainController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -50,7 +50,7 @@ class DomainController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -78,9 +78,9 @@ class DomainController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Domain $Domain
+     * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show(int $id)
     {
@@ -92,9 +92,9 @@ class DomainController extends Controller
     /**
      * Show the form for editing the specified resource.
      *
-     * @param  \App\Domain $tag
+     * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(int $id)
     {
@@ -110,9 +110,9 @@ class DomainController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \Illuminate\Http\Request $request
-     * @param  \App\Domain $domain
+     * @param  \App\Models\Domain $domain
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request, Domain $domain)
     {
@@ -139,9 +139,9 @@ class DomainController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Domain $tag
+     * @param  \App\Models\Domain $domain
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Domain $domain)
     {
@@ -167,6 +167,11 @@ class DomainController extends Controller
         return redirect('/domains');
     }
 
+    /***
+     * Export the Domains in Excel
+     *
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function export()
     {
         return Excel::download(new DomainsExport(), 'domains.xlsx');
