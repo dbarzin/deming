@@ -100,7 +100,7 @@ function bytesToHuman($bytes) {
         </div>
 
         <div class="row">
-            <div class="cell-4">
+            <div class="cell-5">
                 <button type="submit" class="button success" name="action" value="save">
                     <span class="mif-floppy-disk2"></span>
                     &nbsp;
