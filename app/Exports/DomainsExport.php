@@ -22,10 +22,8 @@ class DomainsExport implements FromQuery, WithMapping, WithHeadings, WithStyles,
         ];
     }
 
-    public function styles(Worksheet $worksheet)
+    public function styles(Worksheet $_worksheet)
     {
-        // fix unused
-        $worksheet;
         return [
             // Style the first row as bold text.
             1 => ['font' => ['bold' => true]],
@@ -40,9 +38,6 @@ class DomainsExport implements FromQuery, WithMapping, WithHeadings, WithStyles,
         ];
     }
 
-    /**
-     * @var Domain $domain
-     */
     public function map($domain): array
     {
         return [
@@ -53,7 +48,7 @@ class DomainsExport implements FromQuery, WithMapping, WithHeadings, WithStyles,
     }
 
     /**
-     * @return \Illuminate\Support\Collection
+     * @return \Illuminate\Database\Query\Builder
      */
     public function query()
     {
