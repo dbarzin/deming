@@ -10,9 +10,9 @@ use Illuminate\Support\Str;
 class GlobalSearchController extends Controller
 {
     private $models = [
-        'App\\Models\\Domain',
-        'App\\Models\\Measure',
-        'App\\Models\\Control',
+        \App\Models\Domain::class,
+        \App\Models\Measure::class,
+        \App\Models\Control::class,
     ];
 
     public function search(Request $request)
@@ -30,7 +30,7 @@ class GlobalSearchController extends Controller
         foreach ($this->models as $model) {
             // user only search on controls
             if (
-                (Auth::User()->role === 5) && ($model !== 'App\\Models\\Control')
+                (Auth::User()->role === 5) && ($model !== \App\Models\Control::class)
             ) {
                 continue;
             }
