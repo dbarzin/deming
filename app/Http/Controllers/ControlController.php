@@ -20,7 +20,7 @@ class ControlController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
@@ -38,6 +38,7 @@ class ControlController extends Controller
             $domain = intval($domain);
             if ($domain === 0) {
                 $request->session()->forget('domain');
+                $domain = null;
             } else {
                 $request->session()->put('domain', $domain);
             }
@@ -111,20 +112,19 @@ class ControlController extends Controller
 
         // get all clauses
         $clauses = DB::table('measures')
-            ->select('clause')
-            ->when($domain !== null, function ($q) use ($domain) {
-                return $q->where('domain_id', '=', $domain);
-            })
-            ->get()
+            ->when($domain !== null, fn ($q) => $q->where('domain_id', $domain))
+            ->whereNotNull('clause')
+            ->where('clause', '!=', '')
+            ->distinct()
+            ->orderBy('clause')
             ->pluck('clause');
 
         // get domain base on his title
-        $domain_title = $request->get('domain_title');
-        if ($domain_title !== null) {
-            $domain = Domain::where('title', '=', $domain_title)->get();
-            if ($domain !== null) {
-                $domain = $domain->first()->id;
-                $request->session()->put('domain', $domain);
+        $domainTitle = $request->input('domain_title');
+        if ($domainTitle !== null) {
+            $domainId = Domain::where('title', $domainTitle)->value('id');
+            if ($domainId) {
+                $request->session()->put('domain', $domainId);
             }
         }
 
@@ -147,7 +147,6 @@ class ControlController extends Controller
             ->whereIn('status', [0, 1])
             ->distinct()
             ->orderBy('scope')
-            ->get()
             ->pluck('scope');
 
         // -----------------------------------------------------
@@ -197,14 +196,14 @@ class ControlController extends Controller
                     'c1.plan_date',
                     '>=',
                     (new Carbon('first day of this month'))
-                        ->addMonth($period)
+                        ->addMonths($period)
                         ->format('Y-m-d')
                 )
                 ->where(
                     'c1.plan_date',
                     '<',
                     (new Carbon('first day of next month'))
-                        ->addMonth($period)
+                        ->addMonths($period)
                         ->format('Y-m-d')
                 );
         }
@@ -292,7 +291,7 @@ class ControlController extends Controller
     /**
      * Show the form for creating a new Control.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -317,7 +316,6 @@ class ControlController extends Controller
             ->whereIn('status', [0, 1])
             ->distinct()
             ->orderBy('scope')
-            ->get()
             ->pluck('scope');
 
         // get all attributes
@@ -369,7 +367,7 @@ class ControlController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -439,7 +437,7 @@ class ControlController extends Controller
      *
      * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show(int $id)
     {
@@ -477,7 +475,6 @@ class ControlController extends Controller
             $next_control = DB::table('controls')
                 ->select('id', 'plan_date')
                 ->where('id', '=', $control->next_id)
-                ->get()
                 ->first();
         } else {
             $next_control = null;
@@ -486,7 +483,6 @@ class ControlController extends Controller
         $prev_control = DB::table('controls')
             ->select('id', 'plan_date')
             ->where('next_id', '=', $id)
-            ->get()
             ->first();
 
         // get associated documents
@@ -513,7 +509,7 @@ class ControlController extends Controller
      *
      * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(int $id)
     {
@@ -535,7 +531,6 @@ class ControlController extends Controller
         $ids = DB::table('controls')
             ->select('id')
             ->orderBy('id')
-            ->get()
             ->pluck('id');
 
         // get all clauses
@@ -569,7 +564,6 @@ class ControlController extends Controller
         $measures = DB::table('control_measure')
             ->select('measure_id')
             ->where('control_id', $id)
-            ->get()
             ->pluck('measure_id')
             ->toArray();
 
@@ -581,7 +575,6 @@ class ControlController extends Controller
             ->whereIn('status', [0, 1])
             ->distinct()
             ->orderBy('scope')
-            ->get()
             ->pluck('scope')
             ->toArray();
 
@@ -615,9 +608,9 @@ class ControlController extends Controller
     /**
      * Clone a control.
      *
-     * @param  int Control id
+     * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function clone(Request $request)
     {
@@ -642,7 +635,6 @@ class ControlController extends Controller
             ->whereIn('status', [0, 1])
             ->distinct()
             ->orderBy('scope')
-            ->get()
             ->pluck('scope');
 
         // get all attributes
@@ -702,10 +694,10 @@ class ControlController extends Controller
 
         // Construct owners copy
         $items = [];
-        foreach ($control->users as $user) {
+        foreach ($control->users()->get() as $user) {
             array_push($items, 'USR_' . $user->id);
         }
-        foreach ($control->groups as $group) {
+        foreach ($control->groups()->get() as $group) {
             array_push($items, 'GRP_' . $group->id);
         }
         $request->merge(['owners' => $items]);
@@ -722,9 +714,9 @@ class ControlController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Domain $domain
+     * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(int $id)
     {
@@ -1032,7 +1024,6 @@ class ControlController extends Controller
             ->whereIn('status', [0, 1])
             ->distinct()
             ->orderBy('scope')
-            ->get()
             ->pluck('scope');
 
         $cur_scope = $request->get('scope');
@@ -1141,7 +1132,7 @@ class ControlController extends Controller
      *
      * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function plan(int $id)
     {
@@ -1200,7 +1191,6 @@ class ControlController extends Controller
         $measures = DB::table('control_measure')
             ->select('measure_id')
             ->where('control_id', $id)
-            ->get()
             ->pluck('measure_id');
 
         // Get al active scopes
@@ -1209,7 +1199,6 @@ class ControlController extends Controller
             ->whereIn('status', [0, 1])
             ->distinct()
             ->orderBy('scope')
-            ->get()
             ->pluck('scope');
 
         return view('controls.plan', compact('control'))
@@ -1228,7 +1217,7 @@ class ControlController extends Controller
      *
      * @param  Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function unplan(Request $request)
     {
@@ -1243,16 +1232,13 @@ class ControlController extends Controller
         $control = Control
             ::whereIn('status', [0, 1])
                 ->where('id', '=', $request->id)
-                ->get()
                 ->first();
 
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // Break previous link
-        $prev_control = Control::where('next_id', $control->id)
-            ->get()
-            ->first();
+        $prev_control = Control::where('next_id', $control->id)->first();
         if ($prev_control !== null) {
             $prev_control->next_id = null;
             $prev_control->update();
@@ -1283,15 +1269,15 @@ class ControlController extends Controller
     /**
      * Save a control for planing
      *
-     * @param  Request $Request
+     * @param  Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function doPlan(Request $request)
     {
         // For administrators and users only
         abort_if(
-            Auth::User()->role !== 1 && Auth::User()->rol !== 2,
+            Auth::User()->role !== 1 && Auth::User()->role !== 2,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1370,12 +1356,11 @@ class ControlController extends Controller
             // Once
             $next_date = null;
         } else {
+            // Computer next Date
             $next_date =
-                $control->next_date === null
-                    ? Carbon::createFromFormat('Y-m-d', $control->plan_date)
+                Carbon::createFromFormat('Y-m-d', $control->plan_date)
                         ->addMonthsNoOverflow($control->periodicity)
-                        ->format('Y-m-d')
-                    : $control->next_date->format('Y-m-d');
+                        ->format('Y-m-d');
         }
 
         // return view
@@ -1390,7 +1375,7 @@ class ControlController extends Controller
      *
      * @param  Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function doMake(Request $request)
     {
@@ -1490,13 +1475,13 @@ class ControlController extends Controller
                 $new_control->save();
 
                 // Set owners
-                $new_control->users()->sync($control->users->pluck('id'));
+                $new_control->users()->sync($control->users()->pluck('id'));
 
                 // Set groups
-                $new_control->groups()->sync($control->groups->pluck('id'));
+                $new_control->groups()->sync($control->groups()->pluck('id'));
 
                 // Set measures
-                $new_control->measures()->sync($control->measures->pluck('id'));
+                $new_control->measures()->sync($control->measures()->pluck('id'));
 
                 // make link
                 $control->next_id = $new_control->id;
@@ -1512,9 +1497,9 @@ class ControlController extends Controller
     /**
      * Save a Control
      *
-     * @param  \App\Domain $domain
+     * @param  Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Request $request)
     {
@@ -1590,9 +1575,9 @@ class ControlController extends Controller
     /**
      * Draft a Control
      *
-     * @param  \App\Domain $domain
+     * @param  Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function draft(Request $request)
     {
@@ -1639,9 +1624,9 @@ class ControlController extends Controller
     /**
      * Reject a Control
      *
-     * @param  \App\Domain $domain
+     * @param  Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function reject(Request $request)
     {
@@ -1685,11 +1670,11 @@ class ControlController extends Controller
     /**
      * Accept a Control
      *
-     * @param  \App\Domain $domain
+     * @param  Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
-    public function accept()
+    public function accept(Request $request)
     {
         // Only for Admin and user
         abort_if(
@@ -1698,7 +1683,7 @@ class ControlController extends Controller
             '403 Forbidden'
         );
 
-        $id = (int) request('id');
+        $id = (int) $request->get('id');
 
         // Score must be set
         if ((request('score') === null) || (request('score') === 0)) {
@@ -1740,11 +1725,11 @@ class ControlController extends Controller
         $new_control->save();
 
         // Clone measures
-        $new_control->measures()->sync($control->measures->pluck('id')->toArray());
+        $new_control->measures()->sync($control->measures()->pluck('id')->toArray());
 
         // Set owners
-        $new_control->users()->sync($control->users->pluck('id')->toArray());
-        $new_control->groups()->sync($control->groups->pluck('id')->toArray());
+        $new_control->users()->sync($control->users()->pluck('id')->toArray());
+        $new_control->groups()->sync($control->groups()->pluck('id')->toArray());
 
         // make link
         $control->next_id = $new_control->id;
@@ -1762,7 +1747,7 @@ class ControlController extends Controller
     {
         // For administrators and users only
         abort_if(
-            Auth::User()->role !== 1 && Auth::User()->rol !== 2,
+            Auth::User()->role !== 1 && Auth::User()->role !== 2,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1780,7 +1765,7 @@ class ControlController extends Controller
     {
         // For administrators and users only
         abort_if(
-            Auth::User()->role !== 1 && Auth::User()->rol !== 2,
+            Auth::User()->role !== 1 && Auth::User()->role !== 2,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1797,7 +1782,6 @@ class ControlController extends Controller
             ->select('clause')
             ->distinct()
             ->orderby('clause')
-            ->get()
             ->pluck('clause');
 
         // return view
@@ -1839,7 +1823,7 @@ class ControlController extends Controller
         $templateProcessor = new PhpWordTemplateProcessor($template_filename);
 
         // Replace names
-        $clauses = $control->measures->map(function ($measure) {
+        $clauses = $control->measures()->map(function ($measure) {
             return $measure->clause;
         })->implode(', ');
 

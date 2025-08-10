@@ -116,7 +116,7 @@ class DocumentController extends Controller
             ->header('Cache-Control', 'no-cache private')
             ->header('Content-Description', 'File Transfer')
             ->header('Content-Type', $document->mimetype)
-            ->header('Content-length', strlen($file_contents))
+            ->header('Content-length', (string) strlen($file_contents))
             ->header('Content-Disposition', 'attachment; filename="' . $document->filename .'"')
             ->header('Content-Transfer-Encoding', 'binary');
     }
@@ -136,13 +136,13 @@ class DocumentController extends Controller
         abort_if(
             Auth::User()->role === 5 &&
                 ! (DB::table('control_user')
-                    ->where('control_id', $id)
+                    ->where('control_id', $control_id)
                     ->where('user_id', Auth::User()->id)
                     ->exists()
                     ||
                 DB::table('control_user_group')
                     ->join('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
-                    ->where('control_user_group.control_id', $id)
+                    ->where('control_user_group.control_id', $control_id)
                     ->where('user_user_group.user_id', Auth::User()->id)
                     ->exists()),
             Response::HTTP_FORBIDDEN,
@@ -159,7 +159,7 @@ class DocumentController extends Controller
         $doc->save();
 
         // Move file to storage folder
-        $file->move(storage_path('docs'), $doc->id);
+        $file->move(storage_path('docs'), (string) $doc->id);
 
         // response
         return response()->json(
@@ -184,7 +184,8 @@ class DocumentController extends Controller
 
         if ($document === null) {
             return response()
-                ->with('errorMessage', 'File not found !');
+                ->json(
+                    ['errorMessage' => 'File not found !']);
         }
 
         // Auditee may delete documents from assigned controls
@@ -273,7 +274,7 @@ class DocumentController extends Controller
             file_put_contents(config_path('deming.php'), $text);
 
             // Message
-            $messages = Collect('Configuration saved !');
+            $messages = Collect(['Configuration saved !']);
         } elseif (($action === 'test') && ($duration > 0)) {
             $dateLimit = Carbon::now()->subMonths($duration)->toDateString();
 

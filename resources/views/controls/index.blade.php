@@ -9,7 +9,7 @@
                     <option value="0">-- {{ trans("cruds.control.fields.choose_domain")}} --</option>
                     @foreach ($domains as $domain)
                         <option value="{{ $domain->id }}"
-                            @if (((int)Session::get("domain"))==$domain->id)
+                            @if (intval(Session::get("domain"))==$domain->id)
                                 selected
                             @endif >
                             {{ $domain->title }} - {{ $domain->description }}
