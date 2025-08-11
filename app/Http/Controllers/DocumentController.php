@@ -242,7 +242,7 @@ class DocumentController extends Controller
         );
 
         // Get all documents
-        $documents = Document::with('control')->get();
+        $documents = Document::all();
 
         // show view
         return view('/documents/check')

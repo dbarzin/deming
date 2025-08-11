@@ -19,8 +19,8 @@
         <td>
             {{ $doc->id }}
         </td>
-        <td>
-            <a href="/bob/show/{{ $doc->control_id }}">{{ $doc->control->clause }}</a>
+        <td class="text-center">
+            <a href="/bob/show/{{ $doc->control_id }}">{{ $doc->control_id }}</a>
         </td>
         <td>
             <a href="/doc/show/{{ $doc->id }}">{{ substr($doc->filename,0,32) }}</a>
