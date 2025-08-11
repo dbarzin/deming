@@ -21,14 +21,20 @@ class ActionController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\View\View
      */
     public function index(Request $request)
     {
+        // Admin, user, auditor or auditee
         abort_if(
-            ! ((Auth::User()->role === 1) ||
-            (Auth::User()->role === 2) ||
-            (Auth::User()->role === 3)),
+            ! (
+                (Auth::User()->role === 1) ||
+                (Auth::User()->role === 2) ||
+                (Auth::User()->role === 3) ||
+                (Auth::User()->role === 5)
+            ),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -118,7 +124,6 @@ class ActionController extends Controller
             ->where('status', '<>', 3)
             ->distinct()
             ->orderBy('scope')
-            ->get()
             ->pluck('scope')
             ->toArray();
 
@@ -131,9 +136,9 @@ class ActionController extends Controller
     /**
      * Save an action plan
      *
-     * @param  \App\Domain $domain
+     * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function save(Request $request)
     {
@@ -187,9 +192,9 @@ class ActionController extends Controller
     /**
      * Update an action plan
      *
-     * @param  \App\Domain $domain
+     * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function update(Request $request)
     {
@@ -219,7 +224,7 @@ class ActionController extends Controller
      *
      * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function show(int $id)
     {
@@ -249,7 +254,7 @@ class ActionController extends Controller
      *
      * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function edit(int $id)
     {
@@ -276,7 +281,6 @@ class ActionController extends Controller
             ->where('status', '<>', 2)
             ->distinct()
             ->orderBy('scope')
-            ->get()
             ->pluck('scope')
             ->toArray();
 
@@ -289,7 +293,6 @@ class ActionController extends Controller
         $measures = DB::table('control_measure')
             ->select('measure_id')
             ->where('control_id', $id)
-            ->get()
             ->pluck('measure_id')
             ->toArray();
 
@@ -311,7 +314,7 @@ class ActionController extends Controller
     /**
      * Create an action.
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function create()
     {
@@ -329,7 +332,6 @@ class ActionController extends Controller
             ->where('status', '<>', 2)
             ->distinct()
             ->orderBy('scope')
-            ->get()
             ->pluck('scope')
             ->toArray();
 
@@ -355,9 +357,9 @@ class ActionController extends Controller
     /**
      * Store the action.
      *
-     * @param  int $id
+     * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function store(Request $request)
     {
@@ -401,7 +403,7 @@ class ActionController extends Controller
      *
      * @param  int $id
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\View\View
      */
     public function close(int $id)
     {
@@ -429,9 +431,9 @@ class ActionController extends Controller
     /**
      * Show Close action.
      *
-     * @param  int $id
+     * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\Http\Response
+     * @return \Illuminate\Http\RedirectResponse
      */
     public function doClose(Request $request)
     {
@@ -468,7 +470,7 @@ class ActionController extends Controller
     {
         // For administrators and users only
         abort_if(
-            Auth::User()->role !== 1 && Auth::User()->rol !== 2,
+            Auth::User()->role !== 1 && Auth::User()->role !== 2,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -486,7 +488,7 @@ class ActionController extends Controller
     {
         // For administrators and users only
         abort_if(
-            Auth::User()->role !== 1 && Auth::User()->rol !== 2,
+            Auth::User()->role !== 1 && Auth::User()->role !== 2,
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -514,7 +516,9 @@ class ActionController extends Controller
     /**
      * Display the actions chart
      *
-     * @return \Illuminate\Http\Response
+     * @param  \Illuminate\Http\Request $request
+     *
+     * @return \Illuminate\View\View
      */
     public function chart(Request $request)
     {
@@ -554,7 +558,6 @@ class ActionController extends Controller
             ->where('status', '<>', 3)
             ->distinct()
             ->orderBy('scope')
-            ->get()
             ->pluck('scope')
             ->toArray();
 
@@ -612,45 +615,6 @@ class ActionController extends Controller
                     $query->where('scope', $scope);
                 })
                 ->get();
-
-        // Get progress history
-        $actions = $actions->map(function ($action) {
-            $logs = AuditLog::where('subject_type', Action::class)
-                            ->where('subject_id', $action->id)
-                            ->orderBy('created_at', 'asc')
-                            ->get();
-
-            $history = [];
-            $lastProgressDate = null;
-
-            foreach ($logs as $log) {
-                $properties = json_decode($log->properties[0], true);
-
-                if (!isset($properties['progress'])) {
-                    continue;
-                }
-
-                $progress = (int) $properties['progress'];
-                $progressDate = $log->created_at->toDateString();
-
-                // Same day ?
-                if ($progressDate == $lastProgressDate) {
-                    // replace last value
-                    end($history)['progress'] = $progress;
-                }
-                else {
-                    // add history
-                    $history[] = [
-                        'date' => $progressDate,
-                        'progress' => $progress,
-                    ];
-                    // save last date
-                    $lastProgressDate = $progressDate;
-                }
-            }
-            $action->progress_history = $history;
-            return $action;
-        });
 
         // Return
         return view('radar.actions')

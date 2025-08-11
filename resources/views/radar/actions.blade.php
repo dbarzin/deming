@@ -219,7 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
             datasets: [{
                 label: 'Progression',
                 data: [
-                    @foreach($action->progress_history as $history)
+                    @foreach($action->history() as $history)
                     { x: "{{ $history['date'] }}", y: {{ $history['progress'] }} },
                     @endforeach
                 ],
