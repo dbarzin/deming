@@ -23,7 +23,7 @@ class UserController extends Controller
     {
         abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $user = Document::create($user->all());
+        $user = User::create($request->all());
 
         return response()->json($user, 201);
     }
