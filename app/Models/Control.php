@@ -53,6 +53,7 @@ class Control extends Model
 
     public function measures()
     {
+        // return $this->belongsToMany(Measure::class,'control_measure','control_id')->orderBy('clause');
         return $this->belongsToMany(Measure::class)->orderBy('clause');
     }
 
