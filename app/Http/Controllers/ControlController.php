@@ -1823,9 +1823,10 @@ class ControlController extends Controller
         $templateProcessor = new PhpWordTemplateProcessor($template_filename);
 
         // Replace names
-        $clauses = $control->measures()->map(function ($measure) {
-            return $measure->clause;
-        })->implode(', ');
+        $clauses = $control->measures()
+            ->pluck('measures.clause') 
+            ->implode(', ');
+
 
         $templateProcessor->setValue('ref', $clauses);
         $templateProcessor->setValue('name', $control->name);
