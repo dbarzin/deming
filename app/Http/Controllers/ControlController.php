@@ -130,7 +130,6 @@ class ControlController extends Controller
 
         // get all scopes
         $scopes = DB::table('controls')
-            ->select('scope')
             ->whereNotNull('scope')
             ->where('scope', '<>', '');
         if (Auth::User()->role === 5) {
@@ -310,7 +309,6 @@ class ControlController extends Controller
 
         // get all scopes
         $scopes = DB::table('controls')
-            ->select('scope')
             ->whereNotNull('scope')
             ->where('scope', '<>', '')
             ->whereIn('status', [0, 1])
@@ -529,7 +527,6 @@ class ControlController extends Controller
 
         // get all ids
         $ids = DB::table('controls')
-            ->select('id')
             ->orderBy('id')
             ->pluck('id');
 
@@ -1824,7 +1821,7 @@ class ControlController extends Controller
 
         // Replace names
         $clauses = $control->measures()
-            ->pluck('measures.clause') 
+            ->pluck('measures.clause')
             ->implode(', ');
 
 
