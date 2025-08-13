@@ -8,7 +8,6 @@ use App\Models\UserGroup;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
 
 class UserGroupController extends Controller
 {

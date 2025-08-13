@@ -89,7 +89,7 @@ class MeasuresExport extends StringValueBinder implements FromQuery, WithMapping
         ];
     }
 
-    public function query() : Builder
+    public function query(): Builder
     {
         return Measure::with('domain')->orderBy('clause');
     }

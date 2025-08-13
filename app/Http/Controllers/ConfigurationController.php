@@ -90,7 +90,7 @@ class ConfigurationController extends Controller
                     $mail->isSMTP();
                     // Set the SMTP server
                     $mail->Host = config('mail.mailers.smtp.host');
-                     // TCP port to connect to
+                    // TCP port to connect to
                     $mail->Port = config('mail.mailers.smtp.port');
                     // Enable SMTP authentication
                     $mail->SMTPAuth = config('mail.smtp.auth');

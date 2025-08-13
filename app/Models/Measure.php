@@ -50,7 +50,7 @@ class Measure extends Model
     }
 
     // Check if there is an empty control associated with this measure
-    public function isActive(): Bool
+    public function isActive(): bool
     {
         return DB::table('controls')
             ->where('measure_id', $this->id)
@@ -59,7 +59,7 @@ class Measure extends Model
     }
 
     // check if there is an empty control associated with this measure
-    public function isDisabled(): Bool
+    public function isDisabled(): bool
     {
         return DB::table('controls')
             ->where('measure_id', $this->id)

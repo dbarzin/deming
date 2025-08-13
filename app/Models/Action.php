@@ -63,9 +63,9 @@ class Action extends Model
     public function history()
     {
         $logs = AuditLog::where('subject_type', Action::class)
-                        ->where('subject_id', $this->id)
-                        ->orderBy('created_at', 'asc')
-                        ->get();
+            ->where('subject_id', $this->id)
+            ->orderBy('created_at', 'asc')
+            ->get();
 
         $history = [];
         $lastProgressDate = null;
@@ -73,7 +73,7 @@ class Action extends Model
         foreach ($logs as $log) {
             $properties = json_decode($log->properties[0], true);
 
-            if (!isset($properties['progress'])) {
+            if (! isset($properties['progress'])) {
                 continue;
             }
 
@@ -81,11 +81,10 @@ class Action extends Model
             $progressDate = $log->created_at->toDateString();
 
             // Same day ?
-            if ($progressDate == $lastProgressDate) {
+            if ($progressDate === $lastProgressDate) {
                 // replace last value
                 end($history)['progress'] = $progress;
-            }
-            else {
+            } else {
                 // add history
                 $history[] = [
                     'date' => $progressDate,
@@ -98,5 +97,4 @@ class Action extends Model
 
         return $history;
     }
-
 }

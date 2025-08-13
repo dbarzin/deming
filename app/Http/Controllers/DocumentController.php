@@ -185,7 +185,8 @@ class DocumentController extends Controller
         if ($document === null) {
             return response()
                 ->json(
-                    ['errorMessage' => 'File not found !']);
+                    ['errorMessage' => 'File not found !']
+                );
         }
 
         // Auditee may delete documents from assigned controls
