@@ -1,7 +1,5 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
-
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -18,11 +16,11 @@ Route::namespace('App\\Http\\Controllers\\API')->group(function () {
     Route::post('logout', 'AuthController@logout');
 
     Route::group(['middleware' => 'auth:api'], function () {
-        Route::apiResource('domains', DomainController::class);
-        Route::apiResource('measures', MeasureController::class);
-        Route::apiResource('controls', ControlController::class);
-        Route::apiResource('attributes', AttributeController::class);
-        Route::apiResource('documents', DocumentController::class);
-        Route::apiResource('users', UserController::class);
+        Route::apiResource('domains', 'DomainController');
+        Route::apiResource('measures', 'MeasureController');
+        Route::apiResource('controls', 'ControlController');
+        Route::apiResource('attributes', 'AttributeController');
+        Route::apiResource('documents', 'DocumentController');
+        Route::apiResource('users', 'UserController');
     });
 });

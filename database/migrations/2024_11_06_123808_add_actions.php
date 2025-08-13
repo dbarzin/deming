@@ -24,8 +24,8 @@ return new class extends Migration
             $table->increments('id');
             $table->string('reference', 32)->nullable();
             $table->string('type', 32)->nullable();
-            $table->integer('criticity')->dafault(0);
-            $table->integer('status')->dafault(0);
+            $table->integer('criticity')->default(0);
+            $table->integer('status')->default(0);
             $table->string('scope', 32)->nullable();
             $table->string('name')->nullable();
             $table->text('cause')->nullable();

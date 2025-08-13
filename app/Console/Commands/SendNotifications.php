@@ -90,7 +90,7 @@ class SendNotifications extends Command
                         // Space
                         $txt .= ' &nbsp; - &nbsp; ';
                         // Clauses
-                        foreach ($control->measures as $measure) {
+                        foreach ($control->measures()->get() as $measure) {
                             $txt .= '<a href="' . url('/alice/show/' . $measure->id) . '">'. htmlentities($measure->clause) . '</a>';
                             // Space
                             $txt .= ' &nbsp; ';
@@ -106,14 +106,18 @@ class SendNotifications extends Command
                         $mail = new PHPMailer(true);
 
                         // Server settings
-                        $mail->isSMTP();                                     // Use SMTP
-                        $mail->Host = env('MAIL_HOST');               // Set the SMTP server
-                        $mail->SMTPAuth = env('MAIL_AUTH');               // Enable SMTP authentication
-                        $mail->Username = env('MAIL_USERNAME');           // SMTP username
-                        $mail->Password = env('MAIL_PASSWORD');           // SMTP password
-                        $mail->SMTPSecure = env('MAIL_SMTP_SECURE', false);  // Enable TLS encryption, `ssl` also accepted
-                        $mail->SMTPAutoTLS = env('MAIL_SMTP_AUTO_TLS');      // Enable auto TLS
-                        $mail->Port = env('MAIL_PORT');               // TCP port to connect to
+                        $mail->isSMTP();
+                        // Set the SMTP server
+                        $mail->Host = config('mail.mailers.smtp.host');
+                         // TCP port to connect to
+                        $mail->Port = config('mail.mailers.smtp.port');
+                        // Enable SMTP authentication
+                        $mail->SMTPAuth = config('mail.smtp.auth');
+                        $mail->Username = config('mail.mailers.smtp.username');
+                        $mail->Password = config('mail.mailers.smtp.password');
+                        // SMTP Security
+                        $mail->SMTPSecure = config('mail.mailer.smtp.secure');
+                        $mail->SMTPAutoTLS = config('mail.mailer.smtp.auto_tls');
 
                         // Define charset
                         $mail->CharSet = 'UTF-8';
@@ -138,10 +142,10 @@ class SendNotifications extends Command
                         $mail->Body = $message;
 
                         // Optional: Add DKIM signing
-                        $mail->DKIM_domain = env('MAIL_DKIM_DOMAIN');
-                        $mail->DKIM_private = env('MAIL_DKIM_PRIVATE');
-                        $mail->DKIM_selector = env('MAIL_DKIM_SELECTOR');
-                        $mail->DKIM_passphrase = env('MAIL_DKIM_PASSPHRASE');
+                        $mail->DKIM_domain = config('mail.dkim.domain');
+                        $mail->DKIM_private = config('mail.dkim.private');
+                        $mail->DKIM_selector = config('mail.dkim.selector');
+                        $mail->DKIM_passphrase = config('mail.dkim.passphrase');
                         $mail->DKIM_identity = $mail->From;
 
                         // Send email

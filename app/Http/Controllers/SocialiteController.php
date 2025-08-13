@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Auth;
 use Laravel\Socialite\Facades\Socialite;
 use Laravel\Socialite\Two\User as SocialiteUser;
 use Log;
+use Exception;
 
 /**
  * Socialite Controller for OpenID Connect Autentication
@@ -72,6 +73,10 @@ class SocialiteController extends Controller
         }
         Log::debug('CONFIG: allow_create_user='.($allow_create_user ? 'true' : 'false'));
         Log::debug('CONFIG: allow_update_user='.($allow_update_user ? 'true' : 'false'));
+
+        $role_claim = null;
+        $default_role = null;
+
         if ($allow_create_user || $allow_update_user) {
             $role_claim = config($config_name.'.role_claim', '');
             Log::debug('CONFIG: role_claim='.$role_claim);
@@ -205,14 +210,12 @@ class SocialiteController extends Controller
     private function get_user_role(SocialiteUser $socialite_user, string $role_claim, string $default_role)
     {
         $role_name = '';
-        // if (! empty($role_claim)) {
-        if (isset($role_claim) && $role_claim !== '') {
+        if (! empty($role_claim)) {
             $role_name = $this->get_claim_value($socialite_user, $role_claim);
             Log::debug("Provided claim '{$role_claim}'='{$role_name}'");
         }
         if (! array_key_exists($role_name, self::ROLES_MAP)) {
-            // if (! empty($default_role)) {
-            if (isset($default_role) && $default_role !== '') {
+            if (! empty($default_role)) {
                 $role_name = $default_role;
             } else {
                 Log::error("No default role set! A valid role must be provided. role='{$role_name}'");
