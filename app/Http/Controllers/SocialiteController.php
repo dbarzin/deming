@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use Exception;
 use Illuminate\Database\QueryException;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -72,6 +73,10 @@ class SocialiteController extends Controller
         }
         Log::debug('CONFIG: allow_create_user='.($allow_create_user ? 'true' : 'false'));
         Log::debug('CONFIG: allow_update_user='.($allow_update_user ? 'true' : 'false'));
+
+        $role_claim = null;
+        $default_role = null;
+
         if ($allow_create_user || $allow_update_user) {
             $role_claim = config($config_name.'.role_claim', '');
             Log::debug('CONFIG: role_claim='.$role_claim);
@@ -118,7 +123,7 @@ class SocialiteController extends Controller
     /**
      * Create user with claims provided.
      */
-    protected function create_user(SocialiteUser $socialite_user, string $provider, string $role_claim, string $default_role)
+    protected function create_user(SocialiteUser $socialite_user, string $provider, string $role_claim, string $default_role): User
     {
         $user = new User();
 
@@ -188,7 +193,7 @@ class SocialiteController extends Controller
     /**
      * Return user's login.
      */
-    private function get_user_login(SocialiteUser $socialite_user)
+    private function get_user_login(SocialiteUser $socialite_user): string
     {
         // set login with preferred_username, otherwise use id
         if ($socialite_user->offsetExists('preferred_username')) {
@@ -202,17 +207,15 @@ class SocialiteController extends Controller
      * If no role provided, use $default_role value.
      * If $default_role is null and no role provided, null return.
      */
-    private function get_user_role(SocialiteUser $socialite_user, string $role_claim, string $default_role)
+    private function get_user_role(SocialiteUser $socialite_user, string $role_claim, string $default_role): string
     {
         $role_name = '';
-        // if (! empty($role_claim)) {
-        if (isset($role_claim) && $role_claim !== '') {
+        if (! empty($role_claim)) {
             $role_name = $this->get_claim_value($socialite_user, $role_claim);
             Log::debug("Provided claim '{$role_claim}'='{$role_name}'");
         }
         if (! array_key_exists($role_name, self::ROLES_MAP)) {
-            // if (! empty($default_role)) {
-            if (isset($default_role) && $default_role !== '') {
+            if (! empty($default_role)) {
                 $role_name = $default_role;
             } else {
                 Log::error("No default role set! A valid role must be provided. role='{$role_name}'");
@@ -226,7 +229,7 @@ class SocialiteController extends Controller
      * Return user's language.
      * Use locale claim to dertermine user's language.
      */
-    private function get_user_langage(SocialiteUser $socialite_user)
+    private function get_user_langage(SocialiteUser $socialite_user): string
     {
         if ($socialite_user->offsetExists('locale')) {
             $locale = explode('-', $socialite_user->offsetGet('locale'))[0];

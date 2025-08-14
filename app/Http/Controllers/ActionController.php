@@ -2,12 +2,10 @@
 
 namespace App\Http\Controllers;
 
-
 // Models
-use App\Models\Action;
-use App\Models\AuditLog;
-// Export
 use App\Exports\ActionsExport;
+// Export
+use App\Models\Action;
 // Laravel
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -29,12 +27,10 @@ class ActionController extends Controller
     {
         // Admin, user, auditor or auditee
         abort_if(
-            ! (
-                (Auth::User()->role === 1) ||
+            ! ((Auth::User()->role === 1) ||
                 (Auth::User()->role === 2) ||
                 (Auth::User()->role === 3) ||
-                (Auth::User()->role === 5)
-            ),
+                (Auth::User()->role === 5)),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );

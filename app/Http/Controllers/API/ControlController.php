@@ -28,9 +28,17 @@ class ControlController extends Controller
         if ($request->has('measures')) {
             $control->measures()->sync($request->input('measures', []));
         }
-
-        if ($request->has('owners')) {
-            $control->owners()->sync($request->input('owners', []));
+        if ($request->has('actions')) {
+            $control->actions()->sync($request->input('actions', []));
+        }
+        if ($request->has('documents')) {
+            $control->documents()->sync($request->input('documents', []));
+        }
+        if ($request->has('users')) {
+            $control->users()->sync($request->input('users', []));
+        }
+        if ($request->has('groups')) {
+            $control->groups()->sync($request->input('groups', []));
         }
 
         return response()->json($control, 201);
@@ -52,9 +60,17 @@ class ControlController extends Controller
         if ($request->has('measures')) {
             $control->measures()->sync($request->input('measures', []));
         }
-
-        if ($request->has('owners')) {
-            $control->owners()->sync($request->input('owners', []));
+        if ($request->has('actions')) {
+            $control->actions()->sync($request->input('actions', []));
+        }
+        if ($request->has('documents')) {
+            $control->documents()->sync($request->input('documents', []));
+        }
+        if ($request->has('users')) {
+            $control->users()->sync($request->input('users', []));
+        }
+        if ($request->has('groups')) {
+            $control->groups()->sync($request->input('groups', []));
         }
 
         return response()->json();

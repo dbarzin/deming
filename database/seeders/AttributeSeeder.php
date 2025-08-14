@@ -18,7 +18,7 @@ class AttributeSeeder extends Seeder
         Attribute::truncate();
 
         // get language
-        $lang = env('LANG', 1);
+        $lang = getenv('LANG');
 
         // get filename
         if (strtolower($lang)==="fr")
@@ -34,8 +34,8 @@ class AttributeSeeder extends Seeder
         while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
             if (!$firstline) {
                 Attribute::create([
-                    "name" => $data['0'],
-                    "values" => $data['1'],
+                    "name" => $data[0],
+                    "values" => $data[1],
                     "created_at" => now()
                 ]);
             }

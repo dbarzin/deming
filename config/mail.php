@@ -36,13 +36,15 @@ return [
     'mailers' => [
         'smtp' => [
             'transport' => 'smtp',
-            'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+            'host' => env('MAIL_HOST', 'localhost'),
             'port' => env('MAIL_PORT', 587),
             'encryption' => env('MAIL_ENCRYPTION', 'tls'),
             'username' => env('MAIL_USERNAME'),
             'password' => env('MAIL_PASSWORD'),
             'timeout' => null,
-            'auth_mode' => null,
+            'auth' => env('MAIL_SMTP_AUTH'),
+            'secure' => env('MAIL_SMTP_SECURE', false),
+            'auto_tls' => env('MAIL_SMTP_AUTO_TLS', false),
         ],
 
         'ses' => [
@@ -70,6 +72,14 @@ return [
         'array' => [
             'transport' => 'array',
         ],
+
+        'dkim' => [
+            'domain' => env('MAIL_DKIM_DOMAIN'),
+            'private' => env('MAIL_DKIM_PRIVATE'),
+            'selector' => env('MAIL_DKIM_SELECTOR'),
+            'passphrase' => env('MAIL_DKIM_PASSPHRASE'),
+        ],
+
     ],
 
     /*

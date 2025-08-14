@@ -290,18 +290,20 @@ class MeasureController extends Controller
                 }
             }
         }
-        
+
         $values = array_unique($values);
         sort($values);
 
         // Extraire les attributs sélectionnés de la mesure existante
         $selectedAttributes = array_filter(
             explode(' ', $measure->attributes ?? ''),
-            fn($val) => strlen($val) > 0
+            fn ($val) => strlen($val) > 0
         );
 
-        return view('measures.create',
-            compact('measure', 'values', 'domains', 'selectedAttributes'));
+        return view(
+            'measures.create',
+            compact('measure', 'values', 'domains', 'selectedAttributes')
+        );
     }
 
     /**

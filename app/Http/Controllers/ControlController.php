@@ -1356,8 +1356,8 @@ class ControlController extends Controller
             // Computer next Date
             $next_date =
                 Carbon::createFromFormat('Y-m-d', $control->plan_date)
-                        ->addMonthsNoOverflow($control->periodicity)
-                        ->format('Y-m-d');
+                    ->addMonthsNoOverflow($control->periodicity)
+                    ->format('Y-m-d');
         }
 
         // return view
@@ -1823,7 +1823,6 @@ class ControlController extends Controller
         $clauses = $control->measures()
             ->pluck('measures.clause')
             ->implode(', ');
-
 
         $templateProcessor->setValue('ref', $clauses);
         $templateProcessor->setValue('name', $control->name);

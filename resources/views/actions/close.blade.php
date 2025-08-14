@@ -30,7 +30,23 @@ form, table {
                     <strong>{{ trans("cruds.action.fields.type") }}</strong>
     	    	</div>
                 <div class="cell-1">
-                    {{ $action->type }}
+                    @if ($action->type==1)
+                    <p class="fg-red text-bold">
+                    {{ trans('cruds.action.types.major') }}
+                    </p>
+                    @elseif ($action->type==2)
+                    <p class="fg-orange text-bold">
+                    {{ trans('cruds.action.types.minor') }}
+                    </p>
+                    @elseif ($action->type==3)
+                    <p class="fg-yellow text-bold">
+                    {{ trans('cruds.action.types.observation') }}
+                    </p>
+                    @elseif ($action->type==4)
+                    <p class="fg-green text-bold">
+                    {{ trans('cruds.action.types.opportunity') }}
+                    </p>
+                    @endif
                 </div>
                 <div class="cell-1" align="right">
                     <strong>{{ trans('cruds.action.fields.due_date') }}</strong>

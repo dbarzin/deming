@@ -2,7 +2,6 @@
 
 namespace App\Exports;
 
-use App\Models\Domain;
 use Illuminate\Support\Facades\DB;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\ShouldAutoSize;

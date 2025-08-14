@@ -8,7 +8,6 @@ use App\Models\UserGroup;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
-use Maatwebsite\Excel\Facades\Excel;
 
 class UserGroupController extends Controller
 {
@@ -175,18 +174,5 @@ class UserGroupController extends Controller
         $group->delete();
 
         return redirect('/groups');
-    }
-
-    /**
-     * Export the list of users.
-     *
-     * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
-     */
-    public function export()
-    {
-        // Only for administrator role
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        return Excel::download(new UserGroupsExport(), 'groups.xlsx');
     }
 }

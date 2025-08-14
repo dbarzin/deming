@@ -87,16 +87,18 @@ class ConfigurationController extends Controller
 
                 try {
                     // Server settings
-                    $mail->isSMTP();                               // Use SMTP
-                    // Server settings
-                    $mail->isSMTP();                                     // Use SMTP
-                    $mail->Host = env('MAIL_HOST');               // Set the SMTP server
-                    $mail->SMTPAuth = env('MAIL_AUTH');               // Enable SMTP authentication
-                    $mail->Username = env('MAIL_USERNAME');           // SMTP username
-                    $mail->Password = env('MAIL_PASSWORD');           // SMTP password
-                    $mail->SMTPSecure = env('MAIL_SMTP_SECURE', false);  // Enable TLS encryption, `ssl` also accepted
-                    $mail->SMTPAutoTLS = env('MAIL_SMTP_AUTO_TLS');      // Enable auto TLS
-                    $mail->Port = env('MAIL_PORT');               // TCP port to connect to
+                    $mail->isSMTP();
+                    // Set the SMTP server
+                    $mail->Host = config('mail.mailers.smtp.host');
+                    // TCP port to connect to
+                    $mail->Port = (int) config('mail.mailers.smtp.port');
+                    // Enable SMTP authentication
+                    $mail->SMTPAuth = (bool) config('mail.mailers.smtp.auth', true);
+                    $mail->Username = config('mail.mailers.smtp.username');
+                    $mail->Password = config('mail.mailers.smtp.password');
+                    // SMTP Security
+                    $mail->SMTPSecure = config('mail.mailers.smtp.encryption'); // 'tls', 'ssl', null/false
+                    $mail->SMTPAutoTLS = (bool) config('mail.mailers.smtp.auto_tls', false);
 
                     // Recipients
                     $mail->setFrom($mail_from);
@@ -113,10 +115,10 @@ class ConfigurationController extends Controller
                     // $mail->AltBody = 'This is the plain text version of the email body';
 
                     // Optional: Add DKIM signing
-                    $mail->DKIM_domain = env('MAIL_DKIM_DOMAIN');
-                    $mail->DKIM_private = env('MAIL_DKIM_PRIVATE');
-                    $mail->DKIM_selector = env('MAIL_DKIM_SELECTOR');
-                    $mail->DKIM_passphrase = env('MAIL_DKIM_PASSPHRASE');
+                    $mail->DKIM_domain = config('mail.dkim.domain');
+                    $mail->DKIM_private = config('mail.dkim.private');
+                    $mail->DKIM_selector = config('mail.dkim.selector');
+                    $mail->DKIM_passphrase = config('mail.dkim.passphrase');
                     $mail->DKIM_identity = $mail->From;
 
                     // Send email

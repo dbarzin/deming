@@ -167,7 +167,7 @@ class DomainController extends Controller
         return redirect('/domains');
     }
 
-    /***
+    /*
      * Export the Domains in Excel
      *
      * @return \Illuminate\Http\RedirectResponse

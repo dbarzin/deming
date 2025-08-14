@@ -3,6 +3,7 @@
 namespace App\Exports;
 
 use App\Models\Measure;
+use Illuminate\Database\Eloquent\Builder;
 use Maatwebsite\Excel\Concerns\FromQuery;
 use Maatwebsite\Excel\Concerns\WithColumnWidths;
 use Maatwebsite\Excel\Concerns\WithHeadings;
@@ -88,12 +89,8 @@ class MeasuresExport extends StringValueBinder implements FromQuery, WithMapping
         ];
     }
 
-    /**
-     * @return \Illuminate\Support\Collection
-     */
-    public function query()
+    public function query(): Builder
     {
-        return Measure::with('domain')
-            ->orderBy('clause');
+        return Measure::with('domain')->orderBy('clause');
     }
 }
