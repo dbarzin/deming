@@ -71,6 +71,7 @@ class SendNotifications extends Command
                     ->where('plan_date', '<=', Carbon::today()
                         ->addDays(intval(config('deming.notification.expire-delay')))->toDateString())
                     ->orderBy('plan_date')
+                    ->with('measures')
                     ->get();
 
                 if ($controls->count() > 0) {
@@ -90,7 +91,7 @@ class SendNotifications extends Command
                         // Space
                         $txt .= ' &nbsp; - &nbsp; ';
                         // Clauses
-                        foreach ($control->measures()->get() as $measure) {
+                        foreach ($control->measures as $measure) {
                             $txt .= '<a href="' . url('/alice/show/' . $measure->id) . '">'. htmlentities($measure->clause) . '</a>';
                             // Space
                             $txt .= ' &nbsp; ';

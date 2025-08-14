@@ -137,7 +137,7 @@ class MeasureImportController extends Controller
                 $this->importFromFile($data, $messages);
             }
         } finally {
-            if ($request->file() && ($fileName !== null)) {
+            if ($request->file() && ($fileName !== null) && file_exists($fileName)) {
                 unlink($fileName);
             }
         }

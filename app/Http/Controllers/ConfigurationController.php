@@ -91,14 +91,14 @@ class ConfigurationController extends Controller
                     // Set the SMTP server
                     $mail->Host = config('mail.mailers.smtp.host');
                     // TCP port to connect to
-                    $mail->Port = config('mail.mailers.smtp.port');
+                    $mail->Port = (int) config('mail.mailers.smtp.port');
                     // Enable SMTP authentication
-                    $mail->SMTPAuth = config('mail.smtp.auth');
+                    $mail->SMTPAuth = (bool) config('mail.mailers.smtp.auth', true);
                     $mail->Username = config('mail.mailers.smtp.username');
                     $mail->Password = config('mail.mailers.smtp.password');
                     // SMTP Security
-                    $mail->SMTPSecure = config('mail.mailer.smtp.secure');
-                    $mail->SMTPAutoTLS = config('mail.mailer.smtp.auto_tls');
+                    $mail->SMTPSecure = config('mail.mailers.smtp.encryption'); // 'tls', 'ssl', null/false
+                    $mail->SMTPAutoTLS = (bool) config('mail.mailers.smtp.auto_tls', false);
 
                     // Recipients
                     $mail->setFrom($mail_from);

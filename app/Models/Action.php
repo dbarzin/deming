@@ -83,9 +83,11 @@ class Action extends Model
             // Same day ?
             if ($progressDate === $lastProgressDate) {
                 // replace last value
-                end($history)['progress'] = $progress;
-            } else {
-                // add history
+                $lastKey = array_key_last($history);
+                if ($lastKey !== null) {
+                    $history[$lastKey]['progress'] = $progress;
+                }
+            } else {                // add history
                 $history[] = [
                     'date' => $progressDate,
                     'progress' => $progress,
