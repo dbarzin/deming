@@ -123,7 +123,7 @@ class SocialiteController extends Controller
     /**
      * Create user with claims provided.
      */
-    protected function create_user(SocialiteUser $socialite_user, string $provider, string $role_claim, string $default_role)
+    protected function create_user(SocialiteUser $socialite_user, string $provider, string $role_claim, string $default_role): User
     {
         $user = new User();
 
@@ -193,7 +193,7 @@ class SocialiteController extends Controller
     /**
      * Return user's login.
      */
-    private function get_user_login(SocialiteUser $socialite_user)
+    private function get_user_login(SocialiteUser $socialite_user): string
     {
         // set login with preferred_username, otherwise use id
         if ($socialite_user->offsetExists('preferred_username')) {
@@ -207,7 +207,7 @@ class SocialiteController extends Controller
      * If no role provided, use $default_role value.
      * If $default_role is null and no role provided, null return.
      */
-    private function get_user_role(SocialiteUser $socialite_user, string $role_claim, string $default_role)
+    private function get_user_role(SocialiteUser $socialite_user, string $role_claim, string $default_role): string
     {
         $role_name = '';
         if (! empty($role_claim)) {
@@ -229,7 +229,7 @@ class SocialiteController extends Controller
      * Return user's language.
      * Use locale claim to dertermine user's language.
      */
-    private function get_user_langage(SocialiteUser $socialite_user)
+    private function get_user_langage(SocialiteUser $socialite_user): string
     {
         if ($socialite_user->offsetExists('locale')) {
             $locale = explode('-', $socialite_user->offsetGet('locale'))[0];
