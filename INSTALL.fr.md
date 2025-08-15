@@ -300,7 +300,7 @@ Prérequis : l’extension PHP LDAP doit être installée et active.
 
 ```bash
 sudo apt-get install php-ldap
-sudo systemctl restart php8.3-fpm || sudo systemctl restart apache2
+sudo systemctl restart apache2
 ```
 ### Environnement
 
