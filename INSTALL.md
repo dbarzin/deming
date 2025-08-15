@@ -128,7 +128,7 @@ To import a repository and generate test data, go to "Configuration" -> "Import"
 It is also possible to have the application start as a `systemd` service. For this you will need to create the service's defintion file:
 
 	su root -c "vi /etc/systemd/system/deming.service"
- 
+
 and add it the following content:
 
 	[Unit]
@@ -136,7 +136,7 @@ and add it the following content:
 	After=network.target
 	After=mariadb.service
 	After=apache2.service
-	
+
 	[Service]
 	Type=simple
 	ExecStart=/usr/bin/php artisan serve --host 127.0.0.1 --port 8000
@@ -144,7 +144,7 @@ and add it the following content:
 	Group=www-data
 	WorkingDirectory=/var/www/deming
 	KillMode=mixed
-	
+
 	[Install]
 	WantedBy=multi-user.target
 
@@ -200,21 +200,21 @@ and add the following content:
 
 	<VirtualHost *:80>
 	   ServerName deming.local
-	
+
 	    RewriteEngine On
 	    RewriteRule ^/?(.*) https://%{SERVER_NAME}/$1
 	</VirtualHost>
-	
+
 	<VirtualHost *:443>
 	    ServerName deming.local
 	    DocumentRoot /var/www/deming/public
-	
+
 	    Protocols h2 h2c http/1.1
-	
+
 	    <Directory /var/www/deming>
 	        AllowOverride All
 	    </Directory>
-	
+
 	    ProxyPass / http://127.0.0.1:8000/
 	    ProxyPassReverse / http://127.0.0.1:8000/
 	    ProxyPreserveHost On
@@ -223,10 +223,10 @@ and add the following content:
 	    #<FilesMatch \.php$>
 	    #    SetHandler "proxy:unix:/var/run/php/php8.3-fpm.sock|fcgi://localhost/"
 	    #</FilesMatch>
-	
+
     	    ErrorLog ${APACHE_LOG_DIR}/error.log
     	    CustomLog ${APACHE_LOG_DIR}/access.log combined
-	
+
 	    <IfModule mod_headers.c>
 	        Header always set Strict-Transport-Security "max-age=15552000; includeSubDomains; preload"
 	        Header always set Referrer-Policy "no-referrer"
@@ -236,7 +236,7 @@ and add the following content:
 	        Header always set X-Frame-Options "SAMEORIGIN"
 	        Header edit Set-Cookie ^(.*)$ "$1;HttpOnly;Secure;SameSite=Strict"
 	    </IfModule>
-	
+
 	    SSLEngine on
 	    SSLCertificateFile  /etc/apache2/ssl/deming.local.crt
 	    SSLCertificateKeyFile /etc/apache2/ssl/deming.local.key
@@ -278,6 +278,120 @@ You may also configure DKIM :
     MAIL_DKIM_PASSPHRASE = '';      // Only if your key has a passphrase
 
 Don't forget to [configure](https://dbarzin.github.io/deming/config/#notifications) the content and frequency of your emails.
+
+
+## LDAP / LDAPRecord configuration (optional)
+
+This section lets you enable LDAP authentication in Deming using **LDAPRecord v2**. It works with **Active Directory** *and* **OpenLDAP**, and can coexist with local (database) authentication.
+
+### Prerequisites
+
+The PHP LDAP extension must be installed and enabled.
+
+```bash
+sudo apt-get install php-ldap
+sudo systemctl restart php8.3-fpm || sudo systemctl restart apache2
+```
+
+### Environment
+
+Add / adjust the following variables:
+
+```dotenv
+# Enable LDAP in Deming (hybrid mode)
+LDAP_ENABLED=true                 # Turn LDAP authentication on
+LDAP_FALLBACK_LOCAL=true          # If LDAP fails, try local DB auth
+LDAP_AUTO_PROVISION=false         # Auto-create the local user after a successful LDAP bind
+
+# LDAP server connection
+LDAP_HOST=ldap.example.org
+LDAP_PORT=389                     # 389 (StartTLS) or 636 (LDAPS)
+LDAP_BASE_DN=dc=example,dc=org
+LDAP_USERNAME=cn=admin,dc=example,dc=org   # Service account used for searches
+LDAP_PASSWORD=********
+LDAP_TLS=true                     # StartTLS (recommended when using port 389)
+LDAP_SSL=false                    # true if you use ldaps:// on port 636
+LDAP_TIMEOUT=5                    # (optional)
+
+# Candidate attributes to identify the username entered in the form
+# Order matters: the first match wins.
+# OpenLDAP: uid, cn, mail ; AD: sAMAccountName, userPrincipalName, mail
+LDAP_LOGIN_ATTRIBUTES=uid,cn,mail,sAMAccountName,userPrincipalName
+```
+
+**Examples**
+
+* OpenLDAP (typical user DN: `uid=jdupont,ou=people,dc=example,dc=org`):
+
+  ```dotenv
+  LDAP_TLS=true
+  LDAP_SSL=false
+  LDAP_LOGIN_ATTRIBUTES=uid,cn,mail
+  ```
+
+* Active Directory (UPN: `jdupont@example.org`, sAM: `jdupont`):
+
+  ```dotenv
+  LDAP_TLS=true
+  LDAP_SSL=false
+  LDAP_LOGIN_ATTRIBUTES=sAMAccountName,userPrincipalName,mail,cn
+  LDAP_USERNAME=EXAMPLE\svc_ldap   # or the full DN of the service account
+  ```
+
+After changing `.env`:
+
+```bash
+php artisan config:clear
+php artisan optimize:clear
+```
+
+### Certificates
+
+If you use StartTLS/LDAPS with a private CA, add the CA to your OS trust store (e.g., place the file in `/usr/local/share/ca-certificates` and run `update-ca-certificates`).
+
+### How it works in Deming
+
+The authentication controller:
+
+* searches the LDAP entry using an **OR** query across the attributes listed in `LDAP_LOGIN_ATTRIBUTES`;
+* retrieves the **DN**;
+* attempts a **bind** with the supplied password;
+* on success, signs in the corresponding local application user (and can **auto-provision** it if it does not exist, depending on `LDAP_AUTO_PROVISION`).
+
+### Quick test
+
+Before testing via the UI, validate the connection from the CLI:
+
+```bash
+php artisan tinker
+```
+
+Then in Tinker:
+
+```php
+use LdapRecord\Container;
+
+$dn = 'uid=jdupont,ou=people,dc=example,dc=org';  // or cn=..., or an AD DN
+Container::getConnection()->auth()->attempt($dn, 'PASSWORD', true);
+// => true expected if authentication succeeds
+```
+
+### Fast troubleshooting
+
+* **Missing PHP LDAP**: `php -m | grep ldap` should print `ldap`. If not, `sudo apt-get install php-ldap`, then restart PHP/Apache.
+* **Wrong DN**: make sure organizational units are correct (e.g., `ou=people`).
+* **TLS/SSL**: StartTLS = `LDAP_TLS=true` (389). LDAPS = `LDAP_SSL=true` (636). Do not use cleartext in production.
+* **Untrusted certificate**: add the CA to the system store (see above).
+* **Cannot search**: verify `LDAP_USERNAME` / `LDAP_PASSWORD` (service account) and directory ACLs.
+* **Login attribute**: align `LDAP_LOGIN_ATTRIBUTES` with what your users actually type (uid? UPN? email?).
+
+### Security — do this
+
+* Use **TLS/LDAPS**. Period.
+* Restrict the **service account** to the minimum required (read-only on needed attributes).
+* Avoid logging passwords or full DNs in application logs.
+* If you enable **auto-provisioning**, store a random password in the DB (not a copy of the LDAP password) and enforce your role/profile policies.
+
 
 ## Keycloak Configuration (optional)
 

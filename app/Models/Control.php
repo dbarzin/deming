@@ -4,13 +4,14 @@ namespace App\Models;
 
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 class Control extends Model
+
 {
     use Auditable;
 
@@ -55,7 +56,6 @@ class Control extends Model
 
     public function measures(): BelongsToMany
     {
-        // return $this->belongsToMany(Measure::class,'control_measure','control_id')->orderBy('clause');
         return $this->belongsToMany(Measure::class)->orderBy('clause');
     }
 
