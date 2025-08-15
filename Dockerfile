@@ -1,7 +1,7 @@
 FROM nginx:bookworm
 
-RUN apt update && apt dist-upgrade -y
-RUN apt-get install -y --no-install-recommends \
+RUN apt update \
+ && apt-get install -y --no-install-recommends \
     git=1:2.39.5-* \
     composer=2.5.5-* \
     php=2:8.2* \
@@ -14,9 +14,10 @@ RUN apt-get install -y --no-install-recommends \
     php-mbstring=2:8.2* \
     php-curl=2:8.2* \
     php-xml=2:8.2* \
+    php-ldap=2:8.2* \
     mariadb-client \
     cron \
-    && apt-get clean && rm -rf /var/lib/apt/lists/*
+&& rm -rf /var/lib/apt/lists/*
 
 RUN touch /etc/mailname
 RUN echo "sender@yourdomain.org" > /etc/mailname
