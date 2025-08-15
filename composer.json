@@ -6,6 +6,7 @@
     "license": "GPLv3",
     "require": {
         "php": "^8.2",
+        "directorytree/ldaprecord-laravel": "^3.4",
         "erusev/parsedown": "^1.7",
         "laravel/framework": "^11.9",
         "laravel/passport": "^12.3",

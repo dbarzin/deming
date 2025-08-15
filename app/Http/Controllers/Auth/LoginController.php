@@ -7,20 +7,13 @@ use App\Models\User;
 use Config;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Log;
+use LdapRecord\Container;
+use LdapRecord\Auth\BindException;
+use LdapRecord\Models\Entry as LdapEntry;
 
 class LoginController extends Controller
 {
-    /*
-    |--------------------------------------------------------------------------
-    | Login Controller
-    |--------------------------------------------------------------------------
-    |
-    | This controller handles authenticating users for the application and
-    | redirecting them to your home screen. The controller uses a trait
-    | to conveniently provide its functionality to your applications.
-    |
-    */
-
     use AuthenticatesUsers;
 
     /**
@@ -37,22 +30,14 @@ class LoginController extends Controller
      */
     protected $username;
 
-    /**
-     * Create a new controller instance.
-     *
-     * @return void
-     */
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-
         $this->username = $this->findUsername();
     }
 
     /**
-     * Get the login username to be used by the controller.
-     *
-     * @return string
+     * Determine the field used for login (email or login).
      */
     public function findUsername()
     {
@@ -66,9 +51,7 @@ class LoginController extends Controller
     }
 
     /**
-     * Get username property.
-     *
-     * @return string
+     * Expose username property to the framework.
      */
     public function username()
     {
@@ -76,42 +59,112 @@ class LoginController extends Controller
     }
 
     /**
-     * Login with LDAP
+     * Attempt an LDAP bind for the given app username + password using LDAPRecord v2.
+     * Returns the corresponding LDAP user on success, or null on failure.
      */
-    protected function ldapLogin(string $userid, string $password)
+    protected function ldapBindAndGetUser(string $appUsername, string $password): ?LdapEntry
     {
-        $ldapserver = Config::get('app.ldap_url');
+        // Recherche agnostique du schéma : AD ou OpenLDAP
+        // On construit une requête OR sur une liste d'attributs configurables
+        $attrs = array_filter(array_map('trim', explode(',', env('LDAP_LOGIN_ATTRIBUTES', 'uid,cn,mail,sAMAccountName,userPrincipalName'))));
 
-        putenv('LDAPTLS_REQCERT=require');
-        putenv('LDAPTLS_CACERT='.Config::get('app.ldap_cert'));
+        try {
+            $query = LdapEntry::query();
+            $first = true;
+            foreach ($attrs as $attr) {
+                if ($first) {
+                    $query->whereEquals($attr, $appUsername);
+                    $first = false;
+                } else {
+                    $query->orWhereEquals($attr, $appUsername);
+                }
+            }
 
-        $ldapconn = ldap_connect($ldapserver);
-        if ($ldapconn) {
-            return ldap_bind($ldapconn, $userid . '@' . Config::get('app.ldap_domain'), $password);
+            /** @var LdapEntry|null $ldapUser */
+            $ldapUser = $query->first();
+            if (!$ldapUser) {
+                return null;
+            }
+
+            $connection = Container::getConnection();
+            $dn = $ldapUser->getDn();
+
+            if ($connection->auth()->attempt($dn, $password, true)) {
+                return $ldapUser;
+            }
+
+            return null;
+        } catch (BindException $e) {
+            Log::warning('LDAP bind failed', [
+                'error' => $e->getMessage(),
+                'diagnostic' => method_exists($e, 'getDetailedError') && $e->getDetailedError() ? $e->getDetailedError()->getDiagnosticMessage() : null,
+            ]);
+            return null;
+        } catch (\Throwable $e) {
+            Log::error('LDAP error: '.$e->getMessage());
+            return null;
         }
-        return false;
     }
 
+    /**
+     * Override Laravel's default login attempt to add LDAPRecord support, toggled by .env
+     *
+     * Priority:
+     *  - If LDAP_ENABLED=true => try LDAP; on success, log the mapped local user in.
+     *  - If LDAP fails and LDAP_FALLBACK_LOCAL=true => try local DB credentials.
+     *  - If LDAP_ENABLED=false => only local DB credentials.
+     */
     protected function attemptLogin(Request $request)
     {
-        if (Config::get('app.ldap_domain') !== null) {
-            $credentials = $request->only($this->username(), 'password');
-            $username = $credentials[$this->username()];
-            $password = $credentials['password'];
-            try {
-                if ($this->ldapLogin($username, $password)) {
-                    $user = User::where('login', $username)->first();
-                    if (! $user) {
-                        return false;
-                    }
-                    $this->guard()->login($user, true);
+        $useLdap = (bool) env('LDAP_ENABLED', false);
+        $fallbackLocal = (bool) env('LDAP_FALLBACK_LOCAL', true);
+        $autoProvision = (bool) env('LDAP_AUTO_PROVISION', false);
+
+        $credentials = $request->only($this->username(), 'password');
+        $identifier = $credentials[$this->username()] ?? '';
+        $password = $credentials['password'] ?? '';
+
+        if ($useLdap) {
+            $ldapUser = $this->ldapBindAndGetUser($identifier, $password);
+
+            if ($ldapUser) {
+                // Map / locate local application user
+                $local = User::query()
+                    ->when(filter_var($identifier, FILTER_VALIDATE_EMAIL), function ($q) use ($identifier) {
+                        return $q->where('email', $identifier);
+                    }, function ($q) use ($identifier) {
+                        return $q->where('login', $identifier);
+                    })
+                    ->first();
+
+                if (!$local && $autoProvision) {
+                    // Minimal safe provisioning – adapt attributes to your schema
+                    $local = User::create([
+                        'name'  => $ldapUser->getFirstAttribute('cn') ?: $identifier,
+                        'email' => $ldapUser->getFirstAttribute('mail') ?: null,
+                        'login' => $identifier,
+                        // Store a random password so DB auth is not accidentally usable unless you set one explicitly
+                        'password' => bcrypt(str()->random(32)),
+                    ]);
+                }
+
+                if ($local) {
+                    $remember = $request->boolean('remember');
+                    $this->guard()->login($local, $remember);
                     return true;
                 }
-            } catch (\Exception $e) {
-                \Log::error($e->getMessage());
+
+                // LDAP OK but no mapped local user and no auto-provision
+                return false;
             }
-            return false;
+
+            // LDAP failed – optionally fall back to local DB auth
+            if (!$fallbackLocal) {
+                return false;
+            }
         }
+
+        // Local database auth path (default Laravel)
         return $this->guard()->attempt(
             $this->credentials($request),
             $request->filled('remember')
