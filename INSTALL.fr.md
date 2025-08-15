@@ -70,13 +70,14 @@ Mettre les paramètre de connexion à la base de données :
 
     vi .env
 
-    ## .env file
-    DB_CONNECTION=mysql
-    DB_HOST=127.0.0.1
-    DB_PORT=3306
-    DB_DATABASE=deming
-    DB_USERNAME=deming_user
-    DB_PASSWORD=demPasssword-123
+```dotenv
+DB_CONNECTION=mysql
+DB_HOST=127.0.0.1
+DB_PORT=3306
+DB_DATABASE=deming
+DB_USERNAME=deming_user
+DB_PASSWORD=demPasssword-123
+```
 
 ## Créer la base de données
 
@@ -268,20 +269,24 @@ Après avoir modifié le(s) fichier(s) php.ini, vous devez redémarrer le servic
 Si vous souhaitez envoyer des e-mails de notification depuis Deming.
 Vous devez configurer l'accès au serveur SMTP dans .env
 
-    MAIL_HOST='smtp.localhost'
-    MAIL_PORT=2525
-    MAIL_AUTH=true
-    MAIL_SMTP_SECURE='ssl'
-    MAIL_SMTP_AUTO_TLS=false
-    MAIL_USERNAME=
-    MAIL_PASSWORD=
+```dotenv
+MAIL_HOST='smtp.localhost'
+MAIL_PORT=2525
+MAIL_AUTH=true
+MAIL_SMTP_SECURE='ssl'
+MAIL_SMTP_AUTO_TLS=false
+MAIL_USERNAME=
+MAIL_PASSWORD=
+```
 
 Vous pouvez également configurer DKIM :
 
-    MAIL_DKIM_DOMAIN = 'admin.local';
-    MAIL_DKIM_PRIVATE = '/path/to/private/key';
-    MAIL_DKIM_SELECTOR = 'default'; // Match your DKIM DNS selector
-    MAIL_DKIM_PASSPHRASE = '';      // Only if your key has a passphrase
+```dotenv
+MAIL_DKIM_DOMAIN = 'admin.local';
+MAIL_DKIM_PRIVATE = '/path/to/private/key';
+MAIL_DKIM_SELECTOR = 'default'; // Match your DKIM DNS selector
+MAIL_DKIM_PASSPHRASE = '';      // Only if your key has a passphrase
+```
 
 N'oubliez pas de [configurer](https://dbarzin.github.io/deming/config.fr/#notifications) le contenu et la fréquence d'envoi des mails.
 
@@ -295,7 +300,7 @@ Prérequis : l’extension PHP LDAP doit être installée et active.
 
 ```bash
 sudo apt-get install php-ldap
-sudo systemctl restart php8.3-fpm || sudo systemctl restart apache2
+sudo systemctl restart apache2
 ```
 ### Environnement
 
