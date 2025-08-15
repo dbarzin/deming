@@ -691,10 +691,10 @@ class ControlController extends Controller
 
         // Construct owners copy
         $items = [];
-        foreach ($control->users()->get() as $user) {
+        foreach ($control->users as $user) {
             array_push($items, 'USR_' . $user->id);
         }
-        foreach ($control->groups()->get() as $group) {
+        foreach ($control->groups as $group) {
             array_push($items, 'GRP_' . $group->id);
         }
         $request->merge(['owners' => $items]);
@@ -731,7 +731,7 @@ class ControlController extends Controller
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // Delete documents
-        foreach ($control->documents()->get() as $document) {
+        foreach ($control->documents as $document) {
             \Log::debug(storage_path('docs/' . $document->id));
             unlink(storage_path('docs/' . $document->id));
         }
@@ -1251,7 +1251,7 @@ class ControlController extends Controller
         $control->measures()->detach();
 
         // Delete documents
-        foreach ($control->documents()->get() as $document) {
+        foreach ($control->documents as $document) {
             \Log::debug(storage_path('docs/' . $document->id));
             unlink(storage_path('docs/' . $document->id));
         }

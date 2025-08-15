@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
+use App\Models\Action;
 use App\Models\Control;
+use App\Models\Document;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
@@ -29,10 +31,12 @@ class ControlController extends Controller
             $control->measures()->sync($request->input('measures', []));
         }
         if ($request->has('actions')) {
-            $control->actions()->sync($request->input('actions', []));
+            Action::where('control_id', $control->id)->update(['control_id' => null]);
+            Action::whereIn('id', $request->input('actions', []))->update(['control_id' => $control->id]);
         }
         if ($request->has('documents')) {
-            $control->documents()->sync($request->input('documents', []));
+            Document::where('control_id', $control->id)->update(['control_id' => null]);
+            Document::whereIn('id', $request->input('documents', []))->update(['control_id' => $control->id]);
         }
         if ($request->has('users')) {
             $control->users()->sync($request->input('users', []));
@@ -61,10 +65,12 @@ class ControlController extends Controller
             $control->measures()->sync($request->input('measures', []));
         }
         if ($request->has('actions')) {
-            $control->actions()->sync($request->input('actions', []));
+            Action::where('control_id', $control->id)->update(['control_id' => null]);
+            Action::whereIn('id', $request->input('actions', []))->update(['control_id' => $control->id]);
         }
         if ($request->has('documents')) {
-            $control->documents()->sync($request->input('documents', []));
+            Document::where('control_id', $control->id)->update(['control_id' => null]);
+            Document::whereIn('id', $request->input('documents', []))->update(['control_id' => $control->id]);
         }
         if ($request->has('users')) {
             $control->users()->sync($request->input('users', []));

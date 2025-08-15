@@ -4,12 +4,11 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use App\Models\User;
-use Config;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use LdapRecord\Container;
 use LdapRecord\Auth\BindException;
+use LdapRecord\Container;
 use LdapRecord\Models\Entry as LdapEntry;
 
 class LoginController extends Controller
@@ -66,7 +65,7 @@ class LoginController extends Controller
     {
         // Recherche agnostique du schéma : AD ou OpenLDAP
         // On construit une requête OR sur une liste d'attributs configurables
-        $attrs = array_filter(array_map('trim', explode(',', env('LDAP_LOGIN_ATTRIBUTES', 'uid,cn,mail,sAMAccountName,userPrincipalName'))));
+        $attrs = array_filter(array_map('trim', explode(',', config('ldap_login_attributes'))));
 
         try {
             $query = LdapEntry::query();
@@ -82,7 +81,7 @@ class LoginController extends Controller
 
             /** @var LdapEntry|null $ldapUser */
             $ldapUser = $query->first();
-            if (!$ldapUser) {
+            if (! $ldapUser) {
                 return null;
             }
 
@@ -97,7 +96,7 @@ class LoginController extends Controller
         } catch (BindException $e) {
             Log::warning('LDAP bind failed', [
                 'error' => $e->getMessage(),
-                'diagnostic' => method_exists($e, 'getDetailedError') && $e->getDetailedError() ? $e->getDetailedError()->getDiagnosticMessage() : null,
+                'diagnostic' => $e->getDetailedError()->getDiagnosticMessage(),
             ]);
             return null;
         } catch (\Throwable $e) {
@@ -116,9 +115,9 @@ class LoginController extends Controller
      */
     protected function attemptLogin(Request $request)
     {
-        $useLdap = (bool) env('LDAP_ENABLED', false);
-        $fallbackLocal = (bool) env('LDAP_FALLBACK_LOCAL', true);
-        $autoProvision = (bool) env('LDAP_AUTO_PROVISION', false);
+        $useLdap = config('app.ldap_enabled');
+        $fallbackLocal = config('app.ldap_fallback_local');
+        $autoProvision = config('app.ldap_auto_provision');
 
         $credentials = $request->only($this->username(), 'password');
         $identifier = $credentials[$this->username()] ?? '';
@@ -137,10 +136,10 @@ class LoginController extends Controller
                     })
                     ->first();
 
-                if (!$local && $autoProvision) {
+                if (! $local && $autoProvision) {
                     // Minimal safe provisioning – adapt attributes to your schema
                     $local = User::create([
-                        'name'  => $ldapUser->getFirstAttribute('cn') ?: $identifier,
+                        'name' => $ldapUser->getFirstAttribute('cn') ?: $identifier,
                         'email' => $ldapUser->getFirstAttribute('mail') ?: null,
                         'login' => $identifier,
                         // Store a random password so DB auth is not accidentally usable unless you set one explicitly
@@ -159,7 +158,7 @@ class LoginController extends Controller
             }
 
             // LDAP failed – optionally fall back to local DB auth
-            if (!$fallbackLocal) {
+            if (! $fallbackLocal) {
                 return false;
             }
         }

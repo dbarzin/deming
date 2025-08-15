@@ -4,6 +4,8 @@ namespace App\Models;
 
 use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
@@ -51,23 +53,23 @@ class Control extends Model
     // 1 - Proposed by auditee => relisation date not null
     // 2 - Done => relisation date not null
 
-    public function measures()
+    public function measures(): BelongsToMany
     {
         // return $this->belongsToMany(Measure::class,'control_measure','control_id')->orderBy('clause');
         return $this->belongsToMany(Measure::class)->orderBy('clause');
     }
 
-    public function actions()
+    public function actions(): HasMany
     {
         return $this->hasMany(Action::class);
     }
 
-    public function documents()
+    public function documents(): HasMany
     {
         return $this->hasMany(Document::class);
     }
 
-    public function users()
+    public function users(): BelongsToMany
     {
         if ($this->users === null) {
             $this->users = $this->belongsToMany(User::class, 'control_user', 'control_id')->orderBy('name');

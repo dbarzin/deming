@@ -144,9 +144,10 @@ return [
     | read from .env files
     |
     */
-    'ldap_url' => env('LDAP_URL'),
-    'ldap_domain' => env('LDAP_DOMAIN'),
-    'ldap_cert' => env('LDAP_CERT'),
+    'ldap_enabled' => (bool) env('LDAP_ENABLED', false),
+    'ldap_fallback_local' => (bool) env('LDAP_FALLBACK_LOCAL', true),
+    'ldap_auto_provision' => (bool) env('LDAP_AUTO_PROVISION', false),
+    'ldap_login_attributes' => env('LDAP_LOGIN_ATTRIBUTES', 'uid,cn,mail,sAMAccountName,userPrincipalName'),
 
     /*
     |--------------------------------------------------------------------------
