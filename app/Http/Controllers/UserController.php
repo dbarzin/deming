@@ -58,9 +58,9 @@ class UserController extends Controller
         $this->validate($request, [
             'login' => 'required|unique:users|min:1|max:30',
             'name' => 'required|min:1|max:90',
-            'title' => 'required|min:1|max:30',
+            'title' => 'nullable|min:1|max:30',
             'email' => 'required|unique:users|email:rfc',
-            'role' => 'required',
+            'role' => 'required|min:1|max:5',
         ]);
 
         // Custom password validation if LDAP is not enabled
@@ -138,9 +138,9 @@ class UserController extends Controller
         $this->validate($request, [
             'login' => 'required|min:1|max:30|unique:users,login,'.$user->id,
             'name' => 'required|min:1|max:90',
-            'title' => 'required|min:1|max:30',
+            'title' => 'nullable|min:1|max:30',
             'email' => 'required|email:rfc|unique:users,email,'.$user->id,
-            'role' => 'required',
+            'role' => 'min:1|max:5',
         ]);
 
         // Custom password validation if LDAP is not enabled
