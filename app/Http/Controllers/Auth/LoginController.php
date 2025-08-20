@@ -63,12 +63,19 @@ class LoginController extends Controller
      */
     protected function ldapBindAndGetUser(string $appUsername, string $password): ?LdapEntry
     {
-        // Recherche agnostique du schéma : AD ou OpenLDAP
-        // On construit une requête OR sur une liste d'attributs configurables
-        $attrs = array_filter(array_map('trim', explode(',', config('ldap_login_attributes'))));
 
         try {
             $query = LdapEntry::query();
+
+            // Optionnel : restreindre à une OU si configuré
+            $base = config('app.ldap_users_base_dn', env('LDAP_USERS_BASE_DN'));
+            if ($base) {
+                $query->in($base);
+            }
+
+            // Filtre de localisation : OR sur les attributs pertinents
+            $attrs = array_filter(array_map('trim', explode(',', config('app.ldap_login_attributes'))));
+
             $first = true;
             foreach ($attrs as $attr) {
                 if ($first) {
@@ -79,9 +86,12 @@ class LoginController extends Controller
                 }
             }
 
+            \Log::debug("LDAP dn: " . $query->getDn() . " query: " . $query->getQuery());
+
             /** @var LdapEntry|null $ldapUser */
             $ldapUser = $query->first();
             if (! $ldapUser) {
+                \Log::debug("LDAP user not found !");
                 return null;
             }
 
@@ -140,8 +150,9 @@ class LoginController extends Controller
                     // Minimal safe provisioning – adapt attributes to your schema
                     $local = User::create([
                         'name' => $ldapUser->getFirstAttribute('cn') ?: $identifier,
-                        'email' => $ldapUser->getFirstAttribute('mail') ?: null,
+                        'email' => $ldapUser->getFirstAttribute('mail') ?: 'user@localhost.local',
                         'login' => $identifier,
+                        'role' => 5, // Auditee
                         // Store a random password so DB auth is not accidentally usable unless you set one explicitly
                         'password' => bcrypt(str()->random(32)),
                     ]);
