@@ -67,7 +67,7 @@ class LoginController extends Controller
             $query = LdapEntry::query();
 
             // Optionnel : restreindre à une OU si configuré
-            $base = config('app.ldap_users_base_dn', env('LDAP_USERS_BASE_DN'));
+            $base = config('app.ldap_users_base_dn', config('app.ldap_users_base_dn'));
             if ($base) {
                 $query->in($base);
             }
@@ -148,8 +148,8 @@ class LoginController extends Controller
                 if (! $local && $autoProvision) {
                     // Minimal safe provisioning – adapt attributes to your schema
                     $local = User::create([
-                        'name' => $ldapUser->getFirstAttribute('cn') ?: $identifier,
-                        'email' => $ldapUser->getFirstAttribute('mail') ?: 'user@localhost.local',
+                        'name' => $ldapUser->getFirstAttribute('cn') ?? $identifier,
+                        'email' => $ldapUser->getFirstAttribute('mail') ?? 'user@localhost.local',
                         'login' => $identifier,
                         'role' => 5, // Auditee
                         // Store a random password so DB auth is not accidentally usable unless you set one explicitly

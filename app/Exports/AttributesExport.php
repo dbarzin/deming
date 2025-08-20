@@ -21,9 +21,8 @@ class AttributesExport implements FromQuery, WithMapping, WithHeadings, WithStyl
         ];
     }
 
-    public function styles(Worksheet $sheet)
+    public function styles(Worksheet $_sheet)
     {
-        $sheet = null;
         // Return
         return [
             // Style the first row as bold text.

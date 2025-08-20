@@ -244,7 +244,7 @@ class ReportController extends Controller
 
         foreach ($controls as $control) {
             $table->addRow();
-            $table->addCell(2500)->addText($control->measures()->implode('clause', ', '));
+            $table->addCell(2500)->addText($control->measures()->get()->implode('clause', ', '));
             $table->addCell(12500)->addText(str_replace('&', 'x', $control->name));
             $table->addCell(2800)->addText($control->realisation_date, null, ['align' => 'center']);
             $table->addCell(12500)->addText($control->scope);
