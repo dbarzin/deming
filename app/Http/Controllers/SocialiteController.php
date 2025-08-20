@@ -18,9 +18,9 @@ class SocialiteController extends Controller
 {
     public const ROLES_MAP = [
         //'admin' => '1',
-        'user' => '2',
-        'auditee' => '5',
-        'auditor' => '3',
+        'user' => 2,
+        'auditee' => 5,
+        'auditor' => 3,
         //'api' => '4',
     ];
 
@@ -65,19 +65,19 @@ class SocialiteController extends Controller
 
         // Get additionnal config for current provider
         $config_name = 'services.socialite_controller.'.$provider;
-        $allow_create_user = false;
-        $allow_update_user = false;
+        $allow_createUser = false;
+        $allow_updateUser = false;
         if (config($config_name)) {
-            $allow_create_user = config($config_name.'.allow_create_user', $allow_create_user);
-            $allow_update_user = config($config_name.'.allow_update_user', $allow_update_user);
+            $allow_createUser = config($config_name.'.allow_createUser', $allow_createUser);
+            $allow_updateUser = config($config_name.'.allow_updateUser', $allow_updateUser);
         }
-        Log::debug('CONFIG: allow_create_user='.($allow_create_user ? 'true' : 'false'));
-        Log::debug('CONFIG: allow_update_user='.($allow_update_user ? 'true' : 'false'));
+        Log::debug('CONFIG: allow_createUser='.($allow_createUser ? 'true' : 'false'));
+        Log::debug('CONFIG: allow_updateUser='.($allow_updateUser ? 'true' : 'false'));
 
         $role_claim = null;
         $default_role = null;
 
-        if ($allow_create_user || $allow_update_user) {
+        if ($allow_createUser || $allow_updateUser) {
             $role_claim = config($config_name.'.role_claim', '');
             Log::debug('CONFIG: role_claim='.$role_claim);
             $default_role = config($config_name.'.default_role', '');
@@ -96,8 +96,8 @@ class SocialiteController extends Controller
             }
 
             // If not exist and allow to create user then create it
-            if (! $user && $allow_create_user) {
-                $user = $this->create_user($socialite_user, $provider, $role_claim, $default_role);
+            if (! $user && $allow_createUser) {
+                $user = $this->createUser($socialite_user, $provider, $role_claim, $default_role);
             }
 
             // If no user redirect to login with error message
@@ -106,8 +106,8 @@ class SocialiteController extends Controller
                 return redirect('login')->withErrors(['socialite' => trans('cruds.login.error.user_not_exist') ]);
             }
 
-            if ($allow_update_user) {
-                $this->update_user($user, $socialite_user, $provider, $role_claim, $default_role);
+            if ($allow_updateUser) {
+                $this->updateUser($user, $socialite_user, $provider, $role_claim, $default_role);
             }
 
             Log::info("User '{$user->login}' login with {$provider} provider");
@@ -123,11 +123,11 @@ class SocialiteController extends Controller
     /**
      * Create user with claims provided.
      */
-    protected function create_user(SocialiteUser $socialite_user, string $provider, string $role_claim, string $default_role): User
+    protected function createUser(SocialiteUser $socialite_user, string $provider, string $role_claim, string $default_role): User|null
     {
         $user = new User();
 
-        $user->login = $this->get_user_login($socialite_user);
+        $user->login = $this->getUserLogin($socialite_user);
         $user->name = $socialite_user->name;
         $user->email = $socialite_user->email;
         $user->title = "User provide by {$provider}";
@@ -152,11 +152,11 @@ class SocialiteController extends Controller
     /**
      * Update user with claims providid.
      */
-    protected function update_user(User $user, SocialiteUser $socialite_user, string $provider, string $role_claim, string $default_role)
+    protected function updateUser(User $user, SocialiteUser $socialite_user, string $provider, string $role_claim, string $default_role)
     {
         $updated = false;
 
-        $login = $this->get_user_login($socialite_user);
+        $login = $this->getUserLogin($socialite_user);
         if ($login !== $user->login) {
             Log::debug("Login changed {$user->login} => {$login}");
             $user->login = $login;
@@ -193,7 +193,7 @@ class SocialiteController extends Controller
     /**
      * Return user's login.
      */
-    private function get_user_login(SocialiteUser $socialite_user): string
+    private function getUserLogin(SocialiteUser $socialite_user): string
     {
         // set login with preferred_username, otherwise use id
         if ($socialite_user->offsetExists('preferred_username')) {
@@ -207,15 +207,15 @@ class SocialiteController extends Controller
      * If no role provided, use $default_role value.
      * If $default_role is null and no role provided, null return.
      */
-    private function get_user_role(SocialiteUser $socialite_user, string $role_claim, string $default_role): string
+    private function get_user_role(SocialiteUser $socialite_user, string $role_claim, string $default_role): int|null
     {
         $role_name = '';
-        if (! empty($role_claim)) {
+        if ($role_claim !== '') {
             $role_name = $this->get_claim_value($socialite_user, $role_claim);
             Log::debug("Provided claim '{$role_claim}'='{$role_name}'");
         }
         if (! array_key_exists($role_name, self::ROLES_MAP)) {
-            if (! empty($default_role)) {
+            if ($default_role !== '') {
                 $role_name = $default_role;
             } else {
                 Log::error("No default role set! A valid role must be provided. role='{$role_name}'");
