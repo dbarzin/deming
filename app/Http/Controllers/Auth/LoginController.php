@@ -63,7 +63,6 @@ class LoginController extends Controller
      */
     protected function ldapBindAndGetUser(string $appUsername, string $password): ?LdapEntry
     {
-
         try {
             $query = LdapEntry::query();
 
@@ -86,12 +85,12 @@ class LoginController extends Controller
                 }
             }
 
-            \Log::debug("LDAP dn: " . $query->getDn() . " query: " . $query->getQuery());
+            \Log::debug('LDAP dn: ' . $query->getDn() . ' query: ' . $query->getQuery());
 
             /** @var LdapEntry|null $ldapUser */
             $ldapUser = $query->first();
             if (! $ldapUser) {
-                \Log::debug("LDAP user not found !");
+                \Log::debug('LDAP user not found !');
                 return null;
             }
 
