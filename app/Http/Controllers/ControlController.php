@@ -1417,6 +1417,7 @@ class ControlController extends Controller
                 $action->name = $control->name;
                 $action->scope = $control->scope;
                 $action->status = 0;
+                $action->score = 0;
                 $action->cause = $control->observations;
                 $action->remediation = $control->action_plan;
                 $action->due_date = request('next_date');

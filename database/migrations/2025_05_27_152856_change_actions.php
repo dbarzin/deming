@@ -23,7 +23,6 @@ return new class extends Migration
 
             // Explicit conversion using PostgreSQL's USING clause
             DB::statement('ALTER TABLE actions ALTER COLUMN type TYPE integer USING type::integer');
-            // DB::statement('ALTER TABLE actions ALTER COLUMN type SET NOT NULL');
         } else {
             // MySQL, MariaDB, SQLite: automatic or dynamic type conversion
             Schema::table('actions', function (Blueprint $table) {
