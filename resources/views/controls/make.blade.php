@@ -288,8 +288,6 @@ document.addEventListener('DOMContentLoaded', function () {
         url: '/doc/store',
 	    headers: { 'x-csrf-token': '{{csrf_token()}}' },
         params: function params(files, xhr, chunk) { return { 'control': '{{ $control->id }}' }; },
-        maxFilesize: 10,
-        // acceptedFiles: ".jpeg,.jpg,.png,.gif",
         addRemoveLinks: true,
         timeout: 50000,
         removedfile: function(file)
