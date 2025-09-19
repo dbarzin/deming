@@ -90,6 +90,7 @@
         data-rownum="false"
         data-check="false"
         data-check-style="1"
+        data-search="true"
        >
         <thead>
             <tr>
@@ -180,92 +181,142 @@
     </tbody>
 </table>
 </div>
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            // Récupère le paramètre search
-            let params = new URLSearchParams(window.location.search);
-            const searchValue =  params.get('search');
-            if (searchValue) {
-                // get serach filter
-                let searchInput = document.querySelector('.table-search-block input');
-                searchInput.value = searchValue;
-                // Trouve la table et applique la recherche
-                let tableElement = document.querySelector('.data-table');
-                let table = Metro.getPlugin(tableElement, "table");
-                if (table)
-                    table.search(searchValue);
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const $ = (sel, root=document) => root.querySelector(sel);
+  const getParam = (k) => new URLSearchParams(location.search).get(k) ?? '';
 
-            }
-            // Auto submits
-            var select = document.getElementById('domain');
-            select.addEventListener('change', function(){
-                let url = new URL(window.location.href);
-                url.pathname = '/bob/index';
-                url.searchParams.set('domain', this.value);
-                let searchInput = document.querySelector('.table-search-block input');
-                url.searchParams.set('search', searchInput.value);
-                window.location = url.toString();
-            }, false);
+  // --- Attendre que Metro ait fini d'initialiser ses selects
+  let ready = false;
+  window.addEventListener('load', () => {
+    // 2 rAF pour laisser Metro construire le DOM
+    requestAnimationFrame(() => requestAnimationFrame(() => { ready = true; }));
+  });
 
-            var select = document.getElementById('scope');
-            select.addEventListener('change', function(){
-                let url = new URL(window.location.href);
-                url.pathname = '/bob/index';
-                url.searchParams.set('scope', this.value);
-                let searchInput = document.querySelector('.table-search-block input');
-                url.searchParams.set('search', searchInput.value);
-                window.location = url.toString();
-            }, false);
+  // --- Snapshot de tous les filtres (UI -> fallback URL)
+  function snapshotFilters() {
+    const searchInput = $('.table-search-block input');
+    return {
+      domain : document.getElementById('domain')?.value ?? getParam('domain'),
+      clause : (document.getElementById('clause')?.value ?? getParam('clause')).trim(),
+      scope  : (document.getElementById('scope')?.value  ?? getParam('scope')).trim(),
+      period : document.getElementById('cur_period')?.value ?? getParam('period'),
+      status : (document.getElementById('status0')?.checked ? '0' :
+               document.getElementById('status1')?.checked ? '1' :
+               document.getElementById('status2')?.checked ? '2' : getParam('status')),
+      search : (searchInput && searchInput.value !== '') ? searchInput.value : getParam('search')
+    };
+  }
 
-            var select = document.getElementById('clause');
-            select.addEventListener('change', function(){
-                let url = new URL(window.location.href);
-                url.pathname = '/bob/index';
-                url.searchParams.set('clause', this.value);
-                let searchInput = document.querySelector('.table-search-block input');
-                url.searchParams.set('search', searchInput.value);
-                window.location = url.toString();
-            }, false);
+  // --- Navigation: toujours poster TOUTES les valeurs
+  function navigateWithAll(patch={}) {
+    const cur  = new URL(location.href);
+    const next = new URL(location.href);
+    next.pathname = '/bob/index';
 
-            select = document.getElementById('cur_period');
-            select.addEventListener('change', function(){
-                let url = new URL(window.location.href);
-                url.pathname = '/bob/index';
-                url.searchParams.set('period', this.value);
-                let searchInput = document.querySelector('.table-search-block input');
-                url.searchParams.set('search', searchInput.value);
-                window.location = url.toString();
-            }, false);
+    const all = { ...snapshotFilters(), ...patch };
+    for (const [k,v] of Object.entries(all)) {
+      if (v == null || String(v) === '') next.searchParams.delete(k);
+      else next.searchParams.set(k, String(v));
+    }
+    if (next.toString() !== location.href) location.assign(next.toString());
+  }
 
-            select = document.getElementById('status0');
-            select.addEventListener('change', function() {
-                let url = new URL(window.location.href);
-                url.pathname = '/bob/index';
-                url.searchParams.set('status', 0);
-                let searchInput = document.querySelector('.table-search-block input');
-                url.searchParams.set('search', searchInput.value);
-                window.location = url.toString();
-            }, false);
+  // ==================================================================
 
-            select = document.getElementById('status1');
-            select.addEventListener('change', function(){
-                let url = new URL(window.location.href);
-                url.pathname = '/bob/index';
-                url.searchParams.set('status', 1);
-                let searchInput = document.querySelector('.table-search-block input');
-                url.searchParams.set('search', searchInput.value);
-                window.location = url.toString();
-            }, false);
+  // --- 1) assure-toi que la table génère bien la barre de recherche
+  // (dans ton HTML de la table) :
+  // data-search="true"
 
-            select = document.getElementById('status2');
-            select.addEventListener('change', function(){
-                let url = new URL(window.location.href);
-                url.pathname = '/bob/index';
-                url.searchParams.set('status', 2);
-                let searchInput = document.querySelector('.table-search-block input');
-                url.searchParams.set('search', searchInput.value);
-                window.location = url.toString();
-            }, false);
-        }, false);
-    </script>
+  // --- 2) lit la valeur dans l'URL
+  const params = new URLSearchParams(location.search);
+  const searchValue = params.get('search') || '';
+
+  // --- 3) applique à l'API table (filtrage effectif)
+  const applyToAPI = (val) => {
+    const tableEl = document.getElementById('controls');
+    const api = tableEl ? Metro.getPlugin(tableEl, 'table') : null;
+    if (api && typeof api.search === 'function') {
+      api.search(val);
+      return true;
+    }
+    return false;
+  };
+
+  // --- 4) pose la valeur dans l'input quand il existe (et quand il est recréé)
+  function setSearchInputWhenReady(val, timeoutMs = 3000) {
+    if (!val) return;
+
+    const trySet = () => {
+      const input = $('.table-search-block input');
+      if (!input) return false;
+      if (input.value !== val) {
+        input.value = val;
+        input.dispatchEvent(new Event('input',  { bubbles: true }));
+        input.dispatchEvent(new Event('change', { bubbles: true }));
+      }
+      return true;
+    };
+
+    if (trySet()) return;
+
+    // a) quelques frames
+    let tries = 0, maxTries = 20;
+    const raf = () => {
+      if (trySet()) return;
+      if (++tries >= maxTries) return;
+      requestAnimationFrame(raf);
+    };
+    requestAnimationFrame(raf);
+
+    // b) garde-fou si l’input apparaît plus tard (reconstruction Metro)
+    const mo = new MutationObserver(() => {
+      if (trySet()) mo.disconnect();
+    });
+    mo.observe(document.body, { childList: true, subtree: true });
+    setTimeout(() => mo.disconnect(), timeoutMs);
+  }
+
+  // --- 5) exécution au chargement
+  if (searchValue) {
+    // filtre la table côté API (immédiat ou dès que prêt)
+    if (!applyToAPI(searchValue)) {
+      requestAnimationFrame(() => applyToAPI(searchValue));
+    }
+    // force l’affichage dans l’input dès qu’il existe
+    setSearchInputWhenReady(searchValue);
+  }
+
+
+  // ==================================================================
+  // --- Bind: ne PAS utiliser e.isTrusted (Metro déclenche un change programmatique)
+  const bindChange = (id, key, coerce = v => v) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('change', () => {
+      if (!ready) return;                      // on ignore les changements pendant l'init
+      const newVal = coerce(el.value);
+      navigateWithAll({ [key]: newVal });
+    }, false);
+  };
+
+  bindChange('domain', 'domain', v => String(v));
+  bindChange('clause', 'clause', v => String(v).trim());
+  bindChange('scope',  'scope',  v => String(v).trim());
+  bindChange('cur_period', 'period', v => String(v));
+
+  // Radios status (OK de garder le flag ready)
+  const bindStatus = (id, value) => {
+    const el = document.getElementById(id);
+    if (!el) return;
+    el.addEventListener('change', () => {
+      if (!ready) return;
+      navigateWithAll({ status: String(value) });
+    }, false);
+  };
+  bindStatus('status0', 0);
+  bindStatus('status1', 1);
+  bindStatus('status2', 2);
+}, false);
+</script>
 @endsection
