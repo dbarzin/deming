@@ -90,7 +90,7 @@ return [
             'periodicity' => 'Periodicity',
             'planned' => 'Planned',
             'realisation_date' => 'Realization date',
-            'realized' => 'Realized',
+            'realized' => 'Made',
             'evidence' => 'Evidence',
             'score' => 'Score',
             'status' => 'State',

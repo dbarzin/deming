@@ -221,7 +221,7 @@
                     <strong>{{ trans('cruds.control.fields.owners') }}</strong>
                 </div>
                 <div class="cell-lg-6 cell-md-10">
-                    <select data-role="select" name="owners[]" id="owners" multiple>
+                    <select data-role="select" name="owners[]" id="owners" data-filter="true" multiple>
                         @foreach($owners as $id => $name)
                             <option
                                 value="{{ $id }}"

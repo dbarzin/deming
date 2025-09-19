@@ -24,6 +24,6 @@ class UserGroup extends Model
 
     public function controls()
     {
-        return $this->belongsToMany(Control::class)->orderBy('plan_date');
+        return $this->belongsToMany(Control::class)->whereNull('realisation_date')->orderBy('plan_date');
     }
 }
