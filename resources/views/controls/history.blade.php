@@ -1,7 +1,5 @@
 @extends("layout")
 
-@section('title', $control->name)
-
 @section("content")
 <div class="row">
     <div class="cell-lg-6 cell-md-12">
