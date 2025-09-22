@@ -1,6 +1,7 @@
 @extends("layout")
-@section("styles")
-@endsection
+
+@section('title', $measure->name)
+
 @section("content")
 <div data-role="panel" data-title-caption="{{ trans('cruds.measure.edit') }}" data-collapsible="false" data-title-icon="<span class='mif-books'></span>">
 

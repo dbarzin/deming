@@ -224,10 +224,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
   // ==================================================================
 
-  // --- 1) assure-toi que la table génère bien la barre de recherche
-  // (dans ton HTML de la table) :
-  // data-search="true"
-
   // --- 2) lit la valeur dans l'URL
   const params = new URLSearchParams(location.search);
   const searchValue = params.get('search') || '';
