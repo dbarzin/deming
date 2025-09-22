@@ -6,7 +6,7 @@
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <meta name="metro:smooth_scroll" content="true">
-    <title>Deming - ISMS Controls Made Easy</title>
+    <title>Deming - @yield('title', 'ISMS Controls Made Easy')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('styles')
     @if (!app()->environment('production'))
@@ -236,7 +236,7 @@
         <div data-role="appbar" class="bg-reserve-steppe border-bottom bd-default" data-expand-point="fs">
             <div class="app-bar-item-static d-none-fs d-flex-md">
                 <div class="text-bold enlarge-2" id="content-title">
-                @yield('title')
+                @yield('none')
                 </div>
             </div>
             <ul class="app-bar-menu ml-auto">

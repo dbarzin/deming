@@ -1,5 +1,7 @@
 @extends("layout")
 
+@section('title', $control->name)
+
 @section("styles")
 <style>
 .CodeMirror.CodeMirror-disabled {
