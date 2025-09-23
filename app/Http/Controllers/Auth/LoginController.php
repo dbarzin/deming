@@ -32,13 +32,13 @@ class LoginController extends Controller
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->username = $this->findUsername();
+        $this->username = $this->findLoginType();
     }
 
     /**
      * Determine the field used for login (email or login).
      */
-    public function findUsername()
+    public function findLoginType()
     {
         $login = request()->input('login');
 
@@ -152,7 +152,6 @@ class LoginController extends Controller
                         'email' => $ldapUser->getFirstAttribute('mail') ?? 'user@localhost.local',
                         'login' => $identifier,
                         'role' => 5, // Auditee
-                        // Store a random password so DB auth is not accidentally usable unless you set one explicitly
                         'password' => bcrypt(str()->random(32)),
                     ]);
                 }
