@@ -19,7 +19,7 @@ class DatabaseSeeder extends Seeder
                 $lang="en";
 
             DB::table('users')->insert([
-                'login' => 'admin',
+                'login' => 'admin@admin.localhost',
                 'name' => 'Administrator',
                 'title' => 'Pirate Captain',
                 'role' => 1,
