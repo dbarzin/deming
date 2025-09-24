@@ -155,8 +155,8 @@ class UserController extends Controller
         }
 
         // Update user information
-        $user->name = $request->input('name');
         $user->login = $request->input('login');
+        $user->name = $request->input('name');
         $user->email = $request->input('email');
         if ($this->isAdmin()) {
             $user->role = $request->input('role');

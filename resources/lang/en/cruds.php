@@ -286,7 +286,7 @@ return [
          'add' => 'Add User',
          'show' => 'Show user',
          'fields' => [
-             'login' => 'UserId',
+            'login' => 'Login',
              'name' => 'Name',
              'title' => 'Title',
              'role' => 'Role',

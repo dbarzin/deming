@@ -15,7 +15,7 @@
 					<label>{{ trans('cruds.user.fields.login') }}</label>
 				</div>
 	    		<div class="cell-3">
-					<input type="text" class="input {{ $errors->has('login') ? 'is-danger' : ''}}" name="login" value="{{ $errors->has('login') ?  old('login') : $user->login }}" size='40'>
+                    <input type="text" class="input {{ $errors->has('login') ? 'is-danger' : ''}}" name="login" value="{{ old('login', $user->login) }}" size='40'>
 				</div>
 			</div>
 
@@ -25,7 +25,7 @@
 					<label>{{ trans('cruds.user.fields.name') }}</label>
 				</div>
 	    		<div class="cell-3">
-					<input type="text" class="input {{ $errors->has('name') ? 'is-danger' : ''}}" name="name" value="{{ $errors->has('name') ?  old('name') : $user->name }}" size='80'>
+                    <input type="text" class="input {{ $errors->has('name') ? 'is-danger' : ''}}" name="name" value="{{ old('name', $user->name) }}" size='80'>
 				</div>
 			</div>
 
@@ -34,7 +34,7 @@
 					<label>{{ trans('cruds.user.fields.title') }}</label>
 				</div>
 	    		<div class="cell-3">
-					<input type="text" class="input {{ $errors->has('title') ? 'is-danger' : ''}}" name="title" value="{{ $errors->has('title') ?  old('title') : $user->title }}" size='80'>
+                    <input type="text" class="input {{ $errors->has('title') ? 'is-danger' : ''}}" name="title" value="{{ old('title', $user->title) }}" size='80'>
 				</div>
 			</div>
 

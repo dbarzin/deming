@@ -284,7 +284,7 @@ return [
         'edit' => 'Modifier un utilisateur',
         'add' => 'Ajouter un utilisateur',
         'fields' => [
-            'login' => 'UserId',
+            'login' => 'Login',
             'name' => 'Nom',
             'title' => 'Titre',
             'role' => 'Role',
