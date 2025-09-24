@@ -18,29 +18,15 @@ class LoginController extends Controller
     use AuthenticatesUsers;
 
     protected string $redirectTo = '/home';
-    protected string $username;
 
     public function __construct()
     {
         $this->middleware('guest')->except('logout');
-        $this->username = $this->findUsername();
-    }
-
-    /**
-     * N'utiliser QUE le champ 'login' comme identifiant.
-     */
-    public function findUsername(): string
-    {
-        $login = trim((string) request()->input('login', ''));
-        // On merge pour que credentials($request) prenne bien 'login'
-        request()->merge(['login' => $login]);
-
-        return 'login';
     }
 
     public function username(): string
     {
-        return $this->username;
+        return 'login';
     }
 
     /**
