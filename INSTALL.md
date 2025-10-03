@@ -323,6 +323,9 @@ LDAP_TIMEOUT=5                    # (optional)
 LDAP_LOGIN_ATTRIBUTES=uid,cn,mail,sAMAccountName,userPrincipalName
 ```
 
+# User must be member of this LDAP group
+LDAP_GROUP=Mercator
+
 **Examples**
 
 * OpenLDAP (typical user DN: `uid=jdupont,ou=people,dc=example,dc=org`):
@@ -331,6 +334,7 @@ LDAP_LOGIN_ATTRIBUTES=uid,cn,mail,sAMAccountName,userPrincipalName
   LDAP_TLS=true
   LDAP_SSL=false
   LDAP_LOGIN_ATTRIBUTES=uid,cn,mail
+  LDAP_GROUP=Merator
   ```
 
 * Active Directory (UPN: `jdupont@example.org`, sAM: `jdupont`):

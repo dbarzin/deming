@@ -455,7 +455,7 @@ ajouter cette ligne dans le crontab
 
 ## Mise à jour
 
-Pour mettre à jour Deming, il faut aller dans le répoertoire de Deming et récupérer les sources
+Pour mettre à jour Deming, il faut aller dans le répertoire de Deming et récupérer les sources
 
     cd /var/www/deming
     git pull
