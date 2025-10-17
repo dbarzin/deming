@@ -12,6 +12,7 @@ This document contains the evolutions planned in 2024 / 2025.
 * [x] Groups management
 * [x] Automatically remove measurements after a defined number of months
 * [ ] Export set of controls for audit
+* [ ] Send notifications to Slack with Laravel Notification Framework : https://github.com/dbarzin/deming/discussions/540
 * [ ] Docker
 * [ ] Non-regression tests
 
