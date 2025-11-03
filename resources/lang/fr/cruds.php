@@ -44,7 +44,7 @@ return [
             'status_rejected' => 'Rejeté',
             'status_all' => 'Tous',
             'close_date' => 'Date de clôture',
-            'progress' => 'Etat d\'avacement',
+            'progress' => 'Etat d\'avancement',
         ],
         'types' => [
             'major' => 'Majeure',
