@@ -15,6 +15,8 @@ services:
       ### PLEASE AFTER ONE RUN DISABLE FOR OPTIMIZATION
       - INITIAL_DB=FR #EN OR FR
       - TZ=Europe/Paris
+      - APP_ENV=production
+      - APP_FORCE_HTTPS=false
     volumes:
       - .env:/var/www/deming/.env
       - ./docker/custom/deming.php:/var/www/deming/config/deming.php

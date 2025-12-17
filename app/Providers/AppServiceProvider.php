@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\URL;
 use Illuminate\Support\ServiceProvider;
+use LdapRecord\Container;
 use Log;
 
 class AppServiceProvider extends ServiceProvider
@@ -36,13 +37,20 @@ class AppServiceProvider extends ServiceProvider
             URL::forceScheme('https');
         }
 
-        if (Config::get('app.debug')) {
+        if (config('app.debug')) {
             DB::listen(function ($query) {
                 Log::info(
                     $query->sql,
                     $query->bindings
                 );
             });
+        }
+
+        // Si le logging LDAP est activé, on force l’utilisation du channel "ldap"
+        if (config('ldap.logging.enabled')) {
+            Container::setLogger(
+                Log::channel('ldap')
+            );
         }
 
         if (in_array('keycloak', Config::get('services.socialite_controller.providers'))) {
