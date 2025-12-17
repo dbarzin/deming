@@ -68,8 +68,8 @@ class SocialiteController extends Controller
         $allow_createUser = false;
         $allow_updateUser = false;
         if (config($config_name)) {
-            $allow_createUser = config($config_name.'.allow_createUser', $allow_createUser);
-            $allow_updateUser = config($config_name.'.allow_updateUser', $allow_updateUser);
+            $allow_createUser = config($config_name.'.allow_create_User', $allow_createUser);
+            $allow_updateUser = config($config_name.'.allow_update_User', $allow_updateUser);
         }
         Log::debug('CONFIG: allow_createUser='.($allow_createUser ? 'true' : 'false'));
         Log::debug('CONFIG: allow_updateUser='.($allow_updateUser ? 'true' : 'false'));
