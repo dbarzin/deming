@@ -26,7 +26,7 @@ return new class extends Migration
         }
 
         if (DB::getDriverName() !== 'pgsql') {
-            if (DB::getDriverName() == 'mysql')
+            if (DB::getDriverName() == 'mysql' || DB::getDriverName() == 'mariadb')
                 Schema::table('controls', function (Blueprint $table) {
                     $table->dropForeign(['domain_id']);
                    $table->dropForeign(['measure_id']);
