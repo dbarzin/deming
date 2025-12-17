@@ -18,6 +18,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');
     Route::get('/index', 'HomeController@index');
+    Route::redirect('/admin', '/');
 
     /* Socialite (auth) */
     Route::get('auth/redirect/{driver}', 'SocialiteController@redirect')->name('socialite.redirect');
