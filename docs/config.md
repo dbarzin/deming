@@ -23,7 +23,7 @@ Users are directly defined in the application.
 
 There are four different roles:
 
-* RSSI: the RSSI is the administrator of the application. He can create new measurements, new attributes, modify controls already carried out...
+* Administrators: The administrator can create users, measurements, attributes, modify controls already carried out.
 
 * Users: users can use the application without being able to modify the measurements, attributes and controls already carried out.
 

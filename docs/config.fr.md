@@ -23,7 +23,7 @@ Les utilisateurs sont définis dans l’application.
 
 Il existe quatre rôles différents :
 
-* RSSI : le RSSI est l'administrateur de l’application. Il peut créer de nouvelles mesures, de nouveaux attributs, modifier des contrôles déjà réalisés...
+* Administrateurs : L'administrateur de l’application peut créer de nouveaux utilisateur, des mesures, de nouveaux attributs, modifier des contrôles déjà réalisés.
 
 * Utilisateurs : les utilisateurs peuvent utiliser l’application sans pouvoir modifier les mesures, les attributs et les contrôles déjà réalisés.
 
