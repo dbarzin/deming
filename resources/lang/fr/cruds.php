@@ -7,7 +7,7 @@ return [
         'controls' => 'Contrôles',
         'action_plans' => 'Plans d\'action',
         'next_controls' => 'Contrôles planifiés les 30 prochains jours',
-        'control_status' => 'Etat des contrôles',
+        'control_status' => 'État des contrôles',
         'control_planning' => 'Planning des contrôles',
     ],
     'action' => [
@@ -44,7 +44,7 @@ return [
             'status_rejected' => 'Rejeté',
             'status_all' => 'Tous',
             'close_date' => 'Date de clôture',
-            'progress' => 'Etat d\'avancement',
+            'progress' => 'État d\'avancement',
         ],
         'types' => [
             'major' => 'Majeure',
@@ -114,8 +114,8 @@ return [
         'history' => 'Planning',
         'make' => 'Réaliser un contrôle',
         'plan' => 'Planifier un contrôle',
-        'radar' => 'Etat des contrôles de sécurité',
-        'status_date' => 'Etat des contrôles au',
+        'radar' => 'État des contrôles de sécurité',
+        'status_date' => 'État des contrôles au',
         'title' => 'Contrôles',
         'title_singular' => 'Contrôle',
         'groupBy' => 'Groupé par',
@@ -160,7 +160,7 @@ return [
         'choose' => 'Choisir un domaine',
         'title' => 'Domaine',
         'radar' => 'Résultat des contrôles par domaine',
-        'measure_date' => 'Etat des contrôles au',
+        'measure_date' => 'État des contrôles au',
     ],
     'document' => [
         'title' => [
@@ -254,7 +254,7 @@ return [
         'subject_type' => 'Type',
         'subject_id' => 'ID',
         'user' => 'Utilisateur',
-        'host' => 'Host',
+        'host' => 'Hôte',
         'timestamp' => 'Horodatage',
         'properties' => 'Données'
     ],
@@ -287,10 +287,10 @@ return [
             'login' => 'Login',
             'name' => 'Nom',
             'title' => 'Titre',
-            'role' => 'Role',
-            'password' => 'Password',
+            'role' => 'Rôle',
+            'password' => 'Mot de passe',
             'email' => 'eMail',
-            'groups' => 'Groups',
+            'groups' => 'Groupes',
             'language' => 'Langue',
             'controls' => 'Contrôles de l\'utilisateur'
         ],
