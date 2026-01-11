@@ -69,7 +69,7 @@ According to ISO 27001, chapter 9.1, it is imperative to assess security perform
 [<img src="public/screenshots/pilotage2.en.png" width="400">](public/screenshots/pilotage2.en.png)
 
 
-## :classical_building: Referentials supproted
+## :classical_building: Referentials supported
 
 | File                                 | Description                                                                    |
 |--------------------------------------|--------------------------------------------------------------------------------|
