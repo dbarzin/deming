@@ -154,3 +154,8 @@ td {
     word-wrap: break-word;          /* Permet de couper les mots trop longs */
     word-break: break-word;         /* Couper les mots s'ils sont trop longs */
 }
+
+/*  Wrapper */
+.table .data-wrapper {
+    white-space: normal !important; /* Autorise le retour à la ligne */
+}

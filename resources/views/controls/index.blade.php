@@ -73,7 +73,6 @@
 			@if ((Auth::User()->role==1)||(Auth::User()->role==2))
 				<button class="button primary" onclick="location.href = '/bob/create';">
 		            <span class="mif-plus"></span>
-		            &nbsp;
 					{{ trans('common.new') }}
                </button>
             @endif
@@ -107,14 +106,10 @@
     @foreach($controls as $control)
         <tr>
             <td>
-                @foreach($control->measures as $measure)
-                <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">
-                    {{ $measure['clause'] }}
-                </a>
-                @if (!$loop->last)
-                ,
-                @endif
+                @foreach($control->measures->take(3) as $measure)
+                <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">{{ $measure['clause'] }}</a>@if (!$loop->last), @endif
                 @endforeach
+                @if($control->measures->count() > 3)... @endif
             </td>
             <td>
                     {{ $control->name }}
@@ -144,7 +139,7 @@
             <td>
                 <!-- format in red when month passed -->
                 @if (($control->status === 0)||($control->status === 1))
-                <a id="{{ $control->plan_date }}" href="/bob/show/{{$control->id}}">
+                <a id="{{ $control->plan_date }}" href="/bob/show/{{$control->id}}" style="white-space: nowrap;">
                 <b> @if (today()->lte($control->plan_date))
                         <font color="green">{{ $control->plan_date }}</font>
                     @else
@@ -158,7 +153,7 @@
             </td>
             <td>
                 <b id="{{ $control->realisation_date }}">
-                    <a href="/bob/show/{{$control->id}}">
+                    <a href="/bob/show/{{$control->id}}" style="white-space: nowrap;">
                         {{ $control->realisation_date }}
                     </a>
                     @if ( ($control->status===1 )&& ((Auth::User()->role===1)||(Auth::User()->role===2)))
@@ -170,7 +165,7 @@
             <td>
                 <b id="{{ $control->next_date }}">
                     @if ($control->next_id!=null)
-                    <a href="/bob/show/{{$control->next_id}}">
+                    <a href="/bob/show/{{$control->next_id}}" style="white-space: nowrap;">
                         {{ $control->next_date }}
                     </a>
                     @endif
