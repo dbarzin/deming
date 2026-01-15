@@ -83,6 +83,7 @@ According to ISO 27001, chapter 9.1, it is imperative to assess security perform
 | MPA-5.2-Best-Practices.xlsx          | [Motion Picture Association Best Practices, v5.2](https://www.ttpn.org/wp-content/uploads/2023/08/MPA-Content-Security-Best-Practices-v5.2_Aug30_2023-Release.xlsx) |
 | MPA-5.3-Best-Practices.xlsx          | [Motion Picture Association Best Practices, v5.3](https://www.ttpn.org/wp-content/uploads/2025/01/MPA-Content-Security-Best-Practices-v5.3_Jan6_2025_English.xlsx) |
 | NIS2.en.xlsx                         | [NIS 2 directive requirements](https://eur-lex.europa.eu/legal-content/EN/TXT/?uri=CELEX%3A32022L2555) |
+| NIS2.de.xlsx                         | [NIS 2 directive requirements](https://www.recht.bund.de/bgbl/1/2025/301/VO) |
 | NIS2.fr.xlsx                         | [NIS 2 directive requirements](https://eur-lex.europa.eu/legal-content/FR/TXT/?uri=CELEX%3A32022L2555) |
 | MVSP-3.0.xlsx                        | [Minimum Viable Security Product, v3.0](https://mvsp.dev/mvsp.en/)             |
 | PCI.DSS.4.0.EN.xlsx                  | [PCI DSS, v4.0, in English](https://blog.pcisecuritystandards.org/pci-dss-v4-0-resource-hub) |
