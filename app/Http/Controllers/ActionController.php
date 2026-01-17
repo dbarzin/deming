@@ -26,11 +26,7 @@ class ActionController extends Controller
     public function index(Request $request)
     {
         // Admin, user, auditor or auditee
-        abort_if(
-            ! ((Auth::User()->role === 1) ||
-                (Auth::User()->role === 2) ||
-                (Auth::User()->role === 3) ||
-                (Auth::User()->role === 5)),
+        abort_if(Auth::User()->isAPI(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -90,11 +86,33 @@ class ActionController extends Controller
             $actions = $actions->where('actions.scope', $scope);
         }
 
-        // filter on auditee controls
-        if (Auth::User()->role === 5) {
-            $actions = $actions
-                ->leftjoin('action_user', 'controls.id', '=', 'control_user.control_id')
-                ->where('action_user.user_id', '=', Auth::User()->id);
+        // filter on auditee actions
+        if (Auth::User()->isAuditee()) {
+            $userId = Auth::id();
+            $actions = $actions->where(function($query) use ($userId) {
+                // Actions assignées directement à l'utilisateur
+                $query->whereExists(function($q) use ($userId) {
+                    $q->select(DB::raw(1))
+                        ->from('action_user')
+                        ->whereColumn('action_user.action_id', 'actions.id')
+                        ->where('action_user.user_id', $userId);
+                })
+                    // OU actions liées à des contrôles assignés à l'utilisateur
+                    ->orWhereExists(function($q) use ($userId) {
+                        $q->select(DB::raw(1))
+                            ->from('control_user')
+                            ->whereColumn('control_user.control_id', 'actions.control_id')
+                            ->where('control_user.user_id', $userId);
+                    })
+                    // OU actions liées à des contrôles assignés via un groupe
+                    ->orWhereExists(function($q) use ($userId) {
+                        $q->select(DB::raw(1))
+                            ->from('control_user_group')
+                            ->join('user_user_group', 'user_user_group.user_group_id', '=', 'control_user_group.user_group_id')
+                            ->whereColumn('control_user_group.control_id', 'actions.control_id')
+                            ->where('user_user_group.user_id', $userId);
+                    });
+            });
         }
 
         // Query DB
@@ -128,7 +146,6 @@ class ActionController extends Controller
             ->with('scopes', $scopes)
             ->with('actions', $actions);
     }
-
     /**
      * Save an action plan
      *

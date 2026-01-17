@@ -25,11 +25,7 @@ class ControlController extends Controller
     public function index(Request $request)
     {
         // Not for API
-        abort_if(
-            Auth::User()->role === 4,
-            Response::HTTP_FORBIDDEN,
-            '403 Forbidden'
-        );
+        abort_if(Auth::User()->isAPI(),Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // -----------------------------------------------------
         // Domain filter
