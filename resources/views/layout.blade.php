@@ -49,7 +49,6 @@
         </form>
 
         <ul class="navview-menu pad-second-level" id="side-menu">
-            @if (Auth::User()->role <= 3)
             <li class="{{ request()->is('/') ? 'active': '' }}">
                 <a href="/">
                     <span class="icon mif-home"></span>
@@ -64,7 +63,6 @@
                     <span class="caption">{{ trans("menu.measures") }}</span>
                 </a>
             </li>
-            @endif
             <li class="{{ request()->is('bob/index') ? 'active': '' }}">
                 <a href="/bob/index">
                     <span class="icon mif-paste"></span>

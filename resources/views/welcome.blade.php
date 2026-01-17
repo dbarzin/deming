@@ -97,11 +97,43 @@
                     <tbody>
                         @foreach($controls_todo as $control)
                         <tr>
-                            <td>
-                                @foreach($control->measures as $measure)
-                                    <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">{{ $measure['clause'] }}</a>@if(!$loop->last),@endif
-                                @endforeach
+                            <td class="wrap-column">
+                                @if($control->measures->count() > 3)
+                                    @php
+                                        $clauses = $control->measures->pluck('clause');
+                                        // Grouper par 3 et joindre avec retour à la ligne
+                                        $formattedClauses = $clauses->chunk(3)->map(function($chunk) {
+                                            return $chunk->implode(', ');
+                                        })->implode('<br>');
+                                    @endphp
+                                    <span
+                                        data-role="hint"
+                                        data-hint-text="{{ $formattedClauses }}"
+                                        data-hint-position="top"
+                                        style="cursor: help; border-bottom: 1px dotted #999;"
+                                    >
+                                        @foreach($control->measures->take(2) as $measure)
+                                        <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">
+                                            {{ $measure['clause'] }}
+                                        </a>
+                                        @if (!$loop->last)
+                                        ,
+                                        @endif
+                                        @endforeach
+                                        , ...
+                                    </span>
+                                @else
+                                    @foreach($control->measures as $measure)
+                                    <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">
+                                        {{ $measure['clause'] }}
+                                    </a>
+                                    @if (!$loop->last)
+                                    ,
+                                    @endif
+                                    @endforeach
+                                @endif
                             </td>
+
                             <td class="bg-danger text-white">{{ $control->name }}</td>
                             <td>
                                 <a href="/bob/index?domain=0&attribute=none&scope={{ urlencode($control->scope) }}&status=0&period=99">
@@ -269,7 +301,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 const activePoints = window.myBar.getElementsAtEventForMode(event.native, 'nearest', { intersect: true }, true);
                 if (activePoints.length) {
                     const firstPoint = activePoints[0];
-                    window.location.href = "/bob/index?domain=0&attribute=none&scope=none&status=0&period=" + (firstPoint.index - 12);
+                    window.location.href = "/bob/index?domain=0&clause=none&attribute=none&scope=none&status=0&period=" + (firstPoint.index - 12);
                 }
             }
         },

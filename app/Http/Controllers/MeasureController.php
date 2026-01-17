@@ -22,9 +22,7 @@ class MeasureController extends Controller
     public function index(Request $request)
     {
         // Not for Auditor, API and auditee
-        abort_if(
-            (Auth::User()->role === 4) ||
-            (Auth::User()->role === 5),
+        abort_if(Auth::User()->isAPI(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -51,8 +49,62 @@ class MeasureController extends Controller
                     'domains.title',
                 ]
             )
-            ->join('domains', 'domains.id', '=', 'measures.domain_id')
-            ->addSelect(
+            ->join('domains', 'domains.id', '=', 'measures.domain_id');
+
+        // Filtrer les mesures uniquement si l'utilisateur est Auditee
+        if (Auth::user()->isAuditee()) {
+            $userId = Auth::id();
+
+            $measures->whereExists(function($query) use ($userId) {
+                $query->select(DB::raw(1))
+                    ->from('control_measure')
+                    ->whereColumn('control_measure.measure_id', 'measures.id')
+                    ->where(function($subQuery) use ($userId) {
+                        // Mesures liées à des contrôles assignés directement
+                        $subQuery->whereExists(function($q) use ($userId) {
+                            $q->select(DB::raw(1))
+                                ->from('control_user')
+                                ->whereColumn('control_user.control_id', 'control_measure.control_id')
+                                ->where('control_user.user_id', $userId);
+                        })
+                            // OU mesures liées à des contrôles assignés via un groupe
+                            ->orWhereExists(function($q) use ($userId) {
+                                $q->select(DB::raw(1))
+                                    ->from('control_user_group')
+                                    ->join('user_user_group', 'user_user_group.user_group_id', '=', 'control_user_group.user_group_id')
+                                    ->whereColumn('control_user_group.control_id', 'control_measure.control_id')
+                                    ->where('user_user_group.user_id', $userId);
+                            });
+                    });
+            });
+
+            // Compter uniquement les contrôles assignés à l'utilisateur
+            $measures->addSelect(
+                ['control_count' => DB::table('controls')
+                    ->selectRaw('count(*) as controls_count')
+                    ->leftjoin('control_measure', 'control_measure.measure_id', 'measures.id')
+                    ->whereColumn('control_measure.control_id', 'controls.id')
+                    ->whereIn('controls.status', [0,1])
+                    ->where(function($q) use ($userId) {
+                        $q->whereExists(function($subQ) use ($userId) {
+                            $subQ->select(DB::raw(1))
+                                ->from('control_user')
+                                ->whereColumn('control_user.control_id', 'controls.id')
+                                ->where('control_user.user_id', $userId);
+                        })
+                            ->orWhereExists(function($subQ) use ($userId) {
+                                $subQ->select(DB::raw(1))
+                                    ->from('control_user_group')
+                                    ->join('user_user_group', 'user_user_group.user_group_id', '=', 'control_user_group.user_group_id')
+                                    ->whereColumn('control_user_group.control_id', 'controls.id')
+                                    ->where('user_user_group.user_id', $userId);
+                            });
+                    }),
+                ]
+            );
+        } else {
+            // Pour les autres rôles, compter tous les contrôles
+            $measures->addSelect(
                 ['control_count' => DB::table('controls')
                     ->selectRaw('count(*) as controls_count')
                     ->leftjoin('control_measure', 'control_measure.measure_id', 'measures.id')
@@ -60,6 +112,7 @@ class MeasureController extends Controller
                     ->whereIn('controls.status', [0,1]),
                 ]
             );
+        }
 
         if ($domain !== null) {
             $measures->where('measures.domain_id', $domain);

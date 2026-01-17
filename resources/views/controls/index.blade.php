@@ -73,7 +73,6 @@
 			@if ((Auth::User()->role==1)||(Auth::User()->role==2))
 				<button class="button primary" onclick="location.href = '/bob/create';">
 		            <span class="mif-plus"></span>
-		            &nbsp;
 					{{ trans('common.new') }}
                </button>
             @endif
@@ -104,18 +103,45 @@
             </tr>
         </thead>
         <tbody>
-    @foreach($controls as $control)
+        @foreach($controls as $control)
         <tr>
-            <td>
-                @foreach($control->measures as $measure)
-                <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">
-                    {{ $measure['clause'] }}
-                </a>
-                @if (!$loop->last)
-                ,
+            <td class="wrap-column">
+                @if($control->measures->count() > 3)
+                    @php
+                        $clauses = $control->measures->pluck('clause');
+                        // Grouper par 3 et joindre avec retour à la ligne
+                        $formattedClauses = $clauses->chunk(3)->map(function($chunk) {
+                            return $chunk->implode(', ');
+                        })->implode('<br>');
+                    @endphp
+                    <span
+                        data-role="hint"
+                        data-hint-text="{{ $formattedClauses }}"
+                        data-hint-position="top"
+                        style="cursor: help; border-bottom: 1px dotted #999;"
+                    >
+                        @foreach($control->measures->take(2) as $measure)
+                        <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">
+                            {{ $measure['clause'] }}
+                        </a>
+                        @if (!$loop->last)
+                        ,
+                        @endif
+                        @endforeach
+                        , ...
+                    </span>
+                @else
+                    @foreach($control->measures as $measure)
+                    <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">
+                        {{ $measure['clause'] }}
+                    </a>
+                    @if (!$loop->last)
+                    ,
+                    @endif
+                    @endforeach
                 @endif
-                @endforeach
             </td>
+
             <td>
                     {{ $control->name }}
             </td>
@@ -144,7 +170,7 @@
             <td>
                 <!-- format in red when month passed -->
                 @if (($control->status === 0)||($control->status === 1))
-                <a id="{{ $control->plan_date }}" href="/bob/show/{{$control->id}}">
+                <a id="{{ $control->plan_date }}" href="/bob/show/{{$control->id}}" style="white-space: nowrap;">
                 <b> @if (today()->lte($control->plan_date))
                         <font color="green">{{ $control->plan_date }}</font>
                     @else
@@ -158,7 +184,7 @@
             </td>
             <td>
                 <b id="{{ $control->realisation_date }}">
-                    <a href="/bob/show/{{$control->id}}">
+                    <a href="/bob/show/{{$control->id}}" style="white-space: nowrap;">
                         {{ $control->realisation_date }}
                     </a>
                     @if ( ($control->status===1 )&& ((Auth::User()->role===1)||(Auth::User()->role===2)))
@@ -170,7 +196,7 @@
             <td>
                 <b id="{{ $control->next_date }}">
                     @if ($control->next_id!=null)
-                    <a href="/bob/show/{{$control->next_id}}">
+                    <a href="/bob/show/{{$control->next_id}}" style="white-space: nowrap;">
                         {{ $control->next_date }}
                     </a>
                     @endif

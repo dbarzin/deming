@@ -19,19 +19,58 @@ class DomainController extends Controller
      */
     public function index()
     {
-        $domains = DB::table('domains')->orderBy('id')->get();
+        if (Auth::user()->isAuditee()) {
+            $userId = Auth::id();
 
-        $domains = DB::table('domains')
-            ->select('domains.id', 'domains.framework', 'domains.title', 'domains.description', DB::raw('COUNT(measures.id) AS measures'))
-            ->leftJoin('measures', 'measures.domain_id', '=', 'domains.id')
-            ->groupBy('domains.id')
-            ->orderBy('domains.title')
-            ->get();
+            // Pour les Auditees : récupérer uniquement les domaines avec mesures assignées
+            $domains = DB::table('domains')
+                ->select(
+                    'domains.id',
+                    'domains.framework',
+                    'domains.title',
+                    'domains.description',
+                    DB::raw('(
+                    SELECT COUNT(DISTINCT m.id)
+                    FROM measures m
+                    WHERE m.domain_id = domains.id
+                    AND EXISTS (
+                        SELECT 1 
+                        FROM control_measure cm
+                        WHERE cm.measure_id = m.id
+                        AND (
+                            EXISTS (
+                                SELECT 1 
+                                FROM control_user cu 
+                                WHERE cu.control_id = cm.control_id 
+                                AND cu.user_id = ' . $userId . '
+                            )
+                            OR EXISTS (
+                                SELECT 1 
+                                FROM control_user_group cug
+                                INNER JOIN user_user_group uug ON uug.user_group_id = cug.user_group_id
+                                WHERE cug.control_id = cm.control_id
+                                AND uug.user_id = ' . $userId . '
+                            )
+                        )
+                    )
+                ) AS measures')
+                )
+                ->havingRaw('measures > 0')
+                ->orderBy('domains.title')
+                ->get();
+        } else {
+            // Pour les autres rôles : tous les domaines avec toutes les mesures
+            $domains = DB::table('domains')
+                ->select('domains.id', 'domains.framework', 'domains.title', 'domains.description', DB::raw('COUNT(measures.id) AS measures'))
+                ->leftJoin('measures', 'measures.domain_id', '=', 'domains.id')
+                ->groupBy('domains.id', 'domains.framework', 'domains.title', 'domains.description')
+                ->orderBy('domains.title')
+                ->get();
+        }
 
         return view('domains.index')
             ->with('domains', $domains);
     }
-
     /**
      * Show the form for creating a new resource.
      *
