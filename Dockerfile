@@ -1,23 +1,25 @@
-FROM nginx:bookworm
+FROM php:8.3-fpm-bookworm
 
+# Installer Nginx et dépendances
 RUN apt update \
  && apt-get install -y --no-install-recommends \
-    git=1:2.39.5-* \
-    composer=2.5.5-* \
-    php=2:8.2* \
-    php-cli=2:8.2* \
-    php-opcache \
-    php-mysql=2:8.2* \
-    php-pgsql=2:8.2* \
-    php-zip=2:8.2* \
-    php-gd=2:8.2* \
-    php-mbstring=2:8.2* \
-    php-curl=2:8.2* \
-    php-xml=2:8.2* \
-    php-ldap=2:8.2* \
+    nginx \
+    git \
     mariadb-client \
     cron \
-&& rm -rf /var/lib/apt/lists/*
+    libzip-dev \
+    libpng-dev \
+    libldap2-dev \
+    libpq-dev \
+ && docker-php-ext-install \
+    pdo_mysql \
+    pdo_pgsql \
+    zip \
+    gd \
+    ldap \
+ && docker-php-ext-enable opcache \
+ && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+ && rm -rf /var/lib/apt/lists/*
 
 RUN touch /etc/mailname
 RUN echo "sender@yourdomain.org" > /etc/mailname
