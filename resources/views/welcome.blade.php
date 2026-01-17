@@ -112,7 +112,7 @@
                                         data-hint-position="top"
                                         style="cursor: help; border-bottom: 1px dotted #999;"
                                     >
-                                        @foreach($control->measures->take(3) as $measure)
+                                        @foreach($control->measures->take(2) as $measure)
                                         <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">
                                             {{ $measure['clause'] }}
                                         </a>
