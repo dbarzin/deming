@@ -79,11 +79,13 @@
 					@endif
 				</td>
 				<td>
+				@if (!Auth::User()->isAuditee())
                     <a href="/alice/plan/{{ $measure->id }}" class="button info small">
 			            <span class="mif-calendar"></span>
 			            &nbsp;
 				    	{{ trans('common.plan') }}
                     </a>
+                @endif
 				</td>
 			</tr>
 		@endforeach
