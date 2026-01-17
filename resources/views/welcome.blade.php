@@ -98,9 +98,10 @@
                         @foreach($controls_todo as $control)
                         <tr>
                             <td>
-                                @foreach($control->measures as $measure)
+                                @foreach($control->measures->take(3) as $measure)
                                     <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">{{ $measure['clause'] }}</a>@if(!$loop->last),@endif
                                 @endforeach
+                                @if ($control->measures->count()>3)...@endif
                             </td>
                             <td class="bg-danger text-white">{{ $control->name }}</td>
                             <td>

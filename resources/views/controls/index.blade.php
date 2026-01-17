@@ -103,14 +103,45 @@
             </tr>
         </thead>
         <tbody>
-    @foreach($controls as $control)
+        @foreach($controls as $control)
         <tr>
-            <td>
-                @foreach($control->measures->take(3) as $measure)
-                <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">{{ $measure['clause'] }}</a>@if (!$loop->last), @endif
-                @endforeach
-                @if($control->measures->count() > 3)... @endif
+            <td class="wrap-column">
+                @if($control->measures->count() > 3)
+                    @php
+                        $clauses = $control->measures->pluck('clause');
+                        // Grouper par 3 et joindre avec retour à la ligne
+                        $formattedClauses = $clauses->chunk(3)->map(function($chunk) {
+                            return $chunk->implode(', ');
+                        })->implode('<br>');
+                    @endphp
+                    <span
+                        data-role="hint"
+                        data-hint-text="{{ $formattedClauses }}"
+                        data-hint-position="top"
+                        style="cursor: help; border-bottom: 1px dotted #999;"
+                    >
+                        @foreach($control->measures->take(3) as $measure)
+                        <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">
+                            {{ $measure['clause'] }}
+                        </a>
+                        @if (!$loop->last)
+                        ,
+                        @endif
+                        @endforeach
+                        , ...
+                    </span>
+                @else
+                    @foreach($control->measures as $measure)
+                    <a id="{{ $measure['clause'] }}" href="/alice/show/{{ $measure['id'] }}">
+                        {{ $measure['clause'] }}
+                    </a>
+                    @if (!$loop->last)
+                    ,
+                    @endif
+                    @endforeach
+                @endif
             </td>
+
             <td>
                     {{ $control->name }}
             </td>
