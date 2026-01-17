@@ -6,10 +6,12 @@ use App\Exports\MeasuresExport;
 use App\Models\Control;
 use App\Models\Domain;
 use App\Models\Measure;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
 
 class MeasureController extends Controller
@@ -17,9 +19,11 @@ class MeasureController extends Controller
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * Request $request
+     *
+     * @return View
      */
-    public function index(Request $request)
+    public function index(Request $request): View
     {
         // Not for Auditor, API and auditee
         abort_if(Auth::User()->isAPI(),
@@ -130,15 +134,12 @@ class MeasureController extends Controller
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
-        // Not for Auditor, API and auditee
-        abort_if(
-            (Auth::User()->role === 3) ||
-            (Auth::User()->role === 4) ||
-            (Auth::User()->role === 5),
+        // Only Admin and User can create a measure
+        abort_if(!Auth::User()->isAdmin() && !Auth::User()->isUser(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -178,11 +179,8 @@ class MeasureController extends Controller
      */
     public function store(Request $request)
     {
-        // Not for Auditor, API and auditee
-        abort_if(
-            (Auth::User()->role === 3) ||
-            (Auth::User()->role === 4) ||
-            (Auth::User()->role === 5),
+        // Only Admin and User can create a measure
+        abort_if(!Auth::User()->isAdmin() && !Auth::User()->isUser(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -220,20 +218,19 @@ class MeasureController extends Controller
      *
      * @param  int $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function show(int $id)
     {
         // Not for API
-        abort_if(
-            (Auth::User()->role === 4),
+        abort_if(Auth::User()->isAPI(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
 
         // user must have one control assigned
         abort_if(
-            (Auth::User()->role === 5) &&
+            (Auth::User()->isAuditee()) &&
             ! DB::table('controls')
                 ->where('measure_id', $id)
                 ->join('control_measure', 'control_measure.control_id', '=', 'controls.id')
@@ -267,15 +264,12 @@ class MeasureController extends Controller
      *
      * @param  int $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit(int $id)
     {
-        // Not for Auditor, API and auditee
-        abort_if(
-            (Auth::User()->role === 3) ||
-            (Auth::User()->role === 4) ||
-            (Auth::User()->role === 5),
+        // Only Admin and User can edit a measure
+        abort_if(!Auth::User()->isAdmin() && !Auth::User()->isUser(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -312,13 +306,12 @@ class MeasureController extends Controller
      *
      * @param  int $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function clone(int $id)
     {
-        // Restriction d'accès
-        abort_if(
-            in_array(Auth::user()->role, [3, 4, 5]),
+        // Only Admin and User can clone a measure
+        abort_if(!Auth::User()->isAdmin() && !Auth::User()->isUser(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -368,11 +361,8 @@ class MeasureController extends Controller
      */
     public function update(Request $request)
     {
-        // Not for Auditor, API and auditee
-        abort_if(
-            (Auth::User()->role === 3) ||
-            (Auth::User()->role === 4) ||
-            (Auth::User()->role === 5),
+        // Only Admin and User can update a measure
+        abort_if(!Auth::User()->isAdmin() && !Auth::User()->isUser(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -406,25 +396,7 @@ class MeasureController extends Controller
 
         $measure->update();
 
-        /*
-        // update the current control
-        $control = Control::where('measure_id', $measure->id)
-            // ->where('realisation_date', null)
-            ->whereIn('status', [0,1])
-            ->get()->first();
-        if ($control !== null) {
-            $control->clause = $measure->clause;
-            $control->name = $measure->name;
-            $control->attributes = $measure->attributes;
-            $control->objective = $measure->objective;
-            $control->input = $measure->input;
-            $control->model = $measure->model;
-            $control->indicator = $measure->indicator;
-            $control->action_plan = $measure->action_plan;
-            $control->save();
-        }
-        */
-        // retun to view measure
+        // return to view measure
         return redirect('/alice/show/'.$measure->id);
     }
 
@@ -474,9 +446,9 @@ class MeasureController extends Controller
      *
      * @param  \Illuminate\Http\Request $request
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function plan(Request $request)
+    public function plan(Request $request): View
     {
         // Not for Auditor, API and auditee
         abort_if(
@@ -567,7 +539,7 @@ class MeasureController extends Controller
      *
      * @return \Illuminate\Http\RedirectResponse
      */
-    public function activate(Request $request)
+    public function activate(Request $request) : RedirectResponse
     {
         // Not for Auditor, API and auditee
         abort_if(
