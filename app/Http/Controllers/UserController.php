@@ -58,7 +58,7 @@ class UserController extends Controller
         $this->validate($request, [
             'login' => 'required|unique:users|min:1|max:30',
             'name' => 'required|min:1|max:90',
-            'title' => 'nullable|min:1|max:30',
+            'title' => 'required|min:1|max:30',
             'email' => 'required|unique:users|email:rfc',
             'role' => 'required|min:1|max:5',
         ]);
