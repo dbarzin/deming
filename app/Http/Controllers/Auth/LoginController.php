@@ -3,8 +3,10 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Models\AuditLog;
 use App\Models\User;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
@@ -161,4 +163,60 @@ class LoginController extends Controller
             $remember
         );
     }
+
+
+    /**
+     * Hook appelé APRES un login réussi (LDAP ou local).
+     *
+     * Crée une entrée dans le journal d'audit pour tracer la connexion.
+     */
+    protected function authenticated(Request $request, User $user): void
+    {
+        try {
+            AuditLog::query()->create([
+                'description' => 'Login',
+                'subject_id' => $user->id,
+                'subject_type' => User::class,
+                'user_id' => $user->id,
+                'properties' => [
+                    'user_agent' => $request->userAgent(),
+                    'method' => $request->method(),
+                    'url' => $request->fullUrl(),
+                ],
+                'host' => $request->ip(),
+            ]);
+        } catch (\Throwable $e) {
+            Log::warning('Failed to create login audit log', ['error' => $e->getMessage()]);
+        }
+    }
+
+    public function logout(Request $request): RedirectResponse
+    {
+        $userId = auth()->id();
+
+        $this->guard()->logout();
+        $request->session()->invalidate();
+        $request->session()->regenerateToken();
+
+        try {
+            AuditLog::query()->create([
+                'description'  => 'Logout',
+                'subject_id'   => $userId,
+                'subject_type' => User::class,
+                'user_id'      => $userId,
+                'properties'   => [
+                    'user_agent' => $request->userAgent(),
+                    'method'     => $request->method(),
+                    'url'        => $request->fullUrl(),
+                ],
+                'host'         => $request->ip(),
+            ]);
+        } catch (\Throwable $e) {
+            Log::warning('Failed to create logout audit log', ['error' => $e->getMessage()]);
+        }
+
+        return $this->loggedOut($request) ?: redirect('/');
+    }
+
+
 }
