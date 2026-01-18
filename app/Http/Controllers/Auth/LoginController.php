@@ -164,28 +164,30 @@ class LoginController extends Controller
         );
     }
 
+
     /**
      * Hook appelé APRES un login réussi (LDAP ou local).
      *
-     * Ici on :
-     *  - eager-load les rôles / permissions pour éviter le N+1 dans la requête
-     *  - stocke l'utilisateur enrichi en session pour un éventuel middleware
+     * Crée une entrée dans le journal d'audit pour tracer la connexion.
      */
     protected function authenticated(Request $request, User $user): void
     {
-
-        AuditLog::query()->create([
-            'description'  => 'Login',
-            'subject_id'   => $user->id,
-            'subject_type' => User::class,
-            'user_id'      => $user->id,
-            'properties'   => [
-                'user_agent' => $request->userAgent(),
-                'method'     => $request->method(),
-                'url'        => $request->fullUrl(),
-            ],
-            'host'         => $request->ip(),
-        ]);
+        try {
+            AuditLog::query()->create([
+                'description' => 'Login',
+                'subject_id' => $user->id,
+                'subject_type' => User::class,
+                'user_id' => $user->id,
+                'properties' => [
+                    'user_agent' => $request->userAgent(),
+                    'method' => $request->method(),
+                    'url' => $request->fullUrl(),
+                ],
+                'host' => $request->ip(),
+            ]);
+        } catch (\Throwable $e) {
+            Log::warning('Failed to create login audit log', ['error' => $e->getMessage()]);
+        }
     }
 
     public function logout(Request $request): RedirectResponse
