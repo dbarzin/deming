@@ -166,12 +166,18 @@ class DocumentController extends Controller
 
         $newPath = storage_path('docs/' . $doc->id);
 
+        $deduplicated = false;
         if ($existingDocument !== null) {
             // Reuse existing file - create hard link
             $existingPath = storage_path('docs/' . $existingDocument->id);
 
             if (file_exists($existingPath)) {
-                link($existingPath, $newPath);
+                if (link($existingPath, $newPath)) {
+                    $deduplicated = true;
+                } else {
+                    // Fallback: hard-link failed (e.g., different filesystem)
+                    $file->move(storage_path('docs'), (string) $doc->id);
+                    }
             } else {
                 // Fallback: if existing file is missing, store the uploaded file
                 $file->move(storage_path('docs'), (string) $doc->id);
@@ -186,7 +192,7 @@ class DocumentController extends Controller
             [
                 'success' => $doc->filename,
                 'id' => $doc->id,
-                'deduplicated' => $existingDocument !== null,
+                'deduplicated' => $deduplicated,
             ]
         );
     }
