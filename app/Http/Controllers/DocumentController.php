@@ -124,7 +124,7 @@ class DocumentController extends Controller
     public function store(Request $request)
     {
         // Not for API
-        abort_if((Auth::User()->role === 4), Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if((Auth::User()->isAPI()), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // Get file
         $file = $request->file('file');
@@ -135,11 +135,11 @@ class DocumentController extends Controller
         // Auditee may save document to assigned control only
         abort_if(
             Auth::User()->role === 5 &&
-                ! (DB::table('control_user')
+            ! (DB::table('control_user')
                     ->where('control_id', $control_id)
                     ->where('user_id', Auth::User()->id)
                     ->exists()
-                    ||
+                ||
                 DB::table('control_user_group')
                     ->join('user_user_group', 'control_user_group.user_group_id', '=', 'user_user_group.user_group_id')
                     ->where('control_user_group.control_id', $control_id)
@@ -149,22 +149,50 @@ class DocumentController extends Controller
             '403 Forbidden'
         );
 
-        // Save document
+        // Calculate file hash
+        $hash = hash_file('sha256', $file->path());
+
+        // Check if a document with this hash already exists
+        $existingDocument = Document::where('hash', $hash)->first();
+
+        // Create new document record
         $doc = new Document();
         $doc->control_id = $control_id;
         $doc->filename = $file->getClientOriginalName();
         $doc->mimetype = $file->getClientMimeType();
         $doc->size = $file->getSize();
-        $doc->hash = hash_file('sha256', $file->path());
+        $doc->hash = $hash;
         $doc->save();
 
-        // Move file to storage folder
-        $file->move(storage_path('docs'), (string) $doc->id);
+        $newPath = storage_path('docs/' . $doc->id);
+
+        $deduplicated = false;
+        if ($existingDocument !== null) {
+            // Reuse existing file - create hard link
+            $existingPath = storage_path('docs/' . $existingDocument->id);
+
+            if (file_exists($existingPath)) {
+                if (link($existingPath, $newPath)) {
+                    $deduplicated = true;
+                } else {
+                    // Fallback: hard-link failed (e.g., different filesystem)
+                    $file->move(storage_path('docs'), (string) $doc->id);
+                    }
+            } else {
+                // Fallback: if existing file is missing, store the uploaded file
+                $file->move(storage_path('docs'), (string) $doc->id);
+            }
+        } else {
+            // New file - store it
+            $file->move(storage_path('docs'), (string) $doc->id);
+        }
 
         // response
         return response()->json(
-            ['success' => $doc->filename,
+            [
+                'success' => $doc->filename,
                 'id' => $doc->id,
+                'deduplicated' => $deduplicated,
             ]
         );
     }
