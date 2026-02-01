@@ -286,7 +286,7 @@ class DocumentController extends Controller
                     $doc->link_count = $stats['nlink'] ?? 0;
                     }
                 $computedHash = hash_file('sha256', $filePath);
-                $doc->hash_valid = $computedHash !== false && hash_equals($doc->hash, $computedHash);
+                $doc->hash_valid = $computedHash !== false && $doc->hash !== null && hash_equals($doc->hash, $computedHash);
             }
 
             return $doc;
