@@ -17,40 +17,22 @@
     </thead>
 
     @foreach ($documents as $doc)
-    @php
-        $filePath = storage_path('docs/' . $doc->id);
-        $fileExists = file_exists($filePath);
-        $linkCount = 0;
-        $hashValid = false;
-
-        if ($fileExists) {
-            $stats = stat($filePath);
-            $linkCount = $stats['nlink'] ?? 0;
-            $hashValid = ($doc->hash === hash_file('sha256', $filePath));
-        }
-    @endphp
     <tr>
-        <td>
-            {{ $doc->id }}
-        </td>
+        <td>{{ $doc->id }}</td>
         <td class="text-center">
             <a href="/bob/show/{{ $doc->control_id }}">{{ $doc->control_id }}</a>
         </td>
         <td>
             <a href="/doc/show/{{ $doc->id }}">{{ substr($doc->filename, 0, 32) }}</a>
         </td>
-        <td>
-            {{ \Illuminate\Support\Number::fileSize($doc->size) }}
-        </td>
-        <td>
-            <small>{{ $doc->hash }}</small>
-        </td>
+        <td>{{ \Illuminate\Support\Number::fileSize($doc->size) }}</td>
+        <td><small>{{ $doc->hash }}</small></td>
         <td class="text-center">
-            @if ($fileExists)
-                @if ($linkCount > 1)
-                    <span class="badge bg-blue">{{ $linkCount }}</span>
+            @if ($doc->file_exists)
+                @if ($doc->link_count > 1)
+                    <span class="badge bg-blue">{{ $doc->link_count }}</span>
                 @else
-                    {{ $linkCount }}
+                    {{ $doc->link_count }}
                 @endif
             @else
                 -
@@ -58,9 +40,9 @@
         </td>
         <td>
             <b>
-            @if ($fileExists)
-                @if ($hashValid)
-                    <span style="color: green; ">OK</span>
+            @if ($doc->file_exists)
+                @if ($doc->hash_valid)
+                    <span style="color: green;">OK</span>
                 @else
                     <span style="color: red">HASH FAILS</span>
                 @endif
