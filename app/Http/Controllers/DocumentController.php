@@ -270,10 +270,29 @@ class DocumentController extends Controller
             '403 Forbidden'
         );
 
-        // Get all documents
-        $documents = Document::all();
+        // Get all documents with computed metadata
+        $documents = Document::all()->map(function ($doc) {
+            $filePath = storage_path('docs/' . $doc->id);
+            $fileExists = file_exists($filePath);
 
-        // show view
+            // Add computed attributes to document object
+            $doc->file_exists = $fileExists;
+            $doc->link_count = 0;
+            $doc->hash_valid = false;
+
+            if ($fileExists) {
+                $stats = stat($filePath);
+                if ($stats !== false) {
+                    $doc->link_count = $stats['nlink'] ?? 0;
+                    }
+                $computedHash = hash_file('sha256', $filePath);
+                $doc->hash_valid = $computedHash !== false && $doc->hash !== null && hash_equals($doc->hash, $computedHash);
+            }
+
+            return $doc;
+        });
+
+        // Show view with pre-computed metadata
         return view('/documents/check')
             ->with('documents', $documents);
     }

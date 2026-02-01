@@ -179,6 +179,8 @@ return [
             'control' => 'Contrôle',
             'size' => 'Taille',
             'hash' => 'Hash',
+            'links' => 'Liens',
+            'status' => 'Vérification',
         ],
         'model' => [
             'control' => 'Modèle de fiche de contrôle',

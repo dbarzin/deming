@@ -11,37 +11,43 @@
         <th>{{ trans('cruds.document.fields.name') }}</th>
         <th>{{ trans('cruds.document.fields.size') }}</th>
         <th>{{ trans('cruds.document.fields.hash') }}</th>
+        <th>{{ trans('cruds.document.fields.links') }}</th>
+        <th>{{ trans('cruds.document.fields.status') }}</th>
     </tr>
     </thead>
 
     @foreach ($documents as $doc)
     <tr>
-        <td>
-            {{ $doc->id }}
-        </td>
+        <td>{{ $doc->id }}</td>
         <td class="text-center">
             <a href="/bob/show/{{ $doc->control_id }}">{{ $doc->control_id }}</a>
         </td>
         <td>
-            <a href="/doc/show/{{ $doc->id }}">{{ substr($doc->filename,0,32) }}</a>
+            <a href="/doc/show/{{ $doc->id }}">{{ substr($doc->filename, 0, 32) }}</a>
         </td>
-        <td>
-            {{ \Illuminate\Support\Number::fileSize($doc->size) }}
-        </td>
-        <td>
-            {{ $doc->hash }}
-            <br>
+        <td>{{ \Illuminate\Support\Number::fileSize($doc->size) }}</td>
+        <td><small>{{ $doc->hash }}</small></td>
+        <td class="text-center">
+            @if ($doc->file_exists)
+                @if ($doc->link_count > 1)
+                    <span class="badge bg-blue">{{ $doc->link_count }}</span>
+                @else
+                    {{ $doc->link_count }}
+                @endif
+            @else
+                -
+            @endif
         </td>
         <td>
             <b>
-            @if (file_exists(storage_path('docs/').$doc->id))
-                @if ($doc->hash == hash_file("sha256", storage_path('docs/').$doc->id))
-                    <font color="green">OK</font>
+            @if ($doc->file_exists)
+                @if ($doc->hash_valid)
+                    <span style="color: green;">OK</span>
                 @else
-                    <font color="red">HASH FAILS</font>
+                    <span style="color: red">HASH FAILS</span>
                 @endif
             @else
-                    <font color="red">MISSING</font>
+                <span style="color: red">MISSING</span>
             @endif
             </b>
         </td>
