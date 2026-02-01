@@ -282,8 +282,9 @@ class DocumentController extends Controller
 
             if ($fileExists) {
                 $stats = stat($filePath);
-                $doc->link_count = $stats['nlink'] ?? 0;
-
+                if ($stats !== false) {
+                    $doc->link_count = $stats['nlink'] ?? 0;
+                    }
                 $computedHash = hash_file('sha256', $filePath);
                 $doc->hash_valid = $computedHash !== false && hash_equals($doc->hash, $computedHash);
             }
