@@ -178,6 +178,8 @@ return [
             'control' => 'Kontrolle',
             'size' => 'Größe',
             'hash' => 'Hashwert',
+            'links' => 'Links',
+            'status' => 'Überprüfen',
         ],
         'model' => [
             'control' => 'Vorlage Kontrollblatt',

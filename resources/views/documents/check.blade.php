@@ -11,8 +11,8 @@
         <th>{{ trans('cruds.document.fields.name') }}</th>
         <th>{{ trans('cruds.document.fields.size') }}</th>
         <th>{{ trans('cruds.document.fields.hash') }}</th>
-        <th>Links</th>
-        <th>Status</th>
+        <th>{{ trans('cruds.document.fields.links') }}</th>
+        <th>{{ trans('cruds.document.fields.status') }}</th>
     </tr>
     </thead>
 

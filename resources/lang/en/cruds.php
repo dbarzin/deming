@@ -180,6 +180,8 @@ return [
              'control' => 'Control',
              'size' => 'Size',
              'hash' => 'Hash',
+             'links' => 'Links',
+             'status' => 'Check status',
          ],
          'model' => [
             'control' => 'Control sheet template',
