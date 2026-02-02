@@ -196,7 +196,8 @@ class MeasureController extends Controller
             ]
         );
 
-        $request['attributes'] = implode(' ', $request->get('attributes') !== null ? $request->get('attributes') : []);
+        $attributes = $request->get('attributes');
+        $request['attributes'] = $attributes !== null ? implode(' ', $attributes) : null;
 
         $measure = Measure::query()->create($request->all());
         // $measure = new Measure();
