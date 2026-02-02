@@ -381,23 +381,14 @@ class MeasureController extends Controller
         );
 
         // find measure
-        $measure = Measure::find($request->id);
+        $measure = Measure::query()->find($request->id);
 
         // not found
         abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // update measure
-        $measure->domain_id = request('domain_id');
-        $measure->name = request('name');
-        $measure->clause = request('clause');
-        $measure->attributes = request('attributes') !== null ? implode(' ', request('attributes')) : null;
-        $measure->objective = request('objective');
-        $measure->input = request('input');
-        $measure->model = request('model');
-        $measure->indicator = request('indicator');
-        $measure->action_plan = request('action_plan');
-
-        $measure->update();
+        $request['attributes'] = implode(' ', $request->get('attributes') !== null ? $request->get('attributes') : []);
+        $measure->update($request->all());
 
         // return to view measure
         return redirect('/alice/show/'.$measure->id);
