@@ -14,7 +14,7 @@ class ControlController extends Controller
 {
     public function index()
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $activities = Control::all();
 
@@ -23,7 +23,7 @@ class ControlController extends Controller
 
     public function store(Request $request)
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $control = Control::create($request->all());
 
@@ -50,14 +50,16 @@ class ControlController extends Controller
 
     public function show(Control $control)
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
+
+        $control['measures'] = $control->measures()->pluck('id');
 
         return response()->json($control);
     }
 
     public function update(Request $request, Control $control)
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $control->update($request->all());
 
@@ -84,7 +86,7 @@ class ControlController extends Controller
 
     public function destroy(Control $control)
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $control->measures()->detach();
         $control->delete();
