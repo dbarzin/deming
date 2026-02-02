@@ -28,12 +28,15 @@ class Measure extends Model
     ];
 
     protected $fillable = [
-        'name',
+        'domain_id',
         'clause',
+        'name',
         'objective',
-        'input',
         'attributes',
+        'input',
         'model',
+        'indicator',
+        'action_plan',
     ];
 
     // Return the domain associated to this measure

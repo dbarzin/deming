@@ -12,7 +12,7 @@ class MeasureController extends Controller
 {
     public function index()
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $measures = Measure::all();
 
@@ -21,9 +21,9 @@ class MeasureController extends Controller
 
     public function store(Request $request)
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $measure = Measure::create($request->all());
+        $measure = Measure::query()->create($request->all());
         if ($request->has('controls')) {
             $measure->controls()->sync($request->input('controls', []));
         }
@@ -33,14 +33,14 @@ class MeasureController extends Controller
 
     public function show(Measure $measure)
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return response()->json($measure);
     }
 
     public function update(Request $request, Measure $measure)
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $measure->update($request->all());
         if ($request->has('controls')) {
@@ -52,7 +52,7 @@ class MeasureController extends Controller
 
     public function destroy(Measure $measure)
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $measure->delete();
 
