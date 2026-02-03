@@ -22,5 +22,6 @@ Route::namespace('App\\Http\\Controllers\\API')->group(function () {
         Route::apiResource('attributes', 'AttributeController');
         Route::apiResource('documents', 'DocumentController');
         Route::apiResource('users', 'UserController');
+        Route::apiResource('logs', 'AuditLogController');
     });
 });

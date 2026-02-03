@@ -3,52 +3,52 @@
 namespace App\Http\Controllers\API;
 
 use App\Http\Controllers\Controller;
-use App\Models\Domain;
+use App\Models\AuditLog;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 
-class DomainController extends Controller
+class AuditLogController extends Controller
 {
     public function index()
     {
         abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $domains = Domain::all();
+        $auditLogs = AuditLog::all();
 
-        return response()->json($domains);
+        return response()->json($auditLogs);
     }
 
     public function store(Request $request)
     {
         abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $domain = Domain::create($request->all());
+        $auditLog = AuditLog::query()->create($request->all());
 
-        return response()->json($domain, 201);
+        return response()->json($auditLog, 201);
     }
 
-    public function show(Domain $domain)
+    public function show(AuditLog $auditLog)
     {
         abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return response()->json($domain);
+        return response()->json($auditLog);
     }
 
-    public function update(Request $request, Domain $domain)
+    public function update(Request $request, AuditLog $auditLog)
     {
         abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $domain->update($request->all());
+        $auditLog->update($request->all());
 
         return response()->json();
     }
 
-    public function destroy(Domain $domain)
+    public function destroy(AuditLog $auditLog)
     {
         abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $domain->delete();
+        $auditLog->delete();
 
         return response()->json();
     }

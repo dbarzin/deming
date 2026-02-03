@@ -30,6 +30,8 @@ L'environnement Docker prend en charge cette fonctionnalité nativement, via l'[
 
 - /api/documents
 
+- /api/logs
+
 ### Actions gérées par le contrôleur de ressources
 
 Les requêtes et URI de chaque api est représentée dans le tableau ci-dessous.
