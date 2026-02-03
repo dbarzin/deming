@@ -28,27 +28,27 @@ class AuditLogController extends Controller
         return response()->json($auditLog, 201);
     }
 
-    public function show(AuditLog $auditLog)
+    public function show(AuditLog $log)
     {
         abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        return response()->json($auditLog);
+        return response()->json($log);
     }
 
-    public function update(Request $request, AuditLog $auditLog)
+    public function update(Request $request, AuditLog $log)
     {
         abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $auditLog->update($request->all());
+        $log->update($request->all());
 
         return response()->json();
     }
 
-    public function destroy(AuditLog $auditLog)
+    public function destroy(AuditLog $log)
     {
         abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $auditLog->delete();
+        $log->delete();
 
         return response()->json();
     }
