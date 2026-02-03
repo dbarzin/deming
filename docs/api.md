@@ -30,6 +30,8 @@ The Docker environment supports this functionality natively, via the [entrypoint
 
 - /api/documents
 
+- /api/logs
+
 ### Actions managed by the resource controller
 
 Requests and URIs for each api are shown in the table below.
