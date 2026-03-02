@@ -1705,28 +1705,29 @@ class ControlController extends Controller
         $control->plan_date = request('plan_date');
         $control->action_plan = request('action_plan');
 
-        // create a new control
-        $new_control = $control->replicate();
-        $new_control->status = 0;
-        $new_control->observations = null;
-        $new_control->realisation_date = null;
-        $new_control->note = null;
-        $new_control->score = null;
-        $new_control->plan_date = request('next_date');
+        // Check periodicity
+        if ($control->periodicity !== 0) {
+            // create a new control
+            $new_control = $control->replicate();
+            $new_control->status = 0;
+            $new_control->observations = null;
+            $new_control->realisation_date = null;
+            $new_control->note = null;
+            $new_control->score = null;
+            $new_control->plan_date = request('next_date');
+            // Save new control
+            $new_control->save();
 
-        // Save new control
-        $new_control->save();
+            // Clone measures
+            $new_control->measures()->sync($control->measures()->pluck('id')->toArray());
 
-        // Clone measures
-        $new_control->measures()->sync($control->measures()->pluck('id')->toArray());
+            // Set owners
+            $new_control->users()->sync($control->users()->pluck('id')->toArray());
+            $new_control->groups()->sync($control->groups()->pluck('id')->toArray());
 
-        // Set owners
-        $new_control->users()->sync($control->users()->pluck('id')->toArray());
-        $new_control->groups()->sync($control->groups()->pluck('id')->toArray());
-
-        // make link
-        $control->next_id = $new_control->id;
-
+            // make link
+            $control->next_id = $new_control->id;
+        }
         // set status done
         $control->status = 2;
 
