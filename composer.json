@@ -9,7 +9,7 @@
         "directorytree/ldaprecord-laravel": "^3.4",
         "erusev/parsedown": "^1.7",
         "laravel/framework": "^11.9",
-        "laravel/passport": "^12.3",
+        "laravel/passport": "^13",
         "laravel/sanctum": "^4.0",
         "laravel/socialite": "^5.16",
         "laravel/tinker": "^2.9",
