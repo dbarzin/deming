@@ -43,7 +43,7 @@ return [
         'api' => [
             'driver' => 'passport',
             'provider' => 'users',
-            'hash' => true,
+            // 'hash' => true,
         ],    
     ],
 
