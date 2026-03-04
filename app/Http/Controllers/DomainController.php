@@ -131,7 +131,7 @@ class DomainController extends Controller
      */
     public function show(int $id)
     {
-        $domain = Domain::query()->find($id);
+        $domain = Domain::query()->findOrFail($id);
 
         return view('domains.show', compact('domain'));
     }

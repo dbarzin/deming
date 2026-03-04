@@ -23,9 +23,8 @@ class DocumentController extends Controller
     {
         abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        abort(500, 'Not implemented');
+        abort(Response::HTTP_NOT_IMPLEMENTED, '501 Not Implemented');
     }
-
     public function show(Document $document)
     {
         abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');

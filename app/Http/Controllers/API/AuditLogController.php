@@ -21,7 +21,7 @@ class AuditLogController extends Controller
 
     public function store(Request $request)
     {
-        abort(Response::HTTP_UNAUTHORIZED, '401 Unauthorized');
+        abort(Response::HTTP_FORBIDDEN, '403 Forbidden');
     }
 
     public function show(AuditLog $log)
