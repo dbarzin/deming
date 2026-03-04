@@ -8,21 +8,23 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 use Maatwebsite\Excel\Facades\Excel;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class DomainController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
-    public function index()
+    public function index(): View
     {
-        if (Auth::user()->isAuditee()) {
-            $userId = Auth::id();
+        $userId = Auth::id();
 
-            // Pour les Auditees : récupérer uniquement les domaines avec mesures assignées
+        if (Auth::user()->isAuditee()) {
             $domains = DB::table('domains')
                 ->select(
                     'domains.id',
@@ -34,52 +36,58 @@ class DomainController extends Controller
                     FROM measures m
                     WHERE m.domain_id = domains.id
                     AND EXISTS (
-                        SELECT 1 
+                        SELECT 1
                         FROM control_measure cm
                         WHERE cm.measure_id = m.id
                         AND (
                             EXISTS (
-                                SELECT 1 
-                                FROM control_user cu 
-                                WHERE cu.control_id = cm.control_id 
-                                AND cu.user_id = ' . $userId . '
+                                SELECT 1
+                                FROM control_user cu
+                                WHERE cu.control_id = cm.control_id
+                                AND cu.user_id = ?
                             )
                             OR EXISTS (
-                                SELECT 1 
+                                SELECT 1
                                 FROM control_user_group cug
-                                INNER JOIN user_user_group uug ON uug.user_group_id = cug.user_group_id
+                                INNER JOIN user_user_group uug
+                                    ON uug.user_group_id = cug.user_group_id
                                 WHERE cug.control_id = cm.control_id
-                                AND uug.user_id = ' . $userId . '
+                                AND uug.user_id = ?
                             )
                         )
                     )
-                ) AS measures')
+                ) AS measures_count')
                 )
-                ->havingRaw('measures > 0')
+                ->addBinding([$userId, $userId], 'select')
+                ->havingRaw('measures_count > 0')
                 ->orderBy('domains.title')
                 ->get();
         } else {
-            // Pour les autres rôles : tous les domaines avec toutes les mesures
             $domains = DB::table('domains')
-                ->select('domains.id', 'domains.framework', 'domains.title', 'domains.description', DB::raw('COUNT(measures.id) AS measures'))
+                ->select(
+                    'domains.id',
+                    'domains.framework',
+                    'domains.title',
+                    'domains.description',
+                    DB::raw('COUNT(measures.id) AS measures_count')
+                )
                 ->leftJoin('measures', 'measures.domain_id', '=', 'domains.id')
                 ->groupBy('domains.id', 'domains.framework', 'domains.title', 'domains.description')
                 ->orderBy('domains.title')
                 ->get();
         }
 
-        return view('domains.index')
-            ->with('domains', $domains);
+        return view('domains.index', compact('domains'));
     }
     /**
      * Show the form for creating a new resource.
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function create()
     {
         // Only for administrator role
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAdmin(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return view('domains.create');
     }
@@ -94,7 +102,7 @@ class DomainController extends Controller
     public function store(Request $request)
     {
         // Only for administrator role
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAdmin(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $this->validate(
             $request,
@@ -119,11 +127,11 @@ class DomainController extends Controller
      *
      * @param  int $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function show(int $id)
     {
-        $domain = Domain::find($id);
+        $domain = Domain::query()->findOrFail($id);
 
         return view('domains.show', compact('domain'));
     }
@@ -133,12 +141,12 @@ class DomainController extends Controller
      *
      * @param  int $id
      *
-     * @return \Illuminate\View\View
+     * @return View
      */
     public function edit(int $id)
     {
         // Only for administrator role
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAdmin(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $domain = Domain::find($id);
 
@@ -156,7 +164,7 @@ class DomainController extends Controller
     public function update(Request $request, Domain $domain)
     {
         // Only for administrator role
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAdmin(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $this->validate(
             $request,
@@ -185,7 +193,7 @@ class DomainController extends Controller
     public function destroy(Domain $domain)
     {
         // Only for administrator role
-        abort_if(Auth::User()->role !== 1, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAdmin(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         // Has measures ?
         if (DB::table('measures')
@@ -209,10 +217,13 @@ class DomainController extends Controller
     /*
      * Export the Domains in Excel
      *
-     * @return \Illuminate\Http\RedirectResponse
      */
-    public function export()
+    public function export(): BinaryFileResponse
     {
+        abort_if(
+            !Auth::User()->isAdmin(),
+            Response::HTTP_FORBIDDEN, '403 Forbidden');
+
         return Excel::download(new DomainsExport(), 'domains.xlsx');
     }
 }

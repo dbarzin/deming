@@ -21,11 +21,7 @@ class AuditLogController extends Controller
 
     public function store(Request $request)
     {
-        abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $auditLog = AuditLog::query()->create($request->all());
-
-        return response()->json($auditLog, 201);
+        abort(Response::HTTP_FORBIDDEN, '403 Forbidden');
     }
 
     public function show(AuditLog $log)
@@ -37,19 +33,11 @@ class AuditLogController extends Controller
 
     public function update(Request $request, AuditLog $log)
     {
-        abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $log->update($request->all());
-
-        return response()->json();
+        abort(Response::HTTP_UNAUTHORIZED, '401 Unauthorized');
     }
 
     public function destroy(AuditLog $log)
     {
-        abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
-
-        $log->delete();
-
-        return response()->json();
+        abort(Response::HTTP_UNAUTHORIZED, '401 Unauthorized');
     }
 }

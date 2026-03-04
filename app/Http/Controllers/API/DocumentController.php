@@ -12,7 +12,7 @@ class DocumentController extends Controller
 {
     public function index()
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $documents = Document::all();
 
@@ -21,32 +21,27 @@ class DocumentController extends Controller
 
     public function store(Request $request)
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $document = Document::create($request->all());
-
-        return response()->json($document, 201);
+        abort(Response::HTTP_NOT_IMPLEMENTED, '501 Not Implemented');
     }
-
     public function show(Document $document)
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         return response()->json($document);
     }
 
     public function update(Request $request, Document $document)
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
-        $document->update($request->all());
-
-        return response()->json();
+        abort(500, 'Not implemented');
     }
 
     public function destroy(Document $document)
     {
-        abort_if(Auth::User()->role !== 4, Response::HTTP_FORBIDDEN, '403 Forbidden');
+        abort_if(!Auth::User()->isAPI(), Response::HTTP_FORBIDDEN, '403 Forbidden');
 
         $document->delete();
 

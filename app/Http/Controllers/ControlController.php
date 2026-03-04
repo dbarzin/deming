@@ -437,14 +437,14 @@ class ControlController extends Controller
     {
         // Not API
         abort_if(
-            Auth::User()->role === 4,
+            Auth::User()->isAPI(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
 
         // for aditee only if he is assigne to that control
         abort_if(
-            Auth::User()->role === 5 &&
+            Auth::User()->isAuditee() &&
                 ! (DB::table('control_user')
                     ->where('control_id', $id)
                     ->where('user_id', Auth::User()->id)
@@ -509,7 +509,7 @@ class ControlController extends Controller
     {
         // Only for administrator role
         abort_if(
-            Auth::User()->role !== 1,
+            ! Auth::User()->isAdmin(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -607,9 +607,9 @@ class ControlController extends Controller
      */
     public function clone(Request $request)
     {
-        // Only for admin and users
+        // For administrators, users only
         abort_if(
-            (Auth::User()->role !== 1) && (Auth::User()->role !== 2),
+            !Auth::User()->isAdmin() && !Auth::User()->isUser(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -992,6 +992,13 @@ class ControlController extends Controller
 
     public function measures(Request $request)
     {
+        // For administrators, users only
+        abort_if(
+            !Auth::User()->isAdmin() && !Auth::User()->isUser(),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
         // get all active domains
         $domains = DB::table('domains')
             ->select(
@@ -1067,9 +1074,9 @@ class ControlController extends Controller
 
     public function attributes()
     {
-        // Not API and auditee
+        // For administrators, users only
         abort_if(
-            Auth::User()->role === 4 || Auth::User()->role === 5,
+            !Auth::User()->isAdmin() && !Auth::User()->isUser(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1129,9 +1136,9 @@ class ControlController extends Controller
      */
     public function plan(int $id)
     {
-        // For administrators and users only
+        // For administrators, users only
         abort_if(
-            Auth::User()->role !== 1 && Auth::User()->role !== 2,
+            !Auth::User()->isAdmin() && !Auth::User()->isUser(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1216,7 +1223,7 @@ class ControlController extends Controller
     {
         // For administrators and users only
         abort_if(
-            Auth::User()->role !== 1 && Auth::User()->role !== 2,
+            !Auth::User()->isAdmin() && !Auth::User()->isUser(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );

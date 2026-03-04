@@ -196,21 +196,22 @@ class MeasureController extends Controller
             ]
         );
 
-        $attributes = $request->get('attributes');
-        $request['attributes'] = $attributes !== null ? implode(' ', $attributes) : null;
+        // OLD CODE
+        // $attributes = $request->get('attributes');
+        // $request['attributes'] = $attributes !== null ? implode(' ', $attributes) : null;
+        // $measure = Measure::query()->create($request->all());
 
-        $measure = Measure::query()->create($request->all());
-        // $measure = new Measure();
-        // $measure->domain_id = request('domain_id');
-        // $measure->clause = request('clause');
-        // $measure->name = request('name');
-        // $measure->attributes = request('attributes') !== null ? implode(' ', request('attributes')) : null;
-        // $measure->objective = request('objective');
-        // $measure->input = request('input');
-        // $measure->model = request('model');
-        // $measure->indicator = request('indicator');
-        // $measure->action_plan = request('action_plan');
-        // $measure->save();
+        $measure = new Measure();
+        $measure->domain_id = request('domain_id');
+        $measure->clause = request('clause');
+        $measure->name = request('name');
+        $measure->attributes = request('attributes') !== null ? implode(' ', request('attributes')) : null;
+        $measure->objective = request('objective');
+        $measure->input = request('input');
+        $measure->model = request('model');
+        $measure->indicator = request('indicator');
+        $measure->action_plan = request('action_plan');
+        $measure->save();
 
         $request->session()->put('domain', $measure->domain_id);
 
@@ -388,8 +389,16 @@ class MeasureController extends Controller
         abort_if($measure === null, Response::HTTP_NOT_FOUND, '404 Not Found');
 
         // update measure
-        $request['attributes'] = implode(' ', $request->get('attributes') !== null ? $request->get('attributes') : []);
-        $measure->update($request->all());
+        $measure->domain_id = request('domain_id');
+        $measure->clause = request('clause');
+        $measure->name = request('name');
+        $measure->attributes = request('attributes') !== null ? implode(' ', request('attributes')) : null;
+        $measure->objective = request('objective');
+        $measure->input = request('input');
+        $measure->model = request('model');
+        $measure->indicator = request('indicator');
+        $measure->action_plan = request('action_plan');
+        $measure->update();
 
         // return to view measure
         return redirect('/alice/show/'.$measure->id);

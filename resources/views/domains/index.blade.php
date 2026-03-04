@@ -44,7 +44,7 @@
 				<td>{{ $domain->framework }}</td>
 				<td><a href="/domains/{{ $domain->id}}">{{ $domain->title }}</a></td>
 				<td>{{ $domain->description }}</td>
-				<td><a href="/alice/index?domain={{ $domain->id }}">{{ $domain->measures }}</a></td>
+				<td><a href="/alice/index?domain={{ $domain->id }}">{{ $domain->measures_count }}</a></td>
 			</tr>
 		@endforeach
 			</tbody>
