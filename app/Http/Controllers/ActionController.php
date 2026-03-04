@@ -249,8 +249,6 @@ class ActionController extends Controller
             '403 Forbidden'
         );
 
-        // TODO : check for user
-
         // Get the action
         $action = Action::find($id);
 
@@ -278,8 +276,6 @@ class ActionController extends Controller
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
-
-        // TODO : check for user
 
         // Get the action
         $action = Action::find($id);
@@ -428,8 +424,6 @@ class ActionController extends Controller
             '403 Forbidden'
         );
 
-        // TODO : check for user
-
         // Get the action
         $action = Action::find($id);
 
@@ -457,8 +451,6 @@ class ActionController extends Controller
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
-
-        // TODO : check for user
 
         // Get the action
         $id = request('id');

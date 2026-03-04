@@ -5,18 +5,28 @@ namespace App\Http\Controllers;
 use App\Models\Control;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
+use Illuminate\View\View;
 use PhpOffice\PhpWord\Element\Chart;
 use PhpOffice\PhpWord\Element\Table;
 use PhpOffice\PhpWord\Shared\Converter;
 use PhpOffice\PhpWord\SimpleType\TblWidth;
 use PhpOffice\PhpWord\TemplateProcessor;
+use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 class ReportController extends Controller
 {
-    public function show()
+    public function show(): View
     {
+        // For administrators and users only
+        abort_if(
+            !Auth::User()->isAdmin() && !Auth::User()->isUser(),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
         // get all frameworks
         $frameworks = DB::table('domains')
             ->select(DB::raw('distinct framework'))
@@ -34,6 +44,13 @@ class ReportController extends Controller
      */
     public function pilotage(Request $request)
     {
+        // For administrators and users only
+        abort_if(
+            !Auth::User()->isAdmin() && !Auth::User()->isUser(),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
         $framework = $request->get('framework');
 
         // start date
@@ -106,8 +123,16 @@ class ReportController extends Controller
      *
      * @return \Symfony\Component\HttpFoundation\BinaryFileResponse
      */
-    public function soa()
+    public function soa(Request $request): BinaryFileResponse
     {
+        // For administrators and users only
+        abort_if(
+            !Auth::User()->isAdmin() && !Auth::User()->isUser(),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
+
         // Get all scopes
         $scopes = DB::table('controls')
             ->select('scope')
