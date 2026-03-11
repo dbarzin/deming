@@ -1748,7 +1748,7 @@ class ControlController extends Controller
     {
         // For administrators and users only
         abort_if(
-            Auth::User()->role !== 1 && Auth::User()->role !== 2,
+            !Auth::User()->isAdmin() && !Auth::User()->isUser(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
