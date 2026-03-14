@@ -19,6 +19,15 @@
     }
     </style>
     @endif
+    {{-- Metro UI Calendar: start week on Monday for European --}}
+    <script>
+        (function() {
+            const weekStart = {{ in_array(app()->getLocale(), ['fr', 'de']) ? 1 : 0 }};
+            window.metroCalendarPickerSetup = { weekStart: weekStart };
+            window.metroCalendarSetup = { weekStart: weekStart };
+        })();
+    </script>
+
 </head>
 <body class="cloak">
 @if (!app()->environment('production'))
