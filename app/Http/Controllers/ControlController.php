@@ -791,17 +791,31 @@ class ControlController extends Controller
         foreach ($controls as $control) {
             $expandedControls->push($control);
 
-            if (($control->realisation_date === null) &&
-                ($control->periodicity > 0) && ($control->periodicity <= 12)) {
-                for ($i = 1; $i <= 12 / $control->periodicity; $i++) {
-                    $repeatedControl = clone $control;
-                    $repeatedControl->id = null;
-                    $repeatedControl->score = null;
-                    $repeatedControl->observations = null;
-                    $repeatedControl->realisation_date = null;
-                    $repeatedControl->plan_date = Carbon::parse($control->plan_date)->addMonthsNoOverflow($i * $control->periodicity);
-                    $expandedControls->push($repeatedControl);
+            if ($control->realisation_date === null) {
+                if ($control->periodicity === -1) {
+                    // weekly
+                    for ($i = 1; $i <= 52; $i++) {
+                        $repeatedControl = clone $control;
+                        $repeatedControl->id = null;
+                        $repeatedControl->score = null;
+                        $repeatedControl->observations = null;
+                        $repeatedControl->realisation_date = null;
+                        $repeatedControl->plan_date = Carbon::parse($control->plan_date)->addDays($i * 7);
+                        $expandedControls->push($repeatedControl);
+                    }
                 }
+                else if (($control->periodicity > 0) && ($control->periodicity <= 12)) {
+                    // Monthly
+                    for ($i = 1; $i <= 12 / $control->periodicity; $i++) {
+                        $repeatedControl = clone $control;
+                        $repeatedControl->id = null;
+                        $repeatedControl->score = null;
+                        $repeatedControl->observations = null;
+                        $repeatedControl->realisation_date = null;
+                        $repeatedControl->plan_date = Carbon::parse($control->plan_date)->addMonthsNoOverflow($i * $control->periodicity);
+                        $expandedControls->push($repeatedControl);
+                        }
+                    }
             }
         }
         // Return view with controls
@@ -1357,10 +1371,19 @@ class ControlController extends Controller
             $next_date = null;
         } else {
             // Computer next Date
-            $next_date =
-                Carbon::createFromFormat('Y-m-d', $control->plan_date)
-                    ->addMonthsNoOverflow($control->periodicity)
-                    ->format('Y-m-d');
+            if ($control->periodicity === -1) {
+                // One week
+                $next_date =
+                    Carbon::createFromFormat('Y-m-d', $control->plan_date)
+                        ->addDays(7)
+                        ->format('Y-m-d');
+            }
+            else
+                // Add months
+                $next_date =
+                    Carbon::createFromFormat('Y-m-d', $control->plan_date)
+                        ->addMonthsNoOverflow($control->periodicity)
+                        ->format('Y-m-d');
         }
 
         // return view
@@ -1461,16 +1484,19 @@ class ControlController extends Controller
                 $new_control->score = null;
                 $new_control->status = 0;
                 // only admin and user can update the plan_date, realisation_date and action_plan
-                if (Auth::User()->role === 1 || Auth::User()->role === 2) {
+                if (Auth::User()->isAdmin() || Auth::User()->isUser()) {
                     $new_control->plan_date = request('next_date');
                 } else {
-                    $new_control->plan_date = date(
-                        'Y-m-d',
-                        strtotime(
-                            $control->periodicity . ' months',
-                            strtotime($control->plan_date)
-                        )
-                    );
+                    if ($control->periodicity === -1)
+                        // One week
+                        $new_control->plan_date = Carbon::parse($control->plan_date)
+                            ->addDays(7)
+                            ->toDateString();
+                    else
+                        // Months
+                        $new_control->plan_date = Carbon::parse($control->plan_date)
+                            ->addMonths($control->periodicity)
+                            ->toDateString();
                 }
                 $new_control->save();
 
@@ -1505,13 +1531,13 @@ class ControlController extends Controller
     {
         // Only for CISO
         abort_if(
-            Auth::User()->role !== 1,
+            ! Auth::User()->isAdmin(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
 
         // Get the control
-        $control = Control::find($request->id);
+        $control = Control::query()->find($request->id);
 
         // Control not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
@@ -1583,7 +1609,7 @@ class ControlController extends Controller
     {
         // Not for API
         abort_if(
-            Auth::User()->role === 4,
+            Auth::User()->isAPI(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1611,7 +1637,7 @@ class ControlController extends Controller
         $control->score = request('score') === 0 ? null : request('score');
 
         // only admin and user can update the plan_date and action_plan
-        if (Auth::User()->role === 1 || Auth::User()->role === 2) {
+        if (Auth::User()->isAdmin() || Auth::User()->isUser()) {
             $control->plan_date = request('plan_date');
             $control->action_plan = request('action_plan');
             // do not save the realisation date as it is in draft
@@ -1632,7 +1658,7 @@ class ControlController extends Controller
     {
         // Only for Admin and user
         abort_if(
-            ! (Auth::User()->role === 1 || Auth::User()->role === 2),
+            ! (Auth::User()->isAdmin() || Auth::User()->isUser()),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1766,7 +1792,7 @@ class ControlController extends Controller
     {
         // For administrators and users only
         abort_if(
-            Auth::User()->role !== 1 && Auth::User()->role !== 2,
+            ! Auth::User()->isAdmin() && !Auth::User()->isUser(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
@@ -1774,7 +1800,7 @@ class ControlController extends Controller
         // get measures
         if ($request->id !== null) {
             // Find associate control
-            $measures = Measure::where('clause', '=', $request->id)->get();
+            $measures = Measure::query()->where('clause', '=', $request->id)->get();
         } else {
             $measures = Collect();
         }
@@ -1795,7 +1821,7 @@ class ControlController extends Controller
     {
         // Not for API
         abort_if(
-            Auth::User()->role === 4,
+            Auth::User()->isAPI(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );

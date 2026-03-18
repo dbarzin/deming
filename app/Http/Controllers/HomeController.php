@@ -419,18 +419,30 @@ class HomeController extends Controller
         return $controls->flatMap(function ($control) {
             $expanded = collect([$control]);
 
-            if ($control->realisation_date === null && $control->periodicity > 0 && $control->periodicity <= 12) {
-                for ($i = 1; $i <= 12 / $control->periodicity; $i++) {
-                    $repeatedControl = clone $control;
-                    $repeatedControl->id = null;
-                    $repeatedControl->score = null;
-                    $repeatedControl->observations = null;
-                    $repeatedControl->realisation_date = null;
-                    $repeatedControl->plan_date = Carbon::parse($control->plan_date)->addMonthsNoOverflow($i * $control->periodicity);
-                    $expanded->push($repeatedControl);
+            if ($control->realisation_date === null) {
+                if ($control->periodicity === -1) {
+                    for ($i = 1; $i <= 32; $i++) {
+                        $repeatedControl = clone $control;
+                        $repeatedControl->id = null;
+                        $repeatedControl->score = null;
+                        $repeatedControl->observations = null;
+                        $repeatedControl->realisation_date = null;
+                        $repeatedControl->plan_date = Carbon::parse($control->plan_date)->addDays($i * 7);
+                        $expanded->push($repeatedControl);
+                    }
+                }
+                else if ($control->periodicity > 0 && $control->periodicity <= 12) {
+                    for ($i = 1; $i <= 12 / $control->periodicity; $i++) {
+                        $repeatedControl = clone $control;
+                        $repeatedControl->id = null;
+                        $repeatedControl->score = null;
+                        $repeatedControl->observations = null;
+                        $repeatedControl->realisation_date = null;
+                        $repeatedControl->plan_date = Carbon::parse($control->plan_date)->addMonthsNoOverflow($i * $control->periodicity);
+                        $expanded->push($repeatedControl);
+                    }
                 }
             }
-
             return $expanded;
         });
     }

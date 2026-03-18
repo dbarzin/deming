@@ -120,6 +120,7 @@
     		<div class="cell-lg-3 cell-md-4">
     			<select name="periodicity" data-role="select">
     			    <option value="0" {{ $measure->periodicity==0 ? "selected" : ""}}>{{ trans('common.once') }}</option>
+    			    <option value="-1" {{ $measure->periodicity==-1 ? "selected" : ""}}>{{ trans('common.weekly') }}</option>
     			    <option value="1" {{ $measure->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
     			    <option value="3" {{ $measure->periodicity==3 ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
     			    <option value="6" {{ $measure->periodicity==6 ? "selected" : ""}}>{{ trans('common.biannually') }}</option>
