@@ -24,6 +24,7 @@ return [
     'validate' => 'Validate',
 
     'once' => 'Once',
+    'weekly' => 'Weekly',
     'monthly' => 'Monthly',
     'quarterly' => 'Quarterly',
     'biannually' => 'Biannually',

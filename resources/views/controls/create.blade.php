@@ -117,6 +117,7 @@
 				<div class="cell-lg-2 cell-md-4">
                     <select data-role="select" id='periodicity' name="periodicity">
 					    <option value="0" {{ old("periodicity")=="0" ? "selected" : ""}}>{{ trans('common.once') }}</option>
+					    <option value="-1" {{ old("periodicity")=="-1" ? "selected" : ""}}>{{ trans('common.weekly') }}</option>
 					    <option value="1" {{ old("periodicity")=="1" ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
 					    <option value="3" {{ old("periodicity")=="3" ? "selected" : ""}}>{{ trans('common.quarterly') }}</option>
 					    <option value="6" {{ old("periodicity")=="6" ? "selected" : ""}}>{{ trans('common.biannually') }}</option>

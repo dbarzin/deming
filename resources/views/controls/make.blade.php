@@ -209,7 +209,9 @@
                     {{ $next_date }}
                 @endif
 			(
-			@if ($control->periodicity==1)
+			@if ($control->periodicity==-1)
+				{{ trans("common.weekly") }}
+			@elseif ($control->periodicity==1)
 				{{ trans("common.monthly") }}
 			@elseif ($control->periodicity==3)
 				{{ trans("common.quarterly") }}

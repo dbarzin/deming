@@ -278,7 +278,7 @@ class ActionController extends Controller
         );
 
         // Get the action
-        $action = Action::find($id);
+        $action = Action::query()->find($id);
 
         // Control not found
         abort_if($action === null, Response::HTTP_NOT_FOUND, '404 Not Found');

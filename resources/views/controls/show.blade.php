@@ -209,6 +209,7 @@
     	</div>
 		<div class="cell-lg-6 cell-md-8">
 			@if ($control->periodicity==0) {{ trans("common.once") }} @endif
+			@if ($control->periodicity==-1) {{ trans("common.weekly") }} @endif
 			@if ($control->periodicity==1) {{ trans("common.monthly") }} @endif
 			@if ($control->periodicity==3) {{ trans("common.quarterly") }} @endif
 			@if ($control->periodicity==6) {{ trans("common.biannually") }} @endif

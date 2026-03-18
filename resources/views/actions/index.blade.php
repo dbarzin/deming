@@ -98,28 +98,22 @@
 	@foreach($actions as $action)
         <tr>
             <td>
-                <b id="{{ $action->reference }}"><a href="/action/show/{{ $action->id }}">{{ $action->reference==null ? ("ACT-".$action->id) : $action->reference }}<a>
+                <b id="{{ $action->reference }}">
+                    <a href="/action/show/{{ $action->id }}">{{ $action->reference==null ? ("ACT-".$action->id) : $action->reference }}</a>
+                </b>
             </td>
             <td>
-                <p id="{{ $action->type }}">
-                    @if ($action->type==1)
-                    <p class="fg-red text-bold">
-                    {{ trans('cruds.action.types.major') }}
-                    </p>
-                    @elseif ($action->type==2)
-                    <p class="fg-orange text-bold">
-                    {{ trans('cruds.action.types.minor') }}
-                    </p>
-                    @elseif ($action->type==3)
-                    <p class="fg-yellow text-bold">
-                    {{ trans('cruds.action.types.observation') }}
-                    </p>
-                    @elseif ($action->type==4)
-                    <p class="fg-green text-bold">
-                    {{ trans('cruds.action.types.opportunity') }}
-                    </p>
-                    @endif
-                </p>
+            <center>
+                @if ($action->type==1)
+                    <span class="mif-warning fg-red" style="font-size: 1.5rem;" title="{{ trans('cruds.action.types.major') }}"></span>
+                @elseif ($action->type==2)
+                    <span class="mif-warning fg-orange" style="font-size: 1.5rem;" title="{{ trans('cruds.action.types.minor') }}"></span>
+                @elseif ($action->type==3)
+                    <span class="mif-eye fg-dark-gray" style="font-size: 1.5rem;" title="{{ trans('cruds.action.types.observation') }}"></span>
+                @elseif ($action->type==4)
+                    <span class="mif-thumbs-up fg-green" style="font-size: 1.5rem;" title="{{ trans('cruds.action.types.opportunity') }}"></span>
+                @endif
+            </center>
             </td>
             <td id="{{ $action->status }}">
                 @if ($action->status==0)
