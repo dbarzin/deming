@@ -113,8 +113,8 @@
                 @elseif ($action->type==4)
                     <span class="mif-thumbs-up fg-green" style="font-size: 1.5rem;" title="{{ trans('cruds.action.types.opportunity') }}"></span>
                 @endif
-                </td>
             </center>
+            </td>
             <td id="{{ $action->status }}">
                 @if ($action->status==0)
                 {{ trans('cruds.action.fields.status_open') }}

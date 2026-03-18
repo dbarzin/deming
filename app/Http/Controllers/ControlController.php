@@ -379,7 +379,7 @@ class ControlController extends Controller
                 'scope' => 'max:32',
                 'objective' => 'required',
                 'plan_date' => 'required',
-                'periodicity' => 'required|integer',
+                'periodicity' => 'required|integer|in:-1,0,1,3,6,12',
             ]
         );
 
@@ -1299,7 +1299,7 @@ class ControlController extends Controller
         // Validate fields
         $this->validate($request, [
             'plan_date' => 'required',
-            'periodicity' => 'required',
+            'periodicity' => 'required|integer|in:-1,0,1,3,6,12',
         ]);
 
         // Find the control
@@ -1549,7 +1549,7 @@ class ControlController extends Controller
                 'scope' => 'max:32',
                 'objective' => 'required',
                 'plan_date' => 'required',
-                'periodicity' => 'required|integer',
+                'periodicity' => 'required|integer|in:-1,0,1,3,6,12',
             ]
         );
 

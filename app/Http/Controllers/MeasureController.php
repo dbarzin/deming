@@ -558,7 +558,7 @@ class MeasureController extends Controller
             $request,
             [
                 'plan_date' => 'required',
-                'periodicity' => 'required',
+                'periodicity' => 'required|integer|in:-1,0,1,3,6,12',
                 'measures' => 'array|min:1',
             ]
         );
