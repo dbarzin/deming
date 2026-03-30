@@ -66,6 +66,7 @@ return [
         'client_id' => env('OIDC_CLIENT_ID'),  
         'client_secret' => env('OIDC_CLIENT_SECRET'),  
         'host' => env('OIDC_BASE_URL'),
+        'suffix' => env('OIDC_SUFFIX', null),
         'redirect' => env('OIDC_REDIRECT_URI', rtrim(env('APP_URL'), '/').'/auth/callback/oidc'),
         'authorize_endpoint' => env('OIDC_AUTHORIZE_ENDPOINT', null),
         'token_endpoint' => env('OIDC_TOKEN_ENDPOINT', null),
