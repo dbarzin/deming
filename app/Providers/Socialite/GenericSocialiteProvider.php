@@ -48,7 +48,7 @@ class GenericSocialiteProvider extends AbstractProvider implements ProviderInter
      */
     public function getOIDCUrl()
     {
-        return rtrim(config('services.oidc.host'), '/').'/oauth2';
+        return rtrim(config('services.oidc.host'), '/').config('services.oidc.suffix', '');;
     }
 
     /**
