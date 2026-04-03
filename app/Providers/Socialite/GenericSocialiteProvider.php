@@ -189,6 +189,20 @@ class GenericSocialiteProvider extends AbstractProvider implements ProviderInter
             throw new \Exception('Failed to decode ID token: '.$e->getMessage(), 0, $e);
         }
 
-        return json_decode(json_encode($decoded), true);
+        $claims = (array) $decoded;
+        $clientId = config('services.oidc.client_id');
+        $expectedIssuer = rtrim(config('services.oidc.issuer', $this->getOIDCUrl()), '/');
+        $aud = $claims['aud'] ?? null;
+        $audiences = is_array($aud) ? $aud : ($aud !== null ? [$aud] : []);
+        if (($claims['iss'] ?? null) !== $expectedIssuer) {
+            throw new \Exception('Invalid ID token issuer');
+        }
+        if (!in_array($clientId, $audiences, true)) {
+            throw new \Exception('Invalid ID token audience');
+        }
+        if (count($audiences) > 1 && ($claims['azp'] ?? null) !== $clientId) {
+            throw new \Exception('Invalid ID token authorized party');
+        }
+        return $claims;
     }
 }
