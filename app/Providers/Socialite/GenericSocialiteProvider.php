@@ -6,6 +6,8 @@ use GuzzleHttp\Exception\GuzzleException;
 use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\ProviderInterface;
 use Laravel\Socialite\Two\User;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Log;
 
 /**
@@ -40,6 +42,7 @@ class GenericSocialiteProvider extends AbstractProvider implements ProviderInter
      * {@inheritdoc}
      */
     protected $scopeSeparator = ' ';
+    protected $idToken;
 
     /**
      * Return provider Url.
@@ -97,6 +100,19 @@ class GenericSocialiteProvider extends AbstractProvider implements ProviderInter
     }
 
     /**
+     * Get the access token response for the given code.
+     *
+     * @param  string  $code
+     * @return mixed
+     */
+    public function getAccessTokenResponse($code)
+    {
+        $response = parent::getAccessTokenResponse($code);
+        $this->idToken = $response['id_token'] ?? null;
+        return $response;
+    }
+
+    /**
      * @param string $token
      *
      * @throws GuzzleException
@@ -105,6 +121,15 @@ class GenericSocialiteProvider extends AbstractProvider implements ProviderInter
      */
     protected function getUserByToken($token)
     {
+        $useIdToken = config('services.oidc.use_id_token', false);
+
+        if ($useIdToken) {
+            if (!$this->idToken) {
+                throw new \Exception('OIDC_USE_ID_TOKEN=true but id_token not received');
+            }
+            return $this->decodeIdToken($this->idToken);
+        }
+
         $base_url = $this->getOIDCUrl() . '/userinfo';
         // If userinfo endpoint set, use it instead
         if (config('services.oidc.userinfo_endpoint')) {
@@ -139,5 +164,23 @@ class GenericSocialiteProvider extends AbstractProvider implements ProviderInter
             $socialite_user[$socialite_attr] = $user[$provider_attr];
         }
         return (new User())->setRaw($user)->map($socialite_user);
+    }
+
+    protected function decodeIdToken($idToken)
+    {
+        $alg = config('services.oidc.jwt_alg', 'RS256');
+        $key = config('services.oidc.jwt_secret_or_key');
+
+        if (!$key) {
+            throw new \Exception('JWT secret or public key not configured');
+        }
+
+        try {
+            $decoded = JWT::decode($idToken, new Key($key, $alg));
+        } catch (\Exception $e) {
+            throw new \Exception('Failed to decode ID token: '.$e->getMessage(), 0, $e);
+        }
+
+        return json_decode(json_encode($decoded), true);
     }
 }
