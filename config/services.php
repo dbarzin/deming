@@ -71,6 +71,9 @@ return [
         'authorize_endpoint' => env('OIDC_AUTHORIZE_ENDPOINT', null),
         'token_endpoint' => env('OIDC_TOKEN_ENDPOINT', null),
         'userinfo_endpoint' => env('OIDC_USERINFO_ENDPOINT', null),
+        'use_id_token' => env('OIDC_USE_ID_TOKEN', false),
+        'jwt_alg' => env('OIDC_JWT_ALG', 'RS256'),
+        'jwt_secret_or_key' => env('OIDC_JWT_SECRET_OR_KEY', ''),
         'map_user_attr' => [
             'id' => 'sub',
             'name' => 'name',
