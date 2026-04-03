@@ -109,7 +109,7 @@ class GenericSocialiteProvider extends AbstractProvider implements ProviderInter
         }
 
         if ($this->hasInvalidState()) {
-            throw new InvalidStateException;
+            throw new \Laravel\Socialite\Two\InvalidStateException;;
         }
 
         $response = $this->getAccessTokenResponse($this->getCode());
