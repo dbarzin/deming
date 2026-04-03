@@ -3,6 +3,7 @@
 namespace App\Providers\Socialite;
 
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Arr;
 use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\ProviderInterface;
 use Laravel\Socialite\Two\User;
@@ -42,7 +43,6 @@ class GenericSocialiteProvider extends AbstractProvider implements ProviderInter
      * {@inheritdoc}
      */
     protected $scopeSeparator = ' ';
-    protected $idToken;
 
     /**
      * Return provider Url.
@@ -99,18 +99,26 @@ class GenericSocialiteProvider extends AbstractProvider implements ProviderInter
         return $this->getOIDCUrl() . '/token';
     }
 
-    /**
-     * Get the access token response for the given code.
-     *
-     * @param  string  $code
-     * @return mixed
+   /**
+     * {@inheritdoc}
      */
-    public function getAccessTokenResponse($code)
+    public function user()
     {
-        $response = parent::getAccessTokenResponse($code);
-        $this->idToken = $response['id_token'] ?? null;
-        return $response;
+        if ($this->user) {
+            return $this->user;
+        }
+
+        if ($this->hasInvalidState()) {
+            throw new InvalidStateException;
+        }
+
+        $response = $this->getAccessTokenResponse($this->getCode());
+
+        $user = $this->getUserByToken(Arr::get($response, 'access_token'), Arr::get($response, 'id_token'));
+
+        return $this->userInstance($response, $user);
     }
+
 
     /**
      * @param string $token
@@ -119,15 +127,15 @@ class GenericSocialiteProvider extends AbstractProvider implements ProviderInter
      *
      * @return array|mixed
      */
-    protected function getUserByToken($token)
+    protected function getUserByToken($token, $idToken = null)
     {
         $useIdToken = config('services.oidc.use_id_token', false);
 
         if ($useIdToken) {
-            if (!$this->idToken) {
+            if (!$idToken) {
                 throw new \Exception('OIDC_USE_ID_TOKEN=true but id_token not received');
             }
-            return $this->decodeIdToken($this->idToken);
+            return $this->decodeIdToken($idToken);
         }
 
         $base_url = $this->getOIDCUrl() . '/userinfo';
