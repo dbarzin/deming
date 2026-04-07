@@ -1566,6 +1566,7 @@ class ControlController extends Controller
         $control->realisation_date = request('realisation_date');
         $control->observations = request('observations');
         $control->note = request('note');
+        $control->indicator = request('indicator');
         $control->score = request('score');
         $control->action_plan = request('action_plan');
         $control->periodicity = request('periodicity');

@@ -157,7 +157,7 @@
 		    		<strong>{{ trans("cruds.control.fields.indicator") }}</strong>
 		    	</div>
                 <div class="cell-lg-6 cell-md-10">
-					<pre>{{ $control->indicator }}</pre>
+                    <textarea class="textarea" name="indicator" rows="3" data-role="textarea" data-clear-button="false">{{ $errors->has('indicator') ?  old('indicator') : $control->indicator }}</textarea>
 				</div>
 			</div>
 
