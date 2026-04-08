@@ -126,10 +126,10 @@ class RiskController extends Controller
 
     public function edit(int $id): View
     {
-        $risk     = Risk::findOrFail($id);
-        $users    = User::orderBy('name')->get();
-        $controls = Control::orderBy('name')->get();
-        $actions  = Action::orderBy('name')->get();
+        $risk     = Risk::query()->findOrFail($id);
+        $users    = User::query()->orderBy('name')->get();
+        $controls = Control::query()->whereIn('status', [0, 1])->orderBy('name')->get();
+        $actions  = Action::query()->orderBy('name')->get();
         $statuses = Risk::STATUS_LABELS;
         $scoringConfig = $this->scoringService->config();
 
@@ -140,7 +140,7 @@ class RiskController extends Controller
 
     public function update(Request $request): RedirectResponse
     {
-        $risk      = Risk::findOrFail($request->input('id'));
+        $risk      = Risk::query()->findOrFail($request->input('id'));
         $validated = $this->validateRisk($request);
 
         $frequencyChanged = (int) $validated['review_frequency'] !== $risk->review_frequency;
@@ -168,7 +168,7 @@ class RiskController extends Controller
             abort(403);
         }
 
-        Risk::findOrFail($id)->delete();
+        Risk::query()->findOrFail($id)->delete();
 
         return redirect('/risk/index')
             ->with('success', __('Risque supprimé.'));

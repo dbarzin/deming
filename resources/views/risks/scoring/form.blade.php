@@ -79,7 +79,7 @@
                         <tbody id="probability-body">
                         @foreach (old('probability_levels', $probLevels) as $idx => $level)
                         <tr class="level-row">
-                            <td><input data-role="spinner" name="probability_levels[{{ $idx }}][value]" class="input" value="{{ $level['value'] }}" min="0" required style="width:54px"></td>
+                            <td><input type="number" name="probability_levels[{{ $idx }}][value]" class="input" value="{{ $level['value'] }}" min="0" required style="width:80px; text-align:center;"></td>
                             <td><input type="text"   name="probability_levels[{{ $idx }}][label]" class="input" value="{{ $level['label'] }}" required></td>
                             <td><input type="text"   name="probability_levels[{{ $idx }}][description]" class="input" value="{{ $level['description'] ?? '' }}"></td>
                             <td><button type="button" class="button mini alert js-remove-level"><span class="mif-bin"></span></button></td>
@@ -113,7 +113,7 @@
                         <tbody id="exposure-body">
                         @foreach (old('exposure_levels', $expLevels) as $idx => $level)
                         <tr class="level-row">
-                            <td><input data-role="spinner" name="exposure_levels[{{ $idx }}][value]" class="input" value="{{ $level['value'] }}" min="0" style="width:54px"></td>
+                            <td><input type="number" name="exposure_levels[{{ $idx }}][value]" class="input" value="{{ $level['value'] }}" min="0" style="width:80px; text-align:center;"></td>
                             <td><input type="text"   name="exposure_levels[{{ $idx }}][label]" class="input" value="{{ $level['label'] }}"></td>
                             <td><input type="text"   name="exposure_levels[{{ $idx }}][description]" class="input" value="{{ $level['description'] ?? '' }}"></td>
                             <td><button type="button" class="button mini alert js-remove-level"><span class="mif-bin"></span></button></td>
@@ -144,7 +144,7 @@
                         <tbody id="impact-body">
                         @foreach (old('impact_levels', $impLevels) as $idx => $level)
                         <tr class="level-row">
-                            <td><input data-role="spinner" name="impact_levels[{{ $idx }}][value]" class="input" value="{{ $level['value'] }}" min="1" required style="width:54px"></td>
+                            <td><input type="number" name="impact_levels[{{ $idx }}][value]" class="input" value="{{ $level['value'] }}" min="1" required style="width:80px; text-align:center;"></td>
                             <td><input type="text"   name="impact_levels[{{ $idx }}][label]" class="input" value="{{ $level['label'] }}" required></td>
                             <td><input type="text"   name="impact_levels[{{ $idx }}][description]" class="input" value="{{ $level['description'] ?? '' }}"></td>
                             <td><button type="button" class="button mini alert js-remove-level"><span class="mif-bin"></span></button></td>
@@ -181,7 +181,7 @@
                         <tbody id="vulnerability-body">
                         @foreach (old('vulnerability_levels', $vulnLevels) as $idx => $level)
                         <tr class="level-row">
-                            <td><input type="number" name="vulnerability_levels[{{ $idx }}][value]" class="input" value="{{ $level['value'] }}" min="1" style="width:54px"></td>
+                            <td><input type="number" name="vulnerability_levels[{{ $idx }}][value]" class="input" value="{{ $level['value'] }}" min="1" style="width:80px; text-align:center;"></td>
                             <td><input type="text"   name="vulnerability_levels[{{ $idx }}][label]" class="input" value="{{ $level['label'] }}"></td>
                             <td><input type="text"   name="vulnerability_levels[{{ $idx }}][description]" class="input" value="{{ $level['description'] ?? '' }}"></td>
                             <td><button type="button" class="button mini alert js-remove-level"><span class="mif-bin"></span></button></td>
@@ -198,9 +198,9 @@
             {{-- ================================================================
                  Section : Seuils de classification
             ================================================================ --}}
-            <div class="row mt-2">
+            <div class="row mt-2 mb-0">
                 <div class="cell-lg-12">
-                    <div class="section-header" style="background:#8059C8">
+                    <div class="section-header" style="background:#8059C8; margin-bottom:0;">
                         <span class="mif-equalizer"></span>
                         &nbsp;{{ trans("cruds.risk_scoring.fields.thresholds") }}
                         <small style="opacity:.75;font-weight:400">
@@ -210,7 +210,7 @@
                 </div>
             </div>
 
-            <div class="row">
+            <div class="row mt-0">
                 <div class="cell-lg-8 cell-md-12 mb-4">
                     <table class="table compact border mt-1">
                         <thead>
@@ -228,9 +228,18 @@
                             <tr class="threshold-row">
                                 <td><input type="text"   name="risk_thresholds[{{ $idx }}][level]" class="input" value="{{ $t['level'] }}" required></td>
                                 <td><input type="text"   name="risk_thresholds[{{ $idx }}][label]" class="input js-threshold-label" value="{{ $t['label'] }}" required></td>
-                                <td ><input data-role="spinner" name="risk_thresholds[{{ $idx }}][max]"  value="{{ $t['max'] ?? '' }}" placeholder="∞" min="1"></td>
-                                <td style="width: 20px;" >
+                                <td>
+                                    <input type="number"
+                                           name="risk_thresholds[{{ $idx }}][max]"
+                                           class="input js-threshold-max"
+                                           value="{{ isset($t['max']) && $t['max'] !== null ? $t['max'] : '' }}"
+                                           placeholder="∞"
+                                           min="1"
+                                           style="width:80px; text-align:center;">
+                                </td>
+                                <td>
                                     <input type="color"
+                                    style="width:40px;"
                                            name="risk_thresholds[{{ $idx }}][color]"
                                            class="js-color-input"
                                            value="{{ $t['color'] ?? '#cccccc' }}"
@@ -393,7 +402,7 @@ document.addEventListener("DOMContentLoaded", function () {
             const tr    = document.createElement('tr');
             tr.className = 'level-row';
             tr.innerHTML =
-                '<td><input data-role="spinner"  name="' + field + '_levels[' + idx + '][value]" class="input" min="0" style="width:54px" required></td>' +
+                '<td><input type="number" name="' + field + '_levels[' + idx + '][value]" class="input" min="0" style="width:80px; text-align:center;" required></td>' +
                 '<td><input type="text"   name="' + field + '_levels[' + idx + '][label]" class="input" required></td>' +
                 '<td><input type="text"   name="' + field + '_levels[' + idx + '][description]" class="input"></td>' +
                 '<td><button type="button" class="button mini alert js-remove-level"><span class="mif-bin"></span></button></td>';
@@ -414,7 +423,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tr.innerHTML =
             '<td><input type="text"   name="risk_thresholds[' + thrIdx + '][level]" class="input" required></td>' +
             '<td><input type="text"   name="risk_thresholds[' + thrIdx + '][label]" class="input js-threshold-label" required></td>' +
-            '<td><input data-role="spinner" name="risk_thresholds[' + thrIdx + '][max]"   class="input" placeholder="∞" min="1"></td>' +
+            '<td><input type="number" name="risk_thresholds[' + thrIdx + '][max]"   class="input" placeholder="∞" min="1" style="width:80px; text-align:center;"></td>' +
             '<td><input type="color" name="risk_thresholds[' + thrIdx + '][color]" class="js-color-input"' +
                 ' value="#cccccc" data-role="color-selector" onchange="updatePreview(this)"></td>' +
             '<td><span class="badge js-preview" style="background:#cccccc;color:#fff">—</span></td>' +

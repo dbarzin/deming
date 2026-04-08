@@ -143,7 +143,7 @@
         </div>
 
         {{-- Répartition par statut --}}
-        <div class="cell-lg-2 cell-md-12">
+        <div class="cell-lg-2 cell-md-12" style="font-size:1rem">
             <table class="table compact border mt-2">
             <tr>
                 <td colspan=3>
@@ -152,22 +152,17 @@
             </tr>
                 @foreach ($scoringConfig->risk_thresholds as $i => $t)
                 <tr>
-                    <td class="text-right">
-                    <span class="badge" style="background:{{ $t['color'] }};color:#fff">
+                    <td></td>
+                     <td></td>
+                     <td class="text-left">
+                    <span class="badge"
+                    style="background:{{ $t['color'] }};color:#fff; padding: 4px 10px;">
                         {{ $t['label'] }}
                     </span>
                     </td>
-                    <td></td>
-                    <td></td>
                 </tr>
                 @endforeach
                 <tr>
-                    <td class="text-right">
-                    <b>{{ trans('cruds.risk.fields.total') }}</b>
-                    </td>
-                    <td class="text-right">
-                    <b>{{ $stats['total'] }}</b>
-                    </td>
                     <td>
                         @if($stats['total'] > 0)
                         <a href="/risk/index" class="no-underline">
@@ -175,31 +170,35 @@
                         </a>
                         @endif
                     </td>
+                    <td class="text-left">
+                        <b>{{ $stats['total'] }}</b>
+                    </td>
+                    <td class="text-left">
+                        <b>{{ trans('cruds.risk.fields.total') }}</b>
+                    </td>
                 </tr>
             <tr>
                 <td colspan="3">
-            <strong>{{ trans('cruds.risk.fields.by_status') }}</strong>
-            </td>
+                    <strong>{{ trans('cruds.risk.fields.by_status') }}</strong>
+                </td>
             </tr>
-
                 @foreach (\App\Models\Risk::STATUS_LABELS as $status => $label)
                 <tr>
-                    <td class="text-right">
-                    <a href="/risk/index?status={{ $status }}" class="no-underline">
-                        <span class="badge {{ \App\Models\Risk::STATUS_COLORS[$status] }}">
-                            {{ $label }}
-                        </span>
-                    </a>
-                    </td>
-                    <td class="text-right">
-                        <b>{{ $stats['by_status'][$status] ?? 0 }}</b>
-                    </td>
                     <td>
                         @if(($stats['by_status'][$status] ?? 0) > 0)
                         <a href="/risk/index?status={{$status}}" class="no-underline">
                                 <span class="mif-chevron-right"></span>
                             </a>
                         @endif
+                    </td>
+                    <td class="text-right">
+                        <b>{{ $stats['by_status'][$status] ?? 0 }}</b>
+                    </td>
+                    <td class="text-left">
+                        <span class="badge {{ \App\Models\Risk::STATUS_COLORS[$status] }}"
+                        style="padding: 4px 10px;">
+                            {{ $label }}
+                        </span>
                     </td>
                 </tr>
                 @endforeach

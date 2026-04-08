@@ -38,3 +38,17 @@ a.no-underline:hover {
     text-decoration: none;
 }
 
+
+/* Dans votre fichier CSS ou dans une balise <style> */
+.select-input .tag {
+    max-width: none !important;
+    white-space: normal !important;
+    word-break: break-word;
+    height: auto !important;
+}
+
+/* Le conteneur doit aussi pouvoir s'agrandir */
+.select-input {
+    height: auto !important;
+    min-height: 36px;
+}

@@ -60,18 +60,20 @@
     </div>
 
     {{-- Évaluation : probabilité --}}
+    @if (!$scoringConfig->usesLikelihood())
     <div class="row">
         <div class="cell-lg-1 cell-md-2">
             <strong>{{ trans("cruds.risk.fields.probability") }}</strong>
         </div>
         <div class="cell-lg-1 cell-md-1">
-            <span class="badge
-                @if($risk->probability <= 2) success
-                @elseif($risk->probability == 3) warning
-                @else danger @endif
-            ">{{ $risk->probability }}</span>
+
+            @php $probThreshold = $scoringConfig->thresholdFor($risk->probability * max($scoringConfig->levelValues('impact'))); @endphp
+
+            <span class="badge" style="background:#7f8c8d;color:#fff">{{ $risk->probability }}</span>
+
             &nbsp;
             {{ $scoringConfig->levelLabel('probability', $risk->probability) }}
+
         </div>
         @if ($risk->probability_comment)
         <div class="cell-lg-5 cell-md-7">
@@ -79,7 +81,7 @@
         </div>
         @endif
     </div>
-
+@endif
     {{-- Exposition + Vulnérabilité (formule likelihood_x_impact) --}}
     @if ($scoringConfig->usesLikelihood())
     <div class="row">
@@ -87,21 +89,25 @@
             <strong>{{ trans("cruds.risk.fields.exposure") }}</strong>
         </div>
         <div class="cell-lg-1 cell-md-2">
-            <span class="badge secondary">{{ $risk->exposure ?? '—' }}</span>
+            <span class="badge ">{{ $risk->exposure ?? '—' }}</span>
             &nbsp;{{ $scoringConfig->levelLabel('exposure', $risk->exposure ?? 0) }}
         </div>
-        <div class="cell-lg-1 cell-md-2" align="right">
+    </div>
+    <div class="row">
+        <div class="cell-lg-1 cell-md-2">
             <strong>{{ trans("cruds.risk.fields.vulnerability") }}</strong>
         </div>
         <div class="cell-lg-2 cell-md-3">
-            <span class="badge secondary">{{ $risk->vulnerability ?? '—' }}</span>
+            <span class="badge ">{{ $risk->vulnerability ?? '—' }}</span>
             &nbsp;{{ $scoringConfig->levelLabel('vulnerability', $risk->vulnerability ?? 0) }}
         </div>
-        <div class="cell-lg-1 cell-md-2" align="right">
+    </div>
+    <div class="row">
+        <div class="cell-lg-1 cell-md-2">
             <strong>{{ trans("cruds.risk.fields.likelihood") }}</strong>
         </div>
         <div class="cell-lg-1 cell-md-1">
-            <span class="badge info">{{ $risk->risk_likelihood ?? '—' }}</span>
+            <span class="badge" style="background:#7f8c8d;color:#fff">{{ $risk->risk_likelihood ?? '—' }}</span>
         </div>
     </div>
     @endif
@@ -112,11 +118,7 @@
             <strong>{{ trans("cruds.risk.fields.impact") }}</strong>
         </div>
         <div class="cell-lg-1 cell-md-1">
-            <span class="badge
-                @if($risk->impact <= 2) success
-                @elseif($risk->impact == 3) warning
-                @else danger @endif
-            ">{{ $risk->impact }}</span>
+            <span class="badge" style="background:#7f8c8d;color:#fff">{{ $risk->impact }}</span>
             &nbsp;
             {{ $scoringConfig->levelLabel('impact', $risk->impact) }}
         </div>
@@ -136,11 +138,12 @@
             <strong>{{ trans("cruds.risk.fields.score") }}</strong>
         </div>
         <div class="cell-lg-6 cell-md-8">
-            <span class="badge {{ $risk->risk_level_color }}" style="font-size:1.1rem">
+            @php $scoreThreshold = $scoringConfig->thresholdFor($risk->risk_score); @endphp
+            <span class="badge" style="font-size:1.1rem;background:{{ $scoreThreshold['color'] }};color:#fff">
                 {{ $risk->risk_score }}
             </span>
             &nbsp;&mdash;&nbsp;
-            <strong>{{ $risk->risk_level_label }}</strong>
+            <strong>{{ $scoreThreshold['label'] }}</strong>
         </div>
     </div>
 
@@ -153,7 +156,7 @@
             <strong>{{ trans("cruds.risk.fields.status") }}</strong>
         </div>
         <div class="cell-lg-2 cell-md-3">
-            <span class="badge {{ \App\Models\Risk::STATUS_COLORS[$risk->status] ?? 'secondary' }}">
+            <span class="badge {{ \App\Models\Risk::STATUS_COLORS[$risk->status] ?? 'secondary' }}" style="font-size:1rem;">
                 {{ \App\Models\Risk::STATUS_LABELS[$risk->status] ?? $risk->status }}
             </span>
         </div>

@@ -440,8 +440,8 @@ return [
             'label'       => 'Libellé',
             'description' => 'Description',
             'level_key'   => 'Clé interne',
-            'score_max'   => 'Score max (∞ = dernier)',
-            'color'       => 'Couleur badge',
+            'score_max'   => 'Score max',
+            'color'       => 'Couleur',
         ],
 
         // Couleurs disponibles pour les seuils
