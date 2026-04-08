@@ -11,6 +11,9 @@
 |
 */
 
+use App\Http\Controllers\RiskController;
+use App\Http\Controllers\RiskScoringConfigController;
+
 Auth::routes();
 
 Route::namespace('App\\Http\\Controllers')->group(function () {
@@ -131,4 +134,26 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/export/bobs', 'ControlController@export');
     Route::get('/export/actions', 'ActionController@export');
     Route::get('/export/users', 'UserController@export');
+
+// --- Registre des risques ---
+    Route::get('/risk/index',           [RiskController::class, 'index'])->name('risk.index');
+    Route::get('/risk/create',          [RiskController::class, 'create'])->name('risk.create');
+    Route::post('/risk/store',          [RiskController::class, 'store'])->name('risk.store');
+    Route::get('/risk/show/{id}',       [RiskController::class, 'show'])->name('risk.show');
+    Route::get('/risk/edit/{id}',       [RiskController::class, 'edit'])->name('risk.edit');
+    Route::post('/risk/save',           [RiskController::class, 'update'])->name('risk.save');
+    Route::get('/risk/delete/{id}',     [RiskController::class, 'destroy'])->name('risk.destroy');
+    Route::get('/risk/matrix',          [RiskController::class, 'matrix'])->name('risk.matrix');
+    Route::get('/risk/export',          [RiskController::class, 'export'])->name('risk.export');
+
+// --- Configuration du scoring (Admin uniquement) ---
+    Route::get('/risk/scoring',                     [RiskScoringConfigController::class, 'index'])->name('risk.scoring.index');
+    Route::get('/risk/scoring/create',              [RiskScoringConfigController::class, 'create'])->name('risk.scoring.create');
+    Route::post('/risk/scoring/store',              [RiskScoringConfigController::class, 'store'])->name('risk.scoring.store');
+    Route::get('/risk/scoring/{id}/edit',           [RiskScoringConfigController::class, 'edit'])->name('risk.scoring.edit');
+    Route::post('/risk/scoring/{id}/save',          [RiskScoringConfigController::class, 'update'])->name('risk.scoring.update');
+    Route::post('/risk/scoring/{id}/activate',      [RiskScoringConfigController::class, 'activate'])->name('risk.scoring.activate');
+    Route::get('/risk/scoring/{id}/delete',         [RiskScoringConfigController::class, 'destroy'])->name('risk.scoring.destroy');
+
+
 });

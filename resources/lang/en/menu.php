@@ -24,5 +24,7 @@ return [
         'notifications' => 'Notifications'
     ],
     'test' => 'You are in a test environment - The data is fictitious',
-    'logout' => 'Logout'
+    'logout' => 'Logout',
+    'risks' => 'Risks',
+    'exceptions' => 'Exceptions',
 ];

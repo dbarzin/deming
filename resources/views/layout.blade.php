@@ -91,6 +91,18 @@
                     <span class="caption">{{ trans("menu.action_plan") }}</span>
                 </a>
             </li>
+            <li class="{{ request()->is('action*') ? 'active': '' }}">
+                <a href="/risk/matrix">
+                    <span class="icon mif-warning"></span>
+                    <span class="caption">{{ trans("menu.risks") }}</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('action*') ? 'active': '' }}">
+                <a href="/">
+                    <span class="icon mif-star-empty"></span>
+                    <span class="caption">{{ trans("menu.exceptions") }}</span>
+                </a>
+            </li>
             <li class="{{ request()->is('radar/*') ? 'active': '' }}">
                 <a id="nav-radar" href="#" class="dropdown-toggle">
                     <span class="icon mif-meter"></span>
@@ -191,6 +203,12 @@
                         <a href="/groups">
                         <span class="icon mif-group"></span>
                         <span class="caption">{{ trans("menu.configuration.groups") }}</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->is('risks/scoring*') ? 'active': '' }}">
+                        <a href="/risk/scoring">
+                        <span class="icon mif-calculator"></span>
+                        <span class="caption">{{ trans("menu.configuration.scoring") }}</span>
                         </a>
                     </li>
                     <li class="{{ request()->is('alice/import*') ? 'active': '' }}">

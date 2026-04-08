@@ -335,5 +335,131 @@ return [
                 'months' => 'mois',
             ],
          ]
-    ]
+    ],
+
+    // -------------------------------------------------------------------------
+    // Registre des risques
+    // -------------------------------------------------------------------------
+    'risk' => [
+
+        // Titres de page
+        'list'            => 'Registre des risques',
+        'title_singular'  => 'Risque',
+        'create'          => 'Nouveau risque',
+        'edit'            => 'Modifier le risque',
+        'matrix'          => 'Matrice des risques',
+        'singular'        => 'risque',
+        'plural'          => 'risques',
+
+        // Niveaux de risque (affichés dans les badges et compteurs)
+        'levels' => [
+            'low'      => 'Faible',
+            'medium'   => 'Moyen',
+            'high'     => 'Élevé',
+            'critical' => 'Critique',
+        ],
+
+        // Champs du formulaire et de la liste
+        'fields' => [
+            'name'                => 'Nom',
+            'description'         => 'Description',
+            'owner'               => 'Propriétaire',
+            'no_owner'            => 'Non assigné',
+            'choose_owner'        => 'Choisir un propriétaire',
+            'choose_status'       => 'Choisir un statut',
+
+            // Évaluation
+            'probability'         => 'Probabilité',
+            'probability_comment' => 'Commentaire probabilité',
+            'impact'              => 'Impact',
+            'impact_comment'      => 'Commentaire impact',
+            'exposure'            => 'Exposition',
+            'vulnerability'       => 'Vulnérabilité',
+            'likelihood'          => 'Vraisemblance',
+            'score'               => 'Score',
+
+            // Traitement
+            'status'              => 'Statut de traitement',
+            'status_comment'      => 'Commentaire statut',
+            'controls'            => 'Contrôles liés',
+            'controls_hint'       => 'Requis si statut = Mitigé',
+            'action_plan'         => 'Plans d\'action liés',
+            'actions_hint'        => 'Requis si statut = Non accepté',
+
+            // Planification
+            'review_frequency'    => 'Fréquence de revue',
+            'next_review'         => 'Prochaine revue',
+            'overdue'             => 'En retard de revue',
+            'overdue_all'         => 'Tous',
+            'overdue_only'        => 'En retard',
+
+            // Dashboard / matrice
+            'total'               => 'Total',
+            'by_status'           => 'Répartition par statut',
+            'by_risks'            => 'Répartition par risques',
+        ],
+
+        // Statuts de traitement
+        'status' => [
+            'not_evaluated'        => 'Non évalué',
+            'not_accepted'         => 'Non accepté',
+            'temporarily_accepted' => 'Accepté temporairement',
+            'accepted'             => 'Accepté',
+            'mitigated'            => 'Mitigé',
+            'transferred'          => 'Transféré',
+            'avoided'              => 'Évité',
+        ],
+    ],
+
+    // -------------------------------------------------------------------------
+    // Configuration du moteur de scoring
+    // -------------------------------------------------------------------------
+    'risk_scoring' => [
+
+        // Titres de page
+        'list'             => 'Méthodes de scoring des risques',
+        'create'           => 'Nouvelle configuration de scoring',
+        'edit'             => 'Modifier la configuration de scoring',
+        'activate'         => 'Activer cette configuration',
+
+        // Actions sur les niveaux / seuils
+        'add_level'        => 'Ajouter un niveau',
+        'add_threshold'    => 'Ajouter un seuil',
+
+        // Aides contextuelles
+        'levels_hint'      => 'Minimum 2 niveaux. La valeur doit être un entier unique.',
+        'thresholds_hint'  => 'Le dernier seuil n\'a pas de borne supérieure (attrape-tout). Trier du score le plus bas au plus élevé.',
+
+        // Champs du formulaire
+        'fields' => [
+            'name'        => 'Nom de la configuration',
+            'formula'     => 'Formule de calcul',
+            'levels'      => 'Niveaux',
+            'thresholds'  => 'Seuils de classification',
+            'value'       => 'Valeur',
+            'label'       => 'Libellé',
+            'description' => 'Description',
+            'level_key'   => 'Clé interne',
+            'score_max'   => 'Score max (∞ = dernier)',
+            'color'       => 'Couleur badge',
+        ],
+
+        // Couleurs disponibles pour les seuils
+        'colors' => [
+            'success'   => 'Vert',
+            'warning'   => 'Orange',
+            'danger'    => 'Rouge',
+            'alert'     => 'Rouge foncé',
+            'info'      => 'Bleu',
+            'secondary' => 'Gris',
+        ],
+
+        // Formules disponibles (libellés)
+        'formulas' => [
+            'probability_x_impact' => 'Probabilité × Impact',
+            'likelihood_x_impact'  => 'Vraisemblance × Impact (BSI 200-3)',
+            'additive'             => 'Probabilité + Impact',
+            'max_pi'               => 'max(Probabilité, Impact)',
+        ],
+    ],
 ];

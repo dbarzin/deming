@@ -3,6 +3,7 @@ return [
     'confirm' => 'Confirmer la suppression ?',
 
     'accept' => 'Accepter',
+    'active' => 'Actif',
     'cancel' => 'Annuler',
     'check' => 'Vérifier',
     'clone' => 'Copier',
@@ -11,6 +12,7 @@ return [
     'delete' => 'Supprimer',
     'download' => 'Télécharger',
     'edit' => 'Modifier',
+    'export' => 'Exporter',
     'history' => 'Historique',
     'import' => 'Importer',
     'make' => 'Faire',
@@ -48,5 +50,7 @@ return [
     'never' => 'Jamais',
     'day' => 'Quotidiennement',
     'week' => 'Hebdomadairement',
-    'month' => 'Mensuellement'
+    'month' => 'Mensuellement',
+
+    'months' => 'Mois',
 ];

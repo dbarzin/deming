@@ -23,5 +23,7 @@ return [
         'notifications' => 'Benachrichtigungen'
     ],
     'test' => 'Sie befinden sich in einer Test-Umgebung - Die Daten sind fiktiv',
-    'logout' => 'Logout'
-];
+    'logout' => 'Logout',
+    'risks' => 'Risiken',
+    'exceptions' => 'Ausnahmen',
+    ];

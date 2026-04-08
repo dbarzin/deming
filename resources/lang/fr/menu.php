@@ -17,11 +17,14 @@ return [
         'title' => 'Configuration',
         'users' => 'Utilisateurs',
         'groups' => 'Groupes',
+        'scoring' => 'Scoring',
         'reports' => 'Rapports',
         'import' => "Import",
         'documents' => 'Documents',
         'notifications' => 'Notifications'
     ],
     'test' => 'Vous êtes en environnement de test – Les données sont fictives',
-    'logout' => 'Quitter'
+    'logout' => 'Quitter',
+    'risks' => 'Risques',
+    'exceptions' => 'Exceptions',
 ];

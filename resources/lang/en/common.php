@@ -3,6 +3,7 @@ return [
     'confirm' => 'Confirm deletion',
 
     'accept' => 'Accept',
+    'active' => 'Active',
     'cancel' => 'Cancel',
     'check' => 'Check',
     'create' => 'Create',
@@ -11,6 +12,7 @@ return [
     'delete' => 'Delete',
     'download' => 'Download',
     'edit' => 'Edit',
+    'export' => 'Export',
     'history' => 'History',
     'import' => 'Import',
     'make' => 'Make',
