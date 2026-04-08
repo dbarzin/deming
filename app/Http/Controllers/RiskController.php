@@ -49,6 +49,20 @@ class RiskController extends Controller
             $query->overdue();
         }
 
+        if ($request->filled('threshold') && is_numeric($request->threshold)) {
+            $thresholds = $this->scoringService->config()->risk_thresholds;
+            $idx = (int) $request->threshold;
+            if (isset($thresholds[$idx])) {
+                $min = $idx > 0 ? ($thresholds[$idx - 1]['max'] + 1) : 1;
+                $max = $thresholds[$idx]['max'];
+                $query->whereRaw('probability * impact >= ?', [$min]);
+                if ($max) {
+                    $query->whereRaw('probability * impact <= ?', [$max]);
+                }
+            }
+        }
+
+
         if ($request->filled('search')) {
             $search = '%' . $request->search . '%';
             $query->where(function ($q) use ($search) {
@@ -65,10 +79,11 @@ class RiskController extends Controller
         ]);
 
         $risks   = $query->paginate(50)->withQueryString();
-        $owners  = User::orderBy('name')->get();
+        $owners  = User::query()->orderBy('name')->get();
         $filters = $request->only(['status', 'owner', 'overdue', 'search']);
+        $scoringConfig = $this->scoringService->config();
 
-        return view('risks.index', compact('risks', 'owners', 'filters'));
+        return view('risks.index', compact('risks', 'owners', 'filters', 'scoringConfig'));
     }
 
     // =========================================================================
@@ -186,6 +201,9 @@ class RiskController extends Controller
         $xAxis  = $this->scoringService->matrixXAxis();
         $yAxis  = $this->scoringService->matrixYAxis();
 
+        $scoringConfig = $this->scoringService->config();
+        $thresholds    = $scoringConfig->risk_thresholds;
+
         $stats = [
             'critical'  => $risks->filter(fn($r) => $r->risk_level === 'critical')->count(),
             'high'      => $risks->filter(fn($r) => $r->risk_level === 'high')->count(),
@@ -194,6 +212,16 @@ class RiskController extends Controller
             'total'     => $risks->count(),
             'overdue'   => $risks->filter(fn($r) => $r->is_overdue)->count(),
             'by_status' => $risks->groupBy('status')->map->count(),
+
+            'by_level' => collect($thresholds)
+                ->mapWithKeys(fn($t, $i) => [
+                    $i => $risks->filter(function ($r) use ($thresholds, $i) {
+                        $score = $r->probability * $r->impact;
+                        $min   = $i > 0 ? ($thresholds[$i - 1]['max'] + 1) : 1;
+                        $max   = $thresholds[$i]['max'];
+                        return $max ? ($score >= $min && $score <= $max) : $score >= $min;
+                    })->count(),
+                ]),
         ];
 
         $scoringConfig = $this->scoringService->config();

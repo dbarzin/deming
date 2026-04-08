@@ -79,7 +79,7 @@
             <table class="table border text-center" style="table-layout:fixed; min-width:400px">
                 <thead>
                     <tr>
-                        <th style="width:110px"></th>
+                        <th style="width:140px"></th>
                         @foreach ($xAxis as $impact)
                         <th>
                             {{ trans('cruds.risk.fields.impact') }} {{ $impact['value'] }}
@@ -150,18 +150,29 @@
             <strong>{{ trans('cruds.risk.fields.by_risks') }}</strong>
             </td>
             </tr>
-                @foreach ($scoringConfig->risk_thresholds as $i => $t)
-                <tr>
-                    <td></td>
-                     <td></td>
-                     <td class="text-left">
-                    <span class="badge"
-                    style="background:{{ $t['color'] }};color:#fff; padding: 4px 10px;">
-                        {{ $t['label'] }}
-                    </span>
-                    </td>
-                </tr>
-                @endforeach
+            @foreach ($scoringConfig->risk_thresholds as $i => $t)
+            <tr>
+                <td>
+                    @if(($stats['by_level'][$i] ?? 0) > 0)
+                    <a href="/risk/index?threshold={{ $i }}" class="no-underline">
+                        <span class="mif-chevron-right"></span>
+                    </a>
+                    @endif
+                </td>
+                <td class="text-right">
+                    <b>{{ $stats['by_level'][$i] ?? 0 }}</b>
+                </td>
+                <td class="text-left">
+                    <a href="/risk/index?threshold={{ $i }}" class="no-underline">
+                        <span class="badge"
+                              style="background:{{ $t['color'] }};color:#fff;padding:4px 10px;pointer-events:none">
+                            {{ $t['label'] }}
+                        </span>
+                    </a>
+                </td>
+            </tr>
+            @endforeach
+
                 <tr>
                     <td>
                         @if($stats['total'] > 0)
@@ -174,7 +185,9 @@
                         <b>{{ $stats['total'] }}</b>
                     </td>
                     <td class="text-left">
+                        <a href="/risk/index" class="no-underline">
                         <b>{{ trans('cruds.risk.fields.total') }}</b>
+                        </a>
                     </td>
                 </tr>
             <tr>

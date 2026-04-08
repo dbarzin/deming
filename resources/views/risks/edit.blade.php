@@ -219,7 +219,7 @@
                         <br><small class="text-muted">{{ trans('cruds.risk.fields.controls_hint') }}</small>
                     </div>
                     <div class="cell-lg-6 cell-md-8">
-                        <select name="control_ids[]" data-role="select" data-filter="true" multiple>
+                        <select name="control_ids[]" data-cls-tag="tag-no-truncate" data-role="select" data-filter="true" multiple>
                             @foreach ($controls as $control)
                                 <option value="{{ $control->id }}"
                                     {{ in_array($control->id, old('control_ids', $risk->controls->pluck('id')->toArray())) ? 'selected' : '' }}>
@@ -272,6 +272,70 @@
         </div>
     </form>
 </div>
+
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+
+    function injectStyle(labelId) {
+        const styleId = 'fix-select-style';
+        if (document.getElementById(styleId)) return;
+
+        const style = document.createElement('style');
+        style.id = styleId;
+        style.textContent = `
+            #${labelId},
+            label.input-normal.select.multiple {
+                height: auto !important;
+                min-height: 36px !important;
+                max-height: none !important;
+                overflow: visible !important;
+            }
+            #${labelId} span.dropdown-toggle,
+            label.input-normal.select.multiple span.dropdown-toggle {
+                height: auto !important;
+                max-height: none !important;
+                white-space: normal !important;
+                flex-wrap: wrap !important;
+                overflow: visible !important;
+                align-items: center !important;
+            }
+            #${labelId} span.dropdown-toggle a,
+            label.input-normal.select.multiple span.dropdown-toggle a {
+                max-width: none !important;
+                width: auto !important;
+                white-space: normal !important;
+                overflow: visible !important;
+                text-overflow: unset !important;
+                height: auto !important;
+                flex-shrink: 0 !important;
+            }
+        `;
+        document.head.appendChild(style);
+    }
+
+    function observeSelect() {
+        const select = document.querySelector('select[name="control_ids[]"]');
+        if (!select) return;
+
+        const label = select.closest('label');
+        if (!label) return;
+
+        // Injecter le style avec l'ID réel généré par Metro
+        injectStyle(label.id);
+
+        // Observer les mutations sur le label pour re-appliquer si Metro recrée les tags
+        const observer = new MutationObserver(function () {
+            injectStyle(label.id);
+        });
+
+        observer.observe(label, { childList: true, subtree: true });
+    }
+
+    // Attendre Metro
+    setTimeout(observeSelect, 500);
+});
+</script>
+
 
 @include('risks._scoring_script')
 @endsection

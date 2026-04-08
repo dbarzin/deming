@@ -1,10 +1,5 @@
 /* Metro NPM */
 @import "@olton/metroui/lib/metro.all.css";
-/* Metro Dev */
-/*
-@import '../metro5.1.3/metro.css';
-@import '../metro5.1.3/icons.css';
-*/
 
 @import 'calendar.css';
 @import 'custom.css';
@@ -31,24 +26,33 @@ input[type="file"] {
     width: 100%;
     border-radius: 5px;
     border: 1px solid #C0C0C0;
-
 }
 
 a.no-underline:hover {
     text-decoration: none;
 }
 
+/*******************************************************/
+/* fixe la largeur des labels dans les select multiple */
 
-/* Dans votre fichier CSS ou dans une balise <style> */
-.select-input .tag {
+label.input-normal.select.multiple div.select-input {
+    height: auto !important;
+    min-height: 30px !important;
+    overflow: visible !important;
+    flex-wrap: wrap !important;
+}
+
+label.input-normal.select.multiple div.tag.short-tag {
+    width: auto !important;
     max-width: none !important;
-    white-space: normal !important;
-    word-break: break-word;
     height: auto !important;
 }
 
-/* Le conteneur doit aussi pouvoir s'agrandir */
-.select-input {
-    height: auto !important;
-    min-height: 36px;
-}
+label.input-normal.select.multiple div.tag.short-tag span.title {
+    white-space: normal !important;
+    overflow: visible !important;
+    text-overflow: unset !important;
+    max-width: none !important;
+    width: auto !important;
+
+}/*******************************************************/

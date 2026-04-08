@@ -46,25 +46,6 @@
                     </button>
                 @endif
             </div>
-            {{--
-            <div class="cell-lg-1 cell-md-1" align="right">
-                @if (Auth::User()->role === 1 || Auth::User()->role === 2)
-                    <button class="button" onclick="location.href='/risk/matrix'">
-                        <span class="mif-chart-bars"></span>
-                        {{ trans('cruds.risk.matrix') }}
-                    </button>
-                @endif
-            </div>
-
-            <div class="cell-lg-1 cell-md-1" align="right">
-                @if (Auth::User()->role === 1)
-                    <button class="button" onclick="location.href='/risk/export'">
-                        <span class="mif-file-excel"></span>
-                        {{ trans('common.export') }}
-                    </button>
-                @endif
-            </div>
-            --}}
         </div>
     </div>
 
@@ -98,10 +79,18 @@
             <td>{{ $risk->owner?->name ?? '—' }}</td>
             <td align="center">{{ $risk->probability }}</td>
             <td align="center">{{ $risk->impact }}</td>
-            <td align="center">
-                @php $score = $risk->risk_score; $color = $risk->risk_level_color; @endphp
-                <span class="badge {{ $color }}">{{ $score }}</span>
+
+            <td data-cls-column="text-center">
+                @php
+                    $score     = $risk->probability * $risk->impact;
+                    $threshold = $scoringConfig->thresholdFor($score);
+                @endphp
+                <span class="badge"
+                      style="background:{{ $threshold['color'] }};color:#fff;padding:2px 8px; font-size:1rem">
+                    {{ $score }}
+                </span>
             </td>
+
             <td>
                 <span class="badge {{ \App\Models\Risk::STATUS_COLORS[$risk->status] ?? 'secondary' }}">
                     {{ \App\Models\Risk::STATUS_LABELS[$risk->status] ?? $risk->status }}
