@@ -66,14 +66,10 @@
             <strong>{{ trans("cruds.risk.fields.probability") }}</strong>
         </div>
         <div class="cell-lg-1 cell-md-1">
-
             @php $probThreshold = $scoringConfig->thresholdFor($risk->probability * max($scoringConfig->levelValues('impact'))); @endphp
-
-            <span class="badge" style="background:#7f8c8d;color:#fff">{{ $risk->probability }}</span>
-
+            <span class="badge" style="font-size:1.1rem;background:#7f8c8d;color:#fff">{{ $risk->probability }}</span>
             &nbsp;
             {{ $scoringConfig->levelLabel('probability', $risk->probability) }}
-
         </div>
         @if ($risk->probability_comment)
         <div class="cell-lg-5 cell-md-7">
@@ -89,7 +85,7 @@
             <strong>{{ trans("cruds.risk.fields.exposure") }}</strong>
         </div>
         <div class="cell-lg-1 cell-md-2">
-            <span class="badge ">{{ $risk->exposure ?? '—' }}</span>
+            <span class="badge"style="font-size:1.1rem;background:#7f8c8d;color:#fff">{{ $risk->exposure ?? '—' }}</span>
             &nbsp;{{ $scoringConfig->levelLabel('exposure', $risk->exposure ?? 0) }}
         </div>
     </div>
@@ -98,7 +94,7 @@
             <strong>{{ trans("cruds.risk.fields.vulnerability") }}</strong>
         </div>
         <div class="cell-lg-2 cell-md-3">
-            <span class="badge ">{{ $risk->vulnerability ?? '—' }}</span>
+            <span class="badge" style="font-size:1.1rem;background:#7f8c8d;color:#fff">{{ $risk->vulnerability ?? '—' }}</span>
             &nbsp;{{ $scoringConfig->levelLabel('vulnerability', $risk->vulnerability ?? 0) }}
         </div>
     </div>
@@ -107,7 +103,7 @@
             <strong>{{ trans("cruds.risk.fields.likelihood") }}</strong>
         </div>
         <div class="cell-lg-1 cell-md-1">
-            <span class="badge" style="background:#7f8c8d;color:#fff">{{ $risk->risk_likelihood ?? '—' }}</span>
+            <span class="badge" style="font-size:1.1rem;background:#7f8c8d;color:#fff">{{ $risk->risk_likelihood ?? '—' }}</span>
         </div>
     </div>
     @endif
@@ -118,7 +114,7 @@
             <strong>{{ trans("cruds.risk.fields.impact") }}</strong>
         </div>
         <div class="cell-lg-1 cell-md-1">
-            <span class="badge" style="background:#7f8c8d;color:#fff">{{ $risk->impact }}</span>
+            <span class="badge" style="font-size:1.1rem;background:#7f8c8d;color:#fff">{{ $risk->impact }}</span>
             &nbsp;
             {{ $scoringConfig->levelLabel('impact', $risk->impact) }}
         </div>

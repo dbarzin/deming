@@ -17,7 +17,7 @@ return [
         'title' => 'Configuration',
         'users' => 'Utilisateurs',
         'groups' => 'Groupes',
-        'scoring' => 'Scoring',
+        'scoring' => 'Classification',
         'reports' => 'Rapports',
         'import' => "Import",
         'documents' => 'Documents',

@@ -136,17 +136,6 @@
         @endforelse
         </tbody>
     </table>
-
-    <div class="grid mt-2">
-        <div class="row">
-            <div class="cell-12">
-                <a class="button" href="/risk/index">
-                    <span class="mif-cancel"></span>
-                    &nbsp;{{ trans("common.cancel") }}
-                </a>
-            </div>
-        </div>
-    </div>
-
+<br>
 </div>
 @endsection

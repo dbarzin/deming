@@ -419,9 +419,9 @@ return [
     'risk_scoring' => [
 
         // Titres de page
-        'list'             => 'Méthodes de scoring des risques',
-        'create'           => 'Nouvelle configuration de scoring',
-        'edit'             => 'Modifier la configuration de scoring',
+        'list'             => 'Méthodes de classification des risques',
+        'create'           => 'Nouvelle classification',
+        'edit'             => 'Modifier la classification',
         'activate'         => 'Activer cette configuration',
 
         // Actions sur les niveaux / seuils
