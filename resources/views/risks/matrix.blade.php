@@ -5,73 +5,6 @@
 
 <div class="grid">
 
-{{-- Compteurs résumé --}}
-{{--
-<div class="row">
-    <div class="cell-lg-2 cell-md-6 mt-2">
-        <div class="more-info-box fg-white" style="background-color:#D94F45 !important">
-            <div class="content">
-                <h2 class="text-bold mb-0">{{ $stats['critical'] }}</h2>
-                <div>{{ trans('cruds.risk.levels.critical') }}</div>
-            </div>
-            <div class="icon"><span class="mif-warning"></span></div>
-            <a href="/risk/index?level=critical" class="more">{{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
-        </div>
-    </div>
-    <div class="cell-lg-2 cell-md-6 mt-2">
-        <div class="more-info-box fg-white" style="background-color:#E8731A !important">
-            <div class="content">
-                <h2 class="text-bold mb-0">{{ $stats['high'] }}</h2>
-                <div>{{ trans('cruds.risk.levels.high') }}</div>
-            </div>
-            <div class="icon"><span class="mif-warning"></span></div>
-            <a href="/risk/index?level=high" class="more">{{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
-        </div>
-    </div>
-    <div class="cell-lg-2 cell-md-6 mt-2">
-        <div class="more-info-box fg-white" style="background-color:#E09B1A !important">
-            <div class="content">
-                <h2 class="text-bold mb-0">{{ $stats['medium'] }}</h2>
-                <div>{{ trans('cruds.risk.levels.medium') }}</div>
-            </div>
-            <div class="icon"><span class="mif-clock"></span></div>
-            <a href="/risk/index?level=medium" class="more">{{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
-        </div>
-    </div>
-    <div class="cell-lg-2 cell-md-6 mt-2">
-        <div class="more-info-box fg-white" style="background-color:#3AB87A !important">
-            <div class="content">
-                <h2 class="text-bold mb-0">{{ $stats['low'] }}</h2>
-                <div>{{ trans('cruds.risk.levels.low') }}</div>
-            </div>
-            <div class="icon"><span class="mif-checkmark"></span></div>
-            <a href="/risk/index?level=low" class="more">{{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
-        </div>
-    </div>
-    <div class="cell-lg-2 cell-md-6 mt-2">
-        <div class="more-info-box fg-white" style="background-color:#D94F45 !important">
-            <div class="content">
-                <h2 class="text-bold mb-0">{{ $stats['total'] }}</h2>
-                <div>{{ trans('cruds.risk.fields.total') }}</div>
-            </div>
-            <div class="icon"><span class="mif-report"></span></div>
-            <a href="/risk/index" class="more">{{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
-        </div>
-    </div>
-
-    <div class="cell-lg-2 cell-md-6 mt-2">
-        <div class="more-info-box fg-grey" style="background-color:#ffffff !important">
-            <div class="content">
-                <h2 class="text-bold mb-0">{{ $stats['overdue'] }}</h2>
-                <div>{{ trans('cruds.risk.fields.overdue') }}</div>
-            </div>
-            <div class="icon"><span class="mif-access-time"></span></div>
-            <a href="/risk/index?overdue=1" class="more">{{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
-        </div>
-    </div>
-
-</div>
--- }}
     {{-- Matrice --}}
     <div class="row">
         <div class="cell-lg-10 cell-md-12">
@@ -105,12 +38,14 @@
                             $count     = count($cell);
                             $score     = $yLevel['value'] * $impact['value'];
                             $threshold = $scoringConfig->thresholdFor($score);
+                            $thresholdIndex = $scoringConfig->thresholdIndexFor($score);
                             $bgColor   = $threshold['color'];
                             $txtColor  = '#fff';
-                        @endphp
+
+                            @endphp
                         <td style="background:{{ $bgColor }};color:{{ $txtColor }};padding:10px;vertical-align:middle;{{ $count > 0 ? 'cursor:pointer' : '' }}"
                             @if($count > 0)
-                                onclick="location.href='/risk/index?score={{ $score }}'"
+                                onclick="location.href='/risk/index?threshold={{ $thresholdIndex }}'"
                                 data-role="hint"
                                 data-hint-position="top"
                                 data-hint-text="{{ collect($cell)->pluck('name')->take(5)->implode(', ') }}{{ $count > 5 ? ' …' : '' }}"
@@ -133,11 +68,14 @@
                     @php
                         $prevMax = $i > 0 ? $scoringConfig->risk_thresholds[$i-1]['max'] + 1 : 1;
                     @endphp
-                    <span class="badge" style="background:{{ $t['color'] }};color:#fff">
+                    <a href="/risk/index?threshold={{ $i }}" class="no-underline">
+                        <span class="badge"
+                              style="background:{{ $t['color'] }};color:#fff;padding:4px 10px;pointer-events:none">
                         {{ $t['label'] }}
                         @if ($t['max']) {{ $prevMax }}–{{ $t['max'] }}
                         @else &gt; {{ $scoringConfig->risk_thresholds[$i-1]['max'] ?? 0 }} @endif
                     </span>
+                    </a>
                 @endforeach
             </div>
         </div>
@@ -181,7 +119,7 @@
                         </a>
                         @endif
                     </td>
-                    <td class="text-left">
+                    <td class="text-right">
                         <b>{{ $stats['total'] }}</b>
                     </td>
                     <td class="text-left">
@@ -208,10 +146,12 @@
                         <b>{{ $stats['by_status'][$status] ?? 0 }}</b>
                     </td>
                     <td class="text-left">
-                        <span class="badge {{ \App\Models\Risk::STATUS_COLORS[$status] }}"
-                        style="padding: 4px 10px;">
-                            {{ $label }}
-                        </span>
+                        <a href="/risk/index?status={{$status}}" class="no-underline">
+                            <span class="badge  {{ \App\Models\Risk::STATUS_COLORS[$status] }}"
+                                  style="padding:4px 10px;pointer-events:none">
+                                {{ $label }}
+                            </span>
+                        </a>
                     </td>
                 </tr>
                 @endforeach

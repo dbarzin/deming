@@ -61,32 +61,51 @@
     >
         <thead>
             <tr>
-                <th class="sortable-column" width="25%">{{ trans("cruds.risk.fields.name") }}</th>
-                <th class="sortable-column" width="10%">{{ trans("cruds.risk.fields.owner") }}</th>
-                <th class="sortable-column" width="5%"  align="center">{{ trans("cruds.risk.fields.probability") }}</th>
-                <th class="sortable-column" width="5%"  align="center">{{ trans("cruds.risk.fields.impact") }}</th>
-                <th class="sortable-column" width="5%"  align="center">{{ trans("cruds.risk.fields.score") }}</th>
-                <th class="sortable-column" width="10%">{{ trans("cruds.risk.fields.status") }}</th>
-                <th class="sortable-column sort-asc" width="8%">{{ trans("cruds.risk.fields.next_review") }}</th>
+                <th class="sortable-column">{{ trans("cruds.risk.fields.name") }}</th>
+                <th class="sortable-column">{{ trans("cruds.risk.fields.owner") }}</th>
+
+                {{-- Colonnes intermédiaires selon la config --}}
+                @if ($scoringConfig->usesLikelihood())
+                    <th class="sortable-column">{{ trans("cruds.risk.fields.likelihood") }}</th>
+                    <th class="sortable-column">{{ trans("cruds.risk.fields.vulnerability") }}</th>
+                @else
+                    <th class="sortable-column">{{ trans("cruds.risk.fields.probability") }}</th>
+                @endif
+
+                <th class="sortable-column">{{ trans("cruds.risk.fields.impact") }}</th>
+                <th class="sortable-column sort-desc">{{ trans("cruds.risk.fields.score") }}</th>
+                <th class="sortable-column">{{ trans("cruds.risk.fields.status") }}</th>
+                <th class="sortable-column">{{ trans("cruds.risk.fields.next_review") }}</th>
             </tr>
         </thead>
         <tbody>
         @foreach ($risks as $risk)
         <tr>
             <td>
+                <span style="display:none">{{ $risk->name }}</span>
                 <a href="/risk/show/{{ $risk->id }}">{{ $risk->name }}</a>
             </td>
             <td>{{ $risk->owner?->name ?? '—' }}</td>
-            <td align="center">{{ $risk->probability }}</td>
-            <td align="center">{{ $risk->impact }}</td>
 
-            <td data-cls-column="text-center">
+            {{-- Colonnes intermédiaires selon la config --}}
+            @if ($scoringConfig->usesLikelihood())
+                <td>{{ $risk->risk_likelihood }}</td>
+                <td>{{ $risk->vulnerability }}</td>
+            @else
+                <td>{{ $risk->probability }}</td>
+            @endif
+
+            <td>{{ $risk->impact }}</td>
+
+            {{-- Score délégué au modèle Risk --}}
+            <td>
                 @php
-                    $score     = $risk->probability * $risk->impact;
+                    $score     = $risk->computedScore($scoringConfig);
                     $threshold = $scoringConfig->thresholdFor($score);
                 @endphp
+                <span style="display:none">{{ str_pad($score, 4, '0', STR_PAD_LEFT) }}</span>
                 <span class="badge"
-                      style="background:{{ $threshold['color'] }};color:#fff;padding:2px 8px; font-size:1rem">
+                      style="background:{{ $threshold['color'] }};color:#fff;padding:2px 8px;font-size:1rem">
                     {{ $score }}
                 </span>
             </td>
@@ -114,6 +133,18 @@
 
 </div>
 
+{{-- Alignemet de la table --}}
+<style>
+#risks-table td:nth-child(5),
+#risks-table td:nth-child(6),
+#risks-table td:nth-child(7),
+#risks-table th:nth-child(5),
+#risks-table th:nth-child(6),
+#risks-table th:nth-child(7) {
+    text-align: center !important;
+}
+</style>
+
 <script>
 document.addEventListener("DOMContentLoaded", () => {
     let ready = false;
@@ -132,7 +163,7 @@ document.addEventListener("DOMContentLoaded", () => {
     }
 
     function navigateWithAll(patch = {}) {
-        const next = new URL('/risks', location.origin);
+        const next = new URL('/risk/index', location.origin);
         const all  = { ...snapshotFilters(), ...patch };
         for (const [k, v] of Object.entries(all)) {
             if (v == null || String(v) === '' || v === 'none') next.searchParams.delete(k);

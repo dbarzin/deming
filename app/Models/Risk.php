@@ -212,4 +212,22 @@ class Risk extends Model
     {
         return $query->where('owner_id', $userId);
     }
+
+    /**
+     * Calcule le score brut selon la configuration de scoring active.
+     *
+     * @param  RiskScoringConfig  $config
+     * @return int
+     */
+    public function computedScore(RiskScoringConfig $config): int
+    {
+        if ($config->usesLikelihood()) {
+                // Modèle 3 facteurs : Likelihood × Vulnerability × Impact
+                return $this->risk_likelihood * $this->vulnerability * $this->impact;
+        }
+
+        // Modèle classique probabilité × impact
+        return $this->probability * $this->impact;
+    }
+
 }

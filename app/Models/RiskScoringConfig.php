@@ -165,4 +165,15 @@ class RiskScoringConfig extends Model
         $values = $this->levelValues($field);
         return $values ? max($values) : 0;
     }
+
+    public function thresholdIndexFor(int $score): int
+    {
+        foreach ($this->risk_thresholds as $i => $threshold) {
+            if ($threshold['max'] === null || $score <= $threshold['max']) {
+                return $i;
+            }
+        }
+        return count($this->risk_thresholds) - 1;
+    }
+
 }
