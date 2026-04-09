@@ -110,6 +110,9 @@
 				<li>
                     <a href="/export/actions" target="_blank">{{ trans('cruds.exports.actions_export') }}</a>
 				</li>
+				<li>
+                    <a href="/export/risks" target="_blank">{{ trans('cruds.exports.risks_export') }}</a>
+				</li>
 			</ul>
 		</div>
 	</div>

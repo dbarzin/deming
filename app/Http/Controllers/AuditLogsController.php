@@ -73,6 +73,8 @@ class AuditLogsController extends Controller
             $type = \App\Models\Action::class;
         } elseif ($type === 'user') {
             $type = \App\Models\User::class;
+        } elseif ($type === 'risk') {
+            $type = \App\Models\Risk::class;
         } else {
             abort(404, 'Not found');
         }

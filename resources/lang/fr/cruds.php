@@ -203,6 +203,7 @@ return [
         'measures_export' => 'Exportation des contrôles',
         'controls_export' => 'Exportation des mesures de sécurité',
         'actions_export' => 'Exporter les plans d\'action',
+        'risks_export' => 'Exporter le registre des risques',
     ],
     'group' => [
         'index' => 'Liste des groupes',
@@ -350,6 +351,7 @@ return [
         'matrix'          => 'Matrice des risques',
         'singular'        => 'risque',
         'plural'          => 'risques',
+        'export'          => 'risques',
 
         // Niveaux de risque (affichés dans les badges et compteurs)
         'levels' => [

@@ -134,6 +134,7 @@ Route::namespace('App\\Http\\Controllers')->group(function () {
     Route::get('/export/bobs', 'ControlController@export');
     Route::get('/export/actions', 'ActionController@export');
     Route::get('/export/users', 'UserController@export');
+    Route::get('/export/risks', 'RiskController@export');
 
 // --- Registre des risques ---
     Route::get('/risk/index',           [RiskController::class, 'index'])->name('risk.index');

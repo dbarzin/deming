@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Exports\RiskExport;
 use App\Models\Action;
 use App\Models\Measure;
 use App\Models\Risk;
@@ -9,8 +10,10 @@ use App\Models\User;
 use App\Services\RiskScoringService;
 use Illuminate\Http\RedirectResponse;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\View\View;
+use Maatwebsite\Excel\Facades\Excel;
 
 /**
  * Gestion du registre des risques (ISO 27001 §6.1.2 / §8.2)
@@ -232,57 +235,6 @@ class RiskController extends Controller
     }
 
     // =========================================================================
-    // EXPORT CSV
-    // =========================================================================
-
-    public function export(): \Symfony\Component\HttpFoundation\StreamedResponse
-    {
-        $risks   = Risk::with(['owner', 'measures', 'actions'])->get();
-        $config  = $this->scoringService->config();
-        $headers = [
-            'Content-Type'        => 'text/csv; charset=UTF-8',
-            'Content-Disposition' => 'attachment; filename="risk-register-' . now()->format('Y-m-d') . '.csv"',
-        ];
-
-        return response()->stream(function () use ($risks, $config) {
-            $handle = fopen('php://output', 'w');
-            fputs($handle, "\xEF\xBB\xBF");
-
-            fputcsv($handle, [
-                'ID', 'Nom', 'Description', 'Propriétaire',
-                'Probabilité', 'Impact', 'Score', 'Niveau',
-                'Statut', 'Commentaire statut',
-                'Contrôles liés', 'Plans d\'action liés',
-                'Fréquence de revue (mois)', 'Prochaine revue',
-                'Créé le', 'Modifié le',
-            ], ';');
-
-            foreach ($risks as $risk) {
-                fputcsv($handle, [
-                    $risk->id,
-                    $risk->name,
-                    $risk->description,
-                    $risk->owner?->name,
-                    $risk->probability,
-                    $risk->impact,
-                    $risk->risk_score,
-                    $risk->risk_level_label,
-                    Risk::STATUS_LABELS[$risk->status] ?? $risk->status,
-                    $risk->status_comment,
-                    $risk->measures->pluck('name')->join(', '),
-                    $risk->actions->pluck('name')->join(', '),
-                    $risk->review_frequency,
-                    $risk->next_review_at?->format('Y-m-d'),
-                    $risk->created_at->format('Y-m-d'),
-                    $risk->updated_at->format('Y-m-d'),
-                ], ';');
-            }
-
-            fclose($handle);
-        }, 200, $headers);
-    }
-
-    // =========================================================================
     // Privé
     // =========================================================================
 
@@ -346,4 +298,23 @@ class RiskController extends Controller
             abort(403);
         }
     }
+
+    public function export()
+    {
+        // For administrators and users only
+        abort_if(
+            !Auth::User()->isAdmin() && !Auth::User()->isUser(),
+            Response::HTTP_FORBIDDEN,
+            '403 Forbidden'
+        );
+
+        return Excel::download(
+            new RiskExport(),
+            trans('cruds.risk.plural') .
+            '-' .
+            now()->format('Y-m-d Hi') .
+            '.xlsx'
+        );
+    }
+
 }
