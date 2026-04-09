@@ -167,15 +167,15 @@
         @endif
     </div>
 
-    {{-- Contrôles liés --}}
-    @if ($risk->controls->isNotEmpty())
+    {{-- Mesures liés --}}
+    @if ($risk->measures->isNotEmpty())
     <div class="row">
         <div class="cell-lg-1 cell-md-2">
-            <strong>{{ trans("cruds.risk.fields.controls") }}</strong>
+            <strong>{{ trans("cruds.risk.fields.measures") }}</strong>
         </div>
         <div class="cell-lg-7 cell-md-9">
-            @foreach ($risk->controls as $control)
-                <a href="/bob/show/{{ $control->id }}">{{ $control->name }}</a>
+            @foreach ($risk->measures as $measure)
+                <a href="/alice/show/{{ $measure->id }}">{{ $measure->name }}</a>
                 @if (!$loop->last) , @endif
             @endforeach
         </div>

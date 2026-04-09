@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Action;
-use App\Models\Control;
+use App\Models\Measure;
 use App\Models\Risk;
 use App\Models\User;
 use App\Services\RiskScoringService;
@@ -92,20 +92,21 @@ class RiskController extends Controller
 
     public function create(): View
     {
-        $users         = User::orderBy('name')->get();
-        $controls      = Control::orderBy('name')->get();
-        $actions       = Action::orderBy('name')->get();
+        $users         = User::query()->orderBy('name')->get();
+        $measures      = Measure::query()->orderBy('name')->get();
+        $actions       = Action::query()->orderBy('name')->get();
         $statuses      = Risk::STATUS_LABELS;
         $scoringConfig = $this->scoringService->config();
 
-        return view('risks.create', compact('users', 'controls', 'actions', 'statuses', 'scoringConfig'));
+        return view('risks.create',
+            compact('users', 'measures', 'actions', 'statuses', 'scoringConfig'));
     }
 
     public function store(Request $request): RedirectResponse
     {
         $validated = $this->validateRisk($request);
 
-        $risk = Risk::create($validated);
+        $risk = Risk::query()->create($validated);
 
         if (empty($validated['next_review_at'])) {
             $risk->next_review_at = now()->addMonths((int) $risk->review_frequency);
@@ -125,10 +126,10 @@ class RiskController extends Controller
 
     public function show(int $id): View
     {
-        $risk = Risk::findOrFail($id);
+        $risk = Risk::query()->findOrFail($id);
         $this->authorizeView($risk);
 
-        $risk->load(['owner', 'controls', 'actions']);
+        $risk->load(['owner', 'measures', 'actions']);
 
         $scoringConfig = $this->scoringService->config();
 
@@ -143,14 +144,15 @@ class RiskController extends Controller
     {
         $risk     = Risk::query()->findOrFail($id);
         $users    = User::query()->orderBy('name')->get();
-        $controls = Control::query()->whereIn('status', [0, 1])->orderBy('name')->get();
+        $measures = Measure::query()->orderBy('name')->get();
         $actions  = Action::query()->orderBy('name')->get();
         $statuses = Risk::STATUS_LABELS;
         $scoringConfig = $this->scoringService->config();
 
-        $risk->load(['controls', 'actions']);
+        $risk->load(['measures', 'actions']);
 
-        return view('risks.edit', compact('risk', 'users', 'controls', 'actions', 'statuses', 'scoringConfig'));
+        return view('risks.edit',
+            compact('risk', 'users', 'measures', 'actions', 'statuses', 'scoringConfig'));
     }
 
     public function update(Request $request): RedirectResponse
@@ -235,7 +237,7 @@ class RiskController extends Controller
 
     public function export(): \Symfony\Component\HttpFoundation\StreamedResponse
     {
-        $risks   = Risk::with(['owner', 'controls', 'actions'])->get();
+        $risks   = Risk::with(['owner', 'measures', 'actions'])->get();
         $config  = $this->scoringService->config();
         $headers = [
             'Content-Type'        => 'text/csv; charset=UTF-8',
@@ -267,7 +269,7 @@ class RiskController extends Controller
                     $risk->risk_level_label,
                     Risk::STATUS_LABELS[$risk->status] ?? $risk->status,
                     $risk->status_comment,
-                    $risk->controls->pluck('name')->join(', '),
+                    $risk->measures->pluck('name')->join(', '),
                     $risk->actions->pluck('name')->join(', '),
                     $risk->review_frequency,
                     $risk->next_review_at?->format('Y-m-d'),
@@ -300,8 +302,8 @@ class RiskController extends Controller
             'status_comment'      => ['nullable', 'string'],
             'review_frequency'    => ['required', 'integer', 'min:1', 'max:60'],
             'next_review_at'      => ['nullable', 'date'],
-            'control_ids'         => ['nullable', 'array'],
-            'control_ids.*'       => ['exists:controls,id'],
+            'measure_ids'         => ['nullable', 'array'],
+            'measure_ids.*'       => ['exists:measures,id'],
             'action_ids'          => ['nullable', 'array'],
             'action_ids.*'        => ['exists:actions,id'],
         ]);
@@ -324,13 +326,13 @@ class RiskController extends Controller
 
     private function syncRelations(Risk $risk, Request $request): void
     {
-        $risk->controls()->sync($request->input('control_ids', []));
+        $risk->measures()->sync($request->input('measure_ids', []));
         $risk->actions()->sync($request->input('action_ids', []));
     }
 
     private function warnBusinessRules(Risk $risk): void
     {
-        if ($risk->requiresControls() && $risk->controls()->count() === 0) {
+        if ($risk->requiresMeasures() && $risk->measures()->count() === 0) {
             session()->flash('warning', __('Un risque "Mitigé" doit avoir au moins un contrôle lié.'));
         }
         if ($risk->requiresActions() && $risk->actions()->count() === 0) {

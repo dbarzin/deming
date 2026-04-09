@@ -68,7 +68,7 @@
             <div class="more-info-box fg-white" style="background-color: #D94F45 !important;">
                 <div class="content">
                     <h2 class="text-bold mb-0">
-                       {{ 0 }}
+                       {{ $risks_count }}
                     </h2>
                 <div>{{ trans('menu.risks') }}</div>
                 </div>

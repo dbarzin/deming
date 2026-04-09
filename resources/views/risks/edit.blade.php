@@ -212,18 +212,18 @@
             </div>
 
             {{-- Contrôles liés (mitigated) --}}
-            <div id="controls-section" @if($risk->status !== 'mitigated') style="display:none" @endif>
+            <div id="measures-section" @if($risk->status !== 'mitigated') style="display:none" @endif>
                 <div class="row">
                     <div class="cell-lg-1 cell-md-2">
-                        <strong>{{ trans("cruds.risk.fields.controls") }}</strong>
-                        <br><small class="text-muted">{{ trans('cruds.risk.fields.controls_hint') }}</small>
+                        <strong>{{ trans("cruds.risk.fields.measures") }}</strong>
+                        <br><small class="text-muted">{{ trans('cruds.risk.fields.measures_hint') }}</small>
                     </div>
                     <div class="cell-lg-6 cell-md-8">
-                        <select name="control_ids[]" data-cls-tag="tag-no-truncate" data-role="select" data-filter="true" multiple>
-                            @foreach ($controls as $control)
-                                <option value="{{ $control->id }}"
-                                    {{ in_array($control->id, old('control_ids', $risk->controls->pluck('id')->toArray())) ? 'selected' : '' }}>
-                                    {{ $control->name }}
+                        <select name="measure_ids[]" data-cls-tag="tag-no-truncate" data-role="select" data-filter="true" multiple>
+                            @foreach ($measures as $measure)
+                                <option value="{{ $measure->id }}"
+                                    {{ in_array($measure->id, old('measure_ids', $risk->measures->pluck('id')->toArray())) ? 'selected' : '' }}>
+                                    {{ $measure->name }}
                                 </option>
                             @endforeach
                         </select>
@@ -314,7 +314,7 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function observeSelect() {
-        const select = document.querySelector('select[name="control_ids[]"]');
+        const select = document.querySelector('select[name="measure_ids[]"]');
         if (!select) return;
 
         const label = select.closest('label');

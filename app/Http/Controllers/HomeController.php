@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Risk;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -38,6 +39,7 @@ class HomeController extends Controller
         $planedControlsThisMonthCount = $this->getPlanedControlsThisMonthCount();
         $lateControlsCount = $this->getLateControlsCount();
         $actionPlansCount = $this->getActionPlansCount();
+        $risksCount = $this->getRisksCount();
 
         $activeControls = $this->getActiveControls();
         $controlsTodo = $this->getControlsTodo();
@@ -57,6 +59,7 @@ class HomeController extends Controller
             'active_measures_count' => $activeMeasuresCount,
             'controls_made_count' => $controlsMadeCount,
             'controls_never_made' => $controlsNeverMade,
+            'risks_count' => $risksCount,
             'active_controls' => $activeControls,
             'controls_todo' => $controlsTodo,
             'action_plans_count' => $actionPlansCount,
@@ -446,4 +449,15 @@ class HomeController extends Controller
             return $expanded;
         });
     }
+
+    private function getRisksCount() {
+        $query = Risk::query();
+
+        if (Auth::user()->isAuditee()) {
+            $query->ownedBy(Auth::user()->id);
+        }
+
+        return $query->count();
+    }
+
 }

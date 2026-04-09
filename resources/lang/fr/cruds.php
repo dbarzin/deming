@@ -381,8 +381,8 @@ return [
             // Traitement
             'status'              => 'Statut de traitement',
             'status_comment'      => 'Commentaire statut',
-            'controls'            => 'Contrôles liés',
-            'controls_hint'       => 'Requis si statut = Mitigé',
+            'measures'            => 'Contrôles liés',
+            'measures_hint'       => 'Requis si statut = Mitigé',
             'action_plan'         => 'Plans d\'action liés',
             'actions_hint'        => 'Requis si statut = Non accepté',
 

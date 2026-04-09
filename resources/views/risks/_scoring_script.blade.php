@@ -76,10 +76,10 @@ document.addEventListener("DOMContentLoaded", function () {
         if (!statusEl) return;
         const status = statusEl.value;
 
-        const controlsSection = document.getElementById('controls-section');
+        const measuresSection = document.getElementById('measures-section');
         const actionsSection  = document.getElementById('actions-section');
 
-        if (controlsSection) controlsSection.style.display = (status === 'mitigated')     ? '' : 'none';
+        if (measuresSection) measuresSection.style.display = (status === 'mitigated')     ? '' : 'none';
         if (actionsSection)  actionsSection.style.display  = (status === 'not_accepted')  ? '' : 'none';
     }
 

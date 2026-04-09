@@ -70,10 +70,10 @@ return new class extends Migration
 
         // Table pivot : risques ↔ mesures de contrôle
         // Obligatoire si status = 'mitigated'
-        Schema::create('control_risk', function (Blueprint $table) {
+        Schema::create('measure_risk', function (Blueprint $table) {
             $table->unsignedInteger('risk_id')->constrained()->cascadeOnDelete();
-            $table->unsignedInteger('control_id')->constrained()->cascadeOnDelete();
-            $table->primary(['risk_id', 'control_id']);
+            $table->unsignedInteger('measure_id')->constrained()->cascadeOnDelete();
+            $table->primary(['risk_id', 'measure_id']);
         });
 
         // Table pivot : risques ↔ plans d'action
@@ -88,7 +88,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::dropIfExists('action_risk');
-        Schema::dropIfExists('control_risk');
+        Schema::dropIfExists('measure_risk');
         Schema::dropIfExists('risks');
     }
 };

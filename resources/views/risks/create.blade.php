@@ -191,18 +191,18 @@
             </div>
 
             {{-- Contrôles liés (visible si mitigated) --}}
-            <div id="controls-section" style="display:none">
+            <div id="measures-section" style="display:none">
                 <div class="row">
                     <div class="cell-lg-1 cell-md-2">
-                        <strong>{{ trans("cruds.risk.fields.controls") }}</strong>
-                        <br><small class="text-muted">{{ trans('cruds.risk.fields.controls_hint') }}</small>
+                        <strong>{{ trans("cruds.risk.fields.measures") }}</strong>
+                        <br><small class="text-muted">{{ trans('cruds.risk.fields.measures_hint') }}</small>
                     </div>
                     <div class="cell-lg-6 cell-md-8">
-                        <select name="control_ids[]" data-role="select" data-filter="true" multiple>
-                            @foreach ($controls as $control)
-                                <option value="{{ $control->id }}"
-                                    {{ in_array($control->id, old('control_ids', [])) ? 'selected' : '' }}>
-                                    {{ $control->name }}
+                        <select name="measure_ids[]" data-role="select" data-filter="true" multiple>
+                            @foreach ($measures as $measure)
+                                <option value="{{ $measure->id }}"
+                                    {{ in_array($measure->id, old('measure_ids', [])) ? 'selected' : '' }}>
+                                    {{ $measure->name }}
                                 </option>
                             @endforeach
                         </select>
