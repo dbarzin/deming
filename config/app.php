@@ -67,7 +67,8 @@ return [
 
     'asset_url' => env('ASSET_URL', null),
 
-    'editor' => env('APP_EDITOR', 'sublime'),
+    // set banner in test environment
+    'test' => (bool) env('APP_BANNER_TEST',  false),
 
     /*
     |--------------------------------------------------------------------------

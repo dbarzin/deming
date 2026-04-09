@@ -16,6 +16,9 @@ class MeasureSeeder extends Seeder
      */
     public function run()
     {
+        // clear DB table
+        DB::table('control_measure')->delete();
+        DB::table('controls')->delete();
         DB::table('measures')->delete();
 
         // get language

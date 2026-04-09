@@ -30,7 +30,7 @@ RUN mkdir -p /var/www/deming
 WORKDIR /var/www/deming
 
 RUN git clone https://www.github.com/dbarzin/deming .
-RUN cp docker/deming.conf /etc/nginx/conf.d/default.conf
+RUN cp docker/deming.conf /etc/nginx/conf.d/deming.conf
 RUN cp docker/userdemo.sh /etc/userdemo.sh
 COPY docker/resetdb.sh /etc/resetdb.sh
 RUN cp docker/uploadiso27001db.sh /etc/uploadiso27001db.sh

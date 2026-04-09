@@ -15,7 +15,11 @@ services:
       ### PLEASE AFTER ONE RUN DISABLE FOR OPTIMIZATION
       - INITIAL_DB=FR #EN OR FR
       - TZ=Europe/Paris
-      - APP_ENV=production
+      - DB_HOST=mysql
+      - APP_ENV=local
+      - DB_DATABASE=deming
+      - DB_USERNAME=deming_user
+      - DB_PASSWORD=demPasssword-123
       - APP_FORCE_HTTPS=false
     volumes:
       - .env:/var/www/deming/.env
@@ -23,24 +27,27 @@ services:
       - ./docker/custom/Kernel.php:/var/www/deming/app/Console/Kernel.php
       - ./docker/custom/app.php:/var/www/deming/config/app.php
     ports:
-      - 80:8000
+      - 8000:8000
     depends_on:
       mysql:
         condition: service_healthy
   mysql:
-    image: mysql:9
+    image: mysql:9.5
     environment:
-      MYSQL_DATABASE: '${DB_DATABASE}'
-      MYSQL_USER: '${DB_USERNAME}'
-      MYSQL_PASSWORD: '${DB_PASSWORD}'
-      MYSQL_ROOT_PASSWORD: '${DB_ROOTPASSWORD}'
+      MYSQL_DATABASE: deming
+      MYSQL_USER: deming_user
+      MYSQL_PASSWORD: demPasssword-123
+      MYSQL_RANDOM_ROOT_PASSWORD: "1"
     expose:
       - 3306
     healthcheck:
-      test: ["CMD-SHELL", "mysqladmin ping -h localhost -u root -p$$MYSQL_ROOT_PASSWORD" ]
-      interval: 10s
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "--silent"]
+      interval: 5s
       timeout: 5s
-      retries: 3
+      retries: 10
+      start_period: 30s
+
+
 ### PLEASE ENABLE FOR PERSISTENT DATABASE DATA
     volumes:
       - dbdata:/var/lib/mysql

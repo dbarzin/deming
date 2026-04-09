@@ -9,7 +9,7 @@
     <title>Deming - @yield('title', 'ISMS Controls Made Easy')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('styles')
-    @if (!app()->environment('production'))
+    @if (Config::get('app.test'))
     <style>
     .navview-content {
         padding-top: 50px;
@@ -30,10 +30,10 @@
 
 </head>
 <body class="cloak">
-@if (!app()->environment('production'))
+@if (Config::get('app.test'))
 <div class="app-bar pos-fixed bg-orange fg-white" data-role="appbar">
       <div class="app-bar-section">
-        <span class="mif-warning"></span> &nbsp; {{ app()->environment() }} - {{ trans('menu.test') }}
+        <span class="mif-warning"></span> {{ trans('menu.test') }}
     </div>
 </div>
 @endif
