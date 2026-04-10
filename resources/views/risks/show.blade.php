@@ -12,9 +12,19 @@
         <div class="cell-lg-1 cell-md-2">
             <strong>{{ trans("cruds.risk.fields.name") }}</strong>
         </div>
-        <div class="cell-lg-7 cell-md-9">
+        <div class="cell-lg-10 cell-md-9">
             {{ $risk->name }}
         </div>
+
+        <div class="cell-lg-1 cell-md-1">
+            @if (Auth::User()->role === 1 || Auth::User()->role === 2)
+                <button class="button primary" onclick="location.href='/risk/create'">
+                    <span class="mif-plus"></span>
+                    {{ trans('common.new') }}
+                </button>
+            @endif
+        </div>
+
     </div>
 
     {{-- Description --}}
