@@ -10,7 +10,7 @@ La liste des mesures de sécurité permet d’afficher la liste des mesures, de 
 
 En cliquant sur :
 
-* le domaine, vous arrivez sur la [définition du domaine choisi](config.fr.md/#domain)
+* le domaine, vous arrivez sur la [définition du domaine choisi](config.fr.md/#domains)
 
 * la clause, vous arrivez sur la [description de la mesure de sécurité](#show)
 
