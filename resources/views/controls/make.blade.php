@@ -138,7 +138,6 @@
 	    	</div>
             <div class="cell-lg-2 cell-md-3">
                 <input
-                    type="number"
                     id="note"
                     name="note"
                     value="{{ count($errors)>0 ?  old('note') : $control->note }}"
