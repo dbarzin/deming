@@ -3,9 +3,12 @@
 namespace App\Providers\Socialite;
 
 use GuzzleHttp\Exception\GuzzleException;
+use Illuminate\Support\Arr;
 use Laravel\Socialite\Two\AbstractProvider;
 use Laravel\Socialite\Two\ProviderInterface;
 use Laravel\Socialite\Two\User;
+use Firebase\JWT\JWT;
+use Firebase\JWT\Key;
 use Log;
 
 /**
@@ -96,6 +99,27 @@ class GenericSocialiteProvider extends AbstractProvider implements ProviderInter
         return $this->getOIDCUrl() . '/token';
     }
 
+   /**
+     * {@inheritdoc}
+     */
+    public function user()
+    {
+        if ($this->user) {
+            return $this->user;
+        }
+
+        if ($this->hasInvalidState()) {
+            throw new \Laravel\Socialite\Two\InvalidStateException;;
+        }
+
+        $response = $this->getAccessTokenResponse($this->getCode());
+
+        $user = $this->getUserByToken(Arr::get($response, 'access_token'), Arr::get($response, 'id_token'));
+
+        return $this->userInstance($response, $user);
+    }
+
+
     /**
      * @param string $token
      *
@@ -103,8 +127,17 @@ class GenericSocialiteProvider extends AbstractProvider implements ProviderInter
      *
      * @return array|mixed
      */
-    protected function getUserByToken($token)
+    protected function getUserByToken($token, $idToken = null)
     {
+        $useIdToken = config('services.oidc.use_id_token', false);
+
+        if ($useIdToken) {
+            if (!$idToken) {
+                throw new \Exception('OIDC_USE_ID_TOKEN=true but id_token not received');
+            }
+            return $this->decodeIdToken($idToken);
+        }
+
         $base_url = $this->getOIDCUrl() . '/userinfo';
         // If userinfo endpoint set, use it instead
         if (config('services.oidc.userinfo_endpoint')) {
@@ -139,5 +172,37 @@ class GenericSocialiteProvider extends AbstractProvider implements ProviderInter
             $socialite_user[$socialite_attr] = $user[$provider_attr];
         }
         return (new User())->setRaw($user)->map($socialite_user);
+    }
+
+    protected function decodeIdToken($idToken)
+    {
+        $alg = config('services.oidc.jwt_alg', 'RS256');
+        $key = config('services.oidc.jwt_secret_or_key');
+
+        if (!$key) {
+            throw new \Exception('JWT secret or public key not configured');
+        }
+
+        try {
+            $decoded = JWT::decode($idToken, new Key($key, $alg));
+        } catch (\Exception $e) {
+            throw new \Exception('Failed to decode ID token: '.$e->getMessage(), 0, $e);
+        }
+
+        $claims = (array) $decoded;
+        $clientId = config('services.oidc.client_id');
+        $expectedIssuer = rtrim(config('services.oidc.issuer', $this->getOIDCUrl()), '/');
+        $aud = $claims['aud'] ?? null;
+        $audiences = is_array($aud) ? $aud : ($aud !== null ? [$aud] : []);
+        if (($claims['iss'] ?? null) !== $expectedIssuer) {
+            throw new \Exception('Invalid ID token issuer');
+        }
+        if (!in_array($clientId, $audiences, true)) {
+            throw new \Exception('Invalid ID token audience');
+        }
+        if (count($audiences) > 1 && ($claims['azp'] ?? null) !== $clientId) {
+            throw new \Exception('Invalid ID token authorized party');
+        }
+        return $claims;
     }
 }
