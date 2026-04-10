@@ -128,7 +128,7 @@ class RiskScoringConfigController extends Controller
         $config->activate();
 
         return redirect('/risk/scoring')
-            ->with('success', __('Configuration "' . $config->name . '" activée.'));
+            ->with('messages', [__('Configuration "' . $config->name . '" activée.')]);
     }
 
     public function destroy(int $id): RedirectResponse
@@ -138,13 +138,13 @@ class RiskScoringConfigController extends Controller
         $config = RiskScoringConfig::findOrFail($id);
 
         if ($config->is_active) {
-            return back()->with('error', __('Impossible de supprimer la configuration active.'));
+            return back()->with('errors', [__('Impossible de supprimer la configuration active.')]);
         }
 
         $config->delete();
 
         return redirect('/risk/scoring')
-            ->with('success', __('Configuration supprimée.'));
+            ->with('messages', [__('Configuration supprimée.')]);
     }
 
     private function validateConfig(Request $request): array

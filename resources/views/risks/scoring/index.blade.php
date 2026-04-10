@@ -3,13 +3,7 @@
 @section("content")
 <div data-role="panel" data-title-caption='{{ trans("cruds.risk_scoring.list") }}' data-collapsible="false" data-title-icon="<span class='mif-cog'></span>">
 
-    {{-- Messages flash — même pattern que les autres pages Deming --}}
-    @if (session('success'))
-        <div class="alert success">{{ session('success') }}</div>
-    @endif
-    @if (session('error'))
-        <div class="alert alert">{{ session('error') }}</div>
-    @endif
+    @include('partials.errors')
 
     <div class="grid mb-2">
         <div class="row">
@@ -55,30 +49,31 @@
             {{-- Formule --}}
             <td>{{ $formulas[$config->formula]['label'] ?? $config->formula }}</td>
 
-{{-- Résumé des niveaux --}}
-<td>
-    @if ($config->usesLikelihood())
-        <small>
-            <b>{{ trans('cruds.risk.fields.exposure') }} :</b>
-            {{ count($config->exposure_levels ?? []) }} {{ trans('cruds.risk_scoring.fields.levels') }}
-        </small>
-        <br>
-        <small>
-            <b>{{ trans('cruds.risk.fields.vulnerability') }} :</b>
-            {{ count($config->vulnerability_levels ?? []) }} {{ trans('cruds.risk_scoring.fields.levels') }}
-        </small>
-    @else
-        <small>
-            <b>{{ trans('cruds.risk.fields.probability') }} :</b>
-            {{ count($config->probability_levels ?? []) }} {{ trans('cruds.risk_scoring.fields.levels') }}
-        </small>
-    @endif
-    <br>
-    <small>
-        <b>{{ trans('cruds.risk.fields.impact') }} :</b>
-        {{ count($config->impact_levels ?? []) }} {{ trans('cruds.risk_scoring.fields.levels') }}
-    </small>
-</td>
+            {{-- Résumé des niveaux --}}
+            <td>
+                @if ($config->usesLikelihood())
+                    <small>
+                        <b>{{ trans('cruds.risk.fields.exposure') }} :</b>
+                        {{ count($config->exposure_levels ?? []) }} {{ trans('cruds.risk_scoring.fields.levels') }}
+                    </small>
+                    <br>
+                    <small>
+                        <b>{{ trans('cruds.risk.fields.vulnerability') }} :</b>
+                        {{ count($config->vulnerability_levels ?? []) }} {{ trans('cruds.risk_scoring.fields.levels') }}
+                    </small>
+                @else
+                    <small>
+                        <b>{{ trans('cruds.risk.fields.probability') }} :</b>
+                        {{ count($config->probability_levels ?? []) }} {{ trans('cruds.risk_scoring.fields.levels') }}
+                    </small>
+                @endif
+                <br>
+                <small>
+                    <b>{{ trans('cruds.risk.fields.impact') }} :</b>
+                    {{ count($config->impact_levels ?? []) }} {{ trans('cruds.risk_scoring.fields.levels') }}
+                </small>
+            </td>
+
             {{-- Seuils --}}
             <td>
                 @foreach ($config->risk_thresholds as $i => $t)
@@ -106,8 +101,7 @@
                     &nbsp;
                     {{-- Activation : POST avec CSRF --}}
                     <form action="/risk/scoring/{{ $config->id }}/activate"
-                          method="POST" class="d-inline"
-                          onsubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
+                          method="POST" class="d-inline">
                         @csrf
                         <button type="submit" class="button mini success"
                                 title="{{ trans('cruds.risk_scoring.activate') }}">

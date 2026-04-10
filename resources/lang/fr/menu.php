@@ -25,6 +25,6 @@ return [
     ],
     'test' => 'Vous êtes en environnement de test – Les données sont fictives',
     'logout' => 'Quitter',
-    'risks' => 'Risques',
+    'risks' => 'Matrice des risques',
     'exceptions' => 'Exceptions',
 ];

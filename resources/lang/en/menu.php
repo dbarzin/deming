@@ -26,6 +26,6 @@ return [
     ],
     'test' => 'You are in a test environment - The data is fictitious',
     'logout' => 'Logout',
-    'risks' => 'Risks',
+    'risks' => 'Risk matrix',
     'exceptions' => 'Exceptions',
 ];
