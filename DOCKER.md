@@ -118,7 +118,7 @@ APP_ENV=local           # lease it to local for automatic migrations
 APP_KEY=                # Auto-generated on first boot if empty
 APP_DEBUG=true          # false in production
 APP_URL=http://localhost:8000
-APP_BANNER_TEST=false   # add a warning banner for test environeent
+APP_BANNER_TEST=false   # add a warning banner for test environment
 
 # ── Database ─────────────────────────────────────────────
 DB_CONNECTION=mysql
