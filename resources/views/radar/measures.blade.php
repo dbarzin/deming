@@ -80,13 +80,14 @@ window.addEventListener('DOMContentLoaded', function() {
     }, false);
 
     var scopeSelect = document.getElementById('scopes');
-    scopeSelect.addEventListener('change', function() {
-        const clauseSelectOption = clauseSelect.options[clauseSelect.selectedIndex];
-        const scopeSelectOption = scopeSelect.options[scopeSelect.selectedIndex];
-        window.location = '/radar/bob?clause=' +
-            encodeURIComponent(clauseSelectOption.value) +
-            '&scope=' + encodeURIComponent(scopeSelectOption.value);
-    }, false);
+    if (scopeSelect!=null)
+        scopeSelect.addEventListener('change', function() {
+            const clauseSelectOption = clauseSelect.options[clauseSelect.selectedIndex];
+            const scopeSelectOption = scopeSelect.options[scopeSelect.selectedIndex];
+            window.location = '/radar/bob?clause=' +
+                encodeURIComponent(clauseSelectOption.value) +
+                '&scope=' + encodeURIComponent(scopeSelectOption.value);
+        }, false);
 
 
 @foreach($measures as $measure)

@@ -344,14 +344,13 @@ return [
     'risk' => [
 
         // Titres de page
-        'list'            => 'Registre des risques',
-        'title_singular'  => 'Risque',
+        'list'            => 'Liste des risques',
         'create'          => 'Nouveau risque',
         'edit'            => 'Modifier le risque',
         'matrix'          => 'Matrice des risques',
-        'singular'        => 'risque',
-        'plural'          => 'risques',
-        'export'          => 'risques',
+        'singular'        => 'Risque',
+        'plural'          => 'Risques',
+        'export'          => 'Risques',
 
         // Niveaux de risque (affichés dans les badges et compteurs)
         'levels' => [

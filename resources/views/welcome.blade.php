@@ -70,7 +70,7 @@
                     <h2 class="text-bold mb-0">
                        {{ $risks_count }}
                     </h2>
-                <div>{{ trans('menu.risks') }}</div>
+                <div>{{ trans('cruds.risk.plural') }}</div>
                 </div>
                 <div class="icon">
                     <span class="mif-warning"></span>

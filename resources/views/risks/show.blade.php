@@ -3,7 +3,7 @@
 @section('title', $risk->name)
 
 @section("content")
-<div data-role="panel" data-title-caption='{{ trans("cruds.risk.title_singular") }}' data-collapsible="false" data-title-icon="<span class='mif-warning'></span>">
+<div data-role="panel" data-title-caption='{{ trans("cruds.risk.singular") }}' data-collapsible="false" data-title-icon="<span class='mif-warning'></span>">
 
 <div class="grid">
 
@@ -138,7 +138,7 @@
             <span class="badge" style="font-size:1.1rem;background:{{ $scoreThreshold['color'] }};color:#fff">
                 {{ $risk->risk_score }}
             </span>
-            &nbsp;&mdash;&nbsp;
+            &nbsp;
             <strong>{{ $scoreThreshold['label'] }}</strong>
         </div>
     </div>
