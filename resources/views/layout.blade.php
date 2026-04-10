@@ -9,7 +9,7 @@
     <title>Deming - @yield('title', 'ISMS Controls Made Easy')</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
     @yield('styles')
-    @if (!app()->environment('production'))
+    @if (Config::get('app.test'))
     <style>
     .navview-content {
         padding-top: 50px;
@@ -30,10 +30,10 @@
 
 </head>
 <body class="cloak">
-@if (!app()->environment('production'))
+@if (Config::get('app.test'))
 <div class="app-bar pos-fixed bg-orange fg-white" data-role="appbar">
       <div class="app-bar-section">
-        <span class="mif-warning"></span> &nbsp; {{ app()->environment() }} - {{ trans('menu.test') }}
+        <span class="mif-warning"></span> {{ trans('menu.test') }}
     </div>
 </div>
 @endif
@@ -89,6 +89,18 @@
                 <a href="/actions">
                     <span class="icon mif-pending-actions"></span>
                     <span class="caption">{{ trans("menu.action_plan") }}</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('action*') ? 'active': '' }}">
+                <a href="/risk/matrix">
+                    <span class="icon mif-warning"></span>
+                    <span class="caption">{{ trans("menu.risks") }}</span>
+                </a>
+            </li>
+            <li class="{{ request()->is('action*') ? 'active': '' }}">
+                <a href="/">
+                    <span class="icon mif-star-empty"></span>
+                    <span class="caption">{{ trans("menu.exceptions") }}</span>
                 </a>
             </li>
             <li class="{{ request()->is('radar/*') ? 'active': '' }}">
@@ -191,6 +203,12 @@
                         <a href="/groups">
                         <span class="icon mif-group"></span>
                         <span class="caption">{{ trans("menu.configuration.groups") }}</span>
+                        </a>
+                    </li>
+                    <li class="{{ request()->is('risks/scoring*') ? 'active': '' }}">
+                        <a href="/risk/scoring">
+                        <span class="icon mif-calculator"></span>
+                        <span class="caption">{{ trans("menu.configuration.scoring") }}</span>
                         </a>
                     </li>
                     <li class="{{ request()->is('alice/import*') ? 'active': '' }}">

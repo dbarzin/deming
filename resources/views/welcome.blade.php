@@ -1,10 +1,11 @@
 @extends("layout")
 
 @section("content")
-    <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.dashboard') }}" data-collapsible="false" data-title-icon="<span class='mif-home'></span>">
+<div data-role="panel" data-title-caption="{{ trans('cruds.welcome.dashboard') }}" data-collapsible="false" data-title-icon="<span class='mif-home'></span>">
     <div class="row">
-        <div class="cell-lg-3 cell-md-6 mt-2">
-            <div class="more-info-box fg-white" style="background-color: #fa6800 !important;">
+        <div class="cell-lg-2 cell-md-6 mt-2">
+            {{-- Domaines — navy : ancre structurelle --}}
+            <div class="more-info-box fg-white" style="background-color: #3A72C4 !important;">
                 <div class="content">
                     <h2 class="text-bold mb-0">
                         {{ $active_domains_count }}
@@ -17,9 +18,9 @@
                 <a href="/domains" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
             </div>
         </div>
-        <div class="cell-lg-3 cell-md-6 mt-2">
-            <div class="more-info-box bg-blue fg-white">
-                <div class="content">
+        <div class="cell-lg-2 cell-md-6 mt-2">
+            {{-- Mesures — teal : référentiel/politique --}}
+            <div class="more-info-box fg-white" style="background-color: #17A8C4 !important;">                <div class="content">
                     <h2 class="text-bold mb-0">
                         {{ $active_measures_count }}
                     </h2>
@@ -31,9 +32,9 @@
                 <a href="/alice/index" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
             </div>
         </div>
-        <div class="cell-lg-3 cell-md-6 mt-2">
-            <div class="more-info-box bg-green fg-white">
-                <div class="content">
+        <div class="cell-lg-2 cell-md-6 mt-2">
+            {{-- Contrôles — vert foncé : conformité réalisée --}}
+            <div class="more-info-box fg-white" style="background-color: #3AB87A !important;">                <div class="content">
                     <h2 class="text-bold mb-0">
                         {{ $controls_made_count }}
                     </h2>
@@ -45,8 +46,10 @@
                 <a href="/bob/index?attribute=none&amp;domain=0&amp;scope=none&amp;period=99&amp;status=1" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
             </div>
         </div>
-        <div class="cell-lg-3 cell-md-6 mt-2">
-            <div class="more-info-box bg-crimson fg-white">
+        <div class="cell-lg-2 cell-md-6 mt-2">
+
+            {{-- Plans d'action — ambre : vigilance/remédiation --}}
+            <div class="more-info-box fg-white" style="background-color: #E09B1A !important;">
                 <div class="content">
                     <h2 class="text-bold mb-0">
                         {{ $action_plans_count }}
@@ -59,6 +62,38 @@
                 <a href="/actions" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
             </div>
         </div>
+
+        <div class="cell-lg-2 cell-md-6 mt-2">
+            {{-- Risques — rouge profond : criticité --}}
+            <div class="more-info-box fg-white" style="background-color: #D94F45 !important;">
+                <div class="content">
+                    <h2 class="text-bold mb-0">
+                       {{ $risks_count }}
+                    </h2>
+                <div>{{ trans('cruds.risk.plural') }}</div>
+                </div>
+                <div class="icon">
+                    <span class="mif-warning"></span>
+                </div>
+                <a href="/risk/index" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
+            </div>
+        </div>
+
+        <div class="cell-lg-2 cell-md-6 mt-2">
+            {{-- Exceptions — violet : statut dérogatoire --}}
+            <div class="more-info-box fg-white" style="background-color: #8059C8 !important;">                <div class="content">
+                    <h2 class="text-bold mb-0">
+                       {{ 0 }}
+                    </h2>
+                <div>{{ trans('menu.exceptions') }}</div>
+                </div>
+                <div class="icon">
+                    <span class="mif-star-empty"></span>
+                </div>
+                <a href="/exceptions" class="more disabled"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
+            </div>
+        </div>
+
     </div>
 </div>
 <div class="row">
@@ -187,8 +222,8 @@ document.addEventListener("DOMContentLoaded", function () {
         ],
         datasets: [
             {
-                backgroundColor: "#60a917",
-                borderColor: "#60a917",
+                backgroundColor: "#3AB87A",
+                borderColor: "#3AB87A",
                 stack: 'Stack 0',
                 data: [
                     <?php
@@ -207,8 +242,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 ]
             },
             {
-                backgroundColor: "#fa6800",
-                borderColor: "#fa6800",
+                backgroundColor: "#E8731A",
+                borderColor: "#E8731A",
                 stack: 'Stack 0',
                 data: [
                     <?php
@@ -227,8 +262,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 ]
             },
             {
-                backgroundColor: "#ce352c",
-                borderColor: "#ce352c",
+                backgroundColor: "#D94F45",
+                borderColor: "#D94F45",
                 stack: 'Stack 0',
                 data: [
                     <?php
@@ -341,7 +376,7 @@ document.addEventListener("DOMContentLoaded", function () {
         datasets: [
             {
                 backgroundColor: [
-                    '#ce352c', '#fa6800', '#60a917', 'gray'
+                    '#D94F45', '#E8731A', '#3AB87A', 'gray'
                 ],
                 borderWidth: 0,
                 data: [

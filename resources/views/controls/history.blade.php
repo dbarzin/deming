@@ -80,13 +80,13 @@
                                 }
                                 ?>
                             @endforeach
-                            <font color="red">
+                            <span style="color:#D94F45">
                             @if ($count>0) {{ $count }}
                                 &nbsp; &#9679;
                             @else
                                 &nbsp; &nbsp; &nbsp;
                             @endif
-                            </font>
+                            </span>
                         </td>
                         <td  align="center">
                             <?php $count=0; ?>
@@ -99,13 +99,13 @@
                                 }
                                 ?>
                             @endforeach
-                            <font color="orange">
+                            <span style="color:#E8731A">
                             @if ($count>0) {{ $count }}
                                 &nbsp; &#9679;
                             @else
                                 &nbsp; &nbsp; &nbsp;
                             @endif
-                            </font>
+                            </span>
                         </td>
                         <td align="center">
                             <?php $count=0; ?>
@@ -118,12 +118,12 @@
                                 }
                                 ?>
                             @endforeach
-                            <font color="green">
+                            <span style="color:#3AB87A">
                             @if ($count>0) {{ $count }} &nbsp; &#9679;
                             @else
                             &nbsp; &nbsp; &nbsp;
                             @endif
-                            </font>
+                            </span>
                         </td>
                     </tr>
                 @endfor
@@ -192,12 +192,12 @@
                         }
                         ?>
                     @endforeach
-                    <font color="red">
+                    <span style="color:#D94F45">
                     @if ($count>0) {{ $count }} &nbsp; &#9679;
                     @else
                     &nbsp; &nbsp; &nbsp;
                     @endif
-                    </font>
+                    </span>
                 </td>
                 <td  align="center">
                     <?php $count=0; ?>
@@ -212,12 +212,12 @@
                         }
                         ?>
                     @endforeach
-                    <font color="orange">
+                    <span style="color:#E8731A">
                     @if ($count>0) {{ $count }} &nbsp; &#9679;
                     @else
                     &nbsp; &nbsp; &nbsp;
                     @endif
-                    </font>
+                    </span>
                 </td>
                 <td align="center">
                     <?php $count=0; ?>
@@ -230,12 +230,12 @@
                         }
                         ?>
                     @endforeach
-                    <font color="green">
+                    <span style="color:#3AB87A">
                     @if ($count>0) {{ $count }} &nbsp; &#9679;
                     @else
                     &nbsp; &nbsp; &nbsp;
                     @endif
-                    </font>
+                    </span>
                 </td>
             </tr>
         <?php  } ?>
@@ -306,8 +306,8 @@
         ],
         datasets: [
         {
-            backgroundColor: "#60a917",
-            borderColor: "#60a917",
+            backgroundColor: "#3AB87A",
+            borderColor: "#3AB87A",
             stack: 'Stack 0',
             data: [
                 <?php
@@ -330,8 +330,8 @@
             ]
         },
         {
-            backgroundColor: "#fa6800",
-            borderColor: "#fa6800",
+            backgroundColor: "#E8731A",
+            borderColor: "#E8731A",
             stack: 'Stack 0',
             data: [
                 <?php
@@ -354,8 +354,8 @@
             ]
         },
         {
-            backgroundColor: "#ce352c",
-            borderColor: "#ce352c",
+            backgroundColor: "#D94F45",
+            borderColor: "#D94F45",
             stack: 'Stack 0',
             data: [
                 <?php

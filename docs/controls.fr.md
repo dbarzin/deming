@@ -1,8 +1,8 @@
 ## Contrôles
 
-### Liste des contrôles <a name="list"></a>
+### Liste des contrôles {#list}
 
-Cet écran permet d’afficher la liste des contrôles et de les filtrer par :
+Cet écran permet d'afficher la liste des contrôles et de les filtrer par :
 
 * Domaine,
 
@@ -22,15 +22,15 @@ Lorsque vous cliquez sur :
 
 * La clause, vous arrivez à l'écran d'[affichage de la mesure de sécurité](measures.fr.md/#show).
 
-* La date de réalisation, de planification ou la date du contrôle suivant, vous arrivez l'écran d'[affichage du contrôle de sécurité](#show).
+* La date de réalisation, de planification ou la date du contrôle suivant, vous arrivez l'écran d'[affichage du contrôle de sécurité](controls.fr.md/#show).
 
-### Afficher un contrôle <a name="show"></a>
+### Afficher un contrôle {#show}
 
-Cet écran contient les informations d’un contrôle :
+Cet écran contient les informations d'un contrôle :
 
 * Le nom du contrôle ;
 
-* L’objectif du contrôle ;
+* L'objectif du contrôle ;
 
 * Les attributs ;
 
@@ -44,33 +44,87 @@ Cet écran contient les informations d’un contrôle :
 
 * Le score attribué au contrôle (vert, orange ou rouge).
 
-Les boutons « Faire » et « Planifier » sont présents si ce contrôle n’a pas encore été réalisé.
+Les boutons « Faire » et « Planifier » sont présents si ce contrôle n'a pas encore été réalisé.
 
 Les boutons « Modifier » et « Supprimer » sont présents si l'utilisateur est administrateur.
 
- [![Screenshot](images/c2.fr.png)](images/c2.fr.png)
+[![Screenshot](images/c2.fr.png)](images/c2.fr.png)
 
 Lorsque vous cliquez sur :
 
-* « Faire », vous êtes envoyé vers l’[écran de réalisation d’un contrôle](#make)
+* « Faire », vous êtes envoyé vers l'[écran de réalisation d'un contrôle](#make)
 
-* « Planifier », vous êtes envoyé vers l’[écran de planification d’un contrôle](#plan)
+* « Planifier », vous êtes envoyé vers l'[écran de planification d'un contrôle](#plan)
 
-* « Modifier », vous êtes envoyé vers l’[écran de modification du contrôle](#edit)
+* « Modifier », vous êtes envoyé vers l'[écran de modification du contrôle](#edit)
 
 * « Supprimer », le contrôle est supprimé et vous êtes envoyé vers la [liste des contrôles](#list)
 
 * « Annuler », vous êtes envoyé vers la [liste des contrôles](#list)
 
-### Planifier un contrôle<a name="plan"></a>
+### Créer un contrôle {#create}
 
-Cet écran permet de planifier un contrôle.
+Un contrôle peut être créé de deux façons :
 
-Cet écran contient les informations d’un contrôle :
+* Sur base d'une mesure de sécurité : depuis l'[écran d'affichage de la mesure](measures.fr.md/#show), le bouton « Créer un contrôle » génère un nouveau contrôle pré-rempli avec le nom et l'objectif de la mesure.
+
+* Manuellement : depuis la [liste des contrôles](#list), le bouton « Nouveau » ouvre le formulaire de création.
+
+Cet écran contient les champs suivants :
+
+* La ou les clauses associées ;
 
 * Le nom du contrôle ;
 
-* L’objectif du contrôle ;
+* L'objectif du contrôle ;
+
+* Les attributs ;
+
+* Les données à collecter ;
+
+* Le modèle de calcul du score.
+
+Lorsque vous cliquez sur :
+
+* « Créer », le contrôle est enregistré et vous êtes renvoyé vers l'[écran d'affichage du contrôle](#show)
+
+* « Annuler », vous êtes renvoyé vers la [liste des contrôles](#list)
+
+### Modifier un contrôle {#edit}
+
+Cet écran permet de modifier les informations d'un contrôle existant.
+
+Il est accessible uniquement aux utilisateurs disposant du rôle **Administrateur**.
+
+Cet écran contient les mêmes champs que l'[écran de création](#create) :
+
+* La ou les clauses associées ;
+
+* Le nom du contrôle ;
+
+* L'objectif du contrôle ;
+
+* Les attributs ;
+
+* Les données à collecter ;
+
+* Le modèle de calcul du score.
+
+Lorsque vous cliquez sur :
+
+* « Modifier », les modifications sont enregistrées et vous êtes renvoyé vers l'[écran d'affichage du contrôle](#show)
+
+* « Annuler », vous êtes renvoyé vers l'[écran d'affichage du contrôle](#show)
+
+### Planifier un contrôle {#plan}
+
+Cet écran permet de planifier un contrôle.
+
+Cet écran contient les informations d'un contrôle :
+
+* Le nom du contrôle ;
+
+* L'objectif du contrôle ;
 
 * La date de planification ;
 
@@ -82,12 +136,12 @@ Cet écran contient les informations d’un contrôle :
 
 Lorsque vous cliquez sur :
 
-* « Plan », la date de planification, la récurrence et les responsables sont mis à jour et vous êtes renvoyés vers l’[écran d'affichage du contrôle](#show)
+* « Plan », la date de planification, la récurrence et les responsables sont mis à jour et vous êtes renvoyés vers l'[écran d'affichage du contrôle](controls.fr.md/#show)
 
-* « Annuler », vous êtes renvoyés vers l’[écran d'affichage du contrôle](#show)
+* « Annuler », vous êtes renvoyés vers l'[écran d'affichage du contrôle](controls.fr.md/#show)
 
 
-### Réaliser un contrôle <a name="make"></a>
+### Réaliser un contrôle {#make}
 
 Cet écran permet de réaliser un contrôle de sécurité.
 
@@ -97,7 +151,7 @@ Cet écran contient :
 
 * Le nom du contrôle,
 
-* L’objectif,
+* L'objectif,
 
 * Les données,
 
@@ -115,7 +169,7 @@ Cet écran contient :
 
 * Le score,
 
-* Le plan d’action,
+* Le plan d'action,
 
 * La date du prochaine contrôle
 
@@ -128,12 +182,10 @@ Lorsque vous cliquez sur :
 
 * « Sauver », le contrôle est sauvé
 
-
 et vous revenez vers la [liste des contrôles](#list).
 
 
-### Fiche de contrôle <a name="sheet"></a>
-
+### Fiche de contrôle {#sheet}
 
 La fiche de contrôle est un document Word généré par l'application sur base des données du contrôle.
 

@@ -338,4 +338,130 @@ return [
                 ],
             ],
         ],
-    ];
+
+    // -------------------------------------------------------------------------
+    // Risk register
+    // -------------------------------------------------------------------------
+    'risk' => [
+
+        // Page titles
+        'list'           => 'Risk Register',
+        'title_singular' => 'Risk',
+        'create'         => 'New Risk',
+        'edit'           => 'Edit Risk',
+        'matrix'         => 'Risk Matrix',
+        'singular'       => 'risk',
+        'plural'         => 'risks',
+
+        // Risk levels (displayed in badges and counters)
+        'levels' => [
+            'low'      => 'Low',
+            'medium'   => 'Medium',
+            'high'     => 'High',
+            'critical' => 'Critical',
+        ],
+
+        // Form fields and list columns
+        'fields' => [
+            'name'                => 'Name',
+            'description'         => 'Description',
+            'owner'               => 'Owner',
+            'no_owner'            => 'Unassigned',
+            'choose_owner'        => 'Select an owner',
+            'choose_status'       => 'Select a status',
+
+            // Assessment
+            'probability'         => 'Probability',
+            'probability_comment' => 'Probability comment',
+            'impact'              => 'Impact',
+            'impact_comment'      => 'Impact comment',
+            'exposure'            => 'Exposure',
+            'vulnerability'       => 'Vulnerability',
+            'likelihood'          => 'Likelihood',
+            'score'               => 'Score',
+
+            // Treatment
+            'status'              => 'Treatment status',
+            'status_comment'      => 'Status comment',
+            'measures'            => 'Linked controls',
+            'measures_hint'       => 'Required when status = Mitigated',
+            'action_plan'         => 'Linked action plans',
+            'actions_hint'        => 'Required when status = Not accepted',
+
+            // Planning
+            'review_frequency'    => 'Review frequency',
+            'next_review'         => 'Next review',
+            'overdue'             => 'Overdue review',
+            'overdue_all'         => 'All',
+            'overdue_only'        => 'Overdue',
+
+            // Dashboard / matrix
+            'total'               => 'Total',
+            'by_status'           => 'Distribution by status',
+        ],
+
+        // Treatment statuses
+        'status' => [
+            'not_evaluated'        => 'Not evaluated',
+            'not_accepted'         => 'Not accepted',
+            'temporarily_accepted' => 'Temporarily accepted',
+            'accepted'             => 'Accepted',
+            'mitigated'            => 'Mitigated',
+            'transferred'          => 'Transferred',
+            'avoided'              => 'Avoided',
+        ],
+    ],
+
+    // -------------------------------------------------------------------------
+    // Scoring engine configuration
+    // -------------------------------------------------------------------------
+    'risk_scoring' => [
+
+        // Page titles
+        'list'            => 'Risk Scoring Methods',
+        'create'          => 'New Scoring Configuration',
+        'edit'            => 'Edit Scoring Configuration',
+        'activate'        => 'Activate this configuration',
+
+        // Level / threshold actions
+        'add_level'       => 'Add level',
+        'add_threshold'   => 'Add threshold',
+
+        // Contextual hints
+        'levels_hint'     => 'Minimum 2 levels. Value must be a unique integer.',
+        'thresholds_hint' => 'The last threshold has no upper bound (catch-all). Sort from lowest to highest score.',
+
+        // Form fields
+        'fields' => [
+            'name'        => 'Configuration name',
+            'formula'     => 'Calculation formula',
+            'levels'      => 'Levels',
+            'thresholds'  => 'Classification thresholds',
+            'value'       => 'Value',
+            'label'       => 'Label',
+            'description' => 'Description',
+            'level_key'   => 'Internal key',
+            'score_max'   => 'Max score (∞ = last)',
+            'color'       => 'Badge color',
+        ],
+
+        // Available badge colors
+        'colors' => [
+            'success'   => 'Green',
+            'warning'   => 'Orange',
+            'danger'    => 'Red',
+            'alert'     => 'Dark red',
+            'info'      => 'Blue',
+            'secondary' => 'Grey',
+        ],
+
+        // Available formulas (labels)
+        'formulas' => [
+            'probability_x_impact' => 'Probability × Impact',
+            'likelihood_x_impact'  => 'Likelihood × Impact (BSI 200-3)',
+            'additive'             => 'Probability + Impact',
+            'max_pi'               => 'max(Probability, Impact)',
+        ],
+    ],
+
+];

@@ -668,7 +668,7 @@ class ControlController extends Controller
         }
 
         // Get Control
-        $control = Control::find($request->id);
+        $control = Control::query()->find($request->id);
 
         // Workstation not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
@@ -1799,22 +1799,59 @@ class ControlController extends Controller
         );
 
         // get measures
-        if ($request->id !== null) {
+        if ($request->clause !== null) {
             // Find associate control
-            $measures = Measure::query()->where('clause', '=', $request->id)->get();
+            if ($request->scope !== null) {
+                $measures = Measure::query()
+                    ->where('clause', '=', $request->clause)
+                    ->whereHas('controls', function ($q) {
+                        $q->where('controls.status', '=', 2);
+                    })
+                    ->whereHas('controls', function ($q) use ($request) {
+                        $q->where('controls.scope', '=', $request->scope);
+                    })
+                    ->with(['controls' => function ($q) use ($request) {
+                        $q->where('controls.scope', '=', $request->scope);
+                    }])
+                    ->get();
+            }
+            else
+                $measures = Measure::query()
+                    ->with('controls')
+                    ->where('clause', '=', $request->clause)
+                    ->whereHas('controls', function ($q) {
+                        $q->where('controls.status', '=', 2);
+                    })
+                    ->get();
+            $scopes = DB::Table('measures')
+                ->select('scope')
+                ->join('control_measure', 'measures.id', '=', 'control_measure.measure_id')
+                ->join('controls', 'control_measure.control_id', '=', 'controls.id')
+                ->where('measures.clause', '=', $request->clause)
+                ->whereNotNull('controls.scope')
+                ->distinct()
+                ->orderby('scope')
+                ->pluck('scope');
         } else {
             $measures = Collect();
+            $scopes = Collect();
         }
 
         $clauses = DB::Table('measures')
             ->select('clause')
+            ->join('control_measure', 'measures.id', '=', 'control_measure.measure_id')
+            ->join('controls', 'control_measure.control_id', '=', 'controls.id')
+            ->where('controls.status','=', 2)
             ->distinct()
             ->orderby('clause')
             ->pluck('clause');
 
+
+
         // return view
         return view('radar.measures')
             ->with('clauses', $clauses)
+            ->with('scopes', $scopes)
             ->with('measures', $measures);
     }
 

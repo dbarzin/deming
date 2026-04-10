@@ -17,6 +17,7 @@ return [
         'title' => 'Configuration',
         'users' => 'Users',
         'groups' => 'Groups',
+        'scoring' => 'Scoring',
         'reports' => 'Reports',
         'import' => "Import",
         'documents' => 'Documents',
@@ -24,5 +25,7 @@ return [
         'notifications' => 'Notifications'
     ],
     'test' => 'You are in a test environment - The data is fictitious',
-    'logout' => 'Logout'
+    'logout' => 'Logout',
+    'risks' => 'Risk matrix',
+    'exceptions' => 'Exceptions',
 ];

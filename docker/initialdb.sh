@@ -1,36 +1,15 @@
 #!/bin/bash
 
-# Définit un délai de sommeil par défaut de 10 secondes
-DEFAULT_SLEEP=1
+echo "Initialize database"
 
-# Vérifie si la variable d'environnement RESET_DB_SLEEP est définie
-if [ -n "${DB_SLEEP}" ]; then
-    # Utilise la valeur définie par l'utilisateur
-    SLEEP_TIME="${DB_SLEEP}"
-else
-    # Utilise la valeur par défaut
-    SLEEP_TIME="${DEFAULT_SLEEP}"
-fi
+php artisan migrate
 
-# Affiche le message
-echo "Waiting for ${SLEEP_TIME} seconds before executing migration..."
-# Attend le nombre de secondes spécifié
-sleep "${SLEEP_TIME}"
-
-# Vérifie si la variable d'environnement est égale à 1
 if [ "${INITIAL_DB}" = "EN" ]; then
-    # Se déplace vers le répertoire /var/www/deming/
-    cd /var/www/deming/
-    # Exécute la commande
-    php artisan migrate --seed --force
-    # Exit avec le code 0 pour indiquer que le script s'est terminé avec succès
-    exit 0
+    php artisan db:seed  --class=DatabaseSeeder
+elif [ "${INITIAL_DB}" = "FR" ]; then
+    LANG=fr php artisan db:seed --class=DatabaseSeeder
+else
+    echo "WARNING: INITIAL_DB='${INITIAL_DB}' non reconnu (EN ou FR attendu)."
+    exit 1
 fi
-if [ "${INITIAL_DB}" = "FR" ]; then
-    # Se déplace vers le répertoire /var/www/deming/
-    cd /var/www/deming/
-    # Exécute la commande
-    LANG=fr php artisan migrate --seed --force
-    # Exit avec le code 0 pour indiquer que le script s'est terminé avec succès
-    exit 0
-fi
+

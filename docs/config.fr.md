@@ -1,13 +1,13 @@
 ## Configuration
 
-### Attributs <a name="tags"></a>
+### Attributs {#tags}
 
 Cet écran permet de gérer les attributs associés aux mesures de sécurité.
 Il contient la liste des attributs et permet de créer, supprimer ou modifier des listes d’attributs.
 
 [![Screenshot](images/tags.fr.png)](images/tags.fr.png)
 
-### Domaines <a name="domains"></a>
+### Domaines {#domains}
 
 Cet écran permet de créer, modifier ou supprimer des listes de domaines de sécurité.
 
@@ -15,7 +15,7 @@ Cet écran permet de créer, modifier ou supprimer des listes de domaines de sé
 
 L’application est fournie avec une base de mesures de sécurité inspirée de la norme ISO 27001:2022, mais il est possible de définir de nouveaux domaines de sécurité inspirés d’autres normes comme PCI DSS, HDS...
 
-### Utilisateurs <a name="users"></a>
+### Utilisateurs {#users}
 
 Les utilisateurs sont définis dans l’application.
 
@@ -31,7 +31,7 @@ Il existe quatre rôles différents :
 
 * Auditeur : l’auditeur a un accès en lecture à l’ensemble des informations de l’application.
 
-### Groupes <a name="groups"></a>
+### Groupes {#groups}
 
 Cet écran permet de définir des groupes d'utilisateurs.
 Un groupe permet de rassembler un ensemble d'utilisateurs et de contrôles.
@@ -45,7 +45,7 @@ Un groupe est composé :
 * d'une liste d'utilisateurs
 * d'une listes de contrôles
 
-### Rapports <a name="report"></a>
+### Rapports {#reports}
 
 L’application permet de générer le rapport de pilotage du SMSI et d’exporter dans un fichier Excel la liste des domaines, les mesures de sécurités et tous les contrôles réalisés.
 
@@ -57,7 +57,7 @@ Voici le rapport de pilotage du SMSI :
 
 [![Screenshot](images/report2.png){: style="width:600px"}](images/report2.png)
 
-### Importation <a name="import"></a>
+### Importation {#import}
 
 Il est possible d'importer des mesures de sécurité depuis un fichier .XLSX ou depuis la base de données de modèles.
 
@@ -65,7 +65,7 @@ Lors de l'importation, il est possible de supprimer tous les autres contrôles e
 
 [![Screenshot](images/import.png){: style="width:600px"}](images/import.png)
 
-### Documents <a name="documents"></a>
+### Documents {#documents}
 
 Cet écran permet de modifier la configuration de la gestion des document utilisés dans Deming.
 

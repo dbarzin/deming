@@ -6,9 +6,11 @@ use App\Traits\Auditable;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
+use Mercator\Core\Models\Operation;
 
 class Control extends Model
 {
@@ -53,21 +55,25 @@ class Control extends Model
     // 1 - Proposed by auditee => relisation date not null
     // 2 - Done => relisation date not null
 
+    /** @return BelongsToMany<Measure, $this> */
     public function measures(): BelongsToMany
     {
         return $this->belongsToMany(Measure::class)->orderBy('clause');
     }
 
+    /** @return HasMany<Action, $this> */
     public function actions(): HasMany
     {
         return $this->hasMany(Action::class);
     }
 
+    /** @return HasMany<Document, $this> */
     public function documents(): HasMany
     {
         return $this->hasMany(Document::class);
     }
 
+    /** @return BelongsToMany<User, $this> */
     public function users(): BelongsToMany
     {
         if ($this->users === null) {
@@ -76,6 +82,7 @@ class Control extends Model
         return $this->users;
     }
 
+    /** @return BelongsToMany<UserGroup, $this> */
     public function groups()
     {
         if ($this->groups === null) {
@@ -118,7 +125,7 @@ class Control extends Model
         return false;
     }
 
-    public function clauses(int $id)
+    public function clauses(int $id) : Collection
     {
         return DB::table('measures')
             ->select('measure_id', 'clause')
@@ -126,7 +133,7 @@ class Control extends Model
             ->get();
     }
 
-    public static function cleanup(string $startDate, bool $dryRun)
+    public static function cleanup(string $startDate, bool $dryRun) : array
     {
         // Initialise counters
         $documentCount = 0;

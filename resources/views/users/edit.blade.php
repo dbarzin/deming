@@ -80,9 +80,9 @@
 	    		<div class="cell-1">
 					<label class="label" for="description">{{ trans('cruds.user.fields.password') }}</label>
 				</div>
-	    		<div class="cell-5">
-					<input type="password" name="password1"/>
-					<input type="password" name="password2"/>
+	    		<div class="cell-3">
+					<input type="password" name="password1" autocomplete="new-password"/>
+					<input type="password" name="password2" autocomplete="new-password"/>
 				</div>
 			</div>
 			@endif
