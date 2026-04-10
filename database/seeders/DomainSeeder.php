@@ -14,36 +14,43 @@ class DomainSeeder extends Seeder
      *
      * @return void
      */
-    public function run()
+    public function run() : void
     {
-        DB::table('domains')->delete();
+        try {
+            DB::statement('SET FOREIGN_KEY_CHECKS=0;');
+            DB::table('domains')->delete();
+        } finally {
+            DB::statement('SET FOREIGN_KEY_CHECKS=1;');
+        }
 
-        // get language
         $lang = getenv('LANG') ?: config('app.locale', 'en');
         $lang = strtolower(substr($lang, 0, 2));
 
-        // get filename
-        if ($lang === 'fr')
-            $filename="database/data/domains.fr.csv";
-        else
-            $filename="database/data/domains.en.csv";
+        $filename = $lang === 'fr'
+            ? 'database/data/domains.fr.csv'
+            : 'database/data/domains.en.csv';
 
-        // Open CSV file
-        $csvFile = fopen(base_path($filename), "r");
-
-        // Loop on each line
-        $firstline = true;
-        while (($data = fgetcsv($csvFile, 2000, ",")) !== FALSE) {
-            if (!$firstline) {
-                DB::table('domains')->insert([
-                    'id' => (int) $data[0],
-                    'title' => $data[1],
-                    'description' => $data[2],
-                    'created_at' => now(),
-                ]);
-            }
-            $firstline = false;
+        $csvFile = fopen(base_path($filename), 'r');
+        if ($csvFile === false) {
+            throw new \RuntimeException("Cannot open seed file: {$filename}");
         }
-        fclose($csvFile);
+
+        $firstline = true;
+        try {
+            while (($data = fgetcsv($csvFile, 2000, ',')) !== false) {
+                if (!$firstline) {
+                    DB::table('domains')->insert([
+                        'id'          => (int) $data[0],
+                        'title'       => $data[1],
+                        'framework'   => $data[2] ?? null,  // à ajuster selon structure CSV
+                        'description' => $data[3] ?? $data[2],
+                        'created_at'  => now(),
+                    ]);
+                }
+                $firstline = false;
+            }
+        } finally {
+            fclose($csvFile);
+        }
     }
 }
