@@ -239,7 +239,7 @@
                                 </td>
                                 <td>
                                     <input type="color"
-                                    style="width:40px;"
+                                           style="width:40px;"
                                            name="risk_thresholds[{{ $idx }}][color]"
                                            class="js-color-input"
                                            value="{{ $t['color'] ?? '#cccccc' }}"
@@ -425,8 +425,8 @@ document.addEventListener("DOMContentLoaded", function () {
             '<td><input type="text"   name="risk_thresholds[' + thrIdx + '][label]" class="input js-threshold-label" required></td>' +
             '<td><input type="number" name="risk_thresholds[' + thrIdx + '][max]"   class="input" placeholder="∞" min="1" style="width:80px; text-align:center;"></td>' +
             '<td><input type="color" name="risk_thresholds[' + thrIdx + '][color]" class="js-color-input"' +
-                ' value="#cccccc" data-role="color-selector" onchange="updatePreview(this)"></td>' +
-            '<td><span class="badge js-preview" style="background:#cccccc;color:#fff">—</span></td>' +
+                ' value="#cccccc" style="width:40px;" data-role="color-selector" onchange="updatePreview(this)"></td>' +
+            '<td class="text-center"><span class="badge js-preview" style="background:#cccccc;color:#fff">—</span></td>' +
             '<td><button type="button" class="button mini alert js-remove-threshold"><span class="mif-bin"></span></button></td>';
 
         tbody.appendChild(tr);
