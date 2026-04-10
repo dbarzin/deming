@@ -668,7 +668,7 @@ class ControlController extends Controller
         }
 
         // Get Control
-        $control = Control::find($request->id);
+        $control = Control::query()->find($request->id);
 
         // Workstation not found
         abort_if($control === null, Response::HTTP_NOT_FOUND, '404 Not Found');
@@ -1804,7 +1804,7 @@ class ControlController extends Controller
             if ($request->scope !== null) {
                 $measures = Measure::query()
                     ->where('clause', '=', $request->clause)
-                    ->whereHas('controls', function ($q) use ($request) {
+                    ->whereHas('controls', function ($q) {
                         $q->where('controls.status', '=', 2);
                     })
                     ->whereHas('controls', function ($q) use ($request) {
@@ -1819,7 +1819,7 @@ class ControlController extends Controller
                 $measures = Measure::query()
                     ->with('controls')
                     ->where('clause', '=', $request->clause)
-                    ->whereHas('controls', function ($q) use ($request) {
+                    ->whereHas('controls', function ($q) {
                         $q->where('controls.status', '=', 2);
                     })
                     ->get();

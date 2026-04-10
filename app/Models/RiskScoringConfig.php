@@ -51,17 +51,17 @@ class RiskScoringConfig extends Model
      */
     public static function active(): self
     {
-        if (static::$activeInstance === null) {
-            static::$activeInstance = static::where('is_active', true)->firstOrFail();
+        if (self::$activeInstance === null) {
+            self::$activeInstance = static::where('is_active', true)->firstOrFail();
         }
 
-        return static::$activeInstance;
+        return self::$activeInstance;
     }
 
     /** Invalide le cache (à appeler après activation d'une nouvelle config) */
     public static function clearCache(): void
     {
-        static::$activeInstance = null;
+        self::$activeInstance = null;
     }
 
     // -------------------------------------------------------------------------
@@ -75,9 +75,9 @@ class RiskScoringConfig extends Model
     public function activate(): void
     {
         \DB::transaction(function () {
-            static::query()->update(['is_active' => false]);
+            self::query()->update(['is_active' => false]);
             $this->update(['is_active' => true]);
-            static::clearCache();
+            self::clearCache();
         });
     }
 

@@ -198,6 +198,7 @@ class RiskScoringConfigController extends Controller
 // Helpers couleurs : migration legacy (noms de classes MetroUI) → hex
 // -------------------------------------------------------------------------
 
+/*
     private const COLOR_MAP = [
         'success'   => '#27ae60',
         'warning'   => '#f39c12',
@@ -206,5 +207,5 @@ class RiskScoringConfigController extends Controller
         'info'      => '#2980b9',
         'secondary' => '#7f8c8d',
     ];
-
+*/
 }

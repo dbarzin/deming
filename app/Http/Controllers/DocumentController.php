@@ -263,19 +263,16 @@ class DocumentController extends Controller
 
     public function check()
     {
-        // Only for administrator
         abort_if(
-            (Auth::User()->role !== 1),
+            ! Auth::User()->isAdmin(),
             Response::HTTP_FORBIDDEN,
             '403 Forbidden'
         );
 
-        // Get all documents with computed metadata
-        $documents = Document::all()->map(function ($doc) {
+        $documents = Document::all()->map(function (Document $doc): Document {
             $filePath = storage_path('docs/' . $doc->id);
             $fileExists = file_exists($filePath);
 
-            // Add computed attributes to document object
             $doc->file_exists = $fileExists;
             $doc->link_count = 0;
             $doc->hash_valid = false;
@@ -283,16 +280,16 @@ class DocumentController extends Controller
             if ($fileExists) {
                 $stats = stat($filePath);
                 if ($stats !== false) {
-                    $doc->link_count = $stats['nlink'] ?? 0;
-                    }
+                    $doc->link_count = $stats['nlink'];
+                }
                 $computedHash = hash_file('sha256', $filePath);
-                $doc->hash_valid = $computedHash !== false && $doc->hash !== null && hash_equals($doc->hash, $computedHash);
+                $doc->hash_valid = $computedHash !== false
+                    && hash_equals($doc->hash, $computedHash);
             }
 
             return $doc;
         });
 
-        // Show view with pre-computed metadata
         return view('/documents/check')
             ->with('documents', $documents);
     }
