@@ -161,7 +161,7 @@
 
             {{-- Vulnérabilité : pleine largeur, visible si likelihood --}}
             <div class="row" id="vulnerability-row" style="display:none">
-                <div class="cell-lg-12 cell-md-12 mb-4">
+                <div class="cell-lg-6 cell-md-6 mb-4">
                     <div class="level-section-header" style="background:#7d3c98">
                         <span class="mif-bug"></span>
                         &nbsp;{{ trans("cruds.risk.fields.vulnerability") }}

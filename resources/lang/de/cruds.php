@@ -335,4 +335,165 @@ return [
                 ],
             ],
         ],
+    // -------------------------------------------------------------------------
+    // Risikoregister
+    // -------------------------------------------------------------------------
+    'risk' => [
+
+        // Seitentitel
+        'list' => 'Risikoliste',
+        'create' => 'Neues Risiko',
+        'edit' => 'Risiko bearbeiten',
+        'matrix' => 'Risikomatrix',
+        'singular' => 'Risiko',
+        'plural' => 'Risiken',
+        'export' => 'Risiken',
+
+        // Risikostufen (in Badges und Zählern angezeigt)
+        'levels' => [
+            'low' => 'Gering',
+            'medium' => 'Mittel',
+            'high' => 'Hoch',
+            'critical' => 'Kritisch',
+        ],
+
+        // Formular- und Listenfelder
+        'fields' => [
+            'name' => 'Name',
+            'description' => 'Beschreibung',
+            'owner' => 'Verantwortlicher',
+            'no_owner' => 'Nicht zugewiesen',
+            'choose_owner' => 'Verantwortlichen wählen',
+            'choose_status' => 'Status wählen',
+
+            // Bewertung
+            'probability' => 'Wahrscheinlichkeit',
+            'probability_comment' => 'Kommentar Wahrscheinlichkeit',
+            'impact' => 'Auswirkung',
+            'impact_comment' => 'Kommentar Auswirkung',
+            'exposure' => 'Exposition',
+            'vulnerability' => 'Verwundbarkeit',
+            'likelihood' => 'Eintrittswahrscheinlichkeit',
+            'score' => 'Punktzahl',
+
+            // Behandlung
+            'status' => 'Behandlungsstatus',
+            'status_comment' => 'Kommentar Status',
+            'measures' => 'Verknüpfte Kontrollen',
+            'measures_hint' => 'Erforderlich bei Status = Gemindert',
+            'action_plan' => 'Verknüpfte Aktionspläne',
+            'actions_hint' => 'Erforderlich bei Status = Nicht akzeptiert',
+
+            // Planung
+            'review_frequency' => 'Überprüfungshäufigkeit',
+            'next_review' => 'Nächste Überprüfung',
+            'overdue' => 'Überprüfung überfällig',
+            'overdue_all' => 'Alle',
+            'overdue_only' => 'Überfällig',
+
+            // Dashboard / Matrix
+            'total' => 'Gesamt',
+            'by_status' => 'Verteilung nach Status',
+            'by_risks' => 'Verteilung nach Risiken',
+        ],
+
+        // Behandlungsstatus
+        'status' => [
+            'not_evaluated' => 'Nicht bewertet',
+            'not_accepted' => 'Nicht akzeptiert',
+            'temporarily_accepted' => 'Vorläufig akzeptiert',
+            'accepted' => 'Akzeptiert',
+            'mitigated' => 'Gemindert',
+            'transferred' => 'Übertragen',
+            'avoided' => 'Vermieden',
+            ],
+        ],
+
+        // -------------------------------------------------------------------------
+        // Konfiguration der Risikobewertung
+        // -------------------------------------------------------------------------
+        'risk_scoring' => [
+
+            // Seitentitel
+            'list' => 'Risikoklassifizierungsmethoden',
+            'create' => 'Neue Klassifizierung',
+            'edit' => 'Klassifizierung bearbeiten',
+            'activate' => 'Diese Konfiguration aktivieren',
+
+            // Aktionen auf Stufen / Schwellenwerte
+            'add_level' => 'Stufe hinzufügen',
+            'add_threshold' => 'Schwellenwert hinzufügen',
+
+            // Kontexthilfen
+            'levels_hint' => 'Mindestens 2 Stufen. Der Wert muss eine eindeutige ganze Zahl sein.',
+            'thresholds_hint' => 'Der letzte Schwellenwert hat keine Obergrenze (Auffangwert). Vom niedrigsten zum höchsten Score sortieren.',
+
+            // Formularfelder
+            'fields' => [
+                'name' => 'Konfiguration',
+                'formula' => 'Berechnung',
+                'levels' => 'Stufen',
+                'thresholds' => 'Klassifizierungsschwellen',
+                'value' => 'Wert',
+                'label' => 'Bezeichnung',
+                'description' => 'Beschreibung',
+                'level_key' => 'Interner Schlüssel',
+                'score_max' => 'Max. Punktzahl',
+                'color' => 'Farbe',
+            ],
+
+            // Verfügbare Farben für Schwellenwerte
+            'colors' => [
+                'success' => 'Grün',
+                'warning' => 'Orange',
+                'danger' => 'Rot',
+                'alert' => 'Dunkelrot',
+                'info' => 'Blau',
+                'secondary' => 'Grau',
+            ],
+
+            // Verfügbare Formeln (Bezeichnungen)
+            'formulas' => [
+                'probability_x_impact' => 'Wahrscheinlichkeit × Auswirkung',
+                'likelihood_x_impact' => 'Eintrittswahrscheinlichkeit × Auswirkung (BSI 200-3)',
+                'additive' => 'Wahrscheinlichkeit + Auswirkung',
+                'max_pi' => 'max(Wahrscheinlichkeit, Auswirkung)',
+            ],
+
+            // Standardwerte bei der Erstellung einer neuen Konfiguration
+            'defaults' => [
+                'probability_levels' => [
+                    'rare' => 'Selten',
+                    'unlikely' => 'Unwahrscheinlich',
+                    'possible' => 'Möglich',
+                    'likely' => 'Wahrscheinlich',
+                    'very_likely' => 'Sehr wahrscheinlich',
+                ],
+                'exposure_levels' => [
+                    'offline' => 'Offline',
+                    'internal' => 'Intern',
+                    'internet' => 'Internet',
+                ],
+                'vulnerability_levels' => [
+                    'none' => 'Keine',
+                    'known' => 'Bekannt',
+                    'exploitable_int' => 'Intern ausnutzbar',
+                    'exploitable_ext' => 'Extern ausnutzbar',
+                ],
+                'impact_levels' => [
+                    'negligible' => 'Vernachlässigbar',
+                    'low' => 'Gering',
+                    'moderate' => 'Mäßig',
+                    'high' => 'Hoch',
+                    'critical' => 'Kritisch',
+                ],
+                'risk_thresholds' => [
+                    'low' => 'Gering',
+                    'medium' => 'Mittel',
+                    'high' => 'Hoch',
+                    'critical' => 'Kritisch',
+                ],
+            ],
+        ],
+
     ];

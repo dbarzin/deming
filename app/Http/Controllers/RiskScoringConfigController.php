@@ -15,13 +15,14 @@ use Illuminate\View\View;
  */
 class RiskScoringConfigController extends Controller
 {
+
     public function __construct(private readonly RiskScoringService $scoringService)
     {
     }
 
     private function checkAdmin(): void
     {
-        if (Auth::user()->role !== 1) {
+        if (!Auth::user()->isAdmin()) {
             abort(403);
         }
     }
@@ -44,24 +45,35 @@ class RiskScoringConfigController extends Controller
         $config   = new RiskScoringConfig([
             'formula'            => 'probability_x_impact',
             'probability_levels' => [
-                ['value' => 1, 'label' => 'Rare',          'description' => ''],
-                ['value' => 2, 'label' => 'Peu probable',  'description' => ''],
-                ['value' => 3, 'label' => 'Possible',      'description' => ''],
-                ['value' => 4, 'label' => 'Probable',      'description' => ''],
-                ['value' => 5, 'label' => 'Très probable', 'description' => ''],
+                ['value' => 1, 'label' => __('cruds.risk_scoring.defaults.probability_levels.rare'),        'description' => ''],
+                ['value' => 2, 'label' => __('cruds.risk_scoring.defaults.probability_levels.unlikely'),    'description' => ''],
+                ['value' => 3, 'label' => __('cruds.risk_scoring.defaults.probability_levels.possible'),    'description' => ''],
+                ['value' => 4, 'label' => __('cruds.risk_scoring.defaults.probability_levels.likely'),      'description' => ''],
+                ['value' => 5, 'label' => __('cruds.risk_scoring.defaults.probability_levels.very_likely'), 'description' => ''],
+            ],
+            'exposure_levels' => [
+                ['value' => 0, 'label' => __('cruds.risk_scoring.defaults.exposure_levels.offline'),  'description' => ''],
+                ['value' => 1, 'label' => __('cruds.risk_scoring.defaults.exposure_levels.internal'), 'description' => ''],
+                ['value' => 2, 'label' => __('cruds.risk_scoring.defaults.exposure_levels.internet'), 'description' => ''],
+            ],
+            'vulnerability_levels' => [
+                ['value' => 1, 'label' => __('cruds.risk_scoring.defaults.vulnerability_levels.none'),            'description' => ''],
+                ['value' => 2, 'label' => __('cruds.risk_scoring.defaults.vulnerability_levels.known'),           'description' => ''],
+                ['value' => 3, 'label' => __('cruds.risk_scoring.defaults.vulnerability_levels.exploitable_int'), 'description' => ''],
+                ['value' => 4, 'label' => __('cruds.risk_scoring.defaults.vulnerability_levels.exploitable_ext'), 'description' => ''],
             ],
             'impact_levels' => [
-                ['value' => 1, 'label' => 'Négligeable', 'description' => ''],
-                ['value' => 2, 'label' => 'Faible',      'description' => ''],
-                ['value' => 3, 'label' => 'Modéré',      'description' => ''],
-                ['value' => 4, 'label' => 'Élevé',       'description' => ''],
-                ['value' => 5, 'label' => 'Critique',    'description' => ''],
+                ['value' => 1, 'label' => __('cruds.risk_scoring.defaults.impact_levels.negligible'), 'description' => ''],
+                ['value' => 2, 'label' => __('cruds.risk_scoring.defaults.impact_levels.low'),        'description' => ''],
+                ['value' => 3, 'label' => __('cruds.risk_scoring.defaults.impact_levels.moderate'),   'description' => ''],
+                ['value' => 4, 'label' => __('cruds.risk_scoring.defaults.impact_levels.high'),       'description' => ''],
+                ['value' => 5, 'label' => __('cruds.risk_scoring.defaults.impact_levels.critical'),   'description' => ''],
             ],
             'risk_thresholds' => [
-                ['level' => 'low',      'label' => 'Faible',   'max' => 4,    'color' => '#27ae60'],
-                ['level' => 'medium',   'label' => 'Moyen',    'max' => 9,    'color' => '#f39c12'],
-                ['level' => 'high',     'label' => 'Élevé',    'max' => 16,   'color' => '#e74c3c'],
-                ['level' => 'critical', 'label' => 'Critique', 'max' => null, 'color' => '#c0392b'],
+                ['level' => 'low',      'label' => __('cruds.risk_scoring.defaults.risk_thresholds.low'),      'max' => 4,    'color' => '#27ae60'],
+                ['level' => 'medium',   'label' => __('cruds.risk_scoring.defaults.risk_thresholds.medium'),   'max' => 9,    'color' => '#f39c12'],
+                ['level' => 'high',     'label' => __('cruds.risk_scoring.defaults.risk_thresholds.high'),     'max' => 16,   'color' => '#e74c3c'],
+                ['level' => 'critical', 'label' => __('cruds.risk_scoring.defaults.risk_thresholds.critical'), 'max' => null, 'color' => '#c0392b'],
             ],
         ]);
 
@@ -198,14 +210,14 @@ class RiskScoringConfigController extends Controller
 // Helpers couleurs : migration legacy (noms de classes MetroUI) → hex
 // -------------------------------------------------------------------------
 
-/*
-    private const COLOR_MAP = [
-        'success'   => '#27ae60',
-        'warning'   => '#f39c12',
-        'danger'    => '#e74c3c',
-        'alert'     => '#c0392b',
-        'info'      => '#2980b9',
-        'secondary' => '#7f8c8d',
-    ];
-*/
+    /*
+        private const COLOR_MAP = [
+            'success'   => '#27ae60',
+            'warning'   => '#f39c12',
+            'danger'    => '#e74c3c',
+            'alert'     => '#c0392b',
+            'info'      => '#2980b9',
+            'secondary' => '#7f8c8d',
+        ];
+    */
 }
