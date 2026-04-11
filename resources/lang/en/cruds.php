@@ -462,6 +462,42 @@ return [
             'additive'             => 'Probability + Impact',
             'max_pi'               => 'max(Probability, Impact)',
         ],
+
+
+        // Default values suggested when creating a configuration
+        'defaults' => [
+            'probability_levels' => [
+                'rare' => 'Rare',
+                'unlikely' => 'Unlikely',
+                'possible' => 'Possible',
+                'likely' => 'Probable',
+                'very_likely' => 'Very Likely',
+            ],
+            'exposure_levels' => [
+                'offline' => 'Offline',
+                'internal' => 'Internal',
+                'internet' => 'Internet',
+            ],
+            'vulnerability_levels' => [
+                'none' => 'None',
+                'known' => 'Known',
+                'exploitable_int' => 'Internally exploitable',
+                'exploitable_ext' => 'Externally exploitable',
+            ],
+            'impact_levels' => [
+                'negligible' => 'Negligible',
+                'low' => 'Low',
+                'moderate' => 'Moderate',
+                'high' => 'High',
+                'critical' => 'Critical',
+            ],
+            'risk_thresholds' => [
+                'low' => 'Low',
+                'medium' => 'Medium',
+                'high' => 'High',
+                'critical' => 'Critical',
+            ],
+        ],
     ],
 
 ];

@@ -16,7 +16,7 @@ use App\Http\Controllers\RiskScoringConfigController;
 
 Auth::routes();
 
-Route::namespace('App\\Http\\Controllers')->group(function () {
+Route::namespace('App\\Http\\Controllers')->middleware('auth')->group(function () {
     /* Index */
     Route::get('/', 'HomeController@index');
     Route::get('/home', 'HomeController@index');

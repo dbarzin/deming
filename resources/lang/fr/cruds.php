@@ -54,7 +54,7 @@ return [
         ],
     ],
     'attribute' => [
-       'fields' => [
+        'fields' => [
             'name' => 'Nom',
             'values' => 'Valeurs',
         ],
@@ -64,7 +64,7 @@ return [
         'index' => 'Liste des attributs',
         'choose' => 'Choisir un attribut',
         'title' => 'Attribut'
-     ],
+    ],
     'control' => [
         'description' => '',
         'fields' => [
@@ -248,7 +248,7 @@ return [
         'action' => 'Plan d\'action',
         'action_helper' => 'Le plan d\'action proposé',
         'warning' => 'Cette action est irréversible. Veuillez effectuer une sauvegarde avant !'
-        ],
+    ],
     'log' => [
         'index' => 'Liste des logs',
         'title' => 'Log',
@@ -335,7 +335,7 @@ return [
                 'month' => 'mois',
                 'months' => 'mois',
             ],
-         ]
+        ]
     ],
 
     // -------------------------------------------------------------------------
@@ -461,6 +461,41 @@ return [
             'likelihood_x_impact'  => 'Vraisemblance × Impact (BSI 200-3)',
             'additive'             => 'Probabilité + Impact',
             'max_pi'               => 'max(Probabilité, Impact)',
+        ],
+
+        // Valeurs par défaut proposées à la création d'une configuration
+        'defaults' => [
+            'probability_levels' => [
+                'rare'        => 'Rare',
+                'unlikely'    => 'Peu probable',
+                'possible'    => 'Possible',
+                'likely'      => 'Probable',
+                'very_likely' => 'Très probable',
+            ],
+            'exposure_levels' => [
+                'offline'  => 'Hors réseau',
+                'internal' => 'Interne',
+                'internet' => 'Internet',
+            ],
+            'vulnerability_levels' => [
+                'none'             => 'Aucune',
+                'known'            => 'Connue',
+                'exploitable_int'  => 'Exploitable interne',
+                'exploitable_ext'  => 'Exploitable externe',
+            ],
+            'impact_levels' => [
+                'negligible' => 'Négligeable',
+                'low'        => 'Faible',
+                'moderate'   => 'Modéré',
+                'high'       => 'Élevé',
+                'critical'   => 'Critique',
+            ],
+            'risk_thresholds' => [
+                'low'      => 'Faible',
+                'medium'   => 'Moyen',
+                'high'     => 'Élevé',
+                'critical' => 'Critique',
+            ],
         ],
     ],
 ];
