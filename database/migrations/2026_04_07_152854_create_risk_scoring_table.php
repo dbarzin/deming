@@ -39,37 +39,42 @@ return new class extends Migration
         });
 
         // Insérer la configuration par défaut (ISO 27005 classique, alignée lb-consult)
+
         DB::table('risk_scoring_configs')->insert([
-            'name'    => 'ISO 27005 — Probabilité × Impact (défaut)',
+            'name'    => 'ISO 27005',
             'formula' => 'probability_x_impact',
             'is_active' => true,
-
-            'probability_levels' => json_encode([
-                ['value' => 1, 'label' => 'Rare',           'description' => 'Moins d\'une fois tous les 10 ans'],
-                ['value' => 2, 'label' => 'Peu probable',   'description' => 'Tous les 5 à 10 ans'],
-                ['value' => 3, 'label' => 'Possible',       'description' => 'Tous les 1 à 5 ans'],
-                ['value' => 4, 'label' => 'Probable',       'description' => 'Plusieurs fois par an'],
-                ['value' => 5, 'label' => 'Très probable',  'description' => 'Plusieurs fois par mois'],
+            'probability_levels' =>  json_encode([
+                ['value' => 1, 'label' => __('cruds.risk_scoring.defaults.probability_levels.rare'),        'description' => ''],
+                ['value' => 2, 'label' => __('cruds.risk_scoring.defaults.probability_levels.unlikely'),    'description' => ''],
+                ['value' => 3, 'label' => __('cruds.risk_scoring.defaults.probability_levels.possible'),    'description' => ''],
+                ['value' => 4, 'label' => __('cruds.risk_scoring.defaults.probability_levels.likely'),      'description' => ''],
+                ['value' => 5, 'label' => __('cruds.risk_scoring.defaults.probability_levels.very_likely'), 'description' => ''],
             ]),
-
+            'exposure_levels' => json_encode([
+                ['value' => 0, 'label' => __('cruds.risk_scoring.defaults.exposure_levels.offline'),  'description' => ''],
+                ['value' => 1, 'label' => __('cruds.risk_scoring.defaults.exposure_levels.internal'), 'description' => ''],
+                ['value' => 2, 'label' => __('cruds.risk_scoring.defaults.exposure_levels.internet'), 'description' => ''],
+            ]),
+            'vulnerability_levels' => json_encode([
+                ['value' => 1, 'label' => __('cruds.risk_scoring.defaults.vulnerability_levels.none'),            'description' => ''],
+                ['value' => 2, 'label' => __('cruds.risk_scoring.defaults.vulnerability_levels.known'),           'description' => ''],
+                ['value' => 3, 'label' => __('cruds.risk_scoring.defaults.vulnerability_levels.exploitable_int'), 'description' => ''],
+                ['value' => 4, 'label' => __('cruds.risk_scoring.defaults.vulnerability_levels.exploitable_ext'), 'description' => ''],
+            ]),
             'impact_levels' => json_encode([
-                ['value' => 1, 'label' => 'Négligeable', 'description' => 'Aucun impact opérationnel mesurable'],
-                ['value' => 2, 'label' => 'Faible',      'description' => 'Impact limité, facilement résorbé'],
-                ['value' => 3, 'label' => 'Modéré',      'description' => 'Perturbation significative, récupérable'],
-                ['value' => 4, 'label' => 'Élevé',       'description' => 'Impact majeur sur les opérations'],
-                ['value' => 5, 'label' => 'Critique',    'description' => 'Menace existentielle pour l\'organisation'],
+                ['value' => 1, 'label' => __('cruds.risk_scoring.defaults.impact_levels.negligible'), 'description' => ''],
+                ['value' => 2, 'label' => __('cruds.risk_scoring.defaults.impact_levels.low'),        'description' => ''],
+                ['value' => 3, 'label' => __('cruds.risk_scoring.defaults.impact_levels.moderate'),   'description' => ''],
+                ['value' => 4, 'label' => __('cruds.risk_scoring.defaults.impact_levels.high'),       'description' => ''],
+                ['value' => 5, 'label' => __('cruds.risk_scoring.defaults.impact_levels.critical'),   'description' => ''],
             ]),
-
-            'exposure_levels'      => null,
-            'vulnerability_levels' => null,
-
             'risk_thresholds' => json_encode([
-                ['level' => 'low',      'label' => 'Faible',   'max' => 4,    'color' => 'success'],
-                ['level' => 'medium',   'label' => 'Moyen',    'max' => 9,    'color' => 'warning'],
-                ['level' => 'high',     'label' => 'Élevé',    'max' => 16,   'color' => 'danger'],
-                ['level' => 'critical', 'label' => 'Critique', 'max' => null, 'color' => 'alert'],
+                ['level' => 'low',      'label' => __('cruds.risk_scoring.defaults.risk_thresholds.low'),      'max' => 4,    'color' => '#27ae60'],
+                ['level' => 'medium',   'label' => __('cruds.risk_scoring.defaults.risk_thresholds.medium'),   'max' => 9,    'color' => '#f39c12'],
+                ['level' => 'high',     'label' => __('cruds.risk_scoring.defaults.risk_thresholds.high'),     'max' => 16,   'color' => '#e74c3c'],
+                ['level' => 'critical', 'label' => __('cruds.risk_scoring.defaults.risk_thresholds.critical'), 'max' => null, 'color' => '#c0392b'],
             ]),
-
             'created_at' => now(),
             'updated_at' => now(),
         ]);
