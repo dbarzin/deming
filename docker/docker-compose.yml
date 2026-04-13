@@ -6,15 +6,9 @@ services:
     environment:
       ### PLEASE DISABLE AFTER THE FIRST RUN FOR OPTIMIZATION PRODUCTION
       - DB_SLEEP=10
-      ### PLEASE DISABLE FOR PRODUCTION
-      # - USE_DEMO_DATA=0
-      ### PLEASE DISABLE FOR PRODUCTION
-      ### PLEASE AFTER ONE RUN DISABLE FOR OPTIMIZATION
-      # - UPLOAD_DB_ISO27001=FR #EN OR FR
-      # - APP_BANNER_TEST=false
-      ### PLEASE AFTER ONE RUN DISABLE FOR OPTIMIZATION
-      # - INITIAL_DB=FR #EN OR FR
+      # Default timezone
       - TZ=Europe/Paris
+      # Default db connexion
       - DB_HOST=mysql
       - APP_ENV=local
       - DB_DATABASE=deming
