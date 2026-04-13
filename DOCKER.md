@@ -179,24 +179,18 @@ docker compose build --no-cache deming
 
 These variables in `docker-compose.yml` control the first-run initialization:
 
-| Variable | Values | Description |
-|---|---|---|
-| `INITIAL_DB` | `EN` / `FR` | Run migrations and seed the database in English or French |
-| `UPLOAD_DB_ISO27001` | `EN` / `FR` | Import the ISO 27001 control framework |
-| `USE_DEMO_DATA` | `1` / unset | Generate demo controls, measures and audit data |
-| `RESET_DB` | `EN` / `FR` | **⚠️ Wipe and recreate the entire database** |
-| `DB_SLEEP` | integer (seconds) | Extra wait before migration attempts (default: 10) |
+| Variable       | Values            | Description                                        |
+|----------------|-------------------|----------------------------------------------------|
+| `RESET_DB`     | `EN` / `FR`       | **⚠️ Wipe and recreate the entire database**       |
+| `DB_SLEEP`     | integer (seconds) | Extra wait before migration attempts (default: 10) |
 
 ### Recommended lifecycle
 
 ```yaml
 # docker-compose.yml — first run
 environment:
-  - INITIAL_DB=FR
-  - UPLOAD_DB_ISO27001=FR
-  - USE_DEMO_DATA=1
-  - DB_SLEEP=10
   - TZ=Europe/Paris
+  - DB_SLEEP=10
   - APP_FORCE_HTTPS=false
 ```
 
