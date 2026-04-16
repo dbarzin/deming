@@ -23,7 +23,7 @@
 
     <h2>Open Source</h2>
 
-    <p>Distribué sous licence <a href="https://www.gnu.org/licenses/licenses.html">GPL</a>, Deming s'adapte aux besoins des entreprises en quête d'amélioration continue de leur sécurité de l'information. Pour en savoir plus sur l’utilisation et les fonctionnalités, consultez la <a href="https://dbarzin.github.io/deming/index.fr/">documentation utilisateur</a> et le  <a href="https://github.com/dbarzin">GitHub</a> du projet.</p>
+    <p>Distribué sous licence <a href="https://www.gnu.org/licenses/licenses.html">GPL</a>, Deming s'adapte aux besoins des entreprises en quête d'amélioration continue de leur sécurité de l'information. Pour en savoir plus sur l’utilisation et les fonctionnalités, consultez la <a href="https://dbarzin.github.io/deming/fr/">documentation utilisateur</a> et le  <a href="https://github.com/dbarzin">GitHub</a> du projet.</p>
 @elseif(Auth::User()->language==="de")
 <h1>Über Deming</h1>
 
@@ -38,7 +38,7 @@
 
 <h2>Open Source</h2>
 
-<p>Unter der <a href="https://www.gnu.org/licenses/licenses.html">GPL-Lizenz</a> vertrieben, passt sich Deming den Bedürfnissen von Unternehmen an, die eine kontinuierliche Verbesserung ihrer Informationssicherheit anstreben. Weitere Informationen zur Nutzung und den Funktionen finden Sie in der <a href="https://dbarzin.github.io/deming/index.fr/">Benutzerdokumentation</a> und auf dem <a href="https://github.com/dbarzin">GitHub-Projekt</a>.</p>
+<p>Unter der <a href="https://www.gnu.org/licenses/licenses.html">GPL-Lizenz</a> vertrieben, passt sich Deming den Bedürfnissen von Unternehmen an, die eine kontinuierliche Verbesserung ihrer Informationssicherheit anstreben. Weitere Informationen zur Nutzung und den Funktionen finden Sie in der <a href="https://dbarzin.github.io/deming">Benutzerdokumentation</a> und auf dem <a href="https://github.com/dbarzin">GitHub-Projekt</a>.</p>
 @else
     <h1>About Deming</h1>
 
