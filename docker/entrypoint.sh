@@ -13,8 +13,8 @@ done
 echo "MySQL is ready."
 
 # Permissions — toujours en root (avant le USER switch)
-chown -R www-data:www-data /var/www/html/storage /var/www/html/bootstrap/cache
-chmod -R 775 /var/www/html/storage /var/www/html/bootstrap/cache
+chown -R www-data:www-data /var/www/deming/storage /var/www/deming/bootstrap/cache
+chmod -R 775 /var/www/deming/storage /var/www/deming/bootstrap/cache
 
 # APP_KEY — générer seulement si absent
 grep -q '^APP_KEY=base64:' .env || php artisan key:generate --no-interaction
