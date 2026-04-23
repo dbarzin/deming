@@ -1,8 +1,8 @@
-## Plans d'action
+# Plans d'action
 
 Chaque fois qu’un contrôle est en échec (orange ou rouge), un plan d’action doit être mis en place et suivi afin de remédier à la situation.
 
-### Liste des plans d’action <a name="list"></a>
+## Liste des plans d’action <a name="list"></a>
 
 Cet écran permet de suivre les plans d’action :
 
@@ -17,7 +17,7 @@ En cliquant sur :
 * La date de prochaine revue, vous arrivez vers le [contrôle](controls.fr.md/#show) suivant
 
 
-### Modifier un plan d’action <a name="edit"></a>
+## Modifier un plan d’action <a name="edit"></a>
 
 Cet écran permet de modifier un plan d’action et de planifier la prochaine évaluation du contrôle.
 

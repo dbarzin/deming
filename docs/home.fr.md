@@ -1,6 +1,6 @@
-## Application
+# Application
 
-### Page principale
+## Page principale
 
 La page principale de l’application permet d'avoir une vue d'ensemble du SMSI et des contrôles à réaliser.
 Elle est composée de :
@@ -33,7 +33,7 @@ La partie inférieure de la page principale contient la liste des contrôles pla
 
 Les dates des contrôles en retard sont affichés en rouge.
 
-### Recherche
+## Recherche
 
 Un outil de recherche permet de trouver les objets contenant la présence d’un mot dans le nom, les objectifs, les observations des contrôles ou dans leurs plans d’action.
 

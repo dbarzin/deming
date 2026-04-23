@@ -1,6 +1,6 @@
-## Application
+# Application
 
-### Main page
+## Main page
 
 The main page of the application provides an overview of the ISMS and the checks to be carried out.
 It is composed of:
@@ -34,7 +34,7 @@ The lower part of the main page contains the list of controls scheduled for the 
 
 Overdue check dates are displayed in red.
 
-### Search
+## Search
 
 A search tool allows you to search for the presence of a word in the name, the objectives, the observations of the controls
 and in their action plans.

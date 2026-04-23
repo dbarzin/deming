@@ -1,7 +1,6 @@
-## Introduction
+# Introduction
 
-
-### Qu’est-ce que Deming ?
+## Qu’est-ce que Deming ?
 
 Deming est un outil Open Source conçu pour aider les RSSI à maintenir leur système de management de la sécurité de l'information. Grâce à cette application, les RSSI peuvent facilement planifier et suivre la mise en œuvre des contrôles de sécurité et le cycle d'amélioration continue. L'application est conçue pour être facile à utiliser et à personnaliser, avec une interface utilisateur intuitive.
 
@@ -24,7 +23,7 @@ Cette application de gestion de la sécurité de l'information est un outil puis
 
 Avec son interface utilisateur intuitive, la possibilité de définir de nouveaux contrôles et sa compatibilité ISO 27001:2022, elle offre aux RSSI une grande flexibilité pour adapter l'application à leurs besoins spécifiques.
 
-### Qu'est-ce qui n'est pas Deming ? <a name="notDeming"></a>
+## Qu'est-ce qui n'est pas Deming ? <a name="notDeming"></a>
 
 Deming n'est pas une solution miracle qui réalise l'analyse des risques, importe toutes les normes existantes, gère automatiquement votre documentation, fournit des procédures par défaut ou utilise de l'intelligence artificielle de manière autonome...
 
@@ -39,7 +38,7 @@ Mais :
 - elle est gratuite.
 
 
-### Pourquoi contrôler ?
+## Pourquoi contrôler ?
 
 Pour gérer la sécurité du système d’information il faut mettre en place un ensemble de mesures de sécurité et contrôler régulièrement que ces mesures sont effectives et efficaces. Ces contrôles réguliers permettent de garantir que les mesures de sécurité mises en place atteignent leurs objectifs de sécurité.
 
@@ -52,7 +51,7 @@ Les exigences de mesure de l’efficacité sont :
 - e) de fournir des données pour la revue de la direction afin de faciliter la prise de décisions liées au SMSI;
 - f) de justifier les besoins d'amélioration du SMSI.
 
-### Evaluation des performances
+## Evaluation des performances
 
 La norme ISO 27001 au chapitre 9.1, impose d’évaluer les performances de sécurité de l’information, ainsi que l’efficacité du système de management de la sécurité de l’information.
 
@@ -67,7 +66,7 @@ Pour évaluer ces performances, il faut déterminer :
 
 Deming permet de répondre à ces exigences et de conserver les informations documentées appropriées comme preuves des résultats de la surveillance et des mesures.
 
-### Definitions
+## Definitions
 
 **Mesures de sécurité** (en anglais « Control ») : ensemble de dispositions à mettre en œuvre. Ce sont les mesures à prendre pour mettre en œuvre la politique de sécurité.
 

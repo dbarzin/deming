@@ -1,4 +1,4 @@
-## Dashboards
+# Dashboards
 
 There are three dashboards:
 
@@ -9,16 +9,16 @@ There are three dashboards:
 * controls by attribute
 
 
-### Controls by domains
+## Controls by domains
 
 [![Screenshot](images/r1.png){: style="width:500px"}](images/r1.png)
 
 
-### Controls by domain and by measure
+## Controls by domain and by measure
 
 [![Screenshot](images/r2.png)](images/r2.png)
 
 
-### Attribute checks
+## Attribute checks
 
 [![Screenshot](images/r3.png)](images/r3.png)

@@ -1,8 +1,8 @@
-## Mesures de sécurité
+# Mesures de sécurité
 
 Cette partie permet de définir, de modifier et de planifier de nouvelles mesures de sécurité.
 
-### Liste des mesures de sécurité <a name="list"></a>
+## Liste des mesures de sécurité <a name="list"></a>
 
 La liste des mesures de sécurité permet d’afficher la liste des mesures, de les filtrer par domaine ou de recherche une mesure sur base d’une partie de son nom.
 
@@ -18,7 +18,7 @@ En cliquant sur :
 
 * le bouton "planifier", vous arrivez sur la [planification de la mesure de sécurité](#plan)
 
-### Afficher une mesure de sécurité <a name="show"></a>
+## Afficher une mesure de sécurité <a name="show"></a>
 
 Cet écran permet d’afficher une mesure de sécurité.
 
@@ -56,7 +56,7 @@ Lorsque vous cliquez sur :
 * « Annuler » : vous renvoie vers la [liste des mesures de séucurité](#list)
 
 
-### Modifier une mesure de sécurité <a name="edit"></a>
+## Modifier une mesure de sécurité <a name="edit"></a>
 
 Cet écran permet de modifier une mesure de sécurité.
 
@@ -69,7 +69,7 @@ Lorsque vous cliquez sur :
 * « Annluer », vous revenez à l’écran d’[affichage de la mesure de sécurité](#show).
 
 
-### Planifier un contrôle <a name="plan"></a>
+## Planifier un contrôle <a name="plan"></a>
 
 Cet écran permet de planifier un contrôle de sécurité à partir d’une mesure.
 

@@ -1,7 +1,6 @@
-## Introduction
+# Introduction
 
-
-### What is Deming?
+## What is Deming?
 
 Deming is an Open Source tool designed to help CISOs maintain their information security management system. Using this app, CISOs can easily plan and track the implementation of security controls and the continuous improvement cycle. The app is designed to be easy to use and customize, with a intuitive user interface.
 
@@ -25,7 +24,7 @@ This information security management application is a powerful and customizable 
 With its intuitive user interface, the ability to define new controls and its ISO 27001:2022 compatibility, it offers CISOs great flexibility to adapt the application to their specific needs.
 
 
-### What is not Deming? <a name="notDeming"></a>
+## What is not Deming? <a name="notDeming"></a>
 
 Deming is not a miracle solution that performs risk analysis, imports all existing standards, automatically manages your documentation, provides default procedures or uses artificial intelligence autonomously...
 
@@ -37,7 +36,7 @@ But :
 - it's free.
 
 
-### Why control?
+## Why control?
 
 To manage the security of the information system, it is necessary to put in place a set of security measures and regularly check that these measures are effective and efficient. These regular checks make it possible to guarantee that the security measures put in place achieve their security objectives.
 
@@ -50,7 +49,7 @@ The effectiveness measurement requirements are:
 - e) provide input for management review to facilitate ISMS-related decision-making;
 - f) to justify the needs for improvement of the ISMS.
 
-### Evaluation of performances
+## Evaluation of performances
 
 The ISO 27001 standard in chapter 9.1 requires the evaluation of information security performance, as well as the effectiveness of the information security management system.
 
@@ -65,7 +64,7 @@ To assess this performance, it is necessary to determine:
 
 Deming helps meet these requirements and retain appropriate documented information as evidence of monitoring and measurement results.
 
-### Definitions
+## Definitions
 
 **Controls** : set of provisions to be implemented. These are the controls to be taken to implement the security policy.
 

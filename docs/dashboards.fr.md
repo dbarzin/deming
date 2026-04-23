@@ -1,4 +1,4 @@
-## Tableaux de bord
+# Tableaux de bord
 
 Il existe trois tableaux de bord :
 
@@ -9,14 +9,14 @@ Il existe trois tableaux de bord :
 * les contrôles par attribut
 
 
-### Les contrôles par domaines
+## Les contrôles par domaines
 
 [![Screenshot](images/r1.fr.png){: style="width:500px"}](images/r1.fr.png)
 
-### Les contrôles par domaines et par mesures
+## Les contrôles par domaines et par mesures
 
 [![Screenshot](images/r2.fr.png)](images/r2.fr.png)
 
-### Les contrôles par attributs
+## Les contrôles par attributs
 
 [![Screenshot](images/r3.fr.png)](images/r3.fr.png)

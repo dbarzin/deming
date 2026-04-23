@@ -1,6 +1,6 @@
-## Contrôles
+# Contrôles
 
-### Liste des contrôles {#list}
+## Liste des contrôles {#list}
 
 Cet écran permet d'afficher la liste des contrôles et de les filtrer par :
 
@@ -24,7 +24,7 @@ Lorsque vous cliquez sur :
 
 * La date de réalisation, de planification ou la date du contrôle suivant, vous arrivez l'écran d'[affichage du contrôle de sécurité](controls.fr.md/#show).
 
-### Afficher un contrôle {#show}
+## Afficher un contrôle {#show}
 
 Cet écran contient les informations d'un contrôle :
 
@@ -62,7 +62,7 @@ Lorsque vous cliquez sur :
 
 * « Annuler », vous êtes envoyé vers la [liste des contrôles](#list)
 
-### Créer un contrôle {#create}
+## Créer un contrôle {#create}
 
 Un contrôle peut être créé de deux façons :
 
@@ -90,7 +90,7 @@ Lorsque vous cliquez sur :
 
 * « Annuler », vous êtes renvoyé vers la [liste des contrôles](#list)
 
-### Modifier un contrôle {#edit}
+## Modifier un contrôle {#edit}
 
 Cet écran permet de modifier les informations d'un contrôle existant.
 
@@ -116,7 +116,7 @@ Lorsque vous cliquez sur :
 
 * « Annuler », vous êtes renvoyé vers l'[écran d'affichage du contrôle](#show)
 
-### Planifier un contrôle {#plan}
+## Planifier un contrôle {#plan}
 
 Cet écran permet de planifier un contrôle.
 
@@ -141,7 +141,7 @@ Lorsque vous cliquez sur :
 * « Annuler », vous êtes renvoyés vers l'[écran d'affichage du contrôle](controls.fr.md/#show)
 
 
-### Réaliser un contrôle {#make}
+## Réaliser un contrôle {#make}
 
 Cet écran permet de réaliser un contrôle de sécurité.
 
@@ -185,7 +185,7 @@ Lorsque vous cliquez sur :
 et vous revenez vers la [liste des contrôles](#list).
 
 
-### Fiche de contrôle {#sheet}
+## Fiche de contrôle {#sheet}
 
 La fiche de contrôle est un document Word généré par l'application sur base des données du contrôle.
 

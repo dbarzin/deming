@@ -1,4 +1,4 @@
-## Delegation
+# Delegation
 
 Deming allows you to delegate the realisation of measurements to users who have the *auditee* role.
 The auditee role is assigned to a user via the [user management screen](config.md/#users).
@@ -11,7 +11,7 @@ This delegation complies with the following rules:
 - When a measurement is rejected, it returns to the list of measurements to be carried out by the auditee.
 
 
-### List of measurements to be performed
+## List of measurements to be performed
 
 From the auditee's point of view, the application's main page contains the list of measurements that are assigned to him.
 
@@ -25,9 +25,9 @@ Tha auditee can :
 - Select a measurement to perform
 
 
-### Performing an measurement
+## Performing a measurement
 
-When an auditee performs an mesurement, they can :
+When an auditee performs a mesurement, they can :
 
 - "Save" the measurement
 
@@ -44,9 +44,9 @@ When the auditee clicks on :
 - If the auditee selects "Cancel", the changes are not saved and the auditee returns to the measuremet view.
 
 
-### Accepting / Rejecting a measurement
+## Accepting / Rejecting a measurement
 
-Once an measurement has been carried out by an auditee, it changes status to "to be validated".
+Once an auditee has carried out a measurement, it changes status to "to be validated".
 
 For other users, this is shown by an hourglass next to the completion date in the list of checks to be carried out:
 

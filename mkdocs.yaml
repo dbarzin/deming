@@ -77,6 +77,7 @@ nav:
   - dashboards.md
   - actions.md
   - risks.md
+  - exceptions.md
   - config.md
   - api.md
   - annexe.md

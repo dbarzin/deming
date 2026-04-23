@@ -1,4 +1,4 @@
-## API
+# API
 
 Deming peut être modifié ou mis à jour via une REST API.
 
@@ -6,7 +6,7 @@ Une API REST ([Representational State Transfer](https://fr.wikipedia.org/wiki/Re
 est une interface de programmation d'application qui respecte les contraintes du style d'architecture REST
 et permet d'interagir avec les services web RESTful.
 
-### Installer l'API
+## Installer l'API
 
 pour installer l'API, il est nécessaire d'installer Passport en lançant cette commande :
 
@@ -16,7 +16,7 @@ php artisan passport:install
 
 L'environnement Docker prend en charge cette fonctionnalité nativement, via l'[entrypoint](https://github.com/dbarzin/deming/blob/main/docker/entrypoint.sh).
 
-### Les APIs
+## Les APIs
 
 - /api/attributes
 
@@ -32,7 +32,7 @@ L'environnement Docker prend en charge cette fonctionnalité nativement, via l'[
 
 - /api/logs
 
-### Actions gérées par le contrôleur de ressources
+## Actions gérées par le contrôleur de ressources
 
 Les requêtes et URI de chaque api est représentée dans le tableau ci-dessous.
 
@@ -45,18 +45,18 @@ Les requêtes et URI de chaque api est représentée dans le tableau ci-dessous.
 | DELETE 	| /api/objets/{id}   | supprimer l'objet {id}         |
 
 
-### Droits d'accès
+## Droits d'accès
 
 Il faut s'identifier avec un utilisateur de l'application Deming pour pouvoir accéder aux API.
 Cet utilisateur doit disposer du rôle "API".
 
 Lorsque l'authentification réussit, l'API envoie un "token" qui doit être passé dans l'entête "Authorization" de la requête de l'API.
 
-### Exemples
+## Exemples
 
 Voici quelques exemples d'utilisation de l'API avec PHP :
 
-#### Authentification
+### Authentification
 
 ```php
 <?php
@@ -99,7 +99,7 @@ Voici quelques exemples d'utilisation de l'API avec PHP :
     var_dump($response);
 ```
 
-#### Liste des domaines
+### Liste des domaines
 
 ```php
 <?php
@@ -130,7 +130,7 @@ Voici quelques exemples d'utilisation de l'API avec PHP :
 
 ```
 
-#### Récupérer un domaine
+### Récupérer un domaine
 
 ```php
 <?php
@@ -159,7 +159,7 @@ Voici quelques exemples d'utilisation de l'API avec PHP :
     var_dump($response);
 ```
 
-#### Mettre à jour un domaine
+### Mettre à jour un domaine
 
 ```php
 <?php
@@ -193,7 +193,7 @@ Voici quelques exemples d'utilisation de l'API avec PHP :
     var_dump($response);
 ```
 
-### Python
+## Python
 
 Voici un exemple d'utilisation de l'API en Python
 
@@ -220,7 +220,7 @@ print(response.json())
 
 ```
 
-### bash
+## bash
 
 Voici un exemple d'utilisation de l'API en ligne de commande avec [CURL](https://curl.se/docs/manpage.html) et [JQ](https://stedolan.github.io/jq/)
 ```

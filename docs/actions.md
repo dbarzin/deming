@@ -1,8 +1,8 @@
-## Action Plans
+# Action Plans
 
 Each time a control fails (orange or red), an action plan must be put in place and followed in order to remedy the situation.
 
-### List of Action Plans <a name="list"></a>
+## List of Action Plans <a name="list"></a>
 
 This screen allows you to follow the action plans:
 
@@ -17,7 +17,7 @@ Clicking on :
 * The next review date, you arrive at the next [control](controls.md/#show)
 
 
-### Edit an action plan <a name="edit"></a>
+## Edit an action plan <a name="edit"></a>
 
 This screen allows you to edit an action plan and schedule the next control assessment.
 

@@ -1,4 +1,4 @@
-## Planning
+# Planning
 
 L’écran de planning permet d’avoir une vue sur les contrôles réalisés et à réaliser.
 

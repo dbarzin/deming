@@ -1,4 +1,4 @@
-## API
+# API
 
 Deming can be modified or updated via a REST API.
 
@@ -6,7 +6,7 @@ A REST API ([Representational State Transfer](https://fr.wikipedia.org/wiki/Repr
 is an application programming interface that respects the constraints of the REST
 architecture and enables interaction with RESTful web services.
 
-### Installing the API
+## Installing the API
 
 To install the API, you need to install Passport by running this command:
 
@@ -16,7 +16,7 @@ php artisan passport:install
 
 The Docker environment supports this functionality natively, via the [entrypoint](https://github.com/dbarzin/deming/blob/main/docker/entrypoint.sh).
 
-### The APIs
+## The APIs
 
 - /api/attributes
 
@@ -32,7 +32,7 @@ The Docker environment supports this functionality natively, via the [entrypoint
 
 - /api/logs
 
-### Actions managed by the resource controller
+## Actions managed by the resource controller
 
 Requests and URIs for each api are shown in the table below.
 
@@ -45,18 +45,18 @@ Requests and URIs for each api are shown in the table below.
 | /api/objets/{id} | delete object {id} |
 
 
-### Access rights
+## Access rights
 
 To access the APIs, you need to identify yourself as a Deming application user.
 This user must have the "API" role.
 
 When authentication is successful, the API sends a "token" which must be passed in the "Authorization" header of the API request.
 
-### Examples
+## Examples
 
 Here are a few examples of how to use the API with PHP:
 
-#### Authentication
+### Authentication
 
 ```php
 <?php
@@ -99,7 +99,7 @@ Here are a few examples of how to use the API with PHP:
     var_dump($response);
 ```
 
-#### Liste des domaines
+### Liste des domaines
 
 ```php
 <?php
@@ -130,7 +130,7 @@ Here are a few examples of how to use the API with PHP:
 
 ```
 
-#### Get a control
+### Get a control
 
 ```php
 <?php
@@ -159,7 +159,7 @@ Here are a few examples of how to use the API with PHP:
     var_dump($response);
 ```
 
-#### Update a control
+### Update a control
 
 ```php
 <?php
@@ -191,7 +191,7 @@ Here are a few examples of how to use the API with PHP:
     var_dump($response);
 ```
 
-### Python
+## Python
 
 Voici un exemple d'utilisation de l'API en Python
 
@@ -218,7 +218,7 @@ print(response.json())
 
 ```
 
-### bash
+## bash
 
 Voici un exemple d'utilisation de l'API en ligne de commande avec [CURL](https://curl.se/docs/manpage.html) et [JQ](https://stedolan.github.io/jq/)
 ```

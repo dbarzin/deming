@@ -1,4 +1,4 @@
-## Schedule
+# Schedule
 
 The schedule screen provides a view of the controls carried out and to be carried out.
 

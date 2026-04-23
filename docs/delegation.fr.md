@@ -1,4 +1,4 @@
-## Délégation
+# Délégation
 
 Deming permet de déléguer la réalisation des contrôles de sécurité à des utilisateurs qui ont le rôle *audité*.
 L'assignation du rôle audité à un utilisateur se fait via l'écran de [gestion des utilisateurs](config.fr.md/#users).
@@ -11,7 +11,7 @@ Cette délégation respecte les règles suivantes :
 - Lorsqu'un contrôle est refusé, il retourne dans la liste des contrôles à réaliser de l'audité.
 
 
-### Liste des contrôles à réaliser
+## Liste des contrôles à réaliser
 
 Du point de vue de l'audité, la page principale de l'application contient la liste des contrôles qui lui sont assignés.
 
@@ -25,7 +25,7 @@ L'audité peut :
 - Sélectionner un contrôle à réaliser
 
 
-### Réaliser un contrôle
+## Réaliser un contrôle
 
 Lorsqu'un audité réalise un contrôle, il peut :
 
@@ -44,7 +44,7 @@ Lorsqu'il clique sur :
 - "Annuler", les modifications ne sont pas sauvées, l'utilisateur retourne vers la vue du contrôle.
 
 
-### Accepter / Refuser un contrôle
+## Accepter / Refuser un contrôle
 
 Une fois qu'un contrôle a été réalisé par un audité, il passe dans l'état "à valider".
 

@@ -1,4 +1,4 @@
-## References
+# References
 
 The references used in this documentation are:
 

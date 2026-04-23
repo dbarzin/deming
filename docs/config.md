@@ -1,13 +1,13 @@
-## Setup
+# Setup
 
-### Attributes <a name="tags"></a>
+## Attributes <a name="tags"></a>
 
 This screen allows you to manage the attributes associated with the security measures.
 It contains the list of attributes and allows you to create, delete or modify attribute lists.
 
 [![Screenshot](images/tags.png)](images/tags.png)
 
-### Domains <a name="domains"></a>
+## Domains <a name="domains"></a>
 
 This screen allows you to create, modify or delete lists of security domains.
 
@@ -15,7 +15,7 @@ This screen allows you to create, modify or delete lists of security domains.
 
 The application is provided with a security measurement base inspired by the ISO 27001:2022 standard, but it is possible to define new security domains inspired by other standards such as PCIDSS, HDS, etc.
 
-### Users <a name="users"></a>
+## Users <a name="users"></a>
 
 Users are directly defined in the application.
 
@@ -31,7 +31,7 @@ There are four different roles:
 
 * Auditor: the auditor has read access to all the information in the application.
 
-### Groups <a name=“groups”></a>
+## Groups <a name=“groups”></a>
 
 This screen is used to define user groups.
 A group brings together a set of users and controls.
@@ -49,7 +49,7 @@ A group is composed of :
 * a list of controls
 
 
-### Reports <a name="report"></a>
+## Reports <a name="report"></a>
 
 The application allows you to generate the ISMS management report and to export the list of domains, the security measures and all the checks carried out in an Excell file.
 

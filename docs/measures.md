@@ -1,8 +1,8 @@
-## Controls
+# Controls
 
 This part allows you to define, modify and plan new controls.
 
-### List of controls <a name="list"></a>
+## List of controls <a name="list"></a>
 
 The list of controls allows you to display the list of controls, to filter them by domain or to search for a control based on part of its name.
 
@@ -19,7 +19,7 @@ Clicking on :
 * the "plan" button takes you to the [control planning](#plan)
 
 
-### Show control <a name="show"></a>
+## Show control <a name="show"></a>
 
 This screen displays a control.
 
@@ -56,7 +56,7 @@ When you click:
 * "Cancel": returns you to the [list of controls](#list)
 
 
-### Edit a control <a name="edit"></a>
+## Edit a control <a name="edit"></a>
 
 This screen allows you to modify a control.
 
@@ -70,7 +70,7 @@ When you click:
 * "Cancel", you return to the [control display](#show) screen.
 
 
-### Schedule a control <a name="plan"></a>
+## Schedule a control <a name="plan"></a>
 
 This screen is used to plan a control based on a control.
 
