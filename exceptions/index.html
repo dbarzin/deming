@@ -10,13 +10,13 @@
       
       
       
-        <link rel="canonical" href="https://dbarzin.githubs.io/deming/plan/">
+        <link rel="canonical" href="https://dbarzin.githubs.io/deming/exceptions/">
       
       
-        <link rel="prev" href="../delegation/">
+        <link rel="prev" href="../risks/">
       
       
-        <link rel="next" href="../dashboards/">
+        <link rel="next" href="../config/">
       
       
       <link rel="icon" href="../assets/images/favicon.png">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Schedule - Deming</title>
+        <title>Exceptions - Deming</title>
       
     
     
@@ -78,7 +78,7 @@
     <div data-md-component="skip">
       
         
-        <a href="#schedule" class="md-skip">
+        <a href="#exceptions" class="md-skip">
           Skip to content
         </a>
       
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Schedule
+              Exceptions
             
           </span>
         </div>
@@ -167,7 +167,7 @@
           </li>
         
           <li class="md-select__item">
-            <a href="../fr/plan/" hreflang="fr" class="md-select__link">
+            <a href="../fr/exceptions/" hreflang="fr" class="md-select__link">
               Français
             </a>
           </li>
@@ -382,19 +382,10 @@
       
   
   
-    
   
   
-  
-    <li class="md-nav__item md-nav__item--active">
-      
-      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
-      
-      
-        
-      
-      
-      <a href="./" class="md-nav__link md-nav__link--active">
+    <li class="md-nav__item">
+      <a href="../plan/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -403,7 +394,6 @@
   
 
       </a>
-      
     </li>
   
 
@@ -472,10 +462,30 @@
       
   
   
+    
   
   
-    <li class="md-nav__item">
-      <a href="../exceptions/" class="md-nav__link">
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Exceptions
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
         
   
   <span class="md-ellipsis">
@@ -484,6 +494,71 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#list" class="md-nav__link">
+    <span class="md-ellipsis">
+      Exception list
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#show" class="md-nav__link">
+    <span class="md-ellipsis">
+      View an exception
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create an exception
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit an exception
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#workflow" class="md-nav__link">
+    <span class="md-ellipsis">
+      Approval workflow
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
     </li>
   
 
@@ -583,7 +658,7 @@
                   
 
   
-    <a href="https://github.com/dbarzin/deming/edit/master/docs/plan.md" title="Edit this page" class="md-content__button md-icon">
+    <a href="https://github.com/dbarzin/deming/edit/master/docs/exceptions.md" title="Edit this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M10 20H6V4h7v5h5v3.1l2-2V8l-6-6H6c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h4v-2m10.2-7c.1 0 .3.1.4.2l1.3 1.3c.2.2.2.6 0 .8l-1 1-2.1-2.1 1-1c.1-.1.2-.2.4-.2m0 3.9L14.1 23H12v-2.1l6.1-6.1 2.1 2.1Z"/></svg>
     </a>
@@ -592,20 +667,192 @@
     
       
     
-    <a href="https://github.com/dbarzin/deming/raw/master/docs/plan.md" title="View source of this page" class="md-content__button md-icon">
+    <a href="https://github.com/dbarzin/deming/raw/master/docs/exceptions.md" title="View source of this page" class="md-content__button md-icon">
       
       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M17 18c.56 0 1 .44 1 1s-.44 1-1 1-1-.44-1-1 .44-1 1-1m0-3c-2.73 0-5.06 1.66-6 4 .94 2.34 3.27 4 6 4s5.06-1.66 6-4c-.94-2.34-3.27-4-6-4m0 6.5a2.5 2.5 0 0 1-2.5-2.5 2.5 2.5 0 0 1 2.5-2.5 2.5 2.5 0 0 1 2.5 2.5 2.5 2.5 0 0 1-2.5 2.5M9.27 20H6V4h7v5h5v4.07c.7.08 1.36.25 2 .49V8l-6-6H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h4.5a8.15 8.15 0 0 1-1.23-2Z"/></svg>
     </a>
   
 
 
-<h1 id="schedule">Schedule<a class="headerlink" href="#schedule" title="Permanent link">&para;</a></h1>
-<p>The schedule screen provides a view of the controls carried out and to be carried out.</p>
-<p><a href="../images/cal.png"><img alt="Screenshot" src="../images/cal.png" /></a></p>
-<p>The left part of the screen contains past and future checks. By clicking on a column,
-you are returned to the <a href="../controls/#list">list of controls</a> planned for the corresponding month.</p>
-<p>The right side contains the checks scheduled for this month. It is possible to change the current month and select
-a <a href="../controls/#show">control</a> in the calendar.</p>
+<h1 id="exceptions">Exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h1>
+<p>Exception management allows you to formally record and track waivers granted when a security control cannot be implemented in accordance with requirements. An exception is linked to a non-compliant control and follows an approval workflow handled by an administrator.</p>
+<h2 id="list">Exception list<a class="headerlink" href="#list" title="Permanent link">&para;</a></h2>
+<p>This screen displays the list of exceptions and allows you to filter them by:</p>
+<ul>
+<li>
+<p>status (Draft, Submitted, Approved, Rejected, Expired);</p>
+</li>
+<li>
+<p>linked control;</p>
+</li>
+<li>
+<p>expired exceptions only.</p>
+</li>
+</ul>
+<p><a href="../images/ex1.png"><img alt="Screenshot" src="../images/ex1.png" /></a></p>
+<p>Overdue end dates are displayed in red.</p>
+<p>Clicking on a row takes you to the <a href="#show">exception details screen</a>.</p>
+<p>The "New" button is available to users with the <strong>Administrator</strong> or <strong>User</strong> role.</p>
+<h2 id="show">View an exception<a class="headerlink" href="#show" title="Permanent link">&para;</a></h2>
+<p>This screen displays the information for an exception:</p>
+<ul>
+<li>
+<p>The exception name;</p>
+</li>
+<li>
+<p>The current status;</p>
+</li>
+<li>
+<p>The linked control (with a link to the corresponding <a href="measures.en.md/#show">security measure</a>);</p>
+</li>
+<li>
+<p>The exception description;</p>
+</li>
+<li>
+<p>The business justification;</p>
+</li>
+<li>
+<p>Any compensating controls;</p>
+</li>
+<li>
+<p>The validity period (start date and end date);</p>
+</li>
+<li>
+<p>The creator and creation date;</p>
+</li>
+<li>
+<p>The submitter and submission date;</p>
+</li>
+<li>
+<p>The decision (approver, date and comment).</p>
+</li>
+</ul>
+<p><a href="../images/ex2.png"><img alt="Screenshot" src="../images/ex2.png" /></a></p>
+<p>The buttons available depend on the exception status and the user's role:</p>
+<table>
+<thead>
+<tr>
+<th>Button</th>
+<th>Condition</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>"Submit"</td>
+<td>Draft status — Administrator or User</td>
+</tr>
+<tr>
+<td>"Edit"</td>
+<td>Draft or Rejected status — Administrator or User</td>
+</tr>
+<tr>
+<td>"Delete"</td>
+<td>Administrator only</td>
+</tr>
+<tr>
+<td>"Approve"</td>
+<td>Submitted status — Administrator only</td>
+</tr>
+<tr>
+<td>"Reject"</td>
+<td>Submitted status — Administrator only</td>
+</tr>
+</tbody>
+</table>
+<p>Clicking on:</p>
+<ul>
+<li>
+<p>"Submit" moves the exception to <em>Submitted</em> status and sends it for approval by an administrator;</p>
+</li>
+<li>
+<p>"Edit" takes you to the <a href="#edit">exception edit screen</a>;</p>
+</li>
+<li>
+<p>"Delete" deletes the exception and takes you back to the <a href="#list">exception list</a>;</p>
+</li>
+<li>
+<p>"Approve" accepts the exception and moves it to <em>Approved</em> status;</p>
+</li>
+<li>
+<p>"Reject" rejects the exception (a reason is mandatory) and moves it to <em>Rejected</em> status;</p>
+</li>
+<li>
+<p>"Cancel" takes you back to the <a href="#list">exception list</a>.</p>
+</li>
+</ul>
+<h2 id="create">Create an exception<a class="headerlink" href="#create" title="Permanent link">&para;</a></h2>
+<p>From the <a href="#list">exception list</a>, the "New" button opens the creation form.</p>
+<p>This screen contains the following fields:</p>
+<ul>
+<li>
+<p>The exception name;</p>
+</li>
+<li>
+<p>The linked control (the non-compliant security measure that is the source of the waiver);</p>
+</li>
+<li>
+<p>The exception description;</p>
+</li>
+<li>
+<p>The business justification (the reason why the control cannot be implemented);</p>
+</li>
+<li>
+<p>Compensating controls (alternative controls put in place to reduce the residual risk);</p>
+</li>
+<li>
+<p>The validity start date and end date.</p>
+</li>
+</ul>
+<p>An exception is created with <strong>Draft</strong> status. It must be explicitly submitted before it can be reviewed by an administrator.</p>
+<p>Clicking on:</p>
+<ul>
+<li>
+<p>"Save" records the exception and takes you to the <a href="#show">exception details screen</a>;</p>
+</li>
+<li>
+<p>"Cancel" takes you back to the <a href="#list">exception list</a>.</p>
+</li>
+</ul>
+<h2 id="edit">Edit an exception<a class="headerlink" href="#edit" title="Permanent link">&para;</a></h2>
+<p>This screen allows you to edit an exception with <strong>Draft</strong> or <strong>Rejected</strong> status.</p>
+<p>A rejected exception that is edited automatically reverts to <em>Draft</em> status so that it can be corrected and resubmitted.</p>
+<p>This screen contains the same fields as the <a href="#create">creation screen</a>. The current status and any rejection reason are displayed as read-only for reference.</p>
+<p>Clicking on:</p>
+<ul>
+<li>
+<p>"Save" records the changes and takes you to the <a href="#show">exception details screen</a>;</p>
+</li>
+<li>
+<p>"Cancel" takes you back to the <a href="#show">exception details screen</a>.</p>
+</li>
+</ul>
+<h2 id="workflow">Approval workflow<a class="headerlink" href="#workflow" title="Permanent link">&para;</a></h2>
+<p>The lifecycle of an exception follows these steps:</p>
+<div class="highlight"><pre><span></span><code>Draft → Submitted → Approved
+                ↘ Rejected → (re-edit) → Draft
+Approved → Expired  (automatic, when the end date has passed)
+</code></pre></div>
+<ul>
+<li>
+<p><strong>Draft</strong>: the exception is being written. It can be edited or submitted.</p>
+</li>
+<li>
+<p><strong>Submitted</strong>: the exception is awaiting a decision. It can no longer be edited.</p>
+</li>
+<li>
+<p><strong>Approved</strong>: the waiver is granted for the defined validity period.</p>
+</li>
+<li>
+<p><strong>Rejected</strong>: the waiver is refused. A rejection reason is mandatory and is visible to the requester. The exception can be corrected and resubmitted.</p>
+</li>
+<li>
+<p><strong>Expired</strong>: an approved exception whose end date has passed is automatically moved to <em>Expired</em> status.</p>
+</li>
+</ul>
+<div class="admonition note">
+<p class="admonition-title">Traceability</p>
+<p>Each transition is timestamped and associated with the user who performed it. This information is retained and visible on the <a href="#show">exception details screen</a>, making it possible to justify the waiver during an ISO 27001 audit.</p>
+</div>
 
 
 

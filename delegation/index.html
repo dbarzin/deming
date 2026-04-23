@@ -289,7 +289,7 @@
         
   
   <span class="md-ellipsis">
-    Home
+    Introduction
   </span>
   
 
@@ -309,7 +309,7 @@
         
   
   <span class="md-ellipsis">
-    Home
+    Application
   </span>
   
 
@@ -329,7 +329,7 @@
         
   
   <span class="md-ellipsis">
-    Measures
+    Controls
   </span>
   
 
@@ -349,7 +349,7 @@
         
   
   <span class="md-ellipsis">
-    Controls
+    Measurements
   </span>
   
 
@@ -370,6 +370,8 @@
       
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
+      
+        
       
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
@@ -399,6 +401,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -407,16 +411,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#delegation" class="md-nav__link">
-    <span class="md-ellipsis">
-      Delegation
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Delegation">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#list-of-measurements-to-be-performed" class="md-nav__link">
     <span class="md-ellipsis">
       List of measurements to be performed
@@ -424,27 +418,22 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
-  <a href="#performing-an-measurement" class="md-nav__link">
+      
+        <li class="md-nav__item">
+  <a href="#performing-a-measurement" class="md-nav__link">
     <span class="md-ellipsis">
-      Performing an measurement
+      Performing a measurement
     </span>
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#accepting-rejecting-a-measurement" class="md-nav__link">
     <span class="md-ellipsis">
       Accepting / Rejecting a measurement
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -467,7 +456,7 @@
         
   
   <span class="md-ellipsis">
-    Plan
+    Schedule
   </span>
   
 
@@ -507,7 +496,7 @@
         
   
   <span class="md-ellipsis">
-    Actions
+    Action Plans
   </span>
   
 
@@ -543,11 +532,31 @@
   
   
     <li class="md-nav__item">
+      <a href="../exceptions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exceptions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../config/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Config
+    Setup
   </span>
   
 
@@ -567,7 +576,7 @@
         
   
   <span class="md-ellipsis">
-    Api
+    API
   </span>
   
 
@@ -647,9 +656,7 @@
   
 
 
-  <h1>Delegation</h1>
-
-<h2 id="delegation">Delegation<a class="headerlink" href="#delegation" title="Permanent link">&para;</a></h2>
+<h1 id="delegation">Delegation<a class="headerlink" href="#delegation" title="Permanent link">&para;</a></h1>
 <p>Deming allows you to delegate the realisation of measurements to users who have the <em>auditee</em> role.
 The auditee role is assigned to a user via the <a href="../config/#users">user management screen</a>.</p>
 <p>This delegation complies with the following rules:</p>
@@ -659,7 +666,7 @@ The auditee role is assigned to a user via the <a href="../config/#users">user m
 <li>Users can accept or reject a measurement performed by an auditee;</li>
 <li>When a measurement is rejected, it returns to the list of measurements to be carried out by the auditee.</li>
 </ul>
-<h3 id="list-of-measurements-to-be-performed">List of measurements to be performed<a class="headerlink" href="#list-of-measurements-to-be-performed" title="Permanent link">&para;</a></h3>
+<h2 id="list-of-measurements-to-be-performed">List of measurements to be performed<a class="headerlink" href="#list-of-measurements-to-be-performed" title="Permanent link">&para;</a></h2>
 <p>From the auditee's point of view, the application's main page contains the list of measurements that are assigned to him.</p>
 <p><a href="../images/d1.png"><img alt="Screenshot" src="../images/d1.png" /></a></p>
 <p>Tha auditee can :</p>
@@ -669,8 +676,8 @@ The auditee role is assigned to a user via the <a href="../config/#users">user m
 <li>Sort the list by each column</li>
 <li>Select a measurement to perform</li>
 </ul>
-<h3 id="performing-an-measurement">Performing an measurement<a class="headerlink" href="#performing-an-measurement" title="Permanent link">&para;</a></h3>
-<p>When an auditee performs an mesurement, they can :</p>
+<h2 id="performing-a-measurement">Performing a measurement<a class="headerlink" href="#performing-a-measurement" title="Permanent link">&para;</a></h2>
+<p>When an auditee performs a mesurement, they can :</p>
 <ul>
 <li>
 <p>"Save" the measurement</p>
@@ -692,8 +699,8 @@ The auditee role is assigned to a user via the <a href="../config/#users">user m
 <p>If the auditee selects "Cancel", the changes are not saved and the auditee returns to the measuremet view.</p>
 </li>
 </ul>
-<h3 id="accepting-rejecting-a-measurement">Accepting / Rejecting a measurement<a class="headerlink" href="#accepting-rejecting-a-measurement" title="Permanent link">&para;</a></h3>
-<p>Once an measurement has been carried out by an auditee, it changes status to "to be validated".</p>
+<h2 id="accepting-rejecting-a-measurement">Accepting / Rejecting a measurement<a class="headerlink" href="#accepting-rejecting-a-measurement" title="Permanent link">&para;</a></h2>
+<p>Once an auditee has carried out a measurement, it changes status to "to be validated".</p>
 <p>For other users, this is shown by an hourglass next to the completion date in the list of checks to be carried out:</p>
 <p><a href="../images/d3.png"><img alt="Screenshot" src="../images/d3.png" /></a></p>
 <p>When the user clicks on the date next to the hourglass, they are taken to the measurement performed by the auditee.</p>

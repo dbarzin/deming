@@ -13,7 +13,7 @@
         <link rel="canonical" href="https://dbarzin.githubs.io/deming/config/">
       
       
-        <link rel="prev" href="../risks/">
+        <link rel="prev" href="../exceptions/">
       
       
         <link rel="next" href="../api/">
@@ -24,7 +24,7 @@
     
     
       
-        <title>Config - Deming</title>
+        <title>Setup - Deming</title>
       
     
     
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Config
+              Setup
             
           </span>
         </div>
@@ -289,7 +289,7 @@
         
   
   <span class="md-ellipsis">
-    Home
+    Introduction
   </span>
   
 
@@ -309,7 +309,7 @@
         
   
   <span class="md-ellipsis">
-    Home
+    Application
   </span>
   
 
@@ -329,7 +329,7 @@
         
   
   <span class="md-ellipsis">
-    Measures
+    Controls
   </span>
   
 
@@ -349,7 +349,7 @@
         
   
   <span class="md-ellipsis">
-    Controls
+    Measurements
   </span>
   
 
@@ -389,7 +389,7 @@
         
   
   <span class="md-ellipsis">
-    Plan
+    Schedule
   </span>
   
 
@@ -429,7 +429,7 @@
         
   
   <span class="md-ellipsis">
-    Actions
+    Action Plans
   </span>
   
 
@@ -462,6 +462,26 @@
       
   
   
+  
+  
+    <li class="md-nav__item">
+      <a href="../exceptions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exceptions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
     
   
   
@@ -471,12 +491,14 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
   <span class="md-ellipsis">
-    Config
+    Setup
   </span>
   
 
@@ -487,7 +509,7 @@
         
   
   <span class="md-ellipsis">
-    Config
+    Setup
   </span>
   
 
@@ -499,6 +521,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -507,16 +531,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#setup" class="md-nav__link">
-    <span class="md-ellipsis">
-      Setup
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Setup">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#attributes" class="md-nav__link">
     <span class="md-ellipsis">
       Attributes
@@ -524,8 +538,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#domains" class="md-nav__link">
     <span class="md-ellipsis">
       Domains
@@ -533,8 +547,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#users" class="md-nav__link">
     <span class="md-ellipsis">
       Users
@@ -542,8 +556,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#groups" class="md-nav__link">
     <span class="md-ellipsis">
       Groups
@@ -551,15 +565,16 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#reports" class="md-nav__link">
     <span class="md-ellipsis">
       Reports
     </span>
   </a>
   
-</li>
+    <nav class="md-nav" aria-label="Reports">
+      <ul class="md-nav__list">
         
           <li class="md-nav__item">
   <a href="#import" class="md-nav__link">
@@ -645,7 +660,7 @@
         
   
   <span class="md-ellipsis">
-    Api
+    API
   </span>
   
 
@@ -725,18 +740,16 @@
   
 
 
-  <h1>Config</h1>
-
-<h2 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h2>
-<h3 id="attributes">Attributes <a name="tags"></a><a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h3>
+<h1 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h1>
+<h2 id="attributes">Attributes <a name="tags"></a><a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
 <p>This screen allows you to manage the attributes associated with the security measures.
 It contains the list of attributes and allows you to create, delete or modify attribute lists.</p>
 <p><a href="../images/tags.png"><img alt="Screenshot" src="../images/tags.png" /></a></p>
-<h3 id="domains">Domains <a name="domains"></a><a class="headerlink" href="#domains" title="Permanent link">&para;</a></h3>
+<h2 id="domains">Domains <a name="domains"></a><a class="headerlink" href="#domains" title="Permanent link">&para;</a></h2>
 <p>This screen allows you to create, modify or delete lists of security domains.</p>
 <p><a href="../images/domains.png"><img alt="Screenshot" src="../images/domains.png" /></a></p>
 <p>The application is provided with a security measurement base inspired by the ISO 27001:2022 standard, but it is possible to define new security domains inspired by other standards such as PCIDSS, HDS, etc.</p>
-<h3 id="users">Users <a name="users"></a><a class="headerlink" href="#users" title="Permanent link">&para;</a></h3>
+<h2 id="users">Users <a name="users"></a><a class="headerlink" href="#users" title="Permanent link">&para;</a></h2>
 <p>Users are directly defined in the application.</p>
 <p><a href="../images/users.png"><img alt="Screenshot" src="../images/users.png" /></a></p>
 <p>There are four different roles:</p>
@@ -754,7 +767,7 @@ It contains the list of attributes and allows you to create, delete or modify at
 <p>Auditor: the auditor has read access to all the information in the application.</p>
 </li>
 </ul>
-<h3 id="groups">Groups <a name=“groups”></a><a class="headerlink" href="#groups" title="Permanent link">&para;</a></h3>
+<h2 id="groups">Groups <a name=“groups”></a><a class="headerlink" href="#groups" title="Permanent link">&para;</a></h2>
 <p>This screen is used to define user groups.
 A group brings together a set of users and controls.</p>
 <p><a href="../images/groups.png"><img alt="Screenshot" src="../images/groups.png" /></a></p>
@@ -773,7 +786,7 @@ A group brings together a set of users and controls.</p>
 <p>a list of controls</p>
 </li>
 </ul>
-<h3 id="reports">Reports <a name="report"></a><a class="headerlink" href="#reports" title="Permanent link">&para;</a></h3>
+<h2 id="reports">Reports <a name="report"></a><a class="headerlink" href="#reports" title="Permanent link">&para;</a></h2>
 <p>The application allows you to generate the ISMS management report and to export the list of domains, the security measures and all the checks carried out in an Excell file.</p>
 <p><a href="../images/reports.png"><img alt="Screenshot" src="../images/reports.png" style="width:500px" /></a></p>
 <p>Here is the ISMS pilot report:</p>

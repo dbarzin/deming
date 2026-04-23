@@ -24,7 +24,7 @@
     
     
       
-        <title>Controls - Deming</title>
+        <title>Measurements - Deming</title>
       
     
     
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Controls
+              Measurements
             
           </span>
         </div>
@@ -289,7 +289,7 @@
         
   
   <span class="md-ellipsis">
-    Home
+    Introduction
   </span>
   
 
@@ -309,7 +309,7 @@
         
   
   <span class="md-ellipsis">
-    Home
+    Application
   </span>
   
 
@@ -329,7 +329,7 @@
         
   
   <span class="md-ellipsis">
-    Measures
+    Controls
   </span>
   
 
@@ -351,12 +351,14 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
   <span class="md-ellipsis">
-    Controls
+    Measurements
   </span>
   
 
@@ -367,7 +369,7 @@
         
   
   <span class="md-ellipsis">
-    Controls
+    Measurements
   </span>
   
 
@@ -379,6 +381,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -387,16 +391,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#measurements" class="md-nav__link">
-    <span class="md-ellipsis">
-      Measurements
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="Measurements">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#list" class="md-nav__link">
     <span class="md-ellipsis">
       List of measurements
@@ -404,8 +398,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#show" class="md-nav__link">
     <span class="md-ellipsis">
       Show a measurement
@@ -413,8 +407,26 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a Measure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit a Measure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#plan" class="md-nav__link">
     <span class="md-ellipsis">
       Schedule a measurement
@@ -422,8 +434,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#make" class="md-nav__link">
     <span class="md-ellipsis">
       Making a measurement
@@ -431,18 +443,13 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#sheet" class="md-nav__link">
     <span class="md-ellipsis">
       Measurement sheet
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -485,7 +492,7 @@
         
   
   <span class="md-ellipsis">
-    Plan
+    Schedule
   </span>
   
 
@@ -525,7 +532,7 @@
         
   
   <span class="md-ellipsis">
-    Actions
+    Action Plans
   </span>
   
 
@@ -561,11 +568,31 @@
   
   
     <li class="md-nav__item">
+      <a href="../exceptions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exceptions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../config/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Config
+    Setup
   </span>
   
 
@@ -585,7 +612,7 @@
         
   
   <span class="md-ellipsis">
-    Api
+    API
   </span>
   
 
@@ -665,10 +692,8 @@
   
 
 
-  <h1>Controls</h1>
-
-<h2 id="measurements">Measurements<a class="headerlink" href="#measurements" title="Permanent link">&para;</a></h2>
-<h3 id="list">List of measurements<a class="headerlink" href="#list" title="Permanent link">&para;</a></h3>
+<h1 id="measurements">Measurements<a class="headerlink" href="#measurements" title="Permanent link">&para;</a></h1>
+<h2 id="list">List of measurements<a class="headerlink" href="#list" title="Permanent link">&para;</a></h2>
 <p>This screen is used to display the list of measurements and to filter them by:</p>
 <ul>
 <li>
@@ -700,7 +725,7 @@
 <p>The date of completion, planning or the date of the next check, you arrive at the <a href="#show">security check display</a> screen.</p>
 </li>
 </ul>
-<h3 id="show">Show a measurement<a class="headerlink" href="#show" title="Permanent link">&para;</a></h3>
+<h2 id="show">Show a measurement<a class="headerlink" href="#show" title="Permanent link">&para;</a></h2>
 <p>This screen contains the information of a measurement:</p>
 <ul>
 <li>
@@ -737,7 +762,7 @@
 <p>"Make", you are sent to the <a href="#make">measurement completion screen</a></p>
 </li>
 <li>
-<p>"Plan", you are sent to the <a href="../measures/#plan">measurement planning screen</a></p>
+<p>"Plan", you are sent to the <a href="#plan">measurement planning screen</a></p>
 </li>
 <li>
 <p>"Edit", you are sent to the <a href="#edit">measurement edit screen</a></p>
@@ -749,7 +774,80 @@
 <p>"Cancel", you are sent to the <a href="#list">list of measurements</a></p>
 </li>
 </ul>
-<h3 id="plan">Schedule a measurement<a class="headerlink" href="#plan" title="Permanent link">&para;</a></h3>
+<h2 id="create">Create a Measure<a class="headerlink" href="#create" title="Permanent link">&para;</a></h2>
+<p>A measure can be created in two ways:</p>
+<ul>
+<li>
+<p>Based on a security measure: From the <a href="../measures/#show">measure display screen</a>, the "Create a measure" button generates a new measure pre-filled with the name and purpose of the measure.</p>
+</li>
+<li>
+<p>Manually: From the <a href="#list">measure list</a>, the "New" button opens the creation form.</p>
+</li>
+</ul>
+<p>This screen contains the following fields:</p>
+<ul>
+<li>
+<p>The associated clause(s);</p>
+</li>
+<li>
+<p>The measure name;</p>
+</li>
+<li>
+<p>The measure purpose;</p>
+</li>
+<li>
+<p>The attributes;</p>
+</li>
+<li>
+<p>The data to collect;</p>
+</li>
+<li>
+<p>The score calculation model.</p>
+</li>
+</ul>
+<p>When you click:</p>
+<ul>
+<li>
+<p>"Create," the measure is saved and you are returned to the <a href="#show">measure display screen</a>.</p>
+</li>
+<li>
+<p>"Cancel," you are returned to the <a href="#list">measure list</a>.</p>
+</li>
+</ul>
+<h2 id="edit">Edit a Measure<a class="headerlink" href="#edit" title="Permanent link">&para;</a></h2>
+<p>This screen allows you to modify the information of an existing measure.</p>
+<p>It is accessible only to users with the <strong>Administrator</strong> role.</p>
+<p>This screen contains the same fields as the <a href="#create">create</a> screen:</p>
+<ul>
+<li>
+<p>The associated clause(s);</p>
+</li>
+<li>
+<p>The measure name;</p>
+</li>
+<li>
+<p>The measure's purpose;</p>
+</li>
+<li>
+<p>The attributes;</p>
+</li>
+<li>
+<p>The data to collect;</p>
+</li>
+<li>
+<p>The score calculation model.</p>
+</li>
+</ul>
+<p>When you click:</p>
+<ul>
+<li>
+<p>"Edit", the changes are saved and you are returned to the <a href="#show">measure display</a> screen.</p>
+</li>
+<li>
+<p>"Cancel", you are returned to the <a href="#show">measure display</a> screen.</p>
+</li>
+</ul>
+<h2 id="plan">Schedule a measurement<a class="headerlink" href="#plan" title="Permanent link">&para;</a></h2>
 <p>This screen is used to schedule a measurement.</p>
 <p>This screen contains the information of a measurement:</p>
 <ul>
@@ -782,7 +880,7 @@
 <p>"Cancel", You are returned to the <a href="#show">measurement display screen</a></p>
 </li>
 </ul>
-<h3 id="make">Making a measurement<a class="headerlink" href="#make" title="Permanent link">&para;</a></h3>
+<h2 id="make">Making a measurement<a class="headerlink" href="#make" title="Permanent link">&para;</a></h2>
 <p>This screen allows you to perform a measurement.</p>
 <p>This screen contains:</p>
 <ul>
@@ -838,7 +936,7 @@
 </li>
 </ul>
 <p>and you return to the <a href="#list">list of measurements</a>.</p>
-<h3 id="sheet">Measurement sheet<a class="headerlink" href="#sheet" title="Permanent link">&para;</a></h3>
+<h2 id="sheet">Measurement sheet<a class="headerlink" href="#sheet" title="Permanent link">&para;</a></h2>
 <p>The measurement sheet is a word document generated by the application based on the measurement data.</p>
 <p>This form allows you to describe the observations made, to add screenshots or tables and to <strong>electronically sign</strong> the observations.</p>
 <p><a href="../images/report3.png"><img alt="Screenshot" src="../images/report3.png" /></a></p>

@@ -24,7 +24,7 @@
     
     
       
-        <title>Api - Deming</title>
+        <title>API - Deming</title>
       
     
     
@@ -114,7 +114,7 @@
         <div class="md-header__topic" data-md-component="header-topic">
           <span class="md-ellipsis">
             
-              Api
+              API
             
           </span>
         </div>
@@ -289,7 +289,7 @@
         
   
   <span class="md-ellipsis">
-    Index
+    Introduction
   </span>
   
 
@@ -309,7 +309,7 @@
         
   
   <span class="md-ellipsis">
-    Home
+    Application
   </span>
   
 
@@ -329,7 +329,7 @@
         
   
   <span class="md-ellipsis">
-    Measures
+    Mesures de sécurité
   </span>
   
 
@@ -349,7 +349,7 @@
         
   
   <span class="md-ellipsis">
-    Controls
+    Contrôles
   </span>
   
 
@@ -369,7 +369,7 @@
         
   
   <span class="md-ellipsis">
-    Delegation
+    Délégation
   </span>
   
 
@@ -389,7 +389,7 @@
         
   
   <span class="md-ellipsis">
-    Plan
+    Planning
   </span>
   
 
@@ -409,7 +409,7 @@
         
   
   <span class="md-ellipsis">
-    Dashboards
+    Tableaux de bord
   </span>
   
 
@@ -429,7 +429,7 @@
         
   
   <span class="md-ellipsis">
-    Actions
+    Plans d'action
   </span>
   
 
@@ -465,11 +465,31 @@
   
   
     <li class="md-nav__item">
+      <a href="../exceptions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Exceptions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../config/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Config
+    Configuration
   </span>
   
 
@@ -491,12 +511,14 @@
       <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
       
       
+        
+      
       
         <label class="md-nav__link md-nav__link--active" for="__toc">
           
   
   <span class="md-ellipsis">
-    Api
+    API
   </span>
   
 
@@ -507,7 +529,7 @@
         
   
   <span class="md-ellipsis">
-    Api
+    API
   </span>
   
 
@@ -519,6 +541,8 @@
   
   
   
+    
+  
   
     <label class="md-nav__title" for="__toc">
       <span class="md-nav__icon md-icon"></span>
@@ -527,16 +551,6 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#api" class="md-nav__link">
-    <span class="md-ellipsis">
-      API
-    </span>
-  </a>
-  
-    <nav class="md-nav" aria-label="API">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
   <a href="#installer-lapi" class="md-nav__link">
     <span class="md-ellipsis">
       Installer l'API
@@ -544,8 +558,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#les-apis" class="md-nav__link">
     <span class="md-ellipsis">
       Les APIs
@@ -553,8 +567,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#actions-gerees-par-le-controleur-de-ressources" class="md-nav__link">
     <span class="md-ellipsis">
       Actions gérées par le contrôleur de ressources
@@ -562,8 +576,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#droits-dacces" class="md-nav__link">
     <span class="md-ellipsis">
       Droits d'accès
@@ -571,8 +585,8 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#exemples" class="md-nav__link">
     <span class="md-ellipsis">
       Exemples
@@ -622,8 +636,8 @@
     </nav>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#python" class="md-nav__link">
     <span class="md-ellipsis">
       Python
@@ -631,18 +645,13 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#bash" class="md-nav__link">
     <span class="md-ellipsis">
       bash
     </span>
   </a>
-  
-</li>
-        
-      </ul>
-    </nav>
   
 </li>
       
@@ -685,7 +694,7 @@
         
   
   <span class="md-ellipsis">
-    References
+    Références
   </span>
   
 
@@ -725,19 +734,17 @@
   
 
 
-  <h1>Api</h1>
-
-<h2 id="api">API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h2>
+<h1 id="api">API<a class="headerlink" href="#api" title="Permanent link">&para;</a></h1>
 <p>Deming peut être modifié ou mis à jour via une REST API.</p>
 <p>Une API REST (<a href="https://fr.wikipedia.org/wiki/Representational_state_transfer">Representational State Transfer</a>)
 est une interface de programmation d'application qui respecte les contraintes du style d'architecture REST
 et permet d'interagir avec les services web RESTful.</p>
-<h3 id="installer-lapi">Installer l'API<a class="headerlink" href="#installer-lapi" title="Permanent link">&para;</a></h3>
+<h2 id="installer-lapi">Installer l'API<a class="headerlink" href="#installer-lapi" title="Permanent link">&para;</a></h2>
 <p>pour installer l'API, il est nécessaire d'installer Passport en lançant cette commande :</p>
 <div class="highlight"><pre><span></span><code>php<span class="w"> </span>artisan<span class="w"> </span>passport:install
 </code></pre></div>
 <p>L'environnement Docker prend en charge cette fonctionnalité nativement, via l'<a href="https://github.com/dbarzin/deming/blob/main/docker/entrypoint.sh">entrypoint</a>.</p>
-<h3 id="les-apis">Les APIs<a class="headerlink" href="#les-apis" title="Permanent link">&para;</a></h3>
+<h2 id="les-apis">Les APIs<a class="headerlink" href="#les-apis" title="Permanent link">&para;</a></h2>
 <ul>
 <li>
 <p>/api/attributes</p>
@@ -761,7 +768,7 @@ et permet d'interagir avec les services web RESTful.</p>
 <p>/api/logs</p>
 </li>
 </ul>
-<h3 id="actions-gerees-par-le-controleur-de-ressources">Actions gérées par le contrôleur de ressources<a class="headerlink" href="#actions-gerees-par-le-controleur-de-ressources" title="Permanent link">&para;</a></h3>
+<h2 id="actions-gerees-par-le-controleur-de-ressources">Actions gérées par le contrôleur de ressources<a class="headerlink" href="#actions-gerees-par-le-controleur-de-ressources" title="Permanent link">&para;</a></h2>
 <p>Les requêtes et URI de chaque api est représentée dans le tableau ci-dessous.</p>
 <table>
 <thead>
@@ -799,13 +806,13 @@ et permet d'interagir avec les services web RESTful.</p>
 </tr>
 </tbody>
 </table>
-<h3 id="droits-dacces">Droits d'accès<a class="headerlink" href="#droits-dacces" title="Permanent link">&para;</a></h3>
+<h2 id="droits-dacces">Droits d'accès<a class="headerlink" href="#droits-dacces" title="Permanent link">&para;</a></h2>
 <p>Il faut s'identifier avec un utilisateur de l'application Deming pour pouvoir accéder aux API.
 Cet utilisateur doit disposer du rôle "API".</p>
 <p>Lorsque l'authentification réussit, l'API envoie un "token" qui doit être passé dans l'entête "Authorization" de la requête de l'API.</p>
-<h3 id="exemples">Exemples<a class="headerlink" href="#exemples" title="Permanent link">&para;</a></h3>
+<h2 id="exemples">Exemples<a class="headerlink" href="#exemples" title="Permanent link">&para;</a></h2>
 <p>Voici quelques exemples d'utilisation de l'API avec PHP :</p>
-<h4 id="authentification">Authentification<a class="headerlink" href="#authentification" title="Permanent link">&para;</a></h4>
+<h3 id="authentification">Authentification<a class="headerlink" href="#authentification" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
     <span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
 
@@ -845,7 +852,7 @@ Cet utilisateur doit disposer du rôle "API".</p>
 
     <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
 </code></pre></div>
-<h4 id="liste-des-domaines">Liste des domaines<a class="headerlink" href="#liste-des-domaines" title="Permanent link">&para;</a></h4>
+<h3 id="liste-des-domaines">Liste des domaines<a class="headerlink" href="#liste-des-domaines" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
     <span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
 
@@ -872,7 +879,7 @@ Cet utilisateur doit disposer du rôle "API".</p>
 
     <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
 </code></pre></div>
-<h4 id="recuperer-un-domaine">Récupérer un domaine<a class="headerlink" href="#recuperer-un-domaine" title="Permanent link">&para;</a></h4>
+<h3 id="recuperer-un-domaine">Récupérer un domaine<a class="headerlink" href="#recuperer-un-domaine" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
     <span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
 
@@ -898,7 +905,7 @@ Cet utilisateur doit disposer du rôle "API".</p>
 
     <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
 </code></pre></div>
-<h4 id="mettre-a-jour-un-domaine">Mettre à jour un domaine<a class="headerlink" href="#mettre-a-jour-un-domaine" title="Permanent link">&para;</a></h4>
+<h3 id="mettre-a-jour-un-domaine">Mettre à jour un domaine<a class="headerlink" href="#mettre-a-jour-un-domaine" title="Permanent link">&para;</a></h3>
 <div class="highlight"><pre><span></span><code><span class="cp">&lt;?php</span>
    <span class="nv">$curl</span> <span class="o">=</span> <span class="nb">curl_init</span><span class="p">();</span>
 
@@ -929,7 +936,7 @@ Cet utilisateur doit disposer du rôle "API".</p>
 
     <span class="nb">var_dump</span><span class="p">(</span><span class="nv">$response</span><span class="p">);</span>
 </code></pre></div>
-<h3 id="python">Python<a class="headerlink" href="#python" title="Permanent link">&para;</a></h3>
+<h2 id="python">Python<a class="headerlink" href="#python" title="Permanent link">&para;</a></h2>
 <p>Voici un exemple d'utilisation de l'API en Python</p>
 <div class="highlight"><pre><span></span><code><span class="ch">#!/usr/bin/python3</span>
 
@@ -951,7 +958,7 @@ Cet utilisateur doit disposer du rôle "API".</p>
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">status_code</span><span class="p">)</span>
 <span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="o">.</span><span class="n">json</span><span class="p">())</span>
 </code></pre></div>
-<h3 id="bash">bash<a class="headerlink" href="#bash" title="Permanent link">&para;</a></h3>
+<h2 id="bash">bash<a class="headerlink" href="#bash" title="Permanent link">&para;</a></h2>
 <p>Voici un exemple d'utilisation de l'API en ligne de commande avec <a href="https://curl.se/docs/manpage.html">CURL</a> et <a href="https://stedolan.github.io/jq/">JQ</a>
 <div class="highlight"><pre><span></span><code># valid login and password
 data=&#39;{&quot;email&quot;:&quot;api@admin.localhost&quot;,&quot;password&quot;:&quot;12345678&quot;}&#39;
