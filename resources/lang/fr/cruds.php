@@ -498,4 +498,48 @@ return [
             ],
         ],
     ],
+
+    'exception' => [
+        'list'             => 'Gestion des exceptions',
+        'create'           => 'Nouvelle exception',
+        'edit'             => 'Modifier l\'exception',
+        'title_singular'   => 'Exception',
+        'title_plural'     => 'Exceptions',
+
+        'review_section'   => 'Décision de validation',
+        'expired_hint'     => 'La date de validité est dépassée.',
+
+        'confirm_submit'   => 'Soumettre cette exception à validation ?',
+        'confirm_approve'  => 'Approuver cette exception ?',
+        'confirm_reject'   => 'Refuser cette exception ?',
+
+        'actions' => [
+            'submit'  => 'Soumettre',
+            'approve' => 'Approuver',
+            'reject'  => 'Refuser',
+        ],
+
+        'fields' => [
+            'name'                        => 'Nom',
+            'measure'                     => 'Contrôle lié',
+            'no_measure'                  => 'Aucun contrôle',
+            'description'                 => 'Description',
+            'justification'               => 'Justification',
+            'compensating_controls'       => 'Mesures compensatoires',
+            'start_date'                  => 'Début',
+            'end_date'                    => 'Fin',
+            'status'                      => 'Statut',
+            'created_by'                  => 'Créé par',
+            'submitted_by'                => 'Soumis par',
+            'approved_by'                 => 'Approuvé par',
+            'rejected_by'                 => 'Refusé par',
+            'approval_comment'            => 'Commentaire de décision',
+            'approval_comment_optional'   => 'Commentaire (facultatif)',
+            'approval_comment_required'   => 'Motif du refus (obligatoire)',
+            'choose_status'               => 'Filtrer par statut',
+            'choose_measure'              => 'Filtrer par contrôle',
+            'expired_only'                => 'Expirées uniquement',
+        ],
+    ],
+
 ];

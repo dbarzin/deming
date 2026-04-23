@@ -83,14 +83,14 @@
             {{-- Exceptions — violet : statut dérogatoire --}}
             <div class="more-info-box fg-white" style="background-color: #8059C8 !important;">                <div class="content">
                     <h2 class="text-bold mb-0">
-                       {{ 0 }}
+                       {{ $exceptions_count }}
                     </h2>
                 <div>{{ trans('menu.exceptions') }}</div>
                 </div>
                 <div class="icon">
-                    <span class="mif-star-empty"></span>
+                    <span class="mif-cross"></span>
                 </div>
-                <a href="/exceptions" class="more disabled"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
+                <a href="/exception/index" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
             </div>
         </div>
 

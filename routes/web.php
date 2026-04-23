@@ -11,6 +11,7 @@
 |
 */
 
+use App\Http\Controllers\ExceptionController;
 use App\Http\Controllers\RiskController;
 use App\Http\Controllers\RiskScoringConfigController;
 
@@ -147,7 +148,7 @@ Route::namespace('App\\Http\\Controllers')->middleware('auth')->group(function (
     Route::get('/risk/matrix',          [RiskController::class, 'matrix'])->name('risk.matrix');
     Route::get('/risk/export',          [RiskController::class, 'export'])->name('risk.export');
 
-// --- Configuration du scoring (Admin uniquement) ---
+    // --- Configuration du scoring (Admin uniquement) ---
     Route::get('/risk/scoring',                     [RiskScoringConfigController::class, 'index'])->name('risk.scoring.index');
     Route::get('/risk/scoring/create',              [RiskScoringConfigController::class, 'create'])->name('risk.scoring.create');
     Route::post('/risk/scoring/store',              [RiskScoringConfigController::class, 'store'])->name('risk.scoring.store');
@@ -155,6 +156,20 @@ Route::namespace('App\\Http\\Controllers')->middleware('auth')->group(function (
     Route::post('/risk/scoring/{id}/save',          [RiskScoringConfigController::class, 'update'])->name('risk.scoring.update');
     Route::post('/risk/scoring/{id}/activate',      [RiskScoringConfigController::class, 'activate'])->name('risk.scoring.activate');
     Route::get('/risk/scoring/{id}/delete',         [RiskScoringConfigController::class, 'destroy'])->name('risk.scoring.destroy');
+
+    // --- Gestion des exceptions (issue #590) ---
+    Route::get('/exception/index',          [ExceptionController::class, 'index'])->name('exception.index');
+    Route::get('/exception/create',         [ExceptionController::class, 'create'])->name('exception.create');
+    Route::post('/exception/store',         [ExceptionController::class, 'store'])->name('exception.store');
+    Route::get('/exception/show/{id}',      [ExceptionController::class, 'show'])->name('exception.show');
+    Route::get('/exception/edit/{id}',      [ExceptionController::class, 'edit'])->name('exception.edit');
+    Route::post('/exception/save',          [ExceptionController::class, 'update'])->name('exception.save');
+    Route::get('/exception/delete/{id}',    [ExceptionController::class, 'destroy'])->name('exception.destroy');
+
+    // Transitions de workflow
+    Route::post('/exception/submit',        [ExceptionController::class, 'submit'])->name('exception.submit');
+    Route::post('/exception/approve',       [ExceptionController::class, 'approve'])->name('exception.approve');
+    Route::post('/exception/reject',        [ExceptionController::class, 'reject'])->name('exception.reject');
 
 
 });

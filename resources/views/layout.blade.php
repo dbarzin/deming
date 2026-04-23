@@ -98,8 +98,8 @@
                 </a>
             </li>
             <li class="{{ request()->is('exceptions*') ? 'active': '' }}">
-                <a href="/">
-                    <span class="icon mif-star-empty"></span>
+                <a href="/exception/index">
+                    <span class="icon mif-cross"></span>
                     <span class="caption">{{ trans("menu.exceptions") }}</span>
                 </a>
             </li>
