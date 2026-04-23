@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Exception;
 use App\Models\Risk;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -40,6 +41,7 @@ class HomeController extends Controller
         $lateControlsCount = $this->getLateControlsCount();
         $actionPlansCount = $this->getActionPlansCount();
         $risksCount = $this->getRisksCount();
+        $exceptionsCount = $this->getExceptionsCount();
 
         $activeControls = $this->getActiveControls();
         $controlsTodo = $this->getControlsTodo();
@@ -60,6 +62,7 @@ class HomeController extends Controller
             'controls_made_count' => $controlsMadeCount,
             'controls_never_made' => $controlsNeverMade,
             'risks_count' => $risksCount,
+            'exceptions_count' => $exceptionsCount,
             'active_controls' => $activeControls,
             'controls_todo' => $controlsTodo,
             'action_plans_count' => $actionPlansCount,
@@ -456,6 +459,13 @@ class HomeController extends Controller
         if (Auth::user()->isAuditee()) {
             $query->ownedBy(Auth::user()->id);
         }
+
+        return $query->count();
+    }
+
+    private function getExceptionsCount() {
+        $query = Exception::query();
+
 
         return $query->count();
     }
