@@ -22,7 +22,7 @@ Mettre à jour la distribution
 
 Installer Apache, git, php et composer
 
-    su root -c "apt-get install git composer apache2 libapache2-mod-php php php-mysql php-zip php-gd php-mbstring php-curl php-xml"
+    su root -c "apt-get install git composer apache2 libapache2-mod-php php php-mysql php-zip php-gd php-mbstring php-curl php-ldap php-xml"
 
 Créer le répertoire du projet
 

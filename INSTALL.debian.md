@@ -22,7 +22,7 @@ Update the distribution
 
 Install Apache, git, php and composer
 
-    su root -c "apt-get install git composer apache2 libapache2-mod-php php php-mysql php-zip php-gd php-mbstring php-curl php-xml"
+    su root -c "apt-get install git composer apache2 libapache2-mod-php php php-mysql php-zip php-gd php-mbstring php-curl php-xml php-ldap"
 
 Create the project directory
 
