@@ -87,14 +87,14 @@
         class="table table-striped table-hover table-bordered datatable">
         <thead>
             <tr>
-                <th width="5%">{{ trans("cruds.measure.fields.clauses") }}</th>
-                <th width="40%" data-priority="1">{{ trans("cruds.measure.fields.name") }}</th>
-                <th width="10%">{{ trans("cruds.measure.fields.scope") }}</th>
+                <th>{{ trans("cruds.measure.fields.clauses") }}</th>
+                <th data-priority="1">{{ trans("cruds.measure.fields.name") }}</th>
+                <th>{{ trans("cruds.measure.fields.scope") }}</th>
                 <th class="dt-hidden">{{ trans("cruds.measure.fields.attributes") }}</th>
-                <th width="5%">{{ trans("cruds.measure.fields.score") }}</th>
-                <th  width="5%" data-priority="2">{{ trans("cruds.measure.fields.planned") }}</th>
-                <th  width="5%">{{ trans("cruds.measure.fields.realized") }}</th>
-                <th  width="5%">{{ trans("cruds.measure.fields.next") }}</th>
+                <th>{{ trans("cruds.measure.fields.score") }}</th>
+                <th data-priority="2">{{ trans("cruds.measure.fields.planned") }}</th>
+                <th>{{ trans("cruds.measure.fields.realized") }}</th>
+                <th>{{ trans("cruds.measure.fields.next") }}</th>
                 <th class="dt-hidden">{{ trans("cruds.measure.fields.note") }}</th>
                 <th class="dt-hidden">{{ trans("cruds.measure.fields.periodicity") }}</th>
             </tr>

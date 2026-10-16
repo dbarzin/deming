@@ -8,6 +8,14 @@ function bytesToHuman($bytes) {
     return round($bytes, 2) . ' ' . $units[$i];
 }
 ?>
+<div class="row">
+
+{{-- Aide : balises du modèle du rapport de pilotage (à droite, en dessous sur mobile) --}}
+<div class="col-md-5 col-xl-4 order-2">
+    @include('partials.report-template-help')
+</div>
+
+<div class="col-md-7 col-xl-8 order-1">
 <div class="card">
     <div class="card-header"><i class="bi bi-file-earmark-text"></i> {{ trans('cruds.document.title.templates') }}</div>
     <div class="card-body">
@@ -18,7 +26,7 @@ function bytesToHuman($bytes) {
     @csrf
         <div class="container-fluid px-0">
             <div class="row">
-                <div class="col-md-10 col-lg-5">
+                <div class="col-md-10 col-xl-8">
                     <a href="/doc/template?id=1" target="_new">{{ trans('cruds.document.model.control') }}</a>
                     @if (file_exists(storage_path('app/models/control_.docx')))
                         / <a href="/doc/template?id=2" target="_new">{{ trans('cruds.document.model.custom') }}</a>
@@ -27,16 +35,17 @@ function bytesToHuman($bytes) {
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-10 col-lg-5">
+                <div class="col-md-10 col-xl-8">
                     <a href="/doc/template?id=3" target="_new">{{ trans('cruds.document.model.report') }}</a>
                     @if (file_exists(storage_path('app/models/pilotage_.docx')))
                         / <a href="/doc/template?id=4" target="_new">{{ trans('cruds.document.model.custom') }}</a>
                     @endif
-                    <input class="form-control" type="file" name="template2"/>
+                    <input class="form-control {{ $errors->has('template2') ? 'is-invalid' : '' }}" type="file" name="template2" accept=".docx"/>
+                    <span class="help-block">{{ trans('report_template.upload_helper') }}</span>
                 </div>
             </div>
             <div class="row">
-                <div class="col-md-8 col-lg-4">
+                <div class="col-md-8 col-xl-6">
 
                 <button type="submit" class="btn btn-success">
                     <span class="bi bi-floppy"></span> {{ trans("common.save") }}
@@ -51,23 +60,22 @@ function bytesToHuman($bytes) {
     </form>
 </div>
 </div>
-<br>
 <div class="card">
     <div class="card-header"><i class="bi bi-file-earmark-text"></i> {{ trans('cruds.document.title.storage') }}</div>
     <div class="card-body">
     <div class="container-fluid px-0">
         <div class="row">
-            <div class="col-md-6 col-lg-3">
+            <div class="col-md-6 col-xl-4">
             {{ trans('cruds.document.count') }} : {{ $count }}
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-3">
+            <div class="col-md-6 col-xl-4">
             {{ trans('cruds.document.total_size') }} : {{ bytesToHuman($sum) }}
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-3">
+            <div class="col-md-6 col-xl-4">
                 <a href="/doc/check" class="btn btn-success">
                     <span class="bi bi-check-all"></span> {{ trans('common.check') }}
                 </a>
@@ -76,7 +84,6 @@ function bytesToHuman($bytes) {
     </div>
 </div>
 </div>
-<br>
 <div class="card">
     <div class="card-header"><i class="bi bi-file-earmark-text"></i> {{ trans('cruds.document.title.cleanup') }}</div>
     <div class="card-body">
@@ -84,12 +91,12 @@ function bytesToHuman($bytes) {
 	@csrf
     <div class="container-fluid px-0">
         <div class="row">
-            <div class="col-md-8 col-lg-4">
+            <div class="col-md-8 col-xl-6">
                 {{ trans('cruds.document.title.cleanup_detail') }}
             </div>
         </div>
         <div class="row">
-            <div class="col-md-6 col-lg-3">
+            <div class="col-md-6 col-xl-4">
                 <div class="input-group">
                 <span class="input-group-text">{{ trans('cruds.document.month') }}</span>
                 <select class="form-select select2" id="durationSelect" name="duration">
@@ -105,7 +112,7 @@ function bytesToHuman($bytes) {
         </div>
 
         <div class="row">
-            <div class="col-md-10 col-lg-5">
+            <div class="col-md-10 col-xl-8">
                 <button type="submit" class="btn btn-success" name="action" value="save">
                     <span class="bi bi-floppy"></span> {{ trans("common.save") }}
                 </button>
@@ -121,6 +128,9 @@ function bytesToHuman($bytes) {
         </div>
     </div>
     </form>
+</div>
+</div>
+
 </div>
 </div>
 

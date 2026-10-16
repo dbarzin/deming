@@ -27,21 +27,13 @@
 			class="table table-striped table-hover table-bordered datatable">
 		    <thead>
 		    <tr>
-				<th
-					width="50"
-                    >{{ trans('cruds.group.fields.name') }}
+				<th>{{ trans('cruds.group.fields.name') }}
                 </th>
-				<th
-					width="50"
-                    >{{ trans('cruds.group.fields.description') }}
+				<th>{{ trans('cruds.group.fields.description') }}
                 </th>
-				<th
-					width="50"
-                    ># {{ trans('cruds.group.fields.users') }}
+				<th># {{ trans('cruds.group.fields.users') }}
                 </th>
-				<th
-					width="50"
-                    ># {{ trans('cruds.group.fields.controls') }}
+				<th># {{ trans('cruds.group.fields.controls') }}
                 </th>
                 <th></th>
 		    </tr>

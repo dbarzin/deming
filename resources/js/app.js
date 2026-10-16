@@ -101,7 +101,8 @@ function initDataTable(el, options = {}) {
             data.search.search = '';
             (data.columns || []).forEach(c => { if (c.search) c.search.search = ''; });
         },
-        autoWidth: false,
+        // Largeur des colonnes calculée par DataTables selon le contenu
+        autoWidth: true,
         pageLength: 100,
         lengthMenu: [10, 25, 50, 100, 250, 500],
         layout: withButtons ? {

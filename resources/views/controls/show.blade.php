@@ -143,11 +143,11 @@
 				>
 			<thead>
 				<tr class="row-hover">
-					<th width="65%">{{ trans("cruds.welcome.controls") }}</th>
-					<th width="65%">{{ trans("cruds.measure.fields.scope") }}</th>
-					<th width="5%">{{ trans("cruds.measure.fields.score") }}</th>
-					<th width="15%">{{ trans("cruds.measure.fields.plan_date") }}</th>
-					<th width="15%">{{ trans("cruds.measure.fields.realisation_date") }}</th>
+					<th>{{ trans("cruds.welcome.controls") }}</th>
+					<th>{{ trans("cruds.measure.fields.scope") }}</th>
+					<th>{{ trans("cruds.measure.fields.score") }}</th>
+					<th>{{ trans("cruds.measure.fields.plan_date") }}</th>
+					<th>{{ trans("cruds.measure.fields.realisation_date") }}</th>
 				</tr>
 			</thead>
 			<tbody>

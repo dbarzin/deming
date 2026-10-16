@@ -33,8 +33,8 @@
 			class="table table-striped table-hover table-bordered datatable">
 		    <thead>
 		    <tr>
-				<th width="10">{{ trans('cruds.attribute.fields.name') }}</th>
-				<th width="200">{{ trans('cruds.attribute.fields.values') }}</th>
+				<th>{{ trans('cruds.attribute.fields.name') }}</th>
+				<th>{{ trans('cruds.attribute.fields.values') }}</th>
 		    </tr>
 		    </thead>
 		    <tbody>

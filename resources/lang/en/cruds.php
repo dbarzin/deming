@@ -306,7 +306,7 @@ return [
              'title' => 'Title',
              'role' => 'Role',
              'password' => 'Password',
-             'email' => 'email',
+             'email' => 'Email',
              'language' => 'Language',
              'controls' => 'Controls',
              'groups' => 'Groups'

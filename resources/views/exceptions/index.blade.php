@@ -52,12 +52,12 @@
         class="table table-striped table-hover table-bordered datatable">
         <thead>
             <tr>
-                <th width="30%">{{ trans('cruds.exception.fields.name') }}</th>
-                <th width="20%">{{ trans('cruds.exception.fields.measure') }}</th>
-                <th width="10%">{{ trans('cruds.exception.fields.start_date') }}</th>
-                <th width="10%">{{ trans('cruds.exception.fields.end_date') }}</th>
-                <th width="10%">{{ trans('cruds.exception.fields.status') }}</th>
-                <th width="20%">{{ trans('cruds.exception.fields.created_by') }}</th>
+                <th>{{ trans('cruds.exception.fields.name') }}</th>
+                <th>{{ trans('cruds.exception.fields.measure') }}</th>
+                <th>{{ trans('cruds.exception.fields.start_date') }}</th>
+                <th>{{ trans('cruds.exception.fields.end_date') }}</th>
+                <th>{{ trans('cruds.exception.fields.status') }}</th>
+                <th>{{ trans('cruds.exception.fields.created_by') }}</th>
             </tr>
         </thead>
         <tbody>

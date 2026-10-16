@@ -512,3 +512,54 @@ form {
     -webkit-mask: var(--icon-library-svg) no-repeat center / contain;
     mask: var(--icon-library-svg) no-repeat center / contain;
 }
+
+/***************************************************************************/
+/* Rapports : panneau d'aide des balises du modèle                          */
+/***************************************************************************/
+
+.report-help {
+    font-size: .9rem;
+}
+
+/* Dès qu'il est à côté du contenu (md), le panneau reste visible et défile indépendamment */
+@media (min-width: 768px) {
+    .report-help {
+        position: sticky;
+        top: calc(var(--deming-navbar-height) + 1rem);
+        max-height: calc(100vh - var(--deming-navbar-height) - 2rem);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .report-help .card-body {
+        overflow-y: auto;
+    }
+}
+
+.report-help .table td {
+    vertical-align: top;
+}
+
+.report-help pre.report-syntax {
+    background: #f6f8fa;
+    border: 1px solid #e1e4e8;
+    border-radius: .25rem;
+    padding: .4rem .5rem;
+    font-family: var(--bs-font-monospace);
+    font-size: .8rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin-bottom: .5rem;
+}
+
+.report-help .copy-tag {
+    cursor: copy;
+}
+
+.report-help .copy-tag.copied {
+    background: #d1e7dd;
+}
+
+.report-help .accordion-button code {
+    font-size: .8rem;
+}

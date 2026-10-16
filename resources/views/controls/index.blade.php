@@ -43,12 +43,12 @@
                 class="table table-striped table-hover table-bordered datatable">
 		   <thead>
 			    <tr>
-					<th width="10%">{{ trans('cruds.control.fields.domain') }}</th>
-					<th width="10%">{{ trans('cruds.control.fields.clause') }}</th>
-					<th width="60%">{{ trans('cruds.control.fields.name') }}</th>
+					<th>{{ trans('cruds.control.fields.domain') }}</th>
+					<th>{{ trans('cruds.control.fields.clause') }}</th>
+					<th>{{ trans('cruds.control.fields.name') }}</th>
 					<th class="dt-hidden">{{ trans('cruds.control.fields.attributes') }}</th>
-					<th class="text-center" width="10%"># {{ trans('cruds.measure.title') }}</th>
-					<th width="10%"></th>
+					<th class="dt-center"># {{ trans('cruds.measure.title') }}</th>
+					<th></th>
 			    </tr>
 		    </thead>
 		    <tbody>
@@ -70,7 +70,7 @@
 				</td>
 				<td>{{ $control->name }}</td>
 				<td>{{ $control->attributes }}</td>
-				<td id="{{ $control->control_count }}">
+				<td class="dt-center" id="{{ $control->control_count }}">
 					@if ($control->control_count>0)
                     <a href="/bob/index?period=99&domain=0&scope=none&status=2&clause={{ htmlentities($control->clause) }}">
 						{{ $control->control_count }}

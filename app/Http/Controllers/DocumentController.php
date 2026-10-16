@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 // Models
 use App\Models\Document;
 use App\Models\Measure;
+use App\Services\Report\ReportTableRegistry;
+use App\Services\Report\TemplateTableRenderer;
 // Framework
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -65,12 +67,22 @@ class DocumentController extends Controller
         }
 
         if ($request->has('template2')) {
-            // Get image file
+            $request->validate([
+                'template2' => ['file', 'mimes:docx', 'max:10240'],
+            ]);
             $template = $request->file('template2');
-            // Upload image
+
+            // Vérifie les balises de tableau ${table:...} avant d'accepter le modèle
+            $errors = (new TemplateTableRenderer())->validate($template->getRealPath());
+            if ($errors !== []) {
+                return redirect()
+                    ->back()
+                    ->withErrors(['template2' => $errors]);
+            }
+
             $template->storeAs('models', 'pilotage_.docx');
 
-            $messages->push('Template updated !');
+            $messages->push(trans('report_template.upload_success'));
         }
 
         return redirect()
@@ -258,7 +270,8 @@ class DocumentController extends Controller
         return view('/documents/index')
             ->with('count', $count)
             ->with('sum', $sum)
-            ->with('duration', $duration);
+            ->with('duration', $duration)
+            ->with('reportTables', ReportTableRegistry::describe());
     }
 
     public function check()
@@ -357,6 +370,7 @@ class DocumentController extends Controller
             ->with('count', $count)
             ->with('sum', $sum)
             ->with('duration', $duration)
-            ->with('messages', $messages);
+            ->with('messages', $messages)
+            ->with('reportTables', ReportTableRegistry::describe());
     }
 }

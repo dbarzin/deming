@@ -91,10 +91,10 @@
 				    <table data-order="[[3,&quot;asc&quot;]]" data-page-length="25" id="user-controls-table" class="table table-striped table-hover table-bordered datatable">
 				        <thead>
 				            <tr>
-				                <th width="5%">{{ trans("cruds.measure.fields.clauses") }}</th>
-				                <th width="50%">{{ trans("cruds.measure.fields.name") }}</th>
-                                <th width="50%">{{ trans("cruds.measure.fields.scope") }}</th>
-				                <th  width="5%">{{ trans("cruds.measure.fields.planned") }}</th>
+				                <th>{{ trans("cruds.measure.fields.clauses") }}</th>
+				                <th>{{ trans("cruds.measure.fields.name") }}</th>
+                                <th>{{ trans("cruds.measure.fields.scope") }}</th>
+				                <th>{{ trans("cruds.measure.fields.planned") }}</th>
 				            </tr>
 				        </thead>
 				        <tbody>

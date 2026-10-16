@@ -25,10 +25,10 @@
 			class="table table-striped table-hover table-bordered datatable">
 		    <thead>
 		    <tr>
-				<th width="50">{{ trans('cruds.domain.fields.framework') }}</th>
-				<th width="50">{{ trans('cruds.domain.fields.name') }}</th>
-				<th width="200">{{ trans('cruds.domain.fields.description') }}</th>
-				<th  width="200">{{ trans('cruds.domain.fields.measures') }}</th>
+				<th>{{ trans('cruds.domain.fields.framework') }}</th>
+				<th>{{ trans('cruds.domain.fields.name') }}</th>
+				<th>{{ trans('cruds.domain.fields.description') }}</th>
+				<th>{{ trans('cruds.domain.fields.measures') }}</th>
 		    </tr>
 		    </thead>
 		    <tbody>

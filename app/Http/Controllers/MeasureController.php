@@ -1657,13 +1657,12 @@ class MeasureController extends Controller
         $textlines = explode("\n", $str);
         $textrun   = new \PhpOffice\PhpWord\Element\TextRun();
 
-        $escape = fn ($text) => htmlspecialchars($text, ENT_XML1 | ENT_QUOTES, 'UTF-8');
-
-        $textrun->addText($escape(array_shift($textlines)));
+        // Le texte est échappé par PhpWord (voir AppServiceProvider)
+        $textrun->addText(array_shift($textlines));
 
         foreach ($textlines as $line) {
             $textrun->addTextBreak();
-            $textrun->addText($escape($line));
+            $textrun->addText($line);
         }
 
         return $textrun;

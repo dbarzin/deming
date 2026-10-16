@@ -27,17 +27,10 @@
                 class="table table-striped table-hover table-bordered datatable">
 			    <thead>
 			    <tr>
-					<th
-						width="50"
-						>{{ trans('cruds.user.fields.login') }}</th>
-					<th
-						width="50"
-						>{{ trans('cruds.user.fields.name') }}</th>
-					<th
-						width="50"
-						>{{ trans('cruds.user.fields.role') }}</th>
-					<th
-						width="200">{{ trans('cruds.user.fields.email') }}</th>
+					<th>{{ trans('cruds.user.fields.login') }}</th>
+					<th>{{ trans('cruds.user.fields.name') }}</th>
+					<th>{{ trans('cruds.user.fields.role') }}</th>
+					<th>{{ trans('cruds.user.fields.email') }}</th>
 					<th class="dt-hidden">{{ trans('cruds.user.fields.title') }}</th>
 					<th class="dt-hidden">{{ trans('cruds.user.fields.language') }}</th>
     				@if (Auth::User()->role==1)
