@@ -35,10 +35,10 @@
             <div class="col-lg-4 col-md-5">
     			<input type="text" class="form-control" name="name" value="{{ old('name', $control->name) }}" maxlength='255'>
     		</div>
-            <div class="col-lg-1 col-md-1" align="right">
+            <div class="col-lg-1 col-md-1 text-md-end">
         		<strong>{{ trans('cruds.measure.fields.scope') }}</strong>
         	</div>
-    		<div class="col-lg-1 col-md-2">
+    		<div class="col-lg-2 col-xl-1 col-md-2">
     			<input class="form-control" type="text" name="scope" autocomplete="on" size="32"
     			value="{{ old('scope',$control->scope) }}"/>
     		</div>
@@ -147,7 +147,7 @@
     </div>
 
     <div class="row">
-        <div class="col-6">
+        <div class="col-md-12 col-lg-6">
             @if (Auth::User()->role !== 3)
         	<button class="btn btn-success">
                 <span class="bi bi-calendar3"></span> {{ trans('common.plan') }}

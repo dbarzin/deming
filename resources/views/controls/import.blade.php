@@ -29,7 +29,7 @@
                     </select>
                 </div>
             </div>
-            <div class="col-lg-1 col-md-2" align="right">
+            <div class="col-lg-1 col-md-2 text-md-end">
                 <a href="#" onclick="downloadModel()" class="btn btn-info">
                     {{ trans("common.download") }}
                 </a>
@@ -53,7 +53,7 @@
             <div class="col-lg-6 col-md-7">
                 <div class="form-check form-check-inline"><input id="test" class="form-check-input" type="checkbox" name="test"/><label class="form-check-label" for="test">{{ trans('cruds.imports.fake') }}</label></div>
             </div>
-            <div class="col-lg-1 col-md-2" align="right">
+            <div class="col-lg-1 col-md-2 text-md-end">
     		    <button type="submit" class="btn btn-success"
                     onclick="if ($('#clean').is(':checked')) return confirm('Do you want to remove all other measures and controls  ?')">
                         {{ trans("common.import") }}

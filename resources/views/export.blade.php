@@ -19,7 +19,7 @@
 			@endif
 
 			<div class="row">
-		        <div class="col-5">
+		        <div class="col-md-10 col-lg-5">
 					<b>{{ trans('cruds.imports.title') }}</b>
                     /
                     <a href="/export/alices" target="_blank">Current security Measures</a>
@@ -29,7 +29,7 @@
 			<form action="/alice/import" method="post" enctype="multipart/form-data">
 			@csrf
     			<div class="row">
-    		        <div class="col-4">
+    		        <div class="col-md-8 col-lg-4">
                         <div class="input-group">
                             <span class="input-group-text">Select model</span>
                             <select class="form-select select2" name="model" id="model">
@@ -40,14 +40,14 @@
                             </select>
                         </div>
                     </div>
-    		        <div class="col-1" align="right">
+    		        <div class="col-md-2 col-lg-1 text-md-end">
     				    <button type="submit" name="action" value="download" class="btn btn-info">
                                 {{ trans("common.download") }}
                         </button>
     		        </div>
                 </div>
     			<div class="row">
-    		        <div class="col-5">
+    		        <div class="col-md-10 col-lg-5">
                         or
                         <div class="input-group">
                             <span class="input-group-text">Select import file:</span>
@@ -56,17 +56,17 @@
     				</div>
     		    </div>
     			<div class="row">
-    		        <div class="col-4">
+    		        <div class="col-md-8 col-lg-4">
                         <input class="form-check-input" type="checkbox" name="clean" id="clean">
                         Remove all other measures and controls
                     </div>
                 </div>
     			<div class="row">
-    		        <div class="col-4">
+    		        <div class="col-md-8 col-lg-4">
                         <input class="form-check-input" type="checkbox" name="test">
                         Generate fake measurements
                     </div>
-    		        <div class="col-1" align="right">
+    		        <div class="col-md-2 col-lg-1 text-md-end">
     				    <button type="submit" class="btn btn-success"
                             onclick="if ($('#clean').is(':checked')) return confirm('Do you want to remove all other measures and controls  ?')">
                                 {{ trans("common.import") }}
@@ -78,12 +78,12 @@
 
 
 			<div class="row">
-		        <div class="col-5">
+		        <div class="col-md-10 col-lg-5">
 		        	The import format is an XLSX document with these columns :
 		        </div>
 		    </div>
 			<div class="row">
-		        <div class="col-6">
+		        <div class="col-md-12 col-lg-6">
 
 		    	<table 	class="table table-sm">
 		    		<thead>
@@ -146,7 +146,7 @@
 		    </div>
 
 			<div class="row">
-		        <div class="col-6 text-danger">
+		        <div class="col-md-12 col-lg-6 text-danger">
 		        	This action could not be undone, take a backup before !
 		        </div>
 		    </div>

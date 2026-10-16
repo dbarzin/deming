@@ -7,40 +7,40 @@
     @include('partials.errors')
 	<div class="container-fluid px-0">
     	<div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
 	    		<strong>{{ trans('cruds.domain.fields.framework') }}</strong>
 	    	</div>
-            <div class="col-6">
+            <div class="col-md-12 col-lg-6">
 	    		{{ $domain->framework }}
     		</div>
 	    </div>
 
     	<div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
 	    		<strong>{{ trans('cruds.domain.fields.name') }}</strong>
 	    	</div>
-            <div class="col-6">
+            <div class="col-md-12 col-lg-6">
 	    		{{ $domain->title }}
     		</div>
 	    </div>
 
     	<div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
 	    		<strong>{{ trans('cruds.domain.fields.description') }}</strong>
 	    	</div>
-            <div class="col-6">
+            <div class="col-md-12 col-lg-6">
 	    		{{ $domain->description }}
     		</div>
     	</div>
     </div>
 
 	<div class="row">
-		<div class="col-1">
+		<div class="col-md-2 col-lg-1">
 		</div>
 	</div>
 
 	<div class="row">
-        <div class="col-6">
+        <div class="col-md-12 col-lg-6">
     			@if (Auth::User()->role==1)
                 <a href="/domains/{{ $domain->id }}/edit" class="btn btn-primary">
     		            <span class="bi bi-pencil-square"></span> {{ trans('common.edit') }}

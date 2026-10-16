@@ -7,7 +7,7 @@
     <div class="card-body">
 
         <div class="row">
-            <div class="col-2">
+            <div class="col-md-4 col-lg-2">
                 <strong>{{ trans("cruds.measure.fields.clause") }}</strong>
                 <select class="form-select select2" name="clauses" id="clauses">
                     <option></option>
@@ -19,7 +19,7 @@
                     @endforeach
                 </select>
             </div>
-            <div class="col-2">
+            <div class="col-md-4 col-lg-2">
             @if (($scopes!=null) && ($scopes->count()>0))
                 <strong>{{ trans("cruds.measure.fields.scope") }}</strong>
                 <select class="form-select select2" name="scopes" id="scopes">

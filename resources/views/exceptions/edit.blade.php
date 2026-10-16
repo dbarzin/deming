@@ -100,7 +100,7 @@
                     <input class="form-control" type="date"
                         name="start_date" value="{{ old('start_date', $exception->start_date) }}"/>
                 </div>
-                <div class="col-lg-1 col-md-2 text-end">
+                <div class="col-lg-1 col-md-2 text-md-end">
                     <strong>{{ trans('cruds.exception.fields.end_date') }}</strong>
                 </div>
                 <div class="col-lg-2 col-md-3">

@@ -33,7 +33,7 @@
 			<div class="col-lg-4 col-md-5">
 				{{ $measure->name }}
 			</div>
-			<div class="col-lg-1 col-md-2" align="right">
+			<div class="col-lg-1 col-md-2 text-md-end">
 				<strong>{{ trans("cruds.measure.fields.scope") }}</strong>
 			</div>
 			<div class="col-lg-1 col-md-2">
@@ -89,14 +89,14 @@
 				{{ $measure->plan_date }}
 			</div>
 
-			<div class="col-lg-1 col-md-2 text-end">
+			<div class="col-lg-1 col-md-2 text-md-end">
 				<strong>{{ trans("cruds.measure.fields.realisation_date") }}</strong>
 			</div>
 			<div class="col-lg-1 col-md-2 text-nowrap">
 				{{ $measure->realisation_date }}
 			</div>
 
-			<div class="col-lg-1 col-md-2 text-end">
+			<div class="col-lg-1 col-md-2 text-md-end">
 				<strong>{{ trans("common.previous") }}</strong>
 				<br>
 				<strong>{{ trans("common.next") }}</strong>
@@ -152,7 +152,7 @@
 			<div class="col-lg-1 col-md-2">
 				<strong>{{ trans("cruds.measure.fields.note") }}</strong>
 			</div>
-			<div class="col-2">
+			<div class="col-md-4 col-lg-2">
 				{{ fmod($measure->note, 1) == 0 ? intval($measure->note) : $measure->note }}
 			</div>
 		</div>

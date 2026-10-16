@@ -8,46 +8,46 @@
     <div class="card-body">
 		<div class="container-fluid px-0">
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.login') }}</strong>
 		    	</div>
-                <div class="col-6">
+                <div class="col-md-12 col-lg-6">
 		    		{{ $user->login }}
 	    		</div>
 		    </div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.name') }}</strong>
 		    	</div>
-                <div class="col-6">
+                <div class="col-md-12 col-lg-6">
 		    		{{ $user->name }}
 	    		</div>
 		    </div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.title') }}</strong>
 		    	</div>
-                <div class="col-6">
+                <div class="col-md-12 col-lg-6">
 		    		{{ $user->title }}
 	    		</div>
 		    </div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.language') }}</strong>
 		    	</div>
-                <div class="col-6">
+                <div class="col-md-12 col-lg-6">
 		    		{{ $user->language }}
 	    		</div>
 		    </div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.role') }}</strong>
 		    	</div>
-                <div class="col-6">
+                <div class="col-md-12 col-lg-6">
 		    		{{ $user->role==1 ? trans('cruds.user.roles.admin') : "" }}
 		    		{{ $user->role==2 ? trans('cruds.user.roles.user') : "" }}
                     {{ $user->role==5 ? trans('cruds.user.roles.auditee') : "" }}
@@ -58,20 +58,20 @@
 		    </div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.email') }}</strong>
 		    	</div>
-                <div class="col-6">
+                <div class="col-md-12 col-lg-6">
 		    		{{ $user->email }}
 	    		</div>
 	    	</div>
 
 	    	<div class="row">
-                <div class="col-1">
+                <div class="col-md-2 col-lg-1">
                     <strong>{{ trans('cruds.user.fields.groups') }}</strong>
 		    	</div>
 
-	    		<div class="col-8">
+	    		<div class="col-md-12 col-lg-8">
                     @foreach($user->groups as $group)
                         <a href='/groups/{{ $group->id }}'> {{ $group->name }}</a>
                         @if (!$loop->last)
@@ -82,12 +82,12 @@
 	    	</div>
 
 	    	<div class="row">
-	    		<div class="col-2">
+	    		<div class="col-md-4 col-lg-2">
 		    		<strong>{{ trans('cruds.user.fields.controls') }}</strong>
 		    	</div>
 		    </div>
 	    	<div class="row">
-	    		<div class="col-8">
+	    		<div class="col-md-12 col-lg-8">
 				    <table data-order="[[3,&quot;asc&quot;]]" data-page-length="25" id="user-controls-table" class="table table-striped table-hover table-bordered datatable">
 				        <thead>
 				            <tr>
@@ -133,7 +133,7 @@
 	    </div>
 
     	<div class="row">
-            <div class="col-6">
+            <div class="col-md-12 col-lg-6">
 			@if ((Auth::User()->role==1)||($user->id==Auth::User()->id))
 		    <form>
 		    	<button class="btn btn-primary" onclick='this.form.action="/users/{{ $user->id }}/edit"'>

@@ -20,16 +20,16 @@ form, table {
 
 		<div class="container-fluid px-0">
         	<div class="row">
-        		<div class="col-1">
+        		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans("cruds.action.fields.reference") }}</strong>
     	    	</div>
-                <div class="col-1">
+                <div class="col-md-2 col-lg-2 col-xl-1">
                     <input class="form-control" type="text" name="reference" value="{{ old('reference') }}" maxlength="32">
                 </div>
-                <div class="col-1 text-end">
+                <div class="col-md-2 col-lg-1 text-md-end">
                     <strong>{{ trans("cruds.action.fields.type") }}</strong>
                 </div>
-                <div class="col-2">
+                <div class="col-md-4 col-lg-2">
                     <select class="form-select select2" name="type">
                         <option></option>
                         <option value="1" {{ old('type')==1 ? 'selected' : '' }}>{{ trans('cruds.action.types.major') }}</option>
@@ -38,23 +38,21 @@ form, table {
                         <option value="4" {{ old('type')==4 ? 'selected' : '' }}>{{ trans('cruds.action.types.opportunity') }}</option>
                     </select>
                 </div>
-                <div class="col-1 text-end">
+                <div class="col-md-2 col-lg-1 text-md-end">
                     <strong>{{ trans('cruds.action.fields.due_date') }}</strong>
                 </div>
-                <div class="col-1">
-                    <td>
+                <div class="col-md-2 col-lg-2 col-xl-1">
                         <input class="form-control" type="date"
                             name="due_date"
-                            value=" {{ old('due_date') }}"/>
-                    </td>
+                            value="{{ old('due_date') }}"/>
     			</div>
             </div>
 
 			<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans('cruds.action.fields.clauses') }}</strong>
 		    	</div>
-                <div class="col-6">
+                <div class="col-md-12 col-lg-6">
                     <select class="form-select select2" name="measures[]" multiple>
                         @foreach($all_measures as $measure)
 						    <option
@@ -68,26 +66,26 @@ form, table {
 			</div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans("cruds.action.fields.name") }}</strong>
 	    		</div>
-	    		<div class="col-4">
+	    		<div class="col-md-8 col-lg-4">
                     <input class="form-control" type="text" name="name" value="{{ old('name') }}" maxlength="255" required>
 				</div>
-	    		<div class="col-1" align="right">
+	    		<div class="col-md-2 col-lg-1 text-md-end">
 		    		<strong>{{ trans("cruds.action.fields.scope") }}</strong>
                 </div>
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-2 col-xl-1">
                     <input class="form-control" type="text" name="scope" autocomplete="on" maxlength="32"
                     value="{{ old('scope') }}"/>
 				</div>
 			</div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans('cruds.action.fields.cause') }}</strong>
 		    	</div>
-                <div class="col-6">
+                <div class="col-md-12 col-lg-6">
                 <textarea name="cause" class="easymde form-control" id="cause">{{ old('cause') }}</textarea>
 				</div>
 			</div>
@@ -96,19 +94,19 @@ form, table {
 		</div>
 
     	<div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.remediation') }}</strong>
 	    	</div>
-			<div class="col-6">
+			<div class="col-md-12 col-lg-6">
                 <textarea name="remediation" class="easymde form-control" id="remediation">{{ old('remediation') }}</textarea>
 			</div>
 		</div>
 
 		<div class="row">
-            <div class="col-1">
+            <div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.owners') }}</strong>
             </div>
-            <div class="col-6">
+            <div class="col-md-12 col-lg-6">
                 <select class="form-select select2" name="owners[]" id="owners" multiple>
                     @foreach($users as $user)
                         <option value="{{ $user->id }}" {{ in_array($user->id, old('owners', [])) ? 'selected' : ''  }}>{{ $user->name }}</option>
@@ -118,7 +116,7 @@ form, table {
         </div>
 
         <div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
 
             </div>
         </div>

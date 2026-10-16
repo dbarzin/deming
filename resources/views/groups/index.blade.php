@@ -7,10 +7,10 @@
 
 	<div class="container-fluid px-0">
 		<div class="row">
-			<div class="col-5">
+			<div class="col-md-10 col-lg-5">
 			</div>
 
-			<div class="col-7" align="right">
+			<div class="col-md-12 col-lg-7 text-md-end">
 				@if (Auth::User()->role==1)
                 <a class="btn btn-primary" href="/groups/create">
 		            <span class="bi bi-plus-lg"></span> {{ trans('common.new') }}

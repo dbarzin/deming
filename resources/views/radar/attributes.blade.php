@@ -12,13 +12,13 @@
     @foreach($attributes as $attribute)
 
     <div class="row">
-        <div class="col-10">
+        <div class="col-md-12 col-lg-10">
         </div>
 
 
     </div>
     <div class="row">
-        <div class="col-6">
+        <div class="col-md-12 col-lg-6">
             <table class="table table-bordered">
                   <thead>
                   <tr>
@@ -54,7 +54,7 @@
                 </tbody>
             </table>
         </div>
-        <div class="col-6">
+        <div class="col-md-12 col-lg-6">
             <canvas id="canvas-radar-{{ $attribute->id }}" width="100" height="100"></canvas>
         </div>
     </div>

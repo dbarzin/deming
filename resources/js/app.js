@@ -16,6 +16,7 @@ import 'datatables.net-buttons/js/buttons.colVis.mjs';
 import 'datatables.net-buttons/js/buttons.html5.mjs';
 import 'datatables.net-buttons/js/buttons.print.mjs';
 import 'datatables.net-colreorder-bs5';
+import 'datatables.net-responsive-bs5';
 DataTable.Buttons.jszip(jszip);
 window.DataTable = DataTable;
 
@@ -85,6 +86,9 @@ function initDataTable(el, options = {}) {
     return new DataTable(el, Object.assign({
         // Réorganisation des colonnes par glisser-déposer des en-têtes
         colReorder: true,
+        // Petits écrans : les colonnes qui ne tiennent pas sont repliées
+        // dans une ligne de détail (clic sur la première cellule)
+        responsive: true,
         // Colonnes masquées par défaut (affichables via le bouton "Colonnes")
         columnDefs: [
             { targets: 'dt-hidden', visible: false },
@@ -185,6 +189,16 @@ document.addEventListener("DOMContentLoaded", function () {
     // DataTables
     document.querySelectorAll('table.datatable').forEach(el => initDataTable(el));
 
+    // Tables hors DataTables : défilement horizontal si elles débordent
+    document.querySelectorAll('.main-content table.table:not(.datatable)').forEach(table => {
+        if (!table.closest('.table-responsive, .overflow-auto')) {
+            const wrapper = document.createElement('div');
+            wrapper.className = 'table-responsive';
+            table.parentNode.insertBefore(wrapper, table);
+            wrapper.appendChild(table);
+        }
+    });
+
     // Tooltips
     document.querySelectorAll('[data-bs-toggle="tooltip"]')
         .forEach(el => new bootstrap.Tooltip(el));
@@ -199,6 +213,10 @@ document.addEventListener("DOMContentLoaded", function () {
     const openRow = (e) => {
         const row = e.target.closest('tr[data-href]');
         if (!row || e.target.closest('a, button, input, select, textarea, label')) {
+            return;
+        }
+        // Cellule de dépliage DataTables Responsive (colonnes repliées)
+        if (e.target.closest('table.collapsed td.dtr-control')) {
             return;
         }
         if (e.type === 'auxclick' && e.button !== 1) {
@@ -217,6 +235,18 @@ document.addEventListener("DOMContentLoaded", function () {
     document.addEventListener('click', openRow);
     document.addEventListener('auxclick', openRow);
 
+    // Mobile : un clic hors de la sidebar ouverte la referme. Ce clic est
+    // consommé (capture sur window) pour ne pas activer l'élément situé dessous.
+    window.addEventListener('click', (e) => {
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar?.classList.contains('sidebar-open')
+            && !e.target.closest('#sidebar, #toggle-sidebar-btn')) {
+            sidebar.classList.remove('sidebar-open');
+            e.preventDefault();
+            e.stopPropagation();
+        }
+    }, true);
+
     // Raccourcis clavier
     document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape') {
@@ -228,6 +258,11 @@ document.addEventListener("DOMContentLoaded", function () {
 function toggleSidebar() {
     const sidebar = document.getElementById('sidebar');
     const content = document.getElementById('content-home');
+    // Mobile / tablette : la sidebar s'ouvre par-dessus le contenu, sans mémoriser l'état
+    if (window.matchMedia('(max-width: 991.98px)').matches) {
+        sidebar.classList.toggle('sidebar-open');
+        return;
+    }
     sidebar.classList.toggle('sidebar-hidden');
     content.classList.toggle('content-expanded');
     try {

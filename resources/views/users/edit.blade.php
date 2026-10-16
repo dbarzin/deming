@@ -13,38 +13,38 @@
 		<div class="container-fluid px-0">
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 					<label>{{ trans('cruds.user.fields.login') }}</label>
 				</div>
-	    		<div class="col-3">
+	    		<div class="col-md-6 col-lg-3">
                     <input type="text" class="{{ $errors->has('login') ? 'is-invalid' : ''}} form-control" name="login" value="{{ old('login', $user->login) }}" size='40'>
 				</div>
 			</div>
 
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 					<label>{{ trans('cruds.user.fields.name') }}</label>
 				</div>
-	    		<div class="col-3">
+	    		<div class="col-md-6 col-lg-3">
                     <input type="text" class="{{ $errors->has('name') ? 'is-invalid' : ''}} form-control" name="name" value="{{ old('name', $user->name) }}" size='80'>
 				</div>
 			</div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 					<label>{{ trans('cruds.user.fields.title') }}</label>
 				</div>
-	    		<div class="col-3">
+	    		<div class="col-md-6 col-lg-3">
                     <input type="text" class="{{ $errors->has('title') ? 'is-invalid' : ''}} form-control" name="title" value="{{ old('title', $user->title) }}" size='80'>
 				</div>
 			</div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 					<label>{{ trans('cruds.user.fields.language') }}</label>
 				</div>
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-2 col-xl-1">
 	    			<select class="form-select select2" name='language'>
 	    				<option {{ (old('language',$user->language) =='de') ? 'selected' : ''}} >de</option>
 	    				<option {{ (old('language',$user->language) =='en') ? 'selected' : ''}} >en</option>
@@ -54,10 +54,10 @@
 			</div>
 			@if (Auth::User()->role==1)
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 					<label>{{ trans('cruds.user.fields.role') }}</label>
 				</div>
-	    		<div class="col-3">
+	    		<div class="col-md-6 col-lg-3">
                     <select class="form-select select2" name="role">
 					    <option value="1" {{ $user->role==1 ? "selected" : "" }}>{{ trans('cruds.user.roles.admin') }}</option>
 					    <option value="2" {{ $user->role==2 ? "selected" : "" }}>{{ trans('cruds.user.roles.user') }}</option>
@@ -70,20 +70,20 @@
 			</div>
 			@endif
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 					<label class="form-label" for="description">{{ trans('cruds.user.fields.email') }}</label>
 				</div>
-	    		<div class="col-3">
+	    		<div class="col-md-6 col-lg-3">
 					<input type="text" name="email" class="{{ $errors->has('email') ? 'is-invalid' : ''}} form-control" value="{{ old('email', $user->email) }}" size="120">
 				</div>
 			</div>
 
 	        @if (! Config::get('app.ldap_enabled'))
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 					<label class="form-label" for="description">{{ trans('cruds.user.fields.password') }}</label>
 				</div>
-	    		<div class="col-3">
+	    		<div class="col-md-6 col-lg-3">
 					<input type="password" class="form-control" name="password1" autocomplete="new-password"/>
 					<input type="password" class="form-control" name="password2" autocomplete="new-password"/>
 				</div>
@@ -92,13 +92,13 @@
 
         @if (Auth::User()->isAdmin() || Auth::User()->isUser())
     	<div class="row">
-    		<div class="col-2">
+    		<div class="col-md-4 col-lg-2">
 	    		<strong>{{ trans('cruds.user.fields.controls') }}</strong>
 	    	</div>
 	    </div>
 
     	<div class="row">
-    		<div class="col-8">
+    		<div class="col-md-12 col-lg-8">
 	            <select class="form-select select2" name="controls[]" id="controls" multiple>
 	                @foreach($measures as $measure)
                        <option value="{{ $measure->id }}" {{ (in_array($measure->id, old('controls', [])) || ($user->measures->contains($measure->id))) ? 'selected' : '' }}>
@@ -110,7 +110,7 @@
     	</div>
         @endif
     	<div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
     		</div>
     	</div>
 		</div>

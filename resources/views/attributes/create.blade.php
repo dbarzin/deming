@@ -11,19 +11,19 @@
 	@csrf
 		<div class="container-fluid px-0">
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.attribute.fields.name') }}</strong>
 		    	</div>
-	    		<div class="col-5">
+	    		<div class="col-md-10 col-lg-5">
 					<input class="form-control" type="text" name="name" value="{{ old('name') }}" size='25'>
 				</div>
 			</div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.attribute.fields.values') }}</strong>
 		    	</div>
-	    		<div class="col-5">
+	    		<div class="col-md-10 col-lg-5">
 					<textarea class="form-control" name="values" rows="5" cols="80">{{ old('values') }}</textarea>
 					<br>
 					format: #tag #tag #tag ...
@@ -31,7 +31,7 @@
 			</div>
 
 	    	<div class="row">
-	    		<div class="col-5">
+	    		<div class="col-md-10 col-lg-5">
 					<button type="submit" class="btn btn-success">
                         <span class="bi bi-floppy"></span> {{ trans('common.save') }}
 					</button>

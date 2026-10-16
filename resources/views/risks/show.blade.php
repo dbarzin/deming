@@ -77,7 +77,7 @@
         <div class="col-lg-1 col-md-2">
             <strong>{{ trans("cruds.risk.fields.impact") }}</strong>
         </div>
-        <div class="col-lg-1 col-md-1">
+        <div class="col-lg-1 col-md-3">
             <span class="badge" style="font-size:1.1rem;background:#7f8c8d;color:#fff">{{ $risk->impact }}</span>
             &nbsp;
             {{ $scoringConfig->levelLabel('impact', $risk->impact) }}
@@ -102,7 +102,7 @@
                 @endif
             </strong>
         </div>
-        <div class="col-lg-1 col-md-1">
+        <div class="col-lg-1 col-md-3">
             <span class="badge" style="font-size:1.1rem;background:#7f8c8d;color:#fff">{{ $risk->probability }}</span>
             &nbsp;
             {{ $scoringConfig->levelLabel('probability', $risk->probability) }}
@@ -147,7 +147,7 @@
         <div class="col-lg-1 col-md-2">
             <strong>{{ trans("cruds.risk.fields.likelihood") }}</strong>
         </div>
-        <div class="col-lg-1 col-md-1">
+        <div class="col-lg-1 col-md-3">
             <span class="badge" style="font-size:1.1rem;background:#7f8c8d;color:#fff">{{ $risk->risk_likelihood ?? '—' }}</span>
         </div>
     </div>
@@ -159,7 +159,7 @@
         <div class="col-lg-1 col-md-2">
             <strong>{{ trans("cruds.risk.fields.impact") }}</strong>
         </div>
-        <div class="col-lg-1 col-md-1">
+        <div class="col-lg-1 col-md-3">
             <span class="badge" style="font-size:1.1rem;background:#7f8c8d;color:#fff">{{ $risk->impact }}</span>
             &nbsp;
             {{ $scoringConfig->levelLabel('impact', $risk->impact) }}
@@ -252,7 +252,7 @@
         <div class="col-lg-1 col-md-2">
             <strong>{{ trans("cruds.risk.fields.residual_risk") }}</strong>
         </div>
-        <div class="col-lg-1 col-md-1">
+        <div class="col-lg-1 col-md-3">
             @if ($risk->residual_risk !== null)
                 @php
                     $residualThreshold = $scoringConfig->thresholdFor($risk->residual_risk);

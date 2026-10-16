@@ -6,7 +6,7 @@
     <div class="card-body">
 		<div class="container-fluid px-0">
             <div class="row mb-3">
-				<div class="col-5">
+				<div class="col-md-10 col-lg-5">
 					<select class="form-select select2" id='domain_id' name="domain_id">
 					    <option value="0">-- {{ trans('cruds.domain.choose') }} --</option>
 						@foreach ($domains as $domain)
@@ -19,7 +19,7 @@
 					    @endforeach
 					</select>
 				</div>
-				<div class="col-7" align="right">
+				<div class="col-md-12 col-lg-7 text-md-end">
                     <a class="btn btn-primary" href="/alice/create">
 			            <span class="bi bi-plus-lg"></span> {{ trans('common.new') }}
                     </a>

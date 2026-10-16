@@ -61,7 +61,7 @@
                 @endforeach
             </select>
         </div>
-        <div class="col-lg-2 col-md-2 text-end">
+        <div class="col-lg-2 col-md-2 text-md-end">
             <strong>{{ trans('cruds.crosswalk.fields.coverage') }}</strong>
         </div>
         <div class="col-lg-3 col-md-3">

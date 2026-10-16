@@ -7,10 +7,10 @@
     <div class="card-body">
 		<div class="container-fluid px-0">
 	    	<div class="row">
-	    		<div class="col-4 text-center">
-                    <img src="/images/deming.png" alt="Deming" width="400"/>
+	    		<div class="col-md-8 col-lg-4 text-center">
+                    <img src="/images/deming.png" alt="Deming" width="400" class="img-fluid"/>
                 </div>
-	    		<div class="col-7">
+	    		<div class="col-md-12 col-lg-7">
 @if(Auth::User()->language==="fr")
     <h1>À propos de Deming</h1>
 

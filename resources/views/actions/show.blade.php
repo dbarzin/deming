@@ -21,16 +21,16 @@ form, table {
 
 		<div class="container-fluid px-0">
         	<div class="row">
-        		<div class="col-1">
+        		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans("cruds.action.fields.reference") }}</strong>
     	    	</div>
-                <div class="col-2">
+                <div class="col-md-4 col-lg-2">
                     {{ $action->reference==null ? ("ACT-".$action->id) : $action->reference }}
                 </div>
-                <div class="col-1" align="right">
+                <div class="col-md-2 col-lg-1 text-md-end">
                     <strong>{{ trans("cruds.action.fields.type") }}</strong>
     	    	</div>
-                <div class="col-1">
+                <div class="col-md-2 col-lg-1">
                     @if ($action->type==1)
                     <p class="text-danger fw-bold">
                     {{ trans('cruds.action.types.major') }}
@@ -49,19 +49,19 @@ form, table {
                     </p>
                     @endif
                 </div>
-                <div class="col-1" align="right">
+                <div class="col-md-2 col-lg-1 text-md-end">
                     <strong>{{ trans('cruds.action.fields.due_date') }}</strong>
     	    	</div>
-                <div class="col-2">
+                <div class="col-md-4 col-lg-2">
                     {{$action->due_date}}
     			</div>
             </div>
 
         	<div class="row">
-        		<div class="col-1">
+        		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans("cruds.action.fields.clauses") }}</strong>
     	    	</div>
-        		<div class="col-4">
+        		<div class="col-md-8 col-lg-4">
                     @foreach($action->controls as $control)
                         <a href="/alice/show/{{ $control->id }}">{{ $control->clause }}</a> - {{ $control->name }}
                         @if(!$loop->last)
@@ -72,10 +72,10 @@ form, table {
             </div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.action.fields.name') }}</strong>
 		    	</div>
-                <div class="col-5">
+                <div class="col-md-10 col-lg-5">
                     @if ($action->control_id!==null)
                     <a href="/bob/show/{{ $action->control_id }}">
 					    {{ $action->name }}
@@ -85,7 +85,7 @@ form, table {
                     @endif
 				</div>
                 @if ($action->scope!==null)
-                <div class="col-2">
+                <div class="col-md-4 col-lg-2">
 		    		<strong>{{ trans("cruds.measure.fields.scope") }}</strong>
 		    		&nbsp;
 	    			{{ $action->scope }}
@@ -94,10 +94,10 @@ form, table {
 			</div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans('cruds.action.fields.cause') }}</strong>
 		    	</div>
-				<div class="col-5">
+				<div class="col-md-10 col-lg-5">
                     <pre>{{ $action->cause }}</pre>
 				</div>
 			</div>
@@ -106,10 +106,10 @@ form, table {
 		</div>
 
     	<div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.remediation') }}</strong>
 	    	</div>
-			<div class="col-6">
+			<div class="col-md-12 col-lg-6">
                 @if ($action->status==0)
                     <textarea name="remediation" class="easymde form-control" id="remediation">{{ old('remediation', $action->remediation) }}</textarea>
                 @else
@@ -119,10 +119,10 @@ form, table {
 		</div>
         @if ($action->status==0)
     	<div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.progress') }}</strong>
 	    	</div>
-			<div class="col-6">
+			<div class="col-md-12 col-lg-6">
                 <div class="d-flex align-items-center gap-2">
                     <input class="form-range" value="{{ $action->progress }}" type="range" name="progress" min="0" max="100" step="1"
                            oninput="this.nextElementSibling.textContent = this.value + '%'"/>
@@ -134,10 +134,10 @@ form, table {
 
         @if ($action->status!=0)
     	<div class="row">
-			<div class="col-1">
+			<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.status') }}</strong>
 	    	</div>
-            <div class="col-4">
+            <div class="col-md-8 col-lg-4">
                 @if ($action->status==0)
                     {{ trans('cruds.action.fields.status_open') }}
                 @elseif ($action->status==1)
@@ -149,28 +149,28 @@ form, table {
                 @endif
 
 	    	</div>
-			<div class="col-1">
+			<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.close_date') }}</strong>
 	    	</div>
-			<div class="col-1">
+			<div class="col-md-2 col-lg-1">
                 {{ $action->close_date}}
             </div>
         </div>
     	<div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.justification') }}</strong>
 	    	</div>
-			<div class="col-6">
+			<div class="col-md-12 col-lg-6">
                 {!! \Parsedown::instance()->text($action->justification) !!}
 			</div>
 		</div>
         @endif
 
     	<div class="row">
-			<div class="col-1">
+			<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.owners') }}</strong>
 	    	</div>
-            <div class="col-6">
+            <div class="col-md-12 col-lg-6">
                 @foreach($action->owners as $owner)
 					{{ $owner->name }}
                     @if ($action->owners->last()!=$owner)
@@ -181,7 +181,7 @@ form, table {
 	    </div>
 
         <div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
 
             </div>
         </div>

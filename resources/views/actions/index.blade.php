@@ -7,7 +7,7 @@
 
 <div class="container-fluid px-0">
     <div class="row">
-        <div class="col-2">
+        <div class="col-md-4 col-lg-2">
             <select class="form-select select2" id='type' name="type">
                 <option value="">-- {{ trans("cruds.action.fields.choose_type")}} --</option>
                 <option value="1" {{ (Session::get('type')==1) ? 'selected' : '' }}>{{ trans('cruds.action.types.major') }}</option>
@@ -16,12 +16,12 @@
                 <option value="4" {{ (Session::get('type')==4) ? 'selected' : '' }}>{{ trans('cruds.action.types.opportunity') }}</option>
             </select>
         </div>
-        <div class="col-5 mt-2">
+        <div class="col-md-10 col-lg-5 mt-2">
              <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}/><label class="form-check-label" for="status0">{{ trans("cruds.action.fields.status_open") }}</label></div>
              <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="1" id="status1" {{ (Session::get("status")=="1") ? 'checked' : '' }}/><label class="form-check-label" for="status1">{{ trans("cruds.action.fields.status_closed") }}</label></div>
              <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="2" id="status2" {{ (Session::get("status")=="2") ? 'checked' : '' }}/><label class="form-check-label" for="status2">{{ trans("cruds.action.fields.status_all") }}</label></div>
         </div>
-        <div class="col-2">
+        <div class="col-md-4 col-lg-2">
             <select class="form-select select2" id='scope' name="scope">
                 <option value="">-- {{ trans("cruds.action.fields.choose_scope")}} --</option>
                 @foreach ($scopes as $scope)
@@ -77,11 +77,11 @@
         <table data-order="[[0,&quot;asc&quot;]]" data-page-length="100" id="actions" class="table table-striped table-hover table-bordered datatable">
 	    <thead>
 	    <tr>
-            <th><span style="font-size: 0.8em;">{{ trans('cruds.action.fields.reference') }}</span></th>
+            <th data-priority="2"><span style="font-size: 0.8em;">{{ trans('cruds.action.fields.reference') }}</span></th>
             <th><span style="font-size: 0.8em;">{{ trans('cruds.action.fields.type') }}</span></th>
             <th>{{ trans('cruds.action.fields.status') }}</th>
             <th>{{ trans('cruds.action.fields.progress') }}</th>
-            <th>{{ trans('cruds.action.fields.name') }}</th>
+            <th data-priority="1">{{ trans('cruds.action.fields.name') }}</th>
 			<th>{{ trans('cruds.action.fields.scope') }}</th>
             <th>{{ trans('cruds.action.fields.owners') }}</th>
             <th class="dt-hidden">{{ trans('cruds.action.fields.clauses') }}</th>

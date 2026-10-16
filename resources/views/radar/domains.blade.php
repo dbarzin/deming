@@ -9,7 +9,7 @@
     <div class="row">
         <div class="col-md-9">
             <div class="row">
-                <div class="col-2">
+                <div class="col-md-4 col-lg-3 col-xl-2">
                     <strong>{{ trans("cruds.domain.fields.framework") }}</strong>
                     <select class="form-select select2" name="framework" id="framework">
                         <option value='none'></option>
@@ -23,7 +23,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-2">
+                <div class="col-md-4 col-lg-3 col-xl-2">
                     <strong>{{ trans("cruds.measure.fields.scope") }}</strong>
                     <select class="form-select select2" name="scope" id="scope">
                         <option value='none'></option>
@@ -37,9 +37,9 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-6">
+                <div class="d-none d-xl-block col-xl-6">
                 </div>
-                <div class="col-2">
+                <div class="col-md-4 col-lg-3 col-xl-2">
                     <strong>{{ trans("cruds.measure.groupBy") }}</strong>
                     <select class="form-select select2" name="group" id="group">
                         <option value="0" {{ Session::get("group")==="0" ? "selected" : "" }}>{{ trans("cruds.welcome.measures") }}</option>

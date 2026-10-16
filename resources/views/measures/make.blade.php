@@ -49,7 +49,7 @@
     		<div class="col-lg-5 col-md-5">
 				{{ $measure->name }}
 			</div>
-            <div class="col-2">
+            <div class="col-md-4 col-lg-2">
 	    		<strong>{{ trans("cruds.measure.fields.scope") }}</strong>
 	    		&nbsp;
     			{{ $measure->scope }}
@@ -99,7 +99,7 @@
                     {{ $measure->plan_date }}
                 @endif
 			</div>
-            <div class="col-lg-2 col-md-3" align="right">
+            <div class="col-lg-2 col-md-3 text-md-end">
 	    		<strong>{{ trans('cruds.measure.fields.realisation_date') }}</strong>
 	    	</div>
             <div class="col-lg-2 col-md-3">
@@ -174,7 +174,7 @@
     	<div class="row">
             <div class="col-lg-1 col-md-2">
             </div>
-            <div class="col-3">
+            <div class="col-md-6 col-lg-3">
                 <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="add_action_plan" id="toggleTextarea"/><label class="form-check-label" for="toggleTextarea">{{ trans('cruds.measure.create_action') }}</label></div>
             </div>
         </div>
@@ -199,7 +199,7 @@
 						name="next_date"
 						value="{{ $next_date }}"/>
                 </div>
-                <div class="col-2">
+                <div class="col-md-4 col-lg-2">
                 @else
                     {{ $next_date }}
                 @endif

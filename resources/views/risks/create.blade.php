@@ -55,7 +55,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.review_frequency") }}</strong>
                 </div>
-                <div class="col-lg-1 col-md-2">
+                <div class="col-lg-2 col-xl-1 col-md-2">
                     <input class="form-control" type="number" name="review_frequency"
                            value="{{ old('review_frequency', 12) }}" min="1" max="60">
                 </div>
@@ -233,7 +233,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.residual_risk") }}</strong>
                 </div>
-                <div class="col-lg-1 col-md-2">
+                <div class="col-lg-2 col-xl-1 col-md-2">
                     <input class="form-control" type="number" name="residual_risk" min="0" max="99" step="1"
                            value="{{ old('residual_risk') }}">
                 </div>

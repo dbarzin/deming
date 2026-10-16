@@ -37,7 +37,7 @@
         		{{ $measure->name }}
     		</div>
             @if ($measure->scope!==null)
-    		<div class="col-lg-1 col-md-2" align="right">
+    		<div class="col-lg-1 col-md-2 text-md-end">
         		<strong>{{ trans("cruds.measure.fields.scope") }}</strong>
         	</div>
     		<div class="col-lg-1 col-md-2">

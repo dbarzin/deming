@@ -11,10 +11,10 @@
 	@csrf
 		<div class="container-fluid px-0">
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.attribute.replace.old_value') }}</strong>
 		    	</div>
-	    		<div class="col-5">
+	    		<div class="col-md-10 col-lg-5">
 					<select class="form-select select2" name="old_value">
 						<option></option>
 						@foreach($values as $value)
@@ -25,16 +25,16 @@
 			</div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.attribute.replace.new_value') }}</strong>
 		    	</div>
-	    		<div class="col-5">
+	    		<div class="col-md-10 col-lg-5">
 					<input type="text" class="{{ $errors->has('new_value') ? 'is-invalid' : ''}} form-control" name="new_value" value="{{ old('new_value') }}" size='25'>
 				</div>
 			</div>
 
 	    	<div class="row">
-	    		<div class="col-5">
+	    		<div class="col-md-10 col-lg-5">
 					<button type="submit" class="btn btn-success">
                         <span class="bi bi-floppy"></span> {{ trans('common.save') }}
 					</button>

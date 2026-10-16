@@ -66,7 +66,7 @@
 
 
     	<div class="row">
-            <div class="col-2">
+            <div class="col-md-4 col-lg-2">
                 <strong>{{ trans('cruds.group.fields.controls') }}</strong>
 	    	</div>
         </div>

@@ -22,16 +22,16 @@ form, table {
 
 		<div class="container-fluid px-0">
         	<div class="row">
-        		<div class="col-1">
+        		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans("cruds.action.fields.reference") }}</strong>
     	    	</div>
-                <div class="col-2">
+                <div class="col-md-4 col-lg-2">
                     {{ $action->reference }}
                 </div>
-                <div class="col-1" align="right">
+                <div class="col-md-2 col-lg-1 text-md-end">
                     <strong>{{ trans("cruds.action.fields.type") }}</strong>
     	    	</div>
-                <div class="col-1">
+                <div class="col-md-2 col-lg-1">
                     @if ($action->type==1)
                     <p class="text-danger fw-bold">
                     {{ trans('cruds.action.types.major') }}
@@ -50,19 +50,19 @@ form, table {
                     </p>
                     @endif
                 </div>
-                <div class="col-1" align="right">
+                <div class="col-md-2 col-lg-1 text-md-end">
                     <strong>{{ trans('cruds.action.fields.due_date') }}</strong>
     	    	</div>
-                <div class="col-2">
+                <div class="col-md-4 col-lg-2">
                     {{$action->due_date}}
     			</div>
             </div>
 
         	<div class="row">
-        		<div class="col-1">
+        		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans("cruds.action.fields.clauses") }}</strong>
     	    	</div>
-        		<div class="col-4">
+        		<div class="col-md-8 col-lg-4">
                     @foreach($action->controls as $control)
                         <a href="/alice/show/{{ $control->id }}">{{ $control->clause }}</a>
                         @if(!$loop->last)
@@ -73,10 +73,10 @@ form, table {
             </div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.action.fields.name') }}</strong>
 		    	</div>
-                <div class="col-5">
+                <div class="col-md-10 col-lg-5">
                     @if ($action->control_id!==null)
                     <a href="/bob/show/{{ $action->control_id }}">
 					    {{ $action->name }}
@@ -86,7 +86,7 @@ form, table {
                     @endif
 				</div>
                 @if ($action->scope!==null)
-                <div class="col-2">
+                <div class="col-md-4 col-lg-2">
 		    		<strong>{{ trans("cruds.measure.fields.scope") }}</strong>
 		    		&nbsp;
 	    			{{ $action->scope }}
@@ -95,10 +95,10 @@ form, table {
 			</div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans('cruds.action.fields.cause') }}</strong>
 		    	</div>
-				<div class="col-5">
+				<div class="col-md-10 col-lg-5">
                     <pre>{{ $action->cause }}</pre>
 				</div>
 			</div>
@@ -107,29 +107,29 @@ form, table {
 		</div>
 
     	<div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.remediation') }}</strong>
 	    	</div>
-			<div class="col-6">
+			<div class="col-md-12 col-lg-6">
                 {!! \Parsedown::instance()->text($action->remediation) !!}
 			</div>
 		</div>
 
     	<div class="row">
-            <div class="col-1">
+            <div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.status') }}</strong>
             </div>
-            <div class="col-2">
+            <div class="col-md-4 col-lg-2">
                 <select class="form-select select2" name="status" id="status">
                     <option value="0" {{ $action->status==0 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_open') }}</option>
                     <option value="1" {{ $action->status==1 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_closed') }}</option>
                     <option value="2" {{ $action->status==2 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_rejected') }}</option>
                 </select>
             </div>
-            <div class="col-3 text-end">
+            <div class="col-md-6 col-lg-3 text-md-end">
                 <strong>{{ trans('cruds.action.fields.close_date') }}</strong>
 	    	</div>
-            <div class="col-1">
+            <div class="col-md-2 col-lg-2 col-xl-1">
                 <input class="form-control" type="date"
                     name="close_date"
                     value="{{$action->close_date}}"
@@ -137,19 +137,19 @@ form, table {
             </div>
         </div>
     	<div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.justification') }}</strong>
 	    	</div>
-			<div class="col-6">
+			<div class="col-md-12 col-lg-6">
                 <textarea name="justification" class="easymde form-control" id="justification">{{ old('justification', $action->justification) }}</textarea>
 			</div>
 		</div>
 
     	<div class="row">
-			<div class="col-1">
+			<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.owners') }}</strong>
 	    	</div>
-            <div class="col-6">
+            <div class="col-md-12 col-lg-6">
                 @foreach($action->owners as $owner)
 					{{ $owner->name }}
                     @if ($action->owners->last()!=$owner)
@@ -160,7 +160,7 @@ form, table {
 	    </div>
 
         <div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
 
             </div>
         </div>

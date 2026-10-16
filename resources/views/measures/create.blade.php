@@ -35,10 +35,10 @@
                 <div class="col-lg-4 col-md-5">
 					<input class="form-control" type="text" name="name" value="{{ old('name') }}" maxlength="255">
 				</div>
-                <div class="col-lg-1 col-md-1" align="right">
+                <div class="col-lg-1 col-md-1 text-md-end">
 		    		<strong>{{ trans("cruds.measure.fields.scope") }}</strong>
                 </div>
-                <div class="col-lg-1 col-md-2">
+                <div class="col-lg-2 col-xl-1 col-md-2">
 					<input class="form-control" type="text" name="scope" autocomplete="off" maxlength="32"
                     value="{{ old('scope') }}"/>
 				</div>

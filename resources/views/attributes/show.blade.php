@@ -6,31 +6,31 @@
     <div class="card-body">
 	<div class="container-fluid px-0">
     	<div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
 	    		<strong>{{ trans('cruds.attribute.fields.name') }}</strong>
 	    	</div>
-            <div class="col-6">
+            <div class="col-md-12 col-lg-6">
 	    		{{ $attribute->name }}
     		</div>
 	    </div>
 
     	<div class="row">
-    		<div class="col-1">
+    		<div class="col-md-2 col-lg-1">
 	    		<strong>{{ trans('cruds.attribute.fields.values') }}</strong>
 	    	</div>
-    		<div class="col-6">
+    		<div class="col-md-12 col-lg-6">
 	    		{{ $attribute->values }}
     		</div>
     	</div>
     </div>
 
 	<div class="row">
-		<div class="col-1">
+		<div class="col-md-2 col-lg-1">
 		</div>
 	</div>
 
     <div class="row">
-        <div class="col-6">
+        <div class="col-md-12 col-lg-6">
     		@if (Auth::User()->role==1)
     	    <form action="/attributes/{{ $attribute->id }}/edit">
     	    	<button class="btn btn-primary" type="submit">

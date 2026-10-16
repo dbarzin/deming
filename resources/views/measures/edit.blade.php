@@ -38,10 +38,10 @@
                 <div class="col-lg-4 col-md-6">
 					<input class="form-control" type="text" name="name" value="{{ $measure->name }}" maxlength="255">
 				</div>
-                <div class="col-lg-1 col-md-1" align="right">
+                <div class="col-lg-1 col-md-1 text-md-end">
 		    		<strong>{{ trans("cruds.measure.fields.scope") }}</strong>
                 </div>
-                <div class="col-lg-1 col-md-3">
+                <div class="col-lg-2 col-xl-1 col-md-3">
 					<input class="form-control" type="text" name="scope" autocomplete="off" maxlength="32"
 					value="{{ $measure->scope }}"/>
 				</div>
@@ -101,7 +101,7 @@
 				</div>
                 <div class="col-lg-1 col-md-2">
                 </div>
-                <div class="col-lg-1 col-md-2" align="right">
+                <div class="col-lg-1 col-md-2 text-md-end">
 		    		<strong>{{ trans("cruds.measure.fields.realisation_date") }}</strong>
 		    	</div>
 				<div class="col-lg-2 col-md-3">
@@ -191,20 +191,20 @@
 					    <option value="12" {{ $measure->periodicity==12 ? "selected" : ""}}>{{ trans('common.annually') }}</option>
 					 </select>
 				</div>
-                <div class="col-lg-1 col-md-2" align="right">
+                <div class="col-lg-1 col-md-2 text-md-end">
 		    		<strong>Status</strong>
 	    		</div>
-				<div class="col-lg-1 col-md-2">
+				<div class="col-lg-2 col-xl-1 col-md-2">
                     <select class="form-select select2" id="status" name="status">
 						<option value="0" {{ $measure->status==0 ? "selected" : ""}}>Todo</option>
 						<option value="1" {{ $measure->status==1 ? "selected" : ""}}>Proposed</option>
 						<option value="2" {{ $measure->status==2 ? "selected" : ""}}>Done</option>
 					 </select>
 	    		</div>
-                <div class="col-lg-1 col-md-2" align="right">
+                <div class="col-lg-1 col-md-2 text-md-end">
 		    		<strong>Next ID</strong>
 		    	</div>
-				<div class="col-lg-1 col-md-2">
+				<div class="col-lg-2 col-xl-1 col-md-2">
                     <select class="form-select select2" id="next_id" name="next_id">
 						<option></option>
 						@foreach($ids as $id)

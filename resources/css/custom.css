@@ -165,6 +165,9 @@ html.sidebar-preload-hidden .main-content {
 /***************************************************************************/
 
 .main-content {
+    /* élément flex : sans min-width: 0, il s'élargit au contenu (tables) au lieu
+       de rester dans la fenêtre */
+    min-width: 0;
     margin-left: var(--deming-sidebar-width);
     margin-top: var(--deming-navbar-height);
     padding: 1rem;
@@ -176,15 +179,33 @@ html.sidebar-preload-hidden .main-content {
     margin-left: 0;
 }
 
-@media (max-width: 767.98px) {
-    .sidebar {
+/* Mobile et tablette : sidebar fermée par défaut (l'état mémorisé sur desktop est ignoré),
+   ouverte par-dessus le contenu via .sidebar-open */
+@media (max-width: 991.98px) {
+    .sidebar,
+    .sidebar.sidebar-hidden,
+    html.sidebar-preload-hidden .sidebar {
         transform: translateX(-100%);
+        box-shadow: 0 0 1rem rgba(0, 0, 0, .2);
     }
-    .sidebar.sidebar-hidden {
+    .sidebar.sidebar-open {
         transform: translateX(0);
     }
-    .main-content {
+    .main-content,
+    .main-content.content-expanded {
         margin-left: 0;
+        padding: .75rem;
+    }
+    .navbar-brand {
+        width: auto;
+        font-size: 1.3rem;
+    }
+    .navbar .nav-icon {
+        font-size: 1.2rem;
+        padding: 0 .3rem;
+    }
+    .navbar .ms-auto {
+        gap: .5rem !important;
     }
 }
 
@@ -200,6 +221,11 @@ html.sidebar-preload-hidden .main-content {
 .card-header i {
     margin-right: .5rem;
     color: var(--deming-accent);
+}
+
+/* Quand une ligne passe à la ligne (petits écrans), ses colonnes restent espacées */
+.card-body .row {
+    row-gap: .4rem;
 }
 
 /* Les lignes de formulaire (ex-grille Metro) sont espacées */

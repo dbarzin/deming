@@ -6,10 +6,10 @@
     <div class="card-body">
 	<div class="container-fluid px-0">
 		<div class="row">
-			<div class="col-5">
+			<div class="col-md-10 col-lg-5">
 			</div>
 			@if (Auth::User()->role==1)
-			<div class="col-7" align="right">
+			<div class="col-md-12 col-lg-7 text-md-end">
 				<button class="btn btn-primary" onclick="location.href = '/domains/create';">
 		            <span class="bi bi-plus-lg"></span> {{ trans('common.new') }}
 				</button>

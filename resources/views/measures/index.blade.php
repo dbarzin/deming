@@ -6,7 +6,7 @@
     <div class="card-body">
     <div class="container-fluid px-0 mb-2">
         <div class="row">
-            <div class="col-lg-2 col-md-1">
+            <div class="col-lg-2 col-md-6">
                 <select class="form-select select2" id='domain' name="domain_id">
                     <option value="0">-- {{ trans("cruds.measure.fields.choose_domain")}} --</option>
                     @foreach ($domains as $domain)
@@ -20,7 +20,7 @@
                 </select>
             </div>
 
-            <div class="col-lg-2 col-md-1">
+            <div class="col-lg-2 col-md-6">
                 <select class="form-select select2" id='clause' name="clause">
                     <option value="none">-- {{ trans("cruds.measure.fields.choose_clause")}} --</option>
                     @foreach ($clauses as $clause)
@@ -34,7 +34,7 @@
                 </select>
             </div>
 
-            <div class="col-lg-2 col-md-1">
+            <div class="col-lg-2 col-md-6">
                 <select class="form-select select2" id='scope' name="scope">
                     <option value="none">-- {{ trans("cruds.measure.fields.choose_scope")}} --</option>
                     @foreach ($scopes as $scope)
@@ -48,7 +48,7 @@
                 </select>
             </div>
 
-            <div class="col-lg-2 col-md-1">
+            <div class="col-lg-2 col-md-6">
                 <select class="form-select select2" id='cur_period' name="period">
                     <option value="99"
                         @if (Session::get("period")==="99")
@@ -66,7 +66,7 @@
                         @endfor
                     </select>
                 </div>
-            <div class="col-lg-3 col-md-2 mt-2">
+            <div class="col-lg-3 col-md-6 mt-2">
                  <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}><label class="form-check-label" for="status0">{{ trans("cruds.measure.fields.status_all") }}</label></div>
                  <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="1" id="status1" {{ (Session::get("status")=="1") ? 'checked' : '' }}><label class="form-check-label" for="status1">{{ trans("cruds.measure.fields.status_done") }}</label></div>
                  <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="2" id="status2" {{ (Session::get("status")=="2") ? 'checked' : '' }}><label class="form-check-label" for="status2">{{ trans("cruds.measure.fields.status_todo") }}</label></div>
@@ -88,11 +88,11 @@
         <thead>
             <tr>
                 <th width="5%">{{ trans("cruds.measure.fields.clauses") }}</th>
-                <th width="40%">{{ trans("cruds.measure.fields.name") }}</th>
+                <th width="40%" data-priority="1">{{ trans("cruds.measure.fields.name") }}</th>
                 <th width="10%">{{ trans("cruds.measure.fields.scope") }}</th>
                 <th class="dt-hidden">{{ trans("cruds.measure.fields.attributes") }}</th>
                 <th width="5%">{{ trans("cruds.measure.fields.score") }}</th>
-                <th  width="5%">{{ trans("cruds.measure.fields.planned") }}</th>
+                <th  width="5%" data-priority="2">{{ trans("cruds.measure.fields.planned") }}</th>
                 <th  width="5%">{{ trans("cruds.measure.fields.realized") }}</th>
                 <th  width="5%">{{ trans("cruds.measure.fields.next") }}</th>
                 <th class="dt-hidden">{{ trans("cruds.measure.fields.note") }}</th>

@@ -9,7 +9,7 @@
 
     <div class="container-fluid px-0 mb-2">
         <div class="row">
-            <div class="col-lg-12" align="right">
+            <div class="col-lg-12 text-md-end">
                 <button class="btn btn-primary" onclick="location.href='/risk/scoring/create'">
                     <span class="bi bi-plus-lg"></span>
                     {{ trans('common.new') }}

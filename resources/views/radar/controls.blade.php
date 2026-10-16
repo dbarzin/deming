@@ -11,9 +11,9 @@
 
     <form action="/radar/alice">
         <div class="row">
-            <div class="col-10">
+            <div class="col-md-12 col-lg-10">
             </div>
-            <div class="col-2">
+            <div class="col-md-4 col-lg-2">
                 {{ trans("cruds.measure.fields.scope") }}
                 <select class="form-select select2" name="scope" id="scope">
                     @foreach ($scopes as $scope)
@@ -32,15 +32,15 @@
     @foreach($domains as $domain)
 
     <div class="row">
-        <div class="col-10">
+        <div class="col-md-12 col-lg-10">
             <b>{{ $domain->title }} - {{ $domain->description }}</b>
         </div>
     </div>
     <div class="row">
-        <div class="col-4">
+        <div class="col-md-8 col-lg-4">
             <canvas id="canvas-radar-{{ $domain->id }}" width="100%"></canvas>
         </div>
-        <div class="col-8">
+        <div class="col-md-12 col-lg-8">
             <table class="table table-bordered">
                   <thead>
                   <tr>

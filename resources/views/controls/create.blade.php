@@ -104,7 +104,7 @@
 			</div>
 
 	    	<div class="row">
-	    		<div class="col-5">
+	    		<div class="col-md-10 col-lg-5">
 					<button type="submit" class="btn btn-success">
                         <span class="bi bi-floppy"></span> {{ trans("common.save") }}
 					</button>

@@ -11,34 +11,34 @@
 	@csrf
 		<div class="container-fluid px-0">
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.domain.fields.framework') }}</strong>
 		    	</div>
-	    		<div class="col-5">
+	    		<div class="col-md-10 col-lg-5">
 					<input class="form-control" type="text" name="framework" value="{{ old('framework') }}" maxlength='32'>
 				</div>
 			</div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.domain.fields.name') }}</strong>
 		    	</div>
-	    		<div class="col-5">
+	    		<div class="col-md-10 col-lg-5">
 					<input class="form-control" type="text" name="title" value="{{ old('title') }}" maxlength='32'>
 				</div>
 			</div>
 
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.domain.fields.description') }}</strong>
 		    	</div>
-	    		<div class="col-5">
+	    		<div class="col-md-10 col-lg-5">
 					<input class="form-control" type="text" name="description" value="{{ old('description') }}" maxlength='255'>
 				</div>
 			</div>
 
 	    	<div class="row">
-	    		<div class="col-5">
+	    		<div class="col-md-10 col-lg-5">
 					<button type="submit" class="btn btn-success">
                         <span class="bi bi-floppy"></span> {{ trans('common.save') }}
 					</button>

@@ -7,7 +7,7 @@
 
 	@if (count($errors))
 	<div class="container-fluid px-0">
-	    <div class="col-3 bg-danger text-white">
+	    <div class="col-md-6 col-lg-3 bg-danger text-white">
 			<ul>
 			@foreach ($errors->all() as $error)
 				<li>{{ $error }}</li>
@@ -21,10 +21,10 @@
 	<div class="container-fluid px-0">
 
 		<div class="row">
-	        <div class="col-1">
+	        <div class="col-md-2 col-lg-1">
                 {{ trans("cruds.domain.fields.framework") }}
             </div>
-			<div class="col-3">
+			<div class="col-md-6 col-lg-3">
                 <select class="form-select select2" name="framework" id="framework">
                     <option></option>
                     @foreach ($frameworks as $framework)
@@ -40,10 +40,10 @@
         </div>
 
 		<div class="row">
-	        <div class="col-1">
+	        <div class="col-md-2 col-lg-1">
 				{{ trans('cruds.exports.start') }}
 			</div>
-			<div class="col-2">
+			<div class="col-md-4 col-lg-2">
 	            <input class="form-control" type="date"
 	                    name="start_date"
 	                    value="{{ (new \Carbon\Carbon('first day of this month'))->addMonth(-3)->format('Y-m-d')}}"
@@ -51,10 +51,10 @@
 	        </div>
 	    </div>
 		<div class="row">
-	        <div class="col-1">
+	        <div class="col-md-2 col-lg-1">
 			{{ trans('cruds.exports.end') }}
 			</div>
-			<div class="col-2">
+			<div class="col-md-4 col-lg-2">
 	            <input class="form-control" type="date"
 	                    name="end_date"
 	                    value="{{ (new \Carbon\Carbon('last day of this month'))->addMonth(-1)->format('Y-m-d')}}"
@@ -63,7 +63,7 @@
 	    </div>
 
 		<div class="row">
-	        <div class="col-1">
+	        <div class="col-md-2 col-lg-1">
 			    <button type="submit" class="btn btn-primary">{{ trans ('common.create') }}</button>
 			</div>
 		</div>
@@ -77,7 +77,7 @@
     <div class="card-header"><i class="bi bi-file-earmark-text"></i> {{ trans('cruds.soa.title') }}</div>
     <div class="card-body">
 	<div class="row">
-		<div class="col-6">
+		<div class="col-md-12 col-lg-6">
         	<ul>
         		<li>
 					<a href="/reports/soa" target="_blank">{{ trans('cruds.soa.generate') }}</a>
@@ -92,7 +92,7 @@
     <div class="card-header"><i class="bi bi-file-earmark-text"></i> {{ trans('cruds.exports.index') }}</div>
     <div class="card-body">
 	<div class="row">
-		<div class="col-6">
+		<div class="col-md-12 col-lg-6">
         	<ul>
 				<li>
 					<a href="/export/users" target="_blank">{{ trans('cruds.exports.users_export') }}</a>

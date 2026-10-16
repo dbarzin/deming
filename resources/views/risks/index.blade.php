@@ -67,7 +67,7 @@
         class="table table-striped table-hover table-bordered datatable">
         <thead>
             <tr>
-                <th>{{ trans("cruds.risk.fields.name") }}</th>
+                <th data-priority="1">{{ trans("cruds.risk.fields.name") }}</th>
                 <th>{{ trans("cruds.risk.fields.owner") }}</th>
 
                 @if ($scoringConfig->usesMonarc())
@@ -83,7 +83,7 @@
                     <th>{{ trans("cruds.risk.fields.impact") }}</th>
                 @endif
 
-                <th>{{ trans("cruds.risk.fields.score") }}</th>
+                <th data-priority="2">{{ trans("cruds.risk.fields.score") }}</th>
 
                 <th>{{ trans("cruds.risk.fields.status") }}</th>
                 @if ($scoringConfig->usesMonarc())

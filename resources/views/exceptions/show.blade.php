@@ -105,7 +105,7 @@
             <div class="col-lg-1 col-md-2 text-nowrap">
                 {{ $exception->start_date?->format('Y-m-d') ?? '–' }}
             </div>
-            <div class="col-lg-1 col-md-2 text-end">
+            <div class="col-lg-1 col-md-2 text-md-end">
                 <strong>{{ trans('cruds.exception.fields.end_date') }}</strong>
             </div>
             <div class="col-lg-1 col-md-2 text-nowrap">

@@ -12,7 +12,7 @@
             </canvas>
 
             <div class="row">
-                <div class="col-6">
+                <div class="col-md-12 col-lg-6">
             <table class="table table-sm table-bordered">
                 <?php
                     if (Request::get('date')==null)
@@ -135,7 +135,7 @@
 
     <!----------------------------------------------------------->
 
-    <div class="col-6">
+    <div class="col-md-12 col-lg-6">
     <table class="table table-sm table-bordered">
         <tbody>
         <?php

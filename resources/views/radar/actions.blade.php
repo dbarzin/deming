@@ -23,7 +23,7 @@
                         <input class="form-control" type="date" id="end" name="end" value="{{ $end }}"/>
                     </div>
                 </div>
-                <div class="col-4">
+                <div class="col-md-8 col-lg-4">
                     <strong>Scope</strong>
                     <select class="form-select select2" id='scope' name="scope">
                         <option value="">-- {{ trans("cruds.action.fields.choose_scope")}} --</option>

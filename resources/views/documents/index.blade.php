@@ -18,7 +18,7 @@ function bytesToHuman($bytes) {
     @csrf
         <div class="container-fluid px-0">
             <div class="row">
-                <div class="col-5">
+                <div class="col-md-10 col-lg-5">
                     <a href="/doc/template?id=1" target="_new">{{ trans('cruds.document.model.control') }}</a>
                     @if (file_exists(storage_path('app/models/control_.docx')))
                         / <a href="/doc/template?id=2" target="_new">{{ trans('cruds.document.model.custom') }}</a>
@@ -27,7 +27,7 @@ function bytesToHuman($bytes) {
                 </div>
             </div>
             <div class="row">
-                <div class="col-5">
+                <div class="col-md-10 col-lg-5">
                     <a href="/doc/template?id=3" target="_new">{{ trans('cruds.document.model.report') }}</a>
                     @if (file_exists(storage_path('app/models/pilotage_.docx')))
                         / <a href="/doc/template?id=4" target="_new">{{ trans('cruds.document.model.custom') }}</a>
@@ -36,7 +36,7 @@ function bytesToHuman($bytes) {
                 </div>
             </div>
             <div class="row">
-                <div class="col-4">
+                <div class="col-md-8 col-lg-4">
 
                 <button type="submit" class="btn btn-success">
                     <span class="bi bi-floppy"></span> {{ trans("common.save") }}
@@ -57,17 +57,17 @@ function bytesToHuman($bytes) {
     <div class="card-body">
     <div class="container-fluid px-0">
         <div class="row">
-            <div class="col-3">
+            <div class="col-md-6 col-lg-3">
             {{ trans('cruds.document.count') }} : {{ $count }}
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-md-6 col-lg-3">
             {{ trans('cruds.document.total_size') }} : {{ bytesToHuman($sum) }}
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-md-6 col-lg-3">
                 <a href="/doc/check" class="btn btn-success">
                     <span class="bi bi-check-all"></span> {{ trans('common.check') }}
                 </a>
@@ -84,12 +84,12 @@ function bytesToHuman($bytes) {
 	@csrf
     <div class="container-fluid px-0">
         <div class="row">
-            <div class="col-4">
+            <div class="col-md-8 col-lg-4">
                 {{ trans('cruds.document.title.cleanup_detail') }}
             </div>
         </div>
         <div class="row">
-            <div class="col-3">
+            <div class="col-md-6 col-lg-3">
                 <div class="input-group">
                 <span class="input-group-text">{{ trans('cruds.document.month') }}</span>
                 <select class="form-select select2" id="durationSelect" name="duration">
@@ -105,7 +105,7 @@ function bytesToHuman($bytes) {
         </div>
 
         <div class="row">
-            <div class="col-5">
+            <div class="col-md-10 col-lg-5">
                 <button type="submit" class="btn btn-success" name="action" value="save">
                     <span class="bi bi-floppy"></span> {{ trans("common.save") }}
                 </button>

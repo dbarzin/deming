@@ -12,18 +12,18 @@
 		@csrf
 		<div class="container-fluid px-0">
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 					<label>{{ trans('cruds.attribute.fields.name') }}</label>
 		    	</div>
-				<div class="col-3">
+				<div class="col-md-6 col-lg-3">
 					<input type="text" class="{{ $errors->has('name') ? 'is-invalid' : ''}} form-control" name="name" value="{{ old('name', $attribute->name) }}" size='5'>
 				</div>
 			</div>
 	    	<div class="row">
-	    		<div class="col-1">
+	    		<div class="col-md-2 col-lg-1">
 					<label class="form-label" for="description">{{ trans('cruds.attribute.fields.values') }}</label>
 		    	</div>
-				<div class="col-8">
+				<div class="col-md-12 col-lg-8">
 					<textarea class="form-control" name="values" rows="5" cols="80">{{ old('values', $attribute->values) }}</textarea>
 					<br>
 					format: #tag #tag #tag ...
