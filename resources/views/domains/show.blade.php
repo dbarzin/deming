@@ -1,66 +1,63 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.domain.show') }}" data-collapsible="false" data-title-icon="<span class='mif-library'></span>">
+<div class="card">
+    <div class="card-header"><i class="bi bi-bookshelf"></i> {{ trans('cruds.domain.show') }}</div>
+    <div class="card-body">
     @include('partials.errors')
-	<div class="grid">
+	<div class="container-fluid px-0">
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="col-1">
 	    		<strong>{{ trans('cruds.domain.fields.framework') }}</strong>
 	    	</div>
-            <div class="cell-6">
+            <div class="col-6">
 	    		{{ $domain->framework }}
     		</div>
 	    </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="col-1">
 	    		<strong>{{ trans('cruds.domain.fields.name') }}</strong>
 	    	</div>
-            <div class="cell-6">
+            <div class="col-6">
 	    		{{ $domain->title }}
     		</div>
 	    </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="col-1">
 	    		<strong>{{ trans('cruds.domain.fields.description') }}</strong>
 	    	</div>
-            <div class="cell-6">
+            <div class="col-6">
 	    		{{ $domain->description }}
     		</div>
     	</div>
     </div>
 
 	<div class="row">
-		<div class="cell-1">
+		<div class="col-1">
 		</div>
 	</div>
 
 	<div class="row">
-        <div class="cell-6">
+        <div class="col-6">
     			@if (Auth::User()->role==1)
-                <a href="/domains/{{ $domain->id }}/edit" class="button primary">
-    		            <span class="mif-wrench"></span>
-    		            &nbsp;
-    		    		{{ trans('common.edit') }}
+                <a href="/domains/{{ $domain->id }}/edit" class="btn btn-primary">
+    		            <span class="bi bi-pencil-square"></span> {{ trans('common.edit') }}
                 </a>
     			<form action="/domains/{{ $domain->id }}" class="d-inline" method="post" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
     	           {{ method_field('delete') }}
     	           @csrf
-    		        <button class="button alert" type="submit">
-    					<span class="mif-fire"></span>
-    					&nbsp;
-    			        {{ trans('common.delete') }}
+    		        <button class="btn btn-danger" type="submit">
+    					<span class="bi bi-trash"></span> {{ trans('common.delete') }}
     		    	</button>
             	</form>
     			@endif
-                <a href="/domains" class="button">
-					<span class="mif-cancel"></span>
-					&nbsp;
-		    		{{ trans('common.cancel') }}
+                <a href="/domains" class="btn btn-light border">
+					<span class="bi bi-x-circle"></span> {{ trans('common.cancel') }}
                 </a>
     	</div>
     </div>
+</div>
 </div>
 @endsection

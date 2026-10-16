@@ -1,13 +1,13 @@
 @extends('layout')
 
 @section('content')
-<div data-role="panel"
-     data-title-caption="{{ trans('cruds.crosswalk.create') }}"
-     data-collapsible="false"
-     data-title-icon="<span class='mif-shuffle'></span>">
+<div class="card">
+    <div class="card-header"><i class="bi bi-shuffle"></i> {{ trans('cruds.crosswalk.create') }}</div>
+    <div class="card-body">
     <form method="POST" action="{{ route('crosswalk.store') }}">
         @csrf
         @include('crosswalk._form')
     </form>
+</div>
 </div>
 @endsection

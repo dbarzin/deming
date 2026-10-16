@@ -131,6 +131,30 @@ class ActionController extends Controller
             ]
         )->get();
 
+        // Fetch owners for all actions in one query
+        $ownersByActionId = DB::table('action_user')
+            ->join('users', 'users.id', '=', 'action_user.user_id')
+            ->whereIn('action_user.action_id', $actions->pluck('id'))
+            ->orderBy('users.name')
+            ->get(['action_user.action_id', 'users.name'])
+            ->groupBy('action_id');
+
+        // Fetch clauses (controls) for all actions in one query
+        $controlsByActionId = DB::table('action_control')
+            ->join('controls', 'controls.id', '=', 'action_control.control_id')
+            ->whereIn('action_control.action_id', $actions->pluck('id'))
+            ->orderBy('controls.clause')
+            ->get(['action_control.action_id', 'controls.id', 'controls.clause'])
+            ->groupBy('action_id');
+
+        foreach ($actions as $action) {
+            $action->owners = $ownersByActionId
+                ->get($action->id, collect())
+                ->pluck('name');
+            $action->controls = $controlsByActionId
+                ->get($action->id, collect());
+        }
+
         // Get scopes
         $scopes = DB::table('actions')
             ->select('scope')

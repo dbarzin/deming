@@ -1,49 +1,48 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.attribute.add') }}" data-collapsible="false" data-title-icon="<span class='mif-tags'></span>">
+<div class="card">
+    <div class="card-header"><i class="bi bi-tags"></i> {{ trans('cruds.attribute.add') }}</div>
+    <div class="card-body">
 
     @include('partials.errors')
 
 	<form method="POST" action="/attributes">
 	@csrf
-		<div class="grid">
+		<div class="container-fluid px-0">
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="col-1">
 		    		<strong>{{ trans('cruds.attribute.fields.name') }}</strong>
 		    	</div>
-	    		<div class="cell-5">
-					<input type="text" name="name" value="{{ old('name') }}" size='25'>
+	    		<div class="col-5">
+					<input class="form-control" type="text" name="name" value="{{ old('name') }}" size='25'>
 				</div>
 			</div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="col-1">
 		    		<strong>{{ trans('cruds.attribute.fields.values') }}</strong>
 		    	</div>
-	    		<div class="cell-5">
-					<textarea name="values" rows="5" cols="80">{{ old('values') }}</textarea>
+	    		<div class="col-5">
+					<textarea class="form-control" name="values" rows="5" cols="80">{{ old('values') }}</textarea>
 					<br>
 					format: #tag #tag #tag ...
 				</div>
 			</div>
 
 	    	<div class="row">
-	    		<div class="cell-5">
-					<button type="submit" class="button success">
-                        <span class="mif-floppy-disk2"></span>
-						&nbsp;
-						{{ trans('common.save') }}
+	    		<div class="col-5">
+					<button type="submit" class="btn btn-success">
+                        <span class="bi bi-floppy"></span> {{ trans('common.save') }}
 					</button>
     				&nbsp;
-                    <a href="/attributes" class="button cancel">
-    					<span class="mif-cancel"></span>
-    					&nbsp;
-    	    			{{ trans('common.cancel') }}
+                    <a href="/attributes" class="btn cancel btn-light border">
+    					<span class="bi bi-x-circle"></span> {{ trans('common.cancel') }}
                     </a>
 				</div>
 			</div>
 		</div>
 	</form>
+</div>
 </div>
 @endsection

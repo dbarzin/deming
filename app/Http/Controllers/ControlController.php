@@ -46,6 +46,7 @@ class ControlController extends Controller
                     'controls.domain_id',
                     'controls.clause',
                     'controls.name',
+                    'controls.attributes',
                     'domains.title',
                 ]
             )

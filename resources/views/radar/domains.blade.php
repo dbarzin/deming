@@ -2,14 +2,16 @@
 
 @section("content")
 <form action="/radar/domains">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.domain.radar') }}" data-collapsible="false" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
+    <div class="card">
+    <div class="card-header"><i class="bi bi-bar-chart"></i> {{ trans('cruds.domain.radar') }}</div>
+    <div class="card-body">
 
     <div class="row">
-        <div class="cell-md-9">
+        <div class="col-md-9">
             <div class="row">
-                <div class="cell-2">
+                <div class="col-2">
                     <strong>{{ trans("cruds.domain.fields.framework") }}</strong>
-                    <select name="framework" data-role="select" id="framework">
+                    <select class="form-select select2" name="framework" id="framework">
                         <option value='none'></option>
                         @foreach ($frameworks as $framework)
                         <option
@@ -21,9 +23,9 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="cell-2">
+                <div class="col-2">
                     <strong>{{ trans("cruds.measure.fields.scope") }}</strong>
-                    <select name="scope" data-role="select" id="scope">
+                    <select class="form-select select2" name="scope" id="scope">
                         <option value='none'></option>
                         @foreach ($scopes as $key => $value)
                         <option
@@ -35,28 +37,31 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="cell-6">
+                <div class="col-6">
                 </div>
-                <div class="cell-2">
+                <div class="col-2">
                     <strong>{{ trans("cruds.measure.groupBy") }}</strong>
-                    <select name="group" data-role="select" id="group">
+                    <select class="form-select select2" name="group" id="group">
                         <option value="0" {{ Session::get("group")==="0" ? "selected" : "" }}>{{ trans("cruds.welcome.measures") }}</option>
                         <option value="1" {{ Session::get("group")==="1" ? "selected" : "" }}>{{ trans("cruds.welcome.controls") }}</option>
                     </select>
                 </div>
             </div>
 
-            <div class="panel mt-2">
-                <div data-role="panel" data-title-caption="{{ trans("cruds.measure.status_date") }} {{date('d/m/Y')}}" data-collapsible="true" data-title-icon="<span class='mif-bar-vertical-chart'></span>">
+            <div class="mt-2">
+                <div class="card">
+    <div class="card-header"><i class="bi bi-bar-chart"></i> {{ trans("cruds.measure.status_date") }} {{date('d/m/Y')}}</div>
+    <div class="card-body">
                     <div class="p-8">
                         <canvas id="canvas-status" class="chartjs-render-monitor"></canvas>
                     </div>
                 </div>
+</div>
             </div>
         </div>
     </div>
     <div class="mt-2">
-        <table class="table table-border cell-border">
+        <table class="table table-bordered">
             <thead>
                 <tr>
                     <th>{{ trans("cruds.measure.fields.domain") }}</th>
@@ -231,4 +236,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+</div>
+</div>
 @endsection

@@ -2,16 +2,18 @@
 
 @section("content")
 <div class="row">
-    <div class="cell-lg-6 cell-md-12">
+    <div class="col-lg-6 col-md-12">
 
-        <div data-role="panel" data-title-caption="{{ trans('cruds.measure.history') }}" data-collapsible="false" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
+        <div class="card">
+    <div class="card-header"><i class="bi bi-bar-chart"></i> {{ trans('cruds.measure.history') }}</div>
+    <div class="card-body">
 
             <canvas id="canvas-status" width="600" height="300px" class="chartjs-render-monitor">
             </canvas>
 
             <div class="row">
-                <div class="cell-6">
-            <table class="table subcompact cell-border">
+                <div class="col-6">
+            <table class="table table-sm table-bordered">
                 <?php
                     if (Request::get('date')==null)
                         $start_day=Carbon\Carbon::now()->floorMonth();
@@ -133,8 +135,8 @@
 
     <!----------------------------------------------------------->
 
-    <div class="cell-6">
-    <table class="table subcompact cell-border">
+    <div class="col-6">
+    <table class="table table-sm table-bordered">
         <tbody>
         <?php
         for ($i=0;$i<12;$i++) {
@@ -249,11 +251,14 @@
 
        </div>
     </div>
+</div>
 
 </div>
 
-    <div class="cell-lg-6 cell-md-12">
-        <div data-role="panel" data-title-caption="{{ trans('cruds.measure.calendar') }}" data-collapsible="false" data-title-icon="<span class='mif-calendar'></span>">
+    <div class="col-lg-6 col-md-12">
+        <div class="card">
+    <div class="card-header"><i class="bi bi-calendar3"></i> {{ trans('cruds.measure.calendar') }}</div>
+    <div class="card-body">
 
             <?php
             if (Request::get('date')!==null)
@@ -281,6 +286,7 @@
             echo $calendar;
             ?>
         </div>
+</div>
     </div>
 </div>
 </div>

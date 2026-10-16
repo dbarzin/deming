@@ -1,11 +1,13 @@
 @extends("layout")
 
 @section("content")
-    <div data-role="panel" data-title-caption='{{ trans("cruds.measure.list")}}' data-collapsible="false" data-title-icon="<span class='mif-paste'></span>">
-    <div class="grid mb-2">
+    <div class="card">
+    <div class="card-header"><i class="bi bi-clipboard-check"></i> {{ trans("cruds.measure.list")}}</div>
+    <div class="card-body">
+    <div class="container-fluid px-0 mb-2">
         <div class="row">
-            <div class="cell-lg-2 cell-md-1">
-                <select id='domain' name="domain_id" data-role="select">
+            <div class="col-lg-2 col-md-1">
+                <select class="form-select select2" id='domain' name="domain_id">
                     <option value="0">-- {{ trans("cruds.measure.fields.choose_domain")}} --</option>
                     @foreach ($domains as $domain)
                         <option value="{{ $domain->id }}"
@@ -18,8 +20,8 @@
                 </select>
             </div>
 
-            <div class="cell-lg-2 cell-md-1">
-                <select id='clause' name="clause" data-role="select">
+            <div class="col-lg-2 col-md-1">
+                <select class="form-select select2" id='clause' name="clause">
                     <option value="none">-- {{ trans("cruds.measure.fields.choose_clause")}} --</option>
                     @foreach ($clauses as $clause)
                         <option
@@ -32,8 +34,8 @@
                 </select>
             </div>
 
-            <div class="cell-lg-2 cell-md-1">
-                <select id='scope' name="scope" data-role="select">
+            <div class="col-lg-2 col-md-1">
+                <select class="form-select select2" id='scope' name="scope">
                     <option value="none">-- {{ trans("cruds.measure.fields.choose_scope")}} --</option>
                     @foreach ($scopes as $scope)
                         <option
@@ -46,8 +48,8 @@
                 </select>
             </div>
 
-            <div class="cell-lg-2 cell-md-1">
-                <select id='cur_period' name="period" data-role="select">
+            <div class="col-lg-2 col-md-1">
+                <select class="form-select select2" id='cur_period' name="period">
                     <option value="99"
                         @if (Session::get("period")==="99")
                             selected
@@ -64,15 +66,15 @@
                         @endfor
                     </select>
                 </div>
-            <div class="cell-lg-3 cell-md-2 mt-2">
-                 <input type="radio" data-role="radio" data-append="{{ trans("cruds.measure.fields.status_all") }}" value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}>
-                 <input type="radio" data-role="radio" data-append="{{ trans("cruds.measure.fields.status_done") }}" value="1" id="status1" {{ (Session::get("status")=="1") ? 'checked' : '' }}>
-                 <input type="radio" data-role="radio" data-append="{{ trans("cruds.measure.fields.status_todo") }}" value="2" id="status2" {{ (Session::get("status")=="2") ? 'checked' : '' }}>
+            <div class="col-lg-3 col-md-2 mt-2">
+                 <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}><label class="form-check-label" for="status0">{{ trans("cruds.measure.fields.status_all") }}</label></div>
+                 <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="1" id="status1" {{ (Session::get("status")=="1") ? 'checked' : '' }}><label class="form-check-label" for="status1">{{ trans("cruds.measure.fields.status_done") }}</label></div>
+                 <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="2" id="status2" {{ (Session::get("status")=="2") ? 'checked' : '' }}><label class="form-check-label" for="status2">{{ trans("cruds.measure.fields.status_todo") }}</label></div>
             </div>
-            <div class="cell-lg-1 cell-md-1 flex-justify-end d-flex">
+            <div class="col-auto ms-auto">
 			@if ((Auth::User()->role==1)||(Auth::User()->role==2))
-				<button class="button primary" onclick="location.href = '/bob/create';">
-		            <span class="mif-add-lib"></span>
+				<button class="btn btn-primary" onclick="location.href = '/bob/create';">
+		            <span class="bi bi-plus-lg"></span>
 					{{ trans('common.new') }}
                </button>
             @endif
@@ -80,26 +82,21 @@
         </div>
     </div>
 
-    <table
+    <table data-order="[[5,&quot;asc&quot;]]" data-page-length="100"
         id="controls"
-        class="table data-table striped row-hover cell-border"
-        data-role="table"
-        data-rows="100"
-        data-show-activity="true"
-        data-rownum="false"
-        data-check="false"
-        data-check-style="1"
-        data-search="true"
-       >
+        class="table table-striped table-hover table-bordered datatable">
         <thead>
             <tr>
-                <th class="sortable-column" width="5%">{{ trans("cruds.measure.fields.clauses") }}</th>
+                <th width="5%">{{ trans("cruds.measure.fields.clauses") }}</th>
                 <th width="40%">{{ trans("cruds.measure.fields.name") }}</th>
-                <th class="sortable-column" width="10%">{{ trans("cruds.measure.fields.scope") }}</th>
-                <th class="sortable-column" width="5%">{{ trans("cruds.measure.fields.score") }}</th>
-                <th class="sortable-column sort-asc"  width="5%">{{ trans("cruds.measure.fields.planned") }}</th>
-                <th class="sortable-column sort-asc"  width="5%">{{ trans("cruds.measure.fields.realized") }}</th>
-                <th class="sortable-column"  width="5%">{{ trans("cruds.measure.fields.next") }}</th>
+                <th width="10%">{{ trans("cruds.measure.fields.scope") }}</th>
+                <th class="dt-hidden">{{ trans("cruds.measure.fields.attributes") }}</th>
+                <th width="5%">{{ trans("cruds.measure.fields.score") }}</th>
+                <th  width="5%">{{ trans("cruds.measure.fields.planned") }}</th>
+                <th  width="5%">{{ trans("cruds.measure.fields.realized") }}</th>
+                <th  width="5%">{{ trans("cruds.measure.fields.next") }}</th>
+                <th class="dt-hidden">{{ trans("cruds.measure.fields.note") }}</th>
+                <th class="dt-hidden">{{ trans("cruds.measure.fields.periodicity") }}</th>
             </tr>
         </thead>
         <tbody>
@@ -114,10 +111,7 @@
                             return $chunk->implode(', ');
                         })->implode('<br>');
                     @endphp
-                    <span
-                        data-role="hint"
-                        data-hint-text="{{ $formattedClauses }}"
-                        data-hint-position="top"
+                    <span data-bs-placement="top" data-bs-html="true" title="{{ $formattedClauses }}" data-bs-toggle="tooltip"
                         style="cursor: help; border-bottom: 1px dotted #999;"
                     >
                         @foreach($measure->controls->take(2) as $control)
@@ -148,6 +142,7 @@
             <td>
                     {{ $measure->scope }}
             </td>
+            <td>{{ $measure->attributes }}</td>
             <td>
                 <center id="{{ $measure->score }}">
                     @if ($measure->action_id!=null)
@@ -189,7 +184,7 @@
                     </a>
                     @if ( ($measure->status===1 )&& ((Auth::User()->role===1)||(Auth::User()->role===2)))
                         &nbsp;
-                        <a href="/bob/make/{{ $measure->id }}"><span class="mif-hour-glass"/></a>
+                        <a href="/bob/make/{{ $measure->id }}"><i class="bi bi-hourglass-split"></i></a>
                     @endif
                 </b>
             </td>
@@ -202,26 +197,41 @@
                     @endif
                 </b>
             </td>
+            <td class="text-end" data-order="{{ $measure->note ?? -1 }}">
+                @if ($measure->note !== null)
+                    {{ fmod($measure->note, 1) == 0 ? intval($measure->note) : $measure->note }}
+                @endif
+            </td>
+            <td data-order="{{ $measure->periodicity }}">
+                @switch($measure->periodicity)
+                    @case(0) {{ trans('common.once') }} @break
+                    @case(-1) {{ trans('common.weekly') }} @break
+                    @case(1) {{ trans('common.monthly') }} @break
+                    @case(3) {{ trans('common.quarterly') }} @break
+                    @case(6) {{ trans('common.biannually') }} @break
+                    @case(12) {{ trans('common.annually') }} @break
+                    @default {{ $measure->periodicity }}
+                @endswitch
+            </td>
         </tr>
     @endforeach
     </tbody>
 </table>
 </div>
+</div>
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-  const $ = (sel, root=document) => root.querySelector(sel);
   const getParam = (k) => new URLSearchParams(location.search).get(k) ?? '';
+  const table = initDataTable(document.getElementById('controls'));
 
-  // --- Attendre que Metro ait fini d'initialiser ses selects
-  let ready = false;
-  window.addEventListener('load', () => {
-    // 2 rAF pour laisser Metro construire le DOM
-    requestAnimationFrame(() => requestAnimationFrame(() => { ready = true; }));
-  });
+  // --- Applique la recherche passée dans l'URL
+  const searchValue = getParam('search');
+  if (searchValue) {
+    table.search(searchValue).draw();
+  }
 
   // --- Snapshot de tous les filtres (UI -> fallback URL)
   function snapshotFilters() {
-    const searchInput = $('.table-search-block input');
     return {
       domain : document.getElementById('domain')?.value ?? getParam('domain'),
       clause : (document.getElementById('clause')?.value ?? getParam('clause')).trim(),
@@ -230,13 +240,12 @@ document.addEventListener("DOMContentLoaded", () => {
       status : (document.getElementById('status0')?.checked ? '0' :
                document.getElementById('status1')?.checked ? '1' :
                document.getElementById('status2')?.checked ? '2' : getParam('status')),
-      search : (searchInput && searchInput.value !== '') ? searchInput.value : getParam('search')
+      search : table.search()
     };
   }
 
   // --- Navigation: toujours poster TOUTES les valeurs
   function navigateWithAll(patch={}) {
-    const cur  = new URL(location.href);
     const next = new URL(location.href);
     next.pathname = '/bob/index';
 
@@ -248,78 +257,10 @@ document.addEventListener("DOMContentLoaded", () => {
     if (next.toString() !== location.href) location.assign(next.toString());
   }
 
-  // ==================================================================
-
-  // --- 2) lit la valeur dans l'URL
-  const params = new URLSearchParams(location.search);
-  const searchValue = params.get('search') || '';
-
-  // --- 3) applique à l'API table (filtrage effectif)
-  const applyToAPI = (val) => {
-    const tableEl = document.getElementById('controls');
-    const api = tableEl ? Metro.getPlugin(tableEl, 'table') : null;
-    if (api && typeof api.search === 'function') {
-      api.search(val);
-      return true;
-    }
-    return false;
-  };
-
-  // --- 4) pose la valeur dans l'input quand il existe (et quand il est recréé)
-  function setSearchInputWhenReady(val, timeoutMs = 3000) {
-    if (!val) return;
-
-    const trySet = () => {
-      const input = $('.table-search-block input');
-      if (!input) return false;
-      if (input.value !== val) {
-        input.value = val;
-        input.dispatchEvent(new Event('input',  { bubbles: true }));
-        input.dispatchEvent(new Event('change', { bubbles: true }));
-      }
-      return true;
-    };
-
-    if (trySet()) return;
-
-    // a) quelques frames
-    let tries = 0, maxTries = 20;
-    const raf = () => {
-      if (trySet()) return;
-      if (++tries >= maxTries) return;
-      requestAnimationFrame(raf);
-    };
-    requestAnimationFrame(raf);
-
-    // b) garde-fou si l’input apparaît plus tard (reconstruction Metro)
-    const mo = new MutationObserver(() => {
-      if (trySet()) mo.disconnect();
-    });
-    mo.observe(document.body, { childList: true, subtree: true });
-    setTimeout(() => mo.disconnect(), timeoutMs);
-  }
-
-  // --- 5) exécution au chargement
-  if (searchValue) {
-    // filtre la table côté API (immédiat ou dès que prêt)
-    if (!applyToAPI(searchValue)) {
-      requestAnimationFrame(() => applyToAPI(searchValue));
-    }
-    // force l’affichage dans l’input dès qu’il existe
-    setSearchInputWhenReady(searchValue);
-  }
-
-
-  // ==================================================================
-  // --- Bind: ne PAS utiliser e.isTrusted (Metro déclenche un change programmatique)
   const bindChange = (id, key, coerce = v => v) => {
     const el = document.getElementById(id);
     if (!el) return;
-    el.addEventListener('change', () => {
-      if (!ready) return;                      // on ignore les changements pendant l'init
-      const newVal = coerce(el.value);
-      navigateWithAll({ [key]: newVal });
-    }, false);
+    el.addEventListener('change', () => navigateWithAll({ [key]: coerce(el.value) }));
   };
 
   bindChange('domain', 'domain', v => String(v));
@@ -327,18 +268,11 @@ document.addEventListener("DOMContentLoaded", () => {
   bindChange('scope',  'scope',  v => String(v).trim());
   bindChange('cur_period', 'period', v => String(v));
 
-  // Radios status (OK de garder le flag ready)
-  const bindStatus = (id, value) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.addEventListener('change', () => {
-      if (!ready) return;
-      navigateWithAll({ status: String(value) });
-    }, false);
-  };
-  bindStatus('status0', 0);
-  bindStatus('status1', 1);
-  bindStatus('status2', 2);
-}, false);
+  // Radios status
+  ['0', '1', '2'].forEach(value => {
+    document.getElementById('status' + value)
+      ?.addEventListener('change', () => navigateWithAll({ status: value }));
+  });
+});
 </script>
 @endsection

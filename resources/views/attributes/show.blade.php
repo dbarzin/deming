@@ -1,62 +1,59 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.attribute.show') }}" data-collapsible="false" data-title-icon="<span class='mif-tags'></span>">
-	<div class="grid">
+<div class="card">
+    <div class="card-header"><i class="bi bi-tags"></i> {{ trans('cruds.attribute.show') }}</div>
+    <div class="card-body">
+	<div class="container-fluid px-0">
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="col-1">
 	    		<strong>{{ trans('cruds.attribute.fields.name') }}</strong>
 	    	</div>
-            <div class="cell-6">
+            <div class="col-6">
 	    		{{ $attribute->name }}
     		</div>
 	    </div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="col-1">
 	    		<strong>{{ trans('cruds.attribute.fields.values') }}</strong>
 	    	</div>
-    		<div class="cell-6">
+    		<div class="col-6">
 	    		{{ $attribute->values }}
     		</div>
     	</div>
     </div>
 
 	<div class="row">
-		<div class="cell-1">
+		<div class="col-1">
 		</div>
 	</div>
 
     <div class="row">
-        <div class="cell-6">
+        <div class="col-6">
     		@if (Auth::User()->role==1)
     	    <form action="/attributes/{{ $attribute->id }}/edit">
-    	    	<button class="button primary" type="submit">
-    	            <span class="mif-pencil"></span>
-    	            &nbsp;
-    	    		{{ trans('common.edit') }}
+    	    	<button class="btn btn-primary" type="submit">
+    	            <span class="bi bi-pencil"></span> {{ trans('common.edit') }}
     	    	</button>
     	    </form>
             &nbsp;
     		<form action="/attributes/{{ $attribute->id }}" method="post" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
                {{ method_field('delete') }}
                @csrf
-    	        <button class="button alert" type="submit">
-    				<span class="mif-fire"></span>
-    				&nbsp;
-    		        {{ trans('common.delete') }}
+    	        <button class="btn btn-danger" type="submit">
+    				<span class="bi bi-trash"></span> {{ trans('common.delete') }}
     		    </button>
             </form>
     		&nbsp;
     		@endif
     		<form action="/attributes">
-    	    	<button class="button" type="submit">
-    				<span class="mif-cancel"></span>
-    				&nbsp;
-    	    		{{ trans('common.cancel') }}
+    	    	<button class="btn btn-light border" type="submit">
+    				<span class="bi bi-x-circle"></span> {{ trans('common.cancel') }}
     	    	</button>
     		</form>
         </div>
 	</div>
+</div>
 </div>
 @endsection

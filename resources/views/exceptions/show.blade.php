@@ -15,29 +15,30 @@
     $color = $statusColors[$exception->status] ?? '#888888';
 @endphp
 
-<div data-role="panel" data-title-caption="{{ trans('cruds.exception.title_singular') }}"
-    data-collapsible="false" data-title-icon="<span class='mif-cross'></span>">
+<div class="card">
+    <div class="card-header"><i class="bi bi-x-octagon"></i> {{ trans('cruds.exception.title_singular') }}</div>
+    <div class="card-body">
 
     @include('partials.errors')
 
-    <div class="grid">
+    <div class="container-fluid px-0">
 
         {{-- Nom --}}
         <div class="row">
-            <div class="cell-lg-1 cell-md-2">
+            <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.name') }}</strong>
             </div>
-            <div class="cell-lg-6 cell-md-8">
+            <div class="col-lg-6 col-md-8">
                 {{ $exception->name }}
             </div>
         </div>
 
         {{-- Statut --}}
         <div class="row">
-            <div class="cell-lg-1 cell-md-2">
+            <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.status') }}</strong>
             </div>
-            <div class="cell-lg-6 cell-md-8">
+            <div class="col-lg-6 col-md-8">
                 <span style="color:{{ $color }}; font-weight:bold; font-size:1.05em;">
                     {{ $exception->status_label }}
                 </span>
@@ -46,10 +47,10 @@
 
         {{-- Mesure liée --}}
         <div class="row">
-            <div class="cell-lg-1 cell-md-2">
+            <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.measure') }}</strong>
             </div>
-            <div class="cell-lg-6 cell-md-8">
+            <div class="col-lg-6 col-md-8">
                 @if($exception->measure)
                     <a href="/alice/show/{{ $exception->measure->id }}">
                         {{ $exception->measure->clause }} – {{ $exception->measure->name }}
@@ -63,10 +64,10 @@
         {{-- Description --}}
         @if($exception->description)
         <div class="row">
-            <div class="cell-lg-1 cell-md-2">
+            <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.description') }}</strong>
             </div>
-            <div class="cell-lg-7 cell-md-9">
+            <div class="col-lg-7 col-md-9">
                 <pre style="white-space:pre-wrap;">{{ $exception->description }}</pre>
             </div>
         </div>
@@ -75,10 +76,10 @@
         {{-- Justification --}}
         @if($exception->justification)
         <div class="row">
-            <div class="cell-lg-1 cell-md-2">
+            <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.justification') }}</strong>
             </div>
-            <div class="cell-lg-7 cell-md-9">
+            <div class="col-lg-7 col-md-9">
                 <pre style="white-space:pre-wrap;">{{ $exception->justification }}</pre>
             </div>
         </div>
@@ -87,10 +88,10 @@
         {{-- Mesures compensatoires --}}
         @if($exception->compensating_controls)
         <div class="row">
-            <div class="cell-lg-1 cell-md-2">
+            <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.compensating_controls') }}</strong>
             </div>
-            <div class="cell-lg-7 cell-md-9">
+            <div class="col-lg-7 col-md-9">
                 <pre style="white-space:pre-wrap;">{{ $exception->compensating_controls }}</pre>
             </div>
         </div>
@@ -98,21 +99,20 @@
 
         {{-- Période de validité --}}
         <div class="row">
-            <div class="cell-lg-1 cell-md-2">
+            <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.start_date') }}</strong>
             </div>
-            <div class="cell-lg-1 cell-md-2 no-wrap">
+            <div class="col-lg-1 col-md-2 text-nowrap">
                 {{ $exception->start_date?->format('Y-m-d') ?? '–' }}
             </div>
-            <div class="cell-lg-1 cell-md-2 text-right">
+            <div class="col-lg-1 col-md-2 text-end">
                 <strong>{{ trans('cruds.exception.fields.end_date') }}</strong>
             </div>
-            <div class="cell-lg-1 cell-md-2 no-wrap">
+            <div class="col-lg-1 col-md-2 text-nowrap">
                 @if($exception->end_date)
                     @if($exception->end_date->isPast())
                         <font color="#D94F45"><strong>{{ $exception->end_date->format('Y-m-d') }}</strong></font>
-                        &nbsp;<span class="mif-warning" style="color:#D94F45;"
-                            data-role="hint" data-hint-text="{{ trans('cruds.exception.expired_hint') }}"></span>
+                        &nbsp;<span title="{{ trans('cruds.exception.expired_hint') }}" data-bs-toggle="tooltip" class="bi bi-exclamation-triangle" style="color:#D94F45;"></span>
                     @else
                         {{ $exception->end_date->format('Y-m-d') }}
                     @endif
@@ -124,10 +124,10 @@
 
         {{-- Créé par --}}
         <div class="row">
-            <div class="cell-lg-1 cell-md-2">
+            <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.created_by') }}</strong>
             </div>
-            <div class="cell-lg-6 cell-md-8">
+            <div class="col-lg-6 col-md-8">
                 {{ $exception->createdBy?->name ?? '–' }}
                 &nbsp;–&nbsp;
                 {{ $exception->created_at?->format('Y-m-d H:i') }}
@@ -137,10 +137,10 @@
         {{-- Soumise par --}}
         @if($exception->submittedBy)
         <div class="row">
-            <div class="cell-lg-1 cell-md-2">
+            <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.submitted_by') }}</strong>
             </div>
-            <div class="cell-lg-6 cell-md-8">
+            <div class="col-lg-6 col-md-8">
                 {{ $exception->submittedBy->name }}
                 &nbsp;–&nbsp;
                 {{ $exception->submitted_at?->format('Y-m-d H:i') }}
@@ -151,7 +151,7 @@
         {{-- Décision --}}
         @if($exception->approvedBy)
         <div class="row">
-            <div class="cell-lg-1 cell-md-2">
+            <div class="col-lg-1 col-md-2">
                 <strong>
                     @if($exception->status === \App\Models\Exception::STATUS_APPROVED)
                         {{ trans('cruds.exception.fields.approved_by') }}
@@ -160,7 +160,7 @@
                     @endif
                 </strong>
             </div>
-            <div class="cell-lg-6 cell-md-8">
+            <div class="col-lg-6 col-md-8">
                 {{ $exception->approvedBy->name }}
                 &nbsp;–&nbsp;
                 {{ $exception->approved_at?->format('Y-m-d H:i') }}
@@ -175,7 +175,7 @@
         {{-- BOUTONS D'ACTION                                           --}}
         {{-- ═══════════════════════════════════════════════════════════ --}}
         <div class="row">
-            <div class="cell-12">
+            <div class="col-12">
 
                 {{-- Soumettre (Brouillon → Soumise) : créateur ou admin --}}
                 @if($exception->canSubmit() && ((Auth::User()->role === 1) || (Auth::User()->role === 2)))
@@ -183,8 +183,8 @@
                         onsubmit="if(!confirm('{{ trans('cruds.exception.confirm_submit') }}')){return false;}">
                         @csrf
                         <input type="hidden" name="id" value="{{ $exception->id }}"/>
-                        <button class="button info" type="submit">
-                            <span class="mif-upload"></span>&nbsp;{{ trans('cruds.exception.actions.submit') }}
+                        <button class="btn btn-info" type="submit">
+                            <span class="bi bi-upload"></span> {{ trans('cruds.exception.actions.submit') }}
                         </button>
                     </form>
                     &nbsp;
@@ -192,8 +192,8 @@
 
                 {{-- Éditer (Brouillon ou Refusée pour un User ; l'Admin peut toujours éditer) --}}
                 @if(Auth::User()->isAdmin() || ($exception->canEdit() && Auth::User()->role === 2))
-                    <a href="/exception/edit/{{ $exception->id }}" class="button primary">
-                        <span class="mif-pencil"></span>&nbsp;{{ trans('common.edit') }}
+                    <a href="/exception/edit/{{ $exception->id }}" class="btn btn-primary">
+                        <span class="bi bi-pencil"></span> {{ trans('common.edit') }}
                     </a>
                     &nbsp;
                 @endif
@@ -203,16 +203,16 @@
                     <form action="/exception/delete/{{ $exception->id }}" method="GET" class="d-inline"
                         onsubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
                         @csrf
-                        <button class="button alert" type="submit">
-                            <span class="mif-fire"></span>&nbsp;{{ trans('common.delete') }}
+                        <button class="btn btn-danger" type="submit">
+                            <span class="bi bi-trash"></span> {{ trans('common.delete') }}
                         </button>
                     </form>
                     &nbsp;
                 @endif
 
                 {{-- Retour liste --}}
-                <a class="button" href="/exception/index">
-                    <span class="mif-cancel"></span>&nbsp;{{ trans('common.cancel') }}
+                <a class="btn btn-light border" href="/exception/index">
+                    <span class="bi bi-x-circle"></span> {{ trans('common.cancel') }}
                 </a>
 
             </div>
@@ -223,7 +223,7 @@
         {{-- ═══════════════════════════════════════════════════════════ --}}
         @if($exception->canReview() && Auth::User()->role === 1)
         <div class="row mt-4">
-            <div class="cell-12">
+            <div class="col-12">
                 <hr>
                 <h6 style="color:#3A72C4;">{{ trans('cruds.exception.review_section') }}</h6>
             </div>
@@ -231,20 +231,19 @@
 
         {{-- Approuver --}}
         <div class="row">
-            <div class="cell-lg-1 cell-md-2">
+            <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.actions.approve') }}</strong>
             </div>
-            <div class="cell-lg-7 cell-md-9">
+            <div class="col-lg-7 col-md-9">
                 <form action="/exception/approve" method="POST" class="d-inline-block" style="width:100%;">
                     @csrf
                     <input type="hidden" name="id" value="{{ $exception->id }}"/>
-                    <textarea name="approval_comment" rows="2"
-                        data-role="textarea" data-clear-button="false"
+                    <textarea class="form-control" name="approval_comment" rows="2"
                         placeholder="{{ trans('cruds.exception.fields.approval_comment_optional') }}"></textarea>
                     <br>
-                    <button type="submit" class="button success mt-1"
+                    <button type="submit" class="btn btn-success mt-1"
                         onclick="return confirm('{{ trans('cruds.exception.confirm_approve') }}');">
-                        <span class="mif-checkmark"></span>&nbsp;{{ trans('cruds.exception.actions.approve') }}
+                        <span class="bi bi-check-lg"></span> {{ trans('cruds.exception.actions.approve') }}
                     </button>
                 </form>
             </div>
@@ -252,21 +251,20 @@
 
         {{-- Refuser --}}
         <div class="row mt-2">
-            <div class="cell-lg-1 cell-md-2">
+            <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.actions.reject') }}</strong>
             </div>
-            <div class="cell-lg-7 cell-md-9">
+            <div class="col-lg-7 col-md-9">
                 <form action="/exception/reject" method="POST" class="d-inline-block" style="width:100%;">
                     @csrf
                     <input type="hidden" name="id" value="{{ $exception->id }}"/>
-                    <textarea name="approval_comment" rows="2"
-                        data-role="textarea" data-clear-button="false"
+                    <textarea class="form-control" name="approval_comment" rows="2"
                         placeholder="{{ trans('cruds.exception.fields.approval_comment_required') }}"
                         required></textarea>
                     <br>
-                    <button type="submit" class="button alert mt-1"
+                    <button type="submit" class="btn btn-danger mt-1"
                         onclick="return confirm('{{ trans('cruds.exception.confirm_reject') }}');">
-                        <span class="mif-cross"></span>&nbsp;{{ trans('cruds.exception.actions.reject') }}
+                        <span class="bi bi-x-octagon"></span> {{ trans('cruds.exception.actions.reject') }}
                     </button>
                 </form>
             </div>
@@ -275,5 +273,6 @@
         @endif {{-- canReview --}}
 
     </div>
+</div>
 </div>
 @endsection

@@ -1,11 +1,13 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.control.index') }}" data-collapsible="false" data-title-icon="<span class='mif-books'></span>">
-		<div class="grid">
+<div class="card">
+    <div class="card-header"><i class="bi bi-book"></i> {{ trans('cruds.control.index') }}</div>
+    <div class="card-body">
+		<div class="container-fluid px-0">
             <div class="row mb-3">
-				<div class="cell-5">
-					<select id='domain_id' name="domain_id" data-role="select">
+				<div class="col-5">
+					<select class="form-select select2" id='domain_id' name="domain_id">
 					    <option value="0">-- {{ trans('cruds.domain.choose') }} --</option>
 						@foreach ($domains as $domain)
 					    	<option value="{{ $domain->id }}"
@@ -17,11 +19,9 @@
 					    @endforeach
 					</select>
 				</div>
-				<div class="cell-7" align="right">
-                    <a class="button primary" href="/alice/create">
-			            <span class="mif-add-lib"></span>
-			            &nbsp;
-						{{ trans('common.new') }}
+				<div class="col-7" align="right">
+                    <a class="btn btn-primary" href="/alice/create">
+			            <span class="bi bi-plus-lg"></span> {{ trans('common.new') }}
                     </a>
 				</div>
 			</div>
@@ -37,17 +37,17 @@
 		</script>
 
 		<div class="row">
-			<div class="cell">
-            <table
+			<div class="col">
+            <table data-order="[[0,&quot;asc&quot;]]"
                 id="measures"
-                class="table data-table striped row-hover cell-border"
-                data-role="table">
+                class="table table-striped table-hover table-bordered datatable">
 		   <thead>
 			    <tr>
-					<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.control.fields.domain') }}</th>
-					<th class="sortable-column sort-asc" width="10%">{{ trans('cruds.control.fields.clause') }}</th>
-					<th class="sortable-column sort-asc" width="60%">{{ trans('cruds.control.fields.name') }}</th>
-					<th class="sortable-column sort-asc" data-cls-column="text-center" width="10%"># {{ trans('cruds.measure.title') }}</th>
+					<th width="10%">{{ trans('cruds.control.fields.domain') }}</th>
+					<th width="10%">{{ trans('cruds.control.fields.clause') }}</th>
+					<th width="60%">{{ trans('cruds.control.fields.name') }}</th>
+					<th class="dt-hidden">{{ trans('cruds.control.fields.attributes') }}</th>
+					<th class="text-center" width="10%"># {{ trans('cruds.measure.title') }}</th>
 					<th width="10%"></th>
 			    </tr>
 		    </thead>
@@ -69,6 +69,7 @@
 					</a>
 				</td>
 				<td>{{ $control->name }}</td>
+				<td>{{ $control->attributes }}</td>
 				<td id="{{ $control->control_count }}">
 					@if ($control->control_count>0)
                     <a href="/bob/index?period=99&domain=0&scope=none&status=2&clause={{ htmlentities($control->clause) }}">
@@ -80,10 +81,8 @@
 				</td>
 				<td>
 				@if (!Auth::User()->isAuditee())
-                    <a href="/alice/plan/{{ $control->id }}" class="button info small">
-			            <span class="mif-calendar"></span>
-			            &nbsp;
-				    	{{ trans('common.plan') }}
+                    <a href="/alice/plan/{{ $control->id }}" class="btn btn-info btn-sm">
+			            <span class="bi bi-calendar3"></span> {{ trans('common.plan') }}
                     </a>
                 @endif
 				</td>
@@ -92,5 +91,7 @@
 		</tbody>
 		</table>
 	</div>
+</div>
+</div>
 </div>
 @endsection

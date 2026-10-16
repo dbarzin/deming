@@ -1,62 +1,45 @@
 @extends("layout")
 
 @section("content")
-    <div data-role="panel" data-title-caption="{{ trans('cruds.user.index') }}" data-collapsible="false" data-title-icon="<span class='mif-person'></span>">
+    <div class="card">
+    <div class="card-header"><i class="bi bi-person"></i> {{ trans('cruds.user.index') }}</div>
+    <div class="card-body">
 
-		<div class="grid">
+		<div class="container-fluid px-0">
 			<div class="row">
-				<div class="cell-5">
+				<div class="col-5">
 				</div>
 
-				<div class="cell-7" align="right">
+				<div class="col-7" align="right">
 					@if (Auth::User()->role==1)
-                    <a class="button primary" href="/users/create">
-			            <span class="mif-add-lib"></span>
-			            &nbsp;
-						{{ trans('common.new') }}
+                    <a class="btn btn-primary" href="/users/create">
+			            <span class="bi bi-plus-lg"></span> {{ trans('common.new') }}
                     </a>
 					@endif
 				</div>
 			</div>
 
 			<div class="row">
-				<div class="cell-12">
+				<div class="col-12">
 
-			<table
+			<table data-order="[[0,&quot;asc&quot;]]" data-searching="false" data-page-length="10"
                 id="users"
-                class="table striped row-hover cell-border"
-                data-role="table"
-                data-rows="10"
-                data-show-search="false"
-                data-show-activity="true"
-                data-rownum="false"
-                data-check="false"
-                data-check-style="1">
+                class="table table-striped table-hover table-bordered datatable">
 			    <thead>
 			    <tr>
 					<th
-						data-sortable="true"
-						data-sort-dir="asc"
-						data-format="string"
 						width="50"
 						>{{ trans('cruds.user.fields.login') }}</th>
 					<th
-						data-sortable="true"
-						data-sort-dir="asc"
-						data-format="string"
 						width="50"
 						>{{ trans('cruds.user.fields.name') }}</th>
 					<th
-						data-sortable="true"
-						data-sort-dir="asc"
-						data-format="string"
 						width="50"
 						>{{ trans('cruds.user.fields.role') }}</th>
 					<th
-						data-sortable="true"
-						data-format="string"
-						data-format="string"
 						width="200">{{ trans('cruds.user.fields.email') }}</th>
+					<th class="dt-hidden">{{ trans('cruds.user.fields.title') }}</th>
+					<th class="dt-hidden">{{ trans('cruds.user.fields.language') }}</th>
     				@if (Auth::User()->role==1)
                     <th>
                     </th>
@@ -77,12 +60,12 @@
 		    		{{ $user->role==0 ? trans('cruds.user.roles.disabled') : "" }}
                     </td>
 					<td>{{ $user->email }}</td>
+					<td>{{ $user->title }}</td>
+					<td>{{ $user->language }}</td>
     				@if (Auth::User()->role==1)
                     <td>
-                        <a class="button info small" href='/users/{{ $user->id }}/edit'>
-        		            <span class="mif-pencil"></span>
-        		            &nbsp;
-        		    		{{ trans('common.edit') }}
+                        <a class="btn btn-info btn-sm" href='/users/{{ $user->id }}/edit'>
+        		            <span class="bi bi-pencil"></span> {{ trans('common.edit') }}
                         </a>
                     </td>
                     @endif
@@ -92,5 +75,7 @@
 			</table>
 		</div>
 	</div>
+</div>
+</div>
 </div>
 @endsection

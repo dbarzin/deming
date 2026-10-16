@@ -2,11 +2,13 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.exports.index') }}" data-collapsible="false" data-title-icon="<span class='mif-chart-line'></span>">
+    <div class="card">
+    <div class="card-header"><i class="bi bi-graph-up"></i> {{ trans('cruds.exports.index') }}</div>
+    <div class="card-body">
 
 			@if (count($errors))
 			<div class="form-group">
-				<div class= "remark alert alert-danger">
+				<div class="alert alert-danger">
 					<ul>
 					@foreach ($errors->all() as $error)
 						<li>{{ $error }}</li>
@@ -17,7 +19,7 @@
 			@endif
 
 			<div class="row">
-		        <div class="cell-5">
+		        <div class="col-5">
 					<b>{{ trans('cruds.imports.title') }}</b>
                     /
                     <a href="/export/alices" target="_blank">Current security Measures</a>
@@ -27,39 +29,45 @@
 			<form action="/alice/import" method="post" enctype="multipart/form-data">
 			@csrf
     			<div class="row">
-    		        <div class="cell-4">
-        				<select data-role="select" name="model" id="model" data-prepend="Select model">
-                            <option id="emptyOption"></option>
-    						@foreach($models as $model)
-                                <option>{{ basename($model,'.xlsx') }}</option>
-                            @endforeach
-                        </select>
+    		        <div class="col-4">
+                        <div class="input-group">
+                            <span class="input-group-text">Select model</span>
+                            <select class="form-select select2" name="model" id="model">
+                                <option id="emptyOption"></option>
+                                @foreach($models as $model)
+                                    <option>{{ basename($model,'.xlsx') }}</option>
+                                @endforeach
+                            </select>
+                        </div>
                     </div>
-    		        <div class="cell-1" align="right">
-    				    <button type="submit" name="action" value="download" class="button info drop-shadow">
+    		        <div class="col-1" align="right">
+    				    <button type="submit" name="action" value="download" class="btn btn-info">
                                 {{ trans("common.download") }}
                         </button>
     		        </div>
                 </div>
     			<div class="row">
-    		        <div class="cell-5">
+    		        <div class="col-5">
                         or
-    					<input name="file" type="file" id="file" data-role="file" data-prepend="Select import file:">
+                        <div class="input-group">
+                            <span class="input-group-text">Select import file:</span>
+                            <input class="form-control" name="file" type="file" id="file">
+                        </div>
     				</div>
     		    </div>
     			<div class="row">
-    		        <div class="cell-4">
-                        <input type="checkbox" name="clean" id="clean">
+    		        <div class="col-4">
+                        <input class="form-check-input" type="checkbox" name="clean" id="clean">
                         Remove all other measures and controls
                     </div>
                 </div>
     			<div class="row">
-    		        <div class="cell-4">
-                        <input type="checkbox" name="test">
+    		        <div class="col-4">
+                        <input class="form-check-input" type="checkbox" name="test">
                         Generate fake measurements
                     </div>
-    		        <div class="cell-1" align="right">
-    				    <button type="submit" class="button success drop-shadow"
+    		        <div class="col-1" align="right">
+    				    <button type="submit" class="btn btn-success"
                             onclick="if ($('#clean').is(':checked')) return confirm('Do you want to remove all other measures and controls  ?')">
                                 {{ trans("common.import") }}
                         </button>
@@ -70,14 +78,14 @@
 
 
 			<div class="row">
-		        <div class="cell-5">
+		        <div class="col-5">
 		        	The import format is an XLSX document with these columns :
 		        </div>
 		    </div>
 			<div class="row">
-		        <div class="cell-6">
+		        <div class="col-6">
 
-		    	<table 	class="table subcompact">
+		    	<table 	class="table table-sm">
 		    		<thead>
 		        		<tr>
 		        			<td>Column</td><td>Name</td><td>Type</td><td>Description</td>
@@ -138,10 +146,11 @@
 		    </div>
 
 			<div class="row">
-		        <div class="cell-6 fg-red">
+		        <div class="col-6 text-danger">
 		        	This action could not be undone, take a backup before !
 		        </div>
 		    </div>
 
 		</div>
+</div>
 @endsection

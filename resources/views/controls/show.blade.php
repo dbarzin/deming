@@ -3,16 +3,18 @@
 @section('title', $control->name)
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.control.show') }}" data-collapsible="false" data-title-icon="<span class='mif-books'></span>">
+<div class="card">
+    <div class="card-header"><i class="bi bi-book"></i> {{ trans('cruds.control.show') }}</div>
+    <div class="card-body">
 
     @include('partials.errors')
 
-    <div class="grid">
+    <div class="container-fluid px-0">
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.domain') }}</strong>
         	</div>
-            <div class="cell-lg-7 cell-md-9">
+            <div class="col-lg-7 col-md-9">
     			<a href="/domains/{{$control->domain_id}}">
     			{{ $control->domain->title ?? ""}}
     			</a>
@@ -22,143 +24,130 @@
         </div>
 
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.clause') }}</strong> - <strong>{{ trans('cruds.control.fields.name') }}</strong>
         	</div>
-            <div class="cell-lg-7 cell-md-9">
+            <div class="col-lg-7 col-md-9">
     			{{ $control->clause }} - {{ $control->name }}
     		</div>
         </div>
 
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.objective') }}</strong>
         	</div>
-            <div class="cell-lg-7 cell-md-9">
+            <div class="col-lg-7 col-md-9">
                 {!! \Parsedown::instance()->text($control->objective) !!}
     		</div>
         </div>
 
     	@if ($control->attributes!=null)
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans("cruds.control.fields.attributes") }}</strong>
         	</div>
-            <div class="cell-lg-7 cell-md-9">
+            <div class="col-lg-7 col-md-9">
         		{{ $control->attributes }}
     		</div>
     	</div>
     	@endif
 
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.input') }}</strong>
         	</div>
-            <div class="cell-lg-7 cell-md-9">
+            <div class="col-lg-7 col-md-9">
                 {!! \Parsedown::instance()->text($control->input) !!}
     		</div>
         </div>
 
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.model') }}</strong>
         	</div>
-            <div class="cell-lg-7 cell-md-9">
+            <div class="col-lg-7 col-md-9">
     			<pre>{{ $control->model }}</pre>
     		</div>
         </div>
 
 
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.indicator') }}</strong>
         	</div>
-    		<div class="cell-lg-6 cell-md-9">
+    		<div class="col-lg-6 col-md-9">
     			<pre>{{ $control->indicator }}</pre>
     		</div>
         </div>
 
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.action_plan') }}</strong>
         	</div>
-    		<div class="cell-lg-6 cell-md-9">
+    		<div class="col-lg-6 col-md-9">
                 {!! \Parsedown::instance()->text($control->action_plan) !!}
     		</div>
         </div>
 
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
     		</div>
     	</div>
 
     	<div class="row">
-            <div class="cell-lg-8 cell-md-12" >
+            <div class="col-lg-8 col-md-12" >
     		@if (Auth::User()->role === 1)
-                <a class="button info" href="/alice/plan/{{ $control->id }}">
-    	            <span class="mif-calendar"></span>
-    	            &nbsp;
-    		    	{{ trans('common.plan') }}
+                <a class="btn btn-info" href="/alice/plan/{{ $control->id }}">
+    	            <span class="bi bi-calendar3"></span> {{ trans('common.plan') }}
                 </a>
     	    &nbsp;
-                <a class="button primary" href="/alice/{{ $control->id }}/edit">
-    	            <span class="mif-pencil"></span>
-    	            &nbsp;
-    		    	{{ trans('common.edit') }}
+                <a class="btn btn-primary" href="/alice/{{ $control->id }}/edit">
+    	            <span class="bi bi-pencil"></span> {{ trans('common.edit') }}
                 </a>
     	    &nbsp;
-                <a class="button warning" href="/alice/clone/{{ $control->id }}">
-    	            <span class="mif-add-lib"></span>
-    	            &nbsp;
-    		    	{{ trans('common.clone') }}
+                <a class="btn btn-warning" href="/alice/clone/{{ $control->id }}">
+    	            <span class="bi bi-plus-lg"></span> {{ trans('common.clone') }}
                 </a>
     	    &nbsp;
     		<form action="/alice/delete/{{ $control->id }}" class="d-inline" method="POST" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
                 @csrf
-    			<button class="button alert" type="submit">
-    				<span class="mif-fire"></span>
-    				&nbsp;
-    			    {{ trans('common.delete') }}
+    			<button class="btn btn-danger" type="submit">
+    				<span class="bi bi-trash"></span> {{ trans('common.delete') }}
     			</button>
             </form>
     	    &nbsp;
     	    @endif
     		@if (Auth::User()->role === 5)
-                <a href="/bob/index" class="button">
-        			<span class="mif-cancel"></span>
-        			&nbsp;
-        	    	{{ trans('common.cancel') }}
+                <a href="/bob/index" class="btn btn-light border">
+        			<span class="bi bi-x-circle"></span> {{ trans('common.cancel') }}
                 </a>
                 @else
-                <a href="/alice/index" class="button">
-        			<span class="mif-cancel"></span>
-        			&nbsp;
-        	    	{{ trans('common.cancel') }}
+                <a href="/alice/index" class="btn btn-light border">
+        			<span class="bi bi-x-circle"></span> {{ trans('common.cancel') }}
                 </a>
                 @endif
             </div>
         </div>
     </div>
 </div>
+</div>
 <div>
     <br>
 </div>
-<div data-role="panel" data-title-caption="{{ trans('cruds.measure.title') }}" data-collapsible="false" data-title-icon="<span class='mif-paste'></span>">
+<div class="card">
+    <div class="card-header"><i class="bi bi-clipboard-check"></i> {{ trans('cruds.measure.title') }}</div>
+    <div class="card-body">
 
 	<div>
-		<table id="controls" class="table striped row-hover cell-border"
-				data-role="table"
-				data-show-search="false"
-				data-show-pagination="false"
-				data-show-rows-steps="false"
+		<table data-order="[[0,&quot;asc&quot;]]" data-paging="false" data-searching="false" data-info="false" data-buttons="false" id="controls" class="table table-striped table-hover table-bordered datatable"
 				>
 			<thead>
 				<tr class="row-hover">
-					<th class="sortable-column sort-asc" width="65%">{{ trans("cruds.welcome.controls") }}</th>
-					<th class="sortable-column sort-asc" width="65%">{{ trans("cruds.measure.fields.scope") }}</th>
-					<th class="sortable-column sort-asc" width="5%">{{ trans("cruds.measure.fields.score") }}</th>
-					<th class="sortable-column sort-asc" width="15%">{{ trans("cruds.measure.fields.plan_date") }}</th>
-					<th class="sortable-column sort-asc" width="15%">{{ trans("cruds.measure.fields.realisation_date") }}</th>
+					<th width="65%">{{ trans("cruds.welcome.controls") }}</th>
+					<th width="65%">{{ trans("cruds.measure.fields.scope") }}</th>
+					<th width="5%">{{ trans("cruds.measure.fields.score") }}</th>
+					<th width="15%">{{ trans("cruds.measure.fields.plan_date") }}</th>
+					<th width="15%">{{ trans("cruds.measure.fields.realisation_date") }}</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -219,17 +208,16 @@
 	<div>
 	</div>
 </div>
+</div>
 @if($control->outgoingMappings->isNotEmpty() || $control->incomingMappings->isNotEmpty())
 <div>
     <br>
 </div>
-<div data-role="panel"
-     data-title-caption="{{ trans('cruds.crosswalk.control_mappings') }}"
-     data-collapsible="false"
-     data-title-icon="<span class='mif-shuffle'></span>">
+<div class="card">
+    <div class="card-header"><i class="bi bi-shuffle"></i> {{ trans('cruds.crosswalk.control_mappings') }}</div>
+    <div class="card-body">
     <div class="overflow-auto">
-        <table id="control-crosswalk" class="table striped row-hover cell-border"
-               data-role="table" data-show-search="false" data-show-pagination="false">
+        <table data-order="[]" data-paging="false" data-searching="false" data-info="false" data-buttons="false" id="control-crosswalk" class="table table-striped table-hover table-bordered datatable">
             <thead>
                 <tr>
                     <th>{{ trans('cruds.crosswalk.corresponding_control') }}</th>
@@ -276,6 +264,7 @@
             </tbody>
         </table>
     </div>
+</div>
 </div>
 @endif
 @endsection

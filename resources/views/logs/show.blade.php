@@ -1,9 +1,11 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.log.title') }}" data-collapsible="false" data-title-icon="<span class='mif-log-file'></span>">
+<div class="card">
+    <div class="card-header"><i class="bi bi-journal-text"></i> {{ trans('cruds.log.title') }}</div>
+    <div class="card-body">
 
-    <table class="table table-border cell-border">
+    <table class="table table-bordered">
         <tbody>
             <tr>
                 <th>
@@ -94,9 +96,10 @@
     </table>
     <div>
         <br>
-        <a class="button btn-default" href="/logs">
+        <a class="btn btn-default" href="/logs">
         {{ trans('common.cancel') }}
         </a>
     </div>
+</div>
 </div>
 @endsection

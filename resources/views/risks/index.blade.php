@@ -1,17 +1,16 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel"
-    data-title-caption='{{ trans("cruds.risk.list") }}'
-    data-collapsible="false"
-    data-title-icon="<span class='mif-warning'></span>">
+<div class="card">
+    <div class="card-header"><i class="bi bi-exclamation-triangle"></i> {{ trans("cruds.risk.list") }}</div>
+    <div class="card-body">
 
-    <div class="grid mb-2">
+    <div class="container-fluid px-0 mb-2">
         <div class="row">
 
             {{-- Filtre par niveau de risque --}}
-            <div class="cell-lg-2 cell-md-3">
-                <select id="filter-threshold" data-role="select">
+            <div class="col-lg-2 col-md-3">
+                <select class="form-select select2" id="filter-threshold">
                     <option value="none">-- {{ trans("cruds.risk.fields.choose_level") }} --</option>
                     @foreach ($scoringConfig->risk_thresholds as $idx => $t)
                         <option value="{{ $idx }}"
@@ -23,8 +22,8 @@
             </div>
 
             {{-- Filtre par statut --}}
-            <div class="cell-lg-2 cell-md-3">
-                <select id="filter-status" data-role="select">
+            <div class="col-lg-2 col-md-3">
+                <select class="form-select select2" id="filter-status">
                     <option value="none">-- {{ trans("cruds.risk.fields.choose_status") }} --</option>
                     @foreach (\App\Models\Risk::availableStatuses() as $value => $label)
                         <option value="{{ $value }}" @if(Session::get('risk_status') === $value) selected @endif>
@@ -35,8 +34,8 @@
             </div>
 
             @if (Auth::User()->role !== 3)
-            <div class="cell-lg-2 cell-md-3">
-                <select id="filter-owner" data-role="select">
+            <div class="col-lg-2 col-md-3">
+                <select class="form-select select2" id="filter-owner">
                     <option value="none">-- {{ trans("cruds.risk.fields.choose_owner") }} --</option>
                     @foreach ($owners as $owner)
                         <option value="{{ $owner->id }}" @if(Session::get('risk_owner') == $owner->id) selected @endif>
@@ -47,18 +46,15 @@
             </div>
             @endif
 
-            <div class="cell-lg-2 cell-md-3 mt-2">
-                <input type="radio" data-role="radio" data-append="{{ trans('cruds.risk.fields.overdue_all') }}"  value="0" id="overdue0" {{ Session::get('risk_overdue','0')==='0' ? 'checked' : '' }}>
-                <input type="radio" data-role="radio" data-append="{{ trans('cruds.risk.fields.overdue_only') }}" value="1" id="overdue1" {{ Session::get('risk_overdue')==='1' ? 'checked' : '' }}>
+            <div class="col-lg-2 col-md-3 mt-2">
+                <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="overdue" value="0" id="overdue0" {{ Session::get('risk_overdue','0')==='0' ? 'checked' : '' }}><label class="form-check-label" for="overdue0">{{ trans('cruds.risk.fields.overdue_all') }}</label></div>
+                <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="overdue" value="1" id="overdue1" {{ Session::get('risk_overdue')==='1' ? 'checked' : '' }}><label class="form-check-label" for="overdue1">{{ trans('cruds.risk.fields.overdue_only') }}</label></div>
             </div>
 
-            <div class="cell-lg-3 cell-md-1">
-            </div>
-
-            <div class="cell-lg-1 cell-md-1 flex-justify-end d-flex">
+            <div class="col-auto ms-auto">
                 @if (Auth::User()->role === 1 || Auth::User()->role === 2)
-                    <button class="button primary" onclick="location.href='/risk/create'">
-                        <span class="mif-add-lib"></span>
+                    <button class="btn btn-primary" onclick="location.href='/risk/create'">
+                        <span class="bi bi-plus-lg"></span>
                         {{ trans('common.new') }}
                     </button>
                 @endif
@@ -66,51 +62,42 @@
         </div>
     </div>
 
-    <table
+    <table data-order='[[{{ ($scoringConfig->usesMonarc() || $scoringConfig->usesLikelihood()) ? 5 : 4 }},"desc"]]' data-page-length="50"
         id="risks-table"
-        class="table data-table striped row-hover cell-border"
-        data-role="table"
-        data-rows="50"
-        data-show-activity="true"
-        data-rownum="false"
-        data-check="false"
-        data-search="true"
-    >
+        class="table table-striped table-hover table-bordered datatable">
         <thead>
             <tr>
-                <th class="sortable-column">{{ trans("cruds.risk.fields.name") }}</th>
-                <th class="sortable-column">{{ trans("cruds.risk.fields.owner") }}</th>
+                <th>{{ trans("cruds.risk.fields.name") }}</th>
+                <th>{{ trans("cruds.risk.fields.owner") }}</th>
 
                 @if ($scoringConfig->usesMonarc())
-                    <th class="sortable-column">{{ trans("cruds.risk.fields.impact") }}</th>
-                    <th class="sortable-column">{{ trans("cruds.risk.fields.threat") }}</th>
-                    <th class="sortable-column">{{ trans("cruds.risk.fields.vulnerability") }}</th>
+                    <th>{{ trans("cruds.risk.fields.impact") }}</th>
+                    <th>{{ trans("cruds.risk.fields.threat") }}</th>
+                    <th>{{ trans("cruds.risk.fields.vulnerability") }}</th>
                 @elseif ($scoringConfig->usesLikelihood())
-                    <th class="sortable-column">{{ trans("cruds.risk.fields.likelihood") }}</th>
-                    <th class="sortable-column">{{ trans("cruds.risk.fields.vulnerability") }}</th>
-                    <th class="sortable-column">{{ trans("cruds.risk.fields.impact") }}</th>
+                    <th>{{ trans("cruds.risk.fields.likelihood") }}</th>
+                    <th>{{ trans("cruds.risk.fields.vulnerability") }}</th>
+                    <th>{{ trans("cruds.risk.fields.impact") }}</th>
                 @else
-                    <th class="sortable-column">{{ trans("cruds.risk.fields.probability") }}</th>
-                    <th class="sortable-column">{{ trans("cruds.risk.fields.impact") }}</th>
+                    <th>{{ trans("cruds.risk.fields.probability") }}</th>
+                    <th>{{ trans("cruds.risk.fields.impact") }}</th>
                 @endif
 
-                <th class="sortable-column sort-desc">{{ trans("cruds.risk.fields.score") }}</th>
+                <th>{{ trans("cruds.risk.fields.score") }}</th>
 
-                <th class="sortable-column">{{ trans("cruds.risk.fields.status") }}</th>
+                <th>{{ trans("cruds.risk.fields.status") }}</th>
                 @if ($scoringConfig->usesMonarc())
-                    <th class="sortable-column">{{ trans("cruds.risk.fields.residual_risk") }}</th>
+                    <th>{{ trans("cruds.risk.fields.residual_risk") }}</th>
                 @endif
-                <th class="sortable-column">{{ trans("cruds.risk.fields.next_review") }}</th>
+                <th>{{ trans("cruds.risk.fields.next_review") }}</th>
+                <th class="dt-hidden status-comment">{{ trans("cruds.risk.fields.status_comment") }}</th>
             </tr>
         </thead>
         <tbody>
         @foreach ($risks as $risk)
-        <tr>
+        <tr data-href="/risk/show/{{ $risk->id }}">
             {{-- Name --}}
-            <td>
-                <span style="display:none">{{ $risk->name }}</span>
-                <a href="/risk/show/{{ $risk->id }}">{{ $risk->name }}</a>
-            </td>
+            <td>{{ $risk->name }}</td>
             {{-- Owner --}}
             <td>{{ $risk->owner?->name ?? '—' }}</td>
 
@@ -134,21 +121,18 @@
                     $threshold = $scoringConfig->thresholdFor($score);
                 @endphp
                 <span style="display:none">{{ str_pad($score, 4, '0', STR_PAD_LEFT) }}</span>
-                <a href="/risk/show/{{ $risk->id }}">
                 <span class="badge"
                       style="background:{{ $threshold['color'] }};
                             color:{{ contrast_color($threshold['color']) }};
                             padding:2px 8px;
-                            font-size:1rem;
-                            cursor:pointer">
+                            font-size:1rem">
                     {{ $score }}
                 </span>
-                </a>
             </td>
 
             {{-- Status --}}
             <td>
-                <span class="badge {{ \App\Models\Risk::STATUS_COLORS[$risk->status] ?? 'secondary' }}" style="font-size:1rem;">
+                <span class="badge text-bg-{{ \App\Models\Risk::STATUS_COLORS[$risk->status] ?? 'secondary' }}" style="font-size:1rem;">
                     {{ \App\Models\Risk::statusLabel($risk->status) }}
                 </span>
             </td>
@@ -184,11 +168,13 @@
                     —
                 @endif
             </td>
+            <td class="status-comment"><pre>{{ $risk->status_comment }}</pre></td>
         </tr>
         @endforeach
         </tbody>
     </table>
 
+</div>
 </div>
 
 {{-- Alignemet de la table --}}
@@ -211,15 +197,16 @@
 {
     text-align: center !important;
 }
+
+/* Le commentaire reste aligné à gauche quelle que soit sa position */
+#risks-table td.status-comment,
+#risks-table th.status-comment {
+    text-align: left !important;
+}
 </style>
 
 <script>
 document.addEventListener("DOMContentLoaded", () => {
-    let ready = false;
-    window.addEventListener('load', () => {
-        requestAnimationFrame(() => requestAnimationFrame(() => { ready = true; }));
-    });
-
     const getParam = (k) => new URLSearchParams(location.search).get(k) ?? '';
 
     function snapshotFilters() {
@@ -245,7 +232,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const el = document.getElementById(id);
         if (!el) return;
         el.addEventListener('change', () => {
-            if (!ready) return;
             navigateWithAll({ [key]: el.value });
         });
     };
@@ -258,7 +244,6 @@ document.addEventListener("DOMContentLoaded", () => {
         const el = document.getElementById(id);
         if (!el) return;
         el.addEventListener('change', () => {
-            if (!ready) return;
             navigateWithAll({ overdue: String(i) });
         });
     });

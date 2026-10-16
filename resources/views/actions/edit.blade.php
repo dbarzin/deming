@@ -9,7 +9,9 @@ form, table {
 }
 </style>
 
-<div data-role="panel" data-title-caption="{{ trans('cruds.action.edit') }}" data-collapsible="false" data-title-icon="<span class='mif-pending-actions'></span>">
+<div class="card">
+    <div class="card-header"><i class="bi bi-list-check"></i> {{ trans('cruds.action.edit') }}</div>
+    <div class="card-body">
 
 @include('partials.errors')
 
@@ -17,19 +19,19 @@ form, table {
 	@csrf
 	<input type="hidden" name="id" value="{{ $action->id }}"/>
 
-	<div class="grid">
+	<div class="container-fluid px-0">
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="col-1">
                 <strong>{{ trans("cruds.action.fields.reference") }}</strong>
 	    	</div>
-            <div class="cell-1">
-                <input type="text" data-role="input" name="reference" value="{{ $action->reference }}" maxlength="32">
+            <div class="col-1">
+                <input class="form-control" type="text" name="reference" value="{{ $action->reference }}" maxlength="32">
             </div>
-            <div class="cell-1 text-right">
+            <div class="col-1 text-end">
                 <strong>{{ trans("cruds.action.fields.type") }}</strong>
             </div>
-            <div class="cell-2">
-                <select name="type" data-type="select">
+            <div class="col-2">
+                <select class="form-select" name="type" data-type="select">
                     <option></option>
                     <option value="1" {{ ($action->type==1) ? 'selected' : '' }}>{{ trans('cruds.action.types.major') }}</option>
                     <option value="2" {{ ($action->type==2) ? 'selected' : '' }}>{{ trans('cruds.action.types.minor') }}</option>
@@ -37,24 +39,22 @@ form, table {
                     <option value="4" {{ ($action->type==4) ? 'selected' : '' }}>{{ trans('cruds.action.types.opportunity') }}</option>
                 </select>
             </div>
-            <div class="cell-1 text-right">
+            <div class="col-1 text-end">
                 <strong>{{ trans('cruds.action.fields.due_date') }}</strong>
             </div>
-            <div class="cell-1">
-                <input
-                data-role="calendarpicker"
+            <div class="col-1">
+                <input class="form-control" type="date"
                 name="due_date"
-                value="{{$action->due_date}}"
-                data-format="YYYY-MM-DD"/>
+                value="{{$action->due_date}}"/>
 			</div>
         </div>
 
 		<div class="row">
-    		<div class="cell-1">
+    		<div class="col-1">
                 <strong>{{ trans('cruds.action.fields.clauses') }}</strong>
 	    	</div>
-            <div class="cell-6">
-				<select data-role="select" name="measures[]" data-filter="true" multiple>
+            <div class="col-6">
+				<select class="form-select select2" name="measures[]" multiple>
 					@foreach($all_measures as $measure)
 					    <option value="{{ $measure->id }}"
                             {{ in_array($measure->id, old("measures", $measures)) ? "selected" : "" }}>
@@ -66,27 +66,27 @@ form, table {
 		</div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="col-1">
                 <strong>{{ trans("cruds.action.fields.name") }}</strong>
     		</div>
-    		<div class="cell-4">
-				<input type="text" data-role="input" name="name" value="{{ $action->name }}" maxlength="255">
+    		<div class="col-4">
+				<input class="form-control" type="text" name="name" value="{{ $action->name }}" maxlength="255">
 			</div>
-    		<div class="cell-1 text-right">
+    		<div class="col-1 text-end">
 	    		<strong>{{ trans("cruds.action.fields.scope") }}</strong>
             </div>
-    		<div class="cell-1">
-                <input type="text" name="scope" data-role="input" autocomplete="on" maxlength="32"
-                value="{{ $action->scope }}" data-autocomplete=" {{ implode(",",$scopes) }} "/>
+    		<div class="col-1">
+                <input class="form-control" type="text" name="scope" autocomplete="on" maxlength="32"
+                value="{{ $action->scope }}"/>
 			</div>
 		</div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="col-1">
                 <strong>{{ trans('cruds.action.fields.cause') }}</strong>
 	    	</div>
-            <div class="cell-6">
-            <textarea name="cause" class="easymde" id="cause">{{ old('cause', $action->cause) }}</textarea>
+            <div class="col-6">
+            <textarea name="cause" class="easymde form-control" id="cause">{{ old('cause', $action->cause) }}</textarea>
 			</div>
 		</div>
 
@@ -94,63 +94,64 @@ form, table {
 	</div>
 
 	<div class="row">
-		<div class="cell-1">
+		<div class="col-1">
             <strong>{{ trans('cruds.action.fields.remediation') }}</strong>
     	</div>
-		<div class="cell-6">
-            <textarea name="remediation" class="easymde" id="remediation">{{ old('remediation', $action->remediation) }}</textarea>
+		<div class="col-6">
+            <textarea name="remediation" class="easymde form-control" id="remediation">{{ old('remediation', $action->remediation) }}</textarea>
 		</div>
 	</div>
 
 	<div class="row">
-		<div class="cell-1">
+		<div class="col-1">
             <strong>{{ trans('cruds.action.fields.progress') }}</strong>
     	</div>
-		<div class="cell-6">
-            <input type="text" name="progress" data-role="slider" data-value="{{ $action->progress }}" data-hint="true" data-hint-always="true"/>
+		<div class="col-6">
+            <div class="d-flex align-items-center gap-2">
+                    <input class="form-range" value="{{ $action->progress }}" type="range" name="progress" min="0" max="100" step="1"
+                           oninput="this.nextElementSibling.textContent = this.value + '%'"/>
+                    <span class="badge bg-primary">{{ (int) $action->progress }}%</span>
+                </div>
         </div>
     </div>
 
 	<div class="row">
-        <div class="cell-1">
+        <div class="col-1">
             <strong>{{ trans('cruds.action.fields.status') }}</strong>
         </div>
-        <div class="cell-2">
-            <select data-role="select" name="status" id="status">
+        <div class="col-2">
+            <select class="form-select select2" name="status" id="status">
                 <option value="0" {{ $action->status==0 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_open') }}</option>
                 <option value="1" {{ $action->status==1 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_closed') }}</option>
                 <option value="2" {{ $action->status==2 ? 'selected' : '' }}>{{ trans('cruds.action.fields.status_rejected') }}</option>
             </select>
         </div>
-        <div class="cell-3 text-right">
+        <div class="col-3 text-end">
             <strong>{{ trans('cruds.action.fields.close_date') }}</strong>
         </div>
-        <div class="cell-1">
-            <input
-                data-role="calendarpicker"
+        <div class="col-1">
+            <input class="form-control" type="date"
                 name="close_date"
                 value="{{$action->close_date}}"
-				data-format="YYYY-MM-DD"
-				data-inputFormat="YYYY-MM-DD"
                 />
         </div>
     </div>
 
 	<div class="row">
-		<div class="cell-1">
+		<div class="col-1">
             <strong>{{ trans('cruds.action.fields.justification') }}</strong>
     	</div>
-		<div class="cell-6">
-            <textarea name="justification" class="easymde" id="justification">{{ old('justification', $action->justification) }}</textarea>
+		<div class="col-6">
+            <textarea name="justification" class="easymde form-control" id="justification">{{ old('justification', $action->justification) }}</textarea>
 		</div>
 	</div>
 
 	<div class="row">
-        <div class="cell-1">
+        <div class="col-1">
             <strong>{{ trans('cruds.action.fields.owners') }}</strong>
         </div>
-        <div class="cell-6">
-            <select data-role="select" name="owners[]" id="owners" multiple>
+        <div class="col-6">
+            <select class="form-select select2" name="owners[]" id="owners" multiple>
                 @foreach($users as $user)
                     <option value="{{ $user->id }}" {{ (in_array($user->id, old('owners', [])) || $action->owners->contains($user->id)) ? 'selected' : '' }}>{{ $user->name }}</option>
                 @endforeach
@@ -159,26 +160,23 @@ form, table {
     </div>
 
     <div class="row">
-		<div class="cell-1">
+		<div class="col-1">
 
         </div>
     </div>
-	<div class="grid">
-    	<div class="row-12">
-			<button type="submit" class="button success">
-                <span class="mif-floppy-disk2"></span>
-	            &nbsp;
-				{{ trans('common.save') }}
+	<div class="container-fluid px-0">
+    	<div class="mt-2">
+			<button type="submit" class="btn btn-success">
+                <span class="bi bi-floppy"></span> {{ trans('common.save') }}
 			</button>
 			&nbsp;
-            <a class="button dafault" href="/actions">
-    			<span class="mif-cancel"></span>
-    			&nbsp;
-    			{{ trans("common.cancel") }}
+            <a class="btn btn-light border" href="/actions">
+    			<span class="bi bi-x-circle"></span> {{ trans("common.cancel") }}
             </a>
 		</div>
 	</div>
 </div>
 </form>
+</div>
 </div>
 @endsection

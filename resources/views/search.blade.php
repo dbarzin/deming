@@ -1,7 +1,9 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="Résultats de la recherche" data-collapsible="true" data-title-icon="<span class='mif-search'></span>">
+<div class="card">
+    <div class="card-header"><i class="bi bi-search"></i> Résultats de la recherche</div>
+    <div class="card-body">
 	@foreach($results as $result)
 	@if ($result['model']==='App\\Models\\Domain')
 	   	<b>{{ trans("cruds.domain.title")}}</b> -
@@ -19,5 +21,6 @@
 	@endif
 	<br>
 	@endforeach
+</div>
 </div>
 @endsection

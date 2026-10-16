@@ -24,15 +24,6 @@
             justify-content: center;
         }
 
-        .navview-content {
-            background: url("/images/bg-1.jpg") bottom right no-repeat;
-            background-size: cover;
-        }
-
-        .dark-side .navview-content {
-            background: url("/images/bg-2.jpg") bottom right no-repeat;
-        }
-
         .login-box {
             background-color: rgba(255, 255, 255, 0.75);
             padding: 2rem;
@@ -45,56 +36,48 @@
 </head>
 <body>
 @if (Config::get('app.test'))
-<div class="app-bar pos-fixed bg-orange fg-white" data-role="appbar">
-    <div class="app-bar-section">
-        <span class="mif-warning"></span> {{ trans('menu.test') }}
-    </div>
+<div class="test-banner bg-warning">
+    <i class="bi bi-exclamation-triangle"></i> {{ trans('menu.test') }}
 </div>
 @endif
-<form
-    method="POST"
-    action="/login"
-    data-role="validator"
-    data-clear-invalid="2000"
-    data-on-error-form="invalidForm"
-    data-on-validate-form="validateForm">
+<form method="POST" action="/login">
     @csrf
 
     <div class="login-box">
-        <div class="h3 text-weight-7">{{ trans("cruds.login.connection") }}</div>
+        <div class="h3 fw-bold">{{ trans("cruds.login.connection") }}</div>
 
-        <div class="form-group">
-            <input type="text" data-role="input" name="login" id="login" required
+        <div class="input-group has-validation mb-3">
+            <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
+            <input type="text" name="login" id="login" required autocomplete="username"
                    class="form-control @error('login') is-invalid @enderror @error('email') is-invalid @enderror"
-                   value="{{ old('login') }}"
-                   data-prepend="<span class='mif-person'></span>">
+                   value="{{ old('login') }}">
             @error('login')<span class="invalid-feedback"><strong>{{ $message }}</strong></span>@enderror
             @error('email')<span class="invalid-feedback"><strong>{{ $message }}</strong></span>@enderror
         </div>
 
-        <div class="form-group">
-            <input type="password" data-role="input" name="password" required
-                   class="form-control @error('password') is-invalid @enderror"
-                   data-prepend="<span class='mif-lock'></span>">
+        <div class="input-group has-validation mb-3">
+            <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
+            <input type="password" name="password" required autocomplete="current-password"
+                   class="form-control @error('password') is-invalid @enderror">
             @error('password')<span class="invalid-feedback"><strong>{{ $message }}</strong></span>@enderror
         </div>
 
-        <div class="mt-5 d-flex flex-justify-start flex-align-center">
-            <button class="button primary">{{ trans("cruds.login.identification") }}</button>
+        <div class="mt-5 d-flex justify-content-start align-items-center">
+            <button class="btn btn-primary">{{ trans("cruds.login.identification") }}</button>
         </div>
 
         @if(count(Config::get('services.socialite_controller.providers')) > 0)
         <hr />
         @foreach(Config::get('services.socialite_controller.providers') as $provider)
-        <div class="d-flex flex-align-center my-2">
-            <a href="{{ route('socialite.redirect', $provider) }}" class="button secondary w-100">
-                <span class="mif-share fg-white mr-2"></span>
+        <div class="d-flex align-items-center my-2">
+            <a href="{{ route('socialite.redirect', $provider) }}" class="btn btn-secondary w-100">
+                <span class="bi bi-share text-white me-2"></span>
                 {{ trans("cruds.login.connection_with") }} <strong>{{ Config::get('services.socialite_controller.'.$provider.'.display_name') }}</strong>
             </a>
         </div>
         @endforeach
         @if($errors->has('socialite'))
-        <span class="invalid-feedback"><strong>{{ $errors->first('socialite') }}</strong></span>
+        <span class="invalid-feedback d-block"><strong>{{ $errors->first('socialite') }}</strong></span>
         @endif
         @endif
     </div>

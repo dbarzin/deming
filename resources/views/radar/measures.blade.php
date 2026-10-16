@@ -2,12 +2,14 @@
 
 @section("content")
 <form action="/radar/domains">
-    <div data-role="panel" data-title-caption={{ trans("cruds.welcome.dashboard") }} data-collapsible="false" data-title-icon="<span class='mif-gauge'></span>">
+    <div class="card">
+    <div class="card-header"><i class="bi bi-speedometer"></i> {{ trans("cruds.welcome.dashboard") }}</div>
+    <div class="card-body">
 
         <div class="row">
-            <div class="cell-2">
+            <div class="col-2">
                 <strong>{{ trans("cruds.measure.fields.clause") }}</strong>
-                <select name="clauses" data-role="select" id="clauses" data-filter="true">
+                <select class="form-select select2" name="clauses" id="clauses">
                     <option></option>
                     @foreach ($clauses as $clause)
                     <option value="{{ trim($clause) }}"
@@ -17,10 +19,10 @@
                     @endforeach
                 </select>
             </div>
-            <div class="cell-2">
+            <div class="col-2">
             @if (($scopes!=null) && ($scopes->count()>0))
                 <strong>{{ trans("cruds.measure.fields.scope") }}</strong>
-                <select name="scopes" data-role="select" id="scopes" data-filter="true">
+                <select class="form-select select2" name="scopes" id="scopes">
                     <option></option>
                     @foreach ($scopes as $scope)
                     <option value="{{ trim($scope) }}"
@@ -33,16 +35,19 @@
             </div>
         </div>
     </div>
+</div>
 
     @foreach($controls as $control)
-    <div class="mt-2" data-role="panel" data-title-caption="{{ $control->name }}" data-collapsible="true" data-title-icon="<span class='mif-line-chart'></span>">
+    <div class="card mt-2">
+    <div class="card-header"><i class="bi bi-graph-up"></i> {{ $control->name }}</div>
+    <div class="card-body">
         <div class="p-7" style="height: 300px;">
             <canvas id="scoreChart-{{ $control->id }}"></canvas>
         </div>
 
         <div>
             <div style="overflow-x: auto;">
-                <table class="table table-border cell-border striped" style="width: max-content;">
+                <table class="table table-bordered table-striped" style="width: max-content;">
                     <tbody>
                         <tr>
                             <td class="fw-bold">{{ trans("cruds.measure.fields.realisation_date") }}</td>
@@ -66,6 +71,7 @@
             </div>
         </div>
     </div>
+</div>
 
     @endforeach
 

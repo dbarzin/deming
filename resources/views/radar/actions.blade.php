@@ -2,34 +2,30 @@
 
 @section("content")
 <form action="/radar/domains">
-    <div data-role="panel" data-title-caption="{{ trans('cruds.domain.radar') }}" data-collapsible="false" data-title-icon="<span class=' mif-stacked-bar-chart'></span>">
+    <div class="card">
+    <div class="card-header"><i class="bi bi-bar-chart"></i> {{ trans('cruds.domain.radar') }}</div>
+    <div class="card-body">
 
     <div class="row">
-        <div class="cell-md-9">
+        <div class="col-md-9">
             <div class="row">
-                <div class="cell-auto">
+                <div class="col-auto">
                     <strong>Period</strong>
-                    <input
-                    id="start"
-                    name="start"
-                    value="{{ $start }}"
-                    data-prepend="Start"
-                    data-role="calendarpicker"
-                    data-format="YYYY-MM-DD"/>
+                    <div class="input-group">
+                        <span class="input-group-text">Start</span>
+                        <input class="form-control" type="date" id="start" name="start" value="{{ $start }}"/>
+                    </div>
                 </div>
-                <div class="cell-auto">
+                <div class="col-auto">
                     <br>
-                    <input
-                    id="end"
-                    name="end"
-                    data-prepend="End"
-                    value="{{ $end }}"
-                    data-role="calendarpicker"
-                    data-format="YYYY-MM-DD"/>
+                    <div class="input-group">
+                        <span class="input-group-text">End</span>
+                        <input class="form-control" type="date" id="end" name="end" value="{{ $end }}"/>
+                    </div>
                 </div>
-                <div class="cell-4">
+                <div class="col-4">
                     <strong>Scope</strong>
-                    <select id='scope' name="scope" data-role="select">
+                    <select class="form-select select2" id='scope' name="scope">
                         <option value="">-- {{ trans("cruds.action.fields.choose_scope")}} --</option>
                         @foreach ($scopes as $scope)
                             <option {{ (Session::get('scope')==$scope) ? 'selected' : '' }}>
@@ -40,30 +36,33 @@
                 </div>
             </div>
 
-            <div class="panel mt-2">
-                <div data-role="panel" data-title-caption="{{ trans("cruds.domain.measure_date") }} {{ date('d/m/Y')}}" data-collapsible="false" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
+            <div class="mt-2">
+                <div class="card">
+    <div class="card-header"><i class="bi bi-bar-chart"></i> {{ trans("cruds.domain.measure_date") }} {{ date('d/m/Y')}}</div>
+    <div class="card-body">
                     <div class="p-8">
                         <canvas id="actionsChart" class="chartjs-render-monitor"></canvas>
                     </div>
                 </div>
+</div>
             </div>
 
-            <div class="panel mt-2">
+            <div class="mt-2">
                 <div class="row">
-                    <div class="cell-md-12">
+                    <div class="col-md-12">
                         <table
                             id="controls"
-                            class="table striped row-hover cell-border"
+                            class="table table-striped table-hover table-bordered"
                             >
                             <thead>
                                 <tr>
-                                    <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.reference') }}</th>
-                                    <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.type') }}</th>
-                                    <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.status') }}</th>
-                                    <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.name') }}</th>
-                                    <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.due_date') }}</th>
-                                    <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.progress') }}</th>
-                        			<th class="sortable-column sort-asc"></th>
+                                    <th>{{ trans('cruds.action.fields.reference') }}</th>
+                                    <th>{{ trans('cruds.action.fields.type') }}</th>
+                                    <th>{{ trans('cruds.action.fields.status') }}</th>
+                                    <th>{{ trans('cruds.action.fields.name') }}</th>
+                                    <th>{{ trans('cruds.action.fields.due_date') }}</th>
+                                    <th>{{ trans('cruds.action.fields.progress') }}</th>
+                        			<th></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -75,19 +74,19 @@
                             <td>
                                 <p id="{{ $action->type }}">
                                     @if ($action->type==1)
-                                    <p class="fg-red text-bold">
+                                    <p class="text-danger fw-bold">
                                     {{ trans('cruds.action.types.major') }}
                                     </p>
                                     @elseif ($action->type==2)
-                                    <p class="fg-orange text-bold">
+                                    <p class="text-orange fw-bold">
                                     {{ trans('cruds.action.types.minor') }}
                                     </p>
                                     @elseif ($action->type==3)
-                                    <p class="fg-yellow text-bold">
+                                    <p class="text-warning fw-bold">
                                     {{ trans('cruds.action.types.observation') }}
                                     </p>
                                     @elseif ($action->type==4)
-                                    <p class="fg-green text-bold">
+                                    <p class="text-success fw-bold">
                                     {{ trans('cruds.action.types.opportunity') }}
                                     </p>
                                     @endif
@@ -117,17 +116,7 @@
                             @endif
                             </td>
                             <td width="40">
-                                <div data-role="donut" data-value="{{ $action->progress }}"
-                                {{ $action->progress }}
-                                @if ($action->progress<25)
-                                    class="donut-red"
-                                @elseif ($action->progress<50)
-                                    class="donut-orange"
-                                @else
-                                    class="donut-green"
-                                @endif
-                                    >
-                                </div>
+                                <div class="progress-donut {{ $action->progress < 25 ? 'donut-red' : ($action->progress < 50 ? 'donut-orange' : 'donut-green') }}" style="--value: {{ (int) $action->progress }}">{{ (int) $action->progress }}%</div>
                             </td>
                             <td style="padding: 0; text-align: center; vertical-align: middle;" width=400 height=110>
                                 <canvas id="progressChart{{ $action->id }}" width="400" height="100"></canvas>
@@ -256,4 +245,6 @@ document.addEventListener("DOMContentLoaded", function () {
 });
 </script>
 
+</div>
+</div>
 @endsection

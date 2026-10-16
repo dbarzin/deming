@@ -9,7 +9,9 @@ form, table {
 }
 </style>
 
-<div data-role="panel" data-title-caption="{{ trans('cruds.action.show') }}" data-collapsible="false" data-title-icon="<span class='mif-pending-actions'></span>">
+<div class="card">
+    <div class="card-header"><i class="bi bi-list-check"></i> {{ trans('cruds.action.show') }}</div>
+    <div class="card-body">
 
     @include('partials.errors')
 
@@ -17,49 +19,49 @@ form, table {
 		@csrf
 		<input type="hidden" name="id" value="{{ $action->id }}"/>
 
-		<div class="grid">
+		<div class="container-fluid px-0">
         	<div class="row">
-        		<div class="cell-1">
+        		<div class="col-1">
                     <strong>{{ trans("cruds.action.fields.reference") }}</strong>
     	    	</div>
-                <div class="cell-2">
+                <div class="col-2">
                     {{ $action->reference==null ? ("ACT-".$action->id) : $action->reference }}
                 </div>
-                <div class="cell-1" align="right">
+                <div class="col-1" align="right">
                     <strong>{{ trans("cruds.action.fields.type") }}</strong>
     	    	</div>
-                <div class="cell-1">
+                <div class="col-1">
                     @if ($action->type==1)
-                    <p class="fg-red text-bold">
+                    <p class="text-danger fw-bold">
                     {{ trans('cruds.action.types.major') }}
                     </p>
                     @elseif ($action->type==2)
-                    <p class="fg-orange text-bold">
+                    <p class="text-orange fw-bold">
                     {{ trans('cruds.action.types.minor') }}
                     </p>
                     @elseif ($action->type==3)
-                    <p class="fg-yellow text-bold">
+                    <p class="text-warning fw-bold">
                     {{ trans('cruds.action.types.observation') }}
                     </p>
                     @elseif ($action->type==4)
-                    <p class="fg-green text-bold">
+                    <p class="text-success fw-bold">
                     {{ trans('cruds.action.types.opportunity') }}
                     </p>
                     @endif
                 </div>
-                <div class="cell-1" align="right">
+                <div class="col-1" align="right">
                     <strong>{{ trans('cruds.action.fields.due_date') }}</strong>
     	    	</div>
-                <div class="cell-2">
+                <div class="col-2">
                     {{$action->due_date}}
     			</div>
             </div>
 
         	<div class="row">
-        		<div class="cell-1">
+        		<div class="col-1">
                     <strong>{{ trans("cruds.action.fields.clauses") }}</strong>
     	    	</div>
-        		<div class="cell-4">
+        		<div class="col-4">
                     @foreach($action->controls as $control)
                         <a href="/alice/show/{{ $control->id }}">{{ $control->clause }}</a> - {{ $control->name }}
                         @if(!$loop->last)
@@ -70,10 +72,10 @@ form, table {
             </div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="col-1">
 		    		<strong>{{ trans('cruds.action.fields.name') }}</strong>
 		    	</div>
-                <div class="cell-5">
+                <div class="col-5">
                     @if ($action->control_id!==null)
                     <a href="/bob/show/{{ $action->control_id }}">
 					    {{ $action->name }}
@@ -83,7 +85,7 @@ form, table {
                     @endif
 				</div>
                 @if ($action->scope!==null)
-                <div class="cell-2">
+                <div class="col-2">
 		    		<strong>{{ trans("cruds.measure.fields.scope") }}</strong>
 		    		&nbsp;
 	    			{{ $action->scope }}
@@ -92,10 +94,10 @@ form, table {
 			</div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="col-1">
                     <strong>{{ trans('cruds.action.fields.cause') }}</strong>
 		    	</div>
-				<div class="cell-5">
+				<div class="col-5">
                     <pre>{{ $action->cause }}</pre>
 				</div>
 			</div>
@@ -104,12 +106,12 @@ form, table {
 		</div>
 
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="col-1">
                 <strong>{{ trans('cruds.action.fields.remediation') }}</strong>
 	    	</div>
-			<div class="cell-6">
+			<div class="col-6">
                 @if ($action->status==0)
-                    <textarea name="remediation" class="easymde" id="remediation">{{ old('remediation', $action->remediation) }}</textarea>
+                    <textarea name="remediation" class="easymde form-control" id="remediation">{{ old('remediation', $action->remediation) }}</textarea>
                 @else
                     {!! \Parsedown::instance()->text($action->remediation) !!}
                 @endif
@@ -117,21 +119,25 @@ form, table {
 		</div>
         @if ($action->status==0)
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="col-1">
                 <strong>{{ trans('cruds.action.fields.progress') }}</strong>
 	    	</div>
-			<div class="cell-6">
-                <input type="text" name="progress" data-role="slider" data-value="{{ $action->progress }}" data-hint="true" data-hint-always="true"/>
+			<div class="col-6">
+                <div class="d-flex align-items-center gap-2">
+                    <input class="form-range" value="{{ $action->progress }}" type="range" name="progress" min="0" max="100" step="1"
+                           oninput="this.nextElementSibling.textContent = this.value + '%'"/>
+                    <span class="badge bg-primary">{{ (int) $action->progress }}%</span>
+                </div>
             </div>
         </div>
         @endif
 
         @if ($action->status!=0)
     	<div class="row">
-			<div class="cell-1">
+			<div class="col-1">
                 <strong>{{ trans('cruds.action.fields.status') }}</strong>
 	    	</div>
-            <div class="cell-4">
+            <div class="col-4">
                 @if ($action->status==0)
                     {{ trans('cruds.action.fields.status_open') }}
                 @elseif ($action->status==1)
@@ -143,28 +149,28 @@ form, table {
                 @endif
 
 	    	</div>
-			<div class="cell-1">
+			<div class="col-1">
                 <strong>{{ trans('cruds.action.fields.close_date') }}</strong>
 	    	</div>
-			<div class="cell-1">
+			<div class="col-1">
                 {{ $action->close_date}}
             </div>
         </div>
     	<div class="row">
-    		<div class="cell-1">
+    		<div class="col-1">
                 <strong>{{ trans('cruds.action.fields.justification') }}</strong>
 	    	</div>
-			<div class="cell-6">
+			<div class="col-6">
                 {!! \Parsedown::instance()->text($action->justification) !!}
 			</div>
 		</div>
         @endif
 
     	<div class="row">
-			<div class="cell-1">
+			<div class="col-1">
                 <strong>{{ trans('cruds.action.fields.owners') }}</strong>
 	    	</div>
-            <div class="cell-6">
+            <div class="col-6">
                 @foreach($action->owners as $owner)
 					{{ $owner->name }}
                     @if ($action->owners->last()!=$owner)
@@ -175,47 +181,38 @@ form, table {
 	    </div>
 
         <div class="row">
-    		<div class="cell-1">
+    		<div class="col-1">
 
             </div>
         </div>
-		<div class="grid">
-	    	<div class="row-12">
+		<div class="container-fluid px-0">
+	    	<div class="mt-2">
                 @if ($action->status==0)
-				<button type="submit" class="button success">
-                    <span class="mif-floppy-disk2"></span>
-		            &nbsp;
-					{{ trans('common.save') }}
+				<button type="submit" class="btn btn-success">
+                    <span class="bi bi-floppy"></span> {{ trans('common.save') }}
 				</button>
 	            &nbsp;
-                    <a class="button info" href="/action/close/{{ $action->id }}">
-                        <span class="mif-done"></span>
-    					&nbsp;
-                        {{ trans("common.close") }}
+                    <a class="btn btn-info" href="/action/close/{{ $action->id }}">
+                        <span class="bi bi-check-lg"></span> {{ trans("common.close") }}
                     </a>
 	            &nbsp;
                 @endif
-                <a class="button primary" href="/action/edit/{{ $action->id }}">
-    		            <span class="mif-pencil"></span>
-    		            &nbsp;
-    			    	{{ trans('common.edit') }}
+                <a class="btn btn-primary" href="/action/edit/{{ $action->id }}">
+    		            <span class="bi bi-pencil"></span> {{ trans('common.edit') }}
                 </a>
 				&nbsp;
-                <button class="button alert" type="submit"
+                <button class="btn btn-danger" type="submit"
                     onclick="if (!confirm('{{ trans('common.confirm') }}')) return false; this.form.action='/action/delete';">
-                    <span class="mif-fire"></span>
-                    &nbsp;
-                    {{ trans('common.delete') }}
+                    <span class="bi bi-trash"></span> {{ trans('common.delete') }}
                 </button>
                 &nbsp;
-                <a class="button dafault" href="/actions">
-	    			<span class="mif-cancel"></span>
-	    			&nbsp;
-	    			{{ trans("common.cancel") }}
+                <a class="btn btn-light border" href="/actions">
+	    			<span class="bi bi-x-circle"></span> {{ trans("common.cancel") }}
                 </a>
     		</div>
 		</div>
 	</div>
 	</form>
+</div>
 </div>
 @endsection

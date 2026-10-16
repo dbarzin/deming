@@ -1,22 +1,24 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption='{{ trans("cruds.risk_scoring.list") }}' data-collapsible="false" data-title-icon="<span class='mif-cog'></span>">
+<div class="card">
+    <div class="card-header"><i class="bi bi-gear"></i> {{ trans("cruds.risk_scoring.list") }}</div>
+    <div class="card-body">
 
     @include('partials.errors')
 
-    <div class="grid mb-2">
+    <div class="container-fluid px-0 mb-2">
         <div class="row">
-            <div class="cell-lg-12" align="right">
-                <button class="button primary" onclick="location.href='/risk/scoring/create'">
-                    <span class="mif-add-lib"></span>
+            <div class="col-lg-12" align="right">
+                <button class="btn btn-primary" onclick="location.href='/risk/scoring/create'">
+                    <span class="bi bi-plus-lg"></span>
                     {{ trans('common.new') }}
                 </button>
             </div>
         </div>
     </div>
 
-    <table class="table striped row-hover border cell-border">
+    <table class="table table-striped table-hover border table-bordered">
         <thead>
             <tr>
                 <th width="4%"  align="center">{{ trans("common.active") }}</th>
@@ -33,7 +35,7 @@
             {{-- Indicateur actif --}}
             <td align="center">
                 @if ($config->is_active)
-                    <span class="mif-checkmark fg-green" style="font-size:1.2rem"
+                    <span class="bi bi-check-lg text-success" style="font-size:1.2rem"
                           title="{{ trans('common.active') }}"></span>
                 @endif
             </td>
@@ -42,7 +44,7 @@
             <td>
                 <b><a href="/risk/scoring/{{ $config->id }}/edit">{{ $config->name }}</a></b>
                 @if ($config->is_active)
-                    &nbsp;<span class="badge primary">{{ trans('common.active') }}</span>
+                    &nbsp;<span class="badge text-bg-primary">{{ trans('common.active') }}</span>
                 @endif
             </td>
 
@@ -78,12 +80,9 @@
             <td>
                 @foreach ($config->risk_thresholds as $i => $t)
                     @php $prevMax = $i > 0 ? ($config->risk_thresholds[$i-1]['max'] ?? null) : null; @endphp
-                        <span class="badge"
-                              data-role="hint"
-                              data-hint-position="top"
-                              data-hint-text="{{ $t['max'] !== null
+                        <span data-bs-placement="top" title="{{ $t['max'] !== null
                                   ? 'Score ≤ ' . $t['max']
-                                  : 'Score > ' . ($prevMax ?? 0) }}"
+                                  : 'Score > ' . ($prevMax ?? 0) }}" data-bs-toggle="tooltip" class="badge"
                               style="
                                 background:{{ $t['color'] ?? '#cccccc' }};
                                 color:{{ contrast_color($t['color'] ?? '#cccccc') }};
@@ -99,9 +98,9 @@ padding:2px 8px;
 
             {{-- Actions --}}
             <td align="center" style="white-space:nowrap">
-                <a href="/risk/scoring/{{ $config->id }}/edit" class="button mini primary"
+                <a href="/risk/scoring/{{ $config->id }}/edit" class="btn btn-sm btn-primary"
                    title="{{ trans('common.edit') }}">
-                    <span class="mif-wrench"></span>
+                    <span class="bi bi-pencil-square"></span>
                 </a>
 
                 @unless ($config->is_active)
@@ -110,9 +109,9 @@ padding:2px 8px;
                     <form action="/risk/scoring/{{ $config->id }}/activate"
                           method="POST" class="d-inline">
                         @csrf
-                        <button type="submit" class="button mini success"
+                        <button type="submit" class="btn btn-sm btn-success"
                                 title="{{ trans('cruds.risk_scoring.activate') }}">
-                            <span class="mif-checkmark"></span>
+                            <span class="bi bi-check-lg"></span>
                         </button>
                     </form>
                     &nbsp;
@@ -120,9 +119,9 @@ padding:2px 8px;
                     <form action="/risk/scoring/{{ $config->id }}/delete"
                           class="d-inline"
                           onsubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
-                        <button type="submit" class="button mini alert"
+                        <button type="submit" class="btn btn-sm btn-danger"
                                 title="{{ trans('common.delete') }}">
-                            <span class="mif-fire"></span>
+                            <span class="bi bi-trash"></span>
                         </button>
                     </form>
                 @endunless
@@ -138,5 +137,6 @@ padding:2px 8px;
         </tbody>
     </table>
 <br>
+</div>
 </div>
 @endsection
