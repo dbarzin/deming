@@ -23,7 +23,9 @@ RUN apt-get update \
      ldap \
      intl \
   && docker-php-ext-enable opcache \
-  && curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
+  && curl -fsSL https://getcomposer.org/installer -o /tmp/composer-setup.php \
+  && php /tmp/composer-setup.php --install-dir=/usr/local/bin --filename=composer \
+  && rm /tmp/composer-setup.php \
   && rm -rf /var/lib/apt/lists/*
 
 RUN touch /etc/mailname

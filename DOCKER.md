@@ -774,9 +774,17 @@ docker run --rm debian:bookworm cat /etc/resolv.conf   # inside a container
 docker run --rm debian:bookworm getent hosts deb.debian.org
 ```
 
-**Fix 1 — give Docker your internal DNS servers** (recommended, permanent). Get the
-real upstream servers with `resolvectl status` (or from your network team), then
-create or edit `/etc/docker/daemon.json`:
+**Fix 1 — build with the host network** (recommended, the most reliable):
+
+```bash
+docker build --network=host -t deming:local .
+```
+
+The build then uses the host's own resolver, exactly like `wget` or `curl` on the VM.
+
+**Fix 2 — give Docker your internal DNS servers.** Get the real upstream servers
+with `resolvectl status` (or from your network team), then create or edit
+`/etc/docker/daemon.json`:
 
 ```json
 {
@@ -786,14 +794,15 @@ create or edit `/etc/docker/daemon.json`:
 
 ```bash
 sudo systemctl restart docker
+docker run --rm debian:bookworm cat /etc/resolv.conf   # must now list your DNS servers
 docker build -t deming:local .
 ```
 
-**Fix 2 — build with the host network** (quick workaround, one-off):
-
-```bash
-docker build --network=host -t deming:local .
-```
+> [!NOTE]
+> This setting does not work in every environment (it has been reported to have no
+> effect on some corporate networks, where only `--network=host` worked). If the
+> `getent hosts deb.debian.org` check above still fails after restarting Docker,
+> use Fix 1.
 
 **If an outgoing HTTP proxy is required** on your network, pass it to the build
 (these build arguments are predefined by Docker, no change to the Dockerfile is needed):
@@ -806,16 +815,39 @@ docker build \
   -t deming:local .
 ```
 
-**If your firewall performs TLS inspection** (later steps such as the Composer
-download fail with `SSL certificate problem: unable to get local issuer certificate`),
-add your corporate root CA to the image, right after the `FROM` line of the `Dockerfile`:
+### Build fails: "SSL certificate problem: self-signed certificate in certificate chain"
+
+Once DNS works, the build may stop on the Composer download step (the first `RUN`)
+with an error such as:
+
+```
+curl: (60) SSL certificate problem: self-signed certificate in certificate chain
+```
+
+or `unable to get local issuer certificate`. With older versions of the `Dockerfile`,
+this download error was silently ignored and the build failed later, on
+`RUN composer install`, with exit code **127** (`composer: not found`).
+
+Your firewall performs **TLS inspection** and re-signs HTTPS traffic with a corporate
+root CA that the image does not trust. Add that CA to the image, right after the
+`FROM` line of the `Dockerfile` (before the Composer download):
 
 ```dockerfile
 COPY docker/certs/*.crt /usr/local/share/ca-certificates/
 RUN update-ca-certificates
 ```
 
-(place your CA file(s) in PEM format with a `.crt` extension in `docker/certs/`).
+and place your CA file(s) in `docker/certs/`.
+
+> [!IMPORTANT]
+> - The destination **must** be `/usr/local/share/ca-certificates/`.
+>   `update-ca-certificates` only reads that directory: files copied anywhere else
+>   (e.g. `/usr/local`) are ignored and it reports `0 added`.
+> - Files must be in **PEM** format with a **`.crt`** extension.
+> - When it works, `update-ca-certificates` reports `N added` (N > 0). Warnings such as
+>   `rehash: warning: skipping ...,it does not contain exactly one certificate or CRL`
+>   are harmless, but to be safe put **one certificate per `.crt` file** (split
+>   bundles into separate files).
 
 ### Container loops on "Not ready, retrying"
 

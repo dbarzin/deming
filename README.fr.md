@@ -1,5 +1,7 @@
 # Deming
 
+[<img src="/public/images/deming.png" width="200">](/public/images/deming.png)
+
 [![Latest Release](https://img.shields.io/github/release/sourcentis/deming.svg?style=flat-square)](https://github.com/sourcentis/deming/releases/latest)
 [![License](https://img.shields.io/badge/license-GPL--3.0-blue.svg?style=flat-square)](https://github.com/sourcentis/deming/blob/main/LICENSE)
 [![PHP](https://img.shields.io/badge/PHP-8.2%2B-777BB4.svg?style=flat-square&logo=php)](https://www.php.net)
