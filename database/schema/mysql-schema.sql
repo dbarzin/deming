@@ -93,6 +93,35 @@ CREATE TABLE `audit_logs` (
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `control_mappings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `control_mappings` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `source_control_id` int(10) unsigned NOT NULL,
+  `target_control_id` int(10) unsigned NOT NULL,
+  `mapping_type` enum('equivalent','covers','covered_by','partial','supports','related') NOT NULL,
+  `coverage` enum('full','high','medium','low','none') DEFAULT NULL,
+  `confidence` decimal(5,2) DEFAULT NULL,
+  `rationale` text DEFAULT NULL,
+  `source_reference` varchar(255) DEFAULT NULL,
+  `source_url` varchar(2048) DEFAULT NULL,
+  `validated` tinyint(1) NOT NULL DEFAULT 0,
+  `validated_by` bigint(20) unsigned DEFAULT NULL,
+  `validated_at` timestamp NULL DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `control_mappings_source_target_unique` (`source_control_id`,`target_control_id`),
+  KEY `control_mappings_validated_by_foreign` (`validated_by`),
+  KEY `control_mappings_target_control_index` (`target_control_id`),
+  KEY `control_mappings_mapping_type_index` (`mapping_type`),
+  KEY `control_mappings_coverage_index` (`coverage`),
+  CONSTRAINT `control_mappings_source_control_id_foreign` FOREIGN KEY (`source_control_id`) REFERENCES `controls` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `control_mappings_target_control_id_foreign` FOREIGN KEY (`target_control_id`) REFERENCES `controls` (`id`) ON DELETE CASCADE,
+  CONSTRAINT `control_mappings_validated_by_foreign` FOREIGN KEY (`validated_by`) REFERENCES `users` (`id`) ON DELETE SET NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `control_measure`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8mb4 */;
@@ -132,7 +161,6 @@ CREATE TABLE `controls` (
   `action_plan` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `standard` varchar(255) DEFAULT NULL,
   `attributes` varchar(1024) DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `measures_clause_unique` (`clause`),
@@ -202,6 +230,27 @@ CREATE TABLE `exceptions` (
   CONSTRAINT `exceptions_submitted_by_foreign` FOREIGN KEY (`submitted_by`) REFERENCES `users` (`id`) ON DELETE SET NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
+DROP TABLE IF EXISTS `frameworks`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8mb4 */;
+CREATE TABLE `frameworks` (
+  `id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `code` varchar(255) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `version` varchar(255) NOT NULL DEFAULT '',
+  `publisher` varchar(255) NOT NULL DEFAULT '',
+  `jurisdiction` varchar(255) DEFAULT NULL,
+  `source_url` varchar(2048) DEFAULT NULL,
+  `status` varchar(255) DEFAULT NULL,
+  `publication_date` date DEFAULT NULL,
+  `effective_date` date DEFAULT NULL,
+  `notes` text DEFAULT NULL,
+  `created_at` timestamp NULL DEFAULT NULL,
+  `updated_at` timestamp NULL DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `frameworks_code_unique` (`code`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
 DROP TABLE IF EXISTS `measure_user`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8mb4 */;
@@ -246,7 +295,6 @@ CREATE TABLE `measures` (
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `next_id` int(10) unsigned DEFAULT NULL,
-  `standard` varchar(255) DEFAULT NULL,
   `attributes` varchar(1024) DEFAULT NULL,
   `scope` varchar(32) DEFAULT NULL,
   `status` int(11) NOT NULL DEFAULT 0,
@@ -423,6 +471,7 @@ CREATE TABLE `risks` (
   `next_review_at` date DEFAULT NULL,
   `exposure` tinyint(4) DEFAULT NULL COMMENT 'v2 - BSI 200-3',
   `vulnerability` tinyint(4) DEFAULT NULL COMMENT 'v2 - BSI 200-3',
+  `residual_risk` tinyint(3) unsigned DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
   `deleted_at` timestamp NULL DEFAULT NULL,
@@ -441,6 +490,7 @@ CREATE TABLE `user_groups` (
   `description` text DEFAULT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
+  `type` varchar(20) NOT NULL DEFAULT 'business',
   PRIMARY KEY (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -531,3 +581,8 @@ INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (86,'2026_06_09_000
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (89,'2026_06_11_000001_add_monarc_scoring_config',12);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (90,'2026_06_30_000001_rename_control_user_to_measure_user',13);
 INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (91,'2026_07_29_000001_rename_action_measure_to_action_control',14);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (92,'2026_07_29_091936_add_residual_risk_to_risks_table',15);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (93,'2026_09_16_000001_create_frameworks_table',15);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (94,'2026_09_16_000002_create_control_mappings_table',15);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (95,'2026_10_16_000001_drop_standard_from_controls_and_measures',15);
+INSERT INTO `migrations` (`id`, `migration`, `batch`) VALUES (96,'2026_10_17_000001_add_type_to_user_groups',15);
