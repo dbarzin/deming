@@ -3,13 +3,17 @@ return [
     'confirm' => 'Löschen bestätigen',
 
     'accept' => 'Akzeptiert',
+
+    'active' => 'Aktiv',
     'cancel' => 'Abbruch',
     'check' => 'Prüfen',
     'create' => 'Erstellen',
     'clone' => 'Kopieren',
+    'close' => 'Schließen',
     'delete' => 'Löschen',
     'download' => 'Download',
     'export' => 'Exportieren',
+    'history' => 'Historie',
     'edit' => 'Editieren',
     'import' => 'Import',
     'make' => 'Erledigen',
@@ -19,6 +23,7 @@ return [
     'reject' => 'Ablehnen',
     'save' => 'Sichern',
     'search_results' => 'Suchergebnisse',
+    'show' => 'Anzeigen',
     'test' => 'Testen',
     'unplan' => 'Un-Planen',
     'validate' => 'Validieren',
@@ -49,6 +54,7 @@ return [
     'day' => 'täglich',
     'week' => 'wöchentlich',
     'month' => 'monatlich',
+    'months' => 'Monate',
 
     'my_data' => 'Meine Daten',
     'all_data' => 'Alle Daten',

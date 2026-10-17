@@ -60,6 +60,9 @@ plugins:
         - locale: fr
           name: Français
           build: true
+        - locale: de
+          name: Deutsch
+          build: true
       reconfigure_material: true
 
 markdown_extensions:
