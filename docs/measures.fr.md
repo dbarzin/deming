@@ -4,7 +4,8 @@ Cette partie permet de définir, de modifier et de planifier de nouvelles mesure
 
 ## Liste des mesures de sécurité <a name="list"></a>
 
-La liste des mesures de sécurité permet d’afficher la liste des mesures, de les filtrer par domaine ou de recherche une mesure sur base d’une partie de son nom.
+La liste des mesures de sécurité permet d’afficher la liste des mesures, de les filtrer par domaine ou de rechercher une mesure sur base d’une partie de son nom.
+Les boutons « Colonnes », « Copier », « CSV », « Excel » et « Imprimer » permettent de choisir les colonnes affichées et d'exporter la liste.
 
 [![Screenshot](images/m1.fr.png)](images/m1.fr.png)
 
@@ -87,7 +88,7 @@ L’écran contient :
 
 * Les responsables de la réalisation du contrôles.
 
-[![Screenshot](images/plan.fr.png){: style="width:600px"}](images/plan.fr.png)
+[![Screenshot](images/plan.fr.png)](images/plan.fr.png)
 
 Lorsque vous cliquez sur :
 

@@ -3,16 +3,32 @@
 ## Page principale
 
 La page principale de l’application permet d'avoir une vue d'ensemble du SMSI et des contrôles à réaliser.
-Elle est composée de :
 
-Sur la gauche, le menu principal de l’application ;
+[![Screenshot](images/layout.fr.png)](images/layout.fr.png)
 
-En haut des indicateurs sur :
+L'écran est composé :
+
+* sur la gauche, du menu principal de l’application, avec un champ de recherche en haut. Le menu peut être replié
+  avec le bouton ☰ et s'affiche sous forme de tiroir sur téléphone et tablette ;
+
+* en haut, d'une barre d'outils donnant un accès rapide :
+    * aux contrôles planifiés ce mois-ci (enveloppe),
+    * aux contrôles en retard (cloche),
+    * aux plans d'action ouverts (drapeau),
+    * à la bascule entre « mes données » et « toutes les données » (icône groupe, administrateurs et utilisateurs uniquement),
+    * au profil de l'utilisateur,
+    * à l'aide en ligne.
+
+Le tableau de bord affiche en haut des indicateurs sur :
 
 * le nombre de domaines de sécurité
 * le nombre de mesures de sécurité sélectionnées
-* le nombre de contrôles réalisés
-* le nombre de plans d’action
+* le nombre de contrôles
+* le nombre de plans d’action ouverts
+* le nombre de risques
+* le nombre d'exceptions
+
+Chaque indicateur dispose d'un lien « Plus d'infos » qui ouvre la liste correspondante.
 
 Note :
 
@@ -22,7 +38,7 @@ Note :
 
 Au milieu :
 
-* Le planning des contrôles qui montre les contrôles à réaliser avec leur résultat (vert, orange ou rouge) et les contrôles planifiés (en gris)
+* Le planning des contrôles qui montre les contrôles réalisés avec leur résultat (vert, orange ou rouge) et les contrôles planifiés (en gris)
 * Un état global des contrôles
 
 [![Screenshot](images/home1.fr.png)](images/home1.fr.png)
@@ -31,10 +47,10 @@ La partie inférieure de la page principale contient la liste des contrôles pla
 
 [![Screenshot](images/home2.fr.png)](images/home2.fr.png)
 
-Les dates des contrôles en retard sont affichés en rouge.
+Les dates de planification dépassées sont affichées en rouge.
 
 ## Recherche
 
-Un outil de recherche permet de trouver les objets contenant la présence d’un mot dans le nom, les objectifs, les observations des contrôles ou dans leurs plans d’action.
+Le champ de recherche en haut du menu permet de trouver un mot dans les domaines, les mesures de sécurité, les contrôles (nom, objectifs, observations) et leurs plans d’action.
 
 [![Screenshot](images/search.fr.png)](images/search.fr.png)

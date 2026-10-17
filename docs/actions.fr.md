@@ -6,22 +6,23 @@ Chaque fois qu’un contrôle est en échec (orange ou rouge), un plan d’actio
 
 Cet écran permet de suivre les plans d’action :
 
-[![Screenshot](images/a1.fr.png){: style="width:600px"}](images/a1.fr.png)
+[![Screenshot](images/a1.fr.png)](images/a1.fr.png)
 
-En cliquant sur :
+La liste peut être filtrée par type (majeur, mineur, observation, opportunité), par statut (ouvert, fermé, tous) et par périmètre.
+Elle affiche pour chaque plan d’action sa référence, son type, son statut, son avancement, son nom, son périmètre,
+ses responsables et sa date d’échéance. Les dates d’échéance dépassées sont affichées en rouge.
 
-* le titre du contrôle associé, vous arrivez vers la page de [modification du plan d’action](#edit) correspondant.
+Le bouton « Colonnes » permet d’afficher des colonnes supplémentaires (clauses associées, remédiation),
+et les boutons « Copier », « CSV », « Excel » et « Imprimer » permettent d’exporter la liste affichée.
 
-* La date de planification, vous arrivez sur le [contrôle](controls.fr.md/#show) ayant généré ce plan d’action
-
-* La date de prochaine revue, vous arrivez vers le [contrôle](controls.fr.md/#show) suivant
+En cliquant sur la référence d’un plan d’action, vous arrivez sur ce plan d’action. Le bouton « Nouveau » permet de créer un nouveau plan d’action.
 
 
 ## Modifier un plan d’action <a name="edit"></a>
 
 Cet écran permet de modifier un plan d’action et de planifier la prochaine évaluation du contrôle.
 
-[![Screenshot](images/a2.fr.png){: style="width:600px"}](images/a2.fr.png)
+[![Screenshot](images/a2.fr.png)](images/a2.fr.png)
 
 Lorsque vous cliquez sur :
 

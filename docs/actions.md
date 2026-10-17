@@ -8,13 +8,14 @@ This screen allows you to follow the action plans:
 
 [![Screenshot](images/a1.png)](images/a1.png)
 
-Clicking on :
+The list can be filtered by type (major, minor, observation, opportunity), by status (open, closed, all) and by scope.
+It shows, for each action plan, its reference, type, status, progress, name, scope, owners and due date.
+Overdue due dates are displayed in red.
 
-* the title of the associated control, you arrive at the corresponding [modification of the action plan](#edit) page.
+The "Column visibility" button lets you show additional columns (associated clauses, remediation),
+and the "Copy", "CSV", "Excel" and "Print" buttons export the displayed list.
 
-* On the planning date, you arrive at the [control](controls.md/#show) that generated this action plan
-
-* The next review date, you arrive at the next [control](controls.md/#show)
+Clicking on the reference of an action plan opens it. The "New" button creates a new action plan.
 
 
 ## Edit an action plan <a name="edit"></a>

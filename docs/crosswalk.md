@@ -16,6 +16,10 @@ All authenticated users can view the list, detail, matrix, and exports. Only adm
 
 The matrix presents documentary metrics: number of source controls, number of controls with a relationship, number of controls without a relationship, and number of relationships. These values are never compliance scores.
 
+The crosswalk list is available from the "Configuration > Crosswalk" menu:
+
+[![Screenshot](images/crosswalk.png)](images/crosswalk.png)
+
 ## XLSX import
 
 Command:

@@ -3,16 +3,32 @@
 ## Main page
 
 The main page of the application provides an overview of the ISMS and the checks to be carried out.
-It is composed of:
 
-On the left, the application's main menu;
+[![Screenshot](images/layout.png)](images/layout.png)
 
-* at the top of the indicators on:
+The screen is composed of:
+
+* on the left, the application's main menu, with a search field at the top. The menu can be collapsed with the
+  ☰ button and is displayed as a drawer on phones and tablets;
+
+* at the top, a toolbar giving quick access to:
+    * the measurements planned this month (envelope),
+    * the late measurements (bell),
+    * the open action plans (flag),
+    * the switch between "my data" and "all data" (group icon, administrators and users only),
+    * the user profile,
+    * the online help.
+
+The dashboard displays, at the top, indicators on:
 
 * the number of security domains
 * the number of selected controls
-* the number of measures carried out
-* the number of action plans
+* the number of measurements
+* the number of open action plans
+* the number of risks
+* the number of exceptions
+
+Each indicator has a "More info" link that opens the corresponding list.
 
 Note:
 
@@ -20,23 +36,23 @@ Note:
 * if a control is not planned, it is not included in the count.
 * if an action plan has been completed, it is not taken into account.
 
-In the middle :
+In the middle:
 
-* The inspection schedule which shows the inspections to be carried out with their result (green, orange or red) and the planned inspections (in grey)
-* An overall state of controls
+* The measurement schedule, which shows the measurements carried out with their result (green, orange or red) and the planned measurements (in grey)
+* An overall status of the measurements
 
-[![Mon Screenshot](images/home1.png)](images/home1.png)
+[![Screenshot](images/home1.png)](images/home1.png)
 
 
-The lower part of the main page contains the list of controls scheduled for the next 30 days:
+The lower part of the main page contains the list of measurements scheduled for the next 30 days:
 
 [![Screenshot](images/home2.png)](images/home2.png)
 
-Overdue check dates are displayed in red.
+Overdue planning dates are displayed in red.
 
 ## Search
 
-A search tool allows you to search for the presence of a word in the name, the objectives, the observations of the controls
-and in their action plans.
+The search field at the top of the menu allows you to search for a word in the domains, the controls,
+the measurements (name, objectives, observations) and their action plans.
 
 [![Screenshot](images/search.png)](images/search.png)

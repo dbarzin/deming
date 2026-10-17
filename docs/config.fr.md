@@ -43,15 +43,22 @@ Un groupe permet de rassembler un ensemble d'utilisateurs et de contrôles.
 Un groupe est composé :
 
 * d'un nom de groupe
+* d'un type : *Business* ou *Sécurité* (modifiable uniquement par un administrateur)
 * d'une description du groupe
 * d'une liste d'utilisateurs
-* d'une listes de contrôles
+* d'une liste de contrôles
+
+Le type du groupe permet de distinguer les contrôles portés par l'équipe Sécurité de ceux portés par les autres
+fonctions métier dans l'écran de [pilotage](dashboards.md#steering).
+
+Seuls les contrôles non encore réalisés sont proposés dans le formulaire ; les contrôles réalisés ou proposés
+restent liés au groupe lors de sa modification.
 
 ## Rapports {#reports}
 
 L’application permet de générer le rapport de pilotage du SMSI et d’exporter dans un fichier Excel la liste des domaines, les mesures de sécurités et tous les contrôles réalisés.
 
-[![Screenshot](images/reports.png){: style="width:500px"}](images/reports.png)
+[![Screenshot](images/reports.fr.png)](images/reports.fr.png)
 
 Voici le rapport de pilotage du SMSI :
 
@@ -65,13 +72,13 @@ Il est possible d'importer des mesures de sécurité depuis un fichier .XLSX ou 
 
 Lors de l'importation, il est possible de supprimer tous les autres contrôles et mesures et de générer des données de test.
 
-[![Screenshot](images/import.png){: style="width:600px"}](images/import.png)
+[![Screenshot](images/import.fr.png)](images/import.fr.png)
 
 ## Documents {#documents}
 
 Cet écran permet de modifier la configuration de la gestion des document utilisés dans Deming.
 
-[![Screenshot](images/documents.png){: style="width:400px"}](images/documents.png)
+[![Screenshot](images/documents.fr.png)](images/documents.fr.png)
 
 ### Modèles
 
@@ -109,7 +116,7 @@ L'écran contient :
 
 * Le délais de notification.
 
-[![Screenshot](images/config.fr.png){: style="width:500px"}](images/config.fr.png)
+[![Screenshot](images/config.fr.png)](images/config.fr.png)
 
 Lorsque vous cliquer sur :
 

@@ -33,7 +33,7 @@ There are four different roles:
 
 * Auditor: the auditor has read access to all the information in the application.
 
-## Groups <a name=“groups”></a>
+## Groups {#groups}
 
 This screen is used to define user groups.
 A group brings together a set of users and controls.
@@ -44,18 +44,26 @@ A group is composed of :
 
 * a group name
 
+* a type: *Business* or *Security* (can only be changed by an administrator)
+
 * a group description
 
 * a list of users
 
-* a list of controls
+* a list of measurements
+
+The group type distinguishes the measurements owned by the Security team from those owned by the other business
+functions in the [Steering](dashboards.md#steering) screen.
+
+Only the measurements not yet carried out are listed in the form; completed or proposed measurements stay linked
+to the group when it is updated.
 
 
 ## Reports <a name="report"></a>
 
 The application allows you to generate the ISMS management report and to export the list of domains, the security measures and all the checks carried out in an Excell file.
 
-[![Screenshot](images/reports.png){: style="width:500px"}](images/reports.png)
+[![Screenshot](images/reports.png)](images/reports.png)
 
 Here is the ISMS pilot report:
 
@@ -75,7 +83,7 @@ When importing, all other controls and measures can be deleted and test data gen
 
 This screen lets you modify the document management settings used in Deming.
 
-[![Screenshot](images/documents.png){: style="width:400px"}](images/documents.png)
+[![Screenshot](images/documents.png)](images/documents.png)
 
 #### Templates
 
@@ -113,7 +121,7 @@ The screen contains:
 
 * The notification deadlines.
 
-[![Screenshot](images/config.png){: style="width:500px"}](images/config.png)
+[![Screenshot](images/config.png)](images/config.png)
 
 When you click on:
 

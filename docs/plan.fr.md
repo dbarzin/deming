@@ -2,7 +2,7 @@
 
 L’écran de planning permet d’avoir une vue sur les contrôles réalisés et à réaliser.
 
-[![Screenshot](images/cal.png)](images/cal.png)
+[![Screenshot](images/cal.fr.png)](images/cal.fr.png)
 
 La partie de gauche de l’écran contient les contrôles passés et à venir. En cliquant sur une colonne,
 vous êtes renvoyé vers la [liste des contrôles](controls.fr.md/#list) planifiés du mois correspondant.

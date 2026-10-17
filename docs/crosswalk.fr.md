@@ -16,6 +16,10 @@ Tous les utilisateurs authentifiés peuvent consulter la liste, le détail, la m
 
 La matrice présente des métriques documentaires : nombre de contrôles source, nombre de contrôles ayant une relation, nombre de contrôles sans relation et nombre de relations. Ces valeurs ne sont jamais des scores de conformité.
 
+La liste des correspondances est accessible depuis le menu « Configuration > Correspondances » :
+
+[![Screenshot](images/crosswalk.fr.png)](images/crosswalk.fr.png)
+
 ## Import XLSX
 
 Commande :

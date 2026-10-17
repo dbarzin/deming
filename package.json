@@ -11,7 +11,8 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build --config vite.config.mjs"
+    "build": "vite build --config vite.config.mjs",
+    "docs:screenshots": "node scripts/screenshots/shots.js"
   },
   "require": {
     "laravel/framework": "^12.0",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "laravel-vite-plugin": "^1.0.6",
+    "playwright": "^1.64.1",
     "vite": "^6.2.5"
   },
   "dependencies": {

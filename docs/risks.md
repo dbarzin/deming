@@ -51,7 +51,7 @@ The **New** button in the top right allows you to create a new risk.
 
 This screen displays the detail of a risk.
 
-[![Screenshot](images/risk.show.png){: style="width:600px"}](images/risk.show.png)
+[![Screenshot](images/risk.show.png)](images/risk.show.png)
 
 It contains:
 

@@ -4,15 +4,18 @@
 
 Cet écran permet d'afficher la liste des contrôles et de les filtrer par :
 
-* Domaine,
+* domaine,
 
-* Périmètre,
+* clause,
 
-* Attribut,
+* périmètre,
 
-* la période de planification,
+* période de planification,
 
-* état du contrôle : tous, fait et à faire,
+* état du contrôle : tous, fait et à faire.
+
+Le bouton « Colonnes » permet de choisir les colonnes affichées, et les boutons « Copier », « CSV », « Excel » et
+« Imprimer » permettent d'exporter la liste affichée.
 
 [![Screenshot](images/c1.fr.png)](images/c1.fr.png)
 
@@ -174,7 +177,6 @@ Cet écran contient :
 * La date du prochaine contrôle
 
 [![Screenshot](images/c3.fr.png)](images/c3.fr.png)
-[![Screenshot](images/c4.fr.png)](images/c4.fr.png)
 
 Lorsque vous cliquez sur :
 

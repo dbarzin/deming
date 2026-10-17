@@ -52,7 +52,7 @@ Les boutons  **Nouveau** en haut à droite permettent de créer un nouveau risqu
 
 Cet écran affiche le détail d'un risque.
 
-[![Screenshot](images/risk.show.fr.png){: style="width:600px"}](images/risk.show.fr.png)
+[![Screenshot](images/risk.show.fr.png)](images/risk.show.fr.png)
 
 Il contient :
 

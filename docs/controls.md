@@ -6,13 +6,16 @@ This screen is used to display the list of measurements and to filter them by:
 
 * domain,
 
-* périmètre,
+* clause,
 
-* attribute,
+* scope,
 
 * planning period,
 
-* measurement status: all, done and to do,
+* measurement status: all, done and to do.
+
+The "Column visibility" button lets you choose the displayed columns, and the "Copy", "CSV", "Excel" and "Print"
+buttons export the displayed list.
 
 [![Screenshot](images/c1.png)](images/c1.png)
 
@@ -132,7 +135,7 @@ This screen contains the information of a measurement:
 
 * Those responsible for carrying out the measurements.
 
-[![Screenshot](images/c5.png){: style="width:500px"}](images/c5.png)
+[![Screenshot](images/c5.png)](images/c5.png)
 
 When you click:
 
@@ -176,7 +179,6 @@ This screen contains:
 * The date of the next check,
 
 [![Screenshot](images/c3.png)](images/c3.png)
-[![Screenshot](images/c4.png)](images/c4.png)
 
 When you click:
 
