@@ -10,6 +10,7 @@
     "exception_rejected": { "page": "/exception/index?status=3", "selector": "main table a[href^='/exception/show/']", "regex": "(\\d+)$" },
     "group": { "page": "/groups", "selector": "main table a[href^='/groups/']", "regex": "(\\d+)$" },
     "measure_auditee": { "user": "auditee", "page": "/bob/index?attribute=none&period=99&scope=none&domain=0&status=2", "selector": "main table a[href^='/bob/show/']", "regex": "(\\d+)$" },
+    "mapping": { "page": "/crosswalk", "selector": "main table a[href*='/crosswalk/']", "regex": "/crosswalk/(\\d+)$" },
     "measure_validate": { "page": "/home", "selector": "main a[href^='/bob/make/']:has(i.bi-hourglass-split)", "regex": "(\\d+)$" }
   },
   "screens": [
@@ -60,6 +61,9 @@
     { "name": "import.{fr}", "url": "/alice/import" },
     { "name": "documents.{fr}", "url": "/doc" },
     { "name": "config.{fr}", "url": "/config" },
-    { "name": "crosswalk.{fr}", "url": "/crosswalk" }
+    { "name": "crosswalk.{fr}", "url": "/crosswalk", "maxHeight": 752 },
+    { "name": "crosswalk.matrix.{fr}", "url": "/crosswalk/matrix?source_framework=NIS2-ReCyF-2.5-FR&target_framework=27001%3A2022", "maxHeight": 882 },
+    { "name": "crosswalk.show.{fr}", "url": "/crosswalk/{mapping}" },
+    { "name": "crosswalk.edit.{fr}", "url": "/crosswalk/{mapping}/edit" }
   ]
 }

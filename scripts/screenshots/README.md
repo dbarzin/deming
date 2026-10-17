@@ -6,6 +6,11 @@ Takes the screenshots of `docs/images` in English, French and German with Playwr
 
 * Deming running with test data (`php artisan deming:generate-tests`), an administrator account and, for the
   delegation screens, the auditee account of the test data
+* For the crosswalk screens, the ReCyF framework and its crosswalk to ISO 27001:2022:
+  ```bash
+  php artisan deming:import-framework storage/app/repository/NIS2-ReCyF-2.5-FR.xlsx
+  php artisan deming:import-mappings storage/app/crosswalks/ReCyF-2.5-ISO27001-2022.mappings.xlsx
+  ```
 * Node dependencies installed (`npm install`)
 * A Chromium browser: `npx playwright install chromium`, or an existing one set with `CHROME_PATH`
 

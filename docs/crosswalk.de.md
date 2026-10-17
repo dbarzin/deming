@@ -14,11 +14,44 @@ Die zulässigen Typen sind `equivalent`, `covers`, `covered_by`, `partial`, `sup
 
 Alle angemeldeten Benutzer können die Liste, die Details, die Matrix und die Exporte einsehen. Nur Administratoren (`role=1`) können eine Beziehung erstellen, ändern, validieren oder löschen.
 
-Die Matrix zeigt dokumentarische Kennzahlen: Anzahl der Quellmaßnahmen, Anzahl der Maßnahmen mit Beziehung, Anzahl der Maßnahmen ohne Beziehung und Anzahl der Beziehungen. Diese Werte sind niemals Konformitätsbewertungen.
+### Liste der Zuordnungen
 
 Die Liste der Zuordnungen ist über das Menü „Konfiguration > Zuordnungen“ erreichbar:
 
 [![Screenshot](images/crosswalk.de.png)](images/crosswalk.de.png)
+
+Die Liste kann nach Klausel oder Name einer Maßnahme, nach Quell- und Zielrahmenwerk, nach Zuordnungstyp und nach
+Abdeckung gefiltert werden. Eine Sanduhr in der Spalte „Validierung“ kennzeichnet eine noch nicht validierte Beziehung.
+Für jede Beziehung können über die Schaltflächen ihre [Details](#detail) angezeigt, sie [geändert](#edit) oder gelöscht werden.
+
+Die Schaltfläche „Zuordnungsmatrix“ öffnet die [Matrix](#matrix), „Exportieren“ exportiert die gefilterte Liste im
+XLSX-Format und „Neu“ erstellt eine Beziehung.
+
+### Zuordnungsmatrix {#matrix}
+
+Die Matrix vergleicht ein Quellrahmenwerk mit einem Zielrahmenwerk, optional gefiltert nach Zuordnungstyp und Abdeckung.
+Die Option „Nur nicht zugeordnete Quellkontrollen anzeigen“ listet nur die Quellmaßnahmen ohne Beziehung auf.
+
+[![Screenshot](images/crosswalk.matrix.de.png)](images/crosswalk.matrix.de.png)
+
+Die Matrix zeigt dokumentarische Kennzahlen: Anzahl der Quellmaßnahmen, Anzahl der Maßnahmen mit Beziehung, Anzahl der Maßnahmen ohne Beziehung und Anzahl der Beziehungen. Diese Werte sind niemals Konformitätsbewertungen.
+
+Die Schaltfläche „Richtung umkehren“ tauscht Quell- und Zielrahmenwerk, und „Exportieren“ exportiert die Matrix im
+XLSX-Format.
+
+### Details einer Beziehung {#detail}
+
+Diese Ansicht zeigt eine Beziehung an: Quell- und Zielmaßnahme, Zuordnungstyp, Abdeckung, Konfidenz, Begründung,
+Referenz und URL der Quelle sowie Validierungsstatus.
+
+[![Screenshot](images/crosswalk.show.de.png)](images/crosswalk.show.de.png)
+
+### Eine Beziehung ändern {#edit}
+
+Diese Ansicht ist Administratoren vorbehalten und ermöglicht das Ändern aller Felder einer Beziehung.
+Das Ankreuzen von „Validierung“ validiert die Beziehung: Benutzer und Validierungsdatum werden gespeichert.
+
+[![Screenshot](images/crosswalk.edit.de.png)](images/crosswalk.edit.de.png)
 
 ## XLSX-Import
 
