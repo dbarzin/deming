@@ -21,11 +21,18 @@ class RiskTestDataSeeder extends Seeder
     /** @var string 'fr' ou 'en' */
     private string $locale = 'fr';
 
+    /** @var array<int, int> id des mesures de sécurité présentes en base */
+    private array $controlIds = [];
+
     public function run(string $locale = 'fr'): void
     {
         $this->locale = in_array($locale, ['fr', 'en'], true) ? $locale : 'fr';
 
         $this->ensureUsers();
+
+        // Les liens ci-dessous référencent des mesures de sécurité par id fixe :
+        // on ignore celles qui n'existent pas (référentiel absent ou différent).
+        $this->controlIds = DB::table('controls')->pluck('id')->all();
 
         $this->wipe();
 
@@ -34,12 +41,12 @@ class RiskTestDataSeeder extends Seeder
         $this->seedExceptions();
 
         // Liens risques <-> contrôles
-        $risks['fuite_cloud']->controls()->sync([26, 78]);
-        $risks['datacenter']->controls()->sync([32, 33, 80]);
-        $risks['comptes_privileges']->controls()->sync([68, 71]);
-        $risks['detection_intrusion']->controls()->sync([81, 82]);
-        $risks['prestataire']->controls()->sync([23]);
-        $risks['rancongiciel']->controls()->sync([73, 79]);
+        $risks['fuite_cloud']->controls()->sync($this->controls([26, 78]));
+        $risks['datacenter']->controls()->sync($this->controls([32, 33, 80]));
+        $risks['comptes_privileges']->controls()->sync($this->controls([68, 71]));
+        $risks['detection_intrusion']->controls()->sync($this->controls([81, 82]));
+        $risks['prestataire']->controls()->sync($this->controls([23]));
+        $risks['rancongiciel']->controls()->sync($this->controls([73, 79]));
 
         // Liens risques <-> plans d'action
         $risks['comptes_privileges']->actions()->sync([$actions['mfa']->id]);
@@ -49,8 +56,8 @@ class RiskTestDataSeeder extends Seeder
         $risks['datacenter']->actions()->sync([$actions['pra']->id]);
 
         // Liens plans d'action <-> contrôles
-        $actions['mfa']->controls()->sync([68, 71]);
-        $actions['cloud']->controls()->sync([26]);
+        $actions['mfa']->controls()->sync($this->controls([68, 71]));
+        $actions['cloud']->controls()->sync($this->controls([26]));
 
         // Liens plans d'action <-> responsables
         $actions['mfa']->owners()->sync([1]);
@@ -104,6 +111,17 @@ class RiskTestDataSeeder extends Seeder
         Exception::query()->delete();
         Action::query()->delete();
         Risk::withTrashed()->forceDelete();
+    }
+
+    /**
+     * Ne conserve que les id de mesures de sécurité présentes en base.
+     *
+     * @param  array<int, int>  $ids
+     * @return array<int, int>
+     */
+    private function controls(array $ids): array
+    {
+        return array_values(array_intersect($ids, $this->controlIds));
     }
 
     /** Ne conserve que les champs communs (retire les blocs de traduction fr/en). */
@@ -568,6 +586,7 @@ class RiskTestDataSeeder extends Seeder
         ];
 
         foreach ($defs as $def) {
+            $def['control_id'] = $this->controls([$def['control_id']])[0] ?? null;
             Exception::create($this->localized($def));
         }
     }
