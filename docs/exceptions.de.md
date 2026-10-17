@@ -12,7 +12,7 @@ Diese Ansicht zeigt die Liste der Ausnahmen an und ermöglicht es, sie zu filter
 
 * nur abgelaufenen Ausnahmen.
 
-[![Screenshot](images/ex1.en.png)](images/ex1.en.png)
+[![Screenshot](images/ex1.de.png)](images/ex1.de.png)
 
 Überschrittene Enddaten werden rot angezeigt.
 
@@ -44,7 +44,7 @@ Diese Ansicht zeigt die Informationen einer Ausnahme:
 
 * die Entscheidung (Genehmiger, Datum und Kommentar).
 
-[![Screenshot](images/ex2.en.png)](images/ex2.en.png)
+[![Screenshot](images/ex2.de.png)](images/ex2.de.png)
 
 Die verfügbaren Schaltflächen hängen vom Status der Ausnahme und von der Rolle des Benutzers ab:
 
@@ -74,6 +74,8 @@ Wenn Sie klicken auf:
 
 In der [Liste der Ausnahmen](#list) öffnet die Schaltfläche „Neu“ das Erstellungsformular.
 
+[![Screenshot](images/ex3.de.png)](images/ex3.de.png)
+
 Diese Ansicht enthält die folgenden Felder:
 
 * den Namen der Ausnahme;
@@ -98,11 +100,13 @@ Wenn Sie klicken auf:
 
 ## Eine Ausnahme ändern {#edit}
 
-Mit dieser Ansicht kann eine Ausnahme mit dem Status **Entwurf** oder **Abgelehnt** geändert werden.
+Mit dieser Ansicht kann eine Ausnahme mit dem Status **Entwurf** oder **Abgelehnt** geändert werden. Ein Administrator kann eine Ausnahme unabhängig von ihrem Status ändern.
+
+[![Screenshot](images/ex4.de.png)](images/ex4.de.png)
 
 Eine abgelehnte Ausnahme, die geändert wird, kehrt automatisch in den Status *Entwurf* zurück, damit sie korrigiert und erneut eingereicht werden kann.
 
-Diese Ansicht enthält dieselben Felder wie die [Erstellungsansicht](#create). Der aktuelle Status und ein eventueller Ablehnungsgrund werden zur Information schreibgeschützt angezeigt.
+Diese Ansicht enthält dieselben Felder wie die [Erstellungsansicht](#create). Ein Administrator sieht zusätzlich den Status der Ausnahme und kann ihn frei ändern.
 
 Wenn Sie klicken auf:
 

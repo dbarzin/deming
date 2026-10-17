@@ -74,6 +74,8 @@ Clicking on:
 
 From the [exception list](#list), the "New" button opens the creation form.
 
+[![Screenshot](images/ex3.en.png)](images/ex3.en.png)
+
 This screen contains the following fields:
 
 * The exception name;
@@ -98,11 +100,13 @@ Clicking on:
 
 ## Edit an exception {#edit}
 
-This screen allows you to edit an exception with **Draft** or **Rejected** status.
+This screen allows you to edit an exception with **Draft** or **Rejected** status. An administrator can edit an exception whatever its status.
+
+[![Screenshot](images/ex4.en.png)](images/ex4.en.png)
 
 A rejected exception that is edited automatically reverts to *Draft* status so that it can be corrected and resubmitted.
 
-This screen contains the same fields as the [creation screen](#create). The current status and any rejection reason are displayed as read-only for reference.
+This screen contains the same fields as the [creation screen](#create). An administrator also sees the status of the exception and can change it freely.
 
 Clicking on:
 

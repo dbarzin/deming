@@ -24,6 +24,8 @@ Un plan d’action peut aussi être créé lors de la [réalisation d’un contr
 
 Cet écran permet de créer manuellement un plan d’action.
 
+[![Screenshot](images/a3.fr.png)](images/a3.fr.png)
+
 L’écran contient :
 
 * la référence du plan d’action ;
@@ -53,6 +55,8 @@ Lorsque vous cliquez sur :
 Cet écran affiche un plan d’action : référence, type, statut, périmètre, clauses, nom, cause, date d’échéance,
 responsables et, pour un plan d’action clôturé, sa date de clôture et sa justification. Les clauses et le contrôle
 à l’origine du plan d’action sont accessibles depuis cet écran.
+
+[![Screenshot](images/a4.fr.png)](images/a4.fr.png)
 
 Tant que le plan d’action est ouvert, la remédiation et l’avancement (curseur) peuvent être mis à jour directement.
 

@@ -74,6 +74,8 @@ Lorsque vous cliquez sur :
 
 Depuis la [liste des exceptions](#list), le bouton « Nouveau » ouvre le formulaire de création.
 
+[![Screenshot](images/ex3.fr.png)](images/ex3.fr.png)
+
 Cet écran contient les champs suivants :
 
 * Le nom de l'exception ;
@@ -98,11 +100,13 @@ Lorsque vous cliquez sur :
 
 ## Modifier une exception {#edit}
 
-Cet écran permet de modifier une exception en statut **Brouillon** ou **Refusée**.
+Cet écran permet de modifier une exception en statut **Brouillon** ou **Refusée**. Un administrateur peut modifier une exception quel que soit son statut.
+
+[![Screenshot](images/ex4.fr.png)](images/ex4.fr.png)
 
 Une exception refusée et ré-éditée repasse automatiquement en statut *Brouillon* afin de pouvoir être soumise à nouveau après correction.
 
-Cet écran contient les mêmes champs que l'[écran de création](#create). Le statut et le motif de refus éventuel sont affichés en lecture seule à titre informatif.
+Cet écran contient les mêmes champs que l'[écran de création](#create). Un administrateur voit également le statut de l'exception et peut le modifier librement.
 
 Lorsque vous cliquez sur :
 

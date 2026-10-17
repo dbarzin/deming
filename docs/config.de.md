@@ -9,7 +9,7 @@ die Dokumente, die Benachrichtigungen und die Logs.
 Mit dieser Ansicht werden die den Sicherheitsmaßnahmen zugeordneten Attribute verwaltet.
 Sie enthält die Liste der Attribute und ermöglicht es, Attributlisten zu erstellen, zu löschen oder zu ändern.
 
-[![Screenshot](images/tags.png)](images/tags.png)
+[![Screenshot](images/tags.de.png)](images/tags.de.png)
 
 Nur Administratoren verfügen über eine Schaltfläche „Verwalten“, die ein Formular öffnet, mit dem ein bestehender Attributwert global durch einen neuen Wert ersetzt werden kann. Die Ersetzung gilt überall dort, wo der Wert verwendet wird: in den Attributlisten, in den Sicherheitsmaßnahmen sowie in den noch nicht durchgeführten Kontrollen. Bereits durchgeführte Kontrollen werden nicht geändert, da sie eine Historie darstellen.
 
@@ -17,7 +17,7 @@ Nur Administratoren verfügen über eine Schaltfläche „Verwalten“, die ein 
 
 Mit dieser Ansicht können Listen von Sicherheitsdomänen erstellt, geändert oder gelöscht werden.
 
-[![Screenshot](images/domains.png)](images/domains.png)
+[![Screenshot](images/domains.de.png)](images/domains.de.png)
 
 Die Anwendung wird mit einer an die Norm ISO 27001:2022 angelehnten Basis von Sicherheitsmaßnahmen ausgeliefert, es ist aber möglich, neue Sicherheitsdomänen auf Grundlage anderer Normen wie PCI DSS, HDS usw. zu definieren.
 
@@ -25,7 +25,7 @@ Die Anwendung wird mit einer an die Norm ISO 27001:2022 angelehnten Basis von Si
 
 Die Benutzer werden direkt in der Anwendung definiert.
 
-[![Screenshot](images/users.png)](images/users.png)
+[![Screenshot](images/users.de.png)](images/users.de.png)
 
 Ein Benutzer besteht aus einem Login, einem Namen, einem Titel, einer Rolle, einer E-Mail-Adresse, einer Sprache,
 einem Passwort und der Liste der ihm zugewiesenen Kontrollen. Die Sprache wird für die Benutzeroberfläche, die
@@ -53,7 +53,7 @@ Die Schaltfläche „Historie“ der Benutzeranzeige zeigt die [Änderungshistor
 Mit dieser Ansicht werden Benutzergruppen definiert.
 Eine Gruppe fasst eine Reihe von Benutzern und Kontrollen zusammen.
 
-[![Screenshot](images/groups.png)](images/groups.png)
+[![Screenshot](images/groups.de.png)](images/groups.de.png)
 
 Eine Gruppe besteht aus:
 
@@ -78,7 +78,7 @@ Kontrollen bleiben beim Ändern der Gruppe mit ihr verknüpft.
 Diese Ansicht steht Administratoren und Benutzern zur Verfügung. Mit ihr werden der ISMS-Steuerungsbericht, die
 Erklärung der Anwendbarkeit und die Datenexporte erzeugt.
 
-[![Screenshot](images/reports.png)](images/reports.png)
+[![Screenshot](images/reports.de.png)](images/reports.de.png)
 
 **ISMS-Steuerungsbericht**: Wählen Sie ein Rahmenwerk (optional) und einen Zeitraum und klicken Sie dann auf
 „Erstellen“. Ein Word-Dokument wird auf Grundlage der [Vorlage des Steuerungsberichts](#documents) erzeugt.
@@ -101,13 +101,13 @@ Sicherheitsmaßnahmen können aus einer .XLSX-Datei oder aus der Vorlagendatenba
 
 Beim Import können alle anderen Kontrollen und Maßnahmen gelöscht und Testdaten erzeugt werden.
 
-[![Screenshot](images/import.png)](images/import.png)
+[![Screenshot](images/import.de.png)](images/import.de.png)
 
 ## Dokumente {#documents}
 
 Mit dieser Ansicht wird die Konfiguration der in Deming verwendeten Dokumentenverwaltung geändert.
 
-[![Screenshot](images/documents.png)](images/documents.png)
+[![Screenshot](images/documents.de.png)](images/documents.de.png)
 
 ### Vorlagen
 
@@ -162,7 +162,7 @@ Die Ansicht enthält:
 
 * die Benachrichtigungsfristen.
 
-[![Screenshot](images/config.png)](images/config.png)
+[![Screenshot](images/config.de.png)](images/config.de.png)
 
 Wenn Sie klicken auf:
 

@@ -69,6 +69,8 @@ Lorsque vous cliquez sur :
 Cet écran permet d’ajouter une mesure de sécurité à un référentiel. Il est accessible par le bouton « Nouveau » de
 la [liste des mesures de sécurité](#list) ou par le bouton « Copier » de l’écran d’[affichage d’une mesure](#show).
 
+[![Screenshot](images/m4.fr.png)](images/m4.fr.png)
+
 L’écran contient les mêmes champs que l’[affichage d’une mesure de sécurité](#show) : domaine, clause, nom, objectif
 de sécurité, attributs, données de mesure, modèle de vérification, indicateur et plan d’action.
 

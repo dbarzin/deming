@@ -81,6 +81,8 @@ Un contrôle peut être créé de trois façons :
 
 * Manuellement : depuis la [liste des contrôles](#list), le bouton « Nouveau » ouvre le formulaire de création.
 
+[![Screenshot](images/c4.fr.png)](images/c4.fr.png)
+
 Cet écran contient les champs suivants :
 
 * La ou les clauses associées ;

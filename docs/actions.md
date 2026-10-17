@@ -24,6 +24,8 @@ An action plan can also be created when [making a measurement](controls.md#make)
 
 This screen is used to create an action plan manually.
 
+[![Screenshot](images/a3.png)](images/a3.png)
+
 The screen contains:
 
 * the reference of the action plan;
@@ -53,6 +55,8 @@ When you click:
 This screen displays an action plan: reference, type, status, scope, clauses, name, cause, due date, owners and,
 for a closed action plan, its close date and justification. The clauses and the originating measurement can be
 opened from this screen.
+
+[![Screenshot](images/a4.png)](images/a4.png)
 
 While the action plan is open, the remediation and the progress (slider) can be updated directly.
 

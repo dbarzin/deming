@@ -1,6 +1,6 @@
 # Documentation screenshots
 
-Takes the screenshots of `docs/images` in English and French with Playwright.
+Takes the screenshots of `docs/images` in English, French and German with Playwright.
 
 ## Prerequisites
 
@@ -23,6 +23,9 @@ CHROME_PATH=/usr/bin/google-chrome DEMING_LOGIN=admin DEMING_PASSWORD=secret npm
 # Only some screens, in French
 LANGS=fr ONLY=home1,r0,risk.matrix npm run docs:screenshots
 
+# The creation screens in the three languages
+LANGS=en,fr,de ONLY=m4,c4,a3,a4,ex3,ex4 npm run docs:screenshots
+
 # Use a given control and measurement instead of the first ones of the lists
 ID_control=18 ID_measure_done=1231 npm run docs:screenshots
 ```
@@ -33,7 +36,7 @@ ID_control=18 ID_measure_done=1231 npm run docs:screenshots
 | `DEMING_LOGIN`    | `admin@admin.localhost`  | Administrator login                           |
 | `DEMING_PASSWORD` | `admin`                  | Administrator password                        |
 | `CHROME_PATH`     | Playwright's Chromium    | Browser executable                            |
-| `LANGS`           | `en,fr`                  | Languages to capture                          |
+| `LANGS`           | `en,fr`                  | Languages to capture (`en`, `fr`, `de`)       |
 | `ONLY`            | all screens              | Screen names to capture (without `.{fr}`)     |
 | `OUT_DIR`         | `docs/images`            | Output directory                              |
 | `ID_<lookup>`     |                          | Fixed value for a lookup of `screens.json`    |
@@ -43,7 +46,7 @@ ID_control=18 ID_measure_done=1231 npm run docs:screenshots
 * `lookups`: values used in the screen URLs (`{control}`, `{risk}`...). Each one is read from the first element
   matching `selector` on `page` (attribute `attr`, `href` by default, filtered by `regex`).
 * `screens`: one entry per image.
-    * `name`: image name; `{fr}` is replaced by `fr` in French and removed in English, `{lang}` is replaced by the language
+    * `name`: image name; `{fr}` is replaced by the language in French and German (`fr`, `de`) and removed in English, `{lang}` is replaced by the language
     * `url`: page to capture
     * `selector`: element to capture (default: the main content)
     * `until`: stops the capture at the top of this element

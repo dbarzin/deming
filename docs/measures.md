@@ -69,6 +69,8 @@ When you click:
 This screen is used to add a control to a framework. It is opened by the "New" button of the
 [list of controls](#list) or by the "Copy" button of the [control display](#show) screen.
 
+[![Screenshot](images/m4.png)](images/m4.png)
+
 The screen contains the same fields as the [control display](#show): domain, clause, name, security objective,
 attributes, measurement data, verification model, indicator and action plan.
 

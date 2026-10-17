@@ -4,7 +4,7 @@
 
 Die Hauptseite der Anwendung gibt einen Überblick über das ISMS und die durchzuführenden Kontrollen.
 
-[![Screenshot](images/layout.png)](images/layout.png)
+[![Screenshot](images/layout.de.png)](images/layout.de.png)
 
 Die Ansicht besteht aus:
 
@@ -45,11 +45,11 @@ In der Mitte:
 * Der Zeitplan der Kontrollen, der die durchgeführten Kontrollen mit ihrem Ergebnis (grün, orange oder rot) und die geplanten Kontrollen (grau) zeigt
 * Ein Gesamtstatus der Kontrollen
 
-[![Screenshot](images/home1.png)](images/home1.png)
+[![Screenshot](images/home1.de.png)](images/home1.de.png)
 
 Der untere Teil der Hauptseite enthält die Liste der in den nächsten 30 Tagen geplanten Kontrollen:
 
-[![Screenshot](images/home2.png)](images/home2.png)
+[![Screenshot](images/home2.de.png)](images/home2.de.png)
 
 Überschrittene Planungsdaten werden rot angezeigt.
 
@@ -57,4 +57,4 @@ Der untere Teil der Hauptseite enthält die Liste der in den nächsten 30 Tagen 
 
 Mit dem Suchfeld oben im Menü kann ein Wort in den Domänen, den Sicherheitsmaßnahmen, den Kontrollen (Name, Ziele, Beobachtungen) und ihren Aktionsplänen gesucht werden.
 
-[![Screenshot](images/search.png)](images/search.png)
+[![Screenshot](images/search.de.png)](images/search.de.png)

@@ -2,7 +2,7 @@
 
 Die Planungsansicht gibt einen Überblick über die durchgeführten und die noch durchzuführenden Kontrollen.
 
-[![Screenshot](images/cal.png)](images/cal.png)
+[![Screenshot](images/cal.de.png)](images/cal.de.png)
 
 Der linke Teil der Ansicht enthält die vergangenen und die kommenden Kontrollen. Durch Klicken auf eine Spalte
 gelangen Sie zur [Liste der Kontrollen](controls.de.md#list), die im entsprechenden Monat geplant sind.

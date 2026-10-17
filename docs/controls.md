@@ -81,6 +81,8 @@ A measurement can be created in three ways:
 
 * Manually: from the [list of measurements](#list), the "New" button opens the creation form.
 
+[![Screenshot](images/c4.png)](images/c4.png)
+
 This screen contains the following fields:
 
 * The associated clause(s);

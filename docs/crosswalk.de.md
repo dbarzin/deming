@@ -18,7 +18,7 @@ Die Matrix zeigt dokumentarische Kennzahlen: Anzahl der Quellmaßnahmen, Anzahl 
 
 Die Liste der Zuordnungen ist über das Menü „Konfiguration > Zuordnungen“ erreichbar:
 
-[![Screenshot](images/crosswalk.png)](images/crosswalk.png)
+[![Screenshot](images/crosswalk.de.png)](images/crosswalk.de.png)
 
 ## XLSX-Import
 

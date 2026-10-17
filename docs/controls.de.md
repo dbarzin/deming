@@ -17,7 +17,7 @@ Diese Ansicht zeigt die Liste der Kontrollen an und ermöglicht es, sie zu filte
 Mit der Schaltfläche „Spalten“ können die angezeigten Spalten ausgewählt werden, und mit den Schaltflächen „Kopieren“,
 „CSV“, „Excel“ und „Drucken“ kann die angezeigte Liste exportiert werden.
 
-[![Screenshot](images/c1.png)](images/c1.png)
+[![Screenshot](images/c1.de.png)](images/c1.de.png)
 
 Wenn Sie klicken auf:
 
@@ -51,7 +51,7 @@ Die Schaltflächen „Erledigen“ und „Planen“ sind vorhanden, wenn diese K
 
 Die Schaltflächen „Editieren“, „Kopieren“, „Löschen“ und „Historie“ sind vorhanden, wenn der Benutzer Administrator ist.
 
-[![Screenshot](images/c2.png)](images/c2.png)
+[![Screenshot](images/c2.de.png)](images/c2.de.png)
 
 Wenn Sie klicken auf:
 
@@ -80,6 +80,8 @@ Eine Kontrolle kann auf drei Arten erstellt werden:
   Erstellungsformular, vorausgefüllt mit den Daten dieser Kontrolle.
 
 * Manuell: In der [Liste der Kontrollen](#list) öffnet die Schaltfläche „Neu“ das Erstellungsformular.
+
+[![Screenshot](images/c4.de.png)](images/c4.de.png)
 
 Diese Ansicht enthält die folgenden Felder:
 
@@ -140,7 +142,7 @@ Diese Ansicht enthält die Informationen einer Kontrolle:
 
 * die für die Durchführung der Kontrolle Verantwortlichen.
 
-[![Screenshot](images/c5.png)](images/c5.png)
+[![Screenshot](images/c5.de.png)](images/c5.de.png)
 
 Wenn Sie klicken auf:
 
@@ -183,7 +185,7 @@ Diese Ansicht enthält:
 
 * das Datum der nächsten Kontrolle.
 
-[![Screenshot](images/c3.png)](images/c3.png)
+[![Screenshot](images/c3.de.png)](images/c3.de.png)
 
 Wenn Sie klicken auf:
 

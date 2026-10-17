@@ -12,7 +12,7 @@ Jedes Risiko wird nach einer konfigurierbaren Bewertungsmethode bewertet, mit de
 
 Diese Ansicht zeigt eine zusammenfassende Darstellung aller Risiken in Form einer Matrix.
 
-[![Screenshot](images/risk.matrix.png)](images/risk.matrix.png)
+[![Screenshot](images/risk.matrix.de.png)](images/risk.matrix.de.png)
 
 
 Die Matrix kreuzt die Achsen Wahrscheinlichkeit (oder Eintrittswahrscheinlichkeit) und Auswirkung. Jede Zelle ist entsprechend der zugehörigen Risikostufe eingefärbt und zeigt die Anzahl der in dieser Zelle positionierten Risiken. Durch Klicken auf eine nicht leere Zelle gelangen Sie zur [Liste der Risiken](#list), gefiltert auf diesen Score.
@@ -25,7 +25,7 @@ Rechts neben der Matrix zeigt eine Tabelle die **Anzahl der Risiken pro Stufe** 
 
 Diese Ansicht zeigt alle erfassten Risiken.
 
-[![Screenshot](images/risk.list.png)](images/risk.list.png)
+[![Screenshot](images/risk.list.de.png)](images/risk.list.de.png)
 
 Die Liste kann gefiltert werden nach:
 
@@ -50,7 +50,7 @@ Mit der Schaltfläche **Neu** oben rechts kann ein neues Risiko erstellt werden.
 
 Diese Ansicht zeigt die Details eines Risikos.
 
-[![Screenshot](images/risk.show.png)](images/risk.show.png)
+[![Screenshot](images/risk.show.de.png)](images/risk.show.de.png)
 
 Sie enthält:
 
@@ -77,7 +77,7 @@ Die verfügbaren Schaltflächen hängen von der Rolle des Benutzers ab:
 
 Mit dieser Ansicht wird ein neues Risiko erstellt.
 
-[![Screenshot](images/risk.edit.png)](images/risk.edit.png)
+[![Screenshot](images/risk.edit.de.png)](images/risk.edit.de.png)
 
 Sie enthält die folgenden Felder:
 
@@ -140,7 +140,7 @@ Die Risikobewertung ist vollständig konfigurierbar. Es können mehrere Konfigur
 
 Diese Ansicht zeigt alle in der Anwendung definierten Bewertungskonfigurationen.
 
-[![Screenshot](images/risk.scoring.png)](images/risk.scoring.png)
+[![Screenshot](images/risk.scoring.de.png)](images/risk.scoring.de.png)
 
 Für jede Konfiguration zeigt die Liste:
 
@@ -162,7 +162,7 @@ Mit der Schaltfläche **Neu** oben rechts kann eine neue Konfiguration erstellt 
 
 Mit dieser Ansicht wird eine vollständige Bewertungsmethode definiert.
 
-[![Screenshot](images/risk.scoring.create.png)](images/risk.scoring.create.png)
+[![Screenshot](images/risk.scoring.create.de.png)](images/risk.scoring.create.de.png)
 
 #### Name und Formel
 

@@ -6,7 +6,7 @@ Jedes Mal, wenn eine Kontrolle fehlschlägt (orange oder rot), muss ein Aktionsp
 
 Mit dieser Ansicht können die Aktionspläne verfolgt werden:
 
-[![Screenshot](images/a1.png)](images/a1.png)
+[![Screenshot](images/a1.de.png)](images/a1.de.png)
 
 Die Liste kann nach Typ (Major, Minor, Beobachtung, Gelegenheit), nach Status (offen, geschlossen, alle) und nach
 Geltungsbereich gefiltert werden. Sie zeigt für jeden Aktionsplan seine Referenz, seinen Typ, seinen Status, seinen
@@ -25,6 +25,8 @@ Option „Aktionsplan erstellen“ angekreuzt wird.
 ## Einen Aktionsplan erstellen {#create}
 
 Mit dieser Ansicht kann ein Aktionsplan manuell erstellt werden.
+
+[![Screenshot](images/a3.de.png)](images/a3.de.png)
 
 Die Ansicht enthält:
 
@@ -55,6 +57,8 @@ Wenn Sie klicken auf:
 Diese Ansicht zeigt einen Aktionsplan an: Referenz, Typ, Status, Geltungsbereich, Klauseln, Name, Ursache,
 Fälligkeitsdatum, Verantwortliche und, bei einem geschlossenen Aktionsplan, sein Abschlussdatum und seine
 Begründung. Die Klauseln und die Kontrolle, aus der der Aktionsplan hervorgeht, sind von dieser Ansicht aus erreichbar.
+
+[![Screenshot](images/a4.de.png)](images/a4.de.png)
 
 Solange der Aktionsplan offen ist, können die Behebung und der Fortschritt (Schieberegler) direkt aktualisiert werden.
 
@@ -95,7 +99,7 @@ Mit dieser Ansicht können alle Informationen eines Aktionsplans geändert werde
 Geltungsbereich, Klauseln, Ursache, Behebung, Fälligkeitsdatum, Verantwortliche, Fortschritt, Status, Abschlussdatum
 und Begründung.
 
-[![Screenshot](images/a2.png)](images/a2.png)
+[![Screenshot](images/a2.de.png)](images/a2.de.png)
 
 Wenn Sie klicken auf:
 

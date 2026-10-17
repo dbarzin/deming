@@ -1,4 +1,4 @@
-// Takes the documentation screenshots (docs/images) in English and French.
+// Takes the documentation screenshots (docs/images) in English, French and German.
 //
 // Usage: npm run docs:screenshots
 //
@@ -7,7 +7,7 @@
 //   DEMING_LOGIN     administrator login (default: admin@admin.localhost)
 //   DEMING_PASSWORD  administrator password (default: admin)
 //   CHROME_PATH      browser executable (default: Playwright's bundled Chromium)
-//   LANGS            languages to capture (default: en,fr)
+//   LANGS            languages to capture: en, fr, de (default: en,fr)
 //   ONLY             comma-separated screenshot names to capture (default: all)
 //   OUT_DIR          output directory (default: docs/images)
 //   ID_<lookup>      fixed value for a lookup of screens.json (e.g. ID_control=18)
@@ -24,10 +24,10 @@ const ONLY = process.env.ONLY ? process.env.ONLY.split(',') : null;
 const OUT_DIR = process.env.OUT_DIR || path.join(__dirname, '..', '..', 'docs', 'images');
 const spec = JSON.parse(fs.readFileSync(path.join(__dirname, 'screens.json')));
 
-// Image name: "{fr}" becomes "fr" in French and is dropped in English, "{lang}" is always replaced.
+// Image name: "{fr}" becomes the language in French and German and is dropped in English, "{lang}" is always replaced.
 function fileName(name, lang) {
     return name
-        .replace('.{fr}', lang === 'en' ? '' : '.fr')
+        .replace('.{fr}', lang === 'en' ? '' : '.' + lang)
         .replace('{lang}', lang);
 }
 
@@ -40,9 +40,11 @@ async function login(page) {
 }
 
 // Resolves the {placeholders} used in screen URLs from the first matching element of a list page.
-async function resolveLookups(page) {
+async function resolveLookups(page, screens) {
     const values = {};
+    const used = screens.map(s => s.url).join();
     for (const [key, l] of Object.entries(spec.lookups)) {
+        if (!used.includes('{' + key + '}')) continue;
         if (process.env['ID_' + key]) {
             values[key] = process.env['ID_' + key];
             continue;
@@ -101,26 +103,27 @@ async function capture(page, screen, lang, values) {
 }
 
 (async () => {
-    const browser = await chromium.launch(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {});
-    try {
-        let values = null;
-        for (const lang of LANGS) {
-            // The browser locale drives the format of date inputs
-            const context = await browser.newContext({
-                viewport: { width: 1680, height: 1000 },
-                locale: lang === 'en' ? 'en-GB' : 'fr-FR',
-            });
+    const screens = spec.screens.filter(s => !ONLY || ONLY.includes(s.name.split('.{')[0]));
+    let values = null;
+    for (const lang of LANGS) {
+        // The browser locale drives the format of date inputs: Chrome takes it from --lang, or from LANGUAGE on Linux
+        const locale = { en: 'en-GB', fr: 'fr-FR', de: 'de-DE' }[lang];
+        const browser = await chromium.launch({
+            args: ['--lang=' + locale],
+            env: { ...process.env, LANGUAGE: locale.replace('-', '_'), LANG: locale.replace('-', '_') + '.UTF-8' },
+            ...(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {}),
+        });
+        try {
+            const context = await browser.newContext({ viewport: { width: 1680, height: 1000 }, locale });
             const page = await context.newPage();
             await login(page);
-            if (!values) values = await resolveLookups(page);
-            for (const screen of spec.screens) {
-                if (ONLY && !ONLY.includes(screen.name.split('.{')[0])) continue;
+            if (!values) values = await resolveLookups(page, screens);
+            for (const screen of screens) {
                 await capture(page, screen, lang, values);
             }
-            await context.close();
+        } finally {
+            await browser.close();
         }
-    } finally {
-        await browser.close();
     }
 })().catch(e => {
     console.error(e.message);

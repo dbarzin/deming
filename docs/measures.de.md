@@ -7,7 +7,7 @@ In diesem Bereich können neue Sicherheitsmaßnahmen definiert, geändert und ge
 Die Liste der Sicherheitsmaßnahmen zeigt alle Maßnahmen an, ermöglicht es, sie nach Domäne zu filtern oder eine Maßnahme anhand eines Teils ihres Namens zu suchen.
 Mit den Schaltflächen „Spalten“, „Kopieren“, „CSV“, „Excel“ und „Drucken“ können die angezeigten Spalten ausgewählt und die Liste exportiert werden.
 
-[![Screenshot](images/m1.png)](images/m1.png)
+[![Screenshot](images/m1.de.png)](images/m1.de.png)
 
 Wenn Sie klicken auf:
 
@@ -25,7 +25,7 @@ Mit der Schaltfläche „Neu“ können Sie [eine neue Sicherheitsmaßnahme erst
 
 Diese Ansicht zeigt eine Sicherheitsmaßnahme an.
 
-[![Screenshot](images/m2.png)](images/m2.png)
+[![Screenshot](images/m2.de.png)](images/m2.de.png)
 
 Eine Sicherheitsmaßnahme besteht aus:
 
@@ -70,6 +70,8 @@ Mit dieser Ansicht kann einem Rahmenwerk eine Sicherheitsmaßnahme hinzugefügt 
 „Neu“ der [Liste der Sicherheitsmaßnahmen](#list) oder über die Schaltfläche „Kopieren“ der Ansicht
 [Anzeige einer Maßnahme](#show) erreichbar.
 
+[![Screenshot](images/m4.de.png)](images/m4.de.png)
+
 Die Ansicht enthält dieselben Felder wie die [Anzeige einer Sicherheitsmaßnahme](#show): Domäne, Klausel, Name,
 Sicherheitsziel, Attribute, Messdaten, Prüfmodell, Indikator und Aktionsplan.
 
@@ -87,7 +89,7 @@ Rahmenwerk des Repositorys importiert werden.
 
 Mit dieser Ansicht kann eine Sicherheitsmaßnahme geändert werden.
 
-[![Screenshot](images/m3.png)](images/m3.png)
+[![Screenshot](images/m3.de.png)](images/m3.de.png)
 
 Wenn Sie klicken auf:
 
@@ -116,7 +118,7 @@ Die Ansicht enthält:
 
 * die für die Durchführung der Kontrolle Verantwortlichen.
 
-[![Screenshot](images/plan.png)](images/plan.png)
+[![Screenshot](images/plan.de.png)](images/plan.de.png)
 
 Wenn Sie klicken auf:
 
