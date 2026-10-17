@@ -48,7 +48,7 @@
 
         <div class="input-group has-validation mb-3">
             <span class="input-group-text"><i class="bi bi-person-fill"></i></span>
-            <input type="text" name="login" id="login" required autocomplete="username"
+            <input type="text" name="login" id="login" size="30" required autocomplete="username"
                    class="form-control @error('login') is-invalid @enderror @error('email') is-invalid @enderror"
                    value="{{ old('login') }}">
             @error('login')<span class="invalid-feedback"><strong>{{ $message }}</strong></span>@enderror
@@ -57,7 +57,7 @@
 
         <div class="input-group has-validation mb-3">
             <span class="input-group-text"><i class="bi bi-lock-fill"></i></span>
-            <input type="password" name="password" required autocomplete="current-password"
+            <input type="password" name="password" size="30" required autocomplete="current-password"
                    class="form-control @error('password') is-invalid @enderror">
             @error('password')<span class="invalid-feedback"><strong>{{ $message }}</strong></span>@enderror
         </div>
