@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="card">
-    <div class="card-header"><i class="bi bi-search"></i> Résultats de la recherche</div>
+    <div class="card-header"><i class="bi bi-search"></i> {{ trans("common.search_results") }}</div>
     <div class="card-body">
 	@foreach($results as $result)
 	@if ($result['model']==='App\\Models\\Domain')

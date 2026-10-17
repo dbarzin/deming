@@ -18,6 +18,7 @@ return [
     'plan' => 'Planen',
     'reject' => 'Ablehnen',
     'save' => 'Sichern',
+    'search_results' => 'Suchergebnisse',
     'test' => 'Testen',
     'unplan' => 'Un-Planen',
     'validate' => 'Validieren',

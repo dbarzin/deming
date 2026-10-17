@@ -21,6 +21,7 @@ return [
     'plan' => 'Planifier',
     'reject' => "Rejeter",
     'save' => 'Sauver',
+    'search_results' => 'Résultats de la recherche',
     'show' => 'Voir',
     'test' => 'Tester',
     'unplan' => 'Déplanifier',
