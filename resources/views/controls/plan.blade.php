@@ -32,13 +32,13 @@
     		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.name') }}</strong>
         	</div>
-            <div class="col-lg-4 col-md-5">
+            <div class="col-lg-6 col-md-5">
     			<input type="text" class="form-control" name="name" value="{{ old('name', $control->name) }}" maxlength='255'>
     		</div>
             <div class="col-lg-1 col-md-1 text-md-end">
         		<strong>{{ trans('cruds.measure.fields.scope') }}</strong>
         	</div>
-    		<div class="col-lg-2 col-xl-1 col-md-2">
+    		<div class="col-lg-4 col-md-4">
     			<input class="form-control" type="text" name="scope" autocomplete="on" size="32"
     			value="{{ old('scope',$control->scope) }}"/>
     		</div>

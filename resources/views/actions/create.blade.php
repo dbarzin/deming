@@ -69,13 +69,13 @@ form, table {
 	    		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans("cruds.action.fields.name") }}</strong>
 	    		</div>
-	    		<div class="col-md-8 col-lg-4">
+	    		<div class="col-md-5 col-lg-6">
                     <input class="form-control" type="text" name="name" value="{{ old('name') }}" maxlength="255" required>
 				</div>
-	    		<div class="col-md-2 col-lg-1 text-md-end">
+	    		<div class="col-md-1 col-lg-1 text-md-end">
 		    		<strong>{{ trans("cruds.action.fields.scope") }}</strong>
                 </div>
-	    		<div class="col-md-2 col-lg-2 col-xl-1">
+	    		<div class="col-md-4 col-lg-4">
                     <input class="form-control" type="text" name="scope" autocomplete="on" maxlength="32"
                     value="{{ old('scope') }}"/>
 				</div>
