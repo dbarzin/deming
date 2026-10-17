@@ -4,14 +4,19 @@ Les tables clés sont les suivantes :
 
 - attributes
 - domains
+- frameworks
 - controls
 - measures
 - documents
 - risks
+- actions
+- exceptions
 
 > `controls` = **mesures de sécurité** (exigences à mettre en œuvre).  
 > `measures` = **contrôles** (vérifications périodiques de ces exigences).  
-> `risks` = **risques de sécurité de l'information** (registre ISO 27001 §6.1.2).
+> `risks` = **risques de sécurité de l'information** (registre ISO 27001 §6.1.2).  
+> `actions` = **plans d'action** (remédiation des contrôles en échec et des risques).  
+> `exceptions` = **exceptions** (dérogations temporaires à une mesure de sécurité).
 
 ## Dépendances entre tables
 
@@ -20,6 +25,7 @@ Vue d'ensemble : qui utilise quoi.
 ```mermaid
 flowchart LR
     controls --> |"domain_id (0:1)"| domains
+    domains -.->|"framework = code"| frameworks
     controls <-->|"control_measure (N:N)"| measures
     attributes -.-o |"optional"| controls
     attributes -.-o |"optional"| measures
@@ -27,6 +33,12 @@ flowchart LR
     documents -->|"document_id (1:1)"| measures
     risks -->|"owner_id (0:1)"| users
     risks <-->|"control_risk (N:N)"| controls
+    actions -->|"measure_id (0:1)"| measures
+    actions <-->|"action_control (N:N)"| controls
+    actions <-->|"action_risk (N:N)"| risks
+    actions <-->|"action_user (N:N)"| users
+    exceptions -->|"control_id (0:1)"| controls
+    exceptions -->|"created_by, submitted_by, approved_by (0:1)"| users
 ```
 
 Le schéma détaillé ci-dessous décrit les champs de chaque table.
@@ -34,6 +46,7 @@ Le schéma détaillé ci-dessous décrit les champs de chaque table.
 ```mermaid
 erDiagram
     domains ||--o{ controls : "domain_id"
+    frameworks |o--o{ domains : "code = framework"
     controls }o--o{ measures : "many-to-many"
     attributes }o--o{ controls : "optionnel"
     attributes }o--o{ measures : "optionnel"
@@ -41,12 +54,25 @@ erDiagram
     documents }o--o| measures : "optionnel"
     risks }o--o{ controls : "control_risk"
     users ||--o{ risks : "owner_id"
+    measures |o--o{ actions : "measure_id"
+    actions }o--o{ controls : "action_control"
+    actions }o--o{ risks : "action_risk"
+    actions }o--o{ users : "action_user"
+    controls |o--o{ exceptions : "control_id"
+    users |o--o{ exceptions : "created_by, approved_by"
 
     domains {
         int id PK
         string framework
         string title
         string description
+    }
+    frameworks {
+        int id PK
+        string code UK
+        string name
+        string version
+        string publisher
     }
     attributes {
         int id PK
@@ -89,6 +115,26 @@ erDiagram
         date next_review_at
         array controls
     }
+    actions {
+        int id PK
+        int measure_id FK
+        string reference
+        int type
+        int status
+        int progress
+        date due_date
+        date close_date
+    }
+    exceptions {
+        int id PK
+        int control_id FK
+        string name
+        int status
+        date start_date
+        date end_date
+        int created_by FK
+        int approved_by FK
+    }
 ```
 
 Les relations sont les suivantes :
@@ -96,6 +142,7 @@ Les relations sont les suivantes :
 | Lien | Type | Description |
 | --- | --- | --- |
 | `domains` → `controls` | Clé étrangère (1:N) | Chaque mesure de sécurité référence son domaine via `domain_id` |
+| `frameworks` → `domains` | Optionnel (1:N) via le code | Le champ `framework` d'un domaine contient le `code` de son référentiel ; la ligne de `frameworks` y ajoute ses métadonnées |
 | `controls` ↔ `measures` | Many-to-many (bidirectionnel) | Chaque mesure de sécurité liste ses instances d'audit dans `measures[]` ; chaque instance d'audit liste ses mesures de sécurité dans `controls[]` |
 | `attributes` → `controls` | Optionnel | Le champ `attributes` d'une mesure de sécurité peut contenir une liste d'IDs d'attributs |
 | `attributes` → `measures` | Optionnel | Idem pour les instances d'audit |
@@ -103,10 +150,17 @@ Les relations sont les suivantes :
 | `documents` → `measures` | Optionnel (1:N) | Les documents et preuves sont attachés aux instances d'audit via `measure_id` |
 | `risks` ↔ `controls` | Many-to-many via `control_risk` | Un risque mitigé doit être lié à au moins un contrôle de sécurité ; la liste est stockée dans `controls[]` du risque |
 | `users` → `risks` | Optionnel (1:N) | Chaque risque peut être attribué à un propriétaire (`owner_id`) responsable de la revue périodique |
+| `measures` → `actions` | Optionnel (1:N) | Un plan d'action créé lors de la réalisation d'un contrôle le référence via `measure_id` |
+| `actions` ↔ `controls` | Many-to-many via `action_control` | Mesures de sécurité (clauses) concernées par le plan d'action |
+| `actions` ↔ `risks` | Many-to-many via `action_risk` | Plans d'action traitant un risque ; requis pour un risque *Non accepté* |
+| `actions` ↔ `users` | Many-to-many via `action_user` | Responsables du plan d'action |
+| `controls` → `exceptions` | Optionnel (1:N) | Chaque exception référence la mesure de sécurité à laquelle elle déroge via `control_id` |
+| `users` → `exceptions` | Optionnel (1:N) | Auteur (`created_by`), demandeur (`submitted_by`) et valideur (`approved_by`) de l'exception |
 
 > **Note :** il n'y a pas de table de jonction exposée pour la relation controls/measures.  
 > Les IDs sont directement embarqués dans chaque objet des deux côtés.  
-> La table pivot `control_risk` relie les risques aux mesures de sécurité.
+> La table pivot `control_risk` relie les risques aux mesures de sécurité.  
+> Les tables pivot `action_control`, `action_risk` et `action_user` relient les plans d'action aux mesures de sécurité, aux risques et aux responsables.
 
 ---
 
@@ -161,6 +215,49 @@ Exemple :
   "description": "Pilotage stratégique et opérationnel selon Art. 21.1 et 21.2.a",
   "created_at": "2026-05-17T20:35:52.000000Z",
   "updated_at": "2026-05-17T20:35:52.000000Z"
+}
+```
+
+---
+
+## frameworks
+
+La table `frameworks` ajoute des métadonnées aux codes de référentiel utilisés dans `domains.framework`. Elle ne remplace
+pas ce champ : un référentiel est lié à ses domaines, et à travers eux à ses mesures de sécurité, par son `code`.
+Une ligne est créée automatiquement, avec le code comme nom, lorsqu'un domaine est enregistré avec un nouveau code de
+référentiel. Les [correspondances](crosswalk.fr.md) utilisent ces codes pour choisir les référentiels source et cible.
+
+| Champ | Type | Description |
+| --- | --- | --- |
+| `id` | integer | Identifiant unique (PK) |
+| `code` | string | Code du référentiel, identique à `domains.framework` (unique, ex. : `27001:2022`) |
+| `name` | string | Nom du référentiel (le code par défaut) |
+| `version` | string | Version du référentiel (vide par défaut) |
+| `publisher` | string | Éditeur du référentiel (vide par défaut) |
+| `jurisdiction` | string \| null | Juridiction dans laquelle le référentiel s'applique |
+| `source_url` | string \| null | URL de la source officielle |
+| `status` | string \| null | Statut du référentiel (texte libre) |
+| `publication_date` | date \| null | Date de publication |
+| `effective_date` | date \| null | Date d'entrée en vigueur |
+| `notes` | string \| null | Notes libres |
+| `created_at` | datetime | Date de création |
+| `updated_at` | datetime | Date de dernière modification |
+
+Exemple :
+
+```json
+{
+  "id": 2,
+  "code": "NIS2-ReCyF-2.5-FR",
+  "name": "ReCyF 2.5",
+  "version": "2.5",
+  "publisher": "ANSSI",
+  "jurisdiction": "France",
+  "source_url": "https://messervices.cyber.gouv.fr/nis2#exigences",
+  "status": null,
+  "publication_date": null,
+  "effective_date": null,
+  "notes": null
 }
 ```
 
@@ -333,5 +430,135 @@ Exemple :
   "created_at": "2026-06-09T10:00:00.000000Z",
   "updated_at": "2026-06-09T10:00:00.000000Z",
   "deleted_at": null
+}
+```
+
+---
+
+## actions
+
+La table `actions` contient les plans d'action mis en place pour remédier à un contrôle en échec, à une non-conformité
+ou à un risque. Un plan d'action peut être créé manuellement ou lors de la réalisation d'un contrôle ; il est alors lié
+à ce contrôle via `measure_id`. Les mesures de sécurité, les risques et les responsables d'un plan d'action sont
+stockés dans les tables pivot `action_control`, `action_risk` et `action_user`.
+
+| Champ | Type | Description |
+| --- | --- | --- |
+| `id` | integer | Identifiant unique (PK) |
+| `reference` | string \| null | Référence du plan d'action (ex. : `ACT-2026-001`, 32 caractères max.) |
+| `type` | integer | Type de plan d'action (voir valeurs ci-dessous) |
+| `status` | integer | Statut du plan d'action (voir valeurs ci-dessous) |
+| `progress` | integer \| null | Avancement en pourcentage (0 à 100) |
+| `criticity` | integer | Non utilisé par l’application |
+| `name` | string \| null | Nom du plan d'action |
+| `scope` | string \| null | Périmètre (32 caractères max.) |
+| `cause` | string \| null | Cause du plan d'action (observations du contrôle en échec) |
+| `remediation` | string \| null | Remédiation à réaliser |
+| `measure_id` | integer \| null | Référence vers `measures.id` — contrôle à l'origine du plan d'action |
+| `creation_date` | date \| null | Date de création du plan d'action |
+| `due_date` | date \| null | Date d'échéance |
+| `close_date` | date \| null | Date de clôture |
+| `justification` | string \| null | Justification de la clôture ou du rejet |
+| `created_at` | datetime | Date de création |
+| `updated_at` | datetime | Date de dernière modification |
+
+### Valeurs du champ `type`
+
+| Valeur | Signification |
+| --- | --- |
+| `1` | Non-conformité majeure |
+| `2` | Non-conformité mineure |
+| `3` | Observation |
+| `4` | Opportunité d'amélioration |
+
+### Valeurs du champ `status`
+
+| Valeur | Signification |
+| --- | --- |
+| `0` | Ouvert |
+| `1` | Clôturé |
+| `2` | Rejeté |
+
+Exemple :
+
+```json
+{
+  "id": 1,
+  "reference": "ACT-2026-001",
+  "type": 1,
+  "status": 0,
+  "progress": 60,
+  "criticity": 0,
+  "name": "Déploiement de l'authentification multifacteur sur les comptes à privilèges",
+  "scope": "Systèmes d'information",
+  "cause": "Les comptes administrateur ne sont protégés que par un mot de passe, sans second facteur d'authentification.",
+  "remediation": "Déployer une solution MFA (TOTP ou clé physique) sur l'ensemble des comptes à privilèges.",
+  "measure_id": null,
+  "creation_date": "2026-04-01",
+  "due_date": "2026-09-30",
+  "close_date": null,
+  "justification": null
+}
+```
+
+---
+
+## exceptions
+
+La table `exceptions` enregistre les exceptions (dérogations) accordées lorsqu'une mesure de sécurité ne peut pas être
+appliquée : justification, mesures compensatoires et période de validité. Une exception suit un workflow de validation :
+elle est créée en brouillon, soumise, puis approuvée ou refusée par un administrateur.
+
+| Champ | Type | Description |
+| --- | --- | --- |
+| `id` | integer | Identifiant unique (PK) |
+| `control_id` | integer \| null | Référence vers `controls.id` — mesure de sécurité concernée par l'exception |
+| `name` | string | Nom de l'exception (obligatoire) |
+| `description` | string \| null | Description de l'exception |
+| `justification` | string \| null | Justification métier (raison pour laquelle la mesure de sécurité ne peut pas être appliquée) |
+| `compensating_controls` | string \| null | Mesures compensatoires réduisant le risque résiduel |
+| `start_date` | date \| null | Début de la période de validité |
+| `end_date` | date \| null | Fin de la période de validité ; `null` si pas d'échéance |
+| `status` | integer | Statut de l'exception (voir valeurs ci-dessous) |
+| `created_by` | integer \| null | Référence vers `users.id` — auteur de l'exception |
+| `submitted_by` | integer \| null | Référence vers `users.id` — utilisateur ayant soumis l'exception |
+| `submitted_at` | datetime \| null | Date de soumission |
+| `approved_by` | integer \| null | Référence vers `users.id` — administrateur ayant approuvé ou refusé l'exception |
+| `approved_at` | datetime \| null | Date d'approbation ou de refus |
+| `approval_comment` | string \| null | Commentaire d'approbation, ou motif du refus |
+| `created_at` | datetime | Date de création |
+| `updated_at` | datetime | Date de dernière modification |
+
+### Valeurs du champ `status`
+
+| Valeur | Signification |
+| --- | --- |
+| `0` | Brouillon |
+| `1` | Soumise (en attente de validation) |
+| `2` | Approuvée |
+| `3` | Refusée |
+| `4` | Expirée |
+
+Une exception approuvée dont la date de fin est dépassée est également affichée comme expirée.
+
+Exemple :
+
+```json
+{
+  "id": 4,
+  "control_id": 68,
+  "name": "Maintien temporaire d'un accès VPN partagé pour un prestataire",
+  "description": "Un compte VPN partagé continue d'être utilisé par le prestataire de maintenance applicative.",
+  "justification": "Le projet de bascule vers des accès nominatifs a pris du retard côté prestataire.",
+  "compensating_controls": "Journalisation renforcée des connexions et restriction des horaires d'accès.",
+  "start_date": "2026-03-01",
+  "end_date": "2026-06-01",
+  "status": 3,
+  "created_by": 2,
+  "submitted_by": 2,
+  "submitted_at": "2026-02-20T09:00:00.000000Z",
+  "approved_by": 1,
+  "approved_at": "2026-02-25T14:00:00.000000Z",
+  "approval_comment": "Les accès nominatifs doivent être en place avant la date de fin."
 }
 ```

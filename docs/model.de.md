@@ -4,14 +4,19 @@ Die wichtigsten Tabellen sind:
 
 - attributes  
 - domains  
+- frameworks  
 - controls  
 - measures  
 - documents  
 - risks  
+- actions  
+- exceptions  
 
 > `controls` = **Sicherheitsmaßnahmen** (umzusetzende Anforderungen).  
 > `measures` = **Kontrollen** (periodische Überprüfungen dieser Anforderungen).  
-> `risks` = **Informationssicherheitsrisiken** (Register nach ISO 27001 §6.1.2).
+> `risks` = **Informationssicherheitsrisiken** (Register nach ISO 27001 §6.1.2).  
+> `actions` = **Aktionspläne** (Behebung fehlgeschlagener Kontrollen und von Risiken).  
+> `exceptions` = **Ausnahmen** (befristete Abweichungen von einer Sicherheitsmaßnahme).
 
 ## **Abhängigkeiten zwischen Tabellen**
 
@@ -20,6 +25,7 @@ Die wichtigsten Tabellen sind:
 ```mermaid
 flowchart LR
     controls --> |"domain_id (0:1)"| domains
+    domains -.->|"framework = code"| frameworks
     controls <-->|"control_measure (N:N)"| measures
     attributes -.-o |"optional"| controls
     attributes -.-o |"optional"| measures
@@ -27,6 +33,12 @@ flowchart LR
     documents -->|"document_id (1:1)"| measures
     risks -->|"owner_id (0:1)"| users
     risks <-->|"control_risk (N:N)"| controls
+    actions -->|"measure_id (0:1)"| measures
+    actions <-->|"action_control (N:N)"| controls
+    actions <-->|"action_risk (N:N)"| risks
+    actions <-->|"action_user (N:N)"| users
+    exceptions -->|"control_id (0:1)"| controls
+    exceptions -->|"created_by, submitted_by, approved_by (0:1)"| users
 ```
 
 Das folgende detaillierte Schema beschreibt die Felder jeder Tabelle.
@@ -34,6 +46,7 @@ Das folgende detaillierte Schema beschreibt die Felder jeder Tabelle.
 ```mermaid
 erDiagram
     domains ||--o{ controls : "domain_id"
+    frameworks |o--o{ domains : "code = framework"
     controls }o--o{ measures : "many-to-many"
     attributes }o--o{ controls : "optional"
     attributes }o--o{ measures : "optional"
@@ -41,12 +54,25 @@ erDiagram
     documents }o--o| measures : "optional"
     risks }o--o{ controls : "control_risk"
     users ||--o{ risks : "owner_id"
+    measures |o--o{ actions : "measure_id"
+    actions }o--o{ controls : "action_control"
+    actions }o--o{ risks : "action_risk"
+    actions }o--o{ users : "action_user"
+    controls |o--o{ exceptions : "control_id"
+    users |o--o{ exceptions : "created_by, approved_by"
 
     domains {
         int id PK
         string framework
         string title
         string description
+    }
+    frameworks {
+        int id PK
+        string code UK
+        string name
+        string version
+        string publisher
     }
     attributes {
         int id PK
@@ -89,6 +115,26 @@ erDiagram
         date next_review_at
         array controls
     }
+    actions {
+        int id PK
+        int measure_id FK
+        string reference
+        int type
+        int status
+        int progress
+        date due_date
+        date close_date
+    }
+    exceptions {
+        int id PK
+        int control_id FK
+        string name
+        int status
+        date start_date
+        date end_date
+        int created_by FK
+        int approved_by FK
+    }
 ```
 
 Die Beziehungen sind wie folgt:
@@ -96,6 +142,7 @@ Die Beziehungen sind wie folgt:
 | Verknüpfung | Typ | Beschreibung |
 | --- | --- | --- |
 | `domains` → `controls` | Fremdschlüssel (1:N) | Jede Sicherheitsmaßnahme verweist über `domain_id` auf ihre Domäne |
+| `frameworks` → `domains` | Optional (1:N) über den Code | Das Feld `framework` einer Domäne enthält den `code` ihres Rahmenwerks; die Zeile in `frameworks` ergänzt dessen Metadaten |
 | `controls` ↔ `measures` | Viele-zu-viele (bidirektional) | Jede Sicherheitsmaßnahme listet ihre Kontrollen in `measures[]`; jede Kontrolle listet ihre Sicherheitsmaßnahmen in `controls[]` |
 | `attributes` → `controls` | Optional | Das Feld `attributes` einer Sicherheitsmaßnahme kann eine Liste von Attribut-IDs enthalten |
 | `attributes` → `measures` | Optional | Ebenso für die Kontrollen |
@@ -103,10 +150,17 @@ Die Beziehungen sind wie folgt:
 | `documents` → `measures` | Optional (1:N) | Dokumente und Nachweise sind über `measure_id` an die Kontrollen angehängt |
 | `risks` ↔ `controls` | Viele-zu-viele über `control_risk` | Ein gemindertes Risiko muss mit einer oder mehreren Sicherheitsmaßnahmen verknüpft sein; die Liste wird im Risiko in `controls[]` gespeichert |
 | `users` → `risks` | Optional (1:N) | Jedem Risiko kann ein Verantwortlicher (`owner_id`) für die periodische Überprüfung zugewiesen werden |
+| `measures` → `actions` | Optional (1:N) | Ein bei der Durchführung einer Kontrolle erstellter Aktionsplan verweist über `measure_id` auf sie |
+| `actions` ↔ `controls` | Viele-zu-viele über `action_control` | Vom Aktionsplan betroffene Sicherheitsmaßnahmen (Klauseln) |
+| `actions` ↔ `risks` | Viele-zu-viele über `action_risk` | Aktionspläne zur Behandlung eines Risikos; erforderlich für ein *nicht akzeptiertes* Risiko |
+| `actions` ↔ `users` | Viele-zu-viele über `action_user` | Verantwortliche des Aktionsplans |
+| `controls` → `exceptions` | Optional (1:N) | Jede Ausnahme verweist über `control_id` auf die Sicherheitsmaßnahme, von der sie abweicht |
+| `users` → `exceptions` | Optional (1:N) | Ersteller (`created_by`), Einreicher (`submitted_by`) und Prüfer (`approved_by`) der Ausnahme |
 
 > **Hinweis:** Für die Beziehung controls/measures gibt es keine offengelegte Verknüpfungstabelle.  
 > Die IDs sind auf beiden Seiten direkt in jedem Objekt enthalten.  
-> Die Pivot-Tabelle `control_risk` verknüpft die Risiken mit den Sicherheitsmaßnahmen.
+> Die Pivot-Tabelle `control_risk` verknüpft die Risiken mit den Sicherheitsmaßnahmen.  
+> Die Pivot-Tabellen `action_control`, `action_risk` und `action_user` verknüpfen die Aktionspläne mit den Sicherheitsmaßnahmen, den Risiken und den Verantwortlichen.
 
 ---
 
@@ -161,6 +215,49 @@ Beispiel:
   "description": "Strategic and operational steering according to Art. 21.1 and 21.2.a",
   "created_at": "2026-05-17T20:35:52.000000Z",
   "updated_at": "2026-05-17T20:35:52.000000Z"
+}
+```
+
+---
+
+## **frameworks**
+
+Die Tabelle `frameworks` ergänzt die in `domains.framework` verwendeten Rahmenwerkscodes um Metadaten. Sie ersetzt dieses
+Feld nicht: Ein Rahmenwerk ist über seinen `code` mit seinen Domänen und über diese mit seinen Sicherheitsmaßnahmen verknüpft.
+Eine Zeile wird automatisch mit dem Code als Namen angelegt, wenn eine Domäne mit einem neuen Rahmenwerkscode gespeichert
+wird. Die [Zuordnungen](crosswalk.de.md) verwenden diese Codes, um Quell- und Zielrahmenwerk auszuwählen.
+
+| Feld | Typ | Beschreibung |
+| --- | --- | --- |
+| `id` | integer | Eindeutige Kennung (PK) |
+| `code` | string | Code des Rahmenwerks, identisch mit `domains.framework` (eindeutig, z. B. `27001:2022`) |
+| `name` | string | Name des Rahmenwerks (standardmäßig der Code) |
+| `version` | string | Version des Rahmenwerks (standardmäßig leer) |
+| `publisher` | string | Herausgeber des Rahmenwerks (standardmäßig leer) |
+| `jurisdiction` | string \| null | Rechtsraum, in dem das Rahmenwerk gilt |
+| `source_url` | string \| null | URL der offiziellen Quelle |
+| `status` | string \| null | Status des Rahmenwerks (Freitext) |
+| `publication_date` | date \| null | Veröffentlichungsdatum |
+| `effective_date` | date \| null | Datum des Inkrafttretens |
+| `notes` | string \| null | Freie Notizen |
+| `created_at` | datetime | Erstellungsdatum |
+| `updated_at` | datetime | Datum der letzten Änderung |
+
+Beispiel:
+
+```json
+{
+  "id": 2,
+  "code": "NIS2-ReCyF-2.5-FR",
+  "name": "ReCyF 2.5",
+  "version": "2.5",
+  "publisher": "ANSSI",
+  "jurisdiction": "France",
+  "source_url": "https://messervices.cyber.gouv.fr/nis2#exigences",
+  "status": null,
+  "publication_date": null,
+  "effective_date": null,
+  "notes": null
 }
 ```
 
@@ -333,5 +430,135 @@ Beispiel:
   "created_at": "2026-06-09T10:00:00.000000Z",
   "updated_at": "2026-06-09T10:00:00.000000Z",
   "deleted_at": null
+}
+```
+
+---
+
+## **actions**
+
+Die Tabelle `actions` enthält die Aktionspläne zur Behebung einer fehlgeschlagenen Kontrolle, einer Nichtkonformität
+oder eines Risikos. Ein Aktionsplan kann manuell oder bei der Durchführung einer Kontrolle erstellt werden; er ist dann
+über `measure_id` mit dieser Kontrolle verknüpft. Die Sicherheitsmaßnahmen, Risiken und Verantwortlichen eines
+Aktionsplans werden in den Pivot-Tabellen `action_control`, `action_risk` und `action_user` gespeichert.
+
+| Feld | Typ | Beschreibung |
+| --- | --- | --- |
+| `id` | integer | Eindeutige Kennung (PK) |
+| `reference` | string \| null | Referenz des Aktionsplans (z. B. `ACT-2026-001`, max. 32 Zeichen) |
+| `type` | integer | Typ des Aktionsplans (siehe Werte unten) |
+| `status` | integer | Status des Aktionsplans (siehe Werte unten) |
+| `progress` | integer \| null | Fortschritt in Prozent (0 bis 100) |
+| `criticity` | integer | Von der Anwendung nicht verwendet |
+| `name` | string \| null | Name des Aktionsplans |
+| `scope` | string \| null | Geltungsbereich (max. 32 Zeichen) |
+| `cause` | string \| null | Ursache des Aktionsplans (Beobachtungen der fehlgeschlagenen Kontrolle) |
+| `remediation` | string \| null | Durchzuführende Abhilfemaßnahme |
+| `measure_id` | integer \| null | Verweis auf `measures.id` — Kontrolle, aus der der Aktionsplan hervorgeht |
+| `creation_date` | date \| null | Erstellungsdatum des Aktionsplans |
+| `due_date` | date \| null | Fälligkeitsdatum |
+| `close_date` | date \| null | Abschlussdatum |
+| `justification` | string \| null | Begründung des Abschlusses oder der Ablehnung |
+| `created_at` | datetime | Erstellungsdatum |
+| `updated_at` | datetime | Datum der letzten Änderung |
+
+### **Werte des Feldes `type`**
+
+| Wert | Bedeutung |
+| --- | --- |
+| `1` | Schwerwiegende Nichtkonformität |
+| `2` | Geringfügige Nichtkonformität |
+| `3` | Beobachtung |
+| `4` | Verbesserungspotenzial |
+
+### **Werte des Feldes `status`**
+
+| Wert | Bedeutung |
+| --- | --- |
+| `0` | Offen |
+| `1` | Abgeschlossen |
+| `2` | Abgelehnt |
+
+Beispiel:
+
+```json
+{
+  "id": 1,
+  "reference": "ACT-2026-001",
+  "type": 1,
+  "status": 0,
+  "progress": 60,
+  "criticity": 0,
+  "name": "Einführung der Multi-Faktor-Authentifizierung für privilegierte Konten",
+  "scope": "Informationssysteme",
+  "cause": "Administratorkonten sind nur durch ein Passwort geschützt, ohne zweiten Authentifizierungsfaktor.",
+  "remediation": "Eine MFA-Lösung (TOTP oder Hardware-Schlüssel) für alle privilegierten Konten einführen.",
+  "measure_id": null,
+  "creation_date": "2026-04-01",
+  "due_date": "2026-09-30",
+  "close_date": null,
+  "justification": null
+}
+```
+
+---
+
+## **exceptions**
+
+Die Tabelle `exceptions` erfasst die Ausnahmen (Abweichungen), die gewährt werden, wenn eine Sicherheitsmaßnahme nicht
+angewendet werden kann: Begründung, kompensierende Maßnahmen und Gültigkeitszeitraum. Eine Ausnahme durchläuft einen
+Genehmigungsworkflow: Sie wird als Entwurf erstellt, eingereicht und dann von einem Administrator genehmigt oder abgelehnt.
+
+| Feld | Typ | Beschreibung |
+| --- | --- | --- |
+| `id` | integer | Eindeutige Kennung (PK) |
+| `control_id` | integer \| null | Verweis auf `controls.id` — von der Ausnahme betroffene Sicherheitsmaßnahme |
+| `name` | string | Name der Ausnahme (Pflichtfeld) |
+| `description` | string \| null | Beschreibung der Ausnahme |
+| `justification` | string \| null | Geschäftliche Begründung (warum die Sicherheitsmaßnahme nicht angewendet werden kann) |
+| `compensating_controls` | string \| null | Kompensierende Maßnahmen zur Verringerung des Restrisikos |
+| `start_date` | date \| null | Beginn des Gültigkeitszeitraums |
+| `end_date` | date \| null | Ende des Gültigkeitszeitraums; `null`, wenn kein Enddatum |
+| `status` | integer | Status der Ausnahme (siehe Werte unten) |
+| `created_by` | integer \| null | Verweis auf `users.id` — Ersteller der Ausnahme |
+| `submitted_by` | integer \| null | Verweis auf `users.id` — Benutzer, der die Ausnahme eingereicht hat |
+| `submitted_at` | datetime \| null | Einreichungsdatum |
+| `approved_by` | integer \| null | Verweis auf `users.id` — Administrator, der die Ausnahme genehmigt oder abgelehnt hat |
+| `approved_at` | datetime \| null | Datum der Genehmigung oder Ablehnung |
+| `approval_comment` | string \| null | Kommentar zur Genehmigung oder Ablehnungsgrund |
+| `created_at` | datetime | Erstellungsdatum |
+| `updated_at` | datetime | Datum der letzten Änderung |
+
+### **Werte des Feldes `status`**
+
+| Wert | Bedeutung |
+| --- | --- |
+| `0` | Entwurf |
+| `1` | Eingereicht (Genehmigung ausstehend) |
+| `2` | Genehmigt |
+| `3` | Abgelehnt |
+| `4` | Abgelaufen |
+
+Eine genehmigte Ausnahme, deren Enddatum überschritten ist, wird ebenfalls als abgelaufen angezeigt.
+
+Beispiel:
+
+```json
+{
+  "id": 4,
+  "control_id": 68,
+  "name": "Vorübergehender gemeinsamer VPN-Zugang für einen Dienstleister",
+  "description": "Ein gemeinsames VPN-Konto wird weiterhin vom Dienstleister für die Anwendungswartung genutzt.",
+  "justification": "Die Umstellung auf personenbezogene Zugänge hat sich beim Dienstleister verzögert.",
+  "compensating_controls": "Verstärkte Protokollierung der Verbindungen und eingeschränkte Zugriffszeiten.",
+  "start_date": "2026-03-01",
+  "end_date": "2026-06-01",
+  "status": 3,
+  "created_by": 2,
+  "submitted_by": 2,
+  "submitted_at": "2026-02-20T09:00:00.000000Z",
+  "approved_by": 1,
+  "approved_at": "2026-02-25T14:00:00.000000Z",
+  "approval_comment": "Die personenbezogenen Zugänge müssen vor dem Enddatum eingerichtet sein."
 }
 ```
