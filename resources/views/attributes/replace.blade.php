@@ -14,7 +14,7 @@
 	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.attribute.replace.old_value') }}</strong>
 		    	</div>
-	    		<div class="col-md-10 col-lg-5">
+	    		<div class="col-md-10 col-lg-11">
 					<select class="form-select select2" name="old_value">
 						<option></option>
 						@foreach($values as $value)
@@ -28,7 +28,7 @@
 	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.attribute.replace.new_value') }}</strong>
 		    	</div>
-	    		<div class="col-md-10 col-lg-5">
+	    		<div class="col-md-10 col-lg-11">
 					<input type="text" class="{{ $errors->has('new_value') ? 'is-invalid' : ''}} form-control" name="new_value" value="{{ old('new_value') }}" size='25'>
 				</div>
 			</div>

@@ -7,7 +7,7 @@
     <div class="container-fluid px-0">
         <div class="row">
             <div class="col-lg-2 col-md-3"><strong>{{ trans('cruds.crosswalk.source') }}</strong></div>
-            <div class="col-lg-8 col-md-9">
+            <div class="col-lg-10 col-md-9">
                 <strong>{{ $mapping->sourceControl->domain->framework }}</strong> —
                 <a href="/alice/show/{{ $mapping->sourceControl->id }}">
                     {{ trim($mapping->sourceControl->clause) }} — {{ $mapping->sourceControl->name }}
@@ -16,7 +16,7 @@
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-3"><strong>{{ trans('cruds.crosswalk.target') }}</strong></div>
-            <div class="col-lg-8 col-md-9">
+            <div class="col-lg-10 col-md-9">
                 <strong>{{ $mapping->targetControl->domain->framework }}</strong> —
                 <a href="/alice/show/{{ $mapping->targetControl->id }}">
                     {{ trim($mapping->targetControl->clause) }} — {{ $mapping->targetControl->name }}
@@ -33,19 +33,19 @@
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-3"><strong>{{ trans('cruds.crosswalk.fields.confidence') }}</strong></div>
-            <div class="col-lg-8 col-md-9">{{ $mapping->confidence !== null ? $mapping->confidence . '%' : '–' }}</div>
+            <div class="col-lg-10 col-md-9">{{ $mapping->confidence !== null ? $mapping->confidence . '%' : '–' }}</div>
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-3"><strong>{{ trans('cruds.crosswalk.fields.rationale') }}</strong></div>
-            <div class="col-lg-8 col-md-9"><pre style="white-space:pre-wrap">{{ $mapping->rationale ?? '–' }}</pre></div>
+            <div class="col-lg-10 col-md-9"><pre style="white-space:pre-wrap">{{ $mapping->rationale ?? '–' }}</pre></div>
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-3"><strong>{{ trans('cruds.crosswalk.fields.source_reference') }}</strong></div>
-            <div class="col-lg-8 col-md-9">{{ $mapping->source_reference ?? '–' }}</div>
+            <div class="col-lg-10 col-md-9">{{ $mapping->source_reference ?? '–' }}</div>
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-3"><strong>{{ trans('cruds.crosswalk.fields.source_url') }}</strong></div>
-            <div class="col-lg-8 col-md-9">
+            <div class="col-lg-10 col-md-9">
                 @if($mapping->source_url)
                     <a href="{{ $mapping->source_url }}" target="_blank" rel="noopener noreferrer">
                         {{ $mapping->source_url }}
@@ -57,7 +57,7 @@
         </div>
         <div class="row">
             <div class="col-lg-2 col-md-3"><strong>{{ trans('cruds.crosswalk.fields.validated') }}</strong></div>
-            <div class="col-lg-8 col-md-9">
+            <div class="col-lg-10 col-md-9">
                 @if($mapping->validated)
                     {{ trans('cruds.crosswalk.validated_by', [
                         'name' => $mapping->validator?->name ?? '–',

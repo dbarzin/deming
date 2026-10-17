@@ -22,7 +22,7 @@
                 <div class="col-lg-1 col-md-2 pt-2">
                     <strong>{{ trans("cruds.risk_scoring.fields.name") }}</strong>
                 </div>
-                <div class="col-lg-4 col-md-6">
+                <div class="col-lg-11 col-md-10">
                     <input class="form-control" type="text" name="name"
                            value="{{ old('name', $config->name ?? '') }}" maxlength="255" required>
                 </div>
@@ -46,7 +46,7 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="col-lg-5 col-md-5" style="padding-top:10px">
+                <div class="col-lg-8 col-md-6" style="padding-top:10px">
                     <small id="formula-description" class="text-muted"></small>
                 </div>
             </div>

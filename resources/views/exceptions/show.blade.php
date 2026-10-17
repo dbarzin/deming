@@ -28,7 +28,7 @@
             <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.name') }}</strong>
             </div>
-            <div class="col-lg-6 col-md-8">
+            <div class="col-lg-11 col-md-10">
                 {{ $exception->name }}
             </div>
         </div>
@@ -38,7 +38,7 @@
             <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.status') }}</strong>
             </div>
-            <div class="col-lg-6 col-md-8">
+            <div class="col-lg-11 col-md-10">
                 <span style="color:{{ $color }}; font-weight:bold; font-size:1.05em;">
                     {{ $exception->status_label }}
                 </span>
@@ -50,7 +50,7 @@
             <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.measure') }}</strong>
             </div>
-            <div class="col-lg-6 col-md-8">
+            <div class="col-lg-11 col-md-10">
                 @if($exception->measure)
                     <a href="/alice/show/{{ $exception->measure->id }}">
                         {{ $exception->measure->clause }} – {{ $exception->measure->name }}
@@ -67,7 +67,7 @@
             <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.description') }}</strong>
             </div>
-            <div class="col-lg-7 col-md-9">
+            <div class="col-lg-11 col-md-10">
                 <pre style="white-space:pre-wrap;">{{ $exception->description }}</pre>
             </div>
         </div>
@@ -79,7 +79,7 @@
             <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.justification') }}</strong>
             </div>
-            <div class="col-lg-7 col-md-9">
+            <div class="col-lg-11 col-md-10">
                 <pre style="white-space:pre-wrap;">{{ $exception->justification }}</pre>
             </div>
         </div>
@@ -91,7 +91,7 @@
             <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.compensating_controls') }}</strong>
             </div>
-            <div class="col-lg-7 col-md-9">
+            <div class="col-lg-11 col-md-10">
                 <pre style="white-space:pre-wrap;">{{ $exception->compensating_controls }}</pre>
             </div>
         </div>
@@ -127,7 +127,7 @@
             <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.created_by') }}</strong>
             </div>
-            <div class="col-lg-6 col-md-8">
+            <div class="col-lg-11 col-md-10">
                 {{ $exception->createdBy?->name ?? '–' }}
                 &nbsp;–&nbsp;
                 {{ $exception->created_at?->format('Y-m-d H:i') }}
@@ -140,7 +140,7 @@
             <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.fields.submitted_by') }}</strong>
             </div>
-            <div class="col-lg-6 col-md-8">
+            <div class="col-lg-11 col-md-10">
                 {{ $exception->submittedBy->name }}
                 &nbsp;–&nbsp;
                 {{ $exception->submitted_at?->format('Y-m-d H:i') }}
@@ -160,7 +160,7 @@
                     @endif
                 </strong>
             </div>
-            <div class="col-lg-6 col-md-8">
+            <div class="col-lg-11 col-md-10">
                 {{ $exception->approvedBy->name }}
                 &nbsp;–&nbsp;
                 {{ $exception->approved_at?->format('Y-m-d H:i') }}
@@ -234,7 +234,7 @@
             <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.actions.approve') }}</strong>
             </div>
-            <div class="col-lg-7 col-md-9">
+            <div class="col-lg-11 col-md-10">
                 <form action="/exception/approve" method="POST" class="d-inline-block" style="width:100%;">
                     @csrf
                     <input type="hidden" name="id" value="{{ $exception->id }}"/>
@@ -254,7 +254,7 @@
             <div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.exception.actions.reject') }}</strong>
             </div>
-            <div class="col-lg-7 col-md-9">
+            <div class="col-lg-11 col-md-10">
                 <form action="/exception/reject" method="POST" class="d-inline-block" style="width:100%;">
                     @csrf
                     <input type="hidden" name="id" value="{{ $exception->id }}"/>

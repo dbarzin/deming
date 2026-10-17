@@ -9,7 +9,7 @@
     		<div class="col-md-2 col-lg-1">
 	    		<strong>{{ trans('cruds.attribute.fields.name') }}</strong>
 	    	</div>
-            <div class="col-md-12 col-lg-6">
+            <div class="col-md-12 col-lg-11">
 	    		{{ $attribute->name }}
     		</div>
 	    </div>
@@ -18,7 +18,7 @@
     		<div class="col-md-2 col-lg-1">
 	    		<strong>{{ trans('cruds.attribute.fields.values') }}</strong>
 	    	</div>
-    		<div class="col-md-12 col-lg-6">
+    		<div class="col-md-12 col-lg-11">
 	    		{{ $attribute->values }}
     		</div>
     	</div>

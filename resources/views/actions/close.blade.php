@@ -62,7 +62,7 @@ form, table {
         		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans("cruds.action.fields.clauses") }}</strong>
     	    	</div>
-        		<div class="col-md-8 col-lg-4">
+        		<div class="col-md-10 col-lg-11">
                     @foreach($action->controls as $control)
                         <a href="/alice/show/{{ $control->id }}">{{ $control->clause }}</a>
                         @if(!$loop->last)
@@ -98,7 +98,7 @@ form, table {
 	    		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans('cruds.action.fields.cause') }}</strong>
 		    	</div>
-				<div class="col-md-10 col-lg-5">
+				<div class="col-md-10 col-lg-11">
                     <pre>{{ $action->cause }}</pre>
 				</div>
 			</div>
@@ -110,7 +110,7 @@ form, table {
     		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.remediation') }}</strong>
 	    	</div>
-			<div class="col-md-12 col-lg-6">
+			<div class="col-md-12 col-lg-11">
                 {!! \Parsedown::instance()->text($action->remediation) !!}
 			</div>
 		</div>
@@ -140,7 +140,7 @@ form, table {
     		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.justification') }}</strong>
 	    	</div>
-			<div class="col-md-12 col-lg-6">
+			<div class="col-md-12 col-lg-11">
                 <textarea name="justification" class="easymde form-control" id="justification">{{ old('justification', $action->justification) }}</textarea>
 			</div>
 		</div>
@@ -149,7 +149,7 @@ form, table {
 			<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.owners') }}</strong>
 	    	</div>
-            <div class="col-md-12 col-lg-6">
+            <div class="col-md-12 col-lg-11">
                 @foreach($action->owners as $owner)
 					{{ $owner->name }}
                     @if ($action->owners->last()!=$owner)

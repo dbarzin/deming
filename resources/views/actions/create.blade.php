@@ -52,7 +52,7 @@ form, table {
 	    		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans('cruds.action.fields.clauses') }}</strong>
 		    	</div>
-                <div class="col-md-12 col-lg-6">
+                <div class="col-md-12 col-lg-11">
                     <select class="form-select select2" name="measures[]" multiple>
                         @foreach($all_measures as $measure)
 						    <option
@@ -85,7 +85,7 @@ form, table {
 	    		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans('cruds.action.fields.cause') }}</strong>
 		    	</div>
-                <div class="col-md-12 col-lg-6">
+                <div class="col-md-12 col-lg-11">
                 <textarea name="cause" class="easymde form-control" id="cause">{{ old('cause') }}</textarea>
 				</div>
 			</div>
@@ -97,7 +97,7 @@ form, table {
     		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.remediation') }}</strong>
 	    	</div>
-			<div class="col-md-12 col-lg-6">
+			<div class="col-md-12 col-lg-11">
                 <textarea name="remediation" class="easymde form-control" id="remediation">{{ old('remediation') }}</textarea>
 			</div>
 		</div>
@@ -106,7 +106,7 @@ form, table {
             <div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.owners') }}</strong>
             </div>
-            <div class="col-md-12 col-lg-6">
+            <div class="col-md-12 col-lg-11">
                 <select class="form-select select2" name="owners[]" id="owners" multiple>
                     @foreach($users as $user)
                         <option value="{{ $user->id }}" {{ in_array($user->id, old('owners', [])) ? 'selected' : ''  }}>{{ $user->name }}</option>

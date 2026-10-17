@@ -241,7 +241,7 @@ html.sidebar-preload-hidden .main-content {
 
 .btn i,
 .btn .bi {
-    margin-right: .3rem;
+    margin-right: 10px;
 }
 
 a.no-underline,
@@ -307,6 +307,12 @@ div.dt-container .dt-length {
 
 .select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__rendered .select2-selection__choice {
     white-space: normal;
+}
+
+/* Liste multiple refermée : Select2 laisse le focus dans son champ de recherche
+   en ligne, on masque le curseur tant que la liste n'est pas ouverte */
+.select2-container:not(.select2-container--open) .select2-search--inline .select2-search__field {
+    caret-color: transparent;
 }
 
 /***************************************************************************/

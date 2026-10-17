@@ -14,7 +14,7 @@
 	    		<div class="col-md-2 col-lg-1">
 					<label>{{ trans('cruds.user.fields.login') }}</label>
 		    	</div>
-	    		<div class="col-md-4 col-lg-2">
+	    		<div class="col-md-10 col-lg-11">
 					<input type="text" class="{{ $errors->has('login') ? 'is-invalid' : ''}} form-control" name="login" value="{{ old('login') }}" size='40'>
 				</div>
 			</div>
@@ -22,7 +22,7 @@
 	    		<div class="col-md-2 col-lg-1">
 					<label>{{ trans('cruds.user.fields.name') }}</label>
 		    	</div>
-	    		<div class="col-md-6 col-lg-3">
+	    		<div class="col-md-10 col-lg-11">
 					<input type="text" class="{{ $errors->has('name') ? 'is-invalid' : ''}} form-control" name="name" value="{{ old('name') }}" size='40'>
 				</div>
 			</div>
@@ -30,7 +30,7 @@
 	    		<div class="col-md-2 col-lg-1">
 					<label>{{ trans('cruds.user.fields.title') }}</label>
 				</div>
-	    		<div class="col-md-6 col-lg-3">
+	    		<div class="col-md-10 col-lg-11">
 					<input type="text" class="{{ $errors->has('title') ? 'is-invalid' : ''}} form-control" name="title" value="{{ old('title') }}" size='80'>
 				</div>
 			</div>
@@ -65,7 +65,7 @@
 	    		<div class="col-md-2 col-lg-1">
 					<label class="form-label" for="email">{{ trans('cruds.user.fields.email') }}</label>
 				</div>
-	    		<div class="col-md-6 col-lg-3">
+	    		<div class="col-md-10 col-lg-11">
 					<input type="text" name="email" class="{{ $errors->has('email') ? 'is-invalid' : ''}} form-control" value="{{ old('email') }}" size="120">
 				</div>
 			</div>
@@ -75,7 +75,7 @@
 	    		<div class="col-md-2 col-lg-1">
 					<label class="form-label" for="password">{{ trans('cruds.user.fields.password') }}</label>
 				</div>
-	    		<div class="col-md-10 col-lg-5">
+	    		<div class="col-md-10 col-lg-11">
 					<input type="password" class="form-control" name="password1"/>
 					<input type="password" class="form-control" name="password2"/>
 				</div>

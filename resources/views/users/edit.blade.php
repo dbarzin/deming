@@ -16,7 +16,7 @@
 	    		<div class="col-md-2 col-lg-1">
 					<label>{{ trans('cruds.user.fields.login') }}</label>
 				</div>
-	    		<div class="col-md-6 col-lg-3">
+	    		<div class="col-md-10 col-lg-11">
                     <input type="text" class="{{ $errors->has('login') ? 'is-invalid' : ''}} form-control" name="login" value="{{ old('login', $user->login) }}" size='40'>
 				</div>
 			</div>
@@ -26,7 +26,7 @@
 	    		<div class="col-md-2 col-lg-1">
 					<label>{{ trans('cruds.user.fields.name') }}</label>
 				</div>
-	    		<div class="col-md-6 col-lg-3">
+	    		<div class="col-md-10 col-lg-11">
                     <input type="text" class="{{ $errors->has('name') ? 'is-invalid' : ''}} form-control" name="name" value="{{ old('name', $user->name) }}" size='80'>
 				</div>
 			</div>
@@ -35,7 +35,7 @@
 	    		<div class="col-md-2 col-lg-1">
 					<label>{{ trans('cruds.user.fields.title') }}</label>
 				</div>
-	    		<div class="col-md-6 col-lg-3">
+	    		<div class="col-md-10 col-lg-11">
                     <input type="text" class="{{ $errors->has('title') ? 'is-invalid' : ''}} form-control" name="title" value="{{ old('title', $user->title) }}" size='80'>
 				</div>
 			</div>
@@ -73,7 +73,7 @@
 	    		<div class="col-md-2 col-lg-1">
 					<label class="form-label" for="description">{{ trans('cruds.user.fields.email') }}</label>
 				</div>
-	    		<div class="col-md-6 col-lg-3">
+	    		<div class="col-md-10 col-lg-11">
 					<input type="text" name="email" class="{{ $errors->has('email') ? 'is-invalid' : ''}} form-control" value="{{ old('email', $user->email) }}" size="120">
 				</div>
 			</div>
@@ -83,7 +83,7 @@
 	    		<div class="col-md-2 col-lg-1">
 					<label class="form-label" for="description">{{ trans('cruds.user.fields.password') }}</label>
 				</div>
-	    		<div class="col-md-6 col-lg-3">
+	    		<div class="col-md-10 col-lg-11">
 					<input type="password" class="form-control" name="password1" autocomplete="new-password"/>
 					<input type="password" class="form-control" name="password2" autocomplete="new-password"/>
 				</div>
@@ -98,7 +98,7 @@
 	    </div>
 
     	<div class="row">
-    		<div class="col-md-12 col-lg-8">
+    		<div class="col-12">
 	            <select class="form-select select2" name="controls[]" id="controls" multiple>
 	                @foreach($measures as $measure)
                        <option value="{{ $measure->id }}" {{ (in_array($measure->id, old('controls', [])) || ($user->measures->contains($measure->id))) ? 'selected' : '' }}>

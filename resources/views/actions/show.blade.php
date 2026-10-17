@@ -61,7 +61,7 @@ form, table {
         		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans("cruds.action.fields.clauses") }}</strong>
     	    	</div>
-        		<div class="col-md-8 col-lg-4">
+        		<div class="col-md-10 col-lg-11">
                     @foreach($action->controls as $control)
                         <a href="/alice/show/{{ $control->id }}">{{ $control->clause }}</a> - {{ $control->name }}
                         @if(!$loop->last)
@@ -97,7 +97,7 @@ form, table {
 	    		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans('cruds.action.fields.cause') }}</strong>
 		    	</div>
-				<div class="col-md-10 col-lg-5">
+				<div class="col-md-10 col-lg-11">
                     <pre>{{ $action->cause }}</pre>
 				</div>
 			</div>
@@ -109,7 +109,7 @@ form, table {
     		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.remediation') }}</strong>
 	    	</div>
-			<div class="col-md-12 col-lg-6">
+			<div class="col-md-12 col-lg-11">
                 @if ($action->status==0)
                     <textarea name="remediation" class="easymde form-control" id="remediation">{{ old('remediation', $action->remediation) }}</textarea>
                 @else
@@ -122,7 +122,7 @@ form, table {
     		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.progress') }}</strong>
 	    	</div>
-			<div class="col-md-12 col-lg-6">
+			<div class="col-md-12 col-lg-11">
                 <div class="d-flex align-items-center gap-2">
                     <input class="form-range" value="{{ $action->progress }}" type="range" name="progress" min="0" max="100" step="1"
                            oninput="this.nextElementSibling.textContent = this.value + '%'"/>
@@ -160,7 +160,7 @@ form, table {
     		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.justification') }}</strong>
 	    	</div>
-			<div class="col-md-12 col-lg-6">
+			<div class="col-md-12 col-lg-11">
                 {!! \Parsedown::instance()->text($action->justification) !!}
 			</div>
 		</div>
@@ -170,7 +170,7 @@ form, table {
 			<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.owners') }}</strong>
 	    	</div>
-            <div class="col-md-12 col-lg-6">
+            <div class="col-md-12 col-lg-11">
                 @foreach($action->owners as $owner)
 					{{ $owner->name }}
                     @if ($action->owners->last()!=$owner)

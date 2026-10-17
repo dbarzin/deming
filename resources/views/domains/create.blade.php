@@ -14,7 +14,7 @@
 	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.domain.fields.framework') }}</strong>
 		    	</div>
-	    		<div class="col-md-10 col-lg-5">
+	    		<div class="col-md-10 col-lg-11">
 					<input class="form-control" type="text" name="framework" value="{{ old('framework') }}" maxlength='32'>
 				</div>
 			</div>
@@ -23,7 +23,7 @@
 	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.domain.fields.name') }}</strong>
 		    	</div>
-	    		<div class="col-md-10 col-lg-5">
+	    		<div class="col-md-10 col-lg-11">
 					<input class="form-control" type="text" name="title" value="{{ old('title') }}" maxlength='32'>
 				</div>
 			</div>
@@ -32,7 +32,7 @@
 	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.domain.fields.description') }}</strong>
 		    	</div>
-	    		<div class="col-md-10 col-lg-5">
+	    		<div class="col-md-10 col-lg-11">
 					<input class="form-control" type="text" name="description" value="{{ old('description') }}" maxlength='255'>
 				</div>
 			</div>

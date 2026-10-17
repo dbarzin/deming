@@ -12,7 +12,7 @@
 			<div class="col-lg-1 col-md-2">
 				<strong>{{ trans("cruds.measure.fields.clauses") }}</strong>
 			</div>
-			<div class="col-lg-7 col-md-9">
+			<div class="col-lg-11 col-md-10">
 				@foreach($measure->controls as $control)
 					<a href="/alice/show/{{ $control->id }}">{{ $control->clause }}</a> - {{ $control->name }}
 					@if(!$loop->last)
@@ -47,7 +47,7 @@
 			<div class="col-lg-1 col-md-2">
 				<strong>{{ trans("cruds.measure.fields.objective") }}</strong>
 			</div>
-			<div class="col-lg-7 col-md-9">
+			<div class="col-lg-11 col-md-10">
 				{!! \Parsedown::instance()->text($measure->objective) !!}
 			</div>
 		</div>
@@ -57,7 +57,7 @@
 			<div class="col-lg-1 col-md-2">
 				<strong>{{ trans("cruds.measure.fields.attributes") }}</strong>
 			</div>
-			<div class="col-lg-7 col-md-9">
+			<div class="col-lg-11 col-md-10">
 				{{ $measure->attributes }}
 			</div>
 		</div>
@@ -67,7 +67,7 @@
 			<div class="col-lg-1 col-md-2">
 				<strong>{{ trans("cruds.measure.fields.input") }}</strong>
 			</div>
-			<div class="col-lg-7 col-md-9">
+			<div class="col-lg-11 col-md-10">
 				{!! \Parsedown::instance()->text($measure->input) !!}
 			</div>
 		</div>
@@ -76,7 +76,7 @@
 			<div class="col-lg-1 col-md-2">
 				<strong>{{ trans("cruds.measure.fields.model") }}</strong>
 			</div>
-			<div class="col-lg-7 col-md-9">
+			<div class="col-lg-11 col-md-10">
 				<pre>{!! $measure->model !!}</pre>
 			</div>
 		</div>
@@ -126,7 +126,7 @@
 				<div class="col-lg-1 col-md-2">
 					<strong>{{ trans("cruds.measure.fields.observations") }}</strong>
 				</div>
-				<div class="col-lg-5 col-md-9">
+				<div class="col-lg-11 col-md-10">
 					<pre>{!! $measure->observations !!}</pre>
 				</div>
 			</div>
@@ -137,7 +137,7 @@
 				<div class="col-lg-1 col-md-2">
 					<strong>{{ trans("cruds.measure.fields.evidence") }}</strong>
 				</div>
-				<div class="col-lg-5 col-md-8">
+				<div class="col-lg-11 col-md-10">
 					@foreach ($documents as $document)
 						<a href="/doc/show/{{$document->id}}" target="_new">
 							{{$document->filename}}
@@ -162,7 +162,7 @@
 			<div class="col-lg-1 col-md-2">
 				<strong>{{ trans("cruds.measure.fields.indicator") }}</strong>
 			</div>
-			<div class="col-lg-6 col-md-8">
+			<div class="col-lg-11 col-md-10">
 				<pre>{{ $measure->indicator }}</pre>
 			</div>
 		</div>
@@ -172,7 +172,7 @@
 				<div class="col-lg-1 col-md-2">
 					<strong>{{ trans("cruds.measure.fields.score") }}</strong>
 				</div>
-				<div class="col-lg-6 col-md-8">
+				<div class="col-lg-11 col-md-10">
 					@if ($measure->score==1)
 						&#128545;
 					@elseif ($measure->score==2)
@@ -199,7 +199,7 @@
 				<div class="col-lg-1 col-md-2">
 					<strong>{{ trans("cruds.measure.fields.action_plan") }}</strong>
 				</div>
-				<div class="col-lg-6 col-md-8">
+				<div class="col-lg-11 col-md-10">
 					{!! \Parsedown::instance()->text($measure->action_plan) !!}
 				</div>
 			</div>
@@ -209,7 +209,7 @@
 			<div class="col-lg-1 col-md-2">
 				<strong>{{ trans('cruds.measure.fields.periodicity') }}</strong>
 			</div>
-			<div class="col-lg-6 col-md-8">
+			<div class="col-lg-11 col-md-10">
 				@if ($measure->periodicity==0) {{ trans("common.once") }} @endif
 				@if ($measure->periodicity==-1) {{ trans("common.weekly") }} @endif
 				@if ($measure->periodicity==1) {{ trans("common.monthly") }} @endif
@@ -223,7 +223,7 @@
 			<div class="col-lg-1 col-md-2">
 				<strong>{{ trans('cruds.measure.fields.owners') }}</strong>
 			</div>
-			<div class="col-lg-6 col-md-8">
+			<div class="col-lg-11 col-md-10">
 				@foreach($measure->groups as $group)
 					{{ $group->name }}
 					@if (!$loop->last)

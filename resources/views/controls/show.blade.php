@@ -14,7 +14,7 @@
     		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.domain') }}</strong>
         	</div>
-            <div class="col-lg-7 col-md-9">
+            <div class="col-lg-11 col-md-10">
     			<a href="/domains/{{$control->domain_id}}">
     			{{ $control->domain->title ?? ""}}
     			</a>
@@ -27,7 +27,7 @@
     		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.clause') }}</strong> - <strong>{{ trans('cruds.control.fields.name') }}</strong>
         	</div>
-            <div class="col-lg-7 col-md-9">
+            <div class="col-lg-11 col-md-10">
     			{{ $control->clause }} - {{ $control->name }}
     		</div>
         </div>
@@ -36,7 +36,7 @@
     		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.objective') }}</strong>
         	</div>
-            <div class="col-lg-7 col-md-9">
+            <div class="col-lg-11 col-md-10">
                 {!! \Parsedown::instance()->text($control->objective) !!}
     		</div>
         </div>
@@ -46,7 +46,7 @@
     		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans("cruds.control.fields.attributes") }}</strong>
         	</div>
-            <div class="col-lg-7 col-md-9">
+            <div class="col-lg-11 col-md-10">
         		{{ $control->attributes }}
     		</div>
     	</div>
@@ -56,7 +56,7 @@
     		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.input') }}</strong>
         	</div>
-            <div class="col-lg-7 col-md-9">
+            <div class="col-lg-11 col-md-10">
                 {!! \Parsedown::instance()->text($control->input) !!}
     		</div>
         </div>
@@ -65,7 +65,7 @@
     		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.model') }}</strong>
         	</div>
-            <div class="col-lg-7 col-md-9">
+            <div class="col-lg-11 col-md-10">
     			<pre>{{ $control->model }}</pre>
     		</div>
         </div>
@@ -75,7 +75,7 @@
     		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.indicator') }}</strong>
         	</div>
-    		<div class="col-lg-6 col-md-9">
+    		<div class="col-lg-11 col-md-10">
     			<pre>{{ $control->indicator }}</pre>
     		</div>
         </div>
@@ -84,7 +84,7 @@
     		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.control.fields.action_plan') }}</strong>
         	</div>
-    		<div class="col-lg-6 col-md-9">
+    		<div class="col-lg-11 col-md-10">
                 {!! \Parsedown::instance()->text($control->action_plan) !!}
     		</div>
         </div>

@@ -19,7 +19,7 @@
     		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans("cruds.measure.fields.clauses") }}</strong>
         	</div>
-    		<div class="col-lg-7 col-md-9">
+    		<div class="col-lg-11 col-md-10">
                 @foreach($measure->controls as $control)
                     <a href="/alice/show/{{ $control->id }}">{{ $control->clause }}</a> - {{ $control->name }}
                     @if(!$loop->last)
@@ -51,7 +51,7 @@
     		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
         	</div>
-            <div class="col-lg-6 col-md-10">
+            <div class="col-lg-11 col-md-10">
                 {!! \Parsedown::instance()->text($measure->objective) !!}
     		</div>
     	</div>
@@ -90,7 +90,7 @@
     		<div class="col-lg-1 col-md-2">
     			<strong>{{ trans('cruds.measure.fields.owners') }}</strong>
         	</div>
-            <div class="col-lg-4 col-md-8">
+            <div class="col-lg-11 col-md-10">
                 <select class="form-select select2" name="owners[]" id="owners" multiple>
                     @foreach($owners as $id => $name)
                         <option

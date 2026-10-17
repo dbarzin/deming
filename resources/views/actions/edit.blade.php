@@ -53,7 +53,7 @@ form, table {
     		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.clauses') }}</strong>
 	    	</div>
-            <div class="col-md-12 col-lg-6">
+            <div class="col-md-12 col-lg-11">
 				<select class="form-select select2" name="measures[]" multiple>
 					@foreach($all_measures as $measure)
 					    <option value="{{ $measure->id }}"
@@ -85,7 +85,7 @@ form, table {
     		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans('cruds.action.fields.cause') }}</strong>
 	    	</div>
-            <div class="col-md-12 col-lg-6">
+            <div class="col-md-12 col-lg-11">
             <textarea name="cause" class="easymde form-control" id="cause">{{ old('cause', $action->cause) }}</textarea>
 			</div>
 		</div>
@@ -97,7 +97,7 @@ form, table {
 		<div class="col-md-2 col-lg-1">
             <strong>{{ trans('cruds.action.fields.remediation') }}</strong>
     	</div>
-		<div class="col-md-12 col-lg-6">
+		<div class="col-md-12 col-lg-11">
             <textarea name="remediation" class="easymde form-control" id="remediation">{{ old('remediation', $action->remediation) }}</textarea>
 		</div>
 	</div>
@@ -106,7 +106,7 @@ form, table {
 		<div class="col-md-2 col-lg-1">
             <strong>{{ trans('cruds.action.fields.progress') }}</strong>
     	</div>
-		<div class="col-md-12 col-lg-6">
+		<div class="col-md-12 col-lg-11">
             <div class="d-flex align-items-center gap-2">
                     <input class="form-range" value="{{ $action->progress }}" type="range" name="progress" min="0" max="100" step="1"
                            oninput="this.nextElementSibling.textContent = this.value + '%'"/>
@@ -141,7 +141,7 @@ form, table {
 		<div class="col-md-2 col-lg-1">
             <strong>{{ trans('cruds.action.fields.justification') }}</strong>
     	</div>
-		<div class="col-md-12 col-lg-6">
+		<div class="col-md-12 col-lg-11">
             <textarea name="justification" class="easymde form-control" id="justification">{{ old('justification', $action->justification) }}</textarea>
 		</div>
 	</div>
@@ -150,7 +150,7 @@ form, table {
         <div class="col-md-2 col-lg-1">
             <strong>{{ trans('cruds.action.fields.owners') }}</strong>
         </div>
-        <div class="col-md-12 col-lg-6">
+        <div class="col-md-12 col-lg-11">
             <select class="form-select select2" name="owners[]" id="owners" multiple>
                 @foreach($users as $user)
                     <option value="{{ $user->id }}" {{ (in_array($user->id, old('owners', [])) || $action->owners->contains($user->id)) ? 'selected' : '' }}>{{ $user->name }}</option>

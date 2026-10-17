@@ -16,7 +16,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.control.fields.domain') }}</strong>
 	    	</div>
-			<div class="col-lg-6 col-md-8">
+			<div class="col-lg-11 col-md-10">
 			<select class="form-select select2" name="domain_id">
 				    <option value="">--{{ trans('cruds.domain.choose') }}--</option>
 					@foreach ($domains as $domain)
@@ -43,7 +43,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.control.fields.name') }}</strong>
 	    	</div>
-			<div class="col-lg-6 col-md-8">
+			<div class="col-lg-11 col-md-10">
 				<input class="form-control" type="text" name="name"
 					value="{{ old('name', $control->name) }}"
 					size='60'>
@@ -54,7 +54,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.control.fields.objective') }}</strong>
 	    	</div>
-			<div class="col-lg-6 col-md-8">
+			<div class="col-lg-11 col-md-10">
                 <textarea name="objective" class="easymde form-control" id="mde1">{{ old('objective', $control->objective) }}</textarea>
 			</div>
 		</div>
@@ -63,7 +63,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.control.fields.attributes') }}</strong>
 	    	</div>
-			<div class="col-lg-6 col-md-8">
+			<div class="col-lg-11 col-md-10">
 				<select class="form-select select2" name="attributes[]" multiple>
 					@foreach($values as $value)
 				    <option {{ (old('attributes') ? in_array($value, old('attributes')) : str_contains($control->attributes ?? '', $value)) ? 'selected' : ''}}>{{$value}}</option>
@@ -76,7 +76,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.control.fields.input') }}</strong>
 	    	</div>
-			<div class="col-lg-6 col-md-8">
+			<div class="col-lg-11 col-md-10">
                 <textarea name="input" class="easymde form-control" id="input">{{ old('input', $control->input) }}</textarea>
 			</div>
 		</div>
@@ -84,7 +84,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.control.fields.model') }}</strong>
 	    	</div>
-			<div class="col-lg-6 col-md-8">
+			<div class="col-lg-11 col-md-10">
 				<textarea class="form-control" name="model" rows="3">{{ old('model', $control->model) }}</textarea>
 			</div>
 		</div>
@@ -92,7 +92,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.control.fields.indicator') }}</strong>
 	    	</div>
-			<div class="col-lg-6 col-md-8">
+			<div class="col-lg-11 col-md-10">
 				<textarea class="form-control" name="indicator" rows="3">{{ old('indicator', $control->indicator) }}</textarea>
 			</div>
 		</div>
@@ -100,7 +100,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.control.fields.action_plan') }}</strong>
 	    	</div>
-			<div class="col-lg-6 col-md-8">
+			<div class="col-lg-11 col-md-10">
                 <textarea name="action_plan" class="easymde form-control" id="action_plan">{{ old('action_plan', $control->action_plan) }}</textarea>
 			</div>
 		</div>

@@ -10,7 +10,7 @@
     		<div class="col-md-2 col-lg-1">
 	    		<strong>{{ trans('cruds.domain.fields.framework') }}</strong>
 	    	</div>
-            <div class="col-md-12 col-lg-6">
+            <div class="col-md-12 col-lg-11">
 	    		{{ $domain->framework }}
     		</div>
 	    </div>
@@ -19,7 +19,7 @@
     		<div class="col-md-2 col-lg-1">
 	    		<strong>{{ trans('cruds.domain.fields.name') }}</strong>
 	    	</div>
-            <div class="col-md-12 col-lg-6">
+            <div class="col-md-12 col-lg-11">
 	    		{{ $domain->title }}
     		</div>
 	    </div>
@@ -28,7 +28,7 @@
     		<div class="col-md-2 col-lg-1">
 	    		<strong>{{ trans('cruds.domain.fields.description') }}</strong>
 	    	</div>
-            <div class="col-md-12 col-lg-6">
+            <div class="col-md-12 col-lg-11">
 	    		{{ $domain->description }}
     		</div>
     	</div>

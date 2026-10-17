@@ -20,7 +20,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.name") }}</strong>
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     <input class="form-control" type="text" name="name"
                            value="{{ $risk->name }}" maxlength="255" required>
                 </div>
@@ -31,7 +31,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.description") }}</strong>
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     <textarea class="form-control" name="description" rows="3">{{ old('description', $risk->description) }}</textarea>
                 </div>
             </div>
@@ -81,7 +81,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.impact") }}</strong>
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     @foreach ($scoringConfig->impact_levels ?? [] as $level)
                     <div class="form-check"><input id="impact_{{ $level['value'] }}" class="form-check-input" type="radio" name="impact" value="{{ $level['value'] }}"
                            {{ old('impact', $risk->impact) == $level['value'] ? 'checked' : '' }}/><label class="form-check-label" for="impact_{{ $level['value'] }}"><b>{{ $level['value'] }}</b> — {{ $level['label'] }}@if (!empty($level['description'])) <small class="text-muted">({{ $level['description'] }})</small>@endif</label></div>
@@ -90,7 +90,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-1 col-md-2"></div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     <textarea class="form-control" name="impact_comment" rows="2"
                               placeholder="{{ trans('cruds.risk.fields.impact_comment') }}">{{ old('impact_comment', $risk->impact_comment) }}</textarea>
                 </div>
@@ -110,7 +110,7 @@
                             @endif
                         </strong>
                     </div>
-                    <div class="col-lg-10 col-md-10">
+                    <div class="col-lg-11 col-md-10">
                         @foreach ($scoringConfig->probability_levels ?? [] as $level)
                         <div class="form-check"><input id="probability_{{ $level['value'] }}" class="form-check-input" type="radio" name="probability" value="{{ $level['value'] }}"
                                {{ old('probability', $risk->probability) == $level['value'] ? 'checked' : '' }}/><label class="form-check-label" for="probability_{{ $level['value'] }}"><b>{{ $level['value'] }}</b> — {{ $level['label'] }}@if (!empty($level['description'])) <small class="text-muted">({{ $level['description'] }})</small>@endif</label></div>
@@ -119,7 +119,7 @@
                 </div>
                 <div class="row">
                     <div class="col-lg-1 col-md-2"></div>
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-11 col-md-10">
                         <textarea class="form-control" name="probability_comment" rows="2"
                                   placeholder="{{ trans('cruds.risk.fields.probability_comment') }}">{{ old('probability_comment', $risk->probability_comment) }}</textarea>
                     </div>
@@ -135,7 +135,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.exposure") }}</strong>
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     @foreach ($scoringConfig->exposure_levels ?? [] as $level)
                     <div class="form-check"><input id="exposure_{{ $level['value'] }}" class="form-check-input" type="radio" name="exposure" value="{{ $level['value'] }}"
                            {{ old('exposure', $risk->exposure ?? 0) == $level['value'] ? 'checked' : '' }}/><label class="form-check-label" for="exposure_{{ $level['value'] }}"><b>{{ $level['value'] }}</b> — {{ $level['label'] }}</label></div>
@@ -150,7 +150,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.vulnerability") }}</strong>
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     @foreach ($scoringConfig->vulnerability_levels ?? [] as $level)
                     <div class="form-check"><input id="vulnerability_{{ $level['value'] }}" class="form-check-input" type="radio" name="vulnerability" value="{{ $level['value'] }}"
                            {{ old('vulnerability', $risk->vulnerability ?? 0) == $level['value'] ? 'checked' : '' }}/><label class="form-check-label" for="vulnerability_{{ $level['value'] }}"><b>{{ $level['value'] }}</b> — {{ $level['label'] }}</label></div>
@@ -168,7 +168,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.impact") }}</strong>
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     @foreach ($scoringConfig->impact_levels ?? [] as $level)
                     <div class="form-check"><input id="impact_{{ $level['value'] }}" class="form-check-input" type="radio" name="impact" value="{{ $level['value'] }}"
                            {{ old('impact', $risk->impact) == $level['value'] ? 'checked' : '' }}/><label class="form-check-label" for="impact_{{ $level['value'] }}"><b>{{ $level['value'] }}</b> — {{ $level['label'] }}@if (!empty($level['description'])) <small class="text-muted">({{ $level['description'] }})</small>@endif</label></div>
@@ -177,7 +177,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-1 col-md-2"></div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     <textarea class="form-control" name="impact_comment" rows="2"
                               placeholder="{{ trans('cruds.risk.fields.impact_comment') }}">{{ old('impact_comment', $risk->impact_comment) }}</textarea>
                 </div>
@@ -189,7 +189,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.score") }}</strong>
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                 @php
                     $score     = $risk->computedScore($scoringConfig);
                     $threshold = $scoringConfig->thresholdFor($score);
@@ -234,7 +234,7 @@
             </div>
             <div class="row">
                 <div class="col-lg-1 col-md-2"></div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     <textarea class="form-control" name="status_comment" rows="2"
                               placeholder="{{ trans('cruds.risk.fields.status_comment') }}">{{ old('status_comment', $risk->status_comment) }}</textarea>
                 </div>
@@ -246,7 +246,7 @@
                     <div class="col-lg-1 col-md-2">
                         <strong>{{ trans("cruds.risk.fields.controls") }}</strong>
                     </div>
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-11 col-md-10">
                         <select class="form-select select2" name="control_ids[]" multiple>
                             @foreach ($controls as $control)
                                 <option value="{{ $control->id }}"
@@ -270,7 +270,7 @@
                     <div class="col-lg-1 col-md-2">
                         <strong>{{ trans("cruds.risk.fields.action_plan") }}</strong>
                     </div>
-                    <div class="col-lg-6 col-md-8">
+                    <div class="col-lg-11 col-md-10">
                         <select class="form-select select2" name="action_ids[]" multiple>
                             @foreach ($actions as $action)
                                 <option value="{{ $action->id }}"

@@ -11,7 +11,7 @@
     		<div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.group.fields.name') }}</strong>
 	    	</div>
-            <div class="col-lg-6 col-md-10">
+            <div class="col-lg-11 col-md-10">
                 {{ $group->name }}
     		</div>
 	    </div>
@@ -20,7 +20,7 @@
     		<div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.group.fields.type') }}</strong>
 	    	</div>
-            <div class="col-lg-6 col-md-10">
+            <div class="col-lg-11 col-md-10">
                 @include('groups.type_badge')
     		</div>
 	    </div>
@@ -29,7 +29,7 @@
     		<div class="col-lg-1 col-md-2">
                 <strong>{{ trans('cruds.group.fields.description') }}</strong>
 	    	</div>
-			<div class="col-lg-10 col-md-10">
+			<div class="col-lg-11 col-md-10">
                 {!! $group->description !!}
     		</div>
 	    </div>

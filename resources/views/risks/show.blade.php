@@ -35,7 +35,7 @@
         <div class="col-lg-1 col-md-2">
             <strong>{{ trans("cruds.risk.fields.description") }}</strong>
         </div>
-        <div class="col-lg-7 col-md-9">
+        <div class="col-lg-11 col-md-10">
             <pre>{{ $risk->description }}</pre>
         </div>
     </div>
@@ -83,7 +83,7 @@
             {{ $scoringConfig->levelLabel('impact', $risk->impact) }}
         </div>
         @if ($risk->impact_comment)
-        <div class="col-lg-5 col-md-7">
+        <div class="col-lg-10 col-md-7">
             <small class="text-muted">{{ $risk->impact_comment }}</small>
         </div>
         @endif
@@ -108,7 +108,7 @@
             {{ $scoringConfig->levelLabel('probability', $risk->probability) }}
         </div>
         @if ($risk->probability_comment)
-        <div class="col-lg-5 col-md-7">
+        <div class="col-lg-10 col-md-7">
             <small class="text-muted">{{ $risk->probability_comment }}</small>
         </div>
         @endif
@@ -165,7 +165,7 @@
             {{ $scoringConfig->levelLabel('impact', $risk->impact) }}
         </div>
         @if ($risk->impact_comment)
-        <div class="col-lg-5 col-md-7">
+        <div class="col-lg-10 col-md-7">
             <small class="text-muted">{{ $risk->impact_comment }}</small>
         </div>
         @endif
@@ -180,7 +180,7 @@
         <div class="col-lg-1 col-md-2">
             <strong>{{ trans("cruds.risk.fields.score") }}</strong>
         </div>
-        <div class="col-lg-6 col-md-8">
+        <div class="col-lg-11 col-md-10">
             @php
                 $score     = $risk->computedScore($scoringConfig);
                 $threshold = $scoringConfig->thresholdFor($score);
@@ -206,7 +206,7 @@
         <div class="col-lg-1 col-md-2">
             <strong>{{ trans("cruds.risk.fields.status") }}</strong>
         </div>
-        <div class="col-lg-7 col-md-9">
+        <div class="col-lg-11 col-md-10">
             <span class="badge text-bg-{{ \App\Models\Risk::STATUS_COLORS[$risk->status] ?? 'secondary' }}" style="font-size:1rem;">
                 {{ \App\Models\Risk::statusLabel($risk->status) }}
             </span>
@@ -222,7 +222,7 @@
         <div class="col-lg-1 col-md-2">
             <strong>{{ trans("cruds.risk.fields.controls") }}</strong>
         </div>
-        <div class="col-lg-7 col-md-9">
+        <div class="col-lg-11 col-md-10">
             @foreach ($risk->controls as $control)
                 <a href="/alice/show/{{ $control->id }}">{{ $control->clause }} - {{ $control->name }}</a>
                 @if (!$loop->last) <br> @endif
@@ -237,7 +237,7 @@
         <div class="col-lg-1 col-md-2">
             <strong>{{ trans("cruds.risk.fields.action_plan") }}</strong>
         </div>
-        <div class="col-lg-7 col-md-9">
+        <div class="col-lg-11 col-md-10">
             @foreach ($risk->actions as $action)
                 <a href="/action/show/{{ $action->id }}">{{ $action->name }}</a>
                 @if (!$loop->last) , @endif

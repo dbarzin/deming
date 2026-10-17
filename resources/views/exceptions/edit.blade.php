@@ -18,7 +18,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans('cruds.exception.fields.name') }}</strong>
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     <input class="form-control" type="text" name="name"
         				value="{{ old('name', $exception->name) }}"
                         maxlength="255" required>
@@ -30,7 +30,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans('cruds.exception.fields.measure') }}</strong>
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     <select class="form-select select2" name="measure_id">
                         <option value="">– {{ trans('cruds.exception.fields.no_measure') }} –</option>
                         @foreach($controls as $control)
@@ -48,7 +48,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans('cruds.exception.fields.description') }}</strong>
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     <textarea class="form-control" name="description" rows="4">{{ old('description', $exception->description) }}</textarea>
                 </div>
             </div>
@@ -58,7 +58,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans('cruds.exception.fields.justification') }}</strong>
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     <textarea class="form-control" name="justification" rows="4">{{ old('justification', $exception->justification) }}</textarea>
                 </div>
             </div>
@@ -68,7 +68,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans('cruds.exception.fields.compensating_controls') }}</strong>
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     <textarea class="form-control" name="compensating_controls" rows="3">{{ old('compensating_controls', $exception->compensating_controls) }}</textarea>
                 </div>
             </div>
@@ -79,7 +79,7 @@
                 <div class="col-lg-1 col-md-2">
                     <strong>{{ trans('cruds.exception.fields.status') }}</strong>
                 </div>
-                <div class="col-lg-6 col-md-8">
+                <div class="col-lg-11 col-md-10">
                     <select class="form-select" name="status" style="width: 100%; height: 36px; padding: 4px 8px; border: 1px solid #ababab; border-radius: 2px; background-color: #fff;">
                         @foreach($statuses as $value => $label)
                             <option value="{{ $value }}" {{ ((int) old('status', $exception->status)) === $value ? 'selected' : '' }}>

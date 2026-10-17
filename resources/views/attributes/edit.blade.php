@@ -23,7 +23,7 @@
 	    		<div class="col-md-2 col-lg-1">
 					<label class="form-label" for="description">{{ trans('cruds.attribute.fields.values') }}</label>
 		    	</div>
-				<div class="col-md-12 col-lg-8">
+				<div class="col-md-12 col-lg-11">
 					<textarea class="form-control" name="values" rows="5" cols="80">{{ old('values', $attribute->values) }}</textarea>
 					<br>
 					format: #tag #tag #tag ...

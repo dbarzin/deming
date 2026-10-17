@@ -11,7 +11,7 @@
 	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.login') }}</strong>
 		    	</div>
-                <div class="col-md-12 col-lg-6">
+                <div class="col-md-12 col-lg-11">
 		    		{{ $user->login }}
 	    		</div>
 		    </div>
@@ -20,7 +20,7 @@
 	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.name') }}</strong>
 		    	</div>
-                <div class="col-md-12 col-lg-6">
+                <div class="col-md-12 col-lg-11">
 		    		{{ $user->name }}
 	    		</div>
 		    </div>
@@ -29,7 +29,7 @@
 	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.title') }}</strong>
 		    	</div>
-                <div class="col-md-12 col-lg-6">
+                <div class="col-md-12 col-lg-11">
 		    		{{ $user->title }}
 	    		</div>
 		    </div>
@@ -38,7 +38,7 @@
 	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.language') }}</strong>
 		    	</div>
-                <div class="col-md-12 col-lg-6">
+                <div class="col-md-12 col-lg-11">
 		    		{{ $user->language }}
 	    		</div>
 		    </div>
@@ -47,7 +47,7 @@
 	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.role') }}</strong>
 		    	</div>
-                <div class="col-md-12 col-lg-6">
+                <div class="col-md-12 col-lg-11">
 		    		{{ $user->role==1 ? trans('cruds.user.roles.admin') : "" }}
 		    		{{ $user->role==2 ? trans('cruds.user.roles.user') : "" }}
                     {{ $user->role==5 ? trans('cruds.user.roles.auditee') : "" }}
@@ -61,7 +61,7 @@
 	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.email') }}</strong>
 		    	</div>
-                <div class="col-md-12 col-lg-6">
+                <div class="col-md-12 col-lg-11">
 		    		{{ $user->email }}
 	    		</div>
 	    	</div>
@@ -71,7 +71,7 @@
                     <strong>{{ trans('cruds.user.fields.groups') }}</strong>
 		    	</div>
 
-	    		<div class="col-md-12 col-lg-8">
+	    		<div class="col-md-12 col-lg-11">
                     @foreach($user->groups as $group)
                         <a href='/groups/{{ $group->id }}'> {{ $group->name }}</a>
                         @if (!$loop->last)

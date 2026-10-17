@@ -27,7 +27,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.measure.fields.clauses') }}</strong>
 	    	</div>
-    		<div class="col-lg-7 col-md-9">
+    		<div class="col-lg-11 col-md-10">
                 @foreach($measure->controls as $control)
                     <a href="/alice/show/{{ $control->id }}">{{ $control->clause }}</a> - {{ $control->name }}
                     @if(!$loop->last)
@@ -61,7 +61,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
 	    	</div>
-            <div class="col-lg-6 col-md-10">
+            <div class="col-lg-11 col-md-10">
                 {!! \Parsedown::instance()->text($measure->objective) !!}
 			</div>
 		</div>
@@ -70,7 +70,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.measure.fields.input') }}</strong>
 	    	</div>
-			<div class="col-lg-6 col-md-10">
+			<div class="col-lg-11 col-md-10">
                 {!! \Parsedown::instance()->text($measure->input) !!}
 			</div>
 		</div>
@@ -79,7 +79,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.measure.fields.model') }}</strong>
 	    	</div>
-			<div class="col-lg-6 col-md-10">
+			<div class="col-lg-11 col-md-10">
 				<pre>{{ $measure->model }}</pre>
 			</div>
 		</div>
@@ -116,7 +116,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.measure.fields.observations') }}</strong>
 	    	</div>
-			<div class="col-lg-6 col-md-10">
+			<div class="col-lg-11 col-md-10">
                 <textarea class="form-control" name="observations" rows="5">{{ old('observations', $measure->observations) }}</textarea>
 			</div>
 	    </div>
@@ -127,7 +127,7 @@
 	    		<br>
                 <a target="_new" href="/bob/template/{{ $measure->id }}" id="checklist-link">{{ trans('cruds.measure.checklist') }}</a>
 	    	</div>
-			<div class="col-lg-6 col-md-10">
+			<div class="col-lg-11 col-md-10">
 				<div class="dropzone dropzone-previews" id="dropzoneFileUpload"></div>
 			</div>
 	    </div>
@@ -153,7 +153,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.measure.fields.indicator') }}</strong>
 	    	</div>
-            <div class="col-lg-6 col-md-10">
+            <div class="col-lg-11 col-md-10">
 				<pre>{{ $measure->indicator }}</pre>
 			</div>
 		</div>
@@ -164,7 +164,7 @@
 	    			{{ trans('cruds.measure.fields.score') }}
 	    		</strong>
 	    	</div>
-            <div class="col-lg-6 col-md-10">
+            <div class="col-lg-11 col-md-10">
                 <div class="form-check form-check-inline"><input id="score3" class="form-check-input" type="radio" name="score" value="3" {{ $measure->score===3 ? "checked" : "" }} /><label class="form-check-label" for="score3"><font color='green'>{{ trans('common.green') }}</font></label></div>
                 <div class="form-check form-check-inline"><input id="score2" class="form-check-input" type="radio" name="score" value="2" {{ $measure->score===2 ? "checked" : "" }} /><label class="form-check-label" for="score2"><font color='orange'>{{ trans('common.orange') }}</font></label></div>
                 <div class="form-check form-check-inline"><input id="score1" class="form-check-input" type="radio" name="score" value="1" {{ $measure->score===1 ? "checked" : "" }} /><label class="form-check-label" for="score1"><font color='red'>{{ trans('common.red') }}</font></label></div>
@@ -182,7 +182,7 @@
     		<div class="col-lg-1 col-md-2">
 	    		<strong>{{ trans('cruds.measure.fields.action_plan') }}</strong>
 	    	</div>
-            <div class="col-lg-6 col-md-10">
+            <div class="col-lg-11 col-md-10">
                 <textarea name="action_plan" class="form-control easymde disabled-editor" id="action_plan">{{ old('action_plan', $measure->action_plan) }}</textarea>
 			</div>
 		</div>

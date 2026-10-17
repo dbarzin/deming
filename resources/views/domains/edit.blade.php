@@ -31,7 +31,7 @@
 	    		<div class="col-md-2 col-lg-1">
 					<label class="form-label" for="description">{{ trans('cruds.domain.fields.description') }}</label>
 		    	</div>
-				<div class="col-md-12 col-lg-8">
+				<div class="col-md-12 col-lg-11">
 					<input type="text" class="{{ $errors->has('description') ? 'is-invalid' : ''}} form-control" name="description" value="{{ old('description', $domain->description) }}" maxlength='255'>
 				</div>
 			</div>
