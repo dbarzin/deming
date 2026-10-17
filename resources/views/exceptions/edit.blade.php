@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="card">
-    <div class="card-header">@include('partials.help', ['page' => 'exceptions.edit'])<i class="bi bi-x-octagon"></i> {{ trans('cruds.exception.create') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'exceptions.edit'])<i class="bi bi-x-octagon"></i> {{ trans('cruds.exception.edit') }}</div>
     <div class="card-body">
 
     @include('partials.errors')
@@ -98,14 +98,14 @@
                 </div>
                 <div class="col-lg-2 col-md-3">
                     <input class="form-control" type="date"
-                        name="start_date" value="{{ old('start_date', $exception->start_date) }}"/>
+                        name="start_date" value="{{ old('start_date', $exception->start_date?->format('Y-m-d')) }}"/>
                 </div>
                 <div class="col-lg-1 col-md-2 text-md-end">
                     <strong>{{ trans('cruds.exception.fields.end_date') }}</strong>
                 </div>
                 <div class="col-lg-2 col-md-3">
                     <input class="form-control" type="date"
-                        name="end_date" value="{{ old('end_date', $exception->end_date) }}"/>
+                        name="end_date" value="{{ old('end_date', $exception->end_date?->format('Y-m-d')) }}"/>
                 </div>
             </div>
 
