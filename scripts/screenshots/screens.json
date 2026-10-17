@@ -8,7 +8,9 @@
     "risk": { "page": "/risk/index", "selector": "main table tr[data-href^='/risk/show/']", "attr": "data-href", "regex": "(\\d+)$" },
     "exception": { "page": "/exception/index", "selector": "main table a[href^='/exception/show/']", "regex": "(\\d+)$" },
     "exception_rejected": { "page": "/exception/index?status=3", "selector": "main table a[href^='/exception/show/']", "regex": "(\\d+)$" },
-    "group": { "page": "/groups", "selector": "main table a[href^='/groups/']", "regex": "(\\d+)$" }
+    "group": { "page": "/groups", "selector": "main table a[href^='/groups/']", "regex": "(\\d+)$" },
+    "measure_auditee": { "user": "auditee", "page": "/bob/index?attribute=none&period=99&scope=none&domain=0&status=2", "selector": "main table a[href^='/bob/show/']", "regex": "(\\d+)$" },
+    "measure_validate": { "page": "/home", "selector": "main a[href^='/bob/make/']:has(i.bi-hourglass-split)", "regex": "(\\d+)$" }
   },
   "screens": [
     { "name": "layout.{fr}", "url": "/home", "selector": "body", "maxHeight": 860 },
@@ -26,6 +28,10 @@
     { "name": "c5.{fr}", "url": "/bob/plan/{measure_todo}" },
     { "name": "c3.{fr}", "url": "/bob/make/{measure_todo}" },
     { "name": "cal.{fr}", "url": "/bob/history" },
+    { "name": "d1.{fr}", "url": "/bob/index?attribute=none&period=99&scope=none&domain=0&status=2", "user": "auditee" },
+    { "name": "d2.{fr}", "url": "/bob/make/{measure_auditee}", "user": "auditee" },
+    { "name": "d3.{fr}", "url": "/home", "selector": "main .card:has(table)", "maxHeight": 620 },
+    { "name": "d4.{fr}", "url": "/bob/make/{measure_validate}" },
     { "name": "r0.{fr}", "url": "/radar/monitoring" },
     { "name": "r1.{fr}", "url": "/radar/domains", "until": "main table" },
     { "name": "r4.{fr}", "url": "/radar/bob?clause={clause}" },

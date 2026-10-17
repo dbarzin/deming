@@ -13,14 +13,15 @@ Diese Delegation folgt diesen Regeln:
 
 ## Liste der durchzuführenden Kontrollen
 
-Aus Sicht des Auditierten enthält die Hauptseite der Anwendung die Liste der ihm zugewiesenen Kontrollen.
+Aus Sicht des Auditierten berücksichtigt das Dashboard der Startseite nur die ihm zugewiesenen Kontrollen, und das Menü
+„Kontrollen“ öffnet die Liste dieser Kontrollen.
 
-[![Screenshot](images/d1.png)](images/d1.png)
+[![Screenshot](images/d1.de.png)](images/d1.de.png)
 
 Der Auditierte kann:
 
 - die Liste der Kontrollen durchsuchen
-- die Kontrollen nach Domäne, Geltungsbereich, Attribut oder Zeitraum filtern
+- die Kontrollen nach Domäne, Klausel, Geltungsbereich oder Zeitraum filtern
 - die Liste nach jeder Spalte sortieren
 - eine durchzuführende Kontrolle auswählen
 
@@ -33,7 +34,7 @@ Wenn ein Auditierter eine Kontrolle durchführt, kann er:
 
 - die Kontrolle erledigen
 
-[![Screenshot](images/d2.png){: style="width:300px"}](images/d2.png)
+[![Screenshot](images/d2.de.png)](images/d2.de.png)
 
 Wenn er klickt auf:
 
@@ -48,22 +49,22 @@ Wenn er klickt auf:
 
 Sobald eine Kontrolle von einem Auditierten durchgeführt wurde, wechselt sie in den Status „zu validieren“.
 
-Für die anderen Benutzer wird dies in der Liste der durchzuführenden Kontrollen durch eine Sanduhr neben dem Durchführungsdatum angezeigt:
+Für die anderen Benutzer wird dies durch eine Sanduhr neben dem Planungsdatum in der Liste der in den nächsten 30 Tagen
+geplanten Kontrollen auf der Startseite und neben dem Durchführungsdatum in der [Liste der Kontrollen](controls.de.md#list)
+angezeigt:
 
-[![Screenshot](images/d3.png)](images/d3.png)
+[![Screenshot](images/d3.de.png)](images/d3.de.png)
 
-Wenn der Benutzer auf das Durchführungsdatum neben der Sanduhr klickt, gelangt er zu der vom Auditierten durchgeführten Kontrolle.
+Wenn der Benutzer auf die Sanduhr klickt, gelangt er zu der vom Auditierten durchgeführten Kontrolle.
 
 Er kann die Kontrolle dann akzeptieren oder ablehnen, indem er eine Notiz in den Beobachtungen der Kontrolle hinzufügt und, je nach Ergebnis der Kontrolle, einen Aktionsplan und ein Datum für die Überprüfung der Kontrolle vorschlägt.
 
-[![Screenshot](images/d4.png)](images/d4.png)
+[![Screenshot](images/d4.de.png)](images/d4.de.png)
 
 Wenn der Benutzer klickt auf:
 
 - „Akzeptiert“: Die geänderten Daten werden gesichert und eine neue Kontrolle wird zum eingegebenen Planungsdatum erstellt.
 
 - „Ablehnen“: Die geänderten Daten werden gesichert und die Kontrolle wird in die Liste der vom Auditierten durchzuführenden Kontrollen zurückgeschickt.
-
-- „Sichern“: Die Daten werden gesichert und der Benutzer kehrt zur Ansicht der Kontrolle zurück.
 
 - „Abbruch“: Der Benutzer kehrt zur Ansicht der Kontrolle zurück.

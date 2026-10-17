@@ -6,6 +6,8 @@
 //   DEMING_URL       application URL (default: http://localhost:8000)
 //   DEMING_LOGIN     administrator login (default: admin@admin.localhost)
 //   DEMING_PASSWORD  administrator password (default: admin)
+//   DEMING_AUDITEE_LOGIN     auditee login (default: julien.moreau@example.local)
+//   DEMING_AUDITEE_PASSWORD  auditee password (default: password)
 //   CHROME_PATH      browser executable (default: Playwright's bundled Chromium)
 //   LANGS            languages to capture: en, fr, de (default: en,fr)
 //   ONLY             comma-separated screenshot names to capture (default: all)
@@ -17,8 +19,14 @@ const fs = require('fs');
 const path = require('path');
 
 const BASE = (process.env.DEMING_URL || 'http://localhost:8000').replace(/\/$/, '');
-const LOGIN = process.env.DEMING_LOGIN || 'admin@admin.localhost';
-const PASSWORD = process.env.DEMING_PASSWORD || 'admin';
+// Accounts used to take the screens, selected by the "user" of a screen or a lookup
+const USERS = {
+    admin: { login: process.env.DEMING_LOGIN || 'admin@admin.localhost', password: process.env.DEMING_PASSWORD || 'admin' },
+    auditee: {
+        login: process.env.DEMING_AUDITEE_LOGIN || 'julien.moreau@example.local',
+        password: process.env.DEMING_AUDITEE_PASSWORD || 'password',
+    },
+};
 const LANGS = (process.env.LANGS || 'en,fr').split(',');
 const ONLY = process.env.ONLY ? process.env.ONLY.split(',') : null;
 const OUT_DIR = process.env.OUT_DIR || path.join(__dirname, '..', '..', 'docs', 'images');
@@ -31,16 +39,17 @@ function fileName(name, lang) {
         .replace('{lang}', lang);
 }
 
-async function login(page) {
+async function login(page, user) {
+    const { login, password } = USERS[user];
     await page.goto(BASE + '/login');
-    await page.fill('#login', LOGIN);
-    await page.fill('input[name=password]', PASSWORD);
+    await page.fill('#login', login);
+    await page.fill('input[name=password]', password);
     await Promise.all([page.waitForNavigation(), page.click('form button.btn-primary')]);
-    if (page.url().includes('/login')) throw new Error('Login failed for ' + LOGIN);
+    if (page.url().includes('/login')) throw new Error('Login failed for ' + login);
 }
 
 // Resolves the {placeholders} used in screen URLs from the first matching element of a list page.
-async function resolveLookups(page, screens) {
+async function resolveLookups(pageOf, screens) {
     const values = {};
     const used = screens.map(s => s.url).join();
     for (const [key, l] of Object.entries(spec.lookups)) {
@@ -49,6 +58,7 @@ async function resolveLookups(page, screens) {
             values[key] = process.env['ID_' + key];
             continue;
         }
+        const page = await pageOf(l.user || 'admin');
         await page.goto(BASE + l.page, { waitUntil: 'networkidle' });
         const raw = await page.locator(l.selector).first().getAttribute(l.attr || 'href');
         const match = l.regex ? new RegExp(l.regex).exec(raw || '') : [raw, raw];
@@ -114,12 +124,19 @@ async function capture(page, screen, lang, values) {
             ...(process.env.CHROME_PATH ? { executablePath: process.env.CHROME_PATH } : {}),
         });
         try {
-            const context = await browser.newContext({ viewport: { width: 1680, height: 1000 }, locale });
-            const page = await context.newPage();
-            await login(page);
-            if (!values) values = await resolveLookups(page, screens);
+            // One logged-in page per account, opened when first needed
+            const pages = {};
+            const pageOf = async user => {
+                if (!pages[user]) {
+                    const context = await browser.newContext({ viewport: { width: 1680, height: 1000 }, locale });
+                    pages[user] = await context.newPage();
+                    await login(pages[user], user);
+                }
+                return pages[user];
+            };
+            if (!values) values = await resolveLookups(pageOf, screens);
             for (const screen of screens) {
-                await capture(page, screen, lang, values);
+                await capture(await pageOf(screen.user || 'admin'), screen, lang, values);
             }
         } finally {
             await browser.close();

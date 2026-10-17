@@ -12,7 +12,8 @@ use Illuminate\Support\Facades\DB;
 
 /**
  * Jeu de données de test (français ou anglais, plausible) pour les risques,
- * les plans d'action, les exceptions et les groupes d'utilisateurs.
+ * les plans d'action, les exceptions, les groupes d'utilisateurs et la
+ * délégation de contrôles à un audité.
  *
  * Supprime intégralement les données existantes de ces domaines
  * (et leurs tables pivot) avant de recréer un jeu cohérent.
@@ -40,6 +41,7 @@ class RiskTestDataSeeder extends Seeder
         $risks = $this->seedRisks();
         $actions = $this->seedActions();
         $this->seedExceptions();
+        $this->seedDelegation();
         $this->seedGroups();
 
         // Liens risques <-> contrôles
@@ -82,6 +84,7 @@ class RiskTestDataSeeder extends Seeder
             2 => ['login' => 'alice.martin@example.local', 'name' => 'Alice Martin', 'title' => 'Risk Owner'],
             5 => ['login' => 'claire.dubois@example.local', 'name' => 'Claire Dubois', 'title' => 'Compliance Officer'],
             6 => ['login' => 'benoit.leroy@example.local', 'name' => 'Benoit Leroy', 'title' => 'IT Operations Manager'],
+            7 => ['login' => 'julien.moreau@example.local', 'name' => 'Julien Moreau', 'title' => 'Application Owner', 'role' => User::ROLE_AUDITEE],
         ];
 
         foreach ($demoUsers as $id => $attributes) {
@@ -94,7 +97,7 @@ class RiskTestDataSeeder extends Seeder
                 'login' => $attributes['login'],
                 'name' => $attributes['name'],
                 'title' => $attributes['title'],
-                'role' => User::ROLE_USER,
+                'role' => $attributes['role'] ?? User::ROLE_USER,
                 'language' => $this->locale,
                 'email' => $attributes['login'],
                 'password' => bcrypt('password'),
@@ -628,13 +631,41 @@ class RiskTestDataSeeder extends Seeder
             ],
         ];
 
-        // Contrôles planifiés (non réalisés) répartis entre les groupes
-        $measures = DB::table('measures')->whereNull('realisation_date')->orderBy('plan_date')->pluck('id')->all();
+        // Contrôles planifiés (non réalisés et non délégués) répartis entre les groupes
+        $measures = DB::table('measures')
+            ->whereNull('realisation_date')
+            ->whereNotIn('id', DB::table('measure_user')->select('measure_id'))
+            ->orderBy('plan_date')
+            ->pluck('id')
+            ->all();
 
         foreach ($defs as $def) {
             $group = UserGroup::create($this->localized(array_diff_key($def, ['users' => 0, 'measures' => 0])));
             $group->users()->sync($def['users']);
             $group->measures()->sync(array_splice($measures, 0, $def['measures']));
+        }
+    }
+
+    /**
+     * Délègue les premiers contrôles planifiés à l'audité (id 7) ; l'un d'eux
+     * a été réalisé par l'audité et attend d'être validé.
+     */
+    private function seedDelegation(): void
+    {
+        DB::table('measure_user')->where('user_id', 7)->delete();
+
+        $measures = DB::table('measures')->where('status', 0)->orderBy('plan_date')->limit(6)->pluck('id')->all();
+        DB::table('measure_user')->insert(array_map(fn ($id) => ['measure_id' => $id, 'user_id' => 7], $measures));
+
+        if ($measures !== []) {
+            DB::table('measures')->where('id', $measures[0])->update([
+                'status' => 1,
+                'score' => 3,
+                'realisation_date' => now()->toDateString(),
+                'observations' => $this->locale === 'fr'
+                    ? "Revue réalisée avec l'équipe applicative : les comptes inactifs ont été désactivés."
+                    : 'Review carried out with the application team: inactive accounts have been disabled.',
+            ]);
         }
     }
 }

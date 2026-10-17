@@ -4,7 +4,8 @@ Takes the screenshots of `docs/images` in English, French and German with Playwr
 
 ## Prerequisites
 
-* Deming running with test data and an administrator account
+* Deming running with test data (`php artisan deming:generate-tests`), an administrator account and, for the
+  delegation screens, the auditee account of the test data
 * Node dependencies installed (`npm install`)
 * A Chromium browser: `npx playwright install chromium`, or an existing one set with `CHROME_PATH`
 
@@ -35,6 +36,8 @@ ID_control=18 ID_measure_done=1231 npm run docs:screenshots
 | `DEMING_URL`      | `http://localhost:8000`  | Application URL                               |
 | `DEMING_LOGIN`    | `admin@admin.localhost`  | Administrator login                           |
 | `DEMING_PASSWORD` | `admin`                  | Administrator password                        |
+| `DEMING_AUDITEE_LOGIN` | `julien.moreau@example.local` | Auditee login                       |
+| `DEMING_AUDITEE_PASSWORD` | `password`         | Auditee password                              |
 | `CHROME_PATH`     | Playwright's Chromium    | Browser executable                            |
 | `LANGS`           | `en,fr`                  | Languages to capture (`en`, `fr`, `de`)       |
 | `ONLY`            | all screens              | Screen names to capture (without `.{fr}`)     |
@@ -44,10 +47,12 @@ ID_control=18 ID_measure_done=1231 npm run docs:screenshots
 ## screens.json
 
 * `lookups`: values used in the screen URLs (`{control}`, `{risk}`...). Each one is read from the first element
-  matching `selector` on `page` (attribute `attr`, `href` by default, filtered by `regex`).
+  matching `selector` on `page` (attribute `attr`, `href` by default, filtered by `regex`), seen by `user`
+  (`admin` by default, or `auditee`).
 * `screens`: one entry per image.
     * `name`: image name; `{fr}` is replaced by the language in French and German (`fr`, `de`) and removed in English, `{lang}` is replaced by the language
     * `url`: page to capture
+    * `user`: account used, `admin` (default) or `auditee`
     * `selector`: element to capture (default: the main content)
     * `until`: stops the capture at the top of this element
     * `maxHeight`: maximum height in pixels

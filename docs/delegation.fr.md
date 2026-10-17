@@ -13,14 +13,15 @@ Cette délégation respecte les règles suivantes :
 
 ## Liste des contrôles à réaliser
 
-Du point de vue de l'audité, la page principale de l'application contient la liste des contrôles qui lui sont assignés.
+Du point de vue de l'audité, le tableau de bord de la page d'accueil ne tient compte que des contrôles qui lui sont
+assignés, et le menu « Contrôles » ouvre la liste de ces contrôles.
 
 [![Screenshot](images/d1.fr.png)](images/d1.fr.png)
 
 L'audité peut :
 
 - Effectuer des recherches dans la liste des contrôles
-- Filtrer les contrôles par domaine, périmètre, attribut, période.
+- Filtrer les contrôles par domaine, clause, périmètre ou période
 - Trier la liste par chacune des colonnes
 - Sélectionner un contrôle à réaliser
 
@@ -33,7 +34,7 @@ Lorsqu'un audité réalise un contrôle, il peut :
 
 - Faire le contrôle
 
-[![Screenshot](images/d2.fr.png){: style="width:300px"}](images/d2.fr.png)
+[![Screenshot](images/d2.fr.png)](images/d2.fr.png)
 
 Lorsqu'il clique sur :
 
@@ -48,11 +49,13 @@ Lorsqu'il clique sur :
 
 Une fois qu'un contrôle a été réalisé par un audité, il passe dans l'état "à valider".
 
-Cela se matérialise pour les autres utilisateurs par un sablier à côté de la date de réalisation dans la liste des contrôles à réaliser :
+Cela se matérialise pour les autres utilisateurs par un sablier à côté de la date de planification dans la liste des
+contrôles planifiés dans les 30 prochains jours de la page d'accueil, et à côté de la date de réalisation dans la
+[liste des contrôles](controls.fr.md#list) :
 
-[![Screenshot](images/d3.fr.png)](images/d2.fr.png)
+[![Screenshot](images/d3.fr.png)](images/d3.fr.png)
 
-Lorsque l'utilisateur clique sur la date de réalisation à côté du sablier, il arrive sur le contrôle réalisé par l'audité.
+Lorsque l'utilisateur clique sur le sablier, il arrive sur le contrôle réalisé par l'audité.
 
 Il peut alors accepter ou refuser le contrôle en ajoutant une note dans les observations du contrôle et, selon les résultats du contrôle, proposer un plan d'action et une date de revue du contrôle.
 
@@ -63,7 +66,5 @@ Si l'utilisateur clique sur :
 - "Accepter" : les données modifiées sont sauvées et un nouveau contrôle est créé à la date de planification introduite.
 
 - "Rejeter" : les données modifiées sont sauvées et le contrôle est renvoyé dans la liste des contrôles à réaliser de l'audité.
-
-- "Sauver" : les données sont sauvées et l'utilisateur revient à la vue du contrôle.
 
 - "Annuler" : l'utilisateur revient à la vue du contrôle.
