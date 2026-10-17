@@ -301,6 +301,18 @@ return [
             'ownership' => 'Zuständigkeit: Eine Kontrolle gehört dem Sicherheitsteam, wenn mindestens eine ihrer Gruppen vom Typ Sicherheit ist oder mindestens einer ihrer zugewiesenen Benutzer Mitglied einer Sicherheitsgruppe ist. Alle anderen, einschließlich nicht zugewiesener Kontrollen, liegen außerhalb Sicherheit.',
             'ownership_totals' => 'Die Zuständigkeitssummen im Überblick umfassen alle Kontrollen (abgeschlossen und live), im Gegensatz zur Zuständigkeitstabelle der Live- / aktiven Kontrollen.',
         ],
+        'value_label' => 'Geschäftlicher Nutzen:',
+        'purpose_label' => 'Zweck:',
+        'value' => [
+            'population' => 'Zeigt den Umfang der überwachten Kontrollen und unterscheidet Live- / aktive Kontrollen von überfälligen.',
+            'backlog_health' => 'Gesamtindikator für die Umsetzung: zeigt, ob die Organisation mit den geplanten Kontrollen Schritt hält.',
+            'ownership_distribution' => 'Zeigt, wo die Verantwortung liegt, und unterscheidet Pflichten des Sicherheitsteams von Pflichten anderer Geschäftsbereiche.',
+            'ownership_performance' => 'Zeigt, ob sich Verzögerungen im Sicherheitsteam oder bei den Fachbereichen konzentrieren, und ermöglicht so gezieltere Managementmaßnahmen.',
+            'priorities' => 'Macht aus einer langen Liste offener Kontrollen eine umsetzbare Arbeitsliste, damit die kritischsten Punkte zuerst bearbeitet werden.',
+            'combinations' => 'Bildet das Verantwortungsmodell von Deming genau so ab, wie es konfiguriert ist.',
+            'individuals' => 'Beantwortet die Frage: „Wenn ich heute mit dieser Person spreche, wie viel offene Arbeit ist ihr zuzurechnen?“ Die Standardansichten von Deming sind auf Kontrollen ausgerichtet; diese Übersicht zeigt die Verantwortungslast jeder Person.',
+            'groups' => 'Bewertet Arbeitslast und Rückstand auf Teamebene, damit Führungskräfte die Verteilung der Arbeit und die Konzentration des Rückstands zwischen Teams beurteilen können, nicht nur zwischen Einzelpersonen.',
+        ],
     ],
     'imports' => [
          'index' => 'Import',

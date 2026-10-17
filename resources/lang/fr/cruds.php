@@ -299,6 +299,18 @@ return [
             'ownership' => 'Propriété : un contrôle est pris en charge par l\'équipe Sécurité si au moins un de ses groupes est de type Sécurité, ou si au moins un de ses utilisateurs affectés est membre d\'un groupe Sécurité. Tous les autres, y compris les contrôles non affectés, sont hors Sécurité.',
             'ownership_totals' => 'Les totaux de propriété de la vue d\'ensemble portent sur tous les contrôles (terminés et live), contrairement au tableau de propriété des contrôles live / actifs.',
         ],
+        'value_label' => "Valeur métier\u{00A0}:",
+        'purpose_label' => "Objectif\u{00A0}:",
+        'value' => [
+            'population' => 'Donne la mesure du périmètre de contrôles suivis et distingue ceux qui sont encore live / actifs de ceux qui sont en retard.',
+            'backlog_health' => 'Indicateur global de la santé d\'exécution : montre si l\'organisation suit le rythme des contrôles planifiés.',
+            'ownership_distribution' => 'Montre où se situe la responsabilité et distingue les obligations portées par l\'équipe Sécurité de celles portées par les autres fonctions métier.',
+            'ownership_performance' => 'Indique si les retards se concentrent dans l\'équipe Sécurité ou chez les interlocuteurs métier, pour cibler les actions de management.',
+            'priorities' => 'Transforme une longue liste de contrôles ouverts en file de travail actionnable, pour traiter d\'abord les éléments les plus critiques.',
+            'combinations' => 'Conserve le modèle de responsabilité de Deming exactement tel qu\'il est configuré.',
+            'individuals' => 'Répond à la question : « Si je parle à ce contributeur aujourd\'hui, quelle part du travail non résolu lui est attribuable ? » Les vues standard de Deming sont centrées sur les contrôles ; cette synthèse est centrée sur l\'exposition de chaque personne.',
+            'groups' => 'Évalue la charge et le retard au niveau des équipes, pour juger de la répartition du travail et de la concentration du retard entre équipes, et pas seulement entre individus.',
+        ],
     ],
     'imports' => [
         'index' => 'Importer',

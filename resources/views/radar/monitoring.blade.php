@@ -47,13 +47,16 @@
             </div>
         </div>
     </div>
-    <div class="alert alert-light border mb-0">
+    @include('radar.monitoring-value', ['key' => 'population'])
+    @include('radar.monitoring-value', ['key' => 'backlog_health'])
+    <div class="alert alert-light border mt-3 mb-0">
         <span class="badge" style="background-color:#3A72C4;color:{{ contrast_color('#3A72C4') }}">&nbsp;</span>
         {{ trans('cruds.monitoring.security_owned') }} : <strong id="owned-security">{{ $ownership_all['security'] }}</strong>
         &nbsp;·&nbsp;
         <span class="badge" style="background-color:#D94F45;color:{{ contrast_color('#D94F45') }}">&nbsp;</span>
         {{ trans('cruds.monitoring.non_security_owned') }} : <strong id="owned-non-security">{{ $ownership_all['non_security'] }}</strong>
     </div>
+    @include('radar.monitoring-value', ['key' => 'ownership_distribution'])
 
     </div>
 </div>
@@ -82,8 +85,9 @@
                     @endforeach
                 </tbody>
             </table>
+            @include('radar.monitoring-value', ['key' => 'ownership_performance'])
 
-            <div class="card">
+            <div class="card mt-3">
                 <div class="card-header"><i class="bi bi-info-circle"></i> {{ trans('cruds.monitoring.meaning_title') }}</div>
                 <div class="card-body">
                     <ul class="mb-0">
@@ -137,6 +141,7 @@
             @endforeach
         </tbody>
     </table>
+    @include('radar.monitoring-value', ['key' => 'priorities'])
 
     </div>
 </div>
@@ -166,6 +171,7 @@
             @endforeach
         </tbody>
     </table>
+    @include('radar.monitoring-value', ['key' => 'combinations', 'label' => 'purpose_label'])
 
     <h6 class="mt-4">{{ trans('cruds.monitoring.individuals_title') }}</h6>
     <table class="table table-striped table-hover table-bordered table-sm datatable" id="individuals-table"
@@ -196,6 +202,7 @@
             @endforeach
         </tbody>
     </table>
+    @include('radar.monitoring-value', ['key' => 'individuals'])
 
     <h6 class="mt-4">{{ trans('cruds.monitoring.groups_title') }}</h6>
     <table class="table table-striped table-hover table-bordered table-sm datatable" id="groups-table"
@@ -221,6 +228,7 @@
             @endforeach
         </tbody>
     </table>
+    @include('radar.monitoring-value', ['key' => 'groups'])
 
     </div>
 </div>

@@ -49,7 +49,7 @@ return [
         'types' => [
             'major' => 'Major',
             'minor' => 'Minor',
-            'opportunity' => 'Opportunité',
+            'opportunity' => 'Opportunity',
             'observation' => 'Observation'
         ],
         'types_short' => [
@@ -299,6 +299,18 @@ return [
             'ratios' => 'Ratio base: percentages are always computed on live / active measurements, never on the total.',
             'ownership' => 'Ownership: a measurement is Security Team-owned if at least one of its groups is of type Security, or if at least one of its assigned users is a member of a Security group. All others, including unassigned measurements, are Non-Security-owned.',
             'ownership_totals' => 'The ownership totals of the overview cover all measurements (completed and live), unlike the ownership table of live / active measurements.',
+        ],
+        'value_label' => 'Business value:',
+        'purpose_label' => 'Purpose:',
+        'value' => [
+            'population' => 'Shows the size of the monitored measurement population and distinguishes live / active measurements from overdue ones.',
+            'backlog_health' => 'Overall indicator of execution health: shows whether the organisation is keeping pace with planned measurement activities.',
+            'ownership_distribution' => 'Shows where responsibility resides and distinguishes Security Team-owned obligations from obligations owned by other business functions.',
+            'ownership_performance' => 'Identifies whether delays are concentrated within the Security team or among business stakeholders, enabling more targeted management actions.',
+            'priorities' => 'Turns a long list of open measurements into an actionable work queue, so teams can focus on the most critical items first.',
+            'combinations' => 'Preserves the original Deming accountability model exactly as configured.',
+            'individuals' => 'Answers the question: "If I speak to this contributor today, how much unresolved work is attributable to them?" Deming\'s default views focus on measurements; this summary focuses on each person\'s accountability exposure.',
+            'groups' => 'Evaluates workload and backlog at team level, so managers can assess workload distribution and backlog concentration across teams rather than only at individual level.',
         ],
     ],
     'imports' => [

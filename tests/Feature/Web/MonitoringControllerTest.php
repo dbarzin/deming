@@ -29,12 +29,16 @@ test('admin, user and auditor can access the monitoring page', function (string 
 
 test('auditee and api users cannot access the monitoring page', function (string $state) {
     $user = User::factory()->{$state}()->create();
-    $this->actingAs($user)->get('/radar/monitoring')->assertStatus(403);
+    $this->actingAs($user)->get('/radar/monitoring')
+        ->assertStatus(403)
+        ->assertDontSee('monitoring-value', false);
 })->with(['auditee', 'apiUser']);
 
 test('disabled users cannot access the monitoring page', function () {
     $user = User::factory()->create(['role' => User::ROLE_DISABLED]);
-    $this->actingAs($user)->get('/radar/monitoring')->assertStatus(403);
+    $this->actingAs($user)->get('/radar/monitoring')
+        ->assertStatus(403)
+        ->assertDontSee('monitoring-value', false);
 });
 
 test('the route is named radar.monitoring', function () {
@@ -53,7 +57,7 @@ test('auditor sees the monitoring menu entry, auditee does not', function () {
 test('the menu entry is translated', function (string $language) {
     $user = User::factory()->admin()->create(['language' => $language]);
     $this->actingAs($user)->get('/radar/monitoring')
-        ->assertSee('<span class="menu-text">Monitoring</span>', false);
+        ->assertSee('<span class="menu-text">' . trans('menu.radar_monitoring', [], $language) . '</span>', false);
 })->with(['fr', 'en', 'de']);
 
 // --- Rendering
@@ -125,6 +129,92 @@ test('group view off restricts every block to the user measures', function () {
         ->assertViewHas('individuals', fn ($rows) => collect($rows)->firstWhere('name', 'Other User')['live'] === 0
             && collect($rows)->firstWhere('name', 'Scoped User')['live'] === 2)
         ->assertViewHas('groups', fn ($rows) => collect($rows)->firstWhere('name', 'Team')['live'] === 1);
+});
+
+// --- Business value
+
+const MONITORING_VALUE_KEYS = [
+    'population', 'backlog_health', 'ownership_distribution', 'ownership_performance',
+    'priorities', 'combinations', 'individuals', 'groups',
+];
+
+test('every block shows its business value text', function () {
+    $admin = User::factory()->admin()->create(['language' => 'fr']);
+    $response = $this->actingAs($admin)->get('/radar/monitoring')->assertStatus(200);
+
+    foreach (MONITORING_VALUE_KEYS as $key) {
+        $response->assertSeeText(trans('cruds.monitoring.value.' . $key, [], 'fr'));
+    }
+    $response->assertSeeText(trans('cruds.monitoring.value_label', [], 'fr'))
+        ->assertSeeText(trans('cruds.monitoring.purpose_label', [], 'fr'));
+});
+
+test('the business value labels are translated', function (string $language, array $labels) {
+    $admin = User::factory()->admin()->create(['language' => $language]);
+    $this->actingAs($admin)->get('/radar/monitoring')->assertSeeText($labels);
+})->with([
+    'en' => ['en', ['Business value', 'Purpose']],
+    'de' => ['de', ['Geschäftlicher Nutzen', 'Zweck']],
+]);
+
+test('each business value text is placed after its block', function () {
+    UserGroup::factory()->security()->create(['name' => 'SecOps']);
+    Measure::factory()->create(['status' => 0, 'plan_date' => '2026-10-07']);
+
+    $admin = User::factory()->admin()->create(['language' => 'fr']);
+    $value = fn (string $key) => e(trans('cruds.monitoring.value.' . $key, [], 'fr'));
+    $title = fn (string $key) => e(trans('cruds.monitoring.' . $key, [], 'fr'));
+
+    $this->actingAs($admin)->get('/radar/monitoring')->assertSeeInOrder([
+        'id="tile-rate"',
+        $value('population'),
+        $value('backlog_health'),
+        'id="owned-non-security"',
+        $value('ownership_distribution'),
+        'id="ownership-table"',
+        $value('ownership_performance'),
+        $title('meaning_title'),
+        'id="priorities-table"',
+        $value('priorities'),
+        'id="combinations-table"',
+        $value('combinations'),
+        $title('individuals_title'),
+        'id="individuals-table"',
+        $value('individuals'),
+        $title('groups_title'),
+        'id="groups-table"',
+        $value('groups'),
+        $title('definitions_title'),
+    ], false);
+});
+
+test('the combinations block uses the purpose label', function () {
+    $admin = User::factory()->admin()->create(['language' => 'en']);
+    $this->actingAs($admin)->get('/radar/monitoring')->assertSeeInOrder([
+        'data-value="priorities"', 'Business value:',
+        'data-value="combinations"', 'Purpose:',
+        'data-value="individuals"', 'Business value:',
+    ], false);
+});
+
+test('the business value texts are shown on an empty database', function () {
+    $admin = User::factory()->admin()->create(['language' => 'en']);
+    $response = $this->actingAs($admin)->get('/radar/monitoring')
+        ->assertStatus(200)
+        ->assertViewHas('total', 0);
+
+    foreach (MONITORING_VALUE_KEYS as $key) {
+        $response->assertSee('data-value="' . $key . '"', false)
+            ->assertSeeText(trans('cruds.monitoring.value.' . $key, [], 'en'));
+    }
+});
+
+test('the business value keys are identical in every language', function () {
+    $keys = fn (string $language) => array_keys(trans('cruds.monitoring.value', [], $language));
+
+    expect($keys('fr'))->toBe(MONITORING_VALUE_KEYS)
+        ->and($keys('en'))->toBe(MONITORING_VALUE_KEYS)
+        ->and($keys('de'))->toBe(MONITORING_VALUE_KEYS);
 });
 
 // --- Performance
