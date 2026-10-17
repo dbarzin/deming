@@ -19,6 +19,22 @@ test('admin can list actions', function () {
     $this->actingAs($this->admin)->get('/actions')->assertStatus(200);
 });
 
+test('the action list column order puts clauses after type and remediation after name', function () {
+    Action::factory()->create(['name' => 'Patch servers', 'remediation' => 'Apply the vendor fix']);
+    $this->actingAs($this->admin)->get('/actions')
+        ->assertStatus(200)
+        ->assertSeeInOrder([
+            '>' . trans('cruds.action.fields.type') . '</span></th>',
+            '<th class="dt-hidden">' . trans('cruds.action.fields.clauses') . '</th>',
+            '>' . trans('cruds.action.fields.status') . '</th>',
+            '>' . trans('cruds.action.fields.name') . '</th>',
+            '<th class="dt-hidden">' . trans('cruds.action.fields.remediation') . '</th>',
+            '>' . trans('cruds.action.fields.scope') . '</th>',
+            'Patch servers',
+            'Apply the vendor fix',
+        ], false);
+});
+
 test('auditor can list actions', function () {
     $this->actingAs($this->auditor)->get('/actions')->assertStatus(200);
 });

@@ -125,6 +125,7 @@ class ActionController extends Controller
                 'actions.criticity',
                 'actions.scope',
                 'actions.cause',
+                'actions.remediation',
                 'actions.status',
                 'actions.progress',
                 'actions.due_date',

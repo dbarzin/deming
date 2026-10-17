@@ -79,12 +79,13 @@
 	    <tr>
             <th data-priority="2"><span style="font-size: 0.8em;">{{ trans('cruds.action.fields.reference') }}</span></th>
             <th><span style="font-size: 0.8em;">{{ trans('cruds.action.fields.type') }}</span></th>
+            <th class="dt-hidden">{{ trans('cruds.action.fields.clauses') }}</th>
             <th>{{ trans('cruds.action.fields.status') }}</th>
             <th>{{ trans('cruds.action.fields.progress') }}</th>
             <th data-priority="1">{{ trans('cruds.action.fields.name') }}</th>
+            <th class="dt-hidden">{{ trans('cruds.action.fields.remediation') }}</th>
 			<th>{{ trans('cruds.action.fields.scope') }}</th>
             <th>{{ trans('cruds.action.fields.owners') }}</th>
-            <th class="dt-hidden">{{ trans('cruds.action.fields.clauses') }}</th>
             <th>{{ trans('cruds.action.fields.due_date') }}</th>
 	    </tr>
 	    </thead>
@@ -106,6 +107,11 @@
                 @elseif ($action->type==4)
                     <div class="text-success fw-bold" style="font-size: 0.8em;" title="{{ trans('cruds.action.types.opportunity') }}">{{ trans('cruds.action.types_short.opportunity') }}</div>
                 @endif
+            </td>
+            <td>
+                @foreach($action->controls as $control)
+                    <a href="/alice/show/{{ $control->id }}">{{ $control->clause }}</a>{{ $loop->last ? '' : ',' }}
+                @endforeach
             </td>
             <td id="{{ $action->status }}">
                 @if ($action->status==0)
@@ -134,15 +140,13 @@
                 {!! \Parsedown::instance()->text($action->cause) !!}
             </td>
             <td>
+                {!! \Parsedown::instance()->text($action->remediation) !!}
+            </td>
+            <td>
                 {{ $action->scope }}
             </td>
             <td>
                 {{ $action->owners->implode(', ') }}
-            </td>
-            <td>
-                @foreach($action->controls as $control)
-                    <a href="/alice/show/{{ $control->id }}">{{ $control->clause }}</a>{{ $loop->last ? '' : ',' }}
-                @endforeach
             </td>
             <td>
             @if ($action->due_date!==null)
