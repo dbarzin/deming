@@ -1,6 +1,6 @@
 # Application
 
-## Page principale
+## Page principale {#main}
 
 La page principale de l’application permet d'avoir une vue d'ensemble du SMSI et des contrôles à réaliser.
 
@@ -18,6 +18,9 @@ L'écran est composé :
     * à la bascule entre « mes données » et « toutes les données » (icône groupe, administrateurs et utilisateurs uniquement),
     * au profil de l'utilisateur,
     * à l'aide en ligne.
+
+Chaque écran dispose également d'un bouton « Aide », en haut à droite de son premier cadre, qui ouvre la page de
+cette documentation décrivant l'écran, dans la langue de l'utilisateur (en anglais pour les langues sans documentation traduite).
 
 Le tableau de bord affiche en haut des indicateurs sur :
 
@@ -49,7 +52,7 @@ La partie inférieure de la page principale contient la liste des contrôles pla
 
 Les dates de planification dépassées sont affichées en rouge.
 
-## Recherche
+## Recherche {#search}
 
 Le champ de recherche en haut du menu permet de trouver un mot dans les domaines, les mesures de sécurité, les contrôles (nom, objectifs, observations) et leurs plans d’action.
 

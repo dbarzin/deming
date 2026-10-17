@@ -15,17 +15,86 @@ ses responsables et sa date d’échéance. Les dates d’échéance dépassées
 Le bouton « Colonnes » permet d’afficher des colonnes supplémentaires (clauses associées, remédiation),
 et les boutons « Copier », « CSV », « Excel » et « Imprimer » permettent d’exporter la liste affichée.
 
-En cliquant sur la référence d’un plan d’action, vous arrivez sur ce plan d’action. Le bouton « Nouveau » permet de créer un nouveau plan d’action.
+En cliquant sur la référence d’un plan d’action, vous arrivez sur [ce plan d’action](#show). Le bouton « Nouveau » permet de [créer un nouveau plan d’action](#create).
 
+Un plan d’action peut aussi être créé lors de la [réalisation d’un contrôle](controls.fr.md#make), en cochant
+« Créer un plan d’action ».
+
+## Créer un plan d’action {#create}
+
+Cet écran permet de créer manuellement un plan d’action.
+
+L’écran contient :
+
+* la référence du plan d’action ;
+
+* son type : majeur, mineur, observation ou opportunité ;
+
+* son nom ;
+
+* le périmètre et les clauses associées ;
+
+* la cause ;
+
+* la remédiation à mettre en œuvre ;
+
+* la date d’échéance et
+
+* les responsables du plan d’action.
+
+Lorsque vous cliquez sur :
+
+* « Sauver », le plan d’action est créé et vous revenez à la [liste des plans d’action](#list)
+
+* « Annuler » vous revenez à la [liste des plans d’action](#list)
+
+## Afficher un plan d’action {#show}
+
+Cet écran affiche un plan d’action : référence, type, statut, périmètre, clauses, nom, cause, date d’échéance,
+responsables et, pour un plan d’action clôturé, sa date de clôture et sa justification. Les clauses et le contrôle
+à l’origine du plan d’action sont accessibles depuis cet écran.
+
+Tant que le plan d’action est ouvert, la remédiation et l’avancement (curseur) peuvent être mis à jour directement.
+
+Lorsque vous cliquez sur :
+
+* « Sauver », la remédiation et l’avancement sont sauvés et vous revenez à la [liste des plans d’action](#list)
+
+* « Fermer », vous arrivez sur l’écran de [clôture du plan d’action](#close) (plans d’action ouverts uniquement)
+
+* « Modifier », vous arrivez sur l’écran de [modification du plan d’action](#edit)
+
+* « Supprimer », le plan d’action est supprimé après confirmation
+
+* « Annuler » vous revenez à la [liste des plans d’action](#list)
+
+## Clôturer un plan d’action {#close}
+
+Cet écran permet de clôturer un plan d’action une fois la remédiation réalisée, ou de le rejeter.
+
+L’écran rappelle les informations du plan d’action et contient :
+
+* le nouveau statut : ouvert, fermé ou rejeté ;
+
+* la date de clôture et
+
+* la justification de la clôture.
+
+Lorsque vous cliquez sur :
+
+* « Sauver », le statut, la date de clôture et la justification sont sauvés et vous revenez à la [liste des plans d’action](#list)
+
+* « Annuler » vous revenez au [plan d’action](#show)
 
 ## Modifier un plan d’action <a name="edit"></a>
 
-Cet écran permet de modifier un plan d’action et de planifier la prochaine évaluation du contrôle.
+Cet écran permet de modifier l’ensemble des informations d’un plan d’action : référence, type, nom, périmètre,
+clauses, cause, remédiation, date d’échéance, responsables, avancement, statut, date de clôture et justification.
 
 [![Screenshot](images/a2.fr.png)](images/a2.fr.png)
 
 Lorsque vous cliquez sur :
 
-* « Sauver », vous sauver le plan d’action et revenez à la [liste des plans d’action](#list)
+* « Sauver », vous sauvez le plan d’action et revenez à la [liste des plans d’action](#list)
 
 * « Annuler » vous revenez à la [liste des plans d’action](#list)

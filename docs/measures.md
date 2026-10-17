@@ -19,6 +19,8 @@ Clicking on :
 
 * the "plan" button takes you to the [control planning](#plan)
 
+The "New" button lets you [create a new control](#create).
+
 
 ## Show control <a name="show"></a>
 
@@ -38,7 +40,7 @@ A control consists of:
 
 * attributes;
 
-* controlment data:
+* the measurement data;
 
 * the verification model;
 
@@ -46,15 +48,38 @@ A control consists of:
 
 * an action plan to be applied if control of this control fails.
 
+The screen also lists the measurements of this control (scope, planning date, completion date and score), and the
+[correspondences](crosswalk.md) of this control with the controls of other frameworks.
+
 When you click:
 
 * “Plan”: you arrive at the [control planning](#plan) screen.
 
-* "Modify": you arrive at [the controlment modification screen](#edit)
+* "Edit": you arrive at [the control edit screen](#edit)
+
+* "Copy": you arrive at the [control creation](#create) screen, pre-filled with the data of this control
 
 * “Delete”: allows you to delete the control and return to [the list of controls](#list)
 
 * "Cancel": returns you to the [list of controls](#list)
+
+
+## Create a control {#create}
+
+This screen is used to add a control to a framework. It is opened by the "New" button of the
+[list of controls](#list) or by the "Copy" button of the [control display](#show) screen.
+
+The screen contains the same fields as the [control display](#show): domain, clause, name, security objective,
+attributes, measurement data, verification model, indicator and action plan.
+
+When you click:
+
+* "Save", the control is created and you return to the [list of controls](#list).
+
+* "Cancel", you return to the [list of controls](#list).
+
+Controls can also be imported from a spreadsheet or from a framework of the repository through the
+[import](config.md#import) screen.
 
 
 ## Edit a control <a name="edit"></a>
@@ -85,6 +110,8 @@ The screen contains:
 
 * The planning date;
 
+* The scope;
+
 * The frequency of checks; and
 
 * Those responsible for carrying out the controls.
@@ -93,12 +120,7 @@ The screen contains:
 
 When you click:
 
-* "Plan",
-
-    * if there is no measurement with this scope, a new measurement is created by copying all the control data and is scheduled for the specified date.
-
-    * if there is a measurement with the same scope for this control, an error is displayed.
-
-You then return to the [list of controls](#list).
+* "Plan", a new measurement is created for the given scope by copying all the control data, and is scheduled for
+  the specified date. You then return to the [list of controls](#list).
 
 * "Cancel", you return to the [list of controls](#list).

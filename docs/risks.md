@@ -6,7 +6,7 @@ The risk register allows you to manage information security risks in accordance 
 - **§ 6.1.3** — Information security risk treatment process
 - **§ 8.2** — Information security risk assessment
 
-Each risk is evaluated using a configurable scoring method, linked to the application's existing [controls](controls.md) and [action plans](actions.md), and subject to a periodic review cycle.
+Each risk is evaluated using a configurable scoring method, linked to the application's existing [controls](measures.md) and [action plans](actions.md), and subject to a periodic review cycle.
 
 ## Risk Matrix {#matrix}
 
@@ -71,7 +71,7 @@ The available buttons depend on the user's role:
 
 - **Edit** — accesses the [edit screen](#edit) (Administrator and User);
 - **Delete** — deletes the risk after confirmation (Administrator only);
-- **History** — displays the change log (Administrator only);
+- **History** — displays the [change history](config.md#logs) (Administrator only);
 - **Cancel** — returns to the [risk list](#list).
 
 ## Create a Risk {#create}
@@ -95,16 +95,22 @@ The risk assessment depends on the [active scoring method](#scoring):
 - For the BSI 200-3 formula (Likelihood × Impact):
     - **Exposure** — system accessibility (e.g. 0 = off-network, 1 = internal, 2 = Internet);
     - **Vulnerability** — level of exploitability of known weaknesses;
+- For the MONARC formula (Impact × Threat × Vulnerability):
+    - **Threat** — likelihood of the threat (0 = not applicable to 4 = very likely);
+    - **Vulnerability** — level of the security controls in place (0 = non-existent to 5 = very high);
 - **Impact** — severity of consequences if the risk materialises;
 - **Impact comment**;
-- **Calculated score** — updated in real time based on the entered values, with a color-coded badge indicating the level.
+- **Calculated score** — updated in real time based on the entered values, with a color-coded badge indicating the level;
+- **Residual risk** — MONARC formula only: score of the risk remaining after treatment, entered manually and displayed
+  with the color of its level in the list and on the risk view.
 
 Risk treatment is configured via:
 
-- **Status** — one of: Unassessed, Not accepted, Temporarily accepted, Accepted, Mitigated, Transferred, Avoided;
+- **Status** — one of: Unassessed, Not accepted, Temporarily accepted, Accepted, Mitigated, Transferred, Avoided.
+  With the MONARC formula, the treatments are: Not treated, Reduction, Denied, Accepted, Shared;
 - **Status comment**;
 - **Linked controls** — multiple selection from existing controls (displayed only if status = *Mitigated*);
-- **Linked action plans** — multiple selection from existing action plans (displayed only if status = *Not accepted*).
+- **Linked action plans** — multiple selection from existing action plans (displayed only if status = *Not accepted*, or *Reduction* with the MONARC formula).
 
 > A warning is displayed if a *Mitigated* risk is saved without a linked control, or if a *Not accepted* risk is saved without a linked action plan.
 
@@ -162,7 +168,7 @@ This screen allows you to define a complete scoring method.
 #### Name and Formula
 
 - **Name** — label for the configuration, displayed in the list;
-- **Formula** — the score calculation method. Four formulas are available:
+- **Formula** — the score calculation method. Five formulas are available:
 
 | Formula | Calculation | Recommended use |
 |---|---|---|
@@ -170,8 +176,9 @@ This screen allows you to define a complete scoring method.
 | Likelihood × Impact | Score = (Exposure + Vulnerability) × I | BSI 200-3 / ISACA CSC-IT |
 | Probability + Impact | Score = P + I | Quick triage |
 | max(Probability, Impact) | Score = max(P, I) | Conservative approach |
+| MONARC | Score = Impact × Threat × Vulnerability | MONARC method (max 4 × 4 × 5 = 80) |
 
-> Selecting the *Likelihood × Impact* formula displays the **Exposure** and **Vulnerability** sections in place of the **Probability** section.
+> Selecting the *Likelihood × Impact* formula displays the **Exposure** and **Vulnerability** sections in place of the **Probability** section. The *MONARC* formula displays the **Threat** and **Vulnerability** sections.
 
 #### Levels
 
@@ -187,7 +194,8 @@ The configurable axes are:
 
 - **Probability** — present for standard formulas;
 - **Exposure** — present for the BSI formula (0 = off-network, 1 = internal network, 2 = Internet-facing);
-- **Vulnerability** — present for the BSI formula (1 = none known, 2 = known but not exploitable, 3 = exploitable internally, 4 = remotely exploitable);
+- **Vulnerability** — present for the BSI formula (1 = none known, 2 = known but not exploitable, 3 = exploitable internally, 4 = remotely exploitable) and the MONARC formula (0 = non-existent to 5 = very high);
+- **Threat** — present for the MONARC formula, in place of the probability (0 = not applicable to 4 = very likely);
 - **Impact** — present for all formulas.
 
 #### Classification Thresholds
@@ -197,7 +205,7 @@ Thresholds define the mapping between a numerical score and a qualified risk lev
 - **Internal key** — technical identifier (e.g. `low`, `medium`, `high`, `critical`);
 - **Label** — name displayed in badges and reports;
 - **Max score** — upper bound of the threshold. The last threshold has no upper bound (catch-all);
-- **Color** — MetroUI badge color: Green, Orange, Red, Dark Red, Blue, Grey.
+- **Color** — badge color, chosen with a color picker.
 
 The **Preview** column displays a live badge reflecting the entered color and label.
 

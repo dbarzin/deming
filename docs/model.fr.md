@@ -182,7 +182,6 @@ Chaque mesure de sécurité appartient à un domaine et est vérifiée par une o
 | `model` | string \| null | Modèle ou méthode opérationnelle recommandée |
 | `indicator` | string \| null | Indicateur de performance structuré (Target, Frequency, Owner) |
 | `action_plan` | string \| null | Plan d'action ou traitement associé |
-| `standard` | string \| null | Référence à une norme externe (ex : ISO 27001) |
 | `attributes` | array \| null | Liste d'IDs d'attributs associés ; `null` si aucun |
 | `measures` | array | Liste des IDs d'instances d'audit qui vérifient cette mesure de sécurité |
 | `created_at` | datetime | Date de création |
@@ -201,7 +200,6 @@ Exemple :
   "model": "Analyse annuelle selon ISO 27005 ou EBIOS RM",
   "indicator": "Target: Score résiduel ≤ acceptable | Frequency: Annuel | Owner: RSSI",
   "action_plan": "Plan de traitement des risques validé par Direction",
-  "standard": null,
   "attributes": null,
   "measures": [1]
 }
@@ -231,7 +229,6 @@ Elle porte les données de planification, de réalisation et de résultat.
 | `note` | number \| null | Note qualitative complémentaire |
 | `status` | integer | État courant de l'instance d'audit (voir ci-dessous) |
 | `next_id` | integer \| null | ID de l'instance suivante dans la chaîne historique (FK self) |
-| `standard` | string \| null | Référence normative externe |
 | `attributes` | array \| null | Liste d'IDs d'attributs associés ; `null` si aucun |
 | `scope` | string \| null | Périmètre d'application (entité, site, système) |
 | `controls` | array | Liste des IDs de mesures de sécurité vérifiées par cette instance d'audit |
@@ -260,7 +257,6 @@ Exemple :
   "score": null,
   "status": 2,
   "next_id": null,
-  "standard": null,
   "attributes": null,
   "scope": null,
   "controls": [1]
@@ -288,12 +284,13 @@ Un risque avec le statut *Mitigé* doit être lié à au moins un contrôle de s
 | `name` | string | Intitulé court et identifiable du risque (obligatoire) |
 | `description` | string \| null | Description détaillée du risque |
 | `owner_id` | integer \| null | Référence vers `users.id` — responsable de la revue périodique |
-| `probability` | integer | Niveau de probabilité (1 à N, formules standard) |
+| `probability` | integer | Niveau de probabilité (1 à N, formules standard), ou niveau de menace avec la formule MONARC |
 | `probability_comment` | string \| null | Commentaire libre sur l'évaluation de la probabilité |
 | `impact` | integer | Niveau de gravité si le risque se matérialise (1 à N) |
 | `impact_comment` | string \| null | Commentaire libre sur l'évaluation de l'impact |
 | `exposure` | integer \| null | Accessibilité du système (formule BSI 200-3 : 0 = hors réseau, 1 = interne, 2 = Internet) |
-| `vulnerability` | integer \| null | Niveau d'exploitabilité des failles connues (formule BSI 200-3 uniquement) |
+| `vulnerability` | integer \| null | Niveau d'exploitabilité des failles connues (formule BSI 200-3), ou niveau de vulnérabilité (formule MONARC) |
+| `residual_risk` | integer \| null | Risque résiduel saisi manuellement (formule MONARC uniquement) |
 | `status` | enum | Décision de traitement (voir valeurs ci-dessous) |
 | `status_comment` | string \| null | Commentaire libre sur la décision de traitement |
 | `review_frequency` | integer | Intervalle en mois entre deux revues (défaut : 12) |
@@ -327,6 +324,7 @@ Exemple :
   "impact": 4,
   "exposure": null,
   "vulnerability": null,
+  "residual_risk": null,
   "status": "mitigated",
   "status_comment": "Politique de contrôle d'accès déployée au T1.",
   "review_frequency": 12,

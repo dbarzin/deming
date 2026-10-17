@@ -182,7 +182,6 @@ Each security measure belongs to a domain and is verified by one or more audit i
 | `model` | string \| null | Recommended operational model or method |
 | `indicator` | string \| null | Structured performance indicator (Target, Frequency, Owner) |
 | `action_plan` | string \| null | Associated action or treatment plan |
-| `standard` | string \| null | Reference to an external standard (e.g., ISO 27001) |
 | `attributes` | array \| null | List of associated attribute IDs; `null` if none |
 | `measures` | array | List of audit instance IDs verifying this security measure |
 | `created_at` | datetime | Creation date |
@@ -201,7 +200,6 @@ Example:
   "model": "Annual analysis according to ISO 27005 or EBIOS RM",
   "indicator": "Target: Residual score ≤ acceptable | Frequency: Annual | Owner: CISO",
   "action_plan": "Risk treatment plan approved by Management",
-  "standard": null,
   "attributes": null,
   "measures": [1]
 }
@@ -231,7 +229,6 @@ It contains planning, execution, and result data.
 | `note` | number \| null | Additional qualitative note |
 | `status` | integer | Current status of the audit instance (see below) |
 | `next_id` | integer \| null | ID of the next audit instance in the historical chain (self FK) |
-| `standard` | string \| null | External normative reference |
 | `attributes` | array \| null | List of associated attribute IDs; `null` if none |
 | `scope` | string \| null | Scope of application (entity, site, system) |
 | `controls` | array | List of security measure IDs verified by this audit instance |
@@ -260,7 +257,6 @@ Example:
   "score": null,
   "status": 2,
   "next_id": null,
-  "standard": null,
   "attributes": null,
   "scope": null,
   "controls": [1]
@@ -288,12 +284,13 @@ A risk with *Mitigated* status must be linked to at least one security control v
 | `name` | string | Short, identifiable label for the risk (required) |
 | `description` | string \| null | Detailed description of the risk |
 | `owner_id` | integer \| null | Reference to `users.id` — person responsible for the periodic review |
-| `probability` | integer | Likelihood level (1 to N, standard formulas) |
+| `probability` | integer | Likelihood level (1 to N, standard formulas), or threat level with the MONARC formula |
 | `probability_comment` | string \| null | Free comment on the probability assessment |
 | `impact` | integer | Severity level if the risk materialises (1 to N) |
 | `impact_comment` | string \| null | Free comment on the impact assessment |
 | `exposure` | integer \| null | System accessibility (BSI 200-3 formula only: 0 = off-network, 1 = internal, 2 = Internet) |
-| `vulnerability` | integer \| null | Exploitability of known weaknesses (BSI 200-3 formula only) |
+| `vulnerability` | integer \| null | Exploitability of known weaknesses (BSI 200-3 formula), or vulnerability level (MONARC formula) |
+| `residual_risk` | integer \| null | Residual risk entered manually (MONARC formula only) |
 | `status` | enum | Treatment decision (see values below) |
 | `status_comment` | string \| null | Free comment on the treatment decision |
 | `review_frequency` | integer | Interval in months between two reviews (default: 12) |
@@ -327,6 +324,7 @@ Example:
   "impact": 4,
   "exposure": null,
   "vulnerability": null,
+  "residual_risk": null,
   "status": "mitigated",
   "status_comment": "Access control policy deployed in Q1.",
   "review_frequency": 12,

@@ -17,7 +17,9 @@ En cliquant sur :
 
 * le nombre de contrôle, vous arrivez sur la [liste des contrôles](controls.fr.md/#list) de cette mesure de sécurité
 
-* le bouton "planifier", vous arrivez sur la [planification de la mesure de sécurité](#plan)
+* le bouton « Planifier », vous arrivez sur la [planification de la mesure de sécurité](#plan)
+
+Le bouton « Nouveau » permet de [créer une nouvelle mesure de sécurité](#create).
 
 ## Afficher une mesure de sécurité <a name="show"></a>
 
@@ -37,7 +39,7 @@ Une mesure de sécurité est composée :
 
 * d’attributs ;
 
-* des données de mesures :
+* des données de mesures ;
 
 * du modèle de vérification ;
 
@@ -45,16 +47,39 @@ Une mesure de sécurité est composée :
 
 * d’un plan d’action à appliquer si le contrôle de cette mesure de sécurité est en échec.
 
+L’écran liste également les contrôles de cette mesure de sécurité (périmètre, date de planification, date de
+réalisation et score), ainsi que les [correspondances](crosswalk.fr.md) de cette mesure avec les mesures d’autres
+référentiels.
 
 Lorsque vous cliquez sur :
 
 * « Planifier » : vous arrivez vers l’écran de [planification de la mesure de sécurité](#plan).
 
-* « Modifier » : vous arrivez vers [l’écran de moficiaton de la mesure](#edit)
+* « Modifier » : vous arrivez vers [l’écran de modification de la mesure](#edit)
+
+* « Copier » : vous arrivez vers l’écran de [création d’une mesure de sécurité](#create), pré-rempli avec les données de cette mesure
 
 * « Supprimer »: vous permet de supprimer la mesure et de revenir à [la liste des mesures de sécurité](#list)
 
-* « Annuler » : vous renvoie vers la [liste des mesures de séucurité](#list)
+* « Annuler » : vous renvoie vers la [liste des mesures de sécurité](#list)
+
+
+## Créer une mesure de sécurité {#create}
+
+Cet écran permet d’ajouter une mesure de sécurité à un référentiel. Il est accessible par le bouton « Nouveau » de
+la [liste des mesures de sécurité](#list) ou par le bouton « Copier » de l’écran d’[affichage d’une mesure](#show).
+
+L’écran contient les mêmes champs que l’[affichage d’une mesure de sécurité](#show) : domaine, clause, nom, objectif
+de sécurité, attributs, données de mesure, modèle de vérification, indicateur et plan d’action.
+
+Lorsque vous cliquez sur :
+
+* « Sauver », la mesure de sécurité est créée et vous revenez à la [liste des mesures de sécurité](#list).
+
+* « Annuler », vous revenez à la [liste des mesures de sécurité](#list).
+
+Les mesures de sécurité peuvent aussi être importées depuis un tableur ou depuis un référentiel du dépôt, via
+l’écran d’[importation](config.fr.md#import).
 
 
 ## Modifier une mesure de sécurité <a name="edit"></a>
@@ -67,7 +92,7 @@ Lorsque vous cliquez sur :
 
 * « Sauver », les modifications sont sauvées et vous revenez à l’écran d’[affichage de la mesure de sécurité](#show).
 
-* « Annluer », vous revenez à l’écran d’[affichage de la mesure de sécurité](#show).
+* « Annuler », vous revenez à l’écran d’[affichage de la mesure de sécurité](#show).
 
 
 ## Planifier un contrôle <a name="plan"></a>
@@ -84,20 +109,17 @@ L’écran contient :
 
 * La date de planification ;
 
-* La périodicité du contrôles et
+* Le périmètre ;
 
-* Les responsables de la réalisation du contrôles.
+* La périodicité du contrôle et
+
+* Les responsables de la réalisation du contrôle.
 
 [![Screenshot](images/plan.fr.png)](images/plan.fr.png)
 
 Lorsque vous cliquez sur :
 
-* « Planifier »,
-
-    * s’il n’existe pas de contrôle avec ce périmètre pour cette mesure, un nouveau contrôle est créé en copiant toutes les données de le mesure et est planifié à la date spécifiée.
-
-    * S’il existe déjà un contrôle avec ce périmètre pour cette mesure de sécurité, une erreur est affichée.
-
-	Vous revenez ensuite à la [liste des mesures de sécurité](#list).
+* « Planifier », un nouveau contrôle est créé pour le périmètre indiqué en copiant toutes les données de la mesure,
+  et est planifié à la date spécifiée. Vous revenez ensuite à la [liste des mesures de sécurité](#list).
 
 * « Annuler », vous revenez vers la [liste des mesures de sécurité](#list).

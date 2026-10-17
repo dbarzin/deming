@@ -15,15 +15,83 @@ Overdue due dates are displayed in red.
 The "Column visibility" button lets you show additional columns (associated clauses, remediation),
 and the "Copy", "CSV", "Excel" and "Print" buttons export the displayed list.
 
-Clicking on the reference of an action plan opens it. The "New" button creates a new action plan.
+Clicking on the reference of an action plan [opens it](#show). The "New" button [creates a new action plan](#create).
 
+An action plan can also be created when [making a measurement](controls.md#make), by ticking
+"Create an action plan".
+
+## Create an action plan {#create}
+
+This screen is used to create an action plan manually.
+
+The screen contains:
+
+* the reference of the action plan;
+
+* its type: major, minor, observation or opportunity;
+
+* its name;
+
+* the scope and the associated clauses;
+
+* the cause;
+
+* the remediation to be carried out;
+
+* the due date; and
+
+* the owners of the action plan.
+
+When you click:
+
+* "Save", the action plan is created and you return to the [list of action plans](#list)
+
+* "Cancel" you return to the [list of action plans](#list)
+
+## Show an action plan {#show}
+
+This screen displays an action plan: reference, type, status, scope, clauses, name, cause, due date, owners and,
+for a closed action plan, its close date and justification. The clauses and the originating measurement can be
+opened from this screen.
+
+While the action plan is open, the remediation and the progress (slider) can be updated directly.
+
+When you click:
+
+* "Save", the remediation and the progress are saved and you return to the [list of action plans](#list)
+
+* "Close", you go to the [action plan closure](#close) screen (open action plans only)
+
+* "Edit", you go to the [action plan edit](#edit) screen
+
+* "Delete", the action plan is deleted after confirmation
+
+* "Cancel" you return to the [list of action plans](#list)
+
+## Close an action plan {#close}
+
+This screen is used to close an action plan once the remediation has been carried out, or to reject it.
+
+The screen contains a reminder of the action plan and:
+
+* the new status: open, closed or rejected;
+
+* the close date; and
+
+* the justification of the closure.
+
+When you click:
+
+* "Save", the status, close date and justification are saved and you return to the [list of action plans](#list)
+
+* "Cancel" you return to the [action plan](#show)
 
 ## Edit an action plan <a name="edit"></a>
 
-This screen allows you to edit an action plan and schedule the next control assessment.
+This screen allows you to edit all the information of an action plan: reference, type, name, scope, clauses, cause,
+remediation, due date, owners, progress, status, close date and justification.
 
 [![Screenshot](images/a2.png)](images/a2.png)
-
 
 When you click:
 

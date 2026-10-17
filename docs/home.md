@@ -1,6 +1,6 @@
 # Application
 
-## Main page
+## Main page {#main}
 
 The main page of the application provides an overview of the ISMS and the checks to be carried out.
 
@@ -18,6 +18,9 @@ The screen is composed of:
     * the switch between "my data" and "all data" (group icon, administrators and users only),
     * the user profile,
     * the online help.
+
+Each screen also has a "Help" button, at the top right of its first panel, which opens the page of this
+documentation describing the screen, in the user's language (in English for languages without a translated documentation).
 
 The dashboard displays, at the top, indicators on:
 
@@ -50,7 +53,7 @@ The lower part of the main page contains the list of measurements scheduled for 
 
 Overdue planning dates are displayed in red.
 
-## Search
+## Search {#search}
 
 The search field at the top of the menu allows you to search for a word in the domains, the controls,
 the measurements (name, objectives, observations) and their action plans.
