@@ -104,7 +104,7 @@
     <div class="row">
         <div class="col-lg-9 col-md-12">
             <div class="overflow-auto">
-            <table class="table border text-center" style="table-layout:fixed; min-width:400px; font-size:{{ $cellFs }}">
+            <table class="table table-borderless border text-center" style="table-layout:fixed; min-width:400px; font-size:{{ $cellFs }}">
                 <thead>
                     <tr>
                         <th style="width:{{ $matrixCompact ? '90px' : '140px' }}"></th>
@@ -166,7 +166,7 @@
 
         {{-- Répartition par statut --}}
         <div class="col-lg-3 col-md-12" style="font-size:1rem">
-            <table class="table table-sm border mt-2">
+            <table class="table table-sm table-borderless border mt-2">
             <tr>
                 <td colspan=3>
             <strong>{{ trans('cruds.risk.fields.by_risks') }}</strong>
