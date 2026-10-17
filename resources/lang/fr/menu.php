@@ -13,7 +13,7 @@ return [
     'radar_by_controls' => 'par contrôles',
     'radar_by_attributes' => 'par attributs',
     'radar_by_actions' => 'par plans d\'actions',
-    'radar_monitoring' => 'Monitoring',
+    'radar_monitoring' => 'Pilotage',
     'action_plan' => 'Plans d\'action',
     'new' => 'Nouveaux',
     'late' => 'En retard',

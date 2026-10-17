@@ -236,7 +236,7 @@ return [
          ],
          ],
     'monitoring' => [
-        'title' => 'Monitoring',
+        'title' => 'Steering',
         'extraction_date' => 'Extraction date',
         'total' => 'Total measurements',
         'live' => 'Live / active',

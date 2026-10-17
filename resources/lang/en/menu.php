@@ -13,7 +13,7 @@ return [
     'radar_by_measure' => 'by controls',
     'radar_by_attributes' => 'by attributes',
     'radar_by_actions' => 'by action plans',
-    'radar_monitoring' => 'Monitoring',
+    'radar_monitoring' => 'Steering',
     'action_plan' => 'Action plans',
     'new' => 'New',
     'late' => 'Late',

@@ -237,7 +237,7 @@ return [
          ],
          ],
     'monitoring' => [
-        'title' => 'Monitoring',
+        'title' => 'Steuerung',
         'extraction_date' => 'Extraktionsdatum',
         'total' => 'Kontrollen gesamt',
         'live' => 'Live / aktiv',
