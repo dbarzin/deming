@@ -4,7 +4,7 @@
 
 @section("content")
 <div class="card">
-    <div class="card-header"><i class="bi bi-clipboard-check"></i> {{ trans('cruds.measure.title_singular') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'measures.show'])<i class="bi bi-clipboard-check"></i> {{ trans('cruds.measure.title_singular') }}</div>
     <div class="card-body">
 
 	<div class="container-fluid px-0">

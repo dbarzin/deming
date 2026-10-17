@@ -2,7 +2,7 @@
 
 @section("content")
     <div class="card">
-    <div class="card-header"><i class="bi bi-clipboard-check"></i> {{ trans("cruds.measure.list")}}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'measures.index'])<i class="bi bi-clipboard-check"></i> {{ trans("cruds.measure.list")}}</div>
     <div class="card-body">
     <div class="container-fluid px-0 mb-2">
         <div class="row">

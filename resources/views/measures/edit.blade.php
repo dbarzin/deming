@@ -4,7 +4,7 @@
 
 @section("content")
 <div class="card">
-    <div class="card-header"><i class="bi bi-clipboard-check"></i> {{ trans("cruds.measure.edit")}}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'measures.edit'])<i class="bi bi-clipboard-check"></i> {{ trans("cruds.measure.edit")}}</div>
     <div class="card-body">
 
     @include('partials.errors')

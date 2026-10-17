@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="card">
-    <div class="card-header"><i class="bi bi-file-earmark-text"></i> {{ trans('cruds.exports.steering') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'reports'])<i class="bi bi-file-earmark-text"></i> {{ trans('cruds.exports.steering') }}</div>
     <div class="card-body">
 
 	@if (count($errors))

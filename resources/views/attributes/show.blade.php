@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="card">
-    <div class="card-header"><i class="bi bi-tags"></i> {{ trans('cruds.attribute.show') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'attributes'])<i class="bi bi-tags"></i> {{ trans('cruds.attribute.show') }}</div>
     <div class="card-body">
 	<div class="container-fluid px-0">
     	<div class="row">

@@ -8,7 +8,7 @@
 <div class="card">
     <div class="card-header d-flex flex-wrap justify-content-between">
         <span><i class="bi bi-activity"></i> {{ trans('cruds.monitoring.title') }}</span>
-        <span>{{ trans('cruds.monitoring.extraction_date') }} : {{ \Carbon\Carbon::parse($today)->format('d/m/Y') }}</span>
+        <span>@include('partials.help', ['page' => 'radar.monitoring']){{ trans('cruds.monitoring.extraction_date') }} : {{ \Carbon\Carbon::parse($today)->format('d/m/Y') }}</span>
     </div>
     <div class="card-body">
 

@@ -2,7 +2,7 @@
 
 @section('content')
 <div class="card">
-    <div class="card-header"><i class="bi bi-shuffle"></i> {{ trans('cruds.crosswalk.list') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'crosswalk'])<i class="bi bi-shuffle"></i> {{ trans('cruds.crosswalk.list') }}</div>
     <div class="card-body">
 
     @include('partials.errors')

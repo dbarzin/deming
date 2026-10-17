@@ -5,7 +5,7 @@
     <div class="col-lg-6 col-md-12">
 
         <div class="card">
-    <div class="card-header"><i class="bi bi-bar-chart"></i> {{ trans('cruds.measure.history') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'measures.history'])<i class="bi bi-bar-chart"></i> {{ trans('cruds.measure.history') }}</div>
     <div class="card-body">
 
             <canvas id="canvas-status" width="600" height="300px" class="chartjs-render-monitor">

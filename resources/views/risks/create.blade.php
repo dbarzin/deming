@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="card">
-    <div class="card-header"><i class="bi bi-exclamation-triangle"></i> {{ trans("cruds.risk.create") }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'risks.create'])<i class="bi bi-exclamation-triangle"></i> {{ trans("cruds.risk.create") }}</div>
     <div class="card-body">
 
     @include('partials.errors')

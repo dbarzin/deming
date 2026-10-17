@@ -3,7 +3,7 @@
 @section("content")
 <form action="/radar/domains">
     <div class="card">
-    <div class="card-header"><i class="bi bi-bar-chart"></i> {{ trans('cruds.domain.radar') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'radar.domains'])<i class="bi bi-bar-chart"></i> {{ trans('cruds.domain.radar') }}</div>
     <div class="card-body">
 
     <div class="row">

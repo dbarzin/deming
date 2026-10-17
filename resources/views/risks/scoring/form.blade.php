@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="card">
-    <div class="card-header"><i class="bi bi-gear"></i> {{ isset($config->id) ? trans('cruds.risk_scoring.edit') : trans('cruds.risk_scoring.create') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'risks.scoring_form'])<i class="bi bi-gear"></i> {{ isset($config->id) ? trans('cruds.risk_scoring.edit') : trans('cruds.risk_scoring.create') }}</div>
     <div class="card-body">
 
     @include('partials.errors')

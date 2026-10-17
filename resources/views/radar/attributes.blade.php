@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="card">
-    <div class="card-header"><i class="bi bi-pie-chart"></i> {{ trans('cruds.measure.radar') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'radar.attributes'])<i class="bi bi-pie-chart"></i> {{ trans('cruds.measure.radar') }}</div>
     <div class="card-body">
 
 <div class="container-fluid px-0">

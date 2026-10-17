@@ -11,7 +11,7 @@ form, table {
 
 <div class="p-3">
     <div class="card">
-    <div class="card-header"><i class="bi bi-list-check"></i> {{ trans('cruds.action.close') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'actions.close'])<i class="bi bi-list-check"></i> {{ trans('cruds.action.close') }}</div>
     <div class="card-body">
 
     @include('partials.errors')

@@ -3,7 +3,7 @@
 @section("content")
 <form action="/radar/domains">
     <div class="card">
-    <div class="card-header"><i class="bi bi-speedometer"></i> {{ trans("cruds.welcome.dashboard") }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'radar.measures'])<i class="bi bi-speedometer"></i> {{ trans("cruds.welcome.dashboard") }}</div>
     <div class="card-body">
 
         <div class="row">

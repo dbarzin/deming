@@ -3,7 +3,7 @@
 @section("content")
 <div class="p-3">
     <div class="card">
-    <div class="card-header"><i class="bi bi-graph-up"></i> {{ trans('cruds.exports.index') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'reports'])<i class="bi bi-graph-up"></i> {{ trans('cruds.exports.index') }}</div>
     <div class="card-body">
 
 			@if (count($errors))

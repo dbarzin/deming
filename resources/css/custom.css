@@ -569,3 +569,21 @@ form {
 .report-help .accordion-button code {
     font-size: .8rem;
 }
+
+/* Bouton d'aide discret, à droite du premier card-header de chaque page */
+.btn-help {
+    font-size: .75rem;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: .1rem .5rem;
+    color: #3d8bfd;
+    background-color: #fff;
+    border: 1px solid #9ec5fe;
+}
+
+.btn-help:hover,
+.btn-help:focus {
+    color: var(--deming-accent);
+    background-color: #f0f6ff;
+    border-color: #6ea8fe;
+}

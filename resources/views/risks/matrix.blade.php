@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="card">
-    <div class="card-header"><i class="bi bi-grid-3x3"></i> {{ trans("cruds.risk.matrix") }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'risks.matrix'])<i class="bi bi-grid-3x3"></i> {{ trans("cruds.risk.matrix") }}</div>
     <div class="card-body">
 
     {{-- Filtres ----------------------------------------------------------------}}

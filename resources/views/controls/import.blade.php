@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="card">
-    <div class="card-header"><i class="bi bi-download"></i> {{ trans('cruds.imports.index') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'controls.import'])<i class="bi bi-download"></i> {{ trans('cruds.imports.index') }}</div>
     <div class="card-body">
 
     @include('partials.errors')

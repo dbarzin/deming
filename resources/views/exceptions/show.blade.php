@@ -16,7 +16,7 @@
 @endphp
 
 <div class="card">
-    <div class="card-header"><i class="bi bi-x-octagon"></i> {{ trans('cruds.exception.title_singular') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'exceptions.show'])<i class="bi bi-x-octagon"></i> {{ trans('cruds.exception.title_singular') }}</div>
     <div class="card-body">
 
     @include('partials.errors')

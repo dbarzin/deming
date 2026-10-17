@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="card">
-    <div class="card-header"><i class="bi bi-alarm"></i> {{ trans('cruds.config.notifications.title') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'notifications'])<i class="bi bi-alarm"></i> {{ trans('cruds.config.notifications.title') }}</div>
     <div class="card-body">
 
     @include('partials.errors')

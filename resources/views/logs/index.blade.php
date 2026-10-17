@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="card">
-    <div class="card-header"><i class="bi bi-journal-text"></i> {{ trans("cruds.log.index")}}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'logs'])<i class="bi bi-journal-text"></i> {{ trans("cruds.log.index")}}</div>
     <div class="card-body">
 
     <div class="container-fluid px-0">

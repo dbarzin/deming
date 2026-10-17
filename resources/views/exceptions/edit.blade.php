@@ -2,7 +2,7 @@
 
 @section("content")
 <div class="card">
-    <div class="card-header"><i class="bi bi-x-octagon"></i> {{ trans('cruds.exception.create') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'exceptions.edit'])<i class="bi bi-x-octagon"></i> {{ trans('cruds.exception.create') }}</div>
     <div class="card-body">
 
     @include('partials.errors')

@@ -17,7 +17,7 @@ function bytesToHuman($bytes) {
 
 <div class="col-md-7 col-xl-8 order-1">
 <div class="card">
-    <div class="card-header"><i class="bi bi-file-earmark-text"></i> {{ trans('cruds.document.title.templates') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'documents'])<i class="bi bi-file-earmark-text"></i> {{ trans('cruds.document.title.templates') }}</div>
     <div class="card-body">
 
     @include('partials.errors')

@@ -10,7 +10,7 @@ form, table {
 </style>
 
 <div class="card">
-    <div class="card-header"><i class="bi bi-list-check"></i> {{ trans('cruds.action.edit') }}</div>
+    <div class="card-header">@include('partials.help', ['page' => 'actions.edit'])<i class="bi bi-list-check"></i> {{ trans('cruds.action.edit') }}</div>
     <div class="card-body">
 
 @include('partials.errors')

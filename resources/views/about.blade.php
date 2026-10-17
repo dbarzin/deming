@@ -3,7 +3,7 @@
 @section("content")
 <div class="p-3">
     <div class="card">
-    <div class="card-header"><i class="bi bi-question-circle"></i> About</div>
+    <div class="card-header">@include('partials.help', ['page' => 'about'])<i class="bi bi-question-circle"></i> About</div>
     <div class="card-body">
 		<div class="container-fluid px-0">
 	    	<div class="row">
@@ -40,7 +40,7 @@
 
 <h2>Open Source</h2>
 
-<p>Unter der <a href="https://www.gnu.org/licenses/licenses.html">GPL-Lizenz</a> vertrieben, passt sich Deming den Bedürfnissen von Unternehmen an, die eine kontinuierliche Verbesserung ihrer Informationssicherheit anstreben. Weitere Informationen zur Nutzung und den Funktionen finden Sie in der <a href="https://sourcentis.github.io/deming">Benutzerdokumentation</a> und auf dem <a href="https://github.com/sourcentis">GitHub-Projekt</a>.</p>
+<p>Unter der <a href="https://www.gnu.org/licenses/licenses.html">GPL-Lizenz</a> vertrieben, passt sich Deming den Bedürfnissen von Unternehmen an, die eine kontinuierliche Verbesserung ihrer Informationssicherheit anstreben. Weitere Informationen zur Nutzung und den Funktionen finden Sie in der <a href="https://sourcentis.github.io/deming/de/">Benutzerdokumentation</a> und auf dem <a href="https://github.com/sourcentis">GitHub-Projekt</a>.</p>
 @else
     <h1>About Deming</h1>
 
