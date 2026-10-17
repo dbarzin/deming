@@ -14,6 +14,12 @@ class UserGroupFactory extends Factory
         return [
             'name' => $this->faker->unique()->words(2, true),
             'description' => $this->faker->sentence(),
+            'type' => UserGroup::TYPE_BUSINESS,
         ];
+    }
+
+    public function security(): static
+    {
+        return $this->state(['type' => UserGroup::TYPE_SECURITY]);
     }
 }

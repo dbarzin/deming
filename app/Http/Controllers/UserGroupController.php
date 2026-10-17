@@ -9,6 +9,7 @@ use App\Models\UserGroup;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
 
 class UserGroupController extends Controller
 {
@@ -60,12 +61,14 @@ class UserGroupController extends Controller
         // Validate request data
         $this->validate($request, [
             'name' => 'required|unique:user_groups|min:1|max:90',
+            'type' => 'required|in:' . implode(',', UserGroup::TYPES),
         ]);
 
         // Create and save the new user
         $group = new UserGroup();
         $group->name = $request->input('name');
         $group->description = $request->input('description');
+        $group->type = $request->input('type');
         $group->save();
 
         // Sync users
@@ -137,18 +140,27 @@ class UserGroupController extends Controller
         // Validate request data
         $this->validate($request, [
             'name' => 'required|min:1|max:90',
+            'type' => 'required|in:' . implode(',', UserGroup::TYPES),
         ]);
 
         // Update user information
         $group->name = $request->input('name');
         $group->description = $request->input('description');
+        $group->type = $request->input('type');
         $group->update();
 
         // Sync users
         $group->users()->sync($request->input('users', []));
 
-        // Sync measures
-        $group->measures()->sync($request->input('measures', []));
+        // Sync measures: the form only lists open measures, so keep the
+        // completed / proposed ones already linked to the group
+        $closedMeasures = DB::table('measure_user_group')
+            ->join('measures', 'measures.id', '=', 'measure_user_group.measure_id')
+            ->where('measure_user_group.user_group_id', $group->id)
+            ->whereNotNull('measures.realisation_date')
+            ->pluck('measure_user_group.measure_id')
+            ->all();
+        $group->measures()->sync(array_merge($request->input('measures', []), $closedMeasures));
 
         return redirect('/groups');
     }

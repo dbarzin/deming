@@ -59,6 +59,9 @@
         <a href="/radar/actions" class="{{ request()->is('radar/actions') ? 'active' : '' }}">
             <i class="bi bi-bar-chart"></i><span class="menu-text">{{ trans("menu.radar_by_actions") }}</span>
         </a>
+        <a href="/radar/monitoring" class="{{ request()->is('radar/monitoring') ? 'active' : '' }}">
+            <i class="bi bi-activity"></i><span class="menu-text">{{ trans("menu.radar_monitoring") }}</span>
+        </a>
     </div>
 
     <a href="/reports" class="{{ request()->is('reports*') ? 'active' : '' }}">

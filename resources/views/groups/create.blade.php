@@ -20,6 +20,18 @@
 			</div>
 	    	<div class="row">
 	    		<div class="col-lg-1 col-md-2">
+                    <label>{{ trans('cruds.group.fields.type') }}</label>
+		    	</div>
+	    		<div class="col-lg-4 col-md-6">
+                    <select class="{{ $errors->has('type') ? 'is-invalid' : ''}} form-select" name="type" required>
+                        @foreach(\App\Models\UserGroup::TYPES as $type)
+                            <option value="{{ $type }}" {{ old('type', \App\Models\UserGroup::TYPE_BUSINESS) === $type ? 'selected' : '' }}>{{ trans('cruds.group.types.' . $type) }}</option>
+                        @endforeach
+                    </select>
+				</div>
+			</div>
+	    	<div class="row">
+	    		<div class="col-lg-1 col-md-2">
                     <label>{{ trans('cruds.group.fields.description') }}</label>
 		    	</div>
                 <div class="col-lg-8 col-md-10">

@@ -29,6 +29,8 @@
 		    <tr>
 				<th>{{ trans('cruds.group.fields.name') }}
                 </th>
+				<th>{{ trans('cruds.group.fields.type') }}
+                </th>
 				<th>{{ trans('cruds.group.fields.description') }}
                 </th>
 				<th># {{ trans('cruds.group.fields.users') }}
@@ -42,6 +44,7 @@
         @foreach($groups as $group)
 			<tr>
                 <td><a id="{{$group->name}}" href="/groups/{{ $group->id}}">{{ $group->name }}</a></td>
+                <td>@include('groups.type_badge')</td>
                 <td>{{ $group->description }}</td>
                 <td>{{ $group->users()->count()}} </td>
                 <td>{{ $group->measures()->count()}} </td>
