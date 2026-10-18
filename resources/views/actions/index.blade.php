@@ -80,6 +80,7 @@
             <th data-priority="2"><span style="font-size: 0.8em;">{{ trans('cruds.action.fields.reference') }}</span></th>
             <th><span style="font-size: 0.8em;">{{ trans('cruds.action.fields.type') }}</span></th>
             <th class="dt-hidden">{{ trans('cruds.action.fields.clauses') }}</th>
+            <th>{{ trans('cruds.action.fields.risks') }}</th>
             <th>{{ trans('cruds.action.fields.status') }}</th>
             <th>{{ trans('cruds.action.fields.progress') }}</th>
             <th data-priority="1">{{ trans('cruds.action.fields.name') }}</th>
@@ -111,6 +112,11 @@
             <td>
                 @foreach($action->controls as $control)
                     <a href="/alice/show/{{ $control->id }}">{{ $control->clause }}</a>{{ $loop->last ? '' : ',' }}
+                @endforeach
+            </td>
+            <td>
+                @foreach($action->risks as $risk)
+                    <a href="/risk/show/{{ $risk->id }}">{{ $risk->name }}</a>{{ $loop->last ? '' : ',' }}
                 @endforeach
             </td>
             <td id="{{ $action->status }}">

@@ -19,6 +19,7 @@ return [
          'close' => 'Close an action',
          'fields' => [
             'clauses' => 'Clauses',
+            'risks' => 'Risks',
             'name' => 'Name',
             'scope' => 'Scope',
             'action' => 'Action plan',

@@ -38,6 +38,7 @@ return [
             'criticity' => 'Kritikalität',
             'cause' => 'Ursache',
             'clauses' => 'Klauseln',
+            'risks' => 'Risiken',
             'owners' => 'Besitzer',
             'status' => 'Status',
             'status_open' => 'Offen',

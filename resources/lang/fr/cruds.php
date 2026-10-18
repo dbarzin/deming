@@ -38,6 +38,7 @@ return [
             'criticity' => 'Criticité',
             'cause' => 'Cause',
             'clauses' => 'Clauses',
+            'risks' => 'Risques',
             'owners' => 'Responsables',
             'status_open' => 'Ouvert',
             'status_closed' => 'Fermé',

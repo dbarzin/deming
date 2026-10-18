@@ -148,11 +148,21 @@ class ActionController extends Controller
             ->get(['action_control.action_id', 'controls.id', 'controls.clause'])
             ->groupBy('action_id');
 
+        // Fetch risks for all actions in one query
+        $risksByActionId = DB::table('action_risk')
+            ->join('risks', 'risks.id', '=', 'action_risk.risk_id')
+            ->whereIn('action_risk.action_id', $actions->pluck('id'))
+            ->orderBy('risks.name')
+            ->get(['action_risk.action_id', 'risks.id', 'risks.name'])
+            ->groupBy('action_id');
+
         foreach ($actions as $action) {
             $action->owners = $ownersByActionId
                 ->get($action->id, collect())
                 ->pluck('name');
             $action->controls = $controlsByActionId
+                ->get($action->id, collect());
+            $action->risks = $risksByActionId
                 ->get($action->id, collect());
         }
 
