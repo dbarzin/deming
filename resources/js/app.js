@@ -14,7 +14,6 @@ import DataTable from 'datatables.net-bs5';
 import 'datatables.net-buttons-bs5';
 import 'datatables.net-buttons/js/buttons.colVis.mjs';
 import 'datatables.net-buttons/js/buttons.html5.mjs';
-import 'datatables.net-buttons/js/buttons.print.mjs';
 import 'datatables.net-colreorder-bs5';
 import 'datatables.net-responsive-bs5';
 DataTable.Buttons.jszip(jszip);
@@ -39,6 +38,9 @@ window.EasyMDE = EasyMDE;
 
 // DataTables defaults
 const dtLanguages = {
+    en: {
+        buttons: { excel: 'Export' },
+    },
     fr: {
         decimal: ',',
         emptyTable: 'Aucune donnée disponible',
@@ -50,7 +52,7 @@ const dtLanguages = {
         search: 'Rechercher :',
         zeroRecords: 'Aucun élément correspondant trouvé',
         paginate: { first: '«', last: '»', next: '›', previous: '‹' },
-        buttons: { colvis: 'Colonnes', copy: 'Copier', print: 'Imprimer' },
+        buttons: { colvis: 'Colonnes', copy: 'Copier', excel: 'Exporter' },
     },
     de: {
         decimal: ',',
@@ -63,7 +65,7 @@ const dtLanguages = {
         search: 'Suchen:',
         zeroRecords: 'Keine passenden Einträge gefunden',
         paginate: { first: '«', last: '»', next: '›', previous: '‹' },
-        buttons: { colvis: 'Spalten', copy: 'Kopieren', print: 'Drucken' },
+        buttons: { colvis: 'Spalten', copy: 'Kopieren', excel: 'Exportieren' },
     },
 };
 const lang = (document.documentElement.lang || 'en').substring(0, 2);
@@ -111,9 +113,7 @@ function initDataTable(el, options = {}) {
         buttons: withButtons ? [
             { extend: 'colvis', className: 'btn-sm btn-light' },
             { extend: 'copy', className: 'btn-sm btn-light' },
-            { extend: 'csv', className: 'btn-sm btn-light', title },
             { extend: 'excel', className: 'btn-sm btn-light', title },
-            { extend: 'print', className: 'btn-sm btn-light', title },
         ] : [],
     }, options));
 }
