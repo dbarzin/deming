@@ -9,11 +9,11 @@ Cet écran permet de suivre les plans d’action :
 [![Screenshot](images/a1.fr.png)](images/a1.fr.png)
 
 La liste peut être filtrée par type (majeur, mineur, observation, opportunité), par statut (ouvert, fermé, tous) et par périmètre.
-Elle affiche pour chaque plan d’action sa référence, son type, son statut, son avancement, son nom, son périmètre,
-ses responsables et sa date d’échéance. Les dates d’échéance dépassées sont affichées en rouge.
+Elle affiche pour chaque plan d’action sa référence, son type, les risques associés, son statut, son avancement,
+son nom, son périmètre, ses responsables et sa date d’échéance. Un clic sur un risque permet de l’afficher. Les dates d’échéance dépassées sont affichées en rouge.
 
 Le bouton « Colonnes » permet d’afficher des colonnes supplémentaires (clauses associées, remédiation),
-et les boutons « Copier », « CSV », « Excel » et « Imprimer » permettent d’exporter la liste affichée.
+et les boutons « Copier » et « Exporter » permettent de copier la liste affichée ou de l’exporter vers Excel.
 
 En cliquant sur la référence d’un plan d’action, vous arrivez sur [ce plan d’action](#show). Le bouton « Nouveau » permet de [créer un nouveau plan d’action](#create).
 
@@ -36,6 +36,8 @@ L’écran contient :
 
 * le périmètre et les clauses associées ;
 
+* les risques associés ;
+
 * la cause ;
 
 * la remédiation à mettre en œuvre ;
@@ -52,9 +54,10 @@ Lorsque vous cliquez sur :
 
 ## Afficher un plan d’action {#show}
 
-Cet écran affiche un plan d’action : référence, type, statut, périmètre, clauses, nom, cause, date d’échéance,
-responsables et, pour un plan d’action clôturé, sa date de clôture et sa justification. Les clauses et le contrôle
-à l’origine du plan d’action sont accessibles depuis cet écran.
+Cet écran affiche un plan d’action : référence, type, statut, périmètre, clauses, risques, nom, cause, date
+d’échéance, responsables et, pour un plan d’action clôturé, sa date de clôture et sa justification. Les clauses et
+les risques ne sont affichés que si le plan d’action y est lié. Les clauses, les risques et le contrôle à l’origine
+du plan d’action sont accessibles depuis cet écran.
 
 [![Screenshot](images/a4.fr.png)](images/a4.fr.png)
 
@@ -93,7 +96,7 @@ Lorsque vous cliquez sur :
 ## Modifier un plan d’action <a name="edit"></a>
 
 Cet écran permet de modifier l’ensemble des informations d’un plan d’action : référence, type, nom, périmètre,
-clauses, cause, remédiation, date d’échéance, responsables, avancement, statut, date de clôture et justification.
+clauses, risques, cause, remédiation, date d’échéance, responsables, avancement, statut, date de clôture et justification.
 
 [![Screenshot](images/a2.fr.png)](images/a2.fr.png)
 

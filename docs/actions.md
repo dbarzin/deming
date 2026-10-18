@@ -9,11 +9,12 @@ This screen allows you to follow the action plans:
 [![Screenshot](images/a1.png)](images/a1.png)
 
 The list can be filtered by type (major, minor, observation, opportunity), by status (open, closed, all) and by scope.
-It shows, for each action plan, its reference, type, status, progress, name, scope, owners and due date.
+It shows, for each action plan, its reference, type, associated risks, status, progress, name, scope, owners and
+due date. Clicking on a risk opens it.
 Overdue due dates are displayed in red.
 
 The "Column visibility" button lets you show additional columns (associated clauses, remediation),
-and the "Copy", "CSV", "Excel" and "Print" buttons export the displayed list.
+and the "Copy" and "Export" buttons copy the displayed list or export it to Excel.
 
 Clicking on the reference of an action plan [opens it](#show). The "New" button [creates a new action plan](#create).
 
@@ -36,6 +37,8 @@ The screen contains:
 
 * the scope and the associated clauses;
 
+* the associated risks;
+
 * the cause;
 
 * the remediation to be carried out;
@@ -52,9 +55,9 @@ When you click:
 
 ## Show an action plan {#show}
 
-This screen displays an action plan: reference, type, status, scope, clauses, name, cause, due date, owners and,
-for a closed action plan, its close date and justification. The clauses and the originating measurement can be
-opened from this screen.
+This screen displays an action plan: reference, type, status, scope, clauses, risks, name, cause, due date, owners
+and, for a closed action plan, its close date and justification. The clauses and risks are only shown when the action
+plan is linked to some. The clauses, the risks and the originating measurement can be opened from this screen.
 
 [![Screenshot](images/a4.png)](images/a4.png)
 
@@ -92,8 +95,8 @@ When you click:
 
 ## Edit an action plan <a name="edit"></a>
 
-This screen allows you to edit all the information of an action plan: reference, type, name, scope, clauses, cause,
-remediation, due date, owners, progress, status, close date and justification.
+This screen allows you to edit all the information of an action plan: reference, type, name, scope, clauses, risks,
+cause, remediation, due date, owners, progress, status, close date and justification.
 
 [![Screenshot](images/a2.png)](images/a2.png)
 

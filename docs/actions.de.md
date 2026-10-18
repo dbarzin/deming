@@ -9,12 +9,13 @@ Mit dieser Ansicht können die Aktionspläne verfolgt werden:
 [![Screenshot](images/a1.de.png)](images/a1.de.png)
 
 Die Liste kann nach Typ (Major, Minor, Beobachtung, Gelegenheit), nach Status (offen, geschlossen, alle) und nach
-Geltungsbereich gefiltert werden. Sie zeigt für jeden Aktionsplan seine Referenz, seinen Typ, seinen Status, seinen
-Fortschritt, seinen Namen, seinen Geltungsbereich, seine Verantwortlichen und sein Fälligkeitsdatum.
-Überschrittene Fälligkeitsdaten werden rot angezeigt.
+Geltungsbereich gefiltert werden. Sie zeigt für jeden Aktionsplan seine Referenz, seinen Typ, die zugehörigen Risiken,
+seinen Status, seinen Fortschritt, seinen Namen, seinen Geltungsbereich, seine Verantwortlichen und sein Fälligkeitsdatum.
+Überschrittene Fälligkeitsdaten werden rot angezeigt. Durch Klicken auf ein Risiko wird es geöffnet.
 
 Mit der Schaltfläche „Spalten“ können zusätzliche Spalten (zugehörige Klauseln, Behebung) angezeigt werden,
-und mit den Schaltflächen „Kopieren“, „CSV“, „Excel“ und „Drucken“ kann die angezeigte Liste exportiert werden.
+und mit den Schaltflächen „Kopieren“ und „Exportieren“ kann die angezeigte Liste kopiert oder nach Excel exportiert
+werden.
 
 Durch Klicken auf die Referenz eines Aktionsplans [öffnen Sie ihn](#show). Mit der Schaltfläche „Neu“ können Sie
 [einen neuen Aktionsplan erstellen](#create).
@@ -38,6 +39,8 @@ Die Ansicht enthält:
 
 * den Geltungsbereich und die zugehörigen Klauseln;
 
+* die zugehörigen Risiken;
+
 * die Ursache;
 
 * die durchzuführende Behebung;
@@ -54,9 +57,10 @@ Wenn Sie klicken auf:
 
 ## Einen Aktionsplan anzeigen {#show}
 
-Diese Ansicht zeigt einen Aktionsplan an: Referenz, Typ, Status, Geltungsbereich, Klauseln, Name, Ursache,
+Diese Ansicht zeigt einen Aktionsplan an: Referenz, Typ, Status, Geltungsbereich, Klauseln, Risiken, Name, Ursache,
 Fälligkeitsdatum, Verantwortliche und, bei einem geschlossenen Aktionsplan, sein Abschlussdatum und seine
-Begründung. Die Klauseln und die Kontrolle, aus der der Aktionsplan hervorgeht, sind von dieser Ansicht aus erreichbar.
+Begründung. Die Klauseln und Risiken werden nur angezeigt, wenn der Aktionsplan damit verknüpft ist. Die Klauseln,
+die Risiken und die Kontrolle, aus der der Aktionsplan hervorgeht, sind von dieser Ansicht aus erreichbar.
 
 [![Screenshot](images/a4.de.png)](images/a4.de.png)
 
@@ -96,7 +100,7 @@ Wenn Sie klicken auf:
 ## Einen Aktionsplan ändern <a name="edit"></a>
 
 Mit dieser Ansicht können alle Informationen eines Aktionsplans geändert werden: Referenz, Typ, Name,
-Geltungsbereich, Klauseln, Ursache, Behebung, Fälligkeitsdatum, Verantwortliche, Fortschritt, Status, Abschlussdatum
+Geltungsbereich, Klauseln, Risiken, Ursache, Behebung, Fälligkeitsdatum, Verantwortliche, Fortschritt, Status, Abschlussdatum
 und Begründung.
 
 [![Screenshot](images/a2.de.png)](images/a2.de.png)
