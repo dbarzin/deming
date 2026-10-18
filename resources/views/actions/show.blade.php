@@ -57,6 +57,7 @@ form, table {
     			</div>
             </div>
 
+            @if ($action->controls->isNotEmpty())
         	<div class="row">
         		<div class="col-md-2 col-lg-1">
                     <strong>{{ trans("cruds.action.fields.clauses") }}</strong>
@@ -70,6 +71,23 @@ form, table {
                     @endforeach
                 </div>
             </div>
+            @endif
+
+            @if ($action->risks->isNotEmpty())
+        	<div class="row">
+        		<div class="col-md-2 col-lg-1">
+                    <strong>{{ trans("cruds.action.fields.risks") }}</strong>
+    	    	</div>
+        		<div class="col-md-10 col-lg-11">
+                    @foreach($action->risks as $risk)
+                        <a href="/risk/show/{{ $risk->id }}">{{ $risk->name }}</a>
+                        @if(!$loop->last)
+                        <br>
+                        @endif
+                    @endforeach
+                </div>
+            </div>
+            @endif
 
 	    	<div class="row">
 	    		<div class="col-md-2 col-lg-1">

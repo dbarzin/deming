@@ -65,6 +65,22 @@ form, table {
 			</div>
 		</div>
 
+		<div class="row">
+    		<div class="col-md-2 col-lg-1">
+                <strong>{{ trans('cruds.action.fields.risks') }}</strong>
+	    	</div>
+            <div class="col-md-12 col-lg-11">
+				<select class="form-select select2" name="risks[]" multiple>
+					@foreach($all_risks as $risk)
+					    <option value="{{ $risk->id }}"
+                            {{ in_array($risk->id, old("risks", $risks)) ? "selected" : "" }}>
+                                {{ $risk->name }}
+                        </option>
+				    @endforeach
+				 </select>
+			</div>
+		</div>
+
     	<div class="row">
     		<div class="col-md-2 col-lg-1">
                 <strong>{{ trans("cruds.action.fields.name") }}</strong>

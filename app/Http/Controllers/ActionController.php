@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Exports\ActionsExport;
 // Export
 use App\Models\Action;
+use App\Models\Risk;
 // Laravel
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -152,6 +153,7 @@ class ActionController extends Controller
         $risksByActionId = DB::table('action_risk')
             ->join('risks', 'risks.id', '=', 'action_risk.risk_id')
             ->whereIn('action_risk.action_id', $actions->pluck('id'))
+            ->whereNull('risks.deleted_at')
             ->orderBy('risks.name')
             ->get(['action_risk.action_id', 'risks.id', 'risks.name'])
             ->groupBy('action_id');
@@ -230,6 +232,9 @@ class ActionController extends Controller
 
         // Sync measures
         $action->controls()->sync($request->input('measures', []));
+
+        // Sync risks
+        $action->risks()->sync($request->input('risks', []));
 
         // Sync owners
         $action->owners()->sync($request->input('owners', []));
@@ -340,6 +345,14 @@ class ActionController extends Controller
             ->pluck('control_id')
             ->toArray();
 
+        // Get all risks
+        $all_risks = Risk::query()
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
+        $risks = $action->risks()->pluck('risks.id')->toArray();
+
         // Get users
         $users = DB::table('users')
             ->select('id', 'name')
@@ -351,6 +364,8 @@ class ActionController extends Controller
             ->with('scopes', $scopes)
             ->with('all_measures', $all_measures)
             ->with('measures', $measures)
+            ->with('all_risks', $all_risks)
+            ->with('risks', $risks)
             ->with('users', $users)
             ->with('action', $action);
     }
@@ -391,10 +406,17 @@ class ActionController extends Controller
             ->orderBy('name')
             ->get();
 
+        // Get all risks
+        $all_risks = Risk::query()
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
         // Return
         return view('actions.create')
             ->with('scopes', $scopes)
             ->with('all_measures', $all_measures)
+            ->with('all_risks', $all_risks)
             ->with('users', $users);
     }
 
@@ -434,6 +456,9 @@ class ActionController extends Controller
 
         // Sync measures
         $action->controls()->sync($request->input('measures', []));
+
+        // Sync risks
+        $action->risks()->sync($request->input('risks', []));
 
         // Sync owners
         $action->owners()->sync($request->input('owners', []));

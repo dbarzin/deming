@@ -2,6 +2,7 @@
 
 use App\Models\Action;
 use App\Models\Control;
+use App\Models\Risk;
 use App\Models\User;
 
 beforeEach(function () {
@@ -178,4 +179,58 @@ test('auditor cannot delete an action', function () {
 test('admin can export actions', function () {
     Action::factory()->count(2)->create();
     $this->actingAs($this->admin)->get('/export/actions')->assertStatus(200);
+});
+
+test('admin can create an action linked to risks', function () {
+    $risk = Risk::factory()->create();
+
+    $this->actingAs($this->admin)
+        ->post('/action/store', ['name' => 'Harden servers', 'risks' => [$risk->id]])
+        ->assertRedirect('/actions');
+
+    $action = Action::where('name', 'Harden servers')->firstOrFail();
+    expect($action->risks->pluck('id')->all())->toBe([$risk->id]);
+});
+
+test('saving an action replaces its risks and the edit form pre-selects them', function () {
+    $oldRisk = Risk::factory()->create();
+    $newRisk = Risk::factory()->create();
+    $action = Action::factory()->create();
+    $action->risks()->sync([$oldRisk->id]);
+
+    $this->actingAs($this->admin)
+        ->post('/action/save', ['id' => $action->id, 'name' => $action->name, 'status' => 0, 'risks' => [$newRisk->id]])
+        ->assertRedirect("/action/show/{$action->id}");
+
+    $this->actingAs($this->admin)
+        ->get("/action/edit/{$action->id}")
+        ->assertStatus(200)
+        ->assertViewHas('risks', [$newRisk->id]);
+});
+
+test('the action list and detail show the linked risks but not the deleted ones', function () {
+    $risk = Risk::factory()->create(['name' => 'Ransomware on workstations']);
+    $deletedRisk = Risk::factory()->create(['name' => 'Retired risk']);
+    $action = Action::factory()->create(['status' => 0]);
+    $action->risks()->sync([$risk->id, $deletedRisk->id]);
+    $deletedRisk->delete();
+
+    $this->actingAs($this->admin)->get('/actions?status=0')
+        ->assertStatus(200)
+        ->assertSee('Ransomware on workstations')
+        ->assertDontSee('Retired risk');
+
+    $this->actingAs($this->admin)->get("/action/show/{$action->id}")
+        ->assertStatus(200)
+        ->assertSee('Ransomware on workstations')
+        ->assertDontSee('Retired risk');
+});
+
+test('the action detail hides the clauses and risks labels when the action has none', function () {
+    $action = Action::factory()->create();
+
+    $this->actingAs($this->admin)->get("/action/show/{$action->id}")
+        ->assertStatus(200)
+        ->assertDontSee('<strong>' . trans('cruds.action.fields.clauses') . '</strong>', false)
+        ->assertDontSee('<strong>' . trans('cruds.action.fields.risks') . '</strong>', false);
 });

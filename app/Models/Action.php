@@ -61,6 +61,11 @@ class Action extends Model
         return $this->belongsToMany(Control::class, 'action_control', 'action_id', 'control_id');
     }
 
+    public function risks() : BelongsToMany
+    {
+        return $this->belongsToMany(Risk::class, 'action_risk')->orderBy('name');
+    }
+
     // Computer progress history of an action
     public function history()
     {
