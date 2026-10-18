@@ -5,7 +5,7 @@
     <div class="card-header">@include('partials.help', ['page' => 'measures.index'])<i class="bi bi-clipboard-check"></i> {{ trans("cruds.measure.list")}}</div>
     <div class="card-body">
     <div class="container-fluid px-0 mb-2">
-        <div class="row">
+        <div class="row align-items-center">
             <div class="col-lg-2 col-md-6">
                 <select class="form-select select2" id='domain' name="domain_id">
                     <option value="0">-- {{ trans("cruds.measure.fields.choose_domain")}} --</option>
@@ -66,7 +66,7 @@
                         @endfor
                     </select>
                 </div>
-            <div class="col-lg-3 col-md-6 mt-2">
+            <div class="col-lg col-md-6 mt-2 mt-lg-0">
                  <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}><label class="form-check-label" for="status0">{{ trans("cruds.measure.fields.status_all") }}</label></div>
                  <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="1" id="status1" {{ (Session::get("status")=="1") ? 'checked' : '' }}><label class="form-check-label" for="status1">{{ trans("cruds.measure.fields.status_done") }}</label></div>
                  <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="2" id="status2" {{ (Session::get("status")=="2") ? 'checked' : '' }}><label class="form-check-label" for="status2">{{ trans("cruds.measure.fields.status_todo") }}</label></div>
