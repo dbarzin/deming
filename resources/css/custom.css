@@ -27,9 +27,10 @@ body {
 }
 
 .navbar-brand {
-    /* Centré au-dessus de la sidebar (moins la marge du container-fluid et le bouton du menu) */
-    width: calc(var(--deming-sidebar-width) - .75rem - var(--deming-toggle-width));
-    margin-right: 0;
+    /* Centré au-dessus de la sidebar (moins la marge du container-fluid et le bouton du menu), décalé de 20px vers la gauche */
+    width: calc(var(--deming-sidebar-width) - .75rem - var(--deming-toggle-width) - 40px);
+    margin-right: 40px;
+    caret-color: transparent;
     text-align: center;
     font-weight: 700;
     font-size: 1.75rem;
@@ -201,6 +202,7 @@ html.sidebar-preload-hidden .main-content {
     }
     .navbar-brand {
         width: auto;
+        margin-right: 0;
         font-size: 1.3rem;
     }
     .navbar .nav-icon {
