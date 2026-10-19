@@ -2,6 +2,7 @@
 
 :root {
     --deming-sidebar-width: 230px;
+    --deming-toggle-width: 2.5rem;
     --deming-navbar-height: 56px;
     --deming-accent: #0366D6;
 }
@@ -26,8 +27,8 @@ body {
 }
 
 .navbar-brand {
-    /* Centré au-dessus de la sidebar (moins la marge du container-fluid) */
-    width: calc(var(--deming-sidebar-width) - .75rem);
+    /* Centré au-dessus de la sidebar (moins la marge du container-fluid et le bouton du menu) */
+    width: calc(var(--deming-sidebar-width) - .75rem - var(--deming-toggle-width));
     margin-right: 0;
     text-align: center;
     font-weight: 700;
@@ -59,6 +60,8 @@ tr[data-href] {
 }
 
 .toggle-sidebar-btn {
+    width: var(--deming-toggle-width);
+    padding: 0;
     font-size: 1.4rem;
     border: none;
 }

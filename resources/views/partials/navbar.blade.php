@@ -1,9 +1,9 @@
 <nav class="navbar navbar-expand fixed-top">
     <div class="container-fluid">
-        <a class="navbar-brand" href="/">Deming</a>
         <button class="btn toggle-sidebar-btn" id="toggle-sidebar-btn" type="button" aria-label="Menu">
             <i class="bi bi-list"></i>
         </button>
+        <a class="navbar-brand" href="/">Deming</a>
         <div class="ms-auto d-flex align-items-center gap-3">
             <a href="/bob/index?attribute=none&period=0&scope=none&domain=0&status=2" class="nav-icon"
                title="{{ __('menu.new') }}" aria-label="{{ __('menu.new') }}">
