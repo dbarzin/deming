@@ -21,7 +21,7 @@
             <div class="col-lg-6 col-md-7">
                 <div class="input-group">
                     <span class="input-group-text">Select model</span>
-                    <select class="form-select select2" name="model" id="model" required>
+                    <select class="form-select select2" name="model" id="model">
                         <option></option>
                         @foreach($models as $model)
                             <option>{{ basename($model, '.xlsx') }}</option>
@@ -55,7 +55,7 @@
             </div>
             <div class="col-lg-1 col-md-2 text-md-end">
     		    <button type="submit" class="btn btn-success"
-                    onclick="if ($('#clean').is(':checked')) return confirm('Do you want to remove all other measures and controls  ?')">
+                    onclick="return checkImport()">
                         {{ trans("common.import") }}
                 </button>
             </div>
@@ -146,6 +146,16 @@ function downloadModel() {
         return;
     }
     window.location.href = `/alice/download?model=${encodeURIComponent(model)}`;
+}
+
+function checkImport() {
+    if (!document.getElementById('model').value && !document.getElementById('file').value) {
+        alert('Please select a model or an import file.');
+        return false;
+    }
+    if ($('#clean').is(':checked'))
+        return confirm('Do you want to remove all other measures and controls  ?');
+    return true;
 }
 </script>
 @endsection
