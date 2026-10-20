@@ -72,6 +72,7 @@ class Exception extends Model
     ];
 
     // ── Relations ─────────────────────────────────────────────────────────────
+    /** @return BelongsTo<Control, $this> */
     public function measure(): BelongsTo
     {
         return $this->belongsTo(Control::class, 'control_id');

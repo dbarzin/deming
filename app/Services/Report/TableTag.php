@@ -70,7 +70,7 @@ class TableTag
         $available = ReportTableRegistry::columns($table);
         $real = ReportTableRegistry::realColumns($table);
 
-        foreach (array_filter(array_map('trim', explode(',', $columnList)), 'strlen') as $item) {
+        foreach (array_filter(array_map('trim', explode(',', $columnList)), fn (string $s) => $s !== '') as $item) {
             [$column, $header] = array_pad(array_map('trim', explode('=', $item, 2)), 2, null);
             if (! array_key_exists($column, $available)) {
                 $tag->errors[] = trans('report_template.errors.unknown_column', ['table' => $table, 'column' => $column]);
