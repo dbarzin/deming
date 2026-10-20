@@ -11,7 +11,8 @@
   "private": true,
   "scripts": {
     "dev": "vite",
-    "build": "vite build --config vite.config.mjs"
+    "build": "vite build --config vite.config.mjs",
+    "docs:screenshots": "node scripts/screenshots/shots.js"
   },
   "require": {
     "laravel/framework": "^12.0",
@@ -19,6 +20,7 @@
   },
   "devDependencies": {
     "laravel-vite-plugin": "^1.0.6",
+    "playwright": "^1.64.1",
     "vite": "^6.2.5"
   },
   "dependencies": {
@@ -28,15 +30,26 @@
     "@mui/lab": "^7.0.0-beta.11",
     "@mui/material": "^7.0.2",
     "@mui/styles": "^6.4.8",
-    "@olton/metroui": "^5.0.13",
+    "@popperjs/core": "^2.11.8",
+    "bootstrap": "^5.3.8",
+    "bootstrap-icons": "^1.13.2",
     "chart.js": "^4.4.9",
     "chartjs-adapter-date-fns": "^3.0.0",
     "chartjs-plugin-datalabels": "^2.2.0",
+    "datatables.net-bs5": "^2.3.8",
+    "datatables.net-buttons": "^3.2.6",
+    "datatables.net-buttons-bs5": "^3.2.6",
+    "datatables.net-colreorder-bs5": "^2.1.2",
+    "datatables.net-responsive-bs5": "^3.0.8",
     "dropzone": "^6.0.0-beta.2",
     "easymde": "^2.18.0",
     "fontawesome-free": "^1.0.4",
+    "jquery": "^3.7.1",
+    "jszip": "^3.10.2",
     "less": "^4.3.0",
     "moment": "^2.30.1",
+    "select2": "^4.1.0-rc.0",
+    "select2-bootstrap-5-theme": "^1.3.0",
     "simplemde": "^1.11.2"
   }
 }

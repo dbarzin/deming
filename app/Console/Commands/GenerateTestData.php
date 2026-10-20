@@ -35,6 +35,20 @@ class GenerateTestData extends Command
     {
         $this->components->info('Generate test data');
 
+        // get language for the faker : --locale option, fallback to system LANG
+        $locale = strtolower((string) $this->option('locale'));
+        if (! in_array($locale, ['fr', 'en'], true)) {
+            $locale = strtolower(substr((string) getenv('LANG'), 0, 2)) === 'fr' ? 'fr' : 'en';
+        }
+
+        // No security measure : import the ISO 27001:2022 framework in the selected language
+        if (DB::table('controls')->count() === 0) {
+            $this->components->info('No security measure found: import the ISO 27001:2022 framework');
+            $this->call('deming:import-framework', [
+                'filename' => storage_path('app/repository/ISO27001-2022.' . $locale . '.xlsx'),
+            ]);
+        }
+
         // Remove data in documents and measures tables
         DB::table('documents')->delete();
         DB::table('action_control')->delete();
@@ -75,11 +89,6 @@ class GenerateTestData extends Command
         // loop on security measures
         $delta = $perPeriod - rand(-$perPeriod / 2, $perPeriod / 2);
 
-        // get language for the faker : --locale option, fallback to system LANG
-        $locale = strtolower((string) $this->option('locale'));
-        if (! in_array($locale, ['fr', 'en'], true)) {
-            $locale = strtolower(substr((string) getenv('LANG'), 0, 2)) === 'fr' ? 'fr' : 'en';
-        }
         $fakerLocale = $locale === 'fr' ? 'fr_FR' : 'en_US';
 
         // Intialize faker

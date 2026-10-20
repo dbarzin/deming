@@ -8,8 +8,14 @@
     margin-bottom: 2px;
     font-size: 14px;
     color: #636e73;
-    padding: 12px;
+    padding: 2px 12px;
     text-align: center;
+}
+.MyCalendar .header .row {
+    align-items: center;
+}
+.MyCalendar .header a {
+    line-height: 1;
 }
 .MyCalendar .days {
     display: flex;

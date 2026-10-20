@@ -1,66 +1,41 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.group.index') }}" data-collapsible="false" data-title-icon="<span class='mif-group'></span>">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'groups'])<i class="bi bi-people"></i> {{ trans('cruds.group.index') }}</div>
+    <div class="card-body">
 
-	<div class="grid">
+	<div class="container-fluid px-0">
 		<div class="row">
-			<div class="cell-5">
+			<div class="col-md-10 col-lg-5">
 			</div>
 
-			<div class="cell-7" align="right">
+			<div class="col-md-12 col-lg-7 text-md-end">
 				@if (Auth::User()->role==1)
-                <a class="button primary" href="/groups/create">
-		            <span class="mif-add-lib"></span>
-		            &nbsp;
-					{{ trans('common.new') }}
+                <a class="btn btn-primary" href="/groups/create">
+		            <span class="bi bi-plus-lg"></span> {{ trans('common.new') }}
                 </a>
 				@endif
 			</div>
 		</div>
 
 		<div class="row">
-			<div class="cell-12">
+			<div class="col-12">
 
-		<table
+		<table data-order="[[0,&quot;asc&quot;]]" data-searching="false" data-page-length="10"
 			id="groups"
-			class="table striped row-hover cell-border"
-			data-role="table"
-			data-rows="10"
-			data-show-search="false"
-			data-show-activity="true"
-			data-rownum="false"
-			data-check="false"
-			data-check-style="1">
+			class="table table-striped table-hover table-bordered datatable">
 		    <thead>
 		    <tr>
-				<th
-					data-sortable="true"
-					data-sort-dir="asc"
-					data-format="string"
-					width="50"
-                    >{{ trans('cruds.group.fields.name') }}
+				<th>{{ trans('cruds.group.fields.name') }}
                 </th>
-				<th
-					data-sortable="true"
-					data-sort-dir="asc"
-					data-format="string"
-					width="50"
-                    >{{ trans('cruds.group.fields.description') }}
+				<th>{{ trans('cruds.group.fields.type') }}
                 </th>
-				<th
-					data-sortable="true"
-					data-sort-dir="asc"
-					data-format="string"
-					width="50"
-                    ># {{ trans('cruds.group.fields.users') }}
+				<th>{{ trans('cruds.group.fields.description') }}
                 </th>
-				<th
-					data-sortable="true"
-					data-sort-dir="asc"
-					data-format="string"
-					width="50"
-                    ># {{ trans('cruds.group.fields.controls') }}
+				<th># {{ trans('cruds.group.fields.users') }}
+                </th>
+				<th># {{ trans('cruds.group.fields.controls') }}
                 </th>
                 <th></th>
 		    </tr>
@@ -69,14 +44,13 @@
         @foreach($groups as $group)
 			<tr>
                 <td><a id="{{$group->name}}" href="/groups/{{ $group->id}}">{{ $group->name }}</a></td>
+                <td>@include('groups.type_badge')</td>
                 <td>{{ $group->description }}</td>
                 <td>{{ $group->users()->count()}} </td>
                 <td>{{ $group->measures()->count()}} </td>
                 <td>
-                    <a class="button primary small" href='/groups/{{ $group->id }}/edit'>
-                        <span class="mif-wrench"></span>
-    		            &nbsp;
-    		    		{{ trans('common.edit') }}
+                    <a class="btn btn-primary btn-sm" href='/groups/{{ $group->id }}/edit'>
+                        <span class="bi bi-pencil-square"></span> {{ trans('common.edit') }}
                     </a>
                 </td>
 			</tr>
@@ -86,4 +60,6 @@
 		<br>
 	</div>
 </div></div>
+</div>
+</div>
 @endsection

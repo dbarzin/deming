@@ -85,6 +85,7 @@ Route::namespace('App\\Http\\Controllers')->middleware('auth')->group(function (
     Route::get('/radar/attributes', 'MeasureController@attributes');
     Route::get('/radar/bob', 'MeasureController@tempo');
     Route::get('/radar/actions', 'ActionController@chart');
+    Route::get('/radar/monitoring', 'MonitoringController@index')->name('radar.monitoring');
 
     /* Documents */
     Route::post('/doc/store', 'DocumentController@store');

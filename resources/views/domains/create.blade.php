@@ -1,56 +1,55 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.domain.add') }}" data-collapsible="false" data-title-icon="<span class='mif-library'></span>">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'domains'])<i class="bi bi-bookshelf"></i> {{ trans('cruds.domain.add') }}</div>
+    <div class="card-body">
 
     @include('partials.errors')
 
 	<form method="POST" action="/domains">
 	@csrf
-		<div class="grid">
+		<div class="container-fluid px-0">
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.domain.fields.framework') }}</strong>
 		    	</div>
-	    		<div class="cell-5">
-					<input type="text" name="framework" value="{{ old('framework') }}" maxlength='32'>
+	    		<div class="col-md-10 col-lg-11">
+					<input class="form-control" type="text" name="framework" value="{{ old('framework') }}" maxlength='32'>
 				</div>
 			</div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.domain.fields.name') }}</strong>
 		    	</div>
-	    		<div class="cell-5">
-					<input type="text" name="title" value="{{ old('title') }}" maxlength='32'>
+	    		<div class="col-md-10 col-lg-11">
+					<input class="form-control" type="text" name="title" value="{{ old('title') }}" maxlength='32'>
 				</div>
 			</div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.domain.fields.description') }}</strong>
 		    	</div>
-	    		<div class="cell-5">
-					<input type="text" name="description" value="{{ old('description') }}" maxlength='255'>
+	    		<div class="col-md-10 col-lg-11">
+					<input class="form-control" type="text" name="description" value="{{ old('description') }}" maxlength='255'>
 				</div>
 			</div>
 
 	    	<div class="row">
-	    		<div class="cell-5">
-					<button type="submit" class="button success">
-                        <span class="mif-floppy-disk2"></span>
-						&nbsp;
-						{{ trans('common.save') }}
+	    		<div class="col-md-10 col-lg-5">
+					<button type="submit" class="btn btn-success">
+                        <span class="bi bi-floppy"></span> {{ trans('common.save') }}
 					</button>
-                    <a href="/domains" class="button">
-    						<span class="mif-cancel"></span>
-    						&nbsp;
-    		    			{{ trans('common.cancel') }}
+                    <a href="/domains" class="btn btn-light border">
+    						<span class="bi bi-x-circle"></span> {{ trans('common.cancel') }}
                     </a>
 				</div>
 			</div>
 		</div>
 	</form>
+</div>
 </div>
 
 @endsection

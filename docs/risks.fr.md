@@ -6,7 +6,7 @@ Le registre des risques permet de gérer les risques de sécurité de l'informat
 - **§ 6.1.3** — Processus de traitement des risques de sécurité de l'information
 - **§ 8.2** — Appréciation des risques de sécurité de l'information
 
-Chaque risque est évalué selon une méthode de scoring configurable, lié aux [contrôles](controls.fr.md) et [plans d'action](actions.fr.md) existants de l'application, et soumis à un cycle de revue périodique.
+Chaque risque est évalué selon une méthode de scoring configurable, lié aux [mesures de sécurité](measures.fr.md) et [plans d'action](actions.fr.md) existants de l'application, et soumis à un cycle de revue périodique.
 
 ## Matrice des risques {#matrix}
 
@@ -52,7 +52,7 @@ Les boutons  **Nouveau** en haut à droite permettent de créer un nouveau risqu
 
 Cet écran affiche le détail d'un risque.
 
-[![Screenshot](images/risk.show.fr.png){: style="width:600px"}](images/risk.show.fr.png)
+[![Screenshot](images/risk.show.fr.png)](images/risk.show.fr.png)
 
 Il contient :
 
@@ -72,7 +72,7 @@ Les boutons disponibles dépendent du rôle de l'utilisateur :
 
 - **Modifier** — accède à l'[écran de modification](#edit) (Administrateur et Utilisateur) ;
 - **Supprimer** — supprime le risque après confirmation (Administrateur uniquement) ;
-- **Historique** — affiche le journal des modifications (Administrateur uniquement) ;
+- **Historique** — affiche l'[historique des modifications](config.fr.md#logs) (Administrateur uniquement) ;
 - **Annuler** — revient à la [liste des risques](#list).
 
 ## Créer un risque {#create}
@@ -96,16 +96,22 @@ L'évaluation du risque dépend de la [méthode de scoring active](#scoring) :
 - Pour la formule BSI 200-3 (Vraisemblance × Impact) :
     - **Exposition** — accessibilité du système (ex. 0 = hors réseau, 1 = interne, 2 = Internet) ;
     - **Vulnérabilité** — niveau d'exploitabilité des failles connues ;
+- Pour la formule MONARC (Impact × Menace × Vulnérabilité) :
+    - **Menace** — vraisemblance de la menace (0 = non applicable à 4 = très probable) ;
+    - **Vulnérabilité** — niveau des mesures de sécurité en place (0 = inexistante à 5 = très élevée) ;
 - **Impact** — gravité des conséquences si le risque se matérialise ;
 - **Commentaire impact** ;
-- **Score calculé** — mis à jour en temps réel selon les valeurs saisies, avec badge coloré indiquant le niveau.
+- **Score calculé** — mis à jour en temps réel selon les valeurs saisies, avec badge coloré indiquant le niveau ;
+- **Risque résiduel** — formule MONARC uniquement : score du risque subsistant après traitement, saisi manuellement et
+  affiché avec la couleur de son niveau dans la liste et dans l'affichage du risque.
 
 Le traitement du risque se configure via :
 
-- **Statut** — parmi : Non évalué, Non accepté, Accepté temporairement, Accepté, Mitigé, Transféré, Évité ;
+- **Statut** — parmi : Non évalué, Non accepté, Accepté temporairement, Accepté, Mitigé, Transféré, Évité.
+  Avec la formule MONARC, les traitements sont : Non traité, Réduction, Refusé, Accepté, Partagé ;
 - **Commentaire statut** ;
 - **Contrôles liés** — sélection multiple parmi les contrôles existants (affiché uniquement si statut = *Mitigé*) ;
-- **Plans d'action liés** — sélection multiple parmi les plans d'action existants (affiché uniquement si statut = *Non accepté*).
+- **Plans d'action liés** — sélection multiple parmi les plans d'action existants (affiché uniquement si statut = *Non accepté*, ou *Réduction* avec la formule MONARC).
 
 > Un avertissement est affiché si un risque *Mitigé* est sauvegardé sans contrôle lié, ou si un risque *Non accepté* est sauvegardé sans plan d'action lié.
 
@@ -163,7 +169,7 @@ Cet écran permet de définir une méthode de scoring complète.
 #### Nom et formule
 
 - **Nom** — libellé de la configuration, affiché dans la liste ;
-- **Formule** — la méthode de calcul du score. Quatre formules sont disponibles :
+- **Formule** — la méthode de calcul du score. Cinq formules sont disponibles :
 
 | Formule | Calcul | Usage recommandé |
 |---|---|---|
@@ -171,8 +177,9 @@ Cet écran permet de définir une méthode de scoring complète.
 | Vraisemblance × Impact | Score = (Exposition + Vulnérabilité) × I | BSI 200-3 / ISACA CSC-IT |
 | Probabilité + Impact | Score = P + I | Triage rapide |
 | max(Probabilité, Impact) | Score = max(P, I) | Approche conservatrice |
+| MONARC | Score = Impact × Menace × Vulnérabilité | Méthode MONARC (max 4 × 4 × 5 = 80) |
 
-> La sélection de la formule *Vraisemblance × Impact* affiche les sections **Exposition** et **Vulnérabilité** à la place de la section **Probabilité**.
+> La sélection de la formule *Vraisemblance × Impact* affiche les sections **Exposition** et **Vulnérabilité** à la place de la section **Probabilité**. La formule *MONARC* affiche les sections **Menace** et **Vulnérabilité**.
 
 #### Niveaux
 
@@ -188,7 +195,8 @@ Les axes configurables sont :
 
 - **Probabilité** — présent pour les formules standard ;
 - **Exposition** — présent pour la formule BSI (0 = hors réseau, 1 = réseau interne, 2 = exposé Internet) ;
-- **Vulnérabilité** — présent pour la formule BSI (1 = aucune connue, 2 = connue non exploitable, 3 = exploitable en interne, 4 = exploitable à distance) ;
+- **Vulnérabilité** — présent pour la formule BSI (1 = aucune connue, 2 = connue non exploitable, 3 = exploitable en interne, 4 = exploitable à distance) et la formule MONARC (0 = inexistante à 5 = très élevée) ;
+- **Menace** — présent pour la formule MONARC, à la place de la probabilité (0 = non applicable à 4 = très probable) ;
 - **Impact** — présent pour toutes les formules.
 
 #### Seuils de classification
@@ -198,7 +206,7 @@ Les seuils définissent la correspondance entre un score numérique et un niveau
 - **Clé interne** — identifiant technique (ex. `low`, `medium`, `high`, `critical`) ;
 - **Libellé** — nom affiché dans les badges et les rapports ;
 - **Score max** — borne supérieure du seuil. Le dernier seuil n'a pas de borne supérieure (attrape-tout) ;
-- **Couleur** — couleur du badge MetroUI : Vert, Orange, Rouge, Rouge foncé, Bleu, Gris.
+- **Couleur** — couleur du badge, choisie avec un sélecteur de couleur.
 
 La colonne **Aperçu** affiche un badge en temps réel reflétant la couleur et le libellé saisis.
 

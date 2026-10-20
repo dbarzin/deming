@@ -1,13 +1,15 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.exception.list') }}" data-collapsible="false" data-title-icon="<span class='mif-cross'></span>">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'exceptions.index'])<i class="bi bi-x-octagon"></i> {{ trans('cruds.exception.list') }}</div>
+    <div class="card-body">
 
-    <div class="grid mb-2">
+    <div class="container-fluid px-0 mb-2">
         <div class="row">
             {{-- Filtre statut --}}
-            <div class="cell-lg-2 cell-md-2">
-                <select id="filter-status" name="status" data-role="select">
+            <div class="col-lg-2 col-md-2">
+                <select class="form-select select2" id="filter-status" name="status">
                     <option value="">-- {{ trans('cruds.exception.fields.choose_status') }} --</option>
                     @foreach(\App\Models\Exception::STATUS_LABELS as $value => $label)
                         <option value="{{ $value }}" {{ (string)($filters['status'] ?? '') === (string)$value ? 'selected' : '' }}>
@@ -18,8 +20,8 @@
             </div>
 
             {{-- Filtre mesure --}}
-            <div class="cell-lg-3 cell-md-3">
-                <select id="filter-measure" name="measure_id" data-role="select">
+            <div class="col-lg-3 col-md-3">
+                <select class="form-select select2" id="filter-measure" name="measure_id">
                     <option value="">-- {{ trans('cruds.exception.fields.choose_measure') }} --</option>
                     @foreach($controls as $control)
                         <option value="{{ $control->id }}"
@@ -31,39 +33,31 @@
             </div>
 
             {{-- Filtre expirées --}}
-            <div class="cell-lg-2 cell-md-2 mt-2">
-                <input type="checkbox" id="filter-expired" data-role="checkbox"
-                    data-caption="{{ trans('cruds.exception.fields.expired_only') }}"
-                    {{ ($filters['expired'] ?? false) ? 'checked' : '' }}>
+            <div class="col-lg-2 col-md-2 mt-2">
+                <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" id="filter-expired"
+                    {{ ($filters['expired'] ?? false) ? 'checked' : '' }}><label class="form-check-label" for="filter-expired">{{ trans('cruds.exception.fields.expired_only') }}</label></div>
             </div>
 
             {{-- Bouton Nouveau --}}
-            <div class="cell-lg-5 cell-md-5 text-right">
-                <button class="button primary" onclick="location.href='/exception/create';">
-                    <span class="mif-add-lib"></span>&nbsp;{{ trans('common.new') }}
+            <div class="col-lg-5 col-md-5 text-end">
+                <button class="btn btn-primary" onclick="location.href='/exception/create';">
+                    <span class="bi bi-plus-lg"></span> {{ trans('common.new') }}
                 </button>
             </div>
         </div>
     </div>
 
-    <table
+    <table data-order="[]" data-page-length="50"
         id="exceptions-table"
-        class="table data-table striped row-hover cell-border"
-        data-role="table"
-        data-rows="50"
-        data-show-activity="true"
-        data-rownum="false"
-        data-check="false"
-        data-search="true"
-    >
+        class="table table-striped table-hover table-bordered datatable">
         <thead>
             <tr>
-                <th class="sortable-column" width="30%">{{ trans('cruds.exception.fields.name') }}</th>
-                <th class="sortable-column" width="20%">{{ trans('cruds.exception.fields.measure') }}</th>
-                <th class="sortable-column" width="10%">{{ trans('cruds.exception.fields.start_date') }}</th>
-                <th class="sortable-column" width="10%">{{ trans('cruds.exception.fields.end_date') }}</th>
-                <th class="sortable-column" width="10%">{{ trans('cruds.exception.fields.status') }}</th>
-                <th class="sortable-column" width="20%">{{ trans('cruds.exception.fields.created_by') }}</th>
+                <th>{{ trans('cruds.exception.fields.name') }}</th>
+                <th>{{ trans('cruds.exception.fields.measure') }}</th>
+                <th>{{ trans('cruds.exception.fields.start_date') }}</th>
+                <th>{{ trans('cruds.exception.fields.end_date') }}</th>
+                <th>{{ trans('cruds.exception.fields.status') }}</th>
+                <th>{{ trans('cruds.exception.fields.created_by') }}</th>
             </tr>
         </thead>
         <tbody>
@@ -121,6 +115,7 @@
         {{ $exceptions->withQueryString()->links() }}
     </div>
 
+</div>
 </div>
 
 <script>

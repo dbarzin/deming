@@ -1,14 +1,14 @@
 @extends('layout')
 
 @section('content')
-<div data-role="panel"
-     data-title-caption="{{ trans('cruds.crosswalk.edit') }}"
-     data-collapsible="false"
-     data-title-icon="<span class='mif-shuffle'></span>">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'crosswalk'])<i class="bi bi-shuffle"></i> {{ trans('cruds.crosswalk.edit') }}</div>
+    <div class="card-body">
     <form method="POST" action="{{ route('crosswalk.update', $mapping) }}">
         @csrf
         @method('PUT')
         @include('crosswalk._form')
     </form>
+</div>
 </div>
 @endsection

@@ -1,11 +1,13 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.exports.steering') }}" data-collapsible="false" data-title-icon="<span class='mif-file-text'></span>">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'reports'])<i class="bi bi-file-earmark-text"></i> {{ trans('cruds.exports.steering') }}</div>
+    <div class="card-body">
 
 	@if (count($errors))
-	<div class="grid">
-	    <div class="cell-3 bg-red fg-white">
+	<div class="container-fluid px-0">
+	    <div class="col-md-6 col-lg-3 bg-danger text-white">
 			<ul>
 			@foreach ($errors->all() as $error)
 				<li>{{ $error }}</li>
@@ -16,14 +18,14 @@
 	@endif
 
 	<form action="/reports/pilotage" target="_new">
-	<div class="grid">
+	<div class="container-fluid px-0">
 
 		<div class="row">
-	        <div class="cell-1">
+	        <div class="col-md-2 col-lg-1">
                 {{ trans("cruds.domain.fields.framework") }}
             </div>
-			<div class="cell-3">
-                <select name="framework" data-role="select" id="framework">
+			<div class="col-md-6 col-lg-3">
+                <select class="form-select select2" name="framework" id="framework">
                     <option></option>
                     @foreach ($frameworks as $framework)
                     <option
@@ -38,47 +40,44 @@
         </div>
 
 		<div class="row">
-	        <div class="cell-1">
+	        <div class="col-md-2 col-lg-1">
 				{{ trans('cruds.exports.start') }}
 			</div>
-			<div class="cell-2">
-	            <input type="text"
-	                    data-role="calendarpicker"
+			<div class="col-md-4 col-lg-2">
+	            <input class="form-control" type="date"
 	                    name="start_date"
 	                    value="{{ (new \Carbon\Carbon('first day of this month'))->addMonth(-3)->format('Y-m-d')}}"
-						data-format="YYYY-MM-DD"
-						data-inputFormat="YYYY-MM-DD"
 						/>
 	        </div>
 	    </div>
 		<div class="row">
-	        <div class="cell-1">
+	        <div class="col-md-2 col-lg-1">
 			{{ trans('cruds.exports.end') }}
 			</div>
-			<div class="cell-2">
-	            <input type="text"
-	                    data-role="calendarpicker"
+			<div class="col-md-4 col-lg-2">
+	            <input class="form-control" type="date"
 	                    name="end_date"
 	                    value="{{ (new \Carbon\Carbon('last day of this month'))->addMonth(-1)->format('Y-m-d')}}"
-						data-format="YYYY-MM-DD"
-						data-inputFormat="YYYY-MM-DD"
 						/>
 	        </div>
 	    </div>
 
 		<div class="row">
-	        <div class="cell-1">
-			    <button type="submit" class="button primary drop-shadow">{{ trans ('common.create') }}</button>
+	        <div class="col-md-2 col-lg-1">
+			    <button type="submit" class="btn btn-primary">{{ trans ('common.create') }}</button>
 			</div>
 		</div>
 	</div>
 </form>
 
 </div>
+</div>
 
-<div class="mt-3" data-role="panel" data-title-caption="{{ trans('cruds.soa.title') }}" data-collapsible="false" data-title-icon="<span class='mif-file-text'></span>">
+<div class="card mt-3">
+    <div class="card-header"><i class="bi bi-file-earmark-text"></i> {{ trans('cruds.soa.title') }}</div>
+    <div class="card-body">
 	<div class="row">
-		<div class="cell-6">
+		<div class="col-md-12 col-lg-6">
         	<ul>
         		<li>
 					<a href="/reports/soa" target="_blank">{{ trans('cruds.soa.generate') }}</a>
@@ -87,10 +86,13 @@
 		</div>
 	</div>
 </div>
+</div>
 
-<div class="mt-3" data-role="panel" data-title-caption="{{ trans('cruds.exports.index') }}" data-collapsible="false" data-title-icon="<span class='mif-file-text'></span>">
+<div class="card mt-3">
+    <div class="card-header"><i class="bi bi-file-earmark-text"></i> {{ trans('cruds.exports.index') }}</div>
+    <div class="card-body">
 	<div class="row">
-		<div class="cell-6">
+		<div class="col-md-12 col-lg-6">
         	<ul>
 				<li>
 					<a href="/export/users" target="_blank">{{ trans('cruds.exports.users_export') }}</a>
@@ -116,5 +118,6 @@
 			</ul>
 		</div>
 	</div>
+</div>
 </div>
 @endsection

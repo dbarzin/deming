@@ -1,41 +1,34 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.domain.index') }}" data-collapsible="false" data-title-icon="<span class='mif-library'></span>">
-	<div class="grid">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'domains'])<i class="bi bi-bookshelf"></i> {{ trans('cruds.domain.index') }}</div>
+    <div class="card-body">
+	<div class="container-fluid px-0">
 		<div class="row">
-			<div class="cell-5">
+			<div class="col-md-10 col-lg-5">
 			</div>
 			@if (Auth::User()->role==1)
-			<div class="cell-7" align="right">
-				<button class="button primary" onclick="location.href = '/domains/create';">
-		            <span class="mif-add-lib"></span>
-		            &nbsp;
-					{{ trans('common.new') }}
+			<div class="col-md-12 col-lg-7 text-md-end">
+				<button class="btn btn-primary" onclick="location.href = '/domains/create';">
+		            <span class="bi bi-plus-lg"></span> {{ trans('common.new') }}
 				</button>
 			</div>
 			@endif
 		</div>
 
 		<div class="row">
-			<div class="cell-12">
+			<div class="col-12">
 
-		<table
+		<table data-order="[]" data-searching="false" data-page-length="100"
 			id="domains"
-			class="table striped row-hover cell-border"
-			data-role="table"
-			data-rows="100"
-			data-show-search="false"
-			data-show-activity="true"
-			data-rownum="false"
-			data-check="false"
-			data-check-style="1">
+			class="table table-striped table-hover table-bordered datatable">
 		    <thead>
 		    <tr>
-				<th class="sortable-column" width="50">{{ trans('cruds.domain.fields.framework') }}</th>
-				<th class="sortable-column" width="50">{{ trans('cruds.domain.fields.name') }}</th>
-				<th class="sortable-column" width="200">{{ trans('cruds.domain.fields.description') }}</th>
-				<th class="sortable-column"  width="200">{{ trans('cruds.domain.fields.measures') }}</th>
+				<th>{{ trans('cruds.domain.fields.framework') }}</th>
+				<th>{{ trans('cruds.domain.fields.name') }}</th>
+				<th>{{ trans('cruds.domain.fields.description') }}</th>
+				<th>{{ trans('cruds.domain.fields.measures') }}</th>
 		    </tr>
 		    </thead>
 		    <tbody>
@@ -51,5 +44,7 @@
 		</table>
 		<br>
 	</div>
+</div>
+</div>
 </div>
 @endsection

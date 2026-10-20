@@ -2,13 +2,15 @@
 
 @section("content")
 <div class="p-3">
-    <div data-role="panel" data-title-caption="About" data-collapsible="false" data-title-icon="<span class='mif-help-outline mif-2x'></span>">
-		<div class="grid">
+    <div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'about'])<i class="bi bi-question-circle"></i> About</div>
+    <div class="card-body">
+		<div class="container-fluid px-0">
 	    	<div class="row">
-	    		<div class="cell-4 text-center">
-                    <img src="/images/deming.png" alt="Deming" width="400"/>
+	    		<div class="col-md-8 col-lg-4 text-center">
+                    <img src="/images/deming.png" alt="Deming" width="400" class="img-fluid"/>
                 </div>
-	    		<div class="cell-7">
+	    		<div class="col-md-12 col-lg-7">
 @if(Auth::User()->language==="fr")
     <h1>À propos de Deming</h1>
 
@@ -38,7 +40,7 @@
 
 <h2>Open Source</h2>
 
-<p>Unter der <a href="https://www.gnu.org/licenses/licenses.html">GPL-Lizenz</a> vertrieben, passt sich Deming den Bedürfnissen von Unternehmen an, die eine kontinuierliche Verbesserung ihrer Informationssicherheit anstreben. Weitere Informationen zur Nutzung und den Funktionen finden Sie in der <a href="https://sourcentis.github.io/deming">Benutzerdokumentation</a> und auf dem <a href="https://github.com/sourcentis">GitHub-Projekt</a>.</p>
+<p>Unter der <a href="https://www.gnu.org/licenses/licenses.html">GPL-Lizenz</a> vertrieben, passt sich Deming den Bedürfnissen von Unternehmen an, die eine kontinuierliche Verbesserung ihrer Informationssicherheit anstreben. Weitere Informationen zur Nutzung und den Funktionen finden Sie in der <a href="https://sourcentis.github.io/deming/de/">Benutzerdokumentation</a> und auf dem <a href="https://github.com/sourcentis">GitHub-Projekt</a>.</p>
 @else
     <h1>About Deming</h1>
 
@@ -55,4 +57,6 @@
 
     <p>Distributed under the <a href="https://www.gnu.org/licenses/licenses.html">GPL</a> license, Deming adapts to the needs of companies seeking continuous improvement in their information security. For more information on usage and features, refer to the <a href="https://sourcentis.github.io/deming/">user documentation</a> and the project's <a href="https://github.com/sourcentis">GitHub</a>.</p>
 @endif
+</div>
+</div>
 @endsection

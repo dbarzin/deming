@@ -13,6 +13,7 @@ return [
     'radar_by_measure' => 'nach Maßnahmen',
     'radar_by_attributes' => 'nach Attributen',
     'radar_by_actions' => 'nach Aktionsplänen',
+    'radar_monitoring' => 'Steuerung',
     'action_plan' => 'Aktionspläne',
     'new' => 'Neu',
     'late' => 'Verspätet',

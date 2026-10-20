@@ -89,18 +89,10 @@ document.addEventListener("DOMContentLoaded", function () {
     }
 
     // ---- Bindings ----
-    // Délégation sur document : robuste face à la transformation MetroUI des radios
     const scoringFields = new Set(['probability', 'impact', 'exposure', 'vulnerability']);
 
     document.addEventListener('change', function (e) {
         if (scoringFields.has(e.target.name)) updateScore();
-    });
-
-    // Fallback click : Metro peut checker l'input sans déclencher de change natif ;
-    // le setTimeout laisse Metro mettre à jour checked avant la lecture.
-    document.addEventListener('click', function (e) {
-        const input = e.target.closest('input[type="radio"]');
-        if (input && scoringFields.has(input.name)) setTimeout(updateScore, 0);
     });
 
     const statusEl = document.getElementById('risk-status');

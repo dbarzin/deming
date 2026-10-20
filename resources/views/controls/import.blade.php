@@ -1,12 +1,14 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.imports.index') }}" data-collapsible="false" data-title-icon="<span class='mif-download'></span>">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'controls.import'])<i class="bi bi-download"></i> {{ trans('cruds.imports.index') }}</div>
+    <div class="card-body">
 
     @include('partials.errors')
 
     <div class="row">
-        <div class="cell-lg-8 cell-md-12">
+        <div class="col-lg-8 col-md-12">
     		<b>{{ trans('cruds.imports.title') }}</b>
             /
             <a href="/export/alices" target="_blank">{{ trans('cruds.imports.current') }}</a>
@@ -16,38 +18,44 @@
     <form action="/alice/import" method="post" enctype="multipart/form-data">
     @csrf
     	<div class="row">
-            <div class="cell-lg-6 cell-md-7">
-                <select data-role="select" name="model" id="model" data-prepend="Select model" required>
-                    <option></option>
-    				@foreach($models as $model)
-                        <option>{{ basename($model, '.xlsx') }}</option>
-                    @endforeach
-                </select>
+            <div class="col-lg-6 col-md-7">
+                <div class="input-group">
+                    <span class="input-group-text">Select model</span>
+                    <select class="form-select select2" name="model" id="model">
+                        <option></option>
+                        @foreach($models as $model)
+                            <option>{{ basename($model, '.xlsx') }}</option>
+                        @endforeach
+                    </select>
+                </div>
             </div>
-            <div class="cell-lg-1 cell-md-2" align="right">
-                <a href="#" onclick="downloadModel()" class="button info drop-shadow">
+            <div class="col-lg-1 col-md-2 text-md-end">
+                <a href="#" onclick="downloadModel()" class="btn btn-info">
                     {{ trans("common.download") }}
                 </a>
             </div>
         </div>
     	<div class="row">
-            <div class="cell-lg-7 cell-md-9">
+            <div class="col-lg-7 col-md-9">
                 {{ trans('cruds.imports.or') }}
-                <input name="file" type="file" id="file" data-role="file" data-prepend="Select import file:"/>
+                <div class="input-group">
+                    <span class="input-group-text">Select import file:</span>
+                    <input class="form-control" name="file" type="file" id="file"/>
+                </div>
     		</div>
         </div>
     	<div class="row">
-            <div class="cell-lg-4 cell-md-6">
-                <input type="checkbox" data-role="checkbox" name="clean" id="clean" data-append="{{ trans('cruds.imports.remove_all') }}"/>
+            <div class="col-lg-4 col-md-6">
+                <div class="form-check form-check-inline"><input class="form-check-input" type="checkbox" name="clean" id="clean"/><label class="form-check-label" for="clean">{{ trans('cruds.imports.remove_all') }}</label></div>
             </div>
         </div>
     	<div class="row">
-            <div class="cell-lg-6 cell-md-7">
-                <input type="checkbox" data-role="checkbox" name="test" data-append="{{ trans('cruds.imports.fake') }}"/>
+            <div class="col-lg-6 col-md-7">
+                <div class="form-check form-check-inline"><input id="test" class="form-check-input" type="checkbox" name="test"/><label class="form-check-label" for="test">{{ trans('cruds.imports.fake') }}</label></div>
             </div>
-            <div class="cell-lg-1 cell-md-2" align="right">
-    		    <button type="submit" class="button success drop-shadow"
-                    onclick="if ($('#clean').is(':checked')) return confirm('Do you want to remove all other measures and controls  ?')">
+            <div class="col-lg-1 col-md-2 text-md-end">
+    		    <button type="submit" class="btn btn-success"
+                    onclick="return checkImport()">
                         {{ trans("common.import") }}
                 </button>
             </div>
@@ -55,14 +63,14 @@
     </form>
 
     <div class="row">
-        <div class="cell-lg-9 cell-md-12">
+        <div class="col-lg-9 col-md-12">
             {{ trans('cruds.imports.format') }}
         </div>
     </div>
 
     <div class="row">
-        <div class="cell-lg-7 cell-md-9">
-            <table class="table striped border subcompact">
+        <div class="col-lg-7 col-md-9">
+            <table class="table table-striped border table-sm">
                 <thead>
                     <tr>
                         <th>Column</th>
@@ -123,10 +131,11 @@
         </div>
     </div>
     <div class="row">
-        <div class="cell-lg-6 cell-md-8 fg-red">
+        <div class="col-lg-6 col-md-8 text-danger">
             {{ trans('cruds.imports.warning') }}
         </div>
     </div>
+</div>
 </div>
 
 <script>
@@ -137,6 +146,16 @@ function downloadModel() {
         return;
     }
     window.location.href = `/alice/download?model=${encodeURIComponent(model)}`;
+}
+
+function checkImport() {
+    if (!document.getElementById('model').value && !document.getElementById('file').value) {
+        alert('Please select a model or an import file.');
+        return false;
+    }
+    if ($('#clean').is(':checked'))
+        return confirm('Do you want to remove all other measures and controls  ?');
+    return true;
 }
 </script>
 @endsection

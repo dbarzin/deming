@@ -13,14 +13,15 @@ This delegation complies with the following rules:
 
 ## List of measurements to be performed
 
-From the auditee's point of view, the application's main page contains the list of measurements that are assigned to him.
+From the auditee's point of view, the dashboard of the home page only takes into account the measurements assigned to them,
+and the "Measurements" menu opens the list of these measurements.
 
 [![Screenshot](images/d1.png)](images/d1.png)
 
 Tha auditee can :
 
 - Search the list of measurements
-- Filter measurements by domain, scope, attribute or period.
+- Filter measurements by domain, clause, scope or period
 - Sort the list by each column
 - Select a measurement to perform
 
@@ -33,7 +34,7 @@ When an auditee performs a mesurement, they can :
 
 - "Make" the mesurement
 
-[![Screenshot](images/d2.png){: style="width:300px"}](images/d2.png)
+[![Screenshot](images/d2.png)](images/d2.png)
 
 When the auditee clicks on :
 
@@ -48,22 +49,21 @@ When the auditee clicks on :
 
 Once an auditee has carried out a measurement, it changes status to "to be validated".
 
-For other users, this is shown by an hourglass next to the completion date in the list of checks to be carried out:
+For other users, this is shown by an hourglass next to the planning date in the list of measurements scheduled for the
+next 30 days on the home page, and next to the realisation date in the [list of measurements](controls.md#list):
 
 [![Screenshot](images/d3.png)](images/d3.png)
 
-When the user clicks on the date next to the hourglass, they are taken to the measurement performed by the auditee.
+When the user clicks on the hourglass, they are taken to the measurement performed by the auditee.
 
 They can then accept or reject the measurement, adding a note in the measurement observations and, depending on the measurement score, propose an action plan and anmeasurement review date.
 
-[![Screenshot](images/d4.png){: style="width:500px"}](images/d4.png)
+[![Screenshot](images/d4.png)](images/d4.png)
 
 If the user clicks on :
 
 - "Accept": the modified data is saved and a new measurement is created on the planning date entered.
 
 - "Reject": the modified data is saved and the measurement is returned to the auditee list of controls to be performed.
-
-- "Save": the data is saved and the user returns to the measurement view.
 
 - "Cancel": the user returns to the measurement view.

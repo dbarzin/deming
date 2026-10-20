@@ -93,12 +93,12 @@ test('auditee stays filtered even with a forged group_view session value', funct
     expectScopedCounts($response, $this->ownedDomain->id, $this->otherDomain->id);
 });
 
-test('mif-group icon is rendered for admins and users, not for auditees', function () {
+test('group view toggle icon is rendered for admins and users, not for auditees', function () {
     $admin = User::factory()->admin()->create();
-    $this->actingAs($admin)->get('/domains')->assertSee('mif-group', false);
+    $this->actingAs($admin)->get('/domains')->assertSee('group-view-toggle', false);
 
-    $this->actingAs($this->owner)->get('/domains')->assertSee('mif-group', false);
+    $this->actingAs($this->owner)->get('/domains')->assertSee('group-view-toggle', false);
 
     $auditee = User::factory()->auditee()->create();
-    $this->actingAs($auditee)->get('/domains')->assertDontSee('mif-group', false);
+    $this->actingAs($auditee)->get('/domains')->assertDontSee('group-view-toggle', false);
 });

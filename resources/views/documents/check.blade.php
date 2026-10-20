@@ -1,7 +1,9 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.document.list') }}" data-collapsible="false" data-title-icon="<span class='mif-file-text'></span>">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'documents'])<i class="bi bi-file-earmark-text"></i> {{ trans('cruds.document.list') }}</div>
+    <div class="card-body">
 
 <table class="table">
     <thead>
@@ -30,7 +32,7 @@
         <td class="text-center">
             @if ($doc->file_exists)
                 @if ($doc->link_count > 1)
-                    <span class="badge bg-blue">{{ $doc->link_count }}</span>
+                    <span class="badge bg-primary">{{ $doc->link_count }}</span>
                 @else
                     {{ $doc->link_count }}
                 @endif
@@ -54,6 +56,7 @@
     </tr>
     @endforeach
 </table>
+</div>
 </div>
 
 @endsection

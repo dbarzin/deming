@@ -1,41 +1,36 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption='{{ trans("cruds.log.index")}}' data-collapsible="false" data-title-icon="<span class='mif-log-file'></span>">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'logs'])<i class="bi bi-journal-text"></i> {{ trans("cruds.log.index")}}</div>
+    <div class="card-body">
 
-    <div class="grid">
+    <div class="container-fluid px-0">
 
-    <table
+    <table data-order="[[6,&quot;desc&quot;]]" data-paging="false" data-page-length="100"
         id="logs"
-        class="table striped row-hover cell-border"
-        data-role="table"
-        data-rows="100"
-        data-show-activity="true"
-        data-rownum="false"
-        data-check="false"
-        data-check-style="1"
-        data-show-pagination="false"
+        class="table table-striped table-hover table-bordered datatable"
        >
             <thead>
-                <th class="sortable-column">
+                <th>
                     id
                 </th>
-                <th class="sortable-column">
+                <th>
                     {{ trans('cruds.log.action') }}
                 </th>
-                <th class="sortable-column">
+                <th>
                     {{ trans('cruds.log.subject_type') }}
                 </th>
-                <th class="sortable-column">
+                <th>
                     {{ trans('cruds.log.subject_id') }}
                 </th>
-                <th class="sortable-column">
+                <th>
                     {{ trans('cruds.log.user') }}
                 </th>
-                <th class="sortable-column">
+                <th>
                     {{ trans('cruds.log.host') }}
                 </th>
-                <th class="sortable-column sort-desc">
+                <th>
                     {{ trans('cruds.log.timestamp') }}
                 </th>
                 <th>
@@ -88,10 +83,10 @@
                         {{ $log->created_at }}
                     </td>
                     <td nowrap>
-                        <a class="button success small" href="/logs/show/{{ $log->id }}">
+                        <a class="btn btn-success btn-sm" href="/logs/show/{{ $log->id }}">
                             {{ trans('common.show') }}
                         </a>
-                        <a class="button info small"
+                        <a class="btn btn-info btn-sm"
                         @if ($log->subject_type=='App\\Models\\Measure')
                             href="/logs/history/alice/{{ $log->subject_id }}"
                         @elseif ($log->subject_type=='App\\Models\\Control')
@@ -109,7 +104,8 @@
                 @endforeach
             </tbody>
         </table>
-        {!! $logs->links('vendor.pagination.metro-5') !!}
+        {{ $logs->links() }}
     </div>
+</div>
 </div>
 @endsection

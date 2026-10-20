@@ -14,7 +14,44 @@ Les types autorisés sont `equivalent`, `covers`, `covered_by`, `partial`, `supp
 
 Tous les utilisateurs authentifiés peuvent consulter la liste, le détail, la matrice et les exports. Seuls les administrateurs (`role=1`) peuvent créer, modifier, valider ou supprimer une relation.
 
+### Liste des correspondances
+
+La liste des correspondances est accessible depuis le menu « Configuration > Correspondances » :
+
+[![Screenshot](images/crosswalk.fr.png)](images/crosswalk.fr.png)
+
+La liste peut être filtrée par clause ou nom de mesure, par référentiel source et cible, par type de correspondance et
+par couverture. Un sablier dans la colonne « Validation » signale une relation qui n'a pas encore été validée.
+Pour chaque relation, les boutons permettent d'en afficher le [détail](#detail), de la [modifier](#edit) ou de la supprimer.
+
+Le bouton « Matrice de correspondances » ouvre la [matrice](#matrix), « Exporter » exporte la liste filtrée au format XLSX
+et « Nouveau » crée une relation.
+
+### Matrice de correspondances {#matrix}
+
+La matrice compare un référentiel source à un référentiel cible, éventuellement filtrés par type de correspondance et
+par couverture. L'option « Afficher uniquement les contrôles source non mappés » ne liste que les mesures source qui
+n'ont aucune relation.
+
+[![Screenshot](images/crosswalk.matrix.fr.png)](images/crosswalk.matrix.fr.png)
+
 La matrice présente des métriques documentaires : nombre de contrôles source, nombre de contrôles ayant une relation, nombre de contrôles sans relation et nombre de relations. Ces valeurs ne sont jamais des scores de conformité.
+
+Le bouton « Inverser le sens » échange les référentiels source et cible, et « Exporter » exporte la matrice au format XLSX.
+
+### Détail d'une relation {#detail}
+
+Cet écran affiche une relation : mesures source et cible, type de correspondance, couverture, confiance, justification,
+référence et URL de la source, et état de validation.
+
+[![Screenshot](images/crosswalk.show.fr.png)](images/crosswalk.show.fr.png)
+
+### Modifier une relation {#edit}
+
+Cet écran, réservé aux administrateurs, permet de modifier tous les champs d'une relation.
+Cocher « Validation » valide la relation : l'utilisateur et la date de validation sont enregistrés.
+
+[![Screenshot](images/crosswalk.edit.fr.png)](images/crosswalk.edit.fr.png)
 
 ## Import XLSX
 

@@ -4,15 +4,18 @@
 
 Cet écran permet d'afficher la liste des contrôles et de les filtrer par :
 
-* Domaine,
+* domaine,
 
-* Périmètre,
+* clause,
 
-* Attribut,
+* périmètre,
 
-* la période de planification,
+* période de planification,
 
-* état du contrôle : tous, fait et à faire,
+* état du contrôle : tous, fait et à faire.
+
+Le bouton « Colonnes » permet de choisir les colonnes affichées, et les boutons « Copier » et « Exporter »
+permettent de copier la liste affichée ou de l'exporter vers Excel.
 
 [![Screenshot](images/c1.fr.png)](images/c1.fr.png)
 
@@ -46,7 +49,7 @@ Cet écran contient les informations d'un contrôle :
 
 Les boutons « Faire » et « Planifier » sont présents si ce contrôle n'a pas encore été réalisé.
 
-Les boutons « Modifier » et « Supprimer » sont présents si l'utilisateur est administrateur.
+Les boutons « Modifier », « Copier », « Supprimer » et « Historique » sont présents si l'utilisateur est administrateur.
 
 [![Screenshot](images/c2.fr.png)](images/c2.fr.png)
 
@@ -58,17 +61,27 @@ Lorsque vous cliquez sur :
 
 * « Modifier », vous êtes envoyé vers l'[écran de modification du contrôle](#edit)
 
+* « Copier », vous êtes envoyé vers l'[écran de création d'un contrôle](#create), pré-rempli avec les données de ce contrôle
+
 * « Supprimer », le contrôle est supprimé et vous êtes envoyé vers la [liste des contrôles](#list)
+
+* « Historique », vous êtes envoyé vers l'[historique des modifications](config.fr.md#logs) de ce contrôle
 
 * « Annuler », vous êtes envoyé vers la [liste des contrôles](#list)
 
 ## Créer un contrôle {#create}
 
-Un contrôle peut être créé de deux façons :
+Un contrôle peut être créé de trois façons :
 
-* Sur base d'une mesure de sécurité : depuis l'[écran d'affichage de la mesure](measures.fr.md/#show), le bouton « Créer un contrôle » génère un nouveau contrôle pré-rempli avec le nom et l'objectif de la mesure.
+* Depuis une mesure de sécurité : le bouton « Planifier » de l'[écran d'affichage de la mesure](measures.fr.md#plan)
+  crée un nouveau contrôle pré-rempli avec les données de la mesure.
+
+* En copiant un contrôle : le bouton « Copier » de l'[écran d'affichage du contrôle](#show) ouvre le formulaire de
+  création pré-rempli avec les données de ce contrôle.
 
 * Manuellement : depuis la [liste des contrôles](#list), le bouton « Nouveau » ouvre le formulaire de création.
+
+[![Screenshot](images/c4.fr.png)](images/c4.fr.png)
 
 Cet écran contient les champs suivants :
 
@@ -76,17 +89,25 @@ Cet écran contient les champs suivants :
 
 * Le nom du contrôle ;
 
+* Le périmètre ;
+
 * L'objectif du contrôle ;
 
 * Les attributs ;
 
 * Les données à collecter ;
 
-* Le modèle de calcul du score.
+* Le modèle de calcul du score ;
+
+* Le plan d'action à appliquer si le contrôle est en échec ;
+
+* La date de planification et la périodicité et
+
+* Les responsables de la réalisation du contrôle.
 
 Lorsque vous cliquez sur :
 
-* « Créer », le contrôle est enregistré et vous êtes renvoyé vers l'[écran d'affichage du contrôle](#show)
+* « Sauver », le contrôle est enregistré et vous êtes renvoyé vers la [liste des contrôles](#list)
 
 * « Annuler », vous êtes renvoyé vers la [liste des contrôles](#list)
 
@@ -96,23 +117,12 @@ Cet écran permet de modifier les informations d'un contrôle existant.
 
 Il est accessible uniquement aux utilisateurs disposant du rôle **Administrateur**.
 
-Cet écran contient les mêmes champs que l'[écran de création](#create) :
-
-* La ou les clauses associées ;
-
-* Le nom du contrôle ;
-
-* L'objectif du contrôle ;
-
-* Les attributs ;
-
-* Les données à collecter ;
-
-* Le modèle de calcul du score.
+En plus des champs de l'[écran de création](#create), il contient le résultat du contrôle : date de réalisation,
+observations, preuves, note, score et indicateur.
 
 Lorsque vous cliquez sur :
 
-* « Modifier », les modifications sont enregistrées et vous êtes renvoyé vers l'[écran d'affichage du contrôle](#show)
+* « Sauver », les modifications sont enregistrées et vous êtes renvoyé vers l'[écran d'affichage du contrôle](#show)
 
 * « Annuler », vous êtes renvoyé vers l'[écran d'affichage du contrôle](#show)
 
@@ -174,7 +184,6 @@ Cet écran contient :
 * La date du prochaine contrôle
 
 [![Screenshot](images/c3.fr.png)](images/c3.fr.png)
-[![Screenshot](images/c4.fr.png)](images/c4.fr.png)
 
 Lorsque vous cliquez sur :
 

@@ -3,49 +3,51 @@
 @section("content")
     @include('partials.errors')
 
-    <div data-role="panel" data-title-caption="{{ trans('cruds.user.show') }}" data-collapsible="false" data-title-icon="<span class='mif-person'></span>">
-		<div class="grid">
+    <div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'users'])<i class="bi bi-person"></i> {{ trans('cruds.user.show') }}</div>
+    <div class="card-body">
+		<div class="container-fluid px-0">
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.login') }}</strong>
 		    	</div>
-                <div class="cell-6">
+                <div class="col-md-12 col-lg-11">
 		    		{{ $user->login }}
 	    		</div>
 		    </div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.name') }}</strong>
 		    	</div>
-                <div class="cell-6">
+                <div class="col-md-12 col-lg-11">
 		    		{{ $user->name }}
 	    		</div>
 		    </div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.title') }}</strong>
 		    	</div>
-                <div class="cell-6">
+                <div class="col-md-12 col-lg-11">
 		    		{{ $user->title }}
 	    		</div>
 		    </div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.language') }}</strong>
 		    	</div>
-                <div class="cell-6">
+                <div class="col-md-12 col-lg-11">
 		    		{{ $user->language }}
 	    		</div>
 		    </div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.role') }}</strong>
 		    	</div>
-                <div class="cell-6">
+                <div class="col-md-12 col-lg-11">
 		    		{{ $user->role==1 ? trans('cruds.user.roles.admin') : "" }}
 		    		{{ $user->role==2 ? trans('cruds.user.roles.user') : "" }}
                     {{ $user->role==5 ? trans('cruds.user.roles.auditee') : "" }}
@@ -56,20 +58,20 @@
 		    </div>
 
 	    	<div class="row">
-	    		<div class="cell-1">
+	    		<div class="col-md-2 col-lg-1">
 		    		<strong>{{ trans('cruds.user.fields.email') }}</strong>
 		    	</div>
-                <div class="cell-6">
+                <div class="col-md-12 col-lg-11">
 		    		{{ $user->email }}
 	    		</div>
 	    	</div>
 
 	    	<div class="row">
-                <div class="cell-1">
+                <div class="col-md-2 col-lg-1">
                     <strong>{{ trans('cruds.user.fields.groups') }}</strong>
 		    	</div>
 
-	    		<div class="cell-8">
+	    		<div class="col-md-12 col-lg-11">
                     @foreach($user->groups as $group)
                         <a href='/groups/{{ $group->id }}'> {{ $group->name }}</a>
                         @if (!$loop->last)
@@ -80,24 +82,19 @@
 	    	</div>
 
 	    	<div class="row">
-	    		<div class="cell-2">
+	    		<div class="col-md-4 col-lg-2">
 		    		<strong>{{ trans('cruds.user.fields.controls') }}</strong>
 		    	</div>
 		    </div>
 	    	<div class="row">
-	    		<div class="cell-8">
-				    <table id="user-controls-table" class="table striped row-hover cell-border row-border"
-				       data-role="table"
-				       data-rows="25"
-				       data-show-activity="true"
-				       data-rownum="false"
-				       data-check="false">
+	    		<div class="col-md-12 col-lg-8">
+				    <table data-order="[[3,&quot;asc&quot;]]" data-page-length="25" id="user-controls-table" class="table table-striped table-hover table-bordered datatable">
 				        <thead>
 				            <tr>
-				                <th class="sortable-column" width="5%">{{ trans("cruds.measure.fields.clauses") }}</th>
-				                <th width="50%">{{ trans("cruds.measure.fields.name") }}</th>
-                                <th width="50%">{{ trans("cruds.measure.fields.scope") }}</th>
-				                <th class="sortable-column sort-asc"  width="5%">{{ trans("cruds.measure.fields.planned") }}</th>
+				                <th>{{ trans("cruds.measure.fields.clauses") }}</th>
+				                <th>{{ trans("cruds.measure.fields.name") }}</th>
+                                <th>{{ trans("cruds.measure.fields.scope") }}</th>
+				                <th>{{ trans("cruds.measure.fields.planned") }}</th>
 				            </tr>
 				        </thead>
 				        <tbody>
@@ -136,13 +133,11 @@
 	    </div>
 
     	<div class="row">
-            <div class="cell-6">
+            <div class="col-md-12 col-lg-6">
 			@if ((Auth::User()->role==1)||($user->id==Auth::User()->id))
 		    <form>
-		    	<button class="button primary" onclick='this.form.action="/users/{{ $user->id }}/edit"'>
-		            <span class="mif-pencil"></span>
-		            &nbsp;
-		    		{{ trans('common.edit') }}
+		    	<button class="btn btn-primary" onclick='this.form.action="/users/{{ $user->id }}/edit"'>
+		            <span class="bi bi-pencil"></span> {{ trans('common.edit') }}
 		    	</button>
 		    </form>
             @endif
@@ -150,25 +145,21 @@
 			<form action="/users/{{ $user->id }}" method="post" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}">
                {{ method_field('delete') }}
                @csrf
-	            <button class="button alert" type="submit">
-					<span class="mif-fire"></span>
-					&nbsp;
-	            	{{ trans('common.delete') }}
+	            <button class="btn btn-danger" type="submit">
+					<span class="bi bi-trash"></span> {{ trans('common.delete') }}
 	            </button>
 	        </form>
 	        @endif
 			@if (Auth::User()->role==1)
-			<a class="button" href="/logs/history/user/{{ $user->id }}">
-				<span class="mif-log-file"></span>
-				&nbsp;
-				{{ trans('common.history') }}
+			<a class="btn btn-light border" href="/logs/history/user/{{ $user->id }}">
+				<span class="bi bi-journal-text"></span> {{ trans('common.history') }}
 			</a>
 			@endif
-            <a class="button" href="/users">
-				<span class="mif-cancel"></span>
-				&nbsp;
-	    		{{ trans('common.cancel') }}
+            <a class="btn btn-light border" href="/users">
+				<span class="bi bi-x-circle"></span> {{ trans('common.cancel') }}
             </a>
 		</div>
 	</div>
+</div>
+</div>
 @endsection

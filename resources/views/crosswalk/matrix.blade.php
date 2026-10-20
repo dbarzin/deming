@@ -1,19 +1,18 @@
 @extends('layout')
 
 @section('content')
-<div data-role="panel"
-     data-title-caption="{{ trans('cruds.crosswalk.matrix') }}"
-     data-collapsible="false"
-     data-title-icon="<span class='mif-grid'></span>">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'crosswalk'])<i class="bi bi-grid-3x3"></i> {{ trans('cruds.crosswalk.matrix') }}</div>
+    <div class="card-body">
 
     @include('partials.errors')
 
     <form method="GET" action="{{ route('crosswalk.matrix') }}" class="mb-4">
-        <div class="grid">
+        <div class="container-fluid px-0">
             <div class="row">
-                <div class="cell-lg-3 cell-md-6">
+                <div class="col-lg-3 col-md-6">
                     <label>{{ trans('cruds.crosswalk.source_framework') }}</label>
-                    <select name="source_framework" data-role="select" required>
+                    <select class="form-select select2" name="source_framework" required>
                         <option value="">-- {{ trans('cruds.crosswalk.source_framework') }} --</option>
                         @foreach($frameworks as $framework)
                             <option value="{{ $framework->code }}"
@@ -23,9 +22,9 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="cell-lg-3 cell-md-6">
+                <div class="col-lg-3 col-md-6">
                     <label>{{ trans('cruds.crosswalk.target_framework') }}</label>
-                    <select name="target_framework" data-role="select" required>
+                    <select class="form-select select2" name="target_framework" required>
                         <option value="">-- {{ trans('cruds.crosswalk.target_framework') }} --</option>
                         @foreach($frameworks as $framework)
                             <option value="{{ $framework->code }}"
@@ -35,9 +34,9 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="cell-lg-2 cell-md-6">
+                <div class="col-lg-2 col-md-6">
                     <label>{{ trans('cruds.crosswalk.fields.mapping_type') }}</label>
-                    <select name="mapping_type" data-role="select">
+                    <select class="form-select select2" name="mapping_type">
                         <option value="">-- {{ trans('cruds.crosswalk.all') }} --</option>
                         @foreach(\App\Models\ControlMapping::DIRECTIONAL_MAPPING_TYPES as $mappingType)
                             <option value="{{ $mappingType }}"
@@ -47,9 +46,9 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="cell-lg-2 cell-md-6">
+                <div class="col-lg-2 col-md-6">
                     <label>{{ trans('cruds.crosswalk.fields.coverage') }}</label>
-                    <select name="coverage" data-role="select">
+                    <select class="form-select select2" name="coverage">
                         <option value="">-- {{ trans('cruds.crosswalk.all') }} --</option>
                         @foreach(\App\Models\ControlMapping::COVERAGE_LEVELS as $coverage)
                             <option value="{{ $coverage }}"
@@ -59,33 +58,32 @@
                         @endforeach
                     </select>
                 </div>
-                <div class="cell-lg-2 cell-md-6 d-flex flex-align-end">
-                    <button type="submit" class="button info">
-                        <span class="mif-filter"></span>&nbsp;{{ trans('cruds.crosswalk.display') }}
+                <div class="col-lg-2 col-md-6 d-flex align-items-end">
+                    <button type="submit" class="btn btn-info">
+                        <span class="bi bi-funnel"></span> {{ trans('cruds.crosswalk.display') }}
                     </button>
                 </div>
             </div>
             <div class="row mt-2">
-                <div class="cell-lg-6 cell-md-12">
+                <div class="col-lg-6 col-md-12">
                     <input type="hidden" name="unmapped" value="0">
-                    <input type="checkbox" data-role="checkbox" name="unmapped" value="1"
-                           data-caption="{{ trans('cruds.crosswalk.show_unmapped') }}"
-                           {{ ($filters['unmapped'] ?? false) ? 'checked' : '' }}>
+                    <div class="form-check form-check-inline"><input id="unmapped" class="form-check-input" type="checkbox" name="unmapped" value="1"
+                           {{ ($filters['unmapped'] ?? false) ? 'checked' : '' }}><label class="form-check-label" for="unmapped">{{ trans('cruds.crosswalk.show_unmapped') }}</label></div>
                 </div>
-                <div class="cell-lg-6 cell-md-12 text-right">
+                <div class="col-lg-6 col-md-12 text-end">
                     @if(($filters['source_framework'] ?? null) && ($filters['target_framework'] ?? null))
-                        <a class="button" href="{{ route('crosswalk.matrix', array_merge($filters, [
+                        <a class="btn btn-light border" href="{{ route('crosswalk.matrix', array_merge($filters, [
                             'source_framework' => $filters['target_framework'],
                             'target_framework' => $filters['source_framework'],
                         ])) }}">
-                            <span class="mif-loop2"></span>&nbsp;{{ trans('cruds.crosswalk.reverse') }}
+                            <span class="bi bi-arrow-repeat"></span> {{ trans('cruds.crosswalk.reverse') }}
                         </a>
-                        <a class="button success" href="{{ route('crosswalk.export', array_merge($filters, ['directional' => 1])) }}">
-                            <span class="mif-file-excel"></span>&nbsp;{{ trans('common.export') }}
+                        <a class="btn btn-success" href="{{ route('crosswalk.export', array_merge($filters, ['directional' => 1])) }}">
+                            <span class="bi bi-file-earmark-excel"></span> {{ trans('common.export') }}
                         </a>
                     @endif
-                    <a class="button" href="{{ route('crosswalk.index') }}">
-                        <span class="mif-list"></span>&nbsp;{{ trans('cruds.crosswalk.list') }}
+                    <a class="btn btn-light border" href="{{ route('crosswalk.index') }}">
+                        <span class="bi bi-list-ul"></span> {{ trans('cruds.crosswalk.list') }}
                     </a>
                 </div>
             </div>
@@ -94,41 +92,41 @@
 
     @if(($filters['source_framework'] ?? null) === ($filters['target_framework'] ?? null)
         && ($filters['source_framework'] ?? null))
-        <div class="remark warning">{{ trans('cruds.crosswalk.distinct_frameworks') }}</div>
+        <div class="alert alert-warning">{{ trans('cruds.crosswalk.distinct_frameworks') }}</div>
     @elseif($matrix === null)
-        <div class="remark info">{{ trans('cruds.crosswalk.select_pair') }}</div>
+        <div class="alert alert-info">{{ trans('cruds.crosswalk.select_pair') }}</div>
     @else
-        <div class="remark warning">{{ trans('cruds.crosswalk.documentary_notice') }}</div>
+        <div class="alert alert-warning">{{ trans('cruds.crosswalk.documentary_notice') }}</div>
 
-        <div class="grid">
+        <div class="container-fluid px-0">
             <div class="row">
-                <div class="cell-lg-3 cell-sm-6">
-                    <div class="more-info-box bg-cyan fg-white">
-                        <div class="content"><span class="mif-books icon"></span>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="more-info-box bg-info text-white">
+                        <div class="content"><span class="bi bi-book icon"></span>
                             <div class="text">{{ $matrix['stats']['source_total'] }}</div>
                             <div>{{ trans('cruds.crosswalk.source_total') }}</div>
                         </div>
                     </div>
                 </div>
-                <div class="cell-lg-3 cell-sm-6">
-                    <div class="more-info-box bg-green fg-white">
-                        <div class="content"><span class="mif-link icon"></span>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="more-info-box bg-success text-white">
+                        <div class="content"><span class="bi bi-link icon"></span>
                             <div class="text">{{ $matrix['stats']['mapped_source'] }}</div>
                             <div>{{ trans('cruds.crosswalk.mapped_source') }}</div>
                         </div>
                     </div>
                 </div>
-                <div class="cell-lg-3 cell-sm-6">
-                    <div class="more-info-box bg-orange fg-white">
-                        <div class="content"><span class="mif-unlink icon"></span>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="more-info-box bg-orange text-white">
+                        <div class="content"><span class="bi bi-link-45deg icon"></span>
                             <div class="text">{{ $matrix['stats']['unmapped_source'] }}</div>
                             <div>{{ trans('cruds.crosswalk.unmapped_source') }}</div>
                         </div>
                     </div>
                 </div>
-                <div class="cell-lg-3 cell-sm-6">
-                    <div class="more-info-box bg-steel fg-white">
-                        <div class="content"><span class="mif-shuffle icon"></span>
+                <div class="col-lg-3 col-sm-6">
+                    <div class="more-info-box bg-secondary text-white">
+                        <div class="content"><span class="bi bi-shuffle icon"></span>
                             <div class="text">{{ $matrix['stats']['relations'] }}</div>
                             <div>{{ trans('cruds.crosswalk.relations') }}</div>
                         </div>
@@ -138,8 +136,7 @@
         </div>
 
         <div class="overflow-auto mt-4">
-            <table id="crosswalk-matrix" class="table striped row-hover cell-border"
-                   data-role="table" data-show-search="true" data-rows="50">
+            <table data-order="[]" data-page-length="50" id="crosswalk-matrix" class="table table-striped table-hover table-bordered datatable">
                 <thead>
                     <tr>
                         <th>{{ $filters['source_framework'] }}</th>
@@ -158,11 +155,14 @@
                                         {{ trim($row['control']->clause) }} — {{ $row['control']->name }}
                                     </a>
                                 </td>
-                                <td colspan="4"><em>
+                                <td><em>
                                     {{ $row['has_any_mapping']
                                         ? trans('cruds.crosswalk.no_filtered_mapping')
                                         : trans('cruds.crosswalk.unmapped') }}
                                 </em></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
                             </tr>
                         @else
                             @foreach($row['mappings'] as $item)
@@ -196,11 +196,12 @@
                             @endforeach
                         @endif
                     @empty
-                        <tr><td colspan="5">{{ trans('cruds.crosswalk.no_controls') }}</td></tr>
+                        <tr><td>{{ trans('cruds.crosswalk.no_controls') }}</td><td></td><td></td><td></td><td></td></tr>
                     @endforelse
                 </tbody>
             </table>
         </div>
     @endif
+</div>
 </div>
 @endsection

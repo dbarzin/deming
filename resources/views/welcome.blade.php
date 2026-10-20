@@ -1,132 +1,143 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.welcome.dashboard') }}" data-collapsible="false" data-title-icon="<span class='mif-home'></span>">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'welcome'])<i class="bi bi-house"></i> {{ trans('cruds.welcome.dashboard') }}</div>
+    <div class="card-body">
     <div class="row">
-        <div class="cell-lg-2 cell-md-6 mt-2">
+        <div class="col-lg-2 col-md-6 mt-2">
             {{-- Domaines — navy : ancre structurelle --}}
-            <div class="more-info-box fg-white" style="background-color: #3A72C4 !important;">
+            <div class="more-info-box text-white" style="background-color: #3A72C4 !important;">
                 <div class="content">
-                    <h2 class="text-bold mb-0">
+                    <h2 class="fw-bold mb-0">
                         {{ $active_domains_count }}
                     </h2>
                     <div>{{ trans('menu.domains') }}</div>
                 </div>
                 <div class="icon">
-                    <span class="mif-library"></span>
+                    <span class="icon-library"></span>
                 </div>
-                <a href="/domains" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
+                <a href="/domains" class="more stretched-link"> {{ trans('common.more_info') }} <span class="bi bi-arrow-right"></span></a>
             </div>
         </div>
-        <div class="cell-lg-2 cell-md-6 mt-2">
+        <div class="col-lg-2 col-md-6 mt-2">
             {{-- Mesures — teal : référentiel/politique --}}
-            <div class="more-info-box fg-white" style="background-color: #17A8C4 !important;">                <div class="content">
-                    <h2 class="text-bold mb-0">
+            <div class="more-info-box text-white" style="background-color: #17A8C4 !important;">                <div class="content">
+                    <h2 class="fw-bold mb-0">
                         {{ $active_measures_count }}
                     </h2>
                     <div>{{ trans('menu.measures') }}</div>
                 </div>
                 <div class="icon">
-                    <span class="mif-books"></span>
+                    <span class="bi bi-book"></span>
                 </div>
-                <a href="/alice/index" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
+                <a href="/alice/index" class="more stretched-link"> {{ trans('common.more_info') }} <span class="bi bi-arrow-right"></span></a>
             </div>
         </div>
-        <div class="cell-lg-2 cell-md-6 mt-2">
+        <div class="col-lg-2 col-md-6 mt-2">
             {{-- Contrôles — vert foncé : conformité réalisée --}}
-            <div class="more-info-box fg-white" style="background-color: #3AB87A !important;">                <div class="content">
-                    <h2 class="text-bold mb-0">
+            <div class="more-info-box text-white" style="background-color: #3AB87A !important;">                <div class="content">
+                    <h2 class="fw-bold mb-0">
                         {{ $controls_made_count }}
                     </h2>
                     <div>{{ trans('menu.controls') }}</div>
                 </div>
                 <div class="icon">
-                    <span class="mif-paste"></span>
+                    <span class="bi bi-clipboard-check"></span>
                 </div>
-                <a href="/bob/index?attribute=none&amp;domain=0&amp;scope=none&amp;period=99&amp;status=1" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
+                <a href="/bob/index?attribute=none&amp;domain=0&amp;scope=none&amp;period=99&amp;status=1" class="more stretched-link"> {{ trans('common.more_info') }} <span class="bi bi-arrow-right"></span></a>
             </div>
         </div>
-        <div class="cell-lg-2 cell-md-6 mt-2">
+        <div class="col-lg-2 col-md-6 mt-2">
 
             {{-- Plans d'action — ambre : vigilance/remédiation --}}
-            <div class="more-info-box fg-white" style="background-color: #E09B1A !important;">
+            <div class="more-info-box text-white" style="background-color: #E09B1A !important;">
                 <div class="content">
-                    <h2 class="text-bold mb-0">
+                    <h2 class="fw-bold mb-0">
                         {{ $action_plans_count }}
                     </h2>
                 <div>{{ trans('menu.action_plan') }}</div>
                 </div>
                 <div class="icon">
-                    <span class="mif-pending-actions"></span>
+                    <span class="bi bi-list-check"></span>
                 </div>
-                <a href="/actions" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
+                <a href="/actions" class="more stretched-link"> {{ trans('common.more_info') }} <span class="bi bi-arrow-right"></span></a>
             </div>
         </div>
 
-        <div class="cell-lg-2 cell-md-6 mt-2">
+        <div class="col-lg-2 col-md-6 mt-2">
             {{-- Risques — rouge profond : criticité --}}
-            <div class="more-info-box fg-white" style="background-color: #D94F45 !important;">
+            <div class="more-info-box text-white" style="background-color: #D94F45 !important;">
                 <div class="content">
-                    <h2 class="text-bold mb-0">
+                    <h2 class="fw-bold mb-0">
                        {{ $risks_count }}
                     </h2>
                 <div>{{ trans('cruds.risk.plural') }}</div>
                 </div>
                 <div class="icon">
-                    <span class="mif-warning"></span>
+                    <span class="bi bi-exclamation-triangle"></span>
                 </div>
-                <a href="/risk/index" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
+                <a href="/risk/index" class="more stretched-link"> {{ trans('common.more_info') }} <span class="bi bi-arrow-right"></span></a>
             </div>
         </div>
 
-        <div class="cell-lg-2 cell-md-6 mt-2">
+        <div class="col-lg-2 col-md-6 mt-2">
             {{-- Exceptions — violet : statut dérogatoire --}}
-            <div class="more-info-box fg-white" style="background-color: #8059C8 !important;">                <div class="content">
-                    <h2 class="text-bold mb-0">
+            <div class="more-info-box text-white" style="background-color: #8059C8 !important;">                <div class="content">
+                    <h2 class="fw-bold mb-0">
                        {{ $exceptions_count }}
                     </h2>
                 <div>{{ trans('menu.exceptions') }}</div>
                 </div>
                 <div class="icon">
-                    <span class="mif-cross"></span>
+                    <span class="bi bi-x-octagon"></span>
                 </div>
-                <a href="/exception/index" class="more"> {{ trans('common.more_info') }} <span class="mif-arrow-right"></span></a>
+                <a href="/exception/index" class="more stretched-link"> {{ trans('common.more_info') }} <span class="bi bi-arrow-right"></span></a>
             </div>
         </div>
 
     </div>
 </div>
+</div>
 <div class="row">
-    <div class="cell-lg-7 cell-md-12 mt-3">
-        <div data-role="panel" data-height='580' data-title-caption="{{ trans('cruds.welcome.control_planning') }}" data-collapsible="false" data-title-icon="<span class='mif-stacked-bar-chart'></span>">
+    <div class="col-lg-7 col-md-12 mt-3">
+        <div class="card">
+    <div class="card-header"><i class="bi bi-bar-chart"></i> {{ trans('cruds.welcome.control_planning') }}</div>
+    <div class="card-body">
             <div class="d-flex justify-content-center align-items-center" style="height: 510px;">
                 <canvas id="canvas-status" style="max-height: 510px;"  class="chartjs-render-monitor"></canvas>
             </div>
         </div>
+</div>
     </div>
-    <div class="cell-lg-5 cell-md-12 mt-3">
-        <div data-role="panel" data-height='580' data-title-caption="{{ trans('cruds.welcome.control_status') }}" data-collapsible="false" data-title-icon="<span class='mif-pie-chart'></span>">
+    <div class="col-lg-5 col-md-12 mt-3">
+        <div class="card">
+    <div class="card-header"><i class="bi bi-pie-chart"></i> {{ trans('cruds.welcome.control_status') }}</div>
+    <div class="card-body">
             <div class="d-flex justify-content-center align-items-center" style="height: 510px;">
                 <canvas id="canvas-doughnut" style="max-height: 510px;"  class="chartjs-render-monitor"></canvas>
             </div>
         </div>
+</div>
     </div>
 </div>
 
 <div class="row">
     <div class="col-12">
-        <div data-role="panel" data-title-caption="{{ trans('cruds.welcome.next_controls') }}" data-collapsible="false" data-title-icon="<span class='mif-alarm'></span>">
+        <div class="card">
+    <div class="card-header"><i class="bi bi-alarm"></i> {{ trans('cruds.welcome.next_controls') }}</div>
+    <div class="card-body">
                 <table
-                    class="table data-table striped row-hover cell-border"
+                    class="table table-striped table-hover table-bordered"
                     >
                     <thead>
                         <tr>
-                            <th data-sortable="true">{{ trans('cruds.measure.fields.clauses') }}</th>
-                            <th data-sortable="true">{{ trans('cruds.measure.fields.name') }}</th>
-                            <th data-sortable="true">{{ trans('cruds.measure.fields.scope') }}</th>
-                            <th data-sortable="true">{{ trans('cruds.measure.fields.score') }}</th>
-                            <th data-sortable="true">{{ trans('cruds.measure.fields.realisation_date') }}</th>
-                            <th data-sortable="true" data-sort-dir="asc">{{ trans('cruds.measure.fields.plan_date') }}</th>
+                            <th>{{ trans('cruds.measure.fields.clauses') }}</th>
+                            <th>{{ trans('cruds.measure.fields.name') }}</th>
+                            <th>{{ trans('cruds.measure.fields.scope') }}</th>
+                            <th>{{ trans('cruds.measure.fields.score') }}</th>
+                            <th>{{ trans('cruds.measure.fields.realisation_date') }}</th>
+                            <th>{{ trans('cruds.measure.fields.plan_date') }}</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -141,10 +152,7 @@
                                             return $chunk->implode(', ');
                                         })->implode('<br>');
                                     @endphp
-                                    <span
-                                        data-role="hint"
-                                        data-hint-text="{{ $formattedClauses }}"
-                                        data-hint-position="top"
+                                    <span data-bs-placement="top" data-bs-html="true" title="{{ $formattedClauses }}" data-bs-toggle="tooltip"
                                         style="cursor: help; border-bottom: 1px dotted #999;"
                                     >
                                         @foreach($control->measures->take(2) as $measure)
@@ -169,7 +177,7 @@
                                 @endif
                             </td>
 
-                            <td class="bg-danger text-white">{{ $control->name }}</td>
+                            <td>{{ $control->name }}</td>
                             <td>
                                 <a href="/bob/index?domain=0&attribute=none&scope={{ urlencode($control->scope) }}&status=0&period=99">
                                     {{ $control->scope }}
@@ -194,7 +202,7 @@
                                     <span style="font-weight: bold; color: {{ today()->lte($control->plan_date) ? 'green' : 'red' }}">{{ $control->plan_date }}</span>
                                 </a>
                                 @if ($control->status===1)
-                                    &nbsp;<a href="/bob/make/{{ $control->id }}"><span class="mif-hour-glass"/></a>
+                                    &nbsp;<a href="/bob/make/{{ $control->id }}"><i class="bi bi-hourglass-split"></i></a>
                                 @endif
                             </td>
                         </tr>
@@ -203,6 +211,7 @@
                 </table>
                 <br><br><br><br><br>
             </div>
+</div>
         </div>
     </div>
 

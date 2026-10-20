@@ -9,9 +9,18 @@ class UserGroup extends Model
 {
     use HasFactory;
 
+    public const TYPE_BUSINESS = 'business';
+    public const TYPE_SECURITY = 'security';
+
+    public const TYPES = [
+        self::TYPE_BUSINESS,
+        self::TYPE_SECURITY,
+    ];
+
     protected $fillable = [
         'name',
         'description',
+        'type',
     ];
 
     protected $dates = [

@@ -14,7 +14,43 @@ The allowed types are `equivalent`, `covers`, `covered_by`, `partial`, `supports
 
 All authenticated users can view the list, detail, matrix, and exports. Only administrators (`role=1`) can create, update, validate, or delete a relationship.
 
+### List of relationships
+
+The crosswalk list is available from the "Configuration > Crosswalk" menu:
+
+[![Screenshot](images/crosswalk.png)](images/crosswalk.png)
+
+The list can be filtered by a clause or control name, by source and target framework, by mapping type and by coverage.
+An hourglass in the "Validation" column marks a relationship that has not yet been validated.
+For each relationship, the buttons open its [detail](#detail), [edit it](#edit) or delete it.
+
+The "Crosswalk matrix" button opens the [matrix](#matrix), "Export" exports the filtered list in XLSX format and
+"New" creates a relationship.
+
+### Crosswalk matrix {#matrix}
+
+The matrix compares a source framework with a target framework, optionally filtered by mapping type and coverage.
+The "Show only unmapped source controls" option only lists the source controls that have no relationship.
+
+[![Screenshot](images/crosswalk.matrix.png)](images/crosswalk.matrix.png)
+
 The matrix presents documentary metrics: number of source controls, number of controls with a relationship, number of controls without a relationship, and number of relationships. These values are never compliance scores.
+
+The "Reverse direction" button swaps the source and target frameworks, and "Export" exports the matrix in XLSX format.
+
+### Relationship detail {#detail}
+
+This screen displays a relationship: source and target controls, mapping type, coverage, confidence, rationale,
+source reference and URL, and validation status.
+
+[![Screenshot](images/crosswalk.show.png)](images/crosswalk.show.png)
+
+### Edit a relationship {#edit}
+
+This screen, reserved for administrators, allows you to edit all the fields of a relationship.
+Ticking "Validation" validates the relationship: the user and the validation date are recorded.
+
+[![Screenshot](images/crosswalk.edit.png)](images/crosswalk.edit.png)
 
 ## XLSX import
 

@@ -3,7 +3,9 @@
 @section('title', $risk->name)
 
 @section("content")
-<div data-role="panel" data-title-caption='{{ trans("cruds.risk.edit") }}' data-collapsible="false" data-title-icon="<span class='mif-warning'></span>">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'risks.edit'])<i class="bi bi-exclamation-triangle"></i> {{ trans("cruds.risk.edit") }}</div>
+    <div class="card-body">
 
     @include('partials.errors')
 
@@ -11,37 +13,36 @@
         @csrf
         <input type="hidden" name="id" value="{{ $risk->id }}"/>
 
-        <div class="grid">
+        <div class="container-fluid px-0">
 
             {{-- Nom --}}
             <div class="row">
-                <div class="cell-lg-1 cell-md-2">
+                <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.name") }}</strong>
                 </div>
-                <div class="cell-lg-6 cell-md-8">
-                    <input type="text" data-role="input" name="name"
+                <div class="col-lg-11 col-md-10">
+                    <input class="form-control" type="text" name="name"
                            value="{{ $risk->name }}" maxlength="255" required>
                 </div>
             </div>
 
             {{-- Description --}}
             <div class="row">
-                <div class="cell-lg-1 cell-md-2">
+                <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.description") }}</strong>
                 </div>
-                <div class="cell-lg-6 cell-md-8">
-                    <textarea name="description" rows="3" data-role="textarea"
-                              data-clear-button="false">{{ old('description', $risk->description) }}</textarea>
+                <div class="col-lg-11 col-md-10">
+                    <textarea class="form-control" name="description" rows="3">{{ old('description', $risk->description) }}</textarea>
                 </div>
             </div>
 
             {{-- Propriétaire + Fréquence de revue + Prochaine revue --}}
             <div class="row">
-                <div class="cell-lg-1 cell-md-2">
+                <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.owner") }}</strong>
                 </div>
-                <div class="cell-lg-3 cell-md-4">
-                    <select name="owner_id" data-role="select" data-filter="true">
+                <div class="col-lg-3 col-md-4">
+                    <select class="form-select select2" name="owner_id">
                         <option value="">— {{ trans('cruds.risk.fields.no_owner') }} —</option>
                         @foreach ($users as $user)
                             <option value="{{ $user->id }}"
@@ -53,22 +54,21 @@
                 </div>
             </div>
             <div class="row">
-                <div class="cell-lg-1 cell-md-2">
+                <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.review_frequency") }}</strong>
                 </div>
-                <div class="cell-lg-1 cell-md-2">
-                    <input data-role="spinner" name="review_frequency"
+                <div class="col-lg-2 col-xl-1 col-md-2">
+                    <input class="form-control" type="number" name="review_frequency"
                            value="{{ old('review_frequency', $risk->review_frequency) }}"
                            min="1" max="60">
                 </div>
-                <div class="cell-lg-1 cell-md-1" align="right">
+                <div class="col-lg-1 col-md-1 text-md-end">
                     <strong>{{ trans("cruds.risk.fields.next_review") }}</strong>
                 </div>
-                <div class="cell-lg-2 cell-md-3">
-                    <input data-role="calendarpicker" data-format="YYYY-MM-DD"
+                <div class="col-lg-2 col-md-3">
+                    <input class="form-control" type="date"
                            name="next_review_at"
-                           value="{{ old('next_review_at', $risk->next_review_at?->format('Y-m-d')) }}"
-                           data-clear-button="true"/>
+                           value="{{ old('next_review_at', $risk->next_review_at?->format('Y-m-d')) }}"/>
                 </div>
             </div>
 
@@ -78,24 +78,20 @@
             {{-- Impact (en premier pour MONARC) --}}
             @if ($scoringConfig->usesMonarc())
             <div class="row">
-                <div class="cell-lg-1 cell-md-2">
+                <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.impact") }}</strong>
                 </div>
-                <div class="cell-lg-6 cell-md-8">
+                <div class="col-lg-11 col-md-10">
                     @foreach ($scoringConfig->impact_levels ?? [] as $level)
-                    <input type="radio" name="impact" value="{{ $level['value'] }}"
-                           data-role="radio"
-                           data-append="<b>{{ $level['value'] }}</b> — {{ $level['label'] }}{{ isset($level['description']) && $level['description'] ? ' <small class=\'text-muted\'>('.$level['description'].')</small>' : '' }}"
-                           {{ old('impact', $risk->impact) == $level['value'] ? 'checked' : '' }}/>
-                    <br>
+                    <div class="form-check"><input id="impact_{{ $level['value'] }}" class="form-check-input" type="radio" name="impact" value="{{ $level['value'] }}"
+                           {{ old('impact', $risk->impact) == $level['value'] ? 'checked' : '' }}/><label class="form-check-label" for="impact_{{ $level['value'] }}"><b>{{ $level['value'] }}</b> — {{ $level['label'] }}@if (!empty($level['description'])) <small class="text-muted">({{ $level['description'] }})</small>@endif</label></div>
                     @endforeach
                 </div>
             </div>
             <div class="row">
-                <div class="cell-lg-1 cell-md-2"></div>
-                <div class="cell-lg-6 cell-md-8">
-                    <textarea name="impact_comment" rows="2" data-role="textarea"
-                              data-clear-button="false"
+                <div class="col-lg-1 col-md-2"></div>
+                <div class="col-lg-11 col-md-10">
+                    <textarea class="form-control" name="impact_comment" rows="2"
                               placeholder="{{ trans('cruds.risk.fields.impact_comment') }}">{{ old('impact_comment', $risk->impact_comment) }}</textarea>
                 </div>
             </div>
@@ -105,7 +101,7 @@
             {{-- Section probabilité / menace --}}
             <div id="probability-section" @if($scoringConfig->usesLikelihood()) style="display:none" @endif>
                 <div class="row">
-                    <div class="cell-lg-1 cell-md-2">
+                    <div class="col-lg-1 col-md-2">
                         <strong>
                             @if ($scoringConfig->usesMonarc())
                                 {{ trans("cruds.risk.fields.threat") }}
@@ -114,21 +110,17 @@
                             @endif
                         </strong>
                     </div>
-                    <div class="cell-lg-10 cell-md-10">
+                    <div class="col-lg-11 col-md-10">
                         @foreach ($scoringConfig->probability_levels ?? [] as $level)
-                        <input type="radio" name="probability" value="{{ $level['value'] }}"
-                               data-role="radio"
-                               data-append="<b>{{ $level['value'] }}</b> — {{ $level['label'] }}{{ isset($level['description']) && $level['description'] ? ' <small class=\'text-muted\'>('.$level['description'].')</small>' : '' }}"
-                               {{ old('probability', $risk->probability) == $level['value'] ? 'checked' : '' }}/>
-                        <br>
+                        <div class="form-check"><input id="probability_{{ $level['value'] }}" class="form-check-input" type="radio" name="probability" value="{{ $level['value'] }}"
+                               {{ old('probability', $risk->probability) == $level['value'] ? 'checked' : '' }}/><label class="form-check-label" for="probability_{{ $level['value'] }}"><b>{{ $level['value'] }}</b> — {{ $level['label'] }}@if (!empty($level['description'])) <small class="text-muted">({{ $level['description'] }})</small>@endif</label></div>
                         @endforeach
                     </div>
                 </div>
                 <div class="row">
-                    <div class="cell-lg-1 cell-md-2"></div>
-                    <div class="cell-lg-6 cell-md-8">
-                        <textarea name="probability_comment" rows="2" data-role="textarea"
-                                  data-clear-button="false"
+                    <div class="col-lg-1 col-md-2"></div>
+                    <div class="col-lg-11 col-md-10">
+                        <textarea class="form-control" name="probability_comment" rows="2"
                                   placeholder="{{ trans('cruds.risk.fields.probability_comment') }}">{{ old('probability_comment', $risk->probability_comment) }}</textarea>
                     </div>
                 </div>
@@ -140,16 +132,13 @@
             {{-- Section exposition (likelihood_x_impact uniquement) --}}
             @if ($scoringConfig->usesLikelihood())
             <div class="row">
-                <div class="cell-lg-1 cell-md-2">
+                <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.exposure") }}</strong>
                 </div>
-                <div class="cell-lg-6 cell-md-8">
+                <div class="col-lg-11 col-md-10">
                     @foreach ($scoringConfig->exposure_levels ?? [] as $level)
-                    <input type="radio" name="exposure" value="{{ $level['value'] }}"
-                           data-role="radio"
-                           data-append="<b>{{ $level['value'] }}</b> — {{ $level['label'] }}"
-                           {{ old('exposure', $risk->exposure ?? 0) == $level['value'] ? 'checked' : '' }}/>
-                    <br>
+                    <div class="form-check"><input id="exposure_{{ $level['value'] }}" class="form-check-input" type="radio" name="exposure" value="{{ $level['value'] }}"
+                           {{ old('exposure', $risk->exposure ?? 0) == $level['value'] ? 'checked' : '' }}/><label class="form-check-label" for="exposure_{{ $level['value'] }}"><b>{{ $level['value'] }}</b> — {{ $level['label'] }}</label></div>
                     @endforeach
                 </div>
             </div>
@@ -158,16 +147,13 @@
             {{-- Section vulnérabilité (likelihood_x_impact ou monarc) --}}
             @if ($scoringConfig->usesLikelihood() || $scoringConfig->usesMonarc())
             <div class="row">
-                <div class="cell-lg-1 cell-md-2">
+                <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.vulnerability") }}</strong>
                 </div>
-                <div class="cell-lg-6 cell-md-8">
+                <div class="col-lg-11 col-md-10">
                     @foreach ($scoringConfig->vulnerability_levels ?? [] as $level)
-                    <input type="radio" name="vulnerability" value="{{ $level['value'] }}"
-                           data-role="radio"
-                           data-append="<b>{{ $level['value'] }}</b> — {{ $level['label'] }}"
-                           {{ old('vulnerability', $risk->vulnerability ?? 0) == $level['value'] ? 'checked' : '' }}/>
-                    <br>
+                    <div class="form-check"><input id="vulnerability_{{ $level['value'] }}" class="form-check-input" type="radio" name="vulnerability" value="{{ $level['value'] }}"
+                           {{ old('vulnerability', $risk->vulnerability ?? 0) == $level['value'] ? 'checked' : '' }}/><label class="form-check-label" for="vulnerability_{{ $level['value'] }}"><b>{{ $level['value'] }}</b> — {{ $level['label'] }}</label></div>
                     @endforeach
                 </div>
             </div>
@@ -179,24 +165,20 @@
             {{-- Impact (pour les formules non-MONARC) --}}
             @if (!$scoringConfig->usesMonarc())
             <div class="row">
-                <div class="cell-lg-1 cell-md-2">
+                <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.impact") }}</strong>
                 </div>
-                <div class="cell-lg-6 cell-md-8">
+                <div class="col-lg-11 col-md-10">
                     @foreach ($scoringConfig->impact_levels ?? [] as $level)
-                    <input type="radio" name="impact" value="{{ $level['value'] }}"
-                           data-role="radio"
-                           data-append="<b>{{ $level['value'] }}</b> — {{ $level['label'] }}{{ isset($level['description']) && $level['description'] ? ' <small class=\'text-muted\'>('.$level['description'].')</small>' : '' }}"
-                           {{ old('impact', $risk->impact) == $level['value'] ? 'checked' : '' }}/>
-                    <br>
+                    <div class="form-check"><input id="impact_{{ $level['value'] }}" class="form-check-input" type="radio" name="impact" value="{{ $level['value'] }}"
+                           {{ old('impact', $risk->impact) == $level['value'] ? 'checked' : '' }}/><label class="form-check-label" for="impact_{{ $level['value'] }}"><b>{{ $level['value'] }}</b> — {{ $level['label'] }}@if (!empty($level['description'])) <small class="text-muted">({{ $level['description'] }})</small>@endif</label></div>
                     @endforeach
                 </div>
             </div>
             <div class="row">
-                <div class="cell-lg-1 cell-md-2"></div>
-                <div class="cell-lg-6 cell-md-8">
-                    <textarea name="impact_comment" rows="2" data-role="textarea"
-                              data-clear-button="false"
+                <div class="col-lg-1 col-md-2"></div>
+                <div class="col-lg-11 col-md-10">
+                    <textarea class="form-control" name="impact_comment" rows="2"
                               placeholder="{{ trans('cruds.risk.fields.impact_comment') }}">{{ old('impact_comment', $risk->impact_comment) }}</textarea>
                 </div>
             </div>
@@ -204,10 +186,10 @@
 
             {{-- Score calculé --}}
             <div class="row">
-                <div class="cell-lg-1 cell-md-2">
+                <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.score") }}</strong>
                 </div>
-                <div class="cell-lg-6 cell-md-8">
+                <div class="col-lg-11 col-md-10">
                 @php
                     $score     = $risk->computedScore($scoringConfig);
                     $threshold = $scoringConfig->thresholdFor($score);
@@ -236,11 +218,11 @@
 
             {{-- Statut --}}
             <div class="row">
-                <div class="cell-lg-1 cell-md-2">
+                <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.status") }}</strong>
                 </div>
-                <div class="cell-lg-2 cell-md-3">
-                    <select name="status" id="risk-status" data-role="select">
+                <div class="col-lg-2 col-md-3">
+                    <select class="form-select select2" name="status" id="risk-status">
                         @foreach (\App\Models\Risk::availableStatuses() as $value => $label)
                             <option value="{{ $value }}"
                                 {{ old('status', $risk->status) === $value ? 'selected' : '' }}>
@@ -251,10 +233,9 @@
                 </div>
             </div>
             <div class="row">
-                <div class="cell-lg-1 cell-md-2"></div>
-                <div class="cell-lg-6 cell-md-8">
-                    <textarea name="status_comment" rows="2" data-role="textarea"
-                              data-clear-button="false"
+                <div class="col-lg-1 col-md-2"></div>
+                <div class="col-lg-11 col-md-10">
+                    <textarea class="form-control" name="status_comment" rows="2"
                               placeholder="{{ trans('cruds.risk.fields.status_comment') }}">{{ old('status_comment', $risk->status_comment) }}</textarea>
                 </div>
             </div>
@@ -262,11 +243,11 @@
             {{-- Contrôles liés (mitigated) --}}
             <div id="controls-section" @if($risk->status !== 'mitigated') style="display:none" @endif>
                 <div class="row">
-                    <div class="cell-lg-1 cell-md-2">
+                    <div class="col-lg-1 col-md-2">
                         <strong>{{ trans("cruds.risk.fields.controls") }}</strong>
                     </div>
-                    <div class="cell-lg-6 cell-md-8">
-                        <select name="control_ids[]" data-cls-tag="tag-no-truncate" data-role="select" data-filter="true" multiple>
+                    <div class="col-lg-11 col-md-10">
+                        <select class="form-select select2" name="control_ids[]" multiple>
                             @foreach ($controls as $control)
                                 <option value="{{ $control->id }}"
                                     {{ in_array($control->id, old('control_ids', $risk->controls->pluck('id')->toArray())) ? 'selected' : '' }}>
@@ -286,11 +267,11 @@
             @endphp
             <div id="actions-section" @if(!$showActions) style="display:none" @endif>
                 <div class="row">
-                    <div class="cell-lg-1 cell-md-2">
+                    <div class="col-lg-1 col-md-2">
                         <strong>{{ trans("cruds.risk.fields.action_plan") }}</strong>
                     </div>
-                    <div class="cell-lg-6 cell-md-8">
-                        <select name="action_ids[]" data-role="select" data-filter="true" multiple>
+                    <div class="col-lg-11 col-md-10">
+                        <select class="form-select select2" name="action_ids[]" multiple>
                             @foreach ($actions as $action)
                                 <option value="{{ $action->id }}"
                                     {{ in_array($action->id, old('action_ids', $risk->actions->pluck('id')->toArray())) ? 'selected' : '' }}>
@@ -310,11 +291,11 @@
             </div>
 
             <div class="row">
-                <div class="cell-lg-1 cell-md-2">
+                <div class="col-lg-1 col-md-2">
                     <strong>{{ trans("cruds.risk.fields.residual_risk") }}</strong>
                 </div>
-                <div class="cell-lg-1 cell-md-2">
-                    <input data-role="spinner" name="residual_risk" min="0" max="99" step="1"
+                <div class="col-lg-2 col-xl-1 col-md-2">
+                    <input class="form-control" type="number" name="residual_risk" min="0" max="99" step="1"
                            value="{{ old('residual_risk', $risk->residual_risk) }}">
                 </div>
             </div>
@@ -325,15 +306,13 @@
 
             {{-- Boutons --}}
             <div class="row">
-                <div class="cell-lg-12 cell-md-12">
-                    <button type="submit" class="button success">
-                        <span class="mif-floppy-disk2"></span>
-                        &nbsp;{{ trans("common.save") }}
+                <div class="col-lg-12 col-md-12">
+                    <button type="submit" class="btn btn-success">
+                        <span class="bi bi-floppy"></span> {{ trans("common.save") }}
                     </button>
                     &nbsp;
-                    <a class="button" href="/risk/show/{{ $risk->id }}" role="button">
-                        <span class="mif-cancel"></span>
-                        &nbsp;{{ trans("common.cancel") }}
+                    <a class="btn btn-light border" href="/risk/show/{{ $risk->id }}" role="button">
+                        <span class="bi bi-x-circle"></span> {{ trans("common.cancel") }}
                     </a>
                 </div>
             </div>
@@ -341,70 +320,7 @@
         </div>
     </form>
 </div>
-
-<script>
-document.addEventListener('DOMContentLoaded', function () {
-
-    function injectStyle(labelId) {
-        const styleId = 'fix-select-style';
-        if (document.getElementById(styleId)) return;
-
-        const style = document.createElement('style');
-        style.id = styleId;
-        style.textContent = `
-            #${labelId},
-            label.input-normal.select.multiple {
-                height: auto !important;
-                min-height: 36px !important;
-                max-height: none !important;
-                overflow: visible !important;
-            }
-            #${labelId} span.dropdown-toggle,
-            label.input-normal.select.multiple span.dropdown-toggle {
-                height: auto !important;
-                max-height: none !important;
-                white-space: normal !important;
-                flex-wrap: wrap !important;
-                overflow: visible !important;
-                align-items: center !important;
-            }
-            #${labelId} span.dropdown-toggle a,
-            label.input-normal.select.multiple span.dropdown-toggle a {
-                max-width: none !important;
-                width: auto !important;
-                white-space: normal !important;
-                overflow: visible !important;
-                text-overflow: unset !important;
-                height: auto !important;
-                flex-shrink: 0 !important;
-            }
-        `;
-        document.head.appendChild(style);
-    }
-
-    function observeSelect() {
-        const select = document.querySelector('select[name="control_ids[]"]');
-        if (!select) return;
-
-        const label = select.closest('label');
-        if (!label) return;
-
-        // Injecter le style avec l'ID réel généré par Metro
-        injectStyle(label.id);
-
-        // Observer les mutations sur le label pour re-appliquer si Metro recrée les tags
-        const observer = new MutationObserver(function () {
-            injectStyle(label.id);
-        });
-
-        observer.observe(label, { childList: true, subtree: true });
-    }
-
-    // Attendre Metro
-    setTimeout(observeSelect, 500);
-});
-</script>
-
+</div>
 
 @include('risks._scoring_script')
 @endsection

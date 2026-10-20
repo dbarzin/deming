@@ -28,3 +28,9 @@ Thumbs.db
 *.log
 *.sql
 *.sqlite
+# Generated at runtime / build output
+/config/deming.php
+/public/storage
+/site
+.phpactor.json
+*.bfproject

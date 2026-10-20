@@ -1,7 +1,9 @@
 @extends('layout')
 @section('content')
-<div class="table-responsive" data-role="panel" data-title-caption="{{ trans('cruds.log.title') }}" data-collapsible="false" data-title-icon="<span class='mif-log-file'></span>">
-    <table class="table table-border cell-border">
+<div class="card table-responsive">
+    <div class="card-header">@include('partials.help', ['page' => 'logs'])<i class="bi bi-journal-text"></i> {{ trans('cruds.log.title') }}</div>
+    <div class="card-body">
+    <table class="table table-bordered">
         <tbody>
             <tr>
                 <th style="width: 150px;">
@@ -112,9 +114,10 @@
         </tbody>
     </table>
 </div>
+</div>
 <div>
     <br>
-    <a class="button btn-default" href="/logs">
+    <a class="btn btn-default" href="/logs">
     {{ trans('common.cancel') }}
     </a>
 </div>

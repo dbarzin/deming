@@ -1,19 +1,21 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.measure.radar') }}" data-collapsible="false" data-title-icon="<span class='mif-pie-chart'></span>">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'radar.controls'])<i class="bi bi-pie-chart"></i> {{ trans('cruds.measure.radar') }}</div>
+    <div class="card-body">
 
-<div class="grid">
+<div class="container-fluid px-0">
     <div class="row">
-        <div class="cell-12">
+        <div class="col-12">
 
     <form action="/radar/alice">
         <div class="row">
-            <div class="cell-10">
+            <div class="col-md-12 col-lg-10">
             </div>
-            <div class="cell-2">
+            <div class="col-md-4 col-lg-2">
                 {{ trans("cruds.measure.fields.scope") }}
-                <select name="scope" data-role="select" id="scope">
+                <select class="form-select select2" name="scope" id="scope">
                     @foreach ($scopes as $scope)
                     <option
                         @if (Session::get("scope")==$scope)
@@ -30,15 +32,15 @@
     @foreach($domains as $domain)
 
     <div class="row">
-        <div class="cell-10">
+        <div class="col-md-12 col-lg-10">
             <b>{{ $domain->title }} - {{ $domain->description }}</b>
         </div>
     </div>
     <div class="row">
-        <div class="cell-4">
+        <div class="col-md-8 col-lg-4">
             <canvas id="canvas-radar-{{ $domain->id }}" width="100%"></canvas>
         </div>
-        <div class="cell-8">
+        <div class="col-md-12 col-lg-8">
             <table class="table table-bordered">
                   <thead>
                   <tr>
@@ -81,6 +83,7 @@
     @endforeach
 </div>
 
+</div>
 </div>
 </div>
 </div>

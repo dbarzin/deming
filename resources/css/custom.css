@@ -1,189 +1,594 @@
+/***************************************************************************/
+
 :root {
-    --logo-background: #f6f6f6;
-    --logo-color: #292826;
-    --navview-pane-width: 220px;
+    --deming-sidebar-width: 230px;
+    --deming-toggle-width: 2.5rem;
+    --deming-navbar-height: 56px;
+    --deming-accent: #0366D6;
+}
+
+html {
+    font-size: 14px;
 }
 
 body {
-    font-family: 'Noto Sans', sans-serif;
+    font-family: 'Noto Sans', -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+    background-color: #f3f4f6;
 }
 
+/***************************************************************************/
+/* Top navbar */
+/***************************************************************************/
 
-.dark-side {
-    --logo-background: #2c2d30;
-    --logo-color: #faf5f5;
+.navbar {
+    background-color: #ffffff;
+    border-bottom: 1px solid #ddd;
+    height: var(--deming-navbar-height);
 }
 
-.logo-container, .logo-container-big {
-    background: var(--logo-background);
-    color: var(--logo-color);
-    display: flex;
-    align-items: center;
-    height: 52px;
-    border-bottom: 1px solid var(--border-color);
+.navbar-brand {
+    /* Centré au-dessus de la sidebar (moins la marge du container-fluid et le bouton du menu), décalé de 20px vers la gauche */
+    width: calc(var(--deming-sidebar-width) - .75rem - var(--deming-toggle-width) - 40px);
+    margin-right: 40px;
+    caret-color: transparent;
+    text-align: center;
+    font-weight: 700;
+    font-size: 1.75rem;
+    color: #000 !important;
 }
 
-.logo-container-big {
-    width: 128px;
-    height: 128px;
-    flex-shrink: 0;
-    border-radius: 50%;
+.navbar .nav-icon {
+    position: relative;
+    font-size: 1.4rem;
+    color: #333;
+    padding: 0 .6rem;
+    text-decoration: none;
 }
 
-.radio .caption-prepend, .radio .caption-append {
-    font-size: 15px !important;
-    margin: 0 10px !important;
+.navbar .nav-icon:hover {
+    color: var(--deming-accent);
 }
 
-input[type=text], input[type=password], input[type=email], input[type=date], input[type=datetime-local], input[type=search], input[type=tel], input[type=time], input[type=url], input[type=week], textarea, select, .metro-input, .file, .input, .textarea, .select, .tag-input, .spinner, .color-picker
-{
-    font-size: 15px !important;
-
-}
-.navview {
-    &.compacted {
-        .text-logo {
-            display: none!important;
-        }
-    }
-
-    .navview-content {
-        overflow: hidden;
-    }
+.navbar .nav-icon .badge {
+    position: absolute;
+    top: -4px;
+    right: -4px;
+    font-size: .65rem;
 }
 
-#page-content {
-    height: calc(100% - 52px);
-    width: calc(100% - 2px);
-    overflow-y: auto;
+tr[data-href] {
+    cursor: pointer;
+}
+
+.toggle-sidebar-btn {
+    width: var(--deming-toggle-width);
+    padding: 0;
+    font-size: 1.4rem;
+    border: none;
+}
+
+.test-banner {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1040;
+    text-align: center;
+    padding: 2px;
+}
+
+[id] {
+    scroll-margin-top: 70px;
+}
+
+/***************************************************************************/
+/* Left sidebar */
+/***************************************************************************/
+
+.sidebar {
+    position: fixed;
+    top: var(--deming-navbar-height);
+    bottom: 0;
+    left: 0;
+    width: var(--deming-sidebar-width);
+    background-color: #ffffff;
+    border-right: 1px solid #ddd;
     display: flex;
     flex-direction: column;
-    z-index: 1;
-    padding: .5rem;
+    overflow-y: auto;
+    transition: transform 0.3s ease;
+    z-index: 1020;
 }
 
+.sidebar .search-box {
+    padding: 10px;
+}
 
-@media screen and (min-width: 768px) {
-    #page-content {
-        padding: 1rem 1rem 4rem 1rem;
-        height: calc(100% - 2px);
+.sidebar a {
+    padding: 9px 15px;
+    text-decoration: none;
+    color: #000;
+    display: flex;
+    align-items: center;
+    white-space: normal;
+}
+
+.sidebar a i {
+    margin-right: 12px;
+    color: var(--deming-accent);
+    font-size: 1.15rem;
+    flex-shrink: 0;
+}
+
+.sidebar a .menu-text {
+    flex-grow: 1;
+}
+
+.sidebar a:hover,
+.sidebar a.active {
+    background-color: #eef3fb;
+}
+
+.sidebar a.active {
+    border-left: 3px solid var(--deming-accent);
+    padding-left: 12px;
+}
+
+.sidebar .collapse a,
+.sidebar .collapsing a {
+    padding-left: 30px;
+}
+
+.sidebar .collapse a.active {
+    padding-left: 27px;
+}
+
+.sidebar .sidebar-footer {
+    margin-top: auto;
+    text-align: center;
+    font-size: 12px;
+    background-color: #f6f6f6;
+    border-top: 1px solid #ddd;
+    padding: 8px;
+}
+
+.sidebar-hidden {
+    transform: translateX(-100%);
+}
+
+html.sidebar-preload-hidden .sidebar {
+    transform: translateX(-100%);
+}
+
+html.sidebar-preload-hidden .main-content {
+    margin-left: 0;
+}
+
+/***************************************************************************/
+/* Content */
+/***************************************************************************/
+
+.main-content {
+    /* élément flex : sans min-width: 0, il s'élargit au contenu (tables) au lieu
+       de rester dans la fenêtre */
+    min-width: 0;
+    margin-left: var(--deming-sidebar-width);
+    margin-top: var(--deming-navbar-height);
+    padding: 1rem;
+    min-height: calc(100vh - var(--deming-navbar-height));
+    transition: margin-left 0.3s ease;
+}
+
+.content-expanded {
+    margin-left: 0;
+}
+
+/* Mobile et tablette : sidebar fermée par défaut (l'état mémorisé sur desktop est ignoré),
+   ouverte par-dessus le contenu via .sidebar-open */
+@media (max-width: 991.98px) {
+    .sidebar,
+    .sidebar.sidebar-hidden,
+    html.sidebar-preload-hidden .sidebar {
+        transform: translateX(-100%);
+        box-shadow: 0 0 1rem rgba(0, 0, 0, .2);
+    }
+    .sidebar.sidebar-open {
+        transform: translateX(0);
+    }
+    .main-content,
+    .main-content.content-expanded {
+        margin-left: 0;
+        padding: .75rem;
+    }
+    .navbar-brand {
+        width: auto;
+        margin-right: 0;
+        font-size: 1.3rem;
+    }
+    .navbar .nav-icon {
+        font-size: 1.2rem;
+        padding: 0 .3rem;
+    }
+    .navbar .ms-auto {
+        gap: .5rem !important;
     }
 }
 
-.hljs {
-    color: #383a42;
-    background: #fafafa;
+.card {
+    margin-bottom: 1rem;
 }
 
-.dark-side {
-    .hljs {
-        color: #abb2bf;
-        background: #282c34;
-    }
-
-    pre {
-        color: #ffffff;
-    }
+.card-header {
+    font-weight: 600;
+    background-color: #fff;
 }
 
-
-/* this cause problems with EasyMDE
-pre:not(.stay-on) {
-    display: none;
-}
-*/
-
-html.show-code {
-    pre:not(.stay-on) {
-        display: block;
-    }
+.card-header i {
+    margin-right: .5rem;
+    color: var(--deming-accent);
 }
 
-
-pre {
-    position: relative;
+/* Quand une ligne passe à la ligne (petits écrans), ses colonnes restent espacées */
+.card-body .row {
+    row-gap: .4rem;
 }
 
-.copy-code-button {
-    position: absolute;
-    top: 10px;
-    right: 10px;
+/* Les lignes de formulaire (ex-grille Metro) sont espacées */
+.card-body > .row,
+.card-body form > .row,
+.card-body .container-fluid > .row {
+    margin-bottom: .5rem;
 }
 
-.demo-cell {
-    height: 20px;
-    border: 1px solid var(--border-color);
+.btn {
+    white-space: nowrap;
 }
 
-#content-title {
-    display: none;
+.btn i,
+.btn .bi {
+    margin-right: 10px;
 }
 
-@media screen and (min-width: 500px) {
-    #content-title {
-        display: block;
-    }
-}
-.navview-pane a {
-    font-size: 15px;
+a.no-underline,
+a.no-underline:hover,
+.table a {
+    text-decoration: none;
 }
 
+.text-orange {
+    color: #fd7e14 !important;
+}
+
+.bg-orange {
+    background-color: #fd7e14 !important;
+}
+
+.text-gray {
+    color: #6c757d !important;
+}
+
+.help-block {
+    color: #6c757d;
+    font-size: .8rem;
+}
+
+/***************************************************************************/
+/* Tables */
+/***************************************************************************/
+
+td {
+    white-space: normal;
+    word-wrap: break-word;
+    word-break: break-word;
+}
+
+table.dataTable td,
+table.dataTable th {
+    vertical-align: middle;
+}
+
+div.dt-container div.dt-buttons .btn {
+    margin-right: 2px;
+}
+
+div.dt-container .dt-length {
+    display: inline-block;
+    margin-left: 1rem;
+}
+
+/***************************************************************************/
+/* Select2 */
+/***************************************************************************/
+
+.select2-container {
+    width: 100% !important;
+}
+
+/* Select2 dans un input-group : occupe l'espace restant à côté du préfixe */
+.input-group > .select2-container {
+    flex: 1 1 auto;
+    width: 1% !important;
+}
+
+.select2-container--bootstrap-5 .select2-selection--multiple .select2-selection__rendered .select2-selection__choice {
+    white-space: normal;
+}
+
+/* Liste multiple refermée : Select2 laisse le focus dans son champ de recherche
+   en ligne, on masque le curseur tant que la liste n'est pas ouverte */
+.select2-container:not(.select2-container--open) .select2-search--inline .select2-search__field {
+    caret-color: transparent;
+}
+
+/***************************************************************************/
+/* Forms */
+/***************************************************************************/
 
 pre {
     font-family: inherit;
     font-size: inherit;
     line-height: 1.5;
-    font-style: normal;
-    font-weight: 400;
     color: #212121;
     white-space: pre-wrap;
+    margin-bottom: 0;
 }
 
-form {
-     display:inline;
-     margin:0px;
-     padding:0px;
+form.d-inline {
+    margin: 0;
+    padding: 0;
 }
 
-input[type="text"] {
-    padding-left: 13px;
-}
-
-textarea {
-    font-family: -apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,Ubuntu,"Helvetica Neue",sans-serif;
-}
-
-td {
-    white-space: normal !important; /* Autorise le retour à la ligne */
-    word-wrap: break-word;          /* Permet de couper les mots trop longs */
-    word-break: break-word;         /* Couper les mots s'ils sont trop longs */
-}
-
-/*  Wrapper */
-.table .data-wrapper {
-    white-space: normal !important; /* Autorise le retour à la ligne */
-}
-
-.group-view-toggle {
+/* Barre de progression des plans d'action */
+.progress-donut {
+    --value: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    margin-left: 5px;
-    margin-right: 5px;
-    border-radius: 4px;
-    border: 1px solid var(--color-blue);
-    background: transparent;
+    font-size: 11px;
+    background:
+        radial-gradient(closest-side, #fff 75%, transparent 76% 100%),
+        conic-gradient(var(--donut-color, var(--deming-accent)) calc(var(--value) * 1%), #e9ecef 0);
 }
 
-.group-view-toggle .mif-group {
-    color: var(--color-blue);
+.progress-donut.donut-red {
+    --donut-color: #dc3545;
+}
+
+.progress-donut.donut-orange {
+    --donut-color: #fd7e14;
+}
+
+.progress-donut.donut-green {
+    --donut-color: #198754;
+}
+
+/***************************************************************************/
+/* Group view toggle */
+/***************************************************************************/
+
+.group-view-toggle {
+    border-radius: 4px;
+    border: 1px solid var(--deming-accent);
+}
+
+.group-view-toggle i {
+    color: var(--deming-accent);
 }
 
 .group-view-toggle.group-view-active {
-    background: var(--color-blue);
-    border-color: var(--color-blue);
+    background: var(--deming-accent);
 }
 
-.group-view-toggle.group-view-active .mif-group {
-    color: #ffffff;
+.group-view-toggle.group-view-active i {
+    color: #fff;
+}
+
+/***************************************************************************/
+/* Print */
+/***************************************************************************/
+
+@media print {
+    .navbar,
+    .sidebar,
+    .btn,
+    .dt-buttons {
+        display: none !important;
+    }
+
+    .main-content {
+        margin: 0 !important;
+        padding: 0 !important;
+    }
+
+    body {
+        background: white !important;
+    }
+}
+
+/***************************************************************************/
+/* Tableau de bord : boîtes de synthèse */
+/***************************************************************************/
+
+.more-info-box {
+    position: relative;
+    display: grid;
+    grid-template-columns: 1fr;
+    border-radius: .375rem;
+    overflow: hidden;
+    color: #fff;
+}
+
+/* Texte et icône partagent la même cellule : l'icône y est centrée verticalement */
+.more-info-box > .content,
+.more-info-box > .icon {
+    grid-row: 1;
+    grid-column: 1;
+}
+
+.more-info-box .content {
+    padding: .75rem 1rem;
+    position: relative;
+    z-index: 1;
+}
+
+.more-info-box > .icon {
+    align-self: center;
+    justify-self: end;
+    margin-right: .75rem;
+    font-size: 3.2rem;
+    opacity: .25;
+    line-height: 1;
+}
+
+/* Icône placée dans le bloc de contenu (page des correspondances) */
+.more-info-box .content .icon {
+    position: absolute;
+    top: 50%;
+    right: .75rem;
+    transform: translateY(-50%);
+    font-size: 3.2rem;
+    opacity: .25;
+    line-height: 1;
+}
+
+.more-info-box .more {
+    grid-row: 2;
+    display: block;
+    padding: .25rem 1rem;
+    background: rgba(0, 0, 0, .12);
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+    font-size: .85rem;
+}
+
+.more-info-box .more:hover {
+    background: rgba(0, 0, 0, .2);
+}
+
+/* Survol : l'icône s'agrandit */
+.more-info-box > .icon {
+    transition: transform .3s ease;
+}
+
+.more-info-box:hover > .icon {
+    transform: scale(1.35);
+}
+
+.more-info-box .content .icon {
+    transition: transform .3s ease;
+}
+
+.more-info-box:hover .content .icon {
+    transform: translateY(-50%) scale(1.35);
+}
+
+/* Comportement hérité de Deming : les formulaires sont en ligne */
+form {
+    display: inline;
+    margin: 0;
+    padding: 0;
+}
+
+.more-info-box .text {
+    font-size: 2rem;
+    font-weight: 700;
+    line-height: 1.1;
+}
+
+/* .card impose word-wrap: break-word : on évite de couper les libellés en plein mot */
+.card-body strong,
+.card-body label,
+.card-body b {
+    overflow-wrap: normal;
+    word-wrap: normal;
+}
+
+/***************************************************************************/
+/* Icône "bibliothèque" (équivalent de mif-library de Metro UI)            */
+/* SVG utilisé comme masque : l'icône prend la couleur du texte            */
+/* (currentColor) et reste transparente en dehors du dessin.               */
+/***************************************************************************/
+
+.icon-library {
+    display: inline-block;
+    width: 1em;
+    height: 1em;
+    vertical-align: -.125em;
+    background-color: currentColor;
+    --icon-library-svg: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M16 1 31 9v2H1V9z'/%3E%3Cpath d='M3 13h4v13H3zM10.7 13h4v13h-4zM17.3 13h4v13h-4zM25 13h4v13h-4z'/%3E%3Cpath d='M1 27h30v2H1zM0 30h32v2H0z'/%3E%3C/svg%3E");
+    -webkit-mask: var(--icon-library-svg) no-repeat center / contain;
+    mask: var(--icon-library-svg) no-repeat center / contain;
+}
+
+/***************************************************************************/
+/* Rapports : panneau d'aide des balises du modèle                          */
+/***************************************************************************/
+
+.report-help {
+    font-size: .9rem;
+}
+
+/* Dès qu'il est à côté du contenu (md), le panneau reste visible et défile indépendamment */
+@media (min-width: 768px) {
+    .report-help {
+        position: sticky;
+        top: calc(var(--deming-navbar-height) + 1rem);
+        max-height: calc(100vh - var(--deming-navbar-height) - 2rem);
+        display: flex;
+        flex-direction: column;
+    }
+
+    .report-help .card-body {
+        overflow-y: auto;
+    }
+}
+
+.report-help .table td {
+    vertical-align: top;
+}
+
+.report-help pre.report-syntax {
+    background: #f6f8fa;
+    border: 1px solid #e1e4e8;
+    border-radius: .25rem;
+    padding: .4rem .5rem;
+    font-family: var(--bs-font-monospace);
+    font-size: .8rem;
+    white-space: pre-wrap;
+    word-break: break-all;
+    margin-bottom: .5rem;
+}
+
+.report-help .copy-tag {
+    cursor: copy;
+}
+
+.report-help .copy-tag.copied {
+    background: #d1e7dd;
+}
+
+.report-help .accordion-button code {
+    font-size: .8rem;
+}
+
+/* Bouton d'aide discret, à droite du premier card-header de chaque page */
+.btn-help {
+    font-size: .75rem;
+    font-weight: 400;
+    line-height: 1.2;
+    padding: .1rem .5rem;
+    color: #3d8bfd;
+    background-color: #fff;
+    border: 1px solid #9ec5fe;
+}
+
+.btn-help:hover,
+.btn-help:focus {
+    color: var(--deming-accent);
+    background-color: #f0f6ff;
+    border-color: #6ea8fe;
 }

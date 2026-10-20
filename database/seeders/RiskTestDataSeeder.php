@@ -6,14 +6,16 @@ use App\Models\Action;
 use App\Models\Exception;
 use App\Models\Risk;
 use App\Models\User;
+use App\Models\UserGroup;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
 /**
  * Jeu de données de test (français ou anglais, plausible) pour les risques,
- * les plans d'action et les exceptions.
+ * les plans d'action, les exceptions, les groupes d'utilisateurs et la
+ * délégation de contrôles à un audité.
  *
- * Supprime intégralement les données existantes de ces trois domaines
+ * Supprime intégralement les données existantes de ces domaines
  * (et leurs tables pivot) avant de recréer un jeu cohérent.
  */
 class RiskTestDataSeeder extends Seeder
@@ -21,25 +23,34 @@ class RiskTestDataSeeder extends Seeder
     /** @var string 'fr' ou 'en' */
     private string $locale = 'fr';
 
+    /** @var array<int, int> id des mesures de sécurité présentes en base */
+    private array $controlIds = [];
+
     public function run(string $locale = 'fr'): void
     {
         $this->locale = in_array($locale, ['fr', 'en'], true) ? $locale : 'fr';
 
         $this->ensureUsers();
 
+        // Les liens ci-dessous référencent des mesures de sécurité par id fixe :
+        // on ignore celles qui n'existent pas (référentiel absent ou différent).
+        $this->controlIds = DB::table('controls')->pluck('id')->all();
+
         $this->wipe();
 
         $risks = $this->seedRisks();
         $actions = $this->seedActions();
         $this->seedExceptions();
+        $this->seedDelegation();
+        $this->seedGroups();
 
         // Liens risques <-> contrôles
-        $risks['fuite_cloud']->controls()->sync([26, 78]);
-        $risks['datacenter']->controls()->sync([32, 33, 80]);
-        $risks['comptes_privileges']->controls()->sync([68, 71]);
-        $risks['detection_intrusion']->controls()->sync([81, 82]);
-        $risks['prestataire']->controls()->sync([23]);
-        $risks['rancongiciel']->controls()->sync([73, 79]);
+        $risks['fuite_cloud']->controls()->sync($this->controls([26, 78]));
+        $risks['datacenter']->controls()->sync($this->controls([32, 33, 80]));
+        $risks['comptes_privileges']->controls()->sync($this->controls([68, 71]));
+        $risks['detection_intrusion']->controls()->sync($this->controls([81, 82]));
+        $risks['prestataire']->controls()->sync($this->controls([23]));
+        $risks['rancongiciel']->controls()->sync($this->controls([73, 79]));
 
         // Liens risques <-> plans d'action
         $risks['comptes_privileges']->actions()->sync([$actions['mfa']->id]);
@@ -49,8 +60,8 @@ class RiskTestDataSeeder extends Seeder
         $risks['datacenter']->actions()->sync([$actions['pra']->id]);
 
         // Liens plans d'action <-> contrôles
-        $actions['mfa']->controls()->sync([68, 71]);
-        $actions['cloud']->controls()->sync([26]);
+        $actions['mfa']->controls()->sync($this->controls([68, 71]));
+        $actions['cloud']->controls()->sync($this->controls([26]));
 
         // Liens plans d'action <-> responsables
         $actions['mfa']->owners()->sync([1]);
@@ -73,6 +84,7 @@ class RiskTestDataSeeder extends Seeder
             2 => ['login' => 'alice.martin@example.local', 'name' => 'Alice Martin', 'title' => 'Risk Owner'],
             5 => ['login' => 'claire.dubois@example.local', 'name' => 'Claire Dubois', 'title' => 'Compliance Officer'],
             6 => ['login' => 'benoit.leroy@example.local', 'name' => 'Benoit Leroy', 'title' => 'IT Operations Manager'],
+            7 => ['login' => 'julien.moreau@example.local', 'name' => 'Julien Moreau', 'title' => 'Application Owner', 'role' => User::ROLE_AUDITEE],
         ];
 
         foreach ($demoUsers as $id => $attributes) {
@@ -85,7 +97,7 @@ class RiskTestDataSeeder extends Seeder
                 'login' => $attributes['login'],
                 'name' => $attributes['name'],
                 'title' => $attributes['title'],
-                'role' => User::ROLE_USER,
+                'role' => $attributes['role'] ?? User::ROLE_USER,
                 'language' => $this->locale,
                 'email' => $attributes['login'],
                 'password' => bcrypt('password'),
@@ -101,9 +113,23 @@ class RiskTestDataSeeder extends Seeder
         DB::table('control_risk')->delete();
         DB::table('action_control')->delete();
         DB::table('action_user')->delete();
+        DB::table('measure_user_group')->delete();
+        DB::table('user_user_group')->delete();
+        UserGroup::query()->delete();
         Exception::query()->delete();
         Action::query()->delete();
         Risk::withTrashed()->forceDelete();
+    }
+
+    /**
+     * Ne conserve que les id de mesures de sécurité présentes en base.
+     *
+     * @param  array<int, int>  $ids
+     * @return array<int, int>
+     */
+    private function controls(array $ids): array
+    {
+        return array_values(array_intersect($ids, $this->controlIds));
     }
 
     /** Ne conserve que les champs communs (retire les blocs de traduction fr/en). */
@@ -322,7 +348,7 @@ class RiskTestDataSeeder extends Seeder
                 'due_date' => '2026-09-30',
                 'fr' => [
                     'name' => "Déploiement de l'authentification multifacteur sur les comptes à privilèges",
-                    'scope' => "Direction des systèmes d'information",
+                    'scope' => "Systèmes d'information",
                     'cause' => "Les comptes administrateur ne sont protégés que par un mot de passe, sans second facteur d'authentification.",
                     'remediation' => "Déployer une solution MFA (TOTP ou clé physique) sur l'ensemble des comptes à privilèges et interdire les mécanismes de secours non sécurisés.",
                 ],
@@ -343,7 +369,7 @@ class RiskTestDataSeeder extends Seeder
                 'due_date' => '2026-12-15',
                 'fr' => [
                     'name' => "Déploiement d'une solution EDR sur l'ensemble du parc informatique",
-                    'scope' => "Direction des systèmes d'information",
+                    'scope' => "Systèmes d'information",
                     'cause' => "Les postes de travail ne disposent que d'un antivirus traditionnel, insuffisant face aux techniques d'évasion des rançongiciels récents.",
                     'remediation' => "Déployer un EDR (Endpoint Detection & Response) avec supervision centralisée sur l'ensemble du parc, y compris les postes nomades.",
                 ],
@@ -443,7 +469,8 @@ class RiskTestDataSeeder extends Seeder
 
         $actions = [];
         foreach ($defs as $key => $def) {
-            $actions[$key] = Action::create($this->localized($def));
+            // The name is not mass assignable
+            $actions[$key] = Action::forceCreate($this->localized($def));
         }
 
         return $actions;
@@ -568,7 +595,77 @@ class RiskTestDataSeeder extends Seeder
         ];
 
         foreach ($defs as $def) {
+            $def['control_id'] = $this->controls([$def['control_id']])[0] ?? null;
             Exception::create($this->localized($def));
+        }
+    }
+
+    private function seedGroups(): void
+    {
+        $defs = [
+            [
+                'type' => UserGroup::TYPE_SECURITY,
+                'users' => [2, 5],
+                'measures' => 3,
+                'fr' => [
+                    'name' => "Équipe sécurité",
+                    'description' => "Responsables de la sécurité et de la conformité, chargés des contrôles techniques et organisationnels.",
+                ],
+                'en' => [
+                    'name' => "Security team",
+                    'description' => "Security and compliance officers, in charge of the technical and organisational controls.",
+                ],
+            ],
+            [
+                'type' => UserGroup::TYPE_BUSINESS,
+                'users' => [6],
+                'measures' => 2,
+                'fr' => [
+                    'name' => "Exploitation informatique",
+                    'description' => "Équipe d'exploitation chargée des contrôles sur les sauvegardes et la supervision.",
+                ],
+                'en' => [
+                    'name' => "IT operations",
+                    'description' => "Operations team in charge of the controls on backups and monitoring.",
+                ],
+            ],
+        ];
+
+        // Contrôles planifiés (non réalisés et non délégués) répartis entre les groupes
+        $measures = DB::table('measures')
+            ->whereNull('realisation_date')
+            ->whereNotIn('id', DB::table('measure_user')->select('measure_id'))
+            ->orderBy('plan_date')
+            ->pluck('id')
+            ->all();
+
+        foreach ($defs as $def) {
+            $group = UserGroup::create($this->localized(array_diff_key($def, ['users' => 0, 'measures' => 0])));
+            $group->users()->sync($def['users']);
+            $group->measures()->sync(array_splice($measures, 0, $def['measures']));
+        }
+    }
+
+    /**
+     * Délègue les premiers contrôles planifiés à l'audité (id 7) ; l'un d'eux
+     * a été réalisé par l'audité et attend d'être validé.
+     */
+    private function seedDelegation(): void
+    {
+        DB::table('measure_user')->where('user_id', 7)->delete();
+
+        $measures = DB::table('measures')->where('status', 0)->orderBy('plan_date')->limit(6)->pluck('id')->all();
+        DB::table('measure_user')->insert(array_map(fn ($id) => ['measure_id' => $id, 'user_id' => 7], $measures));
+
+        if ($measures !== []) {
+            DB::table('measures')->where('id', $measures[0])->update([
+                'status' => 1,
+                'score' => 3,
+                'realisation_date' => now()->toDateString(),
+                'observations' => $this->locale === 'fr'
+                    ? "Revue réalisée avec l'équipe applicative : les comptes inactifs ont été désactivés."
+                    : 'Review carried out with the application team: inactive accounts have been disabled.',
+            ]);
         }
     }
 }

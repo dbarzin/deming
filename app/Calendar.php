@@ -30,7 +30,7 @@ class Calendar
 
         $html = '<div class="MyCalendar">';
         $html .= '<div class="header">';
-        $html .= '<div class="grid no-gap">';
+        $html .= '<div class="container-fluid">';
         $html .= '<div class="row">';
         $html .= '<div class="col-4">';
         $html .= '<a href="?date=';
@@ -38,12 +38,12 @@ class Calendar
         $html .= '" ';
         $html .= 'style="font-size: 30px; text-decoration: none"';
         $html .= '>';
-        $html .= '<span class="mif-previous"></span>';
+        $html .= '<i class="bi bi-chevron-left"></i>';
         $html .= '</a> &nbsp; ';
         $html .= '</div>';
         $html .= '<div class="col-4">';
 
-        $html .= "<select id='date' name='date' data-role='select'>";
+        $html .= "<select id='date' name='date' class='form-select select2'>";
         for ($i = -12; $i < 12; $i++) {
             $html .= '<option value="';
             $date = strtotime($i.' month', $this->date);
@@ -65,7 +65,7 @@ class Calendar
         $html .= '" ';
         $html .= 'style="font-size: 30px; text-decoration: none"';
         $html .= '>';
-        $html .= '<span class="mif-next"></span>';
+        $html .= '<i class="bi bi-chevron-right"></i>';
         $html .= '</a>';
         $html .= '</div>';
         $html .= '</div>';

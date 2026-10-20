@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Measure;
+use App\Services\Report\TemplateTableRenderer;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
@@ -104,11 +105,19 @@ class ReportController extends Controller
         $templateProcessor->setValue('today', $today->format('d/m/Y'));
         $templateProcessor->setValue('start_date', $start_date->format('d/m/Y'));
         $templateProcessor->setValue('end_date', $end_date->format('d/m/Y'));
+        $templateProcessor->setValue('framework', $framework ?? '');
 
         $this->generateMadeControlTable($templateProcessor, $framework, $start_date, $end_date);
         $values = $this->generateControlTable($templateProcessor, $framework);
         $this->generateKPITable($templateProcessor, $framework, $values);
         $this->generateActionPlanTable($templateProcessor, $framework);
+
+        // Tableaux personnalisés : balises ${table:<table>:<colonnes>|<options>}
+        (new TemplateTableRenderer())->render($templateProcessor, [
+            'start' => $start_date,
+            'end' => $end_date,
+            'framework' => $framework,
+        ]);
         //----------------------------------------------------------------
         // save a copy
         $filepath = storage_path('templates/pilotage-'. Carbon::today()->format('Y-m-d') .'.docx');
@@ -258,18 +267,18 @@ class ReportController extends Controller
         $table->addCell(2000, ['bgColor' => '#FFD5CA'])
             ->addText('#', ['bold' => true ], ['align' => 'center']);
         $table->addCell(12000, ['bgColor' => '#FFD5CA'])
-            ->addText(trans('cruds.control.fields.name'), ['bold' => true]);
+            ->addText(trans('cruds.measure.fields.name'), ['bold' => true]);
         $table->addCell(3300, ['bgColor' => '#FFD5CA'])
-            ->addText(trans('cruds.control.fields.realisation_date'), ['bold' => true], ['align' => 'center']);
+            ->addText(trans('cruds.measure.fields.realisation_date'), ['bold' => true], ['align' => 'center']);
         $table->addCell(3000, ['bgColor' => '#FFD5CA'])
-            ->addText(trans('cruds.control.fields.scope'), ['bold' => true], ['align' => 'center']);
+            ->addText(trans('cruds.measure.fields.scope'), ['bold' => true], ['align' => 'center']);
         $table->addCell(2000, ['bgColor' => '#FFD5CA'])
-            ->addText(trans('cruds.control.fields.score'), ['bold' => true], ['align' => 'center']);
+            ->addText(trans('cruds.measure.fields.score'), ['bold' => true], ['align' => 'center']);
 
         foreach ($measures as $measure) {
             $table->addRow();
             $table->addCell(2500)->addText($measure->controls()->get()->implode('clause', ', '));
-            $table->addCell(12500)->addText(str_replace('&', 'x', $measure->name));
+            $table->addCell(12500)->addText($measure->name);
             $table->addCell(2800)->addText($measure->realisation_date, null, ['align' => 'center']);
             $table->addCell(12500)->addText($measure->scope);
             $table->addCell(2000)->addText(
@@ -423,7 +432,7 @@ class ReportController extends Controller
         $table->addCell(2000, ['bgColor' => '#FFD5CA'])
             ->addText('#', ['bold' => true], ['align' => 'center']);
         $table->addCell(12500, ['bgColor' => '#FFD5CA'])
-            ->addText('Domaine', ['bold' => true]);
+            ->addText(trans('cruds.domain.title'), ['bold' => true]);
         $table->addCell(2500, ['bgColor' => '#FFD5CA'])
             ->addText('KPI', ['bold' => true], ['align' => 'center']);
         $table->addCell(1000, ['bgColor' => '#FFD5CA'])

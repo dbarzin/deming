@@ -3,7 +3,9 @@
 @section('title', $measure->name)
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.measure.plan') }}" data-collapsible="false" data-title-icon="<span class='mif-paste'></span>">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'measures.plan'])<i class="bi bi-clipboard-check"></i> {{ trans('cruds.measure.plan') }}</div>
+    <div class="card-body">
 
     @include('partials.errors')
 
@@ -12,12 +14,12 @@
 
     <input type="hidden" name="id" value="{{ $measure->id }}"/>
 
-    <div class="grid">
+    <div class="container-fluid px-0">
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans("cruds.measure.fields.clauses") }}</strong>
         	</div>
-    		<div class="cell-lg-7 cell-md-9">
+    		<div class="col-lg-11 col-md-10">
                 @foreach($measure->controls as $control)
                     <a href="/alice/show/{{ $control->id }}">{{ $control->clause }}</a> - {{ $control->name }}
                     @if(!$loop->last)
@@ -28,17 +30,17 @@
         </div>
 
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.measure.fields.name') }}</strong>
         	</div>
-    		<div class="cell-lg-4 cell-md-5">
+    		<div class="col-lg-4 col-md-5">
         		{{ $measure->name }}
     		</div>
             @if ($measure->scope!==null)
-    		<div class="cell-lg-1 cell-md-2" align="right">
+    		<div class="col-lg-1 col-md-2 text-md-end">
         		<strong>{{ trans("cruds.measure.fields.scope") }}</strong>
         	</div>
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
                 <a href="/bob/index?scope={{ $measure->scope }}">
     			{{ $measure->scope }}
                 </a>
@@ -46,36 +48,34 @@
             @endif
     	</div>
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.measure.fields.objective') }}</strong>
         	</div>
-            <div class="cell-lg-6 cell-md-10">
+            <div class="col-lg-11 col-md-10">
                 {!! \Parsedown::instance()->text($measure->objective) !!}
     		</div>
     	</div>
 
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
     			<strong>{{ trans('cruds.measure.fields.plan_date') }}</strong>
         	</div>
-    		<div class="cell-lg-2 cell-md-3">
-    			<input type="text" data-role="calendarpicker" name="plan_date" value="{{
+    		<div class="col-lg-2 col-md-3">
+    			<input class="form-control" type="date" name="plan_date" value="{{
     			\Carbon\Carbon
     			::createFromFormat('Y-m-d',$measure->plan_date)
     			->format('Y-m-d')
     			}}"
-				data-format="YYYY-MM-DD"
-				data-inputFormat="YYYY-MM-DD"
                 />
     		</div>
     	</div>
 
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
         		<strong>{{ trans('cruds.measure.fields.periodicity') }}</strong>
         	</div>
-    		<div class="cell-lg-2 cell-md-3">
-    			<select name="periodicity" data-role="select">
+    		<div class="col-lg-2 col-md-3">
+    			<select class="form-select select2" name="periodicity">
     			    <option value="0" {{ $measure->periodicity==0 ? "selected" : ""}}>{{ trans('common.once') }}</option>
     			    <option value="-1" {{ $measure->periodicity==-1 ? "selected" : ""}}>{{ trans('common.weekly') }}</option>
     			    <option value="1" {{ $measure->periodicity==1 ? "selected" : ""}}>{{ trans('common.monthly') }}</option>
@@ -87,11 +87,11 @@
     	</div>
 
     	<div class="row">
-    		<div class="cell-lg-1 cell-md-2">
+    		<div class="col-lg-1 col-md-2">
     			<strong>{{ trans('cruds.measure.fields.owners') }}</strong>
         	</div>
-            <div class="cell-lg-4 cell-md-8">
-                <select data-role="select" name="owners[]" id="owners" multiple>
+            <div class="col-lg-11 col-md-10">
+                <select class="form-select select2" name="owners[]" id="owners" multiple>
                     @foreach($owners as $id => $name)
                         <option
                             value="{{ $id }}"
@@ -109,12 +109,10 @@
     	</div>
 
     	<div class="row">
-    		<div class="cell-12">
+    		<div class="col-12">
     		@if (Auth::User()->role !== 3)
-    			<button type="submit" class="button success">
-    				<span class="mif-calendar"></span>
-    				&nbsp;
-    				{{ trans("common.plan") }}
+    			<button type="submit" class="btn btn-success">
+    				<span class="bi bi-calendar3"></span> {{ trans("common.plan") }}
     			</button>
     			</form>
     			&nbsp;
@@ -123,22 +121,19 @@
                 <form action="/bob/unplan" method="POST" onSubmit="if(!confirm('{{ trans('common.confirm') }}')){return false;}" class="d-inline">
     				@csrf
     				<input type="hidden" name="id" value="{{ $measure->id }}"/>
-    	            <button class="button alert" type="submit">
-    					<span class="mif-fire"></span>
-    					&nbsp;
-    					{{ trans("common.unplan") }}
+    	            <button class="btn btn-danger" type="submit">
+    					<span class="bi bi-trash"></span> {{ trans("common.unplan") }}
     				</button>
     			</form>
     			&nbsp;
     		@endif
-            <a href="/bob/show/{{$measure->id}}" class="button">
-				<span class="mif-cancel"></span>
-				&nbsp;
-				{{ trans("common.cancel") }}
+            <a href="/bob/show/{{$measure->id}}" class="btn btn-light border">
+				<span class="bi bi-x-circle"></span> {{ trans("common.cancel") }}
             </a>
     		</div>
     	</div>
     </div>
     </form>
+</div>
 </div>
 @endsection

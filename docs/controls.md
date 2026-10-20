@@ -6,13 +6,16 @@ This screen is used to display the list of measurements and to filter them by:
 
 * domain,
 
-* périmètre,
+* clause,
 
-* attribute,
+* scope,
 
 * planning period,
 
-* measurement status: all, done and to do,
+* measurement status: all, done and to do.
+
+The "Column visibility" button lets you choose the displayed columns, and the "Copy" and "Export"
+buttons copy the displayed list or export it to Excel.
 
 [![Screenshot](images/c1.png)](images/c1.png)
 
@@ -46,7 +49,7 @@ This screen contains the information of a measurement:
 
 The "Make" and "Plan" buttons are present if this measurement has not yet been carried out.
 
-The "Modify" and "Delete" buttons are available if the user is an administrator.
+The "Edit", "Copy", "Delete" and "History" buttons are available if the user is an administrator.
 
 [![Screenshot](images/c2.png)](images/c2.png)
 
@@ -58,63 +61,70 @@ When you click:
 
 * "Edit", you are sent to the [measurement edit screen](#edit)
 
+* "Copy", you are sent to the [measurement creation screen](#create), pre-filled with the data of this measurement
+
 * "Delete", the measurement is deleted and you are sent to the [list of measurements](#list).
+
+* "History", you are sent to the [change history](config.md#logs) of this measurement
 
 * "Cancel", you are sent to the [list of measurements](#list)
 
-## Create a Measure {#create}
+## Create a measurement {#create}
 
-A measure can be created in two ways:
+A measurement can be created in three ways:
 
-* Based on a security measure: From the [measure display screen](measures.md/#show), the "Create a measure" button generates a new measure pre-filled with the name and purpose of the measure.
+* From a control: the "Plan" button of the [control display screen](measures.md#plan) creates a new measurement
+  pre-filled with the data of the control.
 
-* Manually: From the [measure list](#list), the "New" button opens the creation form.
+* By copying a measurement: the "Copy" button of the [measurement display screen](#show) opens the creation form
+  pre-filled with the data of this measurement.
+
+* Manually: from the [list of measurements](#list), the "New" button opens the creation form.
+
+[![Screenshot](images/c4.png)](images/c4.png)
 
 This screen contains the following fields:
 
 * The associated clause(s);
 
-* The measure name;
+* The name of the measurement;
 
-* The measure purpose;
+* The scope;
+
+* The objective of the measurement;
 
 * The attributes;
 
 * The data to collect;
 
-* The score calculation model.
+* The score calculation model;
+
+* The action plan to apply if the measurement fails;
+
+* The planning date and the periodicity; and
+
+* Those responsible for carrying out the measurement.
 
 When you click:
 
-* "Create," the measure is saved and you are returned to the [measure display screen](#show).
+* "Save", the measurement is saved and you are returned to the [list of measurements](#list).
 
-* "Cancel," you are returned to the [measure list](#list).
+* "Cancel", you are returned to the [list of measurements](#list).
 
-## Edit a Measure {#edit}
+## Edit a measurement {#edit}
 
-This screen allows you to modify the information of an existing measure.
+This screen allows you to modify the information of an existing measurement.
 
 It is accessible only to users with the **Administrator** role.
 
-This screen contains the same fields as the [create](#create) screen:
-
-* The associated clause(s);
-
-* The measure name;
-
-* The measure's purpose;
-
-* The attributes;
-
-* The data to collect;
-
-* The score calculation model.
+In addition to the fields of the [creation](#create) screen, it contains the result of the measurement:
+completion date, observations, evidence, note, score and indicator.
 
 When you click:
 
-* "Edit", the changes are saved and you are returned to the [measure display](#show) screen.
+* "Save", the changes are saved and you are returned to the [measurement display](#show) screen.
 
-* "Cancel", you are returned to the [measure display](#show) screen.
+* "Cancel", you are returned to the [measurement display](#show) screen.
 
 ## Schedule a measurement {#plan}
 
@@ -132,7 +142,7 @@ This screen contains the information of a measurement:
 
 * Those responsible for carrying out the measurements.
 
-[![Screenshot](images/c5.png){: style="width:500px"}](images/c5.png)
+[![Screenshot](images/c5.png)](images/c5.png)
 
 When you click:
 
@@ -176,7 +186,6 @@ This screen contains:
 * The date of the next check,
 
 [![Screenshot](images/c3.png)](images/c3.png)
-[![Screenshot](images/c4.png)](images/c4.png)
 
 When you click:
 

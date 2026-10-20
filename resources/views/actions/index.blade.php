@@ -1,12 +1,14 @@
 @extends("layout")
 
 @section("content")
-<div data-role="panel" data-title-caption="{{ trans('cruds.action.index') }}" data-collapsible="false" data-title-icon="<span class='mif-pending-actions'></span>">
+<div class="card">
+    <div class="card-header">@include('partials.help', ['page' => 'actions.index'])<i class="bi bi-list-check"></i> {{ trans('cruds.action.index') }}</div>
+    <div class="card-body">
 
-<div class="grid">
+<div class="container-fluid px-0">
     <div class="row">
-        <div class="cell-2">
-            <select id='type' name="type" data-role="select">
+        <div class="col-md-4 col-lg-2">
+            <select class="form-select select2" id='type' name="type">
                 <option value="">-- {{ trans("cruds.action.fields.choose_type")}} --</option>
                 <option value="1" {{ (Session::get('type')==1) ? 'selected' : '' }}>{{ trans('cruds.action.types.major') }}</option>
                 <option value="2" {{ (Session::get('type')==2) ? 'selected' : '' }}>{{ trans('cruds.action.types.minor') }}</option>
@@ -14,15 +16,13 @@
                 <option value="4" {{ (Session::get('type')==4) ? 'selected' : '' }}>{{ trans('cruds.action.types.opportunity') }}</option>
             </select>
         </div>
-        <div class="cell-5 mt-2">
-             <input type="radio" data-role="radio" data-append="{{ trans("cruds.action.fields.status_open") }}" value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}/>
-             <input type="radio" data-role="radio" data-append="{{ trans("cruds.action.fields.status_closed") }}" value="1" id="status1" {{ (Session::get("status")=="1") ? 'checked' : '' }}/>
-             <input type="radio" data-role="radio" data-append="{{ trans("cruds.action.fields.status_all") }}" value="2" id="status2" {{ (Session::get("status")=="2") ? 'checked' : '' }}/>
+        <div class="col-md-10 col-lg-5 mt-2">
+             <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="0" id="status0" {{ (Session::get("status")=="0") ? 'checked' : '' }}/><label class="form-check-label" for="status0">{{ trans("cruds.action.fields.status_open") }}</label></div>
+             <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="1" id="status1" {{ (Session::get("status")=="1") ? 'checked' : '' }}/><label class="form-check-label" for="status1">{{ trans("cruds.action.fields.status_closed") }}</label></div>
+             <div class="form-check form-check-inline"><input class="form-check-input" type="radio" name="status" value="2" id="status2" {{ (Session::get("status")=="2") ? 'checked' : '' }}/><label class="form-check-label" for="status2">{{ trans("cruds.action.fields.status_all") }}</label></div>
         </div>
-        <div class="cell-2">
-        </div>
-        <div class="cell-2">
-            <select id='scope' name="scope" data-role="select">
+        <div class="col-md-4 col-lg-2">
+            <select class="form-select select2" id='scope' name="scope">
                 <option value="">-- {{ trans("cruds.action.fields.choose_scope")}} --</option>
                 @foreach ($scopes as $scope)
                     <option {{ (Session::get('scope')==$scope) ? 'selected' : '' }}>
@@ -31,12 +31,10 @@
                 @endforeach
             </select>
         </div>
-		<div class="cell-1" align="right">
+		<div class="col-auto ms-auto">
 		@if ((Auth::User()->role==1)||(Auth::User()->role==2))
-            <a class="button primary" href='/action/create'>
-	            <span class="mif-add-lib"></span>
-	            &nbsp;
-				{{ trans('common.new') }}
+            <a class="btn btn-primary" href='/action/create'>
+	            <span class="bi bi-plus-lg"></span> {{ trans('common.new') }}
             </a>
         @endif
 		</div>
@@ -76,42 +74,50 @@
 
     <div class="row mt-3">
 
-        <table id="actions" class="table striped row-hover cell-border"
-	       data-role="table"
-	       data-rows="100"
-	       data-show-activity="true"
-	       data-rownum="false"
-	       data-check="false"
-	       data-check-style="1">
+        <table data-order="[[0,&quot;asc&quot;]]" data-page-length="100" id="actions" class="table table-striped table-hover table-bordered datatable">
 	    <thead>
 	    <tr>
-            <th class="sortable-column sort-asc"><span style="font-size: 0.8em;">{{ trans('cruds.action.fields.reference') }}</span></th>
-            <th class="sortable-column sort-asc"><span style="font-size: 0.8em;">{{ trans('cruds.action.fields.type') }}</span></th>
-            <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.status') }}</th>
-            <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.progress') }}</th>
-            <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.name') }}</th>
-			<th class="sortable-column sort-asc">{{ trans('cruds.action.fields.scope') }}</th>
-            <th class="sortable-column sort-asc">{{ trans('cruds.action.fields.due_date') }}</th>
+            <th>{{ trans('cruds.action.fields.reference') }}</th>
+            <th>{{ trans('cruds.action.fields.type') }}</th>
+            <th class="dt-hidden">{{ trans('cruds.action.fields.clauses') }}</th>
+            <th>{{ trans('cruds.action.fields.risks') }}</th>
+            <th>{{ trans('cruds.action.fields.status') }}</th>
+            <th>{{ trans('cruds.action.fields.progress') }}</th>
+            <th>{{ trans('cruds.action.fields.name') }}</th>
+            <th class="dt-hidden">{{ trans('cruds.action.fields.remediation') }}</th>
+			<th>{{ trans('cruds.action.fields.scope') }}</th>
+            <th>{{ trans('cruds.action.fields.owners') }}</th>
+            <th>{{ trans('cruds.action.fields.due_date') }}</th>
 	    </tr>
 	    </thead>
 	    <tbody>
 	@foreach($actions as $action)
-        <tr>
+        <tr data-href="/action/show/{{ $action->id }}">
             <td>
                 <b id="{{ $action->reference }}" style="font-size: 0.8em;">
-                    <a href="/action/show/{{ $action->id }}">{{ $action->reference==null ? ("ACT-".$action->id) : $action->reference }}</a>
+                    {{ $action->reference==null ? ("ACT-".$action->id) : $action->reference }}
                 </b>
             </td>
             <td>
                 @if ($action->type==1)
-                    <div class="fg-red text-bold" style="font-size: 0.8em;" title="{{ trans('cruds.action.types.major') }}">{{ trans('cruds.action.types_short.major') }}</div>
+                    <div class="text-danger fw-bold" style="font-size: 0.8em;" title="{{ trans('cruds.action.types.major') }}">{{ trans('cruds.action.types_short.major') }}</div>
                 @elseif ($action->type==2)
-                    <div class="fg-orange text-bold" style="font-size: 0.8em;" title="{{ trans('cruds.action.types.minor') }}">{{ trans('cruds.action.types_short.minor') }}</div>
+                    <div class="text-orange fw-bold" style="font-size: 0.8em;" title="{{ trans('cruds.action.types.minor') }}">{{ trans('cruds.action.types_short.minor') }}</div>
                 @elseif ($action->type==3)
-                    <div class="fg-yellow text-bold" style="font-size: 0.8em;" title="{{ trans('cruds.action.types.observation') }}">{{ trans('cruds.action.types_short.observation') }}</div>
+                    <div class="text-warning fw-bold" style="font-size: 0.8em;" title="{{ trans('cruds.action.types.observation') }}">{{ trans('cruds.action.types_short.observation') }}</div>
                 @elseif ($action->type==4)
-                    <div class="fg-green text-bold" style="font-size: 0.8em;" title="{{ trans('cruds.action.types.opportunity') }}">{{ trans('cruds.action.types_short.opportunity') }}</div>
+                    <div class="text-success fw-bold" style="font-size: 0.8em;" title="{{ trans('cruds.action.types.opportunity') }}">{{ trans('cruds.action.types_short.opportunity') }}</div>
                 @endif
+            </td>
+            <td>
+                @foreach($action->controls as $control)
+                    <a href="/alice/show/{{ $control->id }}">{{ $control->clause }}</a>{{ $loop->last ? '' : ',' }}
+                @endforeach
+            </td>
+            <td>
+                @foreach($action->risks as $risk)
+                    <a href="/risk/show/{{ $risk->id }}">{{ $risk->name }}</a>{{ $loop->last ? '' : ',' }}
+                @endforeach
             </td>
             <td id="{{ $action->status }}">
                 @if ($action->status==0)
@@ -124,17 +130,15 @@
                 {{ $action->status }}
                 @endif
             </td>
-            <td width="40">
-                <div data-role="donut" data-value="{{ $action->progress }}"
-                {{ $action->progress }}
-                @if ($action->progress<25)
-                    class="donut-red"
-                @elseif ($action->progress<50)
-                    class="donut-orange"
-                @else
-                    class="donut-green"
-                @endif
-                    >
+            <td style="min-width: 130px" data-order="{{ (int) $action->progress }}">
+                <div class="d-flex align-items-center gap-2">
+                    <div class="progress flex-grow-1" role="progressbar"
+                         aria-label="{{ trans('cruds.action.fields.progress') }}"
+                         aria-valuenow="{{ (int) $action->progress }}" aria-valuemin="0" aria-valuemax="100">
+                        <div class="progress-bar {{ $action->progress < 25 ? 'bg-danger' : ($action->progress < 50 ? 'bg-warning' : 'bg-success') }}"
+                             style="width: {{ (int) $action->progress }}%"></div>
+                    </div>
+                    <small class="text-nowrap">{{ (int) $action->progress }}%</small>
                 </div>
             </td>
             <td >
@@ -142,7 +146,13 @@
                 {!! \Parsedown::instance()->text($action->cause) !!}
             </td>
             <td>
+                {!! \Parsedown::instance()->text($action->remediation) !!}
+            </td>
+            <td>
                 {{ $action->scope }}
+            </td>
+            <td>
+                {{ $action->owners->implode(', ') }}
             </td>
             <td>
             @if ($action->due_date!==null)
@@ -161,5 +171,6 @@
 </table>
 		</div>
 	</div>
+</div>
 </div>
 @endsection

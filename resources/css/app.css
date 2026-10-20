@@ -1,58 +1,15 @@
-/* Metro NPM */
-@import "@olton/metroui/lib/metro.all.css";
-
+/*====================================================*/
+@import 'bootstrap/dist/css/bootstrap.min.css';
+@import 'bootstrap-icons/font/bootstrap-icons.css';
+/*====================================================*/
+@import 'datatables.net-bs5/css/dataTables.bootstrap5.css';
+@import 'datatables.net-buttons-bs5/css/buttons.bootstrap5.css';
+@import 'datatables.net-colreorder-bs5/css/colReorder.bootstrap5.css';
+@import 'datatables.net-responsive-bs5/css/responsive.bootstrap5.css';
+/*====================================================*/
+@import 'select2/dist/css/select2.min.css';
+@import 'select2-bootstrap-5-theme/dist/select2-bootstrap-5-theme.min.css';
+/*====================================================*/
+@import 'easymde/dist/easymde.min.css';
 @import 'calendar.css';
 @import 'custom.css';
-@import 'easymde/dist/easymde.min.css';
-
-/* Why do I have to redefine these colors ? */
-.button.primary {
-  background-color: #0366D6 !important;
-  border-color: #0366D6 !important;
-  color: #fff !important;
-  outline-color: #75b5fd !important;
-}
-
-.button.primary:hover {
-  background-color: #024ea4 !important;
-  border-color: #023671 !important;
-}
-
-/* Temporary fix for Metro file upload */
-input[type="file"] {
-    display: block;
-    font-size: 16px;
-    padding: 3px;
-    width: 100%;
-    border-radius: 5px;
-    border: 1px solid #C0C0C0;
-}
-
-a.no-underline:hover {
-    text-decoration: none;
-}
-
-/*******************************************************/
-/* fixe la largeur des labels dans les select multiple */
-
-label.input-normal.select.multiple div.select-input {
-    height: auto !important;
-    min-height: 30px !important;
-    overflow: visible !important;
-    flex-wrap: wrap !important;
-}
-
-label.input-normal.select.multiple div.tag.short-tag {
-    width: auto !important;
-    max-width: none !important;
-    height: auto !important;
-}
-
-label.input-normal.select.multiple div.tag.short-tag span.title {
-    white-space: normal !important;
-    overflow: visible !important;
-    text-overflow: unset !important;
-    max-width: none !important;
-    width: auto !important;
-
-}/*******************************************************/

@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Exports\ActionsExport;
 // Export
 use App\Models\Action;
+use App\Models\Risk;
 // Laravel
 use Carbon\Carbon;
 use Illuminate\Http\Request;
@@ -125,11 +126,47 @@ class ActionController extends Controller
                 'actions.criticity',
                 'actions.scope',
                 'actions.cause',
+                'actions.remediation',
                 'actions.status',
                 'actions.progress',
                 'actions.due_date',
             ]
         )->get();
+
+        // Fetch owners for all actions in one query
+        $ownersByActionId = DB::table('action_user')
+            ->join('users', 'users.id', '=', 'action_user.user_id')
+            ->whereIn('action_user.action_id', $actions->pluck('id'))
+            ->orderBy('users.name')
+            ->get(['action_user.action_id', 'users.name'])
+            ->groupBy('action_id');
+
+        // Fetch clauses (controls) for all actions in one query
+        $controlsByActionId = DB::table('action_control')
+            ->join('controls', 'controls.id', '=', 'action_control.control_id')
+            ->whereIn('action_control.action_id', $actions->pluck('id'))
+            ->orderBy('controls.clause')
+            ->get(['action_control.action_id', 'controls.id', 'controls.clause'])
+            ->groupBy('action_id');
+
+        // Fetch risks for all actions in one query
+        $risksByActionId = DB::table('action_risk')
+            ->join('risks', 'risks.id', '=', 'action_risk.risk_id')
+            ->whereIn('action_risk.action_id', $actions->pluck('id'))
+            ->whereNull('risks.deleted_at')
+            ->orderBy('risks.name')
+            ->get(['action_risk.action_id', 'risks.id', 'risks.name'])
+            ->groupBy('action_id');
+
+        foreach ($actions as $action) {
+            $action->owners = $ownersByActionId
+                ->get($action->id, collect())
+                ->pluck('name');
+            $action->controls = $controlsByActionId
+                ->get($action->id, collect());
+            $action->risks = $risksByActionId
+                ->get($action->id, collect());
+        }
 
         // Get scopes
         $scopes = DB::table('actions')
@@ -195,6 +232,9 @@ class ActionController extends Controller
 
         // Sync measures
         $action->controls()->sync($request->input('measures', []));
+
+        // Sync risks
+        $action->risks()->sync($request->input('risks', []));
 
         // Sync owners
         $action->owners()->sync($request->input('owners', []));
@@ -305,6 +345,14 @@ class ActionController extends Controller
             ->pluck('control_id')
             ->toArray();
 
+        // Get all risks
+        $all_risks = Risk::query()
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
+        $risks = $action->risks()->pluck('risks.id')->toArray();
+
         // Get users
         $users = DB::table('users')
             ->select('id', 'name')
@@ -316,6 +364,8 @@ class ActionController extends Controller
             ->with('scopes', $scopes)
             ->with('all_measures', $all_measures)
             ->with('measures', $measures)
+            ->with('all_risks', $all_risks)
+            ->with('risks', $risks)
             ->with('users', $users)
             ->with('action', $action);
     }
@@ -356,10 +406,17 @@ class ActionController extends Controller
             ->orderBy('name')
             ->get();
 
+        // Get all risks
+        $all_risks = Risk::query()
+            ->select('id', 'name')
+            ->orderBy('name')
+            ->get();
+
         // Return
         return view('actions.create')
             ->with('scopes', $scopes)
             ->with('all_measures', $all_measures)
+            ->with('all_risks', $all_risks)
             ->with('users', $users);
     }
 
@@ -399,6 +456,9 @@ class ActionController extends Controller
 
         // Sync measures
         $action->controls()->sync($request->input('measures', []));
+
+        // Sync risks
+        $action->risks()->sync($request->input('risks', []));
 
         // Sync owners
         $action->owners()->sync($request->input('owners', []));
