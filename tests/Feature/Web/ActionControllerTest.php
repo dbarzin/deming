@@ -25,7 +25,7 @@ test('the action list column order puts clauses after type and remediation after
     $this->actingAs($this->admin)->get('/actions')
         ->assertStatus(200)
         ->assertSeeInOrder([
-            '>' . trans('cruds.action.fields.type') . '</span></th>',
+            '>' . trans('cruds.action.fields.type') . '</th>',
             '<th class="dt-hidden">' . trans('cruds.action.fields.clauses') . '</th>',
             '>' . trans('cruds.action.fields.status') . '</th>',
             '>' . trans('cruds.action.fields.name') . '</th>',
