@@ -49,7 +49,7 @@ form, table {
                     </p>
                     @endif
                 </div>
-                <div class="col-md-2 col-lg-1 text-md-end">
+                <div class="col-md-2 col-lg-2 text-md-end">
                     <strong>{{ trans('cruds.action.fields.due_date') }}</strong>
     	    	</div>
                 <div class="col-md-4 col-lg-2">

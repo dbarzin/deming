@@ -77,13 +77,13 @@
         <table data-order="[[0,&quot;asc&quot;]]" data-page-length="100" id="actions" class="table table-striped table-hover table-bordered datatable">
 	    <thead>
 	    <tr>
-            <th data-priority="2"><span style="font-size: 0.8em;">{{ trans('cruds.action.fields.reference') }}</span></th>
-            <th><span style="font-size: 0.8em;">{{ trans('cruds.action.fields.type') }}</span></th>
+            <th>{{ trans('cruds.action.fields.reference') }}</th>
+            <th>{{ trans('cruds.action.fields.type') }}</th>
             <th class="dt-hidden">{{ trans('cruds.action.fields.clauses') }}</th>
             <th>{{ trans('cruds.action.fields.risks') }}</th>
             <th>{{ trans('cruds.action.fields.status') }}</th>
             <th>{{ trans('cruds.action.fields.progress') }}</th>
-            <th data-priority="1">{{ trans('cruds.action.fields.name') }}</th>
+            <th>{{ trans('cruds.action.fields.name') }}</th>
             <th class="dt-hidden">{{ trans('cruds.action.fields.remediation') }}</th>
 			<th>{{ trans('cruds.action.fields.scope') }}</th>
             <th>{{ trans('cruds.action.fields.owners') }}</th>
