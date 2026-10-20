@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../de/dashboards/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -451,27 +457,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#controls-by-domains" class="md-nav__link">
+  <a href="#steering" class="md-nav__link">
     <span class="md-ellipsis">
-      Controls by domains
+      Steering
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#controls-by-domain-and-by-measure" class="md-nav__link">
+  <a href="#domains" class="md-nav__link">
     <span class="md-ellipsis">
-      Controls by domain and by measure
+      By domains
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#attribute-checks" class="md-nav__link">
+  <a href="#controls" class="md-nav__link">
     <span class="md-ellipsis">
-      Attribute checks
+      By controls
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measures" class="md-nav__link">
+    <span class="md-ellipsis">
+      By measures
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      By attributes
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      By action plans
     </span>
   </a>
   
@@ -697,24 +730,81 @@
 
 
 <h1 id="dashboards">Dashboards<a class="headerlink" href="#dashboards" title="Permanent link">&para;</a></h1>
-<p>There are three dashboards:</p>
+<p>The "Analysis" menu gives access to the following dashboards:</p>
 <ul>
 <li>
-<p>controls by domains</p>
+<p><a href="#steering">Steering</a>: overall follow-up of live measurements, ownership and lateness</p>
 </li>
 <li>
-<p>controls by domain and by measure</p>
+<p><a href="#domains">by domains</a>: status of the measurements by domain</p>
 </li>
 <li>
-<p>controls by attribute</p>
+<p><a href="#controls">by controls</a>: history of the measurements of a control</p>
+</li>
+<li>
+<p><a href="#measures">by measures</a>: status of the controls of each domain</p>
+</li>
+<li>
+<p><a href="#attributes">by attributes</a>: status of the measurements by attribute</p>
+</li>
+<li>
+<p><a href="#actions">by action plans</a>: status of the action plans</p>
 </li>
 </ul>
-<h2 id="controls-by-domains">Controls by domains<a class="headerlink" href="#controls-by-domains" title="Permanent link">&para;</a></h2>
-<p><a href="../images/r1.png"><img alt="Screenshot" src="../images/r1.png" style="width:500px" /></a></p>
-<h2 id="controls-by-domain-and-by-measure">Controls by domain and by measure<a class="headerlink" href="#controls-by-domain-and-by-measure" title="Permanent link">&para;</a></h2>
+<h2 id="steering">Steering<a class="headerlink" href="#steering" title="Permanent link">&para;</a></h2>
+<p>This screen is available to administrators, users and auditors. It gives a management view of the measurements:
+how many are live, how many are late, who owns them and what should be done first.</p>
+<p><a href="../images/r0.png"><img alt="Screenshot" src="../images/r0.png" /></a></p>
+<p>The screen contains:</p>
+<ul>
+<li>
+<p><strong>Overview</strong>: total number of measurements, number of live / active measurements, number of overdue
+  live measurements and overdue rate. The number of measurements owned by the Security team and by the other
+  business functions is also displayed.</p>
+</li>
+<li>
+<p><strong>Ownership and lateness of live / active measurements</strong>: for Security Team-owned and Non-Security-owned
+  measurements, the number of live, overdue, not yet overdue and pending validation measurements, the overdue rate,
+  a chart of the split by ownership and a plain-language summary ("What this means").</p>
+</li>
+<li>
+<p><strong>Contributor action priorities</strong>: a work queue ordered by priority (Security overdue, Non-Security overdue,
+  pending validation, not yet due) with the expected action for each population.</p>
+</li>
+<li>
+<p><strong>Contributor analysis</strong>:</p>
+<ul>
+<li>A. the exact assignment combinations (users and groups) as configured in Deming,</li>
+<li>B. a summary by individual, counting direct assignments and assignments through a group,</li>
+<li>C. a summary by group, with its type (Business or Security) and its number of members.</li>
+</ul>
+</li>
+<li>
+<p><strong>Definitions</strong> of the indicators used on the screen.</p>
+</li>
+</ul>
+<p>The ownership of a measurement is derived from the <a href="../config/#groups">group type</a>: a measurement is Security
+Team-owned if at least one of its groups is of type <em>Security</em>, or if at least one of its assigned users is a
+member of a <em>Security</em> group. All other measurements, including unassigned ones, are Non-Security-owned.</p>
+<p>All figures take into account the "my data / all data" switch of the toolbar.</p>
+<h2 id="domains">By domains<a class="headerlink" href="#domains" title="Permanent link">&para;</a></h2>
+<p>This screen displays, for each domain, the number of measurements by result (green, orange, red).
+It can be filtered by framework and scope, and grouped by control or by measurement.</p>
+<p><a href="../images/r1.png"><img alt="Screenshot" src="../images/r1.png" /></a></p>
+<h2 id="controls">By controls<a class="headerlink" href="#controls" title="Permanent link">&para;</a></h2>
+<p>This screen displays the history of the measurements of a control selected by its clause.</p>
+<p><a href="../images/r4.png"><img alt="Screenshot" src="../images/r4.png" /></a></p>
+<h2 id="measures">By measures<a class="headerlink" href="#measures" title="Permanent link">&para;</a></h2>
+<p>This screen displays, for each domain, a radar of the last score of each control together with the list of
+controls, their last realization date and their next planned date. It can be filtered by scope.</p>
 <p><a href="../images/r2.png"><img alt="Screenshot" src="../images/r2.png" /></a></p>
-<h2 id="attribute-checks">Attribute checks<a class="headerlink" href="#attribute-checks" title="Permanent link">&para;</a></h2>
+<h2 id="attributes">By attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
+<p>This screen displays the measurement results grouped by attribute.</p>
 <p><a href="../images/r3.png"><img alt="Screenshot" src="../images/r3.png" /></a></p>
+<h2 id="actions">By action plans<a class="headerlink" href="#actions" title="Permanent link">&para;</a></h2>
+<p>This screen displays the number of action plans by type (major, minor, observation, opportunity) over a period,
+with the list of action plans and their progress. It can be filtered by scope.</p>
+<p><a href="../images/r5.png"><img alt="Screenshot" src="../images/r5.png" /></a></p>
 
 
 

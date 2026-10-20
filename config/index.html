@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../de/config/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -551,7 +557,7 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#attributes" class="md-nav__link">
+  <a href="#tags" class="md-nav__link">
     <span class="md-ellipsis">
       Attributes
     </span>
@@ -593,10 +599,9 @@
     </span>
   </a>
   
-    <nav class="md-nav" aria-label="Reports">
-      <ul class="md-nav__list">
-        
-          <li class="md-nav__item">
+</li>
+      
+        <li class="md-nav__item">
   <a href="#import" class="md-nav__link">
     <span class="md-ellipsis">
       Import
@@ -604,20 +609,39 @@
   </a>
   
 </li>
-        
-          <li class="md-nav__item">
+      
+        <li class="md-nav__item">
   <a href="#documents" class="md-nav__link">
     <span class="md-ellipsis">
       Documents
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Documents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#templates" class="md-nav__link">
+    <span class="md-ellipsis">
+      Templates
+    </span>
+  </a>
+  
 </li>
         
           <li class="md-nav__item">
-  <a href="#notifications" class="md-nav__link">
+  <a href="#storage" class="md-nav__link">
     <span class="md-ellipsis">
-      Notifications
+      Storage
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retention" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retention
     </span>
   </a>
   
@@ -625,6 +649,24 @@
         
       </ul>
     </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#notifications" class="md-nav__link">
+    <span class="md-ellipsis">
+      Notifications
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#logs" class="md-nav__link">
+    <span class="md-ellipsis">
+      Logs
+    </span>
+  </a>
   
 </li>
       
@@ -748,19 +790,24 @@
 
 
 <h1 id="setup">Setup<a class="headerlink" href="#setup" title="Permanent link">&para;</a></h1>
-<h2 id="attributes">Attributes <a name="tags"></a><a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
+<p>The "Configuration" menu gives access to the attributes, domains, users, groups, <a href="../risks/#scoring">risk scoring</a>,
+import, <a href="../crosswalk/">framework crosswalks</a>, documents, notifications and logs.</p>
+<h2 id="tags">Attributes<a class="headerlink" href="#tags" title="Permanent link">&para;</a></h2>
 <p>This screen allows you to manage the attributes associated with the security measures.
 It contains the list of attributes and allows you to create, delete or modify attribute lists.</p>
 <p><a href="../images/tags.png"><img alt="Screenshot" src="../images/tags.png" /></a></p>
 <p>Administrators only have access to a "Manage" button, which opens a form to globally replace an existing attribute value with a new one. The replacement is applied everywhere the value is used: in the attribute lists, in the controls, and in measures that have not yet been carried out. Measures that have already been carried out are left untouched, since they are historical records.</p>
-<h2 id="domains">Domains <a name="domains"></a><a class="headerlink" href="#domains" title="Permanent link">&para;</a></h2>
+<h2 id="domains">Domains<a class="headerlink" href="#domains" title="Permanent link">&para;</a></h2>
 <p>This screen allows you to create, modify or delete lists of security domains.</p>
 <p><a href="../images/domains.png"><img alt="Screenshot" src="../images/domains.png" /></a></p>
 <p>The application is provided with a security measurement base inspired by the ISO 27001:2022 standard, but it is possible to define new security domains inspired by other standards such as PCIDSS, HDS, etc.</p>
-<h2 id="users">Users <a name="users"></a><a class="headerlink" href="#users" title="Permanent link">&para;</a></h2>
+<h2 id="users">Users<a class="headerlink" href="#users" title="Permanent link">&para;</a></h2>
 <p>Users are directly defined in the application.</p>
 <p><a href="../images/users.png"><img alt="Screenshot" src="../images/users.png" /></a></p>
-<p>There are four different roles:</p>
+<p>A user is composed of a login, a name, a title, a role, an email address, a language, a password and the list of
+measurements assigned to them. The language is used for the user interface, the notifications and the generated
+documents.</p>
+<p>There are six different roles:</p>
 <ul>
 <li>
 <p>Administrators: The administrator can create users, measurements, attributes, modify controls already carried out.</p>
@@ -769,13 +816,21 @@ It contains the list of attributes and allows you to create, delete or modify at
 <p>Users: users can use the application without being able to modify the measurements, attributes and controls already carried out.</p>
 </li>
 <li>
-<p>Auditee: Auditees can only carry out and see the mesurements that have been assigned to them or that they have carried out previously.</p>
+<p>Auditee: Auditees can only carry out and see the measurements that have been assigned to them or that they have
+  carried out previously (see <a href="../delegation/">Delegation</a>).</p>
 </li>
 <li>
 <p>Auditor: the auditor has read access to all the information in the application.</p>
 </li>
+<li>
+<p>API: account used to access the <a href="../api/">API</a>.</p>
+</li>
+<li>
+<p>Disabled: the account still exists, so that its history is kept, but can no longer log in.</p>
+</li>
 </ul>
-<h2 id="groups">Groups <a name=“groups”></a><a class="headerlink" href="#groups" title="Permanent link">&para;</a></h2>
+<p>The "History" button of the user display screen shows the <a href="#logs">change history</a> of this user.</p>
+<h2 id="groups">Groups<a class="headerlink" href="#groups" title="Permanent link">&para;</a></h2>
 <p>This screen is used to define user groups.
 A group brings together a set of users and controls.</p>
 <p><a href="../images/groups.png"><img alt="Screenshot" src="../images/groups.png" /></a></p>
@@ -785,41 +840,74 @@ A group brings together a set of users and controls.</p>
 <p>a group name</p>
 </li>
 <li>
+<p>a type: <em>Business</em> or <em>Security</em> (can only be changed by an administrator)</p>
+</li>
+<li>
 <p>a group description</p>
 </li>
 <li>
 <p>a list of users</p>
 </li>
 <li>
-<p>a list of controls</p>
+<p>a list of measurements</p>
 </li>
 </ul>
-<h2 id="reports">Reports <a name="report"></a><a class="headerlink" href="#reports" title="Permanent link">&para;</a></h2>
-<p>The application allows you to generate the ISMS management report and to export the list of domains, the security measures and all the checks carried out in an Excell file.</p>
-<p><a href="../images/reports.png"><img alt="Screenshot" src="../images/reports.png" style="width:500px" /></a></p>
+<p>The group type distinguishes the measurements owned by the Security team from those owned by the other business
+functions in the <a href="../dashboards/#steering">Steering</a> screen.</p>
+<p>Only the measurements not yet carried out are listed in the form; completed or proposed measurements stay linked
+to the group when it is updated.</p>
+<h2 id="reports">Reports<a class="headerlink" href="#reports" title="Permanent link">&para;</a></h2>
+<p>This screen is available to administrators and users. It is used to generate the ISMS steering report, the
+Statement of Applicability and the data exports.</p>
+<p><a href="../images/reports.png"><img alt="Screenshot" src="../images/reports.png" /></a></p>
+<p><strong>ISMS steering report</strong>: select a framework (optional) and a period, then click "Create". A Word document is
+generated from the <a href="#documents">steering report template</a>.</p>
 <p>Here is the ISMS pilot report:</p>
 <p><a href="../images/report1.png"><img alt="Screenshot" src="../images/report1.png" /></a></p>
 <p><a href="../images/report2.png"><img alt="Screenshot" src="../images/report2.png" /></a></p>
-<h3 id="import">Import <a name="import"></a><a class="headerlink" href="#import" title="Permanent link">&para;</a></h3>
+<p><strong>Statement of Applicability (SoA)</strong>: generates an Excel file listing, for each domain and clause, the security
+measures and the planning date of their controls for each scope.</p>
+<p><strong>Data export</strong>: exports users, domains, attributes, security measures, controls, action plans and the risk
+register to Excel files.</p>
+<h2 id="import">Import<a class="headerlink" href="#import" title="Permanent link">&para;</a></h2>
 <p>Measures can be imported from an .XLSX file or from the template database.</p>
 <p>When importing, all other controls and measures can be deleted and test data generated.</p>
 <p><a href="../images/import.png"><img alt="Screenshot" src="../images/import.png" /></a></p>
-<h3 id="documents">Documents <a name="documents"></a><a class="headerlink" href="#documents" title="Permanent link">&para;</a></h3>
+<h2 id="documents">Documents<a class="headerlink" href="#documents" title="Permanent link">&para;</a></h2>
 <p>This screen lets you modify the document management settings used in Deming.</p>
-<p><a href="../images/documents.png"><img alt="Screenshot" src="../images/documents.png" style="width:400px" /></a></p>
-<h4 id="templates">Templates<a class="headerlink" href="#templates" title="Permanent link">&para;</a></h4>
+<p><a href="../images/documents.png"><img alt="Screenshot" src="../images/documents.png" /></a></p>
+<h3 id="templates">Templates<a class="headerlink" href="#templates" title="Permanent link">&para;</a></h3>
 <p>This part of the screen lets you modify the document templates used for control sheets and the ISMS management report, and gives you an overview of all the documents used as proof when carrying out security controls.</p>
-<h4 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h4>
+<p>The steering report template is a Word document (.docx) whose tags are replaced when the report is generated.
+The "Template tags" panel, displayed next to the templates, lists the available tags; clicking on a tag copies it
+to the clipboard.</p>
+<ul>
+<li>
+<p>Variables: <code>${today}</code>, <code>${start_date}</code>, <code>${end_date}</code>, <code>${framework}</code>, and the predefined tables
+  <code>${control_table}</code>, <code>${kpi_table}</code>, <code>${made_control_table}</code> and <code>${action_plans_table}</code>.</p>
+</li>
+<li>
+<p>Custom tables: <code>${table:&lt;table&gt;:&lt;column&gt;[=Header],...[|option]}</code>, where <code>&lt;table&gt;</code> is one of <code>domains</code>,
+  <code>controls</code>, <code>measures</code>, <code>actions</code>, <code>risks</code>, <code>exceptions</code>, <code>attributes</code>, <code>users</code> or <code>user_groups</code>.
+  The tag must be alone in its paragraph. The available options are <code>period:&lt;column&gt;</code> (rows within the report
+  period), <code>where:&lt;column&gt;=&lt;value&gt;</code> (filter, <code>!=</code> and <code>null</code> are allowed), <code>order:[-]&lt;column&gt;</code> (sort, <code>-</code> for
+  descending order) and <code>limit:&lt;n&gt;</code>.</p>
+</li>
+</ul>
+<p>Example:</p>
+<div class="highlight"><pre><span></span><code>${table:actions:reference,name,owners,due_date|where:status=0|order:due_date}
+</code></pre></div>
+<h3 id="storage">Storage<a class="headerlink" href="#storage" title="Permanent link">&para;</a></h3>
 <p>This part of the screen lets you check the integrity of documents stored in the application.</p>
-<p>By clicking on “Verify”, Deming launches the integrity check of documents stored in the application, using a CRC32.</p>
-<h4 id="retention">Retention<a class="headerlink" href="#retention" title="Permanent link">&para;</a></h4>
+<p>By clicking on “Check”, Deming launches the integrity check of documents stored in the application, using a CRC32.</p>
+<h3 id="retention">Retention<a class="headerlink" href="#retention" title="Permanent link">&para;</a></h3>
 <p>This part of the screen lets you configure the retention period (in months) for checks carried out in the application.</p>
 <p>All checks carried out after this date are deleted, along with the associated documents and action plans.</p>
 <p>This is done by executing the command</p>
 <div class="highlight"><pre><span></span><code>php artisan deming:cleanup
 </code></pre></div>
 <p>command via a cron.</p>
-<h3 id="notifications">Notifications <a name="notifications"></a><a class="headerlink" href="#notifications" title="Permanent link">&para;</a></h3>
+<h2 id="notifications">Notifications<a class="headerlink" href="#notifications" title="Permanent link">&para;</a></h2>
 <p>This screen is used to configure the notifications sent to users when they have to carry out controls.</p>
 <p>The screen contains:</p>
 <ul>
@@ -836,7 +924,7 @@ A group brings together a set of users and controls.</p>
 <p>The notification deadlines.</p>
 </li>
 </ul>
-<p><a href="../images/config.png"><img alt="Screenshot" src="../images/config.png" style="width:500px" /></a></p>
+<p><a href="../images/config.png"><img alt="Screenshot" src="../images/config.png" /></a></p>
 <p>When you click on:</p>
 <ul>
 <li>
@@ -849,6 +937,26 @@ A group brings together a set of users and controls.</p>
 <p>"Cancel" - you return to the main page.</p>
 </li>
 </ul>
+<h2 id="logs">Logs<a class="headerlink" href="#logs" title="Permanent link">&para;</a></h2>
+<p>This screen, available from the "Configuration" menu, lists, from the most recent, all the changes made to
+the security measures, the controls, the action plans, the risks and the users: action (creation, modification,
+deletion), type and identifier of the object, user, IP address and date.</p>
+<p>Clicking on:</p>
+<ul>
+<li>
+<p>the identifier of an entry, or the "Show" button, displays the detail of the change, with all the data of the
+  object at that time;</p>
+</li>
+<li>
+<p>the identifier of an object displays this object;</p>
+</li>
+<li>
+<p>the "History" button displays the change history of this object.</p>
+</li>
+</ul>
+<p>The change history of an object is also accessible through the "History" button of the screens displaying
+a <a href="../controls/#show">control</a>, a <a href="../risks/#show">risk</a> or a <a href="#users">user</a>.</p>
+<p>The logs older than the <a href="#documents">retention period</a> are deleted by the <code>deming:cleanup</code> command.</p>
 
 
 

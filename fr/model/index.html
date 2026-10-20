@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../../de/model/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -618,6 +624,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#frameworks" class="md-nav__link">
+    <span class="md-ellipsis">
+      frameworks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#controls" class="md-nav__link">
     <span class="md-ellipsis">
       controls
@@ -671,6 +686,63 @@
         
           <li class="md-nav__item">
   <a href="#valeurs-du-champ-status_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Valeurs du champ status
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      actions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="actions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#valeurs-du-champ-type" class="md-nav__link">
+    <span class="md-ellipsis">
+      Valeurs du champ type
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#valeurs-du-champ-status_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Valeurs du champ status
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#exceptions" class="md-nav__link">
+    <span class="md-ellipsis">
+      exceptions
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="exceptions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#valeurs-du-champ-status_3" class="md-nav__link">
     <span class="md-ellipsis">
       Valeurs du champ status
     </span>
@@ -767,30 +839,43 @@
 <ul>
 <li>attributes</li>
 <li>domains</li>
+<li>frameworks</li>
 <li>controls</li>
 <li>measures</li>
 <li>documents</li>
 <li>risks</li>
+<li>actions</li>
+<li>exceptions</li>
 </ul>
 <blockquote>
 <p><code>controls</code> = <strong>mesures de sécurité</strong> (exigences à mettre en œuvre).<br />
 <code>measures</code> = <strong>contrôles</strong> (vérifications périodiques de ces exigences).<br />
-<code>risks</code> = <strong>risques de sécurité de l'information</strong> (registre ISO 27001 §6.1.2).</p>
+<code>risks</code> = <strong>risques de sécurité de l'information</strong> (registre ISO 27001 §6.1.2).<br />
+<code>actions</code> = <strong>plans d'action</strong> (remédiation des contrôles en échec et des risques).<br />
+<code>exceptions</code> = <strong>exceptions</strong> (dérogations temporaires à une mesure de sécurité).</p>
 </blockquote>
 <h2 id="dependances-entre-tables">Dépendances entre tables<a class="headerlink" href="#dependances-entre-tables" title="Permanent link">&para;</a></h2>
 <p>Vue d'ensemble : qui utilise quoi.</p>
 <pre class="mermaid"><code>flowchart LR
     controls --&gt; |"domain_id (0:1)"| domains
+    domains -.-&gt;|"framework = code"| frameworks
     controls &lt;--&gt;|"control_measure (N:N)"| measures
     attributes -.-o |"optional"| controls
     attributes -.-o |"optional"| measures
     measures --&gt;|"measure_id (0:1)"| measures
     documents --&gt;|"document_id (1:1)"| measures
     risks --&gt;|"owner_id (0:1)"| users
-    risks &lt;--&gt;|"control_risk (N:N)"| controls</code></pre>
+    risks &lt;--&gt;|"control_risk (N:N)"| controls
+    actions --&gt;|"measure_id (0:1)"| measures
+    actions &lt;--&gt;|"action_control (N:N)"| controls
+    actions &lt;--&gt;|"action_risk (N:N)"| risks
+    actions &lt;--&gt;|"action_user (N:N)"| users
+    exceptions --&gt;|"control_id (0:1)"| controls
+    exceptions --&gt;|"created_by, submitted_by, approved_by (0:1)"| users</code></pre>
 <p>Le schéma détaillé ci-dessous décrit les champs de chaque table.</p>
 <pre class="mermaid"><code>erDiagram
     domains ||--o{ controls : "domain_id"
+    frameworks |o--o{ domains : "code = framework"
     controls }o--o{ measures : "many-to-many"
     attributes }o--o{ controls : "optionnel"
     attributes }o--o{ measures : "optionnel"
@@ -798,12 +883,25 @@
     documents }o--o| measures : "optionnel"
     risks }o--o{ controls : "control_risk"
     users ||--o{ risks : "owner_id"
+    measures |o--o{ actions : "measure_id"
+    actions }o--o{ controls : "action_control"
+    actions }o--o{ risks : "action_risk"
+    actions }o--o{ users : "action_user"
+    controls |o--o{ exceptions : "control_id"
+    users |o--o{ exceptions : "created_by, approved_by"
 
     domains {
         int id PK
         string framework
         string title
         string description
+    }
+    frameworks {
+        int id PK
+        string code UK
+        string name
+        string version
+        string publisher
     }
     attributes {
         int id PK
@@ -845,6 +943,26 @@
         int review_frequency
         date next_review_at
         array controls
+    }
+    actions {
+        int id PK
+        int measure_id FK
+        string reference
+        int type
+        int status
+        int progress
+        date due_date
+        date close_date
+    }
+    exceptions {
+        int id PK
+        int control_id FK
+        string name
+        int status
+        date start_date
+        date end_date
+        int created_by FK
+        int approved_by FK
     }</code></pre>
 <p>Les relations sont les suivantes :</p>
 <table>
@@ -860,6 +978,11 @@
 <td><code>domains</code> → <code>controls</code></td>
 <td>Clé étrangère (1:N)</td>
 <td>Chaque mesure de sécurité référence son domaine via <code>domain_id</code></td>
+</tr>
+<tr>
+<td><code>frameworks</code> → <code>domains</code></td>
+<td>Optionnel (1:N) via le code</td>
+<td>Le champ <code>framework</code> d'un domaine contient le <code>code</code> de son référentiel ; la ligne de <code>frameworks</code> y ajoute ses métadonnées</td>
 </tr>
 <tr>
 <td><code>controls</code> ↔ <code>measures</code></td>
@@ -896,12 +1019,43 @@
 <td>Optionnel (1:N)</td>
 <td>Chaque risque peut être attribué à un propriétaire (<code>owner_id</code>) responsable de la revue périodique</td>
 </tr>
+<tr>
+<td><code>measures</code> → <code>actions</code></td>
+<td>Optionnel (1:N)</td>
+<td>Un plan d'action créé lors de la réalisation d'un contrôle le référence via <code>measure_id</code></td>
+</tr>
+<tr>
+<td><code>actions</code> ↔ <code>controls</code></td>
+<td>Many-to-many via <code>action_control</code></td>
+<td>Mesures de sécurité (clauses) concernées par le plan d'action</td>
+</tr>
+<tr>
+<td><code>actions</code> ↔ <code>risks</code></td>
+<td>Many-to-many via <code>action_risk</code></td>
+<td>Plans d'action traitant un risque ; requis pour un risque <em>Non accepté</em></td>
+</tr>
+<tr>
+<td><code>actions</code> ↔ <code>users</code></td>
+<td>Many-to-many via <code>action_user</code></td>
+<td>Responsables du plan d'action</td>
+</tr>
+<tr>
+<td><code>controls</code> → <code>exceptions</code></td>
+<td>Optionnel (1:N)</td>
+<td>Chaque exception référence la mesure de sécurité à laquelle elle déroge via <code>control_id</code></td>
+</tr>
+<tr>
+<td><code>users</code> → <code>exceptions</code></td>
+<td>Optionnel (1:N)</td>
+<td>Auteur (<code>created_by</code>), demandeur (<code>submitted_by</code>) et valideur (<code>approved_by</code>) de l'exception</td>
+</tr>
 </tbody>
 </table>
 <blockquote>
 <p><strong>Note :</strong> il n'y a pas de table de jonction exposée pour la relation controls/measures.<br />
 Les IDs sont directement embarqués dans chaque objet des deux côtés.<br />
-La table pivot <code>control_risk</code> relie les risques aux mesures de sécurité.</p>
+La table pivot <code>control_risk</code> relie les risques aux mesures de sécurité.<br />
+Les tables pivot <code>action_control</code>, <code>action_risk</code> et <code>action_user</code> relient les plans d'action aux mesures de sécurité, aux risques et aux responsables.</p>
 </blockquote>
 <hr />
 <h2 id="attributes">attributes<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
@@ -1008,6 +1162,103 @@ Chaque domaine appartient à un cadre réglementaire ou méthodologique (<code>f
 <span class="p">}</span>
 </code></pre></div>
 <hr />
+<h2 id="frameworks">frameworks<a class="headerlink" href="#frameworks" title="Permanent link">&para;</a></h2>
+<p>La table <code>frameworks</code> ajoute des métadonnées aux codes de référentiel utilisés dans <code>domains.framework</code>. Elle ne remplace
+pas ce champ : un référentiel est lié à ses domaines, et à travers eux à ses mesures de sécurité, par son <code>code</code>.
+Une ligne est créée automatiquement, avec le code comme nom, lorsqu'un domaine est enregistré avec un nouveau code de
+référentiel. Les <a href="../crosswalk/">correspondances</a> utilisent ces codes pour choisir les référentiels source et cible.</p>
+<table>
+<thead>
+<tr>
+<th>Champ</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer</td>
+<td>Identifiant unique (PK)</td>
+</tr>
+<tr>
+<td><code>code</code></td>
+<td>string</td>
+<td>Code du référentiel, identique à <code>domains.framework</code> (unique, ex. : <code>27001:2022</code>)</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Nom du référentiel (le code par défaut)</td>
+</tr>
+<tr>
+<td><code>version</code></td>
+<td>string</td>
+<td>Version du référentiel (vide par défaut)</td>
+</tr>
+<tr>
+<td><code>publisher</code></td>
+<td>string</td>
+<td>Éditeur du référentiel (vide par défaut)</td>
+</tr>
+<tr>
+<td><code>jurisdiction</code></td>
+<td>string | null</td>
+<td>Juridiction dans laquelle le référentiel s'applique</td>
+</tr>
+<tr>
+<td><code>source_url</code></td>
+<td>string | null</td>
+<td>URL de la source officielle</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>string | null</td>
+<td>Statut du référentiel (texte libre)</td>
+</tr>
+<tr>
+<td><code>publication_date</code></td>
+<td>date | null</td>
+<td>Date de publication</td>
+</tr>
+<tr>
+<td><code>effective_date</code></td>
+<td>date | null</td>
+<td>Date d'entrée en vigueur</td>
+</tr>
+<tr>
+<td><code>notes</code></td>
+<td>string | null</td>
+<td>Notes libres</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>datetime</td>
+<td>Date de création</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>datetime</td>
+<td>Date de dernière modification</td>
+</tr>
+</tbody>
+</table>
+<p>Exemple :</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;code&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;NIS2-ReCyF-2.5-FR&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ReCyF 2.5&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;version&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2.5&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;publisher&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ANSSI&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;jurisdiction&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;France&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;source_url&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;https://messervices.cyber.gouv.fr/nis2#exigences&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;publication_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;effective_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;notes&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
 <h2 id="controls">controls<a class="headerlink" href="#controls" title="Permanent link">&para;</a></h2>
 <p>Les mesures de sécurité décrivent les exigences à mettre en œuvre.<br />
 Chaque mesure de sécurité appartient à un domaine et est vérifiée par une ou plusieurs instances d'audit.</p>
@@ -1066,11 +1317,6 @@ Chaque mesure de sécurité appartient à un domaine et est vérifiée par une o
 <td>Plan d'action ou traitement associé</td>
 </tr>
 <tr>
-<td><code>standard</code></td>
-<td>string | null</td>
-<td>Référence à une norme externe (ex : ISO 27001)</td>
-</tr>
-<tr>
 <td><code>attributes</code></td>
 <td>array | null</td>
 <td>Liste d'IDs d'attributs associés ; <code>null</code> si aucun</td>
@@ -1103,7 +1349,6 @@ Chaque mesure de sécurité appartient à un domaine et est vérifiée par une o
 <span class="w">  </span><span class="nt">&quot;model&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Analyse annuelle selon ISO 27005 ou EBIOS RM&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;indicator&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Target: Score résiduel ≤ acceptable | Frequency: Annuel | Owner: RSSI&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;action_plan&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Plan de traitement des risques validé par Direction&quot;</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;standard&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;measures&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
 <span class="p">}</span>
@@ -1193,11 +1438,6 @@ Elle porte les données de planification, de réalisation et de résultat.</p>
 <td>ID de l'instance suivante dans la chaîne historique (FK self)</td>
 </tr>
 <tr>
-<td><code>standard</code></td>
-<td>string | null</td>
-<td>Référence normative externe</td>
-</tr>
-<tr>
 <td><code>attributes</code></td>
 <td>array | null</td>
 <td>Liste d'IDs d'attributs associés ; <code>null</code> si aucun</td>
@@ -1259,7 +1499,6 @@ Elle porte les données de planification, de réalisation et de résultat.</p>
 <span class="w">  </span><span class="nt">&quot;score&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;next_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
-<span class="w">  </span><span class="nt">&quot;standard&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;attributes&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;controls&quot;</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="mi">1</span><span class="p">]</span>
@@ -1306,7 +1545,7 @@ Un risque avec le statut <em>Mitigé</em> doit être lié à au moins un contrô
 <tr>
 <td><code>probability</code></td>
 <td>integer</td>
-<td>Niveau de probabilité (1 à N, formules standard)</td>
+<td>Niveau de probabilité (1 à N, formules standard), ou niveau de menace avec la formule MONARC</td>
 </tr>
 <tr>
 <td><code>probability_comment</code></td>
@@ -1331,7 +1570,12 @@ Un risque avec le statut <em>Mitigé</em> doit être lié à au moins un contrô
 <tr>
 <td><code>vulnerability</code></td>
 <td>integer | null</td>
-<td>Niveau d'exploitabilité des failles connues (formule BSI 200-3 uniquement)</td>
+<td>Niveau d'exploitabilité des failles connues (formule BSI 200-3), ou niveau de vulnérabilité (formule MONARC)</td>
+</tr>
+<tr>
+<td><code>residual_risk</code></td>
+<td>integer | null</td>
+<td>Risque résiduel saisi manuellement (formule MONARC uniquement)</td>
 </tr>
 <tr>
 <td><code>status</code></td>
@@ -1424,6 +1668,7 @@ Un risque avec le statut <em>Mitigé</em> doit être lié à au moins un contrô
 <span class="w">  </span><span class="nt">&quot;impact&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;exposure&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;vulnerability&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;residual_risk&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;mitigated&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;status_comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Politique de contrôle d&#39;accès déployée au T1.&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;review_frequency&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="p">,</span>
@@ -1432,6 +1677,329 @@ Un risque avec le statut <em>Mitigé</em> doit être lié à au moins un contrô
 <span class="w">  </span><span class="nt">&quot;created_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-06-09T10:00:00.000000Z&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;updated_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-06-09T10:00:00.000000Z&quot;</span><span class="p">,</span>
 <span class="w">  </span><span class="nt">&quot;deleted_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="actions">actions<a class="headerlink" href="#actions" title="Permanent link">&para;</a></h2>
+<p>La table <code>actions</code> contient les plans d'action mis en place pour remédier à un contrôle en échec, à une non-conformité
+ou à un risque. Un plan d'action peut être créé manuellement ou lors de la réalisation d'un contrôle ; il est alors lié
+à ce contrôle via <code>measure_id</code>. Les mesures de sécurité, les risques et les responsables d'un plan d'action sont
+stockés dans les tables pivot <code>action_control</code>, <code>action_risk</code> et <code>action_user</code>.</p>
+<table>
+<thead>
+<tr>
+<th>Champ</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer</td>
+<td>Identifiant unique (PK)</td>
+</tr>
+<tr>
+<td><code>reference</code></td>
+<td>string | null</td>
+<td>Référence du plan d'action (ex. : <code>ACT-2026-001</code>, 32 caractères max.)</td>
+</tr>
+<tr>
+<td><code>type</code></td>
+<td>integer</td>
+<td>Type de plan d'action (voir valeurs ci-dessous)</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>integer</td>
+<td>Statut du plan d'action (voir valeurs ci-dessous)</td>
+</tr>
+<tr>
+<td><code>progress</code></td>
+<td>integer | null</td>
+<td>Avancement en pourcentage (0 à 100)</td>
+</tr>
+<tr>
+<td><code>criticity</code></td>
+<td>integer</td>
+<td>Non utilisé par l’application</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string | null</td>
+<td>Nom du plan d'action</td>
+</tr>
+<tr>
+<td><code>scope</code></td>
+<td>string | null</td>
+<td>Périmètre (32 caractères max.)</td>
+</tr>
+<tr>
+<td><code>cause</code></td>
+<td>string | null</td>
+<td>Cause du plan d'action (observations du contrôle en échec)</td>
+</tr>
+<tr>
+<td><code>remediation</code></td>
+<td>string | null</td>
+<td>Remédiation à réaliser</td>
+</tr>
+<tr>
+<td><code>measure_id</code></td>
+<td>integer | null</td>
+<td>Référence vers <code>measures.id</code> — contrôle à l'origine du plan d'action</td>
+</tr>
+<tr>
+<td><code>creation_date</code></td>
+<td>date | null</td>
+<td>Date de création du plan d'action</td>
+</tr>
+<tr>
+<td><code>due_date</code></td>
+<td>date | null</td>
+<td>Date d'échéance</td>
+</tr>
+<tr>
+<td><code>close_date</code></td>
+<td>date | null</td>
+<td>Date de clôture</td>
+</tr>
+<tr>
+<td><code>justification</code></td>
+<td>string | null</td>
+<td>Justification de la clôture ou du rejet</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>datetime</td>
+<td>Date de création</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>datetime</td>
+<td>Date de dernière modification</td>
+</tr>
+</tbody>
+</table>
+<h3 id="valeurs-du-champ-type">Valeurs du champ <code>type</code><a class="headerlink" href="#valeurs-du-champ-type" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Valeur</th>
+<th>Signification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>1</code></td>
+<td>Non-conformité majeure</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>Non-conformité mineure</td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td>Observation</td>
+</tr>
+<tr>
+<td><code>4</code></td>
+<td>Opportunité d'amélioration</td>
+</tr>
+</tbody>
+</table>
+<h3 id="valeurs-du-champ-status_2">Valeurs du champ <code>status</code><a class="headerlink" href="#valeurs-du-champ-status_2" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Valeur</th>
+<th>Signification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>Ouvert</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>Clôturé</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>Rejeté</td>
+</tr>
+</tbody>
+</table>
+<p>Exemple :</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;reference&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;ACT-2026-001&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;type&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;progress&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">60</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;criticity&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Déploiement de l&#39;authentification multifacteur sur les comptes à privilèges&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;scope&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Systèmes d&#39;information&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;cause&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Les comptes administrateur ne sont protégés que par un mot de passe, sans second facteur d&#39;authentification.&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;remediation&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Déployer une solution MFA (TOTP ou clé physique) sur l&#39;ensemble des comptes à privilèges.&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;measure_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;creation_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-04-01&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;due_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-09-30&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;close_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;justification&quot;</span><span class="p">:</span><span class="w"> </span><span class="kc">null</span>
+<span class="p">}</span>
+</code></pre></div>
+<hr />
+<h2 id="exceptions">exceptions<a class="headerlink" href="#exceptions" title="Permanent link">&para;</a></h2>
+<p>La table <code>exceptions</code> enregistre les exceptions (dérogations) accordées lorsqu'une mesure de sécurité ne peut pas être
+appliquée : justification, mesures compensatoires et période de validité. Une exception suit un workflow de validation :
+elle est créée en brouillon, soumise, puis approuvée ou refusée par un administrateur.</p>
+<table>
+<thead>
+<tr>
+<th>Champ</th>
+<th>Type</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>id</code></td>
+<td>integer</td>
+<td>Identifiant unique (PK)</td>
+</tr>
+<tr>
+<td><code>control_id</code></td>
+<td>integer | null</td>
+<td>Référence vers <code>controls.id</code> — mesure de sécurité concernée par l'exception</td>
+</tr>
+<tr>
+<td><code>name</code></td>
+<td>string</td>
+<td>Nom de l'exception (obligatoire)</td>
+</tr>
+<tr>
+<td><code>description</code></td>
+<td>string | null</td>
+<td>Description de l'exception</td>
+</tr>
+<tr>
+<td><code>justification</code></td>
+<td>string | null</td>
+<td>Justification métier (raison pour laquelle la mesure de sécurité ne peut pas être appliquée)</td>
+</tr>
+<tr>
+<td><code>compensating_controls</code></td>
+<td>string | null</td>
+<td>Mesures compensatoires réduisant le risque résiduel</td>
+</tr>
+<tr>
+<td><code>start_date</code></td>
+<td>date | null</td>
+<td>Début de la période de validité</td>
+</tr>
+<tr>
+<td><code>end_date</code></td>
+<td>date | null</td>
+<td>Fin de la période de validité ; <code>null</code> si pas d'échéance</td>
+</tr>
+<tr>
+<td><code>status</code></td>
+<td>integer</td>
+<td>Statut de l'exception (voir valeurs ci-dessous)</td>
+</tr>
+<tr>
+<td><code>created_by</code></td>
+<td>integer | null</td>
+<td>Référence vers <code>users.id</code> — auteur de l'exception</td>
+</tr>
+<tr>
+<td><code>submitted_by</code></td>
+<td>integer | null</td>
+<td>Référence vers <code>users.id</code> — utilisateur ayant soumis l'exception</td>
+</tr>
+<tr>
+<td><code>submitted_at</code></td>
+<td>datetime | null</td>
+<td>Date de soumission</td>
+</tr>
+<tr>
+<td><code>approved_by</code></td>
+<td>integer | null</td>
+<td>Référence vers <code>users.id</code> — administrateur ayant approuvé ou refusé l'exception</td>
+</tr>
+<tr>
+<td><code>approved_at</code></td>
+<td>datetime | null</td>
+<td>Date d'approbation ou de refus</td>
+</tr>
+<tr>
+<td><code>approval_comment</code></td>
+<td>string | null</td>
+<td>Commentaire d'approbation, ou motif du refus</td>
+</tr>
+<tr>
+<td><code>created_at</code></td>
+<td>datetime</td>
+<td>Date de création</td>
+</tr>
+<tr>
+<td><code>updated_at</code></td>
+<td>datetime</td>
+<td>Date de dernière modification</td>
+</tr>
+</tbody>
+</table>
+<h3 id="valeurs-du-champ-status_3">Valeurs du champ <code>status</code><a class="headerlink" href="#valeurs-du-champ-status_3" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Valeur</th>
+<th>Signification</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>0</code></td>
+<td>Brouillon</td>
+</tr>
+<tr>
+<td><code>1</code></td>
+<td>Soumise (en attente de validation)</td>
+</tr>
+<tr>
+<td><code>2</code></td>
+<td>Approuvée</td>
+</tr>
+<tr>
+<td><code>3</code></td>
+<td>Refusée</td>
+</tr>
+<tr>
+<td><code>4</code></td>
+<td>Expirée</td>
+</tr>
+</tbody>
+</table>
+<p>Une exception approuvée dont la date de fin est dépassée est également affichée comme expirée.</p>
+<p>Exemple :</p>
+<div class="highlight"><pre><span></span><code><span class="p">{</span>
+<span class="w">  </span><span class="nt">&quot;id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">4</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;control_id&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">68</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;name&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Maintien temporaire d&#39;un accès VPN partagé pour un prestataire&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;description&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Un compte VPN partagé continue d&#39;être utilisé par le prestataire de maintenance applicative.&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;justification&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Le projet de bascule vers des accès nominatifs a pris du retard côté prestataire.&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;compensating_controls&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Journalisation renforcée des connexions et restriction des horaires d&#39;accès.&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;start_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-03-01&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;end_date&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-06-01&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;status&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;created_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;submitted_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">2</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;submitted_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-02-20T09:00:00.000000Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;approved_by&quot;</span><span class="p">:</span><span class="w"> </span><span class="mi">1</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;approved_at&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;2026-02-25T14:00:00.000000Z&quot;</span><span class="p">,</span>
+<span class="w">  </span><span class="nt">&quot;approval_comment&quot;</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Les accès nominatifs doivent être en place avant la date de fin.&quot;</span>
 <span class="p">}</span>
 </code></pre></div>
 

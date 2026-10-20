@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../de/measures/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -383,6 +389,15 @@
   <a href="#show-control" class="md-nav__link">
     <span class="md-ellipsis">
       Show control
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create a control
     </span>
   </a>
   
@@ -708,7 +723,8 @@
 <h1 id="controls">Controls<a class="headerlink" href="#controls" title="Permanent link">&para;</a></h1>
 <p>This part allows you to define, modify and plan new controls.</p>
 <h2 id="list-of-controls">List of controls <a name="list"></a><a class="headerlink" href="#list-of-controls" title="Permanent link">&para;</a></h2>
-<p>The list of controls allows you to display the list of controls, to filter them by domain or to search for a control based on part of its name.</p>
+<p>The list of controls allows you to display the list of controls, to filter them by domain or to search for a control based on part of its name.
+The "Column visibility", "Copy" and "Export" buttons let you choose the displayed columns, copy the list or export it to Excel.</p>
 <p><a href="../images/m1.png"><img alt="Screenshot" src="../images/m1.png" /></a></p>
 <p>Clicking on :</p>
 <ul>
@@ -725,6 +741,7 @@
 <p>the "plan" button takes you to the <a href="#plan">control planning</a></p>
 </li>
 </ul>
+<p>The "New" button lets you <a href="#create">create a new control</a>.</p>
 <h2 id="show-control">Show control <a name="show"></a><a class="headerlink" href="#show-control" title="Permanent link">&para;</a></h2>
 <p>This screen displays a control.</p>
 <p><a href="../images/m2.png"><img alt="Screenshot" src="../images/m2.png" /></a></p>
@@ -746,7 +763,7 @@
 <p>attributes;</p>
 </li>
 <li>
-<p>controlment data:</p>
+<p>the measurement data;</p>
 </li>
 <li>
 <p>the verification model;</p>
@@ -758,13 +775,18 @@
 <p>an action plan to be applied if control of this control fails.</p>
 </li>
 </ul>
+<p>The screen also lists the measurements of this control (scope, planning date, completion date and score), and the
+<a href="../crosswalk/">correspondences</a> of this control with the controls of other frameworks.</p>
 <p>When you click:</p>
 <ul>
 <li>
 <p>“Plan”: you arrive at the <a href="#plan">control planning</a> screen.</p>
 </li>
 <li>
-<p>"Modify": you arrive at <a href="#edit">the controlment modification screen</a></p>
+<p>"Edit": you arrive at <a href="#edit">the control edit screen</a></p>
+</li>
+<li>
+<p>"Copy": you arrive at the <a href="#create">control creation</a> screen, pre-filled with the data of this control</p>
 </li>
 <li>
 <p>“Delete”: allows you to delete the control and return to <a href="#list">the list of controls</a></p>
@@ -773,6 +795,23 @@
 <p>"Cancel": returns you to the <a href="#list">list of controls</a></p>
 </li>
 </ul>
+<h2 id="create">Create a control<a class="headerlink" href="#create" title="Permanent link">&para;</a></h2>
+<p>This screen is used to add a control to a framework. It is opened by the "New" button of the
+<a href="#list">list of controls</a> or by the "Copy" button of the <a href="#show">control display</a> screen.</p>
+<p><a href="../images/m4.png"><img alt="Screenshot" src="../images/m4.png" /></a></p>
+<p>The screen contains the same fields as the <a href="#show">control display</a>: domain, clause, name, security objective,
+attributes, measurement data, verification model, indicator and action plan.</p>
+<p>When you click:</p>
+<ul>
+<li>
+<p>"Save", the control is created and you return to the <a href="#list">list of controls</a>.</p>
+</li>
+<li>
+<p>"Cancel", you return to the <a href="#list">list of controls</a>.</p>
+</li>
+</ul>
+<p>Controls can also be imported from a spreadsheet or from a framework of the repository through the
+<a href="../config/#import">import</a> screen.</p>
 <h2 id="edit-a-control">Edit a control <a name="edit"></a><a class="headerlink" href="#edit-a-control" title="Permanent link">&para;</a></h2>
 <p>This screen allows you to modify a control.</p>
 <p><a href="../images/m3.png"><img alt="Screenshot" src="../images/m3.png" /></a></p>
@@ -802,6 +841,9 @@
 <p>The planning date;</p>
 </li>
 <li>
+<p>The scope;</p>
+</li>
+<li>
 <p>The frequency of checks; and</p>
 </li>
 <li>
@@ -812,20 +854,12 @@
 <p>When you click:</p>
 <ul>
 <li>
-<p>"Plan",</p>
-<ul>
-<li>
-<p>if there is no measurement with this scope, a new measurement is created by copying all the control data and is scheduled for the specified date.</p>
+<p>"Plan", a new measurement is created for the given scope by copying all the control data, and is scheduled for
+  the specified date. You then return to the <a href="#list">list of controls</a>.</p>
 </li>
 <li>
-<p>if there is a measurement with the same scope for this control, an error is displayed.</p>
+<p>"Cancel", you return to the <a href="#list">list of controls</a>.</p>
 </li>
-</ul>
-</li>
-</ul>
-<p>You then return to the <a href="#list">list of controls</a>.</p>
-<ul>
-<li>"Cancel", you return to the <a href="#list">list of controls</a>.</li>
 </ul>
 
 

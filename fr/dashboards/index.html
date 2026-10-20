@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../../de/dashboards/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -451,27 +457,54 @@
     <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
       
         <li class="md-nav__item">
-  <a href="#les-controles-par-domaines" class="md-nav__link">
+  <a href="#steering" class="md-nav__link">
     <span class="md-ellipsis">
-      Les contrôles par domaines
+      Pilotage
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#les-controles-par-domaines-et-par-mesures" class="md-nav__link">
+  <a href="#domains" class="md-nav__link">
     <span class="md-ellipsis">
-      Les contrôles par domaines et par mesures
+      Par domaines
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#les-controles-par-attributs" class="md-nav__link">
+  <a href="#controls" class="md-nav__link">
     <span class="md-ellipsis">
-      Les contrôles par attributs
+      Par mesure
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#measures" class="md-nav__link">
+    <span class="md-ellipsis">
+      Par contrôles
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#attributes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Par attributs
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#actions" class="md-nav__link">
+    <span class="md-ellipsis">
+      Par plans d'actions
     </span>
   </a>
   
@@ -697,24 +730,81 @@
 
 
 <h1 id="tableaux-de-bord">Tableaux de bord<a class="headerlink" href="#tableaux-de-bord" title="Permanent link">&para;</a></h1>
-<p>Il existe trois tableaux de bord :</p>
+<p>Le menu « Analyse » donne accès aux tableaux de bord suivants :</p>
 <ul>
 <li>
-<p>les contrôles par domaine</p>
+<p><a href="#steering">Pilotage</a> : suivi global des contrôles live, de leur propriété et de leurs retards</p>
 </li>
 <li>
-<p>les contrôle par domaine et par mesure</p>
+<p><a href="#domains">par domaines</a> : état des contrôles par domaine</p>
 </li>
 <li>
-<p>les contrôles par attribut</p>
+<p><a href="#controls">par mesure</a> : historique des contrôles d'une mesure de sécurité</p>
+</li>
+<li>
+<p><a href="#measures">par contrôles</a> : état des mesures de sécurité de chaque domaine</p>
+</li>
+<li>
+<p><a href="#attributes">par attributs</a> : état des contrôles par attribut</p>
+</li>
+<li>
+<p><a href="#actions">par plans d'actions</a> : état des plans d'action</p>
 </li>
 </ul>
-<h2 id="les-controles-par-domaines">Les contrôles par domaines<a class="headerlink" href="#les-controles-par-domaines" title="Permanent link">&para;</a></h2>
-<p><a href="../images/r1.png"><img alt="Screenshot" src="../images/r1.png" style="width:500px" /></a></p>
-<h2 id="les-controles-par-domaines-et-par-mesures">Les contrôles par domaines et par mesures<a class="headerlink" href="#les-controles-par-domaines-et-par-mesures" title="Permanent link">&para;</a></h2>
+<h2 id="steering">Pilotage<a class="headerlink" href="#steering" title="Permanent link">&para;</a></h2>
+<p>Cet écran est accessible aux administrateurs, utilisateurs et auditeurs. Il donne une vue de management des
+contrôles : combien sont en cours, combien sont en retard, qui en est responsable et ce qu'il faut traiter en premier.</p>
+<p><a href="../images/r0.png"><img alt="Screenshot" src="../images/r0.png" /></a></p>
+<p>L'écran contient :</p>
+<ul>
+<li>
+<p><strong>Vue d'ensemble</strong> : nombre total de contrôles, nombre de contrôles live / actifs, nombre de contrôles live
+  en retard et taux de retard. Le nombre de contrôles portés par l'équipe Sécurité et par les autres fonctions métier
+  est également affiché.</p>
+</li>
+<li>
+<p><strong>Propriété et retard des contrôles live / actifs</strong> : pour les contrôles pris en charge par l'équipe Sécurité et
+  hors Sécurité, le nombre de contrôles live, en retard, pas encore en retard et en attente de validation, le taux de
+  retard, un graphique de répartition par propriété et une synthèse en langage clair (« Ce que cela signifie »).</p>
+</li>
+<li>
+<p><strong>Priorités d'action des contributeurs</strong> : une file de travail ordonnée par priorité (retard Sécurité, retard hors
+  Sécurité, en attente de validation, pas encore échus) avec l'action attendue pour chaque population.</p>
+</li>
+<li>
+<p><strong>Analyse par contributeur</strong> :</p>
+<ul>
+<li>A. les combinaisons d'affectation exactes (utilisateurs et groupes) telles que configurées dans Deming,</li>
+<li>B. une synthèse par individu, distinguant les affectations directes et les affectations via un groupe,</li>
+<li>C. une synthèse par groupe, avec son type (Business ou Sécurité) et son nombre de membres.</li>
+</ul>
+</li>
+<li>
+<p><strong>Définitions</strong> des indicateurs utilisés dans l'écran.</p>
+</li>
+</ul>
+<p>La propriété d'un contrôle est déduite du <a href="../config/#groups">type de groupe</a> : un contrôle est pris en charge par
+l'équipe Sécurité si au moins un de ses groupes est de type <em>Sécurité</em>, ou si au moins un de ses utilisateurs affectés
+est membre d'un groupe <em>Sécurité</em>. Tous les autres contrôles, y compris ceux non affectés, sont hors Sécurité.</p>
+<p>Tous les chiffres tiennent compte de la bascule « mes données / toutes les données » de la barre d'outils.</p>
+<h2 id="domains">Par domaines<a class="headerlink" href="#domains" title="Permanent link">&para;</a></h2>
+<p>Cet écran affiche, pour chaque domaine, le nombre de contrôles par résultat (vert, orange, rouge).
+Il peut être filtré par référentiel et par périmètre, et regroupé par mesure ou par contrôle.</p>
+<p><a href="../images/r1.png"><img alt="Screenshot" src="../images/r1.png" /></a></p>
+<h2 id="controls">Par mesure<a class="headerlink" href="#controls" title="Permanent link">&para;</a></h2>
+<p>Cet écran affiche l'historique des contrôles d'une mesure de sécurité sélectionnée par sa clause.</p>
+<p><a href="../images/r4.png"><img alt="Screenshot" src="../images/r4.png" /></a></p>
+<h2 id="measures">Par contrôles<a class="headerlink" href="#measures" title="Permanent link">&para;</a></h2>
+<p>Cet écran affiche, pour chaque domaine, un radar du dernier score de chaque mesure de sécurité ainsi que la liste
+des mesures, la date de leur dernière réalisation et la date du prochain contrôle. Il peut être filtré par périmètre.</p>
 <p><a href="../images/r2.png"><img alt="Screenshot" src="../images/r2.png" /></a></p>
-<h2 id="les-controles-par-attributs">Les contrôles par attributs<a class="headerlink" href="#les-controles-par-attributs" title="Permanent link">&para;</a></h2>
+<h2 id="attributes">Par attributs<a class="headerlink" href="#attributes" title="Permanent link">&para;</a></h2>
+<p>Cet écran affiche les résultats des contrôles regroupés par attribut.</p>
 <p><a href="../images/r3.png"><img alt="Screenshot" src="../images/r3.png" /></a></p>
+<h2 id="actions">Par plans d'actions<a class="headerlink" href="#actions" title="Permanent link">&para;</a></h2>
+<p>Cet écran affiche le nombre de plans d'action par type (majeur, mineur, observation, opportunité) sur une période,
+avec la liste des plans d'action et leur avancement. Il peut être filtré par périmètre.</p>
+<p><a href="../images/r5.png"><img alt="Screenshot" src="../images/r5.png" /></a></p>
 
 
 

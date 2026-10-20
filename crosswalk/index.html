@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../de/crosswalk/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -546,6 +552,48 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Permissions and screens">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#list-of-relationships" class="md-nav__link">
+    <span class="md-ellipsis">
+      List of relationships
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Crosswalk matrix
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Relationship detail
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Edit a relationship
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -713,7 +761,28 @@
 <p>The allowed types are <code>equivalent</code>, <code>covers</code>, <code>covered_by</code>, <code>partial</code>, <code>supports</code>, and <code>related</code>. The allowed coverage values are <code>full</code>, <code>high</code>, <code>medium</code>, <code>low</code>, and <code>none</code>.</p>
 <h2 id="permissions-and-screens">Permissions and screens<a class="headerlink" href="#permissions-and-screens" title="Permanent link">&para;</a></h2>
 <p>All authenticated users can view the list, detail, matrix, and exports. Only administrators (<code>role=1</code>) can create, update, validate, or delete a relationship.</p>
+<h3 id="list-of-relationships">List of relationships<a class="headerlink" href="#list-of-relationships" title="Permanent link">&para;</a></h3>
+<p>The crosswalk list is available from the "Configuration &gt; Crosswalk" menu:</p>
+<p><a href="../images/crosswalk.png"><img alt="Screenshot" src="../images/crosswalk.png" /></a></p>
+<p>The list can be filtered by a clause or control name, by source and target framework, by mapping type and by coverage.
+An hourglass in the "Validation" column marks a relationship that has not yet been validated.
+For each relationship, the buttons open its <a href="#detail">detail</a>, <a href="#edit">edit it</a> or delete it.</p>
+<p>The "Crosswalk matrix" button opens the <a href="#matrix">matrix</a>, "Export" exports the filtered list in XLSX format and
+"New" creates a relationship.</p>
+<h3 id="matrix">Crosswalk matrix<a class="headerlink" href="#matrix" title="Permanent link">&para;</a></h3>
+<p>The matrix compares a source framework with a target framework, optionally filtered by mapping type and coverage.
+The "Show only unmapped source controls" option only lists the source controls that have no relationship.</p>
+<p><a href="../images/crosswalk.matrix.png"><img alt="Screenshot" src="../images/crosswalk.matrix.png" /></a></p>
 <p>The matrix presents documentary metrics: number of source controls, number of controls with a relationship, number of controls without a relationship, and number of relationships. These values are never compliance scores.</p>
+<p>The "Reverse direction" button swaps the source and target frameworks, and "Export" exports the matrix in XLSX format.</p>
+<h3 id="detail">Relationship detail<a class="headerlink" href="#detail" title="Permanent link">&para;</a></h3>
+<p>This screen displays a relationship: source and target controls, mapping type, coverage, confidence, rationale,
+source reference and URL, and validation status.</p>
+<p><a href="../images/crosswalk.show.png"><img alt="Screenshot" src="../images/crosswalk.show.png" /></a></p>
+<h3 id="edit">Edit a relationship<a class="headerlink" href="#edit" title="Permanent link">&para;</a></h3>
+<p>This screen, reserved for administrators, allows you to edit all the fields of a relationship.
+Ticking "Validation" validates the relationship: the user and the validation date are recorded.</p>
+<p><a href="../images/crosswalk.edit.png"><img alt="Screenshot" src="../images/crosswalk.edit.png" /></a></p>
 <h2 id="xlsx-import">XLSX import<a class="headerlink" href="#xlsx-import" title="Permanent link">&para;</a></h2>
 <p>Command:</p>
 <div class="highlight"><pre><span></span><code><span class="go">php artisan deming:import-mappings file.xlsx</span>

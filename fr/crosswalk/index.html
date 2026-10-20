@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../../de/crosswalk/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -546,6 +552,48 @@
     </span>
   </a>
   
+    <nav class="md-nav" aria-label="Droits et écrans">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#liste-des-correspondances" class="md-nav__link">
+    <span class="md-ellipsis">
+      Liste des correspondances
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#matrix" class="md-nav__link">
+    <span class="md-ellipsis">
+      Matrice de correspondances
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#detail" class="md-nav__link">
+    <span class="md-ellipsis">
+      Détail d'une relation
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#edit" class="md-nav__link">
+    <span class="md-ellipsis">
+      Modifier une relation
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
 </li>
       
         <li class="md-nav__item">
@@ -713,7 +761,29 @@
 <p>Les types autorisés sont <code>equivalent</code>, <code>covers</code>, <code>covered_by</code>, <code>partial</code>, <code>supports</code> et <code>related</code>. Les couvertures autorisées sont <code>full</code>, <code>high</code>, <code>medium</code>, <code>low</code> et <code>none</code>.</p>
 <h2 id="droits-et-ecrans">Droits et écrans<a class="headerlink" href="#droits-et-ecrans" title="Permanent link">&para;</a></h2>
 <p>Tous les utilisateurs authentifiés peuvent consulter la liste, le détail, la matrice et les exports. Seuls les administrateurs (<code>role=1</code>) peuvent créer, modifier, valider ou supprimer une relation.</p>
+<h3 id="liste-des-correspondances">Liste des correspondances<a class="headerlink" href="#liste-des-correspondances" title="Permanent link">&para;</a></h3>
+<p>La liste des correspondances est accessible depuis le menu « Configuration &gt; Correspondances » :</p>
+<p><a href="../images/crosswalk.png"><img alt="Screenshot" src="../images/crosswalk.png" /></a></p>
+<p>La liste peut être filtrée par clause ou nom de mesure, par référentiel source et cible, par type de correspondance et
+par couverture. Un sablier dans la colonne « Validation » signale une relation qui n'a pas encore été validée.
+Pour chaque relation, les boutons permettent d'en afficher le <a href="#detail">détail</a>, de la <a href="#edit">modifier</a> ou de la supprimer.</p>
+<p>Le bouton « Matrice de correspondances » ouvre la <a href="#matrix">matrice</a>, « Exporter » exporte la liste filtrée au format XLSX
+et « Nouveau » crée une relation.</p>
+<h3 id="matrix">Matrice de correspondances<a class="headerlink" href="#matrix" title="Permanent link">&para;</a></h3>
+<p>La matrice compare un référentiel source à un référentiel cible, éventuellement filtrés par type de correspondance et
+par couverture. L'option « Afficher uniquement les contrôles source non mappés » ne liste que les mesures source qui
+n'ont aucune relation.</p>
+<p><a href="../images/crosswalk.matrix.png"><img alt="Screenshot" src="../images/crosswalk.matrix.png" /></a></p>
 <p>La matrice présente des métriques documentaires : nombre de contrôles source, nombre de contrôles ayant une relation, nombre de contrôles sans relation et nombre de relations. Ces valeurs ne sont jamais des scores de conformité.</p>
+<p>Le bouton « Inverser le sens » échange les référentiels source et cible, et « Exporter » exporte la matrice au format XLSX.</p>
+<h3 id="detail">Détail d'une relation<a class="headerlink" href="#detail" title="Permanent link">&para;</a></h3>
+<p>Cet écran affiche une relation : mesures source et cible, type de correspondance, couverture, confiance, justification,
+référence et URL de la source, et état de validation.</p>
+<p><a href="../images/crosswalk.show.png"><img alt="Screenshot" src="../images/crosswalk.show.png" /></a></p>
+<h3 id="edit">Modifier une relation<a class="headerlink" href="#edit" title="Permanent link">&para;</a></h3>
+<p>Cet écran, réservé aux administrateurs, permet de modifier tous les champs d'une relation.
+Cocher « Validation » valide la relation : l'utilisateur et la date de validation sont enregistrés.</p>
+<p><a href="../images/crosswalk.edit.png"><img alt="Screenshot" src="../images/crosswalk.edit.png" /></a></p>
 <h2 id="import-xlsx">Import XLSX<a class="headerlink" href="#import-xlsx" title="Permanent link">&para;</a></h2>
 <p>Commande :</p>
 <div class="highlight"><pre><span></span><code><span class="go">php artisan deming:import-mappings fichier.xlsx</span>
@@ -738,9 +808,11 @@ mapping_type, coverage, rationale, source_reference, source_url
 <li>chaque relation est de type <code>related</code>, car une correspondance documentaire ne permet pas de conclure à une équivalence ou à une implication de conformité ;</li>
 <li>les niveaux ANSSI <code>ÉLEVÉE</code>, <code>MOYENNE</code> et <code>FAIBLE/NULLE</code> sont convertis respectivement en <code>high</code>, <code>medium</code> et <code>low</code>, tandis que le libellé original reste dans la justification ;</li>
 <li>l'observation ANSSI, la référence ISO d'origine, la clause Deming normalisée et l'URL de la source sont conservées ;</li>
-<li>toutes les relations importées restent non validées jusqu'à une revue humaine dans Deming.</li>
-</ul>
+<li>
+<p>toutes les relations importées restent non validées jusqu'à une revue humaine dans Deming.</p>
 <p>Sources : <a href="https://messervices.cyber.gouv.fr/nis2#exigences">comparateur ANSSI</a> et <a href="https://lab.cyber.gouv.fr/les-actualit%C3%A9s-du-lab-anssi/recyf--publication-du-r%C3%A9f%C3%A9rentiel-dexigences-et-du-comparateur/">présentation du ReCyF et du comparateur</a>.</p>
+</li>
+</ul>
 
 
 

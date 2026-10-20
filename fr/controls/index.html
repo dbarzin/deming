@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../../de/controls/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -737,21 +743,23 @@
 <p>Cet écran permet d'afficher la liste des contrôles et de les filtrer par :</p>
 <ul>
 <li>
-<p>Domaine,</p>
+<p>domaine,</p>
 </li>
 <li>
-<p>Périmètre,</p>
+<p>clause,</p>
 </li>
 <li>
-<p>Attribut,</p>
+<p>périmètre,</p>
 </li>
 <li>
-<p>la période de planification,</p>
+<p>période de planification,</p>
 </li>
 <li>
-<p>état du contrôle : tous, fait et à faire,</p>
+<p>état du contrôle : tous, fait et à faire.</p>
 </li>
 </ul>
+<p>Le bouton « Colonnes » permet de choisir les colonnes affichées, et les boutons « Copier » et « Exporter »
+permettent de copier la liste affichée ou de l'exporter vers Excel.</p>
 <p><a href="../images/c1.png"><img alt="Screenshot" src="../images/c1.png" /></a></p>
 <p>Lorsque vous cliquez sur :</p>
 <ul>
@@ -794,7 +802,7 @@
 </li>
 </ul>
 <p>Les boutons « Faire » et « Planifier » sont présents si ce contrôle n'a pas encore été réalisé.</p>
-<p>Les boutons « Modifier » et « Supprimer » sont présents si l'utilisateur est administrateur.</p>
+<p>Les boutons « Modifier », « Copier », « Supprimer » et « Historique » sont présents si l'utilisateur est administrateur.</p>
 <p><a href="../images/c2.png"><img alt="Screenshot" src="../images/c2.png" /></a></p>
 <p>Lorsque vous cliquez sur :</p>
 <ul>
@@ -808,22 +816,34 @@
 <p>« Modifier », vous êtes envoyé vers l'<a href="#edit">écran de modification du contrôle</a></p>
 </li>
 <li>
+<p>« Copier », vous êtes envoyé vers l'<a href="#create">écran de création d'un contrôle</a>, pré-rempli avec les données de ce contrôle</p>
+</li>
+<li>
 <p>« Supprimer », le contrôle est supprimé et vous êtes envoyé vers la <a href="#list">liste des contrôles</a></p>
+</li>
+<li>
+<p>« Historique », vous êtes envoyé vers l'<a href="../config/#logs">historique des modifications</a> de ce contrôle</p>
 </li>
 <li>
 <p>« Annuler », vous êtes envoyé vers la <a href="#list">liste des contrôles</a></p>
 </li>
 </ul>
 <h2 id="create">Créer un contrôle<a class="headerlink" href="#create" title="Permanent link">&para;</a></h2>
-<p>Un contrôle peut être créé de deux façons :</p>
+<p>Un contrôle peut être créé de trois façons :</p>
 <ul>
 <li>
-<p>Sur base d'une mesure de sécurité : depuis l'<a href="../measures/#show">écran d'affichage de la mesure</a>, le bouton « Créer un contrôle » génère un nouveau contrôle pré-rempli avec le nom et l'objectif de la mesure.</p>
+<p>Depuis une mesure de sécurité : le bouton « Planifier » de l'<a href="../measures/#plan">écran d'affichage de la mesure</a>
+  crée un nouveau contrôle pré-rempli avec les données de la mesure.</p>
+</li>
+<li>
+<p>En copiant un contrôle : le bouton « Copier » de l'<a href="#show">écran d'affichage du contrôle</a> ouvre le formulaire de
+  création pré-rempli avec les données de ce contrôle.</p>
 </li>
 <li>
 <p>Manuellement : depuis la <a href="#list">liste des contrôles</a>, le bouton « Nouveau » ouvre le formulaire de création.</p>
 </li>
 </ul>
+<p><a href="../images/c4.png"><img alt="Screenshot" src="../images/c4.png" /></a></p>
 <p>Cet écran contient les champs suivants :</p>
 <ul>
 <li>
@@ -833,6 +853,9 @@
 <p>Le nom du contrôle ;</p>
 </li>
 <li>
+<p>Le périmètre ;</p>
+</li>
+<li>
 <p>L'objectif du contrôle ;</p>
 </li>
 <li>
@@ -842,13 +865,22 @@
 <p>Les données à collecter ;</p>
 </li>
 <li>
-<p>Le modèle de calcul du score.</p>
+<p>Le modèle de calcul du score ;</p>
+</li>
+<li>
+<p>Le plan d'action à appliquer si le contrôle est en échec ;</p>
+</li>
+<li>
+<p>La date de planification et la périodicité et</p>
+</li>
+<li>
+<p>Les responsables de la réalisation du contrôle.</p>
 </li>
 </ul>
 <p>Lorsque vous cliquez sur :</p>
 <ul>
 <li>
-<p>« Créer », le contrôle est enregistré et vous êtes renvoyé vers l'<a href="#show">écran d'affichage du contrôle</a></p>
+<p>« Sauver », le contrôle est enregistré et vous êtes renvoyé vers la <a href="#list">liste des contrôles</a></p>
 </li>
 <li>
 <p>« Annuler », vous êtes renvoyé vers la <a href="#list">liste des contrôles</a></p>
@@ -857,31 +889,12 @@
 <h2 id="edit">Modifier un contrôle<a class="headerlink" href="#edit" title="Permanent link">&para;</a></h2>
 <p>Cet écran permet de modifier les informations d'un contrôle existant.</p>
 <p>Il est accessible uniquement aux utilisateurs disposant du rôle <strong>Administrateur</strong>.</p>
-<p>Cet écran contient les mêmes champs que l'<a href="#create">écran de création</a> :</p>
-<ul>
-<li>
-<p>La ou les clauses associées ;</p>
-</li>
-<li>
-<p>Le nom du contrôle ;</p>
-</li>
-<li>
-<p>L'objectif du contrôle ;</p>
-</li>
-<li>
-<p>Les attributs ;</p>
-</li>
-<li>
-<p>Les données à collecter ;</p>
-</li>
-<li>
-<p>Le modèle de calcul du score.</p>
-</li>
-</ul>
+<p>En plus des champs de l'<a href="#create">écran de création</a>, il contient le résultat du contrôle : date de réalisation,
+observations, preuves, note, score et indicateur.</p>
 <p>Lorsque vous cliquez sur :</p>
 <ul>
 <li>
-<p>« Modifier », les modifications sont enregistrées et vous êtes renvoyé vers l'<a href="#show">écran d'affichage du contrôle</a></p>
+<p>« Sauver », les modifications sont enregistrées et vous êtes renvoyé vers l'<a href="#show">écran d'affichage du contrôle</a></p>
 </li>
 <li>
 <p>« Annuler », vous êtes renvoyé vers l'<a href="#show">écran d'affichage du contrôle</a></p>
@@ -961,8 +974,7 @@
 <p>La date du prochaine contrôle</p>
 </li>
 </ul>
-<p><a href="../images/c3.png"><img alt="Screenshot" src="../images/c3.png" /></a>
-<a href="../images/c4.png"><img alt="Screenshot" src="../images/c4.png" /></a></p>
+<p><a href="../images/c3.png"><img alt="Screenshot" src="../images/c3.png" /></a></p>
 <p>Lorsque vous cliquez sur :</p>
 <ul>
 <li>

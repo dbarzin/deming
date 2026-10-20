@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../de/actions/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -480,6 +486,33 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    <span class="md-ellipsis">
+      Create an action plan
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#show" class="md-nav__link">
+    <span class="md-ellipsis">
+      Show an action plan
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#close" class="md-nav__link">
+    <span class="md-ellipsis">
+      Close an action plan
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#edit-an-action-plan" class="md-nav__link">
     <span class="md-ellipsis">
       Edit an action plan
@@ -692,20 +725,107 @@
 <h2 id="list-of-action-plans">List of Action Plans <a name="list"></a><a class="headerlink" href="#list-of-action-plans" title="Permanent link">&para;</a></h2>
 <p>This screen allows you to follow the action plans:</p>
 <p><a href="../images/a1.png"><img alt="Screenshot" src="../images/a1.png" /></a></p>
-<p>Clicking on :</p>
+<p>The list can be filtered by type (major, minor, observation, opportunity), by status (open, closed, all) and by scope.
+It shows, for each action plan, its reference, type, associated risks, status, progress, name, scope, owners and
+due date. Clicking on a risk opens it.
+Overdue due dates are displayed in red.</p>
+<p>The "Column visibility" button lets you show additional columns (associated clauses, remediation),
+and the "Copy" and "Export" buttons copy the displayed list or export it to Excel.</p>
+<p>Clicking on the reference of an action plan <a href="#show">opens it</a>. The "New" button <a href="#create">creates a new action plan</a>.</p>
+<p>An action plan can also be created when <a href="../controls/#make">making a measurement</a>, by ticking
+"Create an action plan".</p>
+<h2 id="create">Create an action plan<a class="headerlink" href="#create" title="Permanent link">&para;</a></h2>
+<p>This screen is used to create an action plan manually.</p>
+<p><a href="../images/a3.png"><img alt="Screenshot" src="../images/a3.png" /></a></p>
+<p>The screen contains:</p>
 <ul>
 <li>
-<p>the title of the associated control, you arrive at the corresponding <a href="#edit">modification of the action plan</a> page.</p>
+<p>the reference of the action plan;</p>
 </li>
 <li>
-<p>On the planning date, you arrive at the <a href="../controls/#show">control</a> that generated this action plan</p>
+<p>its type: major, minor, observation or opportunity;</p>
 </li>
 <li>
-<p>The next review date, you arrive at the next <a href="../controls/#show">control</a></p>
+<p>its name;</p>
+</li>
+<li>
+<p>the scope and the associated clauses;</p>
+</li>
+<li>
+<p>the associated risks;</p>
+</li>
+<li>
+<p>the cause;</p>
+</li>
+<li>
+<p>the remediation to be carried out;</p>
+</li>
+<li>
+<p>the due date; and</p>
+</li>
+<li>
+<p>the owners of the action plan.</p>
+</li>
+</ul>
+<p>When you click:</p>
+<ul>
+<li>
+<p>"Save", the action plan is created and you return to the <a href="#list">list of action plans</a></p>
+</li>
+<li>
+<p>"Cancel" you return to the <a href="#list">list of action plans</a></p>
+</li>
+</ul>
+<h2 id="show">Show an action plan<a class="headerlink" href="#show" title="Permanent link">&para;</a></h2>
+<p>This screen displays an action plan: reference, type, status, scope, clauses, risks, name, cause, due date, owners
+and, for a closed action plan, its close date and justification. The clauses and risks are only shown when the action
+plan is linked to some. The clauses, the risks and the originating measurement can be opened from this screen.</p>
+<p><a href="../images/a4.png"><img alt="Screenshot" src="../images/a4.png" /></a></p>
+<p>While the action plan is open, the remediation and the progress (slider) can be updated directly.</p>
+<p>When you click:</p>
+<ul>
+<li>
+<p>"Save", the remediation and the progress are saved and you return to the <a href="#list">list of action plans</a></p>
+</li>
+<li>
+<p>"Close", you go to the <a href="#close">action plan closure</a> screen (open action plans only)</p>
+</li>
+<li>
+<p>"Edit", you go to the <a href="#edit">action plan edit</a> screen</p>
+</li>
+<li>
+<p>"Delete", the action plan is deleted after confirmation</p>
+</li>
+<li>
+<p>"Cancel" you return to the <a href="#list">list of action plans</a></p>
+</li>
+</ul>
+<h2 id="close">Close an action plan<a class="headerlink" href="#close" title="Permanent link">&para;</a></h2>
+<p>This screen is used to close an action plan once the remediation has been carried out, or to reject it.</p>
+<p>The screen contains a reminder of the action plan and:</p>
+<ul>
+<li>
+<p>the new status: open, closed or rejected;</p>
+</li>
+<li>
+<p>the close date; and</p>
+</li>
+<li>
+<p>the justification of the closure.</p>
+</li>
+</ul>
+<p>When you click:</p>
+<ul>
+<li>
+<p>"Save", the status, close date and justification are saved and you return to the <a href="#list">list of action plans</a></p>
+</li>
+<li>
+<p>"Cancel" you return to the <a href="#show">action plan</a></p>
 </li>
 </ul>
 <h2 id="edit-an-action-plan">Edit an action plan <a name="edit"></a><a class="headerlink" href="#edit-an-action-plan" title="Permanent link">&para;</a></h2>
-<p>This screen allows you to edit an action plan and schedule the next control assessment.</p>
+<p>This screen allows you to edit all the information of an action plan: reference, type, name, scope, clauses, risks,
+cause, remediation, due date, owners, progress, status, close date and justification.</p>
 <p><a href="../images/a2.png"><img alt="Screenshot" src="../images/a2.png" /></a></p>
 <p>When you click:</p>
 <ul>

@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../../de/delegation/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -707,12 +713,13 @@ L'assignation du rôle audité à un utilisateur se fait via l'écran de <a href
 <li>Lorsqu'un contrôle est refusé, il retourne dans la liste des contrôles à réaliser de l'audité.</li>
 </ul>
 <h2 id="liste-des-controles-a-realiser">Liste des contrôles à réaliser<a class="headerlink" href="#liste-des-controles-a-realiser" title="Permanent link">&para;</a></h2>
-<p>Du point de vue de l'audité, la page principale de l'application contient la liste des contrôles qui lui sont assignés.</p>
+<p>Du point de vue de l'audité, le tableau de bord de la page d'accueil ne tient compte que des contrôles qui lui sont
+assignés, et le menu « Contrôles » ouvre la liste de ces contrôles.</p>
 <p><a href="../images/d1.png"><img alt="Screenshot" src="../images/d1.png" /></a></p>
 <p>L'audité peut :</p>
 <ul>
 <li>Effectuer des recherches dans la liste des contrôles</li>
-<li>Filtrer les contrôles par domaine, périmètre, attribut, période.</li>
+<li>Filtrer les contrôles par domaine, clause, périmètre ou période</li>
 <li>Trier la liste par chacune des colonnes</li>
 <li>Sélectionner un contrôle à réaliser</li>
 </ul>
@@ -726,7 +733,7 @@ L'assignation du rôle audité à un utilisateur se fait via l'écran de <a href
 <p>Faire le contrôle</p>
 </li>
 </ul>
-<p><a href="../images/d2.png"><img alt="Screenshot" src="../images/d2.png" style="width:300px" /></a></p>
+<p><a href="../images/d2.png"><img alt="Screenshot" src="../images/d2.png" /></a></p>
 <p>Lorsqu'il clique sur :</p>
 <ul>
 <li>
@@ -741,9 +748,11 @@ L'assignation du rôle audité à un utilisateur se fait via l'écran de <a href
 </ul>
 <h2 id="accepter-refuser-un-controle">Accepter / Refuser un contrôle<a class="headerlink" href="#accepter-refuser-un-controle" title="Permanent link">&para;</a></h2>
 <p>Une fois qu'un contrôle a été réalisé par un audité, il passe dans l'état "à valider".</p>
-<p>Cela se matérialise pour les autres utilisateurs par un sablier à côté de la date de réalisation dans la liste des contrôles à réaliser :</p>
-<p><a href="../images/d2.png"><img alt="Screenshot" src="../images/d3.png" /></a></p>
-<p>Lorsque l'utilisateur clique sur la date de réalisation à côté du sablier, il arrive sur le contrôle réalisé par l'audité.</p>
+<p>Cela se matérialise pour les autres utilisateurs par un sablier à côté de la date de planification dans la liste des
+contrôles planifiés dans les 30 prochains jours de la page d'accueil, et à côté de la date de réalisation dans la
+<a href="../controls/#list">liste des contrôles</a> :</p>
+<p><a href="../images/d3.png"><img alt="Screenshot" src="../images/d3.png" /></a></p>
+<p>Lorsque l'utilisateur clique sur le sablier, il arrive sur le contrôle réalisé par l'audité.</p>
 <p>Il peut alors accepter ou refuser le contrôle en ajoutant une note dans les observations du contrôle et, selon les résultats du contrôle, proposer un plan d'action et une date de revue du contrôle.</p>
 <p><a href="../images/d4.png"><img alt="Screenshot" src="../images/d4.png" /></a></p>
 <p>Si l'utilisateur clique sur :</p>
@@ -753,9 +762,6 @@ L'assignation du rôle audité à un utilisateur se fait via l'écran de <a href
 </li>
 <li>
 <p>"Rejeter" : les données modifiées sont sauvées et le contrôle est renvoyé dans la liste des contrôles à réaliser de l'audité.</p>
-</li>
-<li>
-<p>"Sauver" : les données sont sauvées et l'utilisateur revient à la vue du contrôle.</p>
 </li>
 <li>
 <p>"Annuler" : l'utilisateur revient à la vue du contrôle.</p>

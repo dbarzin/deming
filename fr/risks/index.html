@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../../de/risks/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -763,7 +769,7 @@
 <li><strong>§ 6.1.3</strong> — Processus de traitement des risques de sécurité de l'information</li>
 <li><strong>§ 8.2</strong> — Appréciation des risques de sécurité de l'information</li>
 </ul>
-<p>Chaque risque est évalué selon une méthode de scoring configurable, lié aux <a href="../controls/">contrôles</a> et <a href="../actions/">plans d'action</a> existants de l'application, et soumis à un cycle de revue périodique.</p>
+<p>Chaque risque est évalué selon une méthode de scoring configurable, lié aux <a href="../measures/">mesures de sécurité</a> et <a href="../actions/">plans d'action</a> existants de l'application, et soumis à un cycle de revue périodique.</p>
 <h2 id="matrix">Matrice des risques<a class="headerlink" href="#matrix" title="Permanent link">&para;</a></h2>
 <p>Cet écran affiche une vue synthétique de l'ensemble des risques sous forme de matrice.</p>
 <p><a href="../images/risk.matrix.png"><img alt="Screenshot" src="../images/risk.matrix.png" /></a></p>
@@ -797,7 +803,7 @@
 <p>Les boutons  <strong>Nouveau</strong> en haut à droite permettent de créer un nouveau risque.</p>
 <h2 id="show">Afficher un risque<a class="headerlink" href="#show" title="Permanent link">&para;</a></h2>
 <p>Cet écran affiche le détail d'un risque.</p>
-<p><a href="../images/risk.show.png"><img alt="Screenshot" src="../images/risk.show.png" style="width:600px" /></a></p>
+<p><a href="../images/risk.show.png"><img alt="Screenshot" src="../images/risk.show.png" /></a></p>
 <p>Il contient :</p>
 <ul>
 <li>Le <strong>nom</strong> et la <strong>description</strong> du risque ;</li>
@@ -820,7 +826,7 @@
 <ul>
 <li><strong>Modifier</strong> — accède à l'<a href="#edit">écran de modification</a> (Administrateur et Utilisateur) ;</li>
 <li><strong>Supprimer</strong> — supprime le risque après confirmation (Administrateur uniquement) ;</li>
-<li><strong>Historique</strong> — affiche le journal des modifications (Administrateur uniquement) ;</li>
+<li><strong>Historique</strong> — affiche l'<a href="../config/#logs">historique des modifications</a> (Administrateur uniquement) ;</li>
 <li><strong>Annuler</strong> — revient à la <a href="#list">liste des risques</a>.</li>
 </ul>
 <h2 id="create">Créer un risque<a class="headerlink" href="#create" title="Permanent link">&para;</a></h2>
@@ -845,16 +851,24 @@
 <li><strong>Vulnérabilité</strong> — niveau d'exploitabilité des failles connues ;</li>
 </ul>
 </li>
+<li>Pour la formule MONARC (Impact × Menace × Vulnérabilité) :<ul>
+<li><strong>Menace</strong> — vraisemblance de la menace (0 = non applicable à 4 = très probable) ;</li>
+<li><strong>Vulnérabilité</strong> — niveau des mesures de sécurité en place (0 = inexistante à 5 = très élevée) ;</li>
+</ul>
+</li>
 <li><strong>Impact</strong> — gravité des conséquences si le risque se matérialise ;</li>
 <li><strong>Commentaire impact</strong> ;</li>
-<li><strong>Score calculé</strong> — mis à jour en temps réel selon les valeurs saisies, avec badge coloré indiquant le niveau.</li>
+<li><strong>Score calculé</strong> — mis à jour en temps réel selon les valeurs saisies, avec badge coloré indiquant le niveau ;</li>
+<li><strong>Risque résiduel</strong> — formule MONARC uniquement : score du risque subsistant après traitement, saisi manuellement et
+  affiché avec la couleur de son niveau dans la liste et dans l'affichage du risque.</li>
 </ul>
 <p>Le traitement du risque se configure via :</p>
 <ul>
-<li><strong>Statut</strong> — parmi : Non évalué, Non accepté, Accepté temporairement, Accepté, Mitigé, Transféré, Évité ;</li>
+<li><strong>Statut</strong> — parmi : Non évalué, Non accepté, Accepté temporairement, Accepté, Mitigé, Transféré, Évité.
+  Avec la formule MONARC, les traitements sont : Non traité, Réduction, Refusé, Accepté, Partagé ;</li>
 <li><strong>Commentaire statut</strong> ;</li>
 <li><strong>Contrôles liés</strong> — sélection multiple parmi les contrôles existants (affiché uniquement si statut = <em>Mitigé</em>) ;</li>
-<li><strong>Plans d'action liés</strong> — sélection multiple parmi les plans d'action existants (affiché uniquement si statut = <em>Non accepté</em>).</li>
+<li><strong>Plans d'action liés</strong> — sélection multiple parmi les plans d'action existants (affiché uniquement si statut = <em>Non accepté</em>, ou <em>Réduction</em> avec la formule MONARC).</li>
 </ul>
 <blockquote>
 <p>Un avertissement est affiché si un risque <em>Mitigé</em> est sauvegardé sans contrôle lié, ou si un risque <em>Non accepté</em> est sauvegardé sans plan d'action lié.</p>
@@ -902,7 +916,7 @@
 <h4 id="nom-et-formule">Nom et formule<a class="headerlink" href="#nom-et-formule" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Nom</strong> — libellé de la configuration, affiché dans la liste ;</li>
-<li><strong>Formule</strong> — la méthode de calcul du score. Quatre formules sont disponibles :</li>
+<li><strong>Formule</strong> — la méthode de calcul du score. Cinq formules sont disponibles :</li>
 </ul>
 <table>
 <thead>
@@ -933,10 +947,15 @@
 <td>Score = max(P, I)</td>
 <td>Approche conservatrice</td>
 </tr>
+<tr>
+<td>MONARC</td>
+<td>Score = Impact × Menace × Vulnérabilité</td>
+<td>Méthode MONARC (max 4 × 4 × 5 = 80)</td>
+</tr>
 </tbody>
 </table>
 <blockquote>
-<p>La sélection de la formule <em>Vraisemblance × Impact</em> affiche les sections <strong>Exposition</strong> et <strong>Vulnérabilité</strong> à la place de la section <strong>Probabilité</strong>.</p>
+<p>La sélection de la formule <em>Vraisemblance × Impact</em> affiche les sections <strong>Exposition</strong> et <strong>Vulnérabilité</strong> à la place de la section <strong>Probabilité</strong>. La formule <em>MONARC</em> affiche les sections <strong>Menace</strong> et <strong>Vulnérabilité</strong>.</p>
 </blockquote>
 <h4 id="niveaux">Niveaux<a class="headerlink" href="#niveaux" title="Permanent link">&para;</a></h4>
 <p>Chaque axe d'évaluation dispose d'un tableau de niveaux personnalisables. Chaque niveau est défini par :</p>
@@ -950,7 +969,8 @@
 <ul>
 <li><strong>Probabilité</strong> — présent pour les formules standard ;</li>
 <li><strong>Exposition</strong> — présent pour la formule BSI (0 = hors réseau, 1 = réseau interne, 2 = exposé Internet) ;</li>
-<li><strong>Vulnérabilité</strong> — présent pour la formule BSI (1 = aucune connue, 2 = connue non exploitable, 3 = exploitable en interne, 4 = exploitable à distance) ;</li>
+<li><strong>Vulnérabilité</strong> — présent pour la formule BSI (1 = aucune connue, 2 = connue non exploitable, 3 = exploitable en interne, 4 = exploitable à distance) et la formule MONARC (0 = inexistante à 5 = très élevée) ;</li>
+<li><strong>Menace</strong> — présent pour la formule MONARC, à la place de la probabilité (0 = non applicable à 4 = très probable) ;</li>
 <li><strong>Impact</strong> — présent pour toutes les formules.</li>
 </ul>
 <h4 id="seuils-de-classification">Seuils de classification<a class="headerlink" href="#seuils-de-classification" title="Permanent link">&para;</a></h4>
@@ -959,7 +979,7 @@
 <li><strong>Clé interne</strong> — identifiant technique (ex. <code>low</code>, <code>medium</code>, <code>high</code>, <code>critical</code>) ;</li>
 <li><strong>Libellé</strong> — nom affiché dans les badges et les rapports ;</li>
 <li><strong>Score max</strong> — borne supérieure du seuil. Le dernier seuil n'a pas de borne supérieure (attrape-tout) ;</li>
-<li><strong>Couleur</strong> — couleur du badge MetroUI : Vert, Orange, Rouge, Rouge foncé, Bleu, Gris.</li>
+<li><strong>Couleur</strong> — couleur du badge, choisie avec un sélecteur de couleur.</li>
 </ul>
 <p>La colonne <strong>Aperçu</strong> affiche un badge en temps réel reflétant la couleur et le libellé saisis.</p>
 <blockquote>

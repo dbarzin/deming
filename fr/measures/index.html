@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../../de/measures/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -383,6 +389,15 @@
   <a href="#afficher-une-mesure-de-securite" class="md-nav__link">
     <span class="md-ellipsis">
       Afficher une mesure de sécurité
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#create" class="md-nav__link">
+    <span class="md-ellipsis">
+      Créer une mesure de sécurité
     </span>
   </a>
   
@@ -708,7 +723,8 @@
 <h1 id="mesures-de-securite">Mesures de sécurité<a class="headerlink" href="#mesures-de-securite" title="Permanent link">&para;</a></h1>
 <p>Cette partie permet de définir, de modifier et de planifier de nouvelles mesures de sécurité.</p>
 <h2 id="liste-des-mesures-de-securite">Liste des mesures de sécurité <a name="list"></a><a class="headerlink" href="#liste-des-mesures-de-securite" title="Permanent link">&para;</a></h2>
-<p>La liste des mesures de sécurité permet d’afficher la liste des mesures, de les filtrer par domaine ou de recherche une mesure sur base d’une partie de son nom.</p>
+<p>La liste des mesures de sécurité permet d’afficher la liste des mesures, de les filtrer par domaine ou de rechercher une mesure sur base d’une partie de son nom.
+Les boutons « Colonnes », « Copier » et « Exporter » permettent de choisir les colonnes affichées, de copier la liste ou de l'exporter vers Excel.</p>
 <p><a href="../images/m1.png"><img alt="Screenshot" src="../images/m1.png" /></a></p>
 <p>En cliquant sur :</p>
 <ul>
@@ -722,9 +738,10 @@
 <p>le nombre de contrôle, vous arrivez sur la <a href="../controls/#list">liste des contrôles</a> de cette mesure de sécurité</p>
 </li>
 <li>
-<p>le bouton "planifier", vous arrivez sur la <a href="#plan">planification de la mesure de sécurité</a></p>
+<p>le bouton « Planifier », vous arrivez sur la <a href="#plan">planification de la mesure de sécurité</a></p>
 </li>
 </ul>
+<p>Le bouton « Nouveau » permet de <a href="#create">créer une nouvelle mesure de sécurité</a>.</p>
 <h2 id="afficher-une-mesure-de-securite">Afficher une mesure de sécurité <a name="show"></a><a class="headerlink" href="#afficher-une-mesure-de-securite" title="Permanent link">&para;</a></h2>
 <p>Cet écran permet d’afficher une mesure de sécurité.</p>
 <p><a href="../images/m2.png"><img alt="Screenshot" src="../images/m2.png" /></a></p>
@@ -746,7 +763,7 @@
 <p>d’attributs ;</p>
 </li>
 <li>
-<p>des données de mesures :</p>
+<p>des données de mesures ;</p>
 </li>
 <li>
 <p>du modèle de vérification ;</p>
@@ -758,21 +775,44 @@
 <p>d’un plan d’action à appliquer si le contrôle de cette mesure de sécurité est en échec.</p>
 </li>
 </ul>
+<p>L’écran liste également les contrôles de cette mesure de sécurité (périmètre, date de planification, date de
+réalisation et score), ainsi que les <a href="../crosswalk/">correspondances</a> de cette mesure avec les mesures d’autres
+référentiels.</p>
 <p>Lorsque vous cliquez sur :</p>
 <ul>
 <li>
 <p>« Planifier » : vous arrivez vers l’écran de <a href="#plan">planification de la mesure de sécurité</a>.</p>
 </li>
 <li>
-<p>« Modifier » : vous arrivez vers <a href="#edit">l’écran de moficiaton de la mesure</a></p>
+<p>« Modifier » : vous arrivez vers <a href="#edit">l’écran de modification de la mesure</a></p>
+</li>
+<li>
+<p>« Copier » : vous arrivez vers l’écran de <a href="#create">création d’une mesure de sécurité</a>, pré-rempli avec les données de cette mesure</p>
 </li>
 <li>
 <p>« Supprimer »: vous permet de supprimer la mesure et de revenir à <a href="#list">la liste des mesures de sécurité</a></p>
 </li>
 <li>
-<p>« Annuler » : vous renvoie vers la <a href="#list">liste des mesures de séucurité</a></p>
+<p>« Annuler » : vous renvoie vers la <a href="#list">liste des mesures de sécurité</a></p>
 </li>
 </ul>
+<h2 id="create">Créer une mesure de sécurité<a class="headerlink" href="#create" title="Permanent link">&para;</a></h2>
+<p>Cet écran permet d’ajouter une mesure de sécurité à un référentiel. Il est accessible par le bouton « Nouveau » de
+la <a href="#list">liste des mesures de sécurité</a> ou par le bouton « Copier » de l’écran d’<a href="#show">affichage d’une mesure</a>.</p>
+<p><a href="../images/m4.png"><img alt="Screenshot" src="../images/m4.png" /></a></p>
+<p>L’écran contient les mêmes champs que l’<a href="#show">affichage d’une mesure de sécurité</a> : domaine, clause, nom, objectif
+de sécurité, attributs, données de mesure, modèle de vérification, indicateur et plan d’action.</p>
+<p>Lorsque vous cliquez sur :</p>
+<ul>
+<li>
+<p>« Sauver », la mesure de sécurité est créée et vous revenez à la <a href="#list">liste des mesures de sécurité</a>.</p>
+</li>
+<li>
+<p>« Annuler », vous revenez à la <a href="#list">liste des mesures de sécurité</a>.</p>
+</li>
+</ul>
+<p>Les mesures de sécurité peuvent aussi être importées depuis un tableur ou depuis un référentiel du dépôt, via
+l’écran d’<a href="../config/#import">importation</a>.</p>
 <h2 id="modifier-une-mesure-de-securite">Modifier une mesure de sécurité <a name="edit"></a><a class="headerlink" href="#modifier-une-mesure-de-securite" title="Permanent link">&para;</a></h2>
 <p>Cet écran permet de modifier une mesure de sécurité.</p>
 <p><a href="../images/m3.png"><img alt="Screenshot" src="../images/m3.png" /></a></p>
@@ -782,7 +822,7 @@
 <p>« Sauver », les modifications sont sauvées et vous revenez à l’écran d’<a href="#show">affichage de la mesure de sécurité</a>.</p>
 </li>
 <li>
-<p>« Annluer », vous revenez à l’écran d’<a href="#show">affichage de la mesure de sécurité</a>.</p>
+<p>« Annuler », vous revenez à l’écran d’<a href="#show">affichage de la mesure de sécurité</a>.</p>
 </li>
 </ul>
 <h2 id="planifier-un-controle">Planifier un contrôle <a name="plan"></a><a class="headerlink" href="#planifier-un-controle" title="Permanent link">&para;</a></h2>
@@ -802,26 +842,21 @@
 <p>La date de planification ;</p>
 </li>
 <li>
-<p>La périodicité du contrôles et</p>
+<p>Le périmètre ;</p>
 </li>
 <li>
-<p>Les responsables de la réalisation du contrôles.</p>
+<p>La périodicité du contrôle et</p>
+</li>
+<li>
+<p>Les responsables de la réalisation du contrôle.</p>
 </li>
 </ul>
-<p><a href="../images/plan.png"><img alt="Screenshot" src="../images/plan.png" style="width:600px" /></a></p>
+<p><a href="../images/plan.png"><img alt="Screenshot" src="../images/plan.png" /></a></p>
 <p>Lorsque vous cliquez sur :</p>
 <ul>
 <li>
-<p>« Planifier »,</p>
-<ul>
-<li>
-<p>s’il n’existe pas de contrôle avec ce périmètre pour cette mesure, un nouveau contrôle est créé en copiant toutes les données de le mesure et est planifié à la date spécifiée.</p>
-</li>
-<li>
-<p>S’il existe déjà un contrôle avec ce périmètre pour cette mesure de sécurité, une erreur est affichée.</p>
-</li>
-</ul>
-<p>Vous revenez ensuite à la <a href="#list">liste des mesures de sécurité</a>.</p>
+<p>« Planifier », un nouveau contrôle est créé pour le périmètre indiqué en copiant toutes les données de la mesure,
+  et est planifié à la date spécifiée. Vous revenez ensuite à la <a href="#list">liste des mesures de sécurité</a>.</p>
 </li>
 <li>
 <p>« Annuler », vous revenez vers la <a href="#list">liste des mesures de sécurité</a>.</p>

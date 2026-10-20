@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../de/controls/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -411,7 +417,7 @@
         <li class="md-nav__item">
   <a href="#create" class="md-nav__link">
     <span class="md-ellipsis">
-      Create a Measure
+      Create a measurement
     </span>
   </a>
   
@@ -420,7 +426,7 @@
         <li class="md-nav__item">
   <a href="#edit" class="md-nav__link">
     <span class="md-ellipsis">
-      Edit a Measure
+      Edit a measurement
     </span>
   </a>
   
@@ -740,18 +746,20 @@
 <p>domain,</p>
 </li>
 <li>
-<p>périmètre,</p>
+<p>clause,</p>
 </li>
 <li>
-<p>attribute,</p>
+<p>scope,</p>
 </li>
 <li>
 <p>planning period,</p>
 </li>
 <li>
-<p>measurement status: all, done and to do,</p>
+<p>measurement status: all, done and to do.</p>
 </li>
 </ul>
+<p>The "Column visibility" button lets you choose the displayed columns, and the "Copy" and "Export"
+buttons copy the displayed list or export it to Excel.</p>
 <p><a href="../images/c1.png"><img alt="Screenshot" src="../images/c1.png" /></a></p>
 <p>When you click:</p>
 <ul>
@@ -794,7 +802,7 @@
 </li>
 </ul>
 <p>The "Make" and "Plan" buttons are present if this measurement has not yet been carried out.</p>
-<p>The "Modify" and "Delete" buttons are available if the user is an administrator.</p>
+<p>The "Edit", "Copy", "Delete" and "History" buttons are available if the user is an administrator.</p>
 <p><a href="../images/c2.png"><img alt="Screenshot" src="../images/c2.png" /></a></p>
 <p>When you click:</p>
 <ul>
@@ -808,32 +816,47 @@
 <p>"Edit", you are sent to the <a href="#edit">measurement edit screen</a></p>
 </li>
 <li>
+<p>"Copy", you are sent to the <a href="#create">measurement creation screen</a>, pre-filled with the data of this measurement</p>
+</li>
+<li>
 <p>"Delete", the measurement is deleted and you are sent to the <a href="#list">list of measurements</a>.</p>
+</li>
+<li>
+<p>"History", you are sent to the <a href="../config/#logs">change history</a> of this measurement</p>
 </li>
 <li>
 <p>"Cancel", you are sent to the <a href="#list">list of measurements</a></p>
 </li>
 </ul>
-<h2 id="create">Create a Measure<a class="headerlink" href="#create" title="Permanent link">&para;</a></h2>
-<p>A measure can be created in two ways:</p>
+<h2 id="create">Create a measurement<a class="headerlink" href="#create" title="Permanent link">&para;</a></h2>
+<p>A measurement can be created in three ways:</p>
 <ul>
 <li>
-<p>Based on a security measure: From the <a href="../measures/#show">measure display screen</a>, the "Create a measure" button generates a new measure pre-filled with the name and purpose of the measure.</p>
+<p>From a control: the "Plan" button of the <a href="../measures/#plan">control display screen</a> creates a new measurement
+  pre-filled with the data of the control.</p>
 </li>
 <li>
-<p>Manually: From the <a href="#list">measure list</a>, the "New" button opens the creation form.</p>
+<p>By copying a measurement: the "Copy" button of the <a href="#show">measurement display screen</a> opens the creation form
+  pre-filled with the data of this measurement.</p>
+</li>
+<li>
+<p>Manually: from the <a href="#list">list of measurements</a>, the "New" button opens the creation form.</p>
 </li>
 </ul>
+<p><a href="../images/c4.png"><img alt="Screenshot" src="../images/c4.png" /></a></p>
 <p>This screen contains the following fields:</p>
 <ul>
 <li>
 <p>The associated clause(s);</p>
 </li>
 <li>
-<p>The measure name;</p>
+<p>The name of the measurement;</p>
 </li>
 <li>
-<p>The measure purpose;</p>
+<p>The scope;</p>
+</li>
+<li>
+<p>The objective of the measurement;</p>
 </li>
 <li>
 <p>The attributes;</p>
@@ -842,49 +865,39 @@
 <p>The data to collect;</p>
 </li>
 <li>
-<p>The score calculation model.</p>
+<p>The score calculation model;</p>
+</li>
+<li>
+<p>The action plan to apply if the measurement fails;</p>
+</li>
+<li>
+<p>The planning date and the periodicity; and</p>
+</li>
+<li>
+<p>Those responsible for carrying out the measurement.</p>
 </li>
 </ul>
 <p>When you click:</p>
 <ul>
 <li>
-<p>"Create," the measure is saved and you are returned to the <a href="#show">measure display screen</a>.</p>
+<p>"Save", the measurement is saved and you are returned to the <a href="#list">list of measurements</a>.</p>
 </li>
 <li>
-<p>"Cancel," you are returned to the <a href="#list">measure list</a>.</p>
+<p>"Cancel", you are returned to the <a href="#list">list of measurements</a>.</p>
 </li>
 </ul>
-<h2 id="edit">Edit a Measure<a class="headerlink" href="#edit" title="Permanent link">&para;</a></h2>
-<p>This screen allows you to modify the information of an existing measure.</p>
+<h2 id="edit">Edit a measurement<a class="headerlink" href="#edit" title="Permanent link">&para;</a></h2>
+<p>This screen allows you to modify the information of an existing measurement.</p>
 <p>It is accessible only to users with the <strong>Administrator</strong> role.</p>
-<p>This screen contains the same fields as the <a href="#create">create</a> screen:</p>
-<ul>
-<li>
-<p>The associated clause(s);</p>
-</li>
-<li>
-<p>The measure name;</p>
-</li>
-<li>
-<p>The measure's purpose;</p>
-</li>
-<li>
-<p>The attributes;</p>
-</li>
-<li>
-<p>The data to collect;</p>
-</li>
-<li>
-<p>The score calculation model.</p>
-</li>
-</ul>
+<p>In addition to the fields of the <a href="#create">creation</a> screen, it contains the result of the measurement:
+completion date, observations, evidence, note, score and indicator.</p>
 <p>When you click:</p>
 <ul>
 <li>
-<p>"Edit", the changes are saved and you are returned to the <a href="#show">measure display</a> screen.</p>
+<p>"Save", the changes are saved and you are returned to the <a href="#show">measurement display</a> screen.</p>
 </li>
 <li>
-<p>"Cancel", you are returned to the <a href="#show">measure display</a> screen.</p>
+<p>"Cancel", you are returned to the <a href="#show">measurement display</a> screen.</p>
 </li>
 </ul>
 <h2 id="plan">Schedule a measurement<a class="headerlink" href="#plan" title="Permanent link">&para;</a></h2>
@@ -907,7 +920,7 @@
 <p>Those responsible for carrying out the measurements.</p>
 </li>
 </ul>
-<p><a href="../images/c5.png"><img alt="Screenshot" src="../images/c5.png" style="width:500px" /></a></p>
+<p><a href="../images/c5.png"><img alt="Screenshot" src="../images/c5.png" /></a></p>
 <p>When you click:</p>
 <ul>
 <li>
@@ -964,8 +977,7 @@
 <p>The date of the next check,</p>
 </li>
 </ul>
-<p><a href="../images/c3.png"><img alt="Screenshot" src="../images/c3.png" /></a>
-<a href="../images/c4.png"><img alt="Screenshot" src="../images/c4.png" /></a></p>
+<p><a href="../images/c3.png"><img alt="Screenshot" src="../images/c3.png" /></a></p>
 <p>When you click:</p>
 <ul>
 <li>

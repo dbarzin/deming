@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../de/risks/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -763,7 +769,7 @@
 <li><strong>§ 6.1.3</strong> — Information security risk treatment process</li>
 <li><strong>§ 8.2</strong> — Information security risk assessment</li>
 </ul>
-<p>Each risk is evaluated using a configurable scoring method, linked to the application's existing <a href="../controls/">controls</a> and <a href="../actions/">action plans</a>, and subject to a periodic review cycle.</p>
+<p>Each risk is evaluated using a configurable scoring method, linked to the application's existing <a href="../measures/">controls</a> and <a href="../actions/">action plans</a>, and subject to a periodic review cycle.</p>
 <h2 id="matrix">Risk Matrix<a class="headerlink" href="#matrix" title="Permanent link">&para;</a></h2>
 <p>This screen displays a summary view of all risks in matrix form.</p>
 <p><a href="../images/risk.matrix.png"><img alt="Screenshot" src="../images/risk.matrix.png" /></a></p>
@@ -797,7 +803,7 @@
 <p>The <strong>New</strong> button in the top right allows you to create a new risk.</p>
 <h2 id="show">View a Risk<a class="headerlink" href="#show" title="Permanent link">&para;</a></h2>
 <p>This screen displays the detail of a risk.</p>
-<p><a href="../images/risk.show.png"><img alt="Screenshot" src="../images/risk.show.png" style="width:600px" /></a></p>
+<p><a href="../images/risk.show.png"><img alt="Screenshot" src="../images/risk.show.png" /></a></p>
 <p>It contains:</p>
 <ul>
 <li>The risk <strong>name</strong> and <strong>description</strong>;</li>
@@ -820,7 +826,7 @@
 <ul>
 <li><strong>Edit</strong> — accesses the <a href="#edit">edit screen</a> (Administrator and User);</li>
 <li><strong>Delete</strong> — deletes the risk after confirmation (Administrator only);</li>
-<li><strong>History</strong> — displays the change log (Administrator only);</li>
+<li><strong>History</strong> — displays the <a href="../config/#logs">change history</a> (Administrator only);</li>
 <li><strong>Cancel</strong> — returns to the <a href="#list">risk list</a>.</li>
 </ul>
 <h2 id="create">Create a Risk<a class="headerlink" href="#create" title="Permanent link">&para;</a></h2>
@@ -845,16 +851,24 @@
 <li><strong>Vulnerability</strong> — level of exploitability of known weaknesses;</li>
 </ul>
 </li>
+<li>For the MONARC formula (Impact × Threat × Vulnerability):<ul>
+<li><strong>Threat</strong> — likelihood of the threat (0 = not applicable to 4 = very likely);</li>
+<li><strong>Vulnerability</strong> — level of the security controls in place (0 = non-existent to 5 = very high);</li>
+</ul>
+</li>
 <li><strong>Impact</strong> — severity of consequences if the risk materialises;</li>
 <li><strong>Impact comment</strong>;</li>
-<li><strong>Calculated score</strong> — updated in real time based on the entered values, with a color-coded badge indicating the level.</li>
+<li><strong>Calculated score</strong> — updated in real time based on the entered values, with a color-coded badge indicating the level;</li>
+<li><strong>Residual risk</strong> — MONARC formula only: score of the risk remaining after treatment, entered manually and displayed
+  with the color of its level in the list and on the risk view.</li>
 </ul>
 <p>Risk treatment is configured via:</p>
 <ul>
-<li><strong>Status</strong> — one of: Unassessed, Not accepted, Temporarily accepted, Accepted, Mitigated, Transferred, Avoided;</li>
+<li><strong>Status</strong> — one of: Unassessed, Not accepted, Temporarily accepted, Accepted, Mitigated, Transferred, Avoided.
+  With the MONARC formula, the treatments are: Not treated, Reduction, Denied, Accepted, Shared;</li>
 <li><strong>Status comment</strong>;</li>
 <li><strong>Linked controls</strong> — multiple selection from existing controls (displayed only if status = <em>Mitigated</em>);</li>
-<li><strong>Linked action plans</strong> — multiple selection from existing action plans (displayed only if status = <em>Not accepted</em>).</li>
+<li><strong>Linked action plans</strong> — multiple selection from existing action plans (displayed only if status = <em>Not accepted</em>, or <em>Reduction</em> with the MONARC formula).</li>
 </ul>
 <blockquote>
 <p>A warning is displayed if a <em>Mitigated</em> risk is saved without a linked control, or if a <em>Not accepted</em> risk is saved without a linked action plan.</p>
@@ -902,7 +916,7 @@
 <h4 id="name-and-formula">Name and Formula<a class="headerlink" href="#name-and-formula" title="Permanent link">&para;</a></h4>
 <ul>
 <li><strong>Name</strong> — label for the configuration, displayed in the list;</li>
-<li><strong>Formula</strong> — the score calculation method. Four formulas are available:</li>
+<li><strong>Formula</strong> — the score calculation method. Five formulas are available:</li>
 </ul>
 <table>
 <thead>
@@ -933,10 +947,15 @@
 <td>Score = max(P, I)</td>
 <td>Conservative approach</td>
 </tr>
+<tr>
+<td>MONARC</td>
+<td>Score = Impact × Threat × Vulnerability</td>
+<td>MONARC method (max 4 × 4 × 5 = 80)</td>
+</tr>
 </tbody>
 </table>
 <blockquote>
-<p>Selecting the <em>Likelihood × Impact</em> formula displays the <strong>Exposure</strong> and <strong>Vulnerability</strong> sections in place of the <strong>Probability</strong> section.</p>
+<p>Selecting the <em>Likelihood × Impact</em> formula displays the <strong>Exposure</strong> and <strong>Vulnerability</strong> sections in place of the <strong>Probability</strong> section. The <em>MONARC</em> formula displays the <strong>Threat</strong> and <strong>Vulnerability</strong> sections.</p>
 </blockquote>
 <h4 id="levels">Levels<a class="headerlink" href="#levels" title="Permanent link">&para;</a></h4>
 <p>Each assessment axis has a table of customisable levels. Each level is defined by:</p>
@@ -950,7 +969,8 @@
 <ul>
 <li><strong>Probability</strong> — present for standard formulas;</li>
 <li><strong>Exposure</strong> — present for the BSI formula (0 = off-network, 1 = internal network, 2 = Internet-facing);</li>
-<li><strong>Vulnerability</strong> — present for the BSI formula (1 = none known, 2 = known but not exploitable, 3 = exploitable internally, 4 = remotely exploitable);</li>
+<li><strong>Vulnerability</strong> — present for the BSI formula (1 = none known, 2 = known but not exploitable, 3 = exploitable internally, 4 = remotely exploitable) and the MONARC formula (0 = non-existent to 5 = very high);</li>
+<li><strong>Threat</strong> — present for the MONARC formula, in place of the probability (0 = not applicable to 4 = very likely);</li>
 <li><strong>Impact</strong> — present for all formulas.</li>
 </ul>
 <h4 id="classification-thresholds">Classification Thresholds<a class="headerlink" href="#classification-thresholds" title="Permanent link">&para;</a></h4>
@@ -959,7 +979,7 @@
 <li><strong>Internal key</strong> — technical identifier (e.g. <code>low</code>, <code>medium</code>, <code>high</code>, <code>critical</code>);</li>
 <li><strong>Label</strong> — name displayed in badges and reports;</li>
 <li><strong>Max score</strong> — upper bound of the threshold. The last threshold has no upper bound (catch-all);</li>
-<li><strong>Color</strong> — MetroUI badge color: Green, Orange, Red, Dark Red, Blue, Grey.</li>
+<li><strong>Color</strong> — badge color, chosen with a color picker.</li>
 </ul>
 <p>The <strong>Preview</strong> column displays a live badge reflecting the entered color and label.</p>
 <blockquote>

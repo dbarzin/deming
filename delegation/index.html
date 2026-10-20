@@ -172,6 +172,12 @@
             </a>
           </li>
         
+          <li class="md-select__item">
+            <a href="../de/delegation/" hreflang="de" class="md-select__link">
+              Deutsch
+            </a>
+          </li>
+        
       </ul>
     </div>
   </div>
@@ -707,12 +713,13 @@ The auditee role is assigned to a user via the <a href="../config/#users">user m
 <li>When a measurement is rejected, it returns to the list of measurements to be carried out by the auditee.</li>
 </ul>
 <h2 id="list-of-measurements-to-be-performed">List of measurements to be performed<a class="headerlink" href="#list-of-measurements-to-be-performed" title="Permanent link">&para;</a></h2>
-<p>From the auditee's point of view, the application's main page contains the list of measurements that are assigned to him.</p>
+<p>From the auditee's point of view, the dashboard of the home page only takes into account the measurements assigned to them,
+and the "Measurements" menu opens the list of these measurements.</p>
 <p><a href="../images/d1.png"><img alt="Screenshot" src="../images/d1.png" /></a></p>
 <p>Tha auditee can :</p>
 <ul>
 <li>Search the list of measurements</li>
-<li>Filter measurements by domain, scope, attribute or period.</li>
+<li>Filter measurements by domain, clause, scope or period</li>
 <li>Sort the list by each column</li>
 <li>Select a measurement to perform</li>
 </ul>
@@ -726,7 +733,7 @@ The auditee role is assigned to a user via the <a href="../config/#users">user m
 <p>"Make" the mesurement</p>
 </li>
 </ul>
-<p><a href="../images/d2.png"><img alt="Screenshot" src="../images/d2.png" style="width:300px" /></a></p>
+<p><a href="../images/d2.png"><img alt="Screenshot" src="../images/d2.png" /></a></p>
 <p>When the auditee clicks on :</p>
 <ul>
 <li>
@@ -741,11 +748,12 @@ The auditee role is assigned to a user via the <a href="../config/#users">user m
 </ul>
 <h2 id="accepting-rejecting-a-measurement">Accepting / Rejecting a measurement<a class="headerlink" href="#accepting-rejecting-a-measurement" title="Permanent link">&para;</a></h2>
 <p>Once an auditee has carried out a measurement, it changes status to "to be validated".</p>
-<p>For other users, this is shown by an hourglass next to the completion date in the list of checks to be carried out:</p>
+<p>For other users, this is shown by an hourglass next to the planning date in the list of measurements scheduled for the
+next 30 days on the home page, and next to the realisation date in the <a href="../controls/#list">list of measurements</a>:</p>
 <p><a href="../images/d3.png"><img alt="Screenshot" src="../images/d3.png" /></a></p>
-<p>When the user clicks on the date next to the hourglass, they are taken to the measurement performed by the auditee.</p>
+<p>When the user clicks on the hourglass, they are taken to the measurement performed by the auditee.</p>
 <p>They can then accept or reject the measurement, adding a note in the measurement observations and, depending on the measurement score, propose an action plan and anmeasurement review date.</p>
-<p><a href="../images/d4.png"><img alt="Screenshot" src="../images/d4.png" style="width:500px" /></a></p>
+<p><a href="../images/d4.png"><img alt="Screenshot" src="../images/d4.png" /></a></p>
 <p>If the user clicks on :</p>
 <ul>
 <li>
@@ -753,9 +761,6 @@ The auditee role is assigned to a user via the <a href="../config/#users">user m
 </li>
 <li>
 <p>"Reject": the modified data is saved and the measurement is returned to the auditee list of controls to be performed.</p>
-</li>
-<li>
-<p>"Save": the data is saved and the user returns to the measurement view.</p>
 </li>
 <li>
 <p>"Cancel": the user returns to the measurement view.</p>
